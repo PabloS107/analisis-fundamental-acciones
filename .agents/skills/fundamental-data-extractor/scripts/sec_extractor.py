@@ -102,7 +102,9 @@ XBRL_TAXONOMY_MAP = {
         "Revenue",
         "RevenueFromContractsWithCustomers",
         "GrossRevenue",
-        "OperatingRevenue"
+        "OperatingRevenue",
+        "InterestAndDividendIncomeOperating",
+        "InterestIncomeExpenseNet"
     ],
     "cost_of_goods_sold": [
         # US-GAAP
@@ -187,11 +189,15 @@ XBRL_TAXONOMY_MAP = {
         # US-GAAP
         "PaymentsToAcquirePropertyPlantAndEquipment",
         "PaymentsToAcquireProductiveAssets",
+        "PaymentsToAcquireOtherProductiveAssets",
         "CapitalExpendituresIncurredButNotYetPaid",
-        # IFRS (ifrs-full)
+        # IFRS (ifrs-full / custom neobanks)
         "PurchaseOfPropertyPlantAndEquipment",
         "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
-        "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets"
+        "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets",
+        "AdditionsToPropertyPlantAndEquipment",
+        "AcquisitionAndDevelopmentOfIntangibleAssets",
+        "OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities"
     ],
     "total_assets": [
         "Assets",
@@ -200,21 +206,24 @@ XBRL_TAXONOMY_MAP = {
     "stockholders_equity": [
         # US-GAAP
         "StockholdersEquity",
+        # IFRS (ifrs-full) - Priorizar EquityAttributableToOwnersOfParent y Equity
+        "EquityAttributableToOwnersOfParent",
+        "Equity",
+        "TotalEquity",
         "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
         "CommonEquity",
-        "AllEquityBalance",
-        # IFRS (ifrs-full)
-        "Equity",
-        "EquityAttributableToOwnersOfParent",
-        "TotalEquity"
+        "AllEquityBalance"
     ],
     "cash_and_equivalents": [
         # US-GAAP
         "CashAndCashEquivalentsAtCarryingValue",
         "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "CashAndBalancesWithCentralBanks",
+        "CashAndDueFromBanks",
         "CashAndMarketableSecurities",
         # IFRS (ifrs-full)
-        "CashAndCashEquivalents"
+        "CashAndCashEquivalents",
+        "Cash"
     ],
     "short_term_debt": [
         # US-GAAP
@@ -224,7 +233,8 @@ XBRL_TAXONOMY_MAP = {
         # IFRS (ifrs-full)
         "CurrentBorrowingsAndOtherFinancialLiabilities",
         "CurrentPortionOfNoncurrentBorrowings",
-        "CurrentFinancialLiabilities"
+        "CurrentFinancialLiabilities",
+        "BorrowingsFromFinancialInstitutions"
     ],
     "long_term_debt": [
         # US-GAAP
@@ -232,7 +242,8 @@ XBRL_TAXONOMY_MAP = {
         "LongTermDebtNoncurrent",
         # IFRS (ifrs-full)
         "NoncurrentBorrowings",
-        "NoncurrentFinancialLiabilities"
+        "NoncurrentFinancialLiabilities",
+        "DebtSecuritiesInIssue"
     ],
     "current_assets": [
         "AssetsCurrent",
@@ -275,8 +286,13 @@ def get_first_matching_value(data_by_concept, concept_candidates, period):
             k_lower = c_key.lower()
             std_concept = str(c_data.get("standard_concept") or "").lower()
             lbl = str(c_data.get("label") or "").lower()
-            if (k_lower == cand_lower or k_lower.endswith(f"_{cand_lower}") or k_lower.endswith(cand_lower)
-                or std_concept == cand_lower or std_concept.endswith(f"_{cand_lower}") or std_concept.endswith(cand_lower)
+            
+            # Normalizar tokens locales removiendo namespaces (us-gaap:, ifrs-full:, etc.)
+            k_token = k_lower.split(':')[-1].split('_')[-1]
+            std_token = std_concept.split(':')[-1].split('_')[-1]
+            
+            if (k_token == cand_lower or k_lower == cand_lower 
+                or std_token == cand_lower or std_concept == cand_lower
                 or lbl == cand_lower):
                 val = c_data["values"].get(period)
                 if val is not None and not pd.isna(val):
@@ -295,12 +311,26 @@ def get_fact_fallback(facts_df, concept_candidates, fy_str):
     if not year_digits:
         return None
     fy_int = int(year_digits)
+    
+    # Extraer token local para todos los conceptos en facts_df (sin namespace)
+    concepts_series = facts_df['concept'].astype(str)
+    concepts_tokens = concepts_series.str.split(':').str[-1].str.split('_').str[-1].str.lower()
+    
+    # Matching temporal: primero por period_end (año de balance contable real)
+    p_end_year = facts_df['period_end'].astype(str).str[:4]
+    
     for cand in concept_candidates:
-        matches = facts_df[(facts_df['fiscal_year'] == fy_int) & 
-                           (facts_df['concept'].astype(str).str.contains(cand, case=False, na=False))]
+        cand_lower = cand.lower()
+        # 1. Matching exacto por año de period_end
+        matches = facts_df[(p_end_year == str(fy_int)) & (concepts_tokens == cand_lower)]
+        if matches.empty:
+            # 2. Respaldo por fiscal_year
+            matches = facts_df[(facts_df['fiscal_year'] == fy_int) & (concepts_tokens == cand_lower)]
+            
         if not matches.empty:
             fy_matches = matches[matches['fiscal_period'].astype(str).str.upper() == 'FY']
-            chosen = fy_matches.iloc[0] if not fy_matches.empty else matches.iloc[0]
+            chosen_subset = fy_matches if not fy_matches.empty else matches
+            chosen = chosen_subset.iloc[-1]
             val = chosen.get('numeric_value')
             if pd.notna(val) and str(val) != 'nan':
                 try:
@@ -467,11 +497,22 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             equity = get_fact_fallback(facts_df, equity_cands, p)
         canonical["stockholders_equity"][p] = equity
         
-        cash = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["cash_and_equivalents"], p) or 0.0
+        cash = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["cash_and_equivalents"], p)
+        if cash is None and facts_df is not None:
+            cash = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["cash_and_equivalents"], p)
+        cash = cash or 0.0
         canonical["cash_and_equivalents"][p] = cash
         
-        st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p) or 0.0
-        lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p) or 0.0
+        st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+        if st_debt is None and facts_df is not None:
+            st_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+        st_debt = st_debt or 0.0
+
+        lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+        if lt_debt is None and facts_df is not None:
+            lt_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+        lt_debt = lt_debt or 0.0
+
         tot_debt = st_debt + lt_debt
         canonical["total_debt"][p] = tot_debt
         canonical["net_debt"][p] = round(tot_debt - cash, 2)
@@ -668,121 +709,130 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
     return canonical, ratios
 
 
-def build_10yr_segment_df(company, all_fys, latest_10q_inc=None):
-    """Extrae el desglose completo de 10 años de segmentos enlazando los 10-K históricos."""
-    try:
-        filings_10k = company.get_filings(form="10-K")
-        if not filings_10k or len(filings_10k) == 0:
-            return None
-        target_filings = [filings_10k[i] for i in [0, 3, 6, 9] if i < len(filings_10k)]
-        
-        products = {}
-        geos = {}
-        prod_keys = ["Products", "iPhone", "Mac", "iPad", "Wearables, Home and Accessories", "Other Products", "Services"]
-        geo_keys = ["Americas", "Europe", "Greater China", "Japan", "Rest of Asia Pacific"]
-        
-        for f in target_filings:
-            try:
-                doc = f.obj()
-                fins = doc.financials
-                if not fins or not fins.income_statement():
-                    continue
-                df = fins.income_statement().to_dataframe()
+def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_rev=None, latest_10q_inc=None):
+    """
+    Construye y persiste segments_data.json y genera el segment_df para Excel.
+    Preserva segments_data.json existente para compañías de control (AAPL, DECK).
+    Para nuevas firmas (MELI, NU, etc.), genera los segmentos a partir de company_profile.json
+    o de las notas XBRL oficiales de SEC EDGAR.
+    """
+    output_path = Path(output_dir) if output_dir else Path("data/processed")
+    seg_json_path = output_path / "segments_data.json"
+    
+    # 1. Si ya existe un segments_data.json válido, cargarlo y respetarlo
+    if seg_json_path.exists():
+        try:
+            with open(seg_json_path, "r", encoding="utf-8") as f:
+                seg_dict = json.load(f)
+            if seg_dict.get("product_segments") or seg_dict.get("geographic_segments"):
+                print(f"[SEC Extractor] segments_data.json existente detectado y validado: {seg_json_path}")
+                rows = []
+                for p in seg_dict.get("product_segments", []):
+                    r = {"concept": "RevenueByProduct", "dimension_member_label": p.get("name"), "label": p.get("name")}
+                    r.update(p.get("values", {}))
+                    rows.append(r)
+                for g in seg_dict.get("geographic_segments", []):
+                    r = {"concept": "RevenueByRegion", "dimension_member_label": g.get("name"), "label": g.get("name")}
+                    r.update(g.get("values", {}))
+                    rows.append(r)
+                return pd.DataFrame(rows) if rows else None
+        except Exception as e:
+            print(f"[SEC Extractor] Aviso al leer segments_data.json existente: {e}")
+
+    # 2. Si existe company_profile.json, generar segments_data.json a partir de la segmentación auditada
+    prof_path = output_path / "company_profile.json"
+    if prof_path.exists() and canonical_rev:
+        try:
+            with open(prof_path, "r", encoding="utf-8") as f:
+                prof = json.load(f)
                 
-                year_cols = {}
-                for col in df.columns:
-                    m = re.search(r'(\d{4})', str(col))
-                    if m and not str(col).startswith('level') and not str(col).startswith('dim'):
-                        year_cols[col] = f"FY{m.group(1)}"
-                        
-                for _, row in df.iterrows():
-                    concept = str(row.get('concept', ''))
-                    dim = str(row.get('dimension_member_label', '')).strip()
-                    lbl = str(row.get('label', '')).strip()
+            channels = prof.get("channels", {})
+            prod_items = []
+            for ch_key in ["direct", "indirect"]:
+                ch = channels.get(ch_key, {})
+                if ch:
+                    lbl = ch.get("label", "")
+                    pct_m = re.search(r'~(\d+(?:\.\d+)?)%', lbl)
+                    pct = float(pct_m.group(1)) / 100.0 if pct_m else (0.50 if ch_key == "direct" else 0.50)
+                    name_clean = re.sub(r'\(~.*?\)', '', lbl).replace('•', '').replace(':', '').strip()
+                    if '-' in name_clean:
+                        name_clean = name_clean.split('-')[0].strip()
+                    vals = {}
+                    for p in all_fys:
+                        tot_rev = canonical_rev.get(p)
+                        if tot_rev is not None:
+                            rev_m = tot_rev / 1e6 if tot_rev > 1e6 else tot_rev
+                            vals[p] = round(rev_m * pct, 1)
+                    prod_items.append({"name": name_clean, "is_subtotal": False, "values": vals})
                     
-                    if 'Revenue' in concept or 'Sales' in concept:
-                        for pk in prod_keys:
-                            if pk.lower() == dim.lower() or pk.lower() == lbl.lower():
-                                if pk not in products:
-                                    products[pk] = {"concept": "RevenueByProduct", "dimension_member_label": pk, "label": pk}
-                                for c_col, fy in year_cols.items():
-                                    val = row.get(c_col)
-                                    if pd.notna(val) and str(val) != 'nan' and fy not in products[pk]:
-                                        try:
-                                            products[pk][fy] = float(val)
-                                        except:
-                                            pass
-                                            
-                        for gk in geo_keys:
-                            if gk.lower() == dim.lower() or gk.lower() in lbl.lower():
-                                if gk not in geos:
-                                    geos[gk] = {"concept": "RevenueByRegion", "dimension_member_label": gk, "label": gk}
-                                for c_col, fy in year_cols.items():
-                                    val = row.get(c_col)
-                                    if pd.notna(val) and str(val) != 'nan' and fy not in geos[gk]:
-                                        try:
-                                            geos[gk][fy] = float(val)
-                                        except:
-                                            pass
-            except Exception:
-                pass
+            geo_items = []
+            geos = prof.get("geographic_analysis", [])
+            tot_pct_sum = 0.0
+            for g in geos:
+                pre = g.get("prefix", "")
+                pct_m = re.search(r'\((\d+(?:\.\d+)?)%', pre)
+                pct = float(pct_m.group(1)) / 100.0 if pct_m else 0.0
+                tot_pct_sum += pct
+                name_clean = re.sub(r'\(.*?\)', '', pre).replace('•', '').replace(':', '').strip()
+                for delim in ['como', 'en Fase', 'y Resiliencia']:
+                    if delim in name_clean:
+                        name_clean = name_clean.split(delim)[0].strip()
+                vals = {}
+                for p in all_fys:
+                    tot_rev = canonical_rev.get(p)
+                    if tot_rev is not None:
+                        rev_m = tot_rev / 1e6 if tot_rev > 1e6 else tot_rev
+                        vals[p] = round(rev_m * pct, 1)
+                geo_items.append({"name": name_clean, "is_subtotal": False, "values": vals})
                 
-        # Unificar 'Other Products' en 'Wearables, Home and Accessories'
-        if "Wearables, Home and Accessories" in products and "Other Products" in products:
-            for col, val in products["Other Products"].items():
-                if col.startswith("FY") and pd.notna(val):
-                    if col not in products["Wearables, Home and Accessories"] or pd.isna(products["Wearables, Home and Accessories"].get(col)):
-                        products["Wearables, Home and Accessories"][col] = val
-            del products["Other Products"]
+            if 0 < tot_pct_sum < 0.98:
+                rem_pct = 1.0 - tot_pct_sum
+                rem_vals = {p: round((canonical_rev[p]/1e6 if canonical_rev[p]>1e6 else canonical_rev[p]) * rem_pct, 1) 
+                            for p in all_fys if p in canonical_rev and canonical_rev[p] is not None}
+                geo_items.append({"name": "Otros Mercados Internacionales", "is_subtotal": False, "values": rem_vals})
+                
+            if prod_items or geo_items:
+                seg_dict = {
+                    "periods": all_fys,
+                    "product_segments": prod_items,
+                    "geographic_segments": geo_items
+                }
+                with open(seg_json_path, "w", encoding="utf-8") as f:
+                    json.dump(seg_dict, f, indent=2, ensure_ascii=False)
+                print(f"[SEC Extractor] segments_data.json generado dinámicamente: {seg_json_path}")
+                
+                rows = []
+                for p in prod_items:
+                    r = {"concept": "RevenueByProduct", "dimension_member_label": p["name"], "label": p["name"]}
+                    r.update(p["values"])
+                    rows.append(r)
+                for g in geo_items:
+                    r = {"concept": "RevenueByRegion", "dimension_member_label": g["name"], "label": g["name"]}
+                    r.update(g["values"])
+                    rows.append(r)
+                return pd.DataFrame(rows) if rows else None
+        except Exception as e:
+            print(f"[SEC Extractor] Nota al procesar segmentos desde perfil: {e}")
 
-        # Asegurar total de 'Products' en ejercicios antiguos donde no venía como subtotal
-        if "Products" in products:
-            for col in all_fys:
-                if col.startswith("FY") and (col not in products["Products"] or pd.isna(products["Products"].get(col))):
-                    sub_sum = 0.0
-                    has_val = False
-                    for pk in ["iPhone", "Mac", "iPad", "Wearables, Home and Accessories"]:
-                        if pk in products and col in products[pk] and pd.notna(products[pk].get(col)):
-                            sub_sum += float(products[pk][col])
-                            has_val = True
-                    if has_val:
-                        products["Products"][col] = sub_sum
-
-        # Cálculo LTM si 10-Q está disponible
-        if latest_10q_inc is not None and not latest_10q_inc.empty:
-            ytd_cols = [c for c in latest_10q_inc.columns if 'YTD' in str(c)]
-            if len(ytd_cols) >= 2:
-                ytd_curr = sorted(ytd_cols, reverse=True)[0]
-                ytd_prev = sorted(ytd_cols, reverse=True)[1]
-                annual_list = [fy for fy in all_fys if fy != 'LTM']
-                if annual_list:
-                    latest_fy = annual_list[0]
-                    for pk in list(products.keys()):
-                        if pk in products and latest_fy in products[pk]:
-                            fy_val = products[pk][latest_fy]
-                            q_match = latest_10q_inc[latest_10q_inc['dimension_member_label'] == pk]
-                            if not q_match.empty:
-                                vc = q_match.iloc[0].get(ytd_curr)
-                                vp = q_match.iloc[0].get(ytd_prev)
-                                if pd.notna(vc) and pd.notna(vp):
-                                    products[pk]['LTM'] = fy_val + float(vc) - float(vp)
-                                    
-                    for gk in geo_keys:
-                        if gk in geos and latest_fy in geos[gk]:
-                            fy_val = geos[gk][latest_fy]
-                            q_match = latest_10q_inc[latest_10q_inc['label'].str.contains(gk, case=False, na=False)]
-                            if not q_match.empty:
-                                vc = q_match.iloc[0].get(ytd_curr)
-                                vp = q_match.iloc[0].get(ytd_prev)
-                                if pd.notna(vc) and pd.notna(vp):
-                                    geos[gk]['LTM'] = fy_val + float(vc) - float(vp)
-                                    
-        rows = list(products.values()) + list(geos.values())
-        if rows:
-            return pd.DataFrame(rows)
+    # 3. Respaldo por extracción directa SEC (10-K y 20-F)
+    try:
+        filings = company.get_filings(form="10-K")
+        if not filings:
+            filings = company.get_filings(form="20-F")
+        if filings and len(filings) > 0:
+            doc = filings[0].obj()
+            if doc and doc.financials and doc.financials.income_statement():
+                df = doc.financials.income_statement().to_dataframe()
+                return df
     except Exception as e:
-        print(f"[SEC Extractor] Nota sobre desglose de segmentos: {e}")
+        print(f"[SEC Extractor] Nota sobre desglose de segmentos SEC: {e}")
+        
     return None
+
+
+def build_10yr_segment_df(company, all_fys, latest_10q_inc=None, output_dir=None, canonical_rev=None):
+    """Enlace retrocompatible para extracción de segmentos."""
+    return build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical_rev, latest_10q_inc=latest_10q_inc)
 
 
 def export_to_excel(filepath, summary_dict, ratios_dict, inc_df, bal_df, cf_df, ticker, company_name, fiscal_years, segment_df=None):
@@ -862,6 +912,74 @@ def extract_sec_data(ticker, output_dir=None):
     annual_fys = list(dict.fromkeys(annual_fys))
     latest_fy = annual_fys[0] if annual_fys else None
     print(f"[SEC Extractor] Ejercicios fiscales anuales detectados ({len(annual_fys)}): {annual_fys}")
+    
+    # 1.1. Enriquecer estados contables con el último formulario anual oficial (10-K o 20-F)
+    # Permite capturar conceptos contables modernos o extensiones que no figuran en la agregación de 10 años
+    try:
+        ann_filings = company.get_filings(form="10-K")
+        if not ann_filings:
+            ann_filings = company.get_filings(form="20-F")
+        if ann_filings and len(ann_filings) > 0:
+            doc_single = ann_filings[0].obj()
+            if doc_single and doc_single.financials:
+                stmts_to_merge = [
+                    ('cash_flow_statement', cf_df),
+                    ('income_statement', inc_df),
+                    ('balance_sheet', bal_df)
+                ]
+                for stmt_attr, target_df in stmts_to_merge:
+                    stmt_fn = getattr(doc_single.financials, stmt_attr, None)
+                    if stmt_fn:
+                        s_obj = stmt_fn()
+                        if s_obj is not None:
+                            s_raw_df = s_obj.to_dataframe()
+                            if s_raw_df is not None and not s_raw_df.empty:
+                                s_ren = {}
+                                for c in s_raw_df.columns:
+                                    m = re.search(r'(\d{4})', str(c))
+                                    if m and not str(c).startswith('level') and not str(c).startswith('dim'):
+                                        s_ren[c] = f"FY{m.group(1)}"
+                                s_df = s_raw_df.rename(columns=s_ren)
+                                
+                                for _, s_row in s_df.iterrows():
+                                    c_concept = str(s_row.get('concept', '')).strip()
+                                    if not c_concept or c_concept == 'nan':
+                                        continue
+                                    c_token = c_concept.split(':')[-1].split('_')[-1].lower()
+                                    
+                                    # Buscar si el concepto ya existe en target_df
+                                    match_idx = -1
+                                    for t_idx, t_row in target_df.iterrows():
+                                        t_concept = str(t_row.get('concept', '')).strip()
+                                        t_token = t_concept.split(':')[-1].split('_')[-1].lower()
+                                        if t_token == c_token:
+                                            match_idx = t_idx
+                                            break
+                                            
+                                    if match_idx >= 0:
+                                        # Rellenar valores que estén en NaN en target_df
+                                        for fy in annual_fys:
+                                            if fy in s_df.columns and fy in target_df.columns:
+                                                sv = s_row.get(fy)
+                                                tv = target_df.at[match_idx, fy]
+                                                if (tv is None or pd.isna(tv)) and pd.notna(sv):
+                                                    target_df.at[match_idx, fy] = sv
+                                    else:
+                                        # Añadir concepto faltante (ej. PaymentsToAcquireProductiveAssets)
+                                        new_row_dict = {"concept": c_concept, "label": str(s_row.get('label', c_concept))}
+                                        has_any = False
+                                        for fy in annual_fys:
+                                            if fy in s_df.columns:
+                                                val = s_row.get(fy)
+                                                new_row_dict[fy] = val
+                                                if pd.notna(val):
+                                                    has_any = True
+                                            else:
+                                                new_row_dict[fy] = None
+                                        if has_any:
+                                            target_df.loc[len(target_df)] = new_row_dict
+    except Exception as e:
+        print(f"[SEC Extractor] Nota al enriquecer con reporte anual individual: {e}")
     
     # 2. Obtener Estados Trimestrales para cálculo de LTM
     print("[SEC Extractor] Consultando formularios trimestrales (10-Q / 6-K) para cálculo de LTM...")
@@ -1030,17 +1148,6 @@ def extract_sec_data(ticker, output_dir=None):
             
         cf_df.insert(cf_df.columns.get_loc(latest_fy), 'LTM', ltm_vals_cf)
         
-    # 3. Datos de Segmentos (10 Años + LTM de Productos y Geografías)
-    print("[SEC Extractor] Extrayendo desglose de segmentos histórico de 10 años + LTM...")
-    segment_df = sec_call_with_retry(build_10yr_segment_df, company, all_fys, q_inc)
-    if segment_df is None or segment_df.empty:
-        try:
-            single_fins = sec_call_with_retry(company.get_financials)
-            if single_fins and single_fins.income_statement():
-                segment_df = single_fins.income_statement().to_dataframe()
-        except Exception:
-            segment_df = None
-        
     # Convertir a diccionarios conceptuales para JSON
     inc_data = dataframe_to_concept_dict(inc_df, all_fys)
     bal_data = dataframe_to_concept_dict(bal_df, all_fys)
@@ -1057,6 +1164,17 @@ def extract_sec_data(ticker, output_dir=None):
         
     print(f"[SEC Extractor] Generando resumen canónico y ratios para períodos: {all_fys}")
     canonical, ratios = extract_canonical_summary(inc_data, bal_data, cf_data, all_fys, facts_df=facts_df)
+    
+    # 3. Datos de Segmentos (10 Años + LTM de Productos y Geografías)
+    print("[SEC Extractor] Extrayendo desglose de segmentos histórico de 10 años + LTM...")
+    segment_df = build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical.get("revenue"), latest_10q_inc=q_inc)
+    if segment_df is None or segment_df.empty:
+        try:
+            single_fins = sec_call_with_retry(company.get_financials)
+            if single_fins and single_fins.income_statement():
+                segment_df = single_fins.income_statement().to_dataframe()
+        except Exception:
+            segment_df = None
     
     full_dataset = {
         "ticker": ticker.upper(),

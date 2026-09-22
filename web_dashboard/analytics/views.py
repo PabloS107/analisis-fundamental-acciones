@@ -38,11 +38,22 @@ def index(request):
                     name = sc.get("company_name", ticker)
                     
                     # 1. Scores Fundamentales (Piotroski y Mohanram)
-                    f_ltm = sc.get("piotroski_f_score", {}).get("LTM", {})
-                    f_sc = f_ltm.get("total_score") if f_ltm.get("total_score") is not None else sc.get("piotroski_f_score", {}).get("latest_result", {}).get("total_score", "-")
-                    
-                    g_ltm = sc.get("mohanram_g_score", {}).get("LTM", {})
-                    g_sc = g_ltm.get("total_score") if g_ltm.get("total_score") is not None else sc.get("mohanram_g_score", {}).get("latest_result", {}).get("total_score", "-")
+                    recent_fy = sc.get("fiscal_years", [None])[0] if sc.get("fiscal_years") else None
+                    f_dict = sc.get("piotroski_f_score", {})
+                    f_ltm = f_dict.get("LTM", {})
+                    f_sc = f_ltm.get("total_score")
+                    if f_sc is None and recent_fy:
+                        f_sc = f_dict.get(recent_fy, {}).get("total_score")
+                    if f_sc is None:
+                        f_sc = f_dict.get("latest_result", {}).get("total_score", "-")
+
+                    g_dict = sc.get("mohanram_g_score", {})
+                    g_ltm = g_dict.get("LTM", {})
+                    g_sc = g_ltm.get("total_score")
+                    if g_sc is None and recent_fy:
+                        g_sc = g_dict.get(recent_fy, {}).get("total_score")
+                    if g_sc is None:
+                        g_sc = g_dict.get("latest_result", {}).get("total_score", "-")
                     
                     # 2. Novy-Marx GP/A
                     nm = sc.get("novy_marx_analysis", {}).get("latest_result", {})
@@ -243,48 +254,51 @@ def company_detail(request, ticker):
     cov_data = solv_data.get("debt_service", {})
     dist_data = solv_data.get("distress_models", {})
 
-    total_debt_m = lev_data.get("total_debt", 0.0)
-    cash_m = lev_data.get("cash", 0.0)
-    net_debt_m = lev_data.get("net_debt", 0.0)
-    ebitda_m = lev_data.get("ebitda", 0.0)
-    fcf_m_val = lev_data.get("fcf", 0.0)
+    total_debt_m = lev_data.get("total_debt") if lev_data.get("total_debt") is not None else 0.0
+    cash_m = lev_data.get("cash") if lev_data.get("cash") is not None else 0.0
+    net_debt_m = lev_data.get("net_debt") if lev_data.get("net_debt") is not None else 0.0
+    ebitda_m = lev_data.get("ebitda")
+    fcf_m_val = lev_data.get("fcf") if lev_data.get("fcf") is not None else 0.0
     is_net_cash = lev_data.get("is_net_cash", False)
     net_debt_ebitda_val = lev_data.get("net_debt_to_ebitda", 0.25)
     solv_13_1_safe = is_net_cash or (isinstance(net_debt_ebitda_val, (int, float)) and net_debt_ebitda_val < 1.5)
 
-    if net_debt_m < 0:
-        net_debt_display = f"-${abs(net_debt_m):,.1f}M (Caja Neta)"
-    elif net_debt_m > 0:
-        net_debt_display = f"+${net_debt_m:,.1f}M"
+    if isinstance(net_debt_m, (int, float)):
+        if net_debt_m < 0:
+            net_debt_display = f"-${abs(net_debt_m):,.1f}M (Caja Neta)"
+        elif net_debt_m > 0:
+            net_debt_display = f"+${net_debt_m:,.1f}M"
+        else:
+            net_debt_display = "$0.0M"
     else:
-        net_debt_display = "$0.0M"
+        net_debt_display = "N/A"
 
     solvency_13_1 = {
-        "total_debt": f"${total_debt_m:,.1f}M",
-        "cash": f"${cash_m:,.1f}M",
+        "total_debt": f"${total_debt_m:,.1f}M" if isinstance(total_debt_m, (int, float)) else "N/A",
+        "cash": f"${cash_m:,.1f}M" if isinstance(cash_m, (int, float)) else "N/A",
         "net_debt": net_debt_display,
         "is_net_cash": is_net_cash,
-        "ebitda": f"${ebitda_m:,.1f}M",
+        "ebitda": f"${ebitda_m:,.1f}M" if isinstance(ebitda_m, (int, float)) else "N/A",
         "net_debt_to_ebitda_str": lev_data.get("net_debt_to_ebitda_str", "0.25x"),
         "net_debt_to_ebitda_status": lev_data.get("status", "Grado Inversión Superior (< 1.5x)"),
-        "fcf": f"${fcf_m_val:,.1f}M",
+        "fcf": f"${fcf_m_val:,.1f}M" if isinstance(fcf_m_val, (int, float)) else "N/A",
         "net_debt_to_fcf_str": lev_data.get("net_debt_to_fcf_str", "0.31x"),
         "badge": lev_data.get("badge", "APALANCAMIENTO BAJO"),
         "diagnosis": lev_data.get("diagnosis", "Apalancamiento muy conservador frente a la generación operativa."),
         "is_safe": solv_13_1_safe,
     }
 
-    ebit_cov_m = cov_data.get("ebit", 0.0)
-    interest_exp_m = cov_data.get("interest_expense", 0.0)
+    ebit_cov_m = cov_data.get("ebit")
+    interest_exp_m = cov_data.get("interest_expense")
     cov_val = cov_data.get("interest_coverage", 41.8)
     solv_13_2_safe = isinstance(cov_val, (int, float)) and (cov_val >= 10.0 or is_net_cash)
 
     solvency_13_2 = {
-        "ebit": f"${ebit_cov_m:,.1f}M",
-        "interest_expense": f"${interest_exp_m:,.1f}M",
+        "ebit": f"${ebit_cov_m:,.1f}M" if isinstance(ebit_cov_m, (int, float)) else "N/A",
+        "interest_expense": f"${interest_exp_m:,.1f}M" if isinstance(interest_exp_m, (int, float)) else "N/A",
         "interest_coverage_str": cov_data.get("interest_coverage_str", "41.8x"),
         "cash_interest_coverage_str": cov_data.get("cash_interest_coverage_str", "39.6x"),
-        "financial_burden_pct": f"{cov_data.get('financial_burden_pct', 2.53):.2f}%",
+        "financial_burden_pct": f"{cov_data.get('financial_burden_pct', 2.53):.2f}%" if isinstance(cov_data.get('financial_burden_pct'), (int, float)) else "N/A",
         "status": cov_data.get("status", "COBERTURA EXCELENTE (> 10.0x)"),
         "badge": cov_data.get("badge", "MÁXIMA PROTECCIÓN"),
         "diagnosis": cov_data.get("diagnosis", "Los beneficios operativos cubren holgadamente los intereses."),
@@ -300,14 +314,14 @@ def company_detail(request, ticker):
         "altman_zone": dist_data.get("altman_zone", "ZONA SEGURA (BAJO RIESGO DE QUIEBRA)"),
         "altman_badge": dist_data.get("altman_badge", "ZONA SEGURA"),
         "altman_diagnosis": dist_data.get("altman_diagnosis", "Probabilidad estadística de insolvencia virtualmente nula a 2 años vista."),
-        "altman_x1": f"{dist_data.get('altman_x1', 0.0013):.4f}",
-        "altman_x2": f"{dist_data.get('altman_x2', 0.0296):.4f}",
-        "altman_x3": f"{dist_data.get('altman_x3', 0.4041):.4f}",
-        "altman_x4": f"{dist_data.get('altman_x4', 0.3899):.4f}",
+        "altman_x1": f"{dist_data.get('altman_x1'):.4f}" if isinstance(dist_data.get('altman_x1'), (int, float)) else "N/A",
+        "altman_x2": f"{dist_data.get('altman_x2'):.4f}" if isinstance(dist_data.get('altman_x2'), (int, float)) else "N/A",
+        "altman_x3": f"{dist_data.get('altman_x3'):.4f}" if isinstance(dist_data.get('altman_x3'), (int, float)) else "N/A",
+        "altman_x4": f"{dist_data.get('altman_x4'):.4f}" if isinstance(dist_data.get('altman_x4'), (int, float)) else "N/A",
         "altman_is_safe": altman_is_safe,
         "synthetic_rating": dist_data.get("synthetic_rating", "AAA"),
         "synthetic_rating_desc": dist_data.get("synthetic_rating_desc", "GRADO INSTITUCIONAL MÁXIMO (AAA / Aaa)"),
-        "default_spread_pct": f"+{dist_data.get('default_spread_pct', 0.60):.2f}%",
+        "default_spread_pct": f"+{dist_data.get('default_spread_pct', 0.60):.2f}%" if isinstance(dist_data.get('default_spread_pct'), (int, float)) else "+0.40%",
         "default_probability": dist_data.get("default_probability", "< 0.2%"),
         "rating_is_safe": True,
     }
@@ -715,34 +729,50 @@ def company_detail(request, ticker):
             "is_base": (idx == 2)
         })
 
-    stock_price = vp["price"]
-    shares_m = round(vp["shares_b"] * 1000.0, 2)
-    rev_base = vp["base_rev_m"]
-    fcf_margin = vp["fcf_margin"]
-    fcf_margin_pct = vp["fcf_margin_pct"]
-    net_debt_m = vp["net_debt_m"]
-    hist_growth = (vp["cagr_5y"] / 100.0) if vp["cagr_5y"] else 0.08
-    hist_growth_pct = vp["cagr_5y"]
-    wacc_dec = vp["wacc_val"]
-    gn_dec = 0.025
+    is_financial = vp.get("is_financial", False)
+    stock_price = vp.get("price", 0.0)
+    shares_m = round(vp.get("shares_b", 0.0) * 1000.0, 2)
 
-    # Cálculo del Valor Intrínseco Teórico (DCF a 10 años con Gordon-Shapiro)
-    pv_fcf = 0.0
-    r_t = rev_base
-    for t in range(1, 11):
-        r_t *= (1.0 + hist_growth)
-        pv_fcf += (r_t * fcf_margin) / ((1.0 + wacc_dec) ** t)
-    tv = (r_t * (1.0 + gn_dec) * fcf_margin) / max(wacc_dec - gn_dec, 0.005)
-    pv_tv = tv / ((1.0 + wacc_dec) ** 10)
-    ev_total = pv_fcf + pv_tv
-    equity_val = ev_total - net_debt_m
-    fair_price_base = equity_val / shares_m if shares_m > 0 else stock_price
+    if is_financial:
+        rev_base = vp.get("tangible_equity_m", 0.0)
+        fcf_margin = 0.0
+        fcf_margin_pct = 0.0
+        net_debt_m = 0.0
+        hist_growth = (vp.get("cagr_5y", 0.0) / 100.0) if vp.get("cagr_5y") else 0.08
+        hist_growth_pct = vp.get("cagr_5y", 0.0)
+        wacc_dec = vp.get("ke_val", 0.0943)
+        gn_dec = (vp.get("g_terminal_pct", 3.5)) / 100.0
+        fair_price_base = vp.get("fair_value_excess_return", stock_price)
+        g_implied = (vp.get("rotce_implied_pct", 0.0)) / 100.0
+        gap_exp = (g_implied - (vp.get("rotce_val", 0.264))) * 100.0
+    else:
+        rev_base = vp.get("base_rev_m", 0.0)
+        fcf_margin = vp.get("fcf_margin", 0.0)
+        fcf_margin_pct = vp.get("fcf_margin_pct", 0.0)
+        net_debt_m = vp.get("net_debt_m", 0.0)
+        hist_growth = (vp["cagr_5y"] / 100.0) if vp.get("cagr_5y") else 0.08
+        hist_growth_pct = vp.get("cagr_5y", 0.0)
+        wacc_dec = vp.get("wacc_val", 0.095)
+        gn_dec = 0.025
 
-    g_implied = vp["g_implied_our_pct"] / 100.0
-    gap_exp = (g_implied - hist_growth) * 100.0
+        # Cálculo del Valor Intrínseco Teórico (DCF a 10 años con Gordon-Shapiro)
+        pv_fcf = 0.0
+        r_t = rev_base
+        for t in range(1, 11):
+            r_t *= (1.0 + hist_growth)
+            pv_fcf += (r_t * fcf_margin) / ((1.0 + wacc_dec) ** t)
+        tv = (r_t * (1.0 + gn_dec) * fcf_margin) / max(wacc_dec - gn_dec, 0.005)
+        pv_tv = tv / ((1.0 + wacc_dec) ** 10)
+        ev_total = pv_fcf + pv_tv
+        equity_val = ev_total - net_debt_m
+        fair_price_base = equity_val / shares_m if shares_m > 0 else stock_price
+
+        g_implied = vp.get("g_implied_our_pct", 0.0) / 100.0
+        gap_exp = (g_implied - hist_growth) * 100.0
+
     gap_expectations_str = f"{'+' if gap_exp >= 0 else ''}{gap_exp:.1f} pp"
 
-    premium_pct = ((stock_price - fair_price_base) / fair_price_base) * 100.0
+    premium_pct = ((stock_price - fair_price_base) / fair_price_base) * 100.0 if fair_price_base > 0 else 0.0
     if premium_pct > 25.0:
         valuation_status = "SOBREVALORADA"
     elif premium_pct < -15.0:
@@ -752,6 +782,7 @@ def company_detail(request, ticker):
 
     context = {
         "ticker": ticker,
+        "is_financial": is_financial,
         "company_name": company_name,
         "cik": cik,
         "fys": fys,

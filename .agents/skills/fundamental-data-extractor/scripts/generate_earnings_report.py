@@ -473,12 +473,13 @@ def generate_full_report(ticker="AAPL"):
         add_body_p(doc, "UGG aporta más de $2.44B con una exitosa desestacionalización que sostiene ventas durante los 12 meses del año sin recurrir a descuentos.", bold_prefix="• UGG como Pilar de Rentabilidad y Moda: ")
         add_body_p(doc, "La combinación de mayorista y DTC permite una sinergia perfecta: el mayorista descubre clientes y el DTC fideliza con margen superior.", bold_prefix="• Sinergia Omnicanal de Alto Margen: ")
     else:
+        tot_prod = sum(s.get("values", {}).get(p_curr, 0.0) for s in prod_segments) or 1.0
         for s in prod_segments[:3]:
             s_name = s.get("name", "Línea Operativa")
             s_vals = s.get("values", {})
             v_curr = s_vals.get(p_curr, 0.0)
             v_prev = s_vals.get(p_prev, 0.0)
-            pct = (v_curr / tot_rev * 100) if tot_rev > 0 else 0.0
+            pct = (v_curr / tot_prod * 100) if tot_prod > 0 else 0.0
             yoy_growth = ((v_curr - v_prev) / v_prev * 100) if v_prev > 0 else 0.0
             prefix = f"• {s_name} ({pct:.1f}% de facturación): "
             text = f"Genera ${v_curr:,.1f} M ({'+' if yoy_growth >= 0 else ''}{yoy_growth:.1f}% YoY), consolidándose como pilar operativo clave de {company_name}."
@@ -557,13 +558,31 @@ def generate_full_report(ticker="AAPL"):
     ])
     build_table(doc, sc_headers, sc_data, [1.6, 1.1, 1.0, 1.0, 2.1])
     
-    add_callout(doc, "GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA PARÁMETRO CLAVE?", [
-        "• Margen Bruto (%): Mide el poder de fijación de precios (pricing power) de la empresa y la ventaja competitiva frente a sus proveedores y costes directos. Un margen en expansión indica que el cliente está dispuesto a pagar por el valor de la marca o que la compañía tiene economías de escala superiores.",
-        "• Margen Operativo (%): Refleja la eficiencia de la gestión para controlar la estructura fija de administración, marketing e investigación (OpEx). Demuestra si la compañía goza de apalancamiento operativo positivo.",
-        "• Margen Neto (%): Es la rentabilidad final que le queda a la empresa tras cubrir costes operativos, gastos financieros de la deuda e impuestos corporativos. Proporción de los ingresos que termina directamente en el bolsillo de los accionistas.",
-        "• Flujo de Caja Libre (FCF) y Margen FCF: Es el indicador más fidedigno de la salud económica real (Cash is King). Mide los dólares reales que ingresan a la caja tras pagar todas las inversiones de mantenimiento y expansión (CapEx). Capital disponible para recomprar acciones, pagar dividendos o desendeudarse.",
-        "• Tasa de Conversión FCF / Beneficio Neto: Evalúa la calidad contable de las ganancias. Ratios consistentes en torno o por encima del 100% garantizan que la empresa no está inflando sus resultados con devengos agresivos."
-    ], accent_color="1B365D", bg_color="F0F4F8")
+    is_fin_inst = False
+    if scoring_data.get("is_financial_institution") or scoring_data.get("novy_marx_analysis", {}).get("latest_result", {}).get("is_financial_institution"):
+        is_fin_inst = True
+    sic_chk = str(scoring_data.get("sic_code") or scoring_data.get("benchmarks_used", {}).get("sic_code", "")).strip()
+    if sic_chk.startswith("6") or scoring_data.get("benchmarks_used", {}).get("gics_sector") == "Financials":
+        is_fin_inst = True
+
+    if is_fin_inst:
+        add_callout(doc, "GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA RATIO BANCARIO?", [
+            "• Margen de Interés Neto (NIM): Mide la rentabilidad del negocio básico de intermediación bancaria (spread entre la tasa activa que cobra por prestar y la tasa pasiva que paga por depósitos). Un NIM elevado y resiliente certifica ventajas estructurales de fondeo.",
+            "• Ratio de Eficiencia Operativa (Cost-to-Income): Gastos de explotación entre margen bruto de intermediación. Ratios < 40% son excelentes; < 25% sitúan a la entidad en la élite mundial absoluta gracias a su apalancamiento tecnológico.",
+            "• Ratio de Morosidad NPL (15-90d y >90d): Porcentaje de la cartera con retrasos en pagos. Evalúa la salud crediticia y la efectividad de los modelos de admisión y suscripción de riesgo.",
+            "• Ratio de Cobertura de Provisiones: Provisiones acumuladas entre cartera dudosa (>90d). Ratios > 150%-200% garantizan que el balance absorberá impagos sin erosionar el patrimonio ni requerir rescates.",
+            "• Cost of Risk (Costo de Riesgo): Gasto anualizado en provisiones sobre cartera total. Indica el coste recurrente de las pérdidas esperadas inherente a la actividad crediticia.",
+            "• Retorno sobre Patrimonio Tangible (ROTCE): Mide la rentabilidad pura generada sobre los fondos propios tangibles. La diferencia frente al Coste del Capital (Ke) determina la creación de valor económico puro (EVA bancario).",
+            "• Ratio CET1 / Basilea III: Mide el capital regulatorio de máxima calidad frente a activos ponderados por riesgo. Garantiza la solvencia ante crisis sistémicas (>8.0% mínimo BACEN / >11.0% élite)."
+        ], accent_color="1B365D", bg_color="F0F4F8")
+    else:
+        add_callout(doc, "GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA PARÁMETRO CLAVE?", [
+            "• Margen Bruto (%): Mide el poder de fijación de precios (pricing power) de la empresa y la ventaja competitiva frente a sus proveedores y costes directos. Un margen en expansión indica que el cliente está dispuesto a pagar por el valor de la marca o que la compañía tiene economías de escala superiores.",
+            "• Margen Operativo (%): Refleja la eficiencia de la gestión para controlar la estructura fija de administración, marketing e investigación (OpEx). Demuestra si la compañía goza de apalancamiento operativo positivo.",
+            "• Margen Neto (%): Es la rentabilidad final que le queda a la empresa tras cubrir costes operativos, gastos financieros de la deuda e impuestos corporativos. Proporción de los ingresos que termina directamente en el bolsillo de los accionistas.",
+            "• Flujo de Caja Libre (FCF) y Margen FCF: Es el indicador más fidedigno de la salud económica real (Cash is King). Mide los dólares reales que ingresan a la caja tras pagar todas las inversiones de mantenimiento y expansión (CapEx). Capital disponible para recomprar acciones, pagar dividendos o desendeudarse.",
+            "• Tasa de Conversión FCF / Beneficio Neto: Evalúa la calidad contable de las ganancias. Ratios consistentes en torno o por encima del 100% garantizan que la empresa no está inflando sus resultados con devengos agresivos."
+        ], accent_color="1B365D", bg_color="F0F4F8")
     
     # =============================================================
     # 5. ANÁLISIS EXHAUSTIVO DE EARNINGS CALLS Y AUDITORÍA DIRECTIVA
@@ -898,7 +917,7 @@ def generate_full_report(ticker="AAPL"):
     add_forensic_section_docx(doc, scoring_data, ticker=ticker_clean, company_name=company_name, section_num=12)
     
     # 13. Solvencia y Estrés Financiero
-    add_solvency_section_docx(doc, scoring_data, ticker=ticker_clean, company_name=company_name, section_num=13)
+    add_solvency_section_docx(doc, scoring_data, ticker=ticker_clean, company_name=company_name, section_num=13, profile_data=profile_data)
     
     # 14. Modelado Financiero y Reverse DCF
     add_valuation_section_docx(doc, scoring_data, ticker=ticker_clean, company_name=company_name, section_num=14, profile_data=profile_data)
@@ -922,8 +941,25 @@ def generate_full_report(ticker="AAPL"):
     novy_marx_md = generate_novy_marx_section_md(novy_marx_data, ticker=ticker_clean, company_name=company_name, section_num=10) + "\n---\n\n"
     roic_wacc_md = generate_roic_wacc_section_md(scoring_data, ticker=ticker_clean, company_name=company_name, section_num=11) + "\n---\n\n"
     forensic_md = generate_forensic_section_md(scoring_data, ticker=ticker_clean, company_name=company_name, section_num=12) + "\n---\n\n"
-    solvency_md = generate_solvency_section_md(scoring_data, ticker=ticker_clean, company_name=company_name, section_num=13) + "\n---\n\n"
+    solvency_md = generate_solvency_section_md(scoring_data, ticker=ticker_clean, company_name=company_name, section_num=13, profile_data=profile_data) + "\n---\n\n"
     valuation_md = generate_valuation_section_md(scoring_data, ticker=ticker_clean, company_name=company_name, section_num=14, profile_data=profile_data)
+    
+    if is_fin_inst:
+        md_scorecard_guide = """> 📌 **GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA RATIO BANCARIO?**  
+> • **Margen de Interés Neto (NIM):** Mide la rentabilidad del negocio básico de intermediación bancaria (spread entre tasa activa y pasiva).  
+> • **Ratio de Eficiencia (Cost-to-Income):** Gastos de explotación sobre margen bruto. Ratios < 40% son excelentes; < 25% élite mundial.  
+> • **Ratio de Morosidad NPL (15-90d y >90d):** Porcentaje de la cartera con retrasos en pagos; evalúa la disciplina en suscripción de crédito.  
+> • **Ratio de Cobertura de Provisiones:** Provisiones sobre morosidad tardía (>90d). Ratios > 150%-200% garantizan blindaje ante impagos.  
+> • **Cost of Risk (Costo de Riesgo):** Gasto en provisiones sobre cartera total media.  
+> • **Retorno sobre Patrimonio Tangible (ROTCE):** Rentabilidad neta sobre fondos propios tangibles frente al coste de capital (Ke).  
+> • **Ratio CET1 / Basilea III:** Capital regulatorio de máxima calidad frente a activos ponderados por riesgo (>8% BACEN / >11% élite)."""
+    else:
+        md_scorecard_guide = """> 📌 **GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA PARÁMETRO CLAVE?**  
+> • **Margen Bruto (%):** Mide el poder de fijación de precios (*pricing power*) de la empresa y la ventaja competitiva frente a costes directos.  
+> • **Margen Operativo (%):** Refleja la eficiencia para controlar gastos fijos de administración, marketing e investigación (OpEx).  
+> • **Margen Neto (%):** Retención final disponible tras cubrir costes operativos, gastos financieros e impuestos.  
+> • **Flujo de Caja Libre (FCF):** Efectivo puro disponible tras financiar todas las inversiones de capital (CapEx).  
+> • **Conversión FCF / Beneficio Neto:** Ratios > 100% certifican ganancias de alta calidad contable."""
     
     # Tablas Markdown para Bloque A y B
     md_guidance_table = "| Métrica / Parámetro Proyectado | Rango de Guidance Oficial | Lectura Estratégica y Factores Clave |\n| :--- | :---: | :--- |\n"
@@ -1035,12 +1071,7 @@ def generate_full_report(ticker="AAPL"):
 
 {md_scorecard_table}
 
-> 📌 **GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA PARÁMETRO CLAVE?**  
-> • **Margen Bruto (%):** Mide el poder de fijación de precios (*pricing power*) de la empresa y la ventaja competitiva frente a costes directos.  
-> • **Margen Operativo (%):** Refleja la eficiencia para controlar gastos fijos de administración, marketing e investigación (OpEx).  
-> • **Margen Neto (%):** Retención final disponible tras cubrir costes operativos, gastos financieros e impuestos.  
-> • **Flujo de Caja Libre (FCF):** Efectivo puro disponible tras financiar todas las inversiones de capital (CapEx).  
-> • **Conversión FCF / Beneficio Neto:** Ratios > 100% certifican ganancias de alta calidad contable.
+{md_scorecard_guide}
 
 ---
 

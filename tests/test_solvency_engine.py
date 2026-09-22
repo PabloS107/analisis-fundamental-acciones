@@ -353,6 +353,58 @@ class TestSolvencyEngine(unittest.TestCase):
         self.assertTrue(any("Solvencia, Deuda y Estrés Financiero" in h for h in headings))
         self.assertGreaterEqual(len(doc.tables), 3)
 
+    def test_08_banking_solvency_report_builder(self):
+        """Verifica que el motor bancario de solvencia genere métricas de Basilea III, CET1 y LDR sin falso distress."""
+        mock_bank_scoring = {
+            "ticker": "NUBANK",
+            "company_name": "Nu Holdings Ltd.",
+            "is_financial_institution": True,
+            "sic_code": "6199",
+            "debt_and_solvency_analysis": {
+                "available": True,
+                "latest_result": {
+                    "period": "LTM",
+                    "cash_flow_leverage": {
+                        "total_debt": 0.0,
+                        "cash": 9185.7,
+                        "net_debt": -9185.7
+                    },
+                    "distress_models": {
+                        "synthetic_rating": "AAA",
+                        "synthetic_rating_desc": "MÁXIMA CALIDAD CREDITICIA"
+                    }
+                }
+            }
+        }
+        mock_profile = {
+            "scorecard": {
+                "data": [
+                    ["Cartera Total de Crédito (Gross Loans)", "$30,400.0 M"],
+                    ["Total Depósitos de Clientes", "$36,600.0 M"],
+                    ["Ratio de Morosidad 15-90 días", "4.20%"],
+                    ["Ratio de Morosidad >90 días (NPL)", "6.80%"],
+                    ["Retorno sobre Patrimonio Tangible (ROTCE)", "26.40%"]
+                ]
+            }
+        }
+
+        # Prueba Markdown Bancario
+        md_out = generate_solvency_section_md(mock_bank_scoring, "NUBANK", "Nu Holdings Ltd.", section_num=13, profile_data=mock_profile)
+        self.assertIn("Banking Solvency", md_out)
+        self.assertIn("CET1", md_out)
+        self.assertIn("Basilea III", md_out)
+        self.assertIn("Loan-to-Deposit", md_out)
+        self.assertIn("ALTMAN Z", md_out)
+        self.assertIn("NO APLICA A LA BANCA", md_out)
+
+        # Prueba Word Bancario
+        doc = docx.Document()
+        add_solvency_section_docx(doc, mock_bank_scoring, "NUBANK", "Nu Holdings Ltd.", section_num=13, profile_data=mock_profile)
+        headings = [p.text for p in doc.paragraphs if p.text]
+        self.assertTrue(any("Banking Solvency" in h for h in headings))
+        self.assertGreaterEqual(len(doc.tables), 3)
+
 
 if __name__ == "__main__":
     unittest.main()
+

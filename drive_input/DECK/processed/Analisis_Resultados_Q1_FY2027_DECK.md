@@ -751,18 +751,11 @@ graph LR
 ### 14.1. Configuración Óptima del Modelo en Plataformas de Valoración (Fiscal AI)
 
 Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativos, se recomienda parametrizar el modelo bajo los siguientes criterios técnicos:
-* **1. Modelo de Valor Terminal: `Perpetuity` (Recomendado) frente a `Exit Multiple`:**
-  * **Por qué elegir Perpetuity:** El modelo de Gordon-Shapiro asume que la empresa madura y crece a perpetuidad a una tasa modesta y sostenible (**2.0% - 2.5%**), alineada con la inflación y el crecimiento tendencial del PIB global.
-  * **Por qué evitar Exit Multiple:** Asumir un múltiplo de salida arbitrario a 10 años (ej. 20x EV/FCF) introduce una doble especulación sobre el optimismo del mercado en una década futura.
-* **2. Variable de Crecimiento: `Revenue Growth` (Recomendado) frente a `Earnings` o `Cash Flow`:**
-  * **Por qué elegir Revenue Growth:** Los ingresos representan el motor económico primario de la empresa y la métrica más limpia contra manipulaciones contables.
-  * **Por qué evitar Earnings Growth:** El beneficio por acción (EPS) puede inflarse mediante recompras masivas de acciones o reducciones fiscales sin que el negocio subyacente esté ganando tracción real.
-* **3. Horizonte Temporal de Pronóstico (*Forecast Years*): `10 Años`:**
-  * Permite capturar un ciclo completo de producto, el despliegue del superciclo de innovación y la estabilización de los márgenes hacia el coste de capital.
+* **1. Modelo de Valor Terminal: `Perpetuity` (Recomendado) frente a `Exit Multiple`:** Gordon-Shapiro anclado a inflación/PIB (2.0% - 2.5%).
+* **2. Variable de Crecimiento: `Revenue Growth` (Recomendado) frente a `Earnings` o `Cash Flow`:** Los ingresos representan el motor comercial real, libre de distorsiones por recompras de acciones.
+* **3. Horizonte Temporal de Pronóstico (*Forecast Years*): `10 Años`:** Captura el ciclo completo de inversión y maduración operativa.
 
 ### 14.2. Tabla Maestra de Parámetros Auditados en Tiempo Real (Advanced Mode)
-
-A continuación se auditan las variables maestras calculadas mediante extracción en tiempo real y verificación de doble factor (Yahoo Finance / CNBC Quote Service / SEC Form 10-Q):
 
 | Casilla / Input de Valoración | Valor Auditado (En Vivo) | Sección de Origen | Racional Técnico y Sustento Fundamental |
 | :--- | :---: | :---: | :--- |
@@ -783,8 +776,6 @@ A continuación se auditan las variables maestras calculadas mediante extracció
 
 ### 14.3. Auditoría de Discrepancia Metodológica: WACC Propietario vs Plataformas (Fiscal AI)
 
-Al contrastar nuestro modelo con la parametrización estándar de plataformas comerciales (ej. Fiscal AI, que adopta un WACC genérico de **10.90%** y margen FCF de **24.4%**), se deduce con exactitud matemática el impacto de las hipótesis en las expectativas de crecimiento:
-
 | Parámetro Clave | Modelo Propietario (Auditado) | Parametrización Plataformas | Diferencial (Delta) | Impacto Cuantitativo en la Tesis |
 | :--- | :---: | :---: | :---: | :--- |
 | **WACC (Tasa de Descuento)** | 10.31% | 10.90% | -0.59 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
@@ -795,26 +786,22 @@ Al contrastar nuestro modelo con la parametrización estándar de plataformas co
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
-La siguiente matriz, calculada dinámicamente por nuestro motor para la cotización actual de $80.23, muestra el **crecimiento anual de ingresos requerido** ante distintas combinaciones de coste de capital y crecimiento terminal a perpetuidad:
-
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.31% (Bajo / Expansión) | -3.9% | -4.3% | -4.7% | -5.2% | -5.6% | -6.2% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 9.81% (Favorable) | -3.1% | -3.5% | -3.9% | -4.3% | -4.7% | -5.2% | Escenario de sensibilidad operativa. |
-| 10.31% (WACC Auditado Base) | -2.4% | -2.7% | -3.1% | -3.5% | -3.9% | -4.3% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.81% (Exigente) | -1.7% | -2.0% | -2.3% | -2.7% | -3.1% | -3.5% | Escenario de sensibilidad operativa. |
-| 11.31% (Estrés / Tipos Altos) | -1.0% | -1.3% | -1.6% | -1.9% | -2.3% | -2.7% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.31% (Bajo / Expansión) | -4.1% | -4.5% | -4.9% | -5.3% | -5.8% | -6.3% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 9.81% (Favorable) | -3.3% | -3.7% | -4.1% | -4.5% | -4.9% | -5.4% | Escenario de sensibilidad operativa. |
+| 10.31% (WACC Auditado Base) | -2.6% | -2.9% | -3.3% | -3.6% | -4.1% | -4.5% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 10.81% (Exigente) | -1.8% | -2.2% | -2.5% | -2.9% | -3.2% | -3.7% | Escenario de sensibilidad operativa. |
+| 11.31% (Estrés / Tipos Altos) | -1.1% | -1.4% | -1.7% | -2.1% | -2.4% | -2.8% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
-
-A la luz de los datos auditados de la SEC, el diagnóstico de gobernanza, la productividad de capital, la auditoría forense y el modelo de flujo de caja inverso, se sintetizan las siguientes conclusiones fundamentales:
 
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Activos Intangibles y Marca + Poder de Fijación de Precios | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (22.7% EBIT). |
 | **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.18 CFO por dólar de NI). |
-| **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda financiera neta; colchón de liquidez de $1.6B. |
+| **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda neta; colchón de liquidez de $1.6B. |
 | **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 53.6% | **COMPOUNDING MACHINE** | Spread económico de +43.3 pp sobre WACC (Creación de valor de élite). |
 | **Valoración de Mercado** | Crecimiento Implícito: -3.7% - -5.5% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
 

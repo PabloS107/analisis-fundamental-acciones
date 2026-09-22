@@ -934,9 +934,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.15830251241864224,
-          "formatted_value": "-15.83%",
-          "comparison_label": "-7.7% vs 8.2% (-15.83%)",
+          "value": -0.0754050239729395,
+          "formatted_value": "-7.54%",
+          "comparison_label": "-7.7% vs -0.1% (-7.54%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -1021,12 +1021,12 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.08150075275507161,
-          "formatted_value": "8.15%",
-          "comparison_label": "8.15% > 0%",
+          "value": -0.001396735690631113,
+          "formatted_value": "-0.14%",
+          "comparison_label": "-0.14% > 0%",
           "threshold": "> 0.00%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Utilidad neta positiva sobre la base de activos instalados."
         },
         "F_CFO": {
@@ -1043,9 +1043,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0041376605422790425,
-          "formatted_value": "+0.41%",
-          "comparison_label": "8.2% vs 7.7% (+0.41%)",
+          "value": 0.048126642020192435,
+          "formatted_value": "+4.81%",
+          "comparison_label": "-0.1% vs -5.0% (+4.81%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -1054,9 +1054,9 @@
         "F_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad",
-          "value": 94541000.0,
-          "formatted_value": "$+94.5M",
-          "comparison_label": "CFO $0.2B > NI $0.1B",
+          "value": 233244000.0,
+          "formatted_value": "$+233.2M",
+          "comparison_label": "CFO $0.2B > NI $-0.0B",
           "threshold": "CFO > Utilidad Neta",
           "passed": true,
           "points": 1,
@@ -1118,11 +1118,11 @@
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 5,
+      "total_score": 4,
       "max_score": 9,
-      "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "rating": "VULNERABILIDAD FINANCIERA",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
+      "status_color": "RED"
     },
     "FY2017": {
       "period": "FY2017",
@@ -1130,12 +1130,12 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.07736309221279257,
-          "formatted_value": "7.74%",
-          "comparison_label": "7.74% > 0%",
+          "value": -0.049523377710823546,
+          "formatted_value": "-4.95%",
+          "comparison_label": "-4.95% > 0%",
           "threshold": "> 0.00%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Utilidad neta positiva sobre la base de activos instalados."
         },
         "F_CFO": {
@@ -1152,9 +1152,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.022360843477020845,
-          "formatted_value": "-2.24%",
-          "comparison_label": "7.7% vs 10.0% (-2.24%)",
+          "value": -0.14924731340063696,
+          "formatted_value": "-14.92%",
+          "comparison_label": "-5.0% vs 10.0% (-14.92%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -1163,9 +1163,9 @@
         "F_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad",
-          "value": 163221000.0,
-          "formatted_value": "$+163.2M",
-          "comparison_label": "CFO $0.3B > NI $0.1B",
+          "value": 336730000.0,
+          "formatted_value": "$+336.7M",
+          "comparison_label": "CFO $0.3B > NI $-0.1B",
           "threshold": "CFO > Utilidad Neta",
           "passed": true,
           "points": 1,
@@ -1227,11 +1227,11 @@
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 5,
+      "total_score": 4,
       "max_score": 9,
-      "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "rating": "VULNERABILIDAD FINANCIERA",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
+      "status_color": "RED"
     },
     "FY2016": {
       "period": "FY2016",
@@ -1250,8 +1250,8 @@
         "F_CFO": {
           "name": "CFO Positivo",
           "category": "Rentabilidad",
-          "value": 196793000.0,
-          "formatted_value": "$196.8M",
+          "value": 190259000.0,
+          "formatted_value": "$190.3M",
           "comparison_label": "$0.2B > $0",
           "threshold": "> $0M",
           "passed": true,
@@ -1272,8 +1272,8 @@
         "F_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad",
-          "value": 60427000.0,
-          "formatted_value": "$+60.4M",
+          "value": 53893000.0,
+          "formatted_value": "$+53.9M",
           "comparison_label": "CFO $0.2B > NI $0.1B",
           "threshold": "CFO > Utilidad Neta",
           "passed": true,
@@ -1416,9 +1416,9 @@
         "G7_CAPEX_INTENSITY": {
           "name": "Reinversi\u00f3n de Capital / Asset-Light",
           "category": "Inversi\u00f3n en Futuro e Intangibles",
-          "value": 0.0,
-          "formatted_value": "0.00% (CapEx)",
-          "comparison_label": "CapEx 0.00% vs Med 4.49%",
+          "value": 0.035062226076358775,
+          "formatted_value": "3.51% (CapEx)",
+          "comparison_label": "CapEx 3.51% vs Med 4.49%",
           "benchmark": "> 4.49%",
           "passed": false,
           "points": 0,
@@ -1519,12 +1519,12 @@
         "G7_CAPEX_INTENSITY": {
           "name": "Reinversi\u00f3n de Capital / Asset-Light",
           "category": "Inversi\u00f3n en Futuro e Intangibles",
-          "value": 0.020201619304651534,
-          "formatted_value": "2.02% (CapEx)",
-          "comparison_label": "CapEx 2.02% vs Med 4.49%",
+          "value": 0.05330211144626131,
+          "formatted_value": "5.33% (CapEx)",
+          "comparison_label": "CapEx 5.33% vs Med 4.49%",
           "benchmark": "> 4.49%",
-          "passed": false,
-          "points": 0,
+          "passed": true,
+          "points": 1,
           "description": "Reinversi\u00f3n en infraestructura de capital f\u00edsico (CapEx) sobre activos."
         },
         "G8_OPERATING_LEVERAGE": {
@@ -1539,7 +1539,7 @@
           "description": "Eficiencia comercial: ingresos escalan con mayor dinamismo que los gastos administrativos y de ventas."
         }
       },
-      "total_score": 4,
+      "total_score": 5,
       "max_score": 8,
       "rating": "CRECIMIENTO PROMEDIO",
       "benchmark_info": {
@@ -1622,12 +1622,12 @@
         "G7_CAPEX_INTENSITY": {
           "name": "Reinversi\u00f3n de Capital / Asset-Light",
           "category": "Inversi\u00f3n en Futuro e Intangibles",
-          "value": 0.005043635951490422,
-          "formatted_value": "0.50% (CapEx)",
-          "comparison_label": "CapEx 0.50% vs Med 4.49%",
+          "value": 0.04873625750878386,
+          "formatted_value": "4.87% (CapEx)",
+          "comparison_label": "CapEx 4.87% vs Med 4.49%",
           "benchmark": "> 4.49%",
-          "passed": false,
-          "points": 0,
+          "passed": true,
+          "points": 1,
           "description": "Reinversi\u00f3n en infraestructura de capital f\u00edsico (CapEx) sobre activos."
         },
         "G8_OPERATING_LEVERAGE": {
@@ -1642,7 +1642,7 @@
           "description": "Eficiencia comercial: ingresos escalan con mayor dinamismo que los gastos administrativos y de ventas."
         }
       },
-      "total_score": 7,
+      "total_score": 8,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
       "benchmark_info": {
@@ -1795,9 +1795,9 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 2.688733094893819,
-          "formatted_value": "CV=2.69",
-          "comparison_label": "CV 2.69 < 0.38 (o P75)",
+          "value": 20.45773313775013,
+          "formatted_value": "CV=20.46",
+          "comparison_label": "CV 20.46 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
           "passed": false,
           "points": 0,
@@ -1898,9 +1898,9 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 2.205144444889232,
-          "formatted_value": "CV=2.21",
-          "comparison_label": "CV 2.21 < 0.38 (o P75)",
+          "value": 1.0,
+          "formatted_value": "CV=1.00",
+          "comparison_label": "CV 1.00 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
           "passed": false,
           "points": 0,
@@ -2001,9 +2001,9 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 1.4520397825173714,
-          "formatted_value": "CV=1.45",
-          "comparison_label": "CV 1.45 < 0.38 (o P75)",
+          "value": 12.77208432469775,
+          "formatted_value": "CV=12.77",
+          "comparison_label": "CV 12.77 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
           "passed": false,
           "points": 0,
@@ -2104,9 +2104,9 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 1.2366131762192156,
-          "formatted_value": "CV=1.24",
-          "comparison_label": "CV 1.24 < 0.38 (o P75)",
+          "value": 11.729058273693417,
+          "formatted_value": "CV=11.73",
+          "comparison_label": "CV 11.73 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
           "passed": false,
           "points": 0,
@@ -2174,12 +2174,12 @@
         "G1_ROA": {
           "name": "ROA > Mediana del Sector",
           "category": "Rentabilidad vs Sector",
-          "value": 0.08150075275507161,
-          "formatted_value": "8.15%",
-          "comparison_label": "ROA 8.15% vs Med 8.04%",
+          "value": -0.001396735690631113,
+          "formatted_value": "-0.14%",
+          "comparison_label": "ROA -0.14% vs Med 8.04%",
           "benchmark": "8.04%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Rentabilidad sobre activos superior a la mitad del sector."
         },
         "G2_CFROA": {
@@ -2196,9 +2196,9 @@
         "G3_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad vs Sector",
-          "value": 94541000.0,
-          "formatted_value": "$+94.5M",
-          "comparison_label": "CFO $0.2B > NI $0.1B",
+          "value": 233244000.0,
+          "formatted_value": "$+233.2M",
+          "comparison_label": "CFO $0.2B > NI $-0.0B",
           "benchmark": "CFO > Utilidad",
           "passed": true,
           "points": 1,
@@ -2207,12 +2207,12 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 0.2918708989845791,
-          "formatted_value": "CV=0.29",
-          "comparison_label": "CV 0.29 < 0.38 (o P75)",
+          "value": 3.7263982846868946,
+          "formatted_value": "CV=3.73",
+          "comparison_label": "CV 3.73 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Baja volatilidad en rentabilidad o nivel de retorno permanentemente en percentil 75 superior."
         },
         "G5_VAR_GROWTH": {
@@ -2260,16 +2260,16 @@
           "description": "Eficiencia comercial: ingresos escalan con mayor dinamismo que los gastos administrativos y de ventas."
         }
       },
-      "total_score": 5,
+      "total_score": 3,
       "max_score": 8,
-      "rating": "CRECIMIENTO PROMEDIO",
+      "rating": "CRECIMIENTO FR\u00c1GIL",
       "benchmark_info": {
         "sic_code": "7389",
         "industry_name": "E-Commerce Marketplaces & Platform Services",
         "is_asset_light": false
       },
-      "summary_text": "Desempe\u00f1o en l\u00ednea con la mediana de la industria; vigilar reinversi\u00f3n o volatilidad.",
-      "status_color": "YELLOW"
+      "summary_text": "Retornos rezagados frente a competidores o crecimiento inestable/destructivo de capital.",
+      "status_color": "RED"
     },
     "FY2017": {
       "period": "FY2017",
@@ -2277,9 +2277,9 @@
         "G1_ROA": {
           "name": "ROA > Mediana del Sector",
           "category": "Rentabilidad vs Sector",
-          "value": 0.07736309221279257,
-          "formatted_value": "7.74%",
-          "comparison_label": "ROA 7.74% vs Med 8.04%",
+          "value": -0.049523377710823546,
+          "formatted_value": "-4.95%",
+          "comparison_label": "ROA -4.95% vs Med 8.04%",
           "benchmark": "8.04%",
           "passed": false,
           "points": 0,
@@ -2299,9 +2299,9 @@
         "G3_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad vs Sector",
-          "value": 163221000.0,
-          "formatted_value": "$+163.2M",
-          "comparison_label": "CFO $0.3B > NI $0.1B",
+          "value": 336730000.0,
+          "formatted_value": "$+336.7M",
+          "comparison_label": "CFO $0.3B > NI $-0.1B",
           "benchmark": "CFO > Utilidad",
           "passed": true,
           "points": 1,
@@ -2310,12 +2310,12 @@
         "G4_VAR_ROA": {
           "name": "Estabilidad / Nivel Superior de ROA",
           "category": "Estabilidad y Predictibilidad",
-          "value": 0.31675860426305885,
-          "formatted_value": "CV=0.32",
-          "comparison_label": "CV 0.32 < 0.38 (o P75)",
+          "value": 3.346302340987808,
+          "formatted_value": "CV=3.35",
+          "comparison_label": "CV 3.35 < 0.38 (o P75)",
           "benchmark": "CV < 0.38 o ROA >= 8.18%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Baja volatilidad en rentabilidad o nivel de retorno permanentemente en percentil 75 superior."
         },
         "G5_VAR_GROWTH": {
@@ -2363,16 +2363,16 @@
           "description": "Eficiencia comercial: ingresos escalan con mayor dinamismo que los gastos administrativos y de ventas."
         }
       },
-      "total_score": 4,
+      "total_score": 3,
       "max_score": 8,
-      "rating": "CRECIMIENTO PROMEDIO",
+      "rating": "CRECIMIENTO FR\u00c1GIL",
       "benchmark_info": {
         "sic_code": "7389",
         "industry_name": "E-Commerce Marketplaces & Platform Services",
         "is_asset_light": false
       },
-      "summary_text": "Desempe\u00f1o en l\u00ednea con la mediana de la industria; vigilar reinversi\u00f3n o volatilidad.",
-      "status_color": "YELLOW"
+      "summary_text": "Retornos rezagados frente a competidores o crecimiento inestable/destructivo de capital.",
+      "status_color": "RED"
     },
     "FY2016": {
       "period": "FY2016",
@@ -2391,9 +2391,9 @@
         "G2_CFROA": {
           "name": "CFROA > Mediana del Sector",
           "category": "Rentabilidad vs Sector",
-          "value": 0.14391397031668782,
-          "formatted_value": "14.39%",
-          "comparison_label": "CFROA 14.39% vs Med 18.08%",
+          "value": 0.13913568103785554,
+          "formatted_value": "13.91%",
+          "comparison_label": "CFROA 13.91% vs Med 18.08%",
           "benchmark": "18.08%",
           "passed": false,
           "points": 0,
@@ -2402,8 +2402,8 @@
         "G3_ACCRUAL": {
           "name": "Calidad Contable (CFO > NI)",
           "category": "Rentabilidad vs Sector",
-          "value": 60427000.0,
-          "formatted_value": "$+60.4M",
+          "value": 53893000.0,
+          "formatted_value": "$+53.9M",
           "comparison_label": "CFO $0.2B > NI $0.1B",
           "benchmark": "CFO > Utilidad",
           "passed": true,
@@ -2493,7 +2493,7 @@
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
       "f_score": 5,
-      "g_score": 4
+      "g_score": 5
     },
     "FY2024": {
       "quadrant": "CUADRANTE I: COMPOUNDER DE \u00c9LITE",
@@ -2501,7 +2501,7 @@
       "color": "GREEN",
       "investment_thesis": "Compa\u00f1\u00eda excepcional: Combina s\u00f3lida salud financiera intr\u00ednseca, balance robusto, generaci\u00f3n l\u00edquida de caja y desendeudamiento (F-Score s\u00f3lido >= 6) con superioridad competitiva, disciplina en I+D y crecimiento por encima de la mediana del sector (G-Score destacado >= 6). Perfil ideal para inversi\u00f3n a largo plazo.",
       "f_score": 6,
-      "g_score": 7
+      "g_score": 8
     },
     "FY2023": {
       "quadrant": "CUADRANTE III: GENERADOR MADURO (CASH COW)",
@@ -2548,16 +2548,16 @@
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 5,
-      "g_score": 5
+      "f_score": 4,
+      "g_score": 3
     },
     "FY2017": {
       "quadrant": "CUADRANTE IV: TRAMPA DE VALOR / DETERIORO",
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 5,
-      "g_score": 4
+      "f_score": 4,
+      "g_score": 3
     },
     "FY2016": {
       "quadrant": "CUADRANTE IV: TRAMPA DE VALOR / DETERIORO",
@@ -2603,14 +2603,14 @@
       "rating_label": "Rentabilidad Tangible Excepcional (> 50% ROC - Negocio Asset-Light Dominante)"
     },
     "roic_wacc": {
-      "wacc": 0.10405125097013097,
-      "ke": 0.111705,
+      "wacc": 0.10399993618197348,
+      "ke": 0.111645,
       "kd_after_tax": 0.03737530585356673,
-      "we": 0.8970297252294519,
-      "wd": 0.1029702747705481,
+      "we": 0.8970634805233856,
+      "wd": 0.10293651947661439,
       "roic_traditional": 0.17416009954375777,
       "roic_adjusted": 0.12450035973188595,
-      "economic_spread_adjusted": 0.020449108761754972,
+      "economic_spread_adjusted": 0.020500423549912467,
       "moat_rating": "RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
       "moat_badge": "\u2696\ufe0f RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
       "total_intangibles_usd_m": 7451.166666666666,
@@ -2635,8 +2635,8 @@
       "net_debt_usd_m": 6977.0,
       "net_debt_to_ebitda": 1.87,
       "net_debt_to_ebitda_str": "1.87x",
-      "net_debt_to_fcf": 0.5,
-      "net_debt_to_fcf_str": "0.50x",
+      "net_debt_to_fcf": 0.56,
+      "net_debt_to_fcf_str": "0.56x",
       "interest_coverage": 4.76,
       "interest_coverage_str": "4.8x",
       "quick_ratio": 0.11,
@@ -3734,21 +3734,21 @@
     "period": "LTM",
     "market_data": {
       "ticker": "MELI",
-      "timestamp": "2026-09-22T18:50:29.123984+00:00",
-      "timestamp_epoch": 1790103034.2744362,
+      "timestamp": "2026-09-22T22:39:34.967670+00:00",
+      "timestamp_epoch": 1790116780.4303024,
       "is_offline": false,
       "from_cache": false,
-      "price": 1825.9125,
-      "market_cap_usd_m": 92568.83,
+      "price": 1826.58,
+      "market_cap_usd_m": 92602.67,
       "diluted_shares": 50697299.0,
-      "rf_10y": 0.04967,
+      "rf_10y": 0.04961,
       "beta": 1.306,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 1826.635009765625,
-          "market_cap": 92604553416.35596,
+          "price": 1826.5799560546875,
+          "market_cap": 92601762369.2732,
           "beta": 1.312,
           "rf_10y": 0.04967999935150146,
           "shares_outstanding": 50696802,
@@ -3756,10 +3756,10 @@
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 1825.19,
+          "price": 1826.58,
           "market_cap": null,
           "beta": 1.3,
-          "rf_10y": 0.04967,
+          "rf_10y": 0.049550000000000004,
           "shares_outstanding": 50700000.0,
           "success": true
         }
@@ -3770,32 +3770,32 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $1825.91 (Yahoo: $1826.64, CNBC: $1825.19, \u0394=0.08%) | Market Cap calculado: $92,568.8M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.967% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.967%) | Beta validado: 1.31 (Yahoo: 1.31, CNBC: 1.30, \u0394=0.01)"
+        "notes": "Precio validado por consenso: $1826.58 (Yahoo: $1826.58, CNBC: $1826.58, \u0394=0.00%) | Market Cap calculado: $92,602.7M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.961% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.955%) | Beta validado: 1.31 (Yahoo: 1.31, CNBC: 1.30, \u0394=0.01)"
       }
     },
-    "cost_of_equity_ke": 0.111705,
+    "cost_of_equity_ke": 0.111645,
     "cost_of_debt_kd_pre_tax": 0.05750047054394881,
     "cost_of_debt_kd_after_tax": 0.03737530585356673,
     "effective_tax_rate": 0.35,
-    "market_cap_usd_m": 92568.83,
+    "market_cap_usd_m": 92602.67,
     "total_debt_usd_m": 10626.0,
-    "enterprise_value_usd_m": 103194.83,
-    "weight_equity": 0.8970297252294519,
-    "weight_debt": 0.1029702747705481,
+    "enterprise_value_usd_m": 103228.67,
+    "weight_equity": 0.8970634805233856,
+    "weight_debt": 0.10293651947661439,
     "is_debt_free": false,
-    "wacc": 0.10405125097013097,
+    "wacc": 0.10399993618197348,
     "sector_wacc_benchmark": 0.098,
     "roic_traditional": 0.17416009954375777,
     "roic_adjusted": 0.12450035973188595,
-    "economic_spread_traditional": 0.0701088485736268,
-    "economic_spread_adjusted": 0.020449108761754972,
+    "economic_spread_traditional": 0.0701601633617843,
+    "economic_spread_adjusted": 0.020500423549912467,
     "moat_rating": "RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
     "moat_badge": "\u2696\ufe0f RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 11.17%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.97%) + Beta (1.31) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "ke_capm": "Costo del Equity (Ke) = 11.16%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.96%) + Beta (1.31) \u00d7 Prima de Riesgo ERP (4.75%).",
       "kd_debt": "Costo de la Deuda Neto = 3.74% (Tasa antes de impuestos 5.75% con escudo fiscal del 35.0%).",
-      "wacc": "WACC = 10.41%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El retorno (12.45%) apenas cubre el costo de financiamiento (10.41%), dejando un excedente marginal de +2.04 p.p. Opera en un entorno de alta competencia sin poder de fijaci\u00f3n de precios."
+      "wacc": "WACC = 10.40%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El retorno (12.45%) apenas cubre el costo de financiamiento (10.40%), dejando un excedente marginal de +2.05 p.p. Opera en un entorno de alta competencia sin poder de fijaci\u00f3n de precios."
     }
   },
   "roic_wacc_analysis": {
@@ -4159,21 +4159,21 @@
       "period": "LTM",
       "market_data": {
         "ticker": "MELI",
-        "timestamp": "2026-09-22T18:50:29.123984+00:00",
-        "timestamp_epoch": 1790103034.2744362,
+        "timestamp": "2026-09-22T22:39:34.967670+00:00",
+        "timestamp_epoch": 1790116780.4303024,
         "is_offline": false,
         "from_cache": false,
-        "price": 1825.9125,
-        "market_cap_usd_m": 92568.83,
+        "price": 1826.58,
+        "market_cap_usd_m": 92602.67,
         "diluted_shares": 50697299.0,
-        "rf_10y": 0.04967,
+        "rf_10y": 0.04961,
         "beta": 1.306,
         "erp": 0.0475,
         "raw_sources": {
           "yahoo": {
             "source": "Yahoo Finance",
-            "price": 1826.635009765625,
-            "market_cap": 92604553416.35596,
+            "price": 1826.5799560546875,
+            "market_cap": 92601762369.2732,
             "beta": 1.312,
             "rf_10y": 0.04967999935150146,
             "shares_outstanding": 50696802,
@@ -4181,10 +4181,10 @@
           },
           "cnbc": {
             "source": "CNBC Quote Service",
-            "price": 1825.19,
+            "price": 1826.58,
             "market_cap": null,
             "beta": 1.3,
-            "rf_10y": 0.04967,
+            "rf_10y": 0.049550000000000004,
             "shares_outstanding": 50700000.0,
             "success": true
           }
@@ -4195,32 +4195,32 @@
             "Yahoo Finance",
             "CNBC Quote Service"
           ],
-          "notes": "Precio validado por consenso: $1825.91 (Yahoo: $1826.64, CNBC: $1825.19, \u0394=0.08%) | Market Cap calculado: $92,568.8M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.967% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.967%) | Beta validado: 1.31 (Yahoo: 1.31, CNBC: 1.30, \u0394=0.01)"
+          "notes": "Precio validado por consenso: $1826.58 (Yahoo: $1826.58, CNBC: $1826.58, \u0394=0.00%) | Market Cap calculado: $92,602.7M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.961% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.955%) | Beta validado: 1.31 (Yahoo: 1.31, CNBC: 1.30, \u0394=0.01)"
         }
       },
-      "cost_of_equity_ke": 0.111705,
+      "cost_of_equity_ke": 0.111645,
       "cost_of_debt_kd_pre_tax": 0.05750047054394881,
       "cost_of_debt_kd_after_tax": 0.03737530585356673,
       "effective_tax_rate": 0.35,
-      "market_cap_usd_m": 92568.83,
+      "market_cap_usd_m": 92602.67,
       "total_debt_usd_m": 10626.0,
-      "enterprise_value_usd_m": 103194.83,
-      "weight_equity": 0.8970297252294519,
-      "weight_debt": 0.1029702747705481,
+      "enterprise_value_usd_m": 103228.67,
+      "weight_equity": 0.8970634805233856,
+      "weight_debt": 0.10293651947661439,
       "is_debt_free": false,
-      "wacc": 0.10405125097013097,
+      "wacc": 0.10399993618197348,
       "sector_wacc_benchmark": 0.098,
       "roic_traditional": 0.17416009954375777,
       "roic_adjusted": 0.12450035973188595,
-      "economic_spread_traditional": 0.0701088485736268,
-      "economic_spread_adjusted": 0.020449108761754972,
+      "economic_spread_traditional": 0.0701601633617843,
+      "economic_spread_adjusted": 0.020500423549912467,
       "moat_rating": "RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
       "moat_badge": "\u2696\ufe0f RENDIMIENTO COMPETITIVO EST\u00c1NDAR",
       "explanations": {
-        "ke_capm": "Costo del Equity (Ke) = 11.17%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.97%) + Beta (1.31) \u00d7 Prima de Riesgo ERP (4.75%).",
+        "ke_capm": "Costo del Equity (Ke) = 11.16%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.96%) + Beta (1.31) \u00d7 Prima de Riesgo ERP (4.75%).",
         "kd_debt": "Costo de la Deuda Neto = 3.74% (Tasa antes de impuestos 5.75% con escudo fiscal del 35.0%).",
-        "wacc": "WACC = 10.41%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
-        "economic_spread": "El retorno (12.45%) apenas cubre el costo de financiamiento (10.41%), dejando un excedente marginal de +2.04 p.p. Opera en un entorno de alta competencia sin poder de fijaci\u00f3n de precios."
+        "wacc": "WACC = 10.40%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
+        "economic_spread": "El retorno (12.45%) apenas cubre el costo de financiamiento (10.40%), dejando un excedente marginal de +2.05 p.p. Opera en un entorno de alta competencia sin poder de fijaci\u00f3n de precios."
       }
     }
   },
@@ -4364,13 +4364,13 @@
       "FY2018": {
         "period": "FY2018",
         "prior_period": "FY2017",
-        "net_income": 136366000.0,
+        "net_income": -2337000.0,
         "cfo": 230907000.0,
-        "total_accruals": -94541000.0,
+        "total_accruals": -233244000.0,
         "ending_assets": 2239519000.0,
         "avg_assets": 1956353000.0,
-        "sloan_ratio": -0.0483,
-        "sloan_ratio_pct": -4.83,
+        "sloan_ratio": -0.1192,
+        "sloan_ratio_pct": -11.92,
         "status": "EXCELENTE",
         "badge": "ALTA CONVERSI\u00d3N DE CAJA (CFO > NI)",
         "color": "#2E7D32",
@@ -4379,13 +4379,13 @@
       "FY2017": {
         "period": "FY2017",
         "prior_period": "FY2016",
-        "net_income": 105789000.0,
+        "net_income": -67720000.0,
         "cfo": 269010000.0,
-        "total_accruals": -163221000.0,
+        "total_accruals": -336730000.0,
         "ending_assets": 1673187000.0,
         "avg_assets": 1520311000.0,
-        "sloan_ratio": -0.1074,
-        "sloan_ratio_pct": -10.74,
+        "sloan_ratio": -0.2215,
+        "sloan_ratio_pct": -22.15,
         "status": "EXCELENTE",
         "badge": "ALTA CONVERSI\u00d3N DE CAJA (CFO > NI)",
         "color": "#2E7D32",
@@ -4395,12 +4395,12 @@
         "period": "FY2016",
         "prior_period": null,
         "net_income": 136366000.0,
-        "cfo": 196793000.0,
-        "total_accruals": -60427000.0,
+        "cfo": 190259000.0,
+        "total_accruals": -53893000.0,
         "ending_assets": 1367435000.0,
         "avg_assets": 1367435000.0,
-        "sloan_ratio": -0.0442,
-        "sloan_ratio_pct": -4.42,
+        "sloan_ratio": -0.0394,
+        "sloan_ratio_pct": -3.94,
         "status": "EXCELENTE",
         "badge": "ALTA CONVERSI\u00d3N DE CAJA (CFO > NI)",
         "color": "#2E7D32",
@@ -5510,7 +5510,7 @@
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
             "condition": "Utilidad Neta > Flujo de Caja Operativo (NI > CFO)",
-            "value_str": "NI: $136.4M vs CFO: $230.9M",
+            "value_str": "NI: $-2.3M vs CFO: $230.9M",
             "flag": false,
             "status": "OK",
             "rationale": "La utilidad contable no se transforma en liquidez real. Alerta de beneficios de papel."
@@ -5569,7 +5569,7 @@
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
             "condition": "Utilidad Neta > Flujo de Caja Operativo (NI > CFO)",
-            "value_str": "NI: $105.8M vs CFO: $269.0M",
+            "value_str": "NI: $-67.7M vs CFO: $269.0M",
             "flag": false,
             "status": "OK",
             "rationale": "La utilidad contable no se transforma en liquidez real. Alerta de beneficios de papel."
@@ -5840,12 +5840,12 @@
         "dna": 818.0,
         "ebitda": 3725.0,
         "cfo": 13905.0,
-        "capex": 0.0,
-        "fcf": 13905.0,
+        "capex": 1496.0,
+        "fcf": 12409.0,
         "net_debt_to_ebitda": 1.87,
         "net_debt_to_ebitda_str": "1.87x",
-        "net_debt_to_fcf": 0.5,
-        "net_debt_to_fcf_str": "0.50x",
+        "net_debt_to_fcf": 0.56,
+        "net_debt_to_fcf_str": "0.56x",
         "debt_to_cfo": 0.76,
         "is_debt_free": false,
         "is_net_cash": false,
@@ -5863,12 +5863,12 @@
         "dna": 818.0,
         "ebitda": 4019.0,
         "cfo": 12116.0,
-        "capex": 509.0,
-        "fcf": 11607.0,
+        "capex": 1343.0,
+        "fcf": 10773.0,
         "net_debt_to_ebitda": 1.37,
         "net_debt_to_ebitda_str": "1.37x",
-        "net_debt_to_fcf": 0.48,
-        "net_debt_to_fcf_str": "0.48x",
+        "net_debt_to_fcf": 0.51,
+        "net_debt_to_fcf_str": "0.51x",
         "debt_to_cfo": 0.76,
         "is_debt_free": false,
         "is_net_cash": false,
@@ -5886,12 +5886,12 @@
         "dna": 617.0,
         "ebitda": 3248.0,
         "cfo": 7918.0,
-        "capex": 89.0,
-        "fcf": 7829.0,
+        "capex": 860.0,
+        "fcf": 7058.0,
         "net_debt_to_ebitda": 0.95,
         "net_debt_to_ebitda_str": "0.95x",
-        "net_debt_to_fcf": 0.39,
-        "net_debt_to_fcf_str": "0.39x",
+        "net_debt_to_fcf": 0.44,
+        "net_debt_to_fcf_str": "0.44x",
         "debt_to_cfo": 0.72,
         "is_debt_free": false,
         "is_net_cash": false,
@@ -6069,12 +6069,12 @@
         "ebit": 181.1,
         "dna": 29.0,
         "ebitda": 210.1,
-        "cfo": 196.8,
+        "cfo": 190.3,
         "capex": 68.5,
-        "fcf": 128.3,
+        "fcf": 121.7,
         "net_debt_to_ebitda": -1.11,
         "net_debt_to_ebitda_str": "CAJA NETA",
-        "net_debt_to_fcf": -1.83,
+        "net_debt_to_fcf": -1.92,
         "net_debt_to_fcf_str": "CAJA NETA",
         "debt_to_cfo": 0.0,
         "is_debt_free": true,
@@ -6685,12 +6685,12 @@
         "dna": 818.0,
         "ebitda": 3725.0,
         "cfo": 13905.0,
-        "capex": 0.0,
-        "fcf": 13905.0,
+        "capex": 1496.0,
+        "fcf": 12409.0,
         "net_debt_to_ebitda": 1.87,
         "net_debt_to_ebitda_str": "1.87x",
-        "net_debt_to_fcf": 0.5,
-        "net_debt_to_fcf_str": "0.50x",
+        "net_debt_to_fcf": 0.56,
+        "net_debt_to_fcf_str": "0.56x",
         "debt_to_cfo": 0.76,
         "is_debt_free": false,
         "is_net_cash": false,

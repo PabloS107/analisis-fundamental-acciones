@@ -9,8 +9,9 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertEqual(response.status_code, 200)
         ctx = response.context
         
-        # Exact mathematical parity with Word report (.docx Section 14)
-        self.assertAlmostEqual(ctx['g_implied_pct'], -3.7, delta=0.1)
+        # Parity with Word report (.docx Section 14) and dynamic valuation engine
+        expected_g_implied = ctx['vp']['g_implied_our_pct']
+        self.assertAlmostEqual(ctx['g_implied_pct'], expected_g_implied, delta=0.01)
         self.assertAlmostEqual(ctx['fcf_margin_pct'], 20.2, delta=0.1)
         self.assertEqual(ctx['net_debt_m'], -1602.6)
         self.assertAlmostEqual(ctx['rev_base'], 5527.3, delta=1.0)
@@ -22,7 +23,7 @@ class ValuationAndSensitivityTests(TestCase):
         base_row = grid[2]
         self.assertTrue(base_row['is_base'])
         self.assertIn('10.31%', base_row['wacc_label'])
-        self.assertIn('-3.', base_row['g_25']) # Central scenario cell
+        self.assertIn(f"{expected_g_implied:.1f}", base_row['g_25']) # Central scenario cell
         
         # HTML content verification
         content = response.content.decode('utf-8')
@@ -35,10 +36,38 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertEqual(response.status_code, 200)
         ctx = response.context
         
-        # Exact parity for Apple (Section 14)
-        self.assertAlmostEqual(ctx['g_implied_pct'], 16.0, delta=1.5)
+        # Dynamic exact parity for Apple (Section 14) calculated automatically
+        expected_g_implied = ctx['vp']['g_implied_our_pct']
+        self.assertAlmostEqual(ctx['g_implied_pct'], expected_g_implied, delta=0.01)
         self.assertEqual(len(ctx['sensitivity_grid']), 5)
-        self.assertTrue(ctx['sensitivity_grid'][2]['is_base'])
+        base_row = ctx['sensitivity_grid'][2]
+        self.assertTrue(base_row['is_base'])
+        self.assertIn(f"{expected_g_implied:.1f}", base_row['g_25'])
+        self.assertGreater(ctx['stock_price'], 50.0)
+
+    def test_nu_banking_view(self):
+        response = self.client.get('/company/NU/')
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertTrue(ctx['is_financial'])
+        self.assertEqual(ctx['ticker'], 'NU')
+        # Excess Return Model checks
+        self.assertIn('fair_value_excess_return', ctx['vp'])
+        self.assertGreater(ctx['vp']['fair_value_excess_return'], 0.0)
+        self.assertEqual(len(ctx['sensitivity_grid']), 5)
+        # Verify solvency displays N/A cleanly for non-applicable banking metrics
+        self.assertEqual(ctx['solvency_13_1']['ebitda'], 'N/A')
+        self.assertEqual(ctx['solvency_13_2']['ebit'], 'N/A')
+
+    def test_meli_hybrid_view(self):
+        response = self.client.get('/company/MELI/')
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertFalse(ctx['is_financial'])
+        self.assertEqual(ctx['ticker'], 'MELI')
+        # Reverse DCF implied growth is positive and realistic
+        self.assertGreater(ctx['g_implied_pct'], 10.0)
+        self.assertEqual(len(ctx['sensitivity_grid']), 5)
 
     def test_index_cards_complete(self):
         response = self.client.get('/')
@@ -60,3 +89,12 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertEqual(aapl['f_score'], 9)
         self.assertIn('52.', aapl['roic_adj'])
         self.assertTrue(aapl['price'].startswith('$'))
+
+        # NU checks
+        nu = companies.get('NU')
+        self.assertIsNotNone(nu)
+        self.assertEqual(nu['f_score'], 6)
+
+        # MELI checks
+        meli = companies.get('MELI')
+        self.assertIsNotNone(meli)

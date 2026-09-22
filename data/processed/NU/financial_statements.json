@@ -4,7 +4,7 @@
   "cik": "0001691493",
   "accounting_standard": "IFRS",
   "source": "SEC EDGAR (IFRS Oficial)",
-  "extraction_timestamp": "2026-09-22T15:51:13.587439",
+  "extraction_timestamp": "2026-09-22T19:38:33.352010",
   "fiscal_years": [
     "FY2024",
     "FY2023",
@@ -37,9 +37,9 @@
     "operating_expenses": {
       "FY2024": null,
       "FY2023": null,
-      "FY2022": -1333267000.0,
-      "FY2021": -628901000.0,
-      "FY2020": -266024000.0
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
     },
     "operating_income": {
       "FY2024": null,
@@ -56,46 +56,46 @@
       "FY2020": -171491000.0
     },
     "cash_from_operations": {
-      "FY2024": 755573000.0,
-      "FY2023": -2924318000.0,
-      "FY2022": 974520000.0,
-      "FY2021": 276137000.0,
-      "FY2020": null
+      "FY2024": 2399044000.0,
+      "FY2023": 1266189000.0,
+      "FY2022": 755573000.0,
+      "FY2021": -2924318000.0,
+      "FY2020": 974520000.0
     },
     "capital_expenditures": {
-      "FY2024": 0.0,
-      "FY2023": 0.0,
-      "FY2022": 0.0,
-      "FY2021": 0.0,
-      "FY2020": 0.0
+      "FY2024": 169572000.0,
+      "FY2023": 156760000.0,
+      "FY2022": 20001000.0,
+      "FY2021": 6025000.0,
+      "FY2020": 3084000.0
     },
     "free_cash_flow": {
-      "FY2024": 755573000.0,
-      "FY2023": -2924318000.0,
-      "FY2022": 974520000.0,
-      "FY2021": 276137000.0,
-      "FY2020": null
+      "FY2024": 2229472000.0,
+      "FY2023": 1109429000.0,
+      "FY2022": 735572000.0,
+      "FY2021": -2930343000.0,
+      "FY2020": 971436000.0
     },
     "cash_and_equivalents": {
-      "FY2024": 0.0,
-      "FY2023": 0.0,
-      "FY2022": 0.0,
-      "FY2021": 0.0,
-      "FY2020": 0.0
+      "FY2024": 9185742000.0,
+      "FY2023": 5923440000.0,
+      "FY2022": 4172316000.0,
+      "FY2021": 2705675000.0,
+      "FY2020": 2343780000.0
     },
     "total_debt": {
-      "FY2024": 0.0,
-      "FY2023": 0.0,
+      "FY2024": 201493000.0,
+      "FY2023": 216068000.0,
       "FY2022": 0.0,
       "FY2021": 0.0,
       "FY2020": 0.0
     },
     "net_debt": {
-      "FY2024": 0.0,
-      "FY2023": 0.0,
-      "FY2022": 0.0,
-      "FY2021": 0.0,
-      "FY2020": 0.0
+      "FY2024": -8984249000.0,
+      "FY2023": -5707372000.0,
+      "FY2022": -4172316000.0,
+      "FY2021": -2705675000.0,
+      "FY2020": -2343780000.0
     },
     "total_assets": {
       "FY2024": 49931214000.0,
@@ -105,17 +105,17 @@
       "FY2020": 10154250000.0
     },
     "stockholders_equity": {
-      "FY2024": 4442541000.0,
-      "FY2023": -4607000.0,
-      "FY2022": -15000.0,
-      "FY2021": -3774000.0,
-      "FY2020": null
+      "FY2024": 7646289000.0,
+      "FY2023": 6406385000.0,
+      "FY2022": 4890783000.0,
+      "FY2021": 4441032000.0,
+      "FY2020": 438111000.0
     },
     "shares_basic": {
-      "FY2024": 4676977000.0,
-      "FY2023": 1602126000.0,
-      "FY2022": 405394.0,
-      "FY2021": 306210.0,
+      "FY2024": 4792081000.0,
+      "FY2023": 4738841000.0,
+      "FY2022": 4676977000.0,
+      "FY2021": 1602126000.0,
       "FY2020": null
     },
     "shares_diluted": {
@@ -128,22 +128,22 @@
     "eps_basic": {
       "FY2024": 0.4115,
       "FY2023": 0.2175,
-      "FY2022": null,
+      "FY2022": -0.078,
       "FY2021": -0.103,
       "FY2020": -0.1304
     },
     "eps_diluted": {
       "FY2024": 0.4034,
       "FY2023": 0.2121,
-      "FY2022": null,
+      "FY2022": -0.078,
       "FY2021": 1602126.0,
       "FY2020": 1315578.0
     },
     "shares_basic_adjusted": {
-      "FY2024": 4676977000.0,
-      "FY2023": 1602126000.0,
-      "FY2022": 405394.0,
-      "FY2021": 306210.0,
+      "FY2024": 4792081000.0,
+      "FY2023": 4738841000.0,
+      "FY2022": 4676977000.0,
+      "FY2021": 1602126000.0,
       "FY2020": null
     },
     "shares_diluted_adjusted": {
@@ -156,14 +156,14 @@
     "eps_basic_adjusted": {
       "FY2024": 0.41,
       "FY2023": 0.22,
-      "FY2022": -899.32,
+      "FY2022": -0.08,
       "FY2021": -0.1,
       "FY2020": -0.13
     },
     "eps_diluted_adjusted": {
       "FY2024": 0.4,
       "FY2023": 0.21,
-      "FY2022": null,
+      "FY2022": -0.08,
       "FY2021": 1602126.0,
       "FY2020": 1315578.0
     },
@@ -189,11 +189,11 @@
       "FY2020": null
     },
     "net_ppe": {
-      "FY2024": 39294000.0,
-      "FY2023": 27482000.0,
-      "FY2022": 14109000.0,
-      "FY2021": 9850000.0,
-      "FY2020": null
+      "FY2024": 25879000.0,
+      "FY2023": 39294000.0,
+      "FY2022": 27482000.0,
+      "FY2021": 14109000.0,
+      "FY2020": 9850000.0
     },
     "net_working_capital": {
       "FY2024": null,
@@ -203,11 +203,11 @@
       "FY2020": null
     },
     "tangible_capital_employed": {
-      "FY2024": 39294000.0,
-      "FY2023": 27482000.0,
-      "FY2022": 14109000.0,
-      "FY2021": 9850000.0,
-      "FY2020": null
+      "FY2024": 25879000.0,
+      "FY2023": 39294000.0,
+      "FY2022": 27482000.0,
+      "FY2021": 14109000.0,
+      "FY2020": 9850000.0
     }
   },
   "key_ratios": {
@@ -227,19 +227,25 @@
       "FY2020": -23.26
     },
     "fcf_margin_pct": {
-      "FY2024": 6.56,
-      "FY2023": -36.42,
-      "FY2022": 20.34,
-      "FY2021": 16.26
+      "FY2024": 19.36,
+      "FY2023": 13.82,
+      "FY2022": 15.35,
+      "FY2021": -172.57,
+      "FY2020": 131.79
     },
     "fcf_conversion_pct": {
-      "FY2024": 38.31,
-      "FY2023": -283.77,
-      "FY2022": -267.3,
-      "FY2021": -167.36
+      "FY2024": 113.05,
+      "FY2023": 107.66,
+      "FY2022": -201.76,
+      "FY2021": 1776.04,
+      "FY2020": -566.46
     },
     "roe_pct": {
-      "FY2024": 44.39
+      "FY2024": 28.07,
+      "FY2023": 18.24,
+      "FY2022": -7.81,
+      "FY2021": -6.76,
+      "FY2020": -39.14
     },
     "roa_pct": {
       "FY2024": 4.22,
@@ -250,7 +256,11 @@
     },
     "current_ratio": {},
     "debt_to_equity": {
-      "FY2024": 0.0
+      "FY2024": 0.03,
+      "FY2023": 0.03,
+      "FY2022": 0.0,
+      "FY2021": 0.0,
+      "FY2020": 0.0
     },
     "roc_greenblatt_pct": {
       "FY2024": null,
@@ -260,11 +270,11 @@
       "FY2020": null
     },
     "tangible_capital_usd": {
-      "FY2024": 33388000.0,
-      "FY2023": 20795500.0,
-      "FY2022": 11979500.0,
-      "FY2021": 9850000.0,
-      "FY2020": null
+      "FY2024": 32586500.0,
+      "FY2023": 33388000.0,
+      "FY2022": 20795500.0,
+      "FY2021": 11979500.0,
+      "FY2020": 9850000.0
     },
     "roa_ending_pct": {
       "FY2024": 3.95,
@@ -274,7 +284,11 @@
       "FY2020": -1.69
     },
     "roe_ending_pct": {
-      "FY2024": 44.39
+      "FY2024": 25.79,
+      "FY2023": 16.09,
+      "FY2022": -7.45,
+      "FY2021": -3.72,
+      "FY2020": -39.14
     },
     "roa_avg_pct": {
       "FY2024": 4.22,
@@ -284,7 +298,11 @@
       "FY2020": -1.69
     },
     "roe_avg_pct": {
-      "FY2024": 44.39
+      "FY2024": 28.07,
+      "FY2023": 18.24,
+      "FY2022": -7.81,
+      "FY2021": -6.76,
+      "FY2020": -39.14
     }
   },
   "income_statement_detail": {
@@ -474,6 +492,126 @@
         "FY2024": 0.4,
         "FY2023": 0.4
       }
+    },
+    "nu_IncomeExpenseGainsOrLossesOfFinancialInstruments": {
+      "label": "Interest income and gains net of losses on financial instruments",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9631043000.0,
+        "FY2023": 6439712000.0
+      }
+    },
+    "ifrs-full_FeeAndCommissionIncome": {
+      "label": "Fee and commission income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1886032000.0,
+        "FY2023": 1589264000.0
+      }
+    },
+    "nu_TransactionalExpenses": {
+      "label": "Transactional expenses",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -260324000.0,
+        "FY2023": -215930000.0
+      }
+    },
+    "nu_ExpectedCreditLoss": {
+      "label": "Expected credit loss",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -3168983000.0,
+        "FY2023": -2285218000.0
+      }
+    },
+    "nu_TotalCostOfFinancialAndTransactionalServicesProvided": {
+      "label": "Total cost of financial and transactional services provided",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -6264166000.0,
+        "FY2023": -4538073000.0
+      }
+    },
+    "nu_CustomerSupportAndOperations": {
+      "label": "Customer support and operations",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -604643000.0,
+        "FY2023": -488082000.0
+      }
+    },
+    "nu_GeneralAndAdministrativeExpenses": {
+      "label": "General and administrative expenses",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -1256086000.0,
+        "FY2023": -1042290000.0
+      }
+    },
+    "ifrs-full_SalesAndMarketingExpense": {
+      "label": "Marketing expenses",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -246396000.0,
+        "FY2023": -171022000.0
+      }
+    },
+    "ifrs-full_OtherExpenseByFunction": {
+      "label": "Other expenses",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -406627000.0,
+        "FY2023": -278184000.0
+      }
+    },
+    "ifrs-full_OtherIncome": {
+      "label": "Non-Operating Income (Expense)",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 56041000.0,
+        "FY2023": 27753000.0
+      }
+    },
+    "ifrs-full_OperatingExpense": {
+      "label": "Total operating (expenses) income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -2457711000.0,
+        "FY2023": -1951825000.0
+      }
+    },
+    "ifrs-full_ProfitLoss": {
+      "label": "Net income for the year",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1972112000.0,
+        "FY2023": 1030530000.0
+      }
+    },
+    "nu_NetIncomeForYear": {
+      "label": "Net income for the year",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1972112000.0,
+        "FY2023": 1030530000.0
+      }
+    },
+    "ifrs-full_WeightedAverageShares": {
+      "label": "Weighted Average Shares Outstanding",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 4792081000.0,
+        "FY2023": 4738841000.0
+      }
+    },
+    "ifrs-full_AdjustedWeightedAverageShares": {
+      "label": "Weighted Average Shares Outstanding, Diluted",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 4888918000.0,
+        "FY2023": 4857579000.0
+      }
     }
   },
   "balance_sheet_detail": {
@@ -603,6 +741,258 @@
         "FY2021": 5162153000.0,
         "FY2020": 3118872000.0
       }
+    },
+    "ifrs-full_CashAndCashEquivalents": {
+      "label": "Cash and Cash Equivalents",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9185742000.0
+      }
+    },
+    "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss": {
+      "label": "Financial assets at fair value through profit or loss",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 740706000.0
+      }
+    },
+    "nu_Securities": {
+      "label": "Securities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 665242000.0
+      }
+    },
+    "nu_Derivatives": {
+      "label": "Derivatives",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 75464000.0
+      }
+    },
+    "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome": {
+      "label": "Financial assets at fair value through other comprehensive income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9913517000.0
+      }
+    },
+    "nu_OtherSecurities": {
+      "label": "Securities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9913517000.0
+      }
+    },
+    "ifrs-full_FinancialAssetsAtAmortisedCost": {
+      "label": "Financial assets at amortized cost",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 26701841000.0
+      }
+    },
+    "nu_CreditCardReceivables1": {
+      "label": "Credit card receivables",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 12259276000.0
+      }
+    },
+    "ifrs-full_LoansAndAdvancesToCustomers": {
+      "label": "Loans to customers",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5321885000.0
+      }
+    },
+    "nu_CompulsoryAndOtherDepositsAtCentralBanks": {
+      "label": "Compulsory and other deposits at central banks",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 6743336000.0
+      }
+    },
+    "nu_Securitie": {
+      "label": "Securities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 885418000.0
+      }
+    },
+    "ifrs-full_OtherReceivables": {
+      "label": "Other Non-Operating Current Assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1413443000.0
+      }
+    },
+    "ifrs-full_OtherFinancialAssets": {
+      "label": "Other financial assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 78483000.0
+      }
+    },
+    "ifrs-full_OtherAssets": {
+      "label": "Other Non-Operating Current Assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 663578000.0
+      }
+    },
+    "ifrs-full_InvestmentsInAssociates": {
+      "label": "Investments in associates",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 99365000.0
+      }
+    },
+    "ifrs-full_RightofuseAssets": {
+      "label": "Operating Lease Right-of-Use Asset",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 20344000.0
+      }
+    },
+    "ifrs-full_PropertyPlantAndEquipment": {
+      "label": "Property, Plant and Equipment",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 25879000.0
+      }
+    },
+    "ifrs-full_FinancialLiabilitiesAtFairValueThroughProfitOrLoss": {
+      "label": "Financial liabilities at fair value through profit or loss",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 32329000.0
+      }
+    },
+    "ifrs-full_DerivativeFinancialLiabilities": {
+      "label": "Derivatives",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 32329000.0
+      }
+    },
+    "ifrs-full_FinancialLiabilitiesAtAmortisedCost": {
+      "label": "Financial liabilities at amortized cost",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 40227546000.0
+      }
+    },
+    "ifrs-full_DepositsFromCustomers": {
+      "label": "Deposits",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 28855065000.0
+      }
+    },
+    "ifrs-full_OtherPayables": {
+      "label": "Payables to network",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9333541000.0
+      }
+    },
+    "ifrs-full_Borrowings": {
+      "label": "Borrowings and financing (i)",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1730357000.0
+      }
+    },
+    "nu_RepurchaseAgreements": {
+      "label": "Repurchase agreements",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 308583000.0
+      }
+    },
+    "nu_SalariesAllowancesAndSocialSecurityContributions": {
+      "label": "Salaries, allowances and social security contributions",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 180181000.0
+      }
+    },
+    "nu_TaxLiabilities": {
+      "label": "Tax liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1102086000.0
+      }
+    },
+    "nu_LeaseLiabilities1": {
+      "label": "Lease liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 26197000.0
+      }
+    },
+    "nu_ProvisionForLawsuitsAndAdministrativeProceedings": {
+      "label": "Provisions and contingent liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 22551000.0
+      }
+    },
+    "ifrs-full_AccrualsAndDeferredIncomeIncludingContractLiabilities": {
+      "label": "Deferred income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 71636000.0
+      }
+    },
+    "ifrs-full_OtherLiabilities": {
+      "label": "Other Non-Operating Current Liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 621612000.0
+      }
+    },
+    "ifrs-full_SharePremium": {
+      "label": "Additional Paid-In Capital",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5053776000.0
+      }
+    },
+    "ifrs-full_RetainedEarnings": {
+      "label": "Retained Earnings",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 3420596000.0
+      }
+    },
+    "ifrs-full_AccumulatedOtherComprehensiveIncome": {
+      "label": "Accumulated Other Comprehensive Income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -828167000.0
+      }
+    },
+    "ifrs-full_EquityAttributableToOwnersOfParent": {
+      "label": "Equity attributable to shareholders of the parent company",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 7646289000.0
+      }
+    },
+    "ifrs-full_Equity": {
+      "label": "Total equity",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 7647076000.0
+      }
+    },
+    "ifrs-full_EquityAndLiabilities": {
+      "label": "Total liabilities and equity",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 49931214000.0
+      }
     }
   },
   "cash_flow_detail": {
@@ -665,6 +1055,322 @@
         "FY2022": 10633000.0,
         "FY2021": -66403000.0,
         "FY2020": -52172000.0
+      }
+    },
+    "ifrs-full_ProfitLossFromContinuingOperations": {
+      "label": "Net income for the year",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1972112000.0,
+        "FY2023": 1030530000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForDepreciationAndAmortisationExpense": {
+      "label": "Depreciation & Amortization (CF)",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 77128000.0,
+        "FY2023": 62895000.0
+      }
+    },
+    "nu_CreditLossAllowanceExpenses1": {
+      "label": "Expected credit loss",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 3469044000.0,
+        "FY2023": 2487648000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForDeferredTaxExpense": {
+      "label": "Net Cash from Operating Activities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -713435000.0,
+        "FY2023": -675682000.0
+      }
+    },
+    "nu_ProvisionsAndContingentLiabilities": {
+      "label": "Provisions and contingent liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 18406000.0,
+        "FY2023": 17098000.0
+      }
+    },
+    "nu_UnrealizedLossesOnFinancialInstruments": {
+      "label": "Unrealized (gains) losses on financial instruments",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 47933000.0,
+        "FY2023": 15885000.0
+      }
+    },
+    "nu_InterestAccrued": {
+      "label": "Interest accrued",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 179203000.0,
+        "FY2023": 103572000.0
+      }
+    },
+    "nu_Others": {
+      "label": "Others",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -2723000.0,
+        "FY2023": 23076000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForReconcileProfitLoss": {
+      "label": "Net Cash from Operating Activities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5320050000.0,
+        "FY2023": 3277573000.0
+      }
+    },
+    "nu_OperatingSecurities": {
+      "label": "Securities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -2552241000.0,
+        "FY2023": 699076000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables": {
+      "label": "Credit card receivables",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -5873063000.0,
+        "FY2023": -7878307000.0
+      }
+    },
+    "nu_LoansToCustomersOne": {
+      "label": "Loans to customers",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -7024003000.0,
+        "FY2023": -3577534000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables": {
+      "label": "Other receivables",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 385192000.0,
+        "FY2023": -1136488000.0
+      }
+    },
+    "nu_CompulsoryDepositsAndOthersAtCentralBanks": {
+      "label": "Compulsory and other deposits at central banks",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 805963000.0,
+        "FY2023": -4540463000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets": {
+      "label": "Other assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 369190000.0,
+        "FY2023": -60982000.0
+      }
+    },
+    "ifrs-full_AdjustmentsForIncreaseDecreaseInDepositsFromBanks": {
+      "label": "Deposits",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5910612000.0,
+        "FY2023": 7664820000.0
+      }
+    },
+    "nu_PayablesToNetwork": {
+      "label": "Payables to network",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -528511000.0,
+        "FY2023": 2818592000.0
+      }
+    },
+    "nu_DeferredIncome1": {
+      "label": "Deferred income",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 3750000.0,
+        "FY2023": 25935000.0
+      }
+    },
+    "nu_OtherLiabilities1": {
+      "label": "Other liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1111830000.0,
+        "FY2023": 1279987000.0
+      }
+    },
+    "nu_InterestPaid1": {
+      "label": "Interest paid",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -88082000.0,
+        "FY2023": -82904000.0
+      }
+    },
+    "nu_IncomeTaxPaid": {
+      "label": "Income tax paid",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -1262541000.0,
+        "FY2023": -612447000.0
+      }
+    },
+    "nu_InterestReceived": {
+      "label": "Interest received",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5820898000.0,
+        "FY2023": 3389331000.0
+      }
+    },
+    "ifrs-full_CashFlowsFromUsedInOperatingActivities": {
+      "label": "Cash flows generated from (used in) operating activities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 2399044000.0,
+        "FY2023": 1266189000.0
+      }
+    },
+    "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities": {
+      "label": "Acquisition of property, plant and equipment",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -5418000.0,
+        "FY2023": -20243000.0
+      }
+    },
+    "nu_AcquisitionAndDevelopmentOfIntangibleAssets": {
+      "label": "Acquisition and development of intangible assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -169572000.0,
+        "FY2023": -156760000.0
+      }
+    },
+    "nu_InvestmentInAssociates": {
+      "label": "Investments in associates",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -99365000.0
+      }
+    },
+    "nu_AcquisitionOfSubsidiaryNetOfCashAcquired": {
+      "label": "Acquisition of subsidiary, net of cash acquired",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -5637000.0
+      }
+    },
+    "nu_FinancialInstrumentsDerivatives": {
+      "label": "Derivatives",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -50635000.0
+      }
+    },
+    "ifrs-full_CashFlowsFromUsedInInvestingActivities": {
+      "label": "Cash flow generated from (used in) investing activities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -330627000.0,
+        "FY2023": -177003000.0
+      }
+    },
+    "nu_ProceedsFromBorrowingsAndFinancing": {
+      "label": "Proceeds from borrowings and financing",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1309890000.0,
+        "FY2023": 469501000.0
+      }
+    },
+    "nu_PaymentsOfBorrowingsAndFinancing": {
+      "label": "Payments of borrowings and financing",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -580642000.0,
+        "FY2023": -46501000.0
+      }
+    },
+    "nu_LeasePayments": {
+      "label": "Lease payments",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -7053000.0,
+        "FY2023": -6933000.0
+      }
+    },
+    "nu_ExerciseOfStockOptions1": {
+      "label": "Exercise of stock options",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5546000.0,
+        "FY2023": 9148000.0
+      }
+    },
+    "ifrs-full_CashFlowsFromUsedInFinancingActivities": {
+      "label": "Cash flows generated from (used in) financing activities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 727741000.0,
+        "FY2023": 425215000.0
+      }
+    },
+    "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents": {
+      "label": "Net Change in Cash",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 2796158000.0,
+        "FY2023": 1514401000.0
+      }
+    },
+    "ifrs-full_CashAndCashEquivalents": {
+      "label": "Cash and cash equivalents - end of the year",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 9185742000.0,
+        "FY2023": 5923440000.0
+      }
+    },
+    "nu_ForeignExchangeRateChangesOnCashAndCashEquivalents": {
+      "label": "Foreign exchange rate changes on cash and cash equivalents",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 466144000.0,
+        "FY2023": 236723000.0
+      }
+    },
+    "nu_IncreaseDecreaseInCashAndCashEquivalent": {
+      "label": "Increase (decrease) in cash and cash equivalents",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 2796158000.0,
+        "FY2023": 1514401000.0
+      }
+    },
+    "nu_SharesIssuedToServicesProvider": {
+      "label": "Shares issued to service providers",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1283000.0,
+        "FY2023": 21533000.0
+      }
+    },
+    "nu_SharesIssuedOnBusinessAcquisition": {
+      "label": "Shares issued on business acquisition",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 75308000.0
       }
     }
   }
