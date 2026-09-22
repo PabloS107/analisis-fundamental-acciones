@@ -1,0 +1,2100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ company_name }} ({{ ticker }}) - Informe Fundamental Django{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+
+    <!-- Header Empresa con Métricas Clave de Valoración y Semáforo -->
+    <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div>
+            <div class="flex flex-wrap items-center gap-3">
+                <h1 class="text-2xl font-black text-white">{{ company_name }}</h1>
+                <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">{{ ticker }}</span>
+                <span class="text-xs text-slate-400">CIK SEC: {{ cik }}</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">
+                Auditoría Contable & Modelo de Valoración Institucional en Django · Período: LTM
+            </p>
+        </div>
+
+        <!-- Bloque de Cotización, Valor Intrínseco y Semáforo -->
+        <div class="flex flex-wrap items-center gap-5 bg-slate-950/70 border border-slate-800 p-4 rounded-2xl w-full lg:w-auto justify-between sm:justify-start">
+            <div>
+                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">Precio de Mercado</span>
+                <div class="flex items-baseline space-x-1">
+                    <span class="text-2xl font-black text-white">${{ stock_price|floatformat:2 }}</span>
+                    <span class="text-xs text-slate-400">USD</span>
+                </div>
+                <div class="flex items-center space-x-2 mt-0.5">
+                    <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> En Vivo
+                    </span>
+                    <a href="?refresh=1" title="Hacer clic para forzar actualización inmediata de cotización desde Yahoo / CNBC" class="text-[10px] text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-0.5 hover:underline transition bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700">
+                        🔄 Refrescar
+                    </a>
+                </div>
+            </div>
+
+            <div class="h-10 w-px bg-slate-800 hidden sm:block"></div>
+
+            <div>
+                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">Valor Intrínseco (DCF)</span>
+                <div class="flex items-baseline space-x-1">
+                    <span class="text-2xl font-black text-sky-400">${{ fair_price_base|floatformat:2 }}</span>
+                    <span class="text-xs text-slate-400">USD</span>
+                </div>
+                <span class="text-[10px] text-slate-400 mt-0.5 block">CAGR Histórico ({{ hist_growth_pct|floatformat:1 }}%)</span>
+            </div>
+
+            <div class="h-10 w-px bg-slate-800 hidden sm:block"></div>
+
+            <div class="flex flex-col">
+                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Semáforo de Valoración</span>
+                {% if valuation_status == "SOBREVALORADA" %}
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span> Priced for Perfection (+{{ premium_pct|floatformat:0 }}%)
+                </span>
+                {% elif valuation_status == "INFRAVALORADA" %}
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Descuento / Margen Seguridad
+                </span>
+                {% else %}
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> En Rango de Precio Justo
+                </span>
+                {% endif %}
+                <span class="text-[10px] text-slate-400 mt-1">Rating Sintético: <strong class="text-sky-400">{{ rating_synth }}</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación por Pestañas -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-4 flex space-x-6 overflow-x-auto text-sm">
+        <button onclick="switchTab('scorecards')" class="tab-btn active py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            📌 Cuadro de Mando (KPIs)
+        </button>
+        <button onclick="switchTab('charts')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            📊 Gráficos & Tendencias
+        </button>
+        <button onclick="switchTab('segments')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            🌍 Segmentos & Geografía
+        </button>
+        <button onclick="switchTab('statements')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            📑 Estados Financieros
+        </button>
+        <button onclick="switchTab('novymarx')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            💎 Novy-Marx & DuPont
+        </button>
+        <button onclick="switchTab('forensic')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            🛡️ Auditoría Forense & Deuda
+        </button>
+        <button onclick="switchTab('reversedcf')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-300 hover:text-white transition">
+            🎯 Simulador Reverse DCF
+        </button>
+    </nav>
+
+    <!-- TAB 1: SCORECARDS -->
+    <div id="tab-scorecards" class="tab-content space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Piotroski F-Score Card (Clickeable) -->
+            <div onclick="toggleScoreDetail('fscore')" class="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-emerald-500/60 hover:bg-slate-850/80 transition-all shadow-lg cursor-pointer group relative">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Piotroski F-Score</span>
+                    <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">Auditado</span>
+                </div>
+                <div class="text-3xl font-black text-white mt-1 group-hover:text-emerald-400 transition">{{ f_score }} <span class="text-lg text-slate-500">/ 9</span></div>
+                <div class="text-xs text-emerald-400 mt-1 font-semibold">{{ f_rating }}</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 group-hover:text-emerald-300 transition">
+                    <span class="font-medium">Desglose de 9 señales</span>
+                    <span id="fscoreArrow" class="font-bold text-xs">▼</span>
+                </div>
+            </div>
+
+            <!-- Mohanram G-Score Card (Clickeable) -->
+            <div onclick="toggleScoreDetail('gscore')" class="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-sky-500/60 hover:bg-slate-850/80 transition-all shadow-lg cursor-pointer group relative">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Mohanram G-Score</span>
+                    <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-bold">Auditado</span>
+                </div>
+                <div class="text-3xl font-black text-white mt-1 group-hover:text-sky-400 transition">{{ g_score }} <span class="text-lg text-slate-500">/ 8</span></div>
+                <div class="text-xs text-sky-400 mt-1 font-semibold">{{ g_rating }}</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 group-hover:text-sky-300 transition">
+                    <span class="font-medium">Desglose de 8 señales</span>
+                    <span id="gscoreArrow" class="font-bold text-xs">▼</span>
+                </div>
+            </div>
+
+            <!-- Novy-Marx GP/A Card -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Novy-Marx GP/A</span>
+                    <span class="text-[10px] {% if gpa_is_higher %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">
+                        {% if gpa_is_higher %}Superior al Sector{% else %}Inferior al Sector{% endif %}
+                    </span>
+                </div>
+                <div class="text-3xl font-black {% if gpa_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ gp_total }}</div>
+                <div class="text-xs text-slate-300 mt-1 font-medium">Ex-Caja: {{ gp_exc }} <span class="text-slate-400">({{ p_label }})</span></div>
+                <div class="mt-2.5 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Mediana Sector:</span>
+                    <strong class="{% if gpa_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %}">{{ median_gpa }} ({{ gpa_diff_str }})</strong>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg">
+                <div class="text-xs text-slate-400 font-medium">ROC Tangible Greenblatt</div>
+                <div class="text-3xl font-black text-emerald-400 mt-1">{{ roc_green }}</div>
+                <div class="text-xs text-slate-400 mt-1">Modelo Asset-Light</div>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg">
+                <div class="text-xs text-slate-400 font-medium">ROIC Ajustado por I+D</div>
+                <div class="text-3xl font-black text-sky-400 mt-1">{{ roic_adj }}</div>
+                <div class="text-xs text-slate-400 mt-1">WACC: {{ wacc_val }} | Spread: +{{ spread_val }} pp</div>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg">
+                <div class="text-xs text-slate-400 font-medium">Calidad Contable (Sloan)</div>
+                <div class="text-3xl font-black text-emerald-400 mt-1">{{ sloan }}</div>
+                <div class="text-xs text-slate-400 mt-1">CFO > Beneficio Neto</div>
+            </div>
+
+            <!-- Montier C-Score Card (Clickeable) -->
+            <div onclick="toggleScoreDetail('montier')" class="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-emerald-500/60 hover:bg-slate-850/80 transition-all shadow-lg cursor-pointer group relative">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Montier C-Score (Fraude)</span>
+                    <span class="text-[10px] {% if montier_score <= 1 %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% elif montier_score <= 2 %}bg-amber-500/20 text-amber-300 border border-amber-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">Auditado</span>
+                </div>
+                <div class="text-3xl font-black {% if montier_score <= 1 %}text-emerald-400{% elif montier_score <= 2 %}text-amber-400{% else %}text-rose-400{% endif %} mt-1 group-hover:text-emerald-300 transition">{{ montier_score }} <span class="text-lg text-slate-500">/ 6</span></div>
+                <div class="text-xs {% if montier_score <= 1 %}text-emerald-400{% elif montier_score <= 2 %}text-amber-400{% else %}text-rose-400{% endif %} mt-1 font-semibold">{{ montier_badge }}</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 group-hover:text-emerald-300 transition">
+                    <span class="font-medium">Desglose de 6 banderas</span>
+                    <span id="montierArrow" class="font-bold text-xs">▼</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg">
+                <div class="text-xs text-slate-400 font-medium">Altman Z''-Score</div>
+                <div class="text-3xl font-black text-emerald-400 mt-1">{{ z_score }}</div>
+                <div class="text-xs text-slate-400 mt-1">Cobertura Intereses: {{ interest_cov }}</div>
+            </div>
+        </div>
+
+        <!-- Panel Desplegable Integrado: Piotroski F-Score (Contraíble) -->
+        <div id="panel-fscore" class="hidden bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 shadow-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <h3 class="text-lg font-black text-white">🔬 Auditoría de Señales Contables: Piotroski F-Score</h3>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">{{ f_score }} de 9 Puntos</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">{{ f_summary }} · Período: LTM vs Previo</p>
+                </div>
+                <button onclick="toggleScoreDetail('fscore')" class="self-end sm:self-auto text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    <span>✕ Cerrar Desglose</span>
+                </button>
+            </div>
+
+            <!-- Grid de 9 Criterios -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {% for sig in f_signals %}
+                <div class="p-4 rounded-2xl border {% if sig.passed %}border-emerald-500/30 bg-emerald-950/15{% else %}border-rose-500/30 bg-rose-950/15{% endif %} flex flex-col justify-between space-y-2.5">
+                    <div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">{{ sig.category }}</span>
+                            {% if sig.passed %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                ✓ +1 Punto
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                                ✗ 0 Puntos
+                            </span>
+                            {% endif %}
+                        </div>
+                        <h4 class="text-xs font-bold text-white mt-1.5">{{ sig.name }}</h4>
+                        <div class="text-xs font-mono font-bold {% if sig.passed %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">
+                            {{ sig.comparison_label }}
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-snug border-t border-slate-800/80 pt-2">
+                        {{ sig.description }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Panel Desplegable Integrado: Mohanram G-Score (Contraíble) -->
+        <div id="panel-gscore" class="hidden bg-slate-900 border border-sky-500/40 rounded-3xl p-6 shadow-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <h3 class="text-lg font-black text-white">🚀 Auditoría de Señales de Crecimiento: Mohanram G-Score</h3>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-500/20 text-sky-400 border border-sky-500/30">{{ g_score }} de 8 Puntos</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">{{ g_summary }} · Comparación vs Mediana Sectorial</p>
+                </div>
+                <button onclick="toggleScoreDetail('gscore')" class="self-end sm:self-auto text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    <span>✕ Cerrar Desglose</span>
+                </button>
+            </div>
+
+            <!-- Grid de 8 Criterios -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                {% for sig in g_signals %}
+                <div class="p-4 rounded-2xl border {% if sig.passed %}border-sky-500/30 bg-sky-950/15{% else %}border-rose-500/30 bg-rose-950/15{% endif %} flex flex-col justify-between space-y-2.5">
+                    <div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">{{ sig.category }}</span>
+                            {% if sig.passed %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                                ✓ +1 Punto
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                                ✗ 0 Puntos
+                            </span>
+                            {% endif %}
+                        </div>
+                        <h4 class="text-xs font-bold text-white mt-1.5">{{ sig.name }}</h4>
+                        <div class="text-xs font-mono font-bold {% if sig.passed %}text-sky-400{% else %}text-rose-400{% endif %} mt-1">
+                            {{ sig.comparison_label }}
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-snug border-t border-slate-800/80 pt-2">
+                        {{ sig.description }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Panel Desplegable Integrado: Montier C-Score (Contraíble) -->
+        <div id="panel-montier" class="hidden bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 shadow-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <h3 class="text-lg font-black text-white">🛡️ Auditoría Forense Contable: Montier C-Score</h3>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black {% if montier_score <= 1 %}bg-emerald-500/20 text-emerald-400 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-400 border border-rose-500/30{% endif %}">{{ montier_score }} de 6 Banderas de Alerta · {{ montier_rating }}</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">{{ montier_verdict }}</p>
+                </div>
+                <button onclick="toggleScoreDetail('montier')" class="self-end sm:self-auto text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                    <span>✕ Cerrar Desglose</span>
+                </button>
+            </div>
+
+            <!-- Grid de 6 Banderas Forenses -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {% for flag in montier_flags %}
+                <div class="p-4 rounded-2xl border {% if not flag.flag %}border-emerald-500/30 bg-emerald-950/15{% else %}border-amber-500/30 bg-amber-950/15{% endif %} flex flex-col justify-between space-y-2.5">
+                    <div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Prueba Forense</span>
+                            {% if not flag.flag %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                ✓ Sin Alerta (Limpio)
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                                ⚠️ Bandera de Alerta
+                            </span>
+                            {% endif %}
+                        </div>
+                        <h4 class="text-xs font-bold text-white mt-1.5">{{ flag.name }}</h4>
+                        <div class="text-[11px] text-slate-300 mt-1 font-mono">
+                            {{ flag.condition }}
+                        </div>
+                        <div class="text-xs font-mono font-bold {% if not flag.flag %}text-emerald-400{% else %}text-amber-400{% endif %} mt-1">
+                            {{ flag.value_str }}
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-snug border-t border-slate-800/80 pt-2">
+                        {{ flag.rationale }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: GRÁFICOS -->
+    <div id="tab-charts" class="tab-content hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico 1: Ingresos vs Beneficios -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white text-base">Ingresos vs. Beneficio Bruto & Neto ($B)</h3>
+                    <span class="text-[11px] text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/60">Cascada P&L</span>
+                </div>
+                <div class="h-80"><canvas id="chartRevNI"></canvas></div>
+            </div>
+
+            <!-- Gráfico 2: Estructura de Márgenes -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white text-base">Estructura de Márgenes de Rentabilidad (%)</h3>
+                    <span class="text-[11px] text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/20">Bruto, Operativo, Neto & FCF</span>
+                </div>
+                <div class="h-80"><canvas id="chartMargins"></canvas></div>
+            </div>
+
+            <!-- Gráfico 3: Flujos de Caja (Opción A: CFO, CapEx, FCF) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white text-base">Flujos de Caja: CFO, CapEx & FCF ($B)</h3>
+                    <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">FCF = CFO - CapEx</span>
+                </div>
+                <div class="h-80"><canvas id="chartCashFlow"></canvas></div>
+            </div>
+
+            <!-- Gráfico 4: Asignación de Capital (Recompras, Acciones y BPA) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white text-base">Asignación de Capital: Recompras, Float & BPA</h3>
+                    <span class="text-[11px] text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-lg border border-sky-500/20">Float: {{ buybacks_summary.float_change_pct }} | Recompras: {{ buybacks_summary.total_buybacks }}</span>
+                </div>
+                <div class="h-80"><canvas id="chartBuybacksSharesEPS"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: SEGMENTOS & GEOGRAFÍA -->
+    <div id="tab-segments" class="tab-content hidden space-y-8">
+        
+        <!-- Bloque 1: 4 KPIs de Concentración y Diversificación -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card Línea Principal -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Línea Principal: {{ kpis_segments.top_product_name }}</span>
+                    <span class="text-lg">📦</span>
+                </div>
+                <div class="text-3xl font-black text-sky-400 mt-1">{{ kpis_segments.top_product_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-800/80">
+                    <span class="text-slate-400">Mix sobre Ventas:</span>
+                    <span class="font-bold text-sky-300">{{ kpis_segments.top_product_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Línea Secundaria -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Línea Secundaria: {{ kpis_segments.second_product_name }}</span>
+                    <span class="text-lg">⭐</span>
+                </div>
+                <div class="text-3xl font-black text-purple-400 mt-1">{{ kpis_segments.second_product_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-800/80">
+                    <span class="text-slate-400">Mix sobre Ventas:</span>
+                    <span class="font-bold text-purple-300">{{ kpis_segments.second_product_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Región Principal -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Región Principal: {{ kpis_segments.top_geo_name }}</span>
+                    <span class="text-lg">🌎</span>
+                </div>
+                <div class="text-3xl font-black text-sky-400 mt-1">{{ kpis_segments.top_geo_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-800/80">
+                    <span class="text-slate-400">Mix sobre Ventas:</span>
+                    <span class="font-bold text-sky-300">{{ kpis_segments.top_geo_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Internacional -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Ventas Internacionales / Resto</span>
+                    <span class="text-lg">🌐</span>
+                </div>
+                <div class="text-3xl font-black text-emerald-400 mt-1">{{ kpis_segments.intl_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-800/80">
+                    <span class="text-slate-400">Diversificación Global:</span>
+                    <span class="font-bold text-emerald-300">{{ kpis_segments.intl_pct }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 2: Tablas de Desglose Histórico (Productos y Geografías) -->
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <!-- Tabla 1: Segmentos de Producto & Servicios -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <span>📦</span> Desglose por Línea de Producto & Servicios
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Ingresos históricos y mix actual (% LTM)</p>
+                    </div>
+                    <span class="text-[11px] text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-lg border border-sky-500/20">Auditado 10-K</span>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-slate-800">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950/80 text-slate-400 uppercase font-semibold border-b border-slate-800">
+                                <th class="py-2.5 px-3 sticky left-0 bg-slate-950">Segmento</th>
+                                <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                                {% for p in seg_periods %}
+                                <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70 font-mono">
+                            {% for row in table_products %}
+                            <tr class="{% if row.is_subtotal %}bg-slate-800/50 font-bold text-sky-300{% else %}text-slate-300 hover:bg-slate-800/30{% endif %}">
+                                <td class="py-2 px-3 sticky left-0 bg-slate-900 whitespace-nowrap font-sans font-medium text-white">{{ row.name }}</td>
+                                <td class="py-2 px-2 text-right text-emerald-400 font-bold">{{ row.mix_pct }}</td>
+                                {% for v in row.values %}
+                                <td class="py-2 px-2 text-right whitespace-nowrap">{{ v }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tabla 2: Segmentos Geográficos -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <span>🗺️</span> Desglose por Región Geográfica
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Distribución geográfica global e internacionalización</p>
+                    </div>
+                    <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">Auditado 10-K</span>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-slate-800">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950/80 text-slate-400 uppercase font-semibold border-b border-slate-800">
+                                <th class="py-2.5 px-3 sticky left-0 bg-slate-950">Región</th>
+                                <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                                {% for p in seg_periods %}
+                                <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70 font-mono">
+                            {% for row in table_geos %}
+                            <tr class="text-slate-300 hover:bg-slate-800/30">
+                                <td class="py-2 px-3 sticky left-0 bg-slate-900 whitespace-nowrap font-sans font-medium text-white">{{ row.name }}</td>
+                                <td class="py-2 px-2 text-right text-sky-400 font-bold">{{ row.mix_pct }}</td>
+                                {% for v in row.values %}
+                                <td class="py-2 px-2 text-right whitespace-nowrap">{{ v }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 3: Gráficos de Evolución y Mix -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico A: Evolución Líneas de Negocio ($B) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Evolución de Líneas de Negocio ($B)</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Ingresos anuales por categoría de producto y servicios</p>
+                    </div>
+                    <span class="text-[11px] text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/20">Tendencia Multi-Anual</span>
+                </div>
+                <div class="h-80"><canvas id="chartProductTrends"></canvas></div>
+            </div>
+
+            <!-- Gráfico B: Evolución Ventas por Región ($B) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Evolución de Ventas por Región ($B)</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Diversificación territorial y tracción internacional</p>
+                    </div>
+                    <span class="text-[11px] text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-lg border border-sky-500/20">Tendencia Geográfica</span>
+                </div>
+                <div class="h-80"><canvas id="chartGeoTrends"></canvas></div>
+            </div>
+
+            <!-- Gráfico C: Mix de Productos LTM (Donut) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Mix de Ingresos por Producto (LTM)</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Participación sobre ventas totales de productos y servicios</p>
+                    </div>
+                    <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">Distribución LTM</span>
+                </div>
+                <div class="h-80"><canvas id="chartProductDonut"></canvas></div>
+            </div>
+
+            <!-- Gráfico D: Mix Geográfico LTM (Donut) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Mix de Ingresos por Región (LTM)</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Participación porcentual por mercado geográfico</p>
+                    </div>
+                    <span class="text-[11px] text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20">Distribución LTM</span>
+                </div>
+                <div class="h-80"><canvas id="chartGeoDonut"></canvas></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TAB 3: ESTADOS FINANCIEROS -->
+    <div id="tab-statements" class="tab-content hidden space-y-4">
+        <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <input type="text" id="pnlSearch" onkeyup="filterPnL()" placeholder="Buscar cuenta financiera..." 
+                   class="bg-slate-800 text-sm text-white px-3 py-1.5 rounded-lg border border-slate-700 w-72 focus:outline-none focus:border-sky-500">
+            <span class="text-xs text-slate-400">Valores en $B / $M USD. Fuente: SEC EDGAR 10-K y 10-Q</span>
+        </div>
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-xl">
+            <table id="pnlTable" class="w-full text-sm text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-900 border-b border-slate-700 text-xs font-bold text-slate-400 uppercase">
+                        <th class="py-3 px-4 sticky left-0 bg-slate-900">Línea Financiera</th>
+                        {% for p in fys %}
+                        <th class="py-3 px-3 text-right">{{ p }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800">
+                    {% for row in table_pnl %}
+                    <tr class="{% if row.is_bold %}font-bold text-blue-300 bg-slate-800/40{% else %}text-slate-300 hover:bg-slate-800/30{% endif %}">
+                        <td class="py-2.5 px-4 sticky left-0 bg-slate-900 whitespace-nowrap">{{ row.label }}</td>
+                        {% for val in row.values %}
+                        <td class="py-2.5 px-3 text-right whitespace-nowrap">{{ val }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 4: NOVY-MARX & DUPONT -->
+    <div id="tab-novymarx" class="tab-content hidden space-y-6">
+        
+        <!-- Bloque 1: Tarjetas de Retorno sobre el Capital & Rentabilidad -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card 1: ROIC Convencional -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if kpis_returns.roic_trad_is_higher %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">ROIC Convencional</span>
+                    <span class="text-[10px] {% if kpis_returns.roic_trad_is_higher %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">GAAP Estándar</span>
+                </div>
+                <div class="text-3xl font-black {% if kpis_returns.roic_trad_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ kpis_returns.roic_trad_ltm }}</div>
+                <div class="text-xs text-slate-400 mt-1">NOPAT / (Deuda + Equity - Caja)</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>vs WACC ({{ kpis_returns.wacc_val }}):</span>
+                    <span class="font-bold {% if kpis_returns.roic_trad_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %}">{% if kpis_returns.roic_trad_is_higher %}Supera Hurdle Rate{% else %}Por debajo{% endif %}</span>
+                </div>
+            </div>
+
+            <!-- Card 2: ROIC Ajustado por Intangibles -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if kpis_returns.roic_adj_is_higher %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">ROIC Ajustado Intangibles</span>
+                    <span class="text-[10px] {% if kpis_returns.roic_adj_is_higher %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/40{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/40{% endif %} px-2 py-0.5 rounded-full font-bold">Damodaran</span>
+                </div>
+                <div class="text-3xl font-black {% if kpis_returns.roic_adj_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ kpis_returns.roic_adj_ltm }}</div>
+                <div class="text-xs text-slate-400 mt-1">Capitalización & Amort. I+D 5Y</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">Spread vs WACC ({{ kpis_returns.wacc_val }}):</span>
+                    <span class="font-black {% if kpis_returns.roic_adj_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %}">{{ kpis_returns.spread_val }}</span>
+                </div>
+            </div>
+
+            <!-- Card 3: ROC Joel Greenblatt -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if kpis_returns.roc_is_higher %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">ROC Greenblatt (Magic Formula)</span>
+                    <span class="text-[10px] {% if kpis_returns.roc_is_higher %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">Capital Tangible</span>
+                </div>
+                <div class="text-3xl font-black {% if kpis_returns.roc_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ kpis_returns.roc_greenblatt_ltm }}</div>
+                <div class="text-xs text-slate-400 mt-1">EBIT / (NWC Operativo + PP&E)</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>vs WACC ({{ kpis_returns.wacc_val }}):</span>
+                    <span class="font-bold {% if kpis_returns.roc_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %}">{% if kpis_returns.roc_is_higher %}Ultra Productivo{% else %}Baja Productividad{% endif %}</span>
+                </div>
+            </div>
+
+            <!-- Card 4: Novy-Marx Gross Profitability -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if gpa_is_higher %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Novy-Marx GP / Activos</span>
+                    <span class="text-[10px] {% if gpa_is_higher %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">Auditado</span>
+                </div>
+                <div class="text-3xl font-black {% if gpa_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ kpis_returns.nm_gpa_ltm }}</div>
+                <div class="text-xs text-slate-400 mt-1">Ex-Caja: <strong class="text-sky-300">{{ kpis_returns.nm_gpa_exc_ltm }}</strong></div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">Mediana Sector: {{ kpis_returns.median_gpa }}</span>
+                    <span class="font-black {% if gpa_is_higher %}text-emerald-400{% else %}text-rose-400{% endif %}">{{ kpis_returns.gpa_diff_str }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 2: Gráficos de Evolución de Retornos y Rentabilidad (Alternativa A) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico 1: Retornos sobre el Capital Invertido (ROIC vs WACC) -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Retornos sobre el Capital Invertido (%)</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">ROIC Tradicional vs. Ajustado por Intangibles vs. Hurdle Rate WACC</p>
+                    </div>
+                    <span class="text-[11px] text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/20">Creación de Valor EVA</span>
+                </div>
+                <div class="h-80"><canvas id="chartROICReturns"></canvas></div>
+            </div>
+
+            <!-- Gráfico 2: Productividad de Capital: ROC Greenblatt vs Novy-Marx -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Productividad del Capital: ROC vs. Novy-Marx</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">ROC Magic Formula [Eje Izq] vs. Rentabilidad Bruta GP/A [Eje Der]</p>
+                    </div>
+                    <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">Escala Dual</span>
+                </div>
+                <div class="h-80"><canvas id="chartROCNovyMarx"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Bloque 3: Ranking Competitivo Sectorial -->
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
+            <h3 class="text-lg font-bold text-white mb-4">Ranking Competitivo Sectorial (Peer Group Novy-Marx)</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800 text-xs font-semibold text-slate-400 uppercase">
+                            <th class="py-2.5 px-3">Ticker</th>
+                            <th class="py-2.5 px-3">Empresa</th>
+                            <th class="py-2.5 px-3 text-right">GP / Activos (%)</th>
+                            <th class="py-2.5 px-3 text-right">GP Ex-Caja (%)</th>
+                            <th class="py-2.5 px-3 text-right">Margen Bruto (%)</th>
+                            <th class="py-2.5 px-3 text-right">Rotación</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        {% for p in peers %}
+                        <tr class="{% if p.ticker == ticker %}bg-sky-950/40 font-bold text-white border-l-4 border-sky-500{% else %}text-slate-300 hover:bg-slate-800/50{% endif %}">
+                            <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-slate-800 text-xs">{{ p.ticker }}</span></td>
+                            <td class="py-2.5 px-3">{{ p.company_name }}</td>
+                            <td class="py-2.5 px-3 text-right text-sky-400">{% widthratio p.gross_profitability_total 1 100 %}%</td>
+                            <td class="py-2.5 px-3 text-right">{% widthratio p.gross_profitability_ex_cash 1 100 %}%</td>
+                            <td class="py-2.5 px-3 text-right">{% widthratio p.gross_margin 1 100 %}%</td>
+                            <td class="py-2.5 px-3 text-right">{{ p.asset_turnover|floatformat:2 }}x</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: FORENSE & SOLVENCIA -->
+    <div id="tab-forensic" class="tab-content hidden space-y-8">
+
+        <!-- BLOQUE 0: RESUMEN EJECUTIVO (4 TARJETAS KPI) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Tarjeta 1: Ratio de Devengos de Sloan -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if sloan_detail.is_safe %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Devengos de Sloan</span>
+                    <span class="text-[10px] {% if sloan_detail.is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">
+                        {{ sloan_detail.status }}
+                    </span>
+                </div>
+                <div class="text-3xl font-black {% if sloan_detail.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ sloan_detail.sloan_str }}</div>
+                <div class="text-xs text-slate-300 mt-1 font-medium">{{ sloan_detail.badge }}</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>CFO vs Utilidad Neta:</span>
+                    <strong class="{% if sloan_detail.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %}">CFO > NI (Sano)</strong>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2: Montier C-Score -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if montier_detail.is_safe %}border-emerald-500/30 bg-emerald-950/10{% elif montier_detail.score == 2 %}border-amber-500/30 bg-amber-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Montier C-Score</span>
+                    <span class="text-[10px] {% if montier_detail.is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% elif montier_detail.score == 2 %}bg-amber-500/20 text-amber-300 border border-amber-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">
+                        {{ montier_detail.badge }}
+                    </span>
+                </div>
+                <div class="text-3xl font-black {% if montier_detail.is_safe %}text-emerald-400{% elif montier_detail.score == 2 %}text-amber-400{% else %}text-rose-400{% endif %} mt-1">{{ montier_detail.score }} <span class="text-lg text-slate-500">/ 6</span></div>
+                <div class="text-xs text-slate-300 mt-1 font-medium">{{ montier_detail.rating }}</div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Riesgo Manipulación:</span>
+                    <strong class="{% if montier_detail.is_safe %}text-emerald-400{% elif montier_detail.score == 2 %}text-amber-400{% else %}text-rose-400{% endif %}">&lt; 5% (Mínimo)</strong>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3: Apalancamiento Deuda Neta / EBITDA -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if solvency_13_1.is_safe %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Apalancamiento Operativo</span>
+                    <span class="text-[10px] {% if solvency_13_1.is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">
+                        {{ solvency_13_1.badge }}
+                    </span>
+                </div>
+                <div class="text-3xl font-black {% if solvency_13_1.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ solvency_13_1.net_debt_to_ebitda_str }}</div>
+                <div class="text-xs text-slate-300 mt-1 font-medium">Deuda Neta / FCF: <strong class="text-sky-300">{{ solvency_13_1.net_debt_to_fcf_str }}</strong></div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Estatus Financiero:</span>
+                    <strong class="{% if solvency_13_1.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %}">{{ solvency_13_1.net_debt_to_ebitda_status }}</strong>
+                </div>
+            </div>
+
+            <!-- Tarjeta 4: Altman Z'' & Rating Sintético -->
+            <div class="bg-slate-900 p-5 rounded-2xl border {% if distress_detail.altman_is_safe %}border-emerald-500/30 bg-emerald-950/10{% else %}border-rose-500/30 bg-rose-950/10{% endif %} shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Solvencia & Rating</span>
+                    <span class="text-[10px] {% if distress_detail.altman_is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2 py-0.5 rounded-full font-bold">
+                        {{ distress_detail.altman_badge }}
+                    </span>
+                </div>
+                <div class="text-3xl font-black {% if distress_detail.altman_is_safe %}text-emerald-400{% else %}text-rose-400{% endif %} mt-1">{{ distress_detail.altman_z }} <span class="text-lg text-slate-500">| {{ distress_detail.synthetic_rating }}</span></div>
+                <div class="text-xs text-slate-300 mt-1 font-medium">Rating Damodaran: <strong class="text-sky-300">{{ distress_detail.synthetic_rating }}</strong></div>
+                <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Default a 10 Años:</span>
+                    <strong class="text-emerald-400">{{ distress_detail.default_probability }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE 1 & 2: MÓDULO FORENSE CONTABLE (SLOAN + MONTIER) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- COLUMNA 1: RATIO DE DEVENGOS DE SLOAN -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🔍 Ratio de Devengos de Sloan</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Calidad contable y contraste entre beneficio neto y flujo de caja libre</p>
+                    </div>
+                    <span class="text-xs font-black {% if sloan_detail.is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2.5 py-1 rounded-lg">
+                        {{ sloan_detail.status }}
+                    </span>
+                </div>
+
+                <!-- Desglose Matemático de la Fórmula -->
+                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 space-y-3">
+                    <div class="text-xs font-semibold text-slate-300 flex items-center justify-between">
+                        <span>FÓRMULA Y DESGLOSE DE CÁLCULO CONTABLE</span>
+                        <span class="text-[10px] text-sky-400 font-mono">ASC 230 / Sloan (1996)</span>
+                    </div>
+
+                    <div class="py-3 px-4 bg-slate-900 rounded-xl border border-slate-800 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <span class="font-bold text-sky-400">Ratio de Sloan</span>
+                        <span class="text-slate-500 font-bold">=</span>
+                        <div class="inline-flex flex-col items-center leading-tight">
+                            <span class="pb-1 border-b border-slate-700 text-slate-200 font-medium">Utilidad Neta ({{ sloan_detail.net_income }}) − Flujo Operativo ({{ sloan_detail.cfo }})</span>
+                            <span class="pt-1 text-slate-400 font-medium">Activos Totales Promedio ({{ sloan_detail.avg_assets }})</span>
+                        </div>
+                        <span class="text-slate-500 font-bold">=</span>
+                        <div class="inline-flex flex-col items-center leading-tight font-mono">
+                            <span class="pb-1 border-b border-slate-700 font-bold text-emerald-400">{{ sloan_detail.total_accruals }}</span>
+                            <span class="pt-1 text-slate-300 font-semibold">{{ sloan_detail.avg_assets }}</span>
+                        </div>
+                        <span class="text-slate-500 font-bold">=</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-black text-sm border border-emerald-500/40">{{ sloan_detail.sloan_str }}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block">Utilidad Neta (NI)</span>
+                            <span class="text-xs font-bold text-white mt-0.5 block">{{ sloan_detail.net_income }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block">Flujo Operativo (CFO)</span>
+                            <span class="text-xs font-bold text-emerald-400 mt-0.5 block">{{ sloan_detail.cfo }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block">Devengos Totales</span>
+                            <span class="text-xs font-bold {% if sloan_detail.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %} mt-0.5 block">{{ sloan_detail.total_accruals }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block">Activos Promedio</span>
+                            <span class="text-xs font-bold text-slate-300 mt-0.5 block">{{ sloan_detail.avg_assets }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escala de Valores de Referencia / Termómetro -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-semibold text-slate-300">Escala de Referencia (Anomalía de Devengos)</span>
+                        <span class="text-xs font-bold {% if sloan_detail.is_safe %}text-emerald-400{% else %}text-rose-400{% endif %}">Actual: {{ sloan_detail.sloan_str }}</span>
+                    </div>
+
+                    <!-- Barra Multi-segmento -->
+                    <div class="grid grid-cols-4 gap-1.5 text-center text-[10px]">
+                        <div class="p-2 rounded-lg bg-sky-950/40 border border-sky-500/30 text-sky-300">
+                            <span class="font-bold block">&lt; -10%</span>
+                            <span class="text-[9px] text-slate-400 block">Conservadurismo Extremo</span>
+                        </div>
+                        <div class="p-2 rounded-lg bg-emerald-950/60 border-2 border-emerald-500/80 text-emerald-300 relative shadow-lg shadow-emerald-950/50">
+                            <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-slate-950 px-1.5 py-0.2 rounded text-[8px] font-black uppercase">{{ ticker }}</span>
+                            <span class="font-bold block">-10% a +5%</span>
+                            <span class="text-[9px] text-emerald-400 block font-semibold">Zona Óptima / Sano</span>
+                        </div>
+                        <div class="p-2 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-300">
+                            <span class="font-bold block">+5% a +10%</span>
+                            <span class="text-[9px] text-slate-400 block">Precaución Media</span>
+                        </div>
+                        <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-500/30 text-rose-300">
+                            <span class="font-bold block">&gt; +10%</span>
+                            <span class="text-[9px] text-slate-400 block">Alerta Manipulación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagnóstico Forense de Sloan -->
+                <div class="p-3.5 bg-slate-950/40 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
+                    <span class="text-emerald-400 text-base">🛡️</span>
+                    <div>
+                        <strong class="text-white block font-semibold">Diagnóstico Institucional:</strong>
+                        <p class="mt-0.5 text-slate-400 leading-relaxed">{{ sloan_detail.diagnosis }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: MONTIER C-SCORE (DINÁMICA INTERNA DE 6 BANDERAS) -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🧪 Montier C-Score</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Detección de manipulación contable (James Montier - Cooking the Books)</p>
+                    </div>
+                    <span class="text-xs font-black {% if montier_detail.is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% elif montier_detail.score == 2 %}bg-amber-500/20 text-amber-300 border border-amber-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2.5 py-1 rounded-lg">
+                        {{ montier_detail.score }} / 6 Banderas
+                    </span>
+                </div>
+
+                <!-- Síntesis y Veredicto -->
+                <div class="p-3.5 bg-slate-950/50 rounded-xl border border-slate-800 space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300">SÍNTESIS FORENSE GLOBAL</span>
+                        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">{{ montier_detail.badge }}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">{{ montier_detail.verdict }}</p>
+                </div>
+
+                <!-- Desglose de las 6 Banderas -->
+                <div class="space-y-2">
+                    <span class="text-xs font-semibold text-slate-300 block">Dinámica Interna de las 6 Señales Evaluadas:</span>
+                    <div class="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                        {% for f in montier_detail.flags %}
+                        <div class="p-2.5 bg-slate-950/40 rounded-xl border {% if f.flag %}border-rose-500/40 bg-rose-950/10{% else %}border-slate-800/80 hover:border-slate-700{% endif %} transition">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold {% if f.flag %}text-rose-300{% else %}text-slate-200{% endif %}">
+                                    {{ f.name }}
+                                </span>
+                                {% if f.flag %}
+                                <span class="text-[10px] font-black bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded-full">
+                                    🔴 FLAG (+1)
+                                </span>
+                                {% else %}
+                                <span class="text-[10px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                                    🟢 OK (0)
+                                </span>
+                                {% endif %}
+                            </div>
+                            <div class="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                                <span class="font-mono text-slate-300">{{ f.value_str }}</span>
+                                <span class="text-[10px] text-slate-400">{{ f.condition }}</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-1 leading-normal italic">{{ f.rationale }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Escala de Montier -->
+                <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Criterio Montier:</span>
+                    <div class="flex gap-2 font-mono text-[10px]">
+                        <span class="text-emerald-400 font-bold">0-1: Limpio</span>
+                        <span class="text-slate-500">|</span>
+                        <span class="text-amber-400">2: Alerta</span>
+                        <span class="text-slate-500">|</span>
+                        <span class="text-rose-400">&ge;3: Manipulación</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE 3: DEUDA, AMORTIZACIÓN Y COBERTURA (TABLAS 13.1 Y 13.2) -->
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Estructura de Deuda, Servicio Financiero & Flujos de Caja</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Estándar de Banca de Inversión y Agencias de Calificación Crediticia (S&P, Moody's)</p>
+                </div>
+
+                <!-- Selector de Sub-Pestañas 13.1 / 13.2 -->
+                <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+                    <button id="btn-subtab-13-1" onclick="switchSolvencySubTab('13-1')" class="px-3.5 py-1.5 rounded-lg font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition">
+                        📊 13.1 Apalancamiento & Amortización
+                    </button>
+                    <button id="btn-subtab-13-2" onclick="switchSolvencySubTab('13-2')" class="px-3.5 py-1.5 rounded-lg font-semibold text-slate-400 border border-transparent hover:text-white transition">
+                        🛡️ 13.2 Cobertura de Intereses & Carga
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENIDO 13.1: APALANCAMIENTO Y CAPACIDAD DE AMORTIZACIÓN -->
+            <div id="subtab-13-1" class="space-y-4">
+                <div class="text-xs text-slate-300 leading-relaxed">
+                    Mide en cuántos años de generación operativa bruta (<strong>EBITDA</strong>) o caja de libre disposición (<strong>FCF</strong>) la empresa podría extinguir el 100% de su deuda neta:
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-800">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800/80 text-slate-400 uppercase font-semibold text-[11px] border-b border-slate-700">
+                                <th class="py-3 px-4">Métrica / Componente</th>
+                                <th class="py-3 px-4">Fórmula Contable</th>
+                                <th class="py-3 px-4 text-center">Umbral Óptimo</th>
+                                <th class="py-3 px-4 text-right">Valor LTM</th>
+                                <th class="py-3 px-4">Diagnóstico de Repago</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Deuda Financiera Total</td>
+                                <td class="py-2.5 px-4 text-slate-400">Deuda Corto Plazo + Largo Plazo</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Referencia</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-white">{{ solvency_13_1.total_debt }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Nivel de apalancamiento bruto emitido en bonos/créditos.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Tesorería y Equivalentes</td>
+                                <td class="py-2.5 px-4 text-slate-400">Efectivo y Activos Líquidos</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Liquidez Inmediata</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-emerald-400">{{ solvency_13_1.cash }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Colchón de caja disponible sin restricciones.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition bg-slate-950/30">
+                                <td class="py-2.5 px-4 font-bold text-sky-300">Deuda Financiera Neta</td>
+                                <td class="py-2.5 px-4 text-slate-400">Deuda Total - Tesorería</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Caja Neta (&lt; $0)</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-sky-300">{{ solvency_13_1.net_debt }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">{% if solvency_13_1.is_net_cash %}Posición neta de caja líquida.{% else %}Deuda neta a amortizar tras liquidar tesorería.{% endif %}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">EBITDA Generado</td>
+                                <td class="py-2.5 px-4 text-slate-400">EBIT + Depreciación & Amortización</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Base Operativa Bruta</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-white">{{ solvency_13_1.ebitda }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Flujo operativo bruto generado antes de reinversión.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20 border-l-4 border-emerald-500">
+                                <td class="py-2.5 px-4 font-black text-emerald-400">Deuda Neta / EBITDA</td>
+                                <td class="py-2.5 px-4 text-slate-300">Deuda Neta / EBITDA</td>
+                                <td class="py-2.5 px-4 text-center font-bold text-emerald-400">&lt; 1.5x (Excelente)</td>
+                                <td class="py-2.5 px-4 text-right font-mono text-sm font-black text-emerald-400">{{ solvency_13_1.net_debt_to_ebitda_str }}</td>
+                                <td class="py-2.5 px-4 font-semibold text-emerald-300">{{ solvency_13_1.net_debt_to_ebitda_status }}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Flujo de Caja Libre (FCF)</td>
+                                <td class="py-2.5 px-4 text-slate-400">Flujo Operativo (CFO) - CapEx</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Caja Real Disponible</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-emerald-400">{{ solvency_13_1.fcf }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Caja libre neta tras cubrir inversiones de capital.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20 border-l-4 border-emerald-500">
+                                <td class="py-2.5 px-4 font-black text-emerald-400">Deuda Neta / FCF</td>
+                                <td class="py-2.5 px-4 text-slate-300">Deuda Neta / FCF</td>
+                                <td class="py-2.5 px-4 text-center font-bold text-emerald-400">&lt; 2.0x (Sólido)</td>
+                                <td class="py-2.5 px-4 text-right font-mono text-sm font-black text-emerald-400">{{ solvency_13_1.net_debt_to_fcf_str }}</td>
+                                <td class="py-2.5 px-4 font-semibold text-emerald-300">
+                                    {% if solvency_13_1.is_net_cash %}
+                                        Posición de caja neta positiva (sin deuda financiera neta que amortizar).
+                                    {% else %}
+                                        Capacidad holgada de desapalancamiento frente al flujo de caja libre.
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="p-3.5 bg-slate-950/50 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
+                    <span><strong>Dictamen de Repago:</strong> {{ solvency_13_1.diagnosis }}</span>
+                    <span class="text-xs font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 uppercase">{{ solvency_13_1.badge }}</span>
+                </div>
+            </div>
+
+            <!-- CONTENIDO 13.2: COBERTURA DE INTERESES Y SERVICIO DE LA DEUDA -->
+            <div id="subtab-13-2" class="hidden space-y-4">
+                <div class="text-xs text-slate-300 leading-relaxed">
+                    Evalúa el margen de seguridad de los beneficios y del flujo de caja para absorber el pago obligatorio de intereses bancarios:
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-800">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800/80 text-slate-400 uppercase font-semibold text-[11px] border-b border-slate-700">
+                                <th class="py-3 px-4">Parámetro Evaluado</th>
+                                <th class="py-3 px-4">Fórmula Contable</th>
+                                <th class="py-3 px-4 text-center">Umbral de Seguridad</th>
+                                <th class="py-3 px-4 text-right">Valor LTM</th>
+                                <th class="py-3 px-4">Dictamen de Cobertura</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Beneficio Operativo (EBIT)</td>
+                                <td class="py-2.5 px-4 text-slate-400">Ingresos - Costes Operativos</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Fondo de Cobertura</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-white">{{ solvency_13_2.ebit }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Margen operativo disponible para atender el servicio de deuda.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Gasto por Intereses</td>
+                                <td class="py-2.5 px-4 text-slate-400">Carga Financiera Anual Reportada</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">Obligación Anual</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-rose-300">{{ solvency_13_2.interest_expense }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">
+                                    {% if solvency_13_1.is_net_cash %}
+                                        Sin coste financiero por emisión de deuda; gastos de intermediación mínimos o nulos.
+                                    {% else %}
+                                        Carga por intereses y servicio de deuda financiera.
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20 border-l-4 border-emerald-500">
+                                <td class="py-2.5 px-4 font-black text-emerald-400">Cobertura Operativa (EBIT / Int)</td>
+                                <td class="py-2.5 px-4 text-slate-300">EBIT / Gasto por Intereses</td>
+                                <td class="py-2.5 px-4 text-center font-bold text-emerald-400">&gt; 10.0x (Grado AAA)</td>
+                                <td class="py-2.5 px-4 text-right font-mono text-sm font-black text-emerald-400">{{ solvency_13_2.interest_coverage_str }}</td>
+                                <td class="py-2.5 px-4 font-semibold text-emerald-300">{{ solvency_13_2.status }}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20 border-l-4 border-emerald-500">
+                                <td class="py-2.5 px-4 font-black text-emerald-400">Cobertura en Efectivo (CFO / Int)</td>
+                                <td class="py-2.5 px-4 text-slate-300">CFO / Gasto por Intereses</td>
+                                <td class="py-2.5 px-4 text-center font-bold text-emerald-400">&gt; 8.0x (Robusta)</td>
+                                <td class="py-2.5 px-4 text-right font-mono text-sm font-black text-emerald-400">{{ solvency_13_2.cash_interest_coverage_str }}</td>
+                                <td class="py-2.5 px-4 font-semibold text-emerald-300">Cobertura líquida sin depender de devengos.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition">
+                                <td class="py-2.5 px-4 font-bold text-white">Carga Financiera sobre CFO</td>
+                                <td class="py-2.5 px-4 text-slate-400">(Intereses / CFO) * 100</td>
+                                <td class="py-2.5 px-4 text-center text-slate-400">&lt; 5.0% (Mínima)</td>
+                                <td class="py-2.5 px-4 text-right font-mono font-bold text-emerald-400">{{ solvency_13_2.financial_burden_pct }}</td>
+                                <td class="py-2.5 px-4 text-slate-400">Porcentaje de la caja operativa consumido por deuda.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="p-3.5 bg-slate-950/50 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
+                    <span><strong>Dictamen de Cobertura:</strong> {{ solvency_13_2.diagnosis }}</span>
+                    <span class="text-xs font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 uppercase">Máxima Protección</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE 4: MODELOS DE QUIEBRA (ALTMAN Z'') Y RATING SINTÉTICO DAMODARAN -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- COLUMNA 1: ALTMAN Z''-SCORE (4 VARIABLES) -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🛡️ Modelo de Quiebra Altman Z''-Score</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Modelo de 4 variables calibrado para firmas no manufactureras y mercados globales</p>
+                    </div>
+                    <span class="text-xs font-black {% if distress_detail.altman_is_safe %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% else %}bg-rose-500/20 text-rose-300 border border-rose-500/30{% endif %} px-2.5 py-1 rounded-lg">
+                        {{ distress_detail.altman_badge }}
+                    </span>
+                </div>
+
+                <!-- Fórmula y Coeficientes Econométricos -->
+                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 space-y-3">
+                    <div class="py-3 px-4 bg-slate-900 rounded-xl border border-slate-800 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-mono">
+                        <span class="font-bold text-sky-400 text-base">Z''</span>
+                        <span class="text-slate-500 font-bold">=</span>
+                        <span class="text-slate-300">6.56 · <strong class="text-sky-300">X₁</strong></span>
+                        <span class="text-slate-600">+</span>
+                        <span class="text-slate-300">3.26 · <strong class="text-sky-300">X₂</strong></span>
+                        <span class="text-slate-600">+</span>
+                        <span class="text-slate-300">6.72 · <strong class="text-emerald-400 font-bold">X₃</strong></span>
+                        <span class="text-slate-600">+</span>
+                        <span class="text-slate-300">1.05 · <strong class="text-sky-300">X₄</strong></span>
+                        <span class="text-slate-500 font-bold">=</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-black text-sm border border-emerald-500/40">{{ distress_detail.altman_z }}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block font-sans">X₁ (Fondo Maniobra / Act)</span>
+                            <span class="text-xs font-mono font-bold text-slate-200 mt-0.5 block">{{ distress_detail.altman_x1 }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block font-sans">X₂ (Resultados Acum. / Act)</span>
+                            <span class="text-xs font-mono font-bold text-slate-200 mt-0.5 block">{{ distress_detail.altman_x2 }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block font-sans">X₃ (EBIT / Activos)</span>
+                            <span class="text-xs font-mono font-bold text-emerald-400 mt-0.5 block">{{ distress_detail.altman_x3 }}</span>
+                        </div>
+                        <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-center">
+                            <span class="text-[10px] text-slate-400 block font-sans">X₄ (Patrimonio / Pas)</span>
+                            <span class="text-xs font-mono font-bold text-slate-200 mt-0.5 block">{{ distress_detail.altman_x4 }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escala de Zonas de Altman -->
+                <div class="space-y-2">
+                    <span class="text-xs font-semibold text-slate-300 block">Zonas Econométricas de Riesgo de Quiebra:</span>
+                    <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                        <div class="p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300">
+                            <span class="font-bold block">&lt; 1.10</span>
+                            <span class="text-[10px] text-slate-400 block">Zona de Distress</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-300">
+                            <span class="font-bold block">1.10 - 2.60</span>
+                            <span class="text-[10px] text-slate-400 block">Zona Gris</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-emerald-950/60 border-2 border-emerald-500 text-emerald-300 relative shadow-lg shadow-emerald-950/50">
+                            <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-slate-950 px-1.5 py-0.2 rounded text-[8px] font-black uppercase">{{ ticker }} ({{ distress_detail.altman_z }})</span>
+                            <span class="font-bold block">&gt; 2.60</span>
+                            <span class="text-[10px] text-emerald-400 block font-semibold">Zona Segura</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagnóstico Econométrico -->
+                <div class="p-3.5 bg-slate-950/40 rounded-xl border border-slate-800 text-xs text-slate-300">
+                    <strong class="text-white block font-semibold">Dictamen de Insolvencia:</strong>
+                    <p class="mt-0.5 text-slate-400 leading-relaxed">{{ distress_detail.altman_diagnosis }}</p>
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: RATING CREDITICIO SINTÉTICO (DAMODARAN) -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🏛️ Rating Sintético de Crédito</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Metodología de Calificación Crediticia Aswath Damodaran (NYU Stern)</p>
+                    </div>
+                    <span class="text-xs font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-lg">
+                        Grado Máximo
+                    </span>
+                </div>
+
+                <!-- Rating Gigante y Descripción -->
+                <div class="p-5 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase tracking-wider block font-semibold">Calificación Asignada</span>
+                        <div class="text-4xl font-black text-emerald-400 mt-1 tracking-wider">{{ distress_detail.synthetic_rating }}</div>
+                        <span class="text-xs text-slate-300 mt-1 block font-medium">{{ distress_detail.synthetic_rating_desc }}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider block font-semibold">Spread de Crédito</span>
+                        <div class="text-3xl font-black text-sky-400 mt-1 font-mono">{{ distress_detail.default_spread_pct }}</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">sobre US Treasury 10Y</span>
+                    </div>
+                </div>
+
+                <!-- Métricas Clave de Respaldo -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="p-3.5 bg-slate-950/40 rounded-xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block">Cobertura Operativa EBIT</span>
+                        <span class="text-lg font-black text-emerald-400 mt-1 block">{{ solvency_13_2.interest_coverage_str }}</span>
+                        <span class="text-[10px] text-slate-500 mt-0.5 block">Exigido para AAA: &gt; 8.50x</span>
+                    </div>
+                    <div class="p-3.5 bg-slate-950/40 rounded-xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block">Probabilidad Default 10Y</span>
+                        <span class="text-lg font-black text-emerald-400 mt-1 block">{{ distress_detail.default_probability }}</span>
+                        <span class="text-[10px] text-slate-500 mt-0.5 block">Histórico S&P / Moody's</span>
+                    </div>
+                </div>
+
+                <!-- Diagnóstico Crediticio -->
+                <div class="p-3.5 bg-slate-950/40 rounded-xl border border-slate-800 text-xs text-slate-300">
+                    <strong class="text-white block font-semibold">Dictamen Institucional de Crédito:</strong>
+                    <p class="mt-0.5 text-slate-400 leading-relaxed">
+                        {{ distress_detail.synthetic_rating_desc }}. {{ distress_detail.altman_diagnosis }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TAB 6: REVERSE DCF -->
+    <div id="tab-reversedcf" class="tab-content hidden space-y-6">
+        <div class="bg-slate-900 p-6 rounded-3xl border border-sky-500/40 shadow-xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Simulador de Valoración & Descuento Inverso (Reverse DCF)</h3>
+                    <p class="text-xs text-slate-400 mt-1">Ajusta el crecimiento proyectado de ventas y las tasas para comparar tu valor intrínseco con la cotización actual (${{ stock_price|floatformat:2 }} USD).</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+                    <span class="text-slate-400">Margen FCF Fijo Auditado:</span>
+                    <span class="font-bold text-purple-400">{{ fcf_margin_pct|floatformat:1 }}%</span>
+                </div>
+            </div>
+
+            <!-- Sliders de Parametrización -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 bg-slate-800/50 rounded-2xl border border-slate-800">
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="text-xs text-slate-300 font-semibold">Crecimiento Ventas Proyectado:</label>
+                        <span id="gRevDisplay" class="text-xs font-black text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">{{ hist_growth_pct|floatformat:2 }}%</span>
+                    </div>
+                    <input type="range" id="gRevSlider" min="2.0" max="28.0" step="0.1" value="{{ hist_growth_pct|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                    <span class="text-[10px] text-slate-400 mt-1 block">Referencia Histórica 5Y: {{ hist_growth_pct|floatformat:1 }}% anual</span>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="text-xs text-slate-300 font-semibold">Costo de Capital (WACC):</label>
+                        <span id="wDisplay" class="text-xs font-black text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">{{ wacc_val }}</span>
+                    </div>
+                    <input type="range" id="wSlider" min="7.0" max="13.0" step="0.1" value="{{ wacc_val|slice:':-1' }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                    <span class="text-[10px] text-slate-400 mt-1 block">WACC Auditado por Ratios: {{ wacc_val }}</span>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="text-xs text-slate-300 font-semibold">Tasa Perpetuidad (gn):</label>
+                        <span id="gDisplay" class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">2.50%</span>
+                    </div>
+                    <input type="range" id="gSlider" min="1.0" max="4.0" step="0.1" value="2.5" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-emerald-500 cursor-pointer">
+                    <span class="text-[10px] text-slate-400 mt-1 block">Crecimiento tendencial del PIB</span>
+                </div>
+            </div>
+
+            <!-- Métricas Resultantes -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 shadow-lg">
+                    <div class="flex items-center justify-center space-x-1">
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Precio Justo Teórico</span>
+                        <span class="text-[10px] text-sky-400 cursor-help" title="Descuento de flujos tradicional (Forward DCF) basado en tu crecimiento de ventas, margen FCF, WACC y gn.">ℹ️</span>
+                    </div>
+                    <span id="fairDisplay" class="text-3xl font-black text-emerald-400 mt-1 block">${{ fair_price_base|floatformat:2 }}</span>
+                    <span id="fairSubtext" class="text-xs text-slate-400 mt-1 block font-medium">Basado en tus parámetros</span>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">Modulado por Crecimiento Ventas, WACC y g<sub>n</sub></span>
+                </div>
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 shadow-lg">
+                    <div class="flex items-center justify-center space-x-1">
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Crecimiento Implícito (Mdo)</span>
+                        <span class="text-[10px] text-sky-400 cursor-help" title="Crecimiento anual requerido para justificar la cotización de mercado actual ($P0). Inmune a tu proyección subjetiva de ventas.">ℹ️</span>
+                    </div>
+                    <span id="gImpliedDisplay" class="text-3xl font-black text-sky-400 mt-1 block">{{ g_implied_pct|floatformat:2 }}%</span>
+                    <span class="text-xs text-slate-400 mt-1 block">Exigido por ${{ stock_price|floatformat:2 }} USD</span>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">Reverse DCF: Responde a WACC y g<sub>n</sub></span>
+                </div>
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 shadow-lg">
+                    <div class="flex items-center justify-center space-x-1">
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Brecha de Expectativas</span>
+                        <span class="text-[10px] text-sky-400 cursor-help" title="Diferencia entre el crecimiento que descuenta el mercado y tu hipótesis de ventas proyectada.">ℹ️</span>
+                    </div>
+                    <span id="gapDisplay" class="text-3xl font-black text-amber-400 mt-1 block">{{ gap_expectations_str }}</span>
+                    <span class="text-xs text-slate-400 mt-1 block">Exceso sobre tu hipótesis</span>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">Crecimiento Implícito − Tu Hipótesis</span>
+                </div>
+            </div>
+
+            <!-- Banner Explicativo Dinámico -->
+            <div id="dcfAlertBox" class="p-4 rounded-2xl border border-slate-800 bg-slate-950/40 text-xs text-slate-300">
+                <!-- Se actualiza dinámicamente con recalcDCF() -->
+            </div>
+
+            <!-- Matriz Bidimensional de Sensibilidad (Sección 14.4 Word Auditada) -->
+            <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/60 pb-3">
+                    <div>
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <span>📊 Matriz Bidimensional de Sensibilidad Reverse DCF</span>
+                            <span class="text-[10px] bg-sky-500/20 text-sky-300 font-semibold px-2 py-0.5 rounded-full border border-sky-500/30">Sección 14.4 Word Auditada</span>
+                        </h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Crecimiento anual de ingresos requerido por la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) ante distintas combinaciones de WACC y tasa terminal (g<sub>n</sub>).</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-[11px] font-bold text-slate-400 uppercase tracking-wider bg-slate-900/60">
+                                <th class="py-3 px-3">WACC \ Tasa Terminal (g<sub>n</sub>)</th>
+                                <th class="py-3 px-2 text-center">1.0%</th>
+                                <th class="py-3 px-2 text-center">1.5%</th>
+                                <th class="py-3 px-2 text-center">2.0%</th>
+                                <th class="py-3 px-2 text-center text-sky-400 bg-sky-500/10">2.5% (Base)</th>
+                                <th class="py-3 px-2 text-center">3.0%</th>
+                                <th class="py-3 px-2 text-center">3.5%</th>
+                                <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/80">
+                            {% for row in sensitivity_grid %}
+                            <tr class="transition hover:bg-slate-800/60 {% if row.is_base %}bg-sky-500/10 border-l-4 border-sky-400 font-bold{% endif %}">
+                                <td class="py-3 px-3 whitespace-nowrap {% if row.is_base %}text-white font-bold{% else %}text-slate-300{% endif %}">
+                                    {{ row.wacc_label }}
+                                    {% if row.is_base %}<span class="ml-1.5 text-[9px] bg-sky-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">BASE</span>{% endif %}
+                                </td>
+                                <td class="py-3 px-2 text-center font-mono text-slate-300">{{ row.g_10 }}</td>
+                                <td class="py-3 px-2 text-center font-mono text-slate-300">{{ row.g_15 }}</td>
+                                <td class="py-3 px-2 text-center font-mono text-slate-300">{{ row.g_20 }}</td>
+                                <td class="py-3 px-2 text-center font-mono font-bold {% if row.is_base %}text-sky-300 bg-sky-500/20 rounded{% else %}text-sky-400 bg-sky-500/5{% endif %}">
+                                    {{ row.g_25 }}
+                                </td>
+                                <td class="py-3 px-2 text-center font-mono text-slate-300">{{ row.g_30 }}</td>
+                                <td class="py-3 px-2 text-center font-mono text-slate-300">{{ row.g_35 }}</td>
+                                <td class="py-3 px-3 text-slate-400 text-[11px] leading-relaxed">
+                                    {% if row.is_base %}
+                                        <span class="text-emerald-300 font-semibold">{{ row.diagnosis }}</span>
+                                    {% else %}
+                                        {{ row.diagnosis }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Nota Metodológica Didáctica -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-[11px] text-slate-400">
+                    <div class="p-2.5 bg-slate-900/50 rounded-xl border border-slate-800/80">
+                        <strong class="text-sky-300 block mb-0.5">📌 ¿Por qué el Crecimiento Implícito no varía con el slider de ventas?</strong>
+                        El modelo <em>Reverse DCF</em> toma la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) como dato objetivo e inmutable. El crecimiento implícito es la <strong>exigencia que el mercado ya descuenta</strong> para esa cotización. Modificar tu hipótesis de ventas altera el <strong>Precio Justo Teórico</strong> y la <strong>Brecha de Expectativas</strong>, pero no lo que el mercado cotiza.
+                    </div>
+                    <div class="p-2.5 bg-slate-900/50 rounded-xl border border-slate-800/80">
+                        <strong class="text-emerald-300 block mb-0.5">💡 Relación entre los Controles y los Resultados:</strong>
+                        <ul class="list-disc list-inside space-y-0.5">
+                            <li><span class="text-slate-200">Slider Crecimiento Ventas:</span> Altera el <em>Precio Justo Teórico</em> y la <em>Brecha de Expectativas</em>.</li>
+                            <li><span class="text-slate-200">Sliders WACC y g<sub>n</sub>:</span> Modifican simultáneamente el <em>Precio Justo Teórico</em> y el <em>Crecimiento Implícito</em>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const targetPrice = {{ stock_price|floatformat:2 }};
+    const shares = {{ shares_m }};
+    const rev0 = {{ rev_base }};
+    const fcfM = {{ fcf_margin_pct }} / 100.0;
+    const histCAGR = {{ hist_growth_pct }} / 100.0;
+    const netDebt = {{ net_debt_m|floatformat:2 }};
+
+    function toggleScoreDetail(type) {
+        const fPanel = document.getElementById('panel-fscore');
+        const gPanel = document.getElementById('panel-gscore');
+        const mPanel = document.getElementById('panel-montier');
+        const fArrow = document.getElementById('fscoreArrow');
+        const gArrow = document.getElementById('gscoreArrow');
+        const mArrow = document.getElementById('montierArrow');
+
+        if (type === 'fscore') {
+            const isClosed = fPanel.classList.contains('hidden');
+            if (gPanel) gPanel.classList.add('hidden');
+            if (mPanel) mPanel.classList.add('hidden');
+            if (gArrow) gArrow.textContent = '▼';
+            if (mArrow) mArrow.textContent = '▼';
+
+            if (isClosed) {
+                fPanel.classList.remove('hidden');
+                if (fArrow) fArrow.textContent = '▲';
+                fPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                fPanel.classList.add('hidden');
+                if (fArrow) fArrow.textContent = '▼';
+            }
+        } else if (type === 'gscore') {
+            const isClosed = gPanel.classList.contains('hidden');
+            if (fPanel) fPanel.classList.add('hidden');
+            if (mPanel) mPanel.classList.add('hidden');
+            if (fArrow) fArrow.textContent = '▼';
+            if (mArrow) mArrow.textContent = '▼';
+
+            if (isClosed) {
+                gPanel.classList.remove('hidden');
+                if (gArrow) gArrow.textContent = '▲';
+                gPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                gPanel.classList.add('hidden');
+                if (gArrow) gArrow.textContent = '▼';
+            }
+        } else if (type === 'montier') {
+            const isClosed = mPanel.classList.contains('hidden');
+            if (fPanel) fPanel.classList.add('hidden');
+            if (gPanel) gPanel.classList.add('hidden');
+            if (fArrow) fArrow.textContent = '▼';
+            if (gArrow) gArrow.textContent = '▼';
+
+            if (isClosed) {
+                mPanel.classList.remove('hidden');
+                if (mArrow) mArrow.textContent = '▲';
+                mPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                mPanel.classList.add('hidden');
+                if (mArrow) mArrow.textContent = '▼';
+            }
+        }
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        const t = document.getElementById('tab-' + tabId);
+        if (t) t.classList.remove('hidden');
+        event.currentTarget.classList.add('active');
+
+        if (tabId === 'charts') setTimeout(renderCharts, 50);
+        if (tabId === 'segments') setTimeout(renderSegmentsCharts, 50);
+        if (tabId === 'novymarx') setTimeout(renderNovyMarxCharts, 50);
+        if (tabId === 'reversedcf') setTimeout(recalcDCF, 50);
+    }
+
+    function switchSolvencySubTab(tab) {
+        const tab1 = document.getElementById('subtab-13-1');
+        const tab2 = document.getElementById('subtab-13-2');
+        const btn1 = document.getElementById('btn-subtab-13-1');
+        const btn2 = document.getElementById('btn-subtab-13-2');
+
+        if (tab === '13-1') {
+            tab1.classList.remove('hidden');
+            tab2.classList.add('hidden');
+            btn1.className = 'px-3.5 py-1.5 rounded-lg font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition';
+            btn2.className = 'px-3.5 py-1.5 rounded-lg font-semibold text-slate-400 border border-transparent hover:text-white transition';
+        } else {
+            tab2.classList.remove('hidden');
+            tab1.classList.add('hidden');
+            btn2.className = 'px-3.5 py-1.5 rounded-lg font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition';
+            btn1.className = 'px-3.5 py-1.5 rounded-lg font-semibold text-slate-400 border border-transparent hover:text-white transition';
+        }
+    }
+
+    function filterPnL() {
+        const q = document.getElementById('pnlSearch').value.toLowerCase();
+        document.querySelectorAll('#pnlTable tbody tr').forEach(r => {
+            r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+    }
+
+    function recalcDCF() {
+        const gRev = parseFloat(document.getElementById('gRevSlider').value) / 100.0;
+        const wacc = parseFloat(document.getElementById('wSlider').value) / 100.0;
+        const gn = parseFloat(document.getElementById('gSlider').value) / 100.0;
+
+        document.getElementById('gRevDisplay').textContent = (gRev * 100).toFixed(2) + '%';
+        document.getElementById('wDisplay').textContent = (wacc * 100).toFixed(2) + '%';
+        document.getElementById('gDisplay').textContent = (gn * 100).toFixed(2) + '%';
+
+        // 1. Precio Justo Teórico (Forward DCF):
+        // Equity Value = Enterprise Value (PV + PV_TV) - Deuda Neta
+        let pv_hyp = 0, r_hyp = rev0;
+        for (let t = 1; t <= 10; t++) {
+            r_hyp *= (1 + gRev);
+            pv_hyp += (r_hyp * fcfM) / Math.pow(1 + wacc, t);
+        }
+        let tv_hyp = (r_hyp * (1 + gn) * fcfM) / Math.max(wacc - gn, 0.005);
+        let ev_hyp = pv_hyp + (tv_hyp / Math.pow(1 + wacc, 10));
+        let equity_hyp = ev_hyp - netDebt;
+        let fairPrice = equity_hyp / shares;
+
+        // 2. Reverse DCF: qué crecimiento anual exige la cotización de mercado P0
+        // Target EV = Market Cap + Net Debt = (P0 * shares) + Net Debt
+        const targetEV = (targetPrice * shares) + netDebt;
+        let low = -0.30, high = 0.80, g_implied = 0.10;
+        for (let iter = 0; iter < 60; iter++) {
+            let mid = (low + high) / 2.0;
+            let pv = 0, r_t = rev0;
+            for (let t = 1; t <= 10; t++) {
+                r_t *= (1 + mid);
+                pv += (r_t * fcfM) / Math.pow(1 + wacc, t);
+            }
+            let tv = (r_t * (1 + gn) * fcfM) / Math.max(wacc - gn, 0.005);
+            let ev = pv + (tv / Math.pow(1 + wacc, 10));
+            if (Math.abs(ev - targetEV) < 1.0) {
+                g_implied = mid;
+                break;
+            }
+            if (ev < targetEV) low = mid; else high = mid;
+            g_implied = mid;
+        }
+
+        const gap = (g_implied - gRev) * 100.0;
+        const diffPricePct = ((fairPrice - targetPrice) / targetPrice) * 100.0;
+
+        document.getElementById('fairDisplay').textContent = '$' + fairPrice.toFixed(2);
+        document.getElementById('gImpliedDisplay').textContent = (g_implied * 100).toFixed(2) + '%';
+        document.getElementById('gapDisplay').textContent = (gap >= 0 ? '+' : '') + gap.toFixed(2) + ' pp';
+
+        const fairSub = document.getElementById('fairSubtext');
+        const alertBox = document.getElementById('dcfAlertBox');
+        if (fairPrice < targetPrice) {
+            fairSub.className = "text-xs text-rose-400 mt-1 block font-medium";
+            fairSub.textContent = `Cotiza con +${Math.abs(diffPricePct).toFixed(0)}% de prima vs este modelo`;
+            if (alertBox) {
+                alertBox.className = "p-4 rounded-2xl border border-rose-500/30 bg-rose-950/20 text-xs text-rose-200 leading-relaxed";
+                alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige un crecimiento anual de ventas del <strong>${(g_implied * 100).toFixed(2)}%</strong> durante una década completa. Tu hipótesis proyectada (${(gRev * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong>.`;
+            }
+        } else {
+            fairSub.className = "text-xs text-emerald-400 mt-1 block font-medium";
+            fairSub.textContent = `Margen de seguridad: +${diffPricePct.toFixed(1)}%`;
+            if (alertBox) {
+                alertBox.className = "p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 text-xs text-emerald-200 leading-relaxed";
+                alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de crecimiento de ventas del <strong>${(gRev * 100).toFixed(2)}%</strong> anual, el valor intrínseco teórico resultante (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
+            }
+        }
+    }
+
+    let chartsDone = false;
+    function renderCharts() {
+        if (chartsDone) return;
+        chartsDone = true;
+
+        const periods = {{ chart_periods_json|safe }};
+        const revs = {{ rev_series_json|safe }};
+        const gps = {{ gp_series_json|safe }};
+        const nis = {{ ni_series_json|safe }};
+        const gms = {{ gm_series_json|safe }};
+        const oms = {{ om_series_json|safe }};
+        const nms = {{ nm_series_json|safe }};
+        const fcfms = {{ fcf_m_series_json|safe }};
+        const cfos = {{ cfo_series_json|safe }};
+        const capexs = {{ capex_series_json|safe }};
+        const fcfs = {{ fcf_series_json|safe }};
+        const buybacks = {{ buybacks_series_json|safe }};
+        const shares = {{ shares_series_json|safe }};
+        const epss = {{ eps_series_json|safe }};
+
+        // Gráfico 1: Ingresos vs Beneficio Bruto & Neto
+        new Chart(document.getElementById('chartRevNI'), {
+            type: 'bar',
+            data: {
+                labels: periods,
+                datasets: [
+                    { label: 'Ingresos ($B)', data: revs, backgroundColor: 'rgba(56, 189, 248, 0.35)', borderColor: '#38bdf8', borderWidth: 1.5, order: 3 },
+                    { label: 'Beneficio Bruto ($B)', data: gps, type: 'line', borderColor: '#f59e0b', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2, order: 1 },
+                    { label: 'Beneficio Neto ($B)', data: nis, type: 'line', borderColor: '#34d399', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2, order: 2 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8', callback: v => '$' + v + 'B' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + 'B'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico 2: Estructura de Márgenes de Rentabilidad
+        new Chart(document.getElementById('chartMargins'), {
+            type: 'line',
+            data: {
+                labels: periods,
+                datasets: [
+                    { label: 'Margen Bruto (%)', data: gms, borderColor: '#38bdf8', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2 },
+                    { label: 'Margen Operativo (%)', data: oms, borderColor: '#818cf8', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2 },
+                    { label: 'Margen Neto (%)', data: nms, borderColor: '#34d399', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2 },
+                    { label: 'Margen FCF (%)', data: fcfms, borderColor: '#c084fc', backgroundColor: 'transparent', borderWidth: 2.5, borderDash: [4, 4], pointRadius: 4, pointHoverRadius: 7, pointHitRadius: 10, tension: 0.2 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8', callback: v => v + '%' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico 3: Flujos de Caja (CFO vs CapEx vs FCF)
+        new Chart(document.getElementById('chartCashFlow'), {
+            type: 'bar',
+            data: {
+                labels: periods,
+                datasets: [
+                    { label: 'CFO ($B)', data: cfos, backgroundColor: 'rgba(99, 102, 241, 0.65)', borderColor: '#6366f1', borderWidth: 1 },
+                    { label: 'CapEx ($B)', data: capexs, backgroundColor: 'rgba(244, 63, 94, 0.65)', borderColor: '#f43f5e', borderWidth: 1 },
+                    { label: 'FCF ($B)', data: fcfs, backgroundColor: 'rgba(16, 185, 129, 0.75)', borderColor: '#10b981', borderWidth: 1 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8', callback: v => '$' + v + 'B' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + 'B'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico 4: Asignación de Capital (Recompras, Acciones y BPA)
+        new Chart(document.getElementById('chartBuybacksSharesEPS'), {
+            data: {
+                labels: periods,
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Recompras (${{ buybacks_unit }})',
+                        data: buybacks,
+                        backgroundColor: 'rgba(168, 85, 247, 0.35)',
+                        borderColor: '#a855f7',
+                        borderWidth: 1.5,
+                        yAxisID: 'yLeft',
+                        order: 3
+                    },
+                    {
+                        type: 'line',
+                        label: 'Acciones Diluidas ({{ shares_unit }})',
+                        data: shares,
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        yAxisID: 'yRightShares',
+                        order: 1
+                    },
+                    {
+                        type: 'line',
+                        label: 'BPA Diluido ($/acc)',
+                        data: epss,
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        yAxisID: 'yRightEPS',
+                        order: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    yLeft: {
+                        type: 'linear',
+                        position: 'left',
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: {
+                            color: '#c084fc',
+                            callback: function(v) { return '$' + v + '{{ buybacks_unit }}'; }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Recompras (${{ buybacks_unit }})',
+                            color: '#c084fc',
+                            font: { size: 10 }
+                        }
+                    },
+                    yRightShares: {
+                        type: 'linear',
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        ticks: {
+                            color: '#38bdf8',
+                            callback: function(v) { return v + '{{ shares_unit }}'; }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Acciones ({{ shares_unit }})',
+                            color: '#38bdf8',
+                            font: { size: 10 }
+                        }
+                    },
+                    yRightEPS: {
+                        type: 'linear',
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        ticks: {
+                            color: '#34d399',
+                            callback: function(v) { return '$' + v; }
+                        },
+                        title: {
+                            display: true,
+                            text: 'BPA ($/acc)',
+                            color: '#34d399',
+                            font: { size: 10 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                if (ctx.dataset.yAxisID === 'yLeft') {
+                                    return ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + '{{ buybacks_unit }}';
+                                } else if (ctx.dataset.yAxisID === 'yRightShares') {
+                                    return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '{{ shares_unit }} acciones';
+                                } else {
+                                    return ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + ' USD';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    let segmentsChartsDone = false;
+    function renderSegmentsCharts() {
+        if (segmentsChartsDone) return;
+        segmentsChartsDone = true;
+
+        const segPeriods = {{ seg_chart_periods_json|safe }};
+        const prodDatasets = {{ products_trend_json|safe }};
+        const geoDatasets = {{ geos_trend_json|safe }};
+
+        const prodLabels = {{ donut_prod_labels_json|safe }};
+        const prodData = {{ donut_prod_data_json|safe }};
+        const prodColors = {{ donut_prod_colors_json|safe }};
+
+        const geoLabels = {{ donut_geo_labels_json|safe }};
+        const geoData = {{ donut_geo_data_json|safe }};
+        const geoColors = {{ donut_geo_colors_json|safe }};
+
+        // Gráfico A: Tendencia de Líneas de Negocio ($B)
+        new Chart(document.getElementById('chartProductTrends'), {
+            type: 'line',
+            data: {
+                labels: segPeriods,
+                datasets: prodDatasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8', callback: v => '$' + v + 'B' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + 'B'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico B: Tendencia de Ventas por Región ($B)
+        new Chart(document.getElementById('chartGeoTrends'), {
+            type: 'line',
+            data: {
+                labels: segPeriods,
+                datasets: geoDatasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8', callback: v => '$' + v + 'B' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + 'B'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico C: Mix de Productos LTM (Doughnut)
+        new Chart(document.getElementById('chartProductDonut'), {
+            type: 'doughnut',
+            data: {
+                labels: prodLabels,
+                datasets: [{
+                    data: prodData,
+                    backgroundColor: prodColors,
+                    borderColor: '#0f172a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 11 }, boxWidth: 12 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const val = ctx.parsed;
+                                const pct = total > 0 ? ((val / total) * 100).toFixed(1) : '0.0';
+                                return ' ' + ctx.label + ': $' + val.toFixed(1) + 'B (' + pct + '%)';
+                            }
+                        }
+                    }
+                },
+                cutout: '68%'
+            }
+        });
+
+        // Gráfico D: Mix Geográfico LTM (Doughnut)
+        new Chart(document.getElementById('chartGeoDonut'), {
+            type: 'doughnut',
+            data: {
+                labels: geoLabels,
+                datasets: [{
+                    data: geoData,
+                    backgroundColor: geoColors,
+                    borderColor: '#0f172a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 11 }, boxWidth: 12 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const val = ctx.parsed;
+                                const pct = total > 0 ? ((val / total) * 100).toFixed(1) : '0.0';
+                                return ' ' + ctx.label + ': $' + val.toFixed(1) + 'B (' + pct + '%)';
+                            }
+                        }
+                    }
+                },
+                cutout: '68%'
+            }
+        });
+    }
+
+    let novyMarxChartsDone = false;
+    function renderNovyMarxCharts() {
+        if (novyMarxChartsDone) return;
+        novyMarxChartsDone = true;
+
+        const periods = {{ chart_periods_json|safe }};
+        const roicTrad = {{ roic_trad_series_json|safe }};
+        const roicAdj = {{ roic_adj_series_json|safe }};
+        const waccLine = {{ wacc_chart_series_json|safe }};
+        const rocGreen = {{ roc_series_json|safe }};
+        const nmGpa = {{ nm_gpa_series_json|safe }};
+        const nmGpaExc = {{ nm_gpa_exc_series_json|safe }};
+
+        // Gráfico 1: ROIC Tradicional vs ROIC Ajustado vs WACC
+        new Chart(document.getElementById('chartROICReturns'), {
+            type: 'line',
+            data: {
+                labels: periods,
+                datasets: [
+                    {
+                        label: 'ROIC Convencional (%)',
+                        data: roicTrad,
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        tension: 0.2
+                    },
+                    {
+                        label: 'ROIC Ajustado Intangibles (%)',
+                        data: roicAdj,
+                        borderColor: '#a855f7',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        tension: 0.2
+                    },
+                    {
+                        label: 'Hurdle Rate WACC (%)',
+                        data: waccLine,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHitRadius: 10,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    y: {
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: { color: '#94a3b8', callback: v => v + '%' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico 2: Productividad de Capital: ROC Greenblatt vs Novy-Marx GP/A
+        new Chart(document.getElementById('chartROCNovyMarx'), {
+            type: 'line',
+            data: {
+                labels: periods,
+                datasets: [
+                    {
+                        label: 'ROC Greenblatt (%)',
+                        data: rocGreen,
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        tension: 0.2,
+                        yAxisID: 'yLeftROC'
+                    },
+                    {
+                        label: 'Novy-Marx GP/A Total (%)',
+                        data: nmGpa,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        tension: 0.2,
+                        yAxisID: 'yRightGPA'
+                    },
+                    {
+                        label: 'GP/A Ex-Caja (%)',
+                        data: nmGpaExc,
+                        borderColor: '#60a5fa',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [4, 4],
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 10,
+                        tension: 0.2,
+                        yAxisID: 'yRightGPA'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'nearest', intersect: true },
+                scales: {
+                    x: { grid: { color: 'rgba(51, 65, 85, 0.4)' }, ticks: { color: '#94a3b8' } },
+                    yLeftROC: {
+                        type: 'linear',
+                        position: 'left',
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: {
+                            color: '#10b981',
+                            callback: v => v + '%'
+                        },
+                        title: {
+                            display: true,
+                            text: 'ROC Tangible (%)',
+                            color: '#10b981',
+                            font: { size: 10 }
+                        }
+                    },
+                    yRightGPA: {
+                        type: 'linear',
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        ticks: {
+                            color: '#f59e0b',
+                            callback: v => v + '%'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Novy-Marx GP/A (%)',
+                            color: '#f59e0b',
+                            font: { size: 10 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', recalcDCF);
+</script>
+{% endblock %}

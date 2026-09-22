@@ -1,0 +1,671 @@
+{
+  "ticker": "NU",
+  "company_name": "Nu Holdings Ltd.",
+  "cik": "0001691493",
+  "accounting_standard": "IFRS",
+  "source": "SEC EDGAR (IFRS Oficial)",
+  "extraction_timestamp": "2026-09-22T15:51:13.587439",
+  "fiscal_years": [
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020"
+  ],
+  "canonical_summary": {
+    "revenue": {
+      "FY2024": 11517075000.0,
+      "FY2023": 8028976000.0,
+      "FY2022": 4792231000.0,
+      "FY2021": 1698023000.0,
+      "FY2020": 737133000.0
+    },
+    "cost_of_goods_sold": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "gross_profit": {
+      "FY2024": 5252909000.0,
+      "FY2023": 3490903000.0,
+      "FY2022": 1662990000.0,
+      "FY2021": 732917000.0,
+      "FY2020": 326909000.0
+    },
+    "operating_expenses": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": -1333267000.0,
+      "FY2021": -628901000.0,
+      "FY2020": -266024000.0
+    },
+    "operating_income": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "net_income": {
+      "FY2024": 1972112000.0,
+      "FY2023": 1030530000.0,
+      "FY2022": -364578000.0,
+      "FY2021": -164993000.0,
+      "FY2020": -171491000.0
+    },
+    "cash_from_operations": {
+      "FY2024": 755573000.0,
+      "FY2023": -2924318000.0,
+      "FY2022": 974520000.0,
+      "FY2021": 276137000.0,
+      "FY2020": null
+    },
+    "capital_expenditures": {
+      "FY2024": 0.0,
+      "FY2023": 0.0,
+      "FY2022": 0.0,
+      "FY2021": 0.0,
+      "FY2020": 0.0
+    },
+    "free_cash_flow": {
+      "FY2024": 755573000.0,
+      "FY2023": -2924318000.0,
+      "FY2022": 974520000.0,
+      "FY2021": 276137000.0,
+      "FY2020": null
+    },
+    "cash_and_equivalents": {
+      "FY2024": 0.0,
+      "FY2023": 0.0,
+      "FY2022": 0.0,
+      "FY2021": 0.0,
+      "FY2020": 0.0
+    },
+    "total_debt": {
+      "FY2024": 0.0,
+      "FY2023": 0.0,
+      "FY2022": 0.0,
+      "FY2021": 0.0,
+      "FY2020": 0.0
+    },
+    "net_debt": {
+      "FY2024": 0.0,
+      "FY2023": 0.0,
+      "FY2022": 0.0,
+      "FY2021": 0.0,
+      "FY2020": 0.0
+    },
+    "total_assets": {
+      "FY2024": 49931214000.0,
+      "FY2023": 43498449000.0,
+      "FY2022": 29934872000.0,
+      "FY2021": 19858681000.0,
+      "FY2020": 10154250000.0
+    },
+    "stockholders_equity": {
+      "FY2024": 4442541000.0,
+      "FY2023": -4607000.0,
+      "FY2022": -15000.0,
+      "FY2021": -3774000.0,
+      "FY2020": null
+    },
+    "shares_basic": {
+      "FY2024": 4676977000.0,
+      "FY2023": 1602126000.0,
+      "FY2022": 405394.0,
+      "FY2021": 306210.0,
+      "FY2020": null
+    },
+    "shares_diluted": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "eps_basic": {
+      "FY2024": 0.4115,
+      "FY2023": 0.2175,
+      "FY2022": null,
+      "FY2021": -0.103,
+      "FY2020": -0.1304
+    },
+    "eps_diluted": {
+      "FY2024": 0.4034,
+      "FY2023": 0.2121,
+      "FY2022": null,
+      "FY2021": 1602126.0,
+      "FY2020": 1315578.0
+    },
+    "shares_basic_adjusted": {
+      "FY2024": 4676977000.0,
+      "FY2023": 1602126000.0,
+      "FY2022": 405394.0,
+      "FY2021": 306210.0,
+      "FY2020": null
+    },
+    "shares_diluted_adjusted": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "eps_basic_adjusted": {
+      "FY2024": 0.41,
+      "FY2023": 0.22,
+      "FY2022": -899.32,
+      "FY2021": -0.1,
+      "FY2020": -0.13
+    },
+    "eps_diluted_adjusted": {
+      "FY2024": 0.4,
+      "FY2023": 0.21,
+      "FY2022": null,
+      "FY2021": 1602126.0,
+      "FY2020": 1315578.0
+    },
+    "split_adjustment_factor": {
+      "FY2024": 1.0,
+      "FY2023": 1.0,
+      "FY2022": 1.0,
+      "FY2021": 1.0,
+      "FY2020": 1.0
+    },
+    "current_assets": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "current_liabilities": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "net_ppe": {
+      "FY2024": 39294000.0,
+      "FY2023": 27482000.0,
+      "FY2022": 14109000.0,
+      "FY2021": 9850000.0,
+      "FY2020": null
+    },
+    "net_working_capital": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "tangible_capital_employed": {
+      "FY2024": 39294000.0,
+      "FY2023": 27482000.0,
+      "FY2022": 14109000.0,
+      "FY2021": 9850000.0,
+      "FY2020": null
+    }
+  },
+  "key_ratios": {
+    "gross_margin_pct": {
+      "FY2024": 45.61,
+      "FY2023": 43.48,
+      "FY2022": 34.7,
+      "FY2021": 43.16,
+      "FY2020": 44.35
+    },
+    "operating_margin_pct": {},
+    "net_margin_pct": {
+      "FY2024": 17.12,
+      "FY2023": 12.84,
+      "FY2022": -7.61,
+      "FY2021": -9.72,
+      "FY2020": -23.26
+    },
+    "fcf_margin_pct": {
+      "FY2024": 6.56,
+      "FY2023": -36.42,
+      "FY2022": 20.34,
+      "FY2021": 16.26
+    },
+    "fcf_conversion_pct": {
+      "FY2024": 38.31,
+      "FY2023": -283.77,
+      "FY2022": -267.3,
+      "FY2021": -167.36
+    },
+    "roe_pct": {
+      "FY2024": 44.39
+    },
+    "roa_pct": {
+      "FY2024": 4.22,
+      "FY2023": 2.81,
+      "FY2022": -1.46,
+      "FY2021": -1.1,
+      "FY2020": -1.69
+    },
+    "current_ratio": {},
+    "debt_to_equity": {
+      "FY2024": 0.0
+    },
+    "roc_greenblatt_pct": {
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null
+    },
+    "tangible_capital_usd": {
+      "FY2024": 33388000.0,
+      "FY2023": 20795500.0,
+      "FY2022": 11979500.0,
+      "FY2021": 9850000.0,
+      "FY2020": null
+    },
+    "roa_ending_pct": {
+      "FY2024": 3.95,
+      "FY2023": 2.37,
+      "FY2022": -1.22,
+      "FY2021": -0.83,
+      "FY2020": -1.69
+    },
+    "roe_ending_pct": {
+      "FY2024": 44.39
+    },
+    "roa_avg_pct": {
+      "FY2024": 4.22,
+      "FY2023": 2.81,
+      "FY2022": -1.46,
+      "FY2021": -1.1,
+      "FY2020": -1.69
+    },
+    "roe_avg_pct": {
+      "FY2024": 44.39
+    }
+  },
+  "income_statement_detail": {
+    "Revenue": {
+      "label": "Total Revenue",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 11517075000.0,
+        "FY2023": 8028976000.0,
+        "FY2022": 4792231000.0,
+        "FY2021": 1698023000.0,
+        "FY2020": 737133000.0
+      }
+    },
+    "AdditionalItems": {
+      "label": "Additional Financial Items",
+      "standard_concept": "",
+      "values": {}
+    },
+    "AverageEffectiveTaxRate": {
+      "label": "AverageEffectiveTaxRate",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 0.294,
+        "FY2023": 0.33,
+        "FY2022": 0.18,
+        "FY2021": -0.028,
+        "FY2020": -0.112
+      }
+    },
+    "BasicEarningsLossPerShare": {
+      "label": "BasicEarningsLossPerShare",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 0.4115,
+        "FY2023": 0.2175,
+        "FY2021": -0.103,
+        "FY2020": -0.1304
+      }
+    },
+    "CurrentTaxExpenseIncome": {
+      "label": "CurrentTaxExpenseIncome",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1536521000.0,
+        "FY2023": 1184230000.0,
+        "FY2022": -473345000.0,
+        "FY2021": 219824000.0,
+        "FY2020": 22338000.0
+      }
+    },
+    "DeferredTaxExpenseIncome": {
+      "label": "DeferredTaxExpenseIncome",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -713435000.0,
+        "FY2023": -675682000.0,
+        "FY2022": 417612000.0,
+        "FY2021": 224654000.0,
+        "FY2020": 44025000.0
+      }
+    },
+    "DilutedEarningsLossPerShare": {
+      "label": "DilutedEarningsLossPerShare",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 0.4034,
+        "FY2023": 0.2121,
+        "FY2021": 1602126.0,
+        "FY2020": 1315578.0
+      }
+    },
+    "DonationsAndSubsidiesExpense": {
+      "label": "DonationsAndSubsidiesExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 32863000.0
+      }
+    },
+    "ExpenseFromSharebasedPaymentTransactionsWithEmployees": {
+      "label": "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+      "standard_concept": "",
+      "values": {
+        "FY2024": -372669000.0,
+        "FY2023": 255614000.0,
+        "FY2022": 286450000.0,
+        "FY2021": 225445000.0,
+        "FY2020": 56273000.0
+      }
+    },
+    "GeneralAndAdministrativeExpense": {
+      "label": "GeneralAndAdministrativeExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2022": -1333267000.0,
+        "FY2021": -628901000.0,
+        "FY2020": -266024000.0
+      }
+    },
+    "GrossProfit": {
+      "label": "GrossProfit",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 5252909000.0,
+        "FY2023": 3490903000.0,
+        "FY2022": 1662990000.0,
+        "FY2021": 732917000.0,
+        "FY2020": 326909000.0
+      }
+    },
+    "IncomeTaxExpenseContinuingOperations": {
+      "label": "IncomeTaxExpenseContinuingOperations",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 823086000.0,
+        "FY2023": 508548000.0,
+        "FY2022": -55733000.0,
+        "FY2021": 4830000.0,
+        "FY2020": 21687000.0
+      }
+    },
+    "InterestExpense": {
+      "label": "InterestExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 2834859000.0,
+        "FY2023": 2036925000.0,
+        "FY2022": 1547903000.0,
+        "FY2021": -367344000.0,
+        "FY2020": -113924000.0
+      }
+    },
+    "ProfessionalFeesExpense": {
+      "label": "ProfessionalFeesExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2023": 88357000.0,
+        "FY2022": 83997000.0,
+        "FY2021": 55045000.0,
+        "FY2020": 39563000.0
+      }
+    },
+    "ProfitLossAttributableToNoncontrollingInterests": {
+      "label": "ProfitLossAttributableToNoncontrollingInterests",
+      "standard_concept": "",
+      "values": {
+        "FY2022": -56000.0,
+        "FY2021": -341000.0
+      }
+    },
+    "ProfitLossAttributableToOwnersOfParent": {
+      "label": "ProfitLossAttributableToOwnersOfParent",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1972112000.0,
+        "FY2023": 1030530000.0,
+        "FY2022": -364578000.0,
+        "FY2021": -164993000.0,
+        "FY2020": -171491000.0
+      }
+    },
+    "ProfitLossBeforeTax": {
+      "label": "ProfitLossBeforeTax",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 2795198000.0,
+        "FY2023": 1539078000.0,
+        "FY2022": -308901000.0,
+        "FY2021": -170164000.0,
+        "FY2020": -193178000.0
+      }
+    },
+    "SellingExpense": {
+      "label": "SellingExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2023": 146655000.0,
+        "FY2022": 136142000.0,
+        "FY2021": 71775000.0,
+        "FY2020": 16479000.0
+      }
+    },
+    "TaxRateEffectOfForeignTaxRates": {
+      "label": "TaxRateEffectOfForeignTaxRates",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 0.4,
+        "FY2023": 0.4
+      }
+    }
+  },
+  "balance_sheet_detail": {
+    "AssetsAbstract": {
+      "label": "ASSETS",
+      "standard_concept": "",
+      "values": {}
+    },
+    "Assets": {
+      "label": "Total Assets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 49931214000.0,
+        "FY2023": 43498449000.0,
+        "FY2022": 29934872000.0,
+        "FY2021": 19858681000.0,
+        "FY2020": 10154250000.0
+      }
+    },
+    "Goodwill": {
+      "label": "Goodwill",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 414287000.0,
+        "FY2023": 397538000.0,
+        "FY2022": 397397000.0,
+        "FY2021": 401872000.0,
+        "FY2020": 831000.0
+      }
+    },
+    "LiabilitiesAndStockholdersEquityAbstract": {
+      "label": "LIABILITIES AND EQUITY",
+      "standard_concept": "",
+      "values": {}
+    },
+    "Liabilities": {
+      "label": "Total Liabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 42284138000.0,
+        "FY2023": 37092064000.0,
+        "FY2022": 25044089000.0,
+        "FY2021": 15416140000.0,
+        "FY2020": 9716139000.0
+      }
+    },
+    "AdditionalItems": {
+      "label": "Additional Financial Items",
+      "standard_concept": "",
+      "values": {}
+    },
+    "AllowanceAccountForCreditLossesOfFinancialAssets": {
+      "label": "AllowanceAccountForCreditLossesOfFinancialAssets",
+      "standard_concept": "",
+      "values": {
+        "FY2023": 1417000.0
+      }
+    },
+    "DeferredTaxAssets": {
+      "label": "DeferredTaxAssets",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1818339000.0,
+        "FY2023": 1537835000.0,
+        "FY2022": 811050000.0,
+        "FY2021": 360752000.0,
+        "FY2020": 125131000.0
+      }
+    },
+    "DeferredTaxLiabilities": {
+      "label": "DeferredTaxLiabilities",
+      "standard_concept": "",
+      "values": {
+        "FY2022": 41118000.0,
+        "FY2021": 29334000.0,
+        "FY2020": 8741000.0
+      }
+    },
+    "IntangibleAssetsOtherThanGoodwill": {
+      "label": "IntangibleAssetsOtherThanGoodwill",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 347616000.0,
+        "FY2023": 295881000.0,
+        "FY2022": 182164000.0,
+        "FY2021": 72337000.0,
+        "FY2020": 12372000.0
+      }
+    },
+    "IssuedCapital": {
+      "label": "IssuedCapital",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 84000.0,
+        "FY2023": 84000.0,
+        "FY2022": 83000.0,
+        "FY2021": 83000.0,
+        "FY2020": 45000.0
+      }
+    },
+    "NoncontrollingInterests": {
+      "label": "NoncontrollingInterests",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 787000.0,
+        "FY2021": 1509000.0
+      }
+    },
+    "TradeAndOtherCurrentReceivables": {
+      "label": "TradeAndOtherCurrentReceivables",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 6100636000.0,
+        "FY2023": 6296788000.0,
+        "FY2022": 4236235000.0,
+        "FY2021": 2341492000.0,
+        "FY2020": 1475417000.0
+      }
+    },
+    "TradeAndOtherReceivables": {
+      "label": "TradeAndOtherReceivables",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 14619312000.0,
+        "FY2023": 14488304000.0,
+        "FY2022": 9266225000.0,
+        "FY2021": 5162153000.0,
+        "FY2020": 3118872000.0
+      }
+    }
+  },
+  "cash_flow_detail": {
+    "NetCashProvidedByUsedInOperatingActivitiesAbstract": {
+      "label": "Cash flows from operating activities:",
+      "standard_concept": "",
+      "values": {}
+    },
+    "ProfitLoss": {
+      "label": "Profit or Loss",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 1972112000.0,
+        "FY2023": 1030530000.0,
+        "FY2022": -364634000.0,
+        "FY2021": -165334000.0,
+        "FY2020": -171491000.0
+      }
+    },
+    "AdditionalItems": {
+      "label": "Additional Financial Items",
+      "standard_concept": "",
+      "values": {}
+    },
+    "AdjustmentsForSharebasedPayments": {
+      "label": "AdjustmentsForSharebasedPayments",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 272382000.0,
+        "FY2023": 212551000.0,
+        "FY2022": 253203000.0,
+        "FY2021": 157324000.0,
+        "FY2020": 35569000.0
+      }
+    },
+    "GeneralAndAdministrativeExpense": {
+      "label": "GeneralAndAdministrativeExpense",
+      "standard_concept": "",
+      "values": {
+        "FY2022": -1333267000.0,
+        "FY2021": -628901000.0,
+        "FY2020": -266024000.0
+      }
+    },
+    "Goodwill": {
+      "label": "Goodwill",
+      "standard_concept": "",
+      "values": {
+        "FY2024": 414287000.0,
+        "FY2023": 397538000.0,
+        "FY2022": 397397000.0,
+        "FY2021": 401872000.0,
+        "FY2020": 831000.0
+      }
+    },
+    "RepaymentsOfBorrowingsClassifiedAsFinancingActivities": {
+      "label": "RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
+      "standard_concept": "",
+      "values": {
+        "FY2022": 10633000.0,
+        "FY2021": -66403000.0,
+        "FY2020": -52172000.0
+      }
+    }
+  }
+}

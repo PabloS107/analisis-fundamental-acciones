@@ -1,0 +1,1416 @@
+{
+  "ticker": "DECK",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-09-10T20:29:27.300093",
+  "scorecard": {
+    "governance_score": 90,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "NEUTRAL_ROUTINE",
+    "insider_sentiment_label": "Actividad Ordinaria Predominantemente bajo Planes 10b5-1",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 0.0,
+    "routine_10b5_sales_usd": 0.0,
+    "discretionary_sales_usd": 0.0,
+    "ratio_10b5_compliance_pct": 100.0,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 13 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-08-31",
+      "accession_number": "0000910521-26-000024",
+      "items": [
+        "Item 1.01",
+        "Item 2.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Creación de una Obligación Financiera Directa o Fuera de Balance / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. On August 27, 2026 (the “Effective Date”), Deckers Outdoor Corporation (the “Company”), Deckers Europe Limited, Deckers UK Ltd., Deckers Outdoor Canada ULC, Deckers Outdoor International Limited, Deckers Coromar, LLC and DBrands SGP Pte. Ltd. (collectively, the “Borrowers”), Deckers Consumer Dir..."
+    },
+    {
+      "filing_date": "2026-07-23",
+      "accession_number": "0000910521-26-000015",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 23, 2026, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2026, and updating its financial outlook for the fiscal year ending March 31, 2027. The Company intends to hold a conference call regarding..."
+    },
+    {
+      "filing_date": "2026-05-21",
+      "accession_number": "0000910521-26-000007",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 21, 2026, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months and fiscal year ended March 31, 2026, providing its financial outlook for the fiscal year ending March 31, 2027, and providing a multi-year financial frame..."
+    },
+    {
+      "filing_date": "2026-01-29",
+      "accession_number": "0000910521-26-000002",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition.** On January 29, 2026, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the fiscal quarter ended December 31, 2025, and updating its financial outlook for the fiscal year ending March 31, 2026. The Company intends to hold a conference cal..."
+    },
+    {
+      "filing_date": "2025-10-23",
+      "accession_number": "0000910521-25-000041",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition.** On October 23, 2025, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2025, and providing financial guidance for the fiscal year ending March 31, 2026. The Company intends to hold a conference call r..."
+    },
+    {
+      "filing_date": "2025-09-11",
+      "accession_number": "0000910521-25-000039",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 8, 2025, Deckers Outdoor Corporation (the \"Company\") held its 2025 Annual Meeting of Stockholders (the \"Annual Meeting\") virtually via live webcast, during which the Company's stockholders voted on three proposals. There were 148,343,362 shares of the Company’s common stock..."
+    },
+    {
+      "filing_date": "2025-07-24",
+      "accession_number": "0000910521-25-000028",
+      "items": [
+        "Item 2.02",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition.** On July 24, 2025, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2025, and providing its financial outlook for the fiscal quarter ending September 30, 2025. The Company intends to hold a conference call..."
+    },
+    {
+      "filing_date": "2025-05-22",
+      "accession_number": "0000910521-25-000013",
+      "items": [
+        "Item 2.02",
+        "Item 5.02",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition.** On May 22, 2025, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months and fiscal year ended March 31, 2025. The Company intends to hold a conference call regarding these financial results. A copy of the press release is fur..."
+    },
+    {
+      "filing_date": "2025-01-30",
+      "accession_number": "0000910521-25-000002",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On January 30, 2025, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended December 31, 2024, and providing an update to its financial outlook for the fiscal year ending March 31, 2025. The Company intends to hold a conf..."
+    },
+    {
+      "filing_date": "2024-10-24",
+      "accession_number": "0000910521-24-000056",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 24, 2024, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2024 and providing financial guidance for the fiscal year ending March 31, 2025. The Company intends to hold a conference call rega..."
+    },
+    {
+      "filing_date": "2024-09-13",
+      "accession_number": "0000910521-24-000048",
+      "items": [
+        "Item 5.02",
+        "Item 5.03",
+        "Item 5.07",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 5.07) / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. The stockholders of Deckers Outdoor Corporation (the “Company”) approved the Deckers Outdoor Corporation 2024 Employee Stock Purchase Plan (the “2024 ESPP”) and the Deckers Outdoor Corporation ..."
+    },
+    {
+      "filing_date": "2024-07-25",
+      "accession_number": "0000910521-24-000037",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 25, 2024, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2024 and providing financial guidance for the fiscal year ending March 31, 2025. The Company intends to hold a conference call regarding th..."
+    },
+    {
+      "filing_date": "2024-07-12",
+      "accession_number": "0000910521-24-000021",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events. Board Approval of Forward Stock Split and Authorized Share Increase On July 9, 2024, the board of directors (the “Board”) of Deckers Outdoor Corporation (the “ Company”) approved a six-for-one forward stock split (the “ Stock Split”) of the Company’s common stock, par value $0.01 (“ Common Stock”), and preferred stock, par v..."
+    },
+    {
+      "filing_date": "2024-05-23",
+      "accession_number": "0000910521-24-000015",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 23, 2024, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months and fiscal year ended March 31, 2024 and providing financial guidance for the fiscal year ending March 31, 2025. The Company intends to hold a conference c..."
+    },
+    {
+      "filing_date": "2024-02-01",
+      "accession_number": "0000910521-24-000004",
+      "items": [
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. Retirement of David Powers as President and Chief Executive Officer On February 1, 2024, Dave Powers announced his intention to retire from his position as Chief Executive Officer and President..."
+    },
+    {
+      "filing_date": "2024-02-01",
+      "accession_number": "0000910521-24-000003",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On February 1, 2024, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended December 31, 2023 and providing an update to its financial outlook for the fiscal year ending March 31, 2024. The Company also held a conference ..."
+    },
+    {
+      "filing_date": "2023-10-26",
+      "accession_number": "0000910521-23-000039",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 26, 2023, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2023 and providing financial guidance for the fiscal year ending March 31, 2024. The Company also held a conference call regarding ..."
+    },
+    {
+      "filing_date": "2023-09-13",
+      "accession_number": "0000910521-23-000037",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 11, 2023, Deckers Outdoor Corporation (the “Company”) held its 2023 Annual Meeting of Stockholders (the “Annual Meeting”) virtually via live webcast at www.virtualshareholdermeeting.com/DECK2023, during which the Company's stockholders voted on four proposals. The Company h..."
+    },
+    {
+      "filing_date": "2023-07-27",
+      "accession_number": "0000910521-23-000032",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 27, 2023, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2023 and providing financial guidance for the fiscal year ending March 31, 2024. The Company also held a conference call regarding these fi..."
+    },
+    {
+      "filing_date": "2023-05-25",
+      "accession_number": "0000910521-23-000014",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 25, 2023, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months and fiscal year ended March 31, 2023 and providing financial guidance for the fiscal year ending March 31, 2024. The Company also held a conference call re..."
+    },
+    {
+      "filing_date": "2023-02-02",
+      "accession_number": "0000910521-23-000002",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On February 2, 2023, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended December 31, 2022 and providing financial guidance for the fiscal year ending March 31, 2023. The Company also held a conference call regarding t..."
+    },
+    {
+      "filing_date": "2022-12-21",
+      "accession_number": "0000910521-22-000041",
+      "items": [
+        "Item 1.01",
+        "Item 1.02",
+        "Item 2.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Terminación de un Acuerdo Comercial Material / Creación de una Obligación Financiera Directa o Fuera de Balance / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico. Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. On December 19, 2022 (the “Effective Date”), Deckers Outdoor Corporation (the “Company”), Deckers Europe Limited, Deckers UK Ltd., Deckers Benelux B.V., Deckers Outdoor Canada ULC, Deckers Outdoor International Limited (collectively, the \"Prior Borrowers\"), Deckers Coromar, LLC and DBrands SGP P..."
+    },
+    {
+      "filing_date": "2022-10-27",
+      "accession_number": "0000910521-22-000036",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 27, 2022, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2022 and providing financial guidance for the fiscal year ending March 31, 2023. The Company also held a conference call regarding ..."
+    },
+    {
+      "filing_date": "2022-09-14",
+      "accession_number": "0000910521-22-000034",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 12, 2022, Deckers Outdoor Corporation (the “Company”) held its 2022 Annual Meeting of Stockholders (the “Annual Meeting”) virtually via live webcast at www.virtualshareholdermeeting.com/DECK2022, during which the Company's stockholders voted on three proposals. The Company ..."
+    },
+    {
+      "filing_date": "2022-07-28",
+      "accession_number": "0000910521-22-000029",
+      "items": [
+        "Item 2.02",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 28, 2022, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2022 and providing financial guidance for the fiscal year ending March 31, 2023. The Company also held a conference call regarding these fi..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 0.0,
+      "total_open_market_buys_shares": 0,
+      "total_10b5_sales_usd": 0.0,
+      "total_10b5_sales_shares": 0,
+      "total_discretionary_sales_usd": 0.0,
+      "total_discretionary_sales_shares": 0,
+      "total_grants_shares": 330526,
+      "ratio_10b5_vs_discretionary_pct": 100.0,
+      "active_insiders_count": 16,
+      "insiders_breakdown": {
+        "Juan R Figuereo": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Patrick J Grismer": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "David A Burwick": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Maha Saleh Ibrahim": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1499,
+          "tx_count": 2
+        },
+        "Victor Luis": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1680,
+          "tx_count": 2
+        },
+        "Bonita C. Stewart": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Lauri M Shanahan": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Nelson Chan": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Cindy L Davis": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 983,
+          "tx_count": 2
+        },
+        "Marco Ellerker": {
+          "position": "President, Global Marketplace",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 21710,
+          "tx_count": 3
+        },
+        "Robin Spring-Green": {
+          "position": "President, Hoka",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 28660,
+          "tx_count": 4
+        },
+        "Anne Spangenberg": {
+          "position": "President, Fashion Lifestyle",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 34740,
+          "tx_count": 3
+        },
+        "Thomas Garcia": {
+          "position": "Chief Administrative Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 26054,
+          "tx_count": 3
+        },
+        "Caroti Stefano": {
+          "position": "President & CEO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 147643,
+          "tx_count": 3
+        },
+        "Angela Ogbechie": {
+          "position": "Chief Supply Chain Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 21710,
+          "tx_count": 3
+        },
+        "Steven J. Fasching": {
+          "position": "Chief Financial Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 39949,
+          "tx_count": 3
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Juan R Figuereo",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Patrick J Grismer",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "David A Burwick",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Maha Saleh Ibrahim",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 816,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Victor Luis",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 914,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Bonita C. Stewart",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Lauri M Shanahan",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Nelson Chan",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-02",
+        "insider": "Cindy L Davis",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 535,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Marco Ellerker",
+        "position": "President, Global Marketplace",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 5548,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Marco Ellerker",
+        "position": "President, Global Marketplace",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 16162,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Robin Spring-Green",
+        "position": "President, Hoka",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 7324,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Robin Spring-Green",
+        "position": "President, Hoka",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 21336,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Anne Spangenberg",
+        "position": "President, Fashion Lifestyle",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 8878,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Anne Spangenberg",
+        "position": "President, Fashion Lifestyle",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 25862,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Thomas Garcia",
+        "position": "Chief Administrative Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 6658,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Thomas Garcia",
+        "position": "Chief Administrative Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 19396,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Caroti Stefano",
+        "position": "President & CEO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 37731,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Caroti Stefano",
+        "position": "President & CEO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 109912,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Angela Ogbechie",
+        "position": "Chief Supply Chain Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 5548,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Angela Ogbechie",
+        "position": "Chief Supply Chain Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 16162,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Steven J. Fasching",
+        "position": "Chief Financial Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 10209,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Steven J. Fasching",
+        "position": "Chief Financial Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 29740,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Patrick J Grismer",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "David A Burwick",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Maha Saleh Ibrahim",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 683,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Victor Luis",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 766,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Juan R Figuereo",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Bonita C. Stewart",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Lauri M Shanahan",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Nelson Chan",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-02",
+        "insider": "Cindy L Davis",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 448,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 20,
+      "total_shares_proposed": 165121,
+      "total_value_proposed_usd": 35534438.96,
+      "notices_under_10b5": 11,
+      "notices_discretionary": 9,
+      "notices_with_anomalies_count": 13
+    },
+    "notices": [
+      {
+        "filing_date": "2026-02-13",
+        "person_selling": "ROBIN ELISE SPRING-GREEN",
+        "shares_to_sell": 347,
+        "market_value_usd": 38170.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-02-13",
+        "person_selling": "Shanahan Lauri M",
+        "shares_to_sell": 4682,
+        "market_value_usd": 533467.08,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-02-12",
+        "person_selling": "Anne T Spangenberg Tr DTD 8/16/19",
+        "shares_to_sell": 4063,
+        "market_value_usd": 467245.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-10-31",
+        "person_selling": "Ogbechie Angela",
+        "shares_to_sell": 1460,
+        "market_value_usd": 118931.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-09-08",
+        "person_selling": "Ibrahim Maha Saleh",
+        "shares_to_sell": 300,
+        "market_value_usd": 35895.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-07-02",
+        "person_selling": "DEVINE MICHAEL F III",
+        "shares_to_sell": 15000,
+        "market_value_usd": 1581000.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": true,
+        "anomaly_flags": [
+          "LARGE_LIQUIDATION",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Liquidación de gran volumen respecto a su tenencia habitual."
+      },
+      {
+        "filing_date": "2025-06-27",
+        "person_selling": "DEVINE MICHAEL F III",
+        "shares_to_sell": 5000,
+        "market_value_usd": 523000.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": true,
+        "anomaly_flags": [
+          "LARGE_LIQUIDATION"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Liquidación de gran volumen respecto a su tenencia habitual."
+      },
+      {
+        "filing_date": "2025-06-06",
+        "person_selling": "Ibrahim Maha Saleh",
+        "shares_to_sell": 300,
+        "market_value_usd": 32640.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-06-02",
+        "person_selling": "Ogbechie Angela",
+        "shares_to_sell": 6244,
+        "market_value_usd": 654121.44,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-03-06",
+        "person_selling": "Ibrahim Maha Saleh",
+        "shares_to_sell": 300,
+        "market_value_usd": 40290.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-02-28",
+        "person_selling": "Powers David",
+        "shares_to_sell": 25000,
+        "market_value_usd": 3470967.15,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-12-11",
+        "person_selling": "Stefano Caroti",
+        "shares_to_sell": 14274,
+        "market_value_usd": 2973845.16,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-12-06",
+        "person_selling": "Ibrahim Maha Saleh",
+        "shares_to_sell": 300,
+        "market_value_usd": 60933.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-22",
+        "person_selling": "Powers David",
+        "shares_to_sell": 32000,
+        "market_value_usd": 6130712.8,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-22",
+        "person_selling": "Spangenberg Anne",
+        "shares_to_sell": 3882,
+        "market_value_usd": 723721.26,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2024-11-22",
+        "person_selling": "Stewart Bonita C.",
+        "shares_to_sell": 4500,
+        "market_value_usd": 838935.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-20",
+        "person_selling": "Marco Ellerker",
+        "shares_to_sell": 5667,
+        "market_value_usd": 9925915.07,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-19",
+        "person_selling": "The Caroti Riva Living Trust DTD 08/14/2020",
+        "shares_to_sell": 15000,
+        "market_value_usd": 2656500.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-19",
+        "person_selling": "Thomas Garcia",
+        "shares_to_sell": 18000,
+        "market_value_usd": 3187800.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-08",
+        "person_selling": "Fasching Steven J.",
+        "shares_to_sell": 8802,
+        "market_value_usd": 1540350.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2026-02-13",
+        "seller": "ROBIN ELISE SPRING-GREEN",
+        "market_value_usd": 38170.0,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-02-13",
+        "seller": "Shanahan Lauri M",
+        "market_value_usd": 533467.08,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-02-12",
+        "seller": "Anne T Spangenberg Tr DTD 8/16/19",
+        "market_value_usd": 467245.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-31",
+        "seller": "Ogbechie Angela",
+        "market_value_usd": 118931.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-07-02",
+        "seller": "DEVINE MICHAEL F III",
+        "market_value_usd": 1581000.0,
+        "is_10b5_1": true,
+        "flags": [
+          "LARGE_LIQUIDATION",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "is_large": true
+      },
+      {
+        "date": "2025-06-27",
+        "seller": "DEVINE MICHAEL F III",
+        "market_value_usd": 523000.0,
+        "is_10b5_1": false,
+        "flags": [
+          "LARGE_LIQUIDATION"
+        ],
+        "is_large": true
+      },
+      {
+        "date": "2025-06-02",
+        "seller": "Ogbechie Angela",
+        "market_value_usd": 654121.44,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-02-28",
+        "seller": "Powers David",
+        "market_value_usd": 3470967.15,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-22",
+        "seller": "Powers David",
+        "market_value_usd": 6130712.8,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-22",
+        "seller": "Spangenberg Anne",
+        "market_value_usd": 723721.26,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-20",
+        "seller": "Marco Ellerker",
+        "market_value_usd": 9925915.07,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-19",
+        "seller": "The Caroti Riva Living Trust DTD 08/14/2020",
+        "market_value_usd": 2656500.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-19",
+        "seller": "Thomas Garcia",
+        "market_value_usd": 3187800.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}

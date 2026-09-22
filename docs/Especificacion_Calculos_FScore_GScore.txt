@@ -1,0 +1,347 @@
+================================================================================
+ESPECIFICACION TECNICA Y MATEMATICA DE CALCULOS FUNDAMENTALES (REVISADA V2):
+PIOTROSKI F-SCORE (2000) & MOHANRAM G-SCORE (2005) CON MEJORAS INSTITUCIONALES
+================================================================================
+Proyecto: Motor Cuantitativo de Analisis Fundamental (SEC EDGAR XBRL)
+Destino: Escritorio del Usuario
+Fecha de Actualizacion: Septiembre 2026 (Version 2 - Post-Auditoria & Mejoras)
+Estado: Documento Definitivo de Especificacion para Diseno e Implementacion
+================================================================================
+
+TABLA DE CONTENIDOS:
+1. Resumen Ejecutivo y Marco Teorico Integrado
+2. Mejoras Estructurales Incorporadas (Auditoria de Ratios)
+3. Especificacion Detallada: Piotroski F-Score (9 Senales, 0 a 9 Puntos)
+   3.1. Bloque I: Rentabilidad y Calidad de Caja - 4 Puntos
+   3.2. Bloque II: Estructura de Capital, Deuda Total y Liquidez - 3 Puntos
+   3.3. Bloque III: Eficiencia Operativa - 2 Puntos
+4. Especificacion Detallada: Mohanram G-Score (8 Senales, 0 a 8 Puntos)
+   4.1. Bloque I: Rentabilidad y Caja vs la Industria - 3 Puntos
+   4.2. Bloque II: Estabilidad y Predictibilidad (Ajustada por Hipercrecimiento) - 2 Puntos
+   4.3. Bloque III: Inversion en Futuro e Intangibles (Asset-Light & Operating Leverage) - 3 Puntos
+5. Metodologia de Benchmarking Sectorial (SIC / GICS)
+6. Matriz de Decision Cuantitativa F-Score vs G-Score
+7. Validacion Practica con Cifras Auditadas de Apple Inc. (AAPL: FY2023 - FY2024)
+8. Arquitectura del Motor y Plan de Implementacion
+
+================================================================================
+1. RESUMEN EJECUTIVO Y MARCO TEORICO INTEGRADO
+================================================================================
+
+El sistema combina dos de los modelos mas respaldados por la literatura academica
+y la industria de gestion cuantitativa de activos (Quantitative Asset Management):
+
+A) PIOTROSKI F-SCORE (Joseph D. Piotroski, Stanford Graduate School of Business, 2000):
+   - Enfoque: Analisis financiero longitudinal (serie temporal de la propia empresa).
+   - Proposito: Evaluar la solidez intrinseca del balance, la generacion real de caja,
+     la ausencia de dilucion y la mejora operativa respecto a su ano previo.
+   - Escala: 0 a 9 puntos discretos (1 punto por cada senal positiva).
+
+B) MOHANRAM G-SCORE (Partha S. Mohanram, Columbia Business School, 2005):
+   - Enfoque: Analisis financiero transversal (cross-sectional frente a la mediana de pares).
+   - Proposito: Evaluar companias orientadas al crecimiento (Growth / Tech / Consumo),
+     analizando la superioridad en rentabilidad, la estabilidad del negocio y la
+     sostenibilidad de su reinversion en I+D y marketing frente al sector.
+   - Escala: 0 a 8 puntos discretos (1 punto por cada senal positiva).
+
+SINERGIA BIDIMENSIONAL:
+- F-Score = Diagnostico Endogeno (Salud, Solvencia y Calidad de Beneficios).
+- G-Score = Diagnostico Exogeno (Ventaja Competitiva, Estabilidad y Eficiencia de Crecimiento).
+
+================================================================================
+2. MEJORAS ESTRUCTURALES INCORPORADAS (AUDITORIA DE RATIOS)
+================================================================================
+
+A raiz de la revision critica de ratios, se incorporan cinco mejoras institucionales
+que corrigen las limitaciones tradicionales de los modelos academicos:
+
+1. MEJORA A - AUSENCIA DE DILUCION PURA (EQ_OFFER):
+   Se establece obligatoriamente el uso de Acciones Basicas
+   (us-gaap:WeightedAverageNumberOfSharesOutstandingBasic) en lugar de acciones diluidas.
+   Motivo: El metodo de acciones de tesorería (Treasury Stock Method) infla las acciones
+   diluidas cuando sube el precio de la accion en bolsa debido al valor intrinseco de las
+   opciones sobre acciones y RSUs, distorsionando el calculo. Las acciones basicas miden
+   con total pureza si la compania emitio o recompro acciones fisicas reales.
+
+2. MEJORA B - DEUDA FINANCIERA TOTAL (F_dLEVER):
+   Se redefine el ratio de apalancamiento sumando la Deuda Financiera Corriente
+   (us-gaap:LongTermDebtCurrent o papel comercial) a la Deuda a Largo Plazo
+   (us-gaap:LongTermDebtNoncurrent).
+   Motivo: Evita el 'arbitraje de plazos'. Una empresa en apuros que traspasa deuda de
+   largo a corto plazo habria ganado un punto falso bajo el F-Score original. Con la
+   Deuda Financiera Total, se captura el riesgo real de refinanciacion.
+
+3. MEJORA C - APALANCAMIENTO OPERATIVO COMERCIAL EN G8:
+   Se descarta premiar el ratio SG&A / Activos (que premiaba burocracia o ineficiencia)
+   y se adopta de forma definitiva la regla de Apalancamiento Operativo Comercial:
+   Delta Ventas (%) > Delta SG&A (%).
+   Motivo: Mide si el crecimiento en ingresos escala mas rapido que los gastos de venta
+   y administracion, demostrando traccion de marca organica y poder de precio.
+
+4. MEJORA D - TRATAMIENTO DEL HIPERCRECIMIENTO EN G4 Y G5:
+   La varianza estadistica simple penaliza por igual las fluctuaciones hacia arriba que
+   hacia abajo. En companias de tecnologia con saltos masivos de ventas (hipercrecimiento),
+   la varianza se dispara castigando indebidamente a las ganadoras.
+   Solucion: Se incorpora el Coeficiente de Variacion (CV = Desv.Estd / Media) o la
+   Clausula de Aceleracion (si el crecimiento anual o ROA supera persistentemente el
+   percentil 75 del sector durante el periodo, se otorga el punto independientemente
+   de la varianza).
+
+5. MEJORA E - INTENSIDAD DE REINVERSION EN MODELOS 'ASSET-LIGHT' (G7):
+   Las companias de software, plataformas y chips fabless no requieren grandes fabricas
+   ni maquinaria pesada (CapEx fisico bajo).
+   Solucion: El modelo evalua la Tasa de Inversion Total en Innovacion y Crecimiento
+   ((CapEx + R&D) / Activos) y ajusta los benchmarks segun el subsector especifico.
+
+================================================================================
+3. ESPECIFICACION DETALLADA: PIOTROSKI F-SCORE (0 A 9 PUNTOS)
+================================================================================
+
+--------------------------------------------------------------------------------
+3.1. BLOQUE I: RENTABILIDAD Y CALIDAD DE CAJA (4 PUNTOS)
+--------------------------------------------------------------------------------
+
+1. SENAL F_ROA (Rentabilidad sobre Activos Positiva):
+   - Formula:
+       ROA_t = Net Income_t / Total Assets_{t-1}
+   - Regla:
+       F_ROA = 1  si ROA_t > 0
+       F_ROA = 0  si ROA_t <= 0
+   - XBRL Tags: us-gaap:NetIncomeLoss / us-gaap:Assets (periodo t-1).
+
+2. SENAL F_CFO (Flujo de Caja Operativo Positivo):
+   - Formula:
+       CFO_t = Operating Cash Flow en el periodo fiscal t
+   - Regla:
+       F_CFO = 1  si CFO_t > 0
+       F_CFO = 0  si CFO_t <= 0
+   - XBRL Tags: us-gaap:NetCashProvidedByUsedInOperatingActivities.
+
+3. SENAL F_dROA (Mejora Interanual de Rentabilidad sobre Activos):
+   - Formula:
+       Delta ROA = ROA_t - ROA_{t-1}
+       Donde:
+         ROA_t     = Net Income_t / Total Assets_{t-1}
+         ROA_{t-1} = Net Income_{t-1} / Total Assets_{t-2}
+   - Regla:
+       F_dROA = 1  si Delta ROA > 0
+       F_dROA = 0  si Delta ROA <= 0
+
+4. SENAL F_ACCRUAL (Calidad Contable de Sloan / Flujo de Caja vs Utilidad):
+   - Formula:
+       CFO_t vs Net Income_t
+   - Regla:
+       F_ACCRUAL = 1  si CFO_t > Net Income_t
+       F_ACCRUAL = 0  si CFO_t <= Net Income_t
+   - Justificacion: Penaliza a empresas con ganancias contables sin respaldo de caja.
+
+--------------------------------------------------------------------------------
+3.2. BLOQUE II: ESTRUCTURA DE CAPITAL, DEUDA TOTAL Y LIQUIDEZ (3 PUNTOS)
+--------------------------------------------------------------------------------
+
+5. SENAL F_dLEVER (Desendeudamiento Financiero Total):
+   - Formula:
+       Deuda Total_t = us-gaap:LongTermDebtNoncurrent_t + us-gaap:LongTermDebtCurrent_t
+       LEVER_t = Deuda Total_t / Total Assets_t
+       Delta LEVER = LEVER_t - LEVER_{t-1}
+   - Regla:
+       F_dLEVER = 1  si LEVER_t <= LEVER_{t-1}  (Delta LEVER <= 0)
+       F_dLEVER = 0  si LEVER_t > LEVER_{t-1}
+
+6. SENAL F_dLIQUID (Mejora de la Razon Corriente):
+   - Formula:
+       Current Ratio_t = Current Assets_t / Current Liabilities_t
+       Delta CR = Current Ratio_t - Current Ratio_{t-1}
+   - Regla:
+       F_dLIQUID = 1  si Current Ratio_t > Current Ratio_{t-1}  (Delta CR > 0)
+       F_dLIQUID = 0  si Current Ratio_t <= Current Ratio_{t-1}
+   - XBRL Tags: us-gaap:AssetsCurrent / us-gaap:LiabilitiesCurrent.
+
+7. SENAL EQ_OFFER (Ausencia de Dilucion / Emision de Acciones):
+   - Formula:
+       Delta Shares = Basic Shares_t - Basic Shares_{t-1}
+   - Regla:
+       EQ_OFFER = 1  si Basic Shares_t <= Basic Shares_{t-1}  (No dilucion o recompra)
+       EQ_OFFER = 0  si Basic Shares_t > Basic Shares_{t-1}   (Dilucion neta)
+   - XBRL Tag: us-gaap:WeightedAverageNumberOfSharesOutstandingBasic.
+
+--------------------------------------------------------------------------------
+3.3. BLOQUE III: EFICIENCIA OPERATIVA (2 PUNTOS)
+--------------------------------------------------------------------------------
+
+8. SENAL F_dMARGIN (Expansion del Margen Bruto):
+   - Formula:
+       Gross Margin_t = Gross Profit_t / Total Revenue_t
+       Delta Margin = Gross Margin_t - Gross Margin_{t-1}
+   - Regla:
+       F_dMARGIN = 1  si Gross Margin_t > Gross Margin_{t-1}
+       F_dMARGIN = 0  si Gross Margin_t <= Gross Margin_{t-1}
+   - XBRL Tags: us-gaap:GrossProfit / us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax.
+
+9. SENAL F_dTURN (Expansion de la Rotacion de Activos):
+   - Formula:
+       Turnover_t = Total Revenue_t / Total Assets_{t-1}
+       Delta Turn = Turnover_t - Turnover_{t-1}
+   - Regla:
+       F_dTURN = 1  si Turnover_t > Turnover_{t-1}
+       F_dTURN = 0  si Turnover_t <= Turnover_{t-1}
+
+================================================================================
+4. ESPECIFICACION DETALLADA: MOHANRAM G-SCORE (0 A 8 PUNTOS)
+================================================================================
+
+--------------------------------------------------------------------------------
+4.1. BLOQUE I: RENTABILIDAD Y CAJA VS LA INDUSTRIA (3 PUNTOS)
+--------------------------------------------------------------------------------
+
+1. SENAL G1 (ROA Superior a la Mediana del Sector):
+   - Formula: ROA_{i,t} = Net Income_{i,t} / Total Assets_{i,t-1}
+   - Regla: G1 = 1  si ROA_{i,t} > Mediana(ROA_{Sector,t}); else 0.
+
+2. SENAL G2 (CFROA Superior a la Mediana del Sector):
+   - Formula: CFROA_{i,t} = CFO_{i,t} / Total Assets_{i,t-1}
+   - Regla: G2 = 1  si CFROA_{i,t} > Mediana(CFROA_{Sector,t}); else 0.
+
+3. SENAL G3 (Calidad Contable de los Devengos):
+   - Formula: CFO_{i,t} vs Net Income_{i,t}
+   - Regla: G3 = 1  si CFO_{i,t} > Net Income_{i,t}; else 0.
+
+--------------------------------------------------------------------------------
+4.2. BLOQUE II: ESTABILIDAD Y PREDICTIBILIDAD AJUSTADA (2 PUNTOS)
+--------------------------------------------------------------------------------
+
+4. SENAL G4 (Estabilidad de la Rentabilidad):
+   - Formula: Coeficiente de Variacion de ROA (CV = Desv.Estd(ROA) / Media(ROA)) en ventana de 3 a 5 anos.
+   - Regla: G4 = 1 si CV(ROA_{i}) < Mediana(CV(ROA_{Sector})) O si ROA_{i,t} supera persistentemente el Percentil 75 del sector; else 0.
+
+5. SENAL G5 (Estabilidad del Crecimiento en Ventas):
+   - Formula: Coeficiente de Variacion del Crecimiento de Ventas (CV = Desv.Estd(g_ventas) / Media(g_ventas)) en ventana de 3 a 5 anos.
+   - Regla: G5 = 1 si CV(g_{i}) < Mediana(CV(g_{Sector})) O si la tasa media de crecimiento supera el 20% anual sostenido (Clausula de Hipercrecimiento); else 0.
+
+--------------------------------------------------------------------------------
+4.3. BLOQUE III: INVERSION EN FUTURO E INTANGIBLES (3 PUNTOS)
+--------------------------------------------------------------------------------
+
+6. SENAL G6 (Intensidad en Investigacion y Desarrollo vs Industria):
+   - Formula: RD_Intensity_{i,t} = R&D Expense_{i,t} / Total Assets_{i,t-1}
+   - Regla: G6 = 1 si RD_Intensity_{i,t} > Mediana(RD_Intensity_{Sector,t}); else 0.
+   - XBRL Tag: us-gaap:ResearchAndDevelopmentExpense.
+
+7. SENAL G7 (Intensidad de Reinversion en CapEx o Capital Total):
+   - Formula Estandar: CapEx_Intensity_{i,t} = CapEx_{i,t} / Total Assets_{i,t-1}
+   - Formula Asset-Light (Software / Fabless): (CapEx + R&D) / Total Assets_{i,t-1}
+   - Regla: G7 = 1 si la intensidad de inversion supera la mediana del subsector correspondiente; else 0.
+
+8. SENAL G8 (Apalancamiento Operativo Comercial / Eficiencia de SG&A):
+   - Formula: Tasa de Crecimiento de Ventas (%) vs Tasa de Crecimiento de Gastos SG&A (%)
+   - Regla:
+       G8 = 1  si Delta Ventas (%) > Delta SG&A (%)
+       G8 = 0  si Delta Ventas (%) <= Delta SG&A (%)
+   - XBRL Tag: us-gaap:SellingGeneralAndAdministrativeExpense.
+   - Nota: Si la empresa desglosa explicitamente gastos de publicidad en sus notas,
+     se evalua en paralelo el ratio clasico Advertising / Assets.
+
+================================================================================
+5. METODOLOGIA DE BENCHMARKING SECTORIAL (SIC / GICS)
+================================================================================
+
+- El sistema extrae el codigo SIC del filing 10-K (ej. SIC 3571 para Apple Inc.).
+- Se utiliza el catalogo estandarizado de Damodaran (NYU Stern) almacenado localmente
+  en config/industry_medians.json con actualizaciones anuales para todos los sectores
+  del S&P 500 y NASDAQ.
+- Para cada ano t, se compara el ratio de la empresa contra la mediana exacta de su
+  industria en ese mismo ejercicio fiscal.
+
+================================================================================
+6. MATRIZ DE DECISION CUANTITATIVA F-SCORE VS G-SCORE
+================================================================================
+
+                F-SCORE ALTO (7 a 9)           F-SCORE BAJO (0 a 4)
+             +------------------------------+------------------------------+
+G-SCORE      | CUADRANTE I:                 | CUADRANTE II:                |
+ALTO         | COMPOUNDER DE ELITE          | CRECIMIENTO VULNERABLE       |
+(6 a 8)      | Maxima solidez de balance    | Alto crecimiento e I+D,      |
+             | y superioridad competitiva.  | pero quema caja internamente.|
+             | Perfil: Apple, Microsoft     | Perfil: Startups agresivas   |
+             +------------------------------+------------------------------+
+G-SCORE      | CUADRANTE III:               | CUADRANTE IV:                |
+BAJO         | CASH COW MADURA              | TRAMPA DE VALOR / RIESGO     |
+(0 a 3)      | Excelente solvencia interna, | Balance deteriorado y        |
+             | pero baja reinversion/moat.  | rezago frente a pares.       |
+             | Perfil: Utilities reguladas  | Alerta roja de inversion.    |
+             +------------------------------+------------------------------+
+
+================================================================================
+7. VALIDACION PRACTICA CON CIFRAS AUDITADAS DE APPLE INC. (AAPL: FY23 - FY24)
+================================================================================
+
+DATOS CONTABLES OFICIALES DE LOS FILINGS 10-K DE LA SEC (En Millones de USD):
+- Activos Totales (Assets FY2022, t-2):       $352,755 M
+- Activos Totales (Assets FY2023, t-1):       $352,583 M
+- Activos Totales (Assets FY2024, t):         $364,980 M
+- Ingreso Neto (Net Income FY2023):           $96,995 M
+- Ingreso Neto (Net Income FY2024):           $93,736 M
+- Flujo Caja Operativo (CFO FY2024):         $118,254 M (Auditado SEC 10-K)
+- Deuda Largo Plazo (LT Debt Noncurrent FY23):$95,281 M
+- Deuda Corto Plazo (Term Debt Current FY23): $15,924 M -> Deuda Total FY23: $111,205 M (31.54% de Activos)
+- Deuda Largo Plazo (LT Debt Noncurrent FY24):$85,750 M
+- Deuda Corto Plazo (Term Debt Current FY24): $10,889 M -> Deuda Total FY24:  $96,639 M (26.48% de Activos)
+- Activos Corrientes (Current Assets FY23):  $143,566 M
+- Pasivos Corrientes (Current Liab FY23):    $145,308 M -> Current Ratio FY23: 0.988
+- Activos Corrientes (Current Assets FY24):  $152,987 M
+- Pasivos Corrientes (Current Liab FY24):    $176,392 M -> Current Ratio FY24: 0.867
+- Acciones Basicas (Basic Shares FY2023):    15,744.23 Millones
+- Acciones Basicas (Basic Shares FY2024):    15,343.83 Millones (Reduccion neta por recompras fisicas)
+- Margen Bruto FY2023:                       44.13% ($169,148 M / $383,285 M)
+- Margen Bruto FY2024:                       46.21% ($180,683 M / $391,035 M) (Expansion)
+- Ingresos (Revenue FY2023):                $383,285 M -> Rotacion Activos FY23: 1.087
+- Ingresos (Revenue FY2024):                $391,035 M -> Rotacion Activos FY24: 1.109 (Expansion)
+- Gasto en I+D (R&D Expense FY2024):         $31,370 M (8.90% sobre Activos Iniciales)
+- Inversion en CapEx (CapEx FY2024):          $9,447 M (2.68% sobre Activos Iniciales)
+- Gastos de Venta y Admin (SG&A FY2023):     $24,932 M
+- Gastos de Venta y Admin (SG&A FY2024):     $25,480 M (Crecimiento SG&A = +2.20% vs Ventas = +2.02%)
+
+EVALUACION PASO A PASO DEL PIOTROSKI F-SCORE REVISADO (APPLE FY2024):
+1. F_ROA:     ROA = $93,736 M / $352,583 M = +26.58% > 0            -> [PASA: 1 PTO]
+2. F_CFO:     CFO = $118,254 M > 0                                    -> [PASA: 1 PTO]
+3. F_dROA:    ROA24 (26.58%) vs ROA23 (27.50%) = -0.92% <= 0           -> [FALLA: 0 PTOS] (Impacto impositivo extraordinario UE)
+4. F_ACCRUAL: CFO ($118,254 M) > Net Income ($93,736 M)             -> [PASA: 1 PTO] (Caja pura > ganancia contable)
+5. F_dLEVER:  Deuda Total24 (26.48%) <= Deuda Total23 (31.54%)         -> [PASA: 1 PTO] (Desendeudamiento integral real)
+6. F_dLIQUID: CR24 (0.867) < CR23 (0.988)                               -> [FALLA: 0 PTOS] (Mayor pasivo operativo con proveedores)
+7. EQ_OFFER:  Basic Shares24 (15,343.8M) < Shares23 (15,744.2M)         -> [PASA: 1 PTO] (Recompra pura de acciones)
+8. F_dMARGIN: Margen Bruto24 (46.21%) > Margen Bruto23 (44.13%)         -> [PASA: 1 PTO] (Pricing power y mezcla de servicios)
+9. F_dTURN:   Rotacion24 (1.109) > Rotacion23 (1.087)                   -> [PASA: 1 PTO] (Mayor volumen por dolar de activo)
+--------------------------------------------------------------------------------
+PUNTUACION TOTAL PIOTROSKI F-SCORE APPLE (FY2024): 7 / 9 PUNTOS (SALUD EXCEPCIONAL)
+--------------------------------------------------------------------------------
+
+EVALUACION PASO A PASO DEL MOHANRAM G-SCORE REVISADO (APPLE FY2024 vs Mediana Hardware):
+1. G1 (ROA vs Mediana Sector ~6.5%):      ROA Apple = 26.58% > 6.5%      -> [PASA: 1 PTO]
+2. G2 (CFROA vs Mediana Sector ~8.2%):    CFROA Apple = 33.54% > 8.2%    -> [PASA: 1 PTO]
+3. G3 (CFO > Net Income):                 $118,254 M > $93,736 M     -> [PASA: 1 PTO]
+4. G4 (Estabilidad de ROA / Nivel Lider): ROA > P75 consistente          -> [PASA: 1 PTO]
+5. G5 (Estabilidad de Crecimiento):       Varianza baja y g sostenido    -> [PASA: 1 PTO]
+6. G6 (I+D / Activos vs Mediana ~5.5%):   R&D Apple = 8.90% > 5.5%       -> [PASA: 1 PTO] (Liderazgo en chips Apple Silicon e IA)
+7. G7 (Inversion Total Asset-Light):      R&D + CapEx / Activos > Med    -> [PASA: 1 PTO] (Reconocimiento de modelo Fabless)
+8. G8 (Apalancamiento Operativo SG&A):    Ventas (+2.02%) vs SG&A (+2.20%) -> [FALLA: 0 PTOS] (Leve incremento comercial en IA)
+--------------------------------------------------------------------------------
+PUNTUACION TOTAL MOHANRAM G-SCORE APPLE (FY2024): 7 / 8 PUNTOS (CRECIMIENTO DE ELITE)
+--------------------------------------------------------------------------------
+
+DIAGNOSTICO SINTETICO:
+Apple se consolida indiscutiblemente en el CUADRANTE I ('Compounder de Elite'):
+combinacion de maximo grado de solvencia y disciplina de capital (F-Score = 7/9)
+junto con una superioridad de rentabilidad e innovacion frente a sus competidores
+(G-Score = 7/8).
+
+================================================================================
+8. ARQUITECTURA DEL MOTOR Y PLAN DE IMPLEMENTACION
+================================================================================
+Una vez aprobado el diagnostico, se procedera con:
+1. financial_scoring_engine.py: Motor de calculo vectorizado sobre series 2016-2025 + LTM.
+2. config/industry_medians.json: Catalogo de medianas sectoriales por codigo SIC/GICS.
+3. excel_formatter.py: Nueva Hoja 7 'Scores Fundamentales' con formulas interactivas y formato condicional.
+4. generate_earnings_report.py: Seccion de Scorecards visuales en Word (.docx) y Markdown (.md).
+================================================================================
+FIN DE LA ESPECIFICACION REVISADA
+================================================================================

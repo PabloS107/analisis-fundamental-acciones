@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Terminal de Análisis Fundamental{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .tab-btn.active {
+            border-bottom: 3px solid #38bdf8;
+            color: #38bdf8;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shadow-lg">
+        <div class="flex items-center space-x-3">
+            <a href="{% url 'analytics:index' %}" class="flex items-center space-x-3">
+                <span class="text-2xl">🏛️</span>
+                <span class="font-bold text-lg text-white tracking-tight">Django Equity Terminal</span>
+            </a>
+            <span class="px-2 py-0.5 rounded text-xs bg-sky-500/20 text-sky-400 border border-sky-500/30">v1.0 Institutional</span>
+        </div>
+        <div class="flex items-center space-x-4 text-sm">
+            <a href="{% url 'analytics:index' %}" class="text-slate-300 hover:text-white transition">Compañías</a>
+            <a href="{% url 'analytics:company_detail' 'AAPL' %}" class="text-slate-300 hover:text-white transition">Apple (AAPL)</a>
+            <a href="{% url 'analytics:company_detail' 'DECK' %}" class="text-slate-300 hover:text-white transition">Deckers (DECK)</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="p-6 max-w-7xl mx-auto space-y-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        Plataforma Institucional de Análisis Fundamental · Desarrollado con Django 6.1 & Chart.js · Datos SEC EDGAR Auditados
+    </footer>
+</body>
+</html>

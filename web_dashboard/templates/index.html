@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Portafolio de Análisis Fundamental - Django{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="bg-gradient-to-r from-sky-950 via-slate-900 to-indigo-950 p-8 rounded-3xl border border-sky-500/30 shadow-2xl">
+        <h1 class="text-3xl font-black text-white">Centro de Inteligencia Bursátil</h1>
+        <p class="text-slate-300 mt-2 max-w-3xl">
+            Plataforma web desarrollada en <strong>Django</strong> para el análisis fundamental automatizado de renta variable.
+            Métricas auditadas con modelos de <em>Piotroski F-Score</em>, <em>Novy-Marx Gross Profitability</em>, 
+            <em>ROIC Ajustado por I+D (Damodaran)</em>, <em>Altman Z''</em> y <em>Reverse DCF</em>.
+        </p>
+    </div>
+
+    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+        <span>🏢 Empresas Auditadas Disponibles</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for c in companies %}
+        <a href="{% url 'analytics:company_detail' c.ticker %}" class="block bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-sky-500 transition shadow-xl group">
+            <div class="flex justify-between items-start mb-3">
+                <div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition">{{ c.name }}</h3>
+                    <div class="flex items-center space-x-2 mt-1.5">
+                        <span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">{{ c.ticker }}</span>
+                        {% if c.price != "-" %}
+                        <div class="flex items-center space-x-1.5 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/30">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="font-bold text-emerald-300 font-mono text-xs">{{ c.price }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <span class="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    {{ c.rating }}
+                </span>
+            </div>
+
+            <!-- Grid de Métricas Fundamentales -->
+            <div class="grid grid-cols-2 gap-2.5 mt-4 text-xs">
+                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
+                    <span class="text-slate-400 block text-[11px]">Piotroski F-Score</span>
+                    <span class="text-base font-bold text-white mt-0.5 block">{{ c.f_score }} / 9</span>
+                </div>
+                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
+                    <span class="text-slate-400 block text-[11px]">Novy-Marx GP/A</span>
+                    <span class="text-base font-bold text-purple-400 mt-0.5 block">{{ c.gpa }}</span>
+                </div>
+                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
+                    <span class="text-slate-400 block text-[11px]">ROIC Ajustado</span>
+                    <span class="text-base font-bold text-emerald-400 mt-0.5 block">{{ c.roic_adj }}</span>
+                    <span class="text-[10px] text-slate-500 block">Retorno sobre capital</span>
+                </div>
+                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
+                    <span class="text-slate-400 block text-[11px]">Coste Capital (WACC)</span>
+                    <span class="text-base font-bold text-sky-400 mt-0.5 block">{{ c.wacc }}</span>
+                    <span class="text-[10px] text-slate-500 block">Tasa de descuento</span>
+                </div>
+            </div>
+
+            <!-- Bloque Destacado: Comparativa ROIC vs WACC = Spread EVA -->
+            <div class="mt-2.5 p-2.5 bg-sky-950/30 rounded-xl border border-sky-500/30 text-xs flex justify-between items-center">
+                <div>
+                    <span class="text-slate-400 block text-[10px] font-semibold uppercase tracking-wider">Spread EVA (ROIC − WACC)</span>
+                    <span class="text-xs text-sky-300 font-medium">Creación de Valor Económico</span>
+                </div>
+                <span class="text-lg font-black {% if c.spread_positive %}text-emerald-400{% else %}text-rose-400{% endif %}">
+                    {{ c.spread }}
+                </span>
+            </div>
+
+            <!-- Footer con Altman Z y Moat -->
+            <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
+                <span class="text-sky-400 font-semibold group-hover:text-sky-300 transition flex items-center gap-1">
+                    Ver Informe Completo →
+                </span>
+                <div class="flex items-center space-x-2 text-[11px]">
+                    <span class="text-slate-400">Altman Z'': <strong class="text-slate-200">{{ c.z_score }}</strong></span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-emerald-400 font-semibold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">{{ c.moat_badge }}</span>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <div class="col-span-3 text-center py-12 text-slate-500">
+            No se encontraron empresas analizadas en data/processed/.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

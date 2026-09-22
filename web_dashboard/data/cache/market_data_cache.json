@@ -1,0 +1,166 @@
+{
+  "DECK": {
+    "ticker": "DECK",
+    "timestamp": "2026-09-22T19:36:28.940221+00:00",
+    "timestamp_epoch": 1790105793.8302274,
+    "is_offline": false,
+    "from_cache": false,
+    "price": 80.345,
+    "market_cap_usd_m": 10941.53,
+    "diluted_shares": 136181857,
+    "rf_10y": 0.04954,
+    "beta": 1.13,
+    "erp": 0.0475,
+    "raw_sources": {
+      "yahoo": {
+        "source": "Yahoo Finance",
+        "price": 80.3499984741211,
+        "market_cap": 10942212002.152977,
+        "beta": 1.15,
+        "rf_10y": 0.04967999935150146,
+        "shares_outstanding": 136181857,
+        "success": true
+      },
+      "cnbc": {
+        "source": "CNBC Quote Service",
+        "price": 80.34,
+        "market_cap": null,
+        "beta": 1.11,
+        "rf_10y": 0.049409999999999996,
+        "shares_outstanding": 136180000.0,
+        "success": true
+      }
+    },
+    "audit": {
+      "status": "VALIDATED_CONSENSUS",
+      "sources_used": [
+        "Yahoo Finance",
+        "CNBC Quote Service"
+      ],
+      "notes": "Precio validado por consenso: $80.34 (Yahoo: $80.35, CNBC: $80.34, \u0394=0.01%) | Market Cap calculado: $10,941.5M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.954% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.941%) | Beta validado: 1.13 (Yahoo: 1.15, CNBC: 1.11, \u0394=0.04)"
+    }
+  },
+  "AAPL": {
+    "ticker": "AAPL",
+    "timestamp": "2026-09-22T19:36:36.494253+00:00",
+    "timestamp_epoch": 1790105799.572883,
+    "is_offline": false,
+    "from_cache": false,
+    "price": 340.435,
+    "market_cap_usd_m": 4968369.67,
+    "diluted_shares": 14594180000,
+    "rf_10y": 0.04953,
+    "beta": 1.083,
+    "erp": 0.0475,
+    "raw_sources": {
+      "yahoo": {
+        "source": "Yahoo Finance",
+        "price": 340.4200134277344,
+        "market_cap": 4968150951566.772,
+        "beta": 1.085,
+        "rf_10y": 0.04967999935150146,
+        "shares_outstanding": 14594180000,
+        "success": true
+      },
+      "cnbc": {
+        "source": "CNBC Quote Service",
+        "price": 340.45,
+        "market_cap": null,
+        "beta": 1.08,
+        "rf_10y": 0.04939,
+        "shares_outstanding": 14590000000.0,
+        "success": true
+      }
+    },
+    "audit": {
+      "status": "VALIDATED_CONSENSUS",
+      "sources_used": [
+        "Yahoo Finance",
+        "CNBC Quote Service"
+      ],
+      "notes": "Precio validado por consenso: $340.44 (Yahoo: $340.42, CNBC: $340.45, \u0394=0.01%) | Market Cap calculado: $4,968,369.7M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.953% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.939%) | Beta validado: 1.08 (Yahoo: 1.08, CNBC: 1.08, \u0394=0.00)"
+    }
+  },
+  "MELI": {
+    "ticker": "MELI",
+    "timestamp": "2026-09-22T19:36:39.611964+00:00",
+    "timestamp_epoch": 1790105803.4442992,
+    "is_offline": false,
+    "from_cache": false,
+    "price": 1840.1275,
+    "market_cap_usd_m": 93288.58,
+    "diluted_shares": 50696802,
+    "rf_10y": 0.04954,
+    "beta": 1.306,
+    "erp": 0.0475,
+    "raw_sources": {
+      "yahoo": {
+        "source": "Yahoo Finance",
+        "price": 1840.125,
+        "market_cap": 93288452780.25,
+        "beta": 1.312,
+        "rf_10y": 0.04967999935150146,
+        "shares_outstanding": 50696802,
+        "success": true
+      },
+      "cnbc": {
+        "source": "CNBC Quote Service",
+        "price": 1840.13,
+        "market_cap": null,
+        "beta": 1.3,
+        "rf_10y": 0.049409999999999996,
+        "shares_outstanding": 50700000.0,
+        "success": true
+      }
+    },
+    "audit": {
+      "status": "VALIDATED_CONSENSUS",
+      "sources_used": [
+        "Yahoo Finance",
+        "CNBC Quote Service"
+      ],
+      "notes": "Precio validado por consenso: $1840.13 (Yahoo: $1840.12, CNBC: $1840.13, \u0394=0.00%) | Market Cap calculado: $93,288.6M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.954% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.941%) | Beta validado: 1.31 (Yahoo: 1.31, CNBC: 1.30, \u0394=0.01)"
+    }
+  },
+  "NU": {
+    "ticker": "NU",
+    "timestamp": "2026-09-22T19:36:43.452485+00:00",
+    "timestamp_epoch": 1790105807.2461772,
+    "is_offline": false,
+    "from_cache": false,
+    "price": 14.15,
+    "market_cap_usd_m": 68354.24,
+    "diluted_shares": 4830688659,
+    "rf_10y": 0.04955,
+    "beta": 0.94,
+    "erp": 0.0475,
+    "raw_sources": {
+      "yahoo": {
+        "source": "Yahoo Finance",
+        "price": 14.149999618530273,
+        "market_cap": 68354242682.08852,
+        "beta": 0.94,
+        "rf_10y": 0.04967999935150146,
+        "shares_outstanding": 4830688659,
+        "success": true
+      },
+      "cnbc": {
+        "source": "CNBC Quote Service",
+        "price": 14.15,
+        "market_cap": null,
+        "beta": 0.94,
+        "rf_10y": 0.049429999999999995,
+        "shares_outstanding": 4830000000.0,
+        "success": true
+      }
+    },
+    "audit": {
+      "status": "VALIDATED_CONSENSUS",
+      "sources_used": [
+        "Yahoo Finance",
+        "CNBC Quote Service"
+      ],
+      "notes": "Precio validado por consenso: $14.15 (Yahoo: $14.15, CNBC: $14.15, \u0394=0.00%) | Market Cap calculado: $68,354.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.955% (Yahoo ^TNX: 4.968%, CNBC US10Y: 4.943%) | Beta validado: 0.94 (Yahoo: 0.94, CNBC: 0.94, \u0394=0.00)"
+    }
+  }
+}

@@ -1,0 +1,750 @@
+{
+  "ticker": "DECK",
+  "cik": "0000910521",
+  "verification_timestamp": "2026-09-08T20:25:48.562354",
+  "fidelity_score_pct": 100.0,
+  "total_checks": 77,
+  "exact_matches": 66,
+  "reconciled_matches": 11,
+  "flagged_discrepancies": 0,
+  "overall_status": "CERTIFIED_VALID",
+  "detailed_reconciliations": [
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "LTM",
+      "sec_extracted_usd": 5527289000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": 5527288832,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "LTM",
+      "sec_extracted_usd": 1014840000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "LTM",
+      "sec_extracted_usd": 1193713000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": 1193713000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "LTM",
+      "sec_extracted_usd": 75905000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": 75905000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "LTM",
+      "sec_extracted_usd": 1117808000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": 1117808000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "LTM",
+      "sec_as_reported": 7.029999999999999,
+      "split_adjusted_canonical": 7.32,
+      "split_factor": 1.0,
+      "sec_facts_api": null,
+      "market_aggregator": 7.03,
+      "status": "RECONCILED",
+      "notes": "LTM EPS acumulado 12M reconciliado ($7.32 vs $7.03 en consenso). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "LTM",
+      "sec_as_reported_m": 138.56,
+      "split_adjusted_m": 138.56,
+      "split_factor": 1.0,
+      "sec_facts_m": null,
+      "market_aggregator_m": 136.18,
+      "status": "EXACT_MATCH",
+      "notes": "Conteo de acciones coincide al 100% con SEC oficial (138.56M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2026",
+      "sec_extracted_usd": 5472296000.0,
+      "sec_facts_api_usd": 5472296000.0,
+      "market_aggregator_usd": 5472296000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2026",
+      "sec_extracted_usd": 1024071000.0,
+      "sec_facts_api_usd": 1024071000.0,
+      "market_aggregator_usd": 1024071000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2026",
+      "sec_extracted_usd": 1181955000.0,
+      "sec_facts_api_usd": 1181955000.0,
+      "market_aggregator_usd": 1181955000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2026",
+      "sec_extracted_usd": 84623000.0,
+      "sec_facts_api_usd": 84623000.0,
+      "market_aggregator_usd": 84623000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2026",
+      "sec_extracted_usd": 1097332000.0,
+      "sec_facts_api_usd": 1097332000.0,
+      "market_aggregator_usd": 1097332000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2026",
+      "sec_as_reported": 7.02,
+      "split_adjusted_canonical": 7.02,
+      "split_factor": 1.0,
+      "sec_facts_api": 7.02,
+      "market_aggregator": 7.02,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($7.02). Coincidencia exacta con fiscal.ai/Tikr ($7.02 vs $7.02). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2026",
+      "sec_as_reported_m": 145.81,
+      "split_adjusted_m": 145.81,
+      "split_factor": 1.0,
+      "sec_facts_m": 145.81,
+      "market_aggregator_m": null,
+      "status": "EXACT_MATCH",
+      "notes": "Conteo de acciones coincide al 100% con SEC oficial (145.81M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2025",
+      "sec_extracted_usd": 4985612000.0,
+      "sec_facts_api_usd": 4985612000.0,
+      "market_aggregator_usd": 4985612000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2025",
+      "sec_extracted_usd": 966091000.0,
+      "sec_facts_api_usd": 966091000.0,
+      "market_aggregator_usd": 966091000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2025",
+      "sec_extracted_usd": 1044523000.0,
+      "sec_facts_api_usd": 1044523000.0,
+      "market_aggregator_usd": 1044523000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2025",
+      "sec_extracted_usd": 86171000.0,
+      "sec_facts_api_usd": 86171000.0,
+      "market_aggregator_usd": 86171000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2025",
+      "sec_extracted_usd": 958352000.0,
+      "sec_facts_api_usd": 958352000.0,
+      "market_aggregator_usd": 958352000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2025",
+      "sec_as_reported": 6.33,
+      "split_adjusted_canonical": 6.33,
+      "split_factor": 1.0,
+      "sec_facts_api": 6.33,
+      "market_aggregator": 6.33,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($6.33). Coincidencia exacta con fiscal.ai/Tikr ($6.33 vs $6.33). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2025",
+      "sec_as_reported_m": 152.67,
+      "split_adjusted_m": 152.67,
+      "split_factor": 1.0,
+      "sec_facts_m": 152.67,
+      "market_aggregator_m": null,
+      "status": "EXACT_MATCH",
+      "notes": "Conteo de acciones coincide al 100% con SEC oficial (152.67M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2024",
+      "sec_extracted_usd": 4287763000.0,
+      "sec_facts_api_usd": 4287763000.0,
+      "market_aggregator_usd": 4287763000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2024",
+      "sec_extracted_usd": 759563000.0,
+      "sec_facts_api_usd": 759563000.0,
+      "market_aggregator_usd": 759563000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2024",
+      "sec_extracted_usd": 1033184000.0,
+      "sec_facts_api_usd": 1033184000.0,
+      "market_aggregator_usd": 1033184000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2024",
+      "sec_extracted_usd": 89365000.0,
+      "sec_facts_api_usd": 89365000.0,
+      "market_aggregator_usd": 89365000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2024",
+      "sec_extracted_usd": 943819000.0,
+      "sec_facts_api_usd": 943819000.0,
+      "market_aggregator_usd": 943819000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2024",
+      "sec_as_reported": 29.16,
+      "split_adjusted_canonical": 4.86,
+      "split_factor": 6.0,
+      "sec_facts_api": 29.16,
+      "market_aggregator": 4.86,
+      "status": "RECONCILED",
+      "notes": "As-Reported coincide con SEC Facts ($29.16). Coincidencia exacta con fiscal.ai/Tikr ($4.86 vs $4.86). Reconciliado por Stock Split 6:1. "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2024",
+      "sec_as_reported_m": 26.05,
+      "split_adjusted_m": 156.29,
+      "split_factor": 6.0,
+      "sec_facts_m": 26.05,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 26.05M -> Ajustado: 156.29M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2023",
+      "sec_extracted_usd": 3627286000.0,
+      "sec_facts_api_usd": 3627286000.0,
+      "market_aggregator_usd": 3627286000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2023",
+      "sec_extracted_usd": 516822000.0,
+      "sec_facts_api_usd": 516822000.0,
+      "market_aggregator_usd": 516822000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2023",
+      "sec_extracted_usd": 537422000.0,
+      "sec_facts_api_usd": 537422000.0,
+      "market_aggregator_usd": 537422000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2023",
+      "sec_extracted_usd": 81025000.0,
+      "sec_facts_api_usd": 81025000.0,
+      "market_aggregator_usd": 81025000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2023",
+      "sec_extracted_usd": 456397000.0,
+      "sec_facts_api_usd": 456397000.0,
+      "market_aggregator_usd": 456397000.0,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). Coincidencia 100% con fiscal.ai/Tikr (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2023",
+      "sec_as_reported": 19.37,
+      "split_adjusted_canonical": 3.23,
+      "split_factor": 6.0,
+      "sec_facts_api": 19.37,
+      "market_aggregator": 3.228333,
+      "status": "RECONCILED",
+      "notes": "As-Reported coincide con SEC Facts ($19.37). Coincidencia exacta con fiscal.ai/Tikr ($3.23 vs $3.23). Reconciliado por Stock Split 6:1. "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2023",
+      "sec_as_reported_m": 26.69,
+      "split_adjusted_m": 160.12,
+      "split_factor": 6.0,
+      "sec_facts_m": 26.69,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 26.69M -> Ajustado: 160.12M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2022",
+      "sec_extracted_usd": 3150339000.0,
+      "sec_facts_api_usd": 3150339000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2022",
+      "sec_extracted_usd": 451949000.0,
+      "sec_facts_api_usd": 451949000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2022",
+      "sec_extracted_usd": 172353000.0,
+      "sec_facts_api_usd": 172353000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2022",
+      "sec_extracted_usd": 51017000.0,
+      "sec_facts_api_usd": 51017000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2022",
+      "sec_extracted_usd": 121336000.0,
+      "sec_facts_api_usd": 121336000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2022",
+      "sec_as_reported": 16.26,
+      "split_adjusted_canonical": 2.71,
+      "split_factor": 6.0,
+      "sec_facts_api": 16.26,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($16.26). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2022",
+      "sec_as_reported_m": 27.79,
+      "split_adjusted_m": 166.73,
+      "split_factor": 6.0,
+      "sec_facts_m": 27.79,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 27.79M -> Ajustado: 166.73M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2021",
+      "sec_extracted_usd": 2545641000.0,
+      "sec_facts_api_usd": 2545641000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2021",
+      "sec_extracted_usd": 382575000.0,
+      "sec_facts_api_usd": 382575000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2021",
+      "sec_extracted_usd": 596217000.0,
+      "sec_facts_api_usd": 596217000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2021",
+      "sec_extracted_usd": 32218000.0,
+      "sec_facts_api_usd": 32218000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2021",
+      "sec_extracted_usd": 563999000.0,
+      "sec_facts_api_usd": 563999000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2021",
+      "sec_as_reported": 13.47,
+      "split_adjusted_canonical": 2.24,
+      "split_factor": 6.0,
+      "sec_facts_api": 13.47,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($13.47). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2021",
+      "sec_as_reported_m": 28.41,
+      "split_adjusted_m": 170.44,
+      "split_factor": 6.0,
+      "sec_facts_m": 28.41,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 28.41M -> Ajustado: 170.44M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2020",
+      "sec_extracted_usd": 2132689000.0,
+      "sec_facts_api_usd": 2132689000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2020",
+      "sec_extracted_usd": 276142000.0,
+      "sec_facts_api_usd": 276142000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2020",
+      "sec_extracted_usd": 286334000.0,
+      "sec_facts_api_usd": 286334000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2020",
+      "sec_extracted_usd": 32455000.0,
+      "sec_facts_api_usd": 32455000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2020",
+      "sec_extracted_usd": 253879000.0,
+      "sec_facts_api_usd": 253879000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2020",
+      "sec_as_reported": 9.62,
+      "split_adjusted_canonical": 1.6,
+      "split_factor": 6.0,
+      "sec_facts_api": 9.62,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($9.62). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2020",
+      "sec_as_reported_m": 28.69,
+      "split_adjusted_m": 172.16,
+      "split_factor": 6.0,
+      "sec_facts_m": 28.69,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 28.69M -> Ajustado: 172.16M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2019",
+      "sec_extracted_usd": 2020437000.0,
+      "sec_facts_api_usd": 2020437000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2019",
+      "sec_extracted_usd": 264308000.0,
+      "sec_facts_api_usd": 264308000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2019",
+      "sec_extracted_usd": 359505000.0,
+      "sec_facts_api_usd": 359505000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2019",
+      "sec_extracted_usd": 29086000.0,
+      "sec_facts_api_usd": 29086000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2019",
+      "sec_extracted_usd": 330419000.0,
+      "sec_facts_api_usd": 330419000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2019",
+      "sec_as_reported": 8.84,
+      "split_adjusted_canonical": 1.47,
+      "split_factor": 6.0,
+      "sec_facts_api": 8.84,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($8.84). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2019",
+      "sec_as_reported_m": 29.9,
+      "split_adjusted_m": 179.42,
+      "split_factor": 6.0,
+      "sec_facts_m": 29.9,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 29.9M -> Ajustado: 179.42M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2018",
+      "sec_extracted_usd": 1903339000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2018",
+      "sec_extracted_usd": 114394000.0,
+      "sec_facts_api_usd": 114394000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2018",
+      "sec_extracted_usd": 327351000.0,
+      "sec_facts_api_usd": 327351000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2018",
+      "sec_extracted_usd": 34813000.0,
+      "sec_facts_api_usd": 34813000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2018",
+      "sec_extracted_usd": 292538000.0,
+      "sec_facts_api_usd": 292538000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2018",
+      "sec_as_reported": 3.58,
+      "split_adjusted_canonical": 0.6,
+      "split_factor": 6.0,
+      "sec_facts_api": 3.58,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($3.58). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2018",
+      "sec_as_reported_m": 32.0,
+      "split_adjusted_m": 191.98,
+      "split_factor": 6.0,
+      "sec_facts_m": 32.0,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 32.0M -> Ajustado: 191.98M)."
+    },
+    {
+      "item_name": "Ingresos Totales (Revenue)",
+      "period": "FY2017",
+      "sec_extracted_usd": 1790147000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "Beneficio Neto (Net Income)",
+      "period": "FY2017",
+      "sec_extracted_usd": -47327000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "Flujo de Caja Operativo (CFO)",
+      "period": "FY2017",
+      "sec_extracted_usd": 169654000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "Inversión en CapEx",
+      "period": "FY2017",
+      "sec_extracted_usd": 44499000.0,
+      "sec_facts_api_usd": 44499000.0,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Coincidencia 100% con SEC Company Facts (0.000% var). "
+    },
+    {
+      "item_name": "Flujo de Caja Libre (FCF)",
+      "period": "FY2017",
+      "sec_extracted_usd": 125155000.0,
+      "sec_facts_api_usd": null,
+      "market_aggregator_usd": null,
+      "status": "EXACT_MATCH",
+      "notes": "Cifras oficiales de la SEC y agregadores coinciden al 100%."
+    },
+    {
+      "item_name": "BPA Diluido (Diluted EPS)",
+      "period": "FY2017",
+      "sec_as_reported": 0.18,
+      "split_adjusted_canonical": -0.24,
+      "split_factor": 6.0,
+      "sec_facts_api": 0.18,
+      "market_aggregator": null,
+      "status": "EXACT_MATCH",
+      "notes": "As-Reported coincide con SEC Facts ($0.18). "
+    },
+    {
+      "item_name": "Acciones Diluidas",
+      "period": "FY2017",
+      "sec_as_reported_m": 32.35,
+      "split_adjusted_m": 194.13,
+      "split_factor": 6.0,
+      "sec_facts_m": 32.35,
+      "market_aggregator_m": null,
+      "status": "RECONCILED",
+      "notes": "Acciones normalizadas por split 6:1 (As-Reported: 32.35M -> Ajustado: 194.13M)."
+    }
+  ]
+}

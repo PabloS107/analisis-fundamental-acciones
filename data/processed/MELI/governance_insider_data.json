@@ -1,0 +1,1190 @@
+{
+  "ticker": "MELI",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-09-22T15:50:29.109959",
+  "scorecard": {
+    "governance_score": 90,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "MODERATE_BUYING",
+    "insider_sentiment_label": "Compras Abiertas Moderadas por Directivos",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 1293635.18,
+    "routine_10b5_sales_usd": 0.0,
+    "discretionary_sales_usd": 2408037.43,
+    "ratio_10b5_compliance_pct": 0.0,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 5 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-09-14",
+      "accession_number": "0001140361-26-036495",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On September 14, 2026, MercadoLibre, Inc. (the “Company” or “we”) closed its underwritten public offering of $1,000,000,000 aggregate principal amount of 5.850% Notes due 2036 (the “Notes”) pursuant to the Company’s Registration Statement on Form S-3 (File No. 333-291604). The Notes were issued pursuant to an indenture (the..."
+    },
+    {
+      "filing_date": "2026-09-10",
+      "accession_number": "0001140361-26-036136",
+      "items": [
+        "Item 1.01",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 1.01. Entry into a Material Definitive Agreement. On September 9, 2026, MercadoLibre, Inc. (the “Company”) and its subsidiaries MercadoLibre S.R.L., Mercado Livre Brasil Ltda., DeRemate.com de México, S. de R.L. de C.V., MP Agregador, S. de R.L. de C.V., MercadoLibre Chile Ltda. and MercadoLibre Colombia Ltda. entered into an underwriting agre..."
+    },
+    {
+      "filing_date": "2026-08-05",
+      "accession_number": "0001099590-26-000021",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On August 5, 2026, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2026-06-12",
+      "accession_number": "0001999371-26-012770",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The Annual Meeting of Stockholders (the “Annual Meeting”) of MercadoLibre, Inc. (the “Company”) was held on June 9, 2026 for the following purposes: To elect the nominees for Class I directors recommended by the Company’s board of directors, to serve until the 2029 Annual Meeting of Sto..."
+    },
+    {
+      "filing_date": "2026-05-07",
+      "accession_number": "0001099590-26-000014",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On May 7, 2026, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2026-04-03",
+      "accession_number": "0001999371-26-007656",
+      "items": [
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Establishment of Performance Goals under the 2026 Bonus Program"
+    },
+    {
+      "filing_date": "2026-02-24",
+      "accession_number": "0001099590-26-000003",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On February 24, 2026, MercadoLibre, Inc. released its financial results for the fourth-quarter and year ended December 31, 2025 on its investor relations website at https://investor.mercadolibre.com. A copy of these is attached as Exhibit 99.1 and incorporated herein by reference. The inform..."
+    },
+    {
+      "filing_date": "2025-12-09",
+      "accession_number": "0001140361-25-045035",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On December 9, 2025, MercadoLibre, Inc. (the “Company” or “we”) closed its underwritten public offering of $750,000,000 aggregate principal amount of 4.900% Notes due 2033 (the “Notes”) pursuant to the Company’s Registration Statement on Form S-3 (File No. 333-291604). The Notes were issued pursuant to an indenture (the “In..."
+    },
+    {
+      "filing_date": "2025-12-05",
+      "accession_number": "0001140361-25-044457",
+      "items": [
+        "Item 1.01",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 1.01. Entry into a Material Definitive Agreement. On December 4, 2025, MercadoLibre, Inc. (the “Company”) and its subsidiaries MercadoLibre S.R.L., eBazar.com.br Ltda., Mercado Pago Instituição de Pagamento Ltda, DeRemate.com de México, S. de R.L. de C.V., MPFS, S. de R.L. de C.V., MP Agregador, S. de R.L. de C.V., MercadoLibre Chile Ltda. and..."
+    },
+    {
+      "filing_date": "2025-10-29",
+      "accession_number": "0001099590-25-000048",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On October 29, 2025, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2025-09-16",
+      "accession_number": "0001099590-25-000046",
+      "items": [
+        "Item 1.01",
+        "Item 2.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Creación de una Obligación Financiera Directa o Fuera de Balance / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. On September 12, 2025, MercadoLibre, Inc. (the “Company”), as borrower, entered into Amendment No. 1 to the Amended and Restated Revolving Credit Agreement (the “First Amendment”) with the lenders party thereto (the “Lenders”), Citibank, N.A. as administrative agent (the “Administrative Agent”) ..."
+    },
+    {
+      "filing_date": "2025-08-04",
+      "accession_number": "0001099590-25-000041",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On August 4, 2025, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2025-08-01",
+      "accession_number": "0001099590-25-000038",
+      "items": [
+        "Item 8.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+      "diagnostic": "Hechos corporativos diversos de interés general.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events Adoption of Compensation Plan for Independent Directors On July 29, 2025, the Board of Directors (the “Board”) of MercadoLibre, Inc. (the “Company”), upon the recommendation of the Compensation Committee of the Board, approved compensation for independent directors, as defined by the Board, for service during the one year per..."
+    },
+    {
+      "filing_date": "2025-06-18",
+      "accession_number": "0001999371-25-008001",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The Annual Meeting of Stockholders (the “Annual Meeting”) of MercadoLibre, Inc. (the “Company”) was held on June 17, 2025 for the following purposes: ■ To elect the nominees for Class I and Class III directors recommended by the Company’s board of directors, to serve until the 2026 and ..."
+    },
+    {
+      "filing_date": "2025-05-21",
+      "accession_number": "0001999371-25-006530",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02. Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On May 16, 2025, the board of directors (the “Board”) of MercadoLibre, Inc. (the “Company”) approved the transition of Marcos Galperin, the Company’s President and Chief Executive Officer, to ..."
+    },
+    {
+      "filing_date": "2025-05-07",
+      "accession_number": "0001099590-25-000025",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On May 7, 2025, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2025-04-18",
+      "accession_number": "0001099590-25-000014",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors: Appointment of Certain Officers: Compensatory Arrangements of Certain Officers. Establishment of Performance Goals under the 2025 Bonus Program On April 14, 2025, the Board of Directors (the “Board”) of MercadoLibre, Inc. (the “Company”) established the performance goals f..."
+    },
+    {
+      "filing_date": "2025-02-20",
+      "accession_number": "0001099590-25-000004",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On February 20, 2025, MercadoLibre, Inc. released its financial results for the fourth-quarter and year ended December 31, 2024 on its investor relations website at https://investor.mercadolibre.com. A copy of these is attached as Exhibit 99.1 and incorporated herein by reference. The inform..."
+    },
+    {
+      "filing_date": "2024-11-06",
+      "accession_number": "0001099590-24-000039",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On November 6, 2024, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2024-10-01",
+      "accession_number": "0001999371-24-012775",
+      "items": [
+        "Item 1.01",
+        "Item 2.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Creación de una Obligación Financiera Directa o Fuera de Balance / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01. Entry into a Material Definitive Agreement. On September 27, 2024, MercadoLibre, Inc. (the “Company”), as borrower, entered into a $400,000,0000 amended and restated revolving credit agreement (the “Amended and Restated Credit Agreement”) with the lenders party thereto (the “Lenders”), Citibank, N.A. as administrative agent (the “Adminis..."
+    },
+    {
+      "filing_date": "2024-09-16",
+      "accession_number": "0001099590-24-000030",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. The Board of Directors (the “Board”) of MercadoLibre, Inc. (the “Company”) is saddened to announce that Mr. Mario Vázquez, one of the directors of the Company, died on August 3, 2024. Mr. Vázqu..."
+    },
+    {
+      "filing_date": "2024-08-01",
+      "accession_number": "0001099590-24-000023",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On August 1, 2024, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2024-06-06",
+      "accession_number": "0001628280-24-027114",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The Annual Meeting of Stockholders (the “Annual Meeting”) of MercadoLibre, Inc. (the “Company”) was held on June 5, 2024 for the following purposes: ■ to elect the nominees for Class II directors recommended by the Company’s board of directors, to serve until the 2027 Annual Meetings of..."
+    },
+    {
+      "filing_date": "2024-05-02",
+      "accession_number": "0001099590-24-000015",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On May 2, 2024, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
+    {
+      "filing_date": "2024-04-23",
+      "accession_number": "0001099590-24-000011",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors: Appointment of Certain Officers: Compensatory Arrangements of Certain Officers. Establishment of Performance Goals under the 2024 Bonus Program On April 18, 2024, the Board of Directors (the “Board”) of MercadoLibre, Inc. (the “Company”) established the performance goals f..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 1293635.18,
+      "total_open_market_buys_shares": 781,
+      "total_10b5_sales_usd": 0.0,
+      "total_10b5_sales_shares": 0,
+      "total_discretionary_sales_usd": 2408037.43,
+      "total_discretionary_sales_shares": 1186,
+      "total_grants_shares": 2325,
+      "ratio_10b5_vs_discretionary_pct": 0.0,
+      "active_insiders_count": 12,
+      "insiders_breakdown": {
+        "Marcelo Melamud": {
+          "position": "SVP - Chief Accounting Officer",
+          "buys_usd": 300078.7268,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 181,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Stelleo Tolda": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 503778.48000000004,
+          "shares_bought": 0,
+          "shares_sold": 246,
+          "grants": 166,
+          "tx_count": 4
+        },
+        "Henrique Vasoncelos Dubugras": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 1713778.3,
+          "shares_bought": 0,
+          "shares_sold": 845,
+          "grants": 331,
+          "tx_count": 5
+        },
+        "Emiliano Calemzuk": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 190480.65,
+          "shares_bought": 0,
+          "shares_sold": 95,
+          "grants": 331,
+          "tx_count": 6
+        },
+        "Alejandro Nicolas Aguzin": {
+          "position": "Director",
+          "buys_usd": 993556.45,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 600,
+          "shares_sold": 0,
+          "grants": 331,
+          "tx_count": 5
+        },
+        "Susan Segal": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 331,
+          "tx_count": 6
+        },
+        "Richard A Sanders": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 331,
+          "tx_count": 4
+        },
+        "Martin R Lawson": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 158,
+          "tx_count": 2
+        },
+        "Gimenez Osvaldo": {
+          "position": "Fintech President",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "Marcos Galperin": {
+          "position": "Chairman of the Board",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "Mario Vazquez": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 173,
+          "tx_count": 2
+        },
+        "Merhy Andrea Mayumi Petroni": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 173,
+          "tx_count": 2
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-06-15",
+        "insider": "Marcelo Melamud",
+        "position": "SVP - Chief Accounting Officer",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 124,
+        "price": 1604.62,
+        "total_usd": 199999.84,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Stelleo Tolda",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Henrique Vasoncelos Dubugras",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Susan Segal",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Richard A Sanders",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-12",
+        "insider": "Martin R Lawson",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 94,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-05-26",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 95,
+        "price": 1655.01,
+        "total_usd": 157225.95,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-05-26",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 505,
+        "price": 1656.1,
+        "total_usd": 836330.5,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-03-02",
+        "insider": "Marcelo Melamud",
+        "position": "SVP - Chief Accounting Officer",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 57,
+        "price": 1755.77,
+        "total_usd": 100078.89,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2025-12-15",
+        "insider": "Henrique Vasoncelos Dubugras",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 845,
+        "price": 2028.14,
+        "total_usd": 1713778.3,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2025-12-12",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 45,
+        "price": 2027.37,
+        "total_usd": 91231.65,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2025-12-11",
+        "insider": "Stelleo Tolda",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 246,
+        "price": 2047.88,
+        "total_usd": 503778.48,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Henrique Vasoncelos Dubugras",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Susan Segal",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Stelleo Tolda",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 8,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Stelleo Tolda",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Richard A Sanders",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "insider": "Martin R Lawson",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 64,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-12-02",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 50,
+        "price": 1984.98,
+        "total_usd": 99249.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Susan Segal",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Mario Vazquez",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Richard A Sanders",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Merhy Andrea Mayumi Petroni",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Henrique Vasoncelos Dubugras",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2024-06-13",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 75,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Emiliano Calemzuk",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Richard A Sanders",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Alejandro Nicolas Aguzin",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Henrique Vasoncelos Dubugras",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Merhy Andrea Mayumi Petroni",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Mario Vazquez",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2023-06-13",
+        "insider": "Susan Segal",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 98,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 5,
+      "total_shares_proposed": 282909,
+      "total_value_proposed_usd": 601477399.39,
+      "notices_under_10b5": 0,
+      "notices_discretionary": 5,
+      "notices_with_anomalies_count": 5
+    },
+    "notices": [
+      {
+        "filing_date": "2025-12-12",
+        "person_selling": "Dubugras Henrique Vasoncelos",
+        "shares_to_sell": 845,
+        "market_value_usd": 1706739.45,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-05-28",
+        "person_selling": "Meliga No.1 Limited Partnership",
+        "shares_to_sell": 32014,
+        "market_value_usd": 81658429.94,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-02-26",
+        "person_selling": "Meliga No.1 Limited Partnership (MELI)",
+        "shares_to_sell": 150000,
+        "market_value_usd": 329646000.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-11-27",
+        "person_selling": "Calemzuk Emiliano",
+        "shares_to_sell": 50,
+        "market_value_usd": 104230.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2024-08-13",
+        "person_selling": "Meliga No.1 Limited Partnership (MELI)",
+        "shares_to_sell": 100000,
+        "market_value_usd": 188362000.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2025-12-12",
+        "seller": "Dubugras Henrique Vasoncelos",
+        "market_value_usd": 1706739.45,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-05-28",
+        "seller": "Meliga No.1 Limited Partnership",
+        "market_value_usd": 81658429.94,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-02-26",
+        "seller": "Meliga No.1 Limited Partnership (MELI)",
+        "market_value_usd": 329646000.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-11-27",
+        "seller": "Calemzuk Emiliano",
+        "market_value_usd": 104230.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2024-08-13",
+        "seller": "Meliga No.1 Limited Partnership (MELI)",
+        "market_value_usd": 188362000.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}

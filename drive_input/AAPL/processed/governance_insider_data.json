@@ -1,0 +1,1518 @@
+{
+  "ticker": "AAPL",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-09-10T20:33:16.881311",
+  "scorecard": {
+    "governance_score": 85,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "OPPORTUNISTIC_SELLING",
+    "insider_sentiment_label": "Venta Discrecional Significativa (Toma de Beneficios)",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 0.0,
+    "routine_10b5_sales_usd": 84830503.67,
+    "discretionary_sales_usd": 87758377.27,
+    "ratio_10b5_compliance_pct": 49.2,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 20 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-09-01",
+      "accession_number": "0001140361-26-035325",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. Apple Inc. (“Apple”) previously announced its Chief Executive Officer transition plan in its Current Report on Form 8-K filed on April 20, 2026 (the “Original Form 8-K”). This Amendment to the ..."
+    },
+    {
+      "filing_date": "2026-07-30",
+      "accession_number": "0000320193-26-000018",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 27, 2026. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed” ..."
+    },
+    {
+      "filing_date": "2026-04-30",
+      "accession_number": "0000320193-26-000011",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On April 30, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its second fiscal quarter ended March 28, 2026. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “file..."
+    },
+    {
+      "filing_date": "2026-04-20",
+      "accession_number": "0001140361-26-015711",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain On April 20, 2026, Apple Inc. (“Apple”) announced that Tim Cook will transition from his role as Chief Executive Officer to Executive Chair of Apple’s Board of Directors (the “Board”), effective Septembe..."
+    },
+    {
+      "filing_date": "2026-02-24",
+      "accession_number": "0001140361-26-006577",
+      "items": [
+        "Item 5.07",
+        "Item 9.01"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The 2026 Annual Meeting of Shareholders (the “Annual Meeting”) of Apple Inc. (“Apple”) was held onFebruary 24, 2026. At the Annual Meeting, Apple’s shareholders voted on the following five proposals and cast their votes as described below. The individuals listed below were elected at th..."
+    },
+    {
+      "filing_date": "2026-01-29",
+      "accession_number": "0000320193-26-000005",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On January 29, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its first fiscal quarter ended December 27, 2025. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “..."
+    },
+    {
+      "filing_date": "2026-01-02",
+      "accession_number": "0001140361-26-000199",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. As part of Apple Inc.’s (“Apple’s”) previously announced Principal Accounting Officer transition plan, Apple’s Board of Directors appointed Ben Borders, 45, as Apple’s Principal Accounting Offi..."
+    },
+    {
+      "filing_date": "2025-12-05",
+      "accession_number": "0001140361-25-044561",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On December 4, 2025, Apple Inc. (“Apple”) announced that Jennifer Newstead will become Apple’s general counsel on March 1, 2026, following a transition of duties from Kate Adams, who has served..."
+    },
+    {
+      "filing_date": "2025-10-30",
+      "accession_number": "0000320193-25-000077",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 30, 2025, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its fourth fiscal quarter ended September 27, 2025. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed..."
+    },
+    {
+      "filing_date": "2025-07-31",
+      "accession_number": "0000320193-25-000071",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 31, 2025, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 28, 2025. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed” ..."
+    },
+    {
+      "filing_date": "2025-07-25",
+      "accession_number": "0001140361-25-027340",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. As part of Apple Inc.’s (“Apple’s”) previously announced Chief Operating Officer transition plan, Apple’s Board of Directors appointed Sabih Khan, 58, as Apple’s Chief Operating Officer, effect..."
+    },
+    {
+      "filing_date": "2025-07-09",
+      "accession_number": "0001140361-25-025275",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On July 8, 2025, Apple Inc. (“Apple”) announced that Jeff Williams will transition his role as Chief Operating Officer later this month to Sabih Khan, Apple’s Senior Vice President of Operation..."
+    },
+    {
+      "filing_date": "2025-05-12",
+      "accession_number": "0001140361-25-018400",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events. On May 12, 2025, Apple Inc. (“Apple”) consummated the issuance and sale of $1,500,000,000 aggregate principal amount of its 4.000% Notes due 2028 (the “2028 Notes”), $1,000,000,000 aggregate principal amount of its 4.200% Notes due 2030 (the “2030 Notes”), $1,000,000,000 aggregate principal amount of its 4.500% Notes due 203..."
+    },
+    {
+      "filing_date": "2025-05-01",
+      "accession_number": "0000320193-25-000055",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 1, 2025, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its second fiscal quarter ended March 29, 2025. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed” ..."
+    },
+    {
+      "filing_date": "2025-02-25",
+      "accession_number": "0001140361-25-005876",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The 2025 Annual Meeting of Shareholders (the “Annual Meeting”) of Apple Inc. (“Apple”) was held onFebruary 25, 2025. At the Annual Meeting, Apple’s shareholders voted on the following seven proposals and cast their votes as described below. The individuals listed below were elected at t..."
+    },
+    {
+      "filing_date": "2025-01-30",
+      "accession_number": "0000320193-25-000007",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On January 30, 2025, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its first fiscal quarter ended December 28, 2024. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “..."
+    },
+    {
+      "filing_date": "2025-01-03",
+      "accession_number": "0001140361-25-000228",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. As part of Apple Inc.’s (“Apple’s”) previously announced Chief Financial Officer transition plan, Apple’s Board of Directors appointed Kevan Parekh, 53, as Apple’s Senior Vice President, Chief ..."
+    },
+    {
+      "filing_date": "2024-10-31",
+      "accession_number": "0000320193-24-000120",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 31, 2024, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its fourth fiscal quarter ended September 28, 2024. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed..."
+    },
+    {
+      "filing_date": "2024-09-10",
+      "accession_number": "0001140361-24-040659",
+      "items": [
+        "Item 7.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure. On August 30, 2016, the European Commission (the “Commission”) announced its decision that Ireland granted state aid to Apple Inc. (the “Company”) by providing tax opinions in 1991 and 2007 concerning the tax allocation of profits of the Irish branches of two subsidiaries of the Company (the “State Aid Decision”)..."
+    },
+    {
+      "filing_date": "2024-08-26",
+      "accession_number": "0001140361-24-038601",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Transición en la Dirección General (CEO): Relevo formal de liderazgo ejecutivo registrado ante la SEC. Verificar continuidad estratégica y alineación de incentivos.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. (b),(c) On August 26, 2024, Apple Inc. (“Apple”) announced that Chief Financial Officer Luca Maestri will transition from his role on January 1, 2025. Mr. Maestri will continue to lead Corporat..."
+    },
+    {
+      "filing_date": "2024-08-23",
+      "accession_number": "0001140361-24-038403",
+      "items": [
+        "Item 5.03",
+        "Item 9.01"
+      ],
+      "title": "Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.03 Amendments to Articles of Incorporation or Bylaws; Change in Fiscal Year. On August 20, 2024, the Board of Directors of Apple Inc. (“Apple”) approved and adopted amended and restated bylaws (the “Amended and Restated Bylaws”), which became effective the same day, to define certain terms, clarify or limit the scope of information and discl..."
+    },
+    {
+      "filing_date": "2024-08-01",
+      "accession_number": "0000320193-24-000080",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On August 1, 2024, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its third fiscal quarter ended June 29, 2024. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed”..."
+    },
+    {
+      "filing_date": "2024-05-03",
+      "accession_number": "0001140361-24-024352",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure. On April 23, 2024, the U.S. District Court for the Northern District of California (the “District Court”) issued an order granting preliminary approval of the proposed settlement of the consolidated derivative lawsuits captionedIn re Apple Inc. Stockholder Derivative Litigation, Case No. 4:19-cv-05153-YGR (N.D. C..."
+    },
+    {
+      "filing_date": "2024-05-02",
+      "accession_number": "0000320193-24-000067",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 2, 2024, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its second fiscal quarter ended March 30, 2024. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed” ..."
+    },
+    {
+      "filing_date": "2024-02-28",
+      "accession_number": "0001140361-24-010155",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The 2024 Annual Meeting of Shareholders (the “Annual Meeting”) of Apple Inc. (“Apple”) was held onFebruary 28, 2024. At the Annual Meeting, Apple’s shareholders voted on the following eight proposals and cast their votes as described below. The individuals listed below were elected at t..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 0.0,
+      "total_open_market_buys_shares": 0,
+      "total_10b5_sales_usd": 84830503.67,
+      "total_10b5_sales_shares": 329369,
+      "total_discretionary_sales_usd": 87758377.27,
+      "total_discretionary_sales_shares": 303752,
+      "total_grants_shares": 0,
+      "ratio_10b5_vs_discretionary_pct": 49.2,
+      "active_insiders_count": 16,
+      "insiders_breakdown": {
+        "Jennifer Newstead": {
+          "position": "SVP, GC and Government Affairs",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 2245141.54,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 7194,
+          "grants": 0,
+          "tx_count": 7
+        },
+        "John Ternus": {
+          "position": "CEO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "Ben Borders": {
+          "position": "Principal Accounting Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 403696.24,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 1390,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Arthur D Levinson": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 86740722.31,
+          "shares_bought": 0,
+          "shares_sold": 300000,
+          "grants": 0,
+          "tx_count": 4
+        },
+        "Kevan Parekh": {
+          "position": "Senior Vice President, CFO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 1460637.48,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 5733,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Deirdre O'Brien": {
+          "position": "Senior Vice President",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 18731953.52,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 73015,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Sabih Khan": {
+          "position": "COO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Timothy D Cook": {
+          "position": "Chief Executive Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 49887920.95,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 194912,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Susan Wagner": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Ronald D Sugar": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Monica C Lozano": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Andrea Jung": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Alex Gorsky": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Wanda M Austin": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Katherine L. Adams": {
+          "position": "SVP, GC and Secretary",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 12101153.940000001,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 47125,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Chris Kondo": {
+          "position": "Principal Accounting Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 1017654.9600000001,
+          "shares_bought": 0,
+          "shares_sold": 3752,
+          "grants": 0,
+          "tx_count": 2
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-09-10",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1438,
+        "price": 317.23,
+        "total_usd": 456176.74,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-09-03",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1439,
+        "price": 317.01,
+        "total_usd": 456177.39,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-08-27",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1439,
+        "price": 310.95,
+        "total_usd": 447457.05,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-08-20",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1439,
+        "price": 307.49,
+        "total_usd": 442478.11,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-08-13",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1439,
+        "price": 307.75,
+        "total_usd": 442852.25,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-06-17",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 116,
+        "price": 295.14,
+        "total_usd": 34236.24,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-05-29",
+        "insider": "Arthur D Levinson",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 50000,
+        "price": 311.02,
+        "total_usd": 15551000.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-12",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1274,
+        "price": 290.0,
+        "total_usd": 369460.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-05-08",
+        "insider": "Arthur D Levinson",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 149527,
+        "price": 284.57,
+        "total_usd": 42550898.39,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-08",
+        "insider": "Arthur D Levinson",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 100473,
+        "price": 285.04,
+        "total_usd": 28638823.92,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-27",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President, CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1534,
+        "price": 275.0,
+        "total_usd": 421850.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 20338,
+        "price": 255.12,
+        "total_usd": 5188630.56,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 9664,
+        "price": 255.82,
+        "total_usd": 2472244.48,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 5087,
+        "price": 251.25,
+        "total_usd": 1278108.75,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 9147,
+        "price": 252.11,
+        "total_usd": 2306050.17,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1878,
+        "price": 253.13,
+        "total_usd": 475378.14,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 16083,
+        "price": 254.37,
+        "total_usd": 4091032.71,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 28188,
+        "price": 255.17,
+        "total_usd": 7192731.96,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-04-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 4566,
+        "price": 256.0,
+        "total_usd": 1168896.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-11-12",
+        "insider": "Chris Kondo",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 3752,
+        "price": 271.23,
+        "total_usd": 1017654.96,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2025-10-17",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President, CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 500,
+        "price": 245.89,
+        "total_usd": 122945.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-17",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President, CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1665,
+        "price": 247.04,
+        "total_usd": 411321.6,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-17",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President, CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1534,
+        "price": 247.82,
+        "total_usd": 380155.88,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-17",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President, CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 500,
+        "price": 248.73,
+        "total_usd": 124365.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 8395,
+        "price": 254.83,
+        "total_usd": 2139297.85,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 22524,
+        "price": 255.86,
+        "total_usd": 5762990.64,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 39293,
+        "price": 256.62,
+        "total_usd": 10083369.66,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Timothy D Cook",
+        "position": "Chief Executive Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 59751,
+        "price": 257.57,
+        "total_usd": 15390065.07,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 41273,
+        "price": 257.36,
+        "total_usd": 10622019.28,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1740,
+        "price": 258.08,
+        "total_usd": 449059.2,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Katherine L. Adams",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 3500,
+        "price": 254.83,
+        "total_usd": 891905.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Katherine L. Adams",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 8100,
+        "price": 255.96,
+        "total_usd": 2073276.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Katherine L. Adams",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 13974,
+        "price": 256.6,
+        "total_usd": 3585728.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2025-10-03",
+        "insider": "Katherine L. Adams",
+        "position": "SVP, GC and Secretary",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 21551,
+        "price": 257.54,
+        "total_usd": 5550244.54,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 20,
+      "total_shares_proposed": 1158750,
+      "total_value_proposed_usd": 298690388.19,
+      "notices_under_10b5": 15,
+      "notices_discretionary": 5,
+      "notices_with_anomalies_count": 20
+    },
+    "notices": [
+      {
+        "filing_date": "2026-08-11",
+        "person_selling": "JENNIFER NEWSTEAD",
+        "shares_to_sell": 8632,
+        "market_value_usd": 2660900.32,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-05-27",
+        "person_selling": "LEVINSON ARTHUR D",
+        "shares_to_sell": 50000,
+        "market_value_usd": 15551085.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-06",
+        "person_selling": "LEVINSON ARTHUR D",
+        "shares_to_sell": 250000,
+        "market_value_usd": 71190164.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "person_selling": "KATHERINE L ADAMS",
+        "shares_to_sell": 43000,
+        "market_value_usd": 12039492.6,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-23",
+        "person_selling": "KEVAN PAREKH",
+        "shares_to_sell": 1534,
+        "market_value_usd": 419042.78,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-02",
+        "person_selling": "O'BRIEN DEIRDRE",
+        "shares_to_sell": 30002,
+        "market_value_usd": 7660977.7,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-02",
+        "person_selling": "COOK TIMOTHY D",
+        "shares_to_sell": 64949,
+        "market_value_usd": 16512062.21,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-16",
+        "person_selling": "KEVAN PAREKH",
+        "shares_to_sell": 4199,
+        "market_value_usd": 1046978.66,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-02",
+        "person_selling": "KATHERINE L ADAMS",
+        "shares_to_sell": 47125,
+        "market_value_usd": 12038081.25,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-02",
+        "person_selling": "COOK TIMOTHY D",
+        "shares_to_sell": 129963,
+        "market_value_usd": 33375525.1,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-02",
+        "person_selling": "O'BRIEN DEIRDRE",
+        "shares_to_sell": 43013,
+        "market_value_usd": 11070896.7,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-02",
+        "person_selling": "COOK TIMOTHY D",
+        "shares_to_sell": 129962,
+        "market_value_usd": 33375268.3,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-02",
+        "person_selling": "WILLIAMS JEFFREY E",
+        "shares_to_sell": 43013,
+        "market_value_usd": 11036060.48,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-08-28",
+        "person_selling": "LEVINSON ARTHUR D",
+        "shares_to_sell": 90000,
+        "market_value_usd": 20885966.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-08-08",
+        "person_selling": "O'BRIEN DEIRDRE",
+        "shares_to_sell": 34821,
+        "market_value_usd": 7772064.61,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-04-23",
+        "person_selling": "KEVAN PAREKH",
+        "shares_to_sell": 4570,
+        "market_value_usd": 912811.8,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-04-02",
+        "person_selling": "KATHERINE L ADAMS",
+        "shares_to_sell": 38822,
+        "market_value_usd": 8664682.18,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-04-02",
+        "person_selling": "WILLIAMS JEFFREY E",
+        "shares_to_sell": 35493,
+        "market_value_usd": 7950684.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-04-02",
+        "person_selling": "COOK TIMOTHY D",
+        "shares_to_sell": 108136,
+        "market_value_usd": 24184497.5,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-02-03",
+        "person_selling": "LEVINSON ARTHUR D",
+        "shares_to_sell": 1516,
+        "market_value_usd": 343147.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2026-08-11",
+        "seller": "JENNIFER NEWSTEAD",
+        "market_value_usd": 2660900.32,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-27",
+        "seller": "LEVINSON ARTHUR D",
+        "market_value_usd": 15551085.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-06",
+        "seller": "LEVINSON ARTHUR D",
+        "market_value_usd": 71190164.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-05",
+        "seller": "KATHERINE L ADAMS",
+        "market_value_usd": 12039492.6,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-23",
+        "seller": "KEVAN PAREKH",
+        "market_value_usd": 419042.78,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-02",
+        "seller": "O'BRIEN DEIRDRE",
+        "market_value_usd": 7660977.7,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-02",
+        "seller": "COOK TIMOTHY D",
+        "market_value_usd": 16512062.21,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-16",
+        "seller": "KEVAN PAREKH",
+        "market_value_usd": 1046978.66,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-02",
+        "seller": "KATHERINE L ADAMS",
+        "market_value_usd": 12038081.25,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-02",
+        "seller": "COOK TIMOTHY D",
+        "market_value_usd": 33375525.1,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-02",
+        "seller": "O'BRIEN DEIRDRE",
+        "market_value_usd": 11070896.7,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-02",
+        "seller": "COOK TIMOTHY D",
+        "market_value_usd": 33375268.3,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-10-02",
+        "seller": "WILLIAMS JEFFREY E",
+        "market_value_usd": 11036060.48,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-08-28",
+        "seller": "LEVINSON ARTHUR D",
+        "market_value_usd": 20885966.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-08-08",
+        "seller": "O'BRIEN DEIRDRE",
+        "market_value_usd": 7772064.61,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-04-23",
+        "seller": "KEVAN PAREKH",
+        "market_value_usd": 912811.8,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-04-02",
+        "seller": "KATHERINE L ADAMS",
+        "market_value_usd": 8664682.18,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-04-02",
+        "seller": "WILLIAMS JEFFREY E",
+        "market_value_usd": 7950684.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-04-02",
+        "seller": "COOK TIMOTHY D",
+        "market_value_usd": 24184497.5,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-02-03",
+        "seller": "LEVINSON ARTHUR D",
+        "market_value_usd": 343147.0,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}
