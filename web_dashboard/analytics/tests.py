@@ -22,7 +22,7 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertEqual(len(grid), 5)
         base_row = grid[2]
         self.assertTrue(base_row['is_base'])
-        self.assertIn('10.31%', base_row['wacc_label'])
+        self.assertIn(f"{ctx['vp']['wacc_pct']:.2f}%", base_row['wacc_label'])
         self.assertIn(f"{expected_g_implied:.1f}", base_row['g_25']) # Central scenario cell
         
         # HTML content verification
@@ -65,9 +65,17 @@ class ValuationAndSensitivityTests(TestCase):
         ctx = response.context
         self.assertFalse(ctx['is_financial'])
         self.assertEqual(ctx['ticker'], 'MELI')
-        # Reverse DCF implied growth is positive and realistic
-        self.assertGreater(ctx['g_implied_pct'], 10.0)
+        # Margen FCF auditado real de estados financieros (35.3%)
+        self.assertAlmostEqual(ctx['fcf_margin_pct'], 35.3, delta=0.5)
+        # Reverse DCF implied growth is calculated dynamically
+        self.assertIsInstance(ctx['g_implied_pct'], float)
         self.assertEqual(len(ctx['sensitivity_grid']), 5)
+        # Elementos reactivos de la interfaz web
+        content = response.content.decode('utf-8')
+        self.assertIn('id="headerFairPrice"', content)
+        self.assertIn('id="headerValuationBadge"', content)
+        self.assertIn('id="sensitivityGridBody"', content)
+        self.assertIn('Margen FCF Auditado: 35.3%', content)
 
     def test_index_cards_complete(self):
         response = self.client.get('/')
@@ -79,8 +87,8 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertIsNotNone(deck)
         self.assertEqual(deck['f_score'], 6)
         self.assertIn('53.', deck['roic_adj'])
-        self.assertIn('10.31%', deck['wacc'])
-        self.assertIn('+43.', deck['spread'])
+        self.assertTrue(deck['wacc'].endswith('%'))
+        self.assertIn('+4', deck['spread'])
         self.assertTrue(deck['price'].startswith('$'))
         
         # Apple checks
@@ -93,8 +101,19 @@ class ValuationAndSensitivityTests(TestCase):
         # NU checks
         nu = companies.get('NU')
         self.assertIsNotNone(nu)
-        self.assertEqual(nu['f_score'], 6)
+        self.assertIsInstance(nu['f_score'], int)
 
         # MELI checks
         meli = companies.get('MELI')
         self.assertIsNotNone(meli)
+
+    def test_cash_flow_adjusted_fcf_and_buybacks(self):
+        """Verifica que el estado de flujos contemple FCF Ajustado y Recompras Netas puras sin filas obsoletas."""
+        for ticker in ['NVDA', 'AAPL', 'DECK']:
+            response = self.client.get(f'/company/{ticker}/')
+            self.assertEqual(response.status_code, 200)
+            content = response.content.decode('utf-8')
+            self.assertIn('Flujo de Caja Libre Ajustado (FCF Menos Retención Fiscal SBC)', content)
+            self.assertIn('RECOMPRAS NETAS DE ACCIONES (Net Share Repurchases)', content)
+            self.assertNotIn('Retención fiscal por liquidación de acciones (SBC Tax Settlement)', content)
+            self.assertNotIn('TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)', content)

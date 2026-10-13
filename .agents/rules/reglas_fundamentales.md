@@ -7,7 +7,7 @@ Estas reglas son de cumplimiento continuo, irrestricto y mandatorio para todo ag
 ## REGLA 1: PROTOCOLO DE PARADA OBLIGATORIA ANTE ERRORES DE CÁLCULO O DISEÑO (STOP & PROPOSE)
 Cuando se detecte cualquier error en el código de los scripts que involucre:
 - Fallos o discrepancias en cálculos contables o cuantitativos (fórmulas rotas, denominadores cero, valores nulos no controlados, desbordes).
-- Errores de diseño o visualización (tablas desalineadas, campos vacíos o 'N/D' no justificados, discrepancias entre el informe Word, el modelo Excel o la web Django).
+- Errores de diseño o visualización (tablas desalineadas, campos vacíos o 'N/D' no justificados, discrepancias entre el informe Word y la web Django).
 - Excepciones en tiempo de ejecución (`TypeError`, `ValueError`, `KeyError`, etc.).
 
 **MANDATO:**
@@ -29,7 +29,6 @@ Ninguna solución, corrección o nueva funcionalidad puede darse por concluida n
    - Validación cruzada para certificar que el cambio no altere, degrade ni distorsione los resultados de las empresas de control previas (ej. `AAPL` y `DECK` para el ámbito corporativo/industrial).
 3. **Test de Inspección Visual de Artefactos Reales:**
    - **Documento Word (.docx):** Verificación directa de tablas, alineaciones, badges institucionales, formatos de moneda/porcentaje y encabezados.
-   - **Modelo Financiero Excel (.xlsx):** Verificación de fórmulas vivas, ausencia de celdas corruptas (`#¡VALOR!`, `#REF!`, `#DIV/0!`) y coherencia en las 10-11 hojas.
    - **Dashboard Web Django:** Comprobación de que las tarjetas de resumen y la vista de detalle reflejen con precisión los mismos valores auditados del informe.
    - **Informe Markdown (.md):** Verificación de sintaxis, renderizado de tablas y fórmulas KaTeX.
 

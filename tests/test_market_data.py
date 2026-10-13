@@ -11,7 +11,7 @@ import unittest
 from pathlib import Path
 
 # Añadir scripts al path
-scripts_dir = Path(".agents/skills/fundamental-data-extractor/scripts").resolve()
+scripts_dir = Path("pipeline").resolve()
 sys.path.insert(0, str(scripts_dir))
 
 from market_data_provider import MarketDataExtractor

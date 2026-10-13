@@ -1,0 +1,133 @@
+{
+  "timestamp": "2026-10-11T21:13:29.378682",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 449956000000.0,
+      "fst_value": 449956000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 261221000000.0,
+      "fst_value": 261221000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 15462000000.0,
+      "fst_value": 15462000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_sec": "meta-06302026xexhibit991.htm",
+    "return_on_equity_reported": null,
+    "risk_adjusted_nim_pct": null,
+    "efficiency_ratio_pct": null,
+    "npl_15_90_pct": null,
+    "npl_90_plus_pct": null,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": null,
+    "active_customers_m": null,
+    "monthly_arpac_usd": null,
+    "monthly_cost_to_serve_usd": 1.0,
+    "deposits_by_country_bn": {},
+    "customers_by_country_m": {},
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    },
+    "brand_segmentation": {
+      "Revenue": {
+        "revenue_usd_m": 228247.0
+      },
+      "Other revenue": {
+        "revenue_usd_m": 2934.8
+      },
+      "Family of Apps": {
+        "revenue_usd_m": 225740.4
+      },
+      "Reality Labs": {
+        "revenue_usd_m": 2506.6
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States & Canada": {
+        "revenue_usd_m": 89572.0
+      },
+      "Europe": {
+        "revenue_usd_m": 52890.7
+      },
+      "Asia-Pacific": {
+        "revenue_usd_m": 61122.6
+      },
+      "Rest of World": {
+        "revenue_usd_m": 24661.7
+      },
+      "United States": {
+        "revenue_usd_m": 84931.3
+      }
+    },
+    "operational_kpis": {}
+  },
+  "kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_sec": "meta-06302026xexhibit991.htm",
+    "return_on_equity_reported": null,
+    "risk_adjusted_nim_pct": null,
+    "efficiency_ratio_pct": null,
+    "npl_15_90_pct": null,
+    "npl_90_plus_pct": null,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": null,
+    "active_customers_m": null,
+    "monthly_arpac_usd": null,
+    "monthly_cost_to_serve_usd": 1.0,
+    "deposits_by_country_bn": {},
+    "customers_by_country_m": {},
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    },
+    "brand_segmentation": {
+      "Revenue": {
+        "revenue_usd_m": 228247.0
+      },
+      "Other revenue": {
+        "revenue_usd_m": 2934.8
+      },
+      "Family of Apps": {
+        "revenue_usd_m": 225740.4
+      },
+      "Reality Labs": {
+        "revenue_usd_m": 2506.6
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States & Canada": {
+        "revenue_usd_m": 89572.0
+      },
+      "Europe": {
+        "revenue_usd_m": 52890.7
+      },
+      "Asia-Pacific": {
+        "revenue_usd_m": 61122.6
+      },
+      "Rest of World": {
+        "revenue_usd_m": 24661.7
+      },
+      "United States": {
+        "revenue_usd_m": 84931.3
+      }
+    },
+    "operational_kpis": {}
+  },
+  "flags": [],
+  "archetype": "CORPORATE_INDUSTRIAL"
+}

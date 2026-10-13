@@ -1,8 +1,7 @@
 """
 tests/test_forensic_engine.py - Suite de pruebas unitarias y de integración
 para el Motor de Auditoría Forense Contable y Detección de Manipulación de Beneficios:
-Ratio Sloan de Devengos, Matriz de Divergencias de Alerta Temprana, Montier C-Score
-y generación de la Hoja 10 en Excel.
+Ratio Sloan de Devengos, Matriz de Divergencias de Alerta Temprana y Montier C-Score.
 """
 
 import os
@@ -10,17 +9,15 @@ import sys
 import json
 import unittest
 from pathlib import Path
-import openpyxl
 
 # Añadir scripts al path
-scripts_dir = Path(".agents/skills/fundamental-data-extractor/scripts").resolve()
+scripts_dir = Path("pipeline").resolve()
 sys.path.insert(0, str(scripts_dir))
 
 from financial_scoring_engine import (
     ForensicAccountingEngine,
     calculate_fundamental_scores
 )
-import excel_formatter
 from forensic_report_builder import generate_forensic_section_md
 
 
@@ -39,12 +36,13 @@ class TestForensicEngine(unittest.TestCase):
                 "inventory": 60.0,
                 "net_ppe": 200.0,
                 "cash": 150.0,
-                "depreciation_and_amortization": 25.0
+                "depreciation_and_amortization": 25.0,
+                "other_current_assets": 30.0
             },
             "FY2025": {
                 "net_income": 100.0,
                 "cfo": 140.0,
-                "total_assets": 1100.0,
+                "total_assets": 1080.0,
                 "revenue": 900.0,
                 "cost_of_goods_sold": 500.0,
                 "gross_profit": 400.0,
@@ -52,7 +50,8 @@ class TestForensicEngine(unittest.TestCase):
                 "inventory": 65.0,
                 "net_ppe": 220.0,
                 "cash": 180.0,
-                "depreciation_and_amortization": 30.0
+                "depreciation_and_amortization": 30.0,
+                "other_current_assets": 32.0
             }
         }
         self.fys = ["FY2025", "FY2024"]
@@ -130,12 +129,53 @@ class TestForensicEngine(unittest.TestCase):
         self.assertGreater(inv_spread["spread_pct"], 15.0)
 
     def test_04_montier_c_score_flags(self):
-        """Verifica la activación de las 6 banderas del Montier C-Score."""
+        """Verifica la activación y consistencia de las 6 banderas canónicas de Montier C-Score."""
         clean_res = ForensicAccountingEngine.calculate_forensic_series(self.fys, self.sample_metrics, ticker="CLEAN")
         montier = clean_res["montier_c_score"]["FY2025"]
         
+        self.assertEqual(montier["max_score"], 6)
         self.assertLessEqual(montier["total_score"], 1)
         self.assertIn("BAJO", montier["rating"])
+        
+        expected_flags = [
+            "f1_cfo_divergence", "f2_ar_vs_sales", "f3_inv_vs_cogs",
+            "f4_other_current_assets", "f5_depreciation_rate", "f6_asset_growth"
+        ]
+        bd = montier["flags_breakdown"]
+        for ef in expected_flags:
+            self.assertIn(ef, bd)
+            self.assertIn("name", bd[ef])
+            self.assertIn("condition", bd[ef])
+            self.assertIn("value_str", bd[ef])
+            self.assertIn("flag", bd[ef])
+            self.assertIn("status", bd[ef])
+            self.assertIn("rationale", bd[ef])
+
+        # Caso crítico: empresa con las 6 banderas activadas (Score = 6)
+        fraud_metrics = {
+            "FY2024": {
+                "net_income": 50.0, "cfo": 100.0,
+                "revenue": 1000.0, "cost_of_goods_sold": 600.0,
+                "accounts_receivable": 100.0, "inventory": 100.0,
+                "other_current_assets": 20.0,
+                "total_assets": 2000.0, "net_ppe": 800.0, "cash": 200.0,
+                "depreciation_and_amortization": 100.0
+            },
+            "FY2025": {
+                "net_income": 120.0, "cfo": 40.0,  # F1: NI > CFO (+1)
+                "revenue": 1020.0, "cost_of_goods_sold": 610.0,
+                "accounts_receivable": 150.0,  # F2: AR +50% vs Rev +2% (+1)
+                "inventory": 160.0,  # F3: Inv +60% vs COGS +1.6% (+1)
+                "other_current_assets": 60.0,  # F4: OCA/Rev 5.88% vs 2.0% (+1)
+                "total_assets": 2600.0,  # F6: Assets +30% > 10% (+1)
+                "net_ppe": 850.0, "cash": 150.0,
+                "depreciation_and_amortization": 40.0  # F5: Depr rate 4.4% vs 11.1% (+1)
+            }
+        }
+        fraud_res = ForensicAccountingEngine.calculate_forensic_series(self.fys, fraud_metrics, ticker="FRAUD")
+        fraud_m = fraud_res["montier_c_score"]["FY2025"]
+        self.assertEqual(fraud_m["total_score"], 6)
+        self.assertIn("ALTO", fraud_m["rating"])
 
     def test_05_integration_aapl_and_deck_scores(self):
         """Verifica que calculate_fundamental_scores genere la auditoría forense en AAPL y DECK."""
@@ -156,45 +196,6 @@ class TestForensicEngine(unittest.TestCase):
             self.assertIn("forensic_audit", diag)
             self.assertIsNotNone(diag["forensic_audit"].get("sloan_ratio_pct"))
             self.assertIsNotNone(diag["forensic_audit"].get("montier_score"))
-
-    def test_06_excel_sheet_10_forensic_audit(self):
-        """Verifica que el libro Excel de AAPL tenga exactamente 10 pestañas y que Hoja 10 esté completa."""
-        excel_path = Path("data/processed/AAPL/financial_statements.xlsx")
-        if not excel_path.exists():
-            return
-            
-        wb = openpyxl.load_workbook(excel_path, data_only=False)
-        self.assertGreaterEqual(len(wb.sheetnames), 10)
-        self.assertIn("Auditoría Forense & Devengos", wb.sheetnames)
-        
-        ws = wb["Auditoría Forense & Devengos"]
-        # Verificar banners y tablas
-        title = ws.cell(1, 1).value
-        self.assertIn("Auditoría Forense", title)
-        
-        # Verificar contenido de celda Sloan LTM
-        sloan_header = None
-        for r in range(1, 20):
-            val = ws.cell(r, 1).value
-            if val and "Ratio de Devengos de Sloan" in str(val):
-                sloan_header = r
-                break
-        self.assertIsNotNone(sloan_header, "Debe existir fila de Ratio de Devengos de Sloan en Hoja 10")
-        
-        # Verificar celda LTM de Sloan
-        ltm_sloan_val = ws.cell(sloan_header, 4).value
-        self.assertIsNotNone(ltm_sloan_val)
-        self.assertAlmostEqual(float(ltm_sloan_val), -0.0479, places=3)
-        
-        # Verificar fila de Montier C-Score
-        montier_row = None
-        for r in range(sloan_header, ws.max_row + 1):
-            val = ws.cell(r, 1).value
-            if val and "MONTIER C-SCORE TOTAL" in str(val):
-                montier_row = r
-                break
-        self.assertIsNotNone(montier_row, "Debe existir fila de Montier C-Score Total en Hoja 10")
-        self.assertIn("/6", str(ws.cell(montier_row, 4).value))
 
     def test_07_markdown_forensic_report_builder(self):
         """Verifica que generate_forensic_section_md genere la estructura esperada."""
@@ -232,7 +233,36 @@ class TestForensicEngine(unittest.TestCase):
         self.assertIn("delta_inv", divs_25["inv_cogs_spread"])
         self.assertIn("delta_cogs", divs_25["inv_cogs_spread"])
         self.assertIn("spread", divs_25["inv_cogs_spread"])
-        self.assertIn("delta_soft_assets", divs_25["soft_assets"])
+    def test_09_financial_archetype_not_applicable(self):
+        """Verifica que para arquetipos FINANCIAL_BANKING e INSURANCE, Montier C-Score sea NO APLICABLE sin fake defaults."""
+        for arch in ["FINANCIAL_BANKING", "INSURANCE"]:
+            res = ForensicAccountingEngine.calculate_forensic_series(
+                ["FY2025", "FY2024"],
+                self.sample_metrics,
+                ticker="FIN_TEST",
+                archetype=arch
+            )
+            montier_25 = res["montier_c_score"]["FY2025"]
+            self.assertIsNone(montier_25["total_score"])
+            self.assertEqual(montier_25["rating"], "NO APLICABLE")
+            self.assertEqual(montier_25["badge"], "NO APLICABLE")
+            self.assertEqual(montier_25["color"], "#607D8B")
+            self.assertIn("NO APLICABLE", montier_25["verdict"])
+
+            for flag_key, flag_val in montier_25["flags_breakdown"].items():
+                self.assertIsNone(flag_val["flag"])
+                self.assertEqual(flag_val["value_str"], "N/A")
+                self.assertEqual(flag_val["status"], "N/A")
+
+            # Divergencias
+            div_25 = res["divergence_matrix"]["FY2025"]
+            self.assertEqual(div_25["ar_sales_spread"]["status"], "NO APLICABLE")
+            self.assertEqual(div_25["inv_cogs_spread"]["status"], "NO APLICABLE")
+
+            # Dictamen global
+            latest = res["latest_result"]
+            self.assertEqual(latest["global_badge"], "ANÁLISIS SECTORIAL BANCARIO")
+            self.assertEqual(latest["global_color"], "#607D8B")
 
 
 if __name__ == "__main__":

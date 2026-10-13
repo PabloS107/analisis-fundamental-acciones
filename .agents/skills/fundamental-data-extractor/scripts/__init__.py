@@ -1,1 +1,0 @@
-# fundamental-data-extractor package

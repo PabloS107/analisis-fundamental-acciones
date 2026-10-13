@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-10-08T15:59:13.063459",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 320272000000.0,
+      "fst_value": 320272000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 228984000000.0,
+      "fst_value": 228984000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 22443000000.0,
+      "fst_value": 22443000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_sec": "q2fy27pr.htm",
+    "brand_segmentation": {
+      "Data Center — Hyperscale": {
+        "revenue_usd_m": 170000.0
+      },
+      "Data Center — AI Clouds, Industrial & Enterprise": {
+        "revenue_usd_m": 107798.0
+      },
+      "Edge Computing": {
+        "revenue_usd_m": 25171.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States": {
+        "revenue_usd_m": 209655.0
+      },
+      "Taiwan": {
+        "revenue_usd_m": 59382.0
+      },
+      "China (incl. Hong Kong)": {
+        "revenue_usd_m": 27570.0
+      },
+      "Other Countries": {
+        "revenue_usd_m": 6363.0
+      }
+    },
+    "operational_kpis": {
+      "remaining_authorization_usd_bn": 99.0
+    },
+    "source_presentation": "Q2FY27-CFO-Commentary.pdf",
+    "total_slides": 9
+  },
+  "kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_sec": "q2fy27pr.htm",
+    "brand_segmentation": {
+      "Data Center — Hyperscale": {
+        "revenue_usd_m": 170000.0
+      },
+      "Data Center — AI Clouds, Industrial & Enterprise": {
+        "revenue_usd_m": 107798.0
+      },
+      "Edge Computing": {
+        "revenue_usd_m": 25171.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States": {
+        "revenue_usd_m": 209655.0
+      },
+      "Taiwan": {
+        "revenue_usd_m": 59382.0
+      },
+      "China (incl. Hong Kong)": {
+        "revenue_usd_m": 27570.0
+      },
+      "Other Countries": {
+        "revenue_usd_m": 6363.0
+      }
+    },
+    "operational_kpis": {
+      "remaining_authorization_usd_bn": 99.0
+    },
+    "source_presentation": "Q2FY27-CFO-Commentary.pdf",
+    "total_slides": 9
+  },
+  "flags": [],
+  "archetype": "CORPORATE_INDUSTRIAL"
+}

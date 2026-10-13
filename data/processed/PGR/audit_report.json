@@ -1,0 +1,724 @@
+{
+  "ticker": "PGR",
+  "company_name": "PROGRESSIVE CORP/OH/",
+  "cik": "0000080661",
+  "audit_timestamp": "2026-10-08T16:42:20.381997",
+  "years_audited": {
+    "LTM": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 124925000000.0,
+        "liabilities": 90592000000.0,
+        "equity": 34333000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 124925000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 12492500.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para LTM."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Reconciliación detallada de variación de caja no aplica a período móvil derivado LTM."
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 11695000000.0,
+        "shares_diluted": 586850000.0,
+        "eps_reported": 19.94,
+        "eps_calculated": 19.93,
+        "eps_adjusted": 19.94,
+        "split_factor": 1.0,
+        "discrepancy": 0.01
+      }
+    ],
+    "FY2025": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 123039000000.0,
+        "liabilities": 92716000000.0,
+        "equity": 30323000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 123039000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 12303900.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2025."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 17548000000.0,
+        "cfi": -14527000000.0,
+        "cff": -3037000000.0,
+        "sum_of_activities": -16000000.0,
+        "net_change_reported": -16000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 11308000000.0,
+        "shares_diluted": 588100000.0,
+        "eps_reported": 19.23,
+        "eps_calculated": 19.23,
+        "eps_adjusted": 19.23,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2024": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 105745000000.0,
+        "liabilities": 80154000000.0,
+        "equity": 25591000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 105745000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 10574500.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2024."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 15119000000.0,
+        "cfi": -13749000000.0,
+        "cff": -1316000000.0,
+        "sum_of_activities": 54000000.0,
+        "net_change_reported": 54000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 8480000000.0,
+        "shares_diluted": 587700000.0,
+        "eps_reported": 14.4,
+        "eps_calculated": 14.43,
+        "eps_adjusted": 14.4,
+        "split_factor": 1.0,
+        "discrepancy": 0.03
+      }
+    ],
+    "FY2023": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 88691000000.0,
+        "liabilities": 68414000000.0,
+        "equity": 20277000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 88691000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 8869100.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2023."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 10643000000.0,
+        "cfi": -10842000000.0,
+        "cff": 78000000.0,
+        "sum_of_activities": -121000000.0,
+        "net_change_reported": -121000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 3903000000.0,
+        "shares_diluted": 587500000.0,
+        "eps_reported": 6.58,
+        "eps_calculated": 6.64,
+        "eps_adjusted": 6.58,
+        "split_factor": 1.0,
+        "discrepancy": 0.06
+      }
+    ],
+    "FY2022": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 75465000000.0,
+        "liabilities": 59574000000.0,
+        "equity": 15891000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 75465000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 7546500.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2022."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 6849000000.0,
+        "cfi": -7956000000.0,
+        "cff": 1126000000.0,
+        "sum_of_activities": 19000000.0,
+        "net_change_reported": 19000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 722000000.0,
+        "shares_diluted": 587100000.0,
+        "eps_reported": 1.18,
+        "eps_calculated": 1.23,
+        "eps_adjusted": 1.18,
+        "split_factor": 1.0,
+        "discrepancy": 0.05
+      }
+    ],
+    "FY2021": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 71132300000.0,
+        "liabilities": 52900700000.0,
+        "equity": 18231600000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 71132300000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 7113230.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2021."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 7761700000.0,
+        "cfi": -3119800000.0,
+        "cff": -4516300000.0,
+        "sum_of_activities": 125600000.0,
+        "net_change_reported": 125600000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 3350900000.0,
+        "shares_diluted": 587100000.0,
+        "eps_reported": 5.66,
+        "eps_calculated": 5.71,
+        "eps_adjusted": 5.66,
+        "split_factor": 1.0,
+        "discrepancy": 0.05
+      }
+    ],
+    "FY2020": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 64098300000.0,
+        "liabilities": 47059700000.0,
+        "equity": 17038600000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 64098300000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 6409830.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2020."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 6905600000.0,
+        "cfi": -6117700000.0,
+        "cff": -938800000.0,
+        "sum_of_activities": -150900000.0,
+        "net_change_reported": -150900000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 5704600000.0,
+        "shares_diluted": 587600000.0,
+        "eps_reported": 9.66,
+        "eps_calculated": 9.71,
+        "eps_adjusted": 9.66,
+        "split_factor": 1.0,
+        "discrepancy": 0.05
+      }
+    ],
+    "FY2019": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 54910500000.0,
+        "liabilities": 41011700000.0,
+        "equity": 13673200000.0,
+        "mezzanine_equity": 225600000.0,
+        "liabilities_plus_equity": 54910500000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 5491050.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2019."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 6261600000.0,
+        "cfi": -4338300000.0,
+        "cff": -1770900000.0,
+        "sum_of_activities": 152400000.0,
+        "net_change_reported": 152400000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 3970300000.0,
+        "shares_diluted": 587200000.0,
+        "eps_reported": 6.72,
+        "eps_calculated": 6.76,
+        "eps_adjusted": 6.72,
+        "split_factor": 1.0,
+        "discrepancy": 0.04
+      }
+    ],
+    "FY2018": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 46575000000.0,
+        "liabilities": 35538700000.0,
+        "equity": 10821800000.0,
+        "mezzanine_equity": 214500000.0,
+        "liabilities_plus_equity": 46575000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 4657500.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2018."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 6284800000.0,
+        "cfi": -7034900000.0,
+        "cff": 549800000.0,
+        "sum_of_activities": -200300000.0,
+        "net_change_reported": -200300000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 2615300000.0,
+        "shares_diluted": 586700000.0,
+        "eps_reported": 4.42,
+        "eps_calculated": 4.46,
+        "eps_adjusted": 4.42,
+        "split_factor": 1.0,
+        "discrepancy": 0.04
+      }
+    ],
+    "FY2017": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 38701200000.0,
+        "liabilities": 28912700000.0,
+        "equity": 9284800000.0,
+        "mezzanine_equity": 503700000.0,
+        "liabilities_plus_equity": 38701200000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 3870120.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2017."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 3756800000.0,
+        "cfi": -3406700000.0,
+        "cff": -300900000.0,
+        "sum_of_activities": 48900000.0,
+        "net_change_reported": 48900000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1592200000.0,
+        "shares_diluted": 585700000.0,
+        "eps_reported": 2.72,
+        "eps_calculated": 2.72,
+        "eps_adjusted": 2.72,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2016": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 33427500000.0,
+        "liabilities": 24986700000.0,
+        "equity": 7957100000.0,
+        "mezzanine_equity": 483700000.0,
+        "liabilities_plus_equity": 33427500000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 3342750.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2016."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": false,
+        "status": "FAIL",
+        "cfo": 2732700000.0,
+        "cfi": -2480700000.0,
+        "cff": -250400000.0,
+        "sum_of_activities": 2000000.0,
+        "net_change_reported": -12600000.0,
+        "discrepancy_usd": 14600000.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1031000000.0,
+        "shares_diluted": 585000000.0,
+        "eps_reported": 1.76,
+        "eps_calculated": 1.76,
+        "eps_adjusted": 1.76,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2015": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 29819300000.0,
+        "liabilities": 22065000000.0,
+        "equity": 7289400000.0,
+        "mezzanine_equity": 464900000.0,
+        "liabilities_plus_equity": 29819300000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 2981930.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2015."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 2292900000.0,
+        "cfi": -1923900000.0,
+        "cff": -252800000.0,
+        "sum_of_activities": 116000000.0,
+        "net_change_reported": 115700000.0,
+        "discrepancy_usd": 300000.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1267600000.0,
+        "shares_diluted": 589200000.0,
+        "eps_reported": 2.15,
+        "eps_calculated": 2.15,
+        "eps_adjusted": 2.15,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2014": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 25787600000.0,
+        "liabilities": 18859000000.0,
+        "equity": 6928600000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 25787600000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 2578760.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2014."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (No aplicable a entidades financieras)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "FCF no aplica a arquetipo INSURANCE."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 1725600000.0,
+        "cfi": -836900000.0,
+        "cff": -855400000.0,
+        "sum_of_activities": 33300000.0,
+        "net_change_reported": 33300000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1281000000.0,
+        "shares_diluted": 594800000.0,
+        "eps_reported": 2.15,
+        "eps_calculated": 2.15,
+        "eps_adjusted": 2.15,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ]
+  },
+  "overall_status": "FAIL",
+  "total_tests": 78,
+  "passed_tests": 50,
+  "failed_tests": 1,
+  "skipped_tests": 27,
+  "compliance_score_pct": 98.0
+}

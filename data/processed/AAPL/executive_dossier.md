@@ -172,7 +172,6 @@ Michael Ng (0:34:58):** Good afternoon. First, Tim, congratulations on the extra
 ---
 
 > **Archivos generados para siguientes módulos:**
-> - `financial_statements.xlsx` (Modelo Excel completo de 8 pestañas con fórmulas y balances)
 > - `financial_statements.json` (Datos estructurados limpios para DCF y Múltiplos)
 > - `fundamental_scores.json` / `financial_scores.json` (Puntuaciones y desgloses de Piotroski y Mohanram)
 > - `qualitative_dossier.json` (Dossier cualitativo de presentaciones y llamadas)

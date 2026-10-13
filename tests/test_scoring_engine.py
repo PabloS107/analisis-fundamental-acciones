@@ -9,10 +9,9 @@ import sys
 import json
 import unittest
 from pathlib import Path
-import openpyxl
 
 # Añadir scripts al path
-scripts_dir = Path(".agents/skills/fundamental-data-extractor/scripts").resolve()
+scripts_dir = Path("pipeline").resolve()
 sys.path.insert(0, str(scripts_dir))
 
 from financial_scoring_engine import (
@@ -138,74 +137,6 @@ class TestScoringEngine(unittest.TestCase):
         self.assertIn("TRAMPA DE VALOR", c4["quadrant"])
         self.assertEqual(c4["color"], "RED")
 
-    def test_06_excel_sheet7_scores_fundamentales(self):
-        """Verifica que el archivo Excel generado contenga la Hoja 7 'Scores Fundamentales' con formato enriquecido."""
-        excel_path = Path("data/processed/AAPL/financial_statements.xlsx")
-        self.assertTrue(excel_path.exists(), "financial_statements.xlsx debe existir")
-
-        wb = openpyxl.load_workbook(excel_path, data_only=True)
-        self.assertIn("Scores Fundamentales", wb.sheetnames, "La pestaña 'Scores Fundamentales' debe estar en el libro Excel")
-
-        ws = wb["Scores Fundamentales"]
-        self.assertIn("Piotroski F-Score", ws.cell(row=1, column=1).value)
-        self.assertIn("Mohanram G-Score", ws.cell(row=1, column=1).value)
-
-        # Verificar filas de totales y celdas enriquecidas con comparaciones
-        found_f_total = False
-        found_g_total = False
-        for r in range(1, 40):
-            val = str(ws.cell(row=r, column=1).value or "")
-            if "TOTAL PIOTROSKI F-SCORE" in val:
-                found_f_total = True
-                score_cell = str(ws.cell(row=r, column=4).value or "")
-                self.assertIn("Pts", score_cell)
-                self.assertGreaterEqual(int(score_cell.split()[0]), 0)
-            if "TOTAL MOHANRAM G-SCORE" in val:
-                found_g_total = True
-                score_cell = str(ws.cell(row=r, column=4).value or "")
-                self.assertIn("Pts", score_cell)
-                self.assertGreaterEqual(int(score_cell.split()[0]), 0)
-
-        self.assertTrue(found_f_total, "La fila TOTAL PIOTROSKI F-SCORE debe existir")
-        self.assertTrue(found_g_total, "La fila TOTAL MOHANRAM G-SCORE debe existir")
-        
-        # Verificar que las celdas contengan valores comparados y puntaje
-        f_roa_cell = str(ws.cell(row=8, column=4).value or "")
-        self.assertTrue(">" in f_roa_cell or "[" in f_roa_cell, "La celda debe mostrar la comparación y puntaje")
-
-    def test_07_excel_sheet8_peer_group(self):
-        """Verifica que el archivo Excel contenga la Hoja 8 'Peer Group & Medianas' con fórmulas estadísticas."""
-        excel_path = Path("data/processed/AAPL/financial_statements.xlsx")
-        self.assertTrue(excel_path.exists(), "financial_statements.xlsx debe existir")
-
-        wb = openpyxl.load_workbook(excel_path, data_only=False)
-        self.assertIn("Peer Group & Medianas", wb.sheetnames, "La pestaña 'Peer Group & Medianas' debe estar en el libro Excel")
-
-        ws = wb["Peer Group & Medianas"]
-        self.assertIn("Análisis de Pares", str(ws.cell(row=1, column=1).value or ""))
-        
-        # Verificar presencia de competidores clave
-        tickers_found = []
-        for r in range(7, 16):
-            tick = ws.cell(row=r, column=1).value
-            if tick:
-                tickers_found.append(str(tick).strip())
-                
-        self.assertIn("AAPL", tickers_found, "AAPL debe estar en la tabla de pares")
-        self.assertIn("DELL", tickers_found, "DELL debe estar en la tabla de pares")
-        self.assertIn("HPQ", tickers_found, "HPQ debe estar en la tabla de pares")
-        
-        # Verificar fórmulas estadísticas de Excel
-        found_median = False
-        for r in range(14, 25):
-            lbl = str(ws.cell(row=r, column=1).value or "")
-            if "MEDIANA" in lbl:
-                found_median = True
-                f_val = str(ws.cell(row=r, column=6).value or "")
-                self.assertTrue("MEDIAN" in f_val.upper(), f"La fórmula de la mediana debe ser =MEDIAN(...), obtenida: {f_val}")
-                
-        self.assertTrue(found_median, "La fila MEDIANA debe existir con fórmula de Excel")
-
     def test_08_dynamic_peer_medians_sync(self):
         """
         Verifica la sincronización matemática al 100% de las medianas dinámicas del peer group (Hoja 8)
@@ -240,8 +171,8 @@ class TestScoringEngine(unittest.TestCase):
 
     def test_09_financial_scores_file_and_robustness(self):
         """
-        Verifica la existencia y coherencia de financial_scores.json, así como la robustez
-        de los formateadores de Excel ante entradas nulas o atípicas ('N/A', None).
+        Verifica la existencia y coherencia de fundamental_scores.json y financial_scores.json,
+        así como la consistencia de las señales G1, G2, G6, G7 contra benchmarks sectoriales.
         """
         out_dir = Path("data/processed/AAPL")
         scores = calculate_fundamental_scores("AAPL", out_dir / "financial_statements.json", out_dir=out_dir)
@@ -265,43 +196,13 @@ class TestScoringEngine(unittest.TestCase):
         self.assertEqual(ltm_g["G6_RD_INTENSITY"]["benchmark"], f"> {bm['median_rd_intensity']*100:.2f}%")
         self.assertEqual(ltm_g["G7_CAPEX_INTENSITY"]["benchmark"], f"> {bm['median_total_reinvestment']*100:.2f}% (I+D+CapEx)")
 
-        # Robustez de create_ratios_sheet ante valores no numéricos ('N/A', '-', None)
-        from excel_formatter import create_ratios_sheet, create_peer_group_sheet
-        dummy_wb = openpyxl.Workbook()
-        dirty_ratios = {
-            "gross_margin_pct": {"LTM": "N/A", "FY2025": "-", "FY2024": None, "FY2023": 45.2},
-            "operating_margin_pct": {"LTM": 30.0}
-        }
-        create_ratios_sheet(dummy_wb, dirty_ratios, "Test Co", "TEST", ["LTM", "FY2025", "FY2024", "FY2023"])
-        ws_ratios = dummy_wb["Ratios Financieros"]
-        # Fila 6: Margen Bruto (col B=LTM, col C=FY2025, col D=FY2024, col E=FY2023)
-        self.assertEqual(ws_ratios.cell(row=6, column=2).value, "-")
-        self.assertEqual(ws_ratios.cell(row=6, column=3).value, "-")
-        self.assertEqual(ws_ratios.cell(row=6, column=4).value, "-")
-        self.assertAlmostEqual(ws_ratios.cell(row=6, column=5).value, 0.452, places=3)
-
-        # Robustez de create_peer_group_sheet ante competidores con campos None
-        dirty_peer_data = {
-            "sic_code": "3571",
-            "peers": [
-                {"ticker": "T1", "company_name": "Test1", "revenue_usd_m": None, "total_assets_usd_m": None},
-                {"ticker": "T2", "company_name": "Test2", "revenue_usd_m": 100.0, "total_assets_usd_m": 200.0, "net_income_usd_m": None}
-            ]
-        }
-        create_peer_group_sheet(dummy_wb, peer_data=dirty_peer_data, ticker="TEST")
-        ws_peers = dummy_wb["Peer Group & Medianas"]
-        self.assertIsNotNone(ws_peers)
-
     def test_10_scoring_engine_and_peer_edge_cases(self):
         """
         Verifica exhaustivamente el blindaje ante valores anómalos:
         1. compute_peer_benchmarks con strings, NaN, 'N/A' y activos negativos.
         2. Calculadores Piotroski y Mohanram ante entradas con cadenas numéricas.
-        3. create_peer_group_sheet ante 'N/A' y strings en métricas financieras.
-        4. create_ratios_sheet ante diccionarios con subconjuntos institucionales (ej. solo net_margin y current_ratio).
         """
         import math
-        from excel_formatter import create_ratios_sheet, create_peer_group_sheet
 
         # 1. compute_peer_benchmarks ante NaN, strings y centinelas
         dirty_peers = [
@@ -325,47 +226,12 @@ class TestScoringEngine(unittest.TestCase):
         self.assertIsInstance(m_res["total_score"], int)
         self.assertTrue(m_res["signals"]["G1_ROA"]["passed"])
 
-        # 3. create_peer_group_sheet ante 'N/A' y strings en métricas
-        dummy_wb = openpyxl.Workbook()
-        peer_payload = {
-            "sic_code": "3571",
-            "peers": [
-                {"ticker": "T1", "company_name": "Test1", "revenue_usd_m": "100.5", "total_assets_usd_m": "500.0", "net_income_usd_m": "N/A", "cfo_usd_m": "-"},
-                {"ticker": "T2", "company_name": "Test2", "revenue_usd_m": 200.0, "total_assets_usd_m": 600.0, "net_income_usd_m": 50.0}
-            ]
-        }
-        create_peer_group_sheet(dummy_wb, peer_data=peer_payload, ticker="T1")
-        ws_p = dummy_wb["Peer Group & Medianas"]
-        # Fila 7 es T1: revenue debe ser numérico 100.5, net_income debe ser float 0.0 (no string "N/A")
-        self.assertEqual(ws_p.cell(row=7, column=3).value, 100.5)
-        self.assertEqual(ws_p.cell(row=7, column=9).value, 0.0)
-
-        # 4. create_ratios_sheet con subconjunto institucional sin gross_margin
-        wb_r = openpyxl.Workbook()
-        partial_ratios = {
-            "net_margin_pct": {"LTM": 22.5, "FY2025": 21.0},
-            "current_ratio": {"LTM": 1.45, "FY2025": 1.30}
-        }
-        create_ratios_sheet(wb_r, partial_ratios, "Partial Co", "PART", ["LTM", "FY2025"])
-        ws_pr = wb_r["Ratios Financieros"]
-        # Margen Neto (col B=LTM: 0.225)
-        self.assertAlmostEqual(ws_pr.cell(row=8, column=2).value, 0.225, places=3)
-        # Current Ratio (col B=LTM: 1.45)
-        cr_val = None
-        for r in range(1, 30):
-            if "Current Ratio" in str(ws_pr.cell(row=r, column=1).value or ""):
-                cr_val = ws_pr.cell(row=r, column=2).value
-                break
-        self.assertIsNotNone(cr_val, "Fila de Current Ratio debe existir en Hoja 2")
-        self.assertAlmostEqual(cr_val, 1.45, places=2)
-
     def test_11_deck_footwear_benchmarks_and_scores(self):
         """
         Verifica la configuración sectorial de Calzado (SIC 3021) y el scoring de Deckers Outdoor (DECK):
         1. Catálogo de medianas para SIC 3021 y mapeo de DECK.
         2. Peer group de calzado en config/peer_benchmarks.json (DECK, NKE, CROX, SKX, SHOO, WWW).
         3. Puntuación LTM de DECK: Piotroski F-Score >= 6/9 y Mohanram G-Score = 7/8 (Crecimiento de Élite).
-        4. Verificación de hojas 7 y 8 en el archivo Excel generado para DECK.
         """
         # 1. Catálogo sectorial
         self.assertIn("SIC_3021", self.medians_db)
@@ -391,14 +257,6 @@ class TestScoringEngine(unittest.TestCase):
             self.assertGreaterEqual(ltm_f, 6)
             self.assertEqual(ltm_g, 7)
             self.assertEqual(deck_scores["latest_diagnosis"]["g_rating"], "CRECIMIENTO DE ÉLITE")
-
-        # 4. Excel DECK
-        deck_xlsx = Path("data/processed/DECK/financial_statements.xlsx")
-        if deck_xlsx.exists():
-            wb = openpyxl.load_workbook(deck_xlsx, read_only=True)
-            self.assertIn("Scores Fundamentales", wb.sheetnames)
-            self.assertIn("Peer Group & Medianas", wb.sheetnames)
-            wb.close()
 
     def test_12_novy_marx_calculator_and_dupont(self):
         """
@@ -465,8 +323,7 @@ class TestScoringEngine(unittest.TestCase):
         1. AAPL: año fiscal más reciente es FY2025 + LTM móvil.
         2. DECK: año fiscal más reciente es FY2026 + LTM móvil.
         3. Presencia de novy_marx_analysis en fundamental_scores.json y financial_scores.json.
-        4. Existencia de tablas y columnas Novy-Marx en Excel (Hojas 2, 7 y 8).
-        5. Existencia de Sección 11 de Novy-Marx en informes generados (.md y .docx).
+        4. Existencia de Sección 11 de Novy-Marx en informes generados (.md y .docx).
         """
         # 1. AAPL Scores
         aapl_nm = self.aapl_scores.get("novy_marx_analysis", {})
@@ -491,35 +348,6 @@ class TestScoringEngine(unittest.TestCase):
             # Cash Drag masivo por la caja de DECK
             self.assertGreater(deck_nm["latest_result"]["cash_drag_pct"], 0.40)
 
-        # 3. Verificación de Hojas Excel
-        aapl_wb = openpyxl.load_workbook("data/processed/AAPL/financial_statements.xlsx", data_only=True)
-        # Hoja 2: Ratios Financieros
-        ws2 = aapl_wb["Ratios Financieros"]
-        found_nm_h2 = False
-        for r in range(1, 40):
-            val = str(ws2.cell(row=r, column=1).value or "")
-            if "PRODUCTIVIDAD PURA" in val.upper() or "NOVY-MARX" in val.upper() or "GROSS PROFITABILITY" in val.upper():
-                found_nm_h2 = True
-                break
-        self.assertTrue(found_nm_h2, "Hoja 2 debe contener la sección Novy-Marx DuPont")
-
-        # Hoja 7: Scoring Fundamental
-        ws7 = aapl_wb["Scores Fundamentales"]
-        found_nm_h7 = False
-        for r in range(1, 55):
-            val = str(ws7.cell(row=r, column=1).value or "")
-            if "NOVY-MARX" in val.upper():
-                found_nm_h7 = True
-                break
-        self.assertTrue(found_nm_h7, "Hoja 7 debe contener la Tabla 4 de Novy-Marx")
-
-        # Hoja 8: Peer Group
-        ws8 = aapl_wb["Peer Group & Medianas"]
-        h_col15 = str(ws8.cell(row=6, column=15).value or "")
-        h_col16 = str(ws8.cell(row=6, column=16).value or "")
-        self.assertIn("GP / Activos", h_col15)
-        self.assertIn("Ex-Caja", h_col16)
-        aapl_wb.close()
 
         # 4. Verificación de Informes Markdown
         aapl_md = Path("data/processed/AAPL/Analisis_Resultados_Q3_FY26_AAPL.md")
@@ -622,40 +450,11 @@ class TestScoringEngine(unittest.TestCase):
             self.assertGreater(wacc_deck["economic_spread_adjusted"], 0.30)
             self.assertIn("WIDE MOAT", wacc_deck["moat_rating"])
 
-    def test_16_excel_and_reports_roic_wacc_integration(self):
+    def test_16_reports_roic_wacc_integration(self):
         """
-        Verifica la integración visual completa de ROIC, WACC y Spread en Excel e Informes:
-        1. Hoja 2 de Excel: Bloque de Rendimiento del Capital y Creación de Valor.
-        2. Hoja 7 de Excel: Tabla 5 y Tarjeta de Auditoría de Mercado / Sensibilidad.
-        3. Hoja 8 de Excel: Columnas 17, 18, 19 (ROIC Adj, WACC, Spread) con fórmulas dinámicas.
-        4. Informes Word (.docx) y Markdown (.md): Sección 12 completa con los 4 bloques.
+        Verifica la integración de ROIC, WACC y Spread en Informes Markdown (.md) y Word (.docx):
+        Sección 12 completa con los 4 bloques.
         """
-        wb = openpyxl.load_workbook("data/processed/AAPL/financial_statements.xlsx", data_only=False)
-
-        # Hoja 2
-        ws2 = wb["Ratios Financieros"]
-        found_roic_h2 = any("ROIC AJUSTADO" in str(ws2.cell(row=r, column=1).value or "").upper() for r in range(1, 40))
-        self.assertTrue(found_roic_h2, "Hoja 2 debe incluir el bloque de ROIC Ajustado vs WACC")
-
-        # Hoja 7
-        ws7 = wb["Scores Fundamentales"]
-        found_tabla5 = any("RENDIMIENTO DEL CAPITAL" in str(ws7.cell(row=r, column=1).value or "").upper() for r in range(1, 70))
-        found_audit = any("AUDITORÍA DE MERCADO" in str(ws7.cell(row=r, column=1).value or "").upper() for r in range(1, 70))
-        self.assertTrue(found_tabla5, "Hoja 7 debe contener la Tabla 5 de ROIC Ajustado y WACC")
-        self.assertTrue(found_audit, "Hoja 7 debe contener la tarjeta de auditoría de mercado")
-
-        # Hoja 8
-        ws8 = wb["Peer Group & Medianas"]
-        h17 = str(ws8.cell(row=6, column=17).value or "")
-        h18 = str(ws8.cell(row=6, column=18).value or "")
-        h19 = str(ws8.cell(row=6, column=19).value or "")
-        self.assertIn("ROIC Ajustado", h17)
-        self.assertIn("WACC", h18)
-        self.assertIn("Spread Económico", h19)
-        # Fórmulas en fila de AAPL y fila Mediana
-        self.assertEqual(ws8.cell(row=7, column=19).value, "=Q7-R7")
-        self.assertEqual(ws8.cell(row=15, column=19).value, "=MEDIAN(S7:S14)")
-        wb.close()
 
         # Informes
         aapl_md = Path("data/processed/AAPL/Analisis_Resultados_Q3_FY26_AAPL.md")
@@ -673,7 +472,136 @@ class TestScoringEngine(unittest.TestCase):
         self.assertIn("12. Rendimiento del Capital Ajustado por Intangibles", text_deck)
         self.assertIn("WIDE MOAT", text_deck)
 
+    def test_17_archetype_ingestion_and_persistence(self):
+        """
+        Verifica la ingestión y persistencia del arquetipo en fundamental_scores.json y scoring_results:
+        1. AAPL y DECK deben ser CORPORATE.
+        2. JPM y NU deben ser FINANCIAL_BANKING.
+        3. PGR debe ser INSURANCE.
+        4. Ingestión a doble nivel (top-level y scoring_results).
+        """
+        self.assertIn(self.aapl_scores.get("archetype"), ("STANDARD_CORPORATE", "CORPORATE"))
+        self.assertIn(self.aapl_scores.get("scoring_results", {}).get("archetype"), ("STANDARD_CORPORATE", "CORPORATE"))
+
+        for ticker, expected_arch in [("DECK", ("STANDARD_CORPORATE", "CORPORATE")), ("JPM", "FINANCIAL_BANKING"), ("NU", "FINANCIAL_BANKING"), ("PGR", "INSURANCE")]:
+            score_file = Path(f"data/processed/{ticker}/fundamental_scores.json")
+            if score_file.exists():
+                with open(score_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                actual_top = data.get("archetype")
+                actual_res = data.get("scoring_results", {}).get("archetype")
+                if isinstance(expected_arch, tuple):
+                    self.assertIn(actual_top, expected_arch, f"{ticker} top-level archetype must be in {expected_arch}")
+                    self.assertIn(actual_res, expected_arch, f"{ticker} scoring_results archetype must be in {expected_arch}")
+                else:
+                    self.assertEqual(actual_top, expected_arch, f"{ticker} top-level archetype must be {expected_arch}")
+                    self.assertEqual(actual_res, expected_arch, f"{ticker} scoring_results archetype must be {expected_arch}")
+
+    def test_18_wacc_vs_ke_branching_by_archetype(self):
+        """
+        Verifica la bifurcación metodológica del coste de capital según arquetipo:
+        1. Entidades financieras (FINANCIAL_BANKING, INSURANCE): modelo COST_OF_EQUITY_KE, Ke como tasa de corte,
+           ROTCE sobre patrimonio tangible (deduciendo goodwill e intangibles), WACC = Ke, sin deuda financiera tradicional.
+        2. Entidades corporativas con deuda: modelo WACC con ponderación de capital y deuda.
+        3. Entidades corporativas sin deuda (DECK): modelo WACC con weight_debt=0 y WACC = Ke.
+        """
+        # 1. Banco (FINANCIAL_BANKING)
+        bank_period_data = {
+            "net_income": 8000.0,
+            "stockholders_equity": 60000.0,
+            "goodwill": 5000.0,
+            "intangibles": 2000.0,
+            "total_debt": 25000.0,
+            "effective_tax_rate": 0.21
+        }
+        bank_benchmarks = {"damodaran_unlevered_beta": 1.05, "damodaran_industry_wacc": 0.08}
+        bank_res = WACCCalculator.calculate_wacc_and_spread(
+            ticker="TEST_BANK",
+            recent_fy="FY2025",
+            period_data=bank_period_data,
+            roic_adjusted=0.15,
+            roic_traditional=0.15,
+            benchmarks=bank_benchmarks,
+            archetype="FINANCIAL_BANKING"
+        )
+        self.assertEqual(bank_res["model_type"], "COST_OF_EQUITY_KE")
+        self.assertEqual(bank_res["archetype"], "FINANCIAL_BANKING")
+        self.assertEqual(bank_res["wacc"], bank_res["cost_of_equity_ke"])
+        self.assertEqual(bank_res["weight_equity"], 1.0)
+        self.assertEqual(bank_res["weight_debt"], 0.0)
+        self.assertFalse(bank_res["is_debt_free"])
+        # TBV = 60000 - 5000 - 2000 = 53000
+        # ROTCE = 8000 / 53000 = 0.150943...
+        self.assertAlmostEqual(bank_res["tangible_book_value_usd_m"], 53000.0, places=1)
+        self.assertAlmostEqual(bank_res["rotce"], 8000.0 / 53000.0, places=4)
+        self.assertIn("COST_OF_EQUITY_KE", bank_res["model_type"])
+
+        # 2. Aseguradora (INSURANCE)
+        ins_period_data = {
+            "net_income": 4000.0,
+            "stockholders_equity": 30000.0,
+            "goodwill": 1000.0,
+            "intangibles": 500.0,
+            "total_debt": 8000.0
+        }
+        ins_res = WACCCalculator.calculate_wacc_and_spread(
+            ticker="TEST_INS",
+            recent_fy="FY2025",
+            period_data=ins_period_data,
+            roic_adjusted=0.12,
+            roic_traditional=0.12,
+            benchmarks=bank_benchmarks,
+            archetype="INSURANCE"
+        )
+        self.assertEqual(ins_res["model_type"], "COST_OF_EQUITY_KE")
+        self.assertEqual(ins_res["wacc"], ins_res["cost_of_equity_ke"])
+
+        # 3. Corporativa con Deuda (CORPORATE)
+        corp_period_data = {
+            "total_debt": 10000.0,
+            "interest_expense": 400.0,
+            "effective_tax_rate": 0.21
+        }
+        corp_res = WACCCalculator.calculate_wacc_and_spread(
+            ticker="TEST_CORP",
+            recent_fy="FY2025",
+            period_data=corp_period_data,
+            roic_adjusted=0.25,
+            roic_traditional=0.25,
+            benchmarks=bank_benchmarks,
+            archetype="CORPORATE"
+        )
+        self.assertEqual(corp_res["model_type"], "WACC")
+        self.assertGreater(corp_res["weight_debt"], 0.0)
+        self.assertFalse(corp_res["is_debt_free"])
+
+    def test_20_semiconductor_peer_benchmarks_and_nvda_ranking(self):
+        """
+        Verifica la configuración sectorial de Semiconductores (SIC 3674) y el ranking Novy-Marx de NVDA:
+        1. Presencia de SIC_3674 en config/peer_benchmarks.json con canasta completa de pares.
+        2. Presencia de NVDA como target y competidores clave (AVGO, TSM, AMD, QCOM, INTC, TXN, MU, ASML).
+        3. Existencia y consistencia del ranking Novy-Marx en fundamental_scores.json de NVDA.
+        """
+        peer_benchmarks = load_peer_benchmarks("config/peer_benchmarks.json")
+        self.assertIn("SIC_3674", peer_benchmarks.get("industry_benchmarks", {}))
+        semi_peers = peer_benchmarks["industry_benchmarks"]["SIC_3674"]["peers"]
+        peer_tickers = [p["ticker"] for p in semi_peers]
+        for t in ["NVDA", "AVGO", "TSM", "AMD", "QCOM", "INTC", "TXN", "MU", "ASML"]:
+            self.assertIn(t, peer_tickers)
+
+        nvda_json = Path("data/processed/NVDA/fundamental_scores.json")
+        if nvda_json.exists():
+            with open(nvda_json, "r", encoding="utf-8") as f:
+                nvda_scores = json.load(f)
+            ranking = nvda_scores.get("novy_marx_analysis", {}).get("peer_ranking", [])
+            self.assertTrue(len(ranking) >= 5, "NVDA debe tener un ranking de pares poblado con al menos 5 competidores")
+            # NVDA lidera en rentabilidad bruta sobre activos
+            first = ranking[0]
+            self.assertEqual(first["ticker"], "NVDA")
+            self.assertGreater(first["gross_profitability_total"], 0.65)
+
 
 if __name__ == "__main__":
     unittest.main()
+
 

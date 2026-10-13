@@ -1,0 +1,372 @@
+{
+  "ticker": "NU",
+  "company_name": "Nu Holdings Ltd.",
+  "exchange": "NYSE",
+  "period_label": "Q2 2026",
+  "period_date": "30 de Junio de 2026",
+  "filing_source": "Formulario 6-K, Formulario 20-F (SEC EDGAR) & Q2 2026 Earnings Call Transcript",
+  "sic_code": "6199",
+  "industry": "Digital Financial Services & FinTech Banking / Neobanks",
+  "business_model_callout": {
+    "title": "RESUMEN DEL MODELO DE NEGOCIO Y DISRUPCI\u00d3N BANCARIA DIGITAL",
+    "paragraphs": [
+      "Nu Holdings Ltd. (Nubank) es la plataforma de banca digital independiente m\u00e1s grande del mundo occidental, prestando servicios a m\u00e1s de 105 millones de clientes en Brasil, M\u00e9xico y Colombia.",
+      "Su modelo de negocio rompe radicalmente con la banca tradicional gracias a una arquitectura 100% nativa en la nube (cloud-native) y sin sucursales f\u00edsicas. Esto le permite operar con un Coste de Atenci\u00f3n por Cliente Activo (Cost-to-Serve) de aproximadamente $0.90 al mes \u2014un 85% inferior a los bancos tradicionales brasile\u00f1os (Ita\u00fa, Bradesco, Santander Brasil)\u2014, monetizando a trav\u00e9s de un ecosistema multiproducto que abarca tarjetas de cr\u00e9dito, pr\u00e9stamos personales, cuentas remuneradas, transferencias y seguros."
+    ]
+  },
+  "channels": {
+    "title": "Estructura de Productos y L\u00edneas de Monetizaci\u00f3n Financiera:",
+    "intro": "De acuerdo con los reportes oficiales auditados ante la SEC bajo IFRS y el Managerial P&L de la entidad, los ingresos se generan a trav\u00e9s de cuatro pilares:",
+    "direct": {
+      "label": "Margen de Intereses e Intermediaci\u00f3n Crediticia - NII (~75% de los ingresos netos):",
+      "description": "Intereses cobrados sobre la cartera de pr\u00e9stamos personales no garantizados y financiamiento rotativo de tarjetas de cr\u00e9dito, fondeados a bajo costo mediante los dep\u00f3sitos de los propios clientes."
+    },
+    "indirect": {
+      "label": "Comisiones por Servicios, Adquirencia e Intercambio (~25% de los ingresos netos):",
+      "description": "Comisiones de intercambio (Interchange Fees) cobradas cada vez que un usuario utiliza su tarjeta de cr\u00e9dito o d\u00e9bito Nubank en cualquier comercio del mundo, tarifas de intermediaci\u00f3n de fondos de inversi\u00f3n (NuInvest) y primas de micro-seguros (NuSeguros)."
+    }
+  },
+  "moat": {
+    "title": "7. Estrategia Tecnol\u00f3gica, Fosos Defensivos (Economic Moat) y Ventajas Competitivas",
+    "intro": "La hiperrentabilidad de Nu Holdings (ROTCE superior al 25%) est\u00e1 resguardada por un Foso Defensivo Amplio (Wide Moat / Dorsey Framework), cimentado en una ventaja estructural de costes inigualable, un coste de fondeo minorista masivo y una potente tracci\u00f3n de marca org\u00e1nica:",
+    "headers": [
+      "Fuente del Foso Defensivo",
+      "Intensidad",
+      "Mecanismo de Protecci\u00f3n Econ\u00f3mica",
+      "Diagn\u00f3stico Competitivo"
+    ],
+    "table_data": [
+      [
+        "Ventaja Estructural de Coste (Cost-to-Serve)",
+        "\ud83d\udfe2 ESTRUCTURAL",
+        "Coste de servir a un cliente activo de apenas ~$0.90/mes frente a los $10-$15 de la banca tradicional con sucursales f\u00edsicas y sistemas legados.",
+        "Permite ofrecer cuentas y tarjetas sin comisiones de mantenimiento y ser hiperrentable donde los bancos tradicionales pierden dinero."
+      ],
+      [
+        "Coste de Fondeo Minorista (Cost of Funds)",
+        "\ud83d\udfe2 DOMINANTE",
+        "M\u00e1s de $36,600M en dep\u00f3sitos minoristas directos captados a trav\u00e9s de NuConta, reduciendo dr\u00e1sticamente la dependencia de financiamiento mayorista caro.",
+        "Sustenta un Net Interest Margin (NIM) de m\u00e1s del 18%, permitiendo prestar a tasas competitivas con amplios m\u00e1rgenes de beneficio."
+      ],
+      [
+        "Adquisici\u00f3n Org\u00e1nica y Poder de Marca (NPS > 80)",
+        "\ud83d\udfe2 EXCEPCIONAL",
+        "M\u00e1s del 80% de los nuevos clientes se suman org\u00e1nicamente por recomendaci\u00f3n de boca a boca; el Net Promoter Score duplica al de los bancos incumbentes.",
+        "Coste de Adquisici\u00f3n de Clientes (CAC) \u00ednfimo (~$5 por cliente), lo que hace que cada cohorte de usuarios sea rentable en pocos meses."
+      ],
+      [
+        "Algoritmos Propietarios de Scoring Crediticio",
+        "\ud83d\udfe2 ALTA",
+        "Evaluaci\u00f3n en tiempo real del comportamiento de gasto y transacciones de 105M de usuarios mediante modelos propietarios de machine learning.",
+        "Control superior del Cost of Risk y expansi\u00f3n continua del Margen Ajustado por Riesgo (Risk-Adjusted NIM > 10.5%)."
+      ]
+    ],
+    "verdict": "WIDE MOAT | Tendencia: EN EXPANSI\u00d3N.",
+    "subsections": [
+      {
+        "title": "7.2. El Modelo de Maduraci\u00f3n de Cohortes (ARPAC Compounding)",
+        "bullets": [
+          [
+            "\u2022 Crecimiento del Ingreso por Cliente (ARPAC): ",
+            "A medida que los clientes permanecen en la plataforma, contratan m\u00e1s productos (tarjeta, pr\u00e9stamo, seguro, inversi\u00f3n), elevando el ARPAC mensual de $4 en cohortes nuevas a m\u00e1s de $12-$25 en cohortes maduras."
+          ],
+          [
+            "\u2022 Expansi\u00f3n del Ratio de Eficiencia: ",
+            "Los ingresos crecen exponencialmente mientras el coste operativo por usuario se mantiene fijo en ~$0.90, impulsando el ratio de eficiencia a un asombroso 17.6% - 25%."
+          ]
+        ]
+      },
+      {
+        "title": "7.3. La Oportunidad de Replicar Brasil en M\u00e9xico y Colombia",
+        "bullets": [
+          [
+            "\u2022 M\u00e9xico como Segundo Motor: ",
+            "Captaci\u00f3n masiva de dep\u00f3sitos a trav\u00e9s de Cuenta Nu M\u00e9xico, logrando una cuota de mercado en nuevas tarjetas superior al 20% con una base que ya supera los 8 millones de clientes."
+          ],
+          [
+            "\u2022 Colombia y la Expansi\u00f3n Andina: ",
+            "Lanzamiento exitoso de cuentas de ahorro en Colombia, consolidando la presencia panregional de Nubank."
+          ]
+        ]
+      }
+    ]
+  },
+  "capital_allocation": {
+    "ma_headers": [
+      "Iniciativa / Transacci\u00f3n",
+      "Tipo de Operaci\u00f3n",
+      "Capital / Compromiso",
+      "\u00bfQu\u00e9 se busca estrat\u00e9gicamente con ello?"
+    ],
+    "ma_data": [
+      [
+        "Capitalizaci\u00f3n de Filiales en M\u00e9xico y Colombia",
+        "Inyecci\u00f3n de Capital Regulatorio",
+        "~$500 M",
+        "Respaldar los colchones de capital exigidos por los reguladores locales (CNBV en M\u00e9xico, SFC en Colombia) para soportar el crecimiento de dep\u00f3sitos y pr\u00e9stamos."
+      ],
+      [
+        "Desarrollo de Tecnolog\u00eda e Infraestructura Cloud",
+        "Inversi\u00f3n Operativa y Software",
+        "~$850 M anuales",
+        "Fortalecimiento de la seguridad transaccional, inteligencia artificial y automatizaci\u00f3n de soporte al cliente."
+      ],
+      [
+        "Expansi\u00f3n de Cartera de Tarjetas y Pr\u00e9stamos",
+        "Asignaci\u00f3n de Balance",
+        "$30,400 M en cartera",
+        "Financiaci\u00f3n selectiva de pr\u00e9stamos no garantizados y l\u00edmites de tarjeta con estrictos criterios de underwriting."
+      ]
+    ],
+    "capex_title": "6.4. Solvencia Regulatoria (Basilea III), Apalancamiento y Generaci\u00f3n de Capital",
+    "capex_intro": "Nu Holdings mantiene una posici\u00f3n de capital extraordinariamente s\u00f3lida que supera con holgura todas las exigencias prudenciales de los bancos centrales de la regi\u00f3n:",
+    "capex_bullets": [
+      [
+        "\u2022 Ratio de Capital CET1 y Basilea: ",
+        "El \u00edndice de adecuaci\u00f3n de capital en Brasil se sit\u00faa en torno al 11.5% - 13.0%, superando c\u00f3modamente el requerimiento m\u00ednimo del 8.0% del Banco Central de Brasil (BACEN)."
+      ],
+      [
+        "\u2022 Autofinanciaci\u00f3n Org\u00e1nica de Capital: ",
+        "Con un beneficio neto trimestral de m\u00e1s de $870M y un ROTCE > 25%, la entidad genera org\u00e1nicamente m\u00e1s capital regulatorio del que consume para crecer, alejando cualquier necesidad de diluci\u00f3n o ampliaci\u00f3n de capital."
+      ]
+    ]
+  },
+  "scorecard": {
+    "intro": "Nu Holdings Ltd. ha presentado resultados financieros hist\u00f3ricos en el segundo trimestre de 2026 (Q2 2026, cerrado el 30 de junio de 2026) y en los \u00faltimos 12 meses m\u00f3viles (LTM), marcando ingresos trimestrales superiores a los $3,700M en NII y un beneficio neto r\u00e9cord, respaldados por una base de m\u00e1s de 105 millones de clientes activos:",
+    "headers": [
+      "M\u00e9trica Financiera",
+      "LTM (M\u00f3vil)",
+      "FY2024 (Cierre)",
+      "FY2023 (Previo)",
+      "Diagn\u00f3stico Fundamental y Salud Bancaria"
+    ],
+    "data": [
+      [
+        "Ingresos Totales (Revenues)",
+        "$11,517.1 M",
+        "$11,517.1 M",
+        "$8,029.0 M",
+        "Crecimiento interanual del +43.4% impulsado por expansi\u00f3n de cr\u00e9dito y dep\u00f3sitos."
+      ],
+      [
+        "Margen de Inter\u00e9s Neto (NII)",
+        "$5,252.9 M",
+        "$5,252.9 M",
+        "$3,490.9 M",
+        "Margen bruto de intermediaci\u00f3n en expansi\u00f3n r\u00e9cord hasta el 18.2%."
+      ],
+      [
+        "Beneficio Neto ($M)",
+        "$1,972.1 M",
+        "$1,972.1 M",
+        "$1,030.5 M",
+        "Casi duplic\u00f3 sus utilidades netas (+91.4% YoY) con retornos de \u00e9lite."
+      ],
+      [
+        "Flujo de Caja Operativo (CFO)",
+        "$755.6 M",
+        "$755.6 M",
+        "-$2,924.3 M",
+        "Retorno a generaci\u00f3n operativa positiva tras la estabilizaci\u00f3n de dep\u00f3sitos."
+      ],
+      [
+        "Cartera Total de Cr\u00e9dito (Gross Loans)",
+        "$30,400.0 M",
+        "$21,500.0 M",
+        "$15,400.0 M",
+        "Crecimiento de +42% YoY manteniendo disciplina de riesgo en tarjetas."
+      ],
+      [
+        "Total Dep\u00f3sitos de Clientes",
+        "$36,600.0 M",
+        "$26,000.0 M",
+        "$18,400.0 M",
+        "Fondeo minorista abundante (+41% YoY) que reduce el coste de capital."
+      ],
+      [
+        "Ratio de Morosidad 15-90 d\u00edas",
+        "4.20%",
+        "4.40%",
+        "4.50%",
+        "Mora temprana en descenso y alineada con la estacionalidad normal."
+      ],
+      [
+        "Ratio de Morosidad >90 d\u00edas (NPL)",
+        "6.80%",
+        "6.70%",
+        "6.10%",
+        "Mora tard\u00eda controlada con colch\u00f3n de cobertura de provisiones > 200%."
+      ],
+      [
+        "Ratio de Eficiencia (Cost-to-Income)",
+        "17.60%",
+        "27.70%",
+        "36.00%",
+        "L\u00edder global absoluto; la entidad bancaria m\u00e1s eficiente de Occidente."
+      ],
+      [
+        "Retorno sobre Patrimonio Tangible (ROTCE)",
+        "26.40%",
+        "24.50%",
+        "16.50%",
+        "Rentabilidad financiera extraordinaria que supera por m\u00e1s de 13 pp al coste de capital."
+      ]
+    ]
+  },
+  "balance_section": {
+    "intro": "La posici\u00f3n patrimonial y estructura de fondeo de Nu Holdings se distingue por un bajo apalancamiento relativo frente a la banca tradicional y una base de dep\u00f3sitos minoristas abundante:",
+    "table_headers": [
+      "M\u00e9trica Bancaria / Patrimonial",
+      "LTM ($M)",
+      "FY2024 ($M)",
+      "Variaci\u00f3n YoY",
+      "Diagn\u00f3stico de Solvencia y Balance"
+    ],
+    "table_data": [
+      [
+        "Caja y Dep\u00f3sitos en Bancos Centrales",
+        "$4,200.0 M",
+        "$3,850.0 M",
+        "+9.1%",
+        "Liquidez inmediata colocada en reservas del Banco Central de Brasil."
+      ],
+      [
+        "Cartera de Cr\u00e9dito Neta de Provisiones",
+        "$27,500.0 M",
+        "$19,300.0 M",
+        "+42.5%",
+        "Activo financiero productivo con provisiones contrac\u00edclicas IFRS 9."
+      ],
+      [
+        "Dep\u00f3sitos de Clientes (Fondeo Minorista)",
+        "$36,600.0 M",
+        "$26,000.0 M",
+        "+40.8%",
+        "Principal pasivo operativo de bajo coste que financia la cartera."
+      ],
+      [
+        "Patrimonio Neto Tangible (TBV)",
+        "$7,850.0 M",
+        "$6,200.0 M",
+        "+26.6%",
+        "Base de capital propio tangible que respalda los ratios de Basilea."
+      ],
+      [
+        "Ratio de Pr\u00e9stamos sobre Dep\u00f3sitos (LDR)",
+        "75.1%",
+        "74.2%",
+        "+90 bps",
+        "Estructura conservadora; los dep\u00f3sitos superan ampliamente a los pr\u00e9stamos."
+      ]
+    ],
+    "carry_trade_note": "A diferencia de la banca tradicional dependiente de pagar\u00e9s y bonos interbancarios, Nu Holdings financia el 100% de su cartera de pr\u00e9stamos con dep\u00f3sitos a la vista y a plazo de sus usuarios, blindando su margen financiero frente a tensiones de liquidez mayorista.",
+    "return_intro": "Nu Holdings retiene la totalidad de sus beneficios netos para soportar el crecimiento de activos ponderados por riesgo (RWA) en M\u00e9xico y Colombia, sin realizar recompras ni distribuir dividendos en efectivo:",
+    "return_headers": [
+      "Componente de Asignaci\u00f3n",
+      "Cifra LTM ($M)",
+      "Objetivo Estrat\u00e9gico",
+      "Impacto para el Accionista"
+    ],
+    "return_data": [
+      [
+        "Beneficio Retenido en Capital Regulatorio",
+        "$1,972.1 M",
+        "Crecimiento de RWA",
+        "El 100% de las ganancias se capitaliza para elevar el valor en libros por acci\u00f3n (TBV)."
+      ],
+      [
+        "Recompra de Acciones",
+        "$0.0 M",
+        "Prioridad de crecimiento",
+        "Se conserva capital para consolidar el liderazgo en M\u00e9xico y Colombia."
+      ],
+      [
+        "Dividendos en Efectivo",
+        "$0.0 M",
+        "Cero distribuci\u00f3n",
+        "Reinversi\u00f3n pura con rentabilidad del 26.4% sobre fondos propios."
+      ]
+    ],
+    "sbc_note": "La diluci\u00f3n por compensaci\u00f3n en acciones (SBC) a directivos y empleados clave se mantiene en niveles razonables para una empresa tecnol\u00f3gica de alto crecimiento, representando menos del 3% del beneficio neto."
+  },
+  "governance_section": {
+    "events_8k_headers": [
+      "Fecha SEC",
+      "\u00cdtem Oficial / Formulario",
+      "Naturaleza del Evento",
+      "\u00bfQu\u00e9 significa para la Empresa?",
+      "Diagn\u00f3stico para el Inversor"
+    ],
+    "events_8k_data": [
+      [
+        "2026-08-14",
+        "Formulario 6-K",
+        "Resultados Financieros Trimestrales Q2 2026",
+        "NII alcanza $3.7B y la cartera de cr\u00e9ditos se expande a $30.4B con mora bajo control.",
+        "\ud83d\udfe2 OPERATIVO: Resultados extraordinarios que confirman el poder de fijaci\u00f3n de precios."
+      ],
+      [
+        "2026-05-15",
+        "Formulario 6-K",
+        "Resultados Financieros Trimestrales Q1 2026",
+        "Beneficio neto trimestral r\u00e9cord de $871M y ratio de eficiencia hist\u00f3rica del 17.6%.",
+        "\ud83d\udfe2 ORDINARIO: Cumplimiento de reporte peri\u00f3dico en calendario regular."
+      ],
+      [
+        "2026-04-20",
+        "Formulario 20-F",
+        "Memoria Anual Auditada del Ejercicio FY2025",
+        "Presentaci\u00f3n de estados financieros consolidados auditados sin salvedades por PwC.",
+        "\ud83d\udfe2 AUDITOR\u00cdA: Estados contables certificados bajo normativa IFRS."
+      ]
+    ],
+    "insider_headers": [
+      "Directivo / Cargo Clave",
+      "Tipo de Operaci\u00f3n y Modalidad SEC",
+      "Volumen de Acciones",
+      "Importe Efectivo ($)",
+      "Trazabilidad SEC",
+      "Diagn\u00f3stico de Convicci\u00f3n"
+    ],
+    "insider_data": [
+      [
+        "David V\u00e9lez\n(Founder, CEO & Chairman)",
+        "\ud83d\udfe2 Control Accionario Clase B",
+        "Posici\u00f3n Fundador Mayoritario",
+        "$0 ventas abiertas",
+        "Filing 6-K / Proxy",
+        "Control patrimonial f\u00e9rreo y compromiso vitalicio con la visi\u00f3n de Nubank."
+      ],
+      [
+        "Cristina Junqueira\n(Co-Founder & Chief Growth Officer)",
+        "\ud83d\udfe2 Retenci\u00f3n Patrimonial",
+        "Posici\u00f3n Co-Fundadora",
+        "$0 ventas abiertas",
+        "Filing 6-K",
+        "Alineaci\u00f3n estrat\u00e9gica completa y liderazgo de la expansi\u00f3n en M\u00e9xico."
+      ],
+      [
+        "Rob Livingston\n(Chief Financial Officer)",
+        "\ud83d\udfe2 Asignaci\u00f3n de RSUs",
+        "Planes de retenci\u00f3n",
+        "Compensaci\u00f3n directiva",
+        "Formulario 6-K",
+        "Integraci\u00f3n al equipo directivo tras la transici\u00f3n planificada de Guilherme Lago."
+      ]
+    ]
+  },
+  "geographic_analysis": [
+    {
+      "prefix": "\u2022 Brasil como Basti\u00f3n Altamente Rentable (82.5% de los ingresos): ",
+      "text": "Base madura con m\u00e1s de 95 millones de clientes, donde Nubank genera retornos superiores al 30% sobre el capital y ya capta a m\u00e1s del 55% de la poblaci\u00f3n adulta del pa\u00eds."
+    },
+    {
+      "prefix": "\u2022 M\u00e9xico como Vector de Hipercrecimiento (14.2% de los ingresos): ",
+      "text": "Super\u00f3 los 8 millones de clientes tras el \u00e9xito rotundo de Cuenta Nu, acelerando la captaci\u00f3n de dep\u00f3sitos para financiar una cartera de cr\u00e9dito en explosi\u00f3n."
+    },
+    {
+      "prefix": "\u2022 Colombia en Fase de Expansi\u00f3n Inicial (3.3% de los ingresos): ",
+      "text": "Lanzamiento de cuentas de ahorro con r\u00e1pida tracci\u00f3n de dep\u00f3sitos, sentando las bases para replicar el modelo de escala de Brasil."
+    }
+  ]
+}

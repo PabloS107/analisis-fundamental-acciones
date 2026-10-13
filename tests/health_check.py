@@ -22,10 +22,10 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-# Añadir scripts de la skill al PATH para importar audit_engine
-skill_scripts_dir = Path(__file__).resolve().parent.parent / ".agents" / "skills" / "fundamental-data-extractor" / "scripts"
-if str(skill_scripts_dir) not in sys.path:
-    sys.path.insert(0, str(skill_scripts_dir))
+# Añadir scripts del pipeline al PATH para importar audit_engine
+pipeline_dir = Path(__file__).resolve().parent.parent / "pipeline"
+if str(pipeline_dir) not in sys.path:
+    sys.path.insert(0, str(pipeline_dir))
 
 try:
     from audit_engine import run_full_audit
@@ -175,15 +175,15 @@ def test_skills_integrity():
             content = f.read()
             
         has_frontmatter = content.startswith("---") and "name:" in content and "description:" in content
-        scripts_dir = skill_dir / "scripts"
-        has_scripts = scripts_dir.exists() and len(list(scripts_dir.glob("*.py"))) > 0
+        pipeline_dir = Path("pipeline")
+        has_scripts = (skill_dir / "scripts").exists() or (pipeline_dir.exists() and len(list(pipeline_dir.glob("*.py"))) > 0)
         
         if has_frontmatter and has_scripts:
-            scripts_count = len(list(scripts_dir.glob("*.py")))
+            scripts_count = len(list(pipeline_dir.glob("*.py"))) if pipeline_dir.exists() else 0
             results.append({
                 "component": f"Skill: {skill_name}",
                 "status": "PASS",
-                "message": f"Estándar Antigravity válido con frontmatter y {scripts_count} scripts ejecutables."
+                "message": f"Estándar Antigravity válido con frontmatter y scripts consolidados en pipeline/ ({scripts_count} scripts)."
             })
         else:
             issues = []

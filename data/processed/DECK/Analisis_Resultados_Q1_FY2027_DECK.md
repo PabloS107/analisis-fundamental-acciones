@@ -1,6 +1,6 @@
 # DECKERS OUTDOOR CORPORATION (NYSE: DECK)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q1 FY2027 & Gobernanza Corporativa
-*Fecha de Emisión: 22 de Septiembre de 2026 | CIK SEC: 0000910521*  
+*Fecha de Emisión: 13 de Septiembre de 2026 | CIK SEC: 0000910521*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript*
 
 ---
@@ -21,12 +21,17 @@
 
 | Línea de Negocio / Producto | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Margen / Mix | Lectura Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **HOKA** | **$2,712.0 M** | $2,587.3 M | **+4.8%** | 50.0% Consolidado | Superciclo en running técnico (Clifton, Bondi, Skyward); aceleración DTC. |
-| **UGG** | **$2,778.6 M** | $2,738.8 M | **+1.5%** | 50.0% Consolidado | Desestacionalización exitosa (Tasman, Tazz); venta a precio completo. |
-| **Other Brands** | **$147.6 M** | $146.2 M | **+1.0%** | 50.0% Consolidado | Crecimiento estructural y tracción en canales clave. |
-| **Wholesale (Canal)** | **$3,250.0 M** | $3,208.1 M | **+1.3%** | 50.0% Consolidado | Crecimiento estructural y tracción en canales clave. |
-| **Direct-to-Consumer (Canal)** | **$2,388.2 M** | $2,264.2 M | **+5.5%** | 50.0% Consolidado | Crecimiento estructural y tracción en canales clave. |
+| **HOKA** | **$2,658.7 M** | $2,587.3 M | **+2.8%** | 48.1% Mix | Desempeño estable (+2.8% YoY); consolidación en mercados y canales core. |
+| **UGG** | **$2,724.4 M** | $2,738.8 M | **-0.5%** | 49.3% Mix | Normalización moderada (-0.5% YoY); ajuste de demanda o transición de catálogo. |
+| **Other Brands** | **$144.2 M** | $146.2 M | **-1.4%** | 2.6% Mix | Normalización moderada (-1.4% YoY); ajuste de demanda o transición de catálogo. |
+| **Wholesale (Canal)** | **$3,186.1 M** | $3,208.1 M | **-0.7%** | Subtotal | Subtotal consolidado de canal/categoría (-0.7% YoY). |
+| **Direct-to-Consumer (Canal)** | **$2,341.2 M** | $2,264.2 M | **+3.4%** | Subtotal | Subtotal consolidado de canal/categoría (+3.4% YoY). |
 
+
+### Análisis Cualitativo de las Líneas de Negocio:
+* **HOKA (48.1% de facturación):** Genera $2,658.7 M (+2.8% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **UGG (49.3% de facturación):** Genera $2,724.4 M (-0.5% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **Other Brands (2.6% de facturación):** Genera $144.2 M (-1.4% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
 
 ---
 
@@ -34,9 +39,13 @@
 
 | Región Geográfica | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Peso en Ventas % | Diagnóstico Operativo |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Domestic (EE.UU.)** | **$3,238.5 M** | $3,191.5 M | **+1.5%** | 57.4% | Mercado estratégico clave; sólida demanda y disciplina de precios. |
-| **International (Global)** | **$2,399.7 M** | $2,280.8 M | **+5.2%** | 42.6% | Mercado estratégico clave; sólida demanda y disciplina de precios. |
+| **Domestic (EE.UU.)** | **$3,174.9 M** | $3,191.5 M | **-0.5%** | 57.4% | Mercado en ajuste (-0.5% YoY); presión macroeconómica o vientos cambiarios (FX). |
+| **International (Global)** | **$2,352.4 M** | $2,280.8 M | **+3.1%** | 42.6% | Mercado estratégico consolidado (+3.1% YoY); estabilidad operativa. |
 
+
+### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
+* **Mercado Domestic (EE.UU.) (57.4% del total):** Aporta $3,174.9 M con variación YoY de -0.5%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado International (Global) (42.6% del total):** Aporta $2,352.4 M con variación YoY de +3.1%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
 
 ---
 
@@ -62,11 +71,11 @@
 
 
 > 📌 **GUÍA DE DIAGNÓSTICO FUNDAMENTAL: ¿QUÉ EVALÚA CADA PARÁMETRO CLAVE?**  
-> • **Margen Bruto (%):** Mide el poder de fijación de precios (*pricing power*) de la empresa y la ventaja competitiva frente a costes directos.  
-> • **Margen Operativo (%):** Refleja la eficiencia para controlar gastos fijos de administración, marketing e investigación (OpEx).  
-> • **Margen Neto (%):** Retención final disponible tras cubrir costes operativos, gastos financieros e impuestos.  
-> • **Flujo de Caja Libre (FCF):** Efectivo puro disponible tras financiar todas las inversiones de capital (CapEx).  
-> • **Conversión FCF / Beneficio Neto:** Ratios > 100% certifican ganancias de alta calidad contable.
+> • Margen Bruto (%): Mide el poder de fijación de precios (pricing power) de la empresa y la ventaja competitiva frente a sus proveedores y costes directos. Un margen en expansión indica que el cliente está dispuesto a pagar por el valor de la marca o que la compañía tiene economías de escala superiores.  
+> • Margen Operativo (%): Refleja la eficiencia de la gestión para controlar la estructura fija de administración, marketing e investigación (OpEx). Demuestra si la compañía goza de apalancamiento operativo positivo.  
+> • Margen Neto (%): Es la rentabilidad final que le queda a la empresa tras cubrir costes operativos, gastos financieros de la deuda e impuestos corporativos. Proporción de los ingresos que termina directamente en el bolsillo de los accionistas.  
+> • Flujo de Caja Libre (FCF) y Margen FCF: Es el indicador más fidedigno de la salud económica real (Cash is King). Mide los dólares reales que ingresan a la caja tras pagar todas las inversiones de mantenimiento y expansión (CapEx). Capital disponible para recomprar acciones, pagar dividendos o desendeudarse.  
+> • Tasa de Conversión FCF / Beneficio Neto: Evalúa la calidad contable de las ganancias. Ratios consistentes en torno o por encima del 100% garantizan que la empresa no está inflando sus resultados con devengos agresivos.
 
 ---
 
@@ -296,18 +305,18 @@ Desarrollado por el profesor Joseph Piotroski (Universidad de Stanford), este mo
 * **¿Qué significa este puntaje para el Inversor?** Una calificación de 6/9 sitúa a Deckers Outdoor Corporation en el percentil superior del mercado global. Certifica que la compañía:
   1. **Genera beneficios respaldados por caja líquida:** La caja operativa ($1,193.7M en LTM) respalda con holgura al beneficio neto contable ($1,014.8M), descartando manipulación de inventarios o ventas a crédito ficticias.
   2. **Reduce o controla su apalancamiento financiero real:** Mantiene una estructura financiera solvente con disciplina en el endeudamiento (Deuda 0.0% vs 0.0% (+0.00%)).
-  3. **Protege al accionista minoritario:** No financia sus operaciones emitiendo nuevas acciones dilutivas, priorizando la retención o recompra de títulos (Acc 138M vs 145M (-7M)).
+  3. **Protege al accionista minoritario:** No financia sus operaciones emitiendo nuevas acciones dilutivas, priorizando la retención o recompra de títulos (Acc 143M vs 145M (-3M)).
   4. **Expande su eficiencia operativa:** Optimiza tanto su margen comercial (MB 57.8% vs 57.7% (+0.10%)) como la productividad de sus activos instalados (Rot 1.50x vs 1.53x (-0.03x)).
 
 | Dimensión / Criterio Piotroski | Condición Contable Evaluada | Valor Detectado | Punto Asignado |
 | :--- | :--- | :---: | :---: |
 | **Rentabilidad: ROA Positivo** | Utilidad neta positiva sobre la base de activos instalados. | 27.52% > 0% | **1 Pto** |
-| **Rentabilidad: CFO Positivo** | Flujo de caja operativo neto positivo. | $1.2B > $0 | **1 Pto** |
+| **Rentabilidad: CFO Positivo** | Flujo de caja operativo neto positivo. | $1,193.7M > $0 | **1 Pto** |
 | **Rentabilidad: Mejora de ROA (Delta ROA)** | Aceleración de la rentabilidad sobre activos frente al año previo. | 27.5% vs 28.7% (-1.16%) | **0 Ptos** |
-| **Rentabilidad: Calidad Contable (CFO > NI)** | Beneficios respaldados por efectivo contante (bajos devengos contables). | CFO $1.2B > NI $1.0B | **1 Pto** |
+| **Rentabilidad: Calidad Contable (CFO > NI)** | Beneficios respaldados por efectivo contante (bajos devengos contables). | CFO $1,193.7M > NI $1,014.8M | **1 Pto** |
 | **Apalancamiento y Liquidez: Desendeudamiento Total** | Reducción o estabilidad del apalancamiento financiero total sobre activos. | Deuda 0.0% vs 0.0% (+0.00%) | **1 Pto** |
 | **Apalancamiento y Liquidez: Mejora de Razón Corriente** | Mayor cobertura de pasivos a corto plazo con activos corrientes. | CR 2.75x vs 3.54x (-0.80x) | **0 Ptos** |
-| **Apalancamiento y Liquidez: Cero Dilución (Acciones Básicas)** | Sin emisión neta dilutiva de capital; recompra de acciones o estabilidad. | Acc 138M vs 145M (-7M) | **1 Pto** |
+| **Apalancamiento y Liquidez: Cero Dilución (Acciones Básicas)** | Sin emisión neta dilutiva de capital; recompra de acciones o estabilidad. | Acc 143M vs 145M (-3M) | **1 Pto** |
 | **Eficiencia Operativa: Expansión de Margen Bruto** | Mayor poder de fijación de precios o menor coste unitario de ventas. | MB 57.8% vs 57.7% (+0.10%) | **1 Pto** |
 | **Eficiencia Operativa: Expansión Rotación de Activos** | Mayor volumen de ingresos generado por cada dólar de activo instalado. | Rot 1.50x vs 1.53x (-0.03x) | **0 Ptos** |
 
@@ -326,7 +335,7 @@ Diseñado por el profesor Partha Mohanram (Universidad de Columbia), este modelo
 | :--- | :--- | :---: | :---: |
 | **ROA > Mediana del Sector** | Rentabilidad sobre activos superior a la mitad del sector. | ROA 27.52% vs Med 8.09% | **1 Pto** |
 | **CFROA > Mediana del Sector** | Generación de caja operativa sobre activos líder en la industria. | CFROA 32.37% vs Med 8.47% | **1 Pto** |
-| **Calidad Contable (CFO > NI)** | Flujo de caja operativo superior a las ganancias devengadas. | CFO $1.2B > NI $1.0B | **1 Pto** |
+| **Calidad Contable (CFO > NI)** | Flujo de caja operativo superior a las ganancias devengadas. | CFO $1,193.7M > NI $1,014.8M | **1 Pto** |
 | **Estabilidad / Nivel Superior de ROA** | Baja volatilidad en rentabilidad o nivel de retorno permanentemente en percentil 75 superior. | CV 0.16 < 0.35 (o P75) | **1 Pto** |
 | **Estabilidad / Aceleración de Ventas** | Trayectoria predecible de ingresos o expansión acelerada superior al 20% anual. | CV 0.24 vs 0.40 | **1 Pto** |
 | **Intensidad en I+D vs Sector** | Reinversión en investigación y desarrollo para fortalecer ventajas competitivas (moats). | I+D 1.87% vs Med 0.00% | **1 Pto** |
@@ -418,7 +427,7 @@ A continuación se presenta el ranking institucional de la canasta de competidor
 
 | Rank | Ticker | Empresa Competidora | Período | GP / Activos (%) | GP Ex-Caja (%) | Margen Bruto (%) | Rotación (x) | Brecha vs Mediana |
 | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **#1** | **DECK** | **Deckers Outdoor Corp.** | LTM (Q1 FY27 Móvil) | **82.59%** | 137.80% | 57.80% | 1.43x | **+28.72 pp** |
+| **#1** | **DECK** | **DECKERS OUTDOOR CORP** | LTM | **82.59%** | 140.99% | 57.80% | 1.43x | **+28.72 pp** |
 | #2 | SKX | Skechers U.S.A., Inc. | LTM (FY2025 Auditado) | 55.90% | 66.99% | 52.70% | 1.06x | +2.04 pp |
 | #3 | SHOO | Steven Madden, Ltd. | LTM (FY2025 Auditado) | 54.64% | 61.74% | 41.48% | 1.32x | +0.78 pp |
 | #4 | NKE | NIKE, Inc. | LTM (FY2026 Auditado) | 53.87% | 66.29% | 44.59% | 1.21x | +0.00 pp |
@@ -439,13 +448,13 @@ A continuación se presenta el ranking institucional de la canasta de competidor
 
 Evaluación del retorno económico del capital y la sostenibilidad de las ventajas competitivas (*Economic Moat*) para **Deckers Outdoor Corporation (DECK)** al período **LTM**.
 
-> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +43.28 p.p.)**  
+> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +43.04 p.p.)**  
 > • **ROC Greenblatt Tangible (LTM):** **234.09%** (Productividad operativa pura pre-tax sobre capital de trabajo y PP&E físico instalado).  
 > • **ROIC Ajustado por Intangibles (LTM):** **53.58%** (Retorno económico post-tax reconstituyendo $947.5M de I+D fuera de balance).  
 > • **ROIC Contable Tradicional (LTM):** **90.86%** (Métrica contable estándar que subestima el capital empleado al enviar I+D a gasto corriente).  
-> • **Costo Promedio Ponderado de Capital (WACC):** **10.31%** (Costo del Equity Ke: 10.31% | Costo Deuda Kd post-tax: 0.00%).  
-> • **Spread Económico Neto (EVA):** **+43.28 p.p.** de rendimiento generado por encima de la tasa de corte exigida por el mercado.  
-> • **Tesis de Foso Defensivo:** Deckers Outdoor Corporation combina una productividad física tangible colosal (ROC > 300%) gracias a su modelo *Asset-Light*, con un retorno sobre capital total (ROIC Ajustado 53.58%) que supera a su WACC por más de 42 puntos porcentuales, confirmando ventajas competitivas estructuralmente blindadas frente a cualquier rival.
+> • **Costo Promedio Ponderado de Capital (WACC):** **10.55%** (Costo del Equity Ke: 10.55% | Costo Deuda Kd post-tax: 0.00%).  
+> • **Spread Económico Neto (EVA):** **+43.04 p.p.** de rendimiento generado por encima de la tasa de corte exigida por el mercado.  
+> • **Tesis de Foso Defensivo:** Deckers Outdoor Corporation combina una productividad física tangible de 234.1% gracias a su modelo operativo, con un retorno sobre capital total (ROIC Ajustado 53.58%) que supera a su WACC por +43.0 p.p., confirmando ventajas competitivas estructuralmente blindadas frente a sus rivales.
 
 ---
 
@@ -455,22 +464,22 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 
 | Variable de Mercado | Valor Validado | Fuente Primaria / Secundaria | Tolerancia & Estatus |
 | :--- | :---: | :---: | :---: |
-| **Precio de Mercado de la Acción** | **$80.23** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
-| **Capitalización Bursátil (Market Cap - E)** | **$11,116.6M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
-| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **4.94%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
-| **Beta de la Acción ($\beta$)** | **1.13** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
+| **Precio de Mercado de la Acción** | **$84.00** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
+| **Capitalización Bursátil (Market Cap - E)** | **$12,015.1M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
+| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.22%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
+| **Beta de la Acción ($\beta$)** | **1.12** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-09-22T13:15:25.969406+00:00`. Precio validado por consenso: $80.23 (Yahoo: $80.23, CNBC: $80.23, Δ=0.00%) | Market Cap calculado: $11,116.6M vía Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.940% (Yahoo ^TNX: 4.945%, CNBC US10Y: 4.935%) | Beta validado: 1.13 (Yahoo: 1.15, CNBC: 1.11, Δ=0.04).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-13T18:04:43.886663+00:00`. Precio validado por consenso: $84.00 (Yahoo: $84.00, CNBC: $84.01, Δ=0.01%) | Market Cap calculado: $12,015.1M vía Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.222% (Yahoo ^TNX: 5.221%, CNBC US10Y: 5.223%) | Beta validado: 1.12 (Yahoo: 1.12, CNBC: 1.12, Δ=0.00).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
 El WACC representa el rendimiento mínimo anual exigido por los accionistas y los acreedores para compensar el costo de oportunidad y el riesgo del negocio:
 
-* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 4.94\% + (1.13 \times 4.75\%) =$ **10.31%**
+* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.22% + (1.12 \times 4.75%) =$ **10.55%**
 * **Costo de la Deuda ($K_d$)**: **0.00%** (*Empresa 100% financiada con recursos propios, deuda financiera $0.0M*).
 * **Ponderación de Capital**: Equity $W_e = 100.0\%$, Deuda $W_d = 0.0\%$.
-* **WACC Consolidado**: $\text{WACC} = K_e =$ **10.31%** (vs. Mediana del Sector: **8.50%**).
+* **WACC Consolidado**: $\text{WACC} = K_e =$ **10.55%** (vs. Mediana del Sector: **8.50%**).
 
 ---
 
@@ -483,8 +492,7 @@ $$\text{ROC Greenblatt} = \frac{\text{Beneficio Operativo (EBIT)}}{\text{Capital
 
 **¿Por qué es una métrica indispensable en Wall Street?**
 1. **Neutralidad Financiera e Impositiva:** Al utilizar el EBIT, elimina distorsiones originadas por distintas estructuras de endeudamiento o subsidios fiscales transitorios.
-2. **Aislamiento del Negocio Físico:** Evalúa con qué intensidad el capital tangible genera flujos. En compañías *Asset-Light* con subcontratación de manufactura, el ratio alcanza niveles extraordinarios.
-3. **Lectura del 234.09% para Apple:** La compañía opera con Capital de Trabajo Negativo (-$28,045M), ya que cobra a clientes antes de pagar a proveedores. Aplicando la salvaguarda de Greenblatt (el capital tangible no puede ser menor a PP&E neto), la base tangible promedio es de **$535.2M**, rindiendo más de **$3.00 de EBIT por cada dólar físico instalado**.
+3. **Lectura del 234.09% para Deckers Outdoor Corporation:** La compañía opera con una base de capital tangible promedio de **$535.2M** (NWC Operativo: $0.0M + Net PP&E: $0.0M), rindiendo **$2.34 de EBIT por cada dólar físico instalado**.
 
 #### Desglose Contable y Conciliación de ROC Greenblatt (Trazabilidad en Balances SEC)
 
@@ -520,19 +528,19 @@ Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza 
 
 | Período Contable | ROC Greenblatt Tangible (%) | ROIC Tradicional Prom. (%) | ROIC Ajustado Prom. (%) | Stock Intangibles ($M) | Capital Invertido Reconstituido Prom. ($M) | Spread vs. WACC (p.p.) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **FY2022** | 127.09% | 57.30% | **40.52%** | $504.9M | $1,246.2M | **+30.21 p.p.** |
-| **FY2023** | 101.43% | 50.95% | **36.93%** | $578.6M | $1,553.8M | **+26.63 p.p.** |
-| **FY2024** | 151.89% | 73.62% | **50.67%** | $699.3M | $1,634.3M | **+40.36 p.p.** |
-| **FY2025** | 224.48% | 102.10% | **61.79%** | $833.0M | $1,678.5M | **+51.48 p.p.** |
-| **FY2026** | 251.62% | 105.71% | **59.33%** | $947.5M | $1,834.0M | **+49.02 p.p.** |
-| **LTM** | 234.09% | 90.86% | **53.58%** | $947.5M | $2,036.9M | **+43.28 p.p.** |
+| **FY2022** | 127.09% | 57.30% | **40.52%** | $504.9M | $1,246.2M | **+29.97 p.p.** |
+| **FY2023** | 101.43% | 50.95% | **36.93%** | $578.6M | $1,553.8M | **+26.39 p.p.** |
+| **FY2024** | 151.89% | 73.62% | **50.67%** | $699.3M | $1,634.3M | **+40.12 p.p.** |
+| **FY2025** | 224.48% | 102.10% | **61.79%** | $833.0M | $1,678.5M | **+51.24 p.p.** |
+| **FY2026** | 251.62% | 105.71% | **59.33%** | $947.5M | $1,834.0M | **+48.78 p.p.** |
+| **LTM** | 234.09% | 90.86% | **53.58%** | $947.5M | $2,036.9M | **+43.04 p.p.** |
 
 **Jerarquía de Eficiencia del Capital y Retornos Operativos**:
 1. **ROC Greenblatt (Tangible pre-tax)**: Mide la productividad pura de los activos operativos tangibles ($EBIT / (NWC + PP&E)$). Es neutral a tasas de impuestos y apalancamiento.
 2. **ROIC Tradicional (Contable post-tax)**: Retorno contable NOPAT sobre capital invertido según balance GAAP/IFRS.
 3. **ROIC Ajustado (Económico con intangibles capitalizados)**: Reconstituye activos fuera de balance (I+D y publicidad) capitalizándolos roll-forward.
-4. **Costo de Capital (WACC)**: Tasa de corte institucional exigida por el mercado (10.31%).
-5. **Spread Económico (Creación de Valor)**: Excedente neto generado sobre la tasa de corte (+43.28 p.p.).
+4. **Costo de Capital (WACC)**: Tasa de corte institucional exigida por el mercado (10.55%).
+5. **Spread Económico (Creación de Valor)**: Excedente neto generado sobre la tasa de corte (+43.04 p.p.).
 
 **Matriz de Sensibilidad de Vida Útil Económica ($N$) para I+D**:
 * **Escenario Acelerado ($N-1 = 2$ años)**: Intangibles acumulados $921.7M $\rightarrow$ ROIC Ajustado: **54.08%**.
@@ -545,11 +553,11 @@ Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza 
 
 ### **Dictamen Estratégico: 🏰 WIDE MOAT / COMPOUNDING MACHINE**
 
-$$\text{Economic Spread} = \text{ROIC}_{\text{Ajustado}} - \text{WACC} = 53.58\% - 10.31\% = \mathbf{+43.28\text{ p.p.}}$$
+$$\text{Economic Spread} = \text{ROIC}_{\text{Ajustado}} - \text{WACC} = 53.58% - 10.55% = \mathbf{+43.04 p.p.}$$
 
-> **Explicación Pedagógica del Spread Económico**: El negocio genera un retorno ajustado (53.58%) que supera a su costo de capital (10.31%) por más de 43.28 puntos porcentuales. Por cada $100 de capital empleado, crea más de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas.
+> **Explicación Pedagógica del Spread Económico**: El negocio genera un retorno ajustado (53.58%) que supera a su costo de capital (10.55%) por más de 43.04 puntos porcentuales. Por cada $100 de capital empleado, crea más de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas.
 
-A diferencia del ROIC contable tradicional (90.86%), que sobrestima la rentabilidad al ignorar la reinversión en innovación, el ROIC Ajustado de **53.58%** (calculado sobre el Capital Invertido Promedio de **$2,036.9M** para garantizar perfecta correspondencia temporal con el NOPAT) demuestra que la empresa supera a su costo de financiamiento (**10.31%**) con holgura extraordinaria, confirmando la existencia de un foso defensivo indestructible frente a sus competidores directos.
+A diferencia del ROIC contable tradicional (90.86%), que sobrestima la rentabilidad al ignorar la reinversión en innovación, el ROIC Ajustado de **53.58%** (calculado sobre el Capital Invertido Promedio de **$2,036.9M** para garantizar perfecta correspondencia temporal con el NOPAT) demuestra que la empresa supera a su costo de financiamiento (**10.55%**) con holgura extraordinaria, confirmando la existencia de un foso defensivo indestructible frente a sus competidores directos.
 
 ---
 
@@ -559,19 +567,19 @@ La siguiente tabla unifica la totalidad de los ratios e indicadores calculados e
 
 | Categoría Analítica | Métrica / Ratio Institucional | Valor LTM | Benchmark / Referencia | Diagnóstico para el Inversor |
 | :--- | :--- | :---: | :---: | :--- |
-| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **4.94%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
-| | Beta de la Acción ($\beta$) | **1.13** | S&P 500 = 1.00x | Sensibilidad cíclica moderada y alineada al mercado. |
+| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **5.22%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
+| | Beta de la Acción ($\beta$) | **1.12** | S&P 500 = 1.00x | Sensibilidad cíclica moderada y alineada al mercado. |
 | | Prima de Riesgo de Mercado (ERP) | **4.75%** | NYU Stern Damodaran | Exigencia de prima de retorno sobre el activo libre de riesgo. |
-| **Costo de Capital (WACC)** | Costo del Capital Propio ($K_e$ vía CAPM) | **10.31%** | Rango 9.5% - 10.5% | Retorno anual exigido por los tenedores de acciones comunes. |
+| **Costo de Capital (WACC)** | Costo del Capital Propio ($K_e$ vía CAPM) | **10.55%** | Rango 9.5% - 10.5% | Retorno anual exigido por los tenedores de acciones comunes. |
 | | Costo de Deuda Neta ($K_d$ Post-Tax) | **0.00%** | Tasa cupón efectiva | Financiación crediticia con escudo fiscal del 21.0%. |
-| | **WACC Consolidado** | **10.31%** | Mediana Sector (8.50%) | Tasa de corte u obstáculo financiero mínimo para crear valor. |
-| **Productividad Tangible** | **ROC Greenblatt (Pre-Tax)** | **234.09%** | Mediana Sector (29.85%) | Negocio Asset-Light extremo; supera al sector por +204.2 pp. |
-| | Capital Tangible Operativo Promedio | **$535.2M** | Balance SEC Form 10-Q | Base física mínima gracias a capital de trabajo negativo. |
+| | **WACC Consolidado** | **10.55%** | Mediana Sector (8.50%) | Tasa de corte u obstáculo financiero mínimo para crear valor. |
+| **Productividad Tangible** | **ROC Greenblatt (Pre-Tax)** | **234.09%** | Mediana Sector (40.90%) | Negocio Asset-Light; supera al sector por +193.19 p.p.. |
+| | Capital Tangible Operativo Promedio | **$535.2M** | Balance SEC Form 10-Q | Base física operativa tras salvaguarda anti-distorsión. |
 | **Retorno Total Reconstituido** | ROIC Contable Tradicional (GAAP) | **90.86%** | ROIC sin ajustes | Métrica distorsionada por no capitalizar gasto de innovación. |
 | | Stock de Intangibles de I+D Fuera de Balance | **$947.5M** | Amortización a 3 Años | Valor acumulado de patentes, silicio y software propietario. |
 | | Capital Invertido Reconstituido Promedio | **$2,036.9M** | Base Económica Total | Base de capital honesta que absorbe las inversiones en I+D. |
-| | **ROIC Ajustado por Intangibles** | **53.58%** | Mediana Sector (18.30%) | Retorno real sobre capital total invertido en el negocio. |
-| **Creación de Valor (EVA)** | **Spread Económico (ROIC Adj − WACC)** | **+43.28 pp** | Mediana Sector (+9.20 pp) | Extraordinaria generación de riqueza neta sobre el coste de capital. |
+| | **ROIC Ajustado por Intangibles** | **53.58%** | Mediana Sector (17.50%) | Retorno real sobre capital total invertido en el negocio. |
+| **Creación de Valor (EVA)** | **Spread Económico (ROIC Adj − WACC)** | **+43.04 p.p.** | Mediana Sector (+8.60 p.p.) | Extraordinaria generación de riqueza neta sobre el coste de capital. |
 | | **Dictamen de Foso Defensivo (*Moat*)** | **🏰 WIDE MOAT / COMPOUNDING MACHINE** | Compounding Machine | Fortaleza estructural inquebrantable de largo plazo. |
 
 ---
@@ -579,10 +587,10 @@ La siguiente tabla unifica la totalidad de los ratios e indicadores calculados e
 
 ## 12. Auditoría Forense Contable y Calidad de Beneficios (Detección de Trampas Contables)
 
-> **DIAGNÓSTICO FORENSE GENERAL (LTM):** ZONA DE VIGILANCIA (GRADO INSTITUCIONAL)  
+> **DIAGNÓSTICO FORENSE GENERAL (LTM):** MÁXIMA CALIDAD CONTABLE (GRADO INSTITUCIONAL)  
 > **Ratio de Devengos de Sloan:** -4.73% [ALTA CONVERSIÓN DE CAJA (CFO > NI)]  
-> **Montier C-Score:** 3 / 6 [RIESGO MODERADO / ALERTA PREVENTIVA (< 5% PROBABILIDAD DE MANIPULACIÓN)]  
-> **Dictamen Consolidado:** *ZONA DE VIGILANCIA POR DESFASES OPERATIVOS: Montier C-Score de 3/6 con divergencias puntuales en capital de trabajo. Revisar ciclos estacionales de inventarios y condiciones comerciales de cobro.*
+> **Montier C-Score:** 2 / 6 [RIESGO MODERADO / ALERTA PREVENTIVA (< 25% RIESGO MODERADO)]  
+> **Dictamen Consolidado:** *CALIDAD DE BENEFICIOS EXCEPCIONAL (GRADO INSTITUCIONAL): Conversión de efectivo sobresaliente (Ratio Sloan: -4.73%, CFO > Utilidad Neta), devengos negativos que suprimen riesgo de inflación contable y Montier C-Score de 2/6 que descarta maniobras de manipulación deliberada.*
 
 A fin de verificar la autenticidad intrínseca de las ganancias reportadas ante los reguladores (SEC) y descartar de forma exhaustiva el riesgo de 'beneficios de papel', inflación artificial de márgenes o reconocimiento agresivo de ventas, se auditan **tres instrumentos cuantitativos especializados no redundantes**:
 1. **Ratio de Devengos de Sloan (Richard Sloan, 1996)**: Mide la brecha entre el resultado contable devengado y el flujo de caja operativo real.
@@ -612,7 +620,7 @@ $$\text{Sloan Accrual Ratio} = \frac{\text{Utilidad Neta GAAP} - \text{Flujo de 
 | Diagnóstico de Fidelidad | **EXCELENTE** | **EXCELENTE** | **SALUDABLE** | **EXCELENTE** | **SALUDABLE** | Fidelidad Ininterrumpida |
 
 
-**Interpretación Económica para el Inversor:** En el período acumulado LTM, Deckers Outdoor Corporation generó **$1.2B** en flujo de caja operativo frente a un beneficio neto reportado de **$1.0B**, lo que arroja una brecha de devengos negativa de **-$0.2B** y un Ratio Sloan de **-4.73%**. Esto implica una **tasa de conversión de caja del 117.6%** (cada dólar de beneficio neto reportado a la SEC está respaldado por **$1.18 de efectivo real** en cuenta bancaria). La serie histórica ratifica una disciplina impecable: la compañía ha mantenido devengos negativos o neutrales en todos los ejercicios auditados, confirmando beneficios puros y conservadores.
+**Interpretación Económica para el Inversor:** En el período acumulado LTM, Deckers Outdoor Corporation generó **$1,193.7M** en flujo de caja operativo frente a un beneficio neto reportado de **$1,014.8M**, lo que arroja una brecha de devengos negativa de **-$178.9M** y un Ratio Sloan de **-4.73%**. Esto implica una **tasa de conversión de caja del 117.6%** (cada dólar de beneficio neto reportado a la SEC está respaldado por **$1.18 de efectivo real** en cuenta bancaria). La serie histórica ratifica una disciplina impecable: la compañía ha mantenido devengos negativos o neutrales en todos los ejercicios auditados, confirmando beneficios puros y conservadores.
 
 ### 12.2. Matriz de Divergencias de Alerta Temprana (Early Warning Spreads)
 
@@ -629,26 +637,26 @@ Las irregularidades contables rara vez aparecen de forma súbita en la cuenta de
 | **3. Índice de Activos Blandos (Soft Assets)** | Partidas No Físicas / Activos | **49.8%** (Umbral > 75%) | Δ p.p.: **+10.7 pp** | **✅ BALANCE TRANSPARENTE.** El balance conserva solidez estructural (Ratio Activos Blandos: 49.8%). Adecuado respaldo de activos duros y liquidez. |
 
 
-> 🔍 **NOTA DE AUDITORÍA FORENSE SOBRE EL INVENTARIO (DECK):**  
-> La variación de existencias frente a costes (Spread: +65.1%, DIO: 126.4d) se audita en el marco del ciclo productivo habitual de la firma, descartando contingencias materiales de obsolescencia o diferimiento indebido de costes.
+> 🔍 **NOTA DE AUDITORÍA FORENSE SOBRE EL INVENTARIO (Deckers Outdoor Corporation):**  
+> Las existencias crecen 65.1% por encima del coste de ventas, elevando el inventario en +49.6 días (DIO: 126.4d). Evaluar si responde a preparación estacional de lanzamientos o acumulación no vendida.
 
 ### 12.3. Montier C-Score (James Montier - 'Cooking the Books')
 
 James Montier, estratega de Société Générale y GMO, diseñó un sistema cuantitativo de 6 banderas binarias basado en las principales señales empíricas de maquillaje contable observadas en las últimas tres décadas de mercados de capitales. En el estudio histórico de Montier, las empresas con una puntuación de **0 a 1 banderas** presentan una probabilidad de fraude o corrección contable inferior al **5%**, mientras que las firmas con **4 o más banderas** sufren caídas de rentabilidad superiores al **80%** en los 12 meses posteriores.
 
-#### Desglose de las 6 Banderas de Montier en LTM (DECK: 3/6)
+#### Desglose de las 6 Banderas de Montier en LTM (DECK: 2 / 6)
 | Bandera de Manipulación (C-Score) | Condición de Alerta | Valor Auditado (LTM) | Estado | Trampa Contable que Previene / Racional |
 | :--- | :--- | :---: | :---: | :--- |
 | **1. Divergencia Beneficio vs. Flujo de Caja** | Utilidad Neta > Flujo de Caja Operativo (NI > CFO) | NI: $1,014.8M vs CFO: $1,193.7M | **✅ OK (Limpio)** | La utilidad contable no se transforma en liquidez real. Alerta de beneficios de papel. |
-| **2. Cuentas por Cobrar vs. Ventas** | Δ Cuentas por Cobrar % > Δ Ventas % | ΔAR: 18.6% vs ΔVentas: 1.0% | **🚩 FLAG (Alerta)** | Las cuentas a cobrar crecen más rápido que las ventas. Indica relajación de cobros o facturación apresurada (channel stuffing). |
-| **3. Inventarios vs. Coste de Ventas** | Δ Inventarios % > Δ Coste de Ventas % | ΔInv: 65.8% vs ΔCOGS: 0.8% | **🚩 FLAG (Alerta)** | Las existencias crecen más rápido que los costes de venta. Puede esconder producto no vendido o absorción de costes en inventario para inflar márgenes. |
-| **4. Deterioro del Margen Bruto** | Margen Bruto_t < Margen Bruto_t-1 | Margen Bruto: 57.8% vs 57.7% | **✅ OK (Limpio)** | El deterioro del margen bruto genera incentivos en los ejecutivos para estirar partidas contables inferiores. |
-| **5. Incremento de Activos Blandos** | Ratio Activos Blandos_t > Ratio Activos Blandos_t-1 | Activos Blandos: 49.8% vs 39.1% | **🚩 FLAG (Alerta)** | Aumento del peso relativo de partidas del balance que no son activos productivos tangibles ni tesorería. |
-| **6. Reducción de la Tasa de Depreciación** | Tasa Depreciación_t < Tasa Depreciación_t-1 | Tasa Deprec: 17.98% vs 18.32% | **✅ OK (Limpio)** | Reducción de la amortización contable respecto a los activos brutos, inflando el beneficio neto al estirar vidas útiles. |
+| **2. Cuentas por Cobrar vs. Ventas (DSO)** | Δ DSO > 0 (o %Δ Cuentas por Cobrar > %Δ Ventas) | DSO: 25.0d (Δ: +3.7d) | **🚩 FLAG (Alerta)** | El plazo de cobro se dilata o las cuentas a cobrar crecen más rápido que las ventas. Indica relajación de cobros o facturación apresurada (channel stuffing). |
+| **3. Inventarios vs. Coste de Ventas (DIO)** | Δ DIO > 0 (o %Δ Inventarios > %Δ Coste de Ventas) | DIO: 126.4d (Δ: +49.6d) | **🚩 FLAG (Alerta)** | Las existencias rotan más lento o crecen más rápido que los costes. Puede esconder producto no vendido o absorción de costes en inventario para inflar márgenes. |
+| **4. Otros Activos Corrientes vs. Ventas** | Ratio Otros Act. Ctes/Ventas_t > Ratio Otros Act. Ctes/Ventas_t-1 | Otros Act/Ventas: 2.34% vs 2.47% | **✅ OK (Limpio)** | Incremento del peso relativo de otros activos corrientes. Alerta de partidas dudosas o cargos diferidos ocultos fuera de clientes e inventarios. |
+| **5. Reducción de la Tasa de Depreciación** | Tasa Depreciación_t < Tasa Depreciación_t-1 | Tasa Deprec: 17.98% vs 18.32% | **✅ OK (Limpio)** | Reducción de la amortización contable respecto a los activos brutos, inflando el beneficio neto al estirar vidas útiles estimadas. |
+| **6. Crecimiento Excesivo de Activos Totales** | Crecimiento Interanual de Activos Totales > 10.0% | ΔActivos: +4.9% (Umbral: > 10%) | **✅ OK (Limpio)** | Expansión acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad orgánica y distorsionar resultados. |
 
 
-> **DICTAMEN MONTIER C-SCORE:** **3 / 6 Banderas** — *RIESGO MODERADO / ALERTA PREVENTIVA*  
-> Se observan 2 a 3 señales atípicas de capital de trabajo o márgenes. Si bien no implica manipulación contable dolosa, amerita verificar la estacionalidad del inventario y los términos contractuales de clientes. Con 3 banderas operativas asociadas a la rotación de capital de trabajo, se recomienda monitorear la estacionalidad habitual de inventario y clientes sin indicios de manipulación contable dolosa.
+> **DICTAMEN MONTIER C-SCORE:** **2 / 6** — *RIESGO MODERADO / ALERTA PREVENTIVA*  
+> Se observan 2 señales atípicas de capital de trabajo o partidas secundarias. Si bien no implica manipulación contable dolosa, amerita verificar la estacionalidad del inventario o los términos comerciales de cobro. Con 2 banderas operativas asociadas a la rotación de capital de trabajo, se recomienda monitorear la estacionalidad habitual de inventario y clientes sin indicios de manipulación contable dolosa.
 
 ### 12.4. Cuadro de Mando Consolidado de Fidelidad Contable y Calidad de Beneficios
 
@@ -661,7 +669,7 @@ La siguiente matriz sintetiza la totalidad de los indicadores forenses auditados
 | **Riesgo Channel Stuffing** | Spread AR vs. Ventas | **+17.6%** | < +10.0% | Spread elevado (+17.6%), pero DSO ultra-bajo (25.0d) descarta ventas ficticias. |
 | **Gestión de Existencias** | Días de Inventario (DIO) | **126.4 días** | < 130 días | Rotación equilibrada (126.4d); ciclo operativo dentro del estándar sectorial. |
 | **Integridad del Balance** | Variación Activos Blandos | **+10.7 pp** | < +2.0 pp | Aumento moderado (+10.7 pp); balance sano con activos blandos bajo 75% (49.8%). |
-| **Manipulación Agregada** | **Montier C-Score Total** | **3 / 6** | 0 - 1 Banderas | Riesgo moderado (3/6); banderas operativas no constitutivas de fraude. |
+| **Manipulación Agregada** | **Montier C-Score Total** | **2 / 6** | 0 - 1 Banderas | Riesgo moderado (2/6); banderas operativas no constitutivas de fraude (< 25%). |
 
 
 ---
@@ -683,7 +691,7 @@ Mide en cuántos años de generación operativa bruta (**EBITDA**) o caja de lib
 | :--- | :--- | :---: | :---: | :--- |
 | **Deuda Financiera Total** | Deuda a Corto + Largo Plazo | Referencia | **$0.0M** | Nivel de apalancamiento bruto emitido. |
 | **Tesorería y Equivalentes** | Efectivo y Activos Líquidos | Liquidez Inmediata | **$1,602.6M** | Colchón de caja disponible. |
-| **Deuda Financiera Neta** | Deuda Total - Tesorería | Caja Neta (< $0) | **$-1,602.6M** | Posición Neta de Caja. |
+| **Deuda Financiera Neta** | Deuda Total - Tesorería | Caja Neta (< $0) | **$1,602.6M (Caja Neta)** | Posición Neta de Caja. |
 | **EBITDA Generado** | EBIT + Depreciación y Amortización | Base Operativa Bruta | **$1,327.0M** | Flujo operativo bruto de negocio. |
 | **Deuda Neta / EBITDA** | Deuda Neta / EBITDA | < 1.5x (Excelente) | **CAJA NETA** | EXCELENTE (POSICIÓN DE CAJA NETA) |
 | **Flujo de Caja Libre (FCF)** | Flujo Operativo (CFO) - CapEx | Caja Real Disponible | **$1,117.8M** | Caja libre tras reinversión e impuestos. |
@@ -746,7 +754,7 @@ graph LR
 
 > **PROPÓSITO DE VALORACIÓN:** INTEGRACIÓN FISCAL AI & MOTOR DE VALORACIÓN PROPIETARIO  
 > **Metodología Seleccionada:** Descuento de Flujo de Caja Inverso (*Reverse DCF*) basado en *Expectations Investing* (Mauboussin & Rappaport).  
-> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Deckers Outdoor Corporation ($80.23) para sostener su cotización.
+> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Deckers Outdoor Corporation ($84.0) para sostener su cotización.
 
 ### 14.1. Configuración Óptima del Modelo en Plataformas de Valoración (Fiscal AI)
 
@@ -759,16 +767,16 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | Casilla / Input de Valoración | Valor Auditado (En Vivo) | Sección de Origen | Racional Técnico y Sustento Fundamental |
 | :--- | :---: | :---: | :--- |
-| **Precio de Referencia ($P_0$)** | **$80.23** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
-| **Tasa Libre de Riesgo ($R_f$)** | **4.94%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
+| **Precio de Referencia ($P_0$)** | **$84.0** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
+| **Tasa Libre de Riesgo ($R_f$)** | **5.22%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Damodaran Benchmark | Prima histórica por riesgo accionario demandada por inversores. |
-| **Beta Apalancada (Consenso)** | **1.13** | Sección 11.2 (Arbitraje) | Sensibilidad sistemática del título frente al índice S&P 500. |
-| **Coste de la Deuda ($K_d$ Pre-Tax)** | **4.5%** | Sección 11.2 (Sintético) | Coste de financiamiento bruto estimado por rating sintético. |
-| **Coste de la Deuda ($K_d$ After-Tax)** | **3.5%** | Sección 11.2 (WACC) | Coste efectivo neto del escudo fiscal: $K_d \times (1 - t)$. |
+| **Beta Apalancada (Consenso)** | **1.12** | Sección 11.2 (Arbitraje) | Sensibilidad sistemática del título frente al índice S&P 500. |
+| **Coste de la Deuda ($K_d$ Pre-Tax)** | **0.0%** | Sección 11.2 (Sintético) | Coste de financiamiento bruto estimado por rating sintético. |
+| **Coste de la Deuda ($K_d$ After-Tax)** | **0.0%** | Sección 11.2 (WACC) | Coste efectivo neto del escudo fiscal: $K_d \times (1 - t)$. |
 | **Tasa Impositiva Efectiva ($t$)** | **21.0%** | Sección 11.2 (SEC 10-K) | Tasa impositiva estructural auditada en estados financieros. |
-| **Ponderación Deuda ($W_d$)** | **5.0%** | Estructura de Capital | Proporción de deuda financiera sobre valor total de la empresa. |
+| **Ponderación Deuda ($W_d$)** | **0.0%** | Estructura de Capital | Proporción de deuda financiera sobre valor total de la empresa. |
 | **Ponderación Fondos Propios ($W_e$)** | **100.0%** | Estructura de Capital | Proporción de capital propio sobre valor total de la empresa. |
-| **Coste Medio Ponderado (WACC)** | **10.31%** | Sección 11.2 (WACC) | Tasa de descuento de corte para flujos libres hacia la empresa. |
+| **Coste Medio Ponderado (WACC)** | **10.55%** | Sección 11.2 (WACC) | Tasa de descuento de corte para flujos libres hacia la empresa. |
 | **Margen FCF Estructural** | **20.2%** | Sección 4 & Solvencia | Conversión de ingresos a caja libre de capital tras reinversiones. |
 | **Tasa de Crecimiento Terminal ($g_n$)** | **2.5%** | Hipótesis Canónica | Crecimiento tendencial de la economía global a perpetuidad. |
 | **Horizonte de Proyección** | **10 Años** | Configuración Estándar | Período de amortización del superciclo operativo y de producto. |
@@ -778,21 +786,21 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | Parámetro Clave | Modelo Propietario (Auditado) | Parametrización Plataformas | Diferencial (Delta) | Impacto Cuantitativo en la Tesis |
 | :--- | :---: | :---: | :---: | :--- |
-| **WACC (Tasa de Descuento)** | 10.31% | 10.90% | -0.59 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
+| **WACC (Tasa de Descuento)** | 10.55% | 10.90% | -0.35 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 20.2% | 24.40% | -4.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **-3.7%** | **-5.5%** | **+1.8 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **-2.0%** | **-4.2%** | **+2.2 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.31% (Bajo / Expansión) | -4.1% | -4.5% | -4.9% | -5.3% | -5.8% | -6.3% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 9.81% (Favorable) | -3.3% | -3.7% | -4.1% | -4.5% | -4.9% | -5.4% | Escenario de sensibilidad operativa. |
-| 10.31% (WACC Auditado Base) | -2.6% | -2.9% | -3.3% | -3.6% | -4.1% | -4.5% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.81% (Exigente) | -1.8% | -2.2% | -2.5% | -2.9% | -3.2% | -3.7% | Escenario de sensibilidad operativa. |
-| 11.31% (Estrés / Tipos Altos) | -1.1% | -1.4% | -1.7% | -2.1% | -2.4% | -2.8% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.55% (Bajo / Expansión) | -2.4% | -2.8% | -3.2% | -3.6% | -4.1% | -4.6% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.05% (Favorable) | -1.6% | -2.0% | -2.4% | -2.8% | -3.2% | -3.7% | Escenario de sensibilidad operativa. |
+| 10.55% (WACC Auditado Base) | -0.9% | -1.2% | -1.6% | -2.0% | -2.4% | -2.8% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.05% (Exigente) | -0.1% | -0.5% | -0.8% | -1.2% | -1.5% | -2.0% | Escenario de sensibilidad operativa. |
+| 11.55% (Estrés / Tipos Altos) | 0.6% | 0.3% | -0.0% | -0.4% | -0.7% | -1.1% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -800,10 +808,10 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Activos Intangibles y Marca + Poder de Fijación de Precios | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (22.7% EBIT). |
-| **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.18 CFO por dólar de NI). |
+| **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.18 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda neta; colchón de liquidez de $1.6B. |
-| **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 53.6% | **COMPOUNDING MACHINE** | Spread económico de +43.3 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: -3.7% - -5.5% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
+| **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 53.6% | **COMPOUNDING MACHINE** | Spread económico de +43.0 pp sobre WACC (Creación de valor de élite). |
+| **Valoración de Mercado** | Crecimiento Implícito: -2.0% - -4.2% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
 
 
 

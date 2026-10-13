@@ -59,3 +59,23 @@ ehthumbs.db
 *.swp
 *.swo
 *~
+
+# Heavy binary presentations and downloads
+drive_input/*/presentations/
+drive_input/**/presentations/**
+drive_input/*/transcripts/
+drive_input/**/transcripts/**
+*.pdf
+*.xlsx
+
+# Temporary images, screenshots, and stitch prototypes
+*.png
+*.jpg
+*.jpeg
+stitch_screen.html
+stitch_3statements.html
+test_res.py
+
+# Local caches and agent scratch
+web_dashboard/data/cache/
+.agents/teamwork/

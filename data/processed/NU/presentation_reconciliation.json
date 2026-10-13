@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-09-28T18:29:17.270610",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 82753414000.0,
+      "fst_value": 82753414000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 13249670000.0,
+      "fst_value": 13249670000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 22700739000.0,
+      "fst_value": 22700739000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "BANKING_FINANCIAL",
+    "source_presentation": "Nu Presentation Q2 2026.pdf",
+    "total_slides": 39,
+    "return_on_equity_reported": 33.0,
+    "risk_adjusted_nim_pct": 12.4,
+    "efficiency_ratio_pct": 19.5,
+    "npl_15_90_pct": 4.8,
+    "npl_90_plus_pct": 6.9,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": 139.0,
+    "active_customers_m": 116.1,
+    "monthly_arpac_usd": 17.0,
+    "monthly_cost_to_serve_usd": null,
+    "deposits_by_country_bn": {
+      "Brazil": 36.4,
+      "Mexico": 5.7,
+      "Colombia": 3.3,
+      "Total_Latam": 45.3
+    },
+    "customers_by_country_m": {
+      "Mexico": 15.8,
+      "Brazil": 118.0,
+      "Colombia": 5.0
+    },
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    },
+    "source_sec": "nupr2q26_6k.htm"
+  },
+  "kpis_enriched": {
+    "archetype": "BANKING_FINANCIAL",
+    "source_presentation": "Nu Presentation Q2 2026.pdf",
+    "total_slides": 39,
+    "return_on_equity_reported": 33.0,
+    "risk_adjusted_nim_pct": 12.4,
+    "efficiency_ratio_pct": 19.5,
+    "npl_15_90_pct": 4.8,
+    "npl_90_plus_pct": 6.9,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": 139.0,
+    "active_customers_m": 116.1,
+    "monthly_arpac_usd": 17.0,
+    "monthly_cost_to_serve_usd": null,
+    "deposits_by_country_bn": {
+      "Brazil": 36.4,
+      "Mexico": 5.7,
+      "Colombia": 3.3,
+      "Total_Latam": 45.3
+    },
+    "customers_by_country_m": {
+      "Mexico": 15.8,
+      "Brazil": 118.0,
+      "Colombia": 5.0
+    },
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    },
+    "source_sec": "nupr2q26_6k.htm"
+  },
+  "flags": [],
+  "archetype": "BANKING_FINANCIAL"
+}

@@ -1,7 +1,7 @@
 {
   "ticker": "DECK",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-09-10T20:29:27.300093",
+  "timestamp": "2026-09-27T22:34:17.216657",
   "scorecard": {
     "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -20,6 +20,18 @@
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-09-15",
+      "accession_number": "0000910521-26-000026",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 14, 2026, Deckers Outdoor Corporation (the \"Company\") held its 2026 Annual Meeting of Stockholders (the \"Annual Meeting\") virtually via live webcast, during which the Company's stockholders voted on three proposals. There were 136,227,720 shares of the Company’s common stoc..."
+    },
     {
       "filing_date": "2026-08-31",
       "accession_number": "0000910521-26-000024",
@@ -337,20 +349,6 @@
       "diagnostic": "Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 12, 2022, Deckers Outdoor Corporation (the “Company”) held its 2022 Annual Meeting of Stockholders (the “Annual Meeting”) virtually via live webcast at www.virtualshareholdermeeting.com/DECK2022, during which the Company's stockholders voted on three proposals. The Company ..."
-    },
-    {
-      "filing_date": "2022-07-28",
-      "accession_number": "0000910521-22-000029",
-      "items": [
-        "Item 2.02",
-        "Item 8.01",
-        "Item 9.01"
-      ],
-      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
-      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 28, 2022, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended June 30, 2022 and providing financial guidance for the fiscal year ending March 31, 2023. The Company also held a conference call regarding these fi..."
     }
   ],
   "form_6k_events": [],

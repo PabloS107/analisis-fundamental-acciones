@@ -17,8 +17,8 @@ Activa esta skill cuando el usuario solicite:
 - Evaluar la ventaja competitiva o estabilidad de crecimiento mediante el **Mohanram G-Score (0-8 puntos)**.
 - Calcular e interpretar la **Rentabilidad Bruta sobre Activos de Novy-Marx (GP/A)**, su cálculo dual (Activos Totales vs. Ex-Caja), descomposición DuPont y matriz de 4 cuadrantes.
 - Comparar una empresa contra su **Peer Group** o calcular **medianas sectoriales LTM** (ROA, CFROA, I+D, Reinversión, Gross Profitability).
-- Construir o actualizar las **Hojas 2 ("Ratios Financieros"), 7 ("Scores Fundamentales") y 8 ("Peer Group & Medianas")** en el libro Excel `financial_statements.xlsx`.
 - Generar el informe ejecutivo institucional en Word (`.docx`) y Markdown (`.md`).
+- Visualizar métricas interactivas en la plataforma web Django (`web_dashboard/`).
 
 ---
 
@@ -120,9 +120,6 @@ python .agents/skills/fundamental-scoring-benchmark/scripts/generate_report.py A
 - **Entrada Financiera:** `data/processed/<TICKER>/financial_statements.json`.
 - **Salidas Producidas:**
   - `data/processed/<TICKER>/fundamental_scores.json`: Resultados detallados de F-Score, G-Score, matriz combinada y `novy_marx_analysis`.
-  - `data/processed/<TICKER>/financial_statements.xlsx`: Libro Excel de 8 pestañas con formato institucional:
-    * Hoja 2: Bloque de Rentabilidad Bruta sobre Activos (Novy-Marx DuPont) con tooltips didácticos.
-    * Hoja 7: Tabla 4 dedicada al diagnóstico Novy-Marx GP/A y cuadrantes estratégicos.
-    * Hoja 8: Columnas 14, 15 y 16 para Utilidad Bruta, GP/A Total (%) y GP/A Ex-Caja (%) con fórmulas de ranking y medianas.
   - `data/processed/<TICKER>/Analisis_Resultados_<TICKER>.docx`: Informe Word institucional con Sección 11 de Novy-Marx GP/A en 4 bloques.
   - `data/processed/<TICKER>/Analisis_Resultados_<TICKER>.md`: Informe Markdown sincronizado.
+  - Plataforma Web Django (`web_dashboard/`): Panel interactivo por empresa con visualización en tiempo real.

@@ -17,7 +17,7 @@ from pathlib import Path
 import sys
 
 # Asegurar que los scripts de la skill estén en sys.path
-SCRIPTS_DIR = Path(__file__).resolve().parent.parent / ".agents" / "skills" / "fundamental-data-extractor" / "scripts"
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent / "pipeline"
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 

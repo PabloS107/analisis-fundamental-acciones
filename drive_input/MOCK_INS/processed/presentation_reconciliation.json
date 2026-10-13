@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-13T17:12:51.419147",
+  "overall_status": "CONCILIADO",
+  "comparisons": {},
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "INSURANCE",
+    "source_sec": "mock.htm",
+    "source_presentation": "mock.pdf",
+    "total_slides": 0,
+    "reit_operational_kpis": {},
+    "investments_breakdown": {},
+    "insurance_operational_kpis": {
+      "investments_breakdown": {}
+    }
+  },
+  "kpis_enriched": {
+    "archetype": "INSURANCE",
+    "source_sec": "mock.htm",
+    "source_presentation": "mock.pdf",
+    "total_slides": 0,
+    "reit_operational_kpis": {},
+    "investments_breakdown": {},
+    "insurance_operational_kpis": {
+      "investments_breakdown": {}
+    }
+  },
+  "flags": [],
+  "archetype": "INSURANCE"
+}

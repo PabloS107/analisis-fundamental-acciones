@@ -1,0 +1,159 @@
+{
+  "timestamp": "2026-10-08T15:59:05.075701",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 3868621000.0,
+      "fst_value": 3868621000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 2301682000.0,
+      "fst_value": 2301682000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 1602589000.0,
+      "fst_value": 1602589000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_presentation": "DECK_Q1_FY2027_Earnings_Release.pdf",
+    "total_slides": 8,
+    "brand_segmentation": {
+      "HOKA": {
+        "revenue_usd_m": 703.5,
+        "growth_yoy_pct": 7.7
+      },
+      "UGG brand": {
+        "revenue_usd_m": 278.0,
+        "growth_yoy_pct": 4.9
+      },
+      "Other brands": {
+        "revenue_usd_m": 37.9,
+        "growth_yoy_pct": -18.1
+      },
+      "UGG": {
+        "revenue_usd_m": 2724.4
+      },
+      "Other Brands": {
+        "revenue_usd_m": 144.2
+      },
+      "Wholesale (Canal)": {
+        "revenue_usd_m": 3186.1
+      },
+      "Direct-to-Consumer (Canal)": {
+        "revenue_usd_m": 2341.2
+      }
+    },
+    "channel_breakdown": {
+      "Wholesale": {
+        "revenue_usd_m": 666.7,
+        "growth_yoy_pct": 2.2
+      },
+      "Direct-to-Consumer (DTC)": {
+        "revenue_usd_m": 352.8,
+        "growth_yoy_pct": 13.0
+      }
+    },
+    "geographic_breakdown": {
+      "Domestic": {
+        "revenue_usd_m": 517.4,
+        "growth_yoy_pct": 3.2
+      },
+      "International": {
+        "revenue_usd_m": 502.1,
+        "growth_yoy_pct": 8.4
+      },
+      "Domestic (EE.UU.)": {
+        "revenue_usd_m": 3174.9
+      },
+      "International (Global)": {
+        "revenue_usd_m": 2352.4
+      }
+    },
+    "operational_kpis": {
+      "gross_margin_pct": 56.4,
+      "diluted_eps": 0.94,
+      "operating_income_usd_m": 155.3,
+      "share_repurchase_shares_m": 3.3,
+      "share_repurchase_usd_m": 338.0,
+      "remaining_authorization_usd_bn": 4.7
+    },
+    "source_sec": "deckex991pressrelease-6302.htm"
+  },
+  "kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_presentation": "DECK_Q1_FY2027_Earnings_Release.pdf",
+    "total_slides": 8,
+    "brand_segmentation": {
+      "HOKA": {
+        "revenue_usd_m": 703.5,
+        "growth_yoy_pct": 7.7
+      },
+      "UGG brand": {
+        "revenue_usd_m": 278.0,
+        "growth_yoy_pct": 4.9
+      },
+      "Other brands": {
+        "revenue_usd_m": 37.9,
+        "growth_yoy_pct": -18.1
+      },
+      "UGG": {
+        "revenue_usd_m": 2724.4
+      },
+      "Other Brands": {
+        "revenue_usd_m": 144.2
+      },
+      "Wholesale (Canal)": {
+        "revenue_usd_m": 3186.1
+      },
+      "Direct-to-Consumer (Canal)": {
+        "revenue_usd_m": 2341.2
+      }
+    },
+    "channel_breakdown": {
+      "Wholesale": {
+        "revenue_usd_m": 666.7,
+        "growth_yoy_pct": 2.2
+      },
+      "Direct-to-Consumer (DTC)": {
+        "revenue_usd_m": 352.8,
+        "growth_yoy_pct": 13.0
+      }
+    },
+    "geographic_breakdown": {
+      "Domestic": {
+        "revenue_usd_m": 517.4,
+        "growth_yoy_pct": 3.2
+      },
+      "International": {
+        "revenue_usd_m": 502.1,
+        "growth_yoy_pct": 8.4
+      },
+      "Domestic (EE.UU.)": {
+        "revenue_usd_m": 3174.9
+      },
+      "International (Global)": {
+        "revenue_usd_m": 2352.4
+      }
+    },
+    "operational_kpis": {
+      "gross_margin_pct": 56.4,
+      "diluted_eps": 0.94,
+      "operating_income_usd_m": 155.3,
+      "share_repurchase_shares_m": 3.3,
+      "share_repurchase_usd_m": 338.0,
+      "remaining_authorization_usd_bn": 4.7
+    },
+    "source_sec": "deckex991pressrelease-6302.htm"
+  },
+  "flags": [],
+  "archetype": "CORPORATE_INDUSTRIAL"
+}

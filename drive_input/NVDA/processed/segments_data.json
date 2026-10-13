@@ -1,0 +1,153 @@
+{
+  "periods": [
+    "LTM",
+    "FY2026",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017",
+    "FY2016"
+  ],
+  "product_segments": [
+    {
+      "name": "Data Center — Hyperscale",
+      "description": "Grandes hiperescaladores de nube pública global: Microsoft Azure, AWS, Google Cloud, Meta, Oracle.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 170000.0,
+        "FY2026": 108493.0,
+        "FY2025": 62200.0,
+        "FY2024": 23763.0,
+        "FY2023": 7502.0,
+        "FY2022": 5305.0,
+        "FY2021": 3350.0,
+        "FY2020": 1492.0,
+        "FY2019": 1466.0,
+        "FY2018": 966.0,
+        "FY2017": 415.0,
+        "FY2016": 170.0
+      }
+    },
+    {
+      "name": "Data Center — AI Clouds, Industrial & Enterprise",
+      "description": "Nubes nativas de IA (CoreWeave, Lambda), corporaciones privadas (banca, salud, manufactura) e iniciativas gubernamentales de IA Soberana.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 107798.0,
+        "FY2026": 85244.0,
+        "FY2025": 52986.0,
+        "FY2024": 23762.0,
+        "FY2023": 7503.0,
+        "FY2022": 5305.0,
+        "FY2021": 3350.0,
+        "FY2020": 1491.0,
+        "FY2019": 1466.0,
+        "FY2018": 966.0,
+        "FY2017": 415.0,
+        "FY2016": 169.0
+      }
+    },
+    {
+      "name": "Edge Computing",
+      "description": "Ecosistema en el borde que consolida Gaming (GeForce RTX), Visualización Profesional (Omniverse), Automoción (DRIVE) y robótica OEM.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 25171.0,
+        "FY2026": 22201.0,
+        "FY2025": 15311.0,
+        "FY2024": 13397.0,
+        "FY2023": 11969.0,
+        "FY2022": 16304.0,
+        "FY2021": 9975.0,
+        "FY2020": 7935.0,
+        "FY2019": 8784.0,
+        "FY2018": 7782.0,
+        "FY2017": 6080.0,
+        "FY2016": 4671.0
+      }
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "United States",
+      "description": "Sede de los mayores laboratorios de IA (frontier models), hiperescaladores y clústeres Blackwell.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 209655.0,
+        "FY2026": 149617.0,
+        "FY2025": 77482.0,
+        "FY2024": 31533.0,
+        "FY2023": 8292.0,
+        "FY2022": 4357.0,
+        "FY2021": 2692.0,
+        "FY2020": 1262.0,
+        "FY2019": 1379.0,
+        "FY2018": 1399.0,
+        "FY2017": 1050.0,
+        "FY2016": 750.0
+      }
+    },
+    {
+      "name": "Taiwan",
+      "description": "Ecosistema ODM/OEM y centros de integración y ensamblaje de servidores (Foxconn, Quanta, Wistron).",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 59382.0,
+        "FY2026": 42345.0,
+        "FY2025": 23600.0,
+        "FY2024": 14912.0,
+        "FY2023": 6986.0,
+        "FY2022": 8536.0,
+        "FY2021": 4570.0,
+        "FY2020": 3402.0,
+        "FY2019": 3546.0,
+        "FY2018": 2787.0,
+        "FY2017": 1850.0,
+        "FY2016": 1400.0
+      }
+    },
+    {
+      "name": "China (incl. Hong Kong)",
+      "description": "Demanda sujeta a controles de exportación y licencias regulatorias del Departamento de Comercio de EE.UU.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 27570.0,
+        "FY2026": 19677.0,
+        "FY2025": 25048.0,
+        "FY2024": 12330.0,
+        "FY2023": 5785.0,
+        "FY2022": 7111.0,
+        "FY2021": 3874.0,
+        "FY2020": 2654.0,
+        "FY2019": 2800.0,
+        "FY2018": 1943.0,
+        "FY2017": 1400.0,
+        "FY2016": 1050.0
+      }
+    },
+    {
+      "name": "Other Countries",
+      "description": "Mercados internacionales (Europa, Japón, Singapur, Corea del Sur y Oriente Medio) e iniciativas de IA Soberana.",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 6363.0,
+        "FY2026": 4299.0,
+        "FY2025": 4367.0,
+        "FY2024": 2147.0,
+        "FY2023": 5911.0,
+        "FY2022": 6910.0,
+        "FY2021": 5539.0,
+        "FY2020": 3600.0,
+        "FY2019": 3991.0,
+        "FY2018": 3585.0,
+        "FY2017": 2610.0,
+        "FY2016": 1810.0
+      }
+    }
+  ]
+}

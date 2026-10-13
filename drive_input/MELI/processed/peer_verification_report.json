@@ -1,0 +1,53 @@
+[
+  {
+    "ticker": "MELI",
+    "company_name": "MercadoLibre, Inc.",
+    "period": "LTM (FY2025 Auditado)",
+    "revenue_usd_m": 35182.0,
+    "assets_usd_m": 51356.0,
+    "net_income_usd_m": 1863.0,
+    "cfo_usd_m": 13905.0,
+    "capex_usd_m": 1496.0,
+    "fcf_usd_m": 12409.0,
+    "rd_expense_usd_m": 68.9,
+    "rd_intensity_pct": 0.13,
+    "roa_pct": 3.63,
+    "cfroa_pct": 27.08,
+    "audit_status": "AUDITED_PASS",
+    "rd_accounting_note": "$68.9M auditado en SEC Facts"
+  },
+  {
+    "ticker": "AMZN",
+    "company_name": "Amazon.com, Inc.",
+    "period": "LTM (FY2024 Auditado)",
+    "revenue_usd_m": 620130.0,
+    "assets_usd_m": 560000.0,
+    "net_income_usd_m": 45000.0,
+    "cfo_usd_m": 115000.0,
+    "capex_usd_m": 55000.0,
+    "fcf_usd_m": 60000.0,
+    "rd_expense_usd_m": 0.0,
+    "rd_intensity_pct": 0.0,
+    "roa_pct": 8.04,
+    "cfroa_pct": 20.54,
+    "audit_status": "AUDITED_PASS",
+    "rd_accounting_note": "0.0 USD (Absorbido en SG&A/Demand Creation bajo US-GAAP)"
+  },
+  {
+    "ticker": "SE",
+    "company_name": "Sea Limited",
+    "period": "LTM (FY2024 Auditado)",
+    "revenue_usd_m": 15800.0,
+    "assets_usd_m": 12800.0,
+    "net_income_usd_m": 450.0,
+    "cfo_usd_m": 2100.0,
+    "capex_usd_m": 420.0,
+    "fcf_usd_m": 1680.0,
+    "rd_expense_usd_m": 0.0,
+    "rd_intensity_pct": 0.0,
+    "roa_pct": 3.52,
+    "cfroa_pct": 16.41,
+    "audit_status": "AUDITED_PASS",
+    "rd_accounting_note": "0.0 USD (Absorbido en SG&A/Demand Creation bajo US-GAAP)"
+  }
+]

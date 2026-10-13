@@ -1,0 +1,159 @@
+{
+  "periods": [
+    "LTM",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017",
+    "FY2016",
+    "FY2015",
+    "FY2014"
+  ],
+  "product_segments": [
+    {
+      "name": "Advertising",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "Family of Apps",
+      "values": {
+        "FY2025": 196175.0,
+        "FY2024": 160633.0,
+        "FY2023": 131948.0,
+        "LTM": 222607.0
+      }
+    },
+    {
+      "name": "Other revenue",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "Family of Apps",
+      "values": {
+        "FY2025": 2584.0,
+        "FY2024": 1722.0,
+        "FY2023": 1058.0,
+        "LTM": 3382.0
+      }
+    },
+    {
+      "name": "Family of Apps",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 198759.0,
+        "FY2024": 162355.0,
+        "FY2023": 133006.0,
+        "LTM": 225989.0
+      }
+    },
+    {
+      "name": "Reality Labs",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2207.0,
+        "FY2024": 2146.0,
+        "FY2023": 1896.0,
+        "LTM": 2258.0
+      }
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "United States & Canada",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 78866.0,
+        "FY2024": 63207.0,
+        "FY2023": 52888.0,
+        "LTM": 88672.0
+      }
+    },
+    {
+      "name": "Europe",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 46569.0,
+        "FY2024": 38361.0,
+        "FY2023": 31210.0,
+        "LTM": 53069.0
+      }
+    },
+    {
+      "name": "Asia-Pacific",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 53817.0,
+        "FY2024": 45009.0,
+        "FY2023": 36154.0,
+        "LTM": 61238.0
+      }
+    },
+    {
+      "name": "Rest of World",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 21714.0,
+        "FY2024": 17924.0,
+        "FY2023": 14650.0,
+        "LTM": 25268.0
+      }
+    },
+    {
+      "name": "United States",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "United States & Canada",
+      "values": {
+        "FY2025": 74780.0,
+        "FY2024": 59730.0,
+        "FY2023": 49780.0
+      }
+    }
+  ],
+  "segment_operating_income": [
+    {
+      "name": "Income (loss) from operations",
+      "values": {
+        "FY2025": 83276.0,
+        "FY2024": 69380.0,
+        "FY2023": 46751.0,
+        "LTM": 86926.0
+      }
+    },
+    {
+      "name": "Family of Apps",
+      "values": {
+        "FY2025": 102469.0,
+        "FY2024": 87109.0,
+        "FY2023": 62871.0,
+        "LTM": 106027.0
+      }
+    },
+    {
+      "name": "Reality Labs",
+      "values": {
+        "FY2025": -19193.0,
+        "FY2024": -17729.0,
+        "FY2023": -16120.0,
+        "LTM": -19101.0
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "META"
+}

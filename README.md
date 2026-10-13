@@ -29,7 +29,6 @@ Analisis fundamental de acciones/
 └── data/
     └── processed/
         └── {TICKER}/                        <- Salidas estructuradas por empresa
-            ├── {TICKER}_Analisis_Financiero_Historico.xlsx  <- Modelo Excel multi-hoja auditado
             ├── Analisis_Resultados_..._{TICKER}.docx        <- Informe institucional de 14 secciones
             ├── Analisis_Resultados_..._{TICKER}.md          <- Versión Markdown sincronizada
             ├── financial_statements.json                    <- Estados financieros auditados

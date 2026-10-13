@@ -1,0 +1,56 @@
+{
+  "ticker": "NVDA",
+  "company_name": "NVIDIA Corporation",
+  "exchange": "NASDAQ",
+  "period_label": "Q2 FY2027 / LTM",
+  "period_date": "2026-07-26",
+  "filing_source": "SEC Form 10-K y Form 10-Q Auditados",
+  "sic_code": "3674 - Semiconductors and Related Devices",
+  "archetype": "STANDARD_CORPORATE",
+  "industry": "Semiconductores & Infraestructura de Cómputo Acelerado para IA",
+  "business_model_callout": {
+    "title": "RESUMEN DEL MODELO DE NEGOCIO Y PROPUESTA DE VALOR",
+    "paragraphs": [
+      "NVIDIA Corporation es el líder global indiscutible en computación acelerada e infraestructura de inteligencia artificial a escala de centro de datos. La compañía diseña y comercializa arquitecturas de procesamiento gráfico (GPUs), unidades centrales de procesamiento (CPUs basadas en ARM), redes de interconexión ultrarrápida (Quantum InfiniBand y Spectrum-X Ethernet) y el ecosistema unificado de software CUDA.",
+      "Su modelo de negocio opera bajo un esquema fabless de alto apalancamiento operativo: externaliza la fabricación de obleas a TSMC y el empaquetado avanzado CoWoS, reteniendo la propiedad intelectual de silicio, arquitectura de sistemas y bibliotecas de software empresarial que generan un foso defensivo casi impenetrable frente a la competencia."
+    ]
+  },
+  "channels": {
+    "title": "Estructura de Plataformas de Mercado y Acceso Comercial (Go-To-Market):",
+    "intro": "De acuerdo con la información auditada del Formulario 10-K y los comentarios oficiales de la CFO ante la SEC, NVIDIA comercializa sus soluciones a través de dos grandes vectores integrados:",
+    "direct": {
+      "label": "Plataforma Data Center (~91.7% de los ingresos netos):",
+      "description": "Infraestructura de supercomputación e inteligencia artificial para hiperescaladores de nube (Microsoft Azure, AWS, Google Cloud, Meta, Oracle), nubes especializadas de IA (CoreWeave, Lambda), empresas soberanas y corporaciones globales, integrando arquitecturas Hopper/Blackwell con redes InfiniBand y software NVIDIA AI Enterprise."
+    },
+    "indirect": {
+      "label": "Plataforma Edge Computing (~8.3% de los ingresos netos):",
+      "description": "Ecosistema de computación en el borde que consolida Gaming (GPUs GeForce RTX para jugadores y creadores), Visualización Profesional (estaciones de trabajo y Omniverse), Automoción (plataformas autónomas DRIVE y cabinas inteligentes) y soluciones OEM embebidas para robótica y telecomunicaciones."
+    }
+  },
+  "geographic_analysis": [
+    {
+      "prefix": "• Estados Unidos como Epicentro de la IA (~69.2% de los ingresos): ",
+      "text": "Base principal de los mayores proveedores de nube pública, laboratorios de investigación de modelos fundacionales (frontier models) y gigantes de tecnología que concentran la mayor demanda de clústeres Blackwell."
+    },
+    {
+      "prefix": "• Taiwán y el Ecosistema ODM/OEM (~19.6% de los ingresos): ",
+      "text": "Sede estratégica de los principales fabricantes de servidores y centros de ensamblaje por contrato (Foxconn, Quanta, Wistron, ASUS) que integran los módulos HGX y GB200 con destino a clientes globales."
+    },
+    {
+      "prefix": "• China y Mercados Regulados (~9.1% de los ingresos): ",
+      "text": "Demanda persistente sujeta a los controles de exportación y licencias del Departamento de Comercio de EE.UU., abastecida mediante aceleradores compatibles y soluciones para el mercado de consumo."
+    },
+    {
+      "prefix": "• Otros Mercados Internacionales (~2.1% de los ingresos): ",
+      "text": "Europa, Japón, Singapur, Corea del Sur y Oriente Medio impulsando iniciativas de IA Soberana (Sovereign AI)."
+    }
+  ],
+  "moat": {
+    "title": "Estrategia Tecnológica, Fosos Defensivos (Economic Moat) y Ventajas Competitivas",
+    "intro": "NVIDIA goza de una ventaja competitiva de escala excepcional protegida por costes de cambio extremos en software (CUDA), efectos de red con más de 5 millones de desarrolladores de IA, y un foso de sistema completo que abarca silicio, interconexión de red, refrigeración líquida y optimización de compiladores a nivel de centros de datos completos."
+  },
+  "capital_allocation": {
+    "title": "Marco de Asignación de Capital y Retorno al Accionista",
+    "intro": "Prioriza una masiva reinversión en I+D orgánica y acuerdos a largo plazo para asegurar capacidad de suministro y obleas de vanguardia, combinada con un programa agresivo de recompra de acciones para devolver el exceso de flujo de caja libre generado."
+  }
+}

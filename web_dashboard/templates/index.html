@@ -4,82 +4,197 @@
 
 {% block content %}
 <div class="space-y-6">
-    <div class="bg-gradient-to-r from-sky-950 via-slate-900 to-indigo-950 p-8 rounded-3xl border border-sky-500/30 shadow-2xl">
-        <h1 class="text-3xl font-black text-white">Centro de Inteligencia Bursátil</h1>
-        <p class="text-slate-300 mt-2 max-w-3xl">
-            Plataforma web desarrollada en <strong>Django</strong> para el análisis fundamental automatizado de renta variable.
-            Métricas auditadas con modelos de <em>Piotroski F-Score</em>, <em>Novy-Marx Gross Profitability</em>, 
-            <em>ROIC Ajustado por I+D (Damodaran)</em>, <em>Altman Z''</em> y <em>Reverse DCF</em>.
-        </p>
+    <div class="bg-gradient-to-r from-sky-50 via-white to-indigo-50/70 p-8 rounded-3xl border border-sky-200/80 shadow-sm space-y-6">
+        <div>
+            <h1 class="text-3xl font-black text-slate-900">Centro de Inteligencia Bursátil</h1>
+            <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
+                Plataforma institucional para el análisis fundamental automatizado de renta variable.
+                Métricas auditadas con modelos de <em>Piotroski F-Score</em>, <em>Novy-Marx GP/A</em>, 
+                <em>ROIC Ajustado por I+D (Damodaran)</em>, <em>Altman Z''</em> y <em>Reverse DCF</em>.
+            </p>
+        </div>
+
+        <!-- Barra de Entrada y Búsqueda Universal -->
+        <div class="relative max-w-3xl">
+            <label for="companySearchInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Incorporar Nueva Empresa al Portafolio (Zero-Touch SEC Pipeline)
+            </label>
+            <div class="flex items-center gap-2">
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" 
+                           id="companySearchInput"
+                           autocomplete="off"
+                           placeholder="Escribe el ticker o nombre de la empresa (ej. GOOGL, MSFT, Amazon, Tesla, Nvidia)..." 
+                           class="w-full pl-11 pr-4 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm font-medium text-slate-800 placeholder-slate-400 transition" />
+                    <div id="searchSpinner" class="absolute inset-y-0 right-0 pr-3.5 flex items-center hidden text-sky-600">
+                        <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <button id="btnLaunchPipeline" 
+                        type="button"
+                        class="px-5 py-3 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold rounded-2xl shadow-sm transition flex items-center gap-1.5 shrink-0">
+                    <span>🚀 Analizar e Incorporar</span>
+                </button>
+            </div>
+
+            <!-- Desplegable de Sugerencias en Vivo -->
+            <div id="suggestionsDropdown" class="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 hidden overflow-hidden divide-y divide-slate-100 max-h-72 overflow-y-auto">
+            </div>
+        </div>
     </div>
 
-    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+    <!-- Modal de Progreso del Pipeline en Vivo -->
+    <div id="pipelineModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">⚙️</span>
+                    <h3 class="font-black text-lg text-slate-900">Incorporando <span id="modalTickerBadge" class="text-sky-600">...</span></h3>
+                </div>
+                <span id="modalStatusBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 animate-pulse">
+                    EN PROCESO
+                </span>
+            </div>
+
+            <p class="text-xs text-slate-500">
+                Extracción automática Zero-Touch: descargas XBRL oficiales de la SEC, formularios 8-K, llamadas de resultados, auditoría contable y construcción de modelos de valoración.
+            </p>
+
+            <!-- Barra de Progreso -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-semibold text-slate-700">
+                    <span id="modalStepText">Iniciando pipeline...</span>
+                    <span id="modalPctText">0%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="modalProgressBar" class="bg-sky-600 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+                </div>
+            </div>
+
+            <!-- Log / Consola de Estados -->
+            <div id="modalConsole" class="bg-slate-900 text-slate-200 p-3.5 rounded-xl font-mono text-[11px] h-28 overflow-y-auto space-y-1">
+                <div class="text-slate-400">> Conectando con servidor de análisis...</div>
+            </div>
+
+            <!-- Acciones Finales -->
+            <div class="flex justify-end gap-2 pt-2">
+                <button id="modalBtnClose" type="button" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition hidden">
+                    Cerrar
+                </button>
+                <a id="modalBtnGo" href="#" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow transition hidden flex items-center gap-1">
+                    <span>Ver Análisis en Pantalla →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
         <span>🏢 Empresas Auditadas Disponibles</span>
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for c in companies %}
-        <a href="{% url 'analytics:company_detail' c.ticker %}" class="block bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-sky-500 transition shadow-xl group">
+        <a href="{% url 'analytics:company_detail' c.ticker %}" class="block bg-white p-6 rounded-2xl border border-slate-200/90 hover:border-sky-500 hover:shadow-md transition shadow-sm group">
             <div class="flex justify-between items-start mb-3">
                 <div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition">{{ c.name }}</h3>
+                    <h3 class="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition">{{ c.name }}</h3>
                     <div class="flex items-center space-x-2 mt-1.5">
-                        <span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">{{ c.ticker }}</span>
+                        <span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200">{{ c.ticker }}</span>
+                        {% if c.archetype == "FINANCIAL_BANKING" %}
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200">🏦 BANCA</span>
+                        {% elif c.archetype == "PLATFORM_ECOSYSTEM" %}
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">🌐 ECOSISTEMA</span>
+                        {% elif c.archetype == "INSURANCE" %}
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">🛡️ SEGUROS</span>
+                        {% elif c.archetype == "REAL_ESTATE_REIT" %}
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">🏢 REIT</span>
+                        {% else %}
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">🏭 CORPORATIVO</span>
+                        {% endif %}
                         {% if c.price != "-" %}
-                        <div class="flex items-center space-x-1.5 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/30">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="font-bold text-emerald-300 font-mono text-xs">{{ c.price }}</span>
+                        <div class="flex items-center space-x-1.5 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span class="font-bold text-emerald-800 font-mono text-xs">{{ c.price }}</span>
                         </div>
                         {% endif %}
                     </div>
                 </div>
-                <span class="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                <span class="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                     {{ c.rating }}
                 </span>
             </div>
 
-            <!-- Grid de Métricas Fundamentales -->
+            <!-- Grid de Métricas Fundamentales adaptadas por Arquetipo -->
             <div class="grid grid-cols-2 gap-2.5 mt-4 text-xs">
-                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
-                    <span class="text-slate-400 block text-[11px]">Piotroski F-Score</span>
-                    <span class="text-base font-bold text-white mt-0.5 block">{{ c.f_score }} / 9</span>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">Piotroski F-Score</span>
+                    <span class="text-base font-bold text-slate-900 mt-0.5 block">{{ c.f_score }} / 9</span>
                 </div>
-                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
-                    <span class="text-slate-400 block text-[11px]">Novy-Marx GP/A</span>
-                    <span class="text-base font-bold text-purple-400 mt-0.5 block">{{ c.gpa }}</span>
+                {% if c.is_banking %}
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">ROE / ROTCE</span>
+                    <span class="text-base font-bold text-purple-700 mt-0.5 block">{{ c.roe }}</span>
+                    <span class="text-[10px] text-slate-500 block">Rentabilidad contable</span>
                 </div>
-                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
-                    <span class="text-slate-400 block text-[11px]">ROIC Ajustado</span>
-                    <span class="text-base font-bold text-emerald-400 mt-0.5 block">{{ c.roic_adj }}</span>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">NIM (Margen Interés)</span>
+                    <span class="text-base font-bold text-emerald-700 mt-0.5 block">{{ c.nim }}</span>
+                    <span class="text-[10px] text-slate-500 block">Margen intermediación</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">Coste de Equity (Ke)</span>
+                    <span class="text-base font-bold text-sky-700 mt-0.5 block">{{ c.wacc }}</span>
+                    <span class="text-[10px] text-slate-500 block">Exigencia de retorno</span>
+                </div>
+                {% else %}
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">Novy-Marx GP/A</span>
+                    <span class="text-base font-bold text-purple-700 mt-0.5 block">{{ c.gpa }}</span>
+                    <span class="text-[10px] text-slate-500 block">Productividad bruta</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">ROIC Ajustado</span>
+                    <span class="text-base font-bold text-emerald-700 mt-0.5 block">{{ c.roic_adj }}</span>
                     <span class="text-[10px] text-slate-500 block">Retorno sobre capital</span>
                 </div>
-                <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-800">
-                    <span class="text-slate-400 block text-[11px]">Coste Capital (WACC)</span>
-                    <span class="text-base font-bold text-sky-400 mt-0.5 block">{{ c.wacc }}</span>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <span class="text-slate-500 block text-[11px] font-medium">Coste Capital (WACC)</span>
+                    <span class="text-base font-bold text-sky-700 mt-0.5 block">{{ c.wacc }}</span>
                     <span class="text-[10px] text-slate-500 block">Tasa de descuento</span>
                 </div>
+                {% endif %}
             </div>
 
-            <!-- Bloque Destacado: Comparativa ROIC vs WACC = Spread EVA -->
-            <div class="mt-2.5 p-2.5 bg-sky-950/30 rounded-xl border border-sky-500/30 text-xs flex justify-between items-center">
+            <!-- Bloque Destacado: Comparativa Spread de Valor Económico -->
+            <div class="mt-2.5 p-2.5 bg-sky-50/70 rounded-xl border border-sky-200 text-xs flex justify-between items-center">
                 <div>
-                    <span class="text-slate-400 block text-[10px] font-semibold uppercase tracking-wider">Spread EVA (ROIC − WACC)</span>
-                    <span class="text-xs text-sky-300 font-medium">Creación de Valor Económico</span>
+                    <span class="text-slate-600 block text-[10px] font-semibold uppercase tracking-wider">
+                        {% if c.is_banking %}Spread Económico (ROTCE − Ke){% else %}Spread EVA (ROIC − WACC){% endif %}
+                    </span>
+                    <span class="text-xs text-sky-800 font-medium">Creación de Valor Económico</span>
                 </div>
-                <span class="text-lg font-black {% if c.spread_positive %}text-emerald-400{% else %}text-rose-400{% endif %}">
+                <span class="text-lg font-black {% if c.spread_positive %}text-emerald-700{% else %}text-rose-700{% endif %}">
                     {{ c.spread }}
                 </span>
             </div>
 
             <!-- Footer con Altman Z y Moat -->
-            <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
-                <span class="text-sky-400 font-semibold group-hover:text-sky-300 transition flex items-center gap-1">
+            <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                <span class="text-sky-600 font-semibold group-hover:text-sky-700 transition flex items-center gap-1">
                     Ver Informe Completo →
                 </span>
                 <div class="flex items-center space-x-2 text-[11px]">
-                    <span class="text-slate-400">Altman Z'': <strong class="text-slate-200">{{ c.z_score }}</strong></span>
-                    <span class="text-slate-600">|</span>
-                    <span class="text-emerald-400 font-semibold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">{{ c.moat_badge }}</span>
+                    <span class="text-slate-500">Altman Z'': <strong class="text-slate-800">{{ c.z_score }}</strong></span>
+                    <span class="text-slate-300">|</span>
+                    <span class="text-emerald-700 font-semibold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">{{ c.moat_badge }}</span>
                 </div>
             </div>
         </a>
@@ -90,4 +205,228 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("companySearchInput");
+    const dropdown = document.getElementById("suggestionsDropdown");
+    const spinner = document.getElementById("searchSpinner");
+    const btnLaunch = document.getElementById("btnLaunchPipeline");
+
+    const modal = document.getElementById("pipelineModal");
+    const modalTickerBadge = document.getElementById("modalTickerBadge");
+    const modalStatusBadge = document.getElementById("modalStatusBadge");
+    const modalStepText = document.getElementById("modalStepText");
+    const modalPctText = document.getElementById("modalPctText");
+    const modalProgressBar = document.getElementById("modalProgressBar");
+    const modalConsole = document.getElementById("modalConsole");
+    const modalBtnClose = document.getElementById("modalBtnClose");
+    const modalBtnGo = document.getElementById("modalBtnGo");
+
+    let debounceTimer = null;
+    let selectedTicker = null;
+    let pollInterval = null;
+
+    // 1. Autocompletado con Debounce (300ms)
+    input.addEventListener("input", (e) => {
+        const query = e.target.value.trim();
+        clearTimeout(debounceTimer);
+        selectedTicker = null;
+
+        if (query.length < 2) {
+            dropdown.classList.add("hidden");
+            dropdown.innerHTML = "";
+            return;
+        }
+
+        spinner.classList.remove("hidden");
+        debounceTimer = setTimeout(() => {
+            fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+                .then(r => r.json())
+                .then(data => {
+                    spinner.classList.add("hidden");
+                    renderSuggestions(data.results || []);
+                })
+                .catch(err => {
+                    spinner.classList.add("hidden");
+                    console.error("Search error:", err);
+                });
+        }, 280);
+    });
+
+    // 2. Renderizar sugerencias
+    function renderSuggestions(results) {
+        if (!results || results.length === 0) {
+            dropdown.innerHTML = `
+                <div class="p-3.5 text-xs text-slate-500 text-center">
+                    No se hallaron coincidencias exactas en la SEC. Puedes escribir el ticker directamente (ej. MSFT) y pulsar <strong>Analizar</strong>.
+                </div>
+            `;
+            dropdown.classList.remove("hidden");
+            return;
+        }
+
+        dropdown.innerHTML = results.map(r => `
+            <div class="p-3 hover:bg-sky-50/70 cursor-pointer transition flex items-center justify-between group suggestion-item" 
+                 data-ticker="${r.ticker}" data-name="${r.name}">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-black text-sm text-slate-900 group-hover:text-sky-700 font-mono">${r.ticker}</span>
+                        <span class="text-xs text-slate-600 font-medium truncate max-w-sm">${r.name}</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400">CIK: ${r.cik || 'N/D'} · Fuente: ${r.source}</span>
+                </div>
+                <span class="text-xs text-sky-600 font-bold opacity-0 group-hover:opacity-100 transition">
+                    Seleccionar →
+                </span>
+            </div>
+        `).join("");
+
+        dropdown.querySelectorAll(".suggestion-item").forEach(item => {
+            item.addEventListener("click", () => {
+                const t = item.getAttribute("data-ticker");
+                const n = item.getAttribute("data-name");
+                input.value = `${t} - ${n}`;
+                selectedTicker = t;
+                dropdown.classList.add("hidden");
+            });
+        });
+
+        dropdown.classList.remove("hidden");
+    }
+
+    // Ocultar dropdown al hacer click fuera
+    document.addEventListener("click", (e) => {
+        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.add("hidden");
+        }
+    });
+
+    // 3. Lanzar Incorporación y Pipeline
+    btnLaunch.addEventListener("click", () => {
+        let ticker = selectedTicker;
+        if (!ticker) {
+            const raw = input.value.trim().split("-")[0].split(" ")[0].trim().toUpperCase();
+            if (raw) ticker = raw;
+        }
+
+        if (!ticker) {
+            alert("Por favor ingresa un ticker o selecciona una empresa.");
+            input.focus();
+            return;
+        }
+
+        startPipeline(ticker);
+    });
+
+    // Presionar Enter en el input
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            btnLaunch.click();
+        }
+    });
+
+    function logToModal(msg, color = "text-slate-300") {
+        const timeStr = new Date().toLocaleTimeString();
+        const line = document.createElement("div");
+        line.className = color;
+        line.textContent = `[${timeStr}] ${msg}`;
+        modalConsole.appendChild(line);
+        modalConsole.scrollTop = modalConsole.scrollHeight;
+    }
+
+    function startPipeline(ticker) {
+        // Preparar Modal
+        modalTickerBadge.textContent = ticker;
+        modalStatusBadge.textContent = "EN PROCESO";
+        modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 animate-pulse";
+        modalStepText.textContent = "Conectando con el orquestador universal...";
+        modalPctText.textContent = "5%";
+        modalProgressBar.style.width = "5%";
+        modalConsole.innerHTML = "";
+        modalBtnClose.classList.add("hidden");
+        modalBtnGo.classList.add("hidden");
+        modal.classList.remove("hidden");
+
+        logToModal(`Iniciando pipeline universal Zero-Touch para ${ticker}...`);
+
+        // Llamar API para disparar proceso
+        fetch("/api/pipeline/trigger/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `ticker=${encodeURIComponent(ticker)}`
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (!data.success) {
+                modalStatusBadge.textContent = "ERROR";
+                modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+                logToModal(`Error: ${data.error || 'No se pudo iniciar el proceso.'}`, "text-rose-400");
+                modalBtnClose.classList.remove("hidden");
+                return;
+            }
+
+            // Iniciar Polling de estado cada 2.5 segundos
+            pollPipeline(ticker);
+        })
+        .catch(err => {
+            modalStatusBadge.textContent = "ERROR RED";
+            modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+            logToModal(`Fallo de conexión: ${err.message}`, "text-rose-400");
+            modalBtnClose.classList.remove("hidden");
+        });
+    }
+
+    function pollPipeline(ticker) {
+        clearInterval(pollInterval);
+        pollInterval = setInterval(() => {
+            fetch(`/api/pipeline/status/${encodeURIComponent(ticker)}/`)
+                .then(r => r.json())
+                .then(job => {
+                    const pct = job.progress_pct || 0;
+                    modalPctText.textContent = `${pct}%`;
+                    modalProgressBar.style.width = `${pct}%`;
+                    if (job.step) {
+                        modalStepText.textContent = job.step;
+                        logToModal(job.step, "text-sky-300");
+                    }
+
+                    if (job.status === "COMPLETED") {
+                        clearInterval(pollInterval);
+                        modalStatusBadge.textContent = "COMPLETADO";
+                        modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
+                        modalProgressBar.style.width = "100%";
+                        modalPctText.textContent = "100%";
+                        modalStepText.textContent = "¡Empresa incorporada con éxito al terminal!";
+                        logToModal("Todos los modelos y entregables fueron generados.", "text-emerald-400");
+                        
+                        modalBtnGo.href = `/company/${ticker}/`;
+                        modalBtnGo.classList.remove("hidden");
+                        modalBtnClose.classList.remove("hidden");
+                    } else if (job.status === "FAILED") {
+                        clearInterval(pollInterval);
+                        modalStatusBadge.textContent = "FALLIDO";
+                        modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+                        logToModal(`Excepción en el motor: ${job.error}`, "text-rose-400");
+                        modalBtnClose.classList.remove("hidden");
+                    }
+                })
+                .catch(err => {
+                    console.error("Polling error:", err);
+                });
+        }, 2500);
+    }
+
+    modalBtnClose.addEventListener("click", () => {
+        clearInterval(pollInterval);
+        modal.classList.add("hidden");
+        // Si se completó, refrescar la página para ver la nueva tarjeta
+        if (modalStatusBadge.textContent === "COMPLETADO") {
+            window.location.reload();
+        }
+    });
+});
+</script>
 {% endblock %}

@@ -2,7 +2,7 @@
   "ticker": "DECK",
   "company_name": "DECKERS OUTDOOR CORP",
   "cik": "0000910521",
-  "audit_timestamp": "2026-09-10T20:28:30.482873",
+  "audit_timestamp": "2026-09-27T22:33:12.037456",
   "years_audited": {
     "LTM": [
       {
@@ -12,6 +12,7 @@
         "assets": 3868621000.0,
         "liabilities": 1566939000.0,
         "equity": 2301682000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 3868621000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 386862.1
@@ -53,12 +54,12 @@
         "passed": true,
         "status": "PASS",
         "net_income": 1014840000.0,
-        "shares_diluted": 138559000.0,
-        "eps_reported": 7.029999999999999,
-        "eps_calculated": 7.32,
-        "eps_adjusted": 7.32,
+        "shares_diluted": 143028500.0,
+        "eps_reported": 7.07,
+        "eps_calculated": 7.1,
+        "eps_adjusted": 7.07,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.03
       }
     ],
     "FY2026": [
@@ -69,6 +70,7 @@
         "assets": 3687765000.0,
         "liabilities": 1188127000.0,
         "equity": 2499638000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 3687765000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 368776.5
@@ -131,6 +133,7 @@
         "assets": 3570252000.0,
         "liabilities": 1057239000.0,
         "equity": 2513013000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 3570252000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 357025.2
@@ -193,6 +196,7 @@
         "assets": 3135579000.0,
         "liabilities": 1028111000.0,
         "equity": 2107468000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 3135579000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 313557.9
@@ -239,11 +243,11 @@
         "passed": true,
         "status": "PASS",
         "net_income": 759563000.0,
-        "shares_diluted": 26048000.0,
-        "eps_reported": 29.16,
-        "eps_calculated": 29.16,
+        "shares_diluted": 156285000.0,
+        "eps_reported": 4.86,
+        "eps_calculated": 4.86,
         "eps_adjusted": 4.86,
-        "split_factor": 6.0,
+        "split_factor": 1.0,
         "discrepancy": 0.0
       }
     ],
@@ -255,6 +259,7 @@
         "assets": 2556203000.0,
         "liabilities": 790470000.0,
         "equity": 1765733000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 2556203000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 255620.3
@@ -301,11 +306,11 @@
         "passed": true,
         "status": "PASS",
         "net_income": 516822000.0,
-        "shares_diluted": 26686000.0,
-        "eps_reported": 19.37,
-        "eps_calculated": 19.37,
+        "shares_diluted": 160111000.0,
+        "eps_reported": 3.23,
+        "eps_calculated": 3.23,
         "eps_adjusted": 3.23,
-        "split_factor": 6.0,
+        "split_factor": 1.0,
         "discrepancy": 0.0
       }
     ],
@@ -317,6 +322,7 @@
         "assets": 2332250000.0,
         "liabilities": 793425000.0,
         "equity": 1538825000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 2332250000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 233225.0
@@ -379,6 +385,7 @@
         "assets": 2167705000.0,
         "liabilities": 723480000.0,
         "equity": 1444225000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 2167705000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 216770.5
@@ -428,7 +435,7 @@
         "shares_diluted": 28406000.0,
         "eps_reported": 13.47,
         "eps_calculated": 13.47,
-        "eps_adjusted": 2.24,
+        "eps_adjusted": 2.25,
         "split_factor": 6.0,
         "discrepancy": 0.0
       }
@@ -441,6 +448,7 @@
         "assets": 1765118000.0,
         "liabilities": 624998000.0,
         "equity": 1140120000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1765118000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 176511.8
@@ -503,6 +511,7 @@
         "assets": 1427206000.0,
         "liabilities": 382076000.0,
         "equity": 1045130000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1427206000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 142720.6
@@ -533,7 +542,7 @@
         "status": "PASS",
         "cfo": 359505000.0,
         "cfi": -29018000.0,
-        "cff": -167194000.0,
+        "cff": -167193000.0,
         "sum_of_activities": 159722000.0,
         "net_change_reported": 159722000.0,
         "discrepancy_usd": 0.0
@@ -565,6 +574,7 @@
         "assets": 1264379000.0,
         "liabilities": 323600000.0,
         "equity": 940779000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1264379000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 126437.9
@@ -583,17 +593,22 @@
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 327351000.0,
+        "cash_from_operations": 327355000.0,
         "capital_expenditures": 34813000.0,
-        "fcf_reported": 292538000.0,
-        "fcf_calculated": 292538000.0,
+        "fcf_reported": 292542000.0,
+        "fcf_calculated": 292542000.0,
         "discrepancy_usd": 0.0
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Detalle de flujo de caja incompleto para FY2018."
+        "passed": true,
+        "status": "PASS",
+        "cfo": 327355000.0,
+        "cfi": -34697000.0,
+        "cff": -157715000.0,
+        "sum_of_activities": 138210000.0,
+        "net_change_reported": 138206000.0,
+        "discrepancy_usd": 4000.0
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
@@ -622,6 +637,7 @@
         "assets": 1191780000.0,
         "liabilities": 237525000.0,
         "equity": 954255000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1191780000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 119178.0
@@ -640,17 +656,22 @@
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 169654000.0,
+        "cash_from_operations": 199330000.0,
         "capital_expenditures": 44499000.0,
-        "fcf_reported": 125155000.0,
-        "fcf_calculated": 125155000.0,
+        "fcf_reported": 154831000.0,
+        "fcf_calculated": 154831000.0,
         "discrepancy_usd": 0.0
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Detalle de flujo de caja incompleto para FY2017."
+        "passed": true,
+        "status": "PASS",
+        "cfo": 199330000.0,
+        "cfi": -44499000.0,
+        "cff": -103757000.0,
+        "sum_of_activities": 45808000.0,
+        "net_change_reported": 45808000.0,
+        "discrepancy_usd": 0.0
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
@@ -662,20 +683,79 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -47327000.0,
+        "net_income": 5710000.0,
         "shares_diluted": 32355000.0,
         "eps_reported": 0.18,
-        "eps_calculated": -1.46,
-        "eps_adjusted": -0.24,
+        "eps_calculated": 0.18,
+        "eps_adjusted": 0.03,
+        "split_factor": 6.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2016": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 1278068000.0,
+        "liabilities": 310597000.0,
+        "equity": 967471000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 1278068000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 127806.8
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2016."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": true,
+        "status": "PASS",
+        "cash_from_operations": 125813000.0,
+        "capital_expenditures": 66186000.0,
+        "fcf_reported": 59627000.0,
+        "fcf_calculated": 59627000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 125813000.0,
+        "cfi": -67221000.0,
+        "cff": -36811000.0,
+        "sum_of_activities": 20813000.0,
+        "net_change_reported": 20813000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 122265000.0,
+        "shares_diluted": 33039000.0,
+        "eps_reported": 3.7,
+        "eps_calculated": 3.7,
+        "eps_adjusted": 0.62,
         "split_factor": 6.0,
         "discrepancy": 0.0
       }
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 66,
-  "passed_tests": 63,
+  "total_tests": 72,
+  "passed_tests": 70,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0
 }

@@ -2,18 +2,119 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-09-22T15:51:43.582337",
+  "audit_timestamp": "2026-09-28T18:29:17.344904",
   "years_audited": {
-    "FY2024": [
+    "LTM": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 82753414000.0,
+        "liabilities": 69501693000.0,
+        "equity": 13249670000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 82751363000.0,
+        "discrepancy_usd": 2051000.0,
+        "tolerance_usd": 8275341.4
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para LTM."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para LTM."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Reconciliación detallada de variación de caja no aplica a período móvil derivado LTM."
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 3609997000.0,
+        "shares_diluted": 4878374324.0,
+        "eps_reported": 0.74,
+        "eps_calculated": 0.74,
+        "eps_adjusted": 0.74,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
+    ],
+    "FY2025": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": false,
         "status": "FAIL",
+        "assets": 74893877000.0,
+        "liabilities": 63572315000.0,
+        "equity": 11290948000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 74863263000.0,
+        "discrepancy_usd": 30614000.0,
+        "tolerance_usd": 7489387.7
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2025."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2025."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Detalle de flujo de caja incompleto para FY2025."
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 2871672000.0,
+        "shares_diluted": 4907352000.0,
+        "eps_reported": 0.5846,
+        "eps_calculated": 0.59,
+        "eps_adjusted": 0.58,
+        "split_factor": 1.0,
+        "discrepancy": 0.01
+      }
+    ],
+    "FY2024": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
         "assets": 49931214000.0,
         "liabilities": 42284138000.0,
-        "equity": 4442541000.0,
-        "liabilities_plus_equity": 46726679000.0,
-        "discrepancy_usd": 3204535000.0,
+        "equity": 7646289000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 49930427000.0,
+        "discrepancy_usd": 787000.0,
         "tolerance_usd": 4993121.4
       },
       {
@@ -24,13 +125,9 @@
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
-        "passed": true,
-        "status": "PASS",
-        "cash_from_operations": 755573000.0,
-        "capital_expenditures": 0.0,
-        "fcf_reported": 755573000.0,
-        "fcf_calculated": 755573000.0,
-        "discrepancy_usd": 0.0
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2024."
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
@@ -46,22 +143,29 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2024."
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1972112000.0,
+        "shares_diluted": 4888918000.0,
+        "eps_reported": 0.4034,
+        "eps_calculated": 0.4,
+        "eps_adjusted": 0.4,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2023": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": false,
-        "status": "FAIL",
-        "assets": 43498449000.0,
-        "liabilities": 37092064000.0,
-        "equity": -4607000.0,
-        "liabilities_plus_equity": 37087457000.0,
-        "discrepancy_usd": 6410992000.0,
-        "tolerance_usd": 4349844.9
+        "passed": true,
+        "status": "PASS",
+        "assets": 43345195000.0,
+        "liabilities": 36938810000.0,
+        "equity": 6406385000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 43345195000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 4334519.5
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -71,13 +175,9 @@
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
-        "passed": true,
-        "status": "PASS",
-        "cash_from_operations": -2924318000.0,
-        "capital_expenditures": 0.0,
-        "fcf_reported": -2924318000.0,
-        "fcf_calculated": -2924318000.0,
-        "discrepancy_usd": 0.0
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2023."
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
@@ -93,21 +193,28 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2023."
+        "passed": true,
+        "status": "PASS",
+        "net_income": 1030530000.0,
+        "shares_diluted": 4857579000.0,
+        "eps_reported": 0.2121,
+        "eps_calculated": 0.21,
+        "eps_adjusted": 0.21,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2022": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "assets": 29934872000.0,
         "liabilities": 25044089000.0,
-        "equity": -15000.0,
-        "liabilities_plus_equity": 25044074000.0,
-        "discrepancy_usd": 4890798000.0,
+        "equity": 4890783000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 29934872000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 2993487.2
       },
       {
@@ -118,13 +225,9 @@
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
-        "passed": true,
-        "status": "PASS",
-        "cash_from_operations": 974520000.0,
-        "capital_expenditures": 0.0,
-        "fcf_reported": 974520000.0,
-        "fcf_calculated": 974520000.0,
-        "discrepancy_usd": 0.0
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2022."
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
@@ -140,21 +243,28 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2022."
+        "passed": true,
+        "status": "PASS",
+        "net_income": -364634000.0,
+        "shares_diluted": 4676977000.0,
+        "eps_reported": -0.078,
+        "eps_calculated": -0.08,
+        "eps_adjusted": -0.08,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2021": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "assets": 19858681000.0,
         "liabilities": 15416140000.0,
-        "equity": -3774000.0,
-        "liabilities_plus_equity": 15412366000.0,
-        "discrepancy_usd": 4446315000.0,
+        "equity": 4441032000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 19857172000.0,
+        "discrepancy_usd": 1509000.0,
         "tolerance_usd": 1985868.1
       },
       {
@@ -165,13 +275,9 @@
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
-        "passed": true,
-        "status": "PASS",
-        "cash_from_operations": 276137000.0,
-        "capital_expenditures": 0.0,
-        "fcf_reported": 276137000.0,
-        "fcf_calculated": 276137000.0,
-        "discrepancy_usd": 0.0
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2021."
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
@@ -187,17 +293,29 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2021."
+        "passed": true,
+        "status": "PASS",
+        "net_income": -165334000.0,
+        "shares_diluted": 1602126000.0,
+        "eps_reported": -0.103,
+        "eps_calculated": -0.1,
+        "eps_adjusted": -0.03,
+        "split_factor": 3.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2020": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2020 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 10154250000.0,
+        "liabilities": 9716139000.0,
+        "equity": 438111000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 10154250000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 1015425.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -225,16 +343,66 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": false,
+        "status": "FAIL",
+        "net_income": -171491000.0,
+        "shares_diluted": 405394.0,
+        "eps_reported": -0.1304,
+        "eps_calculated": -423.02,
+        "eps_adjusted": -0.04,
+        "split_factor": 3.0,
+        "discrepancy": 140.97
+      }
+    ],
+    "FY2019": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": null,
         "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2020."
+        "message": "Partidas insuficientes en FY2019 para verificar balance completo."
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2019."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Faltan flujos de efectivo para FY2019."
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Detalle de flujo de caja incompleto para FY2019."
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": false,
+        "status": "FAIL",
+        "net_income": -92531000.0,
+        "shares_diluted": 306210.0,
+        "eps_reported": -0.0813,
+        "eps_calculated": -302.18,
+        "eps_adjusted": -0.03,
+        "split_factor": 3.0,
+        "discrepancy": 100.7
       }
     ]
   },
   "overall_status": "FAIL",
-  "total_tests": 30,
-  "passed_tests": 9,
-  "failed_tests": 4,
-  "skipped_tests": 17,
-  "compliance_score_pct": 69.2
+  "total_tests": 48,
+  "passed_tests": 20,
+  "failed_tests": 3,
+  "skipped_tests": 25,
+  "compliance_score_pct": 87.0
 }

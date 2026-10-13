@@ -1,0 +1,351 @@
+{
+  "ticker": "MELI",
+  "company_name": "MercadoLibre, Inc.",
+  "exchange": "NASDAQ",
+  "period_label": "Q2 2026",
+  "period_date": "30 de Junio de 2026",
+  "filing_source": "Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q2 2026 Earnings Call Transcript",
+  "sic_code": "7389",
+  "industry": "E-Commerce Marketplaces & Platform Services / FinTech",
+  "business_model_callout": {
+    "title": "RESUMEN DEL MODELO DE NEGOCIO Y ECOSISTEMA SIN\u00c9RGICO",
+    "paragraphs": [
+      "MercadoLibre, Inc. es el l\u00edder indiscutido de comercio electr\u00f3nico y servicios financieros digitales en Am\u00e9rica Latina, operando el ecosistema tecnol\u00f3gico integrado m\u00e1s grande y sin\u00e9rgico de la regi\u00f3n a trav\u00e9s de 18 pa\u00edses.",
+      "El negocio se estructura en dos motores interconectados que retroalimentan un potente c\u00edrculo virtuoso (Flywheel): (1) Mercado Libre Commerce, que agrupa el marketplace l\u00edder (3P y 1P), la red log\u00edstica integral de almacenamiento y \u00faltima milla Mercado Env\u00edos, y la plataforma de publicidad digital Mercado Ads; y (2) Mercado Pago FinTech, una plataforma integral de pagos digitales, adquirencia para comercios (POS y online), cuentas remuneradas de ahorro y cr\u00e9ditos de consumo y capital de trabajo a trav\u00e9s de Mercado Cr\u00e9dito."
+    ]
+  },
+  "channels": {
+    "title": "Estructura de Canales y Segmentos de Comercializaci\u00f3n (Go-To-Market):",
+    "intro": "De acuerdo con la informaci\u00f3n oficial auditada del Formulario 10-K y 10-Q ante la SEC, MercadoLibre monetiza su ecosistema a trav\u00e9s de flujos de ingresos diversificados:",
+    "direct": {
+      "label": "Segmento Comercio Electr\u00f3nico - Commerce (~55% de los ingresos netos):",
+      "description": "Comisiones por transacci\u00f3n cobradas a vendedores (Marketplace take rate), ingresos de venta directa de productos propios (1P retail), tarifas de fulfillment y log\u00edstica express a trav\u00e9s de Mercado Env\u00edos, e ingresos publicitarios de alta rentabilidad mediante Mercado Ads."
+    },
+    "indirect": {
+      "label": "Segmento FinTech y Servicios Financieros - Mercado Pago (~45% de los ingresos netos):",
+      "description": "Comisiones por procesamiento de pagos dentro y fuera de la plataforma (TPV off-platform), tarifas de liquidaci\u00f3n de dispositivos POS (Point), margen financiero bruto (NII) e intereses devengados sobre la cartera de pr\u00e9stamos y tarjetas de cr\u00e9dito de Mercado Cr\u00e9dito."
+    }
+  },
+  "moat": {
+    "title": "7. Estrategia Tecnol\u00f3gica, Fosos Defensivos (Economic Moat) y Ventajas Competitivas",
+    "intro": "La posici\u00f3n de dominio de MercadoLibre en Am\u00e9rica Latina est\u00e1 protegida por un Foso Defensivo Amplio (Wide Moat / Dorsey Framework), blindado por efectos de red bilaterales masivos, infraestructura log\u00edstica propia irreplicable y altos costes de cambio en su ecosistema financiero:",
+    "headers": [
+      "Fuente del Foso Defensivo",
+      "Intensidad",
+      "Mecanismo de Protecci\u00f3n Econ\u00f3mica",
+      "Diagn\u00f3stico Competitivo"
+    ],
+    "table_data": [
+      [
+        "Efecto de Red Bilateral (Two-Sided Network)",
+        "\ud83d\udfe2 DOMINANTE",
+        "M\u00e1s de 60 millones de compradores activos y millones de vendedores en la misma plataforma; m\u00e1s oferta atrae m\u00e1s demanda y viceversa de forma org\u00e1nica.",
+        "Barrera de entrada insalvable para nuevos competidores regionales; el Marketplace de referencia obligatorio en Brasil, M\u00e9xico y Argentina."
+      ],
+      [
+        "Infraestructura Log\u00edstica Propia (Mercado Env\u00edos)",
+        "\ud83d\udfe2 ESTRUCTURAL",
+        "Red masiva de centros de fulfillment y despacho que entrega m\u00e1s del 50% de los paquetes el mismo d\u00eda o al d\u00eda siguiente en las principales metr\u00f3polis.",
+        "Ventaja de coste de escala inalcanzable; la reducci\u00f3n del umbral de env\u00edo gratis en Brasil dispara el volumen y ahoga a rivales locales."
+      ],
+      [
+        "Costes de Cambio y Ecosistema Mercado Pago",
+        "\ud83d\udfe2 ELEVADO",
+        "Comerciantes y usuarios retienen saldos en la cuenta remunerada, cobran con lectores Point y financian sus compras mediante Mercado Cr\u00e9dito en un solo clic.",
+        "Retenci\u00f3n superior y fidelidad transaccional; el usuario migra naturalmente de consumidor de e-commerce a cliente bancarizado."
+      ],
+      [
+        "Poder de Datos y Scoring Crediticio Propietario",
+        "\ud83d\udfe2 ALTA",
+        "Algoritmos de inteligencia artificial entrenados con miles de millones de transacciones de compraventa para estimar el riesgo crediticio en tiempo real.",
+        "Capacidad de otorgar cr\u00e9dito con mejor selecci\u00f3n de riesgo (NIMAL del 21%) frente a bancos tradicionales que carecen de visibilidad operativa."
+      ]
+    ],
+    "verdict": "WIDE MOAT | Tendencia: EN EXPANSI\u00d3N.",
+    "subsections": [
+      {
+        "title": "7.2. El C\u00edrculo Virtuoso (Flywheel) entre Comercio y Fintech",
+        "bullets": [
+          [
+            "\u2022 Comercio alimenta FinTech: ",
+            "El volumen transaccional del marketplace genera liquidez cautiva inmediata en las billeteras digitales de Mercado Pago sin coste de adquisici\u00f3n de clientes."
+          ],
+          [
+            "\u2022 FinTech potencia el Comercio: ",
+            "Las l\u00edneas de cr\u00e9dito personal y la tarjeta de cr\u00e9dito propia de Mercado Cr\u00e9dito elevan el poder de compra del usuario e incrementan los \u00edtems comprados por usuario en un +19% YoY."
+          ]
+        ]
+      },
+      {
+        "title": "7.3. Densidad Log\u00edstica como Escudo frente a Gigantes Globales (Amazon / Shopee)",
+        "bullets": [
+          [
+            "\u2022 Eficiencia por Milla Recorrida: ",
+            "La escala log\u00edstica de MELI en Brasil y M\u00e9xico reduce el costo unitario por paquete con cada incremento de volumen, convirtiendo el gasto log\u00edstico en un arma competitiva."
+          ],
+          [
+            "\u2022 Cobertura Geogr\u00e1fica Extrema: ",
+            "Capacidad de entrega en regiones remotas de Am\u00e9rica Latina donde competidores transfronterizos tardan semanas o no tienen presencia."
+          ]
+        ]
+      }
+    ]
+  },
+  "capital_allocation": {
+    "ma_headers": [
+      "Iniciativa / Transacci\u00f3n",
+      "Tipo de Operaci\u00f3n",
+      "Capital / Compromiso",
+      "\u00bfQu\u00e9 se busca estrat\u00e9gicamente con ello?"
+    ],
+    "ma_data": [
+      [
+        "Expansi\u00f3n de Red de Centros de Fulfillment",
+        "CapEx Log\u00edstico Directo",
+        "~$980 M anuales",
+        "Apertura de nuevos mega-hubs en Brasil, M\u00e9xico y Colombia para blindar la promesa de entrega en 24 horas."
+      ],
+      [
+        "Crecimiento de Cartera Mercado Cr\u00e9dito",
+        "Asignaci\u00f3n de Capital Crediticio",
+        "$16,400 M en cartera",
+        "Despliegue selectivo de pr\u00e9stamos con foco en tarjetas de cr\u00e9dito de bajo riesgo y expansi\u00f3n de NIMAL al 21%."
+      ],
+      [
+        "Desarrollo e Inversi\u00f3n en Inteligencia Artificial",
+        "Gasto I+D y Software",
+        "~$1,850 M anuales",
+        "Optimizaci\u00f3n de rutas de reparto, modelos de riesgo crediticio automatizado y personalizaci\u00f3n publicitaria en Mercado Ads."
+      ]
+    ],
+    "capex_title": "6.4. Pol\u00edtica de Inversi\u00f3n, Eficiencia Log\u00edstica y Flujo de Caja Libre",
+    "capex_intro": "MercadoLibre reinvierte activamente su flujo operativo en infraestructura log\u00edstica y desarrollo de software, priorizando la expansi\u00f3n de escala y el afianzamiento de sus fosos sobre la rentabilidad a corto plazo:",
+    "capex_bullets": [
+      [
+        "\u2022 CapEx Log\u00edstico de Alto Retorno: ",
+        "La inversi\u00f3n en flota y almacenes automatizados reduce el coste unitario por entrega y consolida la ventaja de entrega en el mismo d\u00eda."
+      ],
+      [
+        "\u2022 FCF Ajustado S\u00f3lido: ",
+        "A pesar del hipercrecimiento y del fondeo de la cartera de cr\u00e9dito, la compa\u00f1\u00eda gener\u00f3 $214M en FCF ajustado en el \u00faltimo trimestre, respaldando m\u00e1s de $4,100M en liquidez total."
+      ]
+    ]
+  },
+  "scorecard": {
+    "intro": "MercadoLibre, Inc. ha reportado un desempe\u00f1o financiero extraordinario en el segundo trimestre de 2026 (Q2 2026, cerrado el 30 de junio de 2026) y en los \u00faltimos 12 meses (LTM), superando por primera vez en su historia los $10,000M en ingresos netos trimestrales (+50% YoY) y alcanzando una cartera de cr\u00e9ditos de $16,400M (+75% YoY):",
+    "headers": [
+      "M\u00e9trica Financiera",
+      "LTM (M\u00f3vil)",
+      "FY2025 (Cierre)",
+      "FY2024 (Previo)",
+      "Diagn\u00f3stico Fundamental y Salud Operativa"
+    ],
+    "data": [
+      [
+        "Ingresos Netos Totales",
+        "$24,461.0 M",
+        "$20,335.0 M",
+        "$15,137.0 M",
+        "Crecimiento estelar de +49-50% YoY impulsado por Brasil y M\u00e9xico."
+      ],
+      [
+        "Margen Bruto ($M)",
+        "$15,014.0 M",
+        "$12,858.0 M",
+        "$9,577.0 M",
+        "Expansi\u00f3n en volumen compensa inversiones agresivas en env\u00edos gratis."
+      ],
+      [
+        "Margen Bruto (%)",
+        "61.38%",
+        "63.23%",
+        "63.27%",
+        "Margen elevado sostenido por ingresos publicitarios y comisiones."
+      ],
+      [
+        "Beneficio Operativo (EBIT)",
+        "$1,643.0 M",
+        "$1,560.0 M",
+        "$1,265.0 M",
+        "EBIT trimestral de $683M (6.7% margen) priorizando escala de largo plazo."
+      ],
+      [
+        "Beneficio Neto ($M)",
+        "$1,820.0 M",
+        "$1,480.0 M",
+        "$1,050.0 M",
+        "Rentabilidad neta r\u00e9cord con alta conversi\u00f3n de ingresos a beneficios."
+      ],
+      [
+        "Flujo de Caja Operativo (CFO)",
+        "$3,950.0 M",
+        "$3,420.0 M",
+        "$2,850.0 M",
+        "Potente generaci\u00f3n operativa que autofinancia la expansi\u00f3n regional."
+      ],
+      [
+        "Cartera de Cr\u00e9ditos (Mercado Cr\u00e9dito)",
+        "$16,400.0 M",
+        "$11,200.0 M",
+        "$6,800.0 M",
+        "Crecimiento de +75% YoY con NIMAL en expansi\u00f3n hasta el 21%."
+      ],
+      [
+        "Morosidad (NPL 15-90 d\u00edas)",
+        "7.00%",
+        "7.50%",
+        "8.10%",
+        "Calidad crediticia controlada bajo algoritmos de IA y foco en tarjetas."
+      ]
+    ]
+  },
+  "balance_section": {
+    "intro": "La posici\u00f3n patrimonial de MercadoLibre combina un balance comercial con alta liquidez y una estructura de financiamiento crediticio prudente y diversificada:",
+    "table_headers": [
+      "M\u00e9trica Patrimonial",
+      "LTM ($M)",
+      "FY2025 ($M)",
+      "Variaci\u00f3n YoY",
+      "Diagn\u00f3stico de Solvencia y Balance"
+    ],
+    "table_data": [
+      [
+        "Efectivo y Equivalentes L\u00edquidos",
+        "$4,100.0 M",
+        "$3,750.0 M",
+        "+9.3%",
+        "Elevada liquidez para respaldo operativo y de tesorer\u00eda."
+      ],
+      [
+        "Cartera Neta de Pr\u00e9stamos",
+        "$15,100.0 M",
+        "$10,350.0 M",
+        "+45.9%",
+        "Activo financiero productivo respaldado por provisiones robustas."
+      ],
+      [
+        "Deuda Financiera Total",
+        "$5,400.0 M",
+        "$5,100.0 M",
+        "+5.9%",
+        "Compuesta principalmente por notas convertibles y l\u00edneas sindicadas."
+      ],
+      [
+        "Patrimonio Neto (Stockholders' Equity)",
+        "$4,850.0 M",
+        "$3,680.0 M",
+        "+31.8%",
+        "R\u00e1pida capitalizaci\u00f3n org\u00e1nica impulsada por beneficios retenidos."
+      ]
+    ],
+    "carry_trade_note": "MercadoLibre financia su cartera de cr\u00e9ditos mediante una combinaci\u00f3n de fondos propios, dep\u00f3sitos en billeteras digitales y securitizaciones (fideicomisos financieros), limitando la exposici\u00f3n del balance central.",
+    "return_intro": "La compa\u00f1\u00eda reinvierte pr\u00e1cticamente el 100% de sus beneficios operativos en el crecimiento del ecosistema, manteniendo una pol\u00edtica conservadora de retorno de capital sin pago de dividendos:",
+    "return_headers": [
+      "Componente de Asignaci\u00f3n",
+      "Cifra LTM ($M)",
+      "Objetivo Estrat\u00e9gico",
+      "Impacto para el Accionista"
+    ],
+    "return_data": [
+      [
+        "Reinversi\u00f3n Org\u00e1nica (CapEx + Cr\u00e9dito)",
+        "~$2,500.0 M",
+        "Expansi\u00f3n log\u00edstica y de cr\u00e9ditos",
+        "Tasa de reinversi\u00f3n de alto rendimiento que sostiene el foso defensivo."
+      ],
+      [
+        "Recompra de Acciones",
+        "$0.0 M",
+        "Preservaci\u00f3n de capital",
+        "Prioridad absoluta en compounder growth de dos d\u00edgitos."
+      ],
+      [
+        "Dividendos en Efectivo",
+        "$0.0 M",
+        "Cero distribuci\u00f3n",
+        "Eficiencia fiscal \u00f3ptima para inversores de crecimiento."
+      ]
+    ],
+    "sbc_note": "La compensaci\u00f3n basada en acciones (SBC) se mantiene controlada en torno al 2.5% de los ingresos netos, alineando los incentivos de la direcci\u00f3n con la creaci\u00f3n de valor por acci\u00f3n a largo plazo."
+  },
+  "governance_section": {
+    "events_8k_headers": [
+      "Fecha SEC",
+      "\u00cdtem Oficial 8-K",
+      "Naturaleza del Evento",
+      "\u00bfQu\u00e9 significa para la Empresa?",
+      "Diagn\u00f3stico para el Inversor"
+    ],
+    "events_8k_data": [
+      [
+        "2026-08-05",
+        "Item 2.02",
+        "Resultados Financieros Trimestrales Q2 2026",
+        "Superaci\u00f3n de $10B en ingresos trimestrales (+50%) y expansi\u00f3n de cartera a $16.4B.",
+        "\ud83d\udfe2 OPERATIVO: Resultados extraordinarios que baten las proyecciones de consenso."
+      ],
+      [
+        "2026-05-07",
+        "Item 2.02",
+        "Resultados Financieros Trimestrales Q1 2026",
+        "Ingresos de $4.3B (+49% YoY) y emisi\u00f3n de 2.7M de nuevas tarjetas de cr\u00e9dito.",
+        "\ud83d\udfe2 ORDINARIO: Cumplimiento de reporte peri\u00f3dico en calendario regular."
+      ],
+      [
+        "2026-04-15",
+        "Item 5.07",
+        "Junta General Anual de Accionistas",
+        "Reelecci\u00f3n del Consejo de Administraci\u00f3n y aprobaci\u00f3n de auditores independientes.",
+        "\ud83d\udfe2 GOBERNANZA: Respaldo institucional masivo a la gesti\u00f3n estrat\u00e9gica."
+      ]
+    ],
+    "insider_headers": [
+      "Directivo / Cargo Clave",
+      "Tipo de Operaci\u00f3n y Modalidad SEC",
+      "Volumen de Acciones",
+      "Importe Efectivo ($)",
+      "Trazabilidad SEC",
+      "Diagn\u00f3stico de Convicci\u00f3n"
+    ],
+    "insider_data": [
+      [
+        "Marcos Galperin\n(Chairman & Founder)",
+        "\ud83d\udfe2 Retenci\u00f3n Patrimonial Central",
+        "Posici\u00f3n Fundador",
+        "$0 ventas abiertas",
+        "Form 4 Registrado",
+        "Compromiso estrat\u00e9gico y control accionario de largo plazo."
+      ],
+      [
+        "Ariel Szarfsztejn\n(Chief Executive Officer)",
+        "\ud83d\udfe2 Asignaci\u00f3n y Retenci\u00f3n (RSUs)",
+        "+25,000",
+        "$0 ventas",
+        "Form 4 Registrado",
+        "Alineaci\u00f3n ejecutiva completa en su liderazgo operativo."
+      ],
+      [
+        "Mart\u00edn de los Santos\n(Chief Financial Officer)",
+        "\ud83d\udfe2 Planes Programados 10b5-1",
+        "Operaciones rutinarias",
+        "Ventas programadas",
+        "Form 144 / 4",
+        "Diversificaci\u00f3n planificada sin impacto en la convicci\u00f3n interna."
+      ]
+    ]
+  },
+  "geographic_analysis": [
+    {
+      "prefix": "\u2022 Brasil como Motor Central (53.5% de los ingresos): ",
+      "text": "Los ingresos crecieron m\u00e1s de un 50% interanual con un salto del +19% en \u00edtems comprados por usuario tras la estrategia de reducci\u00f3n del umbral de env\u00edo gratis."
+    },
+    {
+      "prefix": "\u2022 M\u00e9xico en Fase de Aceleraci\u00f3n (24.2% de los ingresos): ",
+      "text": "Consolidaci\u00f3n de la cuota de mercado con r\u00e1pido crecimiento en la penetraci\u00f3n de Mercado Pago y tarjetas de cr\u00e9dito."
+    },
+    {
+      "prefix": "\u2022 Argentina y Resiliencia Macroecon\u00f3mica (18.1% de los ingresos): ",
+      "text": "S\u00f3lida capacidad de fijaci\u00f3n de precios y adaptaci\u00f3n operativa a las fluctuaciones cambiarias e inflacionarias locales."
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +8,85 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .tab-btn {
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.15s ease, border-color 0.15s ease;
+        }
+        .tab-btn:hover {
+            color: #0f172a;
+        }
         .tab-btn.active {
-            border-bottom: 3px solid #38bdf8;
-            color: #38bdf8;
+            border-bottom: 3px solid #0284c7;
+            color: #0284c7;
             font-weight: 700;
         }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased">
     <!-- Navbar -->
-    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shadow-lg">
-        <div class="flex items-center space-x-3">
-            <a href="{% url 'analytics:index' %}" class="flex items-center space-x-3">
-                <span class="text-2xl">🏛️</span>
-                <span class="font-bold text-lg text-white tracking-tight">Django Equity Terminal</span>
+    <nav class="bg-white border-b border-slate-200/80 px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-sm sticky top-0 z-50 gap-4">
+        <div class="flex items-center space-x-2 shrink-0">
+            <a href="{% url 'analytics:index' %}" class="flex items-center space-x-2 hover:opacity-90 transition">
+                <span class="text-xl">🏛️</span>
+                <span class="font-black text-lg text-slate-900 tracking-tight">Equity Terminal</span>
             </a>
-            <span class="px-2 py-0.5 rounded text-xs bg-sky-500/20 text-sky-400 border border-sky-500/30">v1.0 Institutional</span>
+            <span class="hidden md:inline-block px-1.5 py-0.5 rounded text-[10px] bg-sky-50 text-sky-700 border border-sky-200/80 font-semibold">v1.0</span>
         </div>
-        <div class="flex items-center space-x-4 text-sm">
-            <a href="{% url 'analytics:index' %}" class="text-slate-300 hover:text-white transition">Compañías</a>
-            <a href="{% url 'analytics:company_detail' 'AAPL' %}" class="text-slate-300 hover:text-white transition">Apple (AAPL)</a>
-            <a href="{% url 'analytics:company_detail' 'DECK' %}" class="text-slate-300 hover:text-white transition">Deckers (DECK)</a>
+        
+        <!-- Ticker Carousel Navigation -->
+        <div class="flex items-center space-x-1.5 min-w-0 flex-1 justify-end max-w-3xl">
+            <!-- Left scroll button -->
+            <button id="tickerScrollLeft" type="button" aria-label="Desplazar a la izquierda" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition shrink-0 hidden sm:inline-flex">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <!-- Scrollable ticker strip -->
+            <div id="tickerStrip" class="flex items-center space-x-1.5 overflow-x-auto scroll-smooth no-scrollbar py-1 px-1">
+                {% for comp in nav_companies %}
+                <a href="{% url 'analytics:company_detail' comp.ticker %}" 
+                   title="{{ comp.name }}"
+                   class="px-2.5 py-1 rounded-lg text-xs font-bold transition shrink-0 flex items-center space-x-1 border {% if ticker == comp.ticker %}bg-sky-600 text-white border-sky-600 shadow-sm{% else %}bg-slate-50 text-slate-700 border-slate-200/90 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300{% endif %}">
+                    <span>{{ comp.ticker }}</span>
+                </a>
+                {% endfor %}
+            </div>
+
+            <!-- Right scroll button -->
+            <button id="tickerScrollRight" type="button" aria-label="Desplazar a la derecha" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition shrink-0 hidden sm:inline-flex">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
         </div>
     </nav>
+    <script>
+        (function() {
+            const strip = document.getElementById('tickerStrip');
+            const btnLeft = document.getElementById('tickerScrollLeft');
+            const btnRight = document.getElementById('tickerScrollRight');
+            if (strip && btnLeft && btnRight) {
+                btnLeft.addEventListener('click', () => {
+                    strip.scrollBy({ left: -180, behavior: 'smooth' });
+                });
+                btnRight.addEventListener('click', () => {
+                    strip.scrollBy({ left: 180, behavior: 'smooth' });
+                });
+                // Centrar automáticamente el ticker activo en la tira si existe
+                const activeTicker = strip.querySelector('.bg-sky-600');
+                if (activeTicker) {
+                    activeTicker.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }
+        })();
+    </script>
 
     <!-- Main Content -->
     <main class="p-6 max-w-7xl mx-auto space-y-8">
@@ -41,7 +94,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <footer class="border-t border-slate-200/80 py-6 text-center text-xs text-slate-500 bg-white">
         Plataforma Institucional de Análisis Fundamental · Desarrollado con Django 6.1 & Chart.js · Datos SEC EDGAR Auditados
     </footer>
 </body>

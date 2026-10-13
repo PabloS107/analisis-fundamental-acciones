@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-09-22T15:49:10.219775",
+  "audit_timestamp": "2026-10-13T17:30:58.172389",
   "years_audited": {
     "LTM": [
       {
@@ -12,28 +12,30 @@
         "assets": 51356000000.0,
         "liabilities": 43522000000.0,
         "equity": 7834000000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 51356000000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 5135600.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "revenue": 35182000000.0,
-        "cost_of_goods_sold": 11902000000.0,
+        "cost_of_goods_sold": 20168000000.0,
         "gross_profit_reported": 15014000000.0,
-        "gross_profit_calculated": 23280000000.0,
-        "discrepancy_usd": 8266000000.0
+        "gross_profit_calculated": 15014000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 3518200.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 13905000000.0,
-        "capital_expenditures": 0.0,
-        "fcf_reported": 13905000000.0,
-        "fcf_calculated": 13905000000.0,
+        "capital_expenditures": 1496000000.0,
+        "fcf_reported": 12409000000.0,
+        "fcf_calculated": 12409000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -53,12 +55,12 @@
         "passed": true,
         "status": "PASS",
         "net_income": 1863000000.0,
-        "shares_diluted": 50697299.0,
-        "eps_reported": 36.760000000000005,
+        "shares_diluted": 50697282.75,
+        "eps_reported": 36.75,
         "eps_calculated": 36.75,
-        "eps_adjusted": 36.76,
+        "eps_adjusted": 36.75,
         "split_factor": 1.0,
-        "discrepancy": 0.01
+        "discrepancy": 0.0
       }
     ],
     "FY2025": [
@@ -69,6 +71,7 @@
         "assets": 42667000000.0,
         "liabilities": 35919000000.0,
         "equity": 6748000000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 42667000000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 4266700.0
@@ -81,16 +84,17 @@
         "cost_of_goods_sold": 16035000000.0,
         "gross_profit_reported": 12858000000.0,
         "gross_profit_calculated": 12858000000.0,
-        "discrepancy_usd": 0.0
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 2889300.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 12116000000.0,
-        "capital_expenditures": 509000000.0,
-        "fcf_reported": 11607000000.0,
-        "fcf_calculated": 11607000000.0,
+        "capital_expenditures": 1343000000.0,
+        "fcf_reported": 10773000000.0,
+        "fcf_calculated": 10773000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -131,6 +135,7 @@
         "assets": 25196000000.0,
         "liabilities": 20845000000.0,
         "equity": 4351000000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 25196000000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 2519600.0
@@ -143,16 +148,17 @@
         "cost_of_goods_sold": 11200000000.0,
         "gross_profit_reported": 9577000000.0,
         "gross_profit_calculated": 9577000000.0,
-        "discrepancy_usd": 0.0
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 2077700.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 7918000000.0,
-        "capital_expenditures": 89000000.0,
-        "fcf_reported": 7829000000.0,
-        "fcf_calculated": 7829000000.0,
+        "capital_expenditures": 860000000.0,
+        "fcf_reported": 7058000000.0,
+        "fcf_calculated": 7058000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -190,22 +196,24 @@
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 17646000000.0,
-        "liabilities": 14575000000.0,
+        "assets": 17612000000.0,
+        "liabilities": 14541000000.0,
         "equity": 3071000000.0,
-        "liabilities_plus_equity": 17646000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 17612000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 1764600.0
+        "tolerance_usd": 1761200.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 14473000000.0,
-        "cost_of_goods_sold": 7267000000.0,
-        "gross_profit_reported": 7206000000.0,
-        "gross_profit_calculated": 7206000000.0,
-        "discrepancy_usd": 0.0
+        "revenue": 15107000000.0,
+        "cost_of_goods_sold": 7517000000.0,
+        "gross_profit_reported": 7590000000.0,
+        "gross_profit_calculated": 7590000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 1510700.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -255,6 +263,7 @@
         "assets": 13736000000.0,
         "liabilities": 11909000000.0,
         "equity": 1827000000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 13736000000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 1373600.0
@@ -263,11 +272,12 @@
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 10537000000.0,
-        "cost_of_goods_sold": 5374000000.0,
-        "gross_profit_reported": 5163000000.0,
-        "gross_profit_calculated": 5163000000.0,
-        "discrepancy_usd": 0.0
+        "revenue": 10780000000.0,
+        "cost_of_goods_sold": 5582000000.0,
+        "gross_profit_reported": 5198000000.0,
+        "gross_profit_calculated": 5198000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 1078000.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -314,42 +324,44 @@
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 10101158000.0,
-        "liabilities": 8569467000.0,
-        "equity": 1531691000.0,
-        "liabilities_plus_equity": 10101158000.0,
+        "assets": 10101000000.0,
+        "liabilities": 8570000000.0,
+        "equity": 1531000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 10101000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 1010115.8
+        "tolerance_usd": 1010100.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 7069409000.0,
-        "cost_of_goods_sold": 4064357000.0,
-        "gross_profit_reported": 3005052000.0,
-        "gross_profit_calculated": 3005052000.0,
-        "discrepancy_usd": 0.0
+        "revenue": 7069000000.0,
+        "cost_of_goods_sold": 4064000000.0,
+        "gross_profit_reported": 3005000000.0,
+        "gross_profit_calculated": 3005000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 706900.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 965043000.0,
-        "capital_expenditures": 572929000.0,
-        "fcf_reported": 392114000.0,
-        "fcf_calculated": 392114000.0,
+        "cash_from_operations": 965000000.0,
+        "capital_expenditures": 573000000.0,
+        "fcf_reported": 392000000.0,
+        "fcf_calculated": 392000000.0,
         "discrepancy_usd": 0.0
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
         "passed": true,
         "status": "PASS",
-        "cfo": 965043000.0,
-        "cfi": -1596533000.0,
-        "cff": 1924983000.0,
-        "sum_of_activities": 1139739000.0,
-        "net_change_reported": 1139739000.0,
+        "cfo": 965000000.0,
+        "cfi": -1597000000.0,
+        "cff": 1925000000.0,
+        "sum_of_activities": 1140000000.0,
+        "net_change_reported": 1140000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -362,7 +374,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 83304000.0,
+        "net_income": 83000000.0,
         "shares_diluted": 49802993.0,
         "eps_reported": 1.67,
         "eps_calculated": 1.67,
@@ -379,6 +391,7 @@
         "assets": 6526332000.0,
         "liabilities": 4874754000.0,
         "equity": 1651578000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 6526332000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 652633.2
@@ -387,31 +400,32 @@
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 3973465000.0,
-        "cost_of_goods_sold": 2264255000.0,
-        "gross_profit_reported": 1709210000.0,
-        "gross_profit_calculated": 1709210000.0,
-        "discrepancy_usd": 0.0
+        "revenue": 3974000000.0,
+        "cost_of_goods_sold": 2265000000.0,
+        "gross_profit_reported": 1709000000.0,
+        "gross_profit_calculated": 1709000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 397400.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 1182552000.0,
-        "capital_expenditures": 247048000.0,
-        "fcf_reported": 935504000.0,
-        "fcf_calculated": 935504000.0,
+        "cash_from_operations": 1182000000.0,
+        "capital_expenditures": 247000000.0,
+        "fcf_reported": 935000000.0,
+        "fcf_calculated": 935000000.0,
         "discrepancy_usd": 0.0
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
         "passed": true,
         "status": "PASS",
-        "cfo": 1182552000.0,
-        "cfi": -252181000.0,
-        "cff": 242266000.0,
-        "sum_of_activities": 1056800000.0,
-        "net_change_reported": 1056800000.0,
+        "cfo": 1182000000.0,
+        "cfi": -252000000.0,
+        "cff": 242000000.0,
+        "sum_of_activities": 1057000000.0,
+        "net_change_reported": 1057000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -424,25 +438,26 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -707000.0,
+        "net_income": -1000000.0,
         "shares_diluted": 49740407.0,
         "eps_reported": -0.08,
-        "eps_calculated": -0.01,
+        "eps_calculated": -0.02,
         "eps_adjusted": -0.08,
         "split_factor": 1.0,
-        "discrepancy": 0.07
+        "discrepancy": 0.06
       }
     ],
     "FY2019": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "assets": 4781691000.0,
         "liabilities": 2699728000.0,
         "equity": 1983120000.0,
-        "liabilities_plus_equity": 4682848000.0,
-        "discrepancy_usd": 98843000.0,
+        "mezzanine_equity": 98843000.0,
+        "liabilities_plus_equity": 4781691000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 478169.1
       },
       {
@@ -453,7 +468,8 @@
         "cost_of_goods_sold": 1194191000.0,
         "gross_profit_reported": 1102123000.0,
         "gross_profit_calculated": 1102123000.0,
-        "discrepancy_usd": 0.0
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 229631.4
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -503,19 +519,21 @@
         "assets": 2239519000.0,
         "liabilities": 1902819000.0,
         "equity": 336700000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 2239519000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 223951.9
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "revenue": 1439653000.0,
-        "cost_of_goods_sold": 424838000.0,
+        "cost_of_goods_sold": 742645000.0,
         "gross_profit_reported": 697008000.0,
-        "gross_profit_calculated": 1014815000.0,
-        "discrepancy_usd": 317807000.0
+        "gross_profit_calculated": 697008000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 143965.3
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -546,15 +564,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 136366000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": -36585000.0,
         "shares_diluted": 44529614.0,
         "eps_reported": -0.82,
-        "eps_calculated": 3.06,
+        "eps_calculated": -0.82,
         "eps_adjusted": -0.82,
         "split_factor": 1.0,
-        "discrepancy": 3.88
+        "discrepancy": 0.0
       }
     ],
     "FY2017": [
@@ -565,6 +583,7 @@
         "assets": 1673187000.0,
         "liabilities": 1347408000.0,
         "equity": 325779000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1673187000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 167318.7
@@ -573,11 +592,12 @@
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 1398095000.0,
-        "cost_of_goods_sold": 678495000.0,
+        "revenue": 1216542000.0,
+        "cost_of_goods_sold": 496942000.0,
         "gross_profit_reported": 719600000.0,
         "gross_profit_calculated": 719600000.0,
-        "discrepancy_usd": 0.0
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 121654.2
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -591,9 +611,14 @@
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Detalle de flujo de caja incompleto para FY2017."
+        "passed": true,
+        "status": "PASS",
+        "cfo": 269010000.0,
+        "cfi": -22641000.0,
+        "cff": -50903000.0,
+        "sum_of_activities": 154120000.0,
+        "net_change_reported": 154120000.0,
+        "discrepancy_usd": 0.0
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
@@ -603,15 +628,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 105789000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 13780000.0,
         "shares_diluted": 44157364.0,
         "eps_reported": 0.31,
-        "eps_calculated": 2.4,
+        "eps_calculated": 0.31,
         "eps_adjusted": 0.31,
         "split_factor": 1.0,
-        "discrepancy": 2.09
+        "discrepancy": 0.0
       }
     ],
     "FY2016": [
@@ -622,6 +647,7 @@
         "assets": 1367435000.0,
         "liabilities": 938581000.0,
         "equity": 428854000.0,
+        "mezzanine_equity": null,
         "liabilities_plus_equity": 1367435000.0,
         "discrepancy_usd": 0.0,
         "tolerance_usd": 136743.5
@@ -634,23 +660,29 @@
         "cost_of_goods_sold": 307538000.0,
         "gross_profit_reported": 536858000.0,
         "gross_profit_calculated": 536858000.0,
-        "discrepancy_usd": 0.0
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 84439.6
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 196793000.0,
+        "cash_from_operations": 190259000.0,
         "capital_expenditures": 68527000.0,
-        "fcf_reported": 128266000.0,
-        "fcf_calculated": 128266000.0,
+        "fcf_reported": 121732000.0,
+        "fcf_calculated": 121732000.0,
         "discrepancy_usd": 0.0
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Detalle de flujo de caja incompleto para FY2016."
+        "passed": true,
+        "status": "PASS",
+        "cfo": 190259000.0,
+        "cfi": -84243000.0,
+        "cff": -19668000.0,
+        "sum_of_activities": 67259000.0,
+        "net_change_reported": 67259000.0,
+        "discrepancy_usd": 0.0
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
@@ -670,12 +702,65 @@
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
+    ],
+    "FY2015": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Partidas insuficientes en FY2015 para verificar balance completo."
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": null,
+        "status": "SKIP",
+        "message": "Datos insuficientes de P&L para FY2015."
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": true,
+        "status": "PASS",
+        "cash_from_operations": 221370000.0,
+        "capital_expenditures": 39150000.0,
+        "fcf_reported": 182220000.0,
+        "fcf_calculated": 182220000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 221370000.0,
+        "cfi": -183538000.0,
+        "cff": -27714000.0,
+        "sum_of_activities": -56263000.0,
+        "net_change_reported": -56263000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 105789000.0,
+        "shares_diluted": 44155680.0,
+        "eps_reported": 2.4,
+        "eps_calculated": 2.4,
+        "eps_adjusted": 2.4,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
+      }
     ]
   },
-  "overall_status": "FAIL",
-  "total_tests": 66,
-  "passed_tests": 58,
-  "failed_tests": 5,
+  "overall_status": "PASS",
+  "total_tests": 72,
+  "passed_tests": 69,
+  "failed_tests": 0,
   "skipped_tests": 3,
-  "compliance_score_pct": 92.1
+  "compliance_score_pct": 100.0
 }

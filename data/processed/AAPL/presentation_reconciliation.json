@@ -1,0 +1,121 @@
+{
+  "timestamp": "2026-10-08T15:58:52.511531",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 383266000000.0,
+      "fst_value": 383266000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 107520000000.0,
+      "fst_value": 107520000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 39544000000.0,
+      "fst_value": 39544000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
+    "total_slides": 3,
+    "brand_segmentation": {
+      "Products": {
+        "revenue_usd_m": 346345.0
+      },
+      "Services": {
+        "revenue_usd_m": 120478.0
+      },
+      "iPhone": {
+        "revenue_usd_m": 245540.0
+      },
+      "Mac": {
+        "revenue_usd_m": 35863.0
+      },
+      "iPad": {
+        "revenue_usd_m": 28652.0
+      },
+      "Wearables, Home and Accessories": {
+        "revenue_usd_m": 36290.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "Americas": {
+        "revenue_usd_m": 193595.0
+      },
+      "Europe": {
+        "revenue_usd_m": 124299.0
+      },
+      "Greater China": {
+        "revenue_usd_m": 79332.0
+      },
+      "Japan": {
+        "revenue_usd_m": 31004.0
+      },
+      "Rest of Asia Pacific": {
+        "revenue_usd_m": 38593.0
+      }
+    },
+    "operational_kpis": {
+      "diluted_eps": 2.02
+    },
+    "source_sec": "a8-kex991q3202606272026.htm"
+  },
+  "kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
+    "total_slides": 3,
+    "brand_segmentation": {
+      "Products": {
+        "revenue_usd_m": 346345.0
+      },
+      "Services": {
+        "revenue_usd_m": 120478.0
+      },
+      "iPhone": {
+        "revenue_usd_m": 245540.0
+      },
+      "Mac": {
+        "revenue_usd_m": 35863.0
+      },
+      "iPad": {
+        "revenue_usd_m": 28652.0
+      },
+      "Wearables, Home and Accessories": {
+        "revenue_usd_m": 36290.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "Americas": {
+        "revenue_usd_m": 193595.0
+      },
+      "Europe": {
+        "revenue_usd_m": 124299.0
+      },
+      "Greater China": {
+        "revenue_usd_m": 79332.0
+      },
+      "Japan": {
+        "revenue_usd_m": 31004.0
+      },
+      "Rest of Asia Pacific": {
+        "revenue_usd_m": 38593.0
+      }
+    },
+    "operational_kpis": {
+      "diluted_eps": 2.02
+    },
+    "source_sec": "a8-kex991q3202606272026.htm"
+  },
+  "flags": [],
+  "archetype": "CORPORATE_INDUSTRIAL"
+}

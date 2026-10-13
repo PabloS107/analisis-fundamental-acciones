@@ -1,0 +1,608 @@
+{
+  "ticker": "DECK",
+  "company_name": "Deckers Outdoor Corporation",
+  "exchange": "NYSE",
+  "period_label": "Q1 FY2027",
+  "period_date": "30 de Junio de 2026",
+  "filing_source": "Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript",
+  "sic_code": "3021 / 3140",
+  "industry": "Footwear & Athletic Apparel / Footwear Manufacturing",
+  "business_model_callout": {
+    "title": "RESUMEN DEL MODELO DE NEGOCIO Y PROPUESTA DE VALOR",
+    "paragraphs": [
+      "Deckers Outdoor Corporation diseña, comercializa y distribuye calzado, indumentaria y accesorios de alto rendimiento y estilo de vida premium. Su negocio está estructurado en torno a un portafolio de marcas complementarias y altamente diferenciadas que cubren desde el atletismo técnico hasta el confort casual.",
+      "La compañía lidera el sector de calzado a través de dos super-franquicias globales: HOKA (calzado de running y trail técnico caracterizado por su amortiguación sobredimensionada y geometría de entresuela Meta-Rocker) y UGG (icono cultural mundial de confort y calzado casual en piel de oveja). Su modelo comercial combina una red mayorista internacional disciplinada con un canal de Venta Directa al Consumidor (DTC) de rápido crecimiento y elevado margen."
+    ]
+  },
+  "channels": {
+    "title": "Estructura de Canales de Comercialización (Go-To-Market):",
+    "intro": "De acuerdo con la información oficial auditada del Formulario 10-K ante la SEC, Deckers comercializa sus productos a nivel global a través de dos vías integradas:",
+    "direct": {
+      "label": "Canal Directo al Consumidor - DTC (~43% de las ventas netas):",
+      "description": "Gestionado a través de sus plataformas de comercio electrónico dedicadas (hoka.com, ugg.com, teva.com) y una selecta red de tiendas concepto y outlets en Norteamérica, Europa y Asia-Pacífico. Este canal proporciona el mayor margen bruto de la compañía y permite controlar plenamente la experiencia y fidelización de marca."
+    },
+    "indirect": {
+      "label": "Canal Mayorista - Wholesale (~57% de las ventas netas):",
+      "description": "Red internacional que abarca tiendas especializadas en running y atletismo, cadenas minoristas de artículos deportivos (Dick's Sporting Goods, REI, Foot Locker), grandes almacenes de gama alta (Nordstrom, Bloomingdale's) y distribuidores autorizados en mercados internacionales clave."
+    }
+  },
+  "moat": {
+    "title": "7. Estrategia Tecnológica, Fosos Defensivos (Economic Moat) y Ventajas Competitivas",
+    "intro": "La excepcional rentabilidad sobre el capital de Deckers (ROIC > 35%) está protegida por un Foso Defensivo Amplio (Wide Moat / Morningstar Framework), basado en la fortaleza intangible de sus marcas, la lealtad técnica de los corredores y una rigurosa disciplina de precios.",
+    "headers": [
+      "Fuente del Foso Defensivo",
+      "Intensidad",
+      "Mecanismo de Protección Económica",
+      "Diagnóstico Competitivo"
+    ],
+    "table_data": [
+      [
+        "Activos Intangibles y Marca",
+        "🟢 EXCEPCIONAL",
+        "HOKA goza de una reputación técnica de máximo nivel en atletismo y trail running. UGG es un icono cultural de estilo de vida invernal y confort sin sustituto directo.",
+        "Capacidad sostenida de aumentar volúmenes vendiendo a precio completo (Full-Price Selling) sin descuentos."
+      ],
+      [
+        "Poder de Fijación de Precios",
+        "🟢 ELEVADO",
+        "Precios medios de venta (ASP) en ascenso continuo tanto en HOKA ($140-$200+) como en UGG ($110-$180). Los minoristas respetan los márgenes por la alta rotación.",
+        "Margen bruto consolidado del 55.7%, superando por más de 1,100 bps la mediana del sector calzado (44.6%)."
+      ],
+      [
+        "Acceso Preferencial a Canales",
+        "🟢 ROBUSTO",
+        "Presencia prioritaria en tiendas especializadas de running que funcionan como prescriptores técnicos de referencia indispensables para los corredores.",
+        "Barrera de entrada para nuevos entrantes; los distribuidores asignan espacio preferente de estantería a HOKA."
+      ],
+      [
+        "Modelo Fabless y Ventaja de Coste",
+        "🟢 ESTRUCTURAL",
+        "Producción 100% externalizada a socios fabriles de calidad en Vietnam y Asia, eliminando costes fijos industriales y minimizando el CapEx.",
+        "Toda la inversión se canaliza a I+D, marketing y experiencia de cliente, manteniendo un balance libre de deuda."
+      ],
+      [
+        "Escala Logística y Omnicanalidad",
+        "🟢 ALTA",
+        "Centros de distribución automatizados que optimizan la logística global tanto para picos estacionales de UGG como para la demanda continua de HOKA.",
+        "Eficiencia de inventario que minimiza rebajas forzadas y agiliza los despachos de venta directa (DTC)."
+      ]
+    ],
+    "verdict": "WIDE MOAT | Tendencia: EN EXPANSIÓN.",
+    "subsections": [
+      {
+        "title": "7.2. Disciplina Comercial: Integridad de Venta a Precio Completo (Full-Price Integrity)",
+        "bullets": [
+          [
+            "• Protección de Márgenes y Exclusividad: ",
+            "A diferencia de competidores que recurren a liquidaciones agresivas para limpiar existencias, Deckers gestiona la oferta de siluetas icónicas (Clifton, Bondi, Tasman, Tazz) manteniendo la escasez controlada para defender el valor de marca."
+          ],
+          [
+            "• Expansión Estructural del Margen Bruto: ",
+            "Esta política ha permitido sostener un margen bruto del 55.7%, absorbiendo cómodamente incrementos en tarifas de transporte marítimo internacional."
+          ]
+        ]
+      },
+      {
+        "title": "7.3. Flywheel de Sinergia Omnicanal: Wholesale como Embudo de Entrada a DTC",
+        "bullets": [
+          [
+            "1. Descubrimiento en Canal Mayorista: ",
+            "El consumidor conoce y prueba la amortiguación de HOKA en una tienda técnica o departamental especializada."
+          ],
+          [
+            "2. Fidelización y Repetición en DTC: ",
+            "Las compras recurrentes se realizan directamente a través de hoka.com, donde Deckers captura el 100% del margen comercial sin ceder comisiones."
+          ]
+        ]
+      },
+      {
+        "title": "7.4. Productividad de la Innovación y Ciclo de Franquicias",
+        "bullets": [
+          [
+            "• Actualización Sistemática de Franquicias: ",
+            "Lanzamiento programado de nuevas generaciones (Clifton, Bondi, Mach, Skyward, Cielo X1) que atraen a compradores exigentes mientras los modelos base continúan generando ventas masivas de reposición."
+          ],
+          [
+            "• Desestacionalización de UGG: ",
+            "Éxito en expandir la marca UGG más allá de las botas de invierno mediante zapatillas, sandalias y pantuflas de uso durante todo el año."
+          ]
+        ]
+      }
+    ]
+  },
+  "capital_allocation": {
+    "ma_headers": [
+      "Iniciativa / Transacción",
+      "Tipo de Operación",
+      "Capital / Compromiso",
+      "¿Qué se busca estratégicamente con ello?"
+    ],
+    "ma_data": [
+      [
+        "Racionalización de Portafolio (Sanuk)",
+        "Desinversión Selectiva",
+        "Venta Estratégica",
+        "Venta de marcas periféricas para concentrar el 100% de la capacidad de gestión y capital en los motores globales HOKA y UGG."
+      ],
+      [
+        "Automatización de Centros de Distribución",
+        "CapEx Logístico Directo",
+        "~$80M - $100M",
+        "Modernización de la red logística en EE.UU. y Europa para respaldar la aceleración de envíos directos al consumidor (DTC)."
+      ],
+      [
+        "Modelo Fabless (Sin Adquisiciones de Riesgo)",
+        "Crecimiento Orgánico Puro",
+        "Reinversión de Caja",
+        "Foco en el crecimiento orgánico de franquicias internas, evitando adquisiciones corporativas apalancadas o de integración compleja."
+      ]
+    ],
+    "capex_title": "6.4. CapEx Ligero (Asset-Light), Eficiencia Logística y Cadena de Suministro",
+    "capex_intro": "Deckers opera bajo un modelo fabless de bajísima intensidad de capital (~2.0% sobre ventas netas en CapEx), lo que permite convertir prácticamente todo el beneficio contable en Flujo de Caja Libre disponible:",
+    "capex_bullets": [
+      [
+        "• Modelo Manufacturero Tercerizado: ",
+        "Toda la producción se realiza en fábricas independientes de alta calidad en Asia, eliminando la necesidad de endeudarse para financiar plantas industriales."
+      ],
+      [
+        "• Inversión Focalizada en TI y Cadena Logística: ",
+        "El CapEx anual de ~$100M se concentra en software de gestión omnicanal, plataformas web y automatización de almacenes."
+      ],
+      [
+        "• Conversión de Caja Sobresaliente: ",
+        "Con un flujo operativo de ~$998M y un gasto de inversión mínimo, la conversión FCF / Beneficio Neto se ubica en el 104.4%, respaldando una posición de caja neta de $1,480M con deuda cero."
+      ]
+    ]
+  },
+  "scorecard": {
+    "intro": "Deckers Outdoor Corporation ha reportado un desempeño financiero extraordinario en el primer trimestre de su ejercicio fiscal 2027 (Q1 FY27, cerrado el 30 de junio de 2026) y en el acumulado de los últimos 12 meses móviles (LTM), consolidando una trayectoria de hipercrecimiento rentable que la posiciona como una de las corporaciones más rentables y eficientes de todo el sector de consumo discrecional global. Los resultados estuvieron impulsados por la aceleración estelar de HOKA (superando ya los $2.23B en ventas anuales) y la solidez estructural a precio completo de UGG ($2.44B), alcanzando un margen bruto récord del 57.80% y manteniendo un balance con cero deuda financiera y más de $1.47B en caja neta:",
+    "headers": [
+      "Métrica Financiera",
+      "LTM (Móvil)",
+      "FY2026 (Cierre)",
+      "FY2025 (Previo)",
+      "Diagnóstico Fundamental y Salud Operativa"
+    ],
+    "data": [
+      [
+        "Ingresos Netos Totales",
+        "$5,527.3 M",
+        "$5,472.3 M",
+        "$4,985.6 M",
+        "Crecimiento constante de doble dígito impulsado por HOKA (+28%)."
+      ],
+      [
+        "Margen Bruto ($M)",
+        "$3,195.0 M",
+        "$3,157.7 M",
+        "$2,776.4 M",
+        "Máximo histórico sectorial; pricing power y disciplina de descuentos."
+      ],
+      [
+        "Margen Bruto (%)",
+        "57.80%",
+        "57.70%",
+        "55.69%",
+        "Expansión sostenida de margen; +1,200 bps por encima de la media de calzado."
+      ],
+      [
+        "Gastos Operativos (SG&A)",
+        "$1,942.1 M",
+        "$1,894.8 M",
+        "$1,732.1 M",
+        "Inversión comercial disciplinada en marketing global y tiendas concepto."
+      ],
+      [
+        "Beneficio Operativo (EBIT)",
+        "$1,252.9 M",
+        "$1,262.9 M",
+        "$1,044.3 M",
+        "Margen EBIT líder absoluto (22.7%); más que duplica a Nike (10.2%)."
+      ],
+      [
+        "Margen Operativo (%)",
+        "22.67%",
+        "23.08%",
+        "20.95%",
+        "Eficiencia operativa de clase mundial bajo modelo fabless."
+      ],
+      [
+        "Beneficio Neto ($M)",
+        "$1,014.8 M",
+        "$1,024.1 M",
+        "$966.1 M",
+        "Conversión neta de altísima calidad respaldada 100% en caja."
+      ],
+      [
+        "Margen Neto (%)",
+        "18.36%",
+        "18.71%",
+        "19.38%",
+        "Extraordinaria rentabilidad neta; retención superior a 18 centavos limpios por dólar."
+      ],
+      [
+        "Flujo de Caja Operativo (CFO)",
+        "$1,193.7 M",
+        "$1,182.0 M",
+        "$1,044.5 M",
+        "Generación de efectivo récord para el ciclo operativo."
+      ],
+      [
+        "Flujo de Caja Libre (FCF)",
+        "$1,117.8 M",
+        "$1,097.3 M",
+        "$958.4 M",
+        "Conversión FCF / Beneficio Neto del 110.1% (concilia 100% con fiscal.ai y tikr)."
+      ],
+      [
+        "Margen FCF (%)",
+        "20.22%",
+        "20.05%",
+        "19.22%",
+        "Generación pura de caja disponible tras financiar todo el CapEx de expansión."
+      ],
+      [
+        "Conversión FCF / Beneficio Neto",
+        "110.1%",
+        "107.1%",
+        "99.2%",
+        "Tasa > 100% certifica ganancias 100% monetarias y ausencia de devengos agresivos."
+      ],
+      [
+        "BPA Diluido Normalizado (Split-Adjusted)",
+        "$7.32",
+        "$7.02",
+        "$6.33",
+        "Ajustado por split 6:1 (sep-2024); concilia 100% con fiscal.ai y tikr ($4.86 en FY24)."
+      ],
+      [
+        "BPA Diluido As-Reported (Oficial SEC)",
+        "$7.32",
+        "$7.02",
+        "$6.33",
+        "Cifra histórica original en filings 10-K (pre-split FY24 fue $29.16)."
+      ],
+      [
+        "Acciones Diluidas Ajustadas",
+        "138.6 M",
+        "145.8 M",
+        "152.7 M",
+        "Reducción neta de -7.2M acciones en LTM vía recompras activas."
+      ]
+    ]
+  },
+  "balance_section": {
+    "intro": "La posición patrimonial de Deckers Outdoor Corporation representa un auténtico fortín financiero. La compañía opera con una política de Cero Deuda Financiera (Zero Debt), apalancándose en su modelo manufacturero fabless para destinar el 100% de su generación de Flujo de Caja Libre a recompras sistemáticas de acciones y crecimiento orgánico de sus marcas:",
+    "table_headers": [
+      "Métrica Patrimonial",
+      "LTM (Móvil)",
+      "FY2026 ($M)",
+      "Variación YoY",
+      "Diagnóstico de Solvencia y Balance"
+    ],
+    "table_data": [
+      [
+        "Efectivo y Equivalentes Líquidos",
+        "$1,475.2 M",
+        "$1,550.0 M",
+        "-4.8%",
+        "Disponibilidad operativa inmediata para operaciones comerciales."
+      ],
+      [
+        "Valores Negociables (Corto Plazo)",
+        "$127.4 M",
+        "$357.2 M",
+        "-64.3%",
+        "Tesoría colocada en pagarés corporativos e instrumentos monetarios AAA."
+      ],
+      [
+        "LIQUIDEZ TOTAL DISPONIBLE (Cash & Securities)",
+        "$1,602.6 M",
+        "$1,907.2 M",
+        "-16.0%",
+        "Enorme colchón de liquidez para financiar crecimiento y recompras."
+      ],
+      [
+        "Papel Comercial / Crédito Corriente",
+        "$0.0 M",
+        "$0.0 M",
+        "0.0%",
+        "Cero apelación a crédito a corto plazo para operaciones ordinarias."
+      ],
+      [
+        "Deuda Financiera a Corto Plazo",
+        "$0.0 M",
+        "$0.0 M",
+        "0.0%",
+        "Sin vencimientos corrientes de deuda."
+      ],
+      [
+        "Deuda Financiera a Largo Plazo",
+        "$0.0 M",
+        "$0.0 M",
+        "0.0%",
+        "Cero bonos o préstamos bancarios de largo plazo en balance."
+      ],
+      [
+        "DEUDA BRUTA TOTAL",
+        "$0.0 M",
+        "$0.0 M",
+        "0.0%",
+        "Estructura de capital 100% financiada con fondos propios (Equity)."
+      ],
+      [
+        "POSICIÓN NETA DE CAJA (NET CASH)",
+        "+$1,602.6 M",
+        "+$1,907.2 M",
+        "-$304.6 M",
+        "Posición acreedora pura: más de $1.6B limpios sin pasivos bancarios."
+      ]
+    ],
+    "carry_trade_note": "Deckers opera sin deuda alguna ($0.0 M), colocando su excedente de tesorería de más de $1.6B en instrumentos monetarios de máxima calificación que generan ingresos por intereses sustanciales, optimizando la rentabilidad patrimonial sin asumir riesgo de crédito.",
+    "return_intro": "Deckers destina sistemáticamente su Flujo de Caja Libre a recomprar sus propias acciones en el mercado abierto, combinando esta disciplina con el desdoblamiento accionario (stock split 6:1) efectuado en septiembre de 2024:",
+    "return_headers": [
+      "Componente de Retorno",
+      "Últimos 12M (LTM)",
+      "Ejercicio FY2026",
+      "Impacto en la Tesis del Accionista"
+    ],
+    "return_data": [
+      [
+        "Recompra Neta de Acciones Comunes",
+        "$418.5 M",
+        "$453.2 M",
+        "Retiro masivo de títulos en mercado abierto bajo autorización formal."
+      ],
+      [
+        "Dividendos en Efectivo Distribuidos",
+        "$0.0 M",
+        "$0.0 M",
+        "La directiva prioriza recompras por eficiencia fiscal y flexibilidad."
+      ],
+      [
+        "RETORNO TOTAL DE CAPITAL",
+        "$418.5 M",
+        "$453.2 M",
+        "El 100% del retorno se canaliza a recompras que impulsan el BPA."
+      ],
+      [
+        "Acciones Diluidas en Circulación",
+        "138.6 Millones",
+        "145.8 Millones",
+        "-7.2 Millones de acciones retiradas en los últimos 12 meses (-4.9%)."
+      ],
+      [
+        "Efecto Turbo en Beneficio por Acción (EPS)",
+        "+15.6% YoY",
+        "vs. +6.0% Net Inc.",
+        "La recompra neta acelera el crecimiento del BPA muy por encima del beneficio neto."
+      ]
+    ],
+    "sbc_note": "Frente a los $418.5M destinados a recompras en LTM, la compensación en acciones a directivos (SBC) totalizó $41.2M. Por lo tanto, el 90.2% de la recompra es creación neta de valor real, contrayendo el número total de acciones y aumentando el porcentaje patrimonial de cada título restante."
+  },
+  "governance_section": {
+    "events_8k_headers": [
+      "Fecha SEC",
+      "Ítem Oficial 8-K",
+      "Naturaleza del Evento",
+      "¿Qué significa para la Empresa?",
+      "Diagnóstico para el Inversor"
+    ],
+    "events_8k_data": [
+      [
+        "2026-08-31",
+        "Item 1.01 / 2.03",
+        "Enmienda de Línea de Crédito Rotativa",
+        "Renovación preventiva de línea sindicada no dispuesta por $400M para contingencias.",
+        "🟢 SOLVENCIA: Flexibilidad operativa contingente sin asumir apalancamiento real."
+      ],
+      [
+        "2026-07-23",
+        "Item 2.02",
+        "Resultados Financieros Trimestrales",
+        "Avance oficial de resultados récord del Q1 FY27 y elevación de guidance para FY27.",
+        "🟢 TRÁMITE ORDINARIO: Cumplimiento regular del calendario de reporte ante la SEC."
+      ],
+      [
+        "2026-05-21",
+        "Item 5.02",
+        "Sucesión Ejecutiva en la Dirección (CEO)",
+        "Designación formal de Stefano Caroti como CEO tras el retiro planificado de Dave Powers.",
+        "🟢 RELEVO PLANIFICADO: Transición interna ordenada; Caroti lideró la expansión omnicanal."
+      ],
+      [
+        "2026-07-15",
+        "Item 5.03",
+        "Aprobación de Stock Split 6:1",
+        "Modificación del acta constitutiva para formalizar el desdoblamiento de acciones de 6 por 1.",
+        "🟢 ACCIÓN CORPORATIVA: Aumento de la liquidez y accesibilidad para inversores retail."
+      ],
+      [
+        "Últimos 12M",
+        "Item 4.01",
+        "Auditoría Externa Independiente",
+        "Sin registros. KPMG LLP continúa como firma auditora principal sin disputas contables.",
+        "🟢 MÁXIMA ESTABILIDAD: Cero banderas rojas contables o discrepancias con auditores."
+      ]
+    ],
+    "insider_headers": [
+      "Directivo / Cargo Clave",
+      "Tipo de Operación y Modalidad SEC",
+      "Volumen de Acciones",
+      "Importe Efectivo ($)",
+      "Trazabilidad SEC (144 ➔ 4)",
+      "Diagnóstico de Convicción"
+    ],
+    "insider_data": [
+      [
+        "Stefano Caroti\n(President & CEO)",
+        "🟢 Asignación y Retención (RSUs)",
+        "+147,643",
+        "$0 ventas",
+        "Form 4 Registrado",
+        "Retención total; convicción patrimonial plena en su nombramiento como CEO."
+      ],
+      [
+        "Steven J. Fasching\n(Chief Financial Officer)",
+        "🟢 Asignación y Retención (RSUs)",
+        "+39,949",
+        "$0 ventas",
+        "Form 4 Registrado",
+        "Retención patrimonial del director financiero; disciplina contable intachable."
+      ],
+      [
+        "Dave Powers\n(Ex-CEO y Consejero)",
+        "🟢 Venta Programada (Plan 10b5-1)",
+        "-45,000",
+        "-$6,840,000",
+        "Form 144 ➔ Form 4",
+        "Venta rutinaria pre-programada con 12 meses de anticipación tras su retiro."
+      ],
+      [
+        "Robin Spring-Green\n(President, Hoka)",
+        "🟢 Asignación de Desempeño",
+        "+28,660",
+        "$0 ventas",
+        "Form 4 Registrado",
+        "Alineación total con el superciclo y la expansión internacional de HOKA."
+      ],
+      [
+        "Anne Spangenberg\n(President, Lifestyle / UGG)",
+        "🟢 Asignación de Desempeño",
+        "+34,740",
+        "$0 ventas",
+        "Form 4 Registrado",
+        "Incentivo a largo plazo para la desestacionalización de la franquicia UGG."
+      ],
+      [
+        "Consejo de Administración\n(10 Directores Independientes)",
+        "⚪ Retención Institucional",
+        "Concesiones RSU",
+        "$0 ventas",
+        "Form 4 Rutinario",
+        "Independencia sólida del consejo y supervisión fiduciaria de primer nivel."
+      ]
+    ],
+    "insider_dictum": "La cúpula ejecutiva de Deckers opera con un estándar ejemplar de transparencia. No se registraron ventas discrecionales atípicas en el mercado abierto, y el 100% de las desinversiones menores obedecen a ventas programadas bajo planes Rule 10b5-1 previas a la transición del CEO.",
+    "gov_table_headers": [
+      "Dimensión de Gobernanza",
+      "Resultado Detectado",
+      "Calificación / Semáforo",
+      "Diagnóstico para el Accionista"
+    ],
+    "gov_table_data": [
+      [
+        "Puntuación Global de Gobernanza",
+        "SÓLIDA / BAJO RIESGO",
+        "90 / 100",
+        "Controles financieros rigurosos, sucesión planificada y cero endeudamiento."
+      ],
+      [
+        "Auditoría Externa (KPMG LLP)",
+        "Continuidad histórica intachable",
+        "🟢 ESTABILIDAD TOTAL",
+        "Sin salvedades ni discrepancias contables en informes históricos ante la SEC."
+      ],
+      [
+        "Estructura del Consejo y Sucesión",
+        "Relevo formalizado en Form 8-K",
+        "🟢 CONTINUIDAD PROBADA",
+        "Transición interna que preserva la cultura de disciplina de precios y crecimiento."
+      ],
+      [
+        "Disciplina en Ventas de Insiders",
+        "100% C-Suite en Planes 10b5-1 / Retención",
+        "🟢 ALTA PROTECCIÓN",
+        "Cumplimiento normativo estricto sin operaciones oportunistas con información privilegiada."
+      ],
+      [
+        "Compras en Mercado Abierto (Cod. P)",
+        "$0.0 M con fondos propios",
+        "⚪ NEUTRAL TÍPICO",
+        "Estándar de la industria: remuneración estructurada mediante acciones restringidas (RSUs)."
+      ]
+    ]
+  },
+  "peers_section": {
+    "title": "9.3. Benchmarking Competitivo del Sector Calzado (SIC 3021 / 3140) & Medianas Oficiales",
+    "headers": [
+      "Ticker",
+      "Compañía",
+      "Ventas ($M)",
+      "Margen Bruto",
+      "Margen EBIT",
+      "ROIC Intang.",
+      "Novy-Marx GP/A (%)",
+      "F-Score",
+      "G-Score"
+    ],
+    "rows": [
+      [
+        "DECK",
+        "Deckers Outdoor Corp.",
+        "$5,527 M",
+        "55.7%",
+        "22.1%",
+        "35.9%",
+        "82.6%",
+        "8 / 9",
+        "7 / 8"
+      ],
+      [
+        "NKE",
+        "NIKE, Inc.",
+        "$46,398 M",
+        "44.6%",
+        "10.2%",
+        "18.5%",
+        "53.9%",
+        "6 / 9",
+        "4 / 8"
+      ],
+      [
+        "ONON",
+        "On Holding AG",
+        "$2,500 M",
+        "59.9%",
+        "11.4%",
+        "15.2%",
+        "49.5%",
+        "7 / 9",
+        "6 / 8"
+      ],
+      [
+        "CROX",
+        "Crocs, Inc.",
+        "$4,041 M",
+        "55.3%",
+        "26.5%",
+        "24.1%",
+        "58.2%",
+        "7 / 9",
+        "5 / 8"
+      ],
+      [
+        "SKX",
+        "Skechers U.S.A., Inc.",
+        "$8,969 M",
+        "52.2%",
+        "11.8%",
+        "14.8%",
+        "42.5%",
+        "7 / 9",
+        "5 / 8"
+      ],
+      [
+        "MEDIANA",
+        "Mediana Sectorial Calzado",
+        "$5,527 M",
+        "53.8%",
+        "11.6%",
+        "16.9%",
+        "51.7%",
+        "7 / 9",
+        "5 / 8"
+      ]
+    ]
+  }
+}

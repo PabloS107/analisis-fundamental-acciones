@@ -6,7 +6,6 @@ para el Motor de Solvencia, Deuda, Cobertura y Estrés Financiero (Credit Risk E
 - Liquidez Inmediata y Riesgo de Refinanciación (Current, Quick, Cash Ratio, Rollover Risk)
 - Modelos Predictivos de Quiebra (Altman Z''-Score de 4 variables)
 - Calificación Sintética Crediticia Damodaran (AAA a D con default spreads y probabilidades)
-- Auditoría de la Hoja 11 en los libros Excel (AAPL y DECK)
 - Generación de secciones en Word (.docx) y Markdown (.md)
 """
 
@@ -15,18 +14,17 @@ import sys
 import json
 import unittest
 from pathlib import Path
-import openpyxl
 import docx
 
 # Añadir scripts al path
-scripts_dir = Path(".agents/skills/fundamental-data-extractor/scripts").resolve()
+scripts_dir = Path("pipeline").resolve()
 sys.path.insert(0, str(scripts_dir))
 
 from financial_scoring_engine import (
     DebtSolvencyEngine,
-    calculate_fundamental_scores
+    calculate_fundamental_scores,
+    extract_period_metrics
 )
-import excel_formatter
 from solvency_report_builder import (
     generate_solvency_section_md,
     add_solvency_section_docx
@@ -124,9 +122,9 @@ class TestSolvencyEngine(unittest.TestCase):
         cov = latest.get("debt_service", {})
         dist = latest.get("distress_models", {})
 
-        # Deuda Neta / EBITDA debe ser bajo (~0.25x)
-        self.assertLess(lev.get("net_debt_to_ebitda", 99.0), 1.0)
-        self.assertIn("0.25x", lev.get("net_debt_to_ebitda_str"))
+        # Deuda Neta / EBITDA debe ser bajo (< 0.5x)
+        self.assertLess(lev.get("net_debt_to_ebitda", 99.0), 0.5)
+        self.assertEqual(lev.get("net_debt_to_ebitda_str"), f"{lev.get('net_debt_to_ebitda'):.2f}x")
 
         # Cobertura de intereses > 30x
         self.assertGreater(cov.get("interest_coverage", 0), 30.0)
@@ -257,35 +255,6 @@ class TestSolvencyEngine(unittest.TestCase):
         r_neg = DebtSolvencyEngine._get_synthetic_rating(-1.0)
         self.assertEqual(r_neg["rating"], "D")
 
-    def test_06_excel_sheet_11_audit(self):
-        """Audita que los libros Excel de AAPL y DECK contengan exactamente 11 hojas y la Hoja 11 esté completa."""
-        for ticker in ["AAPL", "DECK"]:
-            excel_path = Path(f"data/processed/{ticker}/financial_statements.xlsx")
-            self.assertTrue(excel_path.exists(), f"El archivo {excel_path} debe existir")
-
-            wb = openpyxl.load_workbook(excel_path, data_only=True)
-            self.assertEqual(len(wb.sheetnames), 11, f"{ticker} debe tener exactamente 11 hojas")
-            self.assertIn(
-                "Solvencia & Estrés Financiero",
-                wb.sheetnames,
-                f"{ticker} debe tener la hoja 'Solvencia & Estrés Financiero'"
-            )
-
-            ws = wb["Solvencia & Estrés Financiero"]
-            # Verificar banner
-            banner_val = str(ws["A4"].value)
-            self.assertIn("DICTAMEN GLOBAL DE SOLVENCIA", banner_val)
-
-            # Verificar que las tablas principales existan
-            cells_text = [str(cell.value) for row in ws.iter_rows() for cell in row if cell.value is not None]
-            full_text_upper = " ".join(cells_text).upper()
-            self.assertIn("APALANCAMIENTO", full_text_upper)
-            self.assertIn("COBERTURA DE CARGA FINANCIERA", full_text_upper)
-            self.assertIn("LIQUIDEZ ESTRICTA", full_text_upper)
-            self.assertIn("MODELOS PREDICTIVOS DE QUIEBRA", full_text_upper)
-            self.assertIn("ALTMAN Z''", full_text_upper)
-            self.assertIn("RATING", full_text_upper)
-
     def test_07_solvency_report_builder_integration(self):
         """Verifica que los constructores de reportes Word (.docx) y Markdown (.md) se ejecuten sin errores."""
         mock_scoring = {
@@ -403,6 +372,138 @@ class TestSolvencyEngine(unittest.TestCase):
         headings = [p.text for p in doc.paragraphs if p.text]
         self.assertTrue(any("Banking Solvency" in h for h in headings))
         self.assertGreaterEqual(len(doc.tables), 3)
+
+    def test_09_banking_and_insurance_inhibit_altman_z_with_pedagogical_guidance(self):
+        """
+        Verifica que el motor de solvencia inhiba Altman Z'' para entidades financieras y aseguradoras:
+        1. Para FINANCIAL_BANKING: altman_zone == 'NO APLICABLE', altman_badge == 'NO APLICABLE',
+           is_applicable == False, z_score == None, con nota pedagógica sobre Basilea III y CET1.
+        2. Para INSURANCE: altman_zone == 'NO APLICABLE', is_applicable == False,
+           con nota pedagógica sobre RBC (Risk-Based Capital) y Solvencia II.
+        3. Veredicto institucional asignado sin falso distress de quiebra corporativa.
+        """
+        # 1. Banca
+        res_bank = DebtSolvencyEngine.calculate_solvency_series(
+            self.fys, self.sample_healthy_metrics, ticker="TEST_BANK", archetype="FINANCIAL_BANKING"
+        )
+        dist_bank = res_bank["latest_result"]["distress_models"]
+        self.assertEqual(dist_bank["altman_zone"], "NO APLICABLE")
+        self.assertEqual(dist_bank["altman_badge"], "NO APLICABLE")
+        self.assertFalse(dist_bank["is_applicable"])
+        self.assertIsNone(dist_bank["altman_z_double_prime"])
+        self.assertIn("pedagogical_guidance", dist_bank)
+        self.assertIn("CET1", dist_bank["pedagogical_guidance"].get("why_not_applicable", ""))
+        self.assertIn("SOLVENCIA INSTITUCIONAL REGULADA (FINANCIAL_BANKING)", res_bank["latest_result"]["solvency_verdict"])
+        self.assertEqual(res_bank["latest_result"]["global_badge"], "SOLVENCIA REGULATORIA")
+
+        # 2. Aseguradora
+        res_ins = DebtSolvencyEngine.calculate_solvency_series(
+            self.fys, self.sample_healthy_metrics, ticker="TEST_INS", archetype="INSURANCE"
+        )
+        dist_ins = res_ins["latest_result"]["distress_models"]
+        self.assertEqual(dist_ins["altman_zone"], "NO APLICABLE")
+        self.assertFalse(dist_ins["is_applicable"])
+        self.assertIsNone(dist_ins["altman_z_double_prime"])
+        self.assertIn("pedagogical_guidance", dist_ins)
+        self.assertIn("RBC", dist_ins["pedagogical_guidance"].get("why_not_applicable", ""))
+        self.assertIn("SOLVENCIA INSTITUCIONAL REGULADA (INSURANCE)", res_ins["latest_result"]["solvency_verdict"])
+        self.assertEqual(res_ins["latest_result"]["global_badge"], "SOLVENCIA REGULATORIA")
+
+    def test_10_multi_taxonomic_debt_hierarchy_and_canonical_fallback(self):
+        """
+        Verifica la jerarquía multitaxonómica de extracción de deuda y fallback canónico:
+        1. Combined debt tag (Insurance GAAP: DebtLongtermAndShorttermCombinedAmount).
+        2. Long-term debt tag + Short-term debt tag (Bank GAAP: LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities + ShortTermBorrowings).
+        3. Fallback canónico cuando no hay tags pero canonical_summary tiene total_debt positivo (evita falsa deuda=0).
+        4. Preservación de cero deuda genuina para emisores sin deuda.
+        """
+        # 1. Tag combinado (PGR / Seguros)
+        fin_ins = {
+            "balance_sheet_detail": {
+                "DebtLongtermAndShorttermCombinedAmount": {"values": {"FY2025": 8450.0}}
+            }
+        }
+        m_ins = extract_period_metrics(fin_ins, "FY2025")
+        self.assertEqual(m_ins["total_debt"], 8450.0)
+
+        # 2. LT + ST (JPM / Banca)
+        fin_bank = {
+            "balance_sheet_detail": {
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities": {"values": {"FY2025": 3200.0}},
+                "ShortTermBorrowings": {"values": {"FY2025": 800.0}}
+            }
+        }
+        m_bank = extract_period_metrics(fin_bank, "FY2025")
+        self.assertEqual(m_bank["total_debt"], 4000.0)
+        self.assertEqual(m_bank["long_term_debt"], 3200.0)
+        self.assertEqual(m_bank["short_term_debt"], 800.0)
+
+        # 3. Fallback canónico (cuando balance_sheet_detail no tiene tags mapeados o arroja <=0)
+        fin_fallback = {
+            "canonical_summary": {
+                "total_debt": {"values": {"FY2025": 5700.0}}
+            },
+            "balance_sheet_detail": {}
+        }
+        m_fallback = extract_period_metrics(fin_fallback, "FY2025")
+        self.assertEqual(m_fallback["total_debt"], 5700.0)
+
+        # 4. Cero deuda genuina (DECK)
+        fin_zero = {
+            "canonical_summary": {
+                "total_debt": {"values": {"FY2025": 0.0}}
+            },
+            "balance_sheet_detail": {}
+        }
+        m_zero = extract_period_metrics(fin_zero, "FY2025")
+        self.assertEqual(m_zero["total_debt"], 0.0)
+
+    def test_11_negative_interest_sign_guard_and_synthetic_interest(self):
+        """
+        Verifica el blindaje contra signos negativos en gastos de intereses y estimación sintética:
+        1. Gasto de interés ingresado como negativo (ej. -25.0) se normaliza a positivo 25.0.
+        2. Gasto de interés nulo (None) con deuda > 100M activa tasa sintética del 4.5% s/deuda.
+        3. Gasto de interés nulo con deuda <= 100M no inventa carga financiera.
+        """
+        # 1. Signo negativo normalizado con abs()
+        metrics_neg = {
+            "FY2025": {
+                "ebit": 500.0,
+                "cfo": 450.0,
+                "total_debt": 1000.0,
+                "interest_expense": -25.0,
+                "cash": 300.0,
+                "total_assets": 2000.0,
+                "total_liabilities": 1200.0,
+                "stockholders_equity": 800.0,
+                "retained_earnings": 500.0,
+                "working_capital": 300.0
+            }
+        }
+        res_neg = DebtSolvencyEngine.calculate_solvency_series(["FY2025"], metrics_neg, ticker="TEST_NEG")
+        cov_neg = res_neg["latest_result"]["debt_service"]
+        self.assertEqual(cov_neg["interest_expense"], 25.0)
+        self.assertAlmostEqual(cov_neg["interest_coverage"], 20.0, places=1)
+
+        # 2. Interés None con deuda > 100M (estimación al 4.5%)
+        metrics_synth = {
+            "FY2025": {
+                "ebit": 500.0,
+                "cfo": 450.0,
+                "total_debt": 1000.0,
+                "interest_expense": None,
+                "cash": 300.0,
+                "total_assets": 2000.0,
+                "total_liabilities": 1200.0,
+                "stockholders_equity": 800.0,
+                "retained_earnings": 500.0,
+                "working_capital": 300.0
+            }
+        }
+        res_synth = DebtSolvencyEngine.calculate_solvency_series(["FY2025"], metrics_synth, ticker="TEST_SYNTH")
+        cov_synth = res_synth["latest_result"]["debt_service"]
+        self.assertEqual(cov_synth["interest_expense"], 45.0)  # 4.5% de 1000.0
+        self.assertTrue(cov_synth.get("interest_estimated"))
 
 
 if __name__ == "__main__":

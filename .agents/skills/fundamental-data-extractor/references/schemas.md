@@ -71,12 +71,10 @@ Abarca **10 ejercicios fiscales completos + período LTM (Last Twelve Months / T
 ## 2. Convenciones de Unidades y Formato
 
 1. **Moneda Base**: Todas las variables en `canonical_summary` se almacenan en **dólares enteros (USD)** dentro de `financial_statements.json` para evitar pérdidas de precisión en cálculos matemáticos.
-2. **Modelo Excel (`financial_statements.xlsx`)**:
-   - Pestaña 1 (`Resumen Fundamental`): Cifras formateadas en **Millones de USD ($M)**.
-   - Pestaña 2 (`Ratios Financieros`): Márgenes y Retornos formateados en **Porcentaje (%)**, múltiplos en **(x)**.
-   - Pestaña 3, 4, 5 (`Cuenta de Resultados`, `Balance Patrimonial`, `Flujo de Caja`): En **Millones de USD ($M)**.
-   - Pestaña 6 (`Desglose de Segmentos`): En **Millones de USD ($M)**.
-   - Columna 2 (`LTM`): Con encabezado diferenciado en Gris Pizarra / Dorado para identificar el período de doce meses móviles.
+2. **Plataforma Web Django (`web_dashboard/`) e Informe Word (`.docx`)**:
+   - Vistas y tablas financieras: Cifras formateadas en **Millones de USD ($M)**.
+   - Ratios Financieros: Márgenes y Retornos formateados en **Porcentaje (%)**, múltiplos de cobertura y apalancamiento en **(x)**.
+   - Columna `LTM`: Con columna diferenciada e identada para doce meses móviles.
 3. **Manejo de Cero vs. No Disponible**:
    - Cero (`0.0`): La empresa reportó explícitamente 0 en esa partida o no incurrió en gastos/ingresos.
    - `null` / `"-"`: El concepto no aplica o no fue reportado por la empresa en ese ejercicio fiscal.

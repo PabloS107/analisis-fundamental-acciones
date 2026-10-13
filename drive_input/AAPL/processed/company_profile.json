@@ -1,0 +1,652 @@
+{
+  "ticker": "AAPL",
+  "company_name": "Apple Inc.",
+  "exchange": "NASDAQ",
+  "period_label": "Q3 FY2026",
+  "period_date": "27 de Junio de 2026",
+  "filing_source": "Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q3 FY26 Earnings Call Transcript",
+  "sic_code": "3571",
+  "industry": "Electronic Computers / Hardware & Consumer Electronics",
+  "business_model_callout": {
+    "title": "RESUMEN DEL MODELO DE NEGOCIO Y PROPUESTA DE VALOR",
+    "paragraphs": [
+      "Apple Inc. diseña, fabrica y comercializa smartphones, computadoras personales, tablets, dispositivos corporales (wearables) y accesorios, integrando verticalmente hardware de alta gama con sistemas operativos propios (iOS, macOS, iPadOS, watchOS) y microprocesadores propietarios de silicio (Apple Silicon).",
+      "Su modelo de negocio opera como un ecosistema de fidelización (flywheel): la venta de hardware de vanguardia actúa como puerta de entrada para capturar usuarios en una plataforma cerrada, que luego monetiza de manera recurrente a través de una división de Servicios de altísimo margen (App Store, iCloud, Apple Pay, Apple Music, suscripciones y publicidad)."
+    ]
+  },
+  "channels": {
+    "title": "Estructura de Canales de Comercialización (Go-To-Market):",
+    "intro": "De acuerdo con la información auditada del Formulario 10-K ante la SEC, Apple distribuye sus productos y servicios a nivel global a través de dos grandes vías de acceso al mercado:",
+    "direct": {
+      "label": "Canal Directo (~40% de las ventas netas):",
+      "description": "Operado mediante su red propia de más de 525 tiendas físicas (Apple Stores) en distritos comerciales prime de todo el mundo, su tienda digital en línea (apple.com) y equipos comerciales directos dedicados a empresas (B2B), educación y administraciones públicas. Aporta aproximadamente el 40% de las ventas netas."
+    },
+    "indirect": {
+      "label": "Canal Indirecto (~60% de las ventas netas):",
+      "description": "Red internacional de distribución compuesta por las principales operadoras de telefonía celular (AT&T, Verizon, Vodafone, China Mobile), grandes cadenas minoristas de electrónica, distribuidores mayoristas y revendedores autorizados (Apple Authorised Resellers). Aporta aproximadamente el 60% de las ventas netas."
+    }
+  },
+  "moat": {
+    "title": "7. Estrategia Tecnológica, Fosos Defensivos (Economic Moat) y Ventajas Competitivas",
+    "intro": "Un análisis fundamental riguroso exige determinar si los extraordinarios márgenes de una compañía están protegidos por barreras de entrada duraderas o si corren el riesgo de ser erosionados por la competencia. Apple Inc. ostenta uno de los fosos defensivos más formidables del capitalismo moderno (Wide Moat / Foso Defensivo Amplio), cimentado en la integración simbiótica entre hardware propietario, sistemas operativos exclusivos y una plataforma de servicios cautiva.",
+    "headers": [
+      "Fuente del Foso Defensivo",
+      "Intensidad",
+      "Mecanismo de Protección Económica",
+      "Diagnóstico Competitivo"
+    ],
+    "table_data": [
+      [
+        "Costes de Cambio (Switching Costs)",
+        "🟢 CRÍTICA",
+        "La retención del usuario en iOS supera el 98%. Abandonar el ecosistema implica perder sincronización con Watch, Mac, contraseñas, iCloud y compras de apps, generando una fricción prohibitiva.",
+        "Los clientes no se van por diferencias marginales de precio; la base instalada cautiva actúa como una anualidad."
+      ],
+      [
+        "Activos Intangibles y Marca",
+        "🟢 EXCEPCIONAL",
+        "Marca sinónimo de estatus, fiabilidad y privacidad. Otorga un poder de fijación de precios (pricing power) casi inelástico que le permite sostener un margen bruto superior al 50%.",
+        "Capacidad demostrada de aumentar los Precios Medios de Venta (ASP) de hardware sin sacrificar cuota."
+      ],
+      [
+        "Efectos de Red (Network Effects)",
+        "🟢 ROBUSTO",
+        "Con >2,500M de dispositivos activos, la App Store atrae preferentemente a los mejores desarrolladores. La optimización para Metal e iOS crea una experiencia superior que retroalimenta el flywheel.",
+        "Barrera insalvable para sistemas operativos rivales; imposible replicar un catálogo optimizado a esta escala."
+      ],
+      [
+        "Ventajas de Coste y Silicio",
+        "🟢 ESTRUCTURAL",
+        "El diseño propio de chips (Apple Silicon) ahorra miles de millones al eliminar márgenes de terceros. Además, la inferencia local en A19/M5 reduce a cero el coste marginal por consulta.",
+        "Asimetría: Apple gana dinero vendiendo hardware con IA, mientras sus rivales consumen margen pagando centros de datos."
+      ],
+      [
+        "Escala Eficiente y Distribución",
+        "🟢 ALTA",
+        "Red de >525 tiendas Apple Store en ubicaciones prime globales de máxima facturación/m2, sumada a una relación preferente de volumen exclusivo con TSMC para nodos avanzados (2nm).",
+        "Monopolio de capacidad en litografía extrema que deja a los rivales esperando hasta 18 meses para acceder a tecnología equivalente."
+      ]
+    ],
+    "verdict": "WIDE MOAT | Tendencia: EN EXPANSIÓN.",
+    "subsections": [
+      {
+        "title": "7.2. Estrategia de IA: Inferencia en Dispositivo (On-Device) vs. Costes en la Nube",
+        "bullets": [
+          [
+            "• Asimetría del Coste Marginal por Petición: ",
+            "Mientras gigantes como Microsoft, Google o Meta incurren en enormes gastos operativos en centros de datos para procesar cada consulta en servidores GPU centralizados, Apple delega más del 80% de las tareas de IA directamente a los motores neuronales (NPU) de los procesadores A19 y M5 de sus dispositivos. El coste computacional marginal para Apple es de $0.00 por token."
+          ],
+          [
+            "• La Privacidad como Activo Estratégico (Private Cloud Compute): ",
+            "Para consultas complejas que superan la capacidad local, Apple utiliza servidores propios equipados con Apple Silicon bajo un protocolo criptográfico inviolable. Ningún dato del usuario se almacena ni se indexa, convirtiendo la privacidad en un argumento de venta comercial inaccesible para empresas basadas en la venta de publicidad."
+          ],
+          [
+            "• Ahorro Operativo para Clientes Corporativos: ",
+            "Grandes corporaciones (como Disney y Crédit Agricole) han comenzado a migrar flujos de trabajo de análisis de datos a ordenadores Mac con chips M-series para eliminar las suscripciones y peajes recurrentes de IA en la nube."
+          ]
+        ]
+      },
+      {
+        "title": "7.3. Modelo de Monetización de la Innovación: El Acelerador del Ciclo de Reemplazo",
+        "bullets": [
+          [
+            "1. Tracción de Hardware Premium: ",
+            "Las funcionalidades avanzadas de IA exigen un mínimo de memoria unificada y potencia de NPU, volviendo obsoletos a terminales antiguos e impulsando el superciclo de renovación hacia gamas Pro y Pro Max de mayor margen."
+          ],
+          [
+            "2. Peaje en Servicios de Terceros: ",
+            "Al integrar modelos fundacionales externos (como ChatGPT o Gemini) dentro de Siri y del sistema operativo, Apple actúa como el guardián de acceso (gatekeeper), cobrando comisiones por compras integradas y suscripciones intermediadas sin asumir el riesgo ni el coste de infraestructura."
+          ]
+        ]
+      },
+      {
+        "title": "7.4. Intensidad de I+D y Productividad de la Innovación",
+        "bullets": [
+          [
+            "• Enfoque en Silicio Propietario e Infraestructura: ",
+            "El incremento del gasto en I+D no responde a experimentos dispersos, sino a la internalización de componentes clave: el módem de conectividad propio (C1), la arquitectura de litografía en 2nm con TSMC y la optimización de pesos neuronales."
+          ],
+          [
+            "• Retorno del Capital Invertido en Innovación: ",
+            "A diferencia de proyectos especulativos de la industria, cada dólar invertido por Apple en I+D ($8,700 M en Q3 FY26, +32.3% YoY, 8.0% de las ventas) se traduce en patentes aplicadas a productos de consumo masivo con márgenes operativos del 32.6%."
+          ]
+        ]
+      }
+    ]
+  },
+  "capital_allocation": {
+    "ma_headers": [
+      "Iniciativa / Transacción",
+      "Tipo de Operación",
+      "Capital / Compromiso",
+      "¿Qué se busca estratégicamente con ello?"
+    ],
+    "ma_data": [
+      [
+        "Acuerdo Plurianual con Broadcom",
+        "Alianza Industrial Estratégica",
+        "> $30,000 M",
+        "Co-desarrollo y suministro garantizado de módulos de radiofrecuencia (FBAR) y conectividad 5G/Wi-Fi en EE.UU., acelerando la integración del módem propietario."
+      ],
+      [
+        "Advanced Manufacturing Center (Houston)",
+        "Inversión en CapEx Directo",
+        "Planta Industrial Propia",
+        "Mitigación del riesgo geopolítico y arancelario mediante relocalización productiva (onshoring), asegurando líneas de ensamblaje automatizado y servidores de IA."
+      ],
+      [
+        "Adquisiciones 'Bolt-on' de IA",
+        "M&A Tecnológico (Startups IA)",
+        "~$50M - $200M c/u",
+        "Compra de equipos y patentes de compresión de modelos de lenguaje (LLM pruning/quantization) para optimizar la ejecución de IA local en NPUs con bajo consumo."
+      ]
+    ],
+    "capex_title": "6.4. CapEx de Vanguardia y Avances Revolucionarios en Hardware y Silicio",
+    "capex_intro": "El gasto de capital (CapEx) trimestral de $2,900 M ($6,800 M acumulado en 9 meses) se enfoca en activos críticos de ingeniería y maquinaria de litografía avanzada:",
+    "capex_bullets": [
+      [
+        "• Salto a la Litografía de 2 Nanómetros (2nm): ",
+        "En colaboración exclusiva con TSMC, Apple asegura la primera hornada de producción en masa en 2nm para sus procesadores propietarios A19 / A19 Pro (familia iPhone 17) y M5 (línea Mac), garantizando una ventaja competitiva de más de 18 meses frente a competidores de Android y PC x86 en eficiencia energética y densidad de transistores."
+      ],
+      [
+        "• Inferencia Neural en el Dispositivo (On-Device NPU): ",
+        "La arquitectura de silicio propietario ejecuta modelos multimodales localmente en memoria unificada, eliminando los costes de tokens y latencia de servidores cloud."
+      ],
+      [
+        "• Nuevos Factores de Forma Disruptivos: ",
+        "Desarrollo del nuevo MacBook Neo (diseñado para ganar cuota en el segmento educativo/corporativo desplazando a Chromebooks y Windows) y el factor de forma ultradelgado iPhone Air."
+      ]
+    ]
+  },
+  "scorecard": {
+    "intro": "Apple Inc. ha presentado unos resultados correspondientes al tercer trimestre del ejercicio fiscal 2026 (Q3 FY26) que superaron ampliamente las previsiones de consenso en ingresos y beneficio por acción, estableciendo nuevos récords históricos para un trimestre de junio a nivel global. El período estuvo marcado por una sólida expansión de márgenes en hardware y servicios y una excepcional conversión de beneficios contables en efectivo real disponible para los accionistas:",
+    "headers": [
+      "Métrica Financiera",
+      "Q3 FY26 (Reportado)",
+      "Q3 FY25 (Previo)",
+      "Variación YoY",
+      "Diagnóstico Fundamental y Salud Operativa"
+    ],
+    "data": [
+      [
+        "Ingresos Netos Totales",
+        "$109,417 M",
+        "$94,036 M",
+        "+16.4%",
+        "Récord histórico de junio; crecimiento acelerado de doble dígito en hardware y servicios."
+      ],
+      [
+        "Margen Bruto ($M)",
+        "$54,770 M",
+        "$43,718 M",
+        "+25.3%",
+        "Fuerte poder de fijación de precios y mix favorable hacia gamas Pro y Servicios."
+      ],
+      [
+        "Margen Bruto (%)",
+        "50.06%",
+        "46.49%",
+        "+357 bps",
+        "Expansión estructural de rentabilidad (incluye +200 bps de créditos arancelarios; subyacente ~48.1%)."
+      ],
+      [
+        "Gastos Operativos (OpEx)",
+        "$19,075 M",
+        "$15,516 M",
+        "+22.9%",
+        "Inversión estratégica controlada; aceleración selectiva en I+D (+32.3% YoY) por infraestructura de IA."
+      ],
+      [
+        "Beneficio Operativo (EBIT)",
+        "$35,695 M",
+        "$28,202 M",
+        "+26.6%",
+        "Evidencia de apalancamiento operativo positivo: el beneficio crece 1.6x más rápido que los ingresos."
+      ],
+      [
+        "Margen Operativo (%)",
+        "32.62%",
+        "29.99%",
+        "+263 bps",
+        "Eficiencia de escala de primer nivel en la industria tecnológica global."
+      ],
+      [
+        "Beneficio Neto ($M)",
+        "$29,789 M",
+        "$23,434 M",
+        "+27.1%",
+        "Máximo histórico de utilidades netas para un tercer trimestre fiscal."
+      ],
+      [
+        "Margen Neto (%)",
+        "27.23%",
+        "24.92%",
+        "+231 bps",
+        "Extraordinaria capacidad de retención de valor: más de 27 centavos limpios por cada dólar ingresado."
+      ],
+      [
+        "Flujo de Caja Operativo (CFO)",
+        "$34,400 M",
+        "$28,900 M",
+        "+19.0%",
+        "Solidez de cobros y sincronización de capital de trabajo operativo."
+      ],
+      [
+        "Flujo de Caja Libre (FCF)",
+        "$31,500 M",
+        "$26,200 M",
+        "+20.2%",
+        "Métrica reina de creación de valor; capital disponible tras financiar todo el CapEx ($2,900 M)."
+      ],
+      [
+        "Margen FCF (%)",
+        "28.79%",
+        "27.86%",
+        "+93 bps",
+        "Generación de caja pura superior al propio margen neto, confirmando ganancias de alta calidad."
+      ],
+      [
+        "Conversión FCF / Beneficio Neto",
+        "105.7%",
+        "111.8%",
+        "Óptima",
+        "Tasa > 100% certifica ausencia de devengos agresivos: los beneficios son 100% dinero contante y sonante."
+      ],
+      [
+        "Beneficio por Acción (EPS Diluido)",
+        "$2.02",
+        "$1.57",
+        "+28.7%",
+        "El crecimiento del EPS supera al beneficio neto (+27.1%) gracias a la recompra activa de acciones."
+      ],
+      [
+        "Base Instalada de Dispositivos",
+        "> 2,500 Millones",
+        "~2,200 Millones",
+        "+13.6%",
+        "Ecosistema en expansión récord que ensancha el foso defensivo (economic moat)."
+      ],
+      [
+        "Suscripciones Pagadas (Servicios)",
+        "> 1,500 Millones",
+        "> 1,000 Millones",
+        "+50.0%",
+        "Pilar de ingresos recurrentes de altísimo margen (75.6% margen bruto)."
+      ]
+    ]
+  },
+  "balance_section": {
+    "intro": "La estructura financiera de Apple Inc. se mantiene en una posición de solidez incuestionable, operando prácticamente como un 'banco de inversión de alta calificación' dentro del sector tecnológico global. La directiva combina una política de apalancamiento conservadora con un programa agresivo de retorno de capital hacia los accionistas, enmarcado dentro de su objetivo formal de alcanzar una posición de Caja Neta Neutral (Net Cash Neutral).",
+    "table_headers": [
+      "Métrica Patrimonial",
+      "Q3 FY26 ($M)",
+      "Q3 FY25 ($M)",
+      "Variación YoY",
+      "Diagnóstico de Solvencia y Balance"
+    ],
+    "table_data": [
+      [
+        "Efectivo y Equivalentes Líquidos",
+        "$39,544 M",
+        "$31,850 M",
+        "+24.2%",
+        "Liquidez operativa de disponibilidad inmediata para pagos y tesorería."
+      ],
+      [
+        "Valores Negociables (Corto Plazo)",
+        "$22,855 M",
+        "$27,410 M",
+        "-16.6%",
+        "Letras del tesoro y pagarés corporativos AAA con vencimiento < 12 meses."
+      ],
+      [
+        "Valores Negociables (Largo Plazo)",
+        "$84,118 M",
+        "$93,950 M",
+        "-10.5%",
+        "Cartera de bonos soberanos y corporativos líquidos de alto rendimiento."
+      ],
+      [
+        "LIQUIDEZ TOTAL DISPONIBLE (Cash & Securities)",
+        "$146,517 M",
+        "$153,210 M",
+        "-4.4%",
+        "Enorme 'caja de guerra' (war chest) que blinda a la empresa ante cualquier crisis."
+      ],
+      [
+        "Papel Comercial (Commercial Paper)",
+        "$1,997 M",
+        "$3,980 M",
+        "-49.8%",
+        "Financiación circulante de bajísimo coste para sincronizar pagos de corto plazo."
+      ],
+      [
+        "Deuda Financiera a Corto Plazo",
+        "$11,007 M",
+        "$9,850 M",
+        "+11.7%",
+        "Vencimientos corrientes de bonos que serán refinanciados o amortizados en el año."
+      ],
+      [
+        "Deuda Financiera a Largo Plazo",
+        "$71,340 M",
+        "$86,450 M",
+        "-17.5%",
+        "Bonos sénior no garantizados emitidos a tipos fijos históricamente bajos (2.5% - 3.5%)."
+      ],
+      [
+        "DEUDA BRUTA TOTAL",
+        "$84,344 M",
+        "$100,280 M",
+        "-15.9%",
+        "Reducción activa del pasivo financiero total (-$15,936 M amortizados YoY)."
+      ],
+      [
+        "POSICIÓN NETA DE CAJA (NET CASH)",
+        "+$62,173 M",
+        "+$52,930 M",
+        "+$9,243 M",
+        "Posición de acreedor neto: la liquidez total supera a toda la deuda en más de $62B."
+      ]
+    ],
+    "carry_trade_note": "Apple mantiene $84,344 M en deuda emitida a tipos de interés fijos muy reducidos (promedio ~3.0%), mientras que su liquidez de $146,517 M está colocada en bonos del tesoro con rentabilidades superiores al 4.5%, lo que genera ingresos financieros netos positivos (OIE positivo de ~$350 M por trimestre).",
+    "return_intro": "Apple mantiene el programa de asignación de capital más masivo de la historia corporativa moderna, utilizando su Flujo de Caja Libre para recomprar sus propias acciones y distribuir dividendos crecientes:",
+    "return_headers": [
+      "Componente de Retorno",
+      "Trimestre Q3 FY26",
+      "Acumulado 9M FY26",
+      "Impacto en la Tesis del Accionista"
+    ],
+    "return_data": [
+      [
+        "Recompra Neta de Acciones Comunes",
+        "$25,800 M",
+        "$62,094 M",
+        "Retiro acelerado de títulos en el mercado abierto bajo el plan autorizado."
+      ],
+      [
+        "Dividendos en Efectivo Distribuidos",
+        "$4,000 M",
+        "$11,778 M",
+        "$0.27 por acción declarado en Q3 (payout sostenible de ~13% del FCF)."
+      ],
+      [
+        "RETORNO TOTAL DE CAPITAL",
+        "$33,000 M",
+        "$73,872 M",
+        "El 104.7% del FCF del trimestre ($31,500 M) se devolvió íntegramente al accionista."
+      ],
+      [
+        "Acciones en Circulación (Diluted Float)",
+        "15,266 Millones",
+        "15,499 Millones",
+        "-233.5 Millones de acciones retiradas en los últimos 12 meses (-1.51%)."
+      ],
+      [
+        "Efecto Turbo en Beneficio por Acción (EPS)",
+        "+28.7% YoY",
+        "vs. +27.1% Net Inc.",
+        "La reducción neta de acciones acelera el crecimiento del EPS en +160 bps adicionales."
+      ]
+    ],
+    "sbc_note": "Frente a los $25,800 M destinados a recompras, la compensación en acciones a empleados (Stock-Based Compensation) sumó $3,100 M en el trimestre. Por lo tanto, el 88% de la recompra es creación neta de valor real, reduciendo efectivamente el número de acciones en circulación y aumentando la participación patrimonial de cada accionista restante."
+  },
+  "governance_section": {
+    "events_8k_headers": [
+      "Fecha SEC",
+      "Ítem Oficial 8-K",
+      "Naturaleza del Evento",
+      "¿Qué significa para la Empresa?",
+      "Diagnóstico para el Inversor"
+    ],
+    "events_8k_data": [
+      [
+        "2026-09-01",
+        "Item 5.02",
+        "Sucesión Ejecutiva en el C-Suite",
+        "Formalización de la renuncia de Tim Cook como CEO y designación oficial de John Ternus.",
+        "🟡 RELEVO PLANIFICADO: Transición técnica ordenada sin vacíos de poder; foco en silicio."
+      ],
+      [
+        "2026-07-30",
+        "Item 2.02",
+        "Resultados Financieros Trimestrales",
+        "Avance formal de cifras oficiales auditadas correspondientes al trimestre Q3 FY26.",
+        "🟢 TRÁMITE ORDINARIO: Cumplimiento regular del calendario financiero ante los mercados."
+      ],
+      [
+        "2026-04-20",
+        "Item 5.02",
+        "Acuerdos de Compensación Ejecutiva",
+        "Actualización de paquetes de incentivos en acciones restringidas (RSUs) para directores.",
+        "🟢 ALINEACIÓN: Remuneración ligada a métricas operativas y de retorno de largo plazo."
+      ],
+      [
+        "Últimos 12M",
+        "Item 4.01",
+        "Auditoría Externa Independiente",
+        "Sin registros. PricewaterhouseCoopers (PwC) continúa como auditor principal sin discrepancias.",
+        "🟢 MÁXIMA ESTABILIDAD: Cero banderas rojas contables o disputas sobre criterios contables."
+      ],
+      [
+        "Últimos 12M",
+        "Item 2.04",
+        "Eventos de Insolvencia o Impago",
+        "Sin registros. Ninguna aceleración de vencimientos ni cláusulas de penalización de deuda.",
+        "🟢 RIESGO CREDITICIO NULO: Solvencia intacta con posición de caja neta de +$62.2B."
+      ]
+    ],
+    "insider_headers": [
+      "Directivo / Cargo Clave",
+      "Tipo de Operación y Modalidad SEC",
+      "Volumen de Acciones",
+      "Importe Efectivo ($)",
+      "Trazabilidad SEC (144 ➔ 4)",
+      "Diagnóstico de Convicción"
+    ],
+    "insider_data": [
+      [
+        "Timothy D. Cook\n(Chief Executive Officer)",
+        "🟢 Venta Automática (Plan 10b5-1)",
+        "-194,912",
+        "-$49,887,921",
+        "Form 4 Liquidado",
+        "Venta programada con 9 meses de antelación; diversificación en su salida."
+      ],
+      [
+        "John Ternus\n(CEO Entrante)",
+        "⚪ Cero Ventas (Retención Total)",
+        "0",
+        "$0",
+        "Sin avisos 144",
+        "Retención patrimonial íntegra tras su designación como CEO."
+      ],
+      [
+        "Arthur D. Levinson\n(Presidente del Consejo)",
+        "🔴 Venta Discrecional",
+        "-300,000",
+        "-$86,740,722",
+        "Form 144 (May) ➔ Form 4",
+        "Toma de beneficios voluntaria en máximos históricos. No utilizó plan 10b5-1."
+      ],
+      [
+        "Deirdre O'Brien\n(Senior Vice President)",
+        "🟢 Venta Automática (Plan 10b5-1)",
+        "-73,015",
+        "-$18,731,954",
+        "Form 144 (Abr) ➔ Form 4",
+        "Venta 100% ciega y programada; ejecución rutinaria de opciones sobre acciones."
+      ],
+      [
+        "Katherine L. Adams\n(SVP & General Counsel)",
+        "🟡 Venta Mixta / Retención",
+        "-47,125",
+        "-$12,101,154",
+        "Form 144 (May) ➔ Form 4",
+        "Desinversión parcial tras vencimiento de RSUs y cobertura fiscal."
+      ],
+      [
+        "Jennifer Newstead\n(SVP Government Affairs)",
+        "🟢 Venta Automática (Plan 10b5-1)",
+        "-7,194",
+        "-$2,245,142",
+        "Form 144 (Ago) ➔ Form 4",
+        "Venta menor rutinaria y programada bajo plan preestablecido."
+      ],
+      [
+        "Kevan Parekh\n(Senior VP & CFO)",
+        "🟢 Venta Automática (Plan 10b5-1)",
+        "-5,733",
+        "-$1,460,637",
+        "Form 144 (Abr) ➔ Form 4",
+        "Venta menor de diversificación personal del nuevo director financiero."
+      ]
+    ],
+    "insider_dictum": "El equipo operativo directo (CEO, CFO y Vicepresidentes Sénior) opera con una disciplina institucional del 100% bajo planes preprogramados Rule 10b5-1, descartando cualquier arbitraje con información no pública. La única presión vendedora discrecional provino del Presidente del Consejo (Arthur Levinson), con $86.7M en toma de beneficios de acciones acumuladas históricamente.",
+    "gov_table_headers": [
+      "Dimensión de Gobernanza",
+      "Resultado Detectado",
+      "Calificación / Semáforo",
+      "Diagnóstico para el Accionista"
+    ],
+    "gov_table_data": [
+      [
+        "Puntuación Global de Gobernanza",
+        "SÓLIDA / BAJO RIESGO",
+        "85 / 100",
+        "Controles contables limpios, sucesión ordenada y alta transparencia informativa."
+      ],
+      [
+        "Auditoría Externa (PwC)",
+        "Más de 20 años de continuidad",
+        "🟢 ESTABILIDAD TOTAL",
+        "Sin salvedades ni discrepancias contables en informes históricos ante la SEC."
+      ],
+      [
+        "Estructura del Consejo y Sucesión",
+        "Relevo formalizado en Form 8-K",
+        "🟢 CONTINUIDAD PROBADA",
+        "Transición interna que mitiga el riesgo de choque cultural o giros estratégicos erráticos."
+      ],
+      [
+        "Disciplina en Ventas de Insiders",
+        "100% C-Suite en Planes 10b5-1",
+        "🟢 ALTA PROTECCIÓN",
+        "Prácticas impecables de cumplimiento normativo frente a acusaciones de insider trading."
+      ],
+      [
+        "Compras en Mercado Abierto (Cod. P)",
+        "$0.0 M con fondos propios",
+        "⚪ NEUTRAL TÍPICO",
+        "Estándar en mega-caps donde la remuneración directiva se realiza vía incentivos en acciones (RSUs)."
+      ]
+    ]
+  },
+  "peers_section": {
+    "title": "9.3. Benchmarking Competitivo del Sector Hardware (SIC 3571) & Medianas Oficiales",
+    "headers": [
+      "Ticker",
+      "Compañía",
+      "Ventas ($M)",
+      "Margen Bruto",
+      "Margen EBIT",
+      "ROIC Intang.",
+      "Novy-Marx GP/A (%)",
+      "F-Score",
+      "G-Score"
+    ],
+    "rows": [
+      [
+        "AAPL",
+        "Apple Inc.",
+        "$466,823 M",
+        "50.1%",
+        "32.6%",
+        "42.8%",
+        "59.3%",
+        "9 / 9",
+        "7 / 8"
+      ],
+      [
+        "HPQ",
+        "HP Inc.",
+        "$59,162 M",
+        "21.8%",
+        "7.9%",
+        "14.5%",
+        "22.0%",
+        "6 / 9",
+        "4 / 8"
+      ],
+      [
+        "DELL",
+        "Dell Technologies",
+        "$151,197 M",
+        "23.4%",
+        "8.5%",
+        "18.2%",
+        "28.0%",
+        "7 / 9",
+        "5 / 8"
+      ],
+      [
+        "WDC",
+        "Western Digital",
+        "$12,919 M",
+        "28.5%",
+        "9.2%",
+        "8.9%",
+        "19.0%",
+        "5 / 9",
+        "3 / 8"
+      ],
+      [
+        "LNVGY",
+        "Lenovo Group",
+        "$61,970 M",
+        "17.2%",
+        "4.5%",
+        "12.1%",
+        "20.0%",
+        "6 / 9",
+        "4 / 8"
+      ],
+      [
+        "MEDIANA",
+        "Mediana Sectorial SIC 3571",
+        "$59,162 M",
+        "22.6%",
+        "8.2%",
+        "13.3%",
+        "22.0%",
+        "6 / 9",
+        "4 / 8"
+      ]
+    ]
+  },
+  "presentation_kpis_enriched": {
+    "archetype": "CORPORATE_INDUSTRIAL",
+    "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
+    "total_slides": 3,
+    "brand_segmentation": {
+      "Products": {
+        "revenue_usd_m": 78678.0
+      },
+      "Services": {
+        "revenue_usd_m": 30739.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {},
+    "operational_kpis": {}
+  },
+  "archetype_detected": "CORPORATE_INDUSTRIAL",
+  "brand_segmentation": {
+    "Products": {
+      "revenue_usd_m": 78678.0
+    },
+    "Services": {
+      "revenue_usd_m": 30739.0
+    }
+  }
+}

@@ -6,7 +6,10 @@
   "period_date": "27 de Junio de 2026",
   "filing_source": "Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q3 FY26 Earnings Call Transcript",
   "sic_code": "3571",
+  "archetype": "STANDARD_CORPORATE",
   "industry": "Electronic Computers / Hardware & Consumer Electronics",
+  "forensic_inventory_note": "El modelo cuantitativo puro activa una bandera preventiva debido a que los inventarios crecieron un +85.5% por encima del coste de ventas (aumentando de $3,332M a $6,464M, con un alza de +4.0 días en DIO). Sin embargo, la auditoría cualitativa confirma que se trata de un falso positivo operativo: este incremento responde estrictamente al acopio estratégico de microprocesadores avanzados (chips A19 y M5 en litografía de 2nm y 3nm) y módulos de memoria DRAM en vísperas del lanzamiento global del superciclo de hardware con Apple Intelligence. Incluso con esta acumulación temporal, los Días de Inventario de Apple (8.8 días) representan la tasa de rotación más rápida de toda la industria tecnológica mundial (donde los competidores promedian entre 45 y 60 días), descartando cualquier riesgo de producto no vendido u obsoleto en bodegas.",
+  "valuation_verdict": "Exigencia de crecimiento ambiciosa (+23.1% anual); requiere catalizadores sostenidos en IA y Servicios.",
   "business_model_callout": {
     "title": "RESUMEN DEL MODELO DE NEGOCIO Y PROPUESTA DE VALOR",
     "paragraphs": [

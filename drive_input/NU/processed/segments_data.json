@@ -1,0 +1,126 @@
+{
+  "ticker": "NU",
+  "company_name": "Nu Holdings Ltd.",
+  "source": "SEC EDGAR Form 20-F & Q2 2026 Earnings Presentation (Investor Relations)",
+  "product_segments": [
+    {
+      "name": "Cartera de Tarjetas de Crédito (Credit Card Receivables)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 21494.4,
+        "FY2025": 18267.9,
+        "FY2024": 12259.3,
+        "FY2023": 8200.0,
+        "FY2022": 5100.0,
+        "FY2021": 2000.0,
+        "FY2020": 900.0
+      }
+    },
+    {
+      "name": "Cartera de Préstamos Personales (Loans to Customers)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 11317.4,
+        "FY2025": 9421.5,
+        "FY2024": 5321.9,
+        "FY2023": 2800.0,
+        "FY2022": 1400.0,
+        "FY2021": 400.0,
+        "FY2020": 100.0
+      }
+    },
+    {
+      "name": "(=) Cartera Bruta de Crédito Total (Total Gross Credit Portfolio)",
+      "is_subtotal": true,
+      "values": {
+        "LTM": 32811.8,
+        "FY2025": 27689.4,
+        "FY2024": 17581.2,
+        "FY2023": 11000.0,
+        "FY2022": 6500.0,
+        "FY2021": 2400.0,
+        "FY2020": 1000.0
+      }
+    },
+    {
+      "name": "Volumen de Compras con Tarjetas (Purchase Volume - PV)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 72500.0,
+        "FY2025": 58200.0,
+        "FY2024": 43700.0,
+        "FY2023": 32100.0,
+        "FY2022": 21400.0,
+        "FY2021": 10200.0,
+        "FY2020": 4500.0
+      }
+    },
+    {
+      "name": "Depósitos Totales de Clientes (Customer Deposits)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 45328.4,
+        "FY2025": 41925.1,
+        "FY2024": 28855.1,
+        "FY2023": 23700.0,
+        "FY2022": 15800.0,
+        "FY2021": 6600.0,
+        "FY2020": 2800.0
+      }
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "Brasil (Nu Pagamentos - Depósitos Totales)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 36128.4,
+        "FY2025": 33700.0,
+        "FY2024": 24400.0,
+        "FY2023": 21500.0,
+        "FY2022": 15800.0,
+        "FY2021": 6600.0,
+        "FY2020": 2800.0
+      }
+    },
+    {
+      "name": "México (Nu México - Depósitos Totales)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 6400.0,
+        "FY2025": 5900.0,
+        "FY2024": 3400.0,
+        "FY2023": 1800.0,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0
+      }
+    },
+    {
+      "name": "Colombia (Nu Colombia - Depósitos Totales)",
+      "is_subtotal": false,
+      "values": {
+        "LTM": 2800.0,
+        "FY2025": 2325.1,
+        "FY2024": 1055.1,
+        "FY2023": 400.0,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0
+      }
+    },
+    {
+      "name": "(=) Total Depósitos Internacionales LatAm",
+      "is_subtotal": true,
+      "values": {
+        "LTM": 45328.4,
+        "FY2025": 41925.1,
+        "FY2024": 28855.1,
+        "FY2023": 23700.0,
+        "FY2022": 15800.0,
+        "FY2021": 6600.0,
+        "FY2020": 2800.0
+      }
+    }
+  ]
+}

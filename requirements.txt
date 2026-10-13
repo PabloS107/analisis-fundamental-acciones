@@ -1,0 +1,11 @@
+# ==============================================================================
+# Dependencias del Orquestador Universal de Analisis Fundamental
+# ==============================================================================
+Django>=5.0.0,<=6.1.1
+edgartools>=5.0.0
+yfinance>=0.2.0
+requests>=2.30.0
+pandas>=2.0.0
+numpy>=1.24.0
+python-docx>=1.0.0
+pypdf>=4.0.0
