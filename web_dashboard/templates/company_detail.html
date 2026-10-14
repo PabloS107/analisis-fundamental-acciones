@@ -724,12 +724,19 @@
                 </button>
             </div>
 
-            <!-- Buscador y Toggle % Base -->
-            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-                <button onclick="togglePctColumn()" id="btn-toggle-pct" class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold px-3 py-1.5 rounded-xl border border-slate-200 transition flex items-center gap-1.5">
-                    <span>% Base Vertical</span>
-                    <span id="badge-pct-status" class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                </button>
+            <!-- Buscador y Selector de Modos (Fiscal.ai Style) -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end flex-wrap">
+                <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
+                    <button id="btn-mode-abs" onclick="setStatementViewMode('abs')" class="px-2.5 py-1 rounded-lg bg-white text-slate-900 shadow-sm transition">
+                        💵 Importes ($M)
+                    </button>
+                    <button id="btn-mode-pct" onclick="setStatementViewMode('pct')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        📐 % Vertical
+                    </button>
+                    <button id="btn-mode-yoy" onclick="setStatementViewMode('yoy')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        📈 % YoY & CAGR
+                    </button>
+                </div>
                 <div class="relative">
                     <input type="text" id="statementSearch" onkeyup="filterStatements()" placeholder="Buscar partida..." 
                            class="bg-slate-50 text-xs text-slate-900 pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 w-44 focus:outline-none focus:border-sky-500 transition">
@@ -753,7 +760,7 @@
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                             <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Partida Contable</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
-                            <th class="py-3 px-4 text-right col-pct text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300">% s/ Ventas (LTM)</th>
+                            <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Ventas (LTM)">% s/ Ventas (LTM)</th>
                             {% for p in statements_annual_fys %}
                             <th class="py-3 px-3 text-right">{{ p }}</th>
                             {% endfor %}
@@ -761,6 +768,13 @@
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         {% for row in statements_pnl %}
+                        {% if row.row_type == 'section_header' %}
+                        <tr class="bg-slate-100/90 border-y border-slate-200">
+                            <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-5 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                {{ row.label }}
+                            </td>
+                        </tr>
+                        {% else %}
                         <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'net_income' %}bg-emerald-50/40{% elif row.row_type == 'result' %}bg-slate-50/30{% endif %}">
                             <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'plus' %}
@@ -777,7 +791,7 @@
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-100/70 text-emerald-900 border border-emerald-300 px-2.5 py-1 rounded-md font-black text-xs shadow-sm">
                                         <span class="text-emerald-800">{{ row.operator }}</span> {{ row.label }}
                                     </span>
-                                {% elif row.row_type == 'eps' %}
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}
                                     <span class="text-sky-700 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
                                 {% else %}
@@ -786,21 +800,23 @@
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100">
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'plus' %}
                                     <span class="text-sky-700 font-bold">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'result' %}
                                     <span class="text-emerald-800 font-bold">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'net_income' %}
                                     <span class="text-emerald-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' %}
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}
                                     <span class="text-sky-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}
                                     {{ row.ltm_val }}
                                 {% endif %}
                             </td>
-                            <!-- Col 3: % Base (LTM) Micro-píldora -->
-                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct bg-slate-50/60 border-r-2 border-slate-300">
+                            <!-- Col 3: Columna Meta (% Base LTM / CAGR 5Y) -->
+                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
+                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
                                 {% if row.ltm_pct != '-' %}
                                 <span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">
                                     {{ row.ltm_pct }}
@@ -810,22 +826,24 @@
                                 {% endif %}
                             </td>
                             <!-- Col 4+: Ejercicios Anuales -->
-                            {% for val in row.annual_vals %}
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700">
+                            {% for cell in row.annual_cells %}
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700 stmt-data-cell"
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'plus' %}
-                                    <span class="text-sky-700 font-bold">{{ val }}</span>
+                                    <span class="text-sky-700 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'result' %}
-                                    <span class="text-emerald-800 font-bold">{{ val }}</span>
+                                    <span class="text-emerald-800 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'net_income' %}
-                                    <span class="text-emerald-900 font-black">{{ val }}</span>
-                                {% elif row.row_type == 'eps' %}
-                                    <span class="text-sky-700 font-black">{{ val }}</span>
+                                    <span class="text-emerald-900 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}
+                                    <span class="text-sky-700 font-black">{{ cell.abs }}</span>
                                 {% else %}
-                                    {{ val }}
+                                    {{ cell.abs }}
                                 {% endif %}
                             </td>
                             {% endfor %}
                         </tr>
+                        {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
@@ -839,7 +857,7 @@
                     <span class="text-base">🌊</span>
                     <h3 class="font-bold text-sm text-slate-900 uppercase tracking-wider">Estado de Flujos de Caja Consolidado (Cash Flow Statement)</h3>
                 </div>
-                <span class="text-xs text-slate-500 font-mono">Valores en $M USD · Base de Conversión: Beneficio Neto</span>
+                <span class="text-xs text-slate-500 font-mono">Valores en $M USD · Base de Margen: Ingresos Netos</span>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-xs text-left border-collapse statement-table">
@@ -847,7 +865,7 @@
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                             <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Partida de Flujo de Fondos</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
-                            <th class="py-3 px-4 text-right col-pct text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300">% s/ Ben. Neto (LTM)</th>
+                            <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Ben. Neto (LTM)">% s/ Ben. Neto (LTM)</th>
                             {% for p in statements_annual_fys %}
                             <th class="py-3 px-3 text-right">{{ p }}</th>
                             {% endfor %}
@@ -855,6 +873,13 @@
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         {% for row in statements_cashflow %}
+                        {% if row.row_type == 'section_header' %}
+                        <tr class="bg-slate-100/90 border-y border-slate-200">
+                            <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-5 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                {{ row.label }}
+                            </td>
+                        </tr>
+                        {% else %}
                         <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'result' %}bg-slate-50/30{% endif %}">
                             <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'plus' %}
@@ -867,6 +892,10 @@
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                {% elif row.row_type == 'subtotal' %}
+                                    <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
+                                        <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
+                                    </span>
                                 {% elif row.row_type == 'header_val' %}
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
                                 {% else %}
@@ -875,15 +904,19 @@
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100">
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' %}
                                     <span class="text-emerald-800 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'subtotal' %}
+                                    <span class="text-sky-900 font-bold">{{ row.ltm_val }}</span>
                                 {% else %}
                                     {{ row.ltm_val }}
                                 {% endif %}
                             </td>
-                            <!-- Col 3: % Base (LTM) Micro-píldora -->
-                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct bg-slate-50/60 border-r-2 border-slate-300">
+                            <!-- Col 3: Columna Meta (% Base LTM / CAGR 5Y) -->
+                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
+                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
                                 {% if row.ltm_pct != '-' %}
                                 <span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">
                                     {{ row.ltm_pct }}
@@ -893,16 +926,20 @@
                                 {% endif %}
                             </td>
                             <!-- Col 4+: Ejercicios Anuales -->
-                            {% for val in row.annual_vals %}
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700">
+                            {% for cell in row.annual_cells %}
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700 stmt-data-cell"
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' %}
-                                    <span class="text-emerald-800 font-bold">{{ val }}</span>
+                                    <span class="text-emerald-800 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'subtotal' %}
+                                    <span class="text-sky-900 font-bold">{{ cell.abs }}</span>
                                 {% else %}
-                                    {{ val }}
+                                    {{ cell.abs }}
                                 {% endif %}
                             </td>
                             {% endfor %}
                         </tr>
+                        {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
@@ -924,7 +961,7 @@
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                             <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Cuenta Patrimonial</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
-                            <th class="py-3 px-4 text-right col-pct text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300">% s/ Activos (LTM)</th>
+                            <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Activos (LTM)">% s/ Activos (LTM)</th>
                             {% for p in statements_annual_fys %}
                             <th class="py-3 px-3 text-right">{{ p }}</th>
                             {% endfor %}
@@ -965,12 +1002,17 @@
                                     <span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-800 border border-slate-300 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-slate-600 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                {% elif row.row_type == 'eps' %}
+                                    <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
+                                        <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
+                                    </span>
                                 {% else %}
                                     <span class="text-slate-600">{{ row.label }}</span>
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100">
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' %}
                                     <span class="text-emerald-800 font-bold">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}
@@ -983,12 +1025,15 @@
                                     <span class="text-emerald-700 font-bold">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'net_debt' %}
                                     <span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' %}
+                                    <span class="text-sky-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}
                                     {{ row.ltm_val }}
                                 {% endif %}
                             </td>
-                            <!-- Col 3: % Base (LTM) Micro-píldora -->
-                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct bg-slate-50/60 border-r-2 border-slate-300">
+                            <!-- Col 3: Columna Meta (% Base LTM / CAGR 5Y) -->
+                            <td class="py-2.5 px-4 text-right font-mono whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
+                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
                                 {% if row.ltm_pct != '-' %}
                                 <span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">
                                     {{ row.ltm_pct }}
@@ -998,22 +1043,25 @@
                                 {% endif %}
                             </td>
                             <!-- Col 4+: Ejercicios Anuales -->
-                            {% for val in row.annual_vals %}
-                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700">
+                            {% for cell in row.annual_cells %}
+                            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap text-slate-700 stmt-data-cell"
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' %}
-                                    <span class="text-emerald-800 font-bold">{{ val }}</span>
+                                    <span class="text-emerald-800 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}
-                                    <span class="text-sky-900 font-bold">{{ val }}</span>
+                                    <span class="text-sky-900 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'metric' %}
-                                    <span class="text-indigo-900 font-bold">{{ val }}</span>
+                                    <span class="text-indigo-900 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'net_income' %}
-                                    <span class="text-emerald-900 font-black">{{ val }}</span>
+                                    <span class="text-emerald-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'net_cash' %}
-                                    <span class="text-emerald-700 font-bold">{{ val }}</span>
+                                    <span class="text-emerald-700 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'net_debt' %}
-                                    <span class="text-slate-900 font-bold">{{ val }}</span>
+                                    <span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' %}
+                                    <span class="text-sky-700 font-black">{{ cell.abs }}</span>
                                 {% else %}
-                                    {{ val }}
+                                    {{ cell.abs }}
                                 {% endif %}
                             </td>
                             {% endfor %}
@@ -1027,7 +1075,7 @@
 
     </div>
 
-    <!-- Script de Interactividad para Sub-pestañas y Búsqueda de Estados Financieros -->
+    <!-- Script de Interactividad para Sub-pestañas, Selector de 3 Modos y Búsqueda de Estados Financieros -->
     <script>
         function setStatementSubTab(mode) {
             const pnl = document.getElementById('section-pnl');
@@ -1067,21 +1115,74 @@
             }
         }
 
-        let showPctColumn = true;
-        function togglePctColumn() {
-            showPctColumn = !showPctColumn;
-            const pctCols = document.querySelectorAll('.col-pct');
-            const badge = document.getElementById('badge-pct-status');
-            pctCols.forEach(el => {
-                if (showPctColumn) {
-                    el.classList.remove('hidden');
+        let currentStatementMode = 'abs';
+
+        function setStatementViewMode(mode) {
+            currentStatementMode = mode;
+
+            const btnAbs = document.getElementById('btn-mode-abs');
+            const btnPct = document.getElementById('btn-mode-pct');
+            const btnYoy = document.getElementById('btn-mode-yoy');
+
+            const inactiveClass = 'px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition';
+            const activeClass = 'px-2.5 py-1 rounded-lg bg-white text-slate-900 shadow-sm transition';
+
+            if (btnAbs) btnAbs.className = (mode === 'abs') ? activeClass : inactiveClass;
+            if (btnPct) btnPct.className = (mode === 'pct') ? activeClass : inactiveClass;
+            if (btnYoy) btnYoy.className = (mode === 'yoy') ? activeClass : inactiveClass;
+
+            const metaHdrs = document.querySelectorAll('.col-meta-hdr');
+            metaHdrs.forEach(th => {
+                if (mode === 'yoy') {
+                    th.textContent = 'CAGR 5Y';
                 } else {
-                    el.classList.add('hidden');
+                    th.textContent = th.getAttribute('data-base-title') || '% Base (LTM)';
                 }
             });
-            if (badge) {
-                badge.className = showPctColumn ? 'w-2 h-2 rounded-full bg-emerald-500' : 'w-2 h-2 rounded-full bg-slate-300';
-            }
+
+            const metaCells = document.querySelectorAll('.col-meta-cell');
+            metaCells.forEach(td => {
+                if (mode === 'yoy') {
+                    const cagr = td.getAttribute('data-cagr') || '-';
+                    if (cagr && cagr !== '-') {
+                        const isPos = cagr.startsWith('+');
+                        const isNeg = cagr.startsWith('-');
+                        const colorClass = isPos ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : (isNeg ? 'bg-rose-100 text-rose-800 border-rose-300' : 'bg-slate-100 text-slate-700 border-slate-300');
+                        td.innerHTML = `<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold border ${colorClass}">${cagr}</span>`;
+                    } else {
+                        td.innerHTML = '<span class="text-slate-400 font-normal text-xs">-</span>';
+                    }
+                } else {
+                    const pct = td.getAttribute('data-pct') || '-';
+                    if (pct && pct !== '-') {
+                        td.innerHTML = `<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">${pct}</span>`;
+                    } else {
+                        td.innerHTML = '<span class="text-slate-400 font-normal text-xs">-</span>';
+                    }
+                }
+            });
+
+            const dataCells = document.querySelectorAll('.stmt-data-cell');
+            dataCells.forEach(td => {
+                td.classList.remove('text-emerald-600', 'text-rose-600', 'font-bold', 'text-slate-400');
+                if (mode === 'abs') {
+                    td.textContent = td.getAttribute('data-abs') || '-';
+                    td.classList.add('text-slate-700');
+                } else if (mode === 'pct') {
+                    td.textContent = td.getAttribute('data-pct') || '-';
+                    td.classList.add('text-slate-700');
+                } else if (mode === 'yoy') {
+                    const yoyVal = td.getAttribute('data-yoy') || '-';
+                    td.textContent = yoyVal;
+                    if (yoyVal.startsWith('+')) {
+                        td.classList.add('text-emerald-600', 'font-bold');
+                    } else if (yoyVal.startsWith('-')) {
+                        td.classList.add('text-rose-600', 'font-bold');
+                    } else {
+                        td.classList.add('text-slate-400');
+                    }
+                }
+            });
         }
 
         function filterStatements() {

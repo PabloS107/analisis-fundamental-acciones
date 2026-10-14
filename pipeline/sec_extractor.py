@@ -457,7 +457,9 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "operating_lease_rou_asset": {},
         "accrued_liabilities": {},
         "rd_expense": {},
-        "sga_expense": {}
+        "sga_expense": {},
+        "sm_expense": {},
+        "ga_expense": {}
     }
     
     if is_financial or archetype in ("FINANCIAL_BANKING", "PLATFORM_ECOSYSTEM"):
@@ -708,29 +710,24 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 rd_val = get_fact_fallback(facts_df, rd_cands, p, is_flow=True)
             canonical["rd_expense"][p] = abs(rd_val) if rd_val is not None else None
 
+            # Subpartidas explícitas S&M y G&A
+            sm_cands = XBRL_TAXONOMY_MAP.get("sm_expense", ["SellingAndMarketingExpense"])
+            ga_cands = XBRL_TAXONOMY_MAP.get("ga_expense", ["GeneralAndAdministrativeExpense"])
+            sm_v = get_first_matching_value(inc_data, sm_cands, p)
+            if sm_v is None and facts_df is not None:
+                sm_v = get_fact_fallback(facts_df, sm_cands, p, is_flow=True)
+            ga_v = get_first_matching_value(inc_data, ga_cands, p)
+            if ga_v is None and facts_df is not None:
+                ga_v = get_fact_fallback(facts_df, ga_cands, p, is_flow=True)
+            canonical["sm_expense"][p] = abs(sm_v) if sm_v is not None else None
+            canonical["ga_expense"][p] = abs(ga_v) if ga_v is not None else None
+
             sga_cands = XBRL_TAXONOMY_MAP.get("sga_expense", ["SellingGeneralAndAdministrativeExpense"])
             sga_val = get_first_matching_value(inc_data, sga_cands, p)
             if sga_val is None and facts_df is not None:
                 sga_val = get_fact_fallback(facts_df, sga_cands, p, is_flow=True)
-            if sga_val is None:
-                sm_cands = [
-                    "SellingAndMarketingExpense", "SellingAndMarketingExpenses",
-                    "SalesAndMarketingExpense", "MarketingAndSalesExpense",
-                    "SellingExpense", "MarketingExpense", "FulfillmentExpense",
-                    "CustomerServiceAndMarketingExpense"
-                ]
-                ga_cands = [
-                    "GeneralAndAdministrativeExpense", "GeneralAndAdministrativeExpenses",
-                    "AdministrativeExpense", "GeneralAdministrativeAndOtherExpense"
-                ]
-                sm_v = get_first_matching_value(inc_data, sm_cands, p)
-                if sm_v is None and facts_df is not None:
-                    sm_v = get_fact_fallback(facts_df, sm_cands, p, is_flow=True)
-                ga_v = get_first_matching_value(inc_data, ga_cands, p)
-                if ga_v is None and facts_df is not None:
-                    ga_v = get_fact_fallback(facts_df, ga_cands, p, is_flow=True)
-                if sm_v is not None or ga_v is not None:
-                    sga_val = (abs(sm_v) if sm_v else 0.0) + (abs(ga_v) if ga_v else 0.0)
+            if sga_val is None and (sm_v is not None or ga_v is not None):
+                sga_val = (abs(sm_v) if sm_v else 0.0) + (abs(ga_v) if ga_v else 0.0)
             canonical["sga_expense"][p] = abs(sga_val) if sga_val is not None else None
 
             # Si es PLATFORM_ECOSYSTEM, registrar provisiones de crédito e ingresos financieros en campos dedicados sin contaminar margen comercial
@@ -756,6 +753,12 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         if ebit is None and rev is not None and op_exp is not None and abs(op_exp) > 0 and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
             ebit = round(rev - abs(op_exp), 2)
         canonical["operating_income"][p] = ebit
+
+        if gp is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
+            expected_opex = round(gp - ebit, 2)
+            cur_opex = canonical["operating_expenses"].get(p)
+            if expected_opex > 0 and (cur_opex is None or abs(cur_opex - expected_opex) > max(expected_opex * 0.01, 5.0)):
+                canonical["operating_expenses"][p] = expected_opex
         
         # 5. Beneficio Neto
         ni_cands = XBRL_TAXONOMY_MAP["net_income"]

@@ -541,9 +541,21 @@ def resolve_canonical_balance_sheet(fs, periods):
         "us-gaap_RetainedEarningsAccumulatedDeficit"
     ]
 
+    def_rev_keys = [
+        "DeferredRevenueCurrent", "us-gaap_DeferredRevenueCurrent",
+        "ContractWithCustomerLiabilityCurrent", "us-gaap_ContractWithCustomerLiabilityCurrent",
+        "DeferredRevenueAndOtherCurrentLiabilities", "us-gaap_DeferredRevenueAndOtherCurrentLiabilities"
+    ]
+    def_tax_nc_keys = [
+        "DeferredTaxLiabilitiesNoncurrent", "us-gaap_DeferredTaxLiabilitiesNoncurrent",
+        "DeferredIncomeTaxLiabilitiesNetNoncurrent", "us-gaap_DeferredIncomeTaxLiabilitiesNetNoncurrent",
+        "DeferredIncomeTaxesAndOtherLiabilitiesNoncurrent"
+    ]
+
     res = {
         "cash": {},
         "short_term_investments": {},
+        "total_liquid_cash": {},
         "accounts_receivable": {},
         "inventories": {},
         "other_current_assets": {},
@@ -558,11 +570,13 @@ def resolve_canonical_balance_sheet(fs, periods):
         "total_assets": {},
         "accounts_payable": {},
         "accrued_liabilities": {},
+        "deferred_revenue_current": {},
         "short_term_debt": {},
         "other_current_liabilities": {},
         "total_current_liabilities": {},
         "long_term_debt": {},
         "operating_lease_liability_noncurrent": {},
+        "deferred_tax_liabilities_noncurrent": {},
         "other_noncurrent_liabilities": {},
         "total_noncurrent_liabilities": {},
         "total_liabilities": {},
@@ -572,7 +586,9 @@ def resolve_canonical_balance_sheet(fs, periods):
         "stockholders_equity": {},
         "total_liab_and_equity": {},
         "net_working_capital": {},
-        "net_financial_position": {}
+        "net_financial_position": {},
+        "book_value_per_share": {},
+        "tangible_book_value_per_share": {}
     }
 
     for p in periods:
@@ -651,17 +667,19 @@ def resolve_canonical_balance_sheet(fs, periods):
                 if st_debt_v is None:
                     st_debt_v = 0.0
 
+        def_rev_v = _extract_val(def_rev_keys, p)
         cl_raw = _extract_val(cl_keys, p, "current_liabilities")
-        sum_cl = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0)
+        sum_cl = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0) + (def_rev_v or 0.0)
         tot_cl = cl_raw if (cl_raw is not None and cl_raw > 0) else (sum_cl if sum_cl > 0 else None)
         other_cl = max(0.0, round((tot_cl or 0.0) - sum_cl, 1)) if tot_cl is not None else None
 
         lease_nc_v = _extract_val(lease_liab_nc_keys, p)
+        def_tax_nc_v = _extract_val(def_tax_nc_keys, p)
         eq_v = _extract_val(eq_keys, p, "stockholders_equity")
         tl_raw = _extract_val(tl_keys, p)
         tot_liab = tl_raw if (tl_raw is not None and tl_raw > 0) else (max(0.0, round((tot_ast or 0.0) - (eq_v or 0.0), 1)) if tot_ast is not None and eq_v is not None else None)
         tot_ncl = max(0.0, round((tot_liab or 0.0) - (tot_cl or 0.0), 1)) if (tot_liab is not None and tot_cl is not None) else None
-        other_ncl = max(0.0, round((tot_ncl or 0.0) - ((lt_debt_v or 0.0) + (lease_nc_v or 0.0)), 1)) if tot_ncl is not None else None
+        other_ncl = max(0.0, round((tot_ncl or 0.0) - ((lt_debt_v or 0.0) + (lease_nc_v or 0.0) + (def_tax_nc_v or 0.0)), 1)) if tot_ncl is not None else None
 
         apic_v = _extract_val(apic_keys, p)
         if apic_v is None or apic_v == 0.0:
@@ -676,8 +694,21 @@ def resolve_canonical_balance_sheet(fs, periods):
         nwc_v = round((tot_ca or 0.0) - (tot_cl or 0.0), 1) if (tot_ca is not None and tot_cl is not None) else None
         net_fin_pos = round((tot_debt or 0.0) - (tot_cash_v or 0.0), 1) if (tot_debt is not None and tot_cash_v is not None) else None
 
+        tot_liquid = round((c_v or 0.0) + (sti_v or 0.0), 1) if (c_v is not None or sti_v is not None) else None
+        shares_v = _extract_val(["WeightedAverageNumberOfDilutedSharesOutstanding", "us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding", "CommonStockSharesOutstanding"], p, "shares_diluted_adjusted") or canonical.get("shares_diluted", {}).get(p)
+        if shares_v and float(shares_v) > 0:
+            sh_count = float(shares_v)
+            sh_m = sh_count / 1e6 if sh_count >= 1e6 else sh_count
+            eq_m = (eq_v / 1e6) if (eq_v and abs(eq_v) >= 1e6) else (eq_v or 0.0)
+            gw_m = (gw_int_v / 1e6) if (gw_int_v and abs(gw_int_v) >= 1e6) else (gw_int_v or 0.0)
+            bvps = round(eq_m / sh_m, 2) if sh_m > 0 else None
+            tbvps = round((eq_m - gw_m) / sh_m, 2) if sh_m > 0 else None
+        else:
+            bvps, tbvps = None, None
+
         res["cash"][p] = c_v
         res["short_term_investments"][p] = sti_v
+        res["total_liquid_cash"][p] = tot_liquid
         res["accounts_receivable"][p] = ar_v
         res["inventories"][p] = inv_v
         res["other_current_assets"][p] = other_ca
@@ -692,11 +723,13 @@ def resolve_canonical_balance_sheet(fs, periods):
         res["total_assets"][p] = tot_ast
         res["accounts_payable"][p] = ap_v
         res["accrued_liabilities"][p] = accrued_v
+        res["deferred_revenue_current"][p] = def_rev_v
         res["short_term_debt"][p] = st_debt_v
         res["other_current_liabilities"][p] = other_cl
         res["total_current_liabilities"][p] = tot_cl
         res["long_term_debt"][p] = lt_debt_v
         res["operating_lease_liability_noncurrent"][p] = lease_nc_v
+        res["deferred_tax_liabilities_noncurrent"][p] = def_tax_nc_v
         res["other_noncurrent_liabilities"][p] = other_ncl
         res["total_noncurrent_liabilities"][p] = tot_ncl
         res["total_liabilities"][p] = tot_liab
@@ -707,6 +740,8 @@ def resolve_canonical_balance_sheet(fs, periods):
         res["total_liab_and_equity"][p] = tot_liab_eq
         res["net_working_capital"][p] = nwc_v
         res["net_financial_position"][p] = net_fin_pos
+        res["book_value_per_share"][p] = bvps
+        res["tangible_book_value_per_share"][p] = tbvps
 
     return res
 
@@ -1856,262 +1891,449 @@ def company_detail(request, ticker):
         v = float(val)
         return f"-${abs(v):.2f}" if v < 0 else f"${v:.2f}"
 
-    # Construcción estructurada de ESTADO DE RESULTADOS
-    pnl_rows_raw = []
-    # 1. Ingresos
-    pnl_rows_raw.append({
-        "label": "INGRESOS TOTALES (Total Revenues)",
-        "operator": "(+)",
-        "row_type": "plus",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("revenue", {}).get(p)) for p in statements_fys},
-        "pct_mode": "rev"
-    })
-    # 2. Costo de Ventas
-    pnl_rows_raw.append({
-        "label": "Costo de Ventas (Cost of Sales / COGS)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(canonical.get("cost_of_goods_sold", {}).get(p)) for p in statements_fys},
-        "pct_mode": "rev",
-        "negate_val": True
-    })
-    # 3. Utilidad Bruta
-    pnl_rows_raw.append({
-        "label": "UTILIDAD BRUTA (Gross Profit)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("gross_profit", {}).get(p)) for p in statements_fys},
-        "pct_mode": "rev"
-    })
-    # 4. Gastos Operativos de Caja
-    cash_opex_dict = {}
-    for p in statements_fys:
-        gp_v = _to_m(canonical.get("gross_profit", {}).get(p))
-        ebit_v = _to_m(canonical.get("operating_income", {}).get(p))
-        dna_raw = _num(cf_det, "DepreciationDepletionAndAmortization", p) or _num(cf_det, "DepreciationAmortizationAndAccretionNet", p) or _num(cf_det, "Depreciation", p)
-        dna_v = _to_m(dna_raw)
-        opex_v = _to_m(canonical.get("operating_expenses", {}).get(p))
-        if gp_v is not None and ebit_v is not None:
-            expected_op = round(gp_v - ebit_v, 1)
-            if opex_v is None or abs(opex_v - expected_op) > 1.0:
-                opex_v = expected_op
-        cash_op = round(opex_v - (dna_v or 0.0), 1) if (opex_v is not None and (dna_v is None or opex_v > dna_v)) else opex_v
-        cash_opex_dict[p] = cash_op
-    pnl_rows_raw.append({
-        "label": "Gastos Operativos de Caja (SG&A y R&D en efectivo)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": cash_opex_dict,
-        "pct_mode": "rev",
-        "negate_val": True
-    })
-    # 5. EBITDA
-    ebitda_dict = {}
-    for p in statements_fys:
-        ebit_v = _to_m(canonical.get("operating_income", {}).get(p))
-        dna_raw = _num(cf_det, "DepreciationDepletionAndAmortization", p) or _num(cf_det, "DepreciationAmortizationAndAccretionNet", p) or _num(cf_det, "Depreciation", p)
-        dna_v = _to_m(dna_raw)
-        ebitda_dict[p] = round(ebit_v + (dna_v or 0.0), 1) if ebit_v is not None else None
-    pnl_rows_raw.append({
-        "label": "EBITDA (Resultado Operativo de Caja / Antes de D&A)",
-        "operator": "[★]",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": ebitda_dict,
-        "pct_mode": "rev"
-    })
-    # 6. D&A
+    def _build_statement_cells(r, statements_fys, canonical, ebt_dict=None, bs_tot_assets=None):
+        if r.get("row_type") == "section_header":
+            return {
+                "label": r["label"],
+                "operator": "",
+                "row_type": "section_header",
+                "indent": False,
+                "is_bold": True,
+                "values": ["" for _ in statements_fys],
+                "pcts": ["" for _ in statements_fys],
+                "yoy": ["" for _ in statements_fys],
+                "cagr_5y": "",
+                "ltm_val": "",
+                "ltm_pct": "",
+                "ltm_yoy": "",
+                "annual_cells": [{"abs": "", "pct": "", "yoy": ""} for _ in statements_fys[1:]],
+                "annual_vals": ["" for _ in statements_fys[1:]],
+                "latest_val": "",
+                "latest_pct": ""
+            }
+
+        row_vals = []
+        row_pcts = []
+        row_yoys = []
+
+        for i, p in enumerate(statements_fys):
+            val = r["data"].get(p)
+            val_prior = r["data"].get(statements_fys[i + 1]) if (i + 1 < len(statements_fys)) else None
+
+            # 1. abs_disp
+            row_type = r.get("row_type", "item")
+            if row_type == "shares":
+                abs_disp = _fmt_shares(val)
+            elif row_type in ("eps", "dps"):
+                abs_disp = _fmt_eps(val)
+            elif row_type == "metric_pct":
+                abs_disp = f"{val:.1f}%" if val is not None else "-"
+            elif row_type in ("net_debt", "net_cash", "metric"):
+                if val is not None:
+                    abs_disp = f"-${abs(val):,.1f}M" if val < 0 else f"${val:,.1f}M"
+                else:
+                    abs_disp = "-"
+            else:
+                disp_val = -abs(val) if (r.get("negate_val") and val is not None and val > 0) else val
+                abs_disp = _fmt_money(disp_val)
+
+            row_vals.append(abs_disp)
+
+            # 2. pct_disp (Vertical %)
+            pct_mode = r.get("pct_mode")
+            if row_type in ("shares", "eps", "dps"):
+                pct_disp = "-"
+            elif row_type == "metric_pct":
+                pct_disp = f"{val:.1f}%" if val is not None else "-"
+            elif pct_mode == "rev":
+                rev_val = _to_m(canonical.get("revenue", {}).get(p))
+                if rev_val and rev_val != 0 and val is not None:
+                    num = abs(val) if r.get("negate_val") else val
+                    pct_disp = f"{(num / rev_val * 100.0):.1f}%"
+                else:
+                    pct_disp = "-"
+            elif pct_mode == "ebt":
+                ebt_val = ebt_dict.get(p) if ebt_dict else None
+                if ebt_val and ebt_val != 0 and val is not None:
+                    pct_disp = f"{(abs(val) / abs(ebt_val) * 100.0):.1f}%"
+                else:
+                    pct_disp = "-"
+            elif pct_mode == "assets":
+                tot_ast = bs_tot_assets.get(p) if bs_tot_assets else None
+                if tot_ast and tot_ast != 0 and val is not None:
+                    pct_disp = f"{(abs(val) / tot_ast * 100.0):.1f}%"
+                else:
+                    pct_disp = "-"
+            elif pct_mode == "ni":
+                ni_val = _to_m(canonical.get("net_income", {}).get(p))
+                if ni_val and ni_val != 0 and val is not None:
+                    pct_disp = f"{(val / ni_val * 100.0):.1f}%"
+                else:
+                    pct_disp = "-"
+            else:
+                pct_disp = "-"
+
+            row_pcts.append(pct_disp)
+
+            # 3. yoy_disp (% Variation vs Prior)
+            if val is not None and val_prior is not None and abs(val_prior) > 0:
+                diff = val - val_prior
+                yoy_pct = (diff / abs(val_prior)) * 100.0
+                if abs(yoy_pct) < 0.05:
+                    yoy_disp = "0.0%"
+                else:
+                    yoy_disp = f"{yoy_pct:+.1f}%"
+            else:
+                yoy_disp = "-"
+
+            row_yoys.append(yoy_disp)
+
+        # 4. CAGR 5Y (Calculated across annual periods, excluding LTM)
+        annual_periods = [p for p in statements_fys if p != "LTM"]
+        cagr_5y = "-"
+        if len(annual_periods) >= 6:
+            v_end = r["data"].get(annual_periods[0])
+            v_start = r["data"].get(annual_periods[5])
+            if v_end is not None and v_start is not None and v_start > 0 and v_end > 0:
+                cagr = ((v_end / v_start) ** (1.0 / 5.0) - 1.0) * 100.0
+                cagr_5y = f"{cagr:+.1f}%"
+
+        annual_cells = [
+            {"abs": row_vals[i], "pct": row_pcts[i], "yoy": row_yoys[i]}
+            for i in range(1, len(statements_fys))
+        ]
+
+        return {
+            "label": r["label"],
+            "operator": r.get("operator", ""),
+            "row_type": r.get("row_type", "item"),
+            "indent": r.get("indent", False),
+            "is_bold": r.get("is_bold", False),
+            "values": row_vals,
+            "pcts": row_pcts,
+            "yoy": row_yoys,
+            "cagr_5y": cagr_5y,
+            "ltm_val": row_vals[0] if row_vals else "-",
+            "ltm_pct": row_pcts[0] if row_pcts else "-",
+            "ltm_yoy": row_yoys[0] if row_yoys else "-",
+            "annual_cells": annual_cells,
+            "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
+            "latest_val": row_vals[0] if row_vals else "-",
+            "latest_pct": row_pcts[0] if row_pcts else "-"
+        }
+
+    # -------------------------------------------------------------
+    # 1. ESTADO DE RESULTADOS CONSOLIDADO (P&L FULL CASCADE)
+    # -------------------------------------------------------------
     dna_dict = {}
     for p in statements_fys:
         dna_raw = _num(cf_det, "DepreciationDepletionAndAmortization", p) or _num(cf_det, "DepreciationAmortizationAndAccretionNet", p) or _num(cf_det, "Depreciation", p)
         dna_dict[p] = _to_m(dna_raw)
-    pnl_rows_raw.append({
-        "label": "Depreciación y Amortización (D&A) [Gastos contables no monetarios]",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": dna_dict,
-        "pct_mode": "rev",
-        "negate_val": True
-    })
-    # 7. EBIT
-    pnl_rows_raw.append({
-        "label": "RESULTADO OPERATIVO (Operating Profit / EBIT)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("operating_income", {}).get(p)) for p in statements_fys},
-        "pct_mode": "rev"
-    })
-    # 8. No Operativos
-    nonop_dict = {}
+
+    ebitda_dict = {}
+    for p in statements_fys:
+        ebit_v = _to_m(canonical.get("operating_income", {}).get(p))
+        dna_v = dna_dict.get(p)
+        ebitda_dict[p] = round(ebit_v + (dna_v or 0.0), 1) if ebit_v is not None else None
+
+    taxes_dict = {p: _to_m(_num(inc_det, "IncomeTaxExpenseBenefit", p) or _num(inc_det, "CurrentIncomeTaxExpenseBenefit", p)) for p in statements_fys}
+
     ebt_dict = {}
+    net_int_dict = {}
+    nonop_dict = {}
+    cont_ops_dict = {}
     for p in statements_fys:
         ebit_v = _to_m(canonical.get("operating_income", {}).get(p))
         ni_v = _to_m(canonical.get("net_income", {}).get(p))
-        tax_raw = _num(inc_det, "IncomeTaxExpenseBenefit", p) or _num(inc_det, "CurrentIncomeTaxExpenseBenefit", p)
-        tax_v = _to_m(tax_raw)
+        tax_v = taxes_dict.get(p)
         ebt_raw = _num(inc_det, "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest", p)
-        ebt_v = _to_m(ebt_raw) if ebt_raw is not None else ((round(ni_v + tax_v, 1)) if (ni_v is not None and tax_v is not None) else ebit_v)
+        ebt_v = _to_m(ebt_raw) if ebt_raw is not None else ((round(ni_v + (tax_v or 0.0), 1)) if (ni_v is not None) else ebit_v)
         ebt_dict[p] = ebt_v
-        nonop_dict[p] = round(ebt_v - ebit_v, 1) if (ebt_v is not None and ebit_v is not None) else None
-    pnl_rows_raw.append({
-        "label": "Ingresos / Gastos No Operativos (Non-Operating Income)",
-        "operator": "(±)",
-        "row_type": "neutral",
-        "indent": True,
-        "is_bold": False,
-        "data": nonop_dict,
-        "pct_mode": "rev"
-    })
-    # 9. EBT
-    pnl_rows_raw.append({
-        "label": "RESULTADO ANTES DE IMPUESTOS (EBT)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": ebt_dict,
-        "pct_mode": "rev"
-    })
-    # 10. Impuestos
-    taxes_dict = {p: _to_m(_num(inc_det, "IncomeTaxExpenseBenefit", p) or _num(inc_det, "CurrentIncomeTaxExpenseBenefit", p)) for p in statements_fys}
-    pnl_rows_raw.append({
-        "label": "Provisión para Impuestos a las Ganancias (Taxes)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": taxes_dict,
-        "pct_mode": "ebt",
-        "negate_val": True
-    })
-    # 11. Utilidad Neta
-    pnl_rows_raw.append({
-        "label": "UTILIDAD NETA CONSOLIDADA (Consolidated Net Income)",
-        "operator": "(=)",
-        "row_type": "net_income",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("net_income", {}).get(p)) for p in statements_fys},
-        "pct_mode": "rev"
-    })
 
-    # Formatear filas de P&L para la plantilla
-    statements_pnl = []
-    for r in pnl_rows_raw:
-        row_vals = []
-        row_pcts = []
-        for p in statements_fys:
-            val = r["data"].get(p)
-            rev_val = _to_m(canonical.get("revenue", {}).get(p))
-            ebt_val = ebt_dict.get(p)
-            
-            disp_val = -abs(val) if (r.get("negate_val") and val is not None and val > 0) else val
-            row_vals.append(_fmt_money(disp_val))
-            
-            # Cálculo de % Base
-            if r.get("pct_mode") == "rev" and rev_val and rev_val != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / rev_val * 100.0))
-            elif r.get("pct_mode") == "ebt" and ebt_val and ebt_val != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / ebt_val * 100.0))
+        int_exp = _to_m(_num(inc_det, "InterestExpense", p) or _num(inc_det, "InterestAndDebtExpense", p) or canonical.get("interest_expense", {}).get(p))
+        int_inc = _to_m(_num(inc_det, "InvestmentIncomeInterest", p) or _num(inc_det, "InterestIncome", p) or _num(inc_det, "InterestAndDividendIncomeOperating", p) or canonical.get("interest_income", {}).get(p))
+        if int_exp is not None or int_inc is not None:
+            net_int = round((int_exp or 0.0) - (int_inc or 0.0), 1)
+        else:
+            net_int = None
+        net_int_dict[p] = net_int
+
+        if ebt_v is not None and ebit_v is not None:
+            if net_int is not None:
+                nonop_dict[p] = round(ebt_v - ebit_v + net_int, 1)
             else:
-                row_pcts.append("-")
-                
-        statements_pnl.append({
-            "label": r["label"],
-            "operator": r["operator"],
-            "row_type": r["row_type"],
-            "indent": r["indent"],
-            "is_bold": r["is_bold"],
-            "values": row_vals,
-            "pcts": row_pcts,
-            "ltm_val": row_vals[0] if row_vals else "-",
-            "ltm_pct": row_pcts[0] if row_pcts else "-",
-            "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
-            "latest_val": row_vals[0] if row_vals else "-",
-            "latest_pct": row_pcts[0] if row_pcts else "-"
-        })
+                nonop_dict[p] = round(ebt_v - ebit_v, 1)
+        else:
+            nonop_dict[p] = None
 
-    # Acciones y BPA Diluido
-    shares_vals = [_fmt_shares(_num(canonical, "shares_diluted_adjusted", p) or _num(canonical, "shares_diluted", p) or _num(inc_det, "WeightedAverageNumberOfDilutedSharesOutstanding", p)) for p in statements_fys]
-    statements_pnl.append({
-        "label": "Acciones Ponderadas Diluidas en Circulación (Weighted Shares)",
-        "operator": "(÷)",
-        "row_type": "shares",
-        "indent": False,
-        "is_bold": False,
-        "values": shares_vals,
-        "pcts": ["-" for _ in statements_fys],
-        "ltm_val": shares_vals[0] if shares_vals else "-",
-        "ltm_pct": "-",
-        "annual_vals": shares_vals[1:] if len(shares_vals) > 1 else [],
-        "latest_val": shares_vals[0] if shares_vals else "-",
-        "latest_pct": "-"
-    })
-    eps_vals = [_fmt_eps(_num(canonical, "eps_diluted_adjusted", p) or _num(canonical, "eps_diluted", p) or _num(inc_det, "EarningsPerShareDiluted", p)) for p in statements_fys]
-    statements_pnl.append({
-        "label": "GANANCIA POR ACCIÓN (EPS Diluido Normalizado)",
-        "operator": "(=)",
-        "row_type": "eps",
-        "indent": False,
-        "is_bold": True,
-        "values": eps_vals,
-        "pcts": ["-" for _ in statements_fys],
-        "ltm_val": eps_vals[0] if eps_vals else "-",
-        "ltm_pct": "-",
-        "annual_vals": eps_vals[1:] if len(eps_vals) > 1 else [],
-        "latest_val": eps_vals[0] if eps_vals else "-",
-        "latest_pct": "-"
-    })
+        cont_ops_dict[p] = round(ebt_v - (tax_v or 0.0), 1) if (ebt_v is not None and tax_v is not None) else ni_v
+
+    other_opex_dict = {}
+    for p in statements_fys:
+        opex_v = _to_m(canonical.get("operating_expenses", {}).get(p))
+        rd_v = _to_m(canonical.get("rd_expense", {}).get(p)) or 0.0
+        sga_v = _to_m(canonical.get("sga_expense", {}).get(p)) or 0.0
+        if opex_v is not None:
+            diff_op = round(opex_v - (rd_v + sga_v), 1)
+            other_opex_dict[p] = max(0.0, diff_op) if diff_op > 0 else 0.0
+        else:
+            other_opex_dict[p] = None
+
+    dps_dict = {}
+    fcf_ps_dict = {}
+    for p in statements_fys:
+        sh_raw = _num(canonical, "shares_diluted_adjusted", p) or _num(canonical, "shares_diluted", p) or _num(inc_det, "WeightedAverageNumberOfDilutedSharesOutstanding", p)
+        sh_m = (float(sh_raw) / 1e6) if (sh_raw and float(sh_raw) >= 1e6) else (float(sh_raw) if sh_raw else 0.0)
+
+        raw_dps = _num(inc_det, "CommonStockDividendsPerShareDeclared", p) or _num(inc_det, "CommonStockDividendsPerShareCashPaid", p)
+        if raw_dps is not None:
+            dps_dict[p] = float(raw_dps)
+        else:
+            div_m = _to_m(capital_flows["dividends_paid"].get(p))
+            if div_m and sh_m > 0:
+                dps_dict[p] = round(div_m / sh_m, 2)
+            else:
+                dps_dict[p] = 0.0
+
+        fcf_m = _to_m(canonical.get("free_cash_flow", {}).get(p))
+        if fcf_m is not None and sh_m > 0:
+            fcf_ps_dict[p] = round(fcf_m / sh_m, 2)
+        else:
+            fcf_ps_dict[p] = None
+
+    pnl_rows_raw = [
+        # 1. Ingresos
+        {
+            "label": "INGRESOS TOTALES (Total Revenues)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("revenue", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        # 2. COGS
+        {
+            "label": "Costo de Ventas (Cost of Sales / COGS)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("cost_of_goods_sold", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 3. Utilidad Bruta
+        {
+            "label": "UTILIDAD BRUTA (Gross Profit)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("gross_profit", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        # 4. R&D
+        {
+            "label": "Investigación y Desarrollo (R&D)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("rd_expense", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 5. S&M
+        {
+            "label": "Ventas y Marketing (Selling & Marketing / S&M)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("sm_expense", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 6. G&A
+        {
+            "label": "Gastos Generales y Administrativos (G&A)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("ga_expense", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 7. SG&A Consolidado
+        {
+            "label": "Total Gastos de Venta, Generales y Admin (SG&A Consolidado)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("sga_expense", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 8. Otros OpEx
+        {
+            "label": "Otros Gastos Operativos / Reestructuración",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": other_opex_dict,
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 9. Total OpEx
+        {
+            "label": "TOTAL GASTOS OPERATIVOS (Total OpEx)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("operating_expenses", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        # 10. EBIT
+        {
+            "label": "RESULTADO OPERATIVO (Operating Profit / EBIT)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("operating_income", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        # 11. D&A
+        {
+            "label": "Depreciación y Amortización (D&A)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": True,
+            "is_bold": False,
+            "data": dna_dict,
+            "pct_mode": "rev"
+        },
+        # 12. EBITDA
+        {
+            "label": "EBITDA (Resultado Operativo de Caja / Antes de D&A)",
+            "operator": "[★]",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": ebitda_dict,
+            "pct_mode": "rev"
+        },
+        # 13. Intereses Netos
+        {
+            "label": "Gastos / (Ingresos) por Intereses Netos",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": net_int_dict,
+            "pct_mode": "rev"
+        },
+        # 14. No Operativos
+        {
+            "label": "Otros Ingresos / (Gastos) No Operativos Netos",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": nonop_dict,
+            "pct_mode": "rev"
+        },
+        # 15. EBT
+        {
+            "label": "RESULTADO ANTES DE IMPUESTOS (EBT)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": ebt_dict,
+            "pct_mode": "rev"
+        },
+        # 16. Impuestos
+        {
+            "label": "Provisión para Impuestos a las Ganancias (Taxes)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": taxes_dict,
+            "pct_mode": "ebt",
+            "negate_val": True
+        },
+        # 17. Utilidad Neta Continuada
+        {
+            "label": "Utilidad Neta de Operaciones Continuadas",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": False,
+            "data": cont_ops_dict,
+            "pct_mode": "rev"
+        },
+        # 18. Utilidad Neta Consolidada
+        {
+            "label": "UTILIDAD NETA CONSOLIDADA (Consolidated Net Income)",
+            "operator": "(=)",
+            "row_type": "net_income",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("net_income", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        # 19. Acciones Ponderadas
+        {
+            "label": "Acciones Ponderadas Diluidas en Circulación (Weighted Shares)",
+            "operator": "(÷)",
+            "row_type": "shares",
+            "indent": False,
+            "is_bold": False,
+            "data": {p: _num(canonical, "shares_diluted_adjusted", p) or _num(canonical, "shares_diluted", p) or _num(inc_det, "WeightedAverageNumberOfDilutedSharesOutstanding", p) for p in statements_fys}
+        },
+        # 20. EPS
+        {
+            "label": "GANANCIA POR ACCIÓN (EPS Diluido Normalizado)",
+            "operator": "(=)",
+            "row_type": "eps",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _num(canonical, "eps_diluted_adjusted", p) or _num(canonical, "eps_diluted", p) or _num(inc_det, "EarningsPerShareDiluted", p) for p in statements_fys}
+        },
+        # 21. DPS
+        {
+            "label": "Dividendo Pagado por Acción (DPS)",
+            "operator": "(–)",
+            "row_type": "dps",
+            "indent": False,
+            "is_bold": False,
+            "data": dps_dict
+        },
+        # 22. FCF / Share
+        {
+            "label": "FLUJO DE CAJA LIBRE POR ACCIÓN (FCF / Share)",
+            "operator": "[⚡]",
+            "row_type": "eps",
+            "indent": False,
+            "is_bold": True,
+            "data": fcf_ps_dict
+        }
+    ]
+
+    statements_pnl = [_build_statement_cells(r, statements_fys, canonical, ebt_dict=ebt_dict) for r in pnl_rows_raw]
 
     # -------------------------------------------------------------
-    # Construcción estructurada de ESTADO DE FLUJOS DE CAJA
+    # 2. ESTADO DE FLUJOS DE CAJA CONSOLIDADO (CASH FLOW 4 SECTIONS)
     # -------------------------------------------------------------
-    cf_rows_raw = []
-    # 1. Beneficio Neto
-    cf_rows_raw.append({
-        "label": "Beneficio Neto Consolidado (Net Income)",
-        "operator": "",
-        "row_type": "header_val",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("net_income", {}).get(p)) for p in statements_fys},
-        "pct_mode": "ni"
-    })
-    # 2. D&A
-    cf_rows_raw.append({
-        "label": "Depreciación y Amortización (D&A)",
-        "operator": "(+)",
-        "row_type": "plus",
-        "indent": True,
-        "is_bold": False,
-        "data": dna_dict,
-        "pct_mode": "ni"
-    })
-    # 3. SBC
     sbc_dict = {p: _to_m(_num(cf_det, "ShareBasedCompensation", p) or _num(cf_det, "AllocatedShareBasedCompensationExpense", p)) for p in statements_fys}
-    cf_rows_raw.append({
-        "label": "Compensación basada en acciones (SBC)",
-        "operator": "(+)",
-        "row_type": "plus",
-        "indent": True,
-        "is_bold": False,
-        "data": sbc_dict,
-        "pct_mode": "ni"
-    })
-    # 4. Otros Ajustes No Monetarios e Impuestos Diferidos
     noncash_adj_dict = {}
     for p in statements_fys:
         def_tax = _to_m(_num(cf_det, "DeferredIncomeTaxExpenseBenefit", p) or _num(cf_det, "us-gaap_DeferredIncomeTaxesAndTaxCredits", p) or _num(cf_det, "DeferredIncomeTaxesAndTaxCredits", p) or _num(cf_det, "DeferredIncomeTax", p))
@@ -2121,17 +2343,13 @@ def company_detail(request, ticker):
         tot_adj = (def_tax or 0.0) + (oth_nc or 0.0) + (impair or 0.0) + (unreal or 0.0)
         has_val = any(v is not None for v in [def_tax, oth_nc, impair, unreal])
         noncash_adj_dict[p] = round(tot_adj, 1) if has_val else 0.0
-    cf_rows_raw.append({
-        "label": "Impuestos Diferidos y Ajustes No Monetarios",
-        "operator": "(±)",
-        "row_type": "neutral",
-        "indent": True,
-        "is_bold": False,
-        "data": noncash_adj_dict,
-        "pct_mode": "ni"
-    })
-    # 5. Variación de Capital de Trabajo
+
     delta_wc_dict = {}
+    delta_ar_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInAccountsReceivable", p) or _num(cf_det, "IncreaseDecreaseInAccountsAndOtherReceivables", p)) for p in statements_fys}
+    delta_inv_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInInventories", p) or _num(cf_det, "IncreaseDecreaseInInventory", p)) for p in statements_fys}
+    delta_ap_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInAccountsPayable", p) or _num(cf_det, "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities", p) or _num(cf_det, "IncreaseDecreaseInAccountsPayableTrade", p)) for p in statements_fys}
+    delta_oth_wc_dict = {}
+
     for p in statements_fys:
         cfo_v = _to_m(canonical.get("cash_from_operations", {}).get(p))
         ni_v = _to_m(canonical.get("net_income", {}).get(p))
@@ -2139,50 +2357,14 @@ def company_detail(request, ticker):
         sbc_v = sbc_dict.get(p)
         noncash_v = noncash_adj_dict.get(p, 0.0)
         if cfo_v is not None and ni_v is not None:
-            delta_wc_dict[p] = round(cfo_v - (ni_v + (dna_v or 0.0) + (sbc_v or 0.0) + (noncash_v or 0.0)), 1)
+            tot_wc = round(cfo_v - (ni_v + (dna_v or 0.0) + (sbc_v or 0.0) + (noncash_v or 0.0)), 1)
+            delta_wc_dict[p] = tot_wc
+            known_wc = (delta_ar_dict.get(p) or 0.0) + (delta_inv_dict.get(p) or 0.0) + (delta_ap_dict.get(p) or 0.0)
+            delta_oth_wc_dict[p] = round(tot_wc - known_wc, 1)
         else:
             delta_wc_dict[p] = None
-    cf_rows_raw.append({
-        "label": "Variación del Capital de Trabajo (Δ WC)",
-        "operator": "(±)",
-        "row_type": "neutral",
-        "indent": True,
-        "is_bold": False,
-        "data": delta_wc_dict,
-        "pct_mode": "ni"
-    })
-    # 5. CFO
-    cf_rows_raw.append({
-        "label": "FLUJO DE CAJA OPERATIVO (CFO)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("cash_from_operations", {}).get(p)) for p in statements_fys},
-        "pct_mode": "ni"
-    })
-    # 6. CapEx
-    cf_rows_raw.append({
-        "label": "Inversiones en CapEx (Capital Expenditures)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(canonical.get("capital_expenditures", {}).get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 7. FCF
-    cf_rows_raw.append({
-        "label": "FLUJO DE CAJA LIBRE (FCF)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(canonical.get("free_cash_flow", {}).get(p)) for p in statements_fys},
-        "pct_mode": "ni"
-    })
-    # 7b. FCF Ajustado (Owner Earnings) deduciendo Retención Fiscal SBC
+            delta_oth_wc_dict[p] = None
+
     fcf_adj_dict = {}
     for p in statements_fys:
         raw_fcf = canonical.get("free_cash_flow", {}).get(p)
@@ -2193,439 +2375,378 @@ def company_detail(request, ticker):
         else:
             fcf_adj_dict[p] = None
 
-    cf_rows_raw.append({
-        "label": "Flujo de Caja Libre Ajustado (FCF Menos Retención Fiscal SBC)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": fcf_adj_dict,
-        "pct_mode": "ni"
-    })
-    # 8. M&A
-    cf_rows_raw.append({
-        "label": "Adquisiciones netas (M&A)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["acquisitions_ma"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 9. Dividendos
-    cf_rows_raw.append({
-        "label": "Dividendos pagados en efectivo",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["dividends_paid"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 10. Recompras en Mercado Abierto
-    cf_rows_raw.append({
-        "label": "Recompras de acciones en mercado abierto (Open Market)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["share_repurchases_open_market"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 10b. Retención Fiscal por Liquidación de Acciones
-    cf_rows_raw.append({
-        "label": "Retención fiscal por liquidación de acciones (SBC Tax Settlement)",
-        "operator": "(–)",
-        "row_type": "minus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["share_repurchases_sbc_tax"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 10c. TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)
-    cf_rows_raw.append({
-        "label": "TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(capital_flows["share_repurchases_total"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 11. Ingresos por planes de acciones y emisión
-    cf_rows_raw.append({
-        "label": "Ingresos por emisión y planes de acciones (Stock Plans)",
-        "operator": "(+)",
-        "row_type": "plus",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["stock_plans_proceeds"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": False
-    })
-    # 12. RECOMPRAS NETAS DE ACCIONES (Open Market vs Emisión)
-    cf_rows_raw.append({
-        "label": "RECOMPRAS NETAS DE ACCIONES (Net Share Repurchases)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(capital_flows["share_repurchases_net"].get(p)) for p in statements_fys},
-        "pct_mode": "ni",
-        "negate_val": True
-    })
-    # 13. Variación de Deuda Financiera
-    cf_rows_raw.append({
-        "label": "Variación neta de deuda financiera",
-        "operator": "(±)",
-        "row_type": "neutral",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(capital_flows["net_debt_change"].get(p)) for p in statements_fys},
-        "pct_mode": "ni"
-    })
+    inv_sec_dict = {}
+    cfi_dict = {p: _to_m(canonical.get("cash_from_investing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInInvestingActivities", p)) for p in statements_fys}
+    other_cfi_dict = {}
+    for p in statements_fys:
+        buy_sec = _to_m(_num(cf_det, "PaymentsToAcquireAvailableForSaleSecuritiesDebt", p) or _num(cf_det, "PaymentsToAcquireMarketableSecurities", p))
+        sale_sec = _to_m(_num(cf_det, "ProceedsFromSaleAndMaturityOfMarketableSecurities", p) or _num(cf_det, "ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", p))
+        if buy_sec is not None or sale_sec is not None:
+            inv_sec_dict[p] = round((sale_sec or 0.0) - (buy_sec or 0.0), 1)
+        else:
+            inv_sec_dict[p] = None
 
-    statements_cashflow = []
-    for r in cf_rows_raw:
-        row_vals = []
-        row_pcts = []
-        for p in statements_fys:
-            val = r["data"].get(p)
-            ni_val = _to_m(canonical.get("net_income", {}).get(p))
-            rev_val = _to_m(canonical.get("revenue", {}).get(p))
-            fcf_val = _to_m(canonical.get("free_cash_flow", {}).get(p))
+        cfi_v = cfi_dict.get(p)
+        capex_v = _to_m(canonical.get("capital_expenditures", {}).get(p))
+        ma_v = _to_m(capital_flows["acquisitions_ma"].get(p))
+        inv_v = inv_sec_dict.get(p)
+        if cfi_v is not None:
+            known_cfi = -(capex_v or 0.0) - (ma_v or 0.0) + (inv_v or 0.0)
+            other_cfi_dict[p] = round(cfi_v - known_cfi, 1)
+        else:
+            other_cfi_dict[p] = None
 
-            disp_val = -abs(val) if (r.get("negate_val") and val is not None and val > 0) else val
-            row_vals.append(_fmt_money(disp_val))
+    cff_dict = {p: _to_m(canonical.get("cash_from_financing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInFinancingActivities", p)) for p in statements_fys}
+    other_cff_dict = {}
+    delta_cash_dict = {}
+    for p in statements_fys:
+        cff_v = cff_dict.get(p)
+        tot_rep = _to_m(capital_flows["share_repurchases_total"].get(p))
+        sp_v = _to_m(capital_flows["stock_plans_proceeds"].get(p))
+        div_v = _to_m(capital_flows["dividends_paid"].get(p))
+        debt_v = _to_m(capital_flows["net_debt_change"].get(p))
+        if cff_v is not None:
+            known_cff = -(tot_rep or 0.0) + (sp_v or 0.0) - (div_v or 0.0) + (debt_v or 0.0)
+            other_cff_dict[p] = round(cff_v - known_cff, 1)
+        else:
+            other_cff_dict[p] = None
 
-            if r.get("pct_mode") == "ni" and ni_val and ni_val != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / ni_val * 100.0))
-            elif r.get("pct_mode") == "rev" and rev_val and rev_val != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / rev_val * 100.0))
-            elif r.get("pct_mode") == "fcf" and fcf_val and fcf_val != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / fcf_val * 100.0))
+        raw_dc = _num(cf_det, "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect", p) or _num(cf_det, "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations", p)
+        if raw_dc is not None:
+            delta_cash_dict[p] = _to_m(raw_dc)
+        else:
+            cfo_v = _to_m(canonical.get("cash_from_operations", {}).get(p))
+            cfi_v = cfi_dict.get(p)
+            if cfo_v is not None or cfi_v is not None or cff_v is not None:
+                delta_cash_dict[p] = round((cfo_v or 0.0) + (cfi_v or 0.0) + (cff_v or 0.0), 1)
             else:
-                row_pcts.append("-")
+                delta_cash_dict[p] = None
 
-        statements_cashflow.append({
-            "label": r["label"],
-            "operator": r["operator"],
-            "row_type": r["row_type"],
-            "indent": r["indent"],
-            "is_bold": r["is_bold"],
-            "values": row_vals,
-            "pcts": row_pcts,
-            "ltm_val": row_vals[0] if row_vals else "-",
-            "ltm_pct": row_pcts[0] if row_pcts else "-",
-            "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
-            "latest_val": row_vals[0] if row_vals else "-",
-            "latest_pct": row_pcts[0] if row_pcts else "-"
-        })
+    fcf_margin_dict = {}
+    fcf_conv_dict = {}
+    for p in statements_fys:
+        fcf_v = _to_m(canonical.get("free_cash_flow", {}).get(p))
+        rev_v = _to_m(canonical.get("revenue", {}).get(p))
+        ni_v = _to_m(canonical.get("net_income", {}).get(p))
+        fcf_margin_dict[p] = round(fcf_v / rev_v * 100.0, 1) if (fcf_v is not None and rev_v and rev_v > 0) else None
+        fcf_conv_dict[p] = round(fcf_v / ni_v * 100.0, 1) if (fcf_v is not None and ni_v and ni_v != 0) else None
+
+    cf_rows_raw = [
+        # SECCIÓN 1: ACTIVIDADES OPERATIVAS
+        {
+            "label": "1. ACTIVIDADES OPERATIVAS (CASH FLOW FROM OPERATING ACTIVITIES)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Beneficio Neto Consolidado (Net Income)",
+            "operator": "",
+            "row_type": "header_val",
+            "indent": True,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("net_income", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Depreciación y Amortización (D&A)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": True,
+            "is_bold": False,
+            "data": dna_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Compensación basada en acciones (SBC)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": True,
+            "is_bold": False,
+            "data": sbc_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Impuestos Diferidos y Ajustes No Monetarios",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": noncash_adj_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Variación de Clientes y Cuentas por Cobrar (Δ AR)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_ar_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Variación de Inventarios (Δ Inv)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_inv_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Variación de Proveedores y Cuentas por Pagar (Δ AP)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_ap_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Variación de Otros Activos y Pasivos Operativos",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_oth_wc_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Variación Total del Capital de Trabajo (Δ WC)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_wc_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "FLUJO DE CAJA OPERATIVO (CFO)",
+            "operator": "(=)",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("cash_from_operations", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+
+        # SECCIÓN 2: ACTIVIDADES DE INVERSIÓN
+        {
+            "label": "2. ACTIVIDADES DE INVERSIÓN (CASH FLOW FROM INVESTING ACTIVITIES)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Inversiones de Capital (CapEx / Adquisición de PP&E)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(canonical.get("capital_expenditures", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Adquisiciones netas (M&A)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["acquisitions_ma"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Compras / Ventas netas de Inversiones y Valores Negociables",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": inv_sec_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Otros Flujos de Inversión",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": other_cfi_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "FLUJO DE CAJA DE INVERSIÓN TOTAL (CFI)",
+            "operator": "(=)",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": cfi_dict,
+            "pct_mode": "rev"
+        },
+
+        # SECCIÓN 3: ACTIVIDADES DE FINANCIACIÓN
+        {
+            "label": "3. ACTIVIDADES DE FINANCIACIÓN Y CAJA NETA (CASH FLOW FROM FINANCING ACTIVITIES)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Recompras de acciones en mercado abierto (Open Market)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["share_repurchases_open_market"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Retención fiscal por liquidación de acciones (SBC Tax Settlement)",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["share_repurchases_sbc_tax"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": True,
+            "is_bold": True,
+            "data": {p: _to_m(capital_flows["share_repurchases_total"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Ingresos por emisión y planes de acciones (Stock Plans)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["stock_plans_proceeds"].get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        {
+            "label": "RECOMPRAS NETAS DE ACCIONES (Net Share Repurchases)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": True,
+            "is_bold": True,
+            "data": {p: _to_m(capital_flows["share_repurchases_net"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Dividendos pagados en efectivo",
+            "operator": "(–)",
+            "row_type": "minus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["dividends_paid"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
+            "label": "Variación neta de deuda financiera",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["net_debt_change"].get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Otros Flujos de Financiación",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": other_cff_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "FLUJO DE CAJA DE FINANCIACIÓN TOTAL (CFF)",
+            "operator": "(=)",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": cff_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "VARIACIÓN NETA DE EFECTIVO Y EQUIVALENTES (Δ Cash)",
+            "operator": "[★]",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": delta_cash_dict,
+            "pct_mode": "rev"
+        },
+
+        # SECCIÓN 4: GENERACIÓN DE CAJA LIBRE AL ACCIONISTA
+        {
+            "label": "4. GENERACIÓN DE CAJA LIBRE AL ACCIONISTA (MEMO ITEMS)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "FLUJO DE CAJA LIBRE (FCF)",
+            "operator": "[⚡]",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(canonical.get("free_cash_flow", {}).get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Flujo de Caja Libre Ajustado (FCF Menos Retención Fiscal SBC)",
+            "operator": "[⚡]",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": fcf_adj_dict,
+            "pct_mode": "rev"
+        },
+        {
+            "label": "Margen FCF (% sobre Ingresos)",
+            "operator": "[⚡]",
+            "row_type": "metric_pct",
+            "indent": True,
+            "is_bold": False,
+            "data": fcf_margin_dict
+        },
+        {
+            "label": "Tasa de Conversión FCF (FCF / Utilidad Neta %)",
+            "operator": "[⚡]",
+            "row_type": "metric_pct",
+            "indent": True,
+            "is_bold": False,
+            "data": fcf_conv_dict
+        }
+    ]
+
+    statements_cashflow = [_build_statement_cells(r, statements_fys, canonical) for r in cf_rows_raw]
 
     # -------------------------------------------------------------
-    # Construcción estructurada de BALANCE GENERAL CLASIFICADO (SSOT)
+    # 3. BALANCE GENERAL CLASIFICADO (SSOT BALANCE SHEET)
     # -------------------------------------------------------------
     bs_data = resolve_canonical_balance_sheet(fs, statements_fys)
-    bs_rows_raw = []
+    bs_tot_assets_dict = {p: _to_m(bs_data["total_assets"].get(p)) for p in statements_fys}
 
-    # 1. SECCIÓN ACTIVOS CORRIENTES
-    bs_rows_raw.append({
-        "label": "1. ACTIVOS CORRIENTES (CURRENT ASSETS)",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "Efectivo y Equivalentes de Efectivo",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["cash"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Inversiones a Corto Plazo / Valores Negociables",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["short_term_investments"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Cuentas por Cobrar Comerciales (Clientes)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["accounts_receivable"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Inventarios",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["inventories"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Otros Activos Corrientes",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["other_current_assets"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL ACTIVOS CORRIENTES",
-        "operator": "[=]",
-        "row_type": "subtotal",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_current_assets"].get(p)) for p in statements_fys}
-    })
-
-    # 2. SECCIÓN ACTIVOS NO CORRIENTES
-    bs_rows_raw.append({
-        "label": "2. ACTIVOS NO CORRIENTES (NON-CURRENT ASSETS)",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "Propiedad, Planta y Equipo (PP&E Neto)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["net_ppe"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Activos por Derecho de Uso en Arrendamiento (Operating Lease ROU)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["rou_asset"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Fondo de Comercio e Intangibles (Goodwill & Int.)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["goodwill_and_intangibles"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Inversiones a Largo Plazo / No Corrientes",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["long_term_investments"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Otros Activos No Corrientes",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["other_noncurrent_assets"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL ACTIVOS NO CORRIENTES",
-        "operator": "[=]",
-        "row_type": "subtotal",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_noncurrent_assets"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "ACTIVOS TOTALES (TOTAL ASSETS)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_assets"].get(p)) for p in statements_fys}
-    })
-
-    # 3. SECCIÓN PASIVOS CORRIENTES
-    bs_rows_raw.append({
-        "label": "3. PASIVOS CORRIENTES (CURRENT LIABILITIES)",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "Cuentas por Pagar Comerciales (Proveedores)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["accounts_payable"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Pasivos Acumulados y Gastos Devengados (Accrued Liabilities)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["accrued_liabilities"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Deuda Financiera a Corto Plazo (Vencimientos y Pagarés)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["short_term_debt"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Otros Pasivos Operativos Corrientes",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["other_current_liabilities"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL PASIVOS CORRIENTES",
-        "operator": "[=]",
-        "row_type": "subtotal",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_current_liabilities"].get(p)) for p in statements_fys}
-    })
-
-    # 4. SECCIÓN PASIVOS NO CORRIENTES
-    bs_rows_raw.append({
-        "label": "4. PASIVOS NO CORRIENTES (NON-CURRENT LIABILITIES)",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "Deuda Financiera a Largo Plazo",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["long_term_debt"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Pasivos por Arrendamiento a Largo Plazo (Operating Lease Liab.)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["operating_lease_liability_noncurrent"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Otros Pasivos No Corrientes",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["other_noncurrent_liabilities"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL PASIVOS NO CORRIENTES",
-        "operator": "[=]",
-        "row_type": "subtotal",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_noncurrent_liabilities"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL PASIVOS (TOTAL LIABILITIES)",
-        "operator": "(=)",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_liabilities"].get(p)) for p in statements_fys}
-    })
-
-    # 5. SECCIÓN PATRIMONIO NETO (SHAREHOLDERS' EQUITY)
-    bs_rows_raw.append({
-        "label": "5. PATRIMONIO NETO (SHAREHOLDERS' EQUITY)",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "Capital Social y Prima de Emisión (Common Stock & APIC)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["common_stock_and_apic"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Ganancias Acumuladas / Resultados Retenidos",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["retained_earnings"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "Otros Resultados Integrales y Autocartera (AOCI & Treasury)",
-        "operator": "",
-        "row_type": "item",
-        "indent": True,
-        "is_bold": False,
-        "data": {p: _to_m(bs_data["other_equity"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL PATRIMONIO NETO (EQUITY)",
-        "operator": "(=)",
-        "row_type": "net_income",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["stockholders_equity"].get(p)) for p in statements_fys}
-    })
-
-    # 6. SECCIÓN TOTAL PASIVO + PATRIMONIO Y DIAGNÓSTICO ESTRUCTURAL
-    bs_rows_raw.append({
-        "label": "6. TOTAL PASIVO Y PATRIMONIO NETO & DIAGNÓSTICO",
-        "operator": "",
-        "row_type": "section_header",
-        "indent": False,
-        "is_bold": True,
-        "data": {}
-    })
-    bs_rows_raw.append({
-        "label": "TOTAL PASIVO Y PATRIMONIO NETO",
-        "operator": "[★]",
-        "row_type": "result",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["total_liab_and_equity"].get(p)) for p in statements_fys}
-    })
-    bs_rows_raw.append({
-        "label": "CAPITAL DE TRABAJO NETO (FONDO DE MANIOBRA / NWC)",
-        "operator": "[⚡]",
-        "row_type": "metric",
-        "indent": False,
-        "is_bold": True,
-        "data": {p: _to_m(bs_data["net_working_capital"].get(p)) for p in statements_fys}
-    })
-
-    # Posición Neta de Deuda / Caja Dinámica
     latest_nfp = bs_data["net_financial_position"].get(statements_fys[0]) if statements_fys else 0.0
     if latest_nfp is not None and latest_nfp < 0:
         nfp_label = "CAJA NETA EX-DEUDA (NET CASH)"
@@ -2640,68 +2761,382 @@ def company_detail(request, ticker):
         nfp_row_type = "net_debt"
         nfp_data = {p: 0.0 for p in statements_fys}
 
-    bs_rows_raw.append({
-        "label": nfp_label,
-        "operator": "[⚡]",
-        "row_type": nfp_row_type,
-        "indent": False,
-        "is_bold": True,
-        "data": nfp_data
-    })
+    bs_rows_raw = [
+        # 1. SECCIÓN ACTIVOS CORRIENTES
+        {
+            "label": "1. ACTIVOS CORRIENTES (CURRENT ASSETS)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Efectivo y Equivalentes de Efectivo",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["cash"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Inversiones a Corto Plazo / Valores Negociables",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["short_term_investments"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "LIQUIDEZ TOTAL INMEDIATA (Efectivo + Inversiones Corto Plazo)",
+            "operator": "[=]",
+            "row_type": "subtotal",
+            "indent": True,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_liquid_cash"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Cuentas por Cobrar Comerciales (Clientes)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["accounts_receivable"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Inventarios",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["inventories"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Otros Activos Corrientes",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["other_current_assets"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL ACTIVOS CORRIENTES",
+            "operator": "[=]",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_current_assets"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
 
-    statements_balancesheet = []
-    for r in bs_rows_raw:
-        if r["row_type"] == "section_header":
-            statements_balancesheet.append({
-                "label": r["label"],
-                "operator": "",
-                "row_type": "section_header",
-                "indent": False,
-                "is_bold": True,
-                "values": ["" for _ in statements_fys],
-                "pcts": ["" for _ in statements_fys],
-                "ltm_val": "",
-                "ltm_pct": "",
-                "annual_vals": ["" for _ in statements_fys[1:]],
-                "latest_val": "",
-                "latest_pct": ""
-            })
-            continue
+        # 2. SECCIÓN ACTIVOS NO CORRIENTES
+        {
+            "label": "2. ACTIVOS NO CORRIENTES (NON-CURRENT ASSETS)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Propiedad, Planta y Equipo (PP&E Neto)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["net_ppe"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Activos por Derecho de Uso en Arrendamiento (Operating Lease ROU)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["rou_asset"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Fondo de Comercio e Intangibles (Goodwill & Int.)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["goodwill_and_intangibles"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Inversiones a Largo Plazo / No Corrientes",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["long_term_investments"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Otros Activos No Corrientes",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["other_noncurrent_assets"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL ACTIVOS NO CORRIENTES",
+            "operator": "[=]",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_noncurrent_assets"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "ACTIVOS TOTALES (TOTAL ASSETS)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_assets"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
 
-        row_vals = []
-        row_pcts = []
-        for p in statements_fys:
-            val = r["data"].get(p)
-            tot_ast = _to_m(bs_data["total_assets"].get(p))
-            if r["row_type"] in ("net_debt", "net_cash", "metric"):
-                if val is not None:
-                    if val < 0:
-                        row_vals.append(f"-${abs(val):,.1f}M")
-                    else:
-                        row_vals.append(f"${val:,.1f}M")
-                else:
-                    row_vals.append("-")
-            else:
-                row_vals.append(_fmt_money(val))
-            if tot_ast and tot_ast != 0 and val is not None:
-                row_pcts.append(_fmt_pct(abs(val) / tot_ast * 100.0))
-            else:
-                row_pcts.append("-")
+        # 3. SECCIÓN PASIVOS CORRIENTES
+        {
+            "label": "3. PASIVOS CORRIENTES (CURRENT LIABILITIES)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Cuentas por Pagar Comerciales (Proveedores)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["accounts_payable"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Pasivos Acumulados y Gastos Devengados (Accrued Liabilities)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["accrued_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Ingresos Diferidos Corrientes (Deferred Revenue / Contract Liability)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["deferred_revenue_current"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Deuda Financiera a Corto Plazo (Vencimientos y Pagarés)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["short_term_debt"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Otros Pasivos Operativos Corrientes",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["other_current_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL PASIVOS CORRIENTES",
+            "operator": "[=]",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_current_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
 
-        statements_balancesheet.append({
-            "label": r["label"],
-            "operator": r["operator"],
-            "row_type": r["row_type"],
-            "indent": r["indent"],
-            "is_bold": r["is_bold"],
-            "values": row_vals,
-            "pcts": row_pcts,
-            "ltm_val": row_vals[0] if row_vals else "-",
-            "ltm_pct": row_pcts[0] if row_pcts else "-",
-            "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
-            "latest_val": row_vals[0] if row_vals else "-",
-            "latest_pct": row_pcts[0] if row_pcts else "-"
-        })
+        # 4. SECCIÓN PASIVOS NO CORRIENTES
+        {
+            "label": "4. PASIVOS NO CORRIENTES (NON-CURRENT LIABILITIES)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Deuda Financiera a Largo Plazo",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["long_term_debt"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Pasivos por Arrendamiento a Largo Plazo (Operating Lease Liab.)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["operating_lease_liability_noncurrent"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Impuestos Diferidos Pasivos No Corrientes (Deferred Tax Liabilities)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["deferred_tax_liabilities_noncurrent"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Otros Pasivos No Corrientes",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["other_noncurrent_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL PASIVOS NO CORRIENTES",
+            "operator": "[=]",
+            "row_type": "subtotal",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_noncurrent_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL PASIVOS (TOTAL LIABILITIES)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_liabilities"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+
+        # 5. SECCIÓN PATRIMONIO NETO
+        {
+            "label": "5. PATRIMONIO NETO (SHAREHOLDERS' EQUITY)",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "Capital Social y Prima de Emisión (Common Stock & APIC)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["common_stock_and_apic"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Ganancias Acumuladas / Resultados Retenidos",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["retained_earnings"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "Otros Resultados Integrales y Autocartera (AOCI & Treasury)",
+            "operator": "",
+            "row_type": "item",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(bs_data["other_equity"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "TOTAL PATRIMONIO NETO (EQUITY)",
+            "operator": "(=)",
+            "row_type": "net_income",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["stockholders_equity"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+
+        # 6. SECCIÓN TOTAL PASIVO + PATRIMONIO Y DIAGNÓSTICO ESTRUCTURAL
+        {
+            "label": "6. TOTAL PASIVO Y PATRIMONIO NETO & DIAGNÓSTICO",
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {}
+        },
+        {
+            "label": "TOTAL PASIVO Y PATRIMONIO NETO",
+            "operator": "[★]",
+            "row_type": "result",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["total_liab_and_equity"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": "CAPITAL DE TRABAJO NETO (FONDO DE MANIOBRA / NWC)",
+            "operator": "[⚡]",
+            "row_type": "metric",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: _to_m(bs_data["net_working_capital"].get(p)) for p in statements_fys},
+            "pct_mode": "assets"
+        },
+        {
+            "label": nfp_label,
+            "operator": "[⚡]",
+            "row_type": nfp_row_type,
+            "indent": False,
+            "is_bold": True,
+            "data": nfp_data,
+            "pct_mode": "assets"
+        },
+        {
+            "label": "VALOR CONTABLE POR ACCIÓN (Book Value per Share)",
+            "operator": "[⚡]",
+            "row_type": "eps",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: bs_data["book_value_per_share"].get(p) for p in statements_fys}
+        },
+        {
+            "label": "VALOR CONTABLE TANGIBLE POR ACCIÓN (Tangible BVPS)",
+            "operator": "[⚡]",
+            "row_type": "eps",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: bs_data["tangible_book_value_per_share"].get(p) for p in statements_fys}
+        }
+    ]
+
+    statements_balancesheet = [_build_statement_cells(r, statements_fys, canonical, bs_tot_assets=bs_tot_assets_dict) for r in bs_rows_raw]
 
     # Highlights de Cabecera
     latest_p = statements_fys[0] if statements_fys else "LTM"
