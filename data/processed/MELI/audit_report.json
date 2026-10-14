@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-10-13T17:30:58.172389",
+  "audit_timestamp": "2026-10-14T11:01:54.651566",
   "years_audited": {
     "LTM": [
       {
@@ -310,13 +310,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 482000000.0,
+        "net_income": 489000000.0,
         "shares_diluted": 51335621.0,
         "eps_reported": 9.53,
-        "eps_calculated": 9.39,
+        "eps_calculated": 9.53,
         "eps_adjusted": 9.53,
         "split_factor": 1.0,
-        "discrepancy": 0.14
+        "discrepancy": 0.0
       }
     ],
     "FY2021": [
@@ -438,13 +438,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -1000000.0,
+        "net_income": -4000000.0,
         "shares_diluted": 49740407.0,
         "eps_reported": -0.08,
-        "eps_calculated": -0.02,
+        "eps_calculated": -0.08,
         "eps_adjusted": -0.08,
         "split_factor": 1.0,
-        "discrepancy": 0.06
+        "discrepancy": 0.0
       }
     ],
     "FY2019": [
@@ -502,13 +502,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -171999000.0,
+        "net_income": -180840000.0,
         "shares_diluted": 48692906.0,
         "eps_reported": -3.71,
-        "eps_calculated": -3.53,
+        "eps_calculated": -3.71,
         "eps_adjusted": -3.71,
         "split_factor": 1.0,
-        "discrepancy": 0.18
+        "discrepancy": 0.0
       }
     ],
     "FY2018": [

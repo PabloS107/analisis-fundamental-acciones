@@ -2,7 +2,7 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-10-08T16:42:20.360154",
+  "audit_timestamp": "2026-10-14T11:01:54.676745",
   "years_audited": {
     "LTM": [
       {
@@ -11,10 +11,10 @@
         "status": "PASS",
         "assets": 82753414000.0,
         "liabilities": 69501693000.0,
-        "equity": 13249670000.0,
+        "equity": 13251721000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 82751363000.0,
-        "discrepancy_usd": 2051000.0,
+        "liabilities_plus_equity": 82753414000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 8275341.4
       },
       {
@@ -37,36 +37,34 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -3577147000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 3609997000.0,
+        "net_income": 2868892000.0,
         "shares_diluted": 4878374324.0,
         "eps_reported": 0.74,
-        "eps_calculated": 0.74,
+        "eps_calculated": 0.59,
         "eps_adjusted": 0.74,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.15
       }
     ],
     "FY2025": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "assets": 74893877000.0,
         "liabilities": 63572315000.0,
-        "equity": 11290948000.0,
+        "equity": 11321562000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 74863263000.0,
-        "discrepancy_usd": 30614000.0,
+        "liabilities_plus_equity": 74893877000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 7489387.7
       },
       {
@@ -89,23 +87,21 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -2752894000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 2871672000.0,
+        "net_income": 2868892000.0,
         "shares_diluted": 4907352000.0,
         "eps_reported": 0.5846,
-        "eps_calculated": 0.59,
+        "eps_calculated": 0.58,
         "eps_adjusted": 0.58,
         "split_factor": 1.0,
-        "discrepancy": 0.01
+        "discrepancy": 0.0
       }
     ],
     "FY2024": [
@@ -115,10 +111,10 @@
         "status": "PASS",
         "assets": 49931214000.0,
         "liabilities": 42284138000.0,
-        "equity": 7646289000.0,
+        "equity": 7647076000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 49930427000.0,
-        "discrepancy_usd": 787000.0,
+        "liabilities_plus_equity": 49931214000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 4993121.4
       },
       {
@@ -141,11 +137,9 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -2457711000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
@@ -193,11 +187,9 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -1951825000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
@@ -245,17 +237,15 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -1971891000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -364634000.0,
+        "net_income": -364578000.0,
         "shares_diluted": 4676977000.0,
         "eps_reported": -0.078,
         "eps_calculated": -0.08,
@@ -271,10 +261,10 @@
         "status": "PASS",
         "assets": 19858681000.0,
         "liabilities": 15416140000.0,
-        "equity": 4441032000.0,
+        "equity": 4442541000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 19857172000.0,
-        "discrepancy_usd": 1509000.0,
+        "liabilities_plus_equity": 19858681000.0,
+        "discrepancy_usd": 0.0,
         "tolerance_usd": 1985868.1
       },
       {
@@ -305,7 +295,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": -165334000.0,
+        "net_income": -164993000.0,
         "shares_diluted": 1602126000.0,
         "eps_reported": -0.103,
         "eps_calculated": -0.1,
@@ -353,15 +343,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "net_income": -171491000.0,
-        "shares_diluted": 405394.0,
+        "shares_diluted": 1315578000.0,
         "eps_reported": -0.1304,
-        "eps_calculated": -423.02,
-        "eps_adjusted": -0.04,
-        "split_factor": 3.0,
-        "discrepancy": 140.97
+        "eps_calculated": -0.13,
+        "eps_adjusted": -0.1304,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2019": [
@@ -391,30 +381,28 @@
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
-        "passed": false,
-        "status": "FAIL",
-        "anomalies": [
-          "Gastos operativos (OpEx) negativos: -377217000.0"
-        ]
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "net_income": -92531000.0,
-        "shares_diluted": 306210.0,
+        "shares_diluted": 1137931000.0,
         "eps_reported": -0.0813,
-        "eps_calculated": -302.18,
-        "eps_adjusted": -0.03,
-        "split_factor": 3.0,
-        "discrepancy": 100.7
+        "eps_calculated": -0.08,
+        "eps_adjusted": -0.0813,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ]
   },
-  "overall_status": "FAIL",
+  "overall_status": "PASS",
   "total_tests": 48,
-  "passed_tests": 14,
-  "failed_tests": 9,
+  "passed_tests": 23,
+  "failed_tests": 0,
   "skipped_tests": 25,
-  "compliance_score_pct": 60.9
+  "compliance_score_pct": 100.0
 }

@@ -2,7 +2,7 @@
   "ticker": "JPM",
   "company_name": "JPMORGAN CHASE & CO",
   "cik": "0000019617",
-  "audit_timestamp": "2026-10-08T16:42:20.343997",
+  "audit_timestamp": "2026-10-14T11:01:54.637148",
   "years_audited": {
     "LTM": [
       {
@@ -51,7 +51,7 @@
         "eps_calculated": 23.83,
         "eps_adjusted": 23.83,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.53
       }
     ],
     "FY2025": [
@@ -98,15 +98,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 57048000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 55681000000.0,
         "shares_diluted": 2781500000.0,
         "eps_reported": 20.02,
-        "eps_calculated": 20.51,
+        "eps_calculated": 20.02,
         "eps_adjusted": 20.02,
         "split_factor": 1.0,
-        "discrepancy": 0.49
+        "discrepancy": 0.0
       }
     ],
     "FY2024": [
@@ -153,15 +153,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 58471000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 56868000000.0,
         "shares_diluted": 2879000000.0,
         "eps_reported": 19.75,
-        "eps_calculated": 20.31,
+        "eps_calculated": 19.75,
         "eps_adjusted": 19.75,
         "split_factor": 1.0,
-        "discrepancy": 0.56
+        "discrepancy": 0.0
       }
     ],
     "FY2023": [
@@ -208,15 +208,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 49552000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 47760000000.0,
         "shares_diluted": 2943100000.0,
         "eps_reported": 16.23,
-        "eps_calculated": 16.84,
+        "eps_calculated": 16.23,
         "eps_adjusted": 16.23,
         "split_factor": 1.0,
-        "discrepancy": 0.61
+        "discrepancy": 0.0
       }
     ],
     "FY2022": [
@@ -263,15 +263,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 37676000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 35892000000.0,
         "shares_diluted": 2970000000.0,
         "eps_reported": 12.09,
-        "eps_calculated": 12.69,
+        "eps_calculated": 12.08,
         "eps_adjusted": 12.09,
         "split_factor": 1.0,
-        "discrepancy": 0.6
+        "discrepancy": 0.01
       }
     ],
     "FY2021": [
@@ -318,15 +318,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 48334000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 46503000000.0,
         "shares_diluted": 3026600000.0,
         "eps_reported": 15.36,
-        "eps_calculated": 15.97,
+        "eps_calculated": 15.36,
         "eps_adjusted": 15.36,
         "split_factor": 1.0,
-        "discrepancy": 0.61
+        "discrepancy": 0.0
       }
     ],
     "FY2020": [
@@ -373,15 +373,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 29131000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 27410000000.0,
         "shares_diluted": 3087400000.0,
         "eps_reported": 8.88,
-        "eps_calculated": 9.44,
+        "eps_calculated": 8.88,
         "eps_adjusted": 8.88,
         "split_factor": 1.0,
-        "discrepancy": 0.56
+        "discrepancy": 0.0
       }
     ],
     "FY2019": [
@@ -428,15 +428,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 36431000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 34642000000.0,
         "shares_diluted": 3230400000.0,
         "eps_reported": 10.72,
-        "eps_calculated": 11.28,
+        "eps_calculated": 10.72,
         "eps_adjusted": 10.72,
         "split_factor": 1.0,
-        "discrepancy": 0.56
+        "discrepancy": 0.0
       }
     ],
     "FY2018": [
@@ -483,15 +483,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 32474000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 30709000000.0,
         "shares_diluted": 3414000000.0,
         "eps_reported": 9.0,
-        "eps_calculated": 9.51,
+        "eps_calculated": 9.0,
         "eps_adjusted": 9.0,
         "split_factor": 1.0,
-        "discrepancy": 0.51
+        "discrepancy": 0.0
       }
     ],
     "FY2017": [
@@ -538,15 +538,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 24441000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 22567000000.0,
         "shares_diluted": 3576800000.0,
         "eps_reported": 6.31,
-        "eps_calculated": 6.83,
+        "eps_calculated": 6.31,
         "eps_adjusted": 6.31,
         "split_factor": 1.0,
-        "discrepancy": 0.52
+        "discrepancy": 0.0
       }
     ],
     "FY2016": [
@@ -593,15 +593,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 24733000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 22834000000.0,
         "shares_diluted": 3690000000.0,
         "eps_reported": 6.19,
-        "eps_calculated": 6.7,
+        "eps_calculated": 6.19,
         "eps_adjusted": 6.19,
         "split_factor": 1.0,
-        "discrepancy": 0.51
+        "discrepancy": 0.0
       }
     ],
     "FY2015": [
@@ -648,15 +648,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 24442000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 22651000000.0,
         "shares_diluted": 3773600000.0,
         "eps_reported": 6.0,
-        "eps_calculated": 6.48,
+        "eps_calculated": 6.0,
         "eps_adjusted": 6.0,
         "split_factor": 1.0,
-        "discrepancy": 0.48
+        "discrepancy": 0.0
       }
     ],
     "FY2014": [
@@ -697,22 +697,22 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 21745000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 20077000000.0,
         "shares_diluted": 3797500000.0,
         "eps_reported": 5.29,
-        "eps_calculated": 5.73,
+        "eps_calculated": 5.29,
         "eps_adjusted": 5.29,
         "split_factor": 1.0,
-        "discrepancy": 0.44
+        "discrepancy": 0.0
       }
     ]
   },
-  "overall_status": "FAIL",
+  "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 38,
-  "failed_tests": 12,
+  "passed_tests": 50,
+  "failed_tests": 0,
   "skipped_tests": 28,
-  "compliance_score_pct": 76.0
+  "compliance_score_pct": 100.0
 }

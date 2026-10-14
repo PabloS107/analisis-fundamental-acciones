@@ -1,6 +1,6 @@
 # DECKERS OUTDOOR CORPORATION (NYSE: DECK)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q1 FY2027 & Gobernanza Corporativa
-*Fecha de Emisión: 13 de Septiembre de 2026 | CIK SEC: 0000910521*  
+*Fecha de Emisión: 14 de Septiembre de 2026 | CIK SEC: 0000910521*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript*
 
 ---

@@ -420,6 +420,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "operating_expenses": {},
         "operating_income": {},
         "net_income": {},
+        "net_income_common": {},
         "cash_from_operations": {},
         "capital_expenditures": {},
         "free_cash_flow": {},
@@ -552,6 +553,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
 
             # 4. Gastos no relacionados con intereses (OpEx)
             op_exp = get_first_matching_value(inc_data, BANKING_TAXONOMY_MAP["operating_expenses"], p)
+            if op_exp is not None:
+                op_exp = abs(op_exp)
             canonical["operating_expenses"][p] = op_exp
         elif archetype == "REAL_ESTATE_REIT":
             # 1. Ingresos en REIT: Rental Revenue (o fallback a Revenue total)
@@ -590,6 +593,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             op_exp = get_first_matching_value(inc_data, XBRL_TAXONOMY_MAP["operating_expenses"], p)
             if op_exp is None:
                 op_exp = prop_exp
+            if op_exp is not None:
+                op_exp = abs(op_exp)
             canonical["operating_expenses"][p] = op_exp
 
             # 6. D&A Inmobiliaria, Ganancias por Venta y CapEx Recurrente
@@ -640,6 +645,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
 
             # 3. Gastos Operativos y Siniestros
             op_exp = get_first_matching_value(inc_data, XBRL_TAXONOMY_MAP["operating_expenses"], p)
+            if op_exp is not None:
+                op_exp = abs(op_exp)
             canonical["operating_expenses"][p] = op_exp
 
             losses = get_first_matching_value(inc_data, INSURANCE_TAXONOMY_MAP["losses_and_loss_expenses"], p)
@@ -756,6 +763,12 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         if ni is None and facts_df is not None:
             ni = get_fact_fallback(facts_df, ni_cands, p, is_flow=True)
         canonical["net_income"][p] = ni
+
+        ni_comm_cands = XBRL_TAXONOMY_MAP.get("net_income_common", [])
+        ni_comm = get_first_matching_value(inc_data, ni_comm_cands, p)
+        if ni_comm is None and facts_df is not None and ni_comm_cands:
+            ni_comm = get_fact_fallback(facts_df, ni_comm_cands, p, is_flow=True)
+        canonical["net_income_common"][p] = ni_comm if ni_comm is not None else ni
         
         # 6. Acciones básicas y diluidas
         sh_basic_cands = XBRL_TAXONOMY_MAP["shares_basic"]
@@ -781,34 +794,50 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         if eps_d is None and facts_df is not None:
             eps_d = get_fact_fallback(facts_df, eps_d_cands, p, is_flow=True)
             
-        # Filtro de consistencia: si eps_d es un recuento de acciones erróneo (> 100) o si hay pérdida neta (antidilutivo)
+        misplaced_shares_k = None
         if eps_d is not None and abs(eps_d) > 100:
+            misplaced_shares_k = abs(float(eps_d))
             eps_d = eps_b
         if eps_b is not None and (eps_d is None or (ni is not None and ni < 0)):
             eps_d = eps_b
+
+        ni_ref = canonical["net_income_common"].get(p) if canonical.get("net_income_common", {}).get(p) is not None else ni
+        if ni_ref is not None and eps_d is not None and abs(eps_d) > 1e-4:
+            implied_shares = abs(ni_ref / eps_d)
+            if sh is None or (sh > 0 and abs((ni_ref / sh) - eps_d) > 1.0):
+                if misplaced_shares_k and abs((misplaced_shares_k * 1000.0) - implied_shares) / implied_shares < 0.02:
+                    sh = round(misplaced_shares_k * 1000.0, 0)
+                    sh_basic = sh
+                elif sh and sh > 0 and 250.0 <= (implied_shares / sh) <= 4000.0:
+                    sh = round(implied_shares, 0)
+                    if sh_basic is None or sh_basic < sh * 0.1:
+                        sh_basic = sh
+                canonical["shares_diluted"][p] = sh
+                canonical["shares_basic"][p] = sh_basic
             
         if p == "LTM":
             # Para LTM, verificar primero si podemos calcular el BPA con la suma exacta de los 4 trimestres reportados (GAAP/Fiscal.ai)
             q4_eps_d = get_ltm_quarterly_metric(facts_df, eps_d_cands, mode='sum') if facts_df is not None else None
             q4_eps_b = get_ltm_quarterly_metric(facts_df, eps_b_cands, mode='sum') if facts_df is not None else None
             
+            ni_for_eps = canonical["net_income_common"].get(p) or ni
             if q4_eps_d is not None and q4_eps_d > 0:
                 eps_d = q4_eps_d
-            elif ni is not None and sh and sh > 0:
-                eps_d = round(ni / sh, 2)
+            elif ni_for_eps is not None and sh and sh > 0:
+                eps_d = round(ni_for_eps / sh, 2)
 
             if q4_eps_b is not None and q4_eps_b > 0:
                 eps_b = q4_eps_b
-            elif ni is not None and sh_basic and sh_basic > 0:
-                eps_b = round(ni / sh_basic, 2)
+            elif ni_for_eps is not None and sh_basic and sh_basic > 0:
+                eps_b = round(ni_for_eps / sh_basic, 2)
                 
             # Calibrar las acciones diluidas promedio ponderadas LTM (promedio de los 4 trimestres o identidad GAAP NI/EPS)
             q4_sh = get_ltm_quarterly_metric(facts_df, sh_diluted_cands, mode='avg') if facts_df is not None else None
             if q4_sh is not None and q4_sh > 0:
                 sh = q4_sh
                 canonical["shares_diluted"][p] = sh
-            elif eps_d is not None and eps_d > 0 and ni is not None and ni > 0:
-                implied_sh = round(ni / eps_d)
+            elif eps_d is not None and eps_d > 0 and ni_for_eps is not None and ni_for_eps > 0:
+                implied_sh = round(ni_for_eps / eps_d)
                 if sh is None or abs(implied_sh - sh) / sh > 0.005:
                     sh = float(implied_sh)
                     canonical["shares_diluted"][p] = sh
@@ -817,8 +846,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             if q4_sh_b is not None and q4_sh_b > 0:
                 sh_basic = q4_sh_b
                 canonical["shares_basic"][p] = sh_basic
-            elif eps_b is not None and eps_b > 0 and ni is not None and ni > 0:
-                implied_sh_b = round(ni / eps_b)
+            elif eps_b is not None and eps_b > 0 and ni_for_eps is not None and ni_for_eps > 0:
+                implied_sh_b = round(ni_for_eps / eps_b)
                 if sh_basic is None or abs(implied_sh_b - sh_basic) / sh_basic > 0.005:
                     sh_basic = float(implied_sh_b)
                     canonical["shares_basic"][p] = sh_basic

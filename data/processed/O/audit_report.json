@@ -2,7 +2,7 @@
   "ticker": "O",
   "company_name": "REALTY INCOME CORP",
   "cik": "0000726728",
-  "audit_timestamp": "2026-10-13T17:30:58.191953",
+  "audit_timestamp": "2026-10-14T11:01:54.700507",
   "years_audited": {
     "LTM": [
       {
@@ -55,7 +55,7 @@
         "eps_calculated": 1.14,
         "eps_adjusted": 1.14,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.23
       }
     ],
     "FY2025": [
@@ -167,13 +167,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 860772000.0,
+        "net_income": 847893000.0,
         "shares_diluted": 863792000.0,
         "eps_reported": 0.98,
-        "eps_calculated": 1.0,
+        "eps_calculated": 0.98,
         "eps_adjusted": 0.98,
         "split_factor": 1.0,
-        "discrepancy": 0.02
+        "discrepancy": 0.0
       }
     ],
     "FY2023": [

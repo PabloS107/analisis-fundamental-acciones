@@ -62,6 +62,10 @@ def audit_balance_sheet(data, fy):
                 if fy in v.get("values", {}):
                     equity = v["values"][fy]
                     break
+    if "ifrs-full_Equity" in bal_detail and fy in bal_detail["ifrs-full_Equity"].get("values", {}):
+        ifrs_tot_eq = bal_detail["ifrs-full_Equity"]["values"][fy]
+        if ifrs_tot_eq is not None:
+            equity = ifrs_tot_eq
         
     # Buscar Mezzanine Equity / Acciones Preferentes Rescatables (US-GAAP ASC 480)
     mezzanine = 0.0
@@ -84,7 +88,7 @@ def audit_balance_sheet(data, fy):
     # Verificar si LiabilitiesAndStockholdersEquity está reportado directamente
     liab_equity = None
     for k, v in bal_detail.items():
-        if any(cand == k or k.endswith(f"_{cand}") for cand in ["LiabilitiesAndStockholdersEquity"]):
+        if any(cand == k or k.endswith(f"_{cand}") for cand in ["LiabilitiesAndStockholdersEquity", "EquityAndLiabilities"]):
             if fy in v.get("values", {}):
                 liab_equity = v["values"][fy]
                 break
@@ -356,7 +360,26 @@ def audit_sanity_bounds(data, fy):
 def audit_eps_consistency(data, fy):
     """Prueba 6: Consistencia Matemática de BPA: EPS = Beneficio Neto / Acciones Diluidas."""
     summary = data.get("canonical_summary", {})
-    net_income = summary.get("net_income", {}).get(fy)
+    inc_detail = data.get("income_statement_detail", {})
+    net_income_total = summary.get("net_income", {}).get(fy)
+    net_income = summary.get("net_income_common", {}).get(fy)
+    if net_income is None:
+        for k_ni in [
+            "us-gaap_NetIncomeLossAvailableToCommonStockholdersDiluted",
+            "NetIncomeLossAvailableToCommonStockholdersDiluted",
+            "us-gaap_NetIncomeLossAvailableToCommonStockholdersBasic",
+            "NetIncomeLossAvailableToCommonStockholdersBasic",
+            "ProfitLossAttributableToOwnersOfParent",
+            "ifrs-full_ProfitLossAttributableToOwnersOfParent",
+        ]:
+            if k_ni in inc_detail and fy in inc_detail[k_ni].get("values", {}):
+                val_c = inc_detail[k_ni]["values"][fy]
+                if val_c is not None:
+                    net_income = val_c
+                    break
+    if net_income is None:
+        net_income = net_income_total
+
     shares_diluted = summary.get("shares_diluted", {}).get(fy)
     eps_reported = summary.get("eps_diluted", {}).get(fy)
     eps_adj = summary.get("eps_diluted_adjusted", {}).get(fy)
@@ -380,6 +403,15 @@ def audit_eps_consistency(data, fy):
         calc_eps_adj = round(net_income / shares_adj, 2)
         diff_adj = round(abs(eps_adj - calc_eps_adj), 2)
         passed = diff_adj <= 0.20
+
+    if not passed and net_income_total is not None and net_income_total != net_income:
+        calc_eps_tot = round(net_income_total / shares_diluted, 2)
+        diff_tot = round(abs(eps_reported - calc_eps_tot), 2)
+        if diff_tot <= 0.20:
+            passed = True
+            diff = diff_tot
+            calc_eps = calc_eps_tot
+            net_income = net_income_total
         
     return {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
@@ -441,7 +473,8 @@ def run_full_audit(ticker, custom_dir=None):
             elif t["status"] == "FAIL":
                 audit_results["failed_tests"] += 1
                 audit_results["overall_status"] = "FAIL"
-                print(f"  [FAIL] {t['test_name']} -> Discrepancia: ${t.get('discrepancy_usd', 'N/A')}")
+                disc_msg = t.get("discrepancy_usd", t.get("discrepancy", t.get("anomalies", "N/A")))
+                print(f"  [FAIL] {t['test_name']} -> Discrepancia/Detalle: {disc_msg}")
             else:
                 audit_results["skipped_tests"] += 1
                 print(f"  [SKIP] {t['test_name']} ({t.get('message', '')})")

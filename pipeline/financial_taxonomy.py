@@ -124,6 +124,17 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "ProfitLossAttributableToOwnersOfParent",
         "ProfitLossFromContinuingOperations",
     ],
+    "net_income_common": [
+        "NetIncomeLossAvailableToCommonStockholdersDiluted",
+        "us-gaap_NetIncomeLossAvailableToCommonStockholdersDiluted",
+        "NetIncomeLossAvailableToCommonStockholdersBasic",
+        "us-gaap_NetIncomeLossAvailableToCommonStockholdersBasic",
+        "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+        "ifrs-full_ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+        "ifrs-full_ProfitLossFromContinuingOperationsAttributableToOrdinaryEquityHoldersOfParentEntity",
+        "ProfitLossAttributableToOwnersOfParent",
+        "ifrs-full_ProfitLossAttributableToOwnersOfParent",
+    ],
     "shares_basic": [
         "WeightedAverageNumberOfSharesOutstandingBasic",
         "CommonStockSharesOutstanding",

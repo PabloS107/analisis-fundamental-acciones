@@ -2,7 +2,7 @@
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
   "cik": "0001326801",
-  "audit_timestamp": "2026-10-13T17:29:35.534921",
+  "audit_timestamp": "2026-10-14T11:01:54.667464",
   "years_audited": {
     "LTM": [
       {
@@ -566,7 +566,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 22112000000.0,
+        "net_income": 22111000000.0,
         "shares_diluted": 2921000000.0,
         "eps_reported": 7.57,
         "eps_calculated": 7.57,
@@ -630,7 +630,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 15934000000.0,
+        "net_income": 15920000000.0,
         "shares_diluted": 2956000000.0,
         "eps_reported": 5.39,
         "eps_calculated": 5.39,
@@ -694,13 +694,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 10217000000.0,
+        "net_income": 10188000000.0,
         "shares_diluted": 2925000000.0,
         "eps_reported": 3.49,
-        "eps_calculated": 3.49,
+        "eps_calculated": 3.48,
         "eps_adjusted": 3.49,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.01
       }
     ],
     "FY2015": [
@@ -758,7 +758,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 3688000000.0,
+        "net_income": 3669000000.0,
         "shares_diluted": 2853000000.0,
         "eps_reported": 1.29,
         "eps_calculated": 1.29,
@@ -822,7 +822,7 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 2940000000.0,
+        "net_income": 2925000000.0,
         "shares_diluted": 2664000000.0,
         "eps_reported": 1.1,
         "eps_calculated": 1.1,

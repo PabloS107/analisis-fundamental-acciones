@@ -3195,8 +3195,8 @@
     },
     "roic_wacc": {
       "model_type": "WACC",
-      "wacc": 0.10213904517836932,
-      "ke": 0.1032125,
+      "wacc": 0.10312278039844161,
+      "ke": 0.1042125,
       "kd_after_tax": 0.03721376983567021,
       "we": 0.9837352200722969,
       "wd": 0.016264779927703175,
@@ -3204,8 +3204,8 @@
       "roic_adjusted": 0.5271515777749817,
       "rotce": null,
       "roe": null,
-      "economic_spread_adjusted": 0.42501253259661237,
-      "spread": 0.42501253259661237,
+      "economic_spread_adjusted": 0.4240287973765401,
+      "spread": 0.4240287973765401,
       "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
       "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
       "total_intangibles_usd_m": 79597.75,
@@ -4766,14 +4766,14 @@
     "archetype": "STANDARD_CORPORATE",
     "market_data": {
       "ticker": "AAPL",
-      "timestamp": "2026-10-13T20:11:57.255096+00:00",
-      "timestamp_epoch": 1791922322.9554653,
+      "timestamp": "2026-10-14T13:23:22.508220+00:00",
+      "timestamp_epoch": 1791984214.2804258,
       "is_offline": false,
       "from_cache": true,
       "price": 341.27,
       "market_cap_usd_m": 4980555.81,
       "diluted_shares": 14594180000,
-      "rf_10y": 0.05215,
+      "rf_10y": 0.05315,
       "beta": 1.075,
       "erp": 0.0475,
       "raw_sources": {
@@ -4782,7 +4782,7 @@
           "price": 341.2699890136719,
           "market_cap": 4980555648263.55,
           "beta": 1.069,
-          "rf_10y": 0.052170000076293944,
+          "rf_10y": 0.053189997673034665,
           "shares_outstanding": 14594180000,
           "success": true
         },
@@ -4791,7 +4791,7 @@
           "price": 341.27,
           "market_cap": null,
           "beta": 1.08,
-          "rf_10y": 0.05213,
+          "rf_10y": 0.05312,
           "shares_outstanding": 14590000000.0,
           "success": true
         }
@@ -4802,10 +4802,10 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.215% (Yahoo ^TNX: 5.217%, CNBC US10Y: 5.213%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
+        "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.315% (Yahoo ^TNX: 5.319%, CNBC US10Y: 5.312%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
       }
     },
-    "cost_of_equity_ke": 0.1032125,
+    "cost_of_equity_ke": 0.1042125,
     "cost_of_debt_kd_pre_tax": 0.045,
     "cost_of_debt_kd_after_tax": 0.03721376983567021,
     "effective_tax_rate": 0.17302733698510642,
@@ -4815,21 +4815,21 @@
     "weight_equity": 0.9837352200722969,
     "weight_debt": 0.016264779927703175,
     "is_debt_free": false,
-    "wacc": 0.10213904517836932,
-    "hurdle_rate": 0.10213904517836932,
+    "wacc": 0.10312278039844161,
+    "hurdle_rate": 0.10312278039844161,
     "sector_wacc_benchmark": 0.088,
     "roic_traditional": 0.6822283820473294,
     "roic_adjusted": 0.5271515777749817,
-    "economic_spread_traditional": 0.58008933686896,
-    "economic_spread_adjusted": 0.42501253259661237,
-    "spread": 0.42501253259661237,
+    "economic_spread_traditional": 0.5791056016488878,
+    "economic_spread_adjusted": 0.4240287973765401,
+    "spread": 0.4240287973765401,
     "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
     "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 10.32%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.21%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "ke_capm": "Costo del Equity (Ke) = 10.42%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.32%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
       "kd_debt": "Costo de la Deuda Neto = 3.72% (Tasa antes de impuestos 4.50% con escudo fiscal del 17.3%).",
-      "wacc": "WACC = 10.21%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.21%) por m\u00e1s de 42.50 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+      "wacc": "WACC = 10.31%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.31%) por m\u00e1s de 42.40 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
     }
   },
   "wacc_and_spread_analysis": {
@@ -4838,14 +4838,14 @@
     "archetype": "STANDARD_CORPORATE",
     "market_data": {
       "ticker": "AAPL",
-      "timestamp": "2026-10-13T20:11:57.255096+00:00",
-      "timestamp_epoch": 1791922322.9554653,
+      "timestamp": "2026-10-14T13:23:22.508220+00:00",
+      "timestamp_epoch": 1791984214.2804258,
       "is_offline": false,
       "from_cache": true,
       "price": 341.27,
       "market_cap_usd_m": 4980555.81,
       "diluted_shares": 14594180000,
-      "rf_10y": 0.05215,
+      "rf_10y": 0.05315,
       "beta": 1.075,
       "erp": 0.0475,
       "raw_sources": {
@@ -4854,7 +4854,7 @@
           "price": 341.2699890136719,
           "market_cap": 4980555648263.55,
           "beta": 1.069,
-          "rf_10y": 0.052170000076293944,
+          "rf_10y": 0.053189997673034665,
           "shares_outstanding": 14594180000,
           "success": true
         },
@@ -4863,7 +4863,7 @@
           "price": 341.27,
           "market_cap": null,
           "beta": 1.08,
-          "rf_10y": 0.05213,
+          "rf_10y": 0.05312,
           "shares_outstanding": 14590000000.0,
           "success": true
         }
@@ -4874,10 +4874,10 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.215% (Yahoo ^TNX: 5.217%, CNBC US10Y: 5.213%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
+        "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.315% (Yahoo ^TNX: 5.319%, CNBC US10Y: 5.312%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
       }
     },
-    "cost_of_equity_ke": 0.1032125,
+    "cost_of_equity_ke": 0.1042125,
     "cost_of_debt_kd_pre_tax": 0.045,
     "cost_of_debt_kd_after_tax": 0.03721376983567021,
     "effective_tax_rate": 0.17302733698510642,
@@ -4887,21 +4887,21 @@
     "weight_equity": 0.9837352200722969,
     "weight_debt": 0.016264779927703175,
     "is_debt_free": false,
-    "wacc": 0.10213904517836932,
-    "hurdle_rate": 0.10213904517836932,
+    "wacc": 0.10312278039844161,
+    "hurdle_rate": 0.10312278039844161,
     "sector_wacc_benchmark": 0.088,
     "roic_traditional": 0.6822283820473294,
     "roic_adjusted": 0.5271515777749817,
-    "economic_spread_traditional": 0.58008933686896,
-    "economic_spread_adjusted": 0.42501253259661237,
-    "spread": 0.42501253259661237,
+    "economic_spread_traditional": 0.5791056016488878,
+    "economic_spread_adjusted": 0.4240287973765401,
+    "spread": 0.4240287973765401,
     "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
     "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 10.32%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.21%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "ke_capm": "Costo del Equity (Ke) = 10.42%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.32%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
       "kd_debt": "Costo de la Deuda Neto = 3.72% (Tasa antes de impuestos 4.50% con escudo fiscal del 17.3%).",
-      "wacc": "WACC = 10.21%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.21%) por m\u00e1s de 42.50 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+      "wacc": "WACC = 10.31%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.31%) por m\u00e1s de 42.40 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
     }
   },
   "roic_wacc_analysis": {
@@ -5321,14 +5321,14 @@
       "archetype": "STANDARD_CORPORATE",
       "market_data": {
         "ticker": "AAPL",
-        "timestamp": "2026-10-13T20:11:57.255096+00:00",
-        "timestamp_epoch": 1791922322.9554653,
+        "timestamp": "2026-10-14T13:23:22.508220+00:00",
+        "timestamp_epoch": 1791984214.2804258,
         "is_offline": false,
         "from_cache": true,
         "price": 341.27,
         "market_cap_usd_m": 4980555.81,
         "diluted_shares": 14594180000,
-        "rf_10y": 0.05215,
+        "rf_10y": 0.05315,
         "beta": 1.075,
         "erp": 0.0475,
         "raw_sources": {
@@ -5337,7 +5337,7 @@
             "price": 341.2699890136719,
             "market_cap": 4980555648263.55,
             "beta": 1.069,
-            "rf_10y": 0.052170000076293944,
+            "rf_10y": 0.053189997673034665,
             "shares_outstanding": 14594180000,
             "success": true
           },
@@ -5346,7 +5346,7 @@
             "price": 341.27,
             "market_cap": null,
             "beta": 1.08,
-            "rf_10y": 0.05213,
+            "rf_10y": 0.05312,
             "shares_outstanding": 14590000000.0,
             "success": true
           }
@@ -5357,10 +5357,10 @@
             "Yahoo Finance",
             "CNBC Quote Service"
           ],
-          "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.215% (Yahoo ^TNX: 5.217%, CNBC US10Y: 5.213%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
+          "notes": "Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, \u0394=0.00%) | Market Cap calculado: $4,980,555.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.315% (Yahoo ^TNX: 5.319%, CNBC US10Y: 5.312%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
         }
       },
-      "cost_of_equity_ke": 0.1032125,
+      "cost_of_equity_ke": 0.1042125,
       "cost_of_debt_kd_pre_tax": 0.045,
       "cost_of_debt_kd_after_tax": 0.03721376983567021,
       "effective_tax_rate": 0.17302733698510642,
@@ -5370,21 +5370,21 @@
       "weight_equity": 0.9837352200722969,
       "weight_debt": 0.016264779927703175,
       "is_debt_free": false,
-      "wacc": 0.10213904517836932,
-      "hurdle_rate": 0.10213904517836932,
+      "wacc": 0.10312278039844161,
+      "hurdle_rate": 0.10312278039844161,
       "sector_wacc_benchmark": 0.088,
       "roic_traditional": 0.6822283820473294,
       "roic_adjusted": 0.5271515777749817,
-      "economic_spread_traditional": 0.58008933686896,
-      "economic_spread_adjusted": 0.42501253259661237,
-      "spread": 0.42501253259661237,
+      "economic_spread_traditional": 0.5791056016488878,
+      "economic_spread_adjusted": 0.4240287973765401,
+      "spread": 0.4240287973765401,
       "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
       "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
       "explanations": {
-        "ke_capm": "Costo del Equity (Ke) = 10.32%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.21%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
+        "ke_capm": "Costo del Equity (Ke) = 10.42%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.32%) + Beta (1.07) \u00d7 Prima de Riesgo ERP (4.75%).",
         "kd_debt": "Costo de la Deuda Neto = 3.72% (Tasa antes de impuestos 4.50% con escudo fiscal del 17.3%).",
-        "wacc": "WACC = 10.21%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
-        "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.21%) por m\u00e1s de 42.50 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+        "wacc": "WACC = 10.31%: Tasa de corte u obst\u00e1culo financiero global. Pondera 98.4% de Equity y 1.6% de Deuda a valores de mercado. Frente a la mediana del sector (8.80%), su costo de financiamiento es ligeramente superior.",
+        "economic_spread": "El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.31%) por m\u00e1s de 42.40 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
       }
     }
   },
