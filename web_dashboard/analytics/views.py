@@ -631,7 +631,21 @@ def resolve_canonical_balance_sheet(fs, periods):
         rou_v = _extract_val(rou_keys, p, "operating_lease_rou_asset")
         gw_v = _extract_val(gw_keys, p)
         int_v = _extract_val(intang_keys, p)
-        gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
+        if gw_v is not None and int_v is not None and gw_v == int_v:
+            gw_int_v = gw_v
+        else:
+            gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
+
+        # Si en LTM aparece un gw_int_v > 0 pero en el último año fiscal cerrado Goodwill e Intangibles son ambos None o 0
+        # (y no hubo M&A mayor a $5B en LTM), forzar gw_int_v = None para evitar contaminación de notas (caso AAPL)
+        if p == "LTM" and gw_int_v and len(periods) > 1:
+            prev_p = periods[1]
+            prev_gw = _extract_val(gw_keys, prev_p)
+            prev_int = _extract_val(intang_keys, prev_p)
+            ltm_ma = _extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
+            if (not prev_gw or prev_gw == 0.0) and (not prev_int or prev_int == 0.0) and (abs(ltm_ma) < 5000.0):
+                gw_int_v = None
+
         lt_inv_v = _extract_val(lt_inv_keys, p)
         eq_method = _extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
         non_mkt_eq = _extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount", "NonmarketableEquitySecuritiesCarryingValue", "meta_NonmarketableEquitySecuritiesCarryingValue"], p)
@@ -644,13 +658,21 @@ def resolve_canonical_balance_sheet(fs, periods):
         tot_nca = max(0.0, round((tot_ast or 0.0) - (tot_ca or 0.0), 1)) if tot_ast is not None else None
         
         other_nca_rep = _extract_val(other_nca_keys, p)
-        if other_nca_rep is not None:
-            other_nca = other_nca_rep
+        if tot_nca is not None:
+            sum_known_nca = (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0)
+            other_nca = max(0.0, round(tot_nca - sum_known_nca, 1))
         else:
-            other_nca = max(0.0, round((tot_nca or 0.0) - ((ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0)), 1)) if tot_nca is not None else None
+            other_nca = other_nca_rep
 
         ap_v = _extract_val(ap_keys, p)
         accrued_v = _extract_val(accrued_keys, p, "accrued_liabilities")
+        if accrued_v is None or accrued_v == 0.0:
+            emp_acc = _extract_val(["EmployeeRelatedLiabilitiesCurrent", "us-gaap_EmployeeRelatedLiabilitiesCurrent"], p) or 0.0
+            oth_acc = _extract_val(["OtherAccruedLiabilitiesCurrent", "us-gaap_OtherAccruedLiabilitiesCurrent"], p) or 0.0
+            tax_acc = _extract_val(["AccruedIncomeTaxesCurrent", "us-gaap_AccruedIncomeTaxesCurrent"], p) or 0.0
+            sub_acc = emp_acc + oth_acc + tax_acc
+            if sub_acc > 0:
+                accrued_v = round(sub_acc, 1)
         
         tot_debt = _extract_val(tot_debt_keys, p, "total_debt")
         st_debt_v = _extract_val(st_debt_keys, p, "short_term_debt")
@@ -688,6 +710,14 @@ def resolve_canonical_balance_sheet(fs, periods):
             if v_cs is not None or v_apic is not None:
                 apic_v = round((v_cs or 0.0) + (v_apic or 0.0), 1)
         re_v = _extract_val(re_keys, p)
+        aoci_v = _extract_val(["AccumulatedOtherComprehensiveIncomeLossNetOfTax", "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax", "AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesNetOfTax"], p)
+        treas_v = _extract_val(["TreasuryStockValue", "TreasuryStockCommonValue", "us-gaap_TreasuryStockValue"], p)
+
+        if (apic_v is None or apic_v == 0.0) and eq_v is not None and re_v is not None:
+            derived_apic = round(eq_v - re_v - (aoci_v or 0.0) + abs(treas_v or 0.0), 1)
+            if derived_apic > 0:
+                apic_v = derived_apic
+
         other_eq_v = round((eq_v or 0.0) - ((apic_v or 0.0) + (re_v or 0.0)), 1) if eq_v is not None else None
 
         tot_liab_eq = round((tot_liab or 0.0) + (eq_v or 0.0), 1) if (tot_liab is not None or eq_v is not None) else None
@@ -2068,16 +2098,116 @@ def company_detail(request, ticker):
 
         cont_ops_dict[p] = round(ebt_v - (tax_v or 0.0), 1) if (ebt_v is not None and tax_v is not None) else ni_v
 
-    other_opex_dict = {}
+    # -------------------------------------------------------------
+    # 1. ESTADO DE RESULTADOS CONSOLIDADO (INCOME STATEMENT)
+    # -------------------------------------------------------------
+    gp_m = {}
+    ebit_m = {}
+    tot_opex_m = {}
+    rd_m = {}
+    sga_cons_m = {}
+    sm_m = {}
+    ga_m = {}
+
+    count_sga_cons = 0
+    count_sm_ga = 0
+
     for p in statements_fys:
-        opex_v = _to_m(canonical.get("operating_expenses", {}).get(p))
-        rd_v = _to_m(canonical.get("rd_expense", {}).get(p)) or 0.0
-        sga_v = _to_m(canonical.get("sga_expense", {}).get(p)) or 0.0
-        if opex_v is not None:
-            diff_op = round(opex_v - (rd_v + sga_v), 1)
-            other_opex_dict[p] = max(0.0, diff_op) if diff_op > 0 else 0.0
+        gp_v = _to_m(canonical.get("gross_profit", {}).get(p) or _num(inc_det, "GrossProfit", p))
+        ebit_v = _to_m(canonical.get("operating_income", {}).get(p) or _num(inc_det, "OperatingIncomeLoss", p))
+        gp_m[p] = gp_v
+        ebit_m[p] = ebit_v
+
+        if gp_v is not None and ebit_v is not None and gp_v >= ebit_v:
+            tot_op = round(gp_v - ebit_v, 1)
         else:
-            other_opex_dict[p] = None
+            tot_op = _to_m(canonical.get("operating_expenses", {}).get(p) or _num(inc_det, "OperatingExpenses", p))
+        tot_opex_m[p] = tot_op
+
+        rd_v = _to_m(canonical.get("rd_expense", {}).get(p) or _num(inc_det, "ResearchAndDevelopmentExpense", p))
+        rd_m[p] = rd_v
+
+        sga_v = _to_m(_num(inc_det, "SellingGeneralAndAdministrativeExpense", p) or canonical.get("sga_expense", {}).get(p))
+        sga_cons_m[p] = sga_v
+        if sga_v is not None and sga_v > 0:
+            count_sga_cons += 1
+
+        sm_v = _to_m(canonical.get("sm_expense", {}).get(p) or _num(inc_det, "SellingAndMarketingExpense", p) or _num(inc_det, "MarketingAndAdvertisingExpense", p))
+        ga_v = _to_m(canonical.get("ga_expense", {}).get(p) or _num(inc_det, "GeneralAndAdministrativeExpense", p))
+        sm_m[p] = sm_v
+        ga_m[p] = ga_v
+        if sm_v is not None and ga_v is not None and (sm_v > 0 or ga_v > 0):
+            count_sm_ga += 1
+
+    # Regla de decisión para separar S&M y G&A vs mostrar SG&A Consolidado
+    use_split_sm_ga = (count_sm_ga >= count_sga_cons and count_sm_ga >= max(1, len(statements_fys) // 2))
+
+    # Reconciliación vertical de gastos operativos
+    sga_display_m = {}
+    other_opex_dict = {}
+    is_sga_ex_rd = False
+
+    for p in statements_fys:
+        tot_op = tot_opex_m.get(p)
+        rd_v = rd_m.get(p)
+        sga_v = sga_cons_m.get(p)
+
+        if not use_split_sm_ga:
+            if sga_v is not None and tot_op is not None and abs(sga_v - tot_op) <= 1.5 and (rd_v and rd_v > 0):
+                # Caso DECK: R&D es una nota al pie ya contenida dentro de SG&A en el P&L
+                sga_display_m[p] = round(tot_op - rd_v, 1)
+                is_sga_ex_rd = True
+                other_opex_dict[p] = 0.0
+            else:
+                sga_display_m[p] = sga_v
+                if tot_op is not None:
+                    known_op = (rd_v or 0.0) + (sga_v or 0.0)
+                    rem = round(tot_op - known_op, 1)
+                    other_opex_dict[p] = rem if rem > 1.5 else 0.0
+                else:
+                    other_opex_dict[p] = 0.0
+        else:
+            sm_v = sm_m.get(p)
+            ga_v = ga_m.get(p)
+            if tot_op is not None:
+                known_op = (rd_v or 0.0) + (sm_v or 0.0) + (ga_v or 0.0)
+                rem = round(tot_op - known_op, 1)
+                other_opex_dict[p] = rem if rem > 1.5 else 0.0
+            else:
+                other_opex_dict[p] = 0.0
+
+    has_other_opex = any((v is not None and v > 1.5) for v in other_opex_dict.values())
+    has_rd = any((v is not None and v > 0) for v in rd_m.values())
+
+    # Regla de Gastos por Intereses vs No Operativo
+    int_exp_m = {}
+    count_int = 0
+    tot_nonop_m = {}
+
+    for p in statements_fys:
+        ebt_v = ebt_dict.get(p)
+        ebit_v = ebit_m.get(p)
+        tot_nonop = round(ebt_v - ebit_v, 1) if (ebt_v is not None and ebit_v is not None) else None
+        tot_nonop_m[p] = tot_nonop
+
+        ie_cand = _to_m(canonical.get("interest_expense", {}).get(p) or _num(inc_det, "InterestExpense", p) or _num(inc_det, "InterestExpenseDebt", p) or _num(inc_det, "InterestExpenseNonoperating", p) or _num(cf_det, "InterestPaidNet", p))
+        if ie_cand is not None and abs(ie_cand) > 0:
+            int_exp_m[p] = abs(ie_cand)
+            count_int += 1
+        else:
+            int_exp_m[p] = 0.0
+
+    show_split_interest = (count_int >= max(1, len(statements_fys) // 2) or (int_exp_m.get(statements_fys[0], 0.0) > 0))
+
+    other_nonop_m = {}
+    if show_split_interest:
+        for p in statements_fys:
+            tot_nonop = tot_nonop_m.get(p)
+            ie_v = int_exp_m.get(p, 0.0)
+            if tot_nonop is not None:
+                other_nonop_m[p] = round(tot_nonop + ie_v, 1)
+            else:
+                other_nonop_m[p] = None
 
     dps_dict = {}
     fcf_ps_dict = {}
@@ -2130,56 +2260,62 @@ def company_detail(request, ticker):
             "row_type": "result",
             "indent": False,
             "is_bold": True,
-            "data": {p: _to_m(canonical.get("gross_profit", {}).get(p)) for p in statements_fys},
+            "data": gp_m,
             "pct_mode": "rev"
         },
-        # 4. R&D
-        {
+    ]
+
+    if has_rd:
+        pnl_rows_raw.append({
             "label": "Investigación y Desarrollo (R&D)",
             "operator": "(–)",
             "row_type": "minus",
             "indent": True,
             "is_bold": False,
-            "data": {p: _to_m(canonical.get("rd_expense", {}).get(p)) for p in statements_fys},
+            "data": rd_m,
             "pct_mode": "rev",
             "negate_val": True
-        },
-        # 5. S&M
-        {
-            "label": "Ventas y Marketing (Selling & Marketing / S&M)",
+        })
+
+    if use_split_sm_ga:
+        pnl_rows_raw.extend([
+            {
+                "label": "Ventas y Marketing (Selling & Marketing / S&M)",
+                "operator": "(–)",
+                "row_type": "minus",
+                "indent": True,
+                "is_bold": False,
+                "data": sm_m,
+                "pct_mode": "rev",
+                "negate_val": True
+            },
+            {
+                "label": "Gastos Generales y Administrativos (G&A)",
+                "operator": "(–)",
+                "row_type": "minus",
+                "indent": True,
+                "is_bold": False,
+                "data": ga_m,
+                "pct_mode": "rev",
+                "negate_val": True
+            }
+        ])
+    else:
+        sga_lbl = "Gastos de Venta, Generales y Admin (SG&A ex-I+D)" if is_sga_ex_rd else "Total Gastos de Venta, Generales y Admin (SG&A Consolidado)"
+        pnl_rows_raw.append({
+            "label": sga_lbl,
             "operator": "(–)",
             "row_type": "minus",
             "indent": True,
             "is_bold": False,
-            "data": {p: _to_m(canonical.get("sm_expense", {}).get(p)) for p in statements_fys},
+            "data": sga_display_m,
             "pct_mode": "rev",
             "negate_val": True
-        },
-        # 6. G&A
-        {
-            "label": "Gastos Generales y Administrativos (G&A)",
-            "operator": "(–)",
-            "row_type": "minus",
-            "indent": True,
-            "is_bold": False,
-            "data": {p: _to_m(canonical.get("ga_expense", {}).get(p)) for p in statements_fys},
-            "pct_mode": "rev",
-            "negate_val": True
-        },
-        # 7. SG&A Consolidado
-        {
-            "label": "Total Gastos de Venta, Generales y Admin (SG&A Consolidado)",
-            "operator": "(–)",
-            "row_type": "minus",
-            "indent": True,
-            "is_bold": False,
-            "data": {p: _to_m(canonical.get("sga_expense", {}).get(p)) for p in statements_fys},
-            "pct_mode": "rev",
-            "negate_val": True
-        },
-        # 8. Otros OpEx
-        {
-            "label": "Otros Gastos Operativos / Reestructuración",
+        })
+
+    if has_other_opex:
+        pnl_rows_raw.append({
+            "label": "Otros Gastos / Costos Operativos",
             "operator": "(–)",
             "row_type": "minus",
             "indent": True,
@@ -2187,7 +2323,9 @@ def company_detail(request, ticker):
             "data": other_opex_dict,
             "pct_mode": "rev",
             "negate_val": True
-        },
+        })
+
+    pnl_rows_raw.extend([
         # 9. Total OpEx
         {
             "label": "TOTAL GASTOS OPERATIVOS (Total OpEx)",
@@ -2195,7 +2333,7 @@ def company_detail(request, ticker):
             "row_type": "minus",
             "indent": False,
             "is_bold": True,
-            "data": {p: _to_m(canonical.get("operating_expenses", {}).get(p)) for p in statements_fys},
+            "data": tot_opex_m,
             "pct_mode": "rev",
             "negate_val": True
         },
@@ -2206,7 +2344,7 @@ def company_detail(request, ticker):
             "row_type": "result",
             "indent": False,
             "is_bold": True,
-            "data": {p: _to_m(canonical.get("operating_income", {}).get(p)) for p in statements_fys},
+            "data": ebit_m,
             "pct_mode": "rev"
         },
         # 11. D&A
@@ -2229,26 +2367,42 @@ def company_detail(request, ticker):
             "data": ebitda_dict,
             "pct_mode": "rev"
         },
-        # 13. Intereses Netos
-        {
-            "label": "Gastos / (Ingresos) por Intereses Netos",
+    ])
+
+    if show_split_interest:
+        pnl_rows_raw.extend([
+            {
+                "label": "Gastos por Intereses (Interest Expense)",
+                "operator": "(–)",
+                "row_type": "minus",
+                "indent": True,
+                "is_bold": False,
+                "data": int_exp_m,
+                "pct_mode": "rev",
+                "negate_val": True
+            },
+            {
+                "label": "Ingresos Financieros y Otros No Operativos Netos",
+                "operator": "(±)",
+                "row_type": "neutral",
+                "indent": True,
+                "is_bold": False,
+                "data": other_nonop_m,
+                "pct_mode": "rev"
+            }
+        ])
+    else:
+        pnl_rows_raw.append({
+            "label": "Ingresos / (Gastos) Financieros y No Operativos Netos",
             "operator": "(±)",
             "row_type": "neutral",
             "indent": True,
             "is_bold": False,
-            "data": net_int_dict,
+            "data": tot_nonop_m,
             "pct_mode": "rev"
-        },
-        # 14. No Operativos
-        {
-            "label": "Otros Ingresos / (Gastos) No Operativos Netos",
-            "operator": "(±)",
-            "row_type": "neutral",
-            "indent": True,
-            "is_bold": False,
-            "data": nonop_dict,
-            "pct_mode": "rev"
-        },
+        })
+
+    pnl_rows_raw.extend([
         # 15. EBT
         {
             "label": "RESULTADO ANTES DE IMPUESTOS (EBT)",
@@ -2326,7 +2480,7 @@ def company_detail(request, ticker):
             "is_bold": True,
             "data": fcf_ps_dict
         }
-    ]
+    ])
 
     statements_pnl = [_build_statement_cells(r, statements_fys, canonical, ebt_dict=ebt_dict) for r in pnl_rows_raw]
 
@@ -2375,26 +2529,17 @@ def company_detail(request, ticker):
         else:
             fcf_adj_dict[p] = None
 
-    inv_sec_dict = {}
     cfi_dict = {p: _to_m(canonical.get("cash_from_investing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInInvestingActivities", p)) for p in statements_fys}
-    other_cfi_dict = {}
+    net_inv_sec_dict = {}
     for p in statements_fys:
-        buy_sec = _to_m(_num(cf_det, "PaymentsToAcquireAvailableForSaleSecuritiesDebt", p) or _num(cf_det, "PaymentsToAcquireMarketableSecurities", p))
-        sale_sec = _to_m(_num(cf_det, "ProceedsFromSaleAndMaturityOfMarketableSecurities", p) or _num(cf_det, "ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", p))
-        if buy_sec is not None or sale_sec is not None:
-            inv_sec_dict[p] = round((sale_sec or 0.0) - (buy_sec or 0.0), 1)
-        else:
-            inv_sec_dict[p] = None
-
         cfi_v = cfi_dict.get(p)
         capex_v = _to_m(canonical.get("capital_expenditures", {}).get(p))
         ma_v = _to_m(capital_flows["acquisitions_ma"].get(p))
-        inv_v = inv_sec_dict.get(p)
         if cfi_v is not None:
-            known_cfi = -(capex_v or 0.0) - (ma_v or 0.0) + (inv_v or 0.0)
-            other_cfi_dict[p] = round(cfi_v - known_cfi, 1)
+            known_cfi = -(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0)
+            net_inv_sec_dict[p] = round(cfi_v - known_cfi, 1)
         else:
-            other_cfi_dict[p] = None
+            net_inv_sec_dict[p] = None
 
     cff_dict = {p: _to_m(canonical.get("cash_from_financing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInFinancingActivities", p)) for p in statements_fys}
     other_cff_dict = {}
@@ -2402,11 +2547,13 @@ def company_detail(request, ticker):
     for p in statements_fys:
         cff_v = cff_dict.get(p)
         tot_rep = _to_m(capital_flows["share_repurchases_total"].get(p))
-        sp_v = _to_m(capital_flows["stock_plans_proceeds"].get(p))
+        open_bb = _to_m(capital_flows["share_repurchases_open_market"].get(p))
+        tax_bb = _to_m(capital_flows["share_repurchases_sbc_tax"].get(p))
         div_v = _to_m(capital_flows["dividends_paid"].get(p))
         debt_v = _to_m(capital_flows["net_debt_change"].get(p))
         if cff_v is not None:
-            known_cff = -(tot_rep or 0.0) + (sp_v or 0.0) - (div_v or 0.0) + (debt_v or 0.0)
+            effective_bb = tot_rep if tot_rep is not None else ((open_bb or 0.0) + (tax_bb or 0.0))
+            known_cff = -(abs(effective_bb) if effective_bb is not None else 0.0) - (abs(div_v) if div_v is not None else 0.0) + (debt_v or 0.0)
             other_cff_dict[p] = round(cff_v - known_cff, 1)
         else:
             other_cff_dict[p] = None
@@ -2562,21 +2709,12 @@ def company_detail(request, ticker):
             "negate_val": True
         },
         {
-            "label": "Compras / Ventas netas de Inversiones y Valores Negociables",
+            "label": "Inversión Neta en Valores Negociables y Otros Activos de Inversión",
             "operator": "(±)",
             "row_type": "neutral",
             "indent": True,
             "is_bold": False,
-            "data": inv_sec_dict,
-            "pct_mode": "rev"
-        },
-        {
-            "label": "Otros Flujos de Inversión",
-            "operator": "(±)",
-            "row_type": "neutral",
-            "indent": True,
-            "is_bold": False,
-            "data": other_cfi_dict,
+            "data": net_inv_sec_dict,
             "pct_mode": "rev"
         },
         {
@@ -2667,7 +2805,7 @@ def company_detail(request, ticker):
             "pct_mode": "rev"
         },
         {
-            "label": "Otros Flujos de Financiación",
+            "label": "Emisión de Acciones y Otros Flujos de Financiación",
             "operator": "(±)",
             "row_type": "neutral",
             "indent": True,

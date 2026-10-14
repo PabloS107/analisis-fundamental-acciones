@@ -467,13 +467,13 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 
 | Variable de Mercado | Valor Validado | Fuente Primaria / Secundaria | Tolerancia & Estatus |
 | :--- | :---: | :---: | :---: |
-| **Precio de Mercado de la Acción** | **$343.74** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
-| **Capitalización Bursátil (Market Cap - E)** | **$5,016,603.4M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
+| **Precio de Mercado de la Acción** | **$342.96** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
+| **Capitalización Bursátil (Market Cap - E)** | **$5,005,220.0M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
 | **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.19%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-14T19:36:14.056646+00:00`. Precio validado por consenso: $343.74 (Yahoo: $343.79, CNBC: $343.69, Δ=0.03%) | Market Cap calculado: $5,016,603.4M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.193% (Yahoo ^TNX: 5.190%, CNBC US10Y: 5.196%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-14T20:39:01.789818+00:00`. Precio validado por consenso: $342.96 (Yahoo: $342.96, CNBC: $342.96, Δ=0.00%) | Market Cap calculado: $5,005,220.0M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.192% (Yahoo ^TNX: 5.190%, CNBC US10Y: 5.194%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
@@ -481,7 +481,7 @@ El WACC representa el rendimiento mínimo anual exigido por los accionistas y lo
 
 * **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.19% + (1.07 \times 4.75%) =$ **10.30%**
 * **Costo de la Deuda ($K_d$ neto de impuestos)**: Pre-tax: 4.50% | Con Escudo Fiscal (17.3%): **3.72%**.
-* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,016,603.4M) | Deuda $W_d = 1.6%$ ($82,347.0M).
+* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,005,220.0M) | Deuda $W_d = 1.6%$ ($82,347.0M).
 * **WACC Consolidado**: $\text{WACC} = (W_e \times K_e) + (W_d \times K_d) =$ **10.19%** (vs. Mediana del Sector: **8.80%**).
 
 ---
@@ -757,7 +757,7 @@ graph LR
 
 > **PROPÓSITO DE VALORACIÓN:** INTEGRACIÓN FISCAL AI & MOTOR DE VALORACIÓN PROPIETARIO  
 > **Metodología Seleccionada:** Descuento de Flujo de Caja Inverso (*Reverse DCF*) basado en *Expectations Investing* (Mauboussin & Rappaport).  
-> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Apple Inc. ($343.74) para sostener su cotización.
+> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Apple Inc. ($342.96) para sostener su cotización.
 
 ### 14.1. Configuración Óptima del Modelo en Plataformas de Valoración (Fiscal AI)
 
@@ -770,7 +770,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | Casilla / Input de Valoración | Valor Auditado (En Vivo) | Sección de Origen | Racional Técnico y Sustento Fundamental |
 | :--- | :---: | :---: | :--- |
-| **Precio de Referencia ($P_0$)** | **$343.74** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
+| **Precio de Referencia ($P_0$)** | **$342.96** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
 | **Tasa Libre de Riesgo ($R_f$)** | **5.19%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Damodaran Benchmark | Prima histórica por riesgo accionario demandada por inversores. |
 | **Beta Apalancada (Consenso)** | **1.07** | Sección 11.2 (Arbitraje) | Sensibilidad sistemática del título frente al índice S&P 500. |
@@ -799,11 +799,11 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.19% (Bajo / Expansión) | 16.1% | 15.5% | 14.9% | 14.2% | 13.5% | 12.7% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 9.69% (Favorable) | 17.1% | 16.5% | 16.0% | 15.3% | 14.7% | 14.0% | Escenario de sensibilidad operativa. |
-| 10.19% (WACC Auditado Base) | 18.1% | 17.6% | 17.0% | 16.4% | 15.8% | 15.2% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.69% (Exigente) | 19.1% | 18.6% | 18.1% | 17.5% | 16.9% | 16.3% | Escenario de sensibilidad operativa. |
-| 11.19% (Estrés / Tipos Altos) | 20.0% | 19.6% | 19.1% | 18.6% | 18.0% | 17.4% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.19% (Bajo / Expansión) | 16.0% | 15.4% | 14.8% | 14.2% | 13.4% | 12.7% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 9.69% (Favorable) | 17.0% | 16.5% | 15.9% | 15.3% | 14.6% | 13.9% | Escenario de sensibilidad operativa. |
+| 10.19% (WACC Auditado Base) | 18.1% | 17.5% | 17.0% | 16.4% | 15.8% | 15.1% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 10.69% (Exigente) | 19.0% | 18.5% | 18.0% | 17.5% | 16.9% | 16.3% | Escenario de sensibilidad operativa. |
+| 11.19% (Estrés / Tipos Altos) | 20.0% | 19.5% | 19.0% | 18.5% | 18.0% | 17.4% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión

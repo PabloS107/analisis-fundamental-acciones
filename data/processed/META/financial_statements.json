@@ -1073,6 +1073,16 @@
       "FY2016": null,
       "FY2015": null,
       "FY2014": null
+    },
+    "interest_expense": {
+      "LTM": 1315000000.0,
+      "FY2025": 696000000.0,
+      "FY2024": 486000000.0,
+      "FY2023": 446000000.0,
+      "FY2019": 20000000.0,
+      "FY2018": 9000000.0,
+      "FY2017": 6000000.0,
+      "FY2016": 10000000.0
     }
   },
   "key_ratios": {
@@ -2042,7 +2052,7 @@
       }
     },
     "StockholdersEquityAbstract": {
-      "label": "Stockholders\u2019 equity:",
+      "label": "Stockholders’ equity:",
       "standard_concept": "",
       "values": {}
     },

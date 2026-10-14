@@ -459,7 +459,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "rd_expense": {},
         "sga_expense": {},
         "sm_expense": {},
-        "ga_expense": {}
+        "ga_expense": {},
+        "interest_expense": {}
     }
     
     if is_financial or archetype in ("FINANCIAL_BANKING", "PLATFORM_ECOSYSTEM"):
@@ -759,6 +760,16 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             cur_opex = canonical["operating_expenses"].get(p)
             if expected_opex > 0 and (cur_opex is None or abs(cur_opex - expected_opex) > max(expected_opex * 0.01, 5.0)):
                 canonical["operating_expenses"][p] = expected_opex
+
+        # 4.b Gastos por Intereses (Interest Expense)
+        if archetype not in ("FINANCIAL_BANKING", "PLATFORM_ECOSYSTEM"):
+            ie_cands = XBRL_TAXONOMY_MAP.get("interest_expense", ["InterestExpense"])
+            ie_val = get_first_matching_value(inc_data, ie_cands, p)
+            if ie_val is None and facts_df is not None:
+                ie_val = get_fact_fallback(facts_df, ie_cands, p, is_flow=True)
+            if ie_val is None:
+                ie_val = get_first_matching_value(cf_data, ["InterestPaidNet", "InterestPaid", "us-gaap_InterestPaidNet"], p)
+            canonical["interest_expense"][p] = abs(ie_val) if ie_val is not None else None
         
         # 5. Beneficio Neto
         ni_cands = XBRL_TAXONOMY_MAP["net_income"]

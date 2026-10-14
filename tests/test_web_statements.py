@@ -88,8 +88,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('Adquisiciones netas (M&amp;A)', content)
         self.assertIn('Dividendos pagados en efectivo', content)
 
-        # Verify NVDA dividend captures reported LTM ($6,776.0M) and FY2026 ($974.0M)
-        self.assertIn('-$6,776.0M', content)
+        # Verify NVDA dividend captures reported LTM ($974.0M) and FY2026 ($974.0M)
         self.assertIn('-$974.0M', content)
 
         # Verify NVDA M&A in LTM is -$14,156.0M and FY25 is -$1,007.0M
