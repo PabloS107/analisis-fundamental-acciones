@@ -1,7 +1,7 @@
 # Project: Universal Fundamental Analysis Orchestrator Audit & Refactoring
 
 ## Architecture
-The Universal Fundamental Analysis Orchestrator processes corporate, financial, insurance, and real estate issuers from official SEC EDGAR XBRL filings into structured financial models (Excel .xlsx), executive institutional reports (Word .docx and Markdown .md), and a Django web dashboard.
+The Universal Fundamental Analysis Orchestrator processes corporate, financial, insurance, and real estate issuers from official SEC EDGAR XBRL filings into executive institutional reports (Word .docx and Markdown .md) and a Django web dashboard.
 
 ```
                     [SEC EDGAR XBRL Filings (10-K / 10-Q)]
@@ -32,7 +32,7 @@ The Universal Fundamental Analysis Orchestrator processes corporate, financial, 
  (Zero hardcoded constants, tri-modal)
                  │                                         │
                  ▼                                         ▼
-      Audited DOCX, XLSX, MD                    Live Web Dashboard
+          Audited DOCX, MD                          Live Web Dashboard
 ```
 
 ## Feature Inventory
@@ -57,7 +57,7 @@ Every feature identified during the Survey phase mapped to its assigned mileston
 | 15 | Fix ROTCE vs ROIC Labels and Spreads | Synchronize `ROTCE - Ke` vs `ROIC - WACC` labels and formulas in `index.html`, `company_detail.html`, and `views.py`. | M4 | Survey (Explorer 3) |
 | 16 | Eradicate 404 Errors for JPM, O, PGR | Ensure `fundamental_scores.json` exists or is computed dynamically in `web_dashboard/analytics/views.py`. | M4 | Survey (Explorer 3) |
 | 17 | Fix Segment Mix Denominator | Exclude items with `is_subtotal == True` from segment mix denominators in `views.py` and `company_detail.html`. | M4 | Survey (Explorer 3) |
-| 18 | Triangulated Verification & Zero Regressions | Pass 100% of 4-tier E2E tests, zero regressions on control companies (AAPL, DECK), inspect DOCX, XLSX, Django Web Dashboard, Markdown, and clean forensic audit. | M5 | Survey (All) |
+| 18 | Triangulated Verification & Zero Regressions | Pass 100% of 4-tier E2E tests, zero regressions on control companies (AAPL, DECK), inspect DOCX, Django Web Dashboard, Markdown, and clean forensic audit. | M5 | Survey (All) |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |

@@ -2122,10 +2122,10 @@
                             {% if is_banking or archetype == "FINANCIAL_BANKING" %}Rentabilidad ROTCE Proyectada:{% elif is_insurance or archetype == "INSURANCE" %}Rentabilidad ROE Proyectada:{% else %}Crecimiento Ventas Proyectado:{% endif %}
                         </label>
                         <span id="gRevDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}{{ vp.rotce_pct|default:hist_growth_pct|floatformat:2 }}%{% else %}{{ hist_growth_pct|floatformat:2 }}%{% endif %}
+                            {{ init_growth_disp|floatformat:2 }}%
                         </span>
                     </div>
-                    <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}{{ vp.rotce_pct|default:hist_growth_pct|floatformat:2 }}{% else %}{{ hist_growth_pct|floatformat:2 }}{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                    <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{{ init_growth_disp|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
                     <span class="text-[10px] text-slate-500 mt-1 block">
                         {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% elif is_insurance or archetype == "INSURANCE" %}ROE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% else %}Referencia Histórica 5Y: {{ hist_growth_pct|floatformat:1 }}% anual{% endif %}
                     </span>
@@ -2213,10 +2213,20 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
                     <div>
                         <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                            <span>📊 Matriz Bidimensional de Sensibilidad Excess Return (Ke vs. {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %} Sostenible)</span>
+                            {% else %}
                             <span>📊 Matriz Bidimensional de Sensibilidad Reverse DCF</span>
+                            {% endif %}
                             <span class="text-[10px] bg-sky-50 text-sky-700 font-semibold px-2 py-0.5 rounded-full border border-sky-200">Sección 14.4 Word Auditada</span>
                         </h4>
-                        <p class="text-xs text-slate-500 mt-0.5">Crecimiento anual de ingresos requerido por la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) ante distintas combinaciones de WACC y tasa terminal (g<sub>n</sub>).</p>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                            Valor intrínseco por acción ($) ante distintas combinaciones de Coste de Capital Propio (Ke) y rentabilidad sostenible sobre libros.
+                            {% else %}
+                            Crecimiento anual de ingresos requerido por la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) ante distintas combinaciones de WACC y tasa terminal (g<sub>n</sub>).
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
 
@@ -2224,6 +2234,13 @@
                     <table class="w-full text-xs text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-white/60">
+                                {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                                <th class="py-3 px-3">Coste Equity (Ke) \ {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %}</th>
+                                {% for lbl in vp.rotce_labels %}
+                                <th class="py-3 px-2 text-center {% if '(Base)' in lbl %}text-sky-700 bg-sky-50{% endif %}">{{ lbl }}</th>
+                                {% endfor %}
+                                <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
+                                {% else %}
                                 <th class="py-3 px-3">WACC \ Tasa Terminal (g<sub>n</sub>)</th>
                                 <th class="py-3 px-2 text-center">1.0%</th>
                                 <th class="py-3 px-2 text-center">1.5%</th>
@@ -2232,6 +2249,7 @@
                                 <th class="py-3 px-2 text-center">3.0%</th>
                                 <th class="py-3 px-2 text-center">3.5%</th>
                                 <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody id="sensitivityGridBody" class="divide-y divide-slate-100/80">
@@ -2310,6 +2328,44 @@
     const archetype = "{{ archetype }}";
     const tbvPerShare = {{ vp.tbv_per_share|default:0.0 }};
     const baseFairPrice = {{ fair_price_base|floatformat:2 }};
+    const rotceRates = [{% for r in vp.rotce_rates %}{{ r }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const rotceLabels = [{% for l in vp.rotce_labels %}"{{ l }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const isInsurance = {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}true{% else %}false{% endif %};
+    const cagr5y = {{ vp.cagr_5y_dyn|default:vp.cagr_5y|default:hist_growth_pct|default:0.0 }} / 100.0;
+
+    function computeTwoStagePtbv(rotceVal, keVal, gTerm, cagr5yVal, isIns, fadeYears = 5) {
+        if (keVal <= gTerm || rotceVal <= 0) return 1.0;
+
+        let rTerminal;
+        let retention;
+        if (isIns) {
+            rTerminal = (rotceVal > (keVal + 0.105)) ? Math.min(rotceVal, keVal + 0.105) : rotceVal;
+            retention = 0.45;
+        } else {
+            const isHighGrowthBank = (cagr5yVal !== null && cagr5yVal !== undefined && (cagr5yVal >= 0.25 || cagr5yVal >= 25.0));
+            const spreadCap = isHighGrowthBank ? 0.145 : 0.105;
+            rTerminal = (rotceVal > (keVal + spreadCap)) ? Math.min(rotceVal, keVal + spreadCap) : rotceVal;
+            retention = isHighGrowthBank ? 0.72 : 0.40;
+        }
+
+        let bvT = 1.0;
+        let pvExcessStage1 = 0.0;
+
+        for (let t = 1; t <= fadeYears; t++) {
+            const weight = t / fadeYears;
+            const rT = rotceVal * (1.0 - weight) + rTerminal * weight;
+            const excessReturnT = (rT - keVal) * bvT;
+            pvExcessStage1 += excessReturnT / Math.pow(1.0 + keVal, t);
+            const gBvT = Math.min(0.22, Math.max(gTerm, rT * retention));
+            bvT *= (1.0 + gBvT);
+        }
+
+        const terminalExcessMultiple = (rTerminal - keVal) / (keVal - gTerm);
+        const pvTerminalExcess = (terminalExcessMultiple * bvT) / Math.pow(1.0 + keVal, fadeYears);
+
+        const ptbvJust = 1.0 + pvExcessStage1 + pvTerminalExcess;
+        return Math.max(0.5, ptbvJust);
+    }
 
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -2402,14 +2458,12 @@
         let gap = 0.0;
 
         if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
-            // Modelo Excess Return / Gordon-Shapiro
-            // P/TBV Justificado = (ROTCE - gn) / Math.max(Ke - gn, 0.005)
-            // Fair Value = P/TBV Justificado * TBV_per_share
+            // Modelo Excess Return de 2 Etapas con Convergencia (Damodaran)
             const rotceHyp = slider1Val;
             const ke = discountRate;
             const tbv = tbvPerShare > 0 ? tbvPerShare : (shares > 0 ? (rev0 / shares) : 0);
 
-            const ptbvJustified = (rotceHyp - gn) / Math.max(ke - gn, 0.005);
+            const ptbvJustified = computeTwoStagePtbv(rotceHyp, ke, gn, cagr5y, isInsurance);
             fairPrice = tbv > 0 ? Math.max(0.01, ptbvJustified * tbv) : baseFairPrice;
 
             const ptbvCurrent = tbv > 0 ? (targetPrice / tbv) : 1.0;
@@ -2520,9 +2574,67 @@
         updateSensitivityMatrix(discountRate, currentFcfM);
     }
 
-    function updateSensitivityMatrix(waccBase, fcfMVal) {
+    function updateSensitivityMatrix(discountRate, currentFcfM) {
         const tbody = document.getElementById('sensitivityGridBody');
-        if (!tbody || isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") return;
+        if (!tbody) return;
+
+        const isFin = (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE");
+        if (isFin) {
+            const keBase = discountRate;
+            const gn = parseFloat(document.getElementById('gSlider').value) / 100.0;
+            const keSteps = [
+                { k: keBase - 0.010, label: (keBase * 100 - 1.0).toFixed(2) + '% (Bajo / Optimista)', desc: 'Favorable: Expansión de múltiplos por menor prima de riesgo.' },
+                { k: keBase - 0.005, label: (keBase * 100 - 0.5).toFixed(2) + '% (Favorable)', desc: 'Escenario de sensibilidad financiera.' },
+                { k: keBase, label: (keBase * 100).toFixed(2) + '% (Ke Auditado Base)', isBase: true, desc: 'ESCENARIO CENTRAL: Valor teórico fundamental por rentabilidad de balance.' },
+                { k: keBase + 0.005, label: (keBase * 100 + 0.5).toFixed(2) + '% (Exigente)', desc: 'Escenario de sensibilidad financiera.' },
+                { k: keBase + 0.010, label: (keBase * 100 + 1.0).toFixed(2) + '% (Estrés Macro / Tipos)', desc: 'Estrés: Contracción por alza de tipos de interés o riesgo soberano.' }
+            ];
+
+            const rates = (rotceRates && rotceRates.length === 6) ? rotceRates : [0.18, 0.20, 0.22, 0.24, 0.26, 0.28];
+            const tbv = tbvPerShare > 0 ? tbvPerShare : (shares > 0 ? (rev0 / shares) : 0);
+
+            let html = '';
+            keSteps.forEach(row => {
+                const isBase = row.isBase;
+                const bgClass = isBase ? 'bg-sky-50 border-l-4 border-sky-400 font-bold' : 'transition hover:bg-slate-50';
+                const tdLabelClass = isBase ? 'text-slate-900 font-bold' : 'text-slate-700';
+                const baseBadge = isBase ? '<span class="ml-1.5 text-[9px] bg-sky-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">BASE</span>' : '';
+
+                const cols = rates.map((rVal, idx) => {
+                    let cellText = 'N/D';
+                    if (row.k > gn) {
+                        const ptbvCalc = computeTwoStagePtbv(rVal, row.k, gn, cagr5y, isInsurance);
+                        if (tbv > 0) {
+                            const fvCalc = Math.max(0.01, ptbvCalc * tbv);
+                            cellText = '$' + fvCalc.toFixed(2);
+                        } else {
+                            cellText = ptbvCalc.toFixed(2) + 'x';
+                        }
+                    }
+                    const isBaseCol = (idx === 3);
+                    if (isBase && isBaseCol) {
+                        return `<td class="py-3 px-2 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">${cellText}</td>`;
+                    } else if (isBaseCol) {
+                        return `<td class="py-3 px-2 text-center font-mono font-bold text-sky-700 bg-sky-500/5">${cellText}</td>`;
+                    } else {
+                        return `<td class="py-3 px-2 text-center font-mono text-slate-700">${cellText}</td>`;
+                    }
+                }).join('');
+
+                const descSpan = isBase ? `<span class="text-emerald-700 font-semibold">${row.desc}</span>` : row.desc;
+
+                html += `<tr class="${bgClass}">
+                    <td class="py-3 px-3 whitespace-nowrap ${tdLabelClass}">${row.label}${baseBadge}</td>
+                    ${cols}
+                    <td class="py-3 px-3 text-slate-500 text-[11px] leading-relaxed">${descSpan}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+            return;
+        }
+
+        const waccBase = discountRate;
+        const fcfMVal = currentFcfM;
 
         const waccSteps = [
             { w: waccBase - 0.010, label: (waccBase * 100 - 1.0).toFixed(2) + '% (Bajo / Expansión)', desc: 'Escenario favorable; exigencia de crecimiento más moderada.' },

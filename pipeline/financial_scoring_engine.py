@@ -210,7 +210,7 @@ def compute_peer_benchmarks(peers: Any) -> Dict[str, Any]:
     spreads = [_safe_float(p.get("economic_spread")) for p in peers if p.get("economic_spread") is not None]
     rocs = [_safe_float(p.get("greenblatt_roc", p.get("roc"))) for p in peers if p.get("greenblatt_roc") is not None or p.get("roc") is not None]
 
-    def _excel_percentile(data, p):
+    def _linear_percentile(data, p):
         sorted_data = sorted(data)
         n = len(sorted_data)
         if n == 0:
@@ -229,9 +229,9 @@ def compute_peer_benchmarks(peers: Any) -> Dict[str, Any]:
         "median_rd_intensity": statistics.median(rds) if rds else 0.035,
         "median_total_reinvestment": statistics.median(reinvs) if reinvs else 0.080,
         "median_capex_intensity": statistics.median(capexs) if capexs else 0.045,
-        "p75_roa": _excel_percentile(roas, 0.75) if roas else 0.100,
+        "p75_roa": _linear_percentile(roas, 0.75) if roas else 0.100,
         "median_gross_profitability": statistics.median(gps) if gps else 0.280,
-        "p75_gross_profitability": _excel_percentile(gps, 0.75) if gps else 0.400,
+        "p75_gross_profitability": _linear_percentile(gps, 0.75) if gps else 0.400,
         "median_gp_ex_cash": statistics.median(gp_ex_cashs) if gp_ex_cashs else 0.320,
         "median_gross_margin": statistics.median(gms) if gms else 0.380,
         "median_asset_turnover": statistics.median(turns) if turns else 0.75,

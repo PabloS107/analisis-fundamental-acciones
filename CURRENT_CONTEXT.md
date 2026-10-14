@@ -1,8 +1,8 @@
 # ESTADO Y CONTEXTO DEL PROYECTO: MOTOR UNIVERSAL DE ANÁLISIS FUNDAMENTAL
 
 **Fecha de guardado:** 22 de Septiembre de 2026 (20:30 ART)  
-**Rama activa de Git:** `prueba`  
-**Estado del sistema:** ✅ 100% Operativo | 79/79 Tests Pasados (74 Core + 5 Django) | Cero Errores de Fórmula Excel  
+**Rama activa de Git:** `main`  
+**Estado del sistema:** ✅ 100% Operativo | 299/299 Tests Pasados | Cero Regresiones Contables  
 **Empresas procesadas:** `AAPL`, `DECK` (Corporativas de control), `NU` (Banca digital), `MELI` (Plataforma híbrida)
 
 ---
@@ -66,8 +66,8 @@
    - `/company/DECK/` $\rightarrow$ 200 OK
    - `/company/NU/` $\rightarrow$ 200 OK (Modelo Bancario Excess Return Activo)
    - `/company/MELI/` $\rightarrow$ 200 OK (Modelo Híbrido FCF Normalizado Activo)
-4. **Inspección Excel:**
-   - Modelos de 11 hojas generados para NU, MELI, DECK, AAPL con **0 errores de fórmula** (`#REF!`, `#DIV/0!`, `#¡VALOR!` = 0).
+4. **Inspección de Entregables:**
+   - Informes ejecutivos Word (.docx) y Markdown (.md) generados para todos los arquetipos.
 
 ---
 
@@ -100,9 +100,8 @@ Perfil C: Plataformas Híbridas (MELI) -> Análisis dual SOTP (Commerce + Mercad
    - **Sección 12 Bancaria (Reemplaza a Sloan/Montier):** Auditoría de Riesgo Crediticio, Clasificación de Cartera bajo IFRS 9 / CECL (Stages 1, 2 y 3 / NPLs), Cobertura de Provisiones y Cost of Risk Anualizado.
 2. **Enrutamiento Limpio en `generate_earnings_report.py`:**
    - Condicionar las Secciones 10, 11 y 12 para que, si `is_financial == True`, invoquen directamente las secciones bancarias especializadas sin mezclar ratios comerciales.
-3. **Plantilla Web y Excel Bancarias:**
+3. **Plantilla Web Bancaria:**
    - Adaptar `company_detail.html` para que cuando `is_financial: True` muestre exclusivamente las tarjetas y gráficos bancarios (NIM, Cost-to-Income, NPL, Cobertura, CET1, ROTCE vs Ke).
-   - Crear la plantilla Excel bancaria institucional en `excel_formatter.py`.
 4. **Verificación Triangulada (Regla 2):**
-   - Regenerar y validar los informes Word, Markdown y Excel de `NU`, `MELI`, `AAPL` y `DECK`.
-   - Ejecutar la suite de tests unitarios y Django (`79+ tests`).
+   - Regenerar y validar los informes Word (.docx) y Markdown (.md) de `NU`, `MELI`, `AAPL` y `DECK`.
+   - Ejecutar la suite de tests unitarios y Django (`299+ tests`).

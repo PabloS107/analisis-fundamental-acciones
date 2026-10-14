@@ -306,7 +306,7 @@ def normalize_banking_kpis(sec_data, pdf_data, base_dict):
     Cobertura de Provisiones, ARPAC, Cost to Serve, Clientes totales/activos, Depósitos por país.
     """
     res = dict(base_dict or {})
-    res["archetype"] = "BANKING_FINANCIAL"
+    res["archetype"] = "FINANCIAL_BANKING"
 
     all_text = ""
     if sec_data:
@@ -519,7 +519,7 @@ def normalize_corporate_kpis(sec_data, pdf_data, base_dict, output_dir=None):
     Integra dinámicamente los segmentos desde segments_data.json y extrae KPIs Operativos oficiales desde Form 8-K Ex-99.1.
     """
     res = dict(base_dict or {})
-    res["archetype"] = "CORPORATE_INDUSTRIAL"
+    res["archetype"] = "STANDARD_CORPORATE"
 
     all_text = ""
     lines = []

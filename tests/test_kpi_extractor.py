@@ -44,7 +44,7 @@ class TestKpiExtractor(unittest.TestCase):
         }
         res = normalize_banking_kpis(sec_data, None, {})
         
-        self.assertEqual(res.get("archetype"), "BANKING_FINANCIAL")
+        self.assertEqual(res.get("archetype"), "FINANCIAL_BANKING")
         self.assertEqual(res.get("return_on_equity_reported"), 33.0)
         self.assertEqual(res.get("efficiency_ratio_pct"), 19.5)
         self.assertEqual(res.get("npl_15_90_pct"), 4.8)
@@ -113,7 +113,7 @@ class TestKpiExtractor(unittest.TestCase):
         }
         res = normalize_corporate_kpis(sec_data, None, {})
         
-        self.assertEqual(res.get("archetype"), "CORPORATE_INDUSTRIAL")
+        self.assertEqual(res.get("archetype"), "STANDARD_CORPORATE")
         brands = res.get("brand_segmentation", {})
         self.assertEqual(brands.get("HOKA", {}).get("revenue_usd_m"), 703.5)
         self.assertEqual(brands.get("HOKA", {}).get("growth_yoy_pct"), 7.7)
