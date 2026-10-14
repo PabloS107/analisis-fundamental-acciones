@@ -488,16 +488,16 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(response_aapl.status_code, 200)
         content_aapl = response_aapl.content.decode('utf-8')
         
-        # AAPL: NOPAT $140,914.1M / Cap. Inv. $267,312.2M = 52.7%
-        self.assertIn('NOPAT <strong class="text-slate-300">$140,914.1M</strong> / Cap. Inv. <strong class="text-slate-300">$267,312.2M</strong> = <strong class="text-emerald-400">52.7%</strong>', content_aapl)
+        # AAPL: NOPAT $134,859.4M / Cap. Inv. $269,400.0M = 50.1%
+        self.assertIn('NOPAT <strong class="text-slate-300">$134,859.4M</strong> / Cap. Inv. <strong class="text-slate-300">$269,400.0M</strong> = <strong class="text-emerald-400">50.1%</strong>', content_aapl)
         self.assertNotIn('NOPAT <strong class="text-slate-300">$0.1M</strong>', content_aapl)
 
         response_deck = self.client.get('/company/DECK/')
         self.assertEqual(response_deck.status_code, 200)
         content_deck = response_deck.content.decode('utf-8')
         
-        # DECK: NOPAT $1,091.5M / Cap. Inv. $2,036.9M = 53.6%
-        self.assertIn('NOPAT <strong class="text-slate-300">$1,091.5M</strong> / Cap. Inv. <strong class="text-slate-300">$2,036.9M</strong> = <strong class="text-emerald-400">53.6%</strong>', content_deck)
+        # DECK: NOPAT $998.6M / Cap. Inv. $2,040.5M = 48.9%
+        self.assertIn('NOPAT <strong class="text-slate-300">$998.6M</strong> / Cap. Inv. <strong class="text-slate-300">$2,040.5M</strong> = <strong class="text-emerald-400">48.9%</strong>', content_deck)
 
     def test_dynamic_sales_growth_cagr_not_hardcoded_8_pct(self):
         """Verifica que el crecimiento histórico de ventas no esté hardcodeado al 8% y refleje el CAGR auditado de cada firma."""

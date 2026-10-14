@@ -237,24 +237,24 @@ Nu Holdings mantiene una posición de capital extraordinariamente sólida que su
 
 Desarrollado por el profesor Joseph Piotroski (Universidad de Stanford), este modelo evalúa la solidez económica interna de la empresa a través de 9 señales contables distribuidas en tres dimensiones críticas: Rentabilidad (ROA positivo y creciente, CFO positivo, calidad de devengos Sloan), Apalancamiento y Liquidez (desendeudamiento financiero total, mejora de razón corriente y cero dilución por emisión de acciones) y Eficiencia Operativa (expansión de margen bruto y mayor rotación de activos).
 
-* **Puntaje Obtenido:** **2 / 9 Puntos en LTM** (VULNERABILIDAD FINANCIERA) (5 / 9 en FY2025).
+* **Puntaje Obtenido:** **2 / 9 Puntos en LTM** (VULNERABILIDAD FINANCIERA) (4 / 9 en FY2025).
 * **¿Qué significa este puntaje para el Inversor?** Una calificación de 2/9 sitúa a Nu Holdings Ltd. en el percentil superior del mercado global. Certifica que la compañía:
   1. **Genera beneficios respaldados por caja líquida:** La caja operativa ($-1,381.6M en LTM) respalda con holgura al beneficio neto contable ($3,610.0M), descartando manipulación de inventarios o ventas a crédito ficticias.
   2. **Reduce o controla su apalancamiento financiero real:** Mantiene una estructura financiera solvente con disciplina en el endeudamiento (Deuda 6.9% vs 6.9% (+0.02%)).
   3. **Protege al accionista minoritario:** No financia sus operaciones emitiendo nuevas acciones dilutivas, priorizando la retención o recompra de títulos (Acc 4,833M vs 4,833M (+0M)).
-  4. **Expande su eficiencia operativa:** Optimiza tanto su margen comercial (MB 47.8% vs 59.2% (-11.38%)) como la productividad de sus activos instalados (Rot 0.19x vs 0.22x (-0.04x)).
+  4. **Expande su eficiencia operativa:** Optimiza tanto su margen comercial (N/A) como la productividad de sus activos instalados (Rot 0.18x vs 0.18x (-0.00x)).
 
 | Dimensión / Criterio Piotroski | Condición Contable Evaluada | Valor Detectado | Punto Asignado |
 | :--- | :--- | :---: | :---: |
-| **Rentabilidad: ROA Positivo** | Utilidad neta positiva sobre la base de activos instalados. | 4.82% > 0% | **1 Pto** |
+| **Rentabilidad: ROA Positivo** | Utilidad neta positiva sobre la base de activos promedio instalados. | 4.58% > 0% | **1 Pto** |
 | **Rentabilidad: CFO Positivo** | Flujo de caja operativo neto positivo. | $-1,381.6M > $0 | **0 Ptos** |
-| **Rentabilidad: Mejora de ROA (Delta ROA)** | Aceleración de la rentabilidad sobre activos frente al año previo. | 4.8% vs 5.8% (-0.93%) | **0 Ptos** |
+| **Rentabilidad: Mejora de ROA (Delta ROA)** | Aceleración de la rentabilidad sobre activos frente al año previo. | 4.6% vs 4.6% (-0.02%) | **0 Ptos** |
 | **Rentabilidad: Calidad Contable (CFO > NI)** | Beneficios respaldados por efectivo contante (bajos devengos contables). | CFO $-1,381.6M > NI $3,610.0M | **0 Ptos** |
 | **Apalancamiento y Liquidez: Desendeudamiento Total** | Reducción o estabilidad del apalancamiento financiero total sobre activos. | Deuda 6.9% vs 6.9% (+0.02%) | **0 Ptos** |
 | **Apalancamiento y Liquidez: Mejora de Razón Corriente** | Mayor cobertura de pasivos a corto plazo con activos corrientes. | N/A | **0 Ptos** |
 | **Apalancamiento y Liquidez: Cero Dilución (Acciones Básicas)** | Sin emisión neta dilutiva de capital; recompra de acciones o estabilidad. | Acc 4,833M vs 4,833M (+0M) | **1 Pto** |
-| **Eficiencia Operativa: Expansión de Margen Bruto** | Mayor poder de fijación de precios o menor coste unitario de ventas. | MB 47.8% vs 59.2% (-11.38%) | **0 Ptos** |
-| **Eficiencia Operativa: Expansión Rotación de Activos** | Mayor volumen de ingresos generado por cada dólar de activo instalado. | Rot 0.19x vs 0.22x (-0.04x) | **0 Ptos** |
+| **Eficiencia Operativa: Expansión de Margen Bruto** | Mayor poder de fijación de precios o menor coste unitario de ventas. | N/A | **0 Ptos** |
+| **Eficiencia Operativa: Expansión Rotación de Activos** | Mayor volumen de ingresos generado por cada dólar de activo instalado. | Rot 0.18x vs 0.18x (-0.00x) | **0 Ptos** |
 
 
 ### 9.2. Mohanram G-Score: Calidad de Crecimiento frente a la Industria
@@ -297,24 +297,24 @@ La investigación empírica seminal del Prof. Robert Novy-Marx (*The Other Side 
 
 ### Bloque A: Diagnóstico Dual de Productividad y Efecto Arrastre de Caja (*Cash Drag*)
 
-> 🏆 **CALIFICACIÓN Y CALIDAD DE CAPITAL: PRODUCTIVIDAD SÓLIDA (SUPERIOR A LA MEDIANA (PERCENTIL 50-75))**  
-> • **Gross Profitability Total (LTM):** **8.01%** (vs. Mediana Sector: 5.76%)  
-> • **Gross Profitability Operativa Ex-Caja (LTM):** **11.03%** (vs. Mediana Sector: 6.32%)  
-> • **Efecto Arrastre de Caja (Cash Drag):** **+3.03 p.p.** de compresión nominal por acumulación de liquidez.  
-> • **Ventaja Sectorial (Industry De-meaning):** **+2.25 p.p.** por encima de la empresa representativa de su industria.
+> 🏆 **CALIFICACIÓN Y CALIDAD DE CAPITAL: NO APLICABLE (BANCA / SEGUROS) (NO APLICABLE)**  
+> • **Gross Profitability Total (LTM):** **0.00%** (vs. Mediana Sector: 25.00%)  
+> • **Gross Profitability Operativa Ex-Caja (LTM):** **0.00%** (vs. Mediana Sector: 28.00%)  
+> • **Efecto Arrastre de Caja (Cash Drag):** **+0.00 p.p.** de compresión nominal por acumulación de liquidez.  
+> • **Ventaja Sectorial (Industry De-meaning):** **+0.00 p.p.** por encima de la empresa representativa de su industria.
 
 > 📘 **GUÍA DIDÁCTICA Y METODOLÓGICA: ¿CÓMO INTERPRETAR CADA RESULTADO?**  
-> 1. **¿Qué significa estar en el Superior a la Mediana (Percentil 50-75)?**: Significa que la productividad de capital de NU supera al 95% de sus competidores del sector. De cada 100 compañías de la industria, solo 5 alcanzan o superan este nivel de generación económica por dólar de activo instalado.  
-> 2. **¿Qué significa un GP/A Total de 8.01%?**: Por cada $1.00 de activos totales consolidados en balance, la empresa genera **$0.08 de utilidad bruta pura al año**, antes de gastos operativos, financieros o impuestos.  
-> 3. **¿Qué significa la métrica Ex-Caja (11.03%)?**: Al sustraer el efectivo y valores negociables líquidos ociosos (que no operan en la producción diaria), los activos estrictamente productivos rinden **$0.11 por cada dólar en funcionamiento**.  
-> 4. **¿Qué revela el Efecto Arrastre de Caja (*Cash Drag* de +3.03 p.p.)?**: La tenencia masiva de efectivo reduce mecánicamente el ratio global. El negocio operativo subyacente es significativamente más eficiente y productivo de lo que revela el balance general consolidado.
+> 1. **¿Qué significa estar en el No Aplicable?**: Significa que la productividad de capital de NU supera al 95% de sus competidores del sector. De cada 100 compañías de la industria, solo 5 alcanzan o superan este nivel de generación económica por dólar de activo instalado.  
+> 2. **¿Qué significa un GP/A Total de 0.00%?**: Por cada $1.00 de activos totales consolidados en balance, la empresa genera **$0.00 de utilidad bruta pura al año**, antes de gastos operativos, financieros o impuestos.  
+> 3. **¿Qué significa la métrica Ex-Caja (0.00%)?**: Al sustraer el efectivo y valores negociables líquidos ociosos (que no operan en la producción diaria), los activos estrictamente productivos rinden **$0.00 por cada dólar en funcionamiento**.  
+> 4. **¿Qué revela el Efecto Arrastre de Caja (*Cash Drag* de +0.00 p.p.)?**: La tenencia masiva de efectivo reduce mecánicamente el ratio global. El negocio operativo subyacente es significativamente más eficiente y productivo de lo que revela el balance general consolidado.
 
 | Métrica de Productividad | LTM | FY2025 | Mediana Ind. | Diagnóstico Sectorial | Interpretación Didáctica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **GP / Activos Totales (Nominal)** | **8.01%** | 8.85% | 5.76% | ✅ Superior a la Mediana (Percentil 50-75) | Genera $0.08 de utilidad bruta por cada $1.00 de activo total. |
-| **GP / Activos Operativos (Ex-Caja)** | **11.03%** | 13.16% | 6.32% | ✅ Eficiencia Superior | Capital estrictamente operativo rinde al 11.03%. |
-| **Efecto Arrastre de Caja (Cash Drag)** | **+3.03 pp** | +4.31 pp | +0.56 pp | ℹ️ Dilución Solvente | La liquidez ociosa reduce artificialmente el ratio nominal. |
-| **GP/A Ajustada por Sector (De-meaning)** | **+2.25 pp** | +3.09 pp | 0.00 pp | 🟢 Liderazgo Estructural | Supera a la mediana de competidores en 2.25 p.p. |
+| **GP / Activos Totales (Nominal)** | **0.00%** | 0.00% | 0.00% | ✅ No Aplicable | Genera $0.00 de utilidad bruta por cada $1.00 de activo total. |
+| **GP / Activos Operativos (Ex-Caja)** | **0.00%** | 0.00% | 0.00% | ✅ Eficiencia Superior | Capital estrictamente operativo rinde al 0.00%. |
+| **Efecto Arrastre de Caja (Cash Drag)** | **+0.00 pp** | +0.00 pp | +0.00 pp | ℹ️ Dilución Solvente | La liquidez ociosa reduce artificialmente el ratio nominal. |
+| **GP/A Ajustada por Sector (De-meaning)** | **+0.00 pp** | +0.00 pp | 0.00 pp | 🟢 Liderazgo Estructural | Supera a la mediana de competidores en 0.00 p.p. |
 
 ### Bloque B: Descomposición DuPont de Novy-Marx & Matriz de 4 Cuadrantes
 
@@ -322,36 +322,36 @@ La descomposición DuPont demuestra matemáticamente que la productividad del ca
 $$\text{Gross Profitability (GP/A)} = \text{Margen Bruto} \times \text{Rotación de Activos}$$
 $$\frac{\text{Utilidad Bruta}}{\text{Activos Totales}} = \left(\frac{\text{Utilidad Bruta}}{\text{Ingresos}}\right) \times \left(\frac{\text{Ingresos}}{\text{Activos Totales}}\right)$$
 
-> 💎 **POSICIONAMIENTO ESTRATÉGICO: ⚡ LÍDER EN VOLUMEN Y VELOCIDAD**  
-> Ventaja impulsada por rotación: márgenes ajustados (47.8% vs mediana 49.7%), pero alta velocidad de despliegue de activos (0.17x vs mediana 0.12x). Modelo tipo distribución mayorista, retail masivo o manufactura ultraeficiente.  
-> • **Verificación Matemática (LTM):** Margen Bruto (47.79%) × Rotación de Activos (0.168x) = **8.01%** (Identidad exacta confirmada vs. GP/A de 8.01%).  
-> • **Identidad Operativa Ex-Caja:** Margen Bruto (47.79%) × Rotación Ex-Caja (0.231x) = **11.03%** (Concilia al 100% con 11.03%). 
+> 💎 **POSICIONAMIENTO ESTRATÉGICO: 🏦 N/A SECTOR FINANCIERO (VER ROTCE / NIM / COMBINED RATIO)**  
+> El modelo de Novy-Marx evalúa la productividad fabril/comercial pura deduciendo el coste directo de ventas (COGS). En intermediación financiera y seguros no existe inventario físico ni COGS; los intereses pagados remuneran depósitos de clientes. La productividad y eficiencia del capital se evalúan mediante Margen de Interés Neto (NIM), Ratio de Eficiencia y ROTCE/ROE.  
+> • **Verificación Matemática (LTM):** Margen Bruto (0.00%) × Rotación de Activos (0.000x) = **0.00%** (Identidad exacta confirmada vs. GP/A de 0.00%).  
+> • **Identidad Operativa Ex-Caja:** Margen Bruto (0.00%) × Rotación Ex-Caja (0.000x) = **0.00%** (Concilia al 100% con 0.00%). 
 
 | Palanca DuPont | LTM | FY2025 | Mediana Ind. | Diferencial | Implicación Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Margen Bruto (Gross Margin)** | **47.79%** | 59.17% | 49.66% | -1.86 pp | Pricing power y fortaleza de marca. |
-| **Rotación de Activos Totales** | **0.168x** | 0.149x | 0.116x | +0.05x | Eficiencia y velocidad de despliegue de capital. |
-| **Rotación de Activos Ex-Caja** | **0.231x** | 0.222x | 0.128x | Expansión Operativa | Velocidad de rotación del activo operativo real. |
-| **RENTABILIDAD BRUTA (GP/A)** | **8.01%** | **8.85%** | **5.76%** | **+2.25 pp** | **PRODUCTIVIDAD PURA EN EL TOP 5% SECTORIAL.** |
+| **Margen Bruto (Gross Margin)** | **0.00%** | 0.00% | 0.00% | +0.00 pp | Pricing power y fortaleza de marca. |
+| **Rotación de Activos Totales** | **0.000x** | 0.000x | 0.000x | +0.00x | Eficiencia y velocidad de despliegue de capital. |
+| **Rotación de Activos Ex-Caja** | **0.000x** | 0.000x | 0.000x | Expansión Operativa | Velocidad de rotación del activo operativo real. |
+| **RENTABILIDAD BRUTA (GP/A)** | **0.00%** | **0.00%** | **0.00%** | **+0.00 pp** | **PRODUCTIVIDAD PURA EN EL TOP 5% SECTORIAL.** |
 
 ### Bloque C: Evolución Histórica Multianual y Consistencia de Tendencia
 
 > 📈 **DINÁMICA TEMPORAL Y CONSISTENCIA ESTRUCTURAL:**  
-> • **Variación a 3 Años (vs. FY2023):** **-0.05 puntos porcentuales**  
-> • **Variación a 5 Años (vs. FY2021):** **+4.32 puntos porcentuales**  
-> • **Coeficiente de Variación (CV):** **0.370** (alta predictibilidad y consistencia multianual)  
-> • **Diagnóstico de Tendencia:** Trayectoria constructiva y estable (+4.32 p.p. en 5 años); foso económico protegido.
+> • **Variación a 3 Años (vs. FY2023):** **+0.00 puntos porcentuales**  
+> • **Variación a 5 Años (vs. FY2021):** **+0.00 puntos porcentuales**  
+> • **Coeficiente de Variación (CV):** **0.000** (alta predictibilidad y consistencia multianual)  
+> • **Diagnóstico de Tendencia:** Historial insuficiente para evaluar tendencia de 3-5 años.
 
 | Período Fiscal | GP / Activos (%) | GP Ex-Caja (%) | Cash Drag (pp) | Margen Bruto (%) | Rotación Activos (x) | Cuadrante Estratégico |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **LTM** | **8.01%** | 11.03% | +3.03 pp | 47.79% | 0.168x | LÍDER EN VOLUMEN Y ESCALA |
-| FY2025 | 8.85% | 13.16% | +4.31 pp | 59.17% | 0.149x | COMPOUNDER DE ÉLITE |
-| FY2024 | 10.52% | 15.45% | +4.93 pp | 60.50% | 0.174x | COMPOUNDER DE ÉLITE |
-| FY2023 | 8.05% | 11.65% | +3.59 pp | 58.26% | 0.138x | COMPOUNDER DE ÉLITE |
-| FY2022 | 5.56% | 7.24% | +1.68 pp | 51.26% | 0.108x | MONOPOLIO / PODER DE MARCA |
-| FY2021 | 3.69% | 4.52% | +0.83 pp | 55.08% | 0.067x | MONOPOLIO / PODER DE MARCA |
-| FY2020 | 3.22% | 4.21% | +0.99 pp | 52.46% | 0.061x | MONOPOLIO / PODER DE MARCA |
-| FY2019 | N/D | N/D | +0.00 pp | 49.35% | N/D | BAJA PRODUCTIVIDAD DE CAPITAL |
+| **LTM** | **N/D** | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2025 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2024 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2023 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2022 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2021 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2020 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
+| FY2019 | N/D | N/D | N/D | N/D | N/D | NO APLICABLE A INTERMEDIACIÓN FINANCIERA |
 
 ### Bloque D: Benchmarking Sectorial y Ranking Competitivo de la Industria
 
@@ -359,11 +359,11 @@ A continuación se presenta el ranking institucional de la canasta de competidor
 
 | Rank | Ticker | Empresa Competidora | Período | GP / Activos (%) | GP Ex-Caja (%) | Margen Bruto (%) | Rotación (x) | Brecha vs Mediana |
 | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **#1** | **NU** | **Nu Holdings Ltd.** | LTM | **8.01%** | 11.03% | 47.79% | 0.17x | **+2.25 pp** |
-| #2 | INTR | Inter & Co, Inc. | LTM (FY2024 Auditado) | 5.76% | 6.32% | 49.66% | 0.12x | +0.00 pp |
-| #3 | SOFI | SoFi Technologies, Inc. | LTM (FY2024 Auditado) | 5.44% | 5.99% | 71.15% | 0.08x | -0.32 pp |
-| - | **MEDIANA** | **Mediana Sectorial** | LTM | **5.76%** | **6.32%** | **49.66%** | **0.12x** | **0.00 pp** |
-| - | **P75** | **Percentil 75 Líder** | LTM | **8.70%** | - | - | - | **+2.94 pp** |
+| **#1** | **NU** | **Nu Holdings Ltd.** | LTM (FY2024 Auditado) | **11.63%** | 12.86% | 44.27% | 0.26x | **-13.37 pp** |
+| #2 | INTR | Inter & Co, Inc. | LTM (FY2024 Auditado) | 5.76% | 6.32% | 49.66% | 0.12x | -19.24 pp |
+| #3 | SOFI | SoFi Technologies, Inc. | LTM (FY2024 Auditado) | 5.44% | 5.99% | 71.15% | 0.08x | -19.56 pp |
+| - | **MEDIANA** | **Mediana Sectorial** | LTM | **0.00%** | **0.00%** | **0.00%** | **0.00x** | **0.00 pp** |
+| - | **P75** | **Percentil 75 Líder** | LTM | **0.00%** | - | - | - | **+0.00 pp** |
 ### Conclusiones Fundamentales para Modelos de Valoración
 
 > 💡 **CONCLUSIÓN ANALÍTICA DE PRODUCTIVIDAD:**  
@@ -376,12 +376,12 @@ A continuación se presenta el ranking institucional de la canasta de competidor
 
 Evaluación del retorno financiero y sostenibilidad de las ventajas competitivas (*Economic Moat*) para **Nu Holdings Ltd. (NU)** al período **LTM**.
 
-> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +18.30 p.p.)**  
+> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +18.36 p.p.)**  
 > • **Rentabilidad de Balance (ROTCE - LTM):** **28.11%** (Rendimiento sobre fondos propios auditado).  
-> • **Costo del Capital Propio (Ke vía CAPM):** **9.82%** (Tasa de corte mínima exigida por accionistas).  
-> • **Spread Económico Neto (EVA):** **+18.30 p.p.** de rendimiento generado por encima del coste del capital propio.  
+> • **Costo del Capital Propio (Ke vía CAPM):** **9.76%** (Tasa de corte mínima exigida por accionistas).  
+> • **Spread Económico Neto (EVA):** **+18.36 p.p.** de rendimiento generado por encima del coste del capital propio.  
 > • **Inaplicabilidad de WACC / ROC Tradicional:** En instituciones financieras y aseguradoras, los depósitos y el float constituyen la materia prima operativa del negocio, no un pasivo financiero externo; por tanto, el FCFF y WACC carecen de sentido económico. La rentabilidad del capital se evalúa mediante ROTCE frente a Ke.  
-> • **Tesis de Foso Defensivo:** Nu Holdings Ltd. genera un retorno financiero de 28.11%, superando a su coste de oportunidad del capital (9.82%) por +18.30 p.p., sustentando la creación de valor sobre el balance patrimonial.
+> • **Tesis de Foso Defensivo:** Nu Holdings Ltd. genera un retorno financiero de 28.11%, superando a su coste de oportunidad del capital (9.76%) por +18.36 p.p., sustentando la creación de valor sobre el balance patrimonial.
 
 ---
 
@@ -391,19 +391,19 @@ Para garantizar un cálculo contemporáneo y riguroso, los parámetros de mercad
 
 | Variable de Mercado | Valor Validado | Fuente Primaria / Secundaria | Tolerancia & Estatus |
 | :--- | :---: | :---: | :---: |
-| **Precio de Mercado de la Acción** | **$15.72** | Yahoo Finance / CNBC | Validado por Consenso |
-| **Capitalización Bursátil (Market Cap - E)** | **$76,688.5M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
-| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.22%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
-| **Beta de la Acción ($\beta$)** | **0.97** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
+| **Precio de Mercado de la Acción** | **$14.87** | Yahoo Finance / CNBC | Validado por Consenso |
+| **Capitalización Bursátil (Market Cap - E)** | **$72,529.2M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
+| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.19%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
+| **Beta de la Acción ($\beta$)** | **0.96** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-13T18:47:28.520174+00:00`. Precio validado por consenso: $15.72 (Yahoo: $15.72, CNBC: $15.72, Δ=0.00%) | Market Cap calculado: $76,688.5M vía Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.220% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.221%) | Beta validado: 0.97 (Yahoo: 0.95, CNBC: 0.98, Δ=0.03).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-14T18:26:16.745565+00:00`. Precio validado por consenso: $14.87 (Yahoo: $14.86, CNBC: $14.87, Δ=0.03%) | Market Cap calculado: $72,529.2M vía Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 0.96 (Yahoo: 0.95, CNBC: 0.97, Δ=0.02).
 
 ### 11.2. Bloque B: Coste del Capital Propio ($K_e$ vía CAPM) & Estructura Patrimonial
 
 En el sector bancario y asegurador, el WACC no es aplicable porque la deuda por depósitos y contratos de seguros es el insumo productivo básico, no una fuente de financiamiento discrecional. La tasa de corte institucional es el **Coste del Capital Propio ($K_e$)**:
 
-* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.22% + (0.97 \times 4.75%) =$ **9.82%**
+* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.19% + (0.96 \times 4.75%) =$ **9.76%**
 * **Inaplicabilidad del WACC Corporativo**: Las entidades reguladas no emplean WACC dado que los pasivos no separan estructura de capital de pasivo operativo.
 * **Patrimonio Contable Empleado**: Base patrimonial neta reportada ante la SEC: **$12,840.3M**.
 
@@ -424,11 +424,11 @@ $$\text{ROTCE} = \frac{\text{Net Income}}{\text{Tangible Equity / Net Assets}} =
 
 ### **Dictamen Estratégico: 🏰 WIDE MOAT / COMPOUNDING MACHINE**
 
-$$\text{Economic Spread} = \text{ROTCE} - K_e = 28.11% - 9.82% = \mathbf{+18.30 p.p.}$$
+$$\text{Economic Spread} = \text{ROTCE} - K_e = 28.11% - 9.76% = \mathbf{+18.36 p.p.}$$
 
-> **Explicación Pedagógica del Spread Económico**: Spread de Retorno Excedente (ROTCE - Ke) = +18.30 p.p. (ROTCE: 28.11% vs Ke: 9.82%).
+> **Explicación Pedagógica del Spread Económico**: Spread de Retorno Excedente (ROTCE - Ke) = +18.36 p.p. (ROTCE: 28.11% vs Ke: 9.76%).
 
-Con un spread positivo de **+18.30 p.p.**, Nu Holdings Ltd. retribuye a los accionistas por encima del costo de oportunidad del mercado, consolidando ventajas de escala y fondeo.
+Con un spread positivo de **+18.36 p.p.**, Nu Holdings Ltd. retribuye a los accionistas por encima del costo de oportunidad del mercado, consolidando ventajas de escala y fondeo.
 
 ---
 
@@ -436,14 +436,14 @@ Con un spread positivo de **+18.30 p.p.**, Nu Holdings Ltd. retribuye a los acci
 
 | Categoría Analítica | Métrica / Ratio Institucional | Valor LTM | Benchmark / Referencia | Diagnóstico para el Inversor |
 | :--- | :--- | :---: | :---: | :--- |
-| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **5.22%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
-| | Beta de la Acción ($\beta$) | **0.97** | S&P 500 = 1.00x | Sensibilidad sistemática del título frente al mercado. |
+| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **5.19%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
+| | Beta de la Acción ($\beta$) | **0.96** | S&P 500 = 1.00x | Sensibilidad sistemática del título frente al mercado. |
 | | Prima de Riesgo de Mercado (ERP) | **4.75%** | NYU Stern Damodaran | Exigencia de prima de retorno sobre el activo libre de riesgo. |
-| **Coste del Capital Propio** | Costo del Capital Propio ($K_e$ vía CAPM) | **9.82%** | Tasa de Corte | Retorno anual mínimo exigido por los accionistas comunes. |
+| **Coste del Capital Propio** | Costo del Capital Propio ($K_e$ vía CAPM) | **9.76%** | Tasa de Corte | Retorno anual mínimo exigido por los accionistas comunes. |
 | | WACC Tradicional | **No Aplicable** | N/A Sectorial | Depósitos y float son insumos operativos; no computan en WACC. |
 | **Rentabilidad de Balance** | **ROTCE Auditado** | **28.11%** | Benchmark Sectorial | Rentabilidad financiera neta sobre patrimonio empleado. |
 | | Base Patrimonial Tangible | **$12,840.3M** | Balance SEC | Fondos propios tangibles que respaldan la operación. |
-| **Creación de Valor (EVA)** | **Spread Económico (ROTCE − $K_e$)** | **+18.30 p.p.** | Hurdle Rate | Excedente neto generado sobre el costo de oportunidad del capital. |
+| **Creación de Valor (EVA)** | **Spread Económico (ROTCE − $K_e$)** | **+18.36 p.p.** | Hurdle Rate | Excedente neto generado sobre el costo de oportunidad del capital. |
 | | **Dictamen de Foso Defensivo (*Moat*)** | **🏰 WIDE MOAT / COMPOUNDING MACHINE** | Compounding Machine | Fortaleza estructural de intermediación y fondeo. |
 
 ---
@@ -452,7 +452,7 @@ Con un spread positivo de **+18.30 p.p.**, Nu Holdings Ltd. retribuye a los acci
 ## 12. Auditoría Forense Contable y Calidad de Beneficios (Detección de Trampas Contables)
 
 > **DIAGNÓSTICO FORENSE GENERAL (LTM):** ANÁLISIS SECTORIAL BANCARIO (GRADO INSTITUCIONAL)  
-> **Ratio de Devengos de Sloan:** +6.33% [DEVENGOS EQUILIBRADOS]  
+> **Ratio de Devengos de Sloan:** +0.00% [N/A BANCA Y SEGUROS]  
 > **Montier C-Score:** NO APLICABLE [NO APLICABLE]  
 > **Dictamen Consolidado:** *AUDITORÍA FORENSE ADAPTADA (FINANCIAL_BANKING): Los modelos cuantitativos de devengos industriales y Montier C-Score no son aplicables a balances bancarios y aseguradores. La solvencia e integridad contable se evalúan mediante la calidad de cartera (NPLs), ratios de cobertura de provisiones, margen de interés neto (NIM) y solidez de capital regulatorio (CET1).*
 
@@ -478,13 +478,13 @@ $$\text{Sloan Accrual Ratio} = \frac{\text{Utilidad Neta GAAP} - \text{Flujo de 
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | (+) Utilidad Neta GAAP ($M) | $3,610.0M | $2,871.7M | $1,972.1M | $1,030.5M | $-364.6M | Base Devengada SEC |
 | (-) Flujo Operativo CFO ($M) | $-1,381.6M | $3,500.5M | $2,399.0M | $1,266.2M | $755.6M | Caja Líquida Real |
-| (=) Devengos Totales (NI − CFO) | $+4,991.6M | $-628.8M | $-426.9M | $-235.7M | $-1,120.2M | CFO > NI (Deseable) |
+| (=) Devengos Totales (NI − CFO) | - | - | - | - | - | CFO > NI (Deseable) |
 | Activos Totales Promedio ($M) | $78,823.6M | $62,412.5M | $46,638.2M | $36,640.0M | $24,896.8M | Base de Activos |
-| **Ratio de Devengos de Sloan (%)** | **+6.33%** | **-1.01%** | **-0.92%** | **-0.64%** | **-4.50%** | **< -3.0% (Excelente)** |
-| Diagnóstico de Fidelidad | **SALUDABLE** | **SALUDABLE** | **SALUDABLE** | **SALUDABLE** | **EXCELENTE** | Fidelidad Ininterrumpida |
+| **Ratio de Devengos de Sloan (%)** | - | - | - | - | - | **< -3.0% (Excelente)** |
+| Diagnóstico de Fidelidad | **NO APLICABLE (SECTOR FINANCIERO)** | **NO APLICABLE (SECTOR FINANCIERO)** | **NO APLICABLE (SECTOR FINANCIERO)** | **NO APLICABLE (SECTOR FINANCIERO)** | **NO APLICABLE (SECTOR FINANCIERO)** | Fidelidad Ininterrumpida |
 
 
-**Interpretación Económica para el Inversor:** En el período acumulado LTM, Nu Holdings Ltd. generó **$-1,381.6M** en flujo de caja operativo frente a un beneficio neto reportado de **$3,610.0M**, lo que arroja una brecha de devengos negativa de **-$4,991.6M** y un Ratio Sloan de **+6.33%**. Esto implica una **tasa de conversión de caja del -38.3%** (cada dólar de beneficio neto reportado a la SEC está respaldado por **$-0.38 de efectivo real** en cuenta bancaria). La serie histórica ratifica una disciplina impecable: la compañía ha mantenido devengos negativos o neutrales en todos los ejercicios auditados, confirmando beneficios puros y conservadores.
+**Interpretación Económica para el Inversor:** En el período acumulado LTM, Nu Holdings Ltd. generó **$-1,381.6M** en flujo de caja operativo frente a un beneficio neto reportado de **$3,610.0M**, lo que arroja una brecha de devengos negativa de **-$0.0M** y un Ratio Sloan de **+0.00%**. Esto implica una **tasa de conversión de caja del -38.3%** (cada dólar de beneficio neto reportado a la SEC está respaldado por **$-0.38 de efectivo real** en cuenta bancaria). La serie histórica ratifica una disciplina impecable: la compañía ha mantenido devengos negativos o neutrales en todos los ejercicios auditados, confirmando beneficios puros y conservadores.
 
 ### 12.2. Matriz de Divergencias de Alerta Temprana (Early Warning Spreads)
 
@@ -528,7 +528,7 @@ La siguiente matriz sintetiza la totalidad de los indicadores forenses auditados
 
 | Dimensión Forense | Indicador Clave | Valor Auditado (LTM) | Zona de Seguridad | Diagnóstico para el Inversor |
 | :--- | :--- | :---: | :---: | :--- |
-| **Calidad de Beneficios** | Ratio de Devengos de Sloan | **+6.33%** | < -3.0% (Excelente) | Sincronización natural y armónica entre facturación y cobros de efectivo. |
+| **Calidad de Beneficios** | Ratio de Devengos de Sloan | **+0.00%** | < -3.0% (Excelente) | Sincronización natural y armónica entre facturación y cobros de efectivo. |
 | **Conversión de Ganancias** | Ratio CFO / Net Income | **-38.3%** | > 100.0% | Alerta (-38.3%): Caja operativa significativamente inferior a la utilidad. |
 | **Riesgo Channel Stuffing** | Spread AR vs. Ventas | **+0.0%** | < +10.0% | Cobranza disciplinada (DSO: 0.0d); cobros sincronizados sin ventas infladas. |
 | **Gestión de Existencias** | Días de Inventario (DIO) | **0.0 días** | < 45 días | Rotación ultra-rápida (0.0d); mínima inmovilización de capital. |
@@ -595,13 +595,13 @@ Mide la capacidad de respuesta ante tensiones de liquidez y analiza el riesgo de
 graph LR
     C["Capital Regulatorio<br>Tier 1 / CET1"] --> C1["Basilea III<br>Cumplimiento de Requerimientos"]
     L["LDR Balanceado<br>83.1%"] --> L1["Liquidez Autónoma<br>Financiación con Depósitos"]
-    R["Rating Sintético<br>D"] --> R1["DEFAULT INMINENTE O TÉCNICO (D / Default)<br>Solvencia Institucional"]
+    R["Rating Sintético<br>AA-"] --> R1["SOLVENCIA BANCARIA DE PRIMER NIVEL (AA-)<br>Solvencia Institucional"]
 ```
 
 #### A. Marco Regulatorio de Adecuación de Capital (Basilea III / Requerimientos de Capital):
 * **Common Equity Tier 1 (CET1 Ratio)**: Supervisado conforme a las directrices de Basilea III y el marco prudencial aplicable, asegurando colchones de capital para absorber ciclos de estrés macroeconómico.
 * **Autofinanciación Orgánica de Capital**: Con rentabilidad sobre patrimonio tangible (**ROTCE de 26.40%**), Nu Holdings Ltd. acumula capital interno para sostener la expansión de balance sin incurrir en dilución forzosa.
-* **Rating Crediticio Sintético (Metodología Damodaran)**: **D** (*DEFAULT INMINENTE O TÉCNICO (D / Default)*). Evaluación fundada en capacidad de servicio y absorción patrimonial.
+* **Rating Crediticio Sintético (Metodología Damodaran)**: **AA-** (*SOLVENCIA BANCARIA DE PRIMER NIVEL (AA-)*). Evaluación fundada en capacidad de servicio y absorción patrimonial.
 
 ---
 
@@ -626,25 +626,25 @@ El marco institucional para valorar la entidad se articula mediante el **Modelo 
   $$\frac{P}{BV} = \frac{ROTCE - g}{K_e - g}$$
   Donde el múltiplo patrimonial depende directamente del exceso de rentabilidad (*Economic Spread* = \(ROTCE - K_e\)) y de la reinversión de capital para sostener el crecimiento.
 * **2. Coste del Capital Propio (\(K_e\)) mediante CAPM:**
-  $$K_e = R_f + \beta \times ERP = 5.22\% + 0.97 \times 4.75\% = \mathbf{9.82\%}$$
+  $$K_e = R_f + \beta \times ERP = 5.19\% + 0.96 \times 4.75\% = \mathbf{9.76\%}$$
 * **3. Creación de Valor Económico Puro:**
-  Con un **ROTCE del 28.11%** y un coste de capital del **9.82%**, Nu Holdings Ltd. genera un **spread económico de +18.3 pp**, justificando una valoración fundada en rentabilidad de balance.
+  Con un **ROTCE del 28.11%** y un coste de capital del **9.76%**, Nu Holdings Ltd. genera un **spread económico de +18.4 pp**, justificando una valoración fundada en rentabilidad de balance.
 
 ### 14.2. Tabla Maestra de Parámetros de Valoración
 
 | Casilla / Input de Valoración Financiera | Valor Auditado | Fuente / Racional Metodológico |
 | :--- | :---: | :--- |
-| **Cotización de Mercado ($P_0$)** | **$15.72** | Cotización bursátil auditada en tiempo real. |
+| **Cotización de Mercado ($P_0$)** | **$14.87** | Cotización bursátil auditada en tiempo real. |
 | **Patrimonio Contable Total** | **$12,840.3 M** | Balance auditado Form 10-K / 20-F ante la SEC. |
 | **Acciones en Circulación** | **4,878.4 M** | Recuento de acciones diluidas reportadas. |
 | **Valor Contable por Acción** | **$2.63** | Valor contable neto por título en circulación. |
-| **Ratio P/TBV de Mercado Actual** | **5.98x** | Múltiplo sobre libros al precio de cotización. |
+| **Ratio P/TBV de Mercado Actual** | **5.65x** | Múltiplo sobre libros al precio de cotización. |
 | **Rentabilidad de Balance (ROTCE)** | **28.11%** | Rentabilidad sobre fondos propios auditada. |
-| **Coste del Capital Propio ($K_e$)** | **9.82%** | Tasa mínima exigida por CAPM ($R_f + \beta \times ERP$). |
-| **Spread Económico ($ROTCE - K_e$)** | **+18.3 pp** | Generación de valor excedente sobre coste de capital. |
+| **Coste del Capital Propio ($K_e$)** | **9.76%** | Tasa mínima exigida por CAPM ($R_f + \beta \times ERP$). |
+| **Spread Económico ($ROTCE - K_e$)** | **+18.4 pp** | Generación de valor excedente sobre coste de capital. |
 | **Crecimiento Terminal Sostenible ($g$)** | **3.0%** | Crecimiento de largo plazo de la base patrimonial. |
-| **Ratio P/TBV Justificado Teórico** | **3.68x** | Múltiplo intrínseco: $(ROTCE - g) / (K_e - g)$. |
-| **Valor Intrínseco por Acción** | **$9.68** | Precio teórico fundamental sustentado por ROTCE actual. |
+| **Ratio P/TBV Justificado Teórico** | **3.72x** | Múltiplo intrínseco: $(ROTCE - g) / (K_e - g)$. |
+| **Valor Intrínseco por Acción** | **$9.78** | Precio teórico fundamental sustentado por ROTCE actual. |
 
 
 ### 14.3. Matriz Bidimensional de Sensibilidad (Cost of Equity $K_e$ vs. ROTCE Sostenible)
@@ -653,17 +653,17 @@ La siguiente matriz evalúa el **Valor Intrínseco por Acción** ante distintas 
 
 | Coste Equity ($K_e$) \ ROTCE | 22.1% | 24.1% | 26.1% | 28.1% | 30.1% | 32.1% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 8.82% (Bajo / Optimista) | $8.63 | $9.54 | $10.44 | $11.35 | $12.25 | $13.15 | Favorable: Expansión de múltiplos por menor prima de riesgo. |
-| 9.32% (Favorable) | $7.95 | $8.78 | $9.62 | $10.45 | $11.28 | $12.11 | Escenario de sensibilidad financiera. |
-| 9.82% (Ke Auditado Base) | $7.37 | $8.14 | $8.91 | $9.68 | $10.45 | $11.23 | ESCENARIO CENTRAL: Valor teórico fundamental por rentabilidad de balance. |
-| 10.32% (Exigente) | $6.86 | $7.58 | $8.30 | $9.02 | $9.74 | $10.46 | Escenario de sensibilidad financiera. |
-| 10.82% (Estrés Macro / Tipos) | $6.43 | $7.10 | $7.77 | $8.44 | $9.12 | $9.79 | Estrés: Contracción por alza de tipos de interés o riesgo soberano. |
+| 8.76% (Bajo / Optimista) | $8.72 | $9.64 | $10.55 | $11.47 | $12.38 | $13.29 | Favorable: Expansión de múltiplos por menor prima de riesgo. |
+| 9.26% (Favorable) | $8.03 | $8.87 | $9.71 | $10.55 | $11.39 | $12.23 | Escenario de sensibilidad financiera. |
+| 9.76% (Ke Auditado Base) | $7.43 | $8.21 | $8.99 | $9.77 | $10.55 | $11.33 | ESCENARIO CENTRAL: Valor teórico fundamental por rentabilidad de balance. |
+| 10.26% (Exigente) | $6.92 | $7.65 | $8.37 | $9.10 | $9.82 | $10.55 | Escenario de sensibilidad financiera. |
+| 10.76% (Estrés Macro / Tipos) | $6.48 | $7.15 | $7.83 | $8.51 | $9.19 | $9.87 | Estrés: Contracción por alza de tipos de interés o riesgo soberano. |
 
 
 ### 14.4. Reverse Excess Return: ¿Qué expectativas descuenta el precio actual de mercado?
 
-Al cotizar a **$15.72** (5.98x P/TBV), el mercado está descontando:
-* **ROTCE Implícito a Perpetuidad:** El precio actual exige que Nu Holdings Ltd. sostenga un ROTCE del **~43.8%** a perpetuidad, o expanda su base operativa con rentabilidad excedente sobre capital.
+Al cotizar a **$14.87** (5.65x P/TBV), el mercado está descontando:
+* **ROTCE Implícito a Perpetuidad:** El precio actual exige que Nu Holdings Ltd. sostenga un ROTCE del **~41.2%** a perpetuidad, o expanda su base operativa con rentabilidad excedente sobre capital.
 * **Diagnóstico de Expectativas:** Para justificar la cotización actual, Nu Holdings Ltd. debe sostener un elevado retorno sobre patrimonio tangible (28.1%) y preservar su disciplina de asignación de capital frente al ciclo crediticio.
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -673,8 +673,8 @@ Al cotizar a **$15.72** (5.98x P/TBV), el mercado está descontando:
 | **Ventaja Competitiva (Moat)** | Eficiencia Operativa + Estructura de Fondeo | **🏰 WIDE MOAT / COMPOUNDING MACHINE** | Ventaja competitiva estructural en captación e intermediación. |
 | **Calidad de Cartera** | Gestión de Riesgo y Cobertura de Provisiones | **BLINDAJE DE PROVISIONES** | Provisiones adecuadas para absorber pérdidas esperadas en ciclo crediticio. |
 | **Solvencia y Capital** | Capital Regulatorio Basilea III / Tier 1 / CET1 | **SOLVENCIA BASILEA III** | Colchón de capital anticíclico y absorción de activos ponderados por riesgo. |
-| **Productividad del Capital** | ROTCE Tangible: 28.1% vs Ke 9.82% | **COMPOUNDING MACHINE** | Spread económico de +18.3 pp sobre coste de capital propio. |
-| **Valoración de Mercado** | P/TBV: 6.0x vs P/TBV Teórico: 3.7x | **PRICED FOR GROWTH** | Cotización descuenta sostener crecimiento y rentabilidad elevada. |
+| **Productividad del Capital** | ROTCE Tangible: 28.1% vs Ke 9.76% | **COMPOUNDING MACHINE** | Spread económico de +18.4 pp sobre coste de capital propio. |
+| **Valoración de Mercado** | P/TBV: 5.7x vs P/TBV Teórico: 3.7x | **PRICED FOR GROWTH** | Cotización descuenta sostener crecimiento y rentabilidad elevada. |
 
 
 

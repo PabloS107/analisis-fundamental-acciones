@@ -308,19 +308,19 @@ Desarrollado por el profesor Joseph Piotroski (Universidad de Stanford), este mo
   1. **Genera beneficios respaldados por caja líquida:** La caja operativa ($146,724.0M en LTM) respalda con holgura al beneficio neto contable ($128,930.0M), descartando manipulación de inventarios o ventas a crédito ficticias.
   2. **Reduce o controla su apalancamiento financiero real:** Mantiene una estructura financiera solvente con disciplina en el endeudamiento (Deuda 21.5% vs 25.2% (-3.76%)).
   3. **Protege al accionista minoritario:** No financia sus operaciones emitiendo nuevas acciones dilutivas, priorizando la retención o recompra de títulos (Acc 14,723M vs 14,948M (-225M)).
-  4. **Expande su eficiencia operativa:** Optimiza tanto su margen comercial (MB 48.7% vs 46.9% (+1.75%)) como la productividad de sus activos instalados (Rot 1.30x vs 1.14x (+0.16x)).
+  4. **Expande su eficiencia operativa:** Optimiza tanto su margen comercial (MB 48.7% vs 46.9% (+1.75%)) como la productividad de sus activos instalados (Rot 1.26x vs 1.15x (+0.11x)).
 
 | Dimensión / Criterio Piotroski | Condición Contable Evaluada | Valor Detectado | Punto Asignado |
 | :--- | :--- | :---: | :---: |
-| **Rentabilidad: ROA Positivo** | Utilidad neta positiva sobre la base de activos instalados. | 35.89% > 0% | **1 Pto** |
+| **Rentabilidad: ROA Positivo** | Utilidad neta positiva sobre la base de activos promedio instalados. | 34.73% > 0% | **1 Pto** |
 | **Rentabilidad: CFO Positivo** | Flujo de caja operativo neto positivo. | $146,724.0M > $0 | **1 Pto** |
-| **Rentabilidad: Mejora de ROA (Delta ROA)** | Aceleración de la rentabilidad sobre activos frente al año previo. | 35.9% vs 30.7% (+5.20%) | **1 Pto** |
+| **Rentabilidad: Mejora de ROA (Delta ROA)** | Aceleración de la rentabilidad sobre activos frente al año previo. | 34.7% vs 30.9% (+3.80%) | **1 Pto** |
 | **Rentabilidad: Calidad Contable (CFO > NI)** | Beneficios respaldados por efectivo contante (bajos devengos contables). | CFO $146,724.0M > NI $128,930.0M | **1 Pto** |
 | **Apalancamiento y Liquidez: Desendeudamiento Total** | Reducción o estabilidad del apalancamiento financiero total sobre activos. | Deuda 21.5% vs 25.2% (-3.76%) | **1 Pto** |
 | **Apalancamiento y Liquidez: Mejora de Razón Corriente** | Mayor cobertura de pasivos a corto plazo con activos corrientes. | CR 1.00x vs 0.89x (+0.11x) | **1 Pto** |
 | **Apalancamiento y Liquidez: Cero Dilución (Acciones Básicas)** | Sin emisión neta dilutiva de capital; recompra de acciones o estabilidad. | Acc 14,723M vs 14,948M (-225M) | **1 Pto** |
 | **Eficiencia Operativa: Expansión de Margen Bruto** | Mayor poder de fijación de precios o menor coste unitario de ventas. | MB 48.7% vs 46.9% (+1.75%) | **1 Pto** |
-| **Eficiencia Operativa: Expansión Rotación de Activos** | Mayor volumen de ingresos generado por cada dólar de activo instalado. | Rot 1.30x vs 1.14x (+0.16x) | **1 Pto** |
+| **Eficiencia Operativa: Expansión Rotación de Activos** | Mayor volumen de ingresos generado por cada dólar de activo instalado. | Rot 1.26x vs 1.15x (+0.11x) | **1 Pto** |
 
 
 ### 9.2. Mohanram G-Score: Calidad de Crecimiento frente a la Industria
@@ -451,13 +451,13 @@ A continuación se presenta el ranking institucional de la canasta de competidor
 
 Evaluación del retorno económico del capital y la sostenibilidad de las ventajas competitivas (*Economic Moat*) para **Apple Inc. (AAPL)** al período **LTM**.
 
-> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +42.40 p.p.)**  
+> 📌 **DICTAMEN DE VALOR ECONÓMICO: 🏰 WIDE MOAT / COMPOUNDING MACHINE (SPREAD +39.87 p.p.)**  
 > • **ROC Greenblatt Tangible (LTM):** **305.85%** (Productividad operativa pura pre-tax sobre capital de trabajo y PP&E físico instalado).  
-> • **ROIC Ajustado por Intangibles (LTM):** **52.72%** (Retorno económico post-tax reconstituyendo $79,597.8M de I+D fuera de balance).  
+> • **ROIC Ajustado por Intangibles (LTM):** **50.06%** (Retorno económico post-tax reconstituyendo $83,773.2M de I+D fuera de balance).  
 > • **ROIC Contable Tradicional (LTM):** **68.22%** (Métrica contable estándar que subestima el capital empleado al enviar I+D a gasto corriente).  
-> • **Costo Promedio Ponderado de Capital (WACC):** **10.31%** (Costo del Equity Ke: 10.42% | Costo Deuda Kd post-tax: 3.72%).  
-> • **Spread Económico Neto (EVA):** **+42.40 p.p.** de rendimiento generado por encima de la tasa de corte exigida por el mercado.  
-> • **Tesis de Foso Defensivo:** Apple Inc. combina una productividad física tangible de 305.8% gracias a su modelo operativo, con un retorno sobre capital total (ROIC Ajustado 52.72%) que supera a su WACC por +42.4 p.p., confirmando ventajas competitivas estructuralmente blindadas frente a sus rivales.
+> • **Costo Promedio Ponderado de Capital (WACC):** **10.19%** (Costo del Equity Ke: 10.30% | Costo Deuda Kd post-tax: 3.72%).  
+> • **Spread Económico Neto (EVA):** **+39.87 p.p.** de rendimiento generado por encima de la tasa de corte exigida por el mercado.  
+> • **Tesis de Foso Defensivo:** Apple Inc. combina una productividad física tangible de 305.8% gracias a su modelo operativo, con un retorno sobre capital total (ROIC Ajustado 50.06%) que supera a su WACC por +39.9 p.p., confirmando ventajas competitivas estructuralmente blindadas frente a sus rivales.
 
 ---
 
@@ -467,22 +467,22 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 
 | Variable de Mercado | Valor Validado | Fuente Primaria / Secundaria | Tolerancia & Estatus |
 | :--- | :---: | :---: | :---: |
-| **Precio de Mercado de la Acción** | **$341.27** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
-| **Capitalización Bursátil (Market Cap - E)** | **$4,980,555.8M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
-| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.32%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
+| **Precio de Mercado de la Acción** | **$342.73** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
+| **Capitalización Bursátil (Market Cap - E)** | **$5,065,079.4M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
+| **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **5.19%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-14T13:23:22.508220+00:00`. Precio validado por consenso: $341.27 (Yahoo: $341.27, CNBC: $341.27, Δ=0.00%) | Market Cap calculado: $4,980,555.8M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 5.315% (Yahoo ^TNX: 5.319%, CNBC US10Y: 5.312%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-14T18:25:56.687646+00:00`. Precio validado por consenso: $342.73 (Yahoo: $342.75, CNBC: $342.71, Δ=0.01%) | Market Cap calculado: $5,065,079.4M vía Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.189% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.181%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
 El WACC representa el rendimiento mínimo anual exigido por los accionistas y los acreedores para compensar el costo de oportunidad y el riesgo del negocio:
 
-* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.32% + (1.07 \times 4.75%) =$ **10.42%**
+* **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 5.19% + (1.07 \times 4.75%) =$ **10.30%**
 * **Costo de la Deuda ($K_d$ neto de impuestos)**: Pre-tax: 4.50% | Con Escudo Fiscal (17.3%): **3.72%**.
-* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($4,980,555.8M) | Deuda $W_d = 1.6%$ ($82,347.0M).
-* **WACC Consolidado**: $\text{WACC} = (W_e \times K_e) + (W_d \times K_d) =$ **10.31%** (vs. Mediana del Sector: **8.80%**).
+* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,065,079.4M) | Deuda $W_d = 1.6%$ ($82,347.0M).
+* **WACC Consolidado**: $\text{WACC} = (W_e \times K_e) + (W_d \times K_d) =$ **10.19%** (vs. Mediana del Sector: **8.80%**).
 
 ---
 
@@ -521,34 +521,34 @@ Para auditar el cálculo y contrastarlo directamente con los estados financieros
 
 #### Desglose y Explicación del ROIC: Tradicional vs. Ajustado por Intangibles (Aswath Damodaran)
 El ROIC Tradicional Contable (**68.22%**) presenta un sesgo contable crítico bajo normas US GAAP / IFRS: al imputar el gasto en I+D íntegramente como gasto operativo corriente del período, el balance general borra los microchips y software propietarios, reduciendo artificialmente la base de capital invertido.
-Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza la inversión histórica en innovación amortizándola en 4 años. Al incorporar **$79,597.8M** en activos intangibles, el Capital Invertido Reconstituido asciende a **$267,312.2M**, arrojando un **ROIC Ajustado de 52.72%**.
+Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza la inversión histórica en innovación amortizándola en 4 años. Al incorporar **$83,773.2M** en activos intangibles, el Capital Invertido Reconstituido asciende a **$269,400.0M**, arrojando un **ROIC Ajustado de 50.06%**.
 
 * **ROC vs. ROIC: ¿Cuándo utilizar cada indicador?**
   * **ROC Greenblatt (305.85%):** Responde a *¿qué tan productivos son los activos físicos y el capital de trabajo de la empresa?* Es idóneo para evaluar la eficiencia operativa pura sin distorsión fiscal.
-  * **ROIC Ajustado (52.72%):** Responde a *¿cuánto rinde el negocio considerando el capital total inyectado, incluidos los intangibles de I+D?* Es el indicador definitivo para comparar contra el costo de capital (WACC).
+  * **ROIC Ajustado (50.06%):** Responde a *¿cuánto rinde el negocio considerando el capital total inyectado, incluidos los intangibles de I+D?* Es el indicador definitivo para comparar contra el costo de capital (WACC).
 
 #### Serie Histórica Multianual de Retornos de Capital (FY2021 a LTM)
 
 | Período Contable | ROC Greenblatt Tangible (%) | ROIC Tradicional Prom. (%) | ROIC Ajustado Prom. (%) | Stock Intangibles ($M) | Capital Invertido Reconstituido Prom. ($M) | Spread vs. WACC (p.p.) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **FY2021** | 255.50% | 48.51% | **41.96%** | $47,645.5M | $239,010.2M | **+31.64 p.p.** |
-| **FY2022** | 292.89% | 51.80% | **43.73%** | $56,116.8M | $245,105.6M | **+33.42 p.p.** |
-| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.24 p.p.** |
-| **FY2024** | 275.67% | 52.44% | **40.04%** | $72,410.2M | $247,173.8M | **+29.73 p.p.** |
-| **FY2025** | 278.60% | 66.13% | **48.15%** | $79,597.8M | $245,795.5M | **+37.84 p.p.** |
-| **LTM** | 305.85% | 68.22% | **52.72%** | $79,597.8M | $267,312.2M | **+42.40 p.p.** |
+| **FY2021** | 255.50% | 48.51% | **41.96%** | $47,645.5M | $239,010.2M | **+31.77 p.p.** |
+| **FY2022** | 292.89% | 51.80% | **43.73%** | $56,116.8M | $245,105.6M | **+33.54 p.p.** |
+| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.36 p.p.** |
+| **FY2024** | 275.67% | 52.44% | **40.04%** | $72,410.2M | $247,173.8M | **+29.85 p.p.** |
+| **FY2025** | 278.60% | 66.13% | **48.15%** | $79,597.8M | $245,795.5M | **+37.96 p.p.** |
+| **LTM** | 305.85% | 68.22% | **50.06%** | $83,773.2M | $269,400.0M | **+39.87 p.p.** |
 
 **Jerarquía de Eficiencia del Capital y Retornos Operativos**:
 1. **ROC Greenblatt (Tangible pre-tax)**: Mide la productividad pura de los activos operativos tangibles ($EBIT / (NWC + PP&E)$). Es neutral a tasas de impuestos y apalancamiento.
 2. **ROIC Tradicional (Contable post-tax)**: Retorno contable NOPAT sobre capital invertido según balance GAAP/IFRS.
 3. **ROIC Ajustado (Económico con intangibles capitalizados)**: Reconstituye activos fuera de balance (I+D y publicidad) capitalizándolos roll-forward.
-4. **Costo de Capital (WACC)**: Tasa de corte institucional exigida por el mercado (10.31%).
-5. **Spread Económico (Creación de Valor)**: Excedente neto generado sobre la tasa de corte (+42.40 p.p.).
+4. **Costo de Capital (WACC)**: Tasa de corte institucional exigida por el mercado (10.19%).
+5. **Spread Económico (Creación de Valor)**: Excedente neto generado sobre la tasa de corte (+39.87 p.p.).
 
 **Matriz de Sensibilidad de Vida Útil Económica ($N$) para I+D**:
-* **Escenario Acelerado ($N-1 = 3$ años)**: Intangibles acumulados $65,435.0M $\rightarrow$ ROIC Ajustado: **55.07%**.
-* **Escenario Base ($N = 4$ años)**: Intangibles acumulados $79,597.8M $\rightarrow$ ROIC Ajustado: **52.72%**.
-* **Escenario Extendido ($N+1 = 5$ años)**: Intangibles acumulados $92,478.2M $\rightarrow$ ROIC Ajustado: **50.80%**.
+* **Escenario Acelerado ($N-1 = 3$ años)**: Intangibles acumulados $69,610.5M $\rightarrow$ ROIC Ajustado: **52.32%**.
+* **Escenario Base ($N = 4$ años)**: Intangibles acumulados $83,773.2M $\rightarrow$ ROIC Ajustado: **50.06%**.
+* **Escenario Extendido ($N+1 = 5$ años)**: Intangibles acumulados $96,653.7M $\rightarrow$ ROIC Ajustado: **48.27%**.
 
 ---
 
@@ -556,11 +556,11 @@ Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza 
 
 ### **Dictamen Estratégico: 🏰 WIDE MOAT / COMPOUNDING MACHINE**
 
-$$\text{Economic Spread} = \text{ROIC}_{\text{Ajustado}} - \text{WACC} = 52.72% - 10.31% = \mathbf{+42.40 p.p.}$$
+$$\text{Economic Spread} = \text{ROIC}_{\text{Ajustado}} - \text{WACC} = 50.06% - 10.19% = \mathbf{+39.87 p.p.}$$
 
-> **Explicación Pedagógica del Spread Económico**: El negocio genera un retorno ajustado (52.72%) que supera a su costo de capital (10.31%) por más de 42.40 puntos porcentuales. Por cada $100 de capital empleado, crea más de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas.
+> **Explicación Pedagógica del Spread Económico**: El negocio genera un retorno ajustado (50.06%) que supera a su costo de capital (10.19%) por más de 39.87 puntos porcentuales. Por cada $100 de capital empleado, crea más de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas.
 
-A diferencia del ROIC contable tradicional (68.22%), que sobrestima la rentabilidad al ignorar la reinversión en innovación, el ROIC Ajustado de **52.72%** (calculado sobre el Capital Invertido Promedio de **$267,312.2M** para garantizar perfecta correspondencia temporal con el NOPAT) demuestra que la empresa supera a su costo de financiamiento (**10.31%**) con holgura extraordinaria, confirmando la existencia de un foso defensivo indestructible frente a sus competidores directos.
+A diferencia del ROIC contable tradicional (68.22%), que sobrestima la rentabilidad al ignorar la reinversión en innovación, el ROIC Ajustado de **50.06%** (calculado sobre el Capital Invertido Promedio de **$269,400.0M** para garantizar perfecta correspondencia temporal con el NOPAT) demuestra que la empresa supera a su costo de financiamiento (**10.19%**) con holgura extraordinaria, confirmando la existencia de un foso defensivo indestructible frente a sus competidores directos.
 
 ---
 
@@ -570,19 +570,19 @@ La siguiente tabla unifica la totalidad de los ratios e indicadores calculados e
 
 | Categoría Analítica | Métrica / Ratio Institucional | Valor LTM | Benchmark / Referencia | Diagnóstico para el Inversor |
 | :--- | :--- | :---: | :---: | :--- |
-| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **5.32%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
+| **Parámetros Macro y Mercado** | Tasa Libre de Riesgo ($R_f$ - Bono 10Y) | **5.19%** | US Treasury Yield | Costo de oportunidad libre de riesgo macroeconómico. |
 | | Beta de la Acción ($\beta$) | **1.07** | S&P 500 = 1.00x | Sensibilidad cíclica moderada y alineada al mercado. |
 | | Prima de Riesgo de Mercado (ERP) | **4.75%** | NYU Stern Damodaran | Exigencia de prima de retorno sobre el activo libre de riesgo. |
-| **Costo de Capital (WACC)** | Costo del Capital Propio ($K_e$ vía CAPM) | **10.42%** | Rango 9.5% - 10.5% | Retorno anual exigido por los tenedores de acciones comunes. |
+| **Costo de Capital (WACC)** | Costo del Capital Propio ($K_e$ vía CAPM) | **10.30%** | Rango 9.5% - 10.5% | Retorno anual exigido por los tenedores de acciones comunes. |
 | | Costo de Deuda Neta ($K_d$ Post-Tax) | **3.72%** | Tasa cupón efectiva | Financiación crediticia con escudo fiscal del 17.3%. |
-| | **WACC Consolidado** | **10.31%** | Mediana Sector (8.80%) | Tasa de corte u obstáculo financiero mínimo para crear valor. |
+| | **WACC Consolidado** | **10.19%** | Mediana Sector (8.80%) | Tasa de corte u obstáculo financiero mínimo para crear valor. |
 | **Productividad Tangible** | **ROC Greenblatt (Pre-Tax)** | **305.85%** | Mediana Sector (29.85%) | Negocio Asset-Light; supera al sector por +276.00 p.p.. |
 | | Capital Tangible Operativo Promedio | **$50,632.5M** | Balance SEC Form 10-Q | Base física operativa tras salvaguarda anti-distorsión. |
 | **Retorno Total Reconstituido** | ROIC Contable Tradicional (GAAP) | **68.22%** | ROIC sin ajustes | Métrica distorsionada por no capitalizar gasto de innovación. |
-| | Stock de Intangibles de I+D Fuera de Balance | **$79,597.8M** | Amortización a 4 Años | Valor acumulado de patentes, silicio y software propietario. |
-| | Capital Invertido Reconstituido Promedio | **$267,312.2M** | Base Económica Total | Base de capital honesta que absorbe las inversiones en I+D. |
-| | **ROIC Ajustado por Intangibles** | **52.72%** | Mediana Sector (18.30%) | Retorno real sobre capital total invertido en el negocio. |
-| **Creación de Valor (EVA)** | **Spread Económico (ROIC Adj − WACC)** | **+42.40 p.p.** | Mediana Sector (+9.20 p.p.) | Extraordinaria generación de riqueza neta sobre el coste de capital. |
+| | Stock de Intangibles de I+D Fuera de Balance | **$83,773.2M** | Amortización a 4 Años | Valor acumulado de patentes, silicio y software propietario. |
+| | Capital Invertido Reconstituido Promedio | **$269,400.0M** | Base Económica Total | Base de capital honesta que absorbe las inversiones en I+D. |
+| | **ROIC Ajustado por Intangibles** | **50.06%** | Mediana Sector (18.30%) | Retorno real sobre capital total invertido en el negocio. |
+| **Creación de Valor (EVA)** | **Spread Económico (ROIC Adj − WACC)** | **+39.87 p.p.** | Mediana Sector (+9.20 p.p.) | Extraordinaria generación de riqueza neta sobre el coste de capital. |
 | | **Dictamen de Foso Defensivo (*Moat*)** | **🏰 WIDE MOAT / COMPOUNDING MACHINE** | Compounding Machine | Fortaleza estructural inquebrantable de largo plazo. |
 
 ---
@@ -655,7 +655,7 @@ James Montier, estratega de Société Générale y GMO, diseñó un sistema cuan
 | **3. Inventarios vs. Coste de Ventas (DIO)** | Δ DIO > 0 (o %Δ Inventarios > %Δ Coste de Ventas) | DIO: 16.9d (Δ: +7.4d) | **🚩 FLAG (Alerta)** | Las existencias rotan más lento o crecen más rápido que los costes. Puede esconder producto no vendido o absorción de costes en inventario para inflar márgenes. |
 | **4. Otros Activos Corrientes vs. Ventas** | Ratio Otros Act. Ctes/Ventas_t > Ratio Otros Act. Ctes/Ventas_t-1 | Otros Act/Ventas: 3.73% vs 3.5% | **🚩 FLAG (Alerta)** | Incremento del peso relativo de otros activos corrientes. Alerta de partidas dudosas o cargos diferidos ocultos fuera de clientes e inventarios. |
 | **5. Reducción de la Tasa de Depreciación** | Tasa Depreciación_t < Tasa Depreciación_t-1 | Tasa Deprec: 20.3% vs 19.01% | **✅ OK (Limpio)** | Reducción de la amortización contable respecto a los activos brutos, inflando el beneficio neto al estirar vidas útiles estimadas. |
-| **6. Crecimiento Excesivo de Activos Totales** | Crecimiento Interanual de Activos Totales > 10.0% | ΔActivos: +6.7% (Umbral: > 10%) | **✅ OK (Limpio)** | Expansión acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad orgánica y distorsionar resultados. |
+| **6. Crecimiento Excesivo de Activos Totales** | Δ Activos > 15.0% y Δ Activos > 1.15 * Δ Ventas | ΔActivos: +6.7% vs ΔVentas: +12.2% | **✅ OK (Limpio)** | Expansión desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad orgánica o acumulación de partidas improductivas. |
 
 
 > **DICTAMEN MONTIER C-SCORE:** **2 / 6** — *RIESGO MODERADO / ALERTA PREVENTIVA*  
@@ -757,7 +757,7 @@ graph LR
 
 > **PROPÓSITO DE VALORACIÓN:** INTEGRACIÓN FISCAL AI & MOTOR DE VALORACIÓN PROPIETARIO  
 > **Metodología Seleccionada:** Descuento de Flujo de Caja Inverso (*Reverse DCF*) basado en *Expectations Investing* (Mauboussin & Rappaport).  
-> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Apple Inc. ($341.27) para sostener su cotización.
+> **Objetivo Práctico:** No especular con proyecciones arbitrarias, sino auditar con rigor matemático qué tasa de crecimiento anual de negocio le está exigiendo el precio actual de mercado a Apple Inc. ($342.73) para sostener su cotización.
 
 ### 14.1. Configuración Óptima del Modelo en Plataformas de Valoración (Fiscal AI)
 
@@ -770,8 +770,8 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | Casilla / Input de Valoración | Valor Auditado (En Vivo) | Sección de Origen | Racional Técnico y Sustento Fundamental |
 | :--- | :---: | :---: | :--- |
-| **Precio de Referencia ($P_0$)** | **$341.27** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
-| **Tasa Libre de Riesgo ($R_f$)** | **5.32%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
+| **Precio de Referencia ($P_0$)** | **$342.73** | Mercado en Vivo | Cotización auditada por consenso bursátil en tiempo real. |
+| **Tasa Libre de Riesgo ($R_f$)** | **5.19%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Damodaran Benchmark | Prima histórica por riesgo accionario demandada por inversores. |
 | **Beta Apalancada (Consenso)** | **1.07** | Sección 11.2 (Arbitraje) | Sensibilidad sistemática del título frente al índice S&P 500. |
 | **Coste de la Deuda ($K_d$ Pre-Tax)** | **4.5%** | Sección 11.2 (Sintético) | Coste de financiamiento bruto estimado por rating sintético. |
@@ -779,7 +779,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Tasa Impositiva Efectiva ($t$)** | **17.3%** | Sección 11.2 (SEC 10-K) | Tasa impositiva estructural auditada en estados financieros. |
 | **Ponderación Deuda ($W_d$)** | **1.6%** | Estructura de Capital | Proporción de deuda financiera sobre valor total de la empresa. |
 | **Ponderación Fondos Propios ($W_e$)** | **98.4%** | Estructura de Capital | Proporción de capital propio sobre valor total de la empresa. |
-| **Coste Medio Ponderado (WACC)** | **10.31%** | Sección 11.2 (WACC) | Tasa de descuento de corte para flujos libres hacia la empresa. |
+| **Coste Medio Ponderado (WACC)** | **10.19%** | Sección 11.2 (WACC) | Tasa de descuento de corte para flujos libres hacia la empresa. |
 | **Margen FCF Estructural** | **29.3%** | Sección 4 & Solvencia | Conversión de ingresos a caja libre de capital tras reinversiones. |
 | **Tasa de Crecimiento Terminal ($g_n$)** | **2.5%** | Hipótesis Canónica | Crecimiento tendencial de la economía global a perpetuidad. |
 | **Horizonte de Proyección** | **10 Años** | Configuración Estándar | Período de amortización del superciclo operativo y de producto. |
@@ -789,21 +789,21 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 
 | Parámetro Clave | Modelo Propietario (Auditado) | Parametrización Plataformas | Diferencial (Delta) | Impacto Cuantitativo en la Tesis |
 | :--- | :---: | :---: | :---: | :--- |
-| **WACC (Tasa de Descuento)** | 10.31% | 10.90% | -0.59 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
+| **WACC (Tasa de Descuento)** | 10.19% | 10.90% | -0.71 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 29.3% | 24.40% | +4.90 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **16.6%** | **20.4%** | **-3.8 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **16.6%** | **20.6%** | **-4.0 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.31% (Bajo / Expansión) | 16.2% | 15.6% | 15.0% | 14.4% | 13.7% | 12.9% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 9.81% (Favorable) | 17.2% | 16.7% | 16.1% | 15.5% | 14.9% | 14.1% | Escenario de sensibilidad operativa. |
-| 10.31% (WACC Auditado Base) | 18.2% | 17.7% | 17.2% | 16.6% | 16.0% | 15.3% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.81% (Exigente) | 19.2% | 18.7% | 18.2% | 17.7% | 17.1% | 16.5% | Escenario de sensibilidad operativa. |
-| 11.31% (Estrés / Tipos Altos) | 20.1% | 19.7% | 19.2% | 18.7% | 18.2% | 17.6% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.19% (Bajo / Expansión) | 16.2% | 15.6% | 15.0% | 14.3% | 13.6% | 12.8% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 9.69% (Favorable) | 17.2% | 16.7% | 16.1% | 15.5% | 14.8% | 14.1% | Escenario de sensibilidad operativa. |
+| 10.19% (WACC Auditado Base) | 18.2% | 17.7% | 17.2% | 16.6% | 15.9% | 15.3% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 10.69% (Exigente) | 19.2% | 18.7% | 18.2% | 17.6% | 17.1% | 16.4% | Escenario de sensibilidad operativa. |
+| 11.19% (Estrés / Tipos Altos) | 20.2% | 19.7% | 19.2% | 18.7% | 18.1% | 17.5% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -813,8 +813,8 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Ventaja Competitiva (Moat)** | Costes de Cambio (Switching Costs) + Activos Intangibles y Marca | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (33.2% EBIT). |
 | **Calidad de Beneficios** | Ratio Sloan: -4.79% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.14 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: 41.8x / Altman Z'': 3.23 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $62.4B. |
-| **Productividad del Capital** | ROC Greenblatt: 305.9% / ROIC Adj: 52.7% | **COMPOUNDING MACHINE** | Spread económico de +42.4 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: 16.6% - 20.4% | **PRICED FOR PERFECTION** | Exigencia de crecimiento ambiciosa (+23.1% anual); requiere catalizadores sostenidos en IA y Servicios. |
+| **Productividad del Capital** | ROC Greenblatt: 305.9% / ROIC Adj: 50.1% | **COMPOUNDING MACHINE** | Spread económico de +39.9 pp sobre WACC (Creación de valor de élite). |
+| **Valoración de Mercado** | Crecimiento Implícito: 16.6% - 20.6% | **PRICED FOR PERFECTION** | Exigencia de crecimiento ambiciosa (+23.1% anual); requiere catalizadores sostenidos en IA y Servicios. |
 
 
 

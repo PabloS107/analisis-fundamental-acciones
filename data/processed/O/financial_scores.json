@@ -210,13 +210,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.0145419479404885,
-          "formatted_value": "1.45%",
-          "comparison_label": "1.45% > 0%",
+          "value": 0.014186688058310868,
+          "formatted_value": "1.42%",
+          "comparison_label": "1.42% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -232,9 +232,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.0008367024587652861,
+          "value": -0.0007619122979778282,
           "formatted_value": "-0.08%",
-          "comparison_label": "1.5% vs 1.5% (-0.08%)",
+          "comparison_label": "1.4% vs 1.5% (-0.08%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -298,7 +298,7 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.004186396994608418,
+          "value": 0.0043632836375031014,
           "formatted_value": "+0.004x",
           "comparison_label": "Rot 0.08x vs 0.08x (+0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
@@ -319,13 +319,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.015378650399253787,
-          "formatted_value": "1.54%",
-          "comparison_label": "1.54% > 0%",
+          "value": 0.014948600356288696,
+          "formatted_value": "1.49%",
+          "comparison_label": "1.49% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -341,9 +341,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0004810806668664909,
-          "formatted_value": "+0.05%",
-          "comparison_label": "1.5% vs 1.5% (+0.05%)",
+          "value": 0.00135185263733263,
+          "formatted_value": "+0.14%",
+          "comparison_label": "1.5% vs 1.4% (+0.14%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -407,9 +407,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.008302493159145483,
-          "formatted_value": "-0.008x",
-          "comparison_label": "Rot 0.08x vs 0.09x (-0.01x)",
+          "value": -0.0028891493707779298,
+          "formatted_value": "-0.003x",
+          "comparison_label": "Rot 0.08x vs 0.08x (-0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": false,
           "points": 0,
@@ -428,13 +428,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.014897569732387296,
-          "formatted_value": "1.49%",
-          "comparison_label": "1.49% > 0%",
+          "value": 0.013596747718956066,
+          "formatted_value": "1.36%",
+          "comparison_label": "1.36% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -450,9 +450,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.002663426873179355,
-          "formatted_value": "-0.27%",
-          "comparison_label": "1.5% vs 1.8% (-0.27%)",
+          "value": -0.002639438763866674,
+          "formatted_value": "-0.26%",
+          "comparison_label": "1.4% vs 1.6% (-0.26%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -516,9 +516,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.007609265847744379,
-          "formatted_value": "+0.008x",
-          "comparison_label": "Rot 0.09x vs 0.08x (+0.01x)",
+          "value": 0.0059984156481024675,
+          "formatted_value": "+0.006x",
+          "comparison_label": "Rot 0.08x vs 0.07x (+0.01x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -537,13 +537,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.01756099660556665,
-          "formatted_value": "1.76%",
-          "comparison_label": "1.76% > 0%",
+          "value": 0.01623618648282274,
+          "formatted_value": "1.62%",
+          "comparison_label": "1.62% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -559,9 +559,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.002593346128511923,
-          "formatted_value": "-0.26%",
-          "comparison_label": "1.8% vs 2.0% (-0.26%)",
+          "value": -0.002498916106866537,
+          "formatted_value": "-0.25%",
+          "comparison_label": "1.6% vs 1.9% (-0.25%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -625,9 +625,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.0031923761756716684,
+          "value": 0.002567407872413427,
           "formatted_value": "+0.003x",
-          "comparison_label": "Rot 0.08x vs 0.08x (+0.00x)",
+          "comparison_label": "Rot 0.07x vs 0.07x (+0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -646,13 +646,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.020154342734078574,
-          "formatted_value": "2.02%",
-          "comparison_label": "2.02% > 0%",
+          "value": 0.018735102589689277,
+          "formatted_value": "1.87%",
+          "comparison_label": "1.87% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -668,9 +668,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0028230476241029867,
-          "formatted_value": "+0.28%",
-          "comparison_label": "2.0% vs 1.7% (+0.28%)",
+          "value": 0.007480611259236642,
+          "formatted_value": "+0.75%",
+          "comparison_label": "1.9% vs 1.1% (+0.75%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -734,20 +734,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.023071052233211375,
-          "formatted_value": "-0.023x",
-          "comparison_label": "Rot 0.08x vs 0.10x (-0.02x)",
+          "value": 0.006451781868275178,
+          "formatted_value": "+0.006x",
+          "comparison_label": "Rot 0.07x vs 0.06x (+0.01x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": false,
-          "points": 0,
+          "passed": true,
+          "points": 1,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 4,
+      "total_score": 5,
       "max_score": 9,
-      "rating": "VULNERABILIDAD FINANCIERA",
-      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
-      "status_color": "RED"
+      "rating": "SALUD MODERADA",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
+      "status_color": "YELLOW"
     },
     "FY2021": {
       "period": "FY2021",
@@ -755,13 +755,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.017331295109975588,
-          "formatted_value": "1.73%",
-          "comparison_label": "1.73% > 0%",
+          "value": 0.011254491330452634,
+          "formatted_value": "1.13%",
+          "comparison_label": "1.13% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -777,9 +777,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.003983194146602604,
-          "formatted_value": "-0.40%",
-          "comparison_label": "1.7% vs 2.1% (-0.40%)",
+          "value": -0.008874542122869424,
+          "formatted_value": "-0.89%",
+          "comparison_label": "1.1% vs 2.0% (-0.89%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -843,20 +843,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.011200979834691802,
-          "formatted_value": "+0.011x",
-          "comparison_label": "Rot 0.10x vs 0.09x (+0.01x)",
+          "value": -0.01879384038472269,
+          "formatted_value": "-0.019x",
+          "comparison_label": "Rot 0.06x vs 0.08x (-0.02x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 5,
+      "total_score": 4,
       "max_score": 9,
-      "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "rating": "VULNERABILIDAD FINANCIERA",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
+      "status_color": "RED"
     },
     "FY2020": {
       "period": "FY2020",
@@ -864,13 +864,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.02131448925657819,
-          "formatted_value": "2.13%",
-          "comparison_label": "2.13% > 0%",
+          "value": 0.020129033453322058,
+          "formatted_value": "2.01%",
+          "comparison_label": "2.01% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -886,9 +886,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.007287619864083324,
-          "formatted_value": "-0.73%",
-          "comparison_label": "2.1% vs 2.9% (-0.73%)",
+          "value": -0.005686634073774198,
+          "formatted_value": "-0.57%",
+          "comparison_label": "2.0% vs 2.6% (-0.57%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -952,9 +952,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.008936548116051116,
-          "formatted_value": "-0.009x",
-          "comparison_label": "Rot 0.09x vs 0.10x (-0.01x)",
+          "value": -0.004372116668707626,
+          "formatted_value": "-0.004x",
+          "comparison_label": "Rot 0.08x vs 0.09x (-0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": false,
           "points": 0,
@@ -973,13 +973,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.028602109120661516,
-          "formatted_value": "2.86%",
-          "comparison_label": "2.86% > 0%",
+          "value": 0.025815667527096256,
+          "formatted_value": "2.58%",
+          "comparison_label": "2.58% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -995,9 +995,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.002737142097224747,
-          "formatted_value": "+0.27%",
-          "comparison_label": "2.9% vs 2.6% (+0.27%)",
+          "value": 0.0010113868114329932,
+          "formatted_value": "+0.10%",
+          "comparison_label": "2.6% vs 2.5% (+0.10%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -1061,20 +1061,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.0032926544477487885,
-          "formatted_value": "+0.003x",
-          "comparison_label": "Rot 0.10x vs 0.09x (+0.00x)",
+          "value": -0.0023311833870791193,
+          "formatted_value": "-0.002x",
+          "comparison_label": "Rot 0.09x vs 0.09x (-0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 6,
+      "total_score": 5,
       "max_score": 9,
-      "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "rating": "SALUD MODERADA",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
+      "status_color": "YELLOW"
     },
     "FY2018": {
       "period": "FY2018",
@@ -1082,13 +1082,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.02586496702343677,
-          "formatted_value": "2.59%",
-          "comparison_label": "2.59% > 0%",
+          "value": 0.024804280715663263,
+          "formatted_value": "2.48%",
+          "comparison_label": "2.48% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1104,9 +1104,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0016270648954526956,
-          "formatted_value": "+0.16%",
-          "comparison_label": "2.6% vs 2.4% (+0.16%)",
+          "value": 0.001372759160641307,
+          "formatted_value": "+0.14%",
+          "comparison_label": "2.5% vs 2.3% (+0.14%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -1170,8 +1170,8 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.0015719170043857755,
-          "formatted_value": "+0.002x",
+          "value": 0.000792091933994099,
+          "formatted_value": "+0.001x",
           "comparison_label": "Rot 0.09x vs 0.09x (+0.00x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
@@ -1191,13 +1191,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.024237902127984073,
-          "formatted_value": "2.42%",
-          "comparison_label": "2.42% > 0%",
+          "value": 0.023431521555021956,
+          "formatted_value": "2.34%",
+          "comparison_label": "2.34% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1213,12 +1213,12 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0002453456739597015,
-          "formatted_value": "+0.02%",
-          "comparison_label": "2.4% vs 2.4% (+0.02%)",
+          "value": -0.0005610348990024161,
+          "formatted_value": "-0.06%",
+          "comparison_label": "2.3% vs 2.4% (-0.06%)",
           "threshold": "> 0.00%",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Aceleraci\u00f3n de la rentabilidad sobre activos frente al a\u00f1o previo."
         },
         "F_ACCRUAL": {
@@ -1279,8 +1279,8 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.008560564457752232,
-          "formatted_value": "+0.009x",
+          "value": 0.005485351638258362,
+          "formatted_value": "+0.005x",
           "comparison_label": "Rot 0.09x vs 0.08x (+0.01x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
@@ -1288,11 +1288,11 @@
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 6,
+      "total_score": 5,
       "max_score": 9,
-      "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "rating": "SALUD MODERADA",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
+      "status_color": "YELLOW"
     },
     "FY2016": {
       "period": "FY2016",
@@ -1306,7 +1306,7 @@
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1415,7 +1415,7 @@
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -2789,7 +2789,7 @@
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 4,
+      "f_score": 5,
       "g_score": 4
     },
     "FY2021": {
@@ -2797,7 +2797,7 @@
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 5,
+      "f_score": 4,
       "g_score": 3
     },
     "FY2020": {
@@ -2809,11 +2809,11 @@
       "g_score": 5
     },
     "FY2019": {
-      "quadrant": "CUADRANTE III: GENERADOR MADURO (CASH COW)",
-      "badge": "\ud83d\udee1\ufe0f GENERADOR MADURO (CASH COW)",
-      "color": "BLUE",
-      "investment_thesis": "Excelente salud y disciplina de capital interna: balance desendeudado, m\u00e1rgenes estables y s\u00f3lida conversi\u00f3n a flujo de caja libre, pero con menor ritmo de reinversi\u00f3n o crecimiento que el promedio de su sector. T\u00edpica vaca lechera con retornos predecibles pero menor expansi\u00f3n.",
-      "f_score": 6,
+      "quadrant": "CUADRANTE IV: TRAMPA DE VALOR / DETERIORO",
+      "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
+      "color": "RED",
+      "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
+      "f_score": 5,
       "g_score": 5
     },
     "FY2018": {
@@ -2825,11 +2825,11 @@
       "g_score": 5
     },
     "FY2017": {
-      "quadrant": "CUADRANTE III: GENERADOR MADURO (CASH COW)",
-      "badge": "\ud83d\udee1\ufe0f GENERADOR MADURO (CASH COW)",
-      "color": "BLUE",
-      "investment_thesis": "Excelente salud y disciplina de capital interna: balance desendeudado, m\u00e1rgenes estables y s\u00f3lida conversi\u00f3n a flujo de caja libre, pero con menor ritmo de reinversi\u00f3n o crecimiento que el promedio de su sector. T\u00edpica vaca lechera con retornos predecibles pero menor expansi\u00f3n.",
-      "f_score": 6,
+      "quadrant": "CUADRANTE IV: TRAMPA DE VALOR / DETERIORO",
+      "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
+      "color": "RED",
+      "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
+      "f_score": 5,
       "g_score": 5
     },
     "FY2016": {
@@ -2887,17 +2887,17 @@
     },
     "roic_wacc": {
       "model_type": "WACC",
-      "wacc": 0.06764610757046993,
-      "ke": 0.084415,
+      "wacc": 0.06751674290544557,
+      "ke": 0.08408500000000001,
       "kd_after_tax": 0.03849111211049802,
-      "we": 0.6348546867399837,
-      "wd": 0.3651453132600164,
-      "roic_traditional": 0.015605892675714994,
-      "roic_adjusted": 0.015605892675714994,
+      "we": 0.6366123210482058,
+      "wd": 0.36338767895179436,
+      "roic_traditional": 0.04606029047080647,
+      "roic_adjusted": 0.04606029047080647,
       "rotce": null,
       "roe": null,
-      "economic_spread_adjusted": -0.05204021489475494,
-      "spread": -0.05204021489475494,
+      "economic_spread_adjusted": -0.021456452434639103,
+      "spread": -0.021456452434639103,
       "moat_rating": "DESTRUCCI\u00d3N NETA DE VALOR ECON\u00d3MICO",
       "moat_badge": "\u26a0\ufe0f DESTRUCCI\u00d3N DE VALOR ECON\u00d3MICO",
       "total_intangibles_usd_m": 0.0,
@@ -2924,23 +2924,25 @@
       "net_debt_to_ebitda_str": "7.64x",
       "net_debt_to_fcf": 7.18,
       "net_debt_to_fcf_str": "7.18x",
-      "interest_coverage": 1.03,
-      "interest_coverage_str": "1.0x",
+      "interest_coverage": 3.17,
+      "interest_coverage_str": "3.2x (EBITDAre/Int)",
       "quick_ratio": null,
       "cash_ratio": null,
       "rollover_risk_pct": 14.33,
-      "altman_z_score": 1.31,
-      "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-      "synthetic_rating": "CCC",
-      "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-      "default_spread_pct": 8.0,
-      "default_probability": "25.0%",
-      "solvency_verdict": "SOLVENCIA EQUILIBRADA BAJO MONITOREO: Apalancamiento controlado (7.64x), cobertura de 1.0x y Altman Z''-Score de 1.31. Estructura de capital adecuada sin riesgos inminentes de impago.",
-      "global_badge": "SOLVENCIA MODERADA",
-      "global_color": "#1976D2"
+      "altman_z_score": null,
+      "altman_zone": "NO APLICABLE",
+      "synthetic_rating": "A-",
+      "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+      "default_spread_pct": 1.5,
+      "default_probability": "1.0%",
+      "solvency_verdict": "ESTRUCTURA DE CAPITAL INMOBILIARIA (REAL_ESTATE_REIT): Cobertura EBITDAre/Intereses de 3.2x (EBITDAre/Int) con rating sint\u00e9tico A-. Altman Z'' inhibido metodol\u00f3gicamente por no aplicar a carteras de inmuebles comerciales en renta.",
+      "global_badge": "SOLVENCIA INMOBILIARIA",
+      "global_color": "#F57C00"
     }
   },
   "novy_marx_analysis": {
+    "is_applicable": true,
+    "is_financial_institution": false,
     "by_period": {
       "LTM": {
         "period": "LTM",
@@ -2975,7 +2977,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (92.67%) \u00d7 Rotaci\u00f3n (0.079x) = 7.34% (Coincidencia exacta con GP/A de 7.34%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -1.16 p.p.: La empresa supera en -1.16 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2025": {
         "period": "FY2025",
@@ -3010,7 +3012,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (92.11%) \u00d7 Rotaci\u00f3n (0.075x) = 6.88% (Coincidencia exacta con GP/A de 6.88%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -1.62 p.p.: La empresa supera en -1.62 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2024": {
         "period": "FY2024",
@@ -3045,7 +3047,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (92.51%) \u00d7 Rotaci\u00f3n (0.073x) = 6.78% (Coincidencia exacta con GP/A de 6.78%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -1.73 p.p.: La empresa supera en -1.73 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2023": {
         "period": "FY2023",
@@ -3080,7 +3082,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (91.99%) \u00d7 Rotaci\u00f3n (0.069x) = 6.30% (Coincidencia exacta con GP/A de 6.30%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -2.20 p.p.: La empresa supera en -2.20 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2022": {
         "period": "FY2022",
@@ -3115,7 +3117,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (93.14%) \u00d7 Rotaci\u00f3n (0.066x) = 6.19% (Coincidencia exacta con GP/A de 6.19%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -2.32 p.p.: La empresa supera en -2.32 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2021": {
         "period": "FY2021",
@@ -3150,7 +3152,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (93.53%) \u00d7 Rotaci\u00f3n (0.048x) = 4.48% (Coincidencia exacta con GP/A de 4.48%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -4.03 p.p.: La empresa supera en -4.03 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2020": {
         "period": "FY2020",
@@ -3185,7 +3187,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (93.62%) \u00d7 Rotaci\u00f3n (0.079x) = 7.40% (Coincidencia exacta con GP/A de 7.40%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -1.10 p.p.: La empresa supera en -1.10 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2019": {
         "period": "FY2019",
@@ -3220,7 +3222,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (94.03%) \u00d7 Rotaci\u00f3n (0.080x) = 7.52% (Coincidencia exacta con GP/A de 7.52%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -0.98 p.p.: La empresa supera en -0.98 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2018": {
         "period": "FY2018",
@@ -3255,7 +3257,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (94.98%) \u00d7 Rotaci\u00f3n (0.087x) = 8.23% (Coincidencia exacta con GP/A de 8.23%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -0.28 p.p.: La empresa supera en -0.28 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2017": {
         "period": "FY2017",
@@ -3290,7 +3292,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (94.29%) \u00d7 Rotaci\u00f3n (0.086x) = 8.15% (Coincidencia exacta con GP/A de 8.15%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -0.35 p.p.: La empresa supera en -0.35 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2016": {
         "period": "FY2016",
@@ -3325,7 +3327,7 @@
           "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (94.30%) \u00d7 Rotaci\u00f3n (0.084x) = 7.91% (Coincidencia exacta con GP/A de 7.91%).",
           "sector_adjustment": "Gross Profitability Ajustada por Sector = -0.60 p.p.: La empresa supera en -0.60 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       },
       "FY2015": {
         "period": "FY2015",
@@ -3360,7 +3362,7 @@
           "dupont_verification": "N/A",
           "sector_adjustment": "N/A"
         },
-        "is_financial_institution": true
+        "is_financial_institution": false
       }
     },
     "latest_period": "LTM",
@@ -3397,7 +3399,7 @@
         "dupont_verification": "Descomposici\u00f3n DuPont: Margen Bruto (92.67%) \u00d7 Rotaci\u00f3n (0.079x) = 7.34% (Coincidencia exacta con GP/A de 7.34%).",
         "sector_adjustment": "Gross Profitability Ajustada por Sector = -1.16 p.p.: La empresa supera en -1.16 puntos porcentuales a la empresa intermedia (mediana de 8.5%) de su industria. Su rentabilidad de capital es inferior a la media del sector."
       },
-      "is_financial_institution": true
+      "is_financial_institution": false
     },
     "trend": {
       "period_3y_basis": "FY2023",
@@ -3479,10 +3481,10 @@
       "FY2015": {
         "period": "FY2015",
         "ebit": 967.933,
-        "ebit_adj": 967.933,
+        "ebit_adj": 1365.607,
         "tax_rate": 0.21,
-        "nopat_trad": 764.6670700000001,
-        "nopat_adj": 764.6670700000001,
+        "nopat_trad": 1078.82953,
+        "nopat_adj": 1078.82953,
         "ic_trad": 1.0,
         "ic_adj": 1.0,
         "ic_trad_end": 1.0,
@@ -3496,20 +3498,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 764.6670700000001,
-        "roic_adj": 764.6670700000001,
-        "roic_trad_end": 764.6670700000001,
-        "roic_adj_end": 764.6670700000001,
-        "roic_trad_avg": 764.6670700000001,
-        "roic_adj_avg": 764.6670700000001
+        "roic_trad": 1078.82953,
+        "roic_adj": 1078.82953,
+        "roic_trad_end": 1078.82953,
+        "roic_adj_end": 1078.82953,
+        "roic_trad_avg": 1078.82953,
+        "roic_adj_avg": 1078.82953
       },
       "FY2016": {
         "period": "FY2016",
         "ebit": 1040.307,
-        "ebit_adj": 1040.307,
+        "ebit_adj": 1476.824,
         "tax_rate": 0.21,
-        "nopat_trad": 821.84253,
-        "nopat_adj": 821.84253,
+        "nopat_trad": 1166.6909600000001,
+        "nopat_adj": 1166.6909600000001,
         "ic_trad": 6572.2255,
         "ic_adj": 6572.2255,
         "ic_trad_end": 13143.451,
@@ -3523,20 +3525,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.1250478289279636,
-        "roic_adj": 0.1250478289279636,
-        "roic_trad_end": 0.0625286715033974,
-        "roic_adj_end": 0.0625286715033974,
-        "roic_trad_avg": 0.1250478289279636,
-        "roic_adj_avg": 0.1250478289279636
+        "roic_trad": 0.17751840073046796,
+        "roic_adj": 0.17751840073046796,
+        "roic_trad_end": 0.08876595347751516,
+        "roic_adj_end": 0.08876595347751516,
+        "roic_trad_avg": 0.17751840073046796,
+        "roic_adj_avg": 0.17751840073046796
       },
       "FY2017": {
         "period": "FY2017",
         "ebit": 1146.288,
-        "ebit_adj": 1146.288,
+        "ebit_adj": 1629.829,
         "tax_rate": 0.21,
-        "nopat_trad": 905.5675200000001,
-        "nopat_adj": 905.5675200000001,
+        "nopat_trad": 1287.56491,
+        "nopat_adj": 1287.56491,
         "ic_trad": 13597.359499999999,
         "ic_adj": 13597.359499999999,
         "ic_trad_end": 14051.268,
@@ -3550,20 +3552,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.06659877750529433,
-        "roic_adj": 0.06659877750529433,
-        "roic_trad_end": 0.06444738795103759,
-        "roic_adj_end": 0.06444738795103759,
-        "roic_trad_avg": 0.06659877750529433,
-        "roic_adj_avg": 0.06659877750529433
+        "roic_trad": 0.09469227536419848,
+        "roic_adj": 0.09469227536419848,
+        "roic_trad_end": 0.09163336077569655,
+        "roic_adj_end": 0.09163336077569655,
+        "roic_trad_avg": 0.09469227536419848,
+        "roic_adj_avg": 0.09469227536419848
       },
       "FY2018": {
         "period": "FY2018",
         "ebit": 1255.22,
-        "ebit_adj": 1255.22,
+        "ebit_adj": 1769.65,
         "tax_rate": 0.21,
-        "nopat_trad": 991.6238000000001,
-        "nopat_adj": 991.6238000000001,
+        "nopat_trad": 1398.0235000000002,
+        "nopat_adj": 1398.0235000000002,
         "ic_trad": 14650.682,
         "ic_adj": 14650.682,
         "ic_trad_end": 15250.096,
@@ -3577,20 +3579,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.06768448049039628,
-        "roic_adj": 0.06768448049039628,
-        "roic_trad_end": 0.06502410214335701,
-        "roic_adj_end": 0.06502410214335701,
-        "roic_trad_avg": 0.06768448049039628,
-        "roic_adj_avg": 0.06768448049039628
+        "roic_trad": 0.09542378300204729,
+        "roic_adj": 0.09542378300204729,
+        "roic_trad_end": 0.09167309504150009,
+        "roic_adj_end": 0.09167309504150009,
+        "roic_trad_avg": 0.09542378300204729,
+        "roic_adj_avg": 0.09542378300204729
       },
       "FY2019": {
         "period": "FY2019",
         "ebit": 404.612,
-        "ebit_adj": 404.612,
+        "ebit_adj": 975.037,
         "tax_rate": 0.05,
-        "nopat_trad": 384.3814,
-        "nopat_adj": 384.3814,
+        "nopat_trad": 926.28515,
+        "nopat_adj": 926.28515,
         "ic_trad": 16875.4405,
         "ic_adj": 16875.4405,
         "ic_trad_end": 18500.785,
@@ -3604,20 +3606,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.02277756245829553,
-        "roic_adj": 0.02277756245829553,
-        "roic_trad_end": 0.02077649137590648,
-        "roic_adj_end": 0.02077649137590648,
-        "roic_trad_avg": 0.02277756245829553,
-        "roic_adj_avg": 0.02277756245829553
+        "roic_trad": 0.05488953903158854,
+        "roic_adj": 0.05488953903158854,
+        "roic_trad_end": 0.0500673430884149,
+        "roic_adj_end": 0.0500673430884149,
+        "roic_trad_avg": 0.05488953903158854,
+        "roic_adj_avg": 0.05488953903158854
       },
       "FY2020": {
         "period": "FY2020",
         "ebit": 328.109,
-        "ebit_adj": 328.109,
+        "ebit_adj": 996.439,
         "tax_rate": 0.05,
-        "nopat_trad": 311.70354999999995,
-        "nopat_adj": 311.70354999999995,
+        "nopat_trad": 946.61705,
+        "nopat_adj": 946.61705,
         "ic_trad": 19208.297,
         "ic_adj": 19208.297,
         "ic_trad_end": 19915.809,
@@ -3631,20 +3633,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.016227547397877073,
-        "roic_adj": 0.016227547397877073,
-        "roic_trad_end": 0.015651061425624235,
-        "roic_adj_end": 0.015651061425624235,
-        "roic_trad_avg": 0.016227547397877073,
-        "roic_adj_avg": 0.016227547397877073
+        "roic_trad": 0.04928167499700781,
+        "roic_adj": 0.04928167499700781,
+        "roic_trad_end": 0.047530936353125296,
+        "roic_adj_end": 0.047530936353125296,
+        "roic_trad_avg": 0.04928167499700781,
+        "roic_adj_avg": 0.04928167499700781
       },
       "FY2021": {
         "period": "FY2021",
         "ebit": 406.514,
-        "ebit_adj": 406.514,
+        "ebit_adj": 1285.2690000000002,
         "tax_rate": 0.05,
-        "nopat_trad": 386.18829999999997,
-        "nopat_adj": 386.18829999999997,
+        "nopat_trad": 1221.00555,
+        "nopat_adj": 1221.00555,
         "ic_trad": 31397.366,
         "ic_adj": 31397.366,
         "ic_trad_end": 42878.923,
@@ -3658,20 +3660,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.012300022237534191,
-        "roic_adj": 0.012300022237534191,
-        "roic_trad_end": 0.009006483208545139,
-        "roic_adj_end": 0.009006483208545139,
-        "roic_trad_avg": 0.012300022237534191,
-        "roic_adj_avg": 0.012300022237534191
+        "roic_trad": 0.03888878926977505,
+        "roic_adj": 0.03888878926977505,
+        "roic_trad_end": 0.028475658075647097,
+        "roic_adj_end": 0.028475658075647097,
+        "roic_trad_avg": 0.03888878926977505,
+        "roic_adj_avg": 0.03888878926977505
       },
       "FY2022": {
         "period": "FY2022",
         "ebit": 759.499,
-        "ebit_adj": 759.499,
+        "ebit_adj": 2334.374,
         "tax_rate": 0.05,
-        "nopat_trad": 721.52405,
-        "nopat_adj": 721.52405,
+        "nopat_trad": 2217.6553,
+        "nopat_adj": 2217.6553,
         "ic_trad": 46190.4565,
         "ic_adj": 46190.4565,
         "ic_trad_end": 49501.99,
@@ -3685,20 +3687,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.015620630421784205,
-        "roic_adj": 0.015620630421784205,
-        "roic_trad_end": 0.014575657463467631,
-        "roic_adj_end": 0.014575657463467631,
-        "roic_trad_avg": 0.015620630421784205,
-        "roic_adj_avg": 0.015620630421784205
+        "roic_trad": 0.048011114590305035,
+        "roic_adj": 0.048011114590305035,
+        "roic_trad_end": 0.044799316148704325,
+        "roic_adj_end": 0.044799316148704325,
+        "roic_trad_avg": 0.048011114590305035,
+        "roic_adj_avg": 0.048011114590305035
       },
       "FY2023": {
         "period": "FY2023",
         "ebit": 769.504,
-        "ebit_adj": 769.504,
+        "ebit_adj": 2595.989,
         "tax_rate": 0.05,
-        "nopat_trad": 731.0287999999999,
-        "nopat_adj": 731.0287999999999,
+        "nopat_trad": 2466.18955,
+        "nopat_adj": 2466.18955,
         "ic_trad": 53524.212,
         "ic_adj": 53524.212,
         "ic_trad_end": 57546.434,
@@ -3712,20 +3714,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.013657908686259592,
-        "roic_adj": 0.013657908686259592,
-        "roic_trad_end": 0.012703285836964284,
-        "roic_adj_end": 0.012703285836964284,
-        "roic_trad_avg": 0.013657908686259592,
-        "roic_adj_avg": 0.013657908686259592
+        "roic_trad": 0.04607614867828414,
+        "roic_adj": 0.04607614867828414,
+        "roic_trad_end": 0.042855645060474123,
+        "roic_adj_end": 0.042855645060474123,
+        "roic_trad_avg": 0.04607614867828414,
+        "roic_adj_avg": 0.04607614867828414
       },
       "FY2024": {
         "period": "FY2024",
         "ebit": 554.454,
-        "ebit_adj": 554.454,
+        "ebit_adj": 2828.687,
         "tax_rate": 0.05,
-        "nopat_trad": 526.7312999999999,
-        "nopat_adj": 526.7312999999999,
+        "nopat_trad": 2687.25265,
+        "nopat_adj": 2687.25265,
         "ic_trad": 62968.2555,
         "ic_adj": 62968.2555,
         "ic_trad_end": 68390.077,
@@ -3739,20 +3741,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.008365029264626839,
-        "roic_adj": 0.008365029264626839,
-        "roic_trad_end": 0.007701867333765392,
-        "roic_adj_end": 0.007701867333765392,
-        "roic_trad_avg": 0.008365029264626839,
-        "roic_adj_avg": 0.008365029264626839
+        "roic_trad": 0.04267630774684555,
+        "roic_adj": 0.04267630774684555,
+        "roic_trad_end": 0.03929301980461288,
+        "roic_adj_end": 0.03929301980461288,
+        "roic_trad_avg": 0.04267630774684555,
+        "roic_adj_avg": 0.04267630774684555
       },
       "FY2025": {
         "period": "FY2025",
         "ebit": 651.35,
-        "ebit_adj": 651.35,
+        "ebit_adj": 3043.7499999999995,
         "tax_rate": 0.05,
-        "nopat_trad": 618.7825,
-        "nopat_adj": 618.7825,
+        "nopat_trad": 2891.5624999999995,
+        "nopat_adj": 2891.5624999999995,
         "ic_trad": 70375.4235,
         "ic_adj": 70375.4235,
         "ic_trad_end": 72360.76999999999,
@@ -3766,20 +3768,20 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.008792593624676376,
-        "roic_adj": 0.008792593624676376,
-        "roic_trad_end": 0.008551353171062167,
-        "roic_adj_end": 0.008551353171062167,
-        "roic_trad_avg": 0.008792593624676376,
-        "roic_adj_avg": 0.008792593624676376
+        "roic_trad": 0.041087674591400496,
+        "roic_adj": 0.041087674591400496,
+        "roic_trad_end": 0.0399603611183242,
+        "roic_adj_end": 0.0399603611183242,
+        "roic_trad_avg": 0.041087674591400496,
+        "roic_adj_avg": 0.041087674591400496
       },
       "LTM": {
         "period": "LTM",
         "ebit": 1217.667,
-        "ebit_adj": 1217.667,
+        "ebit_adj": 3593.9049999999997,
         "tax_rate": 0.05,
-        "nopat_trad": 1156.7836499999999,
-        "nopat_adj": 1156.7836499999999,
+        "nopat_trad": 3414.2097499999995,
+        "nopat_adj": 3414.2097499999995,
         "ic_trad": 74124.7985,
         "ic_adj": 74124.7985,
         "ic_trad_end": 75888.827,
@@ -3793,22 +3795,22 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.015605892675714994,
-        "roic_adj": 0.015605892675714994,
-        "roic_trad_end": 0.015243135198281558,
-        "roic_adj_end": 0.015243135198281558,
-        "roic_trad_avg": 0.015605892675714994,
-        "roic_adj_avg": 0.015605892675714994
+        "roic_trad": 0.04606029047080647,
+        "roic_adj": 0.04606029047080647,
+        "roic_trad_end": 0.04498962343956113,
+        "roic_adj_end": 0.04498962343956113,
+        "roic_trad_avg": 0.04606029047080647,
+        "roic_adj_avg": 0.04606029047080647
       }
     },
     "latest_period": "LTM",
     "latest_result": {
       "period": "LTM",
       "ebit": 1217.667,
-      "ebit_adj": 1217.667,
+      "ebit_adj": 3593.9049999999997,
       "tax_rate": 0.05,
-      "nopat_trad": 1156.7836499999999,
-      "nopat_adj": 1156.7836499999999,
+      "nopat_trad": 3414.2097499999995,
+      "nopat_adj": 3414.2097499999995,
       "ic_trad": 74124.7985,
       "ic_adj": 74124.7985,
       "ic_trad_end": 75888.827,
@@ -3822,28 +3824,28 @@
       "mkt_amortization": 0.0,
       "mkt_stock": 0.0,
       "total_intangible_stock": 0.0,
-      "roic_trad": 0.015605892675714994,
-      "roic_adj": 0.015605892675714994,
-      "roic_trad_end": 0.015243135198281558,
-      "roic_adj_end": 0.015243135198281558,
-      "roic_trad_avg": 0.015605892675714994,
-      "roic_adj_avg": 0.015605892675714994
+      "roic_trad": 0.04606029047080647,
+      "roic_adj": 0.04606029047080647,
+      "roic_trad_end": 0.04498962343956113,
+      "roic_adj_end": 0.04498962343956113,
+      "roic_trad_avg": 0.04606029047080647,
+      "roic_adj_avg": 0.04606029047080647
     },
     "sensitivity_matrix": {
       "n_minus_1": {
         "lifespan_years": 2,
         "intangibles_usd_m": 0.0,
-        "roic_adj": 0.015605892675714994
+        "roic_adj": 0.04606029047080647
       },
       "n_base": {
         "lifespan_years": 3,
         "intangibles_usd_m": 0.0,
-        "roic_adj": 0.015605892675714994
+        "roic_adj": 0.04606029047080647
       },
       "n_plus_1": {
         "lifespan_years": 4,
         "intangibles_usd_m": 0.0,
-        "roic_adj": 0.015605892675714994
+        "roic_adj": 0.04606029047080647
       }
     },
     "parameters": {
@@ -3852,9 +3854,9 @@
       "sga_capitalization_pct": 0.0
     },
     "explanations": {
-      "roic_traditional": "ROIC Tradicional = 1.56%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
-      "roic_adjusted": "ROIC Ajustado por Intangibles = 1.56%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $0.0M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($74,124.8M vs. $74,124.8M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
-      "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 1.56%, y extendi\u00e9ndola a 4 a\u00f1os es de 1.56%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
+      "roic_traditional": "ROIC Tradicional = 4.61%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
+      "roic_adjusted": "ROIC Ajustado por Intangibles = 4.61%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $0.0M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($74,124.8M vs. $74,124.8M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
+      "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 4.61%, y extendi\u00e9ndola a 4 a\u00f1os es de 4.61%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
     }
   },
   "greenblatt_roc_analysis": {
@@ -4331,32 +4333,32 @@
     "archetype": "REAL_ESTATE_REIT",
     "market_data": {
       "ticker": "O",
-      "timestamp": "2026-10-13T18:47:20.064602+00:00",
-      "timestamp_epoch": 1791917244.7285247,
+      "timestamp": "2026-10-14T18:26:24.339874+00:00",
+      "timestamp_epoch": 1792002388.0337248,
       "is_offline": false,
-      "from_cache": true,
-      "price": 54.9687,
-      "market_cap_usd_m": 50923.02,
+      "from_cache": false,
+      "price": 55.3875,
+      "market_cap_usd_m": 51310.99,
       "diluted_shares": 926400250.0,
-      "rf_10y": 0.05221,
+      "rf_10y": 0.05188,
       "beta": 0.678,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 54.96739959716797,
-          "market_cap": 52011144725.95727,
+          "price": 55.3849983215332,
+          "market_cap": 52406284169.509445,
           "beta": 0.696,
-          "rf_10y": 0.052189998626708985,
+          "rf_10y": 0.05197999954223633,
           "shares_outstanding": 946218033,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 54.97,
+          "price": 55.39,
           "market_cap": null,
           "beta": 0.66,
-          "rf_10y": 0.05223,
+          "rf_10y": 0.05179,
           "shares_outstanding": 946220000.0,
           "success": true
         }
@@ -4367,34 +4369,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $54.97 (Yahoo: $54.97, CNBC: $54.97, \u0394=0.00%) | Market Cap calculado: $50,923.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
+        "notes": "Precio validado por consenso: $55.39 (Yahoo: $55.38, CNBC: $55.39, \u0394=0.01%) | Market Cap calculado: $51,311.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
       }
     },
-    "cost_of_equity_ke": 0.084415,
+    "cost_of_equity_ke": 0.08408500000000001,
     "cost_of_debt_kd_pre_tax": 0.040516960116313706,
     "cost_of_debt_kd_after_tax": 0.03849111211049802,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 50923.02,
+    "market_cap_usd_m": 51310.99,
     "total_debt_usd_m": 29289.068,
-    "enterprise_value_usd_m": 80212.08799999999,
-    "weight_equity": 0.6348546867399837,
-    "weight_debt": 0.3651453132600164,
+    "enterprise_value_usd_m": 80600.05799999999,
+    "weight_equity": 0.6366123210482058,
+    "weight_debt": 0.36338767895179436,
     "is_debt_free": false,
-    "wacc": 0.06764610757046993,
-    "hurdle_rate": 0.06764610757046993,
+    "wacc": 0.06751674290544557,
+    "hurdle_rate": 0.06751674290544557,
     "sector_wacc_benchmark": 0.074,
-    "roic_traditional": 0.015605892675714994,
-    "roic_adjusted": 0.015605892675714994,
-    "economic_spread_traditional": -0.05204021489475494,
-    "economic_spread_adjusted": -0.05204021489475494,
-    "spread": -0.05204021489475494,
+    "roic_traditional": 0.04606029047080647,
+    "roic_adjusted": 0.04606029047080647,
+    "economic_spread_traditional": -0.021456452434639103,
+    "economic_spread_adjusted": -0.021456452434639103,
+    "spread": -0.021456452434639103,
     "moat_rating": "DESTRUCCI\u00d3N NETA DE VALOR ECON\u00d3MICO",
     "moat_badge": "\u26a0\ufe0f DESTRUCCI\u00d3N DE VALOR ECON\u00d3MICO",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 8.44%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "ke_capm": "Costo del Equity (Ke) = 8.41%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
       "kd_debt": "Costo de la Deuda Neto = 3.85% (Tasa antes de impuestos 4.05% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 6.76%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.5% de Equity y 36.5% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
-      "economic_spread": "El retorno (1.56%) es inferior al costo de capital exigido (6.76%), destruyendo 5.20 puntos porcentuales de valor por cada ciclo operativo."
+      "wacc": "WACC = 6.75%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.7% de Equity y 36.3% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
+      "economic_spread": "El retorno (4.61%) es inferior al costo de capital exigido (6.75%), destruyendo 2.15 puntos porcentuales de valor por cada ciclo operativo."
     }
   },
   "wacc_and_spread_analysis": {
@@ -4403,32 +4405,32 @@
     "archetype": "REAL_ESTATE_REIT",
     "market_data": {
       "ticker": "O",
-      "timestamp": "2026-10-13T18:47:20.064602+00:00",
-      "timestamp_epoch": 1791917244.7285247,
+      "timestamp": "2026-10-14T18:26:24.339874+00:00",
+      "timestamp_epoch": 1792002388.0337248,
       "is_offline": false,
-      "from_cache": true,
-      "price": 54.9687,
-      "market_cap_usd_m": 50923.02,
+      "from_cache": false,
+      "price": 55.3875,
+      "market_cap_usd_m": 51310.99,
       "diluted_shares": 926400250.0,
-      "rf_10y": 0.05221,
+      "rf_10y": 0.05188,
       "beta": 0.678,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 54.96739959716797,
-          "market_cap": 52011144725.95727,
+          "price": 55.3849983215332,
+          "market_cap": 52406284169.509445,
           "beta": 0.696,
-          "rf_10y": 0.052189998626708985,
+          "rf_10y": 0.05197999954223633,
           "shares_outstanding": 946218033,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 54.97,
+          "price": 55.39,
           "market_cap": null,
           "beta": 0.66,
-          "rf_10y": 0.05223,
+          "rf_10y": 0.05179,
           "shares_outstanding": 946220000.0,
           "success": true
         }
@@ -4439,34 +4441,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $54.97 (Yahoo: $54.97, CNBC: $54.97, \u0394=0.00%) | Market Cap calculado: $50,923.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
+        "notes": "Precio validado por consenso: $55.39 (Yahoo: $55.38, CNBC: $55.39, \u0394=0.01%) | Market Cap calculado: $51,311.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
       }
     },
-    "cost_of_equity_ke": 0.084415,
+    "cost_of_equity_ke": 0.08408500000000001,
     "cost_of_debt_kd_pre_tax": 0.040516960116313706,
     "cost_of_debt_kd_after_tax": 0.03849111211049802,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 50923.02,
+    "market_cap_usd_m": 51310.99,
     "total_debt_usd_m": 29289.068,
-    "enterprise_value_usd_m": 80212.08799999999,
-    "weight_equity": 0.6348546867399837,
-    "weight_debt": 0.3651453132600164,
+    "enterprise_value_usd_m": 80600.05799999999,
+    "weight_equity": 0.6366123210482058,
+    "weight_debt": 0.36338767895179436,
     "is_debt_free": false,
-    "wacc": 0.06764610757046993,
-    "hurdle_rate": 0.06764610757046993,
+    "wacc": 0.06751674290544557,
+    "hurdle_rate": 0.06751674290544557,
     "sector_wacc_benchmark": 0.074,
-    "roic_traditional": 0.015605892675714994,
-    "roic_adjusted": 0.015605892675714994,
-    "economic_spread_traditional": -0.05204021489475494,
-    "economic_spread_adjusted": -0.05204021489475494,
-    "spread": -0.05204021489475494,
+    "roic_traditional": 0.04606029047080647,
+    "roic_adjusted": 0.04606029047080647,
+    "economic_spread_traditional": -0.021456452434639103,
+    "economic_spread_adjusted": -0.021456452434639103,
+    "spread": -0.021456452434639103,
     "moat_rating": "DESTRUCCI\u00d3N NETA DE VALOR ECON\u00d3MICO",
     "moat_badge": "\u26a0\ufe0f DESTRUCCI\u00d3N DE VALOR ECON\u00d3MICO",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 8.44%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "ke_capm": "Costo del Equity (Ke) = 8.41%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
       "kd_debt": "Costo de la Deuda Neto = 3.85% (Tasa antes de impuestos 4.05% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 6.76%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.5% de Equity y 36.5% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
-      "economic_spread": "El retorno (1.56%) es inferior al costo de capital exigido (6.76%), destruyendo 5.20 puntos porcentuales de valor por cada ciclo operativo."
+      "wacc": "WACC = 6.75%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.7% de Equity y 36.3% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
+      "economic_spread": "El retorno (4.61%) es inferior al costo de capital exigido (6.75%), destruyendo 2.15 puntos porcentuales de valor por cada ciclo operativo."
     }
   },
   "roic_wacc_analysis": {
@@ -4475,10 +4477,10 @@
         "FY2015": {
           "period": "FY2015",
           "ebit": 967.933,
-          "ebit_adj": 967.933,
+          "ebit_adj": 1365.607,
           "tax_rate": 0.21,
-          "nopat_trad": 764.6670700000001,
-          "nopat_adj": 764.6670700000001,
+          "nopat_trad": 1078.82953,
+          "nopat_adj": 1078.82953,
           "ic_trad": 1.0,
           "ic_adj": 1.0,
           "ic_trad_end": 1.0,
@@ -4492,20 +4494,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 764.6670700000001,
-          "roic_adj": 764.6670700000001,
-          "roic_trad_end": 764.6670700000001,
-          "roic_adj_end": 764.6670700000001,
-          "roic_trad_avg": 764.6670700000001,
-          "roic_adj_avg": 764.6670700000001
+          "roic_trad": 1078.82953,
+          "roic_adj": 1078.82953,
+          "roic_trad_end": 1078.82953,
+          "roic_adj_end": 1078.82953,
+          "roic_trad_avg": 1078.82953,
+          "roic_adj_avg": 1078.82953
         },
         "FY2016": {
           "period": "FY2016",
           "ebit": 1040.307,
-          "ebit_adj": 1040.307,
+          "ebit_adj": 1476.824,
           "tax_rate": 0.21,
-          "nopat_trad": 821.84253,
-          "nopat_adj": 821.84253,
+          "nopat_trad": 1166.6909600000001,
+          "nopat_adj": 1166.6909600000001,
           "ic_trad": 6572.2255,
           "ic_adj": 6572.2255,
           "ic_trad_end": 13143.451,
@@ -4519,20 +4521,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.1250478289279636,
-          "roic_adj": 0.1250478289279636,
-          "roic_trad_end": 0.0625286715033974,
-          "roic_adj_end": 0.0625286715033974,
-          "roic_trad_avg": 0.1250478289279636,
-          "roic_adj_avg": 0.1250478289279636
+          "roic_trad": 0.17751840073046796,
+          "roic_adj": 0.17751840073046796,
+          "roic_trad_end": 0.08876595347751516,
+          "roic_adj_end": 0.08876595347751516,
+          "roic_trad_avg": 0.17751840073046796,
+          "roic_adj_avg": 0.17751840073046796
         },
         "FY2017": {
           "period": "FY2017",
           "ebit": 1146.288,
-          "ebit_adj": 1146.288,
+          "ebit_adj": 1629.829,
           "tax_rate": 0.21,
-          "nopat_trad": 905.5675200000001,
-          "nopat_adj": 905.5675200000001,
+          "nopat_trad": 1287.56491,
+          "nopat_adj": 1287.56491,
           "ic_trad": 13597.359499999999,
           "ic_adj": 13597.359499999999,
           "ic_trad_end": 14051.268,
@@ -4546,20 +4548,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.06659877750529433,
-          "roic_adj": 0.06659877750529433,
-          "roic_trad_end": 0.06444738795103759,
-          "roic_adj_end": 0.06444738795103759,
-          "roic_trad_avg": 0.06659877750529433,
-          "roic_adj_avg": 0.06659877750529433
+          "roic_trad": 0.09469227536419848,
+          "roic_adj": 0.09469227536419848,
+          "roic_trad_end": 0.09163336077569655,
+          "roic_adj_end": 0.09163336077569655,
+          "roic_trad_avg": 0.09469227536419848,
+          "roic_adj_avg": 0.09469227536419848
         },
         "FY2018": {
           "period": "FY2018",
           "ebit": 1255.22,
-          "ebit_adj": 1255.22,
+          "ebit_adj": 1769.65,
           "tax_rate": 0.21,
-          "nopat_trad": 991.6238000000001,
-          "nopat_adj": 991.6238000000001,
+          "nopat_trad": 1398.0235000000002,
+          "nopat_adj": 1398.0235000000002,
           "ic_trad": 14650.682,
           "ic_adj": 14650.682,
           "ic_trad_end": 15250.096,
@@ -4573,20 +4575,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.06768448049039628,
-          "roic_adj": 0.06768448049039628,
-          "roic_trad_end": 0.06502410214335701,
-          "roic_adj_end": 0.06502410214335701,
-          "roic_trad_avg": 0.06768448049039628,
-          "roic_adj_avg": 0.06768448049039628
+          "roic_trad": 0.09542378300204729,
+          "roic_adj": 0.09542378300204729,
+          "roic_trad_end": 0.09167309504150009,
+          "roic_adj_end": 0.09167309504150009,
+          "roic_trad_avg": 0.09542378300204729,
+          "roic_adj_avg": 0.09542378300204729
         },
         "FY2019": {
           "period": "FY2019",
           "ebit": 404.612,
-          "ebit_adj": 404.612,
+          "ebit_adj": 975.037,
           "tax_rate": 0.05,
-          "nopat_trad": 384.3814,
-          "nopat_adj": 384.3814,
+          "nopat_trad": 926.28515,
+          "nopat_adj": 926.28515,
           "ic_trad": 16875.4405,
           "ic_adj": 16875.4405,
           "ic_trad_end": 18500.785,
@@ -4600,20 +4602,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.02277756245829553,
-          "roic_adj": 0.02277756245829553,
-          "roic_trad_end": 0.02077649137590648,
-          "roic_adj_end": 0.02077649137590648,
-          "roic_trad_avg": 0.02277756245829553,
-          "roic_adj_avg": 0.02277756245829553
+          "roic_trad": 0.05488953903158854,
+          "roic_adj": 0.05488953903158854,
+          "roic_trad_end": 0.0500673430884149,
+          "roic_adj_end": 0.0500673430884149,
+          "roic_trad_avg": 0.05488953903158854,
+          "roic_adj_avg": 0.05488953903158854
         },
         "FY2020": {
           "period": "FY2020",
           "ebit": 328.109,
-          "ebit_adj": 328.109,
+          "ebit_adj": 996.439,
           "tax_rate": 0.05,
-          "nopat_trad": 311.70354999999995,
-          "nopat_adj": 311.70354999999995,
+          "nopat_trad": 946.61705,
+          "nopat_adj": 946.61705,
           "ic_trad": 19208.297,
           "ic_adj": 19208.297,
           "ic_trad_end": 19915.809,
@@ -4627,20 +4629,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.016227547397877073,
-          "roic_adj": 0.016227547397877073,
-          "roic_trad_end": 0.015651061425624235,
-          "roic_adj_end": 0.015651061425624235,
-          "roic_trad_avg": 0.016227547397877073,
-          "roic_adj_avg": 0.016227547397877073
+          "roic_trad": 0.04928167499700781,
+          "roic_adj": 0.04928167499700781,
+          "roic_trad_end": 0.047530936353125296,
+          "roic_adj_end": 0.047530936353125296,
+          "roic_trad_avg": 0.04928167499700781,
+          "roic_adj_avg": 0.04928167499700781
         },
         "FY2021": {
           "period": "FY2021",
           "ebit": 406.514,
-          "ebit_adj": 406.514,
+          "ebit_adj": 1285.2690000000002,
           "tax_rate": 0.05,
-          "nopat_trad": 386.18829999999997,
-          "nopat_adj": 386.18829999999997,
+          "nopat_trad": 1221.00555,
+          "nopat_adj": 1221.00555,
           "ic_trad": 31397.366,
           "ic_adj": 31397.366,
           "ic_trad_end": 42878.923,
@@ -4654,20 +4656,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.012300022237534191,
-          "roic_adj": 0.012300022237534191,
-          "roic_trad_end": 0.009006483208545139,
-          "roic_adj_end": 0.009006483208545139,
-          "roic_trad_avg": 0.012300022237534191,
-          "roic_adj_avg": 0.012300022237534191
+          "roic_trad": 0.03888878926977505,
+          "roic_adj": 0.03888878926977505,
+          "roic_trad_end": 0.028475658075647097,
+          "roic_adj_end": 0.028475658075647097,
+          "roic_trad_avg": 0.03888878926977505,
+          "roic_adj_avg": 0.03888878926977505
         },
         "FY2022": {
           "period": "FY2022",
           "ebit": 759.499,
-          "ebit_adj": 759.499,
+          "ebit_adj": 2334.374,
           "tax_rate": 0.05,
-          "nopat_trad": 721.52405,
-          "nopat_adj": 721.52405,
+          "nopat_trad": 2217.6553,
+          "nopat_adj": 2217.6553,
           "ic_trad": 46190.4565,
           "ic_adj": 46190.4565,
           "ic_trad_end": 49501.99,
@@ -4681,20 +4683,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.015620630421784205,
-          "roic_adj": 0.015620630421784205,
-          "roic_trad_end": 0.014575657463467631,
-          "roic_adj_end": 0.014575657463467631,
-          "roic_trad_avg": 0.015620630421784205,
-          "roic_adj_avg": 0.015620630421784205
+          "roic_trad": 0.048011114590305035,
+          "roic_adj": 0.048011114590305035,
+          "roic_trad_end": 0.044799316148704325,
+          "roic_adj_end": 0.044799316148704325,
+          "roic_trad_avg": 0.048011114590305035,
+          "roic_adj_avg": 0.048011114590305035
         },
         "FY2023": {
           "period": "FY2023",
           "ebit": 769.504,
-          "ebit_adj": 769.504,
+          "ebit_adj": 2595.989,
           "tax_rate": 0.05,
-          "nopat_trad": 731.0287999999999,
-          "nopat_adj": 731.0287999999999,
+          "nopat_trad": 2466.18955,
+          "nopat_adj": 2466.18955,
           "ic_trad": 53524.212,
           "ic_adj": 53524.212,
           "ic_trad_end": 57546.434,
@@ -4708,20 +4710,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.013657908686259592,
-          "roic_adj": 0.013657908686259592,
-          "roic_trad_end": 0.012703285836964284,
-          "roic_adj_end": 0.012703285836964284,
-          "roic_trad_avg": 0.013657908686259592,
-          "roic_adj_avg": 0.013657908686259592
+          "roic_trad": 0.04607614867828414,
+          "roic_adj": 0.04607614867828414,
+          "roic_trad_end": 0.042855645060474123,
+          "roic_adj_end": 0.042855645060474123,
+          "roic_trad_avg": 0.04607614867828414,
+          "roic_adj_avg": 0.04607614867828414
         },
         "FY2024": {
           "period": "FY2024",
           "ebit": 554.454,
-          "ebit_adj": 554.454,
+          "ebit_adj": 2828.687,
           "tax_rate": 0.05,
-          "nopat_trad": 526.7312999999999,
-          "nopat_adj": 526.7312999999999,
+          "nopat_trad": 2687.25265,
+          "nopat_adj": 2687.25265,
           "ic_trad": 62968.2555,
           "ic_adj": 62968.2555,
           "ic_trad_end": 68390.077,
@@ -4735,20 +4737,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.008365029264626839,
-          "roic_adj": 0.008365029264626839,
-          "roic_trad_end": 0.007701867333765392,
-          "roic_adj_end": 0.007701867333765392,
-          "roic_trad_avg": 0.008365029264626839,
-          "roic_adj_avg": 0.008365029264626839
+          "roic_trad": 0.04267630774684555,
+          "roic_adj": 0.04267630774684555,
+          "roic_trad_end": 0.03929301980461288,
+          "roic_adj_end": 0.03929301980461288,
+          "roic_trad_avg": 0.04267630774684555,
+          "roic_adj_avg": 0.04267630774684555
         },
         "FY2025": {
           "period": "FY2025",
           "ebit": 651.35,
-          "ebit_adj": 651.35,
+          "ebit_adj": 3043.7499999999995,
           "tax_rate": 0.05,
-          "nopat_trad": 618.7825,
-          "nopat_adj": 618.7825,
+          "nopat_trad": 2891.5624999999995,
+          "nopat_adj": 2891.5624999999995,
           "ic_trad": 70375.4235,
           "ic_adj": 70375.4235,
           "ic_trad_end": 72360.76999999999,
@@ -4762,20 +4764,20 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.008792593624676376,
-          "roic_adj": 0.008792593624676376,
-          "roic_trad_end": 0.008551353171062167,
-          "roic_adj_end": 0.008551353171062167,
-          "roic_trad_avg": 0.008792593624676376,
-          "roic_adj_avg": 0.008792593624676376
+          "roic_trad": 0.041087674591400496,
+          "roic_adj": 0.041087674591400496,
+          "roic_trad_end": 0.0399603611183242,
+          "roic_adj_end": 0.0399603611183242,
+          "roic_trad_avg": 0.041087674591400496,
+          "roic_adj_avg": 0.041087674591400496
         },
         "LTM": {
           "period": "LTM",
           "ebit": 1217.667,
-          "ebit_adj": 1217.667,
+          "ebit_adj": 3593.9049999999997,
           "tax_rate": 0.05,
-          "nopat_trad": 1156.7836499999999,
-          "nopat_adj": 1156.7836499999999,
+          "nopat_trad": 3414.2097499999995,
+          "nopat_adj": 3414.2097499999995,
           "ic_trad": 74124.7985,
           "ic_adj": 74124.7985,
           "ic_trad_end": 75888.827,
@@ -4789,22 +4791,22 @@
           "mkt_amortization": 0.0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 0.0,
-          "roic_trad": 0.015605892675714994,
-          "roic_adj": 0.015605892675714994,
-          "roic_trad_end": 0.015243135198281558,
-          "roic_adj_end": 0.015243135198281558,
-          "roic_trad_avg": 0.015605892675714994,
-          "roic_adj_avg": 0.015605892675714994
+          "roic_trad": 0.04606029047080647,
+          "roic_adj": 0.04606029047080647,
+          "roic_trad_end": 0.04498962343956113,
+          "roic_adj_end": 0.04498962343956113,
+          "roic_trad_avg": 0.04606029047080647,
+          "roic_adj_avg": 0.04606029047080647
         }
       },
       "latest_period": "LTM",
       "latest_result": {
         "period": "LTM",
         "ebit": 1217.667,
-        "ebit_adj": 1217.667,
+        "ebit_adj": 3593.9049999999997,
         "tax_rate": 0.05,
-        "nopat_trad": 1156.7836499999999,
-        "nopat_adj": 1156.7836499999999,
+        "nopat_trad": 3414.2097499999995,
+        "nopat_adj": 3414.2097499999995,
         "ic_trad": 74124.7985,
         "ic_adj": 74124.7985,
         "ic_trad_end": 75888.827,
@@ -4818,28 +4820,28 @@
         "mkt_amortization": 0.0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 0.0,
-        "roic_trad": 0.015605892675714994,
-        "roic_adj": 0.015605892675714994,
-        "roic_trad_end": 0.015243135198281558,
-        "roic_adj_end": 0.015243135198281558,
-        "roic_trad_avg": 0.015605892675714994,
-        "roic_adj_avg": 0.015605892675714994
+        "roic_trad": 0.04606029047080647,
+        "roic_adj": 0.04606029047080647,
+        "roic_trad_end": 0.04498962343956113,
+        "roic_adj_end": 0.04498962343956113,
+        "roic_trad_avg": 0.04606029047080647,
+        "roic_adj_avg": 0.04606029047080647
       },
       "sensitivity_matrix": {
         "n_minus_1": {
           "lifespan_years": 2,
           "intangibles_usd_m": 0.0,
-          "roic_adj": 0.015605892675714994
+          "roic_adj": 0.04606029047080647
         },
         "n_base": {
           "lifespan_years": 3,
           "intangibles_usd_m": 0.0,
-          "roic_adj": 0.015605892675714994
+          "roic_adj": 0.04606029047080647
         },
         "n_plus_1": {
           "lifespan_years": 4,
           "intangibles_usd_m": 0.0,
-          "roic_adj": 0.015605892675714994
+          "roic_adj": 0.04606029047080647
         }
       },
       "parameters": {
@@ -4848,9 +4850,9 @@
         "sga_capitalization_pct": 0.0
       },
       "explanations": {
-        "roic_traditional": "ROIC Tradicional = 1.56%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
-        "roic_adjusted": "ROIC Ajustado por Intangibles = 1.56%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $0.0M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($74,124.8M vs. $74,124.8M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
-        "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 1.56%, y extendi\u00e9ndola a 4 a\u00f1os es de 1.56%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
+        "roic_traditional": "ROIC Tradicional = 4.61%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
+        "roic_adjusted": "ROIC Ajustado por Intangibles = 4.61%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $0.0M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($74,124.8M vs. $74,124.8M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
+        "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 4.61%, y extendi\u00e9ndola a 4 a\u00f1os es de 4.61%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
       }
     },
     "wacc": {
@@ -4859,32 +4861,32 @@
       "archetype": "REAL_ESTATE_REIT",
       "market_data": {
         "ticker": "O",
-        "timestamp": "2026-10-13T18:47:20.064602+00:00",
-        "timestamp_epoch": 1791917244.7285247,
+        "timestamp": "2026-10-14T18:26:24.339874+00:00",
+        "timestamp_epoch": 1792002388.0337248,
         "is_offline": false,
-        "from_cache": true,
-        "price": 54.9687,
-        "market_cap_usd_m": 50923.02,
+        "from_cache": false,
+        "price": 55.3875,
+        "market_cap_usd_m": 51310.99,
         "diluted_shares": 926400250.0,
-        "rf_10y": 0.05221,
+        "rf_10y": 0.05188,
         "beta": 0.678,
         "erp": 0.0475,
         "raw_sources": {
           "yahoo": {
             "source": "Yahoo Finance",
-            "price": 54.96739959716797,
-            "market_cap": 52011144725.95727,
+            "price": 55.3849983215332,
+            "market_cap": 52406284169.509445,
             "beta": 0.696,
-            "rf_10y": 0.052189998626708985,
+            "rf_10y": 0.05197999954223633,
             "shares_outstanding": 946218033,
             "success": true
           },
           "cnbc": {
             "source": "CNBC Quote Service",
-            "price": 54.97,
+            "price": 55.39,
             "market_cap": null,
             "beta": 0.66,
-            "rf_10y": 0.05223,
+            "rf_10y": 0.05179,
             "shares_outstanding": 946220000.0,
             "success": true
           }
@@ -4895,34 +4897,34 @@
             "Yahoo Finance",
             "CNBC Quote Service"
           ],
-          "notes": "Precio validado por consenso: $54.97 (Yahoo: $54.97, CNBC: $54.97, \u0394=0.00%) | Market Cap calculado: $50,923.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
+          "notes": "Precio validado por consenso: $55.39 (Yahoo: $55.38, CNBC: $55.39, \u0394=0.01%) | Market Cap calculado: $51,311.0M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
         }
       },
-      "cost_of_equity_ke": 0.084415,
+      "cost_of_equity_ke": 0.08408500000000001,
       "cost_of_debt_kd_pre_tax": 0.040516960116313706,
       "cost_of_debt_kd_after_tax": 0.03849111211049802,
       "effective_tax_rate": 0.05,
-      "market_cap_usd_m": 50923.02,
+      "market_cap_usd_m": 51310.99,
       "total_debt_usd_m": 29289.068,
-      "enterprise_value_usd_m": 80212.08799999999,
-      "weight_equity": 0.6348546867399837,
-      "weight_debt": 0.3651453132600164,
+      "enterprise_value_usd_m": 80600.05799999999,
+      "weight_equity": 0.6366123210482058,
+      "weight_debt": 0.36338767895179436,
       "is_debt_free": false,
-      "wacc": 0.06764610757046993,
-      "hurdle_rate": 0.06764610757046993,
+      "wacc": 0.06751674290544557,
+      "hurdle_rate": 0.06751674290544557,
       "sector_wacc_benchmark": 0.074,
-      "roic_traditional": 0.015605892675714994,
-      "roic_adjusted": 0.015605892675714994,
-      "economic_spread_traditional": -0.05204021489475494,
-      "economic_spread_adjusted": -0.05204021489475494,
-      "spread": -0.05204021489475494,
+      "roic_traditional": 0.04606029047080647,
+      "roic_adjusted": 0.04606029047080647,
+      "economic_spread_traditional": -0.021456452434639103,
+      "economic_spread_adjusted": -0.021456452434639103,
+      "spread": -0.021456452434639103,
       "moat_rating": "DESTRUCCI\u00d3N NETA DE VALOR ECON\u00d3MICO",
       "moat_badge": "\u26a0\ufe0f DESTRUCCI\u00d3N DE VALOR ECON\u00d3MICO",
       "explanations": {
-        "ke_capm": "Costo del Equity (Ke) = 8.44%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
+        "ke_capm": "Costo del Equity (Ke) = 8.41%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (0.68) \u00d7 Prima de Riesgo ERP (4.75%).",
         "kd_debt": "Costo de la Deuda Neto = 3.85% (Tasa antes de impuestos 4.05% con escudo fiscal del 5.0%).",
-        "wacc": "WACC = 6.76%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.5% de Equity y 36.5% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
-        "economic_spread": "El retorno (1.56%) es inferior al costo de capital exigido (6.76%), destruyendo 5.20 puntos porcentuales de valor por cada ciclo operativo."
+        "wacc": "WACC = 6.75%: Tasa de corte u obst\u00e1culo financiero global. Pondera 63.7% de Equity y 36.3% de Deuda a valores de mercado. Frente a la mediana del sector (7.40%), su costo de financiamiento es m\u00e1s bajo y competitivo.",
+        "economic_spread": "El retorno (4.61%) es inferior al costo de capital exigido (6.75%), destruyendo 2.15 puntos porcentuales de valor por cada ciclo operativo."
       }
     }
   },
@@ -5851,11 +5853,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +5.0% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +5.0% vs \u0394Ventas: +11.4%",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -5910,17 +5912,17 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +5.8% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +5.8% vs \u0394Ventas: +7.8%",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2024": {
         "period": "FY2024",
-        "total_score": 1,
+        "total_score": 0,
         "max_score": 6,
         "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
         "badge": "CONTABILIDAD CONSERVADORA",
@@ -5969,22 +5971,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +19.1% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +19.1% vs \u0394Ventas: +27.4%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2023": {
         "period": "FY2023",
-        "total_score": 2,
+        "total_score": 1,
         "max_score": 6,
-        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
-        "badge": "ZONA DE VIGILANCIA OPERATIVA",
-        "color": "#F57C00",
-        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
+        "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
+        "badge": "CONTABILIDAD CONSERVADORA",
+        "color": "#2E7D32",
+        "verdict": "La compa\u00f1\u00eda supera con honores la auditor\u00eda forense. Con 0-1 banderas aisladas, la probabilidad emp\u00edrica de manipulaci\u00f3n es m\u00ednima (< 5%). Ganancias de alta calidad avaladas por caja real.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6028,17 +6030,17 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +16.3% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +16.3% vs \u0394Ventas: +20.0%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2022": {
         "period": "FY2022",
-        "total_score": 1,
+        "total_score": 0,
         "max_score": 6,
         "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
         "badge": "CONTABILIDAD CONSERVADORA",
@@ -6087,11 +6089,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +15.2% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +15.2% vs \u0394Ventas: +59.8%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6146,22 +6148,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +108.0% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +108.0% vs \u0394Ventas: +25.9%",
             "flag": true,
             "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2020": {
         "period": "FY2020",
-        "total_score": 2,
+        "total_score": 1,
         "max_score": 6,
-        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
-        "badge": "ZONA DE VIGILANCIA OPERATIVA",
-        "color": "#F57C00",
-        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
+        "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
+        "badge": "CONTABILIDAD CONSERVADORA",
+        "color": "#2E7D32",
+        "verdict": "La compa\u00f1\u00eda supera con honores la auditor\u00eda forense. Con 0-1 banderas aisladas, la probabilidad emp\u00edrica de manipulaci\u00f3n es m\u00ednima (< 5%). Ganancias de alta calidad avaladas por caja real.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6205,11 +6207,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +11.8% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +11.8% vs \u0394Ventas: +10.4%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6264,11 +6266,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +21.6% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +21.6% vs \u0394Ventas: +12.4%",
             "flag": true,
             "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6323,11 +6325,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +8.6% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +8.6% vs \u0394Ventas: +8.7%",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6382,11 +6384,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +6.9% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +6.9% vs \u0394Ventas: +10.2%",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6441,11 +6443,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
             "value_str": "N/D",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6633,11 +6635,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +5.0% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +5.0% vs \u0394Ventas: +11.4%",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6950,192 +6952,192 @@
         "ebit": 1217.7,
         "interest_expense": 1186.7,
         "interest_estimated": false,
-        "interest_coverage": 1.03,
-        "interest_coverage_str": "1.0x",
+        "interest_coverage": 3.17,
+        "interest_coverage_str": "3.2x (EBITDAre/Int)",
         "cash_interest_coverage": 3.51,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.48,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.0x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "status_service": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "badge": "VIGILANCIA DE APALANCAMIENTO",
+        "color": "#F57C00",
+        "diagnosis": "Cobertura ajustada (3.2x EBITDAre/Intereses). Sensibilidad ante incrementos en costes de refinanciaci\u00f3n hipotecaria o bonos."
       },
       "FY2025": {
         "period": "FY2025",
         "ebit": 651.4,
         "interest_expense": 1134.9,
         "interest_estimated": false,
-        "interest_coverage": 0.57,
-        "interest_coverage_str": "0.6x",
+        "interest_coverage": 2.8,
+        "interest_coverage_str": "2.8x (EBITDAre/Int)",
         "cash_interest_coverage": 3.52,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.41,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (0.6x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "status_service": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "badge": "VIGILANCIA DE APALANCAMIENTO",
+        "color": "#F57C00",
+        "diagnosis": "Cobertura ajustada (2.8x EBITDAre/Intereses). Sensibilidad ante incrementos en costes de refinanciaci\u00f3n hipotecaria o bonos."
       },
       "FY2024": {
         "period": "FY2024",
         "ebit": 554.5,
         "interest_expense": 1017.0,
         "interest_estimated": false,
-        "interest_coverage": 0.55,
-        "interest_coverage_str": "0.5x",
+        "interest_coverage": 2.9,
+        "interest_coverage_str": "2.9x (EBITDAre/Int)",
         "cash_interest_coverage": 3.51,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.46,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (0.5x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "status_service": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "badge": "VIGILANCIA DE APALANCAMIENTO",
+        "color": "#F57C00",
+        "diagnosis": "Cobertura ajustada (2.9x EBITDAre/Intereses). Sensibilidad ante incrementos en costes de refinanciaci\u00f3n hipotecaria o bonos."
       },
       "FY2023": {
         "period": "FY2023",
         "ebit": 769.5,
         "interest_expense": 730.4,
         "interest_estimated": false,
-        "interest_coverage": 1.05,
-        "interest_coverage_str": "1.1x",
+        "interest_coverage": 3.65,
+        "interest_coverage_str": "3.6x (EBITDAre/Int)",
         "cash_interest_coverage": 4.05,
         "cash_interest_coverage_str": "4.1x",
         "financial_burden_pct": 24.69,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.1x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "status_service": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "badge": "COBERTURA ROBUSTA",
+        "color": "#1976D2",
+        "diagnosis": "Cobertura c\u00f3moda (3.6x EBITDAre/Intereses). Margen operativo holgado propio de REITs con Grado de Inversi\u00f3n institucional."
       },
       "FY2022": {
         "period": "FY2022",
         "ebit": 759.5,
         "interest_expense": 465.2,
         "interest_estimated": false,
-        "interest_coverage": 1.63,
-        "interest_coverage_str": "1.6x",
+        "interest_coverage": 5.22,
+        "interest_coverage_str": "5.2x (EBITDAre/Int)",
         "cash_interest_coverage": 5.51,
         "cash_interest_coverage_str": "5.5x",
         "financial_burden_pct": 18.15,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.6x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "status_service": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "badge": "M\u00c1XIMA PROTECCI\u00d3N REIT",
+        "color": "#2E7D32",
+        "diagnosis": "Los flujos operativos inmobiliarios (EBITDAre) cubren 5.2 veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
       },
       "FY2021": {
         "period": "FY2021",
         "ebit": 406.5,
         "interest_expense": 323.6,
         "interest_estimated": false,
-        "interest_coverage": 1.26,
-        "interest_coverage_str": "1.3x",
+        "interest_coverage": 4.03,
+        "interest_coverage_str": "4.0x (EBITDAre/Int)",
         "cash_interest_coverage": 4.09,
         "cash_interest_coverage_str": "4.1x",
         "financial_burden_pct": 24.48,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.3x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "status_service": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "badge": "COBERTURA ROBUSTA",
+        "color": "#1976D2",
+        "diagnosis": "Cobertura c\u00f3moda (4.0x EBITDAre/Intereses). Margen operativo holgado propio de REITs con Grado de Inversi\u00f3n institucional."
       },
       "FY2020": {
         "period": "FY2020",
         "ebit": 328.1,
         "interest_expense": 309.3,
         "interest_estimated": false,
-        "interest_coverage": 1.06,
-        "interest_coverage_str": "1.1x",
+        "interest_coverage": 3.25,
+        "interest_coverage_str": "3.2x (EBITDAre/Int)",
         "cash_interest_coverage": 3.61,
         "cash_interest_coverage_str": "3.6x",
         "financial_burden_pct": 27.73,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.1x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "status_service": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "badge": "COBERTURA ROBUSTA",
+        "color": "#1976D2",
+        "diagnosis": "Cobertura c\u00f3moda (3.2x EBITDAre/Intereses). Margen operativo holgado propio de REITs con Grado de Inversi\u00f3n institucional."
       },
       "FY2019": {
         "period": "FY2019",
         "ebit": 404.6,
         "interest_expense": 291.0,
         "interest_estimated": false,
-        "interest_coverage": 1.39,
-        "interest_coverage_str": "1.4x",
+        "interest_coverage": 3.43,
+        "interest_coverage_str": "3.4x (EBITDAre/Int)",
         "cash_interest_coverage": 3.67,
         "cash_interest_coverage_str": "3.7x",
         "financial_burden_pct": 27.22,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.4x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "status_service": "COBERTURA SALUDABLE REIT (3.2x - 4.5x)",
+        "badge": "COBERTURA ROBUSTA",
+        "color": "#1976D2",
+        "diagnosis": "Cobertura c\u00f3moda (3.4x EBITDAre/Intereses). Margen operativo holgado propio de REITs con Grado de Inversi\u00f3n institucional."
       },
       "FY2018": {
         "period": "FY2018",
         "ebit": 1255.2,
         "interest_expense": 266.0,
         "interest_estimated": false,
-        "interest_coverage": 4.72,
-        "interest_coverage_str": "4.7x",
+        "interest_coverage": 6.75,
+        "interest_coverage_str": "6.7x (EBITDAre/Int)",
         "cash_interest_coverage": 3.54,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.28,
-        "status": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "status_service": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "badge": "VIGILANCIA DE INTERESES",
-        "color": "#F57C00",
-        "diagnosis": "Cobertura ajustada (4.7x). Sensibilidad ante ca\u00eddas de margen o subidas de tipos."
+        "status": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "status_service": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "badge": "M\u00c1XIMA PROTECCI\u00d3N REIT",
+        "color": "#2E7D32",
+        "diagnosis": "Los flujos operativos inmobiliarios (EBITDAre) cubren 6.7 veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
       },
       "FY2017": {
         "period": "FY2017",
         "ebit": 1146.3,
         "interest_expense": 247.4,
         "interest_estimated": false,
-        "interest_coverage": 4.63,
-        "interest_coverage_str": "4.6x",
+        "interest_coverage": 6.65,
+        "interest_coverage_str": "6.6x (EBITDAre/Int)",
         "cash_interest_coverage": 3.54,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.25,
-        "status": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "status_service": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "badge": "VIGILANCIA DE INTERESES",
-        "color": "#F57C00",
-        "diagnosis": "Cobertura ajustada (4.6x). Sensibilidad ante ca\u00eddas de margen o subidas de tipos."
+        "status": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "status_service": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "badge": "M\u00c1XIMA PROTECCI\u00d3N REIT",
+        "color": "#2E7D32",
+        "diagnosis": "Los flujos operativos inmobiliarios (EBITDAre) cubren 6.6 veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
       },
       "FY2016": {
         "period": "FY2016",
         "ebit": 1040.3,
         "interest_expense": 220.0,
         "interest_estimated": false,
-        "interest_coverage": 4.73,
-        "interest_coverage_str": "4.7x",
+        "interest_coverage": 6.77,
+        "interest_coverage_str": "6.8x (EBITDAre/Int)",
         "cash_interest_coverage": 3.64,
         "cash_interest_coverage_str": "3.6x",
         "financial_burden_pct": 27.5,
-        "status": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "status_service": "VULNERABILIDAD A CICLOS (2.5x - 5.0x)",
-        "badge": "VIGILANCIA DE INTERESES",
-        "color": "#F57C00",
-        "diagnosis": "Cobertura ajustada (4.7x). Sensibilidad ante ca\u00eddas de margen o subidas de tipos."
+        "status": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "status_service": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "badge": "M\u00c1XIMA PROTECCI\u00d3N REIT",
+        "color": "#2E7D32",
+        "diagnosis": "Los flujos operativos inmobiliarios (EBITDAre) cubren 6.8 veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
       },
       "FY2015": {
         "period": "FY2015",
         "ebit": 967.9,
         "interest_expense": 233.1,
         "interest_estimated": false,
-        "interest_coverage": null,
-        "interest_coverage_str": "INFINITA (SIN DEUDA)",
-        "cash_interest_coverage": null,
-        "cash_interest_coverage_str": "INFINITA (SIN DEUDA)",
-        "financial_burden_pct": 0.0,
-        "status": "LIBRE DE DEUDA",
-        "status_service": "LIBRE DE DEUDA",
-        "badge": "SERVICIO BLINDADO",
+        "interest_coverage": 5.91,
+        "interest_coverage_str": "5.9x (EBITDAre/Int)",
+        "cash_interest_coverage": 2.98,
+        "cash_interest_coverage_str": "3.0x",
+        "financial_burden_pct": 33.61,
+        "status": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "status_service": "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)",
+        "badge": "M\u00c1XIMA PROTECCI\u00d3N REIT",
         "color": "#2E7D32",
-        "diagnosis": "La compa\u00f1\u00eda opera sin deuda financiera, por lo que carece de gasto financiero que comprometa sus resultados."
+        "diagnosis": "Los flujos operativos inmobiliarios (EBITDAre) cubren 5.9 veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
       }
     },
     "liquidity_and_refinancing": {
@@ -7383,231 +7385,399 @@
     "distress_and_credit_models": {
       "LTM": {
         "period": "LTM",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0159,
-        "altman_x4": 1.1461,
-        "altman_z_double_prime": 1.31,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.31 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2025": {
-        "period": "FY2025",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0089,
-        "altman_x4": 1.2071,
-        "altman_z_double_prime": 1.33,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.33 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "D",
-        "synthetic_rating_desc": "DEFAULT INMINENTE O T\u00c9CNICO (D / Default)",
-        "default_spread": 0.15,
-        "default_spread_pct": 15.0,
-        "default_probability": "> 50.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2024": {
-        "period": "FY2024",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0081,
-        "altman_x4": 1.3041,
-        "altman_z_double_prime": 1.42,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.42 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "D",
-        "synthetic_rating_desc": "DEFAULT INMINENTE O T\u00c9CNICO (D / Default)",
-        "default_spread": 0.15,
-        "default_spread_pct": 15.0,
-        "default_probability": "> 50.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2023": {
-        "period": "FY2023",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0133,
-        "altman_x4": 1.3352,
-        "altman_z_double_prime": 1.49,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.49 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2022": {
-        "period": "FY2022",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0153,
-        "altman_x4": 1.3785,
-        "altman_z_double_prime": 1.55,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.55 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "B",
-        "synthetic_rating_desc": "ALTA VULNERABILIDAD FINANCIERA (B / B2)",
-        "default_spread": 0.045,
-        "default_spread_pct": 4.5,
-        "default_probability": "10.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2021": {
-        "period": "FY2021",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0094,
-        "altman_x4": 1.3912,
-        "altman_z_double_prime": 1.52,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.52 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2020": {
-        "period": "FY2020",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0158,
-        "altman_x4": 1.1299,
-        "altman_z_double_prime": 1.29,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.29 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2019": {
-        "period": "FY2019",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0218,
-        "altman_x4": 1.117,
-        "altman_z_double_prime": 1.32,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.32 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
-      },
-      "FY2018": {
-        "period": "FY2018",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0823,
-        "altman_x4": 1.133,
-        "altman_z_double_prime": 1.74,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.74 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "A",
-        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2)",
-        "default_spread": 0.013,
-        "default_spread_pct": 1.3,
-        "default_probability": "0.7%",
-        "rating_color": "#1976D2"
-      },
-      "FY2017": {
-        "period": "FY2017",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0815,
-        "altman_x4": 1.1056,
-        "altman_z_double_prime": 1.71,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.71 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "A",
-        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2)",
-        "default_spread": 0.013,
-        "default_spread_pct": 1.3,
-        "default_probability": "0.7%",
-        "rating_color": "#1976D2"
-      },
-      "FY2016": {
-        "period": "FY2016",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0791,
-        "altman_x4": 1.063,
-        "altman_z_double_prime": 1.65,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.65 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "A",
-        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2)",
-        "default_spread": 0.013,
-        "default_spread_pct": 1.3,
-        "default_probability": "0.7%",
-        "rating_color": "#1976D2"
-      },
-      "FY2015": {
-        "period": "FY2015",
-        "is_applicable": true,
+        "is_applicable": false,
         "altman_x1": null,
         "altman_x2": null,
         "altman_x3": null,
         "altman_x4": null,
         "altman_z_double_prime": null,
-        "altman_zone": "DATOS INSUFICIENTES",
-        "altman_badge": "N/D",
-        "altman_color": "#757575",
-        "altman_diagnosis": "Estructura de balance incompleta para calcular Altman Z''-Score.",
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A-",
+        "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+        "default_spread": 0.015,
+        "default_spread_pct": 1.5,
+        "default_probability": "1.0%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2025": {
+        "period": "FY2025",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A-",
+        "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+        "default_spread": 0.015,
+        "default_spread_pct": 1.5,
+        "default_probability": "1.0%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2024": {
+        "period": "FY2024",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A-",
+        "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+        "default_spread": 0.015,
+        "default_spread_pct": 1.5,
+        "default_probability": "1.0%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2023": {
+        "period": "FY2023",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A",
+        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2) [REIT EBITDAre adj]",
+        "default_spread": 0.013,
+        "default_spread_pct": 1.3,
+        "default_probability": "0.7%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2022": {
+        "period": "FY2022",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "AA",
+        "synthetic_rating_desc": "SOLVENCIA MUY FUERTE (AA / Aa2) [REIT EBITDAre adj]",
+        "default_spread": 0.008,
+        "default_spread_pct": 0.8,
+        "default_probability": "0.3%",
+        "rating_color": "#2E7D32",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2021": {
+        "period": "FY2021",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A",
+        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2) [REIT EBITDAre adj]",
+        "default_spread": 0.013,
+        "default_spread_pct": 1.3,
+        "default_probability": "0.7%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2020": {
+        "period": "FY2020",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A-",
+        "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+        "default_spread": 0.015,
+        "default_spread_pct": 1.5,
+        "default_probability": "1.0%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2019": {
+        "period": "FY2019",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A",
+        "synthetic_rating_desc": "SOLVENCIA BUENA (A / A2) [REIT EBITDAre adj]",
+        "default_spread": 0.013,
+        "default_spread_pct": 1.3,
+        "default_probability": "0.7%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2018": {
+        "period": "FY2018",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "AA",
+        "synthetic_rating_desc": "SOLVENCIA MUY FUERTE (AA / Aa2) [REIT EBITDAre adj]",
+        "default_spread": 0.008,
+        "default_spread_pct": 0.8,
+        "default_probability": "0.3%",
+        "rating_color": "#2E7D32",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2017": {
+        "period": "FY2017",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "AA",
+        "synthetic_rating_desc": "SOLVENCIA MUY FUERTE (AA / Aa2) [REIT EBITDAre adj]",
+        "default_spread": 0.008,
+        "default_spread_pct": 0.8,
+        "default_probability": "0.3%",
+        "rating_color": "#2E7D32",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2016": {
+        "period": "FY2016",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "AA",
+        "synthetic_rating_desc": "SOLVENCIA MUY FUERTE (AA / Aa2) [REIT EBITDAre adj]",
+        "default_spread": 0.008,
+        "default_spread_pct": 0.8,
+        "default_probability": "0.3%",
+        "rating_color": "#2E7D32",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
+      },
+      "FY2015": {
+        "period": "FY2015",
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
         "synthetic_rating": "AAA",
-        "synthetic_rating_desc": "M\u00c1XIMA CALIDAD CREDITICIA (LIBRE DE DEUDA)",
+        "synthetic_rating_desc": "M\u00c1XIMA CALIDAD CREDITICIA (LIBRE DE DEUDA) [REIT EBITDAre adj]",
         "default_spread": 0.004,
         "default_spread_pct": 0.4,
         "default_probability": "< 0.1%",
-        "rating_color": "#2E7D32"
+        "rating_color": "#2E7D32",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
       }
     },
     "latest_result": {
@@ -7642,16 +7812,16 @@
         "ebit": 1217.7,
         "interest_expense": 1186.7,
         "interest_estimated": false,
-        "interest_coverage": 1.03,
-        "interest_coverage_str": "1.0x",
+        "interest_coverage": 3.17,
+        "interest_coverage_str": "3.2x (EBITDAre/Int)",
         "cash_interest_coverage": 3.51,
         "cash_interest_coverage_str": "3.5x",
         "financial_burden_pct": 28.48,
-        "status": "PELIGRO DE DEFAULT (< 2.5x)",
-        "status_service": "PELIGRO DE DEFAULT (< 2.5x)",
-        "badge": "ESTR\u00c9S FINANCIERO",
-        "color": "#D32F2F",
-        "diagnosis": "Carga de intereses asfixiante (1.0x). Alto riesgo de refinanciaci\u00f3n forzada o impago."
+        "status": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "status_service": "VULNERABILIDAD A TIPOS (2.2x - 3.2x)",
+        "badge": "VIGILANCIA DE APALANCAMIENTO",
+        "color": "#F57C00",
+        "diagnosis": "Cobertura ajustada (3.2x EBITDAre/Intereses). Sensibilidad ante incrementos en costes de refinanciaci\u00f3n hipotecaria o bonos."
       },
       "liquidity": {
         "period": "LTM",
@@ -7675,26 +7845,40 @@
       },
       "distress_models": {
         "period": "LTM",
-        "is_applicable": true,
-        "altman_x1": 0.0,
-        "altman_x2": 0.0,
-        "altman_x3": 0.0159,
-        "altman_x4": 1.1461,
-        "altman_z_double_prime": 1.31,
-        "altman_zone": "ZONA GRIS (PRECAUCI\u00d3N Y SEGUIMIENTO)",
-        "altman_badge": "ZONA GRIS",
-        "altman_color": "#F57C00",
-        "altman_diagnosis": "Altman Z''-Score de 1.31 (entre 1.10 y 2.60). Requiere seguimiento de m\u00e1rgenes y apalancamiento.",
-        "synthetic_rating": "CCC",
-        "synthetic_rating_desc": "RIESGO SUSTANCIAL DE IMPAGO (CCC / Caa)",
-        "default_spread": 0.08,
-        "default_spread_pct": 8.0,
-        "default_probability": "25.0%",
-        "rating_color": "#D32F2F"
+        "is_applicable": false,
+        "altman_x1": null,
+        "altman_x2": null,
+        "altman_x3": null,
+        "altman_x4": null,
+        "altman_z_double_prime": null,
+        "altman_zone": "NO APLICABLE",
+        "altman_badge": "NO APLICABLE",
+        "altman_color": "#607D8B",
+        "altman_diagnosis": "Altman Z''-Score NO APLICABLE para sociedades de inversi\u00f3n inmobiliaria (REITs). El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio.",
+        "synthetic_rating": "A-",
+        "synthetic_rating_desc": "SOLVENCIA SATISFACTORIA (A- / A3) [REIT EBITDAre adj]",
+        "default_spread": 0.015,
+        "default_spread_pct": 1.5,
+        "default_probability": "1.0%",
+        "rating_color": "#1976D2",
+        "pedagogical_guidance": {
+          "model": "Altman Z''-Score (4 Variables)",
+          "status": "NO APLICABLE",
+          "archetype": "REAL_ESTATE_REIT",
+          "what_it_measures": "Modelo econom\u00e9trico multivariante de predicci\u00f3n de insolvencia y quiebra a 2 a\u00f1os para corporaciones industriales y de servicios.",
+          "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
+          "why_not_applicable": "Inhibido por dise\u00f1o metodol\u00f3gico institucional para arquetipos 'REAL_ESTATE_REIT'. En sociedades de inversi\u00f3n inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia econ\u00f3mica.",
+          "replacement_metrics": [
+            "Deuda Neta / EBITDAre",
+            "Cobertura EBITDAre / Intereses",
+            "FFO / Deuda Total",
+            "AFFO Payout Ratio"
+          ]
+        }
       },
-      "solvency_verdict": "SOLVENCIA EQUILIBRADA BAJO MONITOREO: Apalancamiento controlado (7.64x), cobertura de 1.0x y Altman Z''-Score de 1.31. Estructura de capital adecuada sin riesgos inminentes de impago.",
-      "global_color": "#1976D2",
-      "global_badge": "SOLVENCIA MODERADA"
+      "solvency_verdict": "ESTRUCTURA DE CAPITAL INMOBILIARIA (REAL_ESTATE_REIT): Cobertura EBITDAre/Intereses de 3.2x (EBITDAre/Int) con rating sint\u00e9tico A-. Altman Z'' inhibido metodol\u00f3gicamente por no aplicar a carteras de inmuebles comerciales en renta.",
+      "global_color": "#F57C00",
+      "global_badge": "SOLVENCIA INMOBILIARIA"
     }
   },
   "scoring_results": {

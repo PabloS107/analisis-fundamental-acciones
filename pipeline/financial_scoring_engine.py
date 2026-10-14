@@ -416,13 +416,17 @@ class PiotroskiScoreCalculator:
         # Datos año t-2 (para rotación previa)
         assets_prev2 = _safe_float(prev2_data.get("total_assets")) if prev2_data else None
 
+        # Activos promedio ponderados ((t + t-1) / 2) para simetría contable y evitar distorsiones en hipercrecimiento
+        avg_assets_t = ((assets_t + assets_prev) / 2.0) if (assets_t and assets_prev and assets_prev > 0) else (assets_t or assets_prev)
+        avg_assets_prev = ((assets_prev + assets_prev2) / 2.0) if (assets_prev and assets_prev2 and assets_prev2 > 0) else assets_prev
+
         score = 0
 
         # -------------------------------------------------------------
         # Bloque I: Rentabilidad (4 Señales)
         # -------------------------------------------------------------
-        # 1. F_ROA: Net Income / Assets_{t-1} > 0
-        roa_denom = assets_prev if (assets_prev and assets_prev > 0) else assets_t
+        # 1. F_ROA: Net Income / Avg_Assets_t > 0
+        roa_denom = avg_assets_t if (avg_assets_t and avg_assets_t > 0) else (assets_prev if assets_prev and assets_prev > 0 else assets_t)
         roa_t = (ni_t / roa_denom) if (ni_t is not None and roa_denom and roa_denom > 0) else None
         pass_roa = bool(roa_t is not None and roa_t > 0)
         score += 1 if pass_roa else 0
@@ -435,7 +439,7 @@ class PiotroskiScoreCalculator:
             "threshold": "> 0.00%",
             "passed": pass_roa,
             "points": 1 if pass_roa else 0,
-            "description": "Utilidad neta positiva sobre la base de activos instalados."
+            "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         }
 
         # 2. F_CFO: Cash Flow from Operations > 0
@@ -454,7 +458,7 @@ class PiotroskiScoreCalculator:
         }
 
         # 3. F_dROA: ROA_t - ROA_{t-1} > 0
-        roa_prev_denom = assets_prev2 if (assets_prev2 and assets_prev2 > 0) else assets_prev
+        roa_prev_denom = avg_assets_prev if (avg_assets_prev and avg_assets_prev > 0) else (assets_prev2 if assets_prev2 and assets_prev2 > 0 else assets_prev)
         roa_prev = (ni_prev / roa_prev_denom) if (ni_prev is not None and roa_prev_denom and roa_prev_denom > 0) else None
         delta_roa = (roa_t - roa_prev) if (roa_t is not None and roa_prev is not None) else None
         pass_droa = bool(delta_roa is not None and delta_roa > 0)
@@ -567,10 +571,10 @@ class PiotroskiScoreCalculator:
         # 9. F_dTURN: Asset Turnover_t > Asset Turnover_{t-1}
         # Turnover_t = Rev_t / Assets_{t-1}
         # Turnover_{t-1} = Rev_{t-1} / Assets_{t-2}
-        turn_t_denom = assets_prev if (assets_prev and assets_prev > 0) else assets_t
+        turn_t_denom = avg_assets_t if (avg_assets_t and avg_assets_t > 0) else (assets_prev if assets_prev and assets_prev > 0 else assets_t)
         turn_t = (rev_t / turn_t_denom) if (rev_t is not None and turn_t_denom and turn_t_denom > 0) else None
 
-        turn_prev_denom = assets_prev2 if (assets_prev2 and assets_prev2 > 0) else assets_prev
+        turn_prev_denom = avg_assets_prev if (avg_assets_prev and avg_assets_prev > 0) else (assets_prev2 if assets_prev2 and assets_prev2 > 0 else assets_prev)
         turn_prev = (rev_prev / turn_prev_denom) if (rev_prev is not None and turn_prev_denom and turn_prev_denom > 0) else None
 
         delta_turn = (turn_t - turn_prev) if (turn_t is not None and turn_prev is not None) else None
@@ -965,9 +969,46 @@ class NovyMarxCalculator:
         assets = _safe_float(current_data.get("total_assets"))
         cash = _safe_float(current_data.get("cash") or current_data.get("cash_and_equiv") or current_data.get("cash_and_cash_equivalents")) or 0.0
 
-        # Validación del sector financiero (SIC 6000-6999)
+        # Validación del sector financiero (Banca y Seguros)
+        arch_norm = normalize_archetype(benchmarks.get("archetype"), default="STANDARD_CORPORATE")
         sic_code = str(benchmarks.get("sic_code", "0000")).strip()
-        is_financial = sic_code.startswith("6") or benchmarks.get("gics_sector") == "Financials"
+        is_financial = (arch_norm in ("FINANCIAL_BANKING", "INSURANCE")) or sic_code.startswith("60") or sic_code.startswith("63")
+
+        if is_financial:
+            return {
+                "period": period,
+                "is_applicable": False,
+                "is_financial_institution": True,
+                "rating": "NO APLICABLE (BANCA / SEGUROS)",
+                "quadrant": "NO APLICABLE A INTERMEDIACIÓN FINANCIERA",
+                "quadrant_badge": "🏦 N/A SECTOR FINANCIERO (VER ROTCE / NIM / COMBINED RATIO)",
+                "quadrant_description": (
+                    "El modelo de Novy-Marx evalúa la productividad fabril/comercial pura deduciendo el coste directo de ventas (COGS). "
+                    "En intermediación financiera y seguros no existe inventario físico ni COGS; los intereses pagados remuneran depósitos de clientes. "
+                    "La productividad y eficiencia del capital se evalúan mediante Margen de Interés Neto (NIM), Ratio de Eficiencia y ROTCE/ROE."
+                ),
+                "gross_profitability_total": None,
+                "gross_profitability_ex_cash": None,
+                "cash_drag": None,
+                "gross_margin": None,
+                "asset_turnover_total": None,
+                "asset_turnover_ex_cash": None,
+                "dupont_product": None,
+                "dupont_verified": False,
+                "percentile_label": "No Aplicable",
+                "percentile_explanation": "Inhibido metodológicamente para arquetipos financieros (Regla 3 de AGENTS.md).",
+                "adjusted_gp_a": None,
+                "adjusted_gp_a_ex_cash": None,
+                "benchmarks_used": {},
+                "explanations": {
+                    "gross_profitability_total": "No aplicable a intermediación bancaria ni seguros.",
+                    "gross_profitability_ex_cash": "No aplicable.",
+                    "cash_drag": "No aplicable.",
+                    "gross_margin": "No aplicable (las entidades financieras no tienen COGS industrial).",
+                    "asset_turnover": "No aplicable.",
+                    "dupont_verification": "No aplicable."
+                }
+            }
 
         # 1. GP / Activos Totales (Formulación original de Novy-Marx 2013)
         gp_a = (gp / assets) if (gp is not None and assets and assets > 0) else None
@@ -1280,7 +1321,13 @@ class NovyMarxCalculator:
 
         peer_ranking.sort(key=lambda x: x["gross_profitability_total"] if x["gross_profitability_total"] is not None else -999, reverse=True)
 
-        return {
+        arch_norm = normalize_archetype(benchmarks.get("archetype"), default="STANDARD_CORPORATE")
+        sic_code = str(benchmarks.get("sic_code", "0000")).strip()
+        is_financial = (arch_norm in ("FINANCIAL_BANKING", "INSURANCE")) or sic_code.startswith("60") or sic_code.startswith("63")
+
+        res_series = {
+            "is_applicable": not is_financial,
+            "is_financial_institution": is_financial,
             "by_period": period_results,
             "latest_period": recent_fy,
             "latest_result": recent_res,
@@ -1295,6 +1342,29 @@ class NovyMarxCalculator:
             },
             "peer_ranking": peer_ranking
         }
+
+        if is_financial:
+            res_series["pedagogical_guidance"] = {
+                "metric": "Novy-Marx Gross Profitability to Assets (GP/A)",
+                "status": "NO APLICABLE",
+                "archetype": arch_norm,
+                "what_it_measures": "Productividad pura del capital de Novy-Marx (2013): Utilidad Bruta / Activos Totales, aislando la eficiencia fabril/comercial sin distorsiones contables de SG&A o I+D.",
+                "formula": "GP/A = Gross Profit / Total Assets",
+                "why_not_applicable": (
+                    f"Inhibido metodológicamente para arquetipos '{arch_norm}'. "
+                    "En intermediación financiera y entidades aseguradoras no existe Costo de Mercancías Vendidas (COGS) industrial. "
+                    "Los gastos por intereses constituyen el costo del pasivo operativo (depósitos de clientes), "
+                    "por lo que imputar un 'margen bruto' desvirtúa el análisis de rentabilidad y productividad."
+                ),
+                "replacement_metrics": [
+                    "NIM Ajustado por Riesgo (Net Interest Margin tras provisiones)",
+                    "Ratio de Eficiencia Bancario (Non-Interest Expense / Total Net Revenue)",
+                    "ROTCE (Rentabilidad sobre Fondos Propios Tangibles)",
+                    "Ratio Combinado (Combined Ratio en Seguros)"
+                ]
+            }
+
+        return res_series
 
 
 
@@ -1318,6 +1388,10 @@ class IntangibleROICCalculator:
         """
         annual_fys = [y for y in fiscal_years if y != "LTM"]
         annual_fys_sorted = sorted(annual_fys, key=lambda x: int(x.replace("FY", "")) if "FY" in x else 0)
+
+        raw_arch = benchmarks.get("archetype") if benchmarks else None
+        arch_norm = normalize_archetype(raw_arch, default="STANDARD_CORPORATE")
+        is_reit = (arch_norm == "REAL_ESTATE_REIT")
 
         n_rd_base = int(benchmarks.get("rd_useful_life_years", 4))
         n_mkt_base = int(benchmarks.get("sga_useful_life_years", 2))
@@ -1381,12 +1455,7 @@ class IntangibleROICCalculator:
                 tax_rate = _safe_float(m.get("effective_tax_rate")) or 0.21
                 tax_rate = max(0.05, min(0.35, tax_rate))
 
-                # NOPAT
-                nopat_trad = ebit * (1.0 - tax_rate)
-                ebit_adj = ebit + (rd_exp - rd_amort) + (mkt_exp - mkt_amort)
-                nopat_adj = ebit_adj * (1.0 - tax_rate)
-
-                # Capital Invertido
+                # Capital Invertido Base
                 raw_assets = _safe_float(m.get("total_assets")) or 0.0
                 assets = _to_millions(raw_assets) or 0.0
                 raw_cash = _safe_float(m.get("cash")) or 0.0
@@ -1397,8 +1466,24 @@ class IntangibleROICCalculator:
                 st_debt = _to_millions(raw_st_debt) or 0.0
 
                 nibcl = max(0.0, cl - st_debt)
-                ic_trad_end = max(1.0, assets - cash - nibcl)
-                ic_adj_end = ic_trad_end + total_intangibles
+
+                if is_reit:
+                    raw_re_dep = _safe_float(m.get("real_estate_depreciation")) or 0.0
+                    re_dep = _to_millions(raw_re_dep) or 0.0
+                    maint_capex = _to_millions(_safe_float(m.get("capex"))) or 0.0
+                    accum_dep = _to_millions(_safe_float(m.get("accumulated_depreciation"))) or 0.0
+                    nopat_trad = max(0.0, (ebit + re_dep - maint_capex) * (1.0 - tax_rate))
+                    ebit_adj = ebit + re_dep - maint_capex
+                    nopat_adj = nopat_trad
+                    ic_trad_end = max(1.0, assets + accum_dep - cash - nibcl)
+                    ic_adj_end = ic_trad_end
+                else:
+                    # NOPAT
+                    nopat_trad = ebit * (1.0 - tax_rate)
+                    ebit_adj = ebit + (rd_exp - rd_amort) + (mkt_exp - mkt_amort)
+                    nopat_adj = ebit_adj * (1.0 - tax_rate)
+                    ic_trad_end = max(1.0, assets - cash - nibcl)
+                    ic_adj_end = ic_trad_end + total_intangibles
 
                 # Capital Invertido Promedio ((t + t-1) / 2)
                 # Garantiza correspondencia temporal institucional con el NOPAT anual
@@ -1464,13 +1549,26 @@ class IntangibleROICCalculator:
                 sga_exp_ltm = _to_millions(raw_sga) or 0.0
                 mkt_exp_ltm = sga_exp_ltm * sga_cap_pct
 
-                # Amortización LTM aproximada al último año fiscal
-                rd_amort_ltm = last_res.get("rd_amortization", 0.0)
-                mkt_amort_ltm = last_res.get("mkt_amortization", 0.0)
+                if is_reit:
+                    rd_amort_ltm = 0.0
+                    mkt_amort_ltm = 0.0
+                    rd_stock_ltm = 0.0
+                    mkt_stock_ltm = 0.0
+                    total_intangibles_ltm = 0.0
+                else:
+                    recent_rd_vals = [rd_invs.get(y, 0.0) for y in annual_fys_sorted[-(n_rd - 1):]] + [rd_exp_ltm]
+                    rd_amort_ltm = (sum(recent_rd_vals) / float(n_rd)) if recent_rd_vals else 0.0
+                    last_rd_stock = last_res.get("rd_stock", 0.0)
+                    last_rd_inv = last_res.get("rd_investment", 0.0)
+                    rd_stock_ltm = max(0.0, last_rd_stock + (rd_exp_ltm - last_rd_inv) * 0.5)
 
-                rd_stock_ltm = last_res.get("rd_stock", 0.0)
-                mkt_stock_ltm = last_res.get("mkt_stock", 0.0)
-                total_intangibles_ltm = rd_stock_ltm + mkt_stock_ltm
+                    recent_mkt_vals = [mkt_invs.get(y, 0.0) for y in annual_fys_sorted[-(n_mkt - 1):]] + [mkt_exp_ltm]
+                    mkt_amort_ltm = (sum(recent_mkt_vals) / float(n_mkt)) if recent_mkt_vals else 0.0
+                    last_mkt_stock = last_res.get("mkt_stock", 0.0)
+                    last_mkt_inv = last_res.get("mkt_investment", 0.0)
+                    mkt_stock_ltm = max(0.0, last_mkt_stock + (mkt_exp_ltm - last_mkt_inv) * 0.5)
+
+                    total_intangibles_ltm = rd_stock_ltm + mkt_stock_ltm
 
                 raw_gp = _safe_float(m_ltm.get("gross_profit")) or 0.0
                 gp = _to_millions(raw_gp) or 0.0
@@ -1485,9 +1583,6 @@ class IntangibleROICCalculator:
                     ebit_ltm = ni
 
                 tax_rate_ltm = _safe_float(m_ltm.get("effective_tax_rate")) or last_res.get("tax_rate", 0.21)
-                nopat_trad_ltm = ebit_ltm * (1.0 - tax_rate_ltm)
-                ebit_adj_ltm = ebit_ltm + (rd_exp_ltm - rd_amort_ltm) + (mkt_exp_ltm - mkt_amort_ltm)
-                nopat_adj_ltm = ebit_adj_ltm * (1.0 - tax_rate_ltm)
 
                 raw_assets = _safe_float(m_ltm.get("total_assets")) or 0.0
                 assets_ltm = _to_millions(raw_assets) or 0.0
@@ -1499,8 +1594,23 @@ class IntangibleROICCalculator:
                 st_debt_ltm = _to_millions(raw_st_debt) or 0.0
 
                 nibcl_ltm = max(0.0, cl_ltm - st_debt_ltm)
-                ic_trad_ltm_end = max(1.0, assets_ltm - cash_ltm - nibcl_ltm)
-                ic_adj_ltm_end = ic_trad_ltm_end + total_intangibles_ltm
+
+                if is_reit:
+                    raw_re_dep = _safe_float(m_ltm.get("real_estate_depreciation")) or 0.0
+                    re_dep_ltm = _to_millions(raw_re_dep) or 0.0
+                    maint_capex_ltm = _to_millions(_safe_float(m_ltm.get("capex"))) or 0.0
+                    accum_dep_ltm = _to_millions(_safe_float(m_ltm.get("accumulated_depreciation"))) or 0.0
+                    nopat_trad_ltm = max(0.0, (ebit_ltm + re_dep_ltm - maint_capex_ltm) * (1.0 - tax_rate_ltm))
+                    ebit_adj_ltm = ebit_ltm + re_dep_ltm - maint_capex_ltm
+                    nopat_adj_ltm = nopat_trad_ltm
+                    ic_trad_ltm_end = max(1.0, assets_ltm + accum_dep_ltm - cash_ltm - nibcl_ltm)
+                    ic_adj_ltm_end = ic_trad_ltm_end
+                else:
+                    nopat_trad_ltm = ebit_ltm * (1.0 - tax_rate_ltm)
+                    ebit_adj_ltm = ebit_ltm + (rd_exp_ltm - rd_amort_ltm) + (mkt_exp_ltm - mkt_amort_ltm)
+                    nopat_adj_ltm = ebit_adj_ltm * (1.0 - tax_rate_ltm)
+                    ic_trad_ltm_end = max(1.0, assets_ltm - cash_ltm - nibcl_ltm)
+                    ic_adj_ltm_end = ic_trad_ltm_end + total_intangibles_ltm
 
                 prev_ic_trad = last_res.get("ic_trad_end", last_res.get("ic_trad", ic_trad_ltm_end))
                 prev_ic_adj = last_res.get("ic_adj_end", last_res.get("ic_adj", ic_adj_ltm_end))
@@ -2292,7 +2402,27 @@ class ForensicAccountingEngine:
             else:
                 avg_assets = assets_t
 
-            if ni is not None and cfo is not None and avg_assets and avg_assets > 0:
+            if is_financial:
+                sloan_analysis[fy] = {
+                    "period": fy,
+                    "prior_period": prev_fy,
+                    "net_income": ni,
+                    "cfo": cfo,
+                    "total_accruals": None,
+                    "ending_assets": assets_t,
+                    "avg_assets": avg_assets,
+                    "sloan_ratio": None,
+                    "sloan_ratio_pct": None,
+                    "status": "NO APLICABLE (SECTOR FINANCIERO)",
+                    "badge": "N/A BANCA Y SEGUROS",
+                    "color": "#607D8B",
+                    "diagnosis": (
+                        "El ratio de devengos contables de Sloan (NI - CFO / Activos) no es aplicable a bancos o aseguradoras. "
+                        "En estas entidades, la originación de créditos, préstamos y movimientos de carteras de inversión se clasifican "
+                        "en el flujo de caja operativo (CFO), creando volatilidades masivas que no reflejan manipulación de beneficios."
+                    )
+                }
+            elif ni is not None and cfo is not None and avg_assets and avg_assets > 0:
                 total_accruals = ni - cfo
                 sloan_ratio = total_accruals / avg_assets
                 sloan_ratio_pct = round(sloan_ratio * 100.0, 2)
@@ -2632,10 +2762,10 @@ class ForensicAccountingEngine:
                 f5 = 1 if (prev and depr_rate_prev > 0 and depr_rate_t < (depr_rate_prev - 0.005)) else 0
                 val_f5 = f"Tasa Deprec: {round(depr_rate_t*100, 2)}% vs {round(depr_rate_prev*100, 2)}%" if (prev and depr_rate_prev > 0) else f"{round(depr_rate_t*100, 2)}%"
 
-                # Bandera 6: Crecimiento Excesivo de Activos Totales (> 10.0%)
+                # Bandera 6: Crecimiento Excesivo de Activos Totales (> 15.0% y superando a ventas)
                 assets_growth = ((assets_t - assets_prev) / abs(assets_prev)) if (assets_t is not None and assets_prev and assets_prev > 0) else None
-                f6 = 1 if (assets_growth is not None and assets_growth > 0.10) else 0
-                val_f6 = f"ΔActivos: {round(assets_growth*100, 1):+.1f}% (Umbral: > 10%)" if assets_growth is not None else "N/D"
+                f6 = 1 if (assets_growth is not None and assets_growth > 0.15 and (d_rev is None or assets_growth > d_rev * 1.15)) else 0
+                val_f6 = f"ΔActivos: {round(assets_growth*100, 1):+.1f}% vs ΔVentas: {round(d_rev*100, 1):+.1f}%" if (assets_growth is not None and d_rev is not None) else (f"ΔActivos: {round(assets_growth*100, 1):+.1f}%" if assets_growth is not None else "N/D")
 
                 total_montier = f1 + f2 + f3 + f4 + f5 + f6
 
@@ -2714,11 +2844,11 @@ class ForensicAccountingEngine:
                     },
                     "f6_asset_growth": {
                         "name": "6. Crecimiento Excesivo de Activos Totales",
-                        "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
+                        "condition": "Δ Activos > 15.0% y Δ Activos > 1.15 * Δ Ventas",
                         "value_str": val_f6,
                         "flag": bool(f6),
                         "status": "FLAG" if f6 else "OK",
-                        "rationale": "Expansión acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad orgánica y distorsionar resultados."
+                        "rationale": "Expansión desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad orgánica o acumulación de partidas improductivas."
                     }
                 }
 
@@ -2954,6 +3084,8 @@ class DebtSolvencyEngine:
         raw_arch = archetype or (benchmarks.get("archetype") if benchmarks else None) or "STANDARD_CORPORATE"
         arch_norm = normalize_archetype(raw_arch)
         is_financial = (arch_norm in ("FINANCIAL_BANKING", "INSURANCE"))
+        is_reit = (arch_norm == "REAL_ESTATE_REIT")
+        is_altman_applicable = not (is_financial or is_reit)
 
         leverage_series: Dict[str, Any] = {}
         coverage_series: Dict[str, Any] = {}
@@ -3114,7 +3246,57 @@ class DebtSolvencyEngine:
             # -------------------------------------------------------------
             # Bloque 2: Cobertura de Carga Financiera y Servicio de la Deuda
             # -------------------------------------------------------------
-            if is_debt_free:
+            if is_financial:
+                raw_eq = _safe_float(curr.get("stockholders_equity")) or 0.0
+                raw_ass = _safe_float(curr.get("total_assets")) or 0.0
+                eq_to_assets_pct = (raw_eq / raw_ass * 100.0) if (raw_ass and raw_ass > 0) else 0.0
+                int_cov = None
+                int_cov_str = f"Cap. {eq_to_assets_pct:.1f}% Activos"
+                cash_int_cov = None
+                cash_int_cov_str = "N/A (BANCA / SEGUROS)"
+                burden_pct = 0.0
+                status_service = "FONDEO BANCARIO / RESERVAS TÉCNICAS"
+                badge_service = "SOLVENCIA REGULATORIA"
+                color_service = "#1976D2"
+                diag_service = (
+                    f"En intermediación bancaria y seguros, el gasto por intereses (${interest:.1f}M) remunera a los depositantes y fondos de clientes, "
+                    "constituyendo un coste de ventas operativo y no una carga de deuda financiera corporativa. "
+                    f"La solvencia se mide por adecuación de capital patrimonial ({eq_to_assets_pct:.1f}% de los activos) y ratios regulatorios (CET1/RBC)."
+                )
+            elif is_reit:
+                raw_re_dep = _safe_float(curr.get("real_estate_depreciation")) or 0.0
+                re_dep = _to_millions(raw_re_dep) or 0.0
+                reit_ebitda = ebitda if (ebitda is not None and ebitda > (ebit or 0)) else ((ebit or 0.0) + re_dep)
+                cov = (reit_ebitda / interest) if interest > 0 else 99.0
+                int_cov = round(cov, 2)
+                int_cov_str = f"{cov:.1f}x (EBITDAre/Int)"
+                cash_cov = (cfo / interest) if (cfo and cfo > 0 and interest > 0) else None
+                cash_int_cov = round(cash_cov, 2) if cash_cov is not None else None
+                cash_int_cov_str = f"{cash_cov:.1f}x" if cash_cov is not None else "N/D"
+                burden = (interest / cfo * 100.0) if (cfo and cfo > 0) else 0.0
+                burden_pct = round(burden, 2)
+
+                if cov >= 4.5:
+                    status_service = "COBERTURA INMOBILIARIA EXCELENTE (> 4.5x)"
+                    color_service = "#2E7D32"
+                    badge_service = "MÁXIMA PROTECCIÓN REIT"
+                    diag_service = f"Los flujos operativos inmobiliarios (EBITDAre) cubren {cov:.1f} veces los intereses de la deuda. Excelente solvencia para soportar ciclos de tipos."
+                elif cov >= 3.2:
+                    status_service = "COBERTURA SALUDABLE REIT (3.2x - 4.5x)"
+                    color_service = "#1976D2"
+                    badge_service = "COBERTURA ROBUSTA"
+                    diag_service = f"Cobertura cómoda ({cov:.1f}x EBITDAre/Intereses). Margen operativo holgado propio de REITs con Grado de Inversión institucional."
+                elif cov >= 2.2:
+                    status_service = "VULNERABILIDAD A TIPOS (2.2x - 3.2x)"
+                    color_service = "#F57C00"
+                    badge_service = "VIGILANCIA DE APALANCAMIENTO"
+                    diag_service = f"Cobertura ajustada ({cov:.1f}x EBITDAre/Intereses). Sensibilidad ante incrementos en costes de refinanciación hipotecaria o bonos."
+                else:
+                    status_service = "ESTRÉS FINANCIERO INMOBILIARIO (< 2.2x)"
+                    color_service = "#D32F2F"
+                    badge_service = "RIESGO DE REFINANCIACIÓN"
+                    diag_service = f"Cobertura de intereses precaria ({cov:.1f}x EBITDAre/Intereses). Alto riesgo de refinanciación forzada o recorte de dividendo."
+            elif is_debt_free:
                 int_cov = None
                 int_cov_str = "INFINITA (SIN DEUDA)"
                 cash_int_cov = None
@@ -3250,6 +3432,15 @@ class DebtSolvencyEngine:
                     "En intermediación bancaria y seguros, los activos corrientes/no corrientes no están segmentados "
                     "y el apalancamiento operativo del balance provocaría una falsa alarma de quiebra inminente."
                 )
+            elif is_reit:
+                altman_zone = "NO APLICABLE"
+                altman_badge = "NO APLICABLE"
+                altman_color = "#607D8B"
+                diag_altman = (
+                    "Altman Z''-Score NO APLICABLE para sociedades de inversión inmobiliaria (REITs). "
+                    "El modelo castiga severamente la ausencia de capital de trabajo circulante y la deuda hipotecaria a largo plazo. "
+                    "La solvencia de un REIT se mide por Deuda Neta / EBITDAre, Cobertura EBITDAre / Intereses y FFO Payout Ratio."
+                )
             elif assets and assets > 0 and liab and liab > 0:
                 nwc = (ca - cl) if (ca is not None and cl is not None) else 0.0
                 x1 = round(nwc / assets, 4)
@@ -3282,16 +3473,56 @@ class DebtSolvencyEngine:
                 diag_altman = "Estructura de balance incompleta para calcular Altman Z''-Score."
 
             # 4.2 Rating Sintético Damodaran
-            synth_dict = cls._get_synthetic_rating(int_cov, is_debt_free=is_debt_free)
-            synth_rating = synth_dict["rating"]
-            synth_desc = synth_dict["desc"]
-            default_spread = synth_dict["default_spread"]
-            default_prob = synth_dict["default_probability"]
-            color_rating = synth_dict["color"]
+            if is_financial:
+                raw_eq = _safe_float(curr.get("stockholders_equity")) or 0.0
+                raw_ass = _safe_float(curr.get("total_assets")) or 0.0
+                raw_ni = _safe_float(curr.get("net_income")) or 0.0
+                eq_ratio = (raw_eq / raw_ass) if (raw_ass and raw_ass > 0) else 0.0
+                roe_val = (raw_ni / raw_eq) if (raw_eq and raw_eq > 0) else 0.0
+
+                if eq_ratio >= 0.12 and roe_val >= 0.12:
+                    synth_rating = "AA-"
+                    synth_desc = "SOLVENCIA BANCARIA DE PRIMER NIVEL (AA-)"
+                    default_spread = 0.0090
+                    default_prob = "0.4%"
+                    color_rating = "#2E7D32"
+                elif eq_ratio >= 0.08 and roe_val >= 0.08:
+                    synth_rating = "A+"
+                    synth_desc = "SOLVENCIA ROBUSTA BANCARIA (A+)"
+                    default_spread = 0.0110
+                    default_prob = "0.5%"
+                    color_rating = "#1976D2"
+                elif eq_ratio >= 0.06:
+                    synth_rating = "BBB+"
+                    synth_desc = "GRADO DE INVERSIÓN BANCARIO (BBB+)"
+                    default_spread = 0.0180
+                    default_prob = "1.8%"
+                    color_rating = "#F57C00"
+                else:
+                    synth_rating = "BB"
+                    synth_desc = "CAPITALIZACIÓN AJUSTADA (BB)"
+                    default_spread = 0.0300
+                    default_prob = "5.0%"
+                    color_rating = "#D32F2F"
+            elif is_reit:
+                reit_adj_cov = (int_cov * 1.25) if (int_cov is not None) else None
+                synth_dict = cls._get_synthetic_rating(reit_adj_cov, is_debt_free=is_debt_free)
+                synth_rating = synth_dict["rating"]
+                synth_desc = f"{synth_dict['desc']} [REIT EBITDAre adj]"
+                default_spread = synth_dict["default_spread"]
+                default_prob = synth_dict["default_probability"]
+                color_rating = synth_dict["color"]
+            else:
+                synth_dict = cls._get_synthetic_rating(int_cov, is_debt_free=is_debt_free)
+                synth_rating = synth_dict["rating"]
+                synth_desc = synth_dict["desc"]
+                default_spread = synth_dict["default_spread"]
+                default_prob = synth_dict["default_probability"]
+                color_rating = synth_dict["color"]
 
             dist_entry = {
                 "period": fy,
-                "is_applicable": not is_financial,
+                "is_applicable": is_altman_applicable,
                 "altman_x1": x1,
                 "altman_x2": x2,
                 "altman_x3": x3,
@@ -3308,7 +3539,7 @@ class DebtSolvencyEngine:
                 "default_probability": default_prob,
                 "rating_color": color_rating
             }
-            if is_financial:
+            if not is_altman_applicable:
                 dist_entry["pedagogical_guidance"] = {
                     "model": "Altman Z''-Score (4 Variables)",
                     "status": "NO APLICABLE",
@@ -3317,12 +3548,17 @@ class DebtSolvencyEngine:
                     "formula": "Z'' = 6.56*X1 (NWC/Assets) + 3.26*X2 (RE/Assets) + 6.72*X3 (EBIT/Assets) + 1.05*X4 (Book Equity/Liabilities)",
                     "why_not_applicable": (
                         f"Inhibido por diseño metodológico institucional para arquetipos '{arch_norm}'. "
-                        "Altman Z'' fue calibrado exclusivamente para firmas no financieras. En bancos y aseguradoras, "
-                        "los depósitos y reservas técnicas constituyen pasivos operativos de intermediación, provocando ratios "
-                        "de capital de trabajo nulo y deuda aparente masiva que disparan falsas alarmas de quiebra inminente (< 1.10). "
-                        "La solvencia de estas entidades se mide mediante suficiencia de capital regulatorio (CET1, Tier 1, RBC) y liquidez (LCR, NSFR)."
+                        + (
+                            "En sociedades de inversión inmobiliaria (REITs), los activos son inmuebles generadores de rentas financiados con deuda a largo plazo y el flujo libre se distribuye en dividendos (> 90%), haciendo que el concepto de capital circulante (NWC) carezca de relevancia económica."
+                            if is_reit else
+                            "Altman Z'' fue calibrado exclusivamente para firmas no financieras. En bancos y aseguradoras, los depósitos y reservas técnicas constituyen pasivos operativos de intermediación, provocando ratios de capital de trabajo nulo y deuda aparente masiva que disparan falsas alarmas de quiebra inminente (< 1.10). La solvencia se evalúa mediante marcos de capital regulatorio (CET1 para banca y RBC / Solvencia II para aseguradoras)."
+                        )
                     ),
-                    "replacement_metrics": ["Ratio CET1", "Tier 1 Capital", "Total Capital Ratio", "LCR (Liquidity Coverage Ratio)", "RBC Ratio (Seguros)"]
+                    "replacement_metrics": (
+                        ["Deuda Neta / EBITDAre", "Cobertura EBITDAre / Intereses", "FFO / Deuda Total", "AFFO Payout Ratio"]
+                        if is_reit else
+                        ["Ratio CET1", "Tier 1 Capital", "Total Capital Ratio", "LCR (Liquidity Coverage Ratio)", "RBC Ratio (Seguros)"]
+                    )
                 }
             distress_series[fy] = dist_entry
 
@@ -3347,6 +3583,14 @@ class DebtSolvencyEngine:
             )
             global_badge = "SOLVENCIA REGULATORIA"
             global_color = "#1976D2"
+        elif is_reit:
+            global_verdict = (
+                f"ESTRUCTURA DE CAPITAL INMOBILIARIA ({arch_norm}): "
+                f"Cobertura EBITDAre/Intereses de {latest_cov.get('interest_coverage_str')} con rating sintético {latest_dist.get('synthetic_rating')}. "
+                "Altman Z'' inhibido metodológicamente por no aplicar a carteras de inmuebles comerciales en renta."
+            )
+            global_badge = "SOLVENCIA INMOBILIARIA"
+            global_color = latest_cov.get("color", "#1976D2")
         elif is_clean_solvency:
             global_verdict = (
                 f"FORTALEZA FINANCIERA INQUEBRANTABLE (GRADO INSTITUCIONAL AAA/AA): "
@@ -3408,6 +3652,8 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
     inc_detail = financials.get("income_statement_detail", {})
     bal_detail = financials.get("balance_sheet_detail", {})
     cf_detail = financials.get("cash_flow_detail", {})
+    arch_raw = financials.get("archetype") or financials.get("company_archetype")
+    arch_norm = normalize_archetype(arch_raw, default="STANDARD_CORPORATE")
 
     def get_val(container: Dict[str, Any], key: str) -> Optional[float]:
         if key in container:
@@ -3557,22 +3803,15 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
     if rev is None:
         rev = get_val(inc_detail, "Revenues")
 
-    gp = get_val(summary, "gross_profit")
-    if gp is None:
-        gp = get_val(inc_detail, "GrossProfit")
-    if gp is None:
-        # REITs: Net Operating Income (NOI)
-        gp = get_val(summary, "noi")
-    if gp is None and rev is not None:
-        # Aseguradoras (P&C / Life): Ingresos Totales menos Siniestros/Pérdidas y Costos de Adquisición de Pólizas
-        losses_ins = get_val(summary, "losses_and_loss_expenses")
-        if losses_ins is not None:
-            acq_ins = get_val(summary, "acquisition_costs") or 0.0
-            gp = rev - losses_ins - acq_ins
-        # Bancos Comerciales / Instituciones Financieras: Ingresos Operativos Netos tras Provisiones Crediticias
-        elif get_val(summary, "net_interest_income") is not None or get_val(summary, "interest_income") is not None:
-            prov_bank = get_val(summary, "credit_loss_provisions") or 0.0
-            gp = rev - prov_bank
+    if arch_norm in ("FINANCIAL_BANKING", "INSURANCE"):
+        gp = None
+    else:
+        gp = get_val(summary, "gross_profit")
+        if gp is None:
+            gp = get_val(inc_detail, "GrossProfit")
+        if gp is None and arch_norm == "REAL_ESTATE_REIT":
+            # REITs: Net Operating Income (NOI)
+            gp = get_val(summary, "noi")
 
     # 8. I+D, CapEx y SG&A
     rd = get_val(inc_detail, "ResearchAndDevelopmentExpense") or 0.0
@@ -3820,7 +4059,10 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
         "accounts_receivable": ar,
         "inventory": inv,
         "cost_of_goods_sold": cogs,
-        "depreciation_and_amortization": dna
+        "depreciation_and_amortization": dna,
+        "ffo": get_val(summary, "ffo"),
+        "affo": get_val(summary, "affo"),
+        "real_estate_depreciation": get_val(summary, "real_estate_depreciation")
     }
 
 

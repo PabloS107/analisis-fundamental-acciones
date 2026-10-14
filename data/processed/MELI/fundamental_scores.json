@@ -152,13 +152,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.043663721377176744,
-          "formatted_value": "4.37%",
-          "comparison_label": "4.37% > 0%",
+          "value": 0.0396286015123959,
+          "formatted_value": "3.96%",
+          "comparison_label": "3.96% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -174,9 +174,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.03559489110099439,
-          "formatted_value": "-3.56%",
-          "comparison_label": "4.4% vs 7.9% (-3.56%)",
+          "value": -0.019225265838001222,
+          "formatted_value": "-1.92%",
+          "comparison_label": "4.0% vs 5.9% (-1.92%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -240,9 +240,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.32215795659161095,
-          "formatted_value": "-0.322x",
-          "comparison_label": "Rot 0.82x vs 1.15x (-0.32x)",
+          "value": -0.10313957950490193,
+          "formatted_value": "-0.103x",
+          "comparison_label": "Rot 0.75x vs 0.85x (-0.10x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": false,
           "points": 0,
@@ -261,13 +261,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.07925861247817113,
-          "formatted_value": "7.93%",
-          "comparison_label": "7.93% > 0%",
+          "value": 0.058853867350397125,
+          "formatted_value": "5.89%",
+          "comparison_label": "5.89% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -283,9 +283,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.029246951909746202,
-          "formatted_value": "-2.92%",
-          "comparison_label": "7.9% vs 10.9% (-2.92%)",
+          "value": -0.030428509775373765,
+          "formatted_value": "-3.04%",
+          "comparison_label": "5.9% vs 8.9% (-3.04%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -349,9 +349,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.03297737831697489,
-          "formatted_value": "-0.033x",
-          "comparison_label": "Rot 1.15x vs 1.18x (-0.03x)",
+          "value": -0.11919675085055781,
+          "formatted_value": "-0.119x",
+          "comparison_label": "Rot 0.85x vs 0.97x (-0.12x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": false,
           "points": 0,
@@ -370,13 +370,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.10850556438791734,
-          "formatted_value": "10.85%",
-          "comparison_label": "10.85% > 0%",
+          "value": 0.08928237712577089,
+          "formatted_value": "8.93%",
+          "comparison_label": "8.93% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -392,9 +392,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.03665058477230872,
-          "formatted_value": "+3.67%",
-          "comparison_label": "10.9% vs 7.2% (+3.67%)",
+          "value": 0.026311852690400206,
+          "formatted_value": "+2.63%",
+          "comparison_label": "8.9% vs 6.3% (+2.63%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -458,9 +458,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.07989630157655792,
-          "formatted_value": "+0.080x",
-          "comparison_label": "Rot 1.18x vs 1.10x (+0.08x)",
+          "value": 0.006880966607351269,
+          "formatted_value": "+0.007x",
+          "comparison_label": "Rot 0.97x vs 0.96x (+0.01x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -479,13 +479,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.07185497961560862,
-          "formatted_value": "7.19%",
-          "comparison_label": "7.19% > 0%",
+          "value": 0.06297052443537068,
+          "formatted_value": "6.30%",
+          "comparison_label": "6.30% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -501,9 +501,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.0241369318975609,
-          "formatted_value": "+2.41%",
-          "comparison_label": "7.2% vs 4.8% (+2.41%)",
+          "value": 0.022529193731003525,
+          "formatted_value": "+2.25%",
+          "comparison_label": "6.3% vs 4.0% (+2.25%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -567,9 +567,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.032589649144687094,
-          "formatted_value": "+0.033x",
-          "comparison_label": "Rot 1.10x vs 1.07x (+0.03x)",
+          "value": 0.05934920898399498,
+          "formatted_value": "+0.059x",
+          "comparison_label": "Rot 0.96x vs 0.90x (+0.06x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -588,13 +588,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.04771804771804772,
-          "formatted_value": "4.77%",
-          "comparison_label": "4.77% > 0%",
+          "value": 0.04044133070436716,
+          "formatted_value": "4.04%",
+          "comparison_label": "4.04% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -610,9 +610,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.03500033737171535,
-          "formatted_value": "+3.50%",
-          "comparison_label": "4.8% vs 1.3% (+3.50%)",
+          "value": 0.03045776869935036,
+          "formatted_value": "+3.05%",
+          "comparison_label": "4.0% vs 1.0% (+3.05%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -676,20 +676,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.015929468179215922,
-          "formatted_value": "-0.016x",
-          "comparison_label": "Rot 1.07x vs 1.08x (-0.02x)",
+          "value": 0.054189489684945746,
+          "formatted_value": "+0.054x",
+          "comparison_label": "Rot 0.90x vs 0.85x (+0.05x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": false,
-          "points": 0,
+          "passed": true,
+          "points": 1,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 5,
+      "total_score": 6,
       "max_score": 9,
-      "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "rating": "SALUD S\u00d3LIDA",
+      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
+      "status_color": "GREEN_LIGHT"
     },
     "FY2021": {
       "period": "FY2021",
@@ -697,13 +697,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.012717710346332366,
-          "formatted_value": "1.27%",
-          "comparison_label": "1.27% > 0%",
+          "value": 0.0099835620050168,
+          "formatted_value": "1.00%",
+          "comparison_label": "1.00% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -719,9 +719,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.012926841383866995,
-          "formatted_value": "+1.29%",
-          "comparison_label": "1.3% vs -0.0% (+1.29%)",
+          "value": 0.010160427580900402,
+          "formatted_value": "+1.02%",
+          "comparison_label": "1.0% vs -0.0% (+1.02%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -785,9 +785,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.2520637922376655,
-          "formatted_value": "+0.252x",
-          "comparison_label": "Rot 1.08x vs 0.83x (+0.25x)",
+          "value": 0.1474229461790988,
+          "formatted_value": "+0.147x",
+          "comparison_label": "Rot 0.85x vs 0.70x (+0.15x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -806,13 +806,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": -0.0002091310375346295,
+          "value": -0.00017686557588360053,
           "formatted_value": "-0.02%",
           "comparison_label": "-0.02% > 0%",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -828,9 +828,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": 0.07659262862603598,
-          "formatted_value": "+7.66%",
-          "comparison_label": "-0.0% vs -7.7% (+7.66%)",
+          "value": 0.04881725367136865,
+          "formatted_value": "+4.88%",
+          "comparison_label": "-0.0% vs -4.9% (+4.88%)",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
@@ -894,20 +894,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.1942736132353412,
-          "formatted_value": "-0.194x",
-          "comparison_label": "Rot 0.83x vs 1.03x (-0.19x)",
+          "value": 0.04875603081199498,
+          "formatted_value": "+0.049x",
+          "comparison_label": "Rot 0.70x vs 0.65x (+0.05x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": false,
-          "points": 0,
+          "passed": true,
+          "points": 1,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 4,
+      "total_score": 5,
       "max_score": 9,
-      "rating": "VULNERABILIDAD FINANCIERA",
-      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
-      "status_color": "RED"
+      "rating": "SALUD MODERADA",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
+      "status_color": "YELLOW"
     },
     "FY2019": {
       "period": "FY2019",
@@ -915,13 +915,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": -0.07680175966357061,
-          "formatted_value": "-7.68%",
-          "comparison_label": "-7.68% > 0%",
+          "value": -0.048994119247252256,
+          "formatted_value": "-4.90%",
+          "comparison_label": "-4.90% > 0%",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -937,9 +937,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.05493630170818368,
-          "formatted_value": "-5.49%",
-          "comparison_label": "-7.7% vs -2.2% (-5.49%)",
+          "value": -0.030293506423288482,
+          "formatted_value": "-3.03%",
+          "comparison_label": "-4.9% vs -1.9% (-3.03%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -1003,20 +1003,20 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.16493471359772183,
-          "formatted_value": "+0.165x",
-          "comparison_label": "Rot 1.03x vs 0.86x (+0.16x)",
+          "value": -0.08177834278378826,
+          "formatted_value": "-0.082x",
+          "comparison_label": "Rot 0.65x vs 0.74x (-0.08x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
-          "passed": true,
-          "points": 1,
+          "passed": false,
+          "points": 0,
           "description": "Mayor volumen de ingresos generado por cada d\u00f3lar de activo instalado."
         }
       },
-      "total_score": 5,
+      "total_score": 4,
       "max_score": 9,
-      "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "rating": "VULNERABILIDAD FINANCIERA",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
+      "status_color": "RED"
     },
     "FY2018": {
       "period": "FY2018",
@@ -1024,13 +1024,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": -0.021865457955386934,
-          "formatted_value": "-2.19%",
-          "comparison_label": "-2.19% > 0%",
+          "value": -0.018700612823963774,
+          "formatted_value": "-1.87%",
+          "comparison_label": "-1.87% > 0%",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1046,9 +1046,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.03194271939742988,
-          "formatted_value": "-3.19%",
-          "comparison_label": "-2.2% vs 1.0% (-3.19%)",
+          "value": -0.02776454776885334,
+          "formatted_value": "-2.78%",
+          "comparison_label": "-1.9% vs 0.9% (-2.78%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -1112,9 +1112,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": -0.029226881817020933,
-          "formatted_value": "-0.029x",
-          "comparison_label": "Rot 0.86x vs 0.89x (-0.03x)",
+          "value": -0.06430674474441556,
+          "formatted_value": "-0.064x",
+          "comparison_label": "Rot 0.74x vs 0.80x (-0.06x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": false,
           "points": 0,
@@ -1133,13 +1133,13 @@
         "F_ROA": {
           "name": "ROA Positivo",
           "category": "Rentabilidad",
-          "value": 0.01007726144204295,
-          "formatted_value": "1.01%",
-          "comparison_label": "1.01% > 0%",
+          "value": 0.009063934944889565,
+          "formatted_value": "0.91%",
+          "comparison_label": "0.91% > 0%",
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1155,9 +1155,9 @@
         "F_dROA": {
           "name": "Mejora de ROA (Delta ROA)",
           "category": "Rentabilidad",
-          "value": -0.08964667424777047,
-          "formatted_value": "-8.96%",
-          "comparison_label": "1.0% vs 10.0% (-8.96%)",
+          "value": -0.09066000074492385,
+          "formatted_value": "-9.07%",
+          "comparison_label": "0.9% vs 10.0% (-9.07%)",
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
@@ -1221,9 +1221,9 @@
         "F_dTURN": {
           "name": "Expansi\u00f3n Rotaci\u00f3n de Activos",
           "category": "Eficiencia Operativa",
-          "value": 0.27214895040714915,
-          "formatted_value": "+0.272x",
-          "comparison_label": "Rot 0.89x vs 0.62x (+0.27x)",
+          "value": 0.18268928106752857,
+          "formatted_value": "+0.183x",
+          "comparison_label": "Rot 0.80x vs 0.62x (+0.18x)",
           "threshold": "Delta Rotaci\u00f3n > 0x",
           "passed": true,
           "points": 1,
@@ -1248,7 +1248,7 @@
           "threshold": "> 0.00%",
           "passed": true,
           "points": 1,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -1357,7 +1357,7 @@
           "threshold": "> 0.00%",
           "passed": false,
           "points": 0,
-          "description": "Utilidad neta positiva sobre la base de activos instalados."
+          "description": "Utilidad neta positiva sobre la base de activos promedio instalados."
         },
         "F_CFO": {
           "name": "CFO Positivo",
@@ -2727,11 +2727,11 @@
       "g_score": 5
     },
     "FY2022": {
-      "quadrant": "CUADRANTE IV: TRAMPA DE VALOR / DETERIORO",
-      "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
-      "color": "RED",
-      "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 5,
+      "quadrant": "CUADRANTE III: GENERADOR MADURO (CASH COW)",
+      "badge": "\ud83d\udee1\ufe0f GENERADOR MADURO (CASH COW)",
+      "color": "BLUE",
+      "investment_thesis": "Excelente salud y disciplina de capital interna: balance desendeudado, m\u00e1rgenes estables y s\u00f3lida conversi\u00f3n a flujo de caja libre, pero con menor ritmo de reinversi\u00f3n o crecimiento que el promedio de su sector. T\u00edpica vaca lechera con retornos predecibles pero menor expansi\u00f3n.",
+      "f_score": 6,
       "g_score": 5
     },
     "FY2021": {
@@ -2747,7 +2747,7 @@
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 4,
+      "f_score": 5,
       "g_score": 5
     },
     "FY2019": {
@@ -2755,7 +2755,7 @@
       "badge": "\ud83d\udea8 TRAMPA DE VALOR / DETERIORO",
       "color": "RED",
       "investment_thesis": "Alerta roja fundamental: Balances en deterioro, p\u00e9rdida de margen operativo o desalineaci\u00f3n de flujo de caja combinados con retornos rezagados respecto a sus competidores. Alto riesgo de p\u00e9rdida permanente.",
-      "f_score": 5,
+      "f_score": 4,
       "g_score": 5
     },
     "FY2018": {
@@ -2829,36 +2829,36 @@
     },
     "roic_wacc": {
       "model_type": "WACC",
-      "wacc": 0.11082742950466974,
-      "ke": 0.11699999999999999,
-      "kd_after_tax": 0.055299499999999994,
-      "we": 0.899959149515316,
-      "wd": 0.10004085048468409,
+      "wacc": 0.11030555274354524,
+      "ke": 0.11667,
+      "kd_after_tax": 0.054986,
+      "we": 0.8968217486470599,
+      "wd": 0.1031782513529401,
       "roic_traditional": 0.2545416839485691,
-      "roic_adjusted": 0.27773726366981166,
+      "roic_adjusted": 0.18104534897054755,
       "rotce": null,
       "roe": null,
-      "economic_spread_adjusted": 0.16690983416514193,
-      "spread": 0.16690983416514193,
-      "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
-      "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
-      "total_intangibles_usd_m": 7451.166666666667,
+      "economic_spread_adjusted": 0.07073979622700231,
+      "spread": 0.07073979622700231,
+      "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
+      "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
+      "total_intangibles_usd_m": 7912.416666666667,
       "market_data_status": "VALIDATED_CONSENSUS"
     },
     "forensic_audit": {
       "sloan_ratio_pct": -25.62,
       "sloan_status": "EXCELENTE",
       "sloan_badge": "ALTA CONVERSI\u00d3N DE CAJA (CFO > NI)",
-      "montier_score": 4,
+      "montier_score": 3,
       "montier_max": 6,
-      "montier_rating": "RIESGO ALTO / ALERTA FORENSE",
-      "montier_badge": "PELIGRO DE MAQUILLAJE CONTABLE",
+      "montier_rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
+      "montier_badge": "ZONA DE ATENCI\u00d3N FORENSE",
       "ar_sales_spread_pct": -8.49,
       "inv_cogs_spread_pct": 18.44,
       "soft_assets_ratio_pct": 87.59,
-      "global_verdict": "ALERTA FORENSE POR CALIDAD DE RESULTADOS: Detecci\u00f3n de devengos desproporcionados (Ratio Sloan: -25.62%) o Montier C-Score elevado (4/6). Se recomienda auditor\u00eda minuciosa de pol\u00edticas contables, partidas no monetarias y devengos acumulados.",
-      "global_badge": "ALERTA FORENSE",
-      "global_color": "#D32F2F"
+      "global_verdict": "ZONA DE VIGILANCIA POR DESFASES OPERATIVOS: Montier C-Score de 3/6 con divergencias puntuales en capital de trabajo. Revisar ciclos estacionales de inventarios y condiciones comerciales de cobro.",
+      "global_badge": "ZONA DE VIGILANCIA",
+      "global_color": "#F57C00"
     },
     "solvency_credit": {
       "net_debt_usd_m": 4896.0,
@@ -2883,6 +2883,8 @@
     }
   },
   "novy_marx_analysis": {
+    "is_applicable": true,
+    "is_financial_institution": false,
     "by_period": {
       "LTM": {
         "period": "LTM",
@@ -3698,74 +3700,74 @@
       "LTM": {
         "period": "LTM",
         "ebit": 2907.0,
-        "ebit_adj": 5350.291666666667,
+        "ebit_adj": 3531.5833333333335,
         "tax_rate": 0.05,
         "nopat_trad": 2761.65,
-        "nopat_adj": 5082.777083333333,
+        "nopat_adj": 3355.0041666666666,
         "ic_trad": 10849.5,
-        "ic_adj": 18300.666666666668,
+        "ic_adj": 18531.291666666668,
         "ic_trad_end": 11335.0,
-        "ic_adj_end": 18786.166666666668,
+        "ic_adj_end": 19247.416666666668,
         "ic_trad_avg": 10849.5,
-        "ic_adj_avg": 18300.666666666668,
+        "ic_adj_avg": 18531.291666666668,
         "rd_investment": 2579.0,
-        "rd_amortization": 1621.3333333333333,
-        "rd_stock": 4168.666666666667,
+        "rd_amortization": 2260.6666666666665,
+        "rd_stock": 4323.666666666667,
         "mkt_investment": 3026.75,
-        "mkt_amortization": 1541.125,
-        "mkt_stock": 3282.5,
-        "total_intangible_stock": 7451.166666666667,
+        "mkt_amortization": 2720.5,
+        "mkt_stock": 3588.75,
+        "total_intangible_stock": 7912.416666666667,
         "roic_trad": 0.2545416839485691,
-        "roic_adj": 0.27773726366981166,
+        "roic_adj": 0.18104534897054755,
         "roic_trad_end": 0.24363917071018967,
-        "roic_adj_end": 0.27055956510552975,
+        "roic_adj_end": 0.17430932289614623,
         "roic_trad_avg": 0.2545416839485691,
-        "roic_adj_avg": 0.27773726366981166
+        "roic_adj_avg": 0.18104534897054755
       }
     },
     "latest_period": "LTM",
     "latest_result": {
       "period": "LTM",
       "ebit": 2907.0,
-      "ebit_adj": 5350.291666666667,
+      "ebit_adj": 3531.5833333333335,
       "tax_rate": 0.05,
       "nopat_trad": 2761.65,
-      "nopat_adj": 5082.777083333333,
+      "nopat_adj": 3355.0041666666666,
       "ic_trad": 10849.5,
-      "ic_adj": 18300.666666666668,
+      "ic_adj": 18531.291666666668,
       "ic_trad_end": 11335.0,
-      "ic_adj_end": 18786.166666666668,
+      "ic_adj_end": 19247.416666666668,
       "ic_trad_avg": 10849.5,
-      "ic_adj_avg": 18300.666666666668,
+      "ic_adj_avg": 18531.291666666668,
       "rd_investment": 2579.0,
-      "rd_amortization": 1621.3333333333333,
-      "rd_stock": 4168.666666666667,
+      "rd_amortization": 2260.6666666666665,
+      "rd_stock": 4323.666666666667,
       "mkt_investment": 3026.75,
-      "mkt_amortization": 1541.125,
-      "mkt_stock": 3282.5,
-      "total_intangible_stock": 7451.166666666667,
+      "mkt_amortization": 2720.5,
+      "mkt_stock": 3588.75,
+      "total_intangible_stock": 7912.416666666667,
       "roic_trad": 0.2545416839485691,
-      "roic_adj": 0.27773726366981166,
+      "roic_adj": 0.18104534897054755,
       "roic_trad_end": 0.24363917071018967,
-      "roic_adj_end": 0.27055956510552975,
+      "roic_adj_end": 0.17430932289614623,
       "roic_trad_avg": 0.2545416839485691,
-      "roic_adj_avg": 0.27773726366981166
+      "roic_adj_avg": 0.18104534897054755
     },
     "sensitivity_matrix": {
       "n_minus_1": {
         "lifespan_years": 2,
-        "intangibles_usd_m": 6518.5,
-        "roic_adj": 0.2783664641870106
+        "intangibles_usd_m": 6979.75,
+        "roic_adj": 0.18182315379752678
       },
       "n_base": {
         "lifespan_years": 3,
-        "intangibles_usd_m": 7451.166666666667,
-        "roic_adj": 0.27773726366981166
+        "intangibles_usd_m": 7912.416666666667,
+        "roic_adj": 0.18104534897054755
       },
       "n_plus_1": {
         "lifespan_years": 4,
-        "intangibles_usd_m": 8192.25,
-        "roic_adj": 0.27979144511402576
+        "intangibles_usd_m": 8653.5,
+        "roic_adj": 0.17937851458369816
       }
     },
     "parameters": {
@@ -3775,8 +3777,8 @@
     },
     "explanations": {
       "roic_traditional": "ROIC Tradicional = 25.45%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
-      "roic_adjusted": "ROIC Ajustado por Intangibles = 27.77%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $7,451.2M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($18,300.7M vs. $10,849.5M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
-      "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 27.84%, y extendi\u00e9ndola a 4 a\u00f1os es de 27.98%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
+      "roic_adjusted": "ROIC Ajustado por Intangibles = 18.10%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $7,912.4M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($18,531.3M vs. $10,849.5M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
+      "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 18.18%, y extendi\u00e9ndola a 4 a\u00f1os es de 17.94%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
     }
   },
   "greenblatt_roc_analysis": {
@@ -4253,32 +4255,32 @@
     "archetype": "PLATFORM_ECOSYSTEM",
     "market_data": {
       "ticker": "MELI",
-      "timestamp": "2026-10-13T18:47:12.006099+00:00",
-      "timestamp_epoch": 1791917235.738845,
+      "timestamp": "2026-10-14T18:26:09.347648+00:00",
+      "timestamp_epoch": 1792002373.1494584,
       "is_offline": false,
-      "from_cache": true,
-      "price": 1885.5175,
-      "market_cap_usd_m": 95590.61,
+      "from_cache": false,
+      "price": 1821.81,
+      "market_cap_usd_m": 92360.82,
       "diluted_shares": 50697282.75,
-      "rf_10y": 0.05221,
+      "rf_10y": 0.05188,
       "beta": 1.364,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 1885.5150146484375,
-          "market_cap": 95589581365.65894,
+          "price": 1821.81005859375,
+          "market_cap": 92359943822.13574,
           "beta": 1.308,
-          "rf_10y": 0.052189998626708985,
+          "rf_10y": 0.05197999954223633,
           "shares_outstanding": 50696802,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 1885.52,
+          "price": 1821.81,
           "market_cap": null,
           "beta": 1.42,
-          "rf_10y": 0.05223,
+          "rf_10y": 0.05179,
           "shares_outstanding": 50700000.0,
           "success": true
         }
@@ -4289,34 +4291,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $1885.52 (Yahoo: $1885.52, CNBC: $1885.52, \u0394=0.00%) | Market Cap calculado: $95,590.6M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
+        "notes": "Precio validado por consenso: $1821.81 (Yahoo: $1821.81, CNBC: $1821.81, \u0394=0.00%) | Market Cap calculado: $92,360.8M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
       }
     },
-    "cost_of_equity_ke": 0.11699999999999999,
-    "cost_of_debt_kd_pre_tax": 0.05821,
-    "cost_of_debt_kd_after_tax": 0.055299499999999994,
+    "cost_of_equity_ke": 0.11667,
+    "cost_of_debt_kd_pre_tax": 0.05788,
+    "cost_of_debt_kd_after_tax": 0.054986,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 95590.61,
+    "market_cap_usd_m": 92360.82,
     "total_debt_usd_m": 10626.0,
-    "enterprise_value_usd_m": 106216.61,
-    "weight_equity": 0.899959149515316,
-    "weight_debt": 0.10004085048468409,
+    "enterprise_value_usd_m": 102986.82,
+    "weight_equity": 0.8968217486470599,
+    "weight_debt": 0.1031782513529401,
     "is_debt_free": false,
-    "wacc": 0.11082742950466974,
-    "hurdle_rate": 0.11082742950466974,
+    "wacc": 0.11030555274354524,
+    "hurdle_rate": 0.11030555274354524,
     "sector_wacc_benchmark": 0.098,
     "roic_traditional": 0.2545416839485691,
-    "roic_adjusted": 0.27773726366981166,
-    "economic_spread_traditional": 0.14371425444389935,
-    "economic_spread_adjusted": 0.16690983416514193,
-    "spread": 0.16690983416514193,
-    "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
-    "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
+    "roic_adjusted": 0.18104534897054755,
+    "economic_spread_traditional": 0.14423613120502382,
+    "economic_spread_adjusted": 0.07073979622700231,
+    "spread": 0.07073979622700231,
+    "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
+    "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 11.70%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
-      "kd_debt": "Costo de la Deuda Neto = 5.53% (Tasa antes de impuestos 5.82% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 11.08%: Tasa de corte u obst\u00e1culo financiero global. Pondera 90.0% de Equity y 10.0% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un retorno ajustado (27.77%) que supera a su costo de capital (11.08%) por m\u00e1s de 16.69 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+      "ke_capm": "Costo del Equity (Ke) = 11.67%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "kd_debt": "Costo de la Deuda Neto = 5.50% (Tasa antes de impuestos 5.79% con escudo fiscal del 5.0%).",
+      "wacc": "WACC = 11.03%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un Spread positivo de +7.07 p.p. sobre el WACC (11.03%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
     }
   },
   "wacc_and_spread_analysis": {
@@ -4325,32 +4327,32 @@
     "archetype": "PLATFORM_ECOSYSTEM",
     "market_data": {
       "ticker": "MELI",
-      "timestamp": "2026-10-13T18:47:12.006099+00:00",
-      "timestamp_epoch": 1791917235.738845,
+      "timestamp": "2026-10-14T18:26:09.347648+00:00",
+      "timestamp_epoch": 1792002373.1494584,
       "is_offline": false,
-      "from_cache": true,
-      "price": 1885.5175,
-      "market_cap_usd_m": 95590.61,
+      "from_cache": false,
+      "price": 1821.81,
+      "market_cap_usd_m": 92360.82,
       "diluted_shares": 50697282.75,
-      "rf_10y": 0.05221,
+      "rf_10y": 0.05188,
       "beta": 1.364,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 1885.5150146484375,
-          "market_cap": 95589581365.65894,
+          "price": 1821.81005859375,
+          "market_cap": 92359943822.13574,
           "beta": 1.308,
-          "rf_10y": 0.052189998626708985,
+          "rf_10y": 0.05197999954223633,
           "shares_outstanding": 50696802,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 1885.52,
+          "price": 1821.81,
           "market_cap": null,
           "beta": 1.42,
-          "rf_10y": 0.05223,
+          "rf_10y": 0.05179,
           "shares_outstanding": 50700000.0,
           "success": true
         }
@@ -4361,34 +4363,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $1885.52 (Yahoo: $1885.52, CNBC: $1885.52, \u0394=0.00%) | Market Cap calculado: $95,590.6M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
+        "notes": "Precio validado por consenso: $1821.81 (Yahoo: $1821.81, CNBC: $1821.81, \u0394=0.00%) | Market Cap calculado: $92,360.8M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
       }
     },
-    "cost_of_equity_ke": 0.11699999999999999,
-    "cost_of_debt_kd_pre_tax": 0.05821,
-    "cost_of_debt_kd_after_tax": 0.055299499999999994,
+    "cost_of_equity_ke": 0.11667,
+    "cost_of_debt_kd_pre_tax": 0.05788,
+    "cost_of_debt_kd_after_tax": 0.054986,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 95590.61,
+    "market_cap_usd_m": 92360.82,
     "total_debt_usd_m": 10626.0,
-    "enterprise_value_usd_m": 106216.61,
-    "weight_equity": 0.899959149515316,
-    "weight_debt": 0.10004085048468409,
+    "enterprise_value_usd_m": 102986.82,
+    "weight_equity": 0.8968217486470599,
+    "weight_debt": 0.1031782513529401,
     "is_debt_free": false,
-    "wacc": 0.11082742950466974,
-    "hurdle_rate": 0.11082742950466974,
+    "wacc": 0.11030555274354524,
+    "hurdle_rate": 0.11030555274354524,
     "sector_wacc_benchmark": 0.098,
     "roic_traditional": 0.2545416839485691,
-    "roic_adjusted": 0.27773726366981166,
-    "economic_spread_traditional": 0.14371425444389935,
-    "economic_spread_adjusted": 0.16690983416514193,
-    "spread": 0.16690983416514193,
-    "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
-    "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
+    "roic_adjusted": 0.18104534897054755,
+    "economic_spread_traditional": 0.14423613120502382,
+    "economic_spread_adjusted": 0.07073979622700231,
+    "spread": 0.07073979622700231,
+    "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
+    "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 11.70%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
-      "kd_debt": "Costo de la Deuda Neto = 5.53% (Tasa antes de impuestos 5.82% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 11.08%: Tasa de corte u obst\u00e1culo financiero global. Pondera 90.0% de Equity y 10.0% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un retorno ajustado (27.77%) que supera a su costo de capital (11.08%) por m\u00e1s de 16.69 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+      "ke_capm": "Costo del Equity (Ke) = 11.67%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "kd_debt": "Costo de la Deuda Neto = 5.50% (Tasa antes de impuestos 5.79% con escudo fiscal del 5.0%).",
+      "wacc": "WACC = 11.03%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un Spread positivo de +7.07 p.p. sobre el WACC (11.03%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
     }
   },
   "roic_wacc_analysis": {
@@ -4694,74 +4696,74 @@
         "LTM": {
           "period": "LTM",
           "ebit": 2907.0,
-          "ebit_adj": 5350.291666666667,
+          "ebit_adj": 3531.5833333333335,
           "tax_rate": 0.05,
           "nopat_trad": 2761.65,
-          "nopat_adj": 5082.777083333333,
+          "nopat_adj": 3355.0041666666666,
           "ic_trad": 10849.5,
-          "ic_adj": 18300.666666666668,
+          "ic_adj": 18531.291666666668,
           "ic_trad_end": 11335.0,
-          "ic_adj_end": 18786.166666666668,
+          "ic_adj_end": 19247.416666666668,
           "ic_trad_avg": 10849.5,
-          "ic_adj_avg": 18300.666666666668,
+          "ic_adj_avg": 18531.291666666668,
           "rd_investment": 2579.0,
-          "rd_amortization": 1621.3333333333333,
-          "rd_stock": 4168.666666666667,
+          "rd_amortization": 2260.6666666666665,
+          "rd_stock": 4323.666666666667,
           "mkt_investment": 3026.75,
-          "mkt_amortization": 1541.125,
-          "mkt_stock": 3282.5,
-          "total_intangible_stock": 7451.166666666667,
+          "mkt_amortization": 2720.5,
+          "mkt_stock": 3588.75,
+          "total_intangible_stock": 7912.416666666667,
           "roic_trad": 0.2545416839485691,
-          "roic_adj": 0.27773726366981166,
+          "roic_adj": 0.18104534897054755,
           "roic_trad_end": 0.24363917071018967,
-          "roic_adj_end": 0.27055956510552975,
+          "roic_adj_end": 0.17430932289614623,
           "roic_trad_avg": 0.2545416839485691,
-          "roic_adj_avg": 0.27773726366981166
+          "roic_adj_avg": 0.18104534897054755
         }
       },
       "latest_period": "LTM",
       "latest_result": {
         "period": "LTM",
         "ebit": 2907.0,
-        "ebit_adj": 5350.291666666667,
+        "ebit_adj": 3531.5833333333335,
         "tax_rate": 0.05,
         "nopat_trad": 2761.65,
-        "nopat_adj": 5082.777083333333,
+        "nopat_adj": 3355.0041666666666,
         "ic_trad": 10849.5,
-        "ic_adj": 18300.666666666668,
+        "ic_adj": 18531.291666666668,
         "ic_trad_end": 11335.0,
-        "ic_adj_end": 18786.166666666668,
+        "ic_adj_end": 19247.416666666668,
         "ic_trad_avg": 10849.5,
-        "ic_adj_avg": 18300.666666666668,
+        "ic_adj_avg": 18531.291666666668,
         "rd_investment": 2579.0,
-        "rd_amortization": 1621.3333333333333,
-        "rd_stock": 4168.666666666667,
+        "rd_amortization": 2260.6666666666665,
+        "rd_stock": 4323.666666666667,
         "mkt_investment": 3026.75,
-        "mkt_amortization": 1541.125,
-        "mkt_stock": 3282.5,
-        "total_intangible_stock": 7451.166666666667,
+        "mkt_amortization": 2720.5,
+        "mkt_stock": 3588.75,
+        "total_intangible_stock": 7912.416666666667,
         "roic_trad": 0.2545416839485691,
-        "roic_adj": 0.27773726366981166,
+        "roic_adj": 0.18104534897054755,
         "roic_trad_end": 0.24363917071018967,
-        "roic_adj_end": 0.27055956510552975,
+        "roic_adj_end": 0.17430932289614623,
         "roic_trad_avg": 0.2545416839485691,
-        "roic_adj_avg": 0.27773726366981166
+        "roic_adj_avg": 0.18104534897054755
       },
       "sensitivity_matrix": {
         "n_minus_1": {
           "lifespan_years": 2,
-          "intangibles_usd_m": 6518.5,
-          "roic_adj": 0.2783664641870106
+          "intangibles_usd_m": 6979.75,
+          "roic_adj": 0.18182315379752678
         },
         "n_base": {
           "lifespan_years": 3,
-          "intangibles_usd_m": 7451.166666666667,
-          "roic_adj": 0.27773726366981166
+          "intangibles_usd_m": 7912.416666666667,
+          "roic_adj": 0.18104534897054755
         },
         "n_plus_1": {
           "lifespan_years": 4,
-          "intangibles_usd_m": 8192.25,
-          "roic_adj": 0.27979144511402576
+          "intangibles_usd_m": 8653.5,
+          "roic_adj": 0.17937851458369816
         }
       },
       "parameters": {
@@ -4771,8 +4773,8 @@
       },
       "explanations": {
         "roic_traditional": "ROIC Tradicional = 25.45%: Mide el retorno operativo sobre el capital invertido promedio en libros contables. Al tratar I+D y Marketing como gastos corrientes en lugar de inversiones de capital, distorsiona al alza el ratio en empresas intensivas en activos intangibles.",
-        "roic_adjusted": "ROIC Ajustado por Intangibles = 27.77%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $7,451.2M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($18,300.7M vs. $10,849.5M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
-        "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 27.84%, y extendi\u00e9ndola a 4 a\u00f1os es de 27.98%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
+        "roic_adjusted": "ROIC Ajustado por Intangibles = 18.10%: Refleja la rentabilidad econ\u00f3mica real al capitalizar $7,912.4M en activos de innovaci\u00f3n/marca y amortizarlos econ\u00f3micamente a 3 a\u00f1os. Calculado sobre el Capital Invertido Promedio ($18,531.3M vs. $10,849.5M tradicional), garantizando la correspondencia temporal perfecta entre el flujo anual de NOPAT y el capital desplegado durante el ejercicio.",
+        "sensitivity": "Matriz de Sensibilidad: Acelerando la amortizaci\u00f3n a 2 a\u00f1os el ROIC ajustado promedio es de 18.18%, y extendi\u00e9ndola a 4 a\u00f1os es de 17.94%. En todos los escenarios, la rentabilidad se mantiene estructuralmente s\u00f3lida y supera con holgura el costo de capital."
       }
     },
     "wacc": {
@@ -4781,32 +4783,32 @@
       "archetype": "PLATFORM_ECOSYSTEM",
       "market_data": {
         "ticker": "MELI",
-        "timestamp": "2026-10-13T18:47:12.006099+00:00",
-        "timestamp_epoch": 1791917235.738845,
+        "timestamp": "2026-10-14T18:26:09.347648+00:00",
+        "timestamp_epoch": 1792002373.1494584,
         "is_offline": false,
-        "from_cache": true,
-        "price": 1885.5175,
-        "market_cap_usd_m": 95590.61,
+        "from_cache": false,
+        "price": 1821.81,
+        "market_cap_usd_m": 92360.82,
         "diluted_shares": 50697282.75,
-        "rf_10y": 0.05221,
+        "rf_10y": 0.05188,
         "beta": 1.364,
         "erp": 0.0475,
         "raw_sources": {
           "yahoo": {
             "source": "Yahoo Finance",
-            "price": 1885.5150146484375,
-            "market_cap": 95589581365.65894,
+            "price": 1821.81005859375,
+            "market_cap": 92359943822.13574,
             "beta": 1.308,
-            "rf_10y": 0.052189998626708985,
+            "rf_10y": 0.05197999954223633,
             "shares_outstanding": 50696802,
             "success": true
           },
           "cnbc": {
             "source": "CNBC Quote Service",
-            "price": 1885.52,
+            "price": 1821.81,
             "market_cap": null,
             "beta": 1.42,
-            "rf_10y": 0.05223,
+            "rf_10y": 0.05179,
             "shares_outstanding": 50700000.0,
             "success": true
           }
@@ -4817,34 +4819,34 @@
             "Yahoo Finance",
             "CNBC Quote Service"
           ],
-          "notes": "Precio validado por consenso: $1885.52 (Yahoo: $1885.52, CNBC: $1885.52, \u0394=0.00%) | Market Cap calculado: $95,590.6M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.221% (Yahoo ^TNX: 5.219%, CNBC US10Y: 5.223%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
+          "notes": "Precio validado por consenso: $1821.81 (Yahoo: $1821.81, CNBC: $1821.81, \u0394=0.00%) | Market Cap calculado: $92,360.8M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.188% (Yahoo ^TNX: 5.198%, CNBC US10Y: 5.179%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.42, \u0394=0.11)"
         }
       },
-      "cost_of_equity_ke": 0.11699999999999999,
-      "cost_of_debt_kd_pre_tax": 0.05821,
-      "cost_of_debt_kd_after_tax": 0.055299499999999994,
+      "cost_of_equity_ke": 0.11667,
+      "cost_of_debt_kd_pre_tax": 0.05788,
+      "cost_of_debt_kd_after_tax": 0.054986,
       "effective_tax_rate": 0.05,
-      "market_cap_usd_m": 95590.61,
+      "market_cap_usd_m": 92360.82,
       "total_debt_usd_m": 10626.0,
-      "enterprise_value_usd_m": 106216.61,
-      "weight_equity": 0.899959149515316,
-      "weight_debt": 0.10004085048468409,
+      "enterprise_value_usd_m": 102986.82,
+      "weight_equity": 0.8968217486470599,
+      "weight_debt": 0.1031782513529401,
       "is_debt_free": false,
-      "wacc": 0.11082742950466974,
-      "hurdle_rate": 0.11082742950466974,
+      "wacc": 0.11030555274354524,
+      "hurdle_rate": 0.11030555274354524,
       "sector_wacc_benchmark": 0.098,
       "roic_traditional": 0.2545416839485691,
-      "roic_adjusted": 0.27773726366981166,
-      "economic_spread_traditional": 0.14371425444389935,
-      "economic_spread_adjusted": 0.16690983416514193,
-      "spread": 0.16690983416514193,
-      "moat_rating": "FOSO DEFENSIVO EXCEPCIONAL (WIDE MOAT)",
-      "moat_badge": "\ud83c\udff0 WIDE MOAT / COMPOUNDING MACHINE",
+      "roic_adjusted": 0.18104534897054755,
+      "economic_spread_traditional": 0.14423613120502382,
+      "economic_spread_adjusted": 0.07073979622700231,
+      "spread": 0.07073979622700231,
+      "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
+      "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
       "explanations": {
-        "ke_capm": "Costo del Equity (Ke) = 11.70%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.22%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
-        "kd_debt": "Costo de la Deuda Neto = 5.53% (Tasa antes de impuestos 5.82% con escudo fiscal del 5.0%).",
-        "wacc": "WACC = 11.08%: Tasa de corte u obst\u00e1culo financiero global. Pondera 90.0% de Equity y 10.0% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
-        "economic_spread": "El negocio genera un retorno ajustado (27.77%) que supera a su costo de capital (11.08%) por m\u00e1s de 16.69 puntos porcentuales. Por cada $100 de capital empleado, crea m\u00e1s de $15 anuales de valor neto por encima de lo que exigen accionistas y bancos. Posee ventajas competitivas profundas y duraderas."
+        "ke_capm": "Costo del Equity (Ke) = 11.67%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.19%) + Beta (1.36) \u00d7 Prima de Riesgo ERP (4.75%).",
+        "kd_debt": "Costo de la Deuda Neto = 5.50% (Tasa antes de impuestos 5.79% con escudo fiscal del 5.0%).",
+        "wacc": "WACC = 11.03%: Tasa de corte u obst\u00e1culo financiero global. Pondera 89.7% de Equity y 10.3% de Deuda a valores de mercado. Frente a la mediana del sector (9.80%), su costo de financiamiento es ligeramente superior.",
+        "economic_spread": "El negocio genera un Spread positivo de +7.07 p.p. sobre el WACC (11.03%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
       }
     }
   },
@@ -5724,12 +5726,12 @@
     "montier_c_score": {
       "LTM": {
         "period": "LTM",
-        "total_score": 4,
+        "total_score": 3,
         "max_score": 6,
-        "rating": "RIESGO ALTO / ALERTA FORENSE",
-        "badge": "PELIGRO DE MAQUILLAJE CONTABLE",
-        "color": "#D32F2F",
-        "verdict": "Alerta forense cr\u00edtica. Se activan 4 o m\u00e1s banderas de alarma simult\u00e1neas (beneficios no monetizados, acumulaci\u00f3n de balance y presi\u00f3n en partidas operativas). Alto riesgo de contabilidad agresiva.",
+        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
+        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
+        "color": "#E65100",
+        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -5773,11 +5775,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +20.4% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +20.4% vs \u0394Ventas: +21.8%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -5832,22 +5834,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +69.3% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +69.3% vs \u0394Ventas: +39.1%",
             "flag": true,
             "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2024": {
         "period": "FY2024",
-        "total_score": 3,
+        "total_score": 2,
         "max_score": 6,
-        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
-        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
-        "color": "#E65100",
-        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
+        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
+        "badge": "ZONA DE VIGILANCIA OPERATIVA",
+        "color": "#F57C00",
+        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -5891,22 +5893,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +43.1% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +43.1% vs \u0394Ventas: +37.5%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2023": {
         "period": "FY2023",
-        "total_score": 2,
+        "total_score": 1,
         "max_score": 6,
-        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
-        "badge": "ZONA DE VIGILANCIA OPERATIVA",
-        "color": "#F57C00",
-        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
+        "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
+        "badge": "CONTABILIDAD CONSERVADORA",
+        "color": "#2E7D32",
+        "verdict": "La compa\u00f1\u00eda supera con honores la auditor\u00eda forense. Con 0-1 banderas aisladas, la probabilidad emp\u00edrica de manipulaci\u00f3n es m\u00ednima (< 5%). Ganancias de alta calidad avaladas por caja real.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -5950,17 +5952,17 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +28.2% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +28.2% vs \u0394Ventas: +40.1%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2022": {
         "period": "FY2022",
-        "total_score": 1,
+        "total_score": 0,
         "max_score": 6,
         "rating": "RIESGO MUY BAJO / LIBROS LIMPIOS",
         "badge": "CONTABILIDAD CONSERVADORA",
@@ -6009,22 +6011,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +36.0% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +36.0% vs \u0394Ventas: +52.5%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2021": {
         "period": "FY2021",
-        "total_score": 4,
+        "total_score": 3,
         "max_score": 6,
-        "rating": "RIESGO ALTO / ALERTA FORENSE",
-        "badge": "PELIGRO DE MAQUILLAJE CONTABLE",
-        "color": "#D32F2F",
-        "verdict": "Alerta forense cr\u00edtica. Se activan 4 o m\u00e1s banderas de alarma simult\u00e1neas (beneficios no monetizados, acumulaci\u00f3n de balance y presi\u00f3n en partidas operativas). Alto riesgo de contabilidad agresiva.",
+        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
+        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
+        "color": "#E65100",
+        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6068,22 +6070,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +54.8% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +54.8% vs \u0394Ventas: +77.9%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2020": {
         "period": "FY2020",
-        "total_score": 3,
+        "total_score": 2,
         "max_score": 6,
-        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
-        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
-        "color": "#E65100",
-        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
+        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
+        "badge": "ZONA DE VIGILANCIA OPERATIVA",
+        "color": "#F57C00",
+        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6127,11 +6129,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +36.5% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +36.5% vs \u0394Ventas: +73.1%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6186,11 +6188,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +113.5% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +113.5% vs \u0394Ventas: +59.5%",
             "flag": true,
             "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6245,22 +6247,22 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +33.8% (Umbral: > 10%)",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +33.8% vs \u0394Ventas: +18.3%",
             "flag": true,
             "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
       "FY2017": {
         "period": "FY2017",
-        "total_score": 3,
+        "total_score": 2,
         "max_score": 6,
-        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
-        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
-        "color": "#E65100",
-        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
+        "rating": "RIESGO MODERADO / ALERTA PREVENTIVA",
+        "badge": "ZONA DE VIGILANCIA OPERATIVA",
+        "color": "#F57C00",
+        "verdict": "Se observan 2 se\u00f1ales at\u00edpicas de capital de trabajo o partidas secundarias. Si bien no implica manipulaci\u00f3n contable dolosa, amerita verificar la estacionalidad del inventario o los t\u00e9rminos comerciales de cobro.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6304,11 +6306,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +22.4% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +22.4% vs \u0394Ventas: +44.1%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6363,11 +6365,11 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
             "value_str": "N/D",
             "flag": false,
             "status": "OK",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
@@ -6506,12 +6508,12 @@
       },
       "montier_c_score": {
         "period": "LTM",
-        "total_score": 4,
+        "total_score": 3,
         "max_score": 6,
-        "rating": "RIESGO ALTO / ALERTA FORENSE",
-        "badge": "PELIGRO DE MAQUILLAJE CONTABLE",
-        "color": "#D32F2F",
-        "verdict": "Alerta forense cr\u00edtica. Se activan 4 o m\u00e1s banderas de alarma simult\u00e1neas (beneficios no monetizados, acumulaci\u00f3n de balance y presi\u00f3n en partidas operativas). Alto riesgo de contabilidad agresiva.",
+        "rating": "RIESGO MEDIO-ALTO / VIGILANCIA RIGUROSA",
+        "badge": "ZONA DE ATENCI\u00d3N FORENSE",
+        "color": "#E65100",
+        "verdict": "Se activan 3 banderas de advertencia simult\u00e1neas en capital de trabajo o variaciones patrimoniales. Sugiere desfases operativos significativos que requieren seguimiento minucioso.",
         "flags_breakdown": {
           "f1_cfo_divergence": {
             "name": "1. Divergencia Beneficio vs. Flujo de Caja",
@@ -6555,17 +6557,17 @@
           },
           "f6_asset_growth": {
             "name": "6. Crecimiento Excesivo de Activos Totales",
-            "condition": "Crecimiento Interanual de Activos Totales > 10.0%",
-            "value_str": "\u0394Activos: +20.4% (Umbral: > 10%)",
-            "flag": true,
-            "status": "FLAG",
-            "rationale": "Expansi\u00f3n acelerada de balance o adquisiciones seriales (M&A). Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica y distorsionar resultados."
+            "condition": "\u0394 Activos > 15.0% y \u0394 Activos > 1.15 * \u0394 Ventas",
+            "value_str": "\u0394Activos: +20.4% vs \u0394Ventas: +21.8%",
+            "flag": false,
+            "status": "OK",
+            "rationale": "Expansi\u00f3n desproporcionada de balance no respaldada por ventas. Montier advierte que suele utilizarse para disimular debilidad org\u00e1nica o acumulaci\u00f3n de partidas improductivas."
           }
         }
       },
-      "forensic_verdict": "ALERTA FORENSE POR CALIDAD DE RESULTADOS: Detecci\u00f3n de devengos desproporcionados (Ratio Sloan: -25.62%) o Montier C-Score elevado (4/6). Se recomienda auditor\u00eda minuciosa de pol\u00edticas contables, partidas no monetarias y devengos acumulados.",
-      "global_color": "#D32F2F",
-      "global_badge": "ALERTA FORENSE"
+      "forensic_verdict": "ZONA DE VIGILANCIA POR DESFASES OPERATIVOS: Montier C-Score de 3/6 con divergencias puntuales en capital de trabajo. Revisar ciclos estacionales de inventarios y condiciones comerciales de cobro.",
+      "global_color": "#F57C00",
+      "global_badge": "ZONA DE VIGILANCIA"
     }
   },
   "debt_and_solvency_analysis": {

@@ -700,7 +700,7 @@ class TestRealCorpusArtifactIntegrity(unittest.TestCase):
             "JPM": {"archetype": "FINANCIAL_BANKING", "altman_inhibited": True, "roc_inhibited": True, "wacc_model": "COST_OF_EQUITY_KE", "debt_free": False},
             "NU": {"archetype": "FINANCIAL_BANKING", "altman_inhibited": True, "roc_inhibited": True, "wacc_model": "COST_OF_EQUITY_KE", "debt_free": False},
             "PGR": {"archetype": "INSURANCE", "altman_inhibited": True, "roc_inhibited": True, "wacc_model": "COST_OF_EQUITY_KE", "debt_free": False},
-            "O": {"archetype": "REAL_ESTATE_REIT", "altman_inhibited": False, "roc_inhibited": False, "wacc_model": "WACC", "debt_free": False},
+            "O": {"archetype": "REAL_ESTATE_REIT", "altman_inhibited": True, "roc_inhibited": False, "wacc_model": "WACC", "debt_free": False},
             "MELI": {"archetype": "PLATFORM_ECOSYSTEM", "altman_inhibited": False, "roc_inhibited": False, "wacc_model": "WACC", "debt_free": False},
             "NVDA": {"archetype": "STANDARD_CORPORATE", "altman_inhibited": False, "roc_inhibited": False, "wacc_model": "WACC", "debt_free": False},
         }
@@ -722,7 +722,10 @@ class TestRealCorpusArtifactIntegrity(unittest.TestCase):
             if contract["altman_inhibited"]:
                 self.assertEqual(dist.get("altman_zone"), "NO APLICABLE", f"{ticker} debio inhibir Altman Z''")
                 self.assertFalse(dist.get("is_applicable"), f"{ticker} debio marcar Altman is_applicable=False")
-                self.assertEqual(latest_solv.get("global_badge"), "SOLVENCIA REGULATORIA")
+                if contract["archetype"] == "REAL_ESTATE_REIT":
+                    self.assertEqual(latest_solv.get("global_badge"), "SOLVENCIA INMOBILIARIA")
+                else:
+                    self.assertEqual(latest_solv.get("global_badge"), "SOLVENCIA REGULATORIA")
             else:
                 self.assertNotEqual(dist.get("altman_zone"), "NO APLICABLE", f"{ticker} no debio inhibir Altman Z''")
                 self.assertTrue(dist.get("is_applicable"), f"{ticker} debio marcar Altman is_applicable=True")
