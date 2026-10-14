@@ -70,3 +70,10 @@ En empresas financieras (bancos, fintechs, prestamistas digitales) o modelos at�
 1. **Prohibición de Imputación Silenciosa / Valores Falsos:** Cuando un KPI, ratio contable, partida de balance o flujo de caja no pueda extraerse o calcularse para un período (sea LTM o un año fiscal determinado), queda **terminantemente PROHIBIDO** imputar un valor sustituto aproximado, inventar cifras o forzar un `0.0` artificial que oculte la ausencia del dato.
 2. **Señalización Explícita y Observabilidad (`N/D` / Alerta Visual):** El dato no encontrado debe señalarse de forma inequívoca en la interfaz web y en los informes como **`N/D`** o con un badge/indicador visual de advertencia (*"Dato No Disponible / Pendiente de Mapeo XBRL"*).
 3. **Trazabilidad Forense para la Corrección en la Raíz:** Todo valor faltante debe quedar registrado en el log de auditoría (`data/processed/{TICKER}/audit_report.json`). Esta señalización abierta es lo que permite al analista y al desarrollador identificar con precisión quirúrgica qué etiqueta XBRL falta en `financial_taxonomy.py` o qué cálculo falló en el motor, procediendo a corregirlo en la raíz del proyecto para todas las empresas presentes y futuras.
+
+---
+
+## REGLA 7: SINCRONIZACIÓN AUTOMÁTICA Y OBLIGATORIA CON EL REPOSITORIO GITHUB (AUTO-SYNC TO GITHUB)
+1. **Commit & Push Inmediato:** Cada vez que se implemente, valide o modifique cualquier archivo, script, modelo, prueba o plantilla en el proyecto y los tests/auditorías hayan concluido satisfactoriamente, los cambios deben confirmarse (`git commit`) y enviarse automáticamente e inmediatamente al repositorio remoto de GitHub (`git push origin <rama_activa>`).
+2. **Mensajes de Commit Descriptivos:** Los mensajes de commit deben ser claros, estructurados y reflejar con precisión técnica el alcance del cambio (convención conventional commits: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`).
+3. **Cero Cambios Huérfanos:** Queda estrictamente prohibido finalizar una intervención, refactorización o corrección dejando modificaciones locales pendientes de sincronizar con el repositorio remoto de GitHub.
