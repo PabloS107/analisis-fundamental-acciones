@@ -643,8 +643,8 @@ El marco institucional para valorar la entidad se articula mediante el **Modelo 
 | **Coste del Capital Propio ($K_e$)** | **9.76%** | Tasa mínima exigida por CAPM ($R_f + \beta \times ERP$). |
 | **Spread Económico ($ROTCE - K_e$)** | **+18.4 pp** | Generación de valor excedente sobre coste de capital. |
 | **Crecimiento Terminal Sostenible ($g$)** | **3.0%** | Crecimiento de largo plazo de la base patrimonial. |
-| **Ratio P/TBV Justificado Teórico** | **3.72x** | Múltiplo intrínseco: $(ROTCE - g) / (K_e - g)$. |
-| **Valor Intrínseco por Acción** | **$9.78** | Precio teórico fundamental sustentado por ROTCE actual. |
+| **Ratio P/TBV Justificado Teórico** | **5.02x** | Múltiplo intrínseco: $(ROTCE - g) / (K_e - g)$. |
+| **Valor Intrínseco por Acción** | **$13.2** | Precio teórico fundamental sustentado por ROTCE actual. |
 
 
 ### 14.3. Matriz Bidimensional de Sensibilidad (Cost of Equity $K_e$ vs. ROTCE Sostenible)
@@ -653,11 +653,11 @@ La siguiente matriz evalúa el **Valor Intrínseco por Acción** ante distintas 
 
 | Coste Equity ($K_e$) \ ROTCE | 22.1% | 24.1% | 26.1% | 28.1% | 30.1% | 32.1% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 8.76% (Bajo / Optimista) | $8.72 | $9.64 | $10.55 | $11.47 | $12.38 | $13.29 | Favorable: Expansión de múltiplos por menor prima de riesgo. |
-| 9.26% (Favorable) | $8.03 | $8.87 | $9.71 | $10.55 | $11.39 | $12.23 | Escenario de sensibilidad financiera. |
-| 9.76% (Ke Auditado Base) | $7.43 | $8.21 | $8.99 | $9.77 | $10.55 | $11.33 | ESCENARIO CENTRAL: Valor teórico fundamental por rentabilidad de balance. |
-| 10.26% (Exigente) | $6.92 | $7.65 | $8.37 | $9.10 | $9.82 | $10.55 | Escenario de sensibilidad financiera. |
-| 10.76% (Estrés Macro / Tipos) | $6.48 | $7.15 | $7.83 | $8.51 | $9.19 | $9.87 | Estrés: Contracción por alza de tipos de interés o riesgo soberano. |
+| 8.76% (Bajo / Optimista) | $12.86 | $14.25 | $14.62 | $15.02 | $15.41 | $15.81 | Favorable: Expansión de múltiplos por menor prima de riesgo. |
+| 9.26% (Favorable) | $11.62 | $13.33 | $13.68 | $14.04 | $14.39 | $14.75 | Escenario de sensibilidad financiera. |
+| 9.76% (Ke Auditado Base) | $10.60 | $12.41 | $12.86 | $13.20 | $13.54 | $13.89 | ESCENARIO CENTRAL: Valor teórico fundamental por rentabilidad de balance. |
+| 10.26% (Exigente) | $9.70 | $11.36 | $12.15 | $12.47 | $12.78 | $13.12 | Escenario de sensibilidad financiera. |
+| 10.76% (Estrés Macro / Tipos) | $8.94 | $10.47 | $11.52 | $11.83 | $12.12 | $12.44 | Estrés: Contracción por alza de tipos de interés o riesgo soberano. |
 
 
 ### 14.4. Reverse Excess Return: ¿Qué expectativas descuenta el precio actual de mercado?
@@ -674,7 +674,7 @@ Al cotizar a **$14.87** (5.65x P/TBV), el mercado está descontando:
 | **Calidad de Cartera** | Gestión de Riesgo y Cobertura de Provisiones | **BLINDAJE DE PROVISIONES** | Provisiones adecuadas para absorber pérdidas esperadas en ciclo crediticio. |
 | **Solvencia y Capital** | Capital Regulatorio Basilea III / Tier 1 / CET1 | **SOLVENCIA BASILEA III** | Colchón de capital anticíclico y absorción de activos ponderados por riesgo. |
 | **Productividad del Capital** | ROTCE Tangible: 28.1% vs Ke 9.76% | **COMPOUNDING MACHINE** | Spread económico de +18.4 pp sobre coste de capital propio. |
-| **Valoración de Mercado** | P/TBV: 5.7x vs P/TBV Teórico: 3.7x | **PRICED FOR GROWTH** | Cotización descuenta sostener crecimiento y rentabilidad elevada. |
+| **Valoración de Mercado** | P/TBV: 5.7x vs P/TBV Teórico: 5.0x | **PRICED FOR GROWTH** | Cotización descuenta sostener crecimiento y rentabilidad elevada. |
 
 
 

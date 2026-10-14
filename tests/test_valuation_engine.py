@@ -54,9 +54,14 @@ class TestValuationEngine(unittest.TestCase):
             meli_scores = json.load(f)
         vp = valuation_report_builder.get_valuation_parameters(meli_scores, "MELI")
         self.assertFalse(vp["is_financial"])
-        # Margen FCF auditado de estados financieros (35.3%)
-        self.assertGreaterEqual(vp["fcf_margin_pct"], 30.0)
-        self.assertLessEqual(vp["fcf_margin_pct"], 45.0)
+        # Margen FCF reportado de estados financieros (>= 30.0%)
+        self.assertGreaterEqual(vp["fcf_margin_reported_pct"], 30.0)
+        self.assertLessEqual(vp["fcf_margin_reported_pct"], 45.0)
+        # Margen FCF operativo normalizado para plataformas (8.0% - 15.0%)
+        self.assertGreaterEqual(vp["fcf_margin_pct"], 8.0)
+        self.assertLessEqual(vp["fcf_margin_pct"], 15.0)
+        # SOTP activado para PLATFORM_ECOSYSTEM
+        self.assertIsNotNone(vp.get("sotp_valuation"))
         # Ingresos base derivados de canonical_summary (35.2B)
         self.assertGreaterEqual(vp["base_rev_m"], 30000.0)
 

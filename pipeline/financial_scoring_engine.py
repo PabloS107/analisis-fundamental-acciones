@@ -2112,9 +2112,17 @@ class WACCCalculator:
         erp = float(mkt.get("erp", 0.0475))
 
         # 2. Costo del Equity (CAPM)
-        ke = rf + (beta * erp)
-
         is_financial = (arch_norm in ("FINANCIAL_BANKING", "INSURANCE"))
+        if is_financial:
+            # Ajuste institucional de Blume para converger betas extremas hacia 1.0 en horizontes perpetuos
+            if beta < 0.80:
+                beta = round(0.67 * beta + 0.33 * 1.0, 2)
+            ke = max(rf + (beta * erp), rf + 0.0325)
+            if "beta" in mkt:
+                mkt["beta"] = beta
+        else:
+            ke = rf + (beta * erp)
+
         if is_financial:
             raw_ni = _safe_float(period_data.get("net_income")) or 0.0
             ni_val = _to_millions(raw_ni) or 0.0

@@ -695,7 +695,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Ponderación Deuda ($W_d$)** | **10.3%** | Estructura de Capital | Proporción de deuda financiera sobre valor total de la empresa. |
 | **Ponderación Fondos Propios ($W_e$)** | **89.7%** | Estructura de Capital | Proporción de capital propio sobre valor total de la empresa. |
 | **Coste Medio Ponderado (WACC)** | **11.03%** | Sección 11.2 (WACC) | Tasa de descuento de corte para flujos libres hacia la empresa. |
-| **Margen FCF Estructural** | **35.3%** | Sección 4 & Solvencia | Conversión de ingresos a caja libre de capital tras reinversiones. |
+| **Margen FCF Estructural** | **10.2%** | Sección 4 & Solvencia | Conversión de ingresos a caja libre de capital tras reinversiones. |
 | **Tasa de Crecimiento Terminal ($g_n$)** | **2.5%** | Hipótesis Canónica | Crecimiento tendencial de la economía global a perpetuidad. |
 | **Horizonte de Proyección** | **10 Años** | Configuración Estándar | Período de amortización del superciclo operativo y de producto. |
 
@@ -705,31 +705,50 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | Parámetro Clave | Modelo Propietario (Auditado) | Parametrización Plataformas | Diferencial (Delta) | Impacto Cuantitativo en la Tesis |
 | :--- | :---: | :---: | :---: | :--- |
 | **WACC (Tasa de Descuento)** | 11.03% | 10.90% | +0.13 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
-| **Margen FCF Sostenible** | 35.3% | 24.40% | +10.90 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
+| **Margen FCF Sostenible** | 10.2% | 24.40% | -14.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **-3.7%** | **1.4%** | **-5.1 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **14.0%** | **1.4%** | **+12.6 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 10.03% (Bajo / Expansión) | -4.2% | -4.5% | -4.9% | -5.3% | -5.7% | -6.2% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 10.53% (Favorable) | -3.5% | -3.8% | -4.1% | -4.5% | -4.9% | -5.3% | Escenario de sensibilidad operativa. |
-| 11.03% (WACC Auditado Base) | -2.8% | -3.1% | -3.4% | -3.7% | -4.1% | -4.5% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 11.53% (Exigente) | -2.1% | -2.4% | -2.7% | -3.0% | -3.3% | -3.7% | Escenario de sensibilidad operativa. |
-| 12.03% (Estrés / Tipos Altos) | -1.4% | -1.7% | -2.0% | -2.3% | -2.6% | -2.9% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 10.03% (Bajo / Expansión) | 13.5% | 13.0% | 12.5% | 12.0% | 11.4% | 10.7% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.53% (Favorable) | 14.5% | 14.0% | 13.5% | 13.0% | 12.4% | 11.8% | Escenario de sensibilidad operativa. |
+| 11.03% (WACC Auditado Base) | 15.4% | 15.0% | 14.5% | 14.0% | 13.5% | 12.9% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.53% (Exigente) | 16.3% | 15.9% | 15.4% | 15.0% | 14.5% | 13.9% | Escenario de sensibilidad operativa. |
+| 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 15.9% | 15.4% | 14.9% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
-### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
+### 14.5. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)
+
+Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y múltiplos de mercado divergentes, se aplica un modelo de **Suma de las Partes (Sum-of-the-Parts)** desagregando el negocio operativo:
+* **Comercio Electrónico / Marketplace:** Facturación LTM de **$19,350.1 M** valorada a un múltiplo objetivo de **3.2x EV/Ventas** -> Enterprise Value de **$61,920.3 M**.
+* **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **$15,831.9 M** valorada a un múltiplo objetivo de **2.4x EV/Ventas** -> Enterprise Value de **$37,996.6 M**.
+* **Enterprise Value Consolidado:** **$99,916.9 M** | **Posición Financiera Neta:** **$-4,896.0 M** (Deuda neta).
+* **Equity Value Teórico:** **$95,020.9 M** sobre 50.7 M de acciones diluidas.
+* **Valor Intrínseco SOTP:** **$1874.28 por acción** (+2.9% frente a cotización actual de $1821.81).
+
+| Segmento de Negocio | Ventas LTM ($ M) | Múltiplo EV/Sales | Enterprise Value ($ M) | Ponderación EV |
+| :--- | :---: | :---: | :---: | :---: |
+| **Comercio Electrónico / Marketplace** | $19,350.1 M | 3.2x | $61,920.3 M | 62.0% |
+| **FinTech y Servicios Financieros** | $15,831.9 M | 2.4x | $37,996.6 M | 38.0% |
+| **Total Enterprise Value (EV)** | **$35,182.0 M** | **—** | **$99,916.9 M** | **100.0%** |
+| (-) Deuda Neta | — | — | $-4,896.0 M | — |
+| **Equity Value Consolidado** | — | — | **$95,020.9 M** | — |
+| **Precio Justo por Acción (SOTP)** | — | — | **$1874.28** | **+2.9%** |
+
+
+### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
 
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Efecto de Red Bilateral (Two-Sided Network) + Infraestructura Logística Propia (Mercado Envíos) | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (8.3% EBIT). |
-| **Calidad de Beneficios** | Ratio Sloan: -25.62% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($2.17 CFO por dólar de NI). |
+| **Calidad de Beneficios** | Ratio Sloan: -25.62% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($2.17 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: 13.7x / Altman Z'': 1.56 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $5.7B. |
 | **Productividad del Capital** | ROC Greenblatt: 82.4% / ROIC Adj: 18.1% | **CREADOR DE VALOR** | Spread económico de +7.1 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: -3.7% - 1.4% | **VALORACIÓN ATRACTIVA** | Valoración conservadora (+-3.7% anual); amplio margen de seguridad operativo. |
+| **Valoración de Mercado** | Crecimiento Implícito: 14.0% - 1.4% | **VALORACIÓN EXIGENTE** | Exigencia asumible (+14.0% anual); alineada con el ritmo tendencial de la empresa y su sector. |
 
 
 

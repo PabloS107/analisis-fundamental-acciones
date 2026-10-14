@@ -316,9 +316,12 @@ class TestAdversarialPlatformArchetype(unittest.TestCase):
             scores = json.load(f)
 
         vp = get_valuation_parameters(scores, "MELI")
-        self.assertFalse(vp.get("is_financial"))
-        # FCF margin reflects real audited statements (~35.3%)
-        self.assertGreater(vp.get("fcf_margin", 0.0), 0.30, "FCF margin for MELI reflects audited financial statements")
+        # Margen FCF reportado contable de estados financieros (~35.3% - 38.1%)
+        self.assertGreater(vp.get("fcf_margin_reported_pct", 0.0), 30.0, "FCF margin reported reflects audited statements")
+        # Margen FCF normalizado operativo ponderado para valoración DCF (~10.2%)
+        self.assertGreater(vp.get("fcf_margin", 0.0), 0.08)
+        self.assertLess(vp.get("fcf_margin", 0.0), 0.15)
+        self.assertIsNotNone(vp.get("sotp_valuation"), "PLATFORM_ECOSYSTEM must include SOTP valuation")
 
 
 class TestAdversarialCorporateControls(unittest.TestCase):

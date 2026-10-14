@@ -811,7 +811,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Costes de Cambio (Switching Costs) + Activos Intangibles y Marca | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (33.2% EBIT). |
-| **Calidad de Beneficios** | Ratio Sloan: -4.79% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.14 CFO por dólar de NI). |
+| **Calidad de Beneficios** | Ratio Sloan: -4.79% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($1.14 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: 41.8x / Altman Z'': 3.23 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $62.4B. |
 | **Productividad del Capital** | ROC Greenblatt: 305.9% / ROIC Adj: 50.1% | **COMPOUNDING MACHINE** | Spread económico de +39.9 pp sobre WACC (Creación de valor de élite). |
 | **Valoración de Mercado** | Crecimiento Implícito: 16.6% - 20.6% | **PRICED FOR PERFECTION** | Exigencia de crecimiento ambiciosa (+23.1% anual); requiere catalizadores sostenidos en IA y Servicios. |

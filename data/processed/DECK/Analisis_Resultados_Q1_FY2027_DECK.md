@@ -808,7 +808,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Activos Intangibles y Marca + Poder de Fijación de Precios | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (22.7% EBIT). |
-| **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias 100% avaladas por caja real ($1.18 CFO por dólar de NI). |
+| **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($1.18 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda neta; colchón de liquidez de $1.6B. |
 | **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 48.9% | **COMPOUNDING MACHINE** | Spread económico de +38.4 pp sobre WACC (Creación de valor de élite). |
 | **Valoración de Mercado** | Crecimiento Implícito: -2.5% - -4.6% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |

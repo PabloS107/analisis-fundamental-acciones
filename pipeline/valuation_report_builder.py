@@ -41,6 +41,30 @@ from docx.oxml.ns import nsdecls, qn
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_DIR = PROJECT_ROOT / "data" / "processed"
 
+try:
+    from sec_extractor import normalize_archetype
+except ImportError:
+    try:
+        from pipeline.sec_extractor import normalize_archetype
+    except ImportError:
+        def normalize_archetype(archetype: str, default: str = "STANDARD_CORPORATE") -> str:
+            if not archetype:
+                return default
+            arch = str(archetype).strip().upper()
+            aliases = {
+                "CORPORATE_STANDARD": "STANDARD_CORPORATE",
+                "STANDARD_CORPORATE": "STANDARD_CORPORATE",
+                "FINANCIAL_BANKING": "FINANCIAL_BANKING",
+                "BANKING_FINANCIAL": "FINANCIAL_BANKING",
+                "BANKING": "FINANCIAL_BANKING",
+                "INSURANCE": "INSURANCE",
+                "INSURER": "INSURANCE",
+                "REAL_ESTATE_REIT": "REAL_ESTATE_REIT",
+                "REIT": "REAL_ESTATE_REIT",
+                "PLATFORM_ECOSYSTEM": "PLATFORM_ECOSYSTEM",
+            }
+            return aliases.get(arch, arch)
+
 
 def _resolve_processed_path(ticker: str, filename: str) -> Path:
     """Resuelve la ruta canónica del archivo en data/processed/{ticker}/ garantizando invariancia de CWD."""
@@ -129,6 +153,55 @@ def _is_financial(scoring_data: Dict[str, Any]) -> bool:
     return get_report_archetype(scoring_data) in ("FINANCIAL_BANKING", "INSURANCE")
 
 
+def compute_two_stage_excess_return_ptbv(
+    rotce_val: float,
+    ke_val: float,
+    g_term: float = 0.030,
+    cagr_5y: Optional[float] = None,
+    is_insurance: bool = False,
+    fade_years: int = 5
+) -> float:
+    """
+    Calcula el múltiplo P/TBV (o P/BV) justificado mediante un Modelo de Retorno Excedente
+    (Residual Income / Excess Return Model) de 2 Etapas (Damodaran):
+    - Etapa 1 (años 1..N): El retorno sobre el capital (ROTCE/ROE) converge linealmente desde rotce_val
+      hacia un retorno sostenible de ciclo completo (r_terminal), mientras el valor en libros por acción
+      crece por retención de beneficios (g_bv).
+    - Etapa 2 (Valor Terminal): (r_terminal - g_term) / (ke_val - g_term) aplicado sobre el BV del año N.
+    """
+    if ke_val <= g_term or rotce_val <= 0:
+        return 1.0
+
+    # Retorno terminal sostenible tras reversión competitiva a la media del ciclo
+    if is_insurance:
+        # En seguros P&C los picos de ciclo duro (>25% ROE) convergen hacia Ke + 10.5% (~18%)
+        r_terminal = min(rotce_val, ke_val + 0.105) if rotce_val > (ke_val + 0.105) else rotce_val
+        retention = 0.45
+    else:
+        # En banca: neobancos de alto crecimiento vs banca tradicional madura
+        is_high_growth_bank = (cagr_5y is not None and cagr_5y >= 25.0)
+        spread_cap = 0.145 if is_high_growth_bank else 0.105
+        r_terminal = min(rotce_val, ke_val + spread_cap) if rotce_val > (ke_val + spread_cap) else rotce_val
+        retention = 0.72 if is_high_growth_bank else 0.40
+
+    bv_t = 1.0  # Normalizado a $1.00 de Book Value inicial
+    pv_excess_stage1 = 0.0
+
+    for t in range(1, fade_years + 1):
+        weight = float(t) / float(fade_years)
+        r_t = rotce_val * (1.0 - weight) + r_terminal * weight
+        excess_return_t = (r_t - ke_val) * bv_t
+        pv_excess_stage1 += excess_return_t / ((1.0 + ke_val) ** t)
+        g_bv_t = min(0.22, max(g_term, r_t * retention))
+        bv_t *= (1.0 + g_bv_t)
+
+    terminal_excess_multiple = (r_terminal - ke_val) / (ke_val - g_term)
+    pv_terminal_excess = (terminal_excess_multiple * bv_t) / ((1.0 + ke_val) ** fade_years)
+
+    ptbv_just = 1.0 + pv_excess_stage1 + pv_terminal_excess
+    return round(max(0.5, ptbv_just), 2)
+
+
 def solve_reverse_dcf(
     share_price: float,
     shares_out_b: float,
@@ -173,14 +246,15 @@ def solve_reverse_dcf(
 
 def get_valuation_parameters(
     scoring_data: Dict[str, Any],
-    ticker: str = "AAPL",
+    ticker: str = "",
     profile_data: Optional[Dict[str, Any]] = None,
     live_price: Optional[float] = None,
     fs_data: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """Extrae y consolida los parámetros financieros y de mercado para la valoración de cualquier empresa."""
+    ticker = ticker or scoring_data.get("ticker", "")
     prof = profile_data or {}
-    if not prof:
+    if not prof and ticker:
         candidate = _resolve_processed_path(ticker, "company_profile.json")
         if candidate.exists():
             try:
@@ -190,7 +264,7 @@ def get_valuation_parameters(
                 pass
 
     fs_obj = fs_data
-    if fs_obj is None:
+    if fs_obj is None and ticker:
         fs_path = _resolve_processed_path(ticker, "financial_statements.json")
         if fs_path.exists():
             try:
@@ -217,6 +291,10 @@ def get_valuation_parameters(
     beta = round(float(mkt.get("beta")), 2) if mkt.get("beta") is not None else 1.05
     erp = round(float(mkt.get("erp")), 4) if mkt.get("erp") is not None else 0.0475
     ke_val = wacc_dict.get("cost_of_equity_ke") if wacc_dict.get("cost_of_equity_ke") is not None else (rf_raw + (beta * erp))
+    if is_fin:
+        if beta < 0.80:
+            beta = round(0.67 * beta + 0.33 * 1.0, 2)
+        ke_val = max(ke_val, rf_raw + (beta * erp), rf_raw + 0.0325)
     
     if live_price is not None and live_price > 0:
         price = round(float(live_price), 2)
@@ -319,18 +397,6 @@ def get_valuation_parameters(
             except Exception:
                 rotce_val = 0.15
             
-        g_term = 0.030
-        spread_rotce_ke = rotce_val - ke_val
-        ptbv_justified = round((rotce_val - g_term) / (ke_val - g_term), 2) if (ke_val > g_term) else 1.0
-        fair_value_excess_return = round(ptbv_justified * tbv_per_share, 2) if tbv_per_share > 0 else 0.0
-        rotce_implied = round(((ptbv_current * (ke_val - g_term)) + g_term) * 100, 1) if ptbv_current > 0 else 0.0
-
-        # Pasos de sensibilidad dinámicos centrados en rotce_val real
-        center_r = rotce_val if (rotce_val and rotce_val > 0) else ke_val
-        base_r = round(center_r, 4)
-        rotce_rates = [round(max(0.04, base_r + step), 3) for step in [-0.06, -0.04, -0.02, 0.0, 0.02, 0.04]]
-        rotce_labels = [f"{r*100:.1f}%" if r != base_r else f"{r*100:.1f}% (Base)" for r in rotce_rates]
-
         # Cálculo dinámico de CAGR para entidades financieras si tienen serie de ingresos
         fin_rev_map = (fs_obj or {}).get("canonical_summary", {}).get("revenue", {})
         fin_yr_list = sorted(
@@ -347,6 +413,24 @@ def get_valuation_parameters(
         cagr_10y_dyn = prof.get("cagr_10y") or target_peer.get("cagr_10y")
         cagr_3y_dyn = prof.get("cagr_3y") or target_peer.get("cagr_3y")
         guidance_dyn = prof.get("guidance_mid") or target_peer.get("guidance_mid")
+
+        g_term = 0.030
+        spread_rotce_ke = rotce_val - ke_val
+        ptbv_justified = compute_two_stage_excess_return_ptbv(
+            rotce_val=rotce_val,
+            ke_val=ke_val,
+            g_term=g_term,
+            cagr_5y=cagr_5y_dyn,
+            is_insurance=is_ins
+        )
+        fair_value_excess_return = round(ptbv_justified * tbv_per_share, 2) if tbv_per_share > 0 else 0.0
+        rotce_implied = round(((ptbv_current * (ke_val - g_term)) + g_term) * 100, 1) if ptbv_current > 0 else 0.0
+
+        # Pasos de sensibilidad dinámicos centrados en rotce_val real
+        center_r = rotce_val if (rotce_val and rotce_val > 0) else ke_val
+        base_r = round(center_r, 4)
+        rotce_rates = [round(max(0.04, base_r + step), 3) for step in [-0.06, -0.04, -0.02, 0.0, 0.02, 0.04]]
+        rotce_labels = [f"{r*100:.1f}%" if r != base_r else f"{r*100:.1f}% (Base)" for r in rotce_rates]
 
         return {
             "is_financial": True,
@@ -401,9 +485,12 @@ def get_valuation_parameters(
     s_ebit = solvency.get("ebit") or 0.0
     s_capex = solvency.get("capex") or 0.0
     s_fcf = solvency.get("fcf") or 0.0
+    s_dna = solvency.get("dna") or 0.0
+    dna_margin = (s_dna / base_rev_m) if (base_rev_m > 0 and s_dna > 0) else 0.025
     
     ebit_margin = (s_ebit / base_rev_m) if (base_rev_m > 0 and s_ebit > 0) else 0.20
     capex_margin = (s_capex / base_rev_m) if (base_rev_m > 0 and s_capex > 0) else 0.02
+    op_fcf_margin = max(0.05, ebit_margin * (1.0 - tax_rate) + dna_margin - capex_margin)
     
     # Margen FCF auditado real derivado de los estados financieros de la compañía
     kr_fcf = None
@@ -414,12 +501,12 @@ def get_valuation_parameters(
             if fy_keys:
                 kr_fcf = fs_obj["key_ratios"]["fcf_margin_pct"][fy_keys[0]]
 
-    if kr_fcf is not None and float(kr_fcf) > 0:
-        fcf_margin = float(kr_fcf) / 100.0
-    elif s_fcf > 0 and base_rev_m > 0:
-        fcf_margin = s_fcf / base_rev_m
+    raw_fcf_margin = (float(kr_fcf) / 100.0) if (kr_fcf is not None and float(kr_fcf) > 0) else ((s_fcf / base_rev_m) if (s_fcf > 0 and base_rev_m > 0) else op_fcf_margin)
+    if arch == "PLATFORM_ECOSYSTEM" and raw_fcf_margin > (op_fcf_margin * 1.5):
+        # En ecosistemas híbridos E-Commerce + FinTech, aislar el flujo operativo comercial/fintech sin depósitos de terceros
+        fcf_margin = round((op_fcf_margin * 0.65) + (min(raw_fcf_margin, 0.18) * 0.35), 4)
     else:
-        fcf_margin = max(0.05, ebit_margin * (1.0 - tax_rate) - capex_margin)
+        fcf_margin = raw_fcf_margin
     
     # Cálculo dinámico de CAGRs históricos de ingresos con separación estricta de períodos anuales completos:
     calc_cagr_5y = None
@@ -480,6 +567,73 @@ def get_valuation_parameters(
     gap_hist = round((g_implied_our * 100) - cagr_5y, 1) if cagr_5y is not None else None
     gap_guide = round((g_implied_our * 100) - guidance_mid, 1) if guidance_mid is not None else None
     
+    sotp_valuation = None
+    if arch == "PLATFORM_ECOSYSTEM":
+        try:
+            seg_path = _resolve_processed_path(ticker, "segments_data.json")
+            rev_commerce_m = 0.0
+            rev_fintech_m = 0.0
+            if seg_path.exists():
+                with open(seg_path, "r", encoding="utf-8") as f_seg:
+                    seg_data = json.load(f_seg)
+                for seg in seg_data.get("product_segments", []):
+                    seg_name = seg.get("name", "").lower()
+                    vals = seg.get("values", {})
+                    v = vals.get("LTM")
+                    if v is None:
+                        for k in sorted(vals.keys(), reverse=True):
+                            if vals[k] is not None:
+                                v = vals[k]
+                                break
+                    v_val = float(v) if v is not None else 0.0
+                    if any(w in seg_name for w in ["comercio", "commerce", "marketplace", "e-commerce"]):
+                        rev_commerce_m = v_val
+                    elif any(w in seg_name for w in ["fintech", "financier", "credit", "pagos"]):
+                        rev_fintech_m = v_val
+
+            if rev_commerce_m == 0.0 and rev_fintech_m == 0.0 and base_rev_m > 0:
+                rev_commerce_m = round(base_rev_m * 0.55, 1)
+                rev_fintech_m = round(base_rev_m * 0.45, 1)
+
+            mult_commerce = 3.2
+            mult_fintech = 2.4
+            ev_commerce_m = round(rev_commerce_m * mult_commerce, 1)
+            ev_fintech_m = round(rev_fintech_m * mult_fintech, 1)
+            ev_total_sotp_m = round(ev_commerce_m + ev_fintech_m, 1)
+            equity_sotp_m = round(ev_total_sotp_m - net_debt_m, 1)
+            fair_value_sotp = round(equity_sotp_m / shares_m, 2) if shares_m > 0 else 0.0
+
+            upside_sotp_pct = round(((fair_value_sotp / price) - 1.0) * 100.0, 1) if price > 0 else 0.0
+            discount_pct = round(((price / fair_value_sotp) - 1.0) * 100.0, 1) if fair_value_sotp > 0 else 0.0
+
+            sotp_valuation = {
+                "current_price": price,
+                "shares_m": shares_m,
+                "rev_commerce_m": rev_commerce_m,
+                "rev_fintech_m": rev_fintech_m,
+                "commerce_rev": rev_commerce_m,
+                "fintech_rev": rev_fintech_m,
+                "mult_commerce": mult_commerce,
+                "mult_fintech": mult_fintech,
+                "commerce_mult": mult_commerce,
+                "fintech_mult": mult_fintech,
+                "ev_commerce_m": ev_commerce_m,
+                "ev_fintech_m": ev_fintech_m,
+                "ev_commerce": ev_commerce_m,
+                "ev_fintech": ev_fintech_m,
+                "ev_total_sotp_m": ev_total_sotp_m,
+                "ev_total": ev_total_sotp_m,
+                "net_debt_m": net_debt_m,
+                "net_debt": net_debt_m,
+                "equity_sotp_m": equity_sotp_m,
+                "equity_sotp": equity_sotp_m,
+                "fair_value_sotp": fair_value_sotp,
+                "discount_pct": discount_pct,
+                "upside_sotp_pct": upside_sotp_pct
+            }
+        except Exception:
+            sotp_valuation = None
+
     return {
         "is_financial": False,
         "price": price,
@@ -495,12 +649,13 @@ def get_valuation_parameters(
         "wacc_val": wacc_val,
         "ebit_margin": ebit_margin,
         "fcf_margin": fcf_margin,
+        "fcf_margin_reported_pct": round(raw_fcf_margin * 100, 1),
         "fcf_margin_audited": fcf_margin,
         "capex_margin": capex_margin,
         "ebit_margin_pct": round(ebit_margin * 100, 1),
         "fcf_margin_pct": round(fcf_margin * 100, 1),
         "fcf_margin_audited_pct": round(fcf_margin * 100, 1),
-        "fcf_margin_operating_pct": round(max(0.05, ebit_margin * (1.0 - tax_rate) - capex_margin) * 100, 1),
+        "fcf_margin_operating_pct": round(op_fcf_margin * 100, 1),
         "capex_margin_pct": round(capex_margin * 100, 1),
         "shares_b": round(shares_b, 4),
         "net_debt_m": net_debt_m,
@@ -512,7 +667,8 @@ def get_valuation_parameters(
         "g_implied_our_pct": round(g_implied_our * 100, 1),
         "g_implied_fiscal_pct": round(g_implied_fiscal * 100, 1),
         "gap_hist": round(gap_hist, 1) if gap_hist is not None else None,
-        "gap_guide": round(gap_guide, 1) if gap_guide is not None else None
+        "gap_guide": round(gap_guide, 1) if gap_guide is not None else None,
+        "sotp_valuation": sotp_valuation
     }
 
 
@@ -533,12 +689,18 @@ def _generate_sensitivity_grid(vp: Dict[str, Any]) -> List[Tuple[str, str, str, 
         tbv_ps = vp.get("tbv_per_share", 0.0)
         
         grid_rows = []
-        for ke_val, ke_label in ke_steps:
+        for ke_val_step, ke_label in ke_steps:
             row_vals = [ke_label]
             for r_val in rotce_rates:
-                if ke_val > g_term:
-                    ptbv_calc = (r_val - g_term) / (ke_val - g_term)
-                    fv_calc = ptbv_calc * tbv_ps if tbv_ps > 0 else ptbv_calc
+                if ke_val_step > g_term:
+                    ptbv_calc = compute_two_stage_excess_return_ptbv(
+                        rotce_val=r_val,
+                        ke_val=ke_val_step,
+                        g_term=g_term,
+                        cagr_5y=vp.get("cagr_5y"),
+                        is_insurance=vp.get("is_insurance", False)
+                    )
+                    fv_calc = round(ptbv_calc * tbv_ps, 2) if tbv_ps > 0 else ptbv_calc
                     row_vals.append(f"${fv_calc:.2f}" if tbv_ps > 0 else f"{ptbv_calc:.2f}x")
                 else:
                     row_vals.append("N/D")
@@ -637,6 +799,12 @@ def _build_cmd_final_rows(
     # -------------------------------------------------------------
     # CUADRO DE MANDO CORPORATIVO TRADICIONAL
     # -------------------------------------------------------------
+    arch_norm = normalize_archetype(scoring_data.get("archetype") or scoring_data.get("benchmarks_used", {}).get("archetype"))
+    is_fin = vp.get("is_financial") or arch_norm in ("FINANCIAL_BANKING", "INSURANCE")
+    is_reit = (arch_norm == "REAL_ESTATE_REIT")
+    is_ins = vp.get("is_insurance", False) or (arch_norm == "INSURANCE")
+
+    # 1. Ventaja Competitiva (Moat)
     moat_sec = prof.get("moat", {})
     moat_table = moat_sec.get("table_data", [])
     primary_moat = "Foso Defensivo Amplio (Ventajas Intangibles)"
@@ -645,48 +813,122 @@ def _build_cmd_final_rows(
         if len(moat_table) > 1:
             primary_moat += f" + {moat_table[1][0]}"
     moat_badge = moat_sec.get("badge", "WIDE MOAT")
-    ebit_m_pct = vp.get("ebit_margin_pct", 20.0)
-    moat_verdict = f"Poder de fijación de precios y resiliencia de márgenes ({ebit_m_pct:.1f}% EBIT)."
+    if is_fin:
+        metric_lbl = "ROE" if is_ins else "ROTCE"
+        ret_val = vp.get("rotce_pct", 0.0)
+        moat_verdict = f"Rentabilidad estructural sobre fondos propios ({metric_lbl} {ret_val:.1f}%) y ventajas de escala regulatoria."
+    else:
+        ebit_m_pct = vp.get("ebit_margin_pct", 20.0)
+        moat_verdict = f"Poder de fijación de precios y resiliencia de márgenes ({ebit_m_pct:.1f}% EBIT)."
     
+    # 2. Calidad de Beneficios
     forensic = scoring_data.get("forensic_accounting_analysis", {}).get("latest_result", {})
-    sloan_obj = forensic.get("sloan_accrual", {})
-    sloan_pct = sloan_obj.get("sloan_ratio_pct")
-    if sloan_pct is None:
-        sloan_pct = (sloan_obj.get("sloan_ratio") or -0.047) * 100.0
-    montier_score = forensic.get("montier_c_score", {}).get("total_score", 1)
+    if is_fin:
+        earnings_diag = "Contabilidad Regulatoria / Provisiones Auditadas"
+        earnings_badge = "MÁXIMA CALIDAD"
+        earnings_verdict = "Resultados y provisiones de balance respaldados bajo normativa SEC/IFRS."
+    else:
+        sloan_obj = forensic.get("sloan_accrual", {})
+        sloan_pct = sloan_obj.get("sloan_ratio_pct")
+        if sloan_pct is None and sloan_obj.get("sloan_ratio") is not None:
+            sloan_pct = sloan_obj.get("sloan_ratio") * 100.0
+        montier_score = forensic.get("montier_c_score", {}).get("total_score")
+        
+        bm_target = next((p for p in scoring_data.get("benchmarks_used", {}).get("peers_detail", []) if p.get("is_target")), {})
+        t_cfo = bm_target.get("cfo_usd_m")
+        t_ni = bm_target.get("net_income_usd_m")
+        cfo_per_ni = (t_cfo / t_ni) if (t_cfo is not None and t_ni is not None and t_ni > 0) else None
+
+        if sloan_pct is not None and montier_score is not None:
+            earnings_diag = f"Ratio Sloan: {sloan_pct:.2f}% / Montier: {montier_score}/6"
+            earnings_badge = "MÁXIMA CALIDAD" if (montier_score <= 1 and sloan_pct < -3.0) else ("CALIDAD SÓLIDA / BAJO RIESGO" if montier_score <= 3 else "ALERTA FORENSE")
+        elif sloan_pct is not None:
+            earnings_diag = f"Ratio Sloan: {sloan_pct:.2f}%"
+            earnings_badge = "CALIDAD SÓLIDA" if sloan_pct < 0 else "REVISIÓN"
+        else:
+            earnings_diag = "Auditoría Forense Estándar"
+            earnings_badge = "CALIDAD SÓLIDA"
+
+        if cfo_per_ni is not None:
+            earnings_verdict = f"Ganancias avaladas por caja real (${cfo_per_ni:.2f} CFO por dólar de NI)."
+        else:
+            earnings_verdict = "Calidad contable auditada sin anomalías operativas de devengo."
     
-    bm_target = next((p for p in scoring_data.get("benchmarks_used", {}).get("peers_detail", []) if p.get("is_target")), {})
-    t_cfo = bm_target.get("cfo_usd_m") or 1.0
-    t_ni = bm_target.get("net_income_usd_m") or 1.0
-    cfo_per_ni = (t_cfo / t_ni) if t_ni > 0 else 1.0
-    
-    earnings_badge = "MÁXIMA CALIDAD" if (montier_score <= 1 and sloan_pct < -3.0) else ("CALIDAD SÓLIDA / BAJO RIESGO" if montier_score <= 3 else "ALERTA FORENSE")
-    earnings_diag = f"Ratio Sloan: {sloan_pct:.2f}% / Montier: {montier_score}/6"
-    earnings_verdict = f"Ganancias 100% avaladas por caja real (${cfo_per_ni:.2f} CFO por dólar de NI)."
-    
+    # 3. Solvencia y Estructura
     solv = scoring_data.get("debt_and_solvency_analysis", {}).get("latest_result", {})
     cov_str = solv.get("debt_service", {}).get("interest_coverage_str", "SÓLIDA")
-    altman_z = solv.get("distress_models", {}).get("altman_z_double_prime", 3.20)
+    altman_z = solv.get("distress_models", {}).get("altman_z_double_prime")
     synth_rating = solv.get("distress_models", {}).get("synthetic_rating", "AAA")
     
     lev_ltm = scoring_data.get("debt_and_solvency_analysis", {}).get("cash_flow_leverage", {}).get("LTM", {})
     is_debt_free = lev_ltm.get("is_debt_free", False) or solv.get("is_debt_free", False)
+    bm_target = next((p for p in scoring_data.get("benchmarks_used", {}).get("peers_detail", []) if p.get("is_target")), {})
     cash_val_m = lev_ltm.get("cash") or bm_target.get("cash_usd_m") or 0.0
-    
-    solv_diag = f"Cobertura EBIT: {cov_str} / Altman Z'': {altman_z:.2f}" if altman_z else f"Cobertura EBIT: {cov_str}"
-    solv_badge = f"SINTÉTICO {synth_rating}"
-    solv_verdict = f"Cero deuda neta; colchón de liquidez de ${cash_val_m/1e3:.1f}B." if is_debt_free else f"Cero estrés financiero; colchón de ${cash_val_m/1e3:.1f}B."
+
+    if is_fin:
+        solv_diag = f"Rating Sintético: {synth_rating} / Balance Regulado"
+        solv_badge = f"SINTÉTICO {synth_rating}"
+        solv_verdict = f"Solvencia bancaria/aseguradora regulada; colchón patrimonial de ${cash_val_m/1e3:.1f}B." if cash_val_m > 0 else "Solvencia financiera supervisada por autoridad competente."
+    elif is_reit:
+        debt_to_assets = scoring_data.get("reit_metrics", {}).get("debt_to_gross_assets_pct")
+        if debt_to_assets is not None:
+            solv_diag = f"Deuda/Activos: {debt_to_assets:.1f}% / Rating: {synth_rating}"
+        else:
+            solv_diag = f"Cobertura EBIT: {cov_str} / Rating: {synth_rating}"
+        solv_badge = f"SINTÉTICO {synth_rating}"
+        solv_verdict = f"Estructura inmobiliaria con grado de inversión; liquidez de ${cash_val_m/1e3:.1f}B." if cash_val_m > 0 else "Estructura de deuda patrimonial de bajo riesgo de refinanciación."
+    else:
+        solv_diag = f"Cobertura EBIT: {cov_str} / Altman Z'': {altman_z:.2f}" if altman_z is not None else f"Cobertura EBIT: {cov_str}"
+        solv_badge = f"SINTÉTICO {synth_rating}"
+        solv_verdict = f"Cero deuda neta; colchón de liquidez de ${cash_val_m/1e3:.1f}B." if is_debt_free else f"Cero estrés financiero; colchón de ${cash_val_m/1e3:.1f}B."
         
+    # 4. Productividad del Capital
     gb = scoring_data.get("greenblatt_roc_analysis", {})
-    roc_pct = gb.get("latest_roc_pct") or (gb.get("latest_result", {}).get("roc_greenblatt", 0.30) * 100.0)
+    raw_roc = gb.get("latest_roc_pct")
+    if raw_roc is None and gb.get("latest_result", {}).get("roc_greenblatt") is not None:
+        raw_roc = gb.get("latest_result", {}).get("roc_greenblatt") * 100.0
+
     ws = scoring_data.get("wacc_and_spread_analysis", {})
-    roic_adj_val = (ws.get("roic_adjusted") or 0.50) * 100.0
-    spread_val = (ws.get("economic_spread_adjusted") or 0.40) * 100.0
+    raw_roic = ws.get("roic_adjusted")
+    raw_spread = ws.get("economic_spread_adjusted")
+    if raw_spread is not None:
+        spread_val = raw_spread * 100.0
+    else:
+        spread_val = vp.get("spread_economic_pct", 0.0)
+
+    if is_fin:
+        metric_lbl = "ROE" if is_ins else "ROTCE"
+        ret_val = vp.get("rotce_pct", 0.0)
+        ke_val = vp.get("ke_pct", 0.0)
+        spread_val = vp.get("spread_economic_pct", ret_val - ke_val)
+        cap_diag = f"Retorno Balance ({metric_lbl}): {ret_val:.1f}% / Ke: {ke_val:.1f}%"
+        cap_badge = "COMPOUNDING MACHINE" if spread_val > 10.0 else ("CREADOR DE VALOR" if spread_val > 0 else "DESTRUCTOR DE CAPITAL")
+        cap_verdict = f"Spread patrimonial de {spread_val:+.1f} pp sobre coste de capital propio ({ke_val:.1f}%)."
+    elif is_reit:
+        cap_rate = scoring_data.get("reit_metrics", {}).get("implied_cap_rate_pct")
+        roic_reit = (raw_roic * 100.0) if raw_roic is not None else None
+        if cap_rate is not None and roic_reit is not None:
+            cap_diag = f"Cap Rate: {cap_rate:.1f}% / ROIC Inmobiliario: {roic_reit:.1f}%"
+        elif roic_reit is not None:
+            cap_diag = f"ROIC Económico Inmobiliario: {roic_reit:.1f}%"
+        else:
+            cap_diag = "ROIC Inmobiliario N/D"
+        cap_badge = "COMPOUNDING MACHINE" if spread_val > 8.0 else ("CREADOR DE VALOR" if spread_val > 0 else "DESTRUCTOR DE VALOR")
+        cap_verdict = f"Spread económico de {spread_val:+.1f} pp sobre coste de capital WACC."
+    else:
+        roic_adj_val = (raw_roic * 100.0) if raw_roic is not None else None
+        if raw_roc is not None and roic_adj_val is not None:
+            cap_diag = f"ROC Greenblatt: {raw_roc:.1f}% / ROIC Adj: {roic_adj_val:.1f}%"
+        elif roic_adj_val is not None:
+            cap_diag = f"ROIC Ajustado: {roic_adj_val:.1f}%"
+        elif raw_roc is not None:
+            cap_diag = f"ROC Greenblatt: {raw_roc:.1f}%"
+        else:
+            cap_diag = "Productividad de Capital N/D"
+        cap_badge = "COMPOUNDING MACHINE" if spread_val > 15.0 else ("CREADOR DE VALOR" if spread_val > 0 else "DESTRUCTOR DE VALOR")
+        cap_verdict = f"Spread económico de {spread_val:+.1f} pp sobre WACC (Creación de valor de élite)." if spread_val > 0 else f"Retorno inferior al coste de capital (Spread: {spread_val:+.1f} pp)."
     
-    cap_diag = f"ROC Greenblatt: {roc_pct:.1f}% / ROIC Adj: {roic_adj_val:.1f}%"
-    cap_badge = "COMPOUNDING MACHINE" if spread_val > 15.0 else ("CREADOR DE VALOR" if spread_val > 0 else "DESTRUCTOR DE VALOR")
-    cap_verdict = f"Spread económico de {spread_val:+.1f} pp sobre WACC (Creación de valor de élite)."
-    
+    # 5. Valoración de Mercado
     g_our = vp.get("g_implied_our_pct", 10.0)
     g_fisc = vp.get("g_implied_fiscal_pct", 12.0)
     val_diag = f"Crecimiento Implícito: {g_our:.1f}% - {g_fisc:.1f}%"
@@ -716,12 +958,14 @@ def _build_cmd_final_rows(
 # ==============================================================================
 def generate_valuation_section_md(
     scoring_data: Dict[str, Any],
-    ticker: str = "AAPL",
-    company_name: str = "Apple Inc.",
+    ticker: str = "",
+    company_name: str = "",
     section_num: int = 14,
     profile_data: Optional[Dict[str, Any]] = None
 ) -> str:
     """Genera la sección completa de Valoración en Markdown, adaptándose según el arquetipo de negocio."""
+    ticker = ticker or scoring_data.get("ticker", "")
+    company_name = company_name or (profile_data or {}).get("company_name") or scoring_data.get("company_name") or ticker or "Compañía"
     vp = get_valuation_parameters(scoring_data, ticker, profile_data)
     
     # RUTA FINANCIERA / BANCARIA / ASEGURADORA
@@ -862,7 +1106,35 @@ def generate_valuation_section_md(
         md.append(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {r[4]} | {r[5]} | {r[6]} | {r[7]} |")
     md.append("\n")
     
-    md.append(f"### {section_num}.5. Cuadro de Mando Consolidado y Tesis Final de Inversión\n")
+    if vp.get("sotp_valuation"):
+        sotp = vp["sotp_valuation"]
+        md.append(f"### {section_num}.5. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)\n")
+        md.append(
+            f"Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y múltiplos de mercado divergentes, "
+            f"se aplica un modelo de **Suma de las Partes (Sum-of-the-Parts)** desagregando el negocio operativo:\n"
+            f"* **Comercio Electrónico / Marketplace:** Facturación LTM de **${sotp['commerce_rev']:,.1f} M** valorada a un múltiplo objetivo de **{sotp['commerce_mult']:.1f}x EV/Ventas** -> Enterprise Value de **${sotp['ev_commerce']:,.1f} M**.\n"
+            f"* **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **${sotp['fintech_rev']:,.1f} M** valorada a un múltiplo objetivo de **{sotp['fintech_mult']:.1f}x EV/Ventas** -> Enterprise Value de **${sotp['ev_fintech']:,.1f} M**.\n"
+            f"* **Enterprise Value Consolidado:** **${sotp['ev_total']:,.1f} M** | **Posición Financiera Neta:** **${-sotp['net_debt']:+,.1f} M** ({'Deuda neta' if sotp['net_debt'] > 0 else 'Caja neta'}).\n"
+            f"* **Equity Value Teórico:** **${sotp['equity_sotp']:,.1f} M** sobre {sotp['shares_m']:,.1f} M de acciones diluidas.\n"
+            f"* **Valor Intrínseco SOTP:** **${sotp['fair_value_sotp']:.2f} por acción** ({sotp['upside_sotp_pct']:+.1f}% frente a cotización actual de ${sotp['current_price']:.2f}).\n"
+        )
+        md.append("| Segmento de Negocio | Ventas LTM ($ M) | Múltiplo EV/Sales | Enterprise Value ($ M) | Ponderación EV |")
+        md.append("| :--- | :---: | :---: | :---: | :---: |")
+        ev_tot = sotp['ev_total'] if sotp['ev_total'] > 0 else 1.0
+        md.append(f"| **Comercio Electrónico / Marketplace** | ${sotp['commerce_rev']:,.1f} M | {sotp['commerce_mult']:.1f}x | ${sotp['ev_commerce']:,.1f} M | {sotp['ev_commerce']/ev_tot*100.0:.1f}% |")
+        md.append(f"| **FinTech y Servicios Financieros** | ${sotp['fintech_rev']:,.1f} M | {sotp['fintech_mult']:.1f}x | ${sotp['ev_fintech']:,.1f} M | {sotp['ev_fintech']/ev_tot*100.0:.1f}% |")
+        md.append(f"| **Total Enterprise Value (EV)** | **${sotp['commerce_rev'] + sotp['fintech_rev']:,.1f} M** | **—** | **${sotp['ev_total']:,.1f} M** | **100.0%** |")
+        debt_lbl = "(-) Deuda Neta" if sotp['net_debt'] > 0 else "(+) Caja Neta"
+        md.append(f"| {debt_lbl} | — | — | ${-sotp['net_debt']:,.1f} M | — |")
+        md.append(f"| **Equity Value Consolidado** | — | — | **${sotp['equity_sotp']:,.1f} M** | — |")
+        md.append(f"| **Precio Justo por Acción (SOTP)** | — | — | **${sotp['fair_value_sotp']:.2f}** | **{sotp['upside_sotp_pct']:+.1f}%** |")
+        md.append("\n")
+
+        cmd_section_title = f"{section_num}.6. Cuadro de Mando Consolidado y Tesis Final de Inversión"
+    else:
+        cmd_section_title = f"{section_num}.5. Cuadro de Mando Consolidado y Tesis Final de Inversión"
+
+    md.append(f"### {cmd_section_title}\n")
     cmd_rows = _build_cmd_final_rows(scoring_data, vp, profile_data, ticker, company_name)
     md.append("| Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |")
     md.append("| :--- | :--- | :---: | :--- |")
@@ -879,12 +1151,14 @@ def generate_valuation_section_md(
 def add_valuation_section_docx(
     doc: docx.Document,
     scoring_data: Dict[str, Any],
-    ticker: str = "AAPL",
-    company_name: str = "Apple Inc.",
+    ticker: str = "",
+    company_name: str = "",
     section_num: int = 14,
     profile_data: Optional[Dict[str, Any]] = None
 ):
     """Añade la sección de Valoración en Word (.docx), adaptándose según el arquetipo de negocio."""
+    ticker = ticker or scoring_data.get("ticker", "")
+    company_name = company_name or (profile_data or {}).get("company_name") or scoring_data.get("company_name") or ticker or "Compañía"
     vp = get_valuation_parameters(scoring_data, ticker, profile_data)
     cmd_data = _build_cmd_final_rows(scoring_data, vp, profile_data, ticker, company_name)
     
@@ -1202,9 +1476,68 @@ def add_valuation_section_docx(
                 
     doc.add_paragraph()
 
+    if vp.get("sotp_valuation"):
+        sotp = vp["sotp_valuation"]
+        h2_sotp = doc.add_heading(level=2)
+        r_h2_sotp = h2_sotp.add_run(f"{section_num}.4. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)")
+        r_h2_sotp.font.name = "Calibri"
+        r_h2_sotp.font.size = Pt(11.5)
+        r_h2_sotp.font.bold = True
+        r_h2_sotp.font.color.rgb = NAVY
+        
+        p_sotp_desc = doc.add_paragraph()
+        r_sotp_d = p_sotp_desc.add_run(
+            f"Al combinar infraestructura de e-commerce y fintech bancaria/crédito, se desagregan los componentes: "
+            f"Comercio a {sotp['commerce_mult']:.1f}x EV/Ventas (${sotp['ev_commerce']:,.1f} M) y FinTech a {sotp['fintech_mult']:.1f}x EV/Ventas (${sotp['ev_fintech']:,.1f} M), "
+            f"resultando en un Equity Value de ${sotp['equity_sotp']:,.1f} M y un Valor Teórico SOTP de ${sotp['fair_value_sotp']:.2f} por título."
+        )
+        r_sotp_d.font.name = "Calibri"
+        r_sotp_d.font.size = Pt(9.0)
+        r_sotp_d.font.color.rgb = DARK_GRAY
+
+        t_sotp = doc.add_table(rows=6, cols=5)
+        t_sotp.alignment = WD_TABLE_ALIGNMENT.CENTER
+        _set_table_borders(t_sotp)
+        
+        sotp_headers = ["Segmento Operativo", "Ventas LTM", "Múltiplo EV/Sales", "Enterprise Value", "Ponderación EV"]
+        for i, h in enumerate(sotp_headers):
+            c = t_sotp.cell(0, i)
+            _set_cell_shading(c, HEADER_BG)
+            p = c.paragraphs[0]
+            r = p.add_run(h)
+            r.bold = True
+            r.font.size = Pt(9)
+            r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+            
+        ev_tot = sotp['ev_total'] if sotp['ev_total'] > 0 else 1.0
+        debt_lbl = "(-) Deuda Neta" if sotp['net_debt'] > 0 else "(+) Caja Neta"
+        sotp_table_data = [
+            ("Comercio Electrónico / Marketplace", f"${sotp['commerce_rev']:,.1f} M", f"{sotp['commerce_mult']:.1f}x", f"${sotp['ev_commerce']:,.1f} M", f"{sotp['ev_commerce']/ev_tot*100.0:.1f}%"),
+            ("FinTech y Crédito Digital", f"${sotp['fintech_rev']:,.1f} M", f"{sotp['fintech_mult']:.1f}x", f"${sotp['ev_fintech']:,.1f} M", f"{sotp['ev_fintech']/ev_tot*100.0:.1f}%"),
+            ("Total Enterprise Value (EV)", f"${sotp['commerce_rev'] + sotp['fintech_rev']:,.1f} M", "—", f"${sotp['ev_total']:,.1f} M", "100.0%"),
+            (debt_lbl, "—", "—", f"${-sotp['net_debt']:,.1f} M", "—"),
+            ("Equity Value Justificado SOTP", "—", "—", f"${sotp['equity_sotp']:,.1f} M", f"${sotp['fair_value_sotp']:.2f}/sh ({sotp['upside_sotp_pct']:+.1f}%)"),
+        ]
+        
+        for row_idx, row_data in enumerate(sotp_table_data, start=1):
+            for col_idx, text in enumerate(row_data):
+                c = t_sotp.cell(row_idx, col_idx)
+                if row_idx % 2 == 0:
+                    _set_cell_shading(c, ALT_ROW_BG)
+                p = c.paragraphs[0]
+                r = p.add_run(text)
+                r.font.size = Pt(8.5)
+                if row_idx in [3, 5] or col_idx in [0, 3]:
+                    r.bold = True
+                    
+        doc.add_paragraph()
+        cmd_num = f"{section_num}.5"
+    else:
+        cmd_num = f"{section_num}.4"
+
     # 6. Cuadro de Mando Consolidado
     h2_5 = doc.add_heading(level=2)
-    r_h2_5 = h2_5.add_run(f"{section_num}.4. Cuadro de Mando Consolidado y Tesis Final de Inversión")
+    r_h2_5 = h2_5.add_run(f"{cmd_num}. Cuadro de Mando Consolidado y Tesis Final de Inversión")
     r_h2_5.font.name = "Calibri"
     r_h2_5.font.size = Pt(11.5)
     r_h2_5.font.bold = True
