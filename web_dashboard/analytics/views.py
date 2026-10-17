@@ -1879,12 +1879,30 @@ def company_detail(request, ticker):
     statements_fys = [p for p in fys[:11]]
 
     def _num(dict_src, key, p):
+        if not dict_src or not key:
+            return None
         if key in dict_src:
             obj = dict_src[key]
             if isinstance(obj, dict):
                 if "values" in obj:
                     return obj["values"].get(p)
                 return obj.get(p)
+        cand_keys = [f"us-gaap_{key}"] if not str(key).startswith("us-gaap_") else [str(key)[len("us-gaap_"):]]
+        for ck in cand_keys:
+            if ck in dict_src:
+                obj = dict_src[ck]
+                if isinstance(obj, dict):
+                    if "values" in obj:
+                        return obj["values"].get(p)
+                    return obj.get(p)
+        raw_key = str(key).split(":")[-1].split("_")[-1].lower()
+        for k, obj in dict_src.items():
+            k_tok = str(k).split(":")[-1].split("_")[-1].lower()
+            if k_tok == raw_key:
+                if isinstance(obj, dict):
+                    if "values" in obj:
+                        return obj["values"].get(p)
+                    return obj.get(p)
         return None
 
     def _to_m(val):
@@ -2490,18 +2508,49 @@ def company_detail(request, ticker):
     sbc_dict = {p: _to_m(_num(cf_det, "ShareBasedCompensation", p) or _num(cf_det, "AllocatedShareBasedCompensationExpense", p)) for p in statements_fys}
     noncash_adj_dict = {}
     for p in statements_fys:
-        def_tax = _to_m(_num(cf_det, "DeferredIncomeTaxExpenseBenefit", p) or _num(cf_det, "us-gaap_DeferredIncomeTaxesAndTaxCredits", p) or _num(cf_det, "DeferredIncomeTaxesAndTaxCredits", p) or _num(cf_det, "DeferredIncomeTax", p))
-        oth_nc = _to_m(_num(cf_det, "OtherNoncashIncomeExpense", p) or _num(cf_det, "us-gaap_OtherNoncashIncomeExpense", p))
-        impair = _to_m(_num(cf_det, "ImpairmentOfLongLivedAssetsHeldForUse", p) or _num(cf_det, "us-gaap_ImpairmentOfLongLivedAssetsHeldForUse", p))
-        unreal = _to_m(_num(cf_det, "meta_UnrealizedGainLossOnMarketableAndNonmarketableEquityInvestments", p) or _num(cf_det, "UnrealizedGainLossOnInvestments", p))
-        tot_adj = (def_tax or 0.0) + (oth_nc or 0.0) + (impair or 0.0) + (unreal or 0.0)
-        has_val = any(v is not None for v in [def_tax, oth_nc, impair, unreal])
+        def_tax = _to_m(_num(cf_det, "DeferredIncomeTaxesAndTaxCredits", p) or _num(cf_det, "DeferredIncomeTaxExpenseBenefit", p) or _num(cf_det, "DeferredIncomeTax", p))
+        oth_nc = _to_m(_num(cf_det, "OtherNoncashIncomeExpense", p))
+        impair = _to_m(_num(cf_det, "ImpairmentOfLongLivedAssetsHeldForUse", p) or _num(cf_det, "AssetImpairmentCharges", p))
+        unreal = _to_m(_num(cf_det, "meta_UnrealizedGainLossOnMarketableAndNonmarketableEquityInvestments", p) or _num(cf_det, "UnrealizedGainLossOnInvestments", p) or _num(cf_det, "EquitySecuritiesFvNiGainLoss", p))
+        restruct = _to_m(_num(cf_det, "RestructuringCharges", p) or _num(cf_det, "RestructuringchargesNoncash", p))
+        lease_cost = _to_m(_num(cf_det, "OperatingLeaseCost", p) or _num(cf_det, "OperatingLeaseExpense", p))
+        tot_adj = (def_tax or 0.0) + (oth_nc or 0.0) + (impair or 0.0) + (unreal or 0.0) + (restruct or 0.0) + (lease_cost or 0.0)
+        has_val = any(v is not None for v in [def_tax, oth_nc, impair, unreal, restruct, lease_cost])
         noncash_adj_dict[p] = round(tot_adj, 1) if has_val else 0.0
 
     delta_wc_dict = {}
     delta_ar_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInAccountsReceivable", p) or _num(cf_det, "IncreaseDecreaseInAccountsAndOtherReceivables", p)) for p in statements_fys}
     delta_inv_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInInventories", p) or _num(cf_det, "IncreaseDecreaseInInventory", p)) for p in statements_fys}
-    delta_ap_dict = {p: _to_m(_num(cf_det, "IncreaseDecreaseInAccountsPayable", p) or _num(cf_det, "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities", p) or _num(cf_det, "IncreaseDecreaseInAccountsPayableTrade", p)) for p in statements_fys}
+    delta_ap_dict = {}
+    for p in statements_fys:
+        ap_tot = _to_m(_num(cf_det, "IncreaseDecreaseInAccountsPayable", p) or _num(cf_det, "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities", p))
+        if ap_tot is not None:
+            delta_ap_dict[p] = ap_tot
+        else:
+            ap_trade = _to_m(_num(cf_det, "IncreaseDecreaseInAccountsPayableTrade", p))
+            ap_oth = _to_m(_num(cf_det, "IncreaseDecreaseInOtherAccountsPayable", p))
+            if ap_trade is not None or ap_oth is not None:
+                delta_ap_dict[p] = round((ap_trade or 0.0) + (ap_oth or 0.0), 1)
+            else:
+                delta_ap_dict[p] = None
+
+    delta_accrued_dict = {
+        p: _to_m(
+            _num(cf_det, "IncreaseDecreaseInAccruedLiabilities", p) or
+            _num(cf_det, "IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities", p) or
+            _num(cf_det, "IncreaseDecreaseInEmployeeRelatedLiabilities", p)
+        )
+        for p in statements_fys
+    }
+    delta_unearned_dict = {
+        p: _to_m(
+            _num(cf_det, "IncreaseDecreaseInContractWithCustomerLiability", p) or
+            _num(cf_det, "IncreaseDecreaseInDeferredRevenue", p)
+        )
+        for p in statements_fys
+    }
+    has_accrued = any(v is not None and v != 0.0 for v in delta_accrued_dict.values())
+    has_unearned = any(v is not None and v != 0.0 for v in delta_unearned_dict.values())
     delta_oth_wc_dict = {}
 
     for p in statements_fys:
@@ -2513,7 +2562,13 @@ def company_detail(request, ticker):
         if cfo_v is not None and ni_v is not None:
             tot_wc = round(cfo_v - (ni_v + (dna_v or 0.0) + (sbc_v or 0.0) + (noncash_v or 0.0)), 1)
             delta_wc_dict[p] = tot_wc
-            known_wc = (delta_ar_dict.get(p) or 0.0) + (delta_inv_dict.get(p) or 0.0) + (delta_ap_dict.get(p) or 0.0)
+            known_wc = (
+                (delta_ar_dict.get(p) or 0.0) +
+                (delta_inv_dict.get(p) or 0.0) +
+                (delta_ap_dict.get(p) or 0.0) +
+                ((delta_accrued_dict.get(p) or 0.0) if has_accrued else 0.0) +
+                ((delta_unearned_dict.get(p) or 0.0) if has_unearned else 0.0)
+            )
             delta_oth_wc_dict[p] = round(tot_wc - known_wc, 1)
         else:
             delta_wc_dict[p] = None
@@ -2558,7 +2613,12 @@ def company_detail(request, ticker):
         else:
             other_cff_dict[p] = None
 
-        raw_dc = _num(cf_det, "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect", p) or _num(cf_det, "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations", p)
+        raw_dc = (
+            _num(cf_det, "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect", p) or
+            _num(cf_det, "CashAndCashEquivalentsPeriodIncreaseDecrease", p) or
+            _num(cf_det, "PeriodIncreaseDecrease", p) or
+            _num(cf_det, "CashAndCashEquivalentsPeriodIncreaseDecreaseExcludingExchangeRateEffect", p)
+        )
         if raw_dc is not None:
             delta_cash_dict[p] = _to_m(raw_dc)
         else:
@@ -2651,6 +2711,31 @@ def company_detail(request, ticker):
             "data": delta_ap_dict,
             "pct_mode": "rev"
         },
+    ]
+
+    if has_accrued:
+        cf_rows_raw.append({
+            "label": "Variación de Gastos Acumulados y Pasivos Devengados (Δ Accrued)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_accrued_dict,
+            "pct_mode": "rev"
+        })
+
+    if has_unearned:
+        cf_rows_raw.append({
+            "label": "Variación de Ingresos Diferidos / Pasivos de Contrato (Δ Unearned)",
+            "operator": "(±)",
+            "row_type": "neutral",
+            "indent": True,
+            "is_bold": False,
+            "data": delta_unearned_dict,
+            "pct_mode": "rev"
+        })
+
+    cf_rows_raw.extend([
         {
             "label": "Variación de Otros Activos y Pasivos Operativos",
             "operator": "(±)",
@@ -2747,6 +2832,25 @@ def company_detail(request, ticker):
             "negate_val": True
         },
         {
+            "label": "Ingresos por emisión y planes de acciones (Stock Plans)",
+            "operator": "(+)",
+            "row_type": "plus",
+            "indent": True,
+            "is_bold": False,
+            "data": {p: _to_m(capital_flows["stock_plans_proceeds"].get(p)) for p in statements_fys},
+            "pct_mode": "rev"
+        },
+        {
+            "label": "RECOMPRAS NETAS DE ACCIONES (Mercado Abierto)",
+            "operator": "(=)",
+            "row_type": "result",
+            "indent": True,
+            "is_bold": True,
+            "data": {p: _to_m(capital_flows["share_repurchases_net"].get(p)) for p in statements_fys},
+            "pct_mode": "rev",
+            "negate_val": True
+        },
+        {
             "label": "Retención fiscal por liquidación de acciones (SBC Tax Settlement)",
             "operator": "(–)",
             "row_type": "minus",
@@ -2757,31 +2861,12 @@ def company_detail(request, ticker):
             "negate_val": True
         },
         {
-            "label": "TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)",
+            "label": "TOTAL SALIDA DE CAJA POR ACCIONES (Recompras + Retención SBC)",
             "operator": "(=)",
             "row_type": "result",
             "indent": True,
             "is_bold": True,
             "data": {p: _to_m(capital_flows["share_repurchases_total"].get(p)) for p in statements_fys},
-            "pct_mode": "rev",
-            "negate_val": True
-        },
-        {
-            "label": "Ingresos por emisión y planes de acciones (Stock Plans)",
-            "operator": "(+)",
-            "row_type": "plus",
-            "indent": True,
-            "is_bold": False,
-            "data": {p: _to_m(capital_flows["stock_plans_proceeds"].get(p)) for p in statements_fys},
-            "pct_mode": "rev"
-        },
-        {
-            "label": "RECOMPRAS NETAS DE ACCIONES (Net Share Repurchases)",
-            "operator": "(=)",
-            "row_type": "result",
-            "indent": True,
-            "is_bold": True,
-            "data": {p: _to_m(capital_flows["share_repurchases_net"].get(p)) for p in statements_fys},
             "pct_mode": "rev",
             "negate_val": True
         },
@@ -2875,7 +2960,7 @@ def company_detail(request, ticker):
             "is_bold": False,
             "data": fcf_conv_dict
         }
-    ]
+    ])
 
     statements_cashflow = [_build_statement_cells(r, statements_fys, canonical) for r in cf_rows_raw]
 

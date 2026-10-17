@@ -2,12 +2,13 @@
   "ticker": "DECK",
   "company_name": "DECKERS OUTDOOR CORP",
   "cik": "0000910521",
+  "sic_code": "3021",
   "accounting_standard": "US-GAAP",
   "archetype": "STANDARD_CORPORATE",
   "is_financial": false,
   "business_model": "CORPORATE_TRADITIONAL",
   "source": "SEC EDGAR (US-GAAP Oficial)",
-  "extraction_timestamp": "2026-09-27T22:31:42.583818",
+  "extraction_timestamp": "2026-10-17T11:17:27.886640",
   "fiscal_years": [
     "LTM",
     "FY2026",
@@ -35,7 +36,7 @@
       "FY2019": 2020437000.0,
       "FY2018": 1903339000.0,
       "FY2017": 1790147000.0,
-      "FY2016": null
+      "FY2016": 1875197000.0
     },
     "cost_of_goods_sold": {
       "LTM": 2332306000.0,
@@ -49,7 +50,7 @@
       "FY2019": 980187000.0,
       "FY2018": 971697000.0,
       "FY2017": 954912000.0,
-      "FY2016": null
+      "FY2016": 1028529000.0
     },
     "gross_profit": {
       "LTM": 3194983000.0,
@@ -107,6 +108,20 @@
       "FY2017": 5710000.0,
       "FY2016": 122265000.0
     },
+    "net_income_common": {
+      "LTM": 1014840000.0,
+      "FY2026": 1024071000.0,
+      "FY2025": 966091000.0,
+      "FY2024": 759563000.0,
+      "FY2023": 516822000.0,
+      "FY2022": 451949000.0,
+      "FY2021": 382575000.0,
+      "FY2020": 276142000.0,
+      "FY2019": 264308000.0,
+      "FY2018": 20615000.0,
+      "FY2017": 86341000.0,
+      "FY2016": 41027000.0
+    },
     "cash_from_operations": {
       "LTM": 1193713000.0,
       "FY2026": 1181955000.0,
@@ -163,6 +178,34 @@
       "FY2017": 291764000.0,
       "FY2016": 245956000.0
     },
+    "short_term_investments": {
+      "LTM": 65572000.0,
+      "FY2026": 55061000.0,
+      "FY2025": 75907000.0,
+      "FY2024": 77843000.0,
+      "FY2023": 38572000.0,
+      "FY2022": 43853000.0,
+      "FY2021": 23234000.0,
+      "FY2020": 25911000.0,
+      "FY2019": 22241000.0,
+      "FY2018": 19815000.0,
+      "FY2017": 40782000.0,
+      "FY2016": 0.0
+    },
+    "total_liquid_cash": {
+      "LTM": 1668161000.0,
+      "FY2026": 1962310000.0,
+      "FY2025": 1965095000.0,
+      "FY2024": 1579894000.0,
+      "FY2023": 1020367000.0,
+      "FY2022": 887380000.0,
+      "FY2021": 1112595000.0,
+      "FY2020": 675347000.0,
+      "FY2019": 611933000.0,
+      "FY2018": 449785000.0,
+      "FY2017": 332546000.0,
+      "FY2016": 245956000.0
+    },
     "total_debt": {
       "LTM": 0.0,
       "FY2026": 0.0,
@@ -171,25 +214,25 @@
       "FY2023": 0.0,
       "FY2022": 0.0,
       "FY2021": 0.0,
-      "FY2020": 638000.0,
-      "FY2019": 603000.0,
-      "FY2018": 578000.0,
-      "FY2017": 550000.0,
-      "FY2016": 67475000.0
+      "FY2020": 30901000.0,
+      "FY2019": 31504000.0,
+      "FY2018": 32082000.0,
+      "FY2017": 32632000.0,
+      "FY2016": 55631000.0
     },
     "net_debt": {
-      "LTM": -1602589000.0,
-      "FY2026": -1907249000.0,
-      "FY2025": -1889188000.0,
-      "FY2024": -1502051000.0,
-      "FY2023": -981795000.0,
-      "FY2022": -843527000.0,
-      "FY2021": -1089361000.0,
-      "FY2020": -648798000.0,
-      "FY2019": -589089000.0,
-      "FY2018": -429392000.0,
-      "FY2017": -291214000.0,
-      "FY2016": -178481000.0
+      "LTM": -1668161000.0,
+      "FY2026": -1962310000.0,
+      "FY2025": -1965095000.0,
+      "FY2024": -1579894000.0,
+      "FY2023": -1020367000.0,
+      "FY2022": -887380000.0,
+      "FY2021": -1112595000.0,
+      "FY2020": -644446000.0,
+      "FY2019": -580429000.0,
+      "FY2018": -417703000.0,
+      "FY2017": -299914000.0,
+      "FY2016": -190325000.0
     },
     "total_assets": {
       "LTM": 3868621000.0,
@@ -388,18 +431,18 @@
       "FY2016": 237246000.0
     },
     "net_working_capital": {
-      "LTM": 255809000.0,
-      "FY2026": 139097000.0,
-      "FY2025": 201346000.0,
-      "FY2024": 221439000.0,
-      "FY2023": 431078000.0,
-      "FY2022": 366917000.0,
-      "FY2021": 93070000.0,
-      "FY2020": 244367000.0,
-      "FY2019": 255792000.0,
-      "FY2018": 292132000.0,
-      "FY2017": 370556000.0,
-      "FY2016": 368786000.0
+      "LTM": 1858398000.0,
+      "FY2026": 2046346000.0,
+      "FY2025": 2090534000.0,
+      "FY2024": 1723490000.0,
+      "FY2023": 1412873000.0,
+      "FY2022": 1210444000.0,
+      "FY2021": 1182431000.0,
+      "FY2020": 893165000.0,
+      "FY2019": 844881000.0,
+      "FY2018": 721524000.0,
+      "FY2017": 661770000.0,
+      "FY2016": 547267000.0
     },
     "tangible_capital_employed": {
       "LTM": 593559000.0,
@@ -413,10 +456,164 @@
       "FY2019": 469588000.0,
       "FY2018": 512294000.0,
       "FY2017": 596087000.0,
-      "FY2016": 606032000.0
+      "FY2016": 561557000.0
+    },
+    "dividends_paid": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "share_repurchases": {
+      "LTM": 1230295000.0,
+      "FY2026": 1075100000.0,
+      "FY2025": 567002000.0,
+      "FY2024": 414931000.0,
+      "FY2023": 297372000.0,
+      "FY2022": 356653000.0,
+      "FY2021": 99147000.0,
+      "FY2020": 190405000.0,
+      "FY2019": 161395000.0,
+      "FY2018": 149687000.0,
+      "FY2017": 12572000.0,
+      "FY2016": 94200000.0
+    },
+    "stock_plans_proceeds": {
+      "LTM": null,
+      "FY2026": 4509000.0,
+      "FY2025": 3804000.0,
+      "FY2024": 2444000.0,
+      "FY2023": 2170000.0,
+      "FY2022": 1991000.0,
+      "FY2021": 1502000.0,
+      "FY2020": 1288000.0,
+      "FY2019": 1025000.0,
+      "FY2018": 0.0,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "share_repurchases_gross": {
+      "LTM": 1230295000.0,
+      "FY2026": 1075100000.0,
+      "FY2025": 567002000.0,
+      "FY2024": 414931000.0,
+      "FY2023": 297372000.0,
+      "FY2022": 356653000.0,
+      "FY2021": 99147000.0,
+      "FY2020": 190405000.0,
+      "FY2019": 161395000.0,
+      "FY2018": 149687000.0,
+      "FY2017": 12572000.0,
+      "FY2016": 94200000.0
+    },
+    "share_repurchases_net": {
+      "LTM": 1230295000.0,
+      "FY2026": 1070591000.0,
+      "FY2025": 563198000.0,
+      "FY2024": 412487000.0,
+      "FY2023": 295202000.0,
+      "FY2022": 354662000.0,
+      "FY2021": 97645000.0,
+      "FY2020": 189117000.0,
+      "FY2019": 160370000.0,
+      "FY2018": 149687000.0,
+      "FY2017": 12572000.0,
+      "FY2016": 94200000.0
+    },
+    "share_repurchases_sbc_tax": {
+      "LTM": 8464000.0,
+      "FY2026": 8410000.0,
+      "FY2025": 15119000.0,
+      "FY2024": 9974000.0,
+      "FY2023": 16688000.0,
+      "FY2022": 14024000.0,
+      "FY2021": 7432000.0,
+      "FY2020": 6148000.0,
+      "FY2019": 5328000.0,
+      "FY2018": 8105000.0,
+      "FY2017": 8452000.0,
+      "FY2016": 3691000.0
+    },
+    "acquisitions_ma": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": 4700000.0
+    },
+    "debt_repayments": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": 0.0,
+      "FY2022": 0.0,
+      "FY2021": 40379000.0,
+      "FY2020": 69800000.0,
+      "FY2019": 162199000.0,
+      "FY2018": 215439000.0,
+      "FY2017": 469461000.0,
+      "FY2016": 387613000.0
+    },
+    "debt_issuances": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": 0.0
+    },
+    "operating_lease_rou_asset": {
+      "LTM": 432484000.0,
+      "FY2026": 335098000.0,
+      "FY2025": 237352000.0,
+      "FY2024": 225669000.0,
+      "FY2023": 213302000.0,
+      "FY2022": 182459000.0,
+      "FY2021": 186991000.0,
+      "FY2020": 243522000.0,
+      "FY2019": 216420000.0,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "accrued_liabilities": {
+      "LTM": 146713000.0,
+      "FY2026": 171173000.0,
+      "FY2025": 142120000.0,
+      "FY2024": 106785000.0,
+      "FY2023": 86753000.0,
+      "FY2022": 81400000.0,
+      "FY2021": 68995000.0,
+      "FY2020": 46281000.0,
+      "FY2019": 47963000.0,
+      "FY2018": 24446000.0,
+      "FY2017": 31815000.0,
+      "FY2016": 39449000.0
     },
     "rd_expense": {
-      "LTM": 68899000.0,
+      "LTM": null,
       "FY2026": 68899000.0,
       "FY2025": 56676000.0,
       "FY2024": 49171000.0,
@@ -426,7 +623,8 @@
       "FY2020": 27555000.0,
       "FY2019": 23187000.0,
       "FY2018": 22372000.0,
-      "FY2017": 21256000.0
+      "FY2017": 21256000.0,
+      "FY2016": 22176000.0
     },
     "sga_expense": {
       "LTM": 1942066000.0,
@@ -442,8 +640,34 @@
       "FY2017": 837154000.0,
       "FY2016": 684541000.0
     },
-    "sm_expense": {},
-    "ga_expense": {},
+    "sm_expense": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "ga_expense": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
     "interest_expense": {
       "LTM": 3119000.0,
       "FY2026": 2492000.0,
@@ -457,6 +681,342 @@
       "FY2018": 3774000.0,
       "FY2017": 5494000.0,
       "FY2016": 4640000.0
+    },
+    "rental_revenue": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "property_operating_expenses": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "real_estate_depreciation": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "gain_loss_sale_properties": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "recurring_capex_maintenance": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "real_estate_acquisitions": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "noi": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "ffo": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "affo": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "net_premiums_earned": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "net_investment_income": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "losses_and_loss_expenses": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "acquisition_costs": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "other_underwriting_expenses": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "underwriting_profit": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "loss_reserves": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "unearned_premiums": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "reinsurance_receivables": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "total_investments": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "float_usd": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "loss_ratio": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "expense_ratio": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "combined_ratio": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "tangible_book_value": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
     }
   },
   "key_ratios": {
@@ -472,7 +1032,7 @@
       "FY2019": 51.49,
       "FY2018": 48.95,
       "FY2017": 46.66,
-      "FY2016": null
+      "FY2016": 45.15
     },
     "operating_margin_pct": {
       "LTM": 22.67,
@@ -485,7 +1045,8 @@
       "FY2020": 15.85,
       "FY2019": 16.2,
       "FY2018": 11.69,
-      "FY2017": -0.11
+      "FY2017": -0.11,
+      "FY2016": 8.65
     },
     "net_margin_pct": {
       "LTM": 18.36,
@@ -498,7 +1059,8 @@
       "FY2020": 12.95,
       "FY2019": 13.08,
       "FY2018": 6.01,
-      "FY2017": 0.32
+      "FY2017": 0.32,
+      "FY2016": 6.52
     },
     "fcf_margin_pct": {
       "LTM": 20.22,
@@ -512,7 +1074,7 @@
       "FY2019": 16.35,
       "FY2018": 15.37,
       "FY2017": 8.65,
-      "FY2016": null
+      "FY2016": 3.18
     },
     "fcf_conversion_pct": {
       "LTM": 110.15,
@@ -578,11 +1140,11 @@
       "FY2023": 0.0,
       "FY2022": 0.0,
       "FY2021": 0.0,
-      "FY2020": 0.0,
-      "FY2019": 0.0,
-      "FY2018": 0.0,
-      "FY2017": 0.0,
-      "FY2016": 0.07
+      "FY2020": 0.03,
+      "FY2019": 0.03,
+      "FY2018": 0.03,
+      "FY2017": 0.03,
+      "FY2016": 0.06
     },
     "roc_greenblatt_pct": {
       "LTM": 234.09,
@@ -595,8 +1157,8 @@
       "FY2020": 73.27,
       "FY2019": 66.67,
       "FY2018": 40.16,
-      "FY2017": -0.32,
-      "FY2016": 26.75
+      "FY2017": -0.33,
+      "FY2016": 28.87
     },
     "tangible_capital_usd": {
       "LTM": 535219000.0,
@@ -609,8 +1171,8 @@
       "FY2020": 461496000.0,
       "FY2019": 490941000.0,
       "FY2018": 554190500.0,
-      "FY2017": 601059500.0,
-      "FY2016": 606032000.0
+      "FY2017": 578822000.0,
+      "FY2016": 561557000.0
     },
     "roa_ending_pct": {
       "LTM": 26.23,
@@ -910,7 +1472,6 @@
       "label": "Cost of Goods and Services Sold",
       "standard_concept": "",
       "values": {
-        "LTM": 2314570000.0,
         "FY2026": 2314570000.0,
         "FY2025": 2099949000.0,
         "FY2024": 1902275000.0,
@@ -927,7 +1488,6 @@
       "label": "Current Income Tax Expense (Benefit)",
       "standard_concept": "",
       "values": {
-        "LTM": 293501000.0,
         "FY2026": 293501000.0,
         "FY2025": 282753000.0,
         "FY2024": 220888000.0,
@@ -988,7 +1548,6 @@
       "label": "Income (Loss) from Continuing Operations before Income Taxes, Domestic",
       "standard_concept": "",
       "values": {
-        "LTM": 1084446000.0,
         "FY2026": 1084446000.0,
         "FY2025": 1033428000.0,
         "FY2024": 688981000.0,
@@ -1067,7 +1626,6 @@
       "label": "Research and Development Expense",
       "standard_concept": "",
       "values": {
-        "LTM": 68899000.0,
         "FY2026": 68899000.0,
         "FY2025": 56676000.0,
         "FY2024": 49171000.0,
@@ -1727,7 +2285,6 @@
       "label": "Value added tax payable",
       "standard_concept": "",
       "values": {
-        "LTM": 8369000.0,
         "FY2026": 8369000.0,
         "FY2025": 6697000.0,
         "FY2024": 5133000.0,
@@ -1861,7 +2418,7 @@
       "label": "Increase (Decrease) in Accounts Receivable",
       "standard_concept": "",
       "values": {
-        "LTM": 17933000.0,
+        "LTM": -2833000.0,
         "FY2026": 7550000.0,
         "FY2025": -41339000.0,
         "FY2024": 4157000.0,
@@ -1879,7 +2436,7 @@
       "label": "Increase (Decrease) in Inventories",
       "standard_concept": "",
       "values": {
-        "LTM": -25355000.0,
+        "LTM": 41771000.0,
         "FY2026": 8208000.0,
         "FY2025": -24344000.0,
         "FY2024": 58541000.0,
@@ -2047,7 +2604,7 @@
       "label": "Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect",
       "standard_concept": "",
       "values": {
-        "LTM": 153949000.0,
+        "LTM": -117827000.0,
         "FY2026": 18061000.0,
         "FY2025": 387137000.0,
         "FY2024": 520256000.0,
@@ -2144,7 +2701,6 @@
       "label": "Share-based Payment Arrangement, Expense",
       "standard_concept": "",
       "values": {
-        "LTM": 44835000.0,
         "FY2026": 44835000.0,
         "FY2025": 37943000.0,
         "FY2024": 37288000.0,
@@ -2181,7 +2737,6 @@
       "label": "Asset Retirement Obligation, Accretion Expense",
       "standard_concept": "",
       "values": {
-        "LTM": 1122000.0,
         "FY2026": 1122000.0,
         "FY2025": 927000.0,
         "FY2024": 421000.0,
@@ -2194,7 +2749,6 @@
       "label": "Depreciation",
       "standard_concept": "",
       "values": {
-        "LTM": 74590000.0,
         "FY2026": 74590000.0,
         "FY2025": 67579000.0,
         "FY2024": 54958000.0
@@ -2255,7 +2809,6 @@
       "label": "Goodwill",
       "standard_concept": "",
       "values": {
-        "LTM": 13990000.0,
         "FY2026": 13990000.0,
         "FY2025": 13990000.0,
         "FY2024": 13990000.0,
@@ -2296,7 +2849,6 @@
       "label": "Impairment of Intangible Assets, Finite-lived",
       "standard_concept": "",
       "values": {
-        "LTM": 0.0,
         "FY2026": 0.0,
         "FY2025": 0.0,
         "FY2024": 8164000.0,
@@ -2423,7 +2975,6 @@
       "label": "Proceeds from Issuance of Common Stock",
       "standard_concept": "",
       "values": {
-        "LTM": 4509000.0,
         "FY2026": 4509000.0,
         "FY2025": 3804000.0,
         "FY2024": 2444000.0,
@@ -2439,7 +2990,6 @@
       "label": "Proceeds from Stock Options Exercised",
       "standard_concept": "",
       "values": {
-        "LTM": 0.0,
         "FY2026": 0.0,
         "FY2025": 968000.0,
         "FY2024": 4786000.0,
@@ -2478,7 +3028,7 @@
       "label": "Bad debt expense",
       "standard_concept": "",
       "values": {
-        "LTM": 11730000.0,
+        "LTM": 960000.0,
         "FY2026": 6345000.0,
         "FY2025": 5032000.0,
         "FY2024": 789000.0,
@@ -2496,7 +3046,6 @@
       "label": "Impairment of property and equipment and cloud computing arrangements",
       "standard_concept": "",
       "values": {
-        "LTM": 127000.0,
         "FY2026": 127000.0,
         "FY2025": 4290000.0,
         "FY2024": 1015000.0,
@@ -2507,25 +3056,25 @@
       "label": "Prepaid expenses and other current assets",
       "standard_concept": "",
       "values": {
-        "LTM": -42193000.0,
-        "FY2026": -23804000.0,
+        "LTM": 5415000.0,
+        "FY2026": 23804000.0,
         "FY2025": 20946000.0,
-        "FY2024": -38490000.0,
-        "FY2023": -5609000.0,
-        "FY2022": -19095000.0,
-        "FY2021": -22128000.0,
+        "FY2024": 38490000.0,
+        "FY2023": 5609000.0,
+        "FY2022": 19095000.0,
+        "FY2021": 22128000.0,
         "FY2020": 2477000.0,
-        "FY2019": -515000.0,
+        "FY2019": 515000.0,
         "FY2018": 11124000.0,
         "FY2017": 7975000.0,
-        "FY2016": -3681000.0
+        "FY2016": 3681000.0
       }
     },
     "us-gaap_IncreaseDecreaseInIncomeTaxesReceivable": {
       "label": "Income tax receivable",
       "standard_concept": "",
       "values": {
-        "LTM": 58417000.0,
+        "LTM": 11159000.0,
         "FY2026": 34788000.0,
         "FY2025": 6945000.0,
         "FY2024": -38775000.0,
@@ -2576,7 +3125,7 @@
       "label": "Trade accounts payable",
       "standard_concept": "",
       "values": {
-        "LTM": -54599000.0,
+        "LTM": -1131000.0,
         "FY2026": -27865000.0,
         "FY2025": 35636000.0,
         "FY2024": 119601000.0,
@@ -2594,7 +3143,7 @@
       "label": "Other accrued expenses",
       "standard_concept": "",
       "values": {
-        "LTM": 46976000.0,
+        "LTM": -13110000.0,
         "FY2026": 16933000.0,
         "FY2025": 22222000.0,
         "FY2024": 43534000.0,
@@ -2648,7 +3197,6 @@
       "label": "Proceeds from sale of assets",
       "standard_concept": "",
       "values": {
-        "LTM": 11000.0,
         "FY2026": 11000.0,
         "FY2025": 11168000.0,
         "FY2024": 34000.0,
@@ -2666,7 +3214,6 @@
       "label": "Cash paid for excise taxes related to repurchases of common stock",
       "standard_concept": "",
       "values": {
-        "LTM": -5043000.0,
         "FY2026": -5043000.0,
         "FY2025": -3985000.0,
         "FY2024": -0.0,
@@ -2691,7 +3238,7 @@
       "label": "Changes in trade accounts payable and other accrued expenses for purchases of property and equipment",
       "standard_concept": "",
       "values": {
-        "LTM": -5770000.0,
+        "LTM": -5348000.0,
         "FY2026": -5559000.0,
         "FY2025": 3819000.0,
         "FY2024": -6705000.0,
@@ -2719,7 +3266,6 @@
       "label": "Leasehold improvements acquired through tenant allowances",
       "standard_concept": "",
       "values": {
-        "LTM": 0.0,
         "FY2026": 0.0,
         "FY2025": 0.0,
         "FY2024": 8127000.0,
@@ -2733,7 +3279,6 @@
       "label": "Accrued for shares withheld for taxes",
       "standard_concept": "",
       "values": {
-        "LTM": 6602000.0,
         "FY2026": 6602000.0,
         "FY2025": 17148000.0,
         "FY2024": 22287000.0,

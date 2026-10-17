@@ -10,109 +10,81 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016"
+    "FY2016",
+    "FY2015",
+    "FY2014"
   ],
   "product_segments": [
     {
       "name": "Products",
       "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 346345.0,
         "FY2025": 307003.0,
         "FY2024": 294866.0,
         "FY2023": 298085.0,
-        "FY2022": 316199.0,
-        "FY2021": 297392.0,
-        "FY2020": 220747.0,
-        "FY2019": 213883.0,
-        "FY2018": 225847.0,
-        "FY2017": 196534.0,
-        "FY2016": 191291.0
+        "LTM": 346345.0
       }
     },
     {
       "name": "iPhone",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 245540.0,
         "FY2025": 209586.0,
         "FY2024": 201183.0,
         "FY2023": 200583.0,
-        "FY2022": 205489.0,
-        "FY2021": 191973.0,
-        "FY2020": 137781.0,
-        "FY2019": 142381.0,
-        "FY2018": 164888.0,
-        "FY2017": 139337.0,
-        "FY2016": 136700.0
+        "LTM": 245540.0
       }
     },
     {
       "name": "Mac",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 35863.0,
         "FY2025": 33708.0,
         "FY2024": 29984.0,
         "FY2023": 29357.0,
-        "FY2022": 40177.0,
-        "FY2021": 35190.0,
-        "FY2020": 28622.0,
-        "FY2019": 25740.0,
-        "FY2018": 25198.0,
-        "FY2017": 25569.0,
-        "FY2016": 22831.0
+        "LTM": 35863.0
       }
     },
     {
       "name": "iPad",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 28652.0,
         "FY2025": 28023.0,
         "FY2024": 26694.0,
         "FY2023": 28300.0,
-        "FY2022": 29292.0,
-        "FY2021": 31862.0,
-        "FY2020": 23724.0,
-        "FY2019": 21280.0,
-        "FY2018": 18380.0,
-        "FY2017": 18802.0,
-        "FY2016": 20628.0
+        "LTM": 28652.0
       }
     },
     {
       "name": "Wearables, Home and Accessories",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 36290.0,
         "FY2025": 35686.0,
         "FY2024": 37005.0,
         "FY2023": 39845.0,
-        "FY2022": 41241.0,
-        "FY2021": 38367.0,
-        "FY2020": 30620.0,
-        "FY2019": 24482.0,
-        "FY2018": 17381.0,
-        "FY2017": 12826.0,
-        "FY2016": 11132.0
+        "LTM": 36290.0
       }
     },
     {
       "name": "Services",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 120478.0,
         "FY2025": 109158.0,
         "FY2024": 96169.0,
         "FY2023": 85200.0,
-        "FY2022": 78129.0,
-        "FY2021": 68425.0,
-        "FY2020": 53768.0,
-        "FY2019": 46291.0,
-        "FY2018": 39748.0,
-        "FY2017": 32700.0,
-        "FY2016": 24348.0
+        "LTM": 120478.0
       }
     }
   ],
@@ -120,87 +92,165 @@
     {
       "name": "Americas",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 193595.0,
         "FY2025": 178353.0,
         "FY2024": 167045.0,
         "FY2023": 162560.0,
-        "FY2022": 169658.0,
-        "FY2021": 153306.0,
-        "FY2020": 124556.0,
-        "FY2019": 116914.0,
-        "FY2018": 112093.0,
-        "FY2017": 96600.0,
-        "FY2016": 86613.0
+        "LTM": 193595.0
       }
     },
     {
       "name": "Europe",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 124299.0,
         "FY2025": 111032.0,
         "FY2024": 101328.0,
         "FY2023": 94294.0,
-        "FY2022": 95118.0,
-        "FY2021": 89307.0,
-        "FY2020": 68640.0,
-        "FY2019": 60288.0,
-        "FY2018": 62420.0,
-        "FY2017": 54938.0,
-        "FY2016": 49952.0
+        "LTM": 124299.0
       }
     },
     {
       "name": "Greater China",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 79332.0,
         "FY2025": 64377.0,
         "FY2024": 66952.0,
         "FY2023": 72559.0,
-        "FY2022": 74200.0,
-        "FY2021": 68366.0,
-        "FY2020": 40308.0,
-        "FY2019": 43678.0,
-        "FY2018": 51942.0,
-        "FY2017": 44764.0,
-        "FY2016": 48492.0
+        "LTM": 79332.0
       }
     },
     {
       "name": "Japan",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 31004.0,
         "FY2025": 28703.0,
         "FY2024": 25052.0,
         "FY2023": 24257.0,
-        "FY2022": 25977.0,
-        "FY2021": 28482.0,
-        "FY2020": 21418.0,
-        "FY2019": 21506.0,
-        "FY2018": 21733.0,
-        "FY2017": 17733.0,
-        "FY2016": 16928.0
+        "LTM": 31004.0
       }
     },
     {
       "name": "Rest of Asia Pacific",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 38593.0,
         "FY2025": 33696.0,
         "FY2024": 30658.0,
         "FY2023": 29615.0,
-        "FY2022": 29375.0,
-        "FY2021": 26356.0,
-        "FY2020": 19593.0,
-        "FY2019": 17788.0,
-        "FY2018": 17407.0,
-        "FY2017": 15199.0,
-        "FY2016": 13654.0
+        "LTM": 38593.0
+      }
+    },
+    {
+      "name": "U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 151790.0,
+        "FY2024": 142196.0,
+        "FY2023": 138573.0,
+        "LTM": 170268.4
+      }
+    },
+    {
+      "name": "China",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 64377.0,
+        "FY2024": 66952.0,
+        "FY2023": 72559.0,
+        "LTM": 72214.0
+      }
+    },
+    {
+      "name": "Other countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 199994.0,
+        "FY2024": 181887.0,
+        "FY2023": 172153.0,
+        "LTM": 224340.6
       }
     }
-  ]
+  ],
+  "segment_operating_income": [
+    {
+      "name": "Operating income",
+      "values": {
+        "FY2025": 133050.0,
+        "FY2024": 123216.0,
+        "FY2023": 114301.0,
+        "LTM": 154859.0
+      }
+    },
+    {
+      "name": "Americas",
+      "values": {
+        "FY2025": 72480.0,
+        "FY2024": 67656.0,
+        "FY2023": 60508.0,
+        "LTM": 82713.0
+      }
+    },
+    {
+      "name": "Europe",
+      "values": {
+        "FY2025": 47739.0,
+        "FY2024": 41790.0,
+        "FY2023": 36098.0,
+        "LTM": 56600.0
+      }
+    },
+    {
+      "name": "Greater China",
+      "values": {
+        "FY2025": 26917.0,
+        "FY2024": 27082.0,
+        "FY2023": 30328.0,
+        "LTM": 34696.0
+      }
+    },
+    {
+      "name": "Japan",
+      "values": {
+        "FY2025": 13955.0,
+        "FY2024": 12454.0,
+        "FY2023": 11888.0,
+        "LTM": 14791.0
+      }
+    },
+    {
+      "name": "Rest of Asia Pacific",
+      "values": {
+        "FY2025": 14586.0,
+        "FY2024": 13062.0,
+        "FY2023": 12066.0,
+        "LTM": 17768.0
+      }
+    },
+    {
+      "name": "Corporate non-segment",
+      "values": {
+        "FY2025": -42627.0,
+        "FY2024": -38828.0,
+        "FY2023": -36587.0,
+        "LTM": -51709.0
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "AAPL"
 }

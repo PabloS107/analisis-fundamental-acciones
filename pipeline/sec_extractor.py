@@ -2854,10 +2854,6 @@ def extract_sec_data(ticker, output_dir=None):
                             f_fy = float(fy_val)
                             f_curr = float(v_curr)
                             f_prev = float(v_prev)
-                            # Alinear signos entre estados trimestrales y anuales si difieren por convención contable
-                            if (f_fy > 0 and f_curr < 0) or (f_fy < 0 and f_curr > 0):
-                                f_curr = -f_curr
-                                f_prev = -f_prev
                             val = f_fy + f_curr - f_prev
                         except (ValueError, TypeError):
                             pass

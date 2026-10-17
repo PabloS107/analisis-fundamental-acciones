@@ -10,127 +10,192 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017"
+    "FY2017",
+    "FY2016"
   ],
   "product_segments": [
     {
+      "name": "Wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2026": 3208.1,
+        "FY2025": 2855.9,
+        "FY2024": 2432.3,
+        "LTM": 3222.4
+      }
+    },
+    {
+      "name": "Direct-to-Consumer",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2026": 2264.2,
+        "FY2025": 2129.7,
+        "FY2024": 1855.5,
+        "LTM": 2304.8
+      }
+    },
+    {
       "name": "HOKA",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 2658.7,
         "FY2026": 2587.3,
         "FY2025": 2233.1,
         "FY2024": 1806.7,
-        "FY2023": 1412.5,
-        "FY2022": 891.6,
-        "FY2021": 571.2,
-        "FY2020": 352.6,
-        "FY2019": 223.1,
-        "FY2018": 153.8,
-        "FY2017": 110.2
+        "LTM": 2637.7
       }
     },
     {
       "name": "UGG",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 2724.4,
         "FY2026": 2738.8,
         "FY2025": 2531.4,
         "FY2024": 2239.1,
-        "FY2023": 1929.0,
-        "FY2022": 1982.1,
-        "FY2021": 1716.8,
-        "FY2020": 1521.9,
-        "FY2019": 1533.2,
-        "FY2018": 1506.4,
-        "FY2017": 1478.6
+        "LTM": 2751.8
       }
     },
     {
       "name": "Other Brands",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 144.2,
         "FY2026": 146.2,
         "FY2025": 221.2,
         "FY2024": 241.9,
-        "FY2023": 285.8,
-        "FY2022": 276.6,
-        "FY2021": 257.6,
-        "FY2020": 258.2,
-        "FY2019": 264.1,
-        "FY2018": 243.1,
-        "FY2017": 201.3
-      }
-    },
-    {
-      "name": "Wholesale (Canal)",
-      "is_subtotal": true,
-      "values": {
-        "LTM": 3186.1,
-        "FY2026": 3208.1,
-        "FY2025": 2855.9,
-        "FY2024": 2432.3,
-        "FY2023": 2160.7,
-        "FY2022": 1936.7,
-        "FY2021": 1478.9,
-        "FY2020": 1395.8,
-        "FY2019": 1305.4,
-        "FY2018": 1187.6,
-        "FY2017": 1125.0
-      }
-    },
-    {
-      "name": "Direct-to-Consumer (Canal)",
-      "is_subtotal": true,
-      "values": {
-        "LTM": 2341.2,
-        "FY2026": 2264.2,
-        "FY2025": 2129.7,
-        "FY2024": 1855.5,
-        "FY2023": 1466.6,
-        "FY2022": 1213.6,
-        "FY2021": 1066.7,
-        "FY2020": 736.9,
-        "FY2019": 715.0,
-        "FY2018": 715.7,
-        "FY2017": 665.1
+        "LTM": 137.8
       }
     }
   ],
   "geographic_segments": [
     {
-      "name": "Domestic (EE.UU.)",
+      "name": "Domestic",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 3174.9,
         "FY2026": 3191.5,
         "FY2025": 3186.7,
         "FY2024": 2863.7,
-        "FY2023": 2451.5,
-        "FY2022": 2167.8,
-        "FY2021": 1761.5,
-        "FY2020": 1401.7,
-        "FY2019": 1278.4,
-        "FY2018": 1174.1,
-        "FY2017": 1110.5
+        "LTM": 3207.7
       }
     },
     {
-      "name": "International (Global)",
+      "name": "International",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 2352.4,
         "FY2026": 2280.8,
         "FY2025": 1798.9,
         "FY2024": 1424.1,
-        "FY2023": 1175.8,
-        "FY2022": 982.5,
-        "FY2021": 784.2,
-        "FY2020": 731.0,
-        "FY2019": 742.1,
-        "FY2018": 729.3,
-        "FY2017": 679.6
+        "LTM": 2319.6
+      }
+    },
+    {
+      "name": "International - Sales Revenue, Net - Net sales in foreign currencies",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2026": 1748.1,
+        "FY2025": 1376.8,
+        "FY2024": 1105.1,
+        "LTM": 1765.7
       }
     }
-  ]
+  ],
+  "segment_operating_income": [
+    {
+      "name": "Segment income from operations",
+      "values": {
+        "FY2026": 1972.7,
+        "FY2025": 1886.0,
+        "FY2024": 1547.6,
+        "LTM": 1973.5
+      }
+    },
+    {
+      "name": "HOKA",
+      "values": {
+        "FY2026": 911.0,
+        "FY2025": 848.5,
+        "FY2024": 719.0,
+        "LTM": 912.9
+      }
+    },
+    {
+      "name": "UGG",
+      "values": {
+        "FY2026": 1045.3,
+        "FY2025": 1002.9,
+        "FY2024": 804.8,
+        "LTM": 1045.3
+      }
+    },
+    {
+      "name": "Other Brands",
+      "values": {
+        "FY2026": 16.4,
+        "FY2025": 34.6,
+        "FY2024": 23.7,
+        "LTM": -1194.6
+      }
+    },
+    {
+      "name": "Segment income from operations",
+      "values": {
+        "FY2026": 1972.7,
+        "FY2025": 1886.0,
+        "FY2024": 1547.6,
+        "LTM": 1973.5
+      }
+    },
+    {
+      "name": "HOKA",
+      "values": {
+        "FY2026": 911.0,
+        "FY2025": 848.5,
+        "FY2024": 719.0,
+        "LTM": 912.9
+      }
+    },
+    {
+      "name": "UGG",
+      "values": {
+        "FY2026": 1045.3,
+        "FY2025": 1002.9,
+        "FY2024": 804.8,
+        "LTM": 1045.3
+      }
+    },
+    {
+      "name": "Other Brands",
+      "values": {
+        "FY2026": 16.4,
+        "FY2025": 34.6,
+        "FY2024": 23.7,
+        "LTM": -1194.6
+      }
+    },
+    {
+      "name": "Total other income, net",
+      "values": {
+        "FY2026": 63.5,
+        "FY2025": 64.2,
+        "FY2024": 51.4,
+        "LTM": 59.5
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "DECK"
 }
