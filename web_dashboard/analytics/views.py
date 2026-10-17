@@ -486,6 +486,11 @@ def resolve_canonical_balance_sheet(fs, periods):
         "OtherAssetsNoncurrent", "us-gaap_OtherAssetsNoncurrent",
         "OtherNoncurrentAssets"
     ]
+    dta_keys = [
+        "DeferredIncomeTaxAssetsNet", "us-gaap_DeferredIncomeTaxAssetsNet",
+        "DeferredTaxAssetsNetNoncurrent", "us-gaap_DeferredTaxAssetsNetNoncurrent",
+        "DeferredIncomeTaxAssets", "us-gaap_DeferredIncomeTaxAssets"
+    ]
     ta_keys = ["Assets", "TotalAssets", "us-gaap_Assets"]
     ap_keys = [
         "AccountsPayableCurrent", "us-gaap_AccountsPayableCurrent",
@@ -565,6 +570,7 @@ def resolve_canonical_balance_sheet(fs, periods):
         "net_ppe_plus_rou": {},
         "goodwill_and_intangibles": {},
         "long_term_investments": {},
+        "deferred_tax_assets": {},
         "other_noncurrent_assets": {},
         "total_noncurrent_assets": {},
         "total_assets": {},
@@ -650,6 +656,7 @@ def resolve_canonical_balance_sheet(fs, periods):
         other_nca_rep = _extract_val(other_nca_keys, p)
         # Regla 6: Cero plugs sintéticos en Activos No Corrientes. Solo reflejar partidas reportadas en XBRL.
         other_nca = round(other_nca_rep, 1) if other_nca_rep is not None else None
+        dta_v = _extract_val(dta_keys, p)
 
         ap_v = _extract_val(ap_keys, p)
         accrued_v = _extract_val(accrued_keys, p, "accrued_liabilities")
@@ -735,6 +742,7 @@ def resolve_canonical_balance_sheet(fs, periods):
         res["net_ppe_plus_rou"][p] = round((ppe_v or 0.0) + (rou_v or 0.0), 1) if (ppe_v is not None or rou_v is not None) else None
         res["goodwill_and_intangibles"][p] = gw_int_v
         res["long_term_investments"][p] = lt_inv_v
+        res["deferred_tax_assets"][p] = dta_v
         res["other_noncurrent_assets"][p] = other_nca
         res["total_noncurrent_assets"][p] = tot_nca
         res["total_assets"][p] = tot_ast
@@ -2574,69 +2582,77 @@ def company_detail(request, ticker):
             fcf_adj_dict[p] = None
 
     cfi_dict = {p: _to_m(canonical.get("cash_from_investing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInInvestingActivities", p)) for p in statements_fys}
+    capex_dict = {p: _to_m(canonical.get("capital_expenditures", {}).get(p)) for p in statements_fys}
+    ma_dict = {p: _to_m(capital_flows["acquisitions_ma"].get(p)) for p in statements_fys}
+    sec_buys_dict = {}
+    sec_sells_dict = {}
     net_inv_sec_dict = {}
+    ppe_sale_dict = {}
+    oth_inv_dict = {}
     cfi_unmapped_dict = {}
     has_cfi_unmapped = False
 
-    sec_buy_keys = [
-        "PaymentsToAcquireAvailableForSaleSecuritiesDebt", "PaymentsToAcquireAvailableForSaleSecurities",
-        "PaymentsToAcquireMarketableSecurities", "PaymentsToAcquireInvestments",
-        "PaymentsToAcquireEquitySecuritiesFvNi", "PaymentsToAcquireOtherInvestments",
-        "us-gaap_PaymentsToAcquireAvailableForSaleSecuritiesDebt", "us-gaap_PaymentsToAcquireAvailableForSaleSecurities",
-        "us-gaap_PaymentsToAcquireMarketableSecurities", "us-gaap_PaymentsToAcquireInvestments",
-        "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi", "us-gaap_PaymentsToAcquireOtherInvestments"
-    ]
-    sec_sell_keys = [
-        "ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "ProceedsFromSaleOfAvailableForSaleSecurities",
-        "ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities",
-        "ProceedsFromSaleAndMaturityOfMarketableSecurities", "ProceedsFromSaleOfInvestments",
-        "ProceedsFromSaleMaturityAndCollectionsOfInvestments", "ProceedsFromSaleOfEquitySecuritiesFvNi",
-        "ProceedsFromSaleOfOtherInvestments", "ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities",
-        "us-gaap_ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "us-gaap_ProceedsFromSaleOfAvailableForSaleSecurities",
-        "us-gaap_ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities",
-        "us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities", "us-gaap_ProceedsFromSaleOfInvestments",
-        "us-gaap_ProceedsFromSaleMaturityAndCollectionsOfInvestments", "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
-        "us-gaap_ProceedsFromSaleOfOtherInvestments", "us-gaap_ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities"
-    ]
-    oth_inv_keys = [
-        "PaymentsForProceedsFromOtherInvestingActivities", "ProceedsFromSaleOfPropertyPlantAndEquipment",
-        "ProceedsFromSaleOfProductiveAssets", "nvda_Proceedsfromsaleoflonglivedassetsandinvestments",
-        "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
-        "us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment", "us-gaap_ProceedsFromSaleOfProductiveAssets"
-    ]
+    def _first_cf_val(keys, p):
+        for k in keys:
+            v = _num(cf_det, k, p)
+            if v is not None:
+                return float(v)
+        return None
 
     for p in statements_fys:
         cfi_v = cfi_dict.get(p)
-        capex_v = _to_m(canonical.get("capital_expenditures", {}).get(p))
-        ma_v = _to_m(capital_flows["acquisitions_ma"].get(p))
-        
-        buys = sum(abs(_num(cf_det, k, p) or 0.0) for k in sec_buy_keys)
-        sells = sum(_num(cf_det, k, p) or 0.0 for k in sec_sell_keys)
-        direct_net_sec = round(_to_m(sells - buys), 1) if (buys > 0 or sells > 0) else None
-        oth_inv_v = round(_to_m(sum(_num(cf_det, k, p) or 0.0 for k in oth_inv_keys)), 1)
+        capex_v = capex_dict.get(p)
+        ma_v = ma_dict.get(p)
 
+        # 1. Compras de valores negociables (deuda y equity líquido)
+        b_mkt = abs(_first_cf_val(["PaymentsToAcquireMarketableSecurities", "PaymentsToAcquireAvailableForSaleSecuritiesDebt", "PaymentsToAcquireAvailableForSaleSecurities", "PaymentsToAcquireInvestments"], p) or 0.0)
+        b_nonmkt = abs(_first_cf_val(["PaymentsToAcquireEquitySecuritiesFvNi", "PaymentsForEquitySecuritiesWithoutReadilyDeterminableFairValue", "PaymentsToAcquireOtherInvestments"], p) or 0.0)
+        tot_buys_raw = b_mkt + b_nonmkt
+        sec_buys_dict[p] = _to_m(tot_buys_raw) if tot_buys_raw > 0 else None
+
+        # 2. Ventas y vencimientos de valores negociables
+        s_comb = _first_cf_val(["ProceedsFromSaleAndMaturityOfMarketableSecurities", "ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities", "ProceedsFromSaleMaturityAndCollectionsOfInvestments"], p)
+        if s_comb is not None:
+            tot_sells_raw = float(s_comb)
+        else:
+            mat_v = _first_cf_val(["ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities"], p) or 0.0
+            s_mkt = _first_cf_val(["ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "ProceedsFromSaleOfAvailableForSaleSecurities", "ProceedsFromSaleOfMarketableSecurities"], p) or 0.0
+            s_nonmkt = _first_cf_val(["ProceedsFromSaleOfEquitySecuritiesFvNi", "ProceedsFromSaleOfOtherInvestments"], p) or 0.0
+            tot_sells_raw = mat_v + s_mkt + s_nonmkt
+        sec_sells_dict[p] = _to_m(tot_sells_raw) if tot_sells_raw > 0 else None
+
+        net_sec_raw = tot_sells_raw - tot_buys_raw if (tot_buys_raw > 0 or tot_sells_raw > 0) else None
+        net_inv_sec_dict[p] = _to_m(net_sec_raw) if net_sec_raw is not None else None
+
+        # 3. Venta de PP&E
+        ppe_sale_raw = _first_cf_val(["ProceedsFromSaleOfPropertyPlantAndEquipment", "ProceedsFromSaleOfProductiveAssets", "Proceedsfromsaleoflonglivedassetsandinvestments", "ProceedsRelatingToPropertyAndEquipment"], p)
+        ppe_sale_dict[p] = _to_m(ppe_sale_raw) if ppe_sale_raw is not None and abs(ppe_sale_raw) > 0 else None
+
+        # 4. Otros flujos de inversión
+        oth_inv_raw = _first_cf_val(["PaymentsForProceedsFromOtherInvestingActivities"], p)
+        oth_inv_dict[p] = _to_m(oth_inv_raw) if oth_inv_raw is not None and abs(oth_inv_raw) > 0 else None
+
+        # Reconciliación de integridad contable (Regla 6)
         if cfi_v is not None:
-            # Regla 6: Si CapEx falta por error de extracción o falta de reporte, NO inventar residuo elástico en Valores Negociables
             if capex_v is None:
-                net_inv_sec_dict[p] = direct_net_sec
                 cfi_unmapped_dict[p] = cfi_v
                 has_cfi_unmapped = True
             else:
-                if direct_net_sec is not None:
-                    net_inv_sec_dict[p] = direct_net_sec
-                else:
-                    rem_cfi = round(cfi_v - (-(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0)), 1)
-                    net_inv_sec_dict[p] = rem_cfi if abs(rem_cfi) < 1.0 else None
-
-                accounted_cfi = -(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0) + (net_inv_sec_dict.get(p) or 0.0) + oth_inv_v
-                diff_cfi = round(cfi_v - accounted_cfi, 1)
-                if abs(diff_cfi) >= 1.0:
-                    cfi_unmapped_dict[p] = diff_cfi
+                accounted = (
+                    -(abs(capex_v) if capex_v is not None else 0.0)
+                    - (abs(sec_buys_dict[p]) if sec_buys_dict.get(p) is not None else 0.0)
+                    + (sec_sells_dict[p] if sec_sells_dict.get(p) is not None else 0.0)
+                    - (abs(ma_v) if ma_v is not None else 0.0)
+                    + (ppe_sale_dict[p] if ppe_sale_dict.get(p) is not None else 0.0)
+                    + (oth_inv_dict[p] if oth_inv_dict.get(p) is not None else 0.0)
+                )
+                diff = round(cfi_v - accounted, 1)
+                if abs(diff) >= 1.5:
+                    cfi_unmapped_dict[p] = diff
                     has_cfi_unmapped = True
                 else:
                     cfi_unmapped_dict[p] = None
         else:
-            net_inv_sec_dict[p] = None
             cfi_unmapped_dict[p] = None
 
     cff_dict = {p: _to_m(canonical.get("cash_from_financing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInFinancingActivities", p)) for p in statements_fys}
@@ -2835,16 +2851,52 @@ def company_detail(request, ticker):
             "pct_mode": "rev",
             "negate_val": True
         },
-        {
-            "label": "Adquisiciones netas (M&A)",
-            "operator": "(–)",
-            "row_type": "minus",
-            "indent": True,
-            "is_bold": False,
-            "data": {p: _to_m(capital_flows["acquisitions_ma"].get(p)) for p in statements_fys},
-            "pct_mode": "rev",
-            "negate_val": True
-        },
+        *(
+            [
+                {
+                    "label": "Venta de Propiedad, Planta y Equipo (PP&E)",
+                    "operator": "(+)",
+                    "row_type": "plus",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": ppe_sale_dict,
+                    "pct_mode": "rev"
+                }
+            ]
+            if any(v is not None and v > 0 for v in ppe_sale_dict.values())
+            else []
+        ),
+        *(
+            [
+                {
+                    "label": "Compras de Valores Negociables e Inversiones Financieras",
+                    "operator": "(–)",
+                    "row_type": "minus",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": sec_buys_dict,
+                    "pct_mode": "rev",
+                    "negate_val": True
+                }
+            ]
+            if any(v is not None and v > 0 for v in sec_buys_dict.values())
+            else []
+        ),
+        *(
+            [
+                {
+                    "label": "Ventas y Vencimientos de Valores Negociables e Inversiones",
+                    "operator": "(+)",
+                    "row_type": "plus",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": sec_sells_dict,
+                    "pct_mode": "rev"
+                }
+            ]
+            if any(v is not None and v > 0 for v in sec_sells_dict.values())
+            else []
+        ),
         {
             "label": "Inversión Neta en Valores Negociables y Otros Activos de Inversión",
             "operator": "(±)",
@@ -2854,6 +2906,37 @@ def company_detail(request, ticker):
             "data": net_inv_sec_dict,
             "pct_mode": "rev"
         },
+        *(
+            [
+                {
+                    "label": "Adquisiciones netas (M&A)",
+                    "operator": "(–)",
+                    "row_type": "minus",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": ma_dict,
+                    "pct_mode": "rev",
+                    "negate_val": True
+                }
+            ]
+            if any(v is not None and v > 0 for v in ma_dict.values())
+            else []
+        ),
+        *(
+            [
+                {
+                    "label": "Otras Actividades de Inversión",
+                    "operator": "(±)",
+                    "row_type": "neutral",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": oth_inv_dict,
+                    "pct_mode": "rev"
+                }
+            ]
+            if any(v is not None and abs(v) > 0 for v in oth_inv_dict.values())
+            else []
+        ),
         *(
             [
                 {
@@ -3185,6 +3268,21 @@ def company_detail(request, ticker):
             "data": {p: _to_m(bs_data["long_term_investments"].get(p)) for p in statements_fys},
             "pct_mode": "assets"
         },
+        *(
+            [
+                {
+                    "label": "Impuestos Diferidos Activos No Corrientes (Deferred Tax Assets)",
+                    "operator": "",
+                    "row_type": "item",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": {p: _to_m(bs_data["deferred_tax_assets"].get(p)) for p in statements_fys},
+                    "pct_mode": "assets"
+                }
+            ]
+            if any(v is not None and v > 0 for v in bs_data.get("deferred_tax_assets", {}).values())
+            else []
+        ),
         {
             "label": "Otros Activos No Corrientes",
             "operator": "",

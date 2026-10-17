@@ -95,11 +95,20 @@ def dataframe_to_concept_dict(df, periods):
                     except (ValueError, TypeError):
                         pass
                         
+        depth_val = int(row.get('depth', 0)) if pd.notna(row.get('depth')) else 0
+        is_abstract = bool(row.get('is_abstract', False)) if pd.notna(row.get('is_abstract')) else False
+        is_total = bool(row.get('is_total', False)) if pd.notna(row.get('is_total')) else False
+        section_val = str(row.get('section', '')).strip() if pd.notna(row.get('section')) else ''
+
         if concept_str not in data_by_concept or len(values) > len(data_by_concept[concept_str].get("values", {})):
             data_by_concept[concept_str] = {
                 "label": label,
                 "standard_concept": std_concept if std_concept != 'None' else None,
-                "values": values
+                "values": values,
+                "depth": depth_val,
+                "is_abstract": is_abstract,
+                "is_total": is_total,
+                "section": section_val
             }
             
     return data_by_concept
@@ -422,6 +431,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "net_income": {},
         "net_income_common": {},
         "cash_from_operations": {},
+        "cash_from_investing": {},
+        "cash_from_financing": {},
         "capital_expenditures": {},
         "free_cash_flow": {},
         "cash_and_equivalents": {},
@@ -1015,20 +1026,35 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             di_raw = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["debt_issuances"], p, is_flow=True)
         canonical["debt_issuances"][p] = abs(float(di_raw)) if di_raw is not None else None
 
+        # 9c. Flujos Totales de Inversión y Financiación Canónicos
+        cfi_cands = ["NetCashProvidedByUsedInInvestingActivities", "us-gaap_NetCashProvidedByUsedInInvestingActivities"]
+        cfi_val = get_first_matching_value(cf_data, cfi_cands, p)
+        if cfi_val is None and facts_df is not None:
+            cfi_val = get_fact_fallback(facts_df, cfi_cands, p, is_flow=True)
+        canonical["cash_from_investing"][p] = float(cfi_val) if cfi_val is not None else None
+
+        cff_cands = ["NetCashProvidedByUsedInFinancingActivities", "us-gaap_NetCashProvidedByUsedInFinancingActivities"]
+        cff_val = get_first_matching_value(cf_data, cff_cands, p)
+        if cff_val is None and facts_df is not None:
+            cff_val = get_fact_fallback(facts_df, cff_cands, p, is_flow=True)
+        canonical["cash_from_financing"][p] = float(cff_val) if cff_val is not None else None
+
         if p == "LTM" and facts_df is not None:
-            for flow_key, cands in [
-                ("dividends_paid", XBRL_TAXONOMY_MAP["dividends_paid"]),
-                ("share_repurchases", XBRL_TAXONOMY_MAP["share_repurchases"]),
-                ("stock_plans_proceeds", XBRL_TAXONOMY_MAP["stock_plans_proceeds"]),
-                ("share_repurchases_sbc_tax", XBRL_TAXONOMY_MAP["share_repurchases_sbc_tax"]),
-                ("acquisitions_ma", XBRL_TAXONOMY_MAP["acquisitions_ma"]),
-                ("debt_repayments", XBRL_TAXONOMY_MAP["debt_repayments"]),
-                ("debt_issuances", XBRL_TAXONOMY_MAP["debt_issuances"]),
+            for flow_key, cands, keep_sign in [
+                ("dividends_paid", XBRL_TAXONOMY_MAP["dividends_paid"], False),
+                ("share_repurchases", XBRL_TAXONOMY_MAP["share_repurchases"], False),
+                ("stock_plans_proceeds", XBRL_TAXONOMY_MAP["stock_plans_proceeds"], False),
+                ("share_repurchases_sbc_tax", XBRL_TAXONOMY_MAP["share_repurchases_sbc_tax"], False),
+                ("acquisitions_ma", XBRL_TAXONOMY_MAP["acquisitions_ma"], False),
+                ("debt_repayments", XBRL_TAXONOMY_MAP["debt_repayments"], False),
+                ("debt_issuances", XBRL_TAXONOMY_MAP["debt_issuances"], False),
+                ("cash_from_investing", ["NetCashProvidedByUsedInInvestingActivities", "us-gaap_NetCashProvidedByUsedInInvestingActivities"], True),
+                ("cash_from_financing", ["NetCashProvidedByUsedInFinancingActivities", "us-gaap_NetCashProvidedByUsedInFinancingActivities"], True),
             ]:
                 if canonical[flow_key][p] is None:
                     q4_sum = get_ltm_quarterly_metric(facts_df, cands, mode='sum')
                     if q4_sum is not None:
-                        canonical[flow_key][p] = abs(float(q4_sum))
+                        canonical[flow_key][p] = float(q4_sum) if keep_sign else abs(float(q4_sum))
             canonical["share_repurchases_gross"][p] = canonical["share_repurchases"][p]
             if canonical["share_repurchases"][p] is not None and canonical["stock_plans_proceeds"][p] is not None:
                 canonical["share_repurchases_net"][p] = max(0.0, round(canonical["share_repurchases"][p] - canonical["stock_plans_proceeds"][p], 2))
