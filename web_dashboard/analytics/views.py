@@ -2841,7 +2841,7 @@ def company_detail(request, ticker):
             "pct_mode": "rev"
         },
         {
-            "label": "RECOMPRAS NETAS DE ACCIONES (Mercado Abierto)",
+            "label": "RECOMPRAS NETAS DE ACCIONES (Net Share Repurchases)",
             "operator": "(=)",
             "row_type": "result",
             "indent": True,
@@ -2861,7 +2861,7 @@ def company_detail(request, ticker):
             "negate_val": True
         },
         {
-            "label": "TOTAL SALIDA DE CAJA POR ACCIONES (Recompras + Retención SBC)",
+            "label": "TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)",
             "operator": "(=)",
             "row_type": "result",
             "indent": True,

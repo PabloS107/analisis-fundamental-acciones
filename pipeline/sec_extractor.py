@@ -1660,7 +1660,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             "revenue", "total revenue", "total revenues", "total net sales",
                             "total net revenue", "consolidated revenue", "net sales", "total"
                         ]
-                        is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments"])
+                        is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments", "wholesale", "direct-to-consumer", "direct to consumer", "dtc"])
 
                         # Detección de subregiones geográficas (ej. "United States" dentro de "United States & Canada")
                         if is_geo and clean_name.lower() == "united states":

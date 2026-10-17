@@ -21,18 +21,17 @@
 
 | Línea de Negocio / Producto | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Margen / Mix | Lectura Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Wholesale** | **$3,222.4 M** | $3,208.1 M | **+0.4%** | 29.2% Mix | Desempeño estable (+0.4% YoY); consolidación en mercados y canales core. |
-| **Direct-to-Consumer** | **$2,304.8 M** | $2,264.2 M | **+1.8%** | 20.8% Mix | Desempeño estable (+1.8% YoY); consolidación en mercados y canales core. |
-| **HOKA** | **$2,637.7 M** | $2,587.3 M | **+1.9%** | 23.9% Mix | Desempeño estable (+1.9% YoY); consolidación en mercados y canales core. |
-| **UGG** | **$2,751.8 M** | $2,738.8 M | **+0.5%** | 24.9% Mix | Desempeño estable (+0.5% YoY); consolidación en mercados y canales core. |
-| **Other Brands** | **$137.8 M** | $146.2 M | **-5.7%** | 1.2% Mix | Normalización moderada (-5.7% YoY); ajuste de demanda o transición de catálogo. |
+| **Wholesale** | **$3,222.4 M** | $3,208.1 M | **+0.4%** | Subtotal | Subtotal consolidado de canal/categoría (+0.4% YoY). |
+| **Direct-to-Consumer** | **$2,304.8 M** | $2,264.2 M | **+1.8%** | Subtotal | Subtotal consolidado de canal/categoría (+1.8% YoY). |
+| **HOKA** | **$2,658.7 M** | $2,587.3 M | **+2.8%** | 48.1% Mix | Desempeño estable (+2.8% YoY); consolidación en mercados y canales core. |
+| **UGG** | **$2,724.4 M** | $2,738.8 M | **-0.5%** | 49.3% Mix | Normalización moderada (-0.5% YoY); ajuste de demanda o transición de catálogo. |
+| **Other Brands** | **$144.2 M** | $146.2 M | **-1.4%** | 2.6% Mix | Normalización moderada (-1.4% YoY); ajuste de demanda o transición de catálogo. |
 
 
 ### Análisis Cualitativo de las Líneas de Negocio:
-* **Wholesale (29.2% de facturación):** Genera $3,222.4 M (+0.4% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
-* **Direct-to-Consumer (20.8% de facturación):** Genera $2,304.8 M (+1.8% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
-* **HOKA (23.9% de facturación):** Genera $2,637.7 M (+1.9% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
-* **UGG (24.9% de facturación):** Genera $2,751.8 M (+0.5% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **HOKA (48.1% de facturación):** Genera $2,658.7 M (+2.8% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **UGG (49.3% de facturación):** Genera $2,724.4 M (-0.5% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **Other Brands (2.6% de facturación):** Genera $144.2 M (-1.4% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
 
 ---
 
@@ -40,14 +39,14 @@
 
 | Región Geográfica | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Peso en Ventas % | Diagnóstico Operativo |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Domestic** | **$3,207.7 M** | $3,191.5 M | **+0.5%** | 44.0% | Mercado estratégico consolidado (+0.5% YoY); estabilidad operativa. |
-| **International** | **$2,319.6 M** | $2,280.8 M | **+1.7%** | 31.8% | Mercado estratégico consolidado (+1.7% YoY); estabilidad operativa. |
+| **Domestic** | **$3,174.9 M** | $3,191.5 M | **-0.5%** | 43.5% | Mercado en ajuste (-0.5% YoY); presión macroeconómica o vientos cambiarios (FX). |
+| **International** | **$2,352.4 M** | $2,280.8 M | **+3.1%** | 32.3% | Mercado estratégico consolidado (+3.1% YoY); estabilidad operativa. |
 | **International - Sales Revenue, Net - Net sales in foreign currencies** | **$1,765.7 M** | $1,748.1 M | **+1.0%** | 24.2% | Mercado estratégico consolidado (+1.0% YoY); estabilidad operativa. |
 
 
 ### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
-* **Mercado Domestic (44.0% del total):** Aporta $3,207.7 M con variación YoY de +0.5%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
-* **Mercado International (31.8% del total):** Aporta $2,319.6 M con variación YoY de +1.7%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado Domestic (43.5% del total):** Aporta $3,174.9 M con variación YoY de -0.5%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado International (32.3% del total):** Aporta $2,352.4 M con variación YoY de +3.1%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
 * **Mercado International - Sales Revenue, Net - Net sales in foreign currencies (24.2% del total):** Aporta $1,765.7 M con variación YoY de +1.0%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
 
 ---

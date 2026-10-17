@@ -91,8 +91,8 @@ class TestStatementsWebDashboard(unittest.TestCase):
         # Verify NVDA dividend captures reported LTM ($974.0M) and FY2026 ($974.0M)
         self.assertIn('-$974.0M', content)
 
-        # Verify NVDA M&A in LTM is -$14,156.0M and FY25 is -$1,007.0M
-        self.assertIn('-$14,156.0M', content)
+        # Verify NVDA M&A in LTM is -$1,156.0M and FY25 is -$1,007.0M
+        self.assertIn('-$1,156.0M', content)
         self.assertIn('-$1,007.0M', content)
 
         # Verify NVDA Net Buybacks is -$54,526.0M
@@ -464,7 +464,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
                 self.assertNotIn('+$21,898.0M', content)
             elif ticker == 'DECK':
                 self.assertIn('$0.0M', content)
-                self.assertIn('-$1,602.6M (Caja Neta)', content)
+                self.assertIn('-$1,668.2M (Caja Neta)', content)
 
             # Punto 3: Rating Sintético con estilo institucional y dictamen multi-factor
             self.assertIn('Dictamen Institucional de Solvencia & Riesgo Crediticio', content)

@@ -16,7 +16,7 @@
   "product_segments": [
     {
       "name": "Wholesale",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -28,7 +28,7 @@
     },
     {
       "name": "Direct-to-Consumer",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -47,7 +47,7 @@
         "FY2026": 2587.3,
         "FY2025": 2233.1,
         "FY2024": 1806.7,
-        "LTM": 2637.7
+        "LTM": 2658.7
       }
     },
     {
@@ -59,7 +59,7 @@
         "FY2026": 2738.8,
         "FY2025": 2531.4,
         "FY2024": 2239.1,
-        "LTM": 2751.8
+        "LTM": 2724.4
       }
     },
     {
@@ -71,7 +71,7 @@
         "FY2026": 146.2,
         "FY2025": 221.2,
         "FY2024": 241.9,
-        "LTM": 137.8
+        "LTM": 144.2
       }
     }
   ],
@@ -85,7 +85,7 @@
         "FY2026": 3191.5,
         "FY2025": 3186.7,
         "FY2024": 2863.7,
-        "LTM": 3207.7
+        "LTM": 3174.9
       }
     },
     {
@@ -97,7 +97,7 @@
         "FY2026": 2280.8,
         "FY2025": 1798.9,
         "FY2024": 1424.1,
-        "LTM": 2319.6
+        "LTM": 2352.4
       }
     },
     {
