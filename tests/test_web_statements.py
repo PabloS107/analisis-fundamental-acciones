@@ -91,9 +91,16 @@ class TestStatementsWebDashboard(unittest.TestCase):
         # Verify NVDA dividend captures reported LTM ($974.0M) and FY2026 ($974.0M)
         self.assertIn('-$974.0M', content)
 
-        # Verify NVDA M&A in LTM is -$1,156.0M and FY25 is -$1,007.0M
-        self.assertIn('-$1,156.0M', content)
+        # Verify NVDA M&A in LTM is -$14,156.0M and FY25 is -$1,007.0M
+        self.assertIn('-$14,156.0M', content)
         self.assertIn('-$1,007.0M', content)
+
+        # Verify NVDA CapEx in LTM is -$7,354.0M and FCF is $127,006.0M
+        self.assertIn('-$7,354.0M', content)
+        self.assertIn('$127,006.0M', content)
+
+        # Verify no fake disclaimer banner for NVDA
+        self.assertNotIn('CapEx LTM no desglosado', content)
 
         # Verify NVDA Net Buybacks is -$54,526.0M
         self.assertIn('-$54,526.0M', content)
@@ -686,6 +693,43 @@ class TestStatementsWebDashboard(unittest.TestCase):
             # 3. Los competidores sectoriales esperados deben figurar en la tabla
             for peer_t in sample_peers:
                 self.assertIn(f'>{peer_t}</span>', tab_quality, f"Expected peer {peer_t} missing in {ticker} peer table")
+
+    def test_zero_synthetic_plugs_and_unmapped_observability(self):
+        """Regla 6 (Zero Fake Defaults & Observabilidad): Verifica que cuando falta una partida contable (como CapEx),
+        el sistema NO impute la diferencia elásticamente en 'Valores Negociables' ni en otra partida,
+        sino que despliegue la fila de alerta '⚠️ Desglose Incompleto / Partidas de Inversión No Mapeadas'
+        y mantenga FCF como N/D."""
+        import json
+        from pathlib import Path
+
+        nvda_path = Path('data/processed/NVDA/financial_statements.json')
+        with open(nvda_path, 'r', encoding='utf-8') as f:
+            original_data = json.load(f)
+
+        try:
+            tampered_data = json.loads(json.dumps(original_data))
+            # Forzar CapEx en LTM a None para simular fallo de extracción
+            tampered_data['canonical_summary']['capital_expenditures']['LTM'] = None
+            if 'free_cash_flow' in tampered_data['canonical_summary']:
+                tampered_data['canonical_summary']['free_cash_flow']['LTM'] = None
+
+            with open(nvda_path, 'w', encoding='utf-8') as f:
+                json.dump(tampered_data, f, indent=2)
+
+            res = self.client.get('/company/NVDA/')
+            self.assertEqual(res.status_code, 200)
+            content = html.unescape(res.content.decode('utf-8'))
+
+            # 1. Debe aparecer la fila de alerta de desglose incompleto
+            self.assertIn('⚠️ Desglose Incompleto / Partidas de Inversión No Mapeadas', content)
+
+            # 2. 'Inversión Neta en Valores Negociables' NO debe absorber el CapEx de -$7,354.0M convirtiéndose en -$73,853.0M
+            self.assertNotIn('-$73,853.0M', content)
+
+        finally:
+            # Restaurar datos originales incondicionalmente
+            with open(nvda_path, 'w', encoding='utf-8') as f:
+                json.dump(original_data, f, indent=2)
 
 
 if __name__ == '__main__':

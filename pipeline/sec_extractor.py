@@ -1224,31 +1224,6 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 net_ppe = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["net_ppe"], p)
             canonical["net_ppe"][p] = net_ppe
 
-            # Reconciliación canónica de inversiones a corto plazo si otros activos corrientes se reportan explícitamente
-            if curr_assets is not None and curr_assets > 0:
-                other_ca_cand = get_first_matching_value(bal_data, [
-                    "PrepaidExpenseAndOtherAssetsCurrent", "PrepaidExpensesAndOtherCurrentAssets",
-                    "OtherAssetsCurrent", "OtherCurrentAssets", "us-gaap_PrepaidExpenseAndOtherAssetsCurrent",
-                    "us-gaap_OtherAssetsCurrent"
-                ], p) or 0.0
-                if other_ca_cand > 0:
-                    ar_cand = (get_first_matching_value(bal_data, [
-                        "AccountsReceivableNetCurrent", "AccountsReceivableNet", "ReceivablesNetCurrent",
-                        "us-gaap_AccountsReceivableNetCurrent"
-                    ], p) or 0.0) + (get_first_matching_value(bal_data, [
-                        "NontradeReceivablesCurrent", "us-gaap_NontradeReceivablesCurrent"
-                    ], p) or 0.0)
-                    inv_cand = get_first_matching_value(bal_data, [
-                        "InventoryNet", "Inventories", "Inventory", "us-gaap_InventoryNet"
-                    ], p) or 0.0
-                    implied_sti = round(curr_assets - (cash + ar_cand + inv_cand + other_ca_cand), 2)
-                    if implied_sti > st_inv:
-                        st_inv = implied_sti
-                        canonical["short_term_investments"][p] = st_inv
-                        tot_liquid_cash = round(cash + st_inv, 2)
-                        canonical["total_liquid_cash"][p] = tot_liquid_cash
-                        canonical["net_debt"][p] = round(tot_debt - tot_liquid_cash, 2)
-
             # Capital de Trabajo Operativo Neto (NWC)
             op_ca = max(0.0, (curr_assets or 0.0) - cash) if curr_assets is not None else None
             op_cl = max(0.0, (curr_liab or 0.0) - st_debt) if curr_liab is not None else None
@@ -2684,8 +2659,10 @@ def extract_sec_data(ticker, output_dir=None):
             is_share_count = any(k in c_name.lower() or k in lbl.lower() for k in ['sharesoutstanding', 'numberofshares'])
             is_per_share = any(k in c_name.lower() or k in lbl.lower() for k in ['pershare', 'per_share', 'per share'])
             
+            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
             if is_share_count and q_inc is not None and ytd_curr_inc:
-                match_q = q_inc[q_inc['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_inc['concept'].astype(str).str.lower() == c_name.lower())]
+                q_toks = q_inc['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                match_q = q_inc[(q_toks == c_tok) | q_inc['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_inc['concept'].astype(str).str.lower() == c_name.lower())]
                 if not match_q.empty:
                     v_curr = match_q.iloc[0].get(ytd_curr_inc)
                     if pd.notna(v_curr):
@@ -2694,7 +2671,8 @@ def extract_sec_data(ticker, output_dir=None):
                         except (ValueError, TypeError):
                             pass
             elif q_inc is not None and ytd_curr_inc and ytd_prev_inc and pd.notna(fy_val):
-                match_q = q_inc[q_inc['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_inc['concept'].astype(str).str.lower() == c_name.lower())]
+                q_toks = q_inc['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                match_q = q_inc[(q_toks == c_tok) | q_inc['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_inc['concept'].astype(str).str.lower() == c_name.lower())]
                 if not match_q.empty:
                     q_row = match_q.iloc[0]
                     v_curr = q_row.get(ytd_curr_inc)
@@ -2780,7 +2758,9 @@ def extract_sec_data(ticker, output_dir=None):
                 continue
 
             if bal_mrq_df is not None and latest_mrq_col:
-                match_b = bal_mrq_df[bal_mrq_df['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (bal_mrq_df['concept'].astype(str).str.lower() == c_name.lower())]
+                c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                b_toks = bal_mrq_df['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                match_b = bal_mrq_df[(b_toks == c_tok) | bal_mrq_df['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (bal_mrq_df['concept'].astype(str).str.lower() == c_name.lower())]
                 if not match_b.empty:
                     v = match_b.iloc[0].get(latest_mrq_col)
                     if pd.notna(v):
@@ -2837,7 +2817,9 @@ def extract_sec_data(ticker, output_dir=None):
             fy_val = row.get(latest_fy)
             val = None
             if q_cf is not None and ytd_curr_cf and ytd_prev_cf and pd.notna(fy_val):
-                match_cf = q_cf[q_cf['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
+                c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                q_toks = q_cf['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                match_cf = q_cf[(q_toks == c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
                 # Si no encuentra coincidencia exacta pero es un concepto de CapEx, buscar variantes en la taxonomía
                 if match_cf.empty and any(cand.lower() in c_name.lower() for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]):
                     for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]:
@@ -2863,6 +2845,11 @@ def extract_sec_data(ticker, output_dir=None):
                     val = ltm_cf_map[c_tok]
                 elif str(row.get('label', '')).strip().lower() in ltm_cf_map:
                     val = ltm_cf_map[str(row.get('label', '')).strip().lower()]
+            if val is None and pd.notna(fy_val) and any(cand.lower() in c_name.lower() for cand in XBRL_TAXONOMY_MAP["acquisitions_ma"]):
+                try:
+                    val = float(fy_val)
+                except (ValueError, TypeError):
+                    pass
             ltm_vals_cf.append(val)
             
         cf_df.insert(cf_df.columns.get_loc(latest_fy), 'LTM', ltm_vals_cf)

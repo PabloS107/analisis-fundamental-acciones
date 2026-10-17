@@ -354,7 +354,7 @@ def resolve_canonical_capital_flows(fs, periods):
         raw_div = _extract_val(div_keys, p, "dividends_paid")
         val_div = abs(raw_div) if raw_div is not None else 0.0
 
-        raw_ma = _extract_val(ma_keys, p, "acquisitions_ma")
+        raw_ma = _extract_sum(ma_keys, p, "acquisitions_ma")
         val_ma = abs(raw_ma) if raw_ma is not None else 0.0
 
         raw_dr = _extract_sum(dr_keys, p, "debt_repayments")
@@ -612,18 +612,8 @@ def resolve_canonical_balance_sheet(fs, periods):
         tot_ca = ca_raw if (ca_raw is not None and ca_raw > 0) else (sum_ca if sum_ca > 0 else None)
         other_ca_rep = _extract_val(other_ca_keys, p)
 
-        if tot_ca is not None and tot_ca > 0 and other_ca_rep is not None and other_ca_rep > 0:
-            implied_sti = max(0.0, round(tot_ca - ((c_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0) + other_ca_rep), 1))
-            if sti_v is not None and implied_sti > sti_v:
-                sti_v = implied_sti
-                other_ca = other_ca_rep
-            else:
-                other_ca = other_ca_rep if abs(tot_ca - ((c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0) + other_ca_rep)) < 1.0 else max(0.0, round(tot_ca - ((c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0)), 1))
-        elif tot_ca is not None and tot_ca > 0:
-            diff_ca = max(0.0, round(tot_ca - ((c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0)), 1))
-            other_ca = diff_ca if diff_ca > 0 else None
-        else:
-            other_ca = other_ca_rep
+        # Regla 6: Cero plugs sintéticos (implied_sti eliminado). Solo reflejar partidas reportadas en XBRL.
+        other_ca = round(other_ca_rep, 1) if other_ca_rep is not None else None
 
         tot_cash_v = round((c_v or 0.0) + (sti_v or 0.0), 1) if (c_v is not None or sti_v is not None) else None
 
@@ -658,11 +648,8 @@ def resolve_canonical_balance_sheet(fs, periods):
         tot_nca = max(0.0, round((tot_ast or 0.0) - (tot_ca or 0.0), 1)) if tot_ast is not None else None
         
         other_nca_rep = _extract_val(other_nca_keys, p)
-        if tot_nca is not None:
-            sum_known_nca = (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0)
-            other_nca = max(0.0, round(tot_nca - sum_known_nca, 1))
-        else:
-            other_nca = other_nca_rep
+        # Regla 6: Cero plugs sintéticos en Activos No Corrientes. Solo reflejar partidas reportadas en XBRL.
+        other_nca = round(other_nca_rep, 1) if other_nca_rep is not None else None
 
         ap_v = _extract_val(ap_keys, p)
         accrued_v = _extract_val(accrued_keys, p, "accrued_liabilities")
@@ -2165,6 +2152,7 @@ def company_detail(request, ticker):
     other_opex_dict = {}
     is_sga_ex_rd = False
 
+    has_rd = any((v is not None and v > 0) for v in rd_m.values())
     for p in statements_fys:
         tot_op = tot_opex_m.get(p)
         rd_v = rd_m.get(p)
@@ -2178,8 +2166,8 @@ def company_detail(request, ticker):
                 other_opex_dict[p] = 0.0
             else:
                 sga_display_m[p] = sga_v
-                if tot_op is not None:
-                    known_op = (rd_v or 0.0) + (sga_v or 0.0)
+                if tot_op is not None and sga_v is not None and (not has_rd or rd_v is not None):
+                    known_op = (rd_v or 0.0) + sga_v
                     rem = round(tot_op - known_op, 1)
                     other_opex_dict[p] = rem if rem > 1.5 else 0.0
                 else:
@@ -2187,15 +2175,14 @@ def company_detail(request, ticker):
         else:
             sm_v = sm_m.get(p)
             ga_v = ga_m.get(p)
-            if tot_op is not None:
-                known_op = (rd_v or 0.0) + (sm_v or 0.0) + (ga_v or 0.0)
+            if tot_op is not None and sm_v is not None and ga_v is not None and (not has_rd or rd_v is not None):
+                known_op = (rd_v or 0.0) + sm_v + ga_v
                 rem = round(tot_op - known_op, 1)
                 other_opex_dict[p] = rem if rem > 1.5 else 0.0
             else:
                 other_opex_dict[p] = 0.0
 
     has_other_opex = any((v is not None and v > 1.5) for v in other_opex_dict.values())
-    has_rd = any((v is not None and v > 0) for v in rd_m.values())
 
     # Regla de Gastos por Intereses vs No Operativo
     int_exp_m = {}
@@ -2553,13 +2540,15 @@ def company_detail(request, ticker):
     has_unearned = any(v is not None and v != 0.0 for v in delta_unearned_dict.values())
     delta_oth_wc_dict = {}
 
+    has_dna = any(v is not None and v > 0 for v in dna_dict.values())
     for p in statements_fys:
         cfo_v = _to_m(canonical.get("cash_from_operations", {}).get(p))
         ni_v = _to_m(canonical.get("net_income", {}).get(p))
         dna_v = dna_dict.get(p)
         sbc_v = sbc_dict.get(p)
         noncash_v = noncash_adj_dict.get(p, 0.0)
-        if cfo_v is not None and ni_v is not None:
+        # Regla 6: Si dna_v es None y la empresa normalmente reporta D&A, NO asumir 0.0 para calcular un capital de trabajo falso
+        if cfo_v is not None and ni_v is not None and (dna_v is not None or not has_dna):
             tot_wc = round(cfo_v - (ni_v + (dna_v or 0.0) + (sbc_v or 0.0) + (noncash_v or 0.0)), 1)
             delta_wc_dict[p] = tot_wc
             known_wc = (
@@ -2586,18 +2575,74 @@ def company_detail(request, ticker):
 
     cfi_dict = {p: _to_m(canonical.get("cash_from_investing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInInvestingActivities", p)) for p in statements_fys}
     net_inv_sec_dict = {}
+    cfi_unmapped_dict = {}
+    has_cfi_unmapped = False
+
+    sec_buy_keys = [
+        "PaymentsToAcquireAvailableForSaleSecuritiesDebt", "PaymentsToAcquireAvailableForSaleSecurities",
+        "PaymentsToAcquireMarketableSecurities", "PaymentsToAcquireInvestments",
+        "PaymentsToAcquireEquitySecuritiesFvNi", "PaymentsToAcquireOtherInvestments",
+        "us-gaap_PaymentsToAcquireAvailableForSaleSecuritiesDebt", "us-gaap_PaymentsToAcquireAvailableForSaleSecurities",
+        "us-gaap_PaymentsToAcquireMarketableSecurities", "us-gaap_PaymentsToAcquireInvestments",
+        "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi", "us-gaap_PaymentsToAcquireOtherInvestments"
+    ]
+    sec_sell_keys = [
+        "ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "ProceedsFromSaleOfAvailableForSaleSecurities",
+        "ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities",
+        "ProceedsFromSaleAndMaturityOfMarketableSecurities", "ProceedsFromSaleOfInvestments",
+        "ProceedsFromSaleMaturityAndCollectionsOfInvestments", "ProceedsFromSaleOfEquitySecuritiesFvNi",
+        "ProceedsFromSaleOfOtherInvestments", "ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities",
+        "us-gaap_ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "us-gaap_ProceedsFromSaleOfAvailableForSaleSecurities",
+        "us-gaap_ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities",
+        "us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities", "us-gaap_ProceedsFromSaleOfInvestments",
+        "us-gaap_ProceedsFromSaleMaturityAndCollectionsOfInvestments", "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
+        "us-gaap_ProceedsFromSaleOfOtherInvestments", "us-gaap_ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities"
+    ]
+    oth_inv_keys = [
+        "PaymentsForProceedsFromOtherInvestingActivities", "ProceedsFromSaleOfPropertyPlantAndEquipment",
+        "ProceedsFromSaleOfProductiveAssets", "nvda_Proceedsfromsaleoflonglivedassetsandinvestments",
+        "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
+        "us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment", "us-gaap_ProceedsFromSaleOfProductiveAssets"
+    ]
+
     for p in statements_fys:
         cfi_v = cfi_dict.get(p)
         capex_v = _to_m(canonical.get("capital_expenditures", {}).get(p))
         ma_v = _to_m(capital_flows["acquisitions_ma"].get(p))
+        
+        buys = sum(abs(_num(cf_det, k, p) or 0.0) for k in sec_buy_keys)
+        sells = sum(_num(cf_det, k, p) or 0.0 for k in sec_sell_keys)
+        direct_net_sec = round(_to_m(sells - buys), 1) if (buys > 0 or sells > 0) else None
+        oth_inv_v = round(_to_m(sum(_num(cf_det, k, p) or 0.0 for k in oth_inv_keys)), 1)
+
         if cfi_v is not None:
-            known_cfi = -(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0)
-            net_inv_sec_dict[p] = round(cfi_v - known_cfi, 1)
+            # Regla 6: Si CapEx falta por error de extracción o falta de reporte, NO inventar residuo elástico en Valores Negociables
+            if capex_v is None:
+                net_inv_sec_dict[p] = direct_net_sec
+                cfi_unmapped_dict[p] = cfi_v
+                has_cfi_unmapped = True
+            else:
+                if direct_net_sec is not None:
+                    net_inv_sec_dict[p] = direct_net_sec
+                else:
+                    rem_cfi = round(cfi_v - (-(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0)), 1)
+                    net_inv_sec_dict[p] = rem_cfi if abs(rem_cfi) < 1.0 else None
+
+                accounted_cfi = -(abs(capex_v) if capex_v is not None else 0.0) - (abs(ma_v) if ma_v is not None else 0.0) + (net_inv_sec_dict.get(p) or 0.0) + oth_inv_v
+                diff_cfi = round(cfi_v - accounted_cfi, 1)
+                if abs(diff_cfi) >= 1.0:
+                    cfi_unmapped_dict[p] = diff_cfi
+                    has_cfi_unmapped = True
+                else:
+                    cfi_unmapped_dict[p] = None
         else:
             net_inv_sec_dict[p] = None
+            cfi_unmapped_dict[p] = None
 
     cff_dict = {p: _to_m(canonical.get("cash_from_financing", {}).get(p) or _num(cf_det, "NetCashProvidedByUsedInFinancingActivities", p)) for p in statements_fys}
     other_cff_dict = {}
+    cff_unmapped_dict = {}
+    has_cff_unmapped = False
     delta_cash_dict = {}
     for p in statements_fys:
         cff_v = cff_dict.get(p)
@@ -2607,11 +2652,18 @@ def company_detail(request, ticker):
         div_v = _to_m(capital_flows["dividends_paid"].get(p))
         debt_v = _to_m(capital_flows["net_debt_change"].get(p))
         if cff_v is not None:
-            effective_bb = tot_rep if tot_rep is not None else ((open_bb or 0.0) + (tax_bb or 0.0))
-            known_cff = -(abs(effective_bb) if effective_bb is not None else 0.0) - (abs(div_v) if div_v is not None else 0.0) + (debt_v or 0.0)
-            other_cff_dict[p] = round(cff_v - known_cff, 1)
+            effective_bb = tot_rep if tot_rep is not None else (((open_bb or 0.0) + (tax_bb or 0.0)) if (open_bb is not None or tax_bb is not None) else None)
+            if effective_bb is None and div_v is None and debt_v is None:
+                other_cff_dict[p] = None
+                cff_unmapped_dict[p] = cff_v
+                has_cff_unmapped = True
+            else:
+                known_cff = -(abs(effective_bb) if effective_bb is not None else 0.0) - (abs(div_v) if div_v is not None else 0.0) + (debt_v or 0.0)
+                other_cff_dict[p] = round(cff_v - known_cff, 1)
+                cff_unmapped_dict[p] = None
         else:
             other_cff_dict[p] = None
+            cff_unmapped_dict[p] = None
 
         raw_dc = (
             _num(cf_det, "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect", p) or
@@ -2802,6 +2854,21 @@ def company_detail(request, ticker):
             "data": net_inv_sec_dict,
             "pct_mode": "rev"
         },
+        *(
+            [
+                {
+                    "label": "⚠️ Desglose Incompleto / Partidas de Inversión No Mapeadas",
+                    "operator": "[!]",
+                    "row_type": "discrepancy_alert",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": cfi_unmapped_dict,
+                    "pct_mode": "rev"
+                }
+            ]
+            if has_cfi_unmapped
+            else []
+        ),
         {
             "label": "FLUJO DE CAJA DE INVERSIÓN TOTAL (CFI)",
             "operator": "(=)",
@@ -2898,6 +2965,21 @@ def company_detail(request, ticker):
             "data": other_cff_dict,
             "pct_mode": "rev"
         },
+        *(
+            [
+                {
+                    "label": "⚠️ Desglose Incompleto / Partidas de Financiación No Mapeadas",
+                    "operator": "[!]",
+                    "row_type": "discrepancy_alert",
+                    "indent": True,
+                    "is_bold": False,
+                    "data": cff_unmapped_dict,
+                    "pct_mode": "rev"
+                }
+            ]
+            if has_cff_unmapped
+            else []
+        ),
         {
             "label": "FLUJO DE CAJA DE FINANCIACIÓN TOTAL (CFF)",
             "operator": "(=)",

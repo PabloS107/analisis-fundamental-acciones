@@ -768,25 +768,29 @@ def get_first_matching_value(
 
     for cand in concept_candidates:
         cand_lower = cand.lower().replace("-", "").replace("_", "")
+        cand_token = cand.lower().split(":")[-1].split("_")[-1].replace("-", "")
         for c_key, c_data in data_by_concept.items():
             if "abstract" in str(c_key).lower():
                 continue
 
-            k_lower = str(c_key).lower().replace("-", "").replace("_", "")
-            std_concept = str(c_data.get("standard_concept") or "").lower().replace("-", "").replace("_", "")
-            if "abstract" in std_concept:
+            raw_k = str(c_key).lower()
+            k_token = raw_k.split(":")[-1].split("_")[-1].replace("-", "")
+            k_lower = raw_k.replace("-", "").replace("_", "")
+
+            raw_std = str(c_data.get("standard_concept") or "").lower()
+            if "abstract" in raw_std:
                 continue
+            std_token = raw_std.split(":")[-1].split("_")[-1].replace("-", "")
+            std_concept = raw_std.replace("-", "").replace("_", "")
 
             lbl = str(c_data.get("label") or "").lower().replace("-", "").replace("_", "")
 
-            # Limpiar namespaces (us-gaap:, ifrs-full:, fb:, etc.)
-            k_token = k_lower.split(":")[-1].split("_")[-1]
-            std_token = std_concept.split(":")[-1].split("_")[-1]
-
             if (
                 k_token == cand_lower
+                or k_token == cand_token
                 or k_lower == cand_lower
                 or std_token == cand_lower
+                or std_token == cand_token
                 or std_concept == cand_lower
                 or (lbl == cand_lower and len(lbl) > 6)
             ):

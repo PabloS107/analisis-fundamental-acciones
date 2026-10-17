@@ -3770,9 +3770,9 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
         debt = lt_debt + st_debt
     elif tot_debt_canonical is not None and tot_debt_canonical > 0:
         debt = tot_debt_canonical
-        if lt_debt is None:
-            lt_debt = max(0.0, debt - (st_debt or 0.0))
-        elif st_debt is None:
+        if lt_debt is None and st_debt is not None:
+            lt_debt = max(0.0, debt - st_debt)
+        elif st_debt is None and lt_debt is not None:
             st_debt = max(0.0, debt - lt_debt)
     elif lt_debt is not None:
         debt = lt_debt
@@ -3786,8 +3786,8 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
     # Fallback incondicional si el cálculo arroja deuda nula pero canonical_summary posee deuda real
     if debt <= 0.0 and tot_debt_canonical is not None and tot_debt_canonical > 0.0:
         debt = tot_debt_canonical
-        if lt_debt is None or lt_debt == 0.0:
-            lt_debt = max(0.0, debt - (st_debt or 0.0))
+        if lt_debt is None and st_debt is not None:
+            lt_debt = max(0.0, debt - st_debt)
 
     # 5. Activos Corrientes y Pasivos Corrientes
     ca = get_val(bal_detail, "AssetsCurrent")
@@ -4002,8 +4002,8 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
     prepaid_val = get_val(bal_detail, "PrepaidExpenseCurrent") or get_val(bal_detail, "us-gaap_PrepaidExpenseCurrent") or 0.0
     if oac_val is not None:
         other_current_assets = oac_val + prepaid_val
-    elif ca is not None and cash is not None:
-        residual_oca = ca - (total_liquid_cash + (ar or 0.0) + (inv or 0.0))
+    elif ca is not None and cash is not None and ar is not None:
+        residual_oca = ca - (total_liquid_cash + ar + (inv or 0.0))
         other_current_assets = max(0.0, residual_oca) if residual_oca > 0 else None
     else:
         other_current_assets = None

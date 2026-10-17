@@ -976,7 +976,7 @@
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'net_income' %}bg-emerald-50/40{% elif row.row_type == 'net_cash' %}bg-emerald-50/20{% elif row.row_type == 'subtotal' %}bg-sky-50/25{% elif row.row_type == 'metric' %}bg-indigo-50/20{% elif row.row_type == 'result' %}bg-slate-50/50{% endif %}">
+                        <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'net_income' %}bg-emerald-50/40{% elif row.row_type == 'net_cash' %}bg-emerald-50/20{% elif row.row_type == 'subtotal' %}bg-sky-50/25{% elif row.row_type == 'metric' %}bg-indigo-50/20{% elif row.row_type == 'result' %}bg-slate-50/50{% elif row.row_type == 'discrepancy_alert' %}bg-amber-50/30{% endif %}">
                             <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'result' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
@@ -985,6 +985,10 @@
                                 {% elif row.row_type == 'subtotal' %}
                                     <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
+                                    </span>
+                                {% elif row.row_type == 'discrepancy_alert' %}
+                                    <span class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-md font-bold text-xs shadow-sm">
+                                        <span class="text-amber-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
                                 {% elif row.row_type == 'metric' %}
                                     <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-900 border border-indigo-200 px-2 py-0.5 rounded-md font-bold text-xs">
@@ -1015,6 +1019,8 @@
                                 data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' %}
                                     <span class="text-emerald-800 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'discrepancy_alert' %}
+                                    <span class="text-amber-700 font-bold font-mono">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}
                                     <span class="text-sky-900 font-bold">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'metric' %}
@@ -1048,6 +1054,8 @@
                                 data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' %}
                                     <span class="text-emerald-800 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'discrepancy_alert' %}
+                                    <span class="text-amber-700 font-bold font-mono">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}
                                     <span class="text-sky-900 font-bold">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'metric' %}
