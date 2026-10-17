@@ -2,7 +2,7 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-10-14T18:29:42.422906",
+  "audit_timestamp": "2026-10-17T11:22:31.722069",
   "years_audited": {
     "LTM": [
       {
@@ -795,10 +795,10 @@
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 59713000000.0,
+        "cash_from_operations": 22670000000.0,
         "capital_expenditures": 9571000000.0,
-        "fcf_reported": 50142000000.0,
-        "fcf_calculated": 50142000000.0,
+        "fcf_reported": 13099000000.0,
+        "fcf_calculated": 13099000000.0,
         "discrepancy_usd": 0.0
       },
       {

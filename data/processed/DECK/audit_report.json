@@ -2,7 +2,7 @@
   "ticker": "DECK",
   "company_name": "DECKERS OUTDOOR CORP",
   "cik": "0000910521",
-  "audit_timestamp": "2026-10-14T18:29:42.434813",
+  "audit_timestamp": "2026-10-17T11:22:31.738952",
   "years_audited": {
     "LTM": [
       {
@@ -636,7 +636,7 @@
         "eps_calculated": 3.58,
         "eps_adjusted": 0.6,
         "split_factor": 6.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.49
       }
     ],
     "FY2017": [
@@ -700,7 +700,7 @@
         "eps_calculated": 0.18,
         "eps_adjusted": 0.03,
         "split_factor": 6.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.41
       }
     ],
     "FY2016": [
@@ -718,9 +718,14 @@
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de P&L para FY2016."
+        "passed": true,
+        "status": "PASS",
+        "revenue": 1875197000.0,
+        "cost_of_goods_sold": 1028529000.0,
+        "gross_profit_reported": 846668000.0,
+        "gross_profit_calculated": 846668000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 187519.7
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -759,14 +764,14 @@
         "eps_calculated": 3.7,
         "eps_adjusted": 0.62,
         "split_factor": 6.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.41
       }
     ]
   },
   "overall_status": "PASS",
   "total_tests": 72,
-  "passed_tests": 70,
+  "passed_tests": 71,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 1,
   "compliance_score_pct": 100.0
 }
