@@ -1,6 +1,6 @@
 # DECKERS OUTDOOR CORPORATION (NYSE: DECK)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q1 FY2027 & Gobernanza Corporativa
-*Fecha de Emisión: 14 de Septiembre de 2026 | CIK SEC: 0000910521*  
+*Fecha de Emisión: 17 de Septiembre de 2026 | CIK SEC: 0000910521*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript*
 
 ---
@@ -21,17 +21,18 @@
 
 | Línea de Negocio / Producto | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Margen / Mix | Lectura Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **HOKA** | **$2,658.7 M** | $2,587.3 M | **+2.8%** | 48.1% Mix | Desempeño estable (+2.8% YoY); consolidación en mercados y canales core. |
-| **UGG** | **$2,724.4 M** | $2,738.8 M | **-0.5%** | 49.3% Mix | Normalización moderada (-0.5% YoY); ajuste de demanda o transición de catálogo. |
-| **Other Brands** | **$144.2 M** | $146.2 M | **-1.4%** | 2.6% Mix | Normalización moderada (-1.4% YoY); ajuste de demanda o transición de catálogo. |
-| **Wholesale (Canal)** | **$3,186.1 M** | $3,208.1 M | **-0.7%** | Subtotal | Subtotal consolidado de canal/categoría (-0.7% YoY). |
-| **Direct-to-Consumer (Canal)** | **$2,341.2 M** | $2,264.2 M | **+3.4%** | Subtotal | Subtotal consolidado de canal/categoría (+3.4% YoY). |
+| **Wholesale** | **$3,222.4 M** | $3,208.1 M | **+0.4%** | 29.2% Mix | Desempeño estable (+0.4% YoY); consolidación en mercados y canales core. |
+| **Direct-to-Consumer** | **$2,304.8 M** | $2,264.2 M | **+1.8%** | 20.8% Mix | Desempeño estable (+1.8% YoY); consolidación en mercados y canales core. |
+| **HOKA** | **$2,637.7 M** | $2,587.3 M | **+1.9%** | 23.9% Mix | Desempeño estable (+1.9% YoY); consolidación en mercados y canales core. |
+| **UGG** | **$2,751.8 M** | $2,738.8 M | **+0.5%** | 24.9% Mix | Desempeño estable (+0.5% YoY); consolidación en mercados y canales core. |
+| **Other Brands** | **$137.8 M** | $146.2 M | **-5.7%** | 1.2% Mix | Normalización moderada (-5.7% YoY); ajuste de demanda o transición de catálogo. |
 
 
 ### Análisis Cualitativo de las Líneas de Negocio:
-* **HOKA (48.1% de facturación):** Genera $2,658.7 M (+2.8% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
-* **UGG (49.3% de facturación):** Genera $2,724.4 M (-0.5% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
-* **Other Brands (2.6% de facturación):** Genera $144.2 M (-1.4% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **Wholesale (29.2% de facturación):** Genera $3,222.4 M (+0.4% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **Direct-to-Consumer (20.8% de facturación):** Genera $2,304.8 M (+1.8% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **HOKA (23.9% de facturación):** Genera $2,637.7 M (+1.9% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
+* **UGG (24.9% de facturación):** Genera $2,751.8 M (+0.5% YoY), consolidándose como pilar operativo clave de Deckers Outdoor Corporation.
 
 ---
 
@@ -39,13 +40,15 @@
 
 | Región Geográfica | LTM ($M) | FY2026 ($M) | Crecimiento YoY | Peso en Ventas % | Diagnóstico Operativo |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Domestic (EE.UU.)** | **$3,174.9 M** | $3,191.5 M | **-0.5%** | 57.4% | Mercado en ajuste (-0.5% YoY); presión macroeconómica o vientos cambiarios (FX). |
-| **International (Global)** | **$2,352.4 M** | $2,280.8 M | **+3.1%** | 42.6% | Mercado estratégico consolidado (+3.1% YoY); estabilidad operativa. |
+| **Domestic** | **$3,207.7 M** | $3,191.5 M | **+0.5%** | 44.0% | Mercado estratégico consolidado (+0.5% YoY); estabilidad operativa. |
+| **International** | **$2,319.6 M** | $2,280.8 M | **+1.7%** | 31.8% | Mercado estratégico consolidado (+1.7% YoY); estabilidad operativa. |
+| **International - Sales Revenue, Net - Net sales in foreign currencies** | **$1,765.7 M** | $1,748.1 M | **+1.0%** | 24.2% | Mercado estratégico consolidado (+1.0% YoY); estabilidad operativa. |
 
 
 ### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
-* **Mercado Domestic (EE.UU.) (57.4% del total):** Aporta $3,174.9 M con variación YoY de -0.5%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
-* **Mercado International (Global) (42.6% del total):** Aporta $2,352.4 M con variación YoY de +3.1%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado Domestic (44.0% del total):** Aporta $3,207.7 M con variación YoY de +0.5%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado International (31.8% del total):** Aporta $2,319.6 M con variación YoY de +1.7%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
+* **Mercado International - Sales Revenue, Net - Net sales in foreign currencies (24.2% del total):** Aporta $1,765.7 M con variación YoY de +1.0%, diversificando la exposición geográfica de Deckers Outdoor Corporation.
 
 ---
 
@@ -789,18 +792,18 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **WACC (Tasa de Descuento)** | 10.52% | 10.90% | -0.38 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 20.2% | 24.40% | -4.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **-3.1%** | **-5.3%** | **+2.2 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **-3.2%** | **-5.4%** | **+2.2 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.52% (Bajo / Expansión) | -3.5% | -3.9% | -4.3% | -4.7% | -5.2% | -5.7% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 10.02% (Favorable) | -2.8% | -3.1% | -3.5% | -3.9% | -4.3% | -4.8% | Escenario de sensibilidad operativa. |
-| 10.52% (WACC Auditado Base) | -2.0% | -2.3% | -2.7% | -3.1% | -3.5% | -3.9% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 11.02% (Exigente) | -1.3% | -1.6% | -1.9% | -2.3% | -2.7% | -3.1% | Escenario de sensibilidad operativa. |
-| 11.52% (Estrés / Tipos Altos) | -0.6% | -0.9% | -1.2% | -1.5% | -1.9% | -2.2% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.52% (Bajo / Expansión) | -3.6% | -4.0% | -4.4% | -4.8% | -5.3% | -5.8% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.02% (Favorable) | -2.9% | -3.2% | -3.6% | -4.0% | -4.4% | -4.9% | Escenario de sensibilidad operativa. |
+| 10.52% (WACC Auditado Base) | -2.1% | -2.4% | -2.8% | -3.2% | -3.6% | -4.0% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.02% (Exigente) | -1.4% | -1.7% | -2.0% | -2.4% | -2.8% | -3.2% | Escenario de sensibilidad operativa. |
+| 11.52% (Estrés / Tipos Altos) | -0.7% | -1.0% | -1.3% | -1.6% | -2.0% | -2.3% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -811,7 +814,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($1.18 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda neta; colchón de liquidez de $1.6B. |
 | **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 48.9% | **COMPOUNDING MACHINE** | Spread económico de +38.4 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: -3.1% - -5.3% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
+| **Valoración de Mercado** | Crecimiento Implícito: -3.2% - -5.4% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
 
 
 
