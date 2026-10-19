@@ -771,7 +771,7 @@
                         {% if row.row_type == 'section_header' %}
                         <tr class="bg-slate-100/90 border-y border-slate-200">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-5 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                {{ row.label }}
+                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
@@ -780,23 +780,34 @@
                                 {% if row.row_type == 'plus' %}
                                     <span class="text-sky-600 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'minus' %}
                                     <span class="text-slate-400 font-medium mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-600">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'result' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'net_income' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-100/70 text-emerald-900 border border-emerald-300 px-2.5 py-1 rounded-md font-black text-xs shadow-sm">
                                         <span class="text-emerald-800">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'eps' or row.row_type == 'dps' %}
                                     <span class="text-sky-700 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+                                {% elif row.row_type == 'metric' or row.row_type == 'metric_pct' %}
+                                    <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-900 border border-indigo-200 px-2 py-0.5 rounded-md font-bold text-xs">
+                                        <span class="text-indigo-700 font-black">{{ row.operator }}</span> {{ row.label }}
+                                    </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% else %}
                                     <span class="text-slate-400 font-medium mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-600">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->
@@ -876,7 +887,7 @@
                         {% if row.row_type == 'section_header' %}
                         <tr class="bg-slate-100/90 border-y border-slate-200">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-5 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                {{ row.label }}
+                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
@@ -885,22 +896,33 @@
                                 {% if row.row_type == 'plus' %}
                                     <span class="text-sky-600 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-800">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'minus' %}
                                     <span class="text-slate-400 font-medium mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-600">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'result' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'subtotal' %}
                                     <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'header_val' %}
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+                                {% elif row.row_type == 'metric' or row.row_type == 'metric_pct' %}
+                                    <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-900 border border-indigo-200 px-2 py-0.5 rounded-md font-bold text-xs">
+                                        <span class="text-indigo-700 font-black">{{ row.operator }}</span> {{ row.label }}
+                                    </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% else %}
                                     <span class="text-slate-400 font-medium mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-600">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->
@@ -972,7 +994,7 @@
                         {% if row.row_type == 'section_header' %}
                         <tr class="bg-slate-100/90 border-y border-slate-200">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-5 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                {{ row.label }}
+                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
@@ -982,36 +1004,53 @@
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'subtotal' %}
                                     <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'discrepancy_alert' %}
                                     <span class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-md font-bold text-xs shadow-sm">
                                         <span class="text-amber-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'metric' %}
                                     <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-900 border border-indigo-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-indigo-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'net_income' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-100/70 text-emerald-900 border border-emerald-300 px-2.5 py-1 rounded-md font-black text-xs shadow-sm">
                                         <span class="text-emerald-800">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'net_cash' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'net_debt' %}
                                     <span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-800 border border-slate-300 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-slate-600 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% elif row.row_type == 'eps' %}
                                     <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-900 border border-sky-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-sky-700 font-black">{{ row.operator }}</span> {{ row.label }}
                                     </span>
-                                {% else %}
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+                                {% elif row.row_type == 'plus' %}
+                                    <span class="text-sky-600 font-bold mr-1">{{ row.operator }}</span>
+                                    <span class="text-slate-900 font-bold">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+                                {% elif row.row_type == 'minus' %}
+                                    <span class="text-slate-400 font-medium mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-600">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+                                {% else %}
+                                    <span class="text-slate-700 font-medium">{{ row.label }}</span>
+                                    {% if row.clarification %}<span class="text-[10px] text-slate-400 font-normal italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                                 {% endif %}
                             </td>
                             <!-- Col 2: LTM -->

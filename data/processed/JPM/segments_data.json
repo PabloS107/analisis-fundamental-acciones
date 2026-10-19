@@ -1,0 +1,136 @@
+{
+  "periods": [
+    "LTM",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017",
+    "FY2016",
+    "FY2015",
+    "FY2014"
+  ],
+  "product_segments": [
+    {
+      "name": "Operating Segments",
+      "is_subtotal": true,
+      "is_subsegment": true,
+      "parent": "CCB",
+      "values": {
+        "FY2025": 76029.0,
+        "FY2024": 71507.0,
+        "FY2023": 70148.0,
+        "LTM": 78709.0
+      }
+    },
+    {
+      "name": "Corporate",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 7025.0,
+        "FY2024": 17394.0,
+        "FY2023": 8038.0,
+        "LTM": 10444.0
+      }
+    },
+    {
+      "name": "Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": -3134.0,
+        "FY2024": -3037.0,
+        "FY2023": -4262.0,
+        "LTM": -3037.0
+      }
+    }
+  ],
+  "geographic_segments": [],
+  "segment_operating_income": [
+    {
+      "name": "Income/(loss) before income tax expense/(benefit)",
+      "values": {
+        "FY2025": 72595.0,
+        "FY2024": 75081.0,
+        "FY2023": 61612.0,
+        "LTM": 83898.0
+      }
+    },
+    {
+      "name": "Total international",
+      "values": {
+        "FY2025": 17482.0,
+        "FY2024": 16573.0,
+        "FY2023": 14405.0
+      }
+    },
+    {
+      "name": "Europe/Middle East/Africa",
+      "values": {
+        "FY2025": 9653.0,
+        "FY2024": 9510.0,
+        "FY2023": 9027.0
+      }
+    },
+    {
+      "name": "Asia-Pacific",
+      "values": {
+        "FY2025": 5794.0,
+        "FY2024": 5073.0,
+        "FY2023": 4055.0
+      }
+    },
+    {
+      "name": "Latin America/Caribbean",
+      "values": {
+        "FY2025": 2035.0,
+        "FY2024": 1990.0,
+        "FY2023": 1323.0
+      }
+    },
+    {
+      "name": "North America",
+      "values": {
+        "FY2025": 55113.0,
+        "FY2024": 58508.0,
+        "FY2023": 47207.0
+      }
+    },
+    {
+      "name": "Operating Segments",
+      "values": {
+        "FY2025": 8644.0,
+        "FY2024": 7232.0,
+        "FY2023": 6888.0,
+        "LTM": 9457.0
+      }
+    },
+    {
+      "name": "Corporate",
+      "values": {
+        "FY2025": 5193.0,
+        "FY2024": 13390.0,
+        "FY2023": 2266.0,
+        "LTM": 8182.0
+      }
+    },
+    {
+      "name": "Reconciling Items",
+      "values": {
+        "FY2025": -3134.0,
+        "FY2024": -3037.0,
+        "FY2023": -4262.0,
+        "LTM": -3037.0
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "JPM"
+}

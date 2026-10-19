@@ -8,7 +8,7 @@
   "is_financial": false,
   "business_model": "CORPORATE_TRADITIONAL",
   "source": "SEC EDGAR (US-GAAP Oficial)",
-  "extraction_timestamp": "2026-10-17T11:09:37.733088",
+  "extraction_timestamp": "2026-10-19T16:06:09.961841",
   "fiscal_years": [
     "LTM",
     "FY2025",
@@ -145,6 +145,36 @@
       "FY2015": 10320000000.0,
       "FY2014": 7326000000.0
     },
+    "cash_from_investing": {
+      "LTM": -139366000000.0,
+      "FY2025": -102003000000.0,
+      "FY2024": -47150000000.0,
+      "FY2023": -24495000000.0,
+      "FY2022": -28970000000.0,
+      "FY2021": -7570000000.0,
+      "FY2020": -30059000000.0,
+      "FY2019": -19864000000.0,
+      "FY2018": -11603000000.0,
+      "FY2017": -20118000000.0,
+      "FY2016": -11792000000.0,
+      "FY2015": -9434000000.0,
+      "FY2014": -5913000000.0
+    },
+    "cash_from_financing": {
+      "LTM": 24516000000.0,
+      "FY2025": -20370000000.0,
+      "FY2024": -40781000000.0,
+      "FY2023": -19500000000.0,
+      "FY2022": -22136000000.0,
+      "FY2021": -50728000000.0,
+      "FY2020": -10292000000.0,
+      "FY2019": -7299000000.0,
+      "FY2018": -15572000000.0,
+      "FY2017": -5235000000.0,
+      "FY2016": -310000000.0,
+      "FY2015": -139000000.0,
+      "FY2014": -298000000.0
+    },
     "capital_expenditures": {
       "LTM": 89325000000.0,
       "FY2025": 69691000000.0,
@@ -191,30 +221,30 @@
       "FY2014": 4315000000.0
     },
     "short_term_investments": {
-      "LTM": 74798000000.0,
+      "LTM": 3543000000.0,
       "FY2025": 45719000000.0,
       "FY2024": 33926000000.0,
       "FY2023": 23541000000.0,
       "FY2022": 26057000000.0,
       "FY2021": 31397000000.0,
-      "FY2020": 44378000000.0,
-      "FY2019": 35776000000.0,
-      "FY2018": 31095000000.0,
+      "FY2020": 0.0,
+      "FY2019": 0.0,
+      "FY2018": 30757000000.0,
       "FY2017": 33632000000.0,
       "FY2016": 20546000000.0,
       "FY2015": 13527000000.0,
       "FY2014": 6884000000.0
     },
     "total_liquid_cash": {
-      "LTM": 90260000000.0,
+      "LTM": 19005000000.0,
       "FY2025": 81592000000.0,
       "FY2024": 77815000000.0,
       "FY2023": 65403000000.0,
       "FY2022": 40738000000.0,
       "FY2021": 47998000000.0,
-      "FY2020": 61954000000.0,
-      "FY2019": 54855000000.0,
-      "FY2018": 41114000000.0,
+      "FY2020": 17576000000.0,
+      "FY2019": 19079000000.0,
+      "FY2018": 40776000000.0,
       "FY2017": 41711000000.0,
       "FY2016": 29449000000.0,
       "FY2015": 18434000000.0,
@@ -236,15 +266,15 @@
       "FY2014": 0.0
     },
     "net_debt": {
-      "LTM": -6596000000.0,
+      "LTM": 64659000000.0,
       "FY2025": -22848000000.0,
       "FY2024": -48989000000.0,
       "FY2023": -47018000000.0,
       "FY2022": -30815000000.0,
       "FY2021": -47998000000.0,
-      "FY2020": -61954000000.0,
-      "FY2019": -54855000000.0,
-      "FY2018": -41114000000.0,
+      "FY2020": -17576000000.0,
+      "FY2019": -19079000000.0,
+      "FY2018": -40776000000.0,
       "FY2017": -41711000000.0,
       "FY2016": -29449000000.0,
       "FY2015": -18434000000.0,
@@ -452,7 +482,7 @@
       "FY2023": 96587000000.0,
       "FY2022": 79518000000.0,
       "FY2021": 57809000000.0,
-      "FY2020": 42291000000.0,
+      "FY2020": 45633000000.0,
       "FY2019": 35323000000.0,
       "FY2018": 24683000000.0,
       "FY2017": 13721000000.0,
@@ -482,7 +512,7 @@
       "FY2023": 108130000000.0,
       "FY2022": 97360000000.0,
       "FY2021": 86739000000.0,
-      "FY2020": 85404000000.0,
+      "FY2020": 88746000000.0,
       "FY2019": 67416000000.0,
       "FY2018": 58127000000.0,
       "FY2017": 50445000000.0,
@@ -1233,8 +1263,8 @@
       "FY2024": 55.06,
       "FY2023": 45.5,
       "FY2022": 31.44,
-      "FY2021": 54.32,
-      "FY2020": 42.76,
+      "FY2021": 53.28,
+      "FY2020": 41.84,
       "FY2019": 38.21,
       "FY2018": 45.89,
       "FY2017": 49.48,
@@ -1248,8 +1278,8 @@
       "FY2024": 126018000000.0,
       "FY2023": 102745000000.0,
       "FY2022": 92049500000.0,
-      "FY2021": 86071500000.0,
-      "FY2020": 76410000000.0,
+      "FY2021": 87742500000.0,
+      "FY2020": 78081000000.0,
       "FY2019": 62771500000.0,
       "FY2018": 54286000000.0,
       "FY2017": 40829500000.0,
@@ -1334,7 +1364,11 @@
         "FY2018": 55838000000.0,
         "FY2017": 40653000000.0,
         "FY2016": 27638000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "CostOfRevenue": {
       "label": "Cost of Revenue",
@@ -1353,7 +1387,11 @@
         "FY2016": 3789000000.0,
         "FY2015": 2867000000.0,
         "FY2014": 2153000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "GrossProfit_Calculated": {
       "label": "Gross Profit (Calculated)",
@@ -1369,12 +1407,20 @@
         "FY2018": 46483000000.0,
         "FY2017": 35199000000.0,
         "FY2016": 23849000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Calculated"
     },
     "OperatingExpensesAbstract": {
       "label": "Operating expenses:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "ResearchAndDevelopmentExpense": {
       "label": "Research and Development Expense",
@@ -1393,7 +1439,11 @@
         "FY2016": 5919000000.0,
         "FY2015": 4816000000.0,
         "FY2014": 2666000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "SellingAndMarketingExpense": {
       "label": "Selling and Marketing Expense",
@@ -1412,7 +1462,11 @@
         "FY2016": 3772000000.0,
         "FY2015": 2725000000.0,
         "FY2014": 1680000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "GeneralAndAdministrativeExpense": {
       "label": "General and Administrative Expense",
@@ -1431,7 +1485,11 @@
         "FY2016": 1731000000.0,
         "FY2015": 1295000000.0,
         "FY2014": 973000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "OperatingIncomeLoss": {
       "label": "Operating Income (Loss)",
@@ -1450,7 +1508,11 @@
         "FY2016": 12427000000.0,
         "FY2015": 6225000000.0,
         "FY2014": 4994000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "OtherNonoperatingIncomeExpense": {
       "label": "Other Nonoperating Income (Expense)",
@@ -1466,7 +1528,11 @@
         "FY2018": 9000000.0,
         "FY2017": 5000000.0,
         "FY2016": 1000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest": {
       "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
@@ -1485,7 +1551,11 @@
         "FY2016": 12518000000.0,
         "FY2015": 6194000000.0,
         "FY2014": 4910000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "IncomeTaxExpenseBenefit": {
       "label": "Income Tax Expense (Benefit)",
@@ -1504,7 +1574,11 @@
         "FY2016": 2301000000.0,
         "FY2015": 2506000000.0,
         "FY2014": 1970000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "NetIncomeLoss": {
       "label": "Net Income (Loss) Attributable to Parent",
@@ -1523,7 +1597,11 @@
         "FY2016": 10217000000.0,
         "FY2015": 3688000000.0,
         "FY2014": 2940000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "EarningsPerShareBasic": {
       "label": "Earnings Per Share, Basic",
@@ -1542,7 +1620,11 @@
         "FY2016": 3.56,
         "FY2015": 1.31,
         "FY2014": 1.12
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "EarningsPerShareDiluted": {
       "label": "Earnings Per Share, Diluted",
@@ -1561,12 +1643,20 @@
         "FY2016": 3.49,
         "FY2015": 1.29,
         "FY2014": 1.1
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "NonoperatingIncomeExpenseAbstract": {
       "label": "Other income (expense):",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "NonoperatingIncomeExpense": {
       "label": "Nonoperating Income (Expense)",
@@ -1585,12 +1675,20 @@
         "FY2016": 91000000.0,
         "FY2015": -31000000.0,
         "FY2014": -84000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "RevenuesAbstract": {
       "label": "Revenues:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "Revenues": {
       "label": "Revenues",
@@ -1600,7 +1698,11 @@
         "FY2016": 27638000000.0,
         "FY2015": 17928000000.0,
         "FY2014": 12466000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "WeightedAverageNumberOfSharesOutstandingBasic": {
       "label": "Weighted Average Number of Shares Outstanding, Basic",
@@ -1619,7 +1721,11 @@
         "FY2016": 2863000000.0,
         "FY2015": 2803000000.0,
         "FY2014": 2614000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "WeightedAverageNumberOfDilutedSharesOutstanding": {
       "label": "Weighted Average Number of Shares Outstanding, Diluted",
@@ -1638,7 +1744,11 @@
         "FY2016": 2925000000.0,
         "FY2015": 2853000000.0,
         "FY2014": 2664000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "InterestExpenseNonoperating": {
       "label": "Interest Expense (non-operating)",
@@ -1646,12 +1756,20 @@
       "values": {
         "FY2025": 1165000000.0,
         "FY2024": 715000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AdditionalItems": {
       "label": "Additional Financial Items",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": "Additional"
     },
     "AmortizationOfIntangibleAssets": {
       "label": "Amortization of Intangible Assets",
@@ -1667,7 +1785,11 @@
         "FY2018": 640000000.0,
         "FY2017": 692000000.0,
         "FY2016": 751000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "CommonStockDividendsPerShareDeclared": {
       "label": "Common Stock, Dividends, Per Share, Declared",
@@ -1676,7 +1798,11 @@
         "LTM": 2.05,
         "FY2025": 2.1,
         "FY2024": 2.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "CostsAndExpenses": {
       "label": "Costs and Expenses",
@@ -1695,7 +1821,11 @@
         "FY2016": 15211000000.0,
         "FY2015": 11703000000.0,
         "FY2014": 7472000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "CurrentIncomeTaxExpenseBenefit": {
       "label": "Current Income Tax Expense (Benefit)",
@@ -1711,7 +1841,11 @@
         "FY2018": 2954000000.0,
         "FY2017": 5034000000.0,
         "FY2016": 2758000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "ForeignCurrencyTransactionGainLossBeforeTax": {
       "label": "Foreign Currency Transaction Gain (Loss), before Tax",
@@ -1727,14 +1861,22 @@
         "FY2018": -213000000.0,
         "FY2017": -6000000.0,
         "FY2016": -76000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "GoodwillImpairmentLoss": {
       "label": "Goodwill, Impairment Loss",
       "standard_concept": "",
       "values": {
         "FY2018": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic": {
       "label": "Income (Loss) from Continuing Operations before Income Taxes, Domestic",
@@ -1750,7 +1892,11 @@
         "FY2018": 8800000000.0,
         "FY2017": 7079000000.0,
         "FY2016": 6368000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "InterestExpense": {
       "label": "Interest Expense",
@@ -1761,7 +1907,11 @@
         "FY2018": 9000000.0,
         "FY2017": 6000000.0,
         "FY2016": 10000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "InterestExpenseDebt": {
       "label": "Interest Expense, Debt",
@@ -1771,7 +1921,11 @@
         "FY2025": 1090000000.0,
         "FY2024": 683000000.0,
         "FY2023": 420000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "InterestRevenueExpenseNet": {
       "label": "Interest Revenue (Expense), Net",
@@ -1780,7 +1934,11 @@
         "FY2022": 276000000.0,
         "FY2021": 461000000.0,
         "FY2020": 672000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Additional"
     },
     "InvestmentIncomeInterest": {
       "label": "Investment Income, Interest",
@@ -1793,7 +1951,11 @@
         "FY2018": 661000000.0,
         "FY2017": 398000000.0,
         "FY2016": 176000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "LaborAndRelatedExpense": {
       "label": "Labor and Related Expense",
@@ -1802,7 +1964,11 @@
         "LTM": 58698000000.0,
         "FY2025": 50702000000.0,
         "FY2024": 41327000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "NetIncomeLossAvailableToCommonStockholdersBasic": {
       "label": "Net Income (Loss) Available to Common Stockholders, Basic",
@@ -1815,7 +1981,11 @@
         "FY2016": 10188000000.0,
         "FY2015": 3669000000.0,
         "FY2014": 2925000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Additional"
     },
     "OtherCostAndExpenseOperating": {
       "label": "Other Cost and Expense, Operating",
@@ -1824,7 +1994,11 @@
         "LTM": 82622000000.0,
         "FY2025": 66988000000.0,
         "FY2024": 53794000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "UndistributedEarningsLossAllocatedToParticipatingSecuritiesBasic": {
       "label": "Undistributed Earnings (Loss) Allocated to Participating Securities, Basic",
@@ -1837,7 +2011,11 @@
         "FY2016": 29000000.0,
         "FY2015": 19000000.0,
         "FY2014": 15000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "us-gaap_AllocatedShareBasedCompensationExpense": {
       "label": "Share-based compensation expense included in costs and expenses",
@@ -1852,14 +2030,22 @@
         "FY2016": 3218000000.0,
         "FY2015": 2969000000.0,
         "FY2014": 1837000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     }
   },
   "balance_sheet_detail": {
     "AssetsAbstract": {
       "label": "ASSETS",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "Assets": {
       "label": "Assets",
@@ -1877,7 +2063,11 @@
         "FY2017": 84524000000.0,
         "FY2016": 64961000000.0,
         "FY2015": 49407000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "PropertyPlantAndEquipmentNet": {
       "label": "Property, Plant and Equipment, Net",
@@ -1888,7 +2078,11 @@
         "FY2017": 13721000000.0,
         "FY2016": 8591000000.0,
         "FY2015": 5687000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "Goodwill": {
       "label": "Goodwill",
@@ -1906,7 +2100,11 @@
         "FY2017": 18221000000.0,
         "FY2016": 18122000000.0,
         "FY2015": 18026000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "IntangibleAssetsNetExcludingGoodwill": {
       "label": "Intangible Assets, Net (Excluding Goodwill)",
@@ -1923,12 +2121,20 @@
         "FY2017": 1884000000.0,
         "FY2016": 2535000000.0,
         "FY2015": 3246000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AssetsCurrentAbstract": {
       "label": "Current assets:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 1,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "CashAndCashEquivalentsAtCarryingValue": {
       "label": "Cash and Cash Equivalents, at Carrying Value",
@@ -1946,7 +2152,11 @@
         "FY2017": 8079000000.0,
         "FY2016": 8903000000.0,
         "FY2015": 4907000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AccountsReceivableNetCurrent": {
       "label": "Accounts Receivable, after Allowance for Credit Loss, Current",
@@ -1964,7 +2174,11 @@
         "FY2017": 5832000000.0,
         "FY2016": 3993000000.0,
         "FY2015": 2559000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AssetsCurrent": {
       "label": "Assets, Current",
@@ -1982,7 +2196,11 @@
         "FY2017": 48563000000.0,
         "FY2016": 34401000000.0,
         "FY2015": 21652000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "PrepaidExpenseAndOtherAssetsCurrent": {
       "label": "Prepaid Expense and Other Assets, Current",
@@ -2000,7 +2218,11 @@
         "FY2017": 1020000000.0,
         "FY2016": 959000000.0,
         "FY2015": 659000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "OperatingLeaseRightOfUseAsset": {
       "label": "Operating Lease, Right-of-Use Asset",
@@ -2014,7 +2236,11 @@
         "FY2021": 12155000000.0,
         "FY2020": 9348000000.0,
         "FY2019": 9460000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "OtherAssetsNoncurrent": {
       "label": "Other Assets, Noncurrent",
@@ -2032,12 +2258,20 @@
         "FY2017": 2135000000.0,
         "FY2016": 1312000000.0,
         "FY2015": 796000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "LiabilitiesAndStockholdersEquityAbstract": {
       "label": "LIABILITIES AND EQUITY",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "Liabilities": {
       "label": "Liabilities",
@@ -2055,12 +2289,20 @@
         "FY2017": 10177000000.0,
         "FY2016": 5767000000.0,
         "FY2015": 5189000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "StockholdersEquityAbstract": {
       "label": "Stockholders’ equity:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 1,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "CommonStockValue": {
       "label": "Common Stock, Value, Issued",
@@ -2077,7 +2319,11 @@
         "FY2017": 0.0,
         "FY2016": 0.0,
         "FY2015": 0.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AdditionalPaidInCapital": {
       "label": "Additional Paid in Capital",
@@ -2094,7 +2340,11 @@
         "FY2017": 40584000000.0,
         "FY2016": 38227000000.0,
         "FY2015": 34886000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "RetainedEarningsAccumulatedDeficit": {
       "label": "Retained Earnings (Accumulated Deficit)",
@@ -2112,7 +2362,11 @@
         "FY2017": 33990000000.0,
         "FY2016": 21670000000.0,
         "FY2015": 9787000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AccumulatedOtherComprehensiveIncomeLossNetOfTax": {
       "label": "Accumulated Other Comprehensive Income (Loss), Net of Tax",
@@ -2130,7 +2384,11 @@
         "FY2017": -227000000.0,
         "FY2016": -703000000.0,
         "FY2015": -455000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "StockholdersEquity": {
       "label": "Stockholders' Equity Attributable to Parent",
@@ -2148,7 +2406,11 @@
         "FY2017": 74347000000.0,
         "FY2016": 59194000000.0,
         "FY2015": 44218000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "LiabilitiesAndStockholdersEquity": {
       "label": "Liabilities and Equity",
@@ -2166,12 +2428,20 @@
         "FY2017": 84524000000.0,
         "FY2016": 64961000000.0,
         "FY2015": 49407000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "LiabilitiesCurrentAbstract": {
       "label": "Current liabilities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 1,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "LiabilitiesCurrent": {
       "label": "Liabilities, Current",
@@ -2189,7 +2459,11 @@
         "FY2017": 3760000000.0,
         "FY2016": 2875000000.0,
         "FY2015": 1925000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "OperatingLeaseLiabilityCurrent": {
       "label": "Operating Lease, Liability, Current",
@@ -2203,7 +2477,11 @@
         "FY2021": 1127000000.0,
         "FY2020": 1023000000.0,
         "FY2019": 800000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AccountsPayableCurrent": {
       "label": "Accounts Payable, Current",
@@ -2216,7 +2494,11 @@
         "FY2017": 380000000.0,
         "FY2016": 302000000.0,
         "FY2015": 196000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AccruedLiabilitiesCurrent": {
       "label": "Accrued Liabilities, Current",
@@ -2234,7 +2516,11 @@
         "FY2017": 2892000000.0,
         "FY2016": 2203000000.0,
         "FY2015": 1449000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "OperatingLeaseLiabilityNoncurrent": {
       "label": "Operating Lease, Liability, Noncurrent",
@@ -2249,7 +2535,11 @@
         "FY2020": 9631000000.0,
         "FY2019": 9524000000.0,
         "FY2018": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "DeferredIncomeTaxLiabilitiesNet": {
       "label": "Deferred Income Tax Liabilities, Net",
@@ -2257,7 +2547,11 @@
       "values": {
         "FY2019": 1039000000.0,
         "FY2018": 673000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "OtherLiabilitiesNoncurrent": {
       "label": "Other Liabilities, Noncurrent",
@@ -2275,7 +2569,11 @@
         "FY2017": 6417000000.0,
         "FY2016": 2892000000.0,
         "FY2015": 3157000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "LongTermDebtNoncurrent": {
       "label": "Long-term Debt, Excluding Current Maturities",
@@ -2287,12 +2585,20 @@
         "FY2023": 18385000000.0,
         "FY2022": 9923000000.0,
         "FY2021": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AdditionalItems": {
       "label": "Additional Financial Items",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": "Additional"
     },
     "DeferredRevenueCurrent": {
       "label": "Deferred Revenue, Current",
@@ -2300,14 +2606,22 @@
       "values": {
         "FY2017": 68000000.0,
         "FY2016": 62000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "DeferredTaxLiabilities": {
       "label": "Deferred Tax Liabilities, Net",
       "standard_concept": "",
       "values": {
         "FY2025": 9167000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Additional"
     },
     "LongTermDebt": {
       "label": "Long-term Debt",
@@ -2318,7 +2632,11 @@
         "FY2024": 28826000000.0,
         "FY2023": 18385000000.0,
         "FY2022": 9923000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "us-gaap_MarketableSecuritiesCurrent": {
       "label": "Marketable securities",
@@ -2333,7 +2651,11 @@
         "FY2017": 33632000000.0,
         "FY2016": 20546000000.0,
         "FY2015": 13527000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_NonmarketableEquitySecuritiesCarryingValue": {
       "label": "Non-marketable equity investments",
@@ -2346,7 +2668,11 @@
         "FY2022": 6201000000.0,
         "FY2021": 6775000000.0,
         "FY2020": 6234000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization": {
       "label": "Property and equipment, net",
@@ -2361,7 +2687,11 @@
         "FY2020": 45633000000.0,
         "FY2019": 35323000000.0,
         "FY2018": 24683000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_AccountsPayableTradeCurrent": {
       "label": "Accounts payable",
@@ -2375,7 +2705,11 @@
         "FY2020": 1331000000.0,
         "FY2019": 886000000.0,
         "FY2018": 541000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_AccruedIncomeTaxesNoncurrent": {
       "label": "Long-term income taxes",
@@ -2385,7 +2719,11 @@
         "FY2025": 21005000000.0,
         "FY2024": 9987000000.0,
         "FY2023": 7514000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_AccountsPayableOtherCurrent": {
       "label": "Partners payable",
@@ -2399,7 +2737,11 @@
         "FY2017": 390000000.0,
         "FY2016": 280000000.0,
         "FY2015": 217000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_AvailableForSaleSecuritiesDebtSecuritiesCurrent": {
       "label": "Marketable securities",
@@ -2411,7 +2753,11 @@
         "FY2019": 35776000000.0,
         "FY2018": 31095000000.0,
         "FY2017": 33632000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_ContractWithCustomerLiabilityAndUnusedDeposits": {
       "label": "Deferred revenue and deposits",
@@ -2419,7 +2765,11 @@
       "values": {
         "FY2021": 561000000.0,
         "FY2020": 382000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_EquitySecuritiesWithoutReadilyDeterminableFairValueAmount": {
       "label": "Equity investments",
@@ -2428,7 +2778,11 @@
         "LTM": 20751000000.0,
         "FY2020": 6234000000.0,
         "FY2019": 86000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ContractWithCustomerLiabilityCurrent": {
       "label": "Deferred revenue and deposits",
@@ -2438,7 +2792,11 @@
         "FY2019": 269000000.0,
         "FY2018": 147000000.0,
         "FY2017": 98000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CommonStockSharesAuthorized": {
       "label": "Common stock, shares authorized (in shares)",
@@ -2446,7 +2804,11 @@
       "values": {
         "FY2020": 9141000000.0,
         "FY2019": 9141000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CommonStockSharesOutstanding": {
       "label": "Common stock, shares, outstanding (in shares)",
@@ -2455,7 +2817,11 @@
         "LTM": 2543000000.0,
         "FY2020": 2849000000.0,
         "FY2019": 2852000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_DeferredRevenueAndCreditsCurrent": {
       "label": "Deferred revenue and deposits",
@@ -2464,7 +2830,11 @@
         "FY2017": 98000000.0,
         "FY2016": 90000000.0,
         "FY2015": 56000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CapitalLeaseObligationsCurrent": {
       "label": "Current portion of capital lease obligations",
@@ -2472,7 +2842,11 @@
       "values": {
         "FY2016": 0.0,
         "FY2015": 7000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CapitalLeaseObligationsNoncurrent": {
       "label": "Capital lease obligations, less current portion",
@@ -2480,7 +2854,11 @@
       "values": {
         "FY2016": 0.0,
         "FY2015": 107000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "EquityMethodInvestments": {
       "label": "Equity Method Investments",
@@ -2499,12 +2877,20 @@
     "NetCashProvidedByUsedInOperatingActivitiesAbstract": {
       "label": "Cash flows from operating activities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "AdjustmentsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivitiesAbstract": {
       "label": "Adjustments to reconcile net income to net cash provided by operating activities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 1,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "DepreciationDepletionAndAmortization": {
       "label": "Depreciation, Depletion and Amortization",
@@ -2523,7 +2909,11 @@
         "FY2016": 2342000000.0,
         "FY2015": 1945000000.0,
         "FY2014": 1243000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "ShareBasedCompensation": {
       "label": "Share-based Payment Arrangement, Noncash Expense",
@@ -2542,12 +2932,20 @@
         "FY2016": 3218000000.0,
         "FY2015": 2960000000.0,
         "FY2014": 1786000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "IncreaseDecreaseInOperatingCapitalAbstract": {
       "label": "Changes in operating assets and liabilities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 2,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "IncreaseDecreaseInAccountsReceivable": {
       "label": "Increase (Decrease) in Accounts Receivable",
@@ -2566,7 +2964,11 @@
         "FY2016": -1489000000.0,
         "FY2015": -973000000.0,
         "FY2014": -610000000.0
-      }
+      },
+      "depth": 3,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "IncreaseDecreaseInAccountsPayable": {
       "label": "Increase (Decrease) in Accounts Payable",
@@ -2577,7 +2979,11 @@
         "FY2016": 14000000.0,
         "FY2015": 18000000.0,
         "FY2014": 31000000.0
-      }
+      },
+      "depth": 3,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "DeferredIncomeTaxExpenseBenefit": {
       "label": "Deferred Income Tax Expense (Benefit)",
@@ -2596,7 +3002,11 @@
         "FY2016": -457000000.0,
         "FY2015": -795000000.0,
         "FY2014": -210000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "ProvisionForDoubtfulAccounts": {
       "label": "Accounts Receivable, Credit Loss Expense (Reversal)",
@@ -2605,7 +3015,11 @@
         "FY2018": 77000000.0,
         "FY2017": 48000000.0,
         "FY2016": 66000000.0
-      }
+      },
+      "depth": 2,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "NetCashProvidedByUsedInOperatingActivities": {
       "label": "Net Cash Provided by (Used in) Operating Activities",
@@ -2624,12 +3038,20 @@
         "FY2016": 16108000000.0,
         "FY2015": 10320000000.0,
         "FY2014": 7326000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "NetCashProvidedByUsedInInvestingActivitiesAbstract": {
       "label": "Cash flows from investing activities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "NetCashProvidedByUsedInInvestingActivities": {
       "label": "Net Cash Provided by (Used in) Investing Activities",
@@ -2648,7 +3070,11 @@
         "FY2016": -11792000000.0,
         "FY2015": -9434000000.0,
         "FY2014": -5913000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "PaymentsForProceedsFromOtherInvestingActivities": {
       "label": "Payments for (Proceeds from) Other Investing Activities",
@@ -2667,7 +3093,11 @@
         "FY2016": 8000000.0,
         "FY2015": -0.0,
         "FY2014": -2000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "PaymentsToAcquirePropertyPlantAndEquipment": {
       "label": "Payments to Acquire Property, Plant, and Equipment",
@@ -2686,12 +3116,20 @@
         "FY2016": -4491000000.0,
         "FY2015": -2523000000.0,
         "FY2014": -1831000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "NetCashProvidedByUsedInFinancingActivitiesAbstract": {
       "label": "Cash flows from financing activities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "PaymentsRelatedToTaxWithholdingForShareBasedCompensation": {
       "label": "Payment, Tax Withholding, Share-based Payment Arrangement",
@@ -2709,7 +3147,11 @@
         "FY2017": -3246000000.0,
         "FY2016": -6000000.0,
         "FY2015": -20000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "PaymentsForRepurchaseOfCommonStock": {
       "label": "Payments for Repurchase of Common Stock",
@@ -2727,7 +3169,11 @@
         "FY2017": -1976000000.0,
         "FY2016": -0.0,
         "FY2015": -0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "NetCashProvidedByUsedInFinancingActivities": {
       "label": "Net Cash Provided by (Used in) Financing Activities",
@@ -2746,7 +3192,11 @@
         "FY2016": -310000000.0,
         "FY2015": -139000000.0,
         "FY2014": -298000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "PaymentsOfDividendsCommonStock": {
       "label": "Dividends paid",
@@ -2754,7 +3204,11 @@
       "values": {
         "FY2025": 5324000000.0,
         "FY2024": 5072000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "ProceedsFromPaymentsForOtherFinancingActivities": {
       "label": "Proceeds from (Payments for) Other Financing Activities",
@@ -2773,7 +3227,11 @@
         "FY2016": 8000000.0,
         "FY2015": 0.0,
         "FY2014": -55000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect": {
       "label": "Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect",
@@ -2790,7 +3248,11 @@
         "FY2018": 1920000000.0,
         "FY2017": -905000000.0,
         "FY2016": 3943000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": true,
+      "section": ""
     },
     "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents": {
       "label": "Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents",
@@ -2807,12 +3269,20 @@
         "FY2018": 10124000000.0,
         "FY2017": 8204000000.0,
         "FY2016": 9109000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "SupplementalCashFlowInformationAbstract": {
       "label": "Supplemental disclosure of cash flow information:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "InterestPaidNet": {
       "label": "Interest Paid, Excluding Capitalized Interest, Operating Activities",
@@ -2827,7 +3297,11 @@
         "FY2018": 1000000.0,
         "FY2017": 0.0,
         "FY2016": 11000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "IncomeTaxesPaidNet": {
       "label": "Income Taxes Paid, Net",
@@ -2846,7 +3320,11 @@
         "FY2016": 1210000000.0,
         "FY2015": 270000000.0,
         "FY2014": 178000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents": {
       "label": "Effect of Exchange Rate on Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents",
@@ -2863,12 +3341,20 @@
         "FY2018": -179000000.0,
         "FY2017": 232000000.0,
         "FY2016": -63000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "CashFlowNoncashInvestingAndFinancingActivitiesDisclosureAbstract": {
       "label": "Noncash investing and financing activities:",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": ""
     },
     "CapitalExpendituresIncurredButNotYetPaid": {
       "label": "Purchases of property and equipment, accrued but unpaid",
@@ -2887,12 +3373,20 @@
         "FY2016": 272000000.0,
         "FY2015": 88000000.0,
         "FY2014": 91000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "AdditionalItems": {
       "label": "Additional Financial Items",
       "standard_concept": "",
-      "values": {}
+      "values": {},
+      "depth": 0,
+      "is_abstract": true,
+      "is_total": false,
+      "section": "Additional"
     },
     "AllocatedShareBasedCompensationExpense": {
       "label": "Share-based Payment Arrangement, Expense",
@@ -2909,7 +3403,11 @@
         "FY2018": 4152000000.0,
         "FY2017": 3723000000.0,
         "FY2016": 3218000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "AmortizationOfIntangibleAssets": {
       "label": "Amortization of Intangible Assets",
@@ -2925,7 +3423,11 @@
         "FY2018": 640000000.0,
         "FY2017": 692000000.0,
         "FY2016": 751000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "Depreciation": {
       "label": "Depreciation",
@@ -2942,7 +3444,11 @@
         "FY2018": 3680000000.0,
         "FY2017": 2330000000.0,
         "FY2016": 1590000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "DividendsPaid": {
       "label": "Payments of Dividends",
@@ -2951,7 +3457,11 @@
         "LTM": 5367000000.0,
         "FY2025": 5324000000.0,
         "FY2024": 5072000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "EquitySecuritiesFvNiGainLoss": {
       "label": "Equity Securities, FV-NI, Gain (Loss)",
@@ -2960,7 +3470,11 @@
         "FY2022": 463000000.0,
         "FY2021": -232000000.0,
         "FY2020": 33000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "EquitySecuritiesFvNiUnrealizedGainLoss": {
       "label": "Equity Securities, FV-NI, Unrealized Gain (Loss)",
@@ -2968,7 +3482,11 @@
       "values": {
         "LTM": -1516000000.0,
         "FY2025": 413000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "ForeignCurrencyTransactionGainLossBeforeTax": {
       "label": "Foreign Currency Transaction Gain (Loss), before Tax",
@@ -2984,7 +3502,11 @@
         "FY2018": -213000000.0,
         "FY2017": -6000000.0,
         "FY2016": -76000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "GeneralAndAdministrativeExpense": {
       "label": "General and Administrative Expense",
@@ -3001,7 +3523,11 @@
         "FY2018": 3451000000.0,
         "FY2017": 2517000000.0,
         "FY2016": 1731000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "Goodwill": {
       "label": "Goodwill",
@@ -3017,7 +3543,11 @@
         "FY2018": 18301000000.0,
         "FY2017": 18221000000.0,
         "FY2016": 18122000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "GoodwillAndIntangibleAssetImpairment": {
       "label": "Goodwill and Intangible Asset Impairment",
@@ -3025,14 +3555,22 @@
       "values": {
         "FY2017": 0.0,
         "FY2016": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "GoodwillImpairmentLoss": {
       "label": "Goodwill, Impairment Loss",
       "standard_concept": "",
       "values": {
         "FY2018": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "IncomeTaxExpenseBenefit": {
       "label": "Income Tax Expense (Benefit)",
@@ -3049,7 +3587,11 @@
         "FY2018": 3249000000.0,
         "FY2017": 4660000000.0,
         "FY2016": 2301000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "InterestExpenseNonoperating": {
       "label": "InterestExpenseNonoperating",
@@ -3057,7 +3599,11 @@
       "values": {
         "FY2025": 1165000000.0,
         "FY2024": 715000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "InvestmentIncomeInterest": {
       "label": "Investment Income, Interest",
@@ -3070,7 +3616,11 @@
         "FY2018": 661000000.0,
         "FY2017": 398000000.0,
         "FY2016": 176000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "NetIncomeLoss": {
       "label": "Net Income (Loss) Attributable to Parent",
@@ -3089,7 +3639,11 @@
         "FY2016": 10217000000.0,
         "FY2015": 3688000000.0,
         "FY2014": 2940000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Additional"
     },
     "NetIncomeLossAvailableToCommonStockholdersBasic": {
       "label": "Net Income (Loss) Available to Common Stockholders, Basic",
@@ -3100,7 +3654,11 @@
         "FY2018": 22111000000.0,
         "FY2017": 15920000000.0,
         "FY2016": 10188000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": true,
+      "section": "Additional"
     },
     "NonoperatingIncomeExpense": {
       "label": "Nonoperating Income (Expense)",
@@ -3117,7 +3675,11 @@
         "FY2018": 448000000.0,
         "FY2017": 391000000.0,
         "FY2016": 91000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "OtherNonoperatingIncomeExpense": {
       "label": "Other Nonoperating Income (Expense)",
@@ -3133,7 +3695,11 @@
         "FY2018": 9000000.0,
         "FY2017": 5000000.0,
         "FY2016": 1000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "PaymentsOfDividends": {
       "label": "Payments of Dividends",
@@ -3144,7 +3710,11 @@
         "FY2024": -5072000000.0,
         "FY2023": -0.0,
         "FY2022": -0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "ProceedsFromIssuanceOfLongTermDebt": {
       "label": "Proceeds from Issuance of Long-term Debt",
@@ -3157,7 +3727,11 @@
         "FY2022": 9921000000.0,
         "FY2021": 0.0,
         "FY2020": 0.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities": {
       "label": "Proceeds from Maturities, Prepayments and Calls of Debt Securities, Available-for-sale",
@@ -3172,7 +3746,11 @@
         "FY2016": 1261000000.0,
         "FY2015": 2310000000.0,
         "FY2014": 1909000000.0
-      }
+      },
+      "depth": 1,
+      "is_abstract": false,
+      "is_total": false,
+      "section": "Additional"
     },
     "us-gaap_DeferredIncomeTaxesAndTaxCredits": {
       "label": "Deferred income taxes",
@@ -3182,7 +3760,11 @@
         "FY2024": -4738000000.0,
         "FY2023": 131000000.0,
         "FY2022": -3286000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_UnrealizedGainLossOnMarketableAndNonmarketableEquityInvestments": {
       "label": "Unrealized (gain) loss on equity investments",
@@ -3192,7 +3774,11 @@
         "FY2025": -1138000000.0,
         "FY2024": -53000000.0,
         "FY2023": 102000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ImpairmentOfLongLivedAssetsHeldForUse": {
       "label": "Impairment charges for facilities consolidation",
@@ -3203,7 +3789,11 @@
         "FY2023": 2432000000.0,
         "FY2022": 2218000000.0,
         "FY2021": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_OtherNoncashIncomeExpense": {
       "label": "Other",
@@ -3222,7 +3812,11 @@
         "FY2016": 30000000.0,
         "FY2015": 17000000.0,
         "FY2014": -24000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets": {
       "label": "Prepaid expenses and other current assets",
@@ -3241,7 +3835,11 @@
         "FY2016": 159000000.0,
         "FY2015": 144000000.0,
         "FY2014": 123000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInOtherOperatingAssets": {
       "label": "Other assets",
@@ -3260,7 +3858,11 @@
         "FY2016": 14000000.0,
         "FY2015": -3000000.0,
         "FY2014": -216000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInAccountsPayableTrade": {
       "label": "Accounts payable",
@@ -3276,7 +3878,11 @@
         "FY2019": 113000000.0,
         "FY2018": 221000000.0,
         "FY2017": 43000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInAccruedLiabilities": {
       "label": "Accrued expenses and other current liabilities",
@@ -3295,7 +3901,11 @@
         "FY2016": 1014000000.0,
         "FY2015": 513000000.0,
         "FY2014": 328000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInOtherNoncurrentLiabilities": {
       "label": "Other liabilities",
@@ -3312,7 +3922,11 @@
         "FY2018": -634000000.0,
         "FY2017": 3083000000.0,
         "FY2016": 1262000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_PaymentsToAcquireMarketableSecurities": {
       "label": "Purchases of marketable securities",
@@ -3329,7 +3943,11 @@
         "FY2016": -22341000000.0,
         "FY2015": -15938000000.0,
         "FY2014": -9104000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities": {
       "label": "Sales and maturities of marketable securities",
@@ -3339,7 +3957,11 @@
         "FY2024": 15789000000.0,
         "FY2023": 6184000000.0,
         "FY2022": 13158000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_PaymentsForHeldForSaleAssets": {
       "label": "Payments for held-for-sale assets",
@@ -3349,7 +3971,11 @@
         "FY2025": -2432000000.0,
         "FY2024": -0.0,
         "FY2023": -0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_ProceedsFromOneTimeVentureDistribution": {
       "label": "Proceeds from Venture distribution",
@@ -3358,7 +3984,11 @@
         "FY2025": 2554000000.0,
         "FY2024": 0.0,
         "FY2023": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_PaymentsForEquitySecuritiesWithoutReadilyDeterminableFairValue": {
       "label": "Purchases of non-marketable equity investments",
@@ -3373,7 +4003,11 @@
         "FY2020": -6361000000.0,
         "FY2019": -61000000.0,
         "FY2018": -25000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_PaymentsToAcquireBusinessesNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets": {
       "label": "Acquisitions of businesses and intangible assets",
@@ -3392,7 +4026,11 @@
         "FY2016": -123000000.0,
         "FY2015": -313000000.0,
         "FY2014": -4975000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_FinanceLeasePrincipalPayments": {
       "label": "Principal payments on finance leases",
@@ -3408,7 +4046,11 @@
         "FY2019": -552000000.0,
         "FY2018": -0.0,
         "FY2017": -0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CashAndCashEquivalentsAtCarryingValue": {
       "label": "Cash and cash equivalents",
@@ -3427,7 +4069,11 @@
         "FY2016": 8903000000.0,
         "FY2015": 4907000000.0,
         "FY2014": 4315000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_RestrictedCashAndCashEquivalentsAtCarryingValue": {
       "label": "Restricted cash equivalents, included in prepaid expenses and other current assets",
@@ -3438,7 +4084,11 @@
         "FY2024": 353000000.0,
         "FY2023": 99000000.0,
         "FY2022": 294000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_RestrictedCashAndCashEquivalentsNoncurrent": {
       "label": "Restricted cash equivalents, included in other assets",
@@ -3449,7 +4099,11 @@
         "FY2024": 1196000000.0,
         "FY2023": 866000000.0,
         "FY2022": 621000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_AcquisitionOfBusinessAndIntangibleAssets": {
       "label": "Acquisition of businesses and intangible assets in accounts payable, accrued expenses and other current liabilities, and other liabilities",
@@ -3460,7 +4114,11 @@
         "FY2024": 172000000.0,
         "FY2023": 119000000.0,
         "FY2022": 291000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_RestructuringCharges": {
       "label": "Restructuring charges",
@@ -3471,7 +4129,11 @@
         "FY2022": 1341000000.0,
         "FY2021": 0.0,
         "FY2020": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_RepurchaseOfCommonStockInAccruedExpensesAndOtherCurrentLiabilities": {
       "label": "Repurchases of Class A common stock in accrued expenses and other current liabilities",
@@ -3483,7 +4145,11 @@
         "FY2021": 340000000.0,
         "FY2020": 68000000.0,
         "FY2019": 43000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInOtherAccountsPayable": {
       "label": "Partners payable",
@@ -3499,7 +4165,11 @@
         "FY2016": 67000000.0,
         "FY2015": 17000000.0,
         "FY2014": -28000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment": {
       "label": "Proceeds relating to property and equipment",
@@ -3509,7 +4179,11 @@
         "FY2022": 245000000.0,
         "FY2021": 123000000.0,
         "FY2020": 48000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_PaymentsToAcquireAvailableForSaleSecuritiesDebt": {
       "label": "Purchases of marketable debt securities",
@@ -3520,7 +4194,11 @@
         "FY2021": -30407000000.0,
         "FY2020": -33930000000.0,
         "FY2019": -23910000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities": {
       "label": "Sales and maturities of marketable debt securities",
@@ -3529,7 +4207,11 @@
         "FY2023": 6184000000.0,
         "FY2022": 13158000000.0,
         "FY2021": 42586000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_RestrictedCashAndCashEquivalents": {
       "label": "Restricted cash and cash equivalents",
@@ -3543,7 +4225,11 @@
         "FY2018": 105000000.0,
         "FY2017": 125000000.0,
         "FY2016": 206000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_AcquisitionIncurredButNotYetPaid": {
       "label": "Acquisition of businesses in accrued expenses and other current liabilities and other liabilities",
@@ -3555,7 +4241,11 @@
         "FY2020": 118000000.0,
         "FY2019": 0.0,
         "FY2018": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "meta_OtherSignificantNoncashTransaction": {
       "label": "Other current assets through financing arrangement in accrued expenses and other current liabilities",
@@ -3566,7 +4256,11 @@
         "FY2021": 508000000.0,
         "FY2020": 0.0,
         "FY2019": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromSaleOfAvailableForSaleSecuritiesDebt": {
       "label": "Sales of marketable debt securities",
@@ -3579,7 +4273,11 @@
         "FY2018": 12358000000.0,
         "FY2017": 9444000000.0,
         "FY2016": 13894000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInContractWithCustomerLiability": {
       "label": "Deferred revenue and deposits",
@@ -3591,7 +4289,11 @@
         "FY2018": 53000000.0,
         "FY2017": 4000000.0,
         "FY2016": 35000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromRepaymentsOfBankOverdrafts": {
       "label": "Net change in overdraft in cash pooling entities",
@@ -3603,7 +4305,11 @@
         "FY2018": 500000000.0,
         "FY2017": 0.0,
         "FY2016": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_IncreaseDecreaseInPrepaidsAndLiabilitiesRelatedToPropertyAndEquipmentAdditions": {
       "label": "Net change in prepaids and liabilities related to property and equipment",
@@ -3613,7 +4319,11 @@
         "FY2018": 918000000.0,
         "FY2017": 495000000.0,
         "FY2016": 136000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_RepaymentsOfCapitalLeaseAndOtherFinancingObligations": {
       "label": "Principal payments on capital lease and other financing obligations",
@@ -3624,7 +4334,11 @@
         "FY2016": -312000000.0,
         "FY2015": -119000000.0,
         "FY2014": -243000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_SettlementOfContingentConsiderationLiability": {
       "label": "Settlement of acquisition-related contingent consideration liability",
@@ -3635,7 +4349,11 @@
         "FY2016": 33000000.0,
         "FY2015": 0.0,
         "FY2014": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_ChangeinUnsettledRepurchasesofCommonStock": {
       "label": "Change in unsettled repurchases of Class A common stock",
@@ -3645,7 +4363,11 @@
         "FY2017": 94000000.0,
         "FY2016": 0.0,
         "FY2015": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_TaxBenefitfromSharebasedCompensationOperatingActivities": {
       "label": "Tax benefit from share-based award activity",
@@ -3655,7 +4377,11 @@
         "FY2016": 0.0,
         "FY2015": 1721000000.0,
         "FY2014": 1853000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInDeferredRevenueAndCustomerAdvancesAndDeposits": {
       "label": "Deferred revenue and deposits",
@@ -3665,7 +4391,11 @@
         "FY2016": 35000000.0,
         "FY2015": -9000000.0,
         "FY2014": 10000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_IncreaseDecreaseInOtherOperatingLiabilities": {
       "label": "Other liabilities",
@@ -3675,7 +4405,11 @@
         "FY2016": 1262000000.0,
         "FY2015": 1365000000.0,
         "FY2014": 346000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_ProceedsFromSaleOfAvailableForSaleSecurities": {
       "label": "Sales of marketable securities",
@@ -3685,7 +4419,11 @@
         "FY2016": 13894000000.0,
         "FY2015": 6928000000.0,
         "FY2014": 8438000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "fb_IncreaseDecreaseInRestrictedCashAndDeposits": {
       "label": "Change in restricted cash and deposits",
@@ -3695,7 +4433,11 @@
         "FY2016": 61000000.0,
         "FY2015": 102000000.0,
         "FY2014": -348000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents": {
       "label": "Effect of exchange rate changes on cash and cash equivalents",
@@ -3705,7 +4447,11 @@
         "FY2016": -63000000.0,
         "FY2015": -155000000.0,
         "FY2014": -123000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease": {
       "label": "Net (decrease) increase in cash and cash equivalents",
@@ -3715,7 +4461,11 @@
         "FY2016": 3996000000.0,
         "FY2015": 592000000.0,
         "FY2014": 992000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_InterestPaid": {
       "label": "Interest",
@@ -3725,7 +4475,11 @@
         "FY2016": 11000000.0,
         "FY2015": 10000000.0,
         "FY2014": 14000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_NotesIssued1": {
       "label": "Promissory note payable issued in connection with an acquisition",
@@ -3735,7 +4489,11 @@
         "FY2016": 0.0,
         "FY2015": 198000000.0,
         "FY2014": 0.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     },
     "us-gaap_OtherSignificantNoncashTransactionValueOfConsiderationGiven1": {
       "label": "Fair value of shares issued related to acquisitions of businesses",
@@ -3744,7 +4502,1645 @@
         "FY2016": 0.0,
         "FY2015": 0.0,
         "FY2014": 14344000000.0
-      }
+      },
+      "depth": 0,
+      "is_abstract": false,
+      "is_total": false,
+      "section": ""
     }
+  },
+  "as_reported_statements": {
+    "income_statement": [
+      {
+        "label": "Revenue",
+        "clarification": "Ingresos totales",
+        "concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
+        "level": 1,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 200966000000.0,
+          "FY2024": 164501000000.0,
+          "FY2023": 134902000000.0,
+          "LTM": 228247000000.0
+        }
+      },
+      {
+        "label": "Costs and expenses:",
+        "clarification": null,
+        "concept": "us-gaap_CostsAndExpensesAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Cost of revenue",
+        "clarification": "Costo de ingresos",
+        "concept": "us-gaap_CostOfRevenue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 36175000000.0,
+          "FY2024": 30161000000.0,
+          "FY2023": 25959000000.0,
+          "LTM": 41661000000.0
+        }
+      },
+      {
+        "label": "Research and development",
+        "clarification": "Investigación y desarrollo (I+D)",
+        "concept": "us-gaap_ResearchAndDevelopmentExpense",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 57372000000.0,
+          "FY2024": 43873000000.0,
+          "FY2023": 38483000000.0,
+          "LTM": 71634000000.0
+        }
+      },
+      {
+        "label": "Marketing and sales",
+        "clarification": "Gastos de marketing",
+        "concept": "us-gaap_SellingAndMarketingExpense",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 11991000000.0,
+          "FY2024": 11347000000.0,
+          "FY2023": 12301000000.0,
+          "LTM": 12595000000.0
+        }
+      },
+      {
+        "label": "General and administrative",
+        "clarification": "Gastos generales y administrativos (G&A)",
+        "concept": "us-gaap_GeneralAndAdministrativeExpense",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 12152000000.0,
+          "FY2024": 9740000000.0,
+          "FY2023": 11408000000.0,
+          "LTM": 15431000000.0
+        }
+      },
+      {
+        "label": "Total costs and expenses",
+        "clarification": null,
+        "concept": "us-gaap_CostsAndExpenses",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 117690000000.0,
+          "FY2024": 95121000000.0,
+          "FY2023": 88151000000.0,
+          "LTM": 141321000000.0
+        }
+      },
+      {
+        "label": "Income (loss) from operations",
+        "clarification": "Resultado operativo (EBIT)",
+        "concept": "us-gaap_OperatingIncomeLoss",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 83276000000.0,
+          "FY2024": 69380000000.0,
+          "FY2023": 46751000000.0,
+          "LTM": 86926000000.0
+        }
+      },
+      {
+        "label": "Interest and other income, net",
+        "clarification": null,
+        "concept": "us-gaap_NonoperatingIncomeExpense",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2656000000.0,
+          "FY2024": 1283000000.0,
+          "FY2023": 677000000.0,
+          "LTM": 598000000.0
+        }
+      },
+      {
+        "label": "Income before provision for income taxes",
+        "clarification": "Resultado antes de impuestos (EBT)",
+        "concept": "us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+        "level": 1,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 85932000000.0,
+          "FY2024": 70663000000.0,
+          "FY2023": 47428000000.0,
+          "LTM": 87524000000.0
+        }
+      },
+      {
+        "label": "Provision for income taxes",
+        "clarification": "Provisión para impuesto a las ganancias",
+        "concept": "us-gaap_IncomeTaxExpenseBenefit",
+        "level": 1,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 25474000000.0,
+          "FY2024": 8303000000.0,
+          "FY2023": 8330000000.0,
+          "LTM": 19426000000.0
+        }
+      },
+      {
+        "label": "Net income",
+        "clarification": "Utilidad neta consolidada",
+        "concept": "us-gaap_NetIncomeLoss",
+        "level": 1,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 60458000000.0,
+          "FY2024": 62360000000.0,
+          "FY2023": 39098000000.0,
+          "LTM": 68098000000.0
+        }
+      },
+      {
+        "label": "Earnings per share:",
+        "clarification": "Ganancia por acción:",
+        "concept": "us-gaap_EarningsPerShareAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Basic (in dollars per share)",
+        "clarification": "EPS básico ($/acc)",
+        "concept": "us-gaap_EarningsPerShareBasic",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 23.98,
+          "FY2024": 24.61,
+          "FY2023": 15.19,
+          "LTM": 26.9
+        }
+      },
+      {
+        "label": "Diluted (in dollars per share)",
+        "clarification": "EPS diluido ($/acc)",
+        "concept": "us-gaap_EarningsPerShareDiluted",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 23.49,
+          "FY2024": 23.86,
+          "FY2023": 14.87,
+          "LTM": 26.549999999999997
+        }
+      },
+      {
+        "label": "Weighted-average shares used to compute earnings per share:",
+        "clarification": "Ganancia por acción:",
+        "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingDilutedDisclosureItemsAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Basic (in shares)",
+        "clarification": "Acciones básicas en circulación",
+        "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingBasic",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2521000000.0,
+          "FY2024": 2534000000.0,
+          "FY2023": 2574000000.0,
+          "LTM": 2543000000.0
+        }
+      },
+      {
+        "label": "Class A Common Stock",
+        "clarification": "Acciones ordinarias",
+        "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingBasic",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2178000000.0,
+          "FY2024": 2189000000.0,
+          "FY2023": 2220000000.0,
+          "LTM": 2201000000.0
+        }
+      },
+      {
+        "label": "Class B Common Stock",
+        "clarification": "Acciones ordinarias",
+        "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingBasic",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 343000000.0,
+          "FY2024": 345000000.0,
+          "FY2023": 354000000.0,
+          "LTM": 342000000.0
+        }
+      },
+      {
+        "label": "Diluted (in shares)",
+        "clarification": "Acciones diluidas en circulación",
+        "concept": "us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2574000000.0,
+          "FY2024": 2614000000.0,
+          "FY2023": 2629000000.0,
+          "LTM": 2566000000.0
+        }
+      }
+    ],
+    "balance_sheet": [
+      {
+        "label": "Assets",
+        "clarification": "ACTIVOS",
+        "concept": "us-gaap_AssetsAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Current assets:",
+        "clarification": "Activos corrientes:",
+        "concept": "us-gaap_AssetsCurrentAbstract",
+        "level": 2,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "clarification": "Efectivo y equivalentes de efectivo",
+        "concept": "us-gaap_CashAndCashEquivalentsAtCarryingValue",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 35873000000.0,
+          "FY2024": 43889000000.0,
+          "LTM": 15462000000.0
+        }
+      },
+      {
+        "label": "Marketable securities",
+        "clarification": "Valores negociables / Inversiones líquidas",
+        "concept": "us-gaap_MarketableSecuritiesCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 45719000000.0,
+          "FY2024": 33926000000.0,
+          "FY2023": 23541000000.0,
+          "FY2022": 26057000000.0,
+          "FY2021": 31397000000.0,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": 33632000000.0,
+          "FY2016": 20546000000.0,
+          "FY2015": 13527000000.0,
+          "FY2014": null,
+          "LTM": 74798000000.0
+        }
+      },
+      {
+        "label": "Accounts receivable, net",
+        "clarification": "Cuentas por cobrar comerciales netas",
+        "concept": "us-gaap_AccountsReceivableNetCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 19769000000.0,
+          "FY2024": 16994000000.0,
+          "LTM": 21752000000.0
+        }
+      },
+      {
+        "label": "Prepaid expenses and other current assets",
+        "clarification": "Gastos pagados por anticipado y otros activos ctes.",
+        "concept": "us-gaap_PrepaidExpenseAndOtherAssetsCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 7361000000.0,
+          "FY2024": 5236000000.0,
+          "LTM": 13463000000.0
+        }
+      },
+      {
+        "label": "Total current assets",
+        "clarification": "Total activos corrientes",
+        "concept": "us-gaap_AssetsCurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 108722000000.0,
+          "FY2024": 100045000000.0,
+          "LTM": 125475000000.0
+        }
+      },
+      {
+        "label": "Non-marketable equity investments",
+        "clarification": null,
+        "concept": "meta_NonmarketableEquitySecuritiesCarryingValue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 27524000000.0,
+          "FY2024": 6070000000.0,
+          "FY2023": 6141000000.0,
+          "FY2022": 6201000000.0,
+          "FY2021": 6775000000.0,
+          "FY2020": 6234000000.0,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 30157000000.0
+        }
+      },
+      {
+        "label": "Property and equipment, net",
+        "clarification": null,
+        "concept": "us-gaap_PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 176400000000.0,
+          "FY2024": 121346000000.0,
+          "FY2023": 96587000000.0,
+          "FY2022": 79518000000.0,
+          "FY2021": 57809000000.0,
+          "FY2020": 45633000000.0,
+          "FY2019": 35323000000.0,
+          "FY2018": 24683000000.0,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 225724000000.0
+        }
+      },
+      {
+        "label": "Operating lease right-of-use assets",
+        "clarification": "Activos por derecho de uso de arrendamiento (ROU)",
+        "concept": "us-gaap_OperatingLeaseRightOfUseAsset",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 20404000000.0,
+          "FY2024": 14922000000.0,
+          "LTM": 23985000000.0
+        }
+      },
+      {
+        "label": "Goodwill",
+        "clarification": "Fondo de comercio (Goodwill)",
+        "concept": "us-gaap_Goodwill",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 24534000000.0,
+          "FY2024": 20654000000.0,
+          "LTM": 23406000000.0
+        }
+      },
+      {
+        "label": "Other assets",
+        "clarification": null,
+        "concept": "us-gaap_OtherAssetsNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 8437000000.0,
+          "FY2024": 13017000000.0,
+          "LTM": 21209000000.0
+        }
+      },
+      {
+        "label": "Total assets",
+        "clarification": "ACTIVOS TOTALES",
+        "concept": "us-gaap_Assets",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 366021000000.0,
+          "FY2024": 276054000000.0,
+          "LTM": 449956000000.0
+        }
+      },
+      {
+        "label": "Liabilities and stockholders' equity",
+        "clarification": "Patrimonio neto",
+        "concept": "us-gaap_LiabilitiesAndStockholdersEquityAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Current liabilities:",
+        "clarification": "Pasivos corrientes:",
+        "concept": "us-gaap_LiabilitiesCurrentAbstract",
+        "level": 2,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Accounts payable",
+        "clarification": "Cuentas por pagar comerciales (Proveedores)",
+        "concept": "us-gaap_AccountsPayableTradeCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 8894000000.0,
+          "FY2024": 7687000000.0,
+          "FY2023": 4849000000.0,
+          "FY2022": 4990000000.0,
+          "FY2021": 4083000000.0,
+          "FY2020": 1331000000.0,
+          "FY2019": 886000000.0,
+          "FY2018": 541000000.0,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Operating lease liabilities, current",
+        "clarification": "Pasivo por arrendamiento operativo corriente",
+        "concept": "us-gaap_OperatingLeaseLiabilityCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2213000000.0,
+          "FY2024": 1942000000.0,
+          "LTM": 2425000000.0
+        }
+      },
+      {
+        "label": "Accrued expenses and other current liabilities",
+        "clarification": "Pasivos corrientes",
+        "concept": "us-gaap_AccruedLiabilitiesCurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 30729000000.0,
+          "FY2024": 23967000000.0,
+          "LTM": 38065000000.0
+        }
+      },
+      {
+        "label": "Total current liabilities",
+        "clarification": "Total pasivos corrientes",
+        "concept": "us-gaap_LiabilitiesCurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 41836000000.0,
+          "FY2024": 33596000000.0,
+          "LTM": 56379000000.0
+        }
+      },
+      {
+        "label": "Operating lease liabilities, non-current",
+        "clarification": "Pasivo por arrendamiento operativo no corriente",
+        "concept": "us-gaap_OperatingLeaseLiabilityNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 22940000000.0,
+          "FY2024": 18292000000.0,
+          "LTM": 26229000000.0
+        }
+      },
+      {
+        "label": "Long-term debt",
+        "clarification": "Financiación mayorista y deuda a largo plazo",
+        "concept": "us-gaap_LongTermDebtNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 58744000000.0,
+          "FY2024": 28826000000.0,
+          "LTM": 83664000000.0
+        }
+      },
+      {
+        "label": "Long-term income taxes",
+        "clarification": null,
+        "concept": "us-gaap_AccruedIncomeTaxesNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 21005000000.0,
+          "FY2024": 9987000000.0,
+          "FY2023": 7514000000.0,
+          "FY2022": null,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 18326000000.0
+        }
+      },
+      {
+        "label": "Other liabilities",
+        "clarification": null,
+        "concept": "us-gaap_OtherLiabilitiesNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 4253000000.0,
+          "FY2024": 2716000000.0,
+          "LTM": 4137000000.0
+        }
+      },
+      {
+        "label": "Total liabilities",
+        "clarification": "TOTAL PASIVOS",
+        "concept": "us-gaap_Liabilities",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 148778000000.0,
+          "FY2024": 93417000000.0,
+          "LTM": 188735000000.0
+        }
+      },
+      {
+        "label": "Commitments and contingencies",
+        "clarification": "Compromisos y contingencias",
+        "concept": "us-gaap_CommitmentsAndContingencies",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Stockholders' equity:",
+        "clarification": "Patrimonio neto",
+        "concept": "us-gaap_StockholdersEquityAbstract",
+        "level": 2,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Common stock, $0.000006 par value; 5,000 million Class A shares authorized, 2,187 million and 2,190 million shares issued and outstanding, as of December 31, 2025 and 2024, respectively; 4,141 million Class B shares authorized, 343 million and 344 million shares issued and outstanding, as of December 31, 2025 and 2024, respectively",
+        "clarification": "Acciones ordinarias",
+        "concept": "us-gaap_CommonStockValue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 0.0,
+          "FY2024": 0.0,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Additional paid-in capital",
+        "clarification": "Prima de emisión de acciones (APIC)",
+        "concept": "us-gaap_AdditionalPaidInCapital",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 95793000000.0,
+          "FY2024": 83228000000.0,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Accumulated other comprehensive income (loss)",
+        "clarification": "Otros resultados integrales acumulados (AOCI)",
+        "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 271000000.0,
+          "FY2024": -3097000000.0,
+          "LTM": -603000000.0
+        }
+      },
+      {
+        "label": "Retained earnings",
+        "clarification": "Ganancias retenidas",
+        "concept": "us-gaap_RetainedEarningsAccumulatedDeficit",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 121179000000.0,
+          "FY2024": 102506000000.0,
+          "LTM": 157843000000.0
+        }
+      },
+      {
+        "label": "Total stockholders' equity",
+        "clarification": "Patrimonio neto total",
+        "concept": "us-gaap_StockholdersEquity",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 217243000000.0,
+          "FY2024": 182637000000.0,
+          "LTM": 261221000000.0
+        }
+      },
+      {
+        "label": "Total liabilities and stockholders' equity",
+        "clarification": "TOTAL PASIVOS",
+        "concept": "us-gaap_LiabilitiesAndStockholdersEquity",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 366021000000.0,
+          "FY2024": 276054000000.0,
+          "LTM": 449956000000.0
+        }
+      }
+    ],
+    "cash_flow_statement": [
+      {
+        "label": "Cash flows from operating activities",
+        "clarification": "ACTIVIDADES OPERATIVAS",
+        "concept": "us-gaap_NetCashProvidedByUsedInOperatingActivitiesAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Net income",
+        "clarification": "Utilidad neta consolidada",
+        "concept": "us-gaap_NetIncomeLoss",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 60458000000.0,
+          "FY2024": 62360000000.0,
+          "FY2023": 39098000000.0,
+          "LTM": 68098000000.0
+        }
+      },
+      {
+        "label": "Adjustments to reconcile net income to net cash provided by operating activities:",
+        "clarification": "Utilidad neta consolidada",
+        "concept": "us-gaap_AdjustmentsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivitiesAbstract",
+        "level": 2,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Depreciation and amortization",
+        "clarification": "Depreciación y amortización",
+        "concept": "us-gaap_DepreciationDepletionAndAmortization",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 18616000000.0,
+          "FY2024": 15498000000.0,
+          "FY2023": 11178000000.0,
+          "LTM": 22729000000.0
+        }
+      },
+      {
+        "label": "Share-based compensation",
+        "clarification": "Compensación basada en acciones (SBC)",
+        "concept": "us-gaap_ShareBasedCompensation",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 20427000000.0,
+          "FY2024": 16690000000.0,
+          "FY2023": 14027000000.0,
+          "LTM": 25136000000.0
+        }
+      },
+      {
+        "label": "Deferred income taxes",
+        "clarification": "Impuestos diferidos",
+        "concept": "us-gaap_DeferredIncomeTaxesAndTaxCredits",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 18738000000.0,
+          "FY2024": -4738000000.0,
+          "FY2023": 131000000.0,
+          "FY2022": -3286000000.0,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Unrealized (gain) loss on equity investments",
+        "clarification": null,
+        "concept": "meta_UnrealizedGainLossOnMarketableAndNonmarketableEquityInvestments",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -1138000000.0,
+          "FY2024": -53000000.0,
+          "FY2023": 102000000.0,
+          "FY2022": null,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": -273000000.0
+        }
+      },
+      {
+        "label": "Impairment charges for facilities consolidation",
+        "clarification": null,
+        "concept": "us-gaap_ImpairmentOfLongLivedAssetsHeldForUse",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 0.0,
+          "FY2024": 383000000.0,
+          "FY2023": 2432000000.0,
+          "FY2022": 2218000000.0,
+          "FY2021": 0.0,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Other",
+        "clarification": "Otros ajustes no monetarios",
+        "concept": "us-gaap_OtherNoncashIncomeExpense",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -416000000.0,
+          "FY2024": 140000000.0,
+          "FY2023": 309000000.0,
+          "FY2022": 641000000.0,
+          "FY2021": -127000000.0,
+          "FY2020": 85000000.0,
+          "FY2019": 39000000.0,
+          "FY2018": -64000000.0,
+          "FY2017": 24000000.0,
+          "FY2016": 30000000.0,
+          "FY2015": 17000000.0,
+          "FY2014": -24000000.0,
+          "LTM": -113000000.0
+        }
+      },
+      {
+        "label": "Changes in assets and liabilities:",
+        "clarification": "Variaciones de activos y pasivos:",
+        "concept": "us-gaap_IncreaseDecreaseInOperatingCapitalAbstract",
+        "level": 3,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Accounts receivable",
+        "clarification": "Cuentas por cobrar comerciales",
+        "concept": "us-gaap_IncreaseDecreaseInAccountsReceivable",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -1815000000.0,
+          "FY2024": -1485000000.0,
+          "FY2023": -2399000000.0,
+          "LTM": -5554000000.0
+        }
+      },
+      {
+        "label": "Prepaid expenses and other current assets",
+        "clarification": "Gastos pagados por anticipado y otros activos ctes.",
+        "concept": "us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -89000000.0,
+          "FY2024": -698000000.0,
+          "FY2023": 559000000.0,
+          "FY2022": 162000000.0,
+          "FY2021": -1750000000.0,
+          "FY2020": 135000000.0,
+          "FY2019": 47000000.0,
+          "FY2018": -690000000.0,
+          "FY2017": -192000000.0,
+          "FY2016": -159000000.0,
+          "FY2015": -144000000.0,
+          "FY2014": -123000000.0,
+          "LTM": -4005000000.0
+        }
+      },
+      {
+        "label": "Other assets",
+        "clarification": null,
+        "concept": "us-gaap_IncreaseDecreaseInOtherOperatingAssets",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -481000000.0,
+          "FY2024": -270000000.0,
+          "FY2023": -80000000.0,
+          "FY2022": -106000000.0,
+          "FY2021": -349000000.0,
+          "FY2020": -34000000.0,
+          "FY2019": 41000000.0,
+          "FY2018": -159000000.0,
+          "FY2017": 154000000.0,
+          "FY2016": 14000000.0,
+          "FY2015": -3000000.0,
+          "FY2014": -216000000.0,
+          "LTM": -2774000000.0
+        }
+      },
+      {
+        "label": "Accounts payable",
+        "clarification": "Cuentas por pagar comerciales (Proveedores)",
+        "concept": "us-gaap_IncreaseDecreaseInAccountsPayableTrade",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -14000000.0,
+          "FY2024": 373000000.0,
+          "FY2023": 51000000.0,
+          "FY2022": 210000000.0,
+          "FY2021": 1436000000.0,
+          "FY2020": -17000000.0,
+          "FY2019": 113000000.0,
+          "FY2018": 221000000.0,
+          "FY2017": 43000000.0,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 206000000.0
+        }
+      },
+      {
+        "label": "Accrued expenses and other current liabilities",
+        "clarification": "Pasivos corrientes",
+        "concept": "us-gaap_IncreaseDecreaseInAccruedLiabilities",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 1077000000.0,
+          "FY2024": 323000000.0,
+          "FY2023": 5081000000.0,
+          "FY2022": 4300000000.0,
+          "FY2021": 3544000000.0,
+          "FY2020": -946000000.0,
+          "FY2019": 7300000000.0,
+          "FY2018": 1417000000.0,
+          "FY2017": 309000000.0,
+          "FY2016": 1014000000.0,
+          "FY2015": 513000000.0,
+          "FY2014": 328000000.0,
+          "LTM": 10077000000.0
+        }
+      },
+      {
+        "label": "Other liabilities",
+        "clarification": null,
+        "concept": "us-gaap_IncreaseDecreaseInOtherNoncurrentLiabilities",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 437000000.0,
+          "FY2024": 2805000000.0,
+          "FY2023": 624000000.0,
+          "FY2022": 886000000.0,
+          "FY2021": 941000000.0,
+          "FY2020": -527000000.0,
+          "FY2019": 1239000000.0,
+          "FY2018": -634000000.0,
+          "FY2017": 3083000000.0,
+          "FY2016": 1262000000.0,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": -5695000000.0
+        }
+      },
+      {
+        "label": "Net cash provided by operating activities",
+        "clarification": "FLUJO DE CAJA OPERATIVO (CFO)",
+        "concept": "us-gaap_NetCashProvidedByUsedInOperatingActivities",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 115800000000.0,
+          "FY2024": 91328000000.0,
+          "FY2023": 71113000000.0,
+          "LTM": 130301000000.0
+        }
+      },
+      {
+        "label": "Cash flows from investing activities",
+        "clarification": "ACTIVIDADES DE INVERSIÓN",
+        "concept": "us-gaap_NetCashProvidedByUsedInInvestingActivitiesAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Purchases of property and equipment",
+        "clarification": "Compras de propiedad y equipo (CapEx)",
+        "concept": "us-gaap_PaymentsToAcquirePropertyPlantAndEquipment",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -69691000000.0,
+          "FY2024": -37256000000.0,
+          "FY2023": -27045000000.0,
+          "LTM": -89325000000.0
+        }
+      },
+      {
+        "label": "Purchases of marketable securities",
+        "clarification": "Compras de valores negociables",
+        "concept": "us-gaap_PaymentsToAcquireMarketableSecurities",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -36929000000.0,
+          "FY2024": -25542000000.0,
+          "FY2023": -2982000000.0,
+          "FY2022": -9626000000.0,
+          "FY2021": null,
+          "FY2020": -33930000000.0,
+          "FY2019": -23910000000.0,
+          "FY2018": -14656000000.0,
+          "FY2017": -25682000000.0,
+          "FY2016": -22341000000.0,
+          "FY2015": -15938000000.0,
+          "FY2014": -9104000000.0,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Sales and maturities of marketable securities",
+        "clarification": "Valores negociables / Inversiones líquidas",
+        "concept": "us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 26874000000.0,
+          "FY2024": 15789000000.0,
+          "FY2023": 6184000000.0,
+          "FY2022": 13158000000.0,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Payments for held-for-sale assets",
+        "clarification": null,
+        "concept": "meta_PaymentsForHeldForSaleAssets",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -2432000000.0,
+          "FY2024": -0.0,
+          "FY2023": -0.0,
+          "FY2022": null,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": -2331000000.0
+        }
+      },
+      {
+        "label": "Proceeds from Venture distribution",
+        "clarification": null,
+        "concept": "meta_ProceedsFromOneTimeVentureDistribution",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2554000000.0,
+          "FY2024": 0.0,
+          "FY2023": 0.0,
+          "FY2022": null,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Purchases of non-marketable equity investments",
+        "clarification": null,
+        "concept": "meta_PaymentsForEquitySecuritiesWithoutReadilyDeterminableFairValue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -18330000000.0,
+          "FY2024": -11000000.0,
+          "FY2023": -1000000.0,
+          "FY2022": -5000000.0,
+          "FY2021": -47000000.0,
+          "FY2020": -6361000000.0,
+          "FY2019": -61000000.0,
+          "FY2018": -25000000.0,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": -4786000000.0
+        }
+      },
+      {
+        "label": "Acquisitions of businesses and intangible assets",
+        "clarification": null,
+        "concept": "meta_PaymentsToAcquireBusinessesNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -4231000000.0,
+          "FY2024": -270000000.0,
+          "FY2023": -629000000.0,
+          "FY2022": -1312000000.0,
+          "FY2021": -851000000.0,
+          "FY2020": -388000000.0,
+          "FY2019": -508000000.0,
+          "FY2018": -137000000.0,
+          "FY2017": -122000000.0,
+          "FY2016": -123000000.0,
+          "FY2015": -313000000.0,
+          "FY2014": -4975000000.0,
+          "LTM": -4643000000.0
+        }
+      },
+      {
+        "label": "Other investing activities",
+        "clarification": "ACTIVIDADES DE INVERSIÓN",
+        "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 182000000.0,
+          "FY2024": 140000000.0,
+          "FY2023": -22000000.0,
+          "LTM": 324000000.0
+        }
+      },
+      {
+        "label": "Net cash used in investing activities",
+        "clarification": "FLUJO DE CAJA DE INVERSIÓN (CFI)",
+        "concept": "us-gaap_NetCashProvidedByUsedInInvestingActivities",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -102003000000.0,
+          "FY2024": -47150000000.0,
+          "FY2023": -24495000000.0,
+          "LTM": -139366000000.0
+        }
+      },
+      {
+        "label": "Cash flows from financing activities",
+        "clarification": "ACTIVIDADES DE FINANCIACIÓN",
+        "concept": "us-gaap_NetCashProvidedByUsedInFinancingActivitiesAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Taxes paid related to net share settlement of equity awards",
+        "clarification": null,
+        "concept": "us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -18400000000.0,
+          "FY2024": -13770000000.0,
+          "FY2023": -7012000000.0,
+          "LTM": -18111000000.0
+        }
+      },
+      {
+        "label": "Repurchases of Class A common stock",
+        "clarification": "Recompras de acciones ordinarias",
+        "concept": "us-gaap_PaymentsForRepurchaseOfCommonStock",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -26248000000.0,
+          "FY2024": -30125000000.0,
+          "FY2023": -19774000000.0,
+          "LTM": -3327000000.0
+        }
+      },
+      {
+        "label": "Payments for dividends and dividend equivalents",
+        "clarification": "Dividendos y equivalentes pagados en efectivo",
+        "concept": "us-gaap_PaymentsOfDividends",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -5324000000.0,
+          "FY2024": -5072000000.0,
+          "FY2023": -0.0,
+          "LTM": -5367000000.0
+        }
+      },
+      {
+        "label": "Proceeds from issuance of long-term debt, net",
+        "clarification": "Deuda a plazo",
+        "concept": "us-gaap_ProceedsFromIssuanceOfLongTermDebt",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 29906000000.0,
+          "FY2024": 10432000000.0,
+          "FY2023": 8455000000.0,
+          "LTM": 54816000000.0
+        }
+      },
+      {
+        "label": "Principal payments on finance leases",
+        "clarification": null,
+        "concept": "us-gaap_FinanceLeasePrincipalPayments",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -2524000000.0,
+          "FY2024": -1969000000.0,
+          "FY2023": -1058000000.0,
+          "FY2022": -850000000.0,
+          "FY2021": -677000000.0,
+          "FY2020": -604000000.0,
+          "FY2019": -552000000.0,
+          "FY2018": -0.0,
+          "FY2017": -0.0,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": -3104000000.0
+        }
+      },
+      {
+        "label": "Other financing activities",
+        "clarification": "ACTIVIDADES DE FINANCIACIÓN",
+        "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2220000000.0,
+          "FY2024": -277000000.0,
+          "FY2023": -111000000.0,
+          "LTM": -391000000.0
+        }
+      },
+      {
+        "label": "Net cash used in financing activities",
+        "clarification": "FLUJO DE CAJA DE FINANCIACIÓN (CFF)",
+        "concept": "us-gaap_NetCashProvidedByUsedInFinancingActivities",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -20370000000.0,
+          "FY2024": -40781000000.0,
+          "FY2023": -19500000000.0,
+          "LTM": 24516000000.0
+        }
+      },
+      {
+        "label": "Effect of exchange rate changes on cash, cash equivalents, and restricted cash equivalents",
+        "clarification": null,
+        "concept": "us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 235000000.0,
+          "FY2024": -786000000.0,
+          "FY2023": 113000000.0,
+          "LTM": -8000000.0
+        }
+      },
+      {
+        "label": "Net increase (decrease) in cash, cash equivalents, and restricted cash equivalents",
+        "clarification": null,
+        "concept": "us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "level": 1,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": -6338000000.0,
+          "FY2024": 2611000000.0,
+          "FY2023": 27231000000.0,
+          "LTM": 15443000000.0
+        }
+      },
+      {
+        "label": "Total cash, cash equivalents, and restricted cash equivalents",
+        "clarification": null,
+        "concept": "us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 39100000000.0,
+          "FY2024": 45438000000.0,
+          "FY2023": 42827000000.0,
+          "LTM": 54543000000.0
+        }
+      },
+      {
+        "label": "Total cash, cash equivalents, and restricted cash equivalents",
+        "clarification": null,
+        "concept": "us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 39100000000.0,
+          "FY2024": 45438000000.0,
+          "FY2023": 42827000000.0,
+          "LTM": 54543000000.0
+        }
+      },
+      {
+        "label": "Reconciliation of cash, cash equivalents, and restricted cash equivalents to the consolidated balance sheets",
+        "clarification": null,
+        "concept": "us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffectAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "clarification": "Efectivo y equivalentes de efectivo",
+        "concept": "us-gaap_CashAndCashEquivalentsAtCarryingValue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 35873000000.0,
+          "FY2024": 43889000000.0,
+          "FY2023": 41862000000.0,
+          "FY2022": 14681000000.0,
+          "FY2021": 16601000000.0,
+          "FY2020": 17576000000.0,
+          "FY2019": 19079000000.0,
+          "FY2018": 10019000000.0,
+          "FY2017": 8079000000.0,
+          "FY2016": 8903000000.0,
+          "FY2015": 4907000000.0,
+          "FY2014": 4315000000.0,
+          "LTM": 39330000000.0
+        }
+      },
+      {
+        "label": "Restricted cash equivalents, included in prepaid expenses and other current assets",
+        "clarification": "Activos corrientes",
+        "concept": "us-gaap_RestrictedCashAndCashEquivalentsAtCarryingValue",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 837000000.0,
+          "FY2024": 353000000.0,
+          "FY2023": 99000000.0,
+          "FY2022": 294000000.0,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 1378000000.0
+        }
+      },
+      {
+        "label": "Restricted cash equivalents, included in other assets",
+        "clarification": null,
+        "concept": "us-gaap_RestrictedCashAndCashEquivalentsNoncurrent",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2390000000.0,
+          "FY2024": 1196000000.0,
+          "FY2023": 866000000.0,
+          "FY2022": 621000000.0,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 13835000000.0
+        }
+      },
+      {
+        "label": "Total cash, cash equivalents, and restricted cash equivalents",
+        "clarification": null,
+        "concept": "us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": true,
+        "values": {
+          "FY2025": 39100000000.0,
+          "FY2024": 45438000000.0,
+          "FY2023": 42827000000.0,
+          "LTM": 54543000000.0
+        }
+      },
+      {
+        "label": "Supplemental cash flow data",
+        "clarification": null,
+        "concept": "us-gaap_SupplementalCashFlowInformationAbstract",
+        "level": 1,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Cash paid for income taxes, net",
+        "clarification": "Impuestos pagados en efectivo",
+        "concept": "us-gaap_IncomeTaxesPaidNet",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 7578000000.0,
+          "FY2024": 10554000000.0,
+          "FY2023": 6607000000.0,
+          "LTM": 4033000000.0
+        }
+      },
+      {
+        "label": "Cash paid for interest, net of amounts capitalized",
+        "clarification": "Intereses pagados en efectivo",
+        "concept": "us-gaap_InterestPaidNet",
+        "level": 2,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 696000000.0,
+          "FY2024": 486000000.0,
+          "FY2023": 448000000.0,
+          "LTM": 1315000000.0
+        }
+      },
+      {
+        "label": "Non-cash investing and financing activities:",
+        "clarification": "ACTIVIDADES DE FINANCIACIÓN:",
+        "concept": "us-gaap_CashFlowNoncashInvestingAndFinancingActivitiesDisclosureAbstract",
+        "level": 2,
+        "is_abstract": true,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "LTM": null
+        }
+      },
+      {
+        "label": "Property and equipment in accounts payable and accrued expenses and other current liabilities",
+        "clarification": "Pasivos corrientes",
+        "concept": "us-gaap_CapitalExpendituresIncurredButNotYetPaid",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 9331000000.0,
+          "FY2024": 7127000000.0,
+          "FY2023": 4105000000.0,
+          "LTM": 18215000000.0
+        }
+      },
+      {
+        "label": "Acquisition of businesses and intangible assets in accounts payable, accrued expenses and other current liabilities, and other liabilities",
+        "clarification": "Pasivos corrientes",
+        "concept": "meta_AcquisitionOfBusinessAndIntangibleAssets",
+        "level": 3,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": 2659000000.0,
+          "FY2024": 172000000.0,
+          "FY2023": 119000000.0,
+          "FY2022": 291000000.0,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 4699000000.0
+        }
+      }
+    ]
   }
 }

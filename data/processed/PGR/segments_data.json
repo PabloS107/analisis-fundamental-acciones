@@ -1,0 +1,136 @@
+{
+  "periods": [
+    "LTM",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017",
+    "FY2016",
+    "FY2015",
+    "FY2014"
+  ],
+  "product_segments": [
+    {
+      "name": "Fees and other revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 1196.0,
+        "FY2024": 1064.0,
+        "FY2023": 889.0,
+        "LTM": 1238.5
+      }
+    },
+    {
+      "name": "Personal Lines Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 1060.0,
+        "FY2024": 893.0,
+        "FY2023": 740.0,
+        "LTM": 1097.7
+      }
+    },
+    {
+      "name": "Commercial Lines Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 136.0,
+        "FY2024": 171.0,
+        "FY2023": 149.0,
+        "LTM": 140.8
+      }
+    },
+    {
+      "name": "Other Indemnity",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 0.0,
+        "FY2024": 0.0,
+        "FY2023": 0.0,
+        "LTM": 0.0
+      }
+    },
+    {
+      "name": "Total underwriting revenue",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 82857.0,
+        "FY2024": 71863.0,
+        "FY2023": 59554.0,
+        "LTM": 85804.3
+      }
+    },
+    {
+      "name": "Revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 82857.0,
+        "FY2024": 71863.0,
+        "FY2023": 59554.0,
+        "LTM": 85804.3
+      }
+    },
+    {
+      "name": "Service revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 504.0,
+        "FY2024": 413.0,
+        "FY2023": 310.0,
+        "LTM": 521.9
+      }
+    },
+    {
+      "name": "Parent Company",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 11539.0,
+        "FY2024": 8763.0,
+        "FY2023": 4176.0,
+        "LTM": 11949.5
+      }
+    }
+  ],
+  "geographic_segments": [],
+  "segment_operating_income": [
+    {
+      "name": "Income before income taxes",
+      "values": {
+        "FY2025": 14223.0,
+        "FY2024": 10713.0,
+        "FY2023": 4904.0
+      }
+    },
+    {
+      "name": "Parent Company",
+      "values": {
+        "FY2025": 11233.0,
+        "FY2024": 8421.0,
+        "FY2023": 3878.0
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "PGR"
+}

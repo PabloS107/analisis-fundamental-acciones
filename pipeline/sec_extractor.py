@@ -25,6 +25,15 @@ except ImportError:
             return fn(*args, **kwargs)
         default_rate_limiter = None
 
+try:
+    from pipeline.financial_bilingual_map import get_spanish_clarification
+except ImportError:
+    try:
+        from financial_bilingual_map import get_spanish_clarification
+    except ImportError:
+        def get_spanish_clarification(label, concept=None):
+            return None
+
 
 def load_sec_config():
     """Carga la configuración de identidad para SEC EDGAR."""
@@ -2437,6 +2446,208 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
                 target_df.loc[len(target_df)] = new_row_dict
 
 
+def build_as_reported_statements(
+    company,
+    annual_fys,
+    latest_fy,
+    inc_df,
+    bal_df,
+    cf_df,
+    latest_10k_obj=None,
+    latest_10q_obj=None,
+    q_inc=None,
+    q_bal=None,
+    q_cf=None,
+    facts_df=None
+):
+    """
+    Construye los tres estados financieros principales bajo formato As-Reported (Filing Presentation fiel a la SEC).
+    Preserva jerarquía, líneas oficiales, notas anuales y cálculo riguroso de LTM (Zero Carry-Forward).
+    """
+    as_reported = {}
+    
+    statements_meta = [
+        ("income_statement", "income_statement", "income_statement", inc_df, True),
+        ("balance_sheet", "balance_sheet", "balance_sheet", bal_df, False),
+        ("cash_flow_statement", "cash_flow_statement", "cash_flow_statement", cf_df, True)
+    ]
+    
+    for s_name, k_attr, q_attr, hist_df, is_flow in statements_meta:
+        k_stmt = None
+        if latest_10k_obj:
+            k_stmt = getattr(latest_10k_obj, k_attr, None)
+            if not k_stmt and hasattr(latest_10k_obj, 'financials') and latest_10k_obj.financials:
+                k_fn = getattr(latest_10k_obj.financials, k_attr, None)
+                if k_fn:
+                    k_stmt = k_fn()
+        
+        if not k_stmt:
+            if hist_df is not None and not hist_df.empty:
+                fallback_rows = []
+                for _, r in hist_df.iterrows():
+                    lbl = str(r.get("label", "")).strip()
+                    conc = str(r.get("concept", "")).strip()
+                    if not lbl and not conc:
+                        continue
+                    row_vals = {}
+                    for p in (["LTM"] + annual_fys):
+                        if p in hist_df.columns:
+                            v = r.get(p)
+                            row_vals[p] = float(v) if pd.notna(v) else None
+                    fallback_rows.append({
+                        "label": lbl or conc,
+                        "clarification": get_spanish_clarification(lbl, conc),
+                        "concept": conc,
+                        "level": int(r.get("depth", 0)) if pd.notna(r.get("depth")) else 0,
+                        "is_abstract": bool(r.get("is_abstract", False)),
+                        "is_total": bool(r.get("is_total", False)),
+                        "values": row_vals
+                    })
+                as_reported[s_name] = fallback_rows
+            continue
+
+        try:
+            k_df = k_stmt.to_dataframe()
+        except Exception:
+            k_df = None
+
+        if k_df is None or k_df.empty:
+            continue
+
+        # Filtrado de líneas puras de carátula (Face-only items)
+        if s_name == "income_statement" and "is_breakdown" in k_df.columns:
+            face_df = k_df[k_df["is_breakdown"] == False].copy()
+        elif "dimension" in k_df.columns:
+            face_df = k_df[k_df["dimension"] == False].copy()
+        else:
+            face_df = k_df.copy()
+
+        # Obtener 10-Q correspondiente
+        q_stmt = None
+        if latest_10q_obj:
+            q_stmt = getattr(latest_10q_obj, q_attr, None)
+            if not q_stmt and hasattr(latest_10q_obj, 'financials') and latest_10q_obj.financials:
+                q_fn = getattr(latest_10q_obj.financials, q_attr, None)
+                if q_fn:
+                    q_stmt = q_fn()
+
+        q_df = None
+        if q_stmt:
+            try:
+                q_df = q_stmt.to_dataframe()
+            except Exception:
+                q_df = None
+        elif s_name == "income_statement" and q_inc is not None:
+            q_df = q_inc
+        elif s_name == "balance_sheet" and q_bal is not None:
+            q_df = q_bal
+        elif s_name == "cash_flow_statement" and q_cf is not None:
+            q_df = q_cf
+
+        if q_df is not None and not q_df.empty:
+            if s_name == "income_statement" and "is_breakdown" in q_df.columns:
+                q_face = q_df[q_df["is_breakdown"] == False].copy()
+            elif "dimension" in q_df.columns:
+                q_face = q_df[q_df["dimension"] == False].copy()
+            else:
+                q_face = q_df.copy()
+        else:
+            q_face = pd.DataFrame()
+
+        # Mapear columnas anuales del 10-K a FYxxxx
+        fy_cols_map = {}
+        for c in face_df.columns:
+            norm_c = normalize_fiscal_year(c)
+            if norm_c.startswith("FY"):
+                fy_cols_map[norm_c] = c
+
+        # Detectar columnas relevantes en el 10-Q
+        q_mrq_col = None
+        ytd_curr = None
+        ytd_prev = None
+        q_curr = None
+        if not q_face.empty:
+            if not is_flow:
+                mrq_cols = sorted([col for col in q_face.columns if re.match(r'^\d{4}-\d{2}-\d{2}$', str(col))], reverse=True)
+                q_mrq_col = mrq_cols[0] if mrq_cols else None
+            else:
+                ytd_cols = [c for c in q_face.columns if 'YTD' in str(c)]
+                ytd_curr = sorted(ytd_cols, reverse=True)[0] if len(ytd_cols) >= 1 else None
+                ytd_prev = sorted(ytd_cols, reverse=True)[1] if len(ytd_cols) >= 2 else None
+                q_cols = [c for c in q_face.columns if re.search(r'\(Q\d\)', str(c))]
+                q_curr = sorted(q_cols, reverse=True)[0] if q_cols else None
+
+        rows = []
+        for _, r in face_df.iterrows():
+            lbl = str(r.get("label", "")).strip()
+            conc = str(r.get("concept", "")).strip()
+            is_abs = bool(r.get("abstract", False))
+            lvl = int(r.get("level", 0)) if pd.notna(r.get("level")) else 0
+            is_tot = ("total" in lbl.lower()) or bool(r.get("is_total", False))
+            clarif = get_spanish_clarification(lbl, conc)
+
+            row_vals = {}
+            for p in annual_fys:
+                if p in fy_cols_map:
+                    v_raw = r.get(fy_cols_map[p])
+                    row_vals[p] = float(v_raw) if pd.notna(v_raw) else None
+                elif hist_df is not None and not hist_df.empty and "concept" in hist_df.columns:
+                    match_h = hist_df[hist_df["concept"].astype(str) == conc]
+                    if not match_h.empty:
+                        for hc in hist_df.columns:
+                            if normalize_fiscal_year(hc) == p:
+                                v_h = match_h.iloc[0].get(hc)
+                                row_vals[p] = float(v_h) if pd.notna(v_h) else None
+                                break
+
+            # Cálculo de LTM bajo estricta integridad temporal (Zero Carry-Forward)
+            if is_abs or q_face.empty:
+                row_vals["LTM"] = None
+            elif not is_flow:
+                q_match = q_face[q_face["concept"].astype(str) == conc]
+                if not q_match.empty and q_mrq_col:
+                    v_q = q_match.iloc[0].get(q_mrq_col)
+                    row_vals["LTM"] = float(v_q) if pd.notna(v_q) else None
+                else:
+                    row_vals["LTM"] = None
+            else:
+                is_sh = any(k in conc.lower() or k in lbl.lower() for k in ["shares", "numberofshares"])
+                q_match = q_face[(q_face["concept"].astype(str) == conc) & (q_face["label"].astype(str) == lbl)]
+                if q_match.empty:
+                    q_match = q_face[q_face["concept"].astype(str) == conc]
+
+                if is_sh:
+                    if not q_match.empty and (q_curr or ytd_curr):
+                        v_sh = q_match.iloc[0].get(q_curr) if q_curr else q_match.iloc[0].get(ytd_curr)
+                        row_vals["LTM"] = float(v_sh) if pd.notna(v_sh) else None
+                    else:
+                        row_vals["LTM"] = None
+                elif not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
+                    v_curr = q_match.iloc[0].get(ytd_curr)
+                    v_prev = q_match.iloc[0].get(ytd_prev)
+                    if pd.notna(v_curr) and pd.notna(v_prev):
+                        row_vals["LTM"] = row_vals[latest_fy] + float(v_curr) - float(v_prev)
+                    else:
+                        row_vals["LTM"] = None
+                else:
+                    row_vals["LTM"] = None
+
+            rows.append({
+                "label": lbl,
+                "clarification": clarif,
+                "concept": conc,
+                "level": lvl,
+                "is_abstract": is_abs,
+                "is_total": is_tot,
+                "values": row_vals
+            })
+            
+        as_reported[s_name] = rows
+        print(f"[SEC Extractor] {s_name}: {len(rows)} partidas As-Reported extraídas fielmente de la SEC.")
+        
+    return as_reported
+
+
 def extract_sec_data(ticker, output_dir=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
     cfg = load_sec_config()
@@ -2616,6 +2827,14 @@ def extract_sec_data(ticker, output_dir=None):
             facts_df = facts_obj.to_dataframe()
     except Exception as e:
         print(f"[SEC Extractor] Nota al obtener facts_df temprano: {e}")
+
+    latest_mrq_date = None
+    if facts_df is not None and not facts_df.empty and 'period_end' in facts_df.columns:
+        asset_matches = facts_df[facts_df['concept'].astype(str).str.endswith(':Assets') | facts_df['concept'].astype(str).str.endswith(':StockholdersEquity')]
+        if not asset_matches.empty:
+            latest_mrq_date = asset_matches['period_end'].dropna().max()
+        else:
+            latest_mrq_date = facts_df['period_end'].dropna().max()
     
     # 2.1. Clasificación dinámica de sector y modelo contable (Banca/Fintech vs Corporativa)
     profile_path = output_dir / "company_profile.json"
@@ -2764,8 +2983,7 @@ def extract_sec_data(ticker, output_dir=None):
         latest_mrq_col = mrq_cols[0] if mrq_cols else None
         
         # Determinar fecha MRQ para rescate en Company Facts si bal_mrq_df viene condensado
-        latest_mrq_date = None
-        if facts_df is not None and not facts_df.empty:
+        if latest_mrq_date is None and facts_df is not None and not facts_df.empty and 'period_end' in facts_df.columns:
             asset_matches = facts_df[facts_df['concept'].astype(str).str.endswith(':Assets') | facts_df['concept'].astype(str).str.endswith(':StockholdersEquity')]
             if not asset_matches.empty:
                 latest_mrq_date = asset_matches['period_end'].dropna().max()
@@ -2927,6 +3145,35 @@ def extract_sec_data(ticker, output_dir=None):
                 segment_df = single_fins.income_statement().to_dataframe()
         except Exception:
             segment_df = None
+
+    # 2.5 Estados Financieros Oficiales As-Reported (Filing Presentation fiel a la SEC)
+    print("[SEC Extractor] Extrayendo estados contables As-Reported oficiales...")
+    try:
+        latest_k_filings = company.get_filings(form=["10-K", "20-F"])
+        latest_10k_obj = latest_k_filings.latest().obj() if latest_k_filings else None
+    except Exception:
+        latest_10k_obj = None
+
+    try:
+        latest_q_filings = company.get_filings(form=["10-Q", "6-K"])
+        latest_10q_obj = latest_q_filings.latest().obj() if latest_q_filings else None
+    except Exception:
+        latest_10q_obj = None
+
+    as_reported_data = build_as_reported_statements(
+        company=company,
+        annual_fys=annual_fys,
+        latest_fy=latest_fy,
+        inc_df=inc_df,
+        bal_df=bal_df,
+        cf_df=cf_df,
+        latest_10k_obj=latest_10k_obj,
+        latest_10q_obj=latest_10q_obj,
+        q_inc=q_inc,
+        q_bal=q_bal,
+        q_cf=q_cf,
+        facts_df=facts_df
+    )
     
     full_dataset = {
         "ticker": ticker.upper(),
@@ -2944,7 +3191,8 @@ def extract_sec_data(ticker, output_dir=None):
         "key_ratios": ratios,
         "income_statement_detail": inc_data,
         "balance_sheet_detail": bal_data,
-        "cash_flow_detail": cf_data
+        "cash_flow_detail": cf_data,
+        "as_reported_statements": as_reported_data
     }
     
     # Guardar JSON

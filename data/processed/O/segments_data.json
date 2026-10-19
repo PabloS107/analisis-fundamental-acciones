@@ -1,0 +1,103 @@
+{
+  "periods": [
+    "LTM",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017",
+    "FY2016",
+    "FY2015"
+  ],
+  "product_segments": [
+    {
+      "name": "Shares of common stock",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "ATM Program",
+      "values": {
+        "FY2025": 34.2,
+        "FY2024": 17.3,
+        "FY2023": 43.7
+      }
+    },
+    {
+      "name": "Retail",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "United Kingdom",
+      "values": {
+        "FY2025": 619.9,
+        "FY2024": 508.2,
+        "FY2023": 374.1
+      }
+    },
+    {
+      "name": "Industrial",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "United Kingdom",
+      "values": {
+        "FY2025": 54.8,
+        "FY2024": 48.1,
+        "FY2023": 43.7
+      }
+    },
+    {
+      "name": "Other",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "United Kingdom",
+      "values": {
+        "FY2025": 6492.0,
+        "FY2024": 794.0,
+        "FY2023": 0.0
+      }
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "Retail - U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 3515.4,
+        "FY2024": 3368.5,
+        "FY2023": 2754.2,
+        "LTM": 3914.7
+      }
+    },
+    {
+      "name": "Industrial - U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 785.9,
+        "FY2024": 747.0,
+        "FY2023": 515.4,
+        "LTM": 875.2
+      }
+    },
+    {
+      "name": "Other - U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 240.7,
+        "FY2024": 237.9,
+        "FY2023": 205.5,
+        "LTM": 268.0
+      }
+    }
+  ],
+  "segment_operating_income": [],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "O"
+}

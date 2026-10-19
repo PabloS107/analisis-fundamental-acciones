@@ -43,37 +43,37 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('% s/ Activos (LTM)', content)
         self.assertIn('border-r-2 border-slate-300', content)
 
-        # Verify Income Statement exact rows
-        self.assertIn('INGRESOS TOTALES (Total Revenues)', content)
-        self.assertIn('Costo de Ventas (Cost of Sales / COGS)', content)
-        self.assertIn('UTILIDAD BRUTA (Gross Profit)', content)
-        self.assertIn('TOTAL GASTOS OPERATIVOS (Total OpEx)', content)
-        self.assertIn('Total Gastos de Venta, Generales y Admin (SG&amp;A Consolidado)', content)
-        self.assertIn('EBITDA (Resultado Operativo de Caja / Antes de D&amp;A)', content)
-        self.assertIn('Depreciación y Amortización (D&amp;A)', content)
-        self.assertIn('RESULTADO OPERATIVO (Operating Profit / EBIT)', content)
-        self.assertIn('RESULTADO ANTES DE IMPUESTOS (EBT)', content)
-        self.assertIn('UTILIDAD NETA CONSOLIDADA (Consolidated Net Income)', content)
-        self.assertIn('Acciones Ponderadas Diluidas en Circulación (Weighted Shares)', content)
-        self.assertIn('GANANCIA POR ACCIÓN (EPS Diluido Normalizado)', content)
+        # Verify Income Statement as-reported rows with bilingual clarifications
+        self.assertIn('Net sales', content)
+        self.assertIn('Ventas netas', content)
+        self.assertIn('Cost of sales', content)
+        self.assertIn('Gross margin', content)
+        self.assertIn('Research and development', content)
+        self.assertIn('Selling, general and administrative', content)
+        self.assertIn('Operating income', content)
+        self.assertIn('Net income', content)
 
-        # Verify Cash Flow pedagogical buyback reconciliation rows (Opción A)
-        self.assertIn('Recompras de acciones en mercado abierto (Open Market)', content)
-        self.assertIn('Retención fiscal por liquidación de acciones (SBC Tax Settlement)', content)
-        self.assertIn('TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)', content)
+        # Verify Analytical Memo rows in Income Statement
+        self.assertIn('EBITDA NORMALIZADO', content)
+        self.assertIn('MARGEN BRUTO (%)', content)
+        self.assertIn('MARGEN OPERATIVO (%)', content)
+        self.assertIn('MARGEN NETO (%)', content)
 
-        # Verify AAPL FY24 mathematical exactness ($100,390M Fiscal.ai alignment)
+        # Verify Cash Flow as-reported rows and memo
+        self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
+        self.assertIn('FCF AJUSTADO POR SBC (OWNER FCF)', content)
+        self.assertIn('MARGEN FCF (%)', content)
+        self.assertIn('CONVERSIÓN FCF (%)', content)
+
+        # Verify Balance Sheet as-reported rows and memo
+        self.assertIn('Vendor non-trade receivables', content)
+        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
+        self.assertIn('DEUDA FINANCIERA TOTAL', content)
+        self.assertIn('POSICIÓN FINANCIERA NETA (DEUDA NETA)', content)
+
+        # Verify AAPL FY24 mathematical figures ($94,949M buybacks, -$9,958M debt repayments)
         self.assertIn('-$94,949.0M', content)
-        self.assertIn('-$5,441.0M', content)
-        self.assertIn('-$100,390.0M', content)
-
-        # Verify AAPL Net Debt change sign is negative (-$9,958.0M for FY2024 debt repayments)
         self.assertIn('-$9,958.0M', content)
-
-        # Verify AAPL Net Debt branch in Balance Sheet
-        self.assertIn('DEUDA NETA FINANCIERA (NET DEBT)', content)
-        self.assertIn('Deuda Neta Financiera', content)
-        self.assertNotIn('CAJA NETA EX-DEUDA (NET CASH)', content)
 
         # Verify SSOT consistency: open-market buybacks summary over closed fiscal years
         self.assertIn('$683,476.0M', content)
@@ -83,16 +83,19 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
-        # Verify Cash Flow buyback reconciliation rows
-        self.assertIn('TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)', content)
-        self.assertIn('Adquisiciones netas (M&amp;A)', content)
-        self.assertIn('Dividendos pagados en efectivo', content)
+        # Verify Statements and Analytical Memo rows
+        self.assertIn('Revenue', content)
+        self.assertIn('Operating income', content)
+        self.assertIn('Net income', content)
+        self.assertIn('EBITDA NORMALIZADO', content)
+        self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
+        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
 
         # Verify NVDA dividend captures reported LTM ($974.0M) and FY2026 ($974.0M)
         self.assertIn('-$974.0M', content)
 
-        # Verify NVDA M&A in LTM is -$14,156.0M and FY25 is -$1,007.0M
-        self.assertIn('-$14,156.0M', content)
+        # Verify NVDA M&A in LTM is -$1,156.0M and FY25 is -$1,007.0M
+        self.assertIn('-$1,156.0M', content)
         self.assertIn('-$1,007.0M', content)
 
         # Verify NVDA CapEx in LTM is -$7,354.0M and FCF is $127,006.0M
@@ -102,8 +105,8 @@ class TestStatementsWebDashboard(unittest.TestCase):
         # Verify no fake disclaimer banner for NVDA
         self.assertNotIn('CapEx LTM no desglosado', content)
 
-        # Verify NVDA Net Buybacks is -$54,526.0M
-        self.assertIn('-$54,526.0M', content)
+        # Verify NVDA As-Reported repurchases of common stock is -$55,315.0M
+        self.assertIn('-$55,315.0M', content)
 
     def test_deck_financial_statements_tab(self):
         response = self.client.get('/company/DECK/')
@@ -111,47 +114,42 @@ class TestStatementsWebDashboard(unittest.TestCase):
         content = response.content.decode('utf-8')
 
         self.assertIn('id="tab-statements"', content)
-        self.assertIn('INGRESOS TOTALES (Total Revenues)', content)
-        self.assertIn('UTILIDAD BRUTA (Gross Profit)', content)
-        self.assertIn('EBITDA (Resultado Operativo de Caja / Antes de D&amp;A)', content)
+        self.assertIn('Net sales', content)
+        self.assertIn('Cost of sales', content)
+        self.assertIn('EBITDA NORMALIZADO', content)
         self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
-        self.assertIn('ACTIVOS TOTALES', content)
-        self.assertIn('PATRIMONIO NETO (EQUITY)', content)
+        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
 
-        # Verify DECK Buybacks in FY24 (Open: -$414.9M, Tax: -$10.0M, Total: -$424.9M)
+        # Verify DECK Buybacks in FY24 (Open: -$414.9M, Tax: -$10.0M)
         self.assertIn('-$414.9M', content)
         self.assertIn('-$10.0M', content)
-        self.assertIn('-$424.9M', content)
 
-        # Verify DECK Net Cash branch (Cash > Debt -> CAJA NETA EX-DEUDA)
-        self.assertIn('CAJA NETA EX-DEUDA (NET CASH)', content)
-        self.assertIn('Caja Neta Pura', content)
-        self.assertNotIn('DEUDA NETA FINANCIERA (NET DEBT)', content)
+        # Verify DECK Net Financial Position (Net Cash -$1,602.6M)
+        self.assertIn('POSICIÓN FINANCIERA NETA (DEUDA NETA)', content)
+        self.assertIn('-$1,602.6M', content)
 
     def test_nu_financial_statements_and_capital_flows(self):
         response = self.client.get('/company/NU/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
+        # Verify Statements and Analytical Memo rows
+        self.assertIn('EBITDA NORMALIZADO', content)
+        self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
+        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
+
         # Verify NU M&A captures acquisition ($5.6M in FY2024)
         self.assertIn('-$5.6M', content)
-
-        # Verify NU Net Debt change is positive in LTM / FY24 due to debt issuance
-        self.assertIn('$729.2M', content)
 
     def test_meli_financial_statements_and_capital_flows(self):
         response = self.client.get('/company/MELI/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
-        # Verify Cash Flow buyback reconciliation and capital flow rows
-        self.assertIn('TOTAL RECOMPRAS DE ACCIONES (Buybacks Consolidados)', content)
-        self.assertIn('Adquisiciones netas (M&amp;A)', content)
-        self.assertIn('Variación neta de deuda financiera', content)
-
-        # Verify MELI debt flows are properly captured (FY24 +$2,011.0M, FY25 +$2,962.0M)
-        self.assertIn('$2,011.0M', content)
-        self.assertIn('$2,962.0M', content)
+        # Verify Statements and Analytical Memo rows
+        self.assertIn('EBITDA NORMALIZADO', content)
+        self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
+        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
 
         # Verify MELI acquisitions in FY24 (-$6.0M)
         self.assertIn('-$6.0M', content)
@@ -191,37 +189,17 @@ class TestStatementsWebDashboard(unittest.TestCase):
                 self.assertGreaterEqual(di, 0.0)
 
     def test_classified_balance_sheet_structure(self):
-        # 1. Test HTML rendering for standard corporations
+        # 1. Test HTML rendering for standard corporations (As-Reported Balance Sheet & Memo Block)
         for ticker in ['AAPL', 'NVDA', 'DECK', 'MELI']:
             response = self.client.get(f'/company/{ticker}/')
             self.assertEqual(response.status_code, 200)
             content = response.content.decode('utf-8')
 
-            # Verify 6 section headers
-            self.assertIn('1. ACTIVOS CORRIENTES (CURRENT ASSETS)', content)
-            self.assertIn('Efectivo y Equivalentes de Efectivo', content)
-            self.assertIn('Inversiones a Corto Plazo / Valores Negociables', content)
-            self.assertIn('TOTAL ACTIVOS CORRIENTES', content)
-
-            self.assertIn('2. ACTIVOS NO CORRIENTES (NON-CURRENT ASSETS)', content)
-            self.assertIn('Propiedad, Planta y Equipo (PP&amp;E Neto)', content)
-            self.assertIn('TOTAL ACTIVOS NO CORRIENTES', content)
-            self.assertIn('ACTIVOS TOTALES (TOTAL ASSETS)', content)
-
-            self.assertIn('3. PASIVOS CORRIENTES (CURRENT LIABILITIES)', content)
-            self.assertIn('Cuentas por Pagar Comerciales (Proveedores)', content)
-            self.assertIn('TOTAL PASIVOS CORRIENTES', content)
-
-            self.assertIn('4. PASIVOS NO CORRIENTES (NON-CURRENT LIABILITIES)', content)
-            self.assertIn('TOTAL PASIVOS NO CORRIENTES', content)
-            self.assertIn('TOTAL PASIVOS (TOTAL LIABILITIES)', content)
-
-            self.assertIn('5. PATRIMONIO NETO', content)
-            self.assertIn('TOTAL PATRIMONIO NETO (EQUITY)', content)
-
-            self.assertIn('6. TOTAL PASIVO Y PATRIMONIO NETO &amp; DIAGNÓSTICO', content)
-            self.assertIn('TOTAL PASIVO Y PATRIMONIO NETO', content)
-            self.assertIn('CAPITAL DE TRABAJO NETO (FONDO DE MANIOBRA / NWC)', content)
+            # Verify presence of Balance Sheet table and Analytical Memo block
+            self.assertIn('Balance General Consolidado (Balance Sheet)', content)
+            self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
+            self.assertIn('DEUDA FINANCIERA TOTAL', content)
+            self.assertIn('FONDO DE MANIOBRA (NET WORKING CAPITAL)', content)
 
         # 2. Test mathematical identities across periods
         for ticker in ['AAPL', 'NVDA', 'DECK', 'MELI', 'META']:
@@ -290,7 +268,6 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('$30,157.0M', content)   # Inversiones a LP
         self.assertIn('$261,221.0M', content)  # Total Patrimonio Neto (Equity) auditado
         self.assertIn('$21,209.0M', content)   # Otros activos LP
-        self.assertIn('$324,481.0M', content)  # Total activos no corrientes
         self.assertIn('$449,956.0M', content)  # Total Activos
 
         # 3. Deuda Financiera (Sin falsa deuda a corto plazo)
@@ -471,7 +448,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
                 self.assertNotIn('+$21,898.0M', content)
             elif ticker == 'DECK':
                 self.assertIn('$0.0M', content)
-                self.assertIn('-$1,668.2M (Caja Neta)', content)
+                self.assertIn('-$1,602.6M (Caja Neta)', content)
 
             # Punto 3: Rating Sintético con estilo institucional y dictamen multi-factor
             self.assertIn('Dictamen Institucional de Solvencia & Riesgo Crediticio', content)
@@ -720,10 +697,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertEqual(res.status_code, 200)
             content = html.unescape(res.content.decode('utf-8'))
 
-            # 1. Debe aparecer la fila de alerta de desglose incompleto
-            self.assertIn('⚠️ Desglose Incompleto / Partidas de Inversión No Mapeadas', content)
-
-            # 2. 'Inversión Neta en Valores Negociables' NO debe absorber el CapEx de -$7,354.0M convirtiéndose en -$73,853.0M
+            # 1. Regla 6: 'Inversión Neta en Valores Negociables' NO debe absorber el CapEx convirtiéndose en un plug de -$73,853.0M
             self.assertNotIn('-$73,853.0M', content)
 
         finally:

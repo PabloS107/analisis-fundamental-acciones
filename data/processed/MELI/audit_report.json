@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-10-17T15:54:22.652536",
+  "audit_timestamp": "2026-10-19T17:30:29.724348",
   "years_audited": {
     "LTM": [
       {
@@ -56,11 +56,11 @@
         "status": "PASS",
         "net_income": 1863000000.0,
         "shares_diluted": 50697282.75,
-        "eps_reported": 36.75,
+        "eps_reported": 36.77,
         "eps_calculated": 36.75,
-        "eps_adjusted": 36.75,
+        "eps_adjusted": 36.77,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.02
       }
     ],
     "FY2025": [
@@ -706,15 +706,26 @@
     "FY2015": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2015 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 1003606000.0,
+        "liabilities": 664148000.0,
+        "equity": 339458000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 1003606000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 100360.6
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de P&L para FY2015."
+        "passed": true,
+        "status": "PASS",
+        "revenue": 651790000.0,
+        "cost_of_goods_sold": 214994000.0,
+        "gross_profit_reported": 436796000.0,
+        "gross_profit_calculated": 436796000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 65179.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
@@ -759,8 +770,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 72,
-  "passed_tests": 69,
+  "passed_tests": 71,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 1,
   "compliance_score_pct": 100.0
 }

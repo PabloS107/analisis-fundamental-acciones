@@ -156,12 +156,14 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
     ],
     "eps_basic": [
         "EarningsPerShareBasic",
+        "EarningsPerShareBasicAndDiluted",
         "BasicEarningsPerShare",
         "BasicEarningsLossPerShare",
         "BasicEarningsLossPerShareFromContinuingOperations",
     ],
     "eps_diluted": [
         "EarningsPerShareDiluted",
+        "EarningsPerShareBasicAndDiluted",
         "DilutedEarningsPerShare",
         "DilutedEarningsLossPerShare",
         "DilutedEarningsLossPerShareFromContinuingOperations",

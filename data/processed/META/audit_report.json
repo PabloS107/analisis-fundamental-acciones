@@ -2,7 +2,7 @@
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
   "cik": "0001326801",
-  "audit_timestamp": "2026-10-14T18:27:51.340256",
+  "audit_timestamp": "2026-10-19T17:30:29.736881",
   "years_audited": {
     "LTM": [
       {
@@ -770,9 +770,15 @@
     "FY2014": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2014 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 39966000000.0,
+        "liabilities": 3870000000.0,
+        "equity": 36096000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 39966000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 3996600.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -828,8 +834,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 76,
+  "passed_tests": 77,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 1,
   "compliance_score_pct": 100.0
 }

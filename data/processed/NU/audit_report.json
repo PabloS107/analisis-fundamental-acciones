@@ -2,7 +2,7 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-10-14T18:27:51.347563",
+  "audit_timestamp": "2026-10-19T17:30:29.746944",
   "years_audited": {
     "LTM": [
       {
@@ -46,12 +46,12 @@
         "passed": true,
         "status": "PASS",
         "net_income": 2868892000.0,
-        "shares_diluted": 4878374324.0,
-        "eps_reported": 0.74,
-        "eps_calculated": 0.59,
-        "eps_adjusted": 0.74,
+        "shares_diluted": 4946365517.0,
+        "eps_reported": 0.58,
+        "eps_calculated": 0.58,
+        "eps_adjusted": 0.58,
         "split_factor": 1.0,
-        "discrepancy": 0.15
+        "discrepancy": 0.0
       }
     ],
     "FY2025": [
@@ -349,8 +349,8 @@
         "shares_diluted": 1315578000.0,
         "eps_reported": -0.1304,
         "eps_calculated": -0.13,
-        "eps_adjusted": -0.1304,
-        "split_factor": 1.0,
+        "eps_adjusted": -0.04,
+        "split_factor": 3.0,
         "discrepancy": 0.0
       }
     ],
@@ -393,8 +393,8 @@
         "shares_diluted": 1137931000.0,
         "eps_reported": -0.0813,
         "eps_calculated": -0.08,
-        "eps_adjusted": -0.0813,
-        "split_factor": 1.0,
+        "eps_adjusted": -0.03,
+        "split_factor": 3.0,
         "discrepancy": 0.0
       }
     ]
