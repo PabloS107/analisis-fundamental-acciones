@@ -2462,8 +2462,20 @@ def build_as_reported_statements(
 ):
     """
     Construye los tres estados financieros principales bajo formato As-Reported (Filing Presentation fiel a la SEC).
-    Preserva jerarquía, líneas oficiales, notas anuales y cálculo riguroso de LTM (Zero Carry-Forward).
+    Preserva jerarquía, líneas oficiales, notas anuales y reconciliación de 10 años + LTM mediante emparejamiento de 3 niveles.
     """
+    def _clean_concept_token(c):
+        if not c or pd.isna(c):
+            return ""
+        s = str(c).strip()
+        if ":" in s:
+            s = s.split(":")[-1]
+        if "_" in s:
+            s = s.split("_")[-1]
+        return s.lower()
+
+    all_tax_maps = [XBRL_TAXONOMY_MAP, BANKING_TAXONOMY_MAP, REIT_TAXONOMY_MAP, INSURANCE_TAXONOMY_MAP, PLATFORM_TAXONOMY_MAP]
+
     as_reported = {}
     
     statements_meta = [
@@ -2515,10 +2527,19 @@ def build_as_reported_statements(
             continue
 
         # Filtrado de líneas puras de carátula (Face-only items)
-        if s_name == "income_statement" and "is_breakdown" in k_df.columns:
+        if "dimension" in k_df.columns:
+            if s_name == "income_statement":
+                # En Income Statement, permitir la apertura oficial de carátula Product / Service (ej. AAPL, MELI)
+                is_prod_serv = k_df["dimension_member"].astype(str).str.contains(r'ProductMember|ServiceMember', case=False, na=False) if "dimension_member" in k_df.columns else False
+                if not is_prod_serv.any() and "label" in k_df.columns:
+                    is_prod_serv = k_df["label"].astype(str).str.strip().str.lower().isin(["products", "services"]) & (k_df["dimension"] == True)
+                is_pure_face = (k_df["dimension"] == False) | k_df["dimension"].isna() | (k_df["dimension"].astype(str).isin(["", "nan", "None"]))
+                face_df = k_df[is_pure_face | is_prod_serv].copy()
+            else:
+                is_pure_face = (k_df["dimension"] == False) | k_df["dimension"].isna() | (k_df["dimension"].astype(str).isin(["", "nan", "None"]))
+                face_df = k_df[is_pure_face].copy()
+        elif "is_breakdown" in k_df.columns:
             face_df = k_df[k_df["is_breakdown"] == False].copy()
-        elif "dimension" in k_df.columns:
-            face_df = k_df[k_df["dimension"] == False].copy()
         else:
             face_df = k_df.copy()
 
@@ -2545,10 +2566,18 @@ def build_as_reported_statements(
             q_df = q_cf
 
         if q_df is not None and not q_df.empty:
-            if s_name == "income_statement" and "is_breakdown" in q_df.columns:
+            if "dimension" in q_df.columns:
+                if s_name == "income_statement":
+                    is_prod_serv_q = q_df["dimension_member"].astype(str).str.contains(r'ProductMember|ServiceMember', case=False, na=False) if "dimension_member" in q_df.columns else False
+                    if not is_prod_serv_q.any() and "label" in q_df.columns:
+                        is_prod_serv_q = q_df["label"].astype(str).str.strip().str.lower().isin(["products", "services"]) & (q_df["dimension"] == True)
+                    is_pure_q = (q_df["dimension"] == False) | q_df["dimension"].isna() | (q_df["dimension"].astype(str).isin(["", "nan", "None"]))
+                    q_face = q_df[is_pure_q | is_prod_serv_q].copy()
+                else:
+                    is_pure_q = (q_df["dimension"] == False) | q_df["dimension"].isna() | (q_df["dimension"].astype(str).isin(["", "nan", "None"]))
+                    q_face = q_df[is_pure_q].copy()
+            elif "is_breakdown" in q_df.columns:
                 q_face = q_df[q_df["is_breakdown"] == False].copy()
-            elif "dimension" in q_df.columns:
-                q_face = q_df[q_df["dimension"] == False].copy()
             else:
                 q_face = q_df.copy()
         else:
@@ -2561,7 +2590,7 @@ def build_as_reported_statements(
             if norm_c.startswith("FY"):
                 fy_cols_map[norm_c] = c
 
-        # Detectar columnas relevantes en el 10-Q
+        # Detectar columnas relevantes en el 10-Q para LTM
         q_mrq_col = None
         ytd_curr = None
         ytd_prev = None
@@ -2572,68 +2601,197 @@ def build_as_reported_statements(
                 q_mrq_col = mrq_cols[0] if mrq_cols else None
             else:
                 ytd_cols = [c for c in q_face.columns if 'YTD' in str(c)]
+                if not ytd_cols:
+                    ytd_cols = [c for c in q_face.columns if any(ch.isdigit() for ch in str(c)) and ('Q' in str(c) or '202' in str(c))]
                 ytd_curr = sorted(ytd_cols, reverse=True)[0] if len(ytd_cols) >= 1 else None
                 ytd_prev = sorted(ytd_cols, reverse=True)[1] if len(ytd_cols) >= 2 else None
                 q_cols = [c for c in q_face.columns if re.search(r'\(Q\d\)', str(c))]
                 q_curr = sorted(q_cols, reverse=True)[0] if q_cols else None
 
+        # Preparar índices de búsqueda en hist_df
+        hist_concept_toks = None
+        hist_labels_clean = None
+        hist_cols_norm = {}
+        if hist_df is not None and not hist_df.empty:
+            if "concept" in hist_df.columns:
+                hist_concept_toks = hist_df["concept"].apply(_clean_concept_token)
+            else:
+                hist_concept_toks = pd.Series([""] * len(hist_df), index=hist_df.index)
+            if "label" in hist_df.columns:
+                hist_labels_clean = hist_df["label"].astype(str).apply(lambda x: re.sub(r'[^a-zA-Z0-9]', '', x.lower()))
+            else:
+                hist_labels_clean = pd.Series([""] * len(hist_df), index=hist_df.index)
+            for col_h in hist_df.columns:
+                norm_h = normalize_fiscal_year(col_h)
+                if norm_h.startswith("FY") or norm_h == "LTM":
+                    hist_cols_norm[norm_h] = col_h
+
         rows = []
+        seen_cash_flow_ending_cash = False
         for _, r in face_df.iterrows():
             lbl = str(r.get("label", "")).strip()
             conc = str(r.get("concept", "")).strip()
             is_abs = bool(r.get("abstract", False))
             lvl = int(r.get("level", 0)) if pd.notna(r.get("level")) else 0
             is_tot = ("total" in lbl.lower()) or bool(r.get("is_total", False))
-            clarif = get_spanish_clarification(lbl, conc)
+            conc_tok = _clean_concept_token(conc)
 
+            # Limpiar etiquetas excesivamente extensas (par value, shares authorized)
+            clean_lbl = lbl
+            clean_detail = None
+            if ";" in lbl and len(lbl) > 50:
+                parts = [p.strip() for p in lbl.split(";") if p.strip()]
+                clean_lbl = parts[0]
+                clean_detail = "; ".join(parts[1:])
+            elif "(" in lbl and ")" in lbl and len(lbl) > 80:
+                m_par = re.search(r'\(([^)]+)\)', lbl)
+                if m_par and len(m_par.group(1)) > 30 and any(w in m_par.group(1).lower() for w in ["share", "par value", "note", "class"]):
+                    clean_detail = m_par.group(1)
+                    clean_lbl = re.sub(r'\s*\([^)]+\)', '', lbl).strip()
+
+            base_clarif = get_spanish_clarification(clean_lbl, conc)
+            if clean_detail:
+                clarif = f"{base_clarif} · {clean_detail}" if base_clarif else clean_detail
+            else:
+                clarif = base_clarif
+
+            # En Flujo de Efectivo, evitar duplicados del saldo final de caja
+            is_cf_cash = (s_name == "cash_flow_statement") and ("cash" in conc_tok and "equivalents" in conc_tok)
+            if is_cf_cash:
+                if "beginning" in clean_lbl.lower() or "start" in clean_lbl.lower():
+                    clean_lbl = "Cash, cash equivalents and restricted cash, beginning of period"
+                elif seen_cash_flow_ending_cash:
+                    continue
+                else:
+                    seen_cash_flow_ending_cash = True
+
+            # Reconciliación Histórica de 3 Niveles en hist_df
+            matched_h_row = None
+            if hist_df is not None and not hist_df.empty:
+                # Nivel 1: Coincidencia por token de concepto (sin prefijo us-gaap_)
+                if conc_tok:
+                    m1 = hist_df[hist_concept_toks == conc_tok]
+                    if len(m1) == 1:
+                        matched_h_row = m1.iloc[0]
+                    elif len(m1) > 1:
+                        lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
+                        m1_lbl = m1[hist_labels_clean.loc[m1.index] == lbl_clean_val]
+                        matched_h_row = m1_lbl.iloc[0] if not m1_lbl.empty else m1.iloc[0]
+
+                # Nivel 2: Coincidencia por nombre de cuenta en carátula limpia
+                if matched_h_row is None and clean_lbl:
+                    lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
+                    if lbl_clean_val:
+                        m2 = hist_df[hist_labels_clean == lbl_clean_val]
+                        if not m2.empty:
+                            matched_h_row = m2.iloc[0]
+
+                # Nivel 3: Grupo sinónimo de taxonomía canónica
+                if matched_h_row is None and conc_tok:
+                    for tmap in all_tax_maps:
+                        for syn_group, cands in tmap.items():
+                            tok_cands = [_clean_concept_token(c_item) for c_item in cands]
+                            if conc_tok in tok_cands:
+                                m3 = hist_df[hist_concept_toks.isin(tok_cands)]
+                                if not m3.empty:
+                                    matched_h_row = m3.iloc[0]
+                                    break
+                        if matched_h_row is not None:
+                            break
+
+            # Extracción de importes anuales
             row_vals = {}
             for p in annual_fys:
+                val = None
+                # 1. Filing actual 10-K
                 if p in fy_cols_map:
                     v_raw = r.get(fy_cols_map[p])
-                    row_vals[p] = float(v_raw) if pd.notna(v_raw) else None
-                elif hist_df is not None and not hist_df.empty and "concept" in hist_df.columns:
-                    match_h = hist_df[hist_df["concept"].astype(str) == conc]
-                    if not match_h.empty:
-                        for hc in hist_df.columns:
-                            if normalize_fiscal_year(hc) == p:
-                                v_h = match_h.iloc[0].get(hc)
-                                row_vals[p] = float(v_h) if pd.notna(v_h) else None
-                                break
+                    if pd.notna(v_raw):
+                        try:
+                            val = float(v_raw)
+                        except (ValueError, TypeError):
+                            val = None
+                # 2. Histórico 10 años (hist_df)
+                if val is None and matched_h_row is not None:
+                    h_col = hist_cols_norm.get(p)
+                    if h_col:
+                        v_h = matched_h_row.get(h_col)
+                        if pd.notna(v_h):
+                            try:
+                                val = float(v_h)
+                            except (ValueError, TypeError):
+                                val = None
+                # 3. Respaldo por grupo sinónimo para año específico
+                if val is None and conc_tok and hist_df is not None and not hist_df.empty:
+                    for tmap in all_tax_maps:
+                        for syn_group, cands in tmap.items():
+                            tok_cands = [_clean_concept_token(c_item) for c_item in cands]
+                            if conc_tok in tok_cands:
+                                syn_matches = hist_df[hist_concept_toks.isin(tok_cands)]
+                                h_col = hist_cols_norm.get(p)
+                                if h_col and not syn_matches.empty:
+                                    for _, syn_r in syn_matches.iterrows():
+                                        v_syn = syn_r.get(h_col)
+                                        if pd.notna(v_syn):
+                                            try:
+                                                val = float(v_syn)
+                                                break
+                                            except (ValueError, TypeError):
+                                                pass
+                                if val is not None:
+                                    break
+                        if val is not None:
+                            break
 
-            # Cálculo de LTM bajo estricta integridad temporal (Zero Carry-Forward)
-            if is_abs or q_face.empty:
+                row_vals[p] = val
+
+            # Cálculo de LTM bajo integridad temporal
+            if is_abs:
                 row_vals["LTM"] = None
-            elif not is_flow:
-                q_match = q_face[q_face["concept"].astype(str) == conc]
-                if not q_match.empty and q_mrq_col:
-                    v_q = q_match.iloc[0].get(q_mrq_col)
-                    row_vals["LTM"] = float(v_q) if pd.notna(v_q) else None
-                else:
-                    row_vals["LTM"] = None
             else:
-                is_sh = any(k in conc.lower() or k in lbl.lower() for k in ["shares", "numberofshares"])
-                q_match = q_face[(q_face["concept"].astype(str) == conc) & (q_face["label"].astype(str) == lbl)]
-                if q_match.empty:
-                    q_match = q_face[q_face["concept"].astype(str) == conc]
+                ltm_val = None
+                # 1. Para Balance Sheet (point-in-time), consultar el 10-Q trimestral oficial al cierre de MRQ
+                if not is_flow and not q_face.empty and q_mrq_col:
+                    q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
+                    q_match = q_face[(q_toks == conc_tok) & (q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
+                    if q_match.empty:
+                        q_match = q_face[q_toks == conc_tok]
+                    if not q_match.empty:
+                        v_q = q_match.iloc[0].get(q_mrq_col)
+                        if pd.notna(v_q):
+                            try:
+                                ltm_val = float(v_q)
+                            except (ValueError, TypeError):
+                                pass
 
-                if is_sh:
-                    if not q_match.empty and (q_curr or ytd_curr):
-                        v_sh = q_match.iloc[0].get(q_curr) if q_curr else q_match.iloc[0].get(ytd_curr)
-                        row_vals["LTM"] = float(v_sh) if pd.notna(v_sh) else None
-                    else:
-                        row_vals["LTM"] = None
-                elif not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
-                    v_curr = q_match.iloc[0].get(ytd_curr)
-                    v_prev = q_match.iloc[0].get(ytd_prev)
-                    if pd.notna(v_curr) and pd.notna(v_prev):
-                        row_vals["LTM"] = row_vals[latest_fy] + float(v_curr) - float(v_prev)
-                    else:
-                        row_vals["LTM"] = None
-                else:
-                    row_vals["LTM"] = None
+                # 2. Consultar LTM calibrado en hist_df (4Q sum EPS, flujo acumulado TTM)
+                if ltm_val is None and matched_h_row is not None and "LTM" in hist_cols_norm:
+                    cand_ltm = matched_h_row.get(hist_cols_norm["LTM"])
+                    if pd.notna(cand_ltm):
+                        try:
+                            ltm_val = float(cand_ltm)
+                        except (ValueError, TypeError):
+                            ltm_val = None
+
+                # 3. Respaldo de flujo (YTD delta) si no figuraba en hist_df
+                if ltm_val is None and is_flow and not q_face.empty:
+                    q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
+                    q_match = q_face[(q_toks == conc_tok) & (q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
+                    if q_match.empty:
+                        q_match = q_face[q_toks == conc_tok]
+                    if not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
+                        v_curr = q_match.iloc[0].get(ytd_curr)
+                        v_prev = q_match.iloc[0].get(ytd_prev)
+                        if pd.notna(v_curr) and pd.notna(v_prev):
+                            try:
+                                ltm_val = row_vals[latest_fy] + float(v_curr) - float(v_prev)
+                            except (ValueError, TypeError):
+                                pass
+
+                row_vals["LTM"] = ltm_val
 
             rows.append({
-                "label": lbl,
+                "label": clean_lbl,
                 "clarification": clarif,
                 "concept": conc,
                 "level": lvl,
@@ -2641,10 +2799,10 @@ def build_as_reported_statements(
                 "is_total": is_tot,
                 "values": row_vals
             })
-            
+
         as_reported[s_name] = rows
         print(f"[SEC Extractor] {s_name}: {len(rows)} partidas As-Reported extraídas fielmente de la SEC.")
-        
+
     return as_reported
 
 

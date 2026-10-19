@@ -758,7 +758,7 @@
                 <table class="w-full text-xs text-left border-collapse statement-table">
                     <thead>
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                            <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Partida Contable</th>
+                            <th class="py-3 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] w-80 shadow-[1px_0_0_0_#e2e8f0]">Partida Contable</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
                             <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Ventas (LTM)">% s/ Ventas (LTM)</th>
                             {% for p in statements_annual_fys %}
@@ -776,7 +776,7 @@
                         </tr>
                         {% else %}
                         <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'net_income' %}bg-emerald-50/40{% elif row.row_type == 'result' %}bg-slate-50/30{% endif %}">
-                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
+                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] whitespace-normal break-words leading-snug shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'plus' %}
                                     <span class="text-sky-600 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-900 font-bold">{{ row.label }}</span>
@@ -874,7 +874,7 @@
                 <table class="w-full text-xs text-left border-collapse statement-table">
                     <thead>
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                            <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Partida de Flujo de Fondos</th>
+                            <th class="py-3 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] w-80 shadow-[1px_0_0_0_#e2e8f0]">Partida de Flujo de Fondos</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
                             <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Ben. Neto (LTM)">% s/ Ben. Neto (LTM)</th>
                             {% for p in statements_annual_fys %}
@@ -892,7 +892,7 @@
                         </tr>
                         {% else %}
                         <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'result' %}bg-slate-50/30{% endif %}">
-                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
+                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] whitespace-normal break-words leading-snug shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'plus' %}
                                     <span class="text-sky-600 font-bold mr-1">{{ row.operator }}</span>
                                     <span class="text-slate-800">{{ row.label }}</span>
@@ -981,7 +981,7 @@
                 <table class="w-full text-xs text-left border-collapse statement-table">
                     <thead>
                         <tr class="bg-white border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                            <th class="py-3 px-5 sticky left-0 bg-white z-10 w-80">Cuenta Patrimonial</th>
+                            <th class="py-3 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] w-80 shadow-[1px_0_0_0_#e2e8f0]">Cuenta Patrimonial</th>
                             <th class="py-3 px-3 text-right bg-sky-50/50 text-sky-800 font-black border-x border-sky-100">{{ statements_ltm }}</th>
                             <th class="py-3 px-4 text-right col-pct col-meta-hdr text-slate-600 bg-slate-50/60 font-bold border-r-2 border-slate-300" data-base-title="% s/ Activos (LTM)">% s/ Activos (LTM)</th>
                             {% for p in statements_annual_fys %}
@@ -999,7 +999,7 @@
                         </tr>
                         {% else %}
                         <tr class="statement-row hover:bg-slate-50/80 transition {% if row.row_type == 'net_income' %}bg-emerald-50/40{% elif row.row_type == 'net_cash' %}bg-emerald-50/20{% elif row.row_type == 'subtotal' %}bg-sky-50/25{% elif row.row_type == 'metric' %}bg-indigo-50/20{% elif row.row_type == 'result' %}bg-slate-50/50{% elif row.row_type == 'discrepancy_alert' %}bg-amber-50/30{% endif %}">
-                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 whitespace-nowrap {% if row.indent %}pl-9{% endif %}">
+                            <td class="py-2.5 px-5 sticky left-0 bg-white z-10 min-w-[220px] max-w-[340px] whitespace-normal break-words leading-snug shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-9{% endif %}">
                                 {% if row.row_type == 'result' %}
                                     <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-xs">
                                         <span class="text-emerald-700 font-black">{{ row.operator }}</span> {{ row.label }}

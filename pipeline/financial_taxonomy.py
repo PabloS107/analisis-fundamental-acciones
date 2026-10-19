@@ -216,6 +216,7 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "MarketableSecuritiesCurrent",
         "ShortTermInvestments",
         "AvailableForSaleSecuritiesCurrent",
+        "AvailableForSaleSecuritiesDebtSecuritiesCurrent",
         "DebtSecuritiesCurrent",
         "EquitySecuritiesFvNi",
         "MarketableSecurities",
@@ -631,6 +632,7 @@ REIT_TAXONOMY_MAP: Dict[str, List[str]] = {
 INSURANCE_TAXONOMY_MAP: Dict[str, List[str]] = {
     "net_premiums_earned": [
         "PremiumsEarnedNet",
+        "PremiumsEarnedNetPropertyAndCasualty",
         "NetPremiumsEarned",
         "InsurancePremiumsEarnedNet",
         "PremiumsEarned",

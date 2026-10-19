@@ -2102,8 +2102,25 @@ def company_detail(request, ticker):
                 "pct_mode": None
             }
 
-        is_eps = ("per share" in lbl_lower) or ("earningspershare" in conc_lower) or conc_lower.endswith("pershare")
-        is_shares = ("shares" in conc_lower and "pershare" not in conc_lower) or ("number of shares" in lbl_lower) or ("shares outstanding" in lbl_lower)
+        # Cuentas patrimoniales de capital, valores contables y flujos de caja en USD nunca son EPS ni conteo de acciones
+        is_dollar_account = any(k in conc_lower for k in [
+            "value", "capital", "equity", "proceeds", "payments", "accruals", "repurchase", "borrowings", "cash"
+        ]) or any(k in lbl_lower for k in [
+            "par value", "stated value", "additional paid", "common stock, $", "preferred stock, $"
+        ])
+
+        is_eps = not is_dollar_account and (
+            "earningspershare" in conc_lower
+            or conc_lower.endswith("earningspershare")
+            or (("per share" in lbl_lower or "pershare" in conc_lower) and any(w in conc_lower or w in lbl_lower for w in ["basic", "diluted", "earnings", "loss", "dividend", "distribution"]))
+        )
+        is_shares = not is_dollar_account and not is_eps and (
+            "weightedaveragenumberofshares" in conc_lower
+            or "weightedaveragenumberofdilutedshares" in conc_lower
+            or conc_lower in ("commonstocksharesoutstanding", "commonstocksharesissued", "sharesoutstanding", "preferredstocksharesoutstanding")
+            or ("number of shares" in lbl_lower and "value" not in conc_lower)
+            or ("shares outstanding" in lbl_lower and "value" not in conc_lower and "par value" not in lbl_lower)
+        )
 
         data_m = {}
         for p in statements_fys:
