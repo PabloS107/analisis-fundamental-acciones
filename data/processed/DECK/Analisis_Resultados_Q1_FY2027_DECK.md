@@ -1,6 +1,6 @@
 # DECKERS OUTDOOR CORPORATION (NYSE: DECK)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q1 FY2027 & Gobernanza Corporativa
-*Fecha de Emisión: 17 de Septiembre de 2026 | CIK SEC: 0000910521*  
+*Fecha de Emisión: 20 de Septiembre de 2026 | CIK SEC: 0000910521*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript*
 
 ---
@@ -791,18 +791,18 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **WACC (Tasa de Descuento)** | 10.52% | 10.90% | -0.38 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 20.2% | 24.40% | -4.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **-3.2%** | **-5.4%** | **+2.2 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **-3.1%** | **-5.3%** | **+2.2 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 9.52% (Bajo / Expansión) | -3.6% | -4.0% | -4.4% | -4.8% | -5.3% | -5.8% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 10.02% (Favorable) | -2.9% | -3.2% | -3.6% | -4.0% | -4.4% | -4.9% | Escenario de sensibilidad operativa. |
-| 10.52% (WACC Auditado Base) | -2.1% | -2.4% | -2.8% | -3.2% | -3.6% | -4.0% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 11.02% (Exigente) | -1.4% | -1.7% | -2.0% | -2.4% | -2.8% | -3.2% | Escenario de sensibilidad operativa. |
-| 11.52% (Estrés / Tipos Altos) | -0.7% | -1.0% | -1.3% | -1.6% | -2.0% | -2.3% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 9.52% (Bajo / Expansión) | -3.5% | -3.9% | -4.3% | -4.7% | -5.2% | -5.7% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.02% (Favorable) | -2.8% | -3.1% | -3.5% | -3.9% | -4.3% | -4.8% | Escenario de sensibilidad operativa. |
+| 10.52% (WACC Auditado Base) | -2.0% | -2.3% | -2.7% | -3.1% | -3.5% | -3.9% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.02% (Exigente) | -1.3% | -1.6% | -1.9% | -2.3% | -2.7% | -3.1% | Escenario de sensibilidad operativa. |
+| 11.52% (Estrés / Tipos Altos) | -0.6% | -0.9% | -1.2% | -1.5% | -1.9% | -2.2% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -813,7 +813,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Calidad de Beneficios** | Ratio Sloan: -4.73% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($1.18 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: INFINITA (SIN DEUDA) / Altman Z'': 8.59 | **SINTÉTICO AAA** | Cero deuda neta; colchón de liquidez de $1.6B. |
 | **Productividad del Capital** | ROC Greenblatt: 234.1% / ROIC Adj: 48.9% | **COMPOUNDING MACHINE** | Spread económico de +38.4 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: -3.2% - -5.4% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
+| **Valoración de Mercado** | Crecimiento Implícito: -3.1% - -5.3% | **VALORACIÓN ATRACTIVA** | Exigencia asumible; requiere sostener la expansión global de HOKA, UGG y canal DTC. |
 
 
 

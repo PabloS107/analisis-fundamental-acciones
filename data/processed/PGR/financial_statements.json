@@ -6835,7 +6835,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Ingresos totales",
+        "orig_tooltip": "Revenues (us-gaap_RevenuesAbstract)"
       },
       {
         "label": "Net premiums earned",
@@ -6858,7 +6860,9 @@
           "FY2015": 19899100000.0,
           "FY2014": 18398500000.0,
           "LTM": 84483000000.0
-        }
+        },
+        "spanish_label": "Primas devengadas netas",
+        "orig_tooltip": "Net premiums earned (us-gaap_PremiumsEarnedNet)"
       },
       {
         "label": "Investment income",
@@ -6881,7 +6885,9 @@
           "FY2015": 454600000.0,
           "FY2014": 408400000.0,
           "LTM": 3794000000.0
-        }
+        },
+        "spanish_label": "Ingresos por rendimientos de inversiones financieras",
+        "orig_tooltip": "Investment income (us-gaap_InterestAndDividendIncomeOperating)"
       },
       {
         "label": "Net realized gains (losses) on securities:",
@@ -6904,7 +6910,9 @@
           "FY2015": 136500000.0,
           "FY2014": 232100000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Net realized gains (losses) on securities: (us-gaap_RealizedInvestmentGainsLossesAbstract)"
       },
       {
         "label": "Net realized gains (losses) on security sales",
@@ -6927,7 +6935,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 340000000.0
-        }
+        },
+        "spanish_label": "Ganancias (pérdidas) netas realizadas en venta de valores",
+        "orig_tooltip": "Net realized gains (losses) on security sales (us-gaap_DebtAndEquitySecuritiesRealizedGainLoss)"
       },
       {
         "label": "Net holding period gains (losses) on securities",
@@ -6950,7 +6960,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 697000000.0
-        }
+        },
+        "spanish_label": "Ganancias (pérdidas) no realizadas por tenencia de valores",
+        "orig_tooltip": "Net holding period gains (losses) on securities (us-gaap_DebtAndEquitySecuritiesUnrealizedGainLoss)"
       },
       {
         "label": "Net impairment losses",
@@ -6973,7 +6985,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pérdidas netas por deterioro permanente de valores",
+        "orig_tooltip": "Net impairment losses (pgr_TotalOtherThanTemporaryImpairmentLoss)"
       },
       {
         "label": "Total net realized gains (losses) on securities",
@@ -6996,7 +7010,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 1036000000.0
-        }
+        },
+        "spanish_label": "Resultado neto realizado en enajenación de valores",
+        "orig_tooltip": "Total net realized gains (losses) on securities (us-gaap_DebtAndEquitySecuritiesGainLoss)"
       },
       {
         "label": "Fees and other revenues",
@@ -7019,7 +7035,9 @@
           "FY2015": 302000000.0,
           "FY2014": 309100000.0,
           "LTM": 1208000000.0
-        }
+        },
+        "spanish_label": "Ingresos por comisiones y otras tarifas de seguros",
+        "orig_tooltip": "Fees and other revenues (pgr_FeesAndOtherRevenues)"
       },
       {
         "label": "Service revenues",
@@ -7042,7 +7060,9 @@
           "FY2015": 86300000.0,
           "FY2014": 56000000.0,
           "LTM": 534000000.0
-        }
+        },
+        "spanish_label": "Ingresos por prestación de servicios de seguros",
+        "orig_tooltip": "Service revenues (pgr_NonInsuranceServiceRevenues)"
       },
       {
         "label": "Total revenues",
@@ -7065,7 +7085,9 @@
           "FY2015": 20853800000.0,
           "FY2014": 19391400000.0,
           "LTM": 87683000000.0
-        }
+        },
+        "spanish_label": "Total ingresos consolidados",
+        "orig_tooltip": "Total revenues (us-gaap_Revenues)"
       },
       {
         "label": "Expenses",
@@ -7088,7 +7110,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Gastos",
+        "orig_tooltip": "Expenses (us-gaap_BenefitsLossesAndExpensesAbstract)"
       },
       {
         "label": "Losses and loss adjustment expenses",
@@ -7111,7 +7135,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 55949000000.0
-        }
+        },
+        "spanish_label": "Siniestros incurridos y gastos de liquidación",
+        "orig_tooltip": "Losses and loss adjustment expenses (us-gaap_PolicyholderBenefitsAndClaimsIncurredNet)"
       },
       {
         "label": "Policy acquisition costs",
@@ -7134,7 +7160,9 @@
           "FY2015": 1651800000.0,
           "FY2014": 1524000000.0,
           "LTM": 6234000000.0
-        }
+        },
+        "spanish_label": "Costes de adquisición y comercialización de pólizas",
+        "orig_tooltip": "Policy acquisition costs (us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense)"
       },
       {
         "label": "Other underwriting expenses",
@@ -7157,7 +7185,9 @@
           "FY2015": 2712100000.0,
           "FY2014": 2467100000.0,
           "LTM": 11978000000.0
-        }
+        },
+        "spanish_label": "Otros gastos de suscripción técnica",
+        "orig_tooltip": "Other underwriting expenses (us-gaap_OtherUnderwritingExpense)"
       },
       {
         "label": "Policyholder credit expense",
@@ -7180,7 +7210,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Bonificaciones comerciales a tomadores de seguros",
+        "orig_tooltip": "Policyholder credit expense (pgr_PolicyholderCreditExpenseProfitLimit)"
       },
       {
         "label": "Investment expenses",
@@ -7203,7 +7235,9 @@
           "FY2015": 22800000.0,
           "FY2014": 18900000.0,
           "LTM": 36000000.0
-        }
+        },
+        "spanish_label": "Gastos directos de gestión de inversiones",
+        "orig_tooltip": "Investment expenses (us-gaap_InvestmentIncomeInvestmentExpense)"
       },
       {
         "label": "Service expenses",
@@ -7226,7 +7260,9 @@
           "FY2015": 77500000.0,
           "FY2014": 50900000.0,
           "LTM": 557000000.0
-        }
+        },
+        "spanish_label": "Gastos operativos de prestación de servicios",
+        "orig_tooltip": "Service expenses (pgr_NonInsuranceServiceExpenses)"
       },
       {
         "label": "Interest expense",
@@ -7249,7 +7285,9 @@
           "FY2015": 136000000.0,
           "FY2014": 116900000.0,
           "LTM": 297000000.0
-        }
+        },
+        "spanish_label": "Gastos por intereses financieros",
+        "orig_tooltip": "Interest expense (us-gaap_InterestExpenseDebt)"
       },
       {
         "label": "Total expenses",
@@ -7272,7 +7310,9 @@
           "FY2015": 18942200000.0,
           "FY2014": 17484000000.0,
           "LTM": 76275000000.0
-        }
+        },
+        "spanish_label": "Gastos operativos y de explotación totales",
+        "orig_tooltip": "Total expenses (us-gaap_BenefitsLossesAndExpenses)"
       },
       {
         "label": "Net Income",
@@ -7295,7 +7335,9 @@
           "FY2015": 1300500000.0,
           "FY2014": 1281000000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net Income (us-gaap_NetIncomeLossAbstract)"
       },
       {
         "label": "Income before income taxes",
@@ -7318,7 +7360,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 14780000000.0
-        }
+        },
+        "spanish_label": "Beneficio antes de impuestos (EBT)",
+        "orig_tooltip": "Income before income taxes (us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest)"
       },
       {
         "label": "Provision for income taxes",
@@ -7341,7 +7385,9 @@
           "FY2015": 611100000.0,
           "FY2014": 626400000.0,
           "LTM": 3085000000.0
-        }
+        },
+        "spanish_label": "Provisión para impuesto a las ganancias",
+        "orig_tooltip": "Provision for income taxes (us-gaap_IncomeTaxExpenseBenefit)"
       },
       {
         "label": "Net income",
@@ -7364,7 +7410,9 @@
           "FY2015": 1267600000.0,
           "FY2014": 1281000000.0,
           "LTM": 11695000000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net income (us-gaap_NetIncomeLoss)"
       },
       {
         "label": "Computation of Earnings Per Common Share",
@@ -7387,7 +7435,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cálculo de ganancias por acción ordinaria",
+        "orig_tooltip": "Computation of Earnings Per Common Share (us-gaap_EarningsPerShareAbstract)"
       },
       {
         "label": "Less: Preferred share dividends and other",
@@ -7410,7 +7460,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 0.0
-        }
+        },
+        "spanish_label": "Menos: Dividendos de acciones preferentes y otros",
+        "orig_tooltip": "Less: Preferred share dividends and other (us-gaap_PreferredStockDividendsIncomeStatementImpact)"
       },
       {
         "label": "Net income available to common shareholders",
@@ -7433,7 +7485,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 11308000000.0
-        }
+        },
+        "spanish_label": "Beneficio neto disponible para los accionistas ordinarios",
+        "orig_tooltip": "Net income available to common shareholders (us-gaap_NetIncomeLossAvailableToCommonStockholdersBasic)"
       },
       {
         "label": "Average common shares outstanding – Basic",
@@ -7456,7 +7510,9 @@
           "FY2015": 585500000.0,
           "FY2014": 590600000.0,
           "LTM": 585350000.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias básicas",
+        "orig_tooltip": "Average common shares outstanding – Basic (us-gaap_WeightedAverageNumberOfSharesOutstandingBasic)"
       },
       {
         "label": "Net effect of dilutive stock-based compensation",
@@ -7479,7 +7535,9 @@
           "FY2015": 3700000.0,
           "FY2014": 4200000.0,
           "LTM": 1300000.0
-        }
+        },
+        "spanish_label": "Efecto dilutivo de compensación en acciones",
+        "orig_tooltip": "Net effect of dilutive stock-based compensation (us-gaap_WeightedAverageNumberDilutedSharesOutstandingAdjustment)"
       },
       {
         "label": "Total average equivalent common shares – Diluted",
@@ -7502,7 +7560,9 @@
           "FY2015": 589200000.0,
           "FY2014": 594800000.0,
           "LTM": 586850000.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias promedio equivalentes (Diluidas)",
+        "orig_tooltip": "Total average equivalent common shares – Diluted (us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding)"
       },
       {
         "label": "Basic: Earnings per common share (usd per share)",
@@ -7525,7 +7585,9 @@
           "FY2015": 2.16,
           "FY2014": 2.17,
           "LTM": 19.99
-        }
+        },
+        "spanish_label": "Beneficio básico por acción común ($)",
+        "orig_tooltip": "Basic: Earnings per common share (usd per share) (us-gaap_EarningsPerShareBasic)"
       },
       {
         "label": "Diluted: Earnings per common share (usd per share)",
@@ -7548,7 +7610,9 @@
           "FY2015": 2.15,
           "FY2014": 2.15,
           "LTM": 19.94
-        }
+        },
+        "spanish_label": "Beneficio diluido por acción común ($)",
+        "orig_tooltip": "Diluted: Earnings per common share (usd per share) (us-gaap_EarningsPerShareDiluted)"
       }
     ],
     "balance_sheet": [
@@ -7573,7 +7637,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activos",
+        "orig_tooltip": "Assets (us-gaap_AssetsAbstract)"
       },
       {
         "label": "Available-for-sale securities, at fair value:",
@@ -7596,7 +7662,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Available-for-sale securities, at fair value: (us-gaap_AvailableForSaleSecuritiesAbstract)"
       },
       {
         "label": "Fixed maturities (amortized cost: $82,704 and $77,126)",
@@ -7619,7 +7687,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 90435000000.0
-        }
+        },
+        "spanish_label": "Valores de renta fija y vencimiento fijo (bonos y pagarés)",
+        "orig_tooltip": "Fixed maturities (amortized cost: $82,704 and $77,126) (pgr_DebtSecuritiesAvailableforsaleFixedMaturities)"
       },
       {
         "label": "Short-term investments (amortized cost: $10,005 and $615)",
@@ -7642,7 +7712,9 @@
           "FY2015": 2172000000.0,
           "FY2014": null,
           "LTM": 1978000000.0
-        }
+        },
+        "spanish_label": "Inversiones financieras temporales a corto plazo",
+        "orig_tooltip": "Short-term investments (amortized cost: $10,005 and $615) (us-gaap_ShortTermInvestments)"
       },
       {
         "label": "Total available-for-sale securities",
@@ -7665,7 +7737,9 @@
           "FY2015": 15332200000.0,
           "FY2014": null,
           "LTM": 92413000000.0
-        }
+        },
+        "spanish_label": "Cartera total de valores disponibles para la venta (AFS)",
+        "orig_tooltip": "Total available-for-sale securities (us-gaap_AvailableForSaleSecuritiesDebtSecurities)"
       },
       {
         "label": "Equity securities, at fair value:",
@@ -7688,7 +7762,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Inversiones en valores de renta variable",
+        "orig_tooltip": "Equity securities, at fair value: (us-gaap_EquitySecuritiesFVNIAbstract)"
       },
       {
         "label": "Nonredeemable preferred stocks (cost: $419 and $756)",
@@ -7711,7 +7787,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 276000000.0
-        }
+        },
+        "spanish_label": "Acciones preferentes no rescatables",
+        "orig_tooltip": "Nonredeemable preferred stocks (cost: $419 and $756) (pgr_EquitySecuritiesFVNINonredeemablePreferredStock)"
       },
       {
         "label": "Common equities (cost: $819 and $745)",
@@ -7734,7 +7812,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 4532000000.0
-        }
+        },
+        "spanish_label": "Inversiones en acciones ordinarias de renta variable",
+        "orig_tooltip": "Common equities (cost: $819 and $745) (pgr_EquitySecuritiesFVNICommonEquities)"
       },
       {
         "label": "Total equity securities",
@@ -7757,7 +7837,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 4808000000.0
-        }
+        },
+        "spanish_label": "Inversiones en valores de renta variable",
+        "orig_tooltip": "Total equity securities (us-gaap_EquitySecuritiesFvNi)"
       },
       {
         "label": "Total investments",
@@ -7780,7 +7862,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 97221000000.0
-        }
+        },
+        "spanish_label": "Cartera total de activos financieros e inversiones",
+        "orig_tooltip": "Total investments (us-gaap_Investments)"
       },
       {
         "label": "Cash and cash equivalents",
@@ -7803,7 +7887,9 @@
           "FY2015": 224100000.0,
           "FY2014": null,
           "LTM": 178000000.0
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Cash and cash equivalents (us-gaap_Cash)"
       },
       {
         "label": "Restricted cash and cash equivalents",
@@ -7826,7 +7912,9 @@
           "FY2015": 300000.0,
           "FY2014": null,
           "LTM": 15000000.0
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Restricted cash and cash equivalents (us-gaap_RestrictedCashAndCashEquivalents)"
       },
       {
         "label": "Total cash, cash equivalents, restricted cash, and restricted cash equivalents",
@@ -7849,7 +7937,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 193000000.0
-        }
+        },
+        "spanish_label": "Total efectivo, equivalentes de efectivo y fondos restringidos",
+        "orig_tooltip": "Total cash, cash equivalents, restricted cash, and restricted cash equivalents (us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents)"
       },
       {
         "label": "Accrued investment income",
@@ -7872,7 +7962,9 @@
           "FY2015": 102200000.0,
           "FY2014": null,
           "LTM": 728000000.0
-        }
+        },
+        "spanish_label": "Ingresos por inversiones devengados y pendientes de cobro",
+        "orig_tooltip": "Accrued investment income (us-gaap_AccruedInvestmentIncomeReceivable)"
       },
       {
         "label": "Premiums receivable, net of allowance for credit losses of $552 and $460",
@@ -7895,7 +7987,9 @@
           "FY2015": 3987700000.0,
           "FY2014": null,
           "LTM": 17106000000.0
-        }
+        },
+        "spanish_label": "Primas de seguros pendientes de cobro",
+        "orig_tooltip": "Premiums receivable, net of allowance for credit losses of $552 and $460 (us-gaap_PremiumsReceivableAtCarryingValue)"
       },
       {
         "label": "Reinsurance recoverables",
@@ -7918,7 +8012,9 @@
           "FY2015": 1488800000.0,
           "FY2014": null,
           "LTM": 3919000000.0
-        }
+        },
+        "spanish_label": "Créditos frente a entidades reaseguradoras por siniestros",
+        "orig_tooltip": "Reinsurance recoverables (us-gaap_ReinsuranceRecoverablesOnPaidAndUnpaidLosses)"
       },
       {
         "label": "Prepaid reinsurance premiums",
@@ -7941,7 +8037,9 @@
           "FY2015": 199300000.0,
           "FY2014": null,
           "LTM": 202000000.0
-        }
+        },
+        "spanish_label": "Primas de reaseguro cedidas pagadas por anticipado",
+        "orig_tooltip": "Prepaid reinsurance premiums (us-gaap_PrepaidReinsurancePremiums)"
       },
       {
         "label": "Deferred acquisition costs",
@@ -7964,7 +8062,9 @@
           "FY2015": 564100000.0,
           "FY2014": null,
           "LTM": 2211000000.0
-        }
+        },
+        "spanish_label": "Costes de adquisición de pólizas diferidos",
+        "orig_tooltip": "Deferred acquisition costs (us-gaap_DeferredPolicyAcquisitionCosts)"
       },
       {
         "label": "Property and equipment, net of accumulated depreciation of $1,460 and $1,461",
@@ -7987,7 +8087,9 @@
           "FY2015": 1037200000.0,
           "FY2014": null,
           "LTM": 922000000.0
-        }
+        },
+        "spanish_label": "Propiedad, planta y equipo (PP&E neto)",
+        "orig_tooltip": "Property and equipment, net of accumulated depreciation of $1,460 and $1,461 (us-gaap_PropertyPlantAndEquipmentNet)"
       },
       {
         "label": "Net federal deferred income taxes",
@@ -8010,7 +8112,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Impuestos federales diferidos netos",
+        "orig_tooltip": "Net federal deferred income taxes (pgr_DeferredTaxAssetsFederalTax)"
       },
       {
         "label": "Other assets",
@@ -8033,7 +8137,9 @@
           "FY2015": 335800000.0,
           "FY2014": null,
           "LTM": 1742000000.0
-        }
+        },
+        "spanish_label": "Otros activos operativos y no corrientes",
+        "orig_tooltip": "Other assets (us-gaap_OtherAssets)"
       },
       {
         "label": "Total assets",
@@ -8056,7 +8162,9 @@
           "FY2015": 29819300000.0,
           "FY2014": null,
           "LTM": 124925000000.0
-        }
+        },
+        "spanish_label": "Total de activos",
+        "orig_tooltip": "Total assets (us-gaap_Assets)"
       },
       {
         "label": "Liabilities",
@@ -8079,7 +8187,9 @@
           "FY2015": 22065000000.0,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pasivos",
+        "orig_tooltip": "Liabilities (us-gaap_LiabilitiesAbstract)"
       },
       {
         "label": "Unearned premiums",
@@ -8102,7 +8212,9 @@
           "FY2015": 6621800000.0,
           "FY2014": null,
           "LTM": 27401000000.0
-        }
+        },
+        "spanish_label": "Provisiones para primas no devengadas",
+        "orig_tooltip": "Unearned premiums (us-gaap_UnearnedPremiums)"
       },
       {
         "label": "Loss and loss adjustment expense reserves",
@@ -8125,7 +8237,9 @@
           "FY2015": 10039000000.0,
           "FY2014": null,
           "LTM": 45567000000.0
-        }
+        },
+        "spanish_label": "Reservas técnicas para siniestros y gastos de liquidación",
+        "orig_tooltip": "Loss and loss adjustment expense reserves (us-gaap_LiabilityForClaimsAndClaimsAdjustmentExpense)"
       },
       {
         "label": "Dividends payable on common shares",
@@ -8148,7 +8262,9 @@
           "FY2015": 519200000.0,
           "FY2014": null,
           "LTM": 58000000.0
-        }
+        },
+        "spanish_label": "Dividendos a pagar sobre acciones ordinarias",
+        "orig_tooltip": "Dividends payable on common shares (us-gaap_DividendsPayableCurrentAndNoncurrent)"
       },
       {
         "label": "Accounts payable, accrued expenses, and other liabilities",
@@ -8171,7 +8287,9 @@
           "FY2015": 2067800000.0,
           "FY2014": null,
           "LTM": 9179000000.0
-        }
+        },
+        "spanish_label": "Otros pasivos operativos no corrientes",
+        "orig_tooltip": "Accounts payable, accrued expenses, and other liabilities (us-gaap_AccountsPayableAndAccruedLiabilitiesCurrentAndNoncurrent)"
       },
       {
         "label": "Debt",
@@ -8194,7 +8312,9 @@
           "FY2015": 2707900000.0,
           "FY2014": null,
           "LTM": 8387000000.0
-        }
+        },
+        "spanish_label": "Deuda financiera consolidada (Corto y Largo Plazo)",
+        "orig_tooltip": "Debt (us-gaap_DebtLongtermAndShorttermCombinedAmount)"
       },
       {
         "label": "Total liabilities",
@@ -8217,7 +8337,9 @@
           "FY2015": 22065000000.0,
           "FY2014": null,
           "LTM": 90592000000.0
-        }
+        },
+        "spanish_label": "Total de pasivos",
+        "orig_tooltip": "Total liabilities (us-gaap_Liabilities)"
       },
       {
         "label": "Commitments and Contingencies",
@@ -8240,7 +8362,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Compromisos contractuales y contingencias legales",
+        "orig_tooltip": "Commitments and Contingencies (us-gaap_CommitmentsAndContingencies)"
       },
       {
         "label": "Shareholders' Equity",
@@ -8263,7 +8387,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Patrimonio neto de los accionistas",
+        "orig_tooltip": "Shareholders' Equity (us-gaap_StockholdersEquityAbstract)"
       },
       {
         "label": "Common shares, $1.00 par value (authorized 900",
@@ -8286,7 +8412,9 @@
           "FY2015": 583600000.0,
           "FY2014": null,
           "LTM": 581000000.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias emitidas y en circulación",
+        "orig_tooltip": "Common shares, $1.00 par value (authorized 900 (us-gaap_CommonStockValueOutstanding)"
       },
       {
         "label": "Paid-in capital",
@@ -8309,7 +8437,9 @@
           "FY2015": 1218800000.0,
           "FY2014": null,
           "LTM": 2338000000.0
-        }
+        },
+        "spanish_label": "Prima de emisión y aportaciones adicionales de capital (APIC)",
+        "orig_tooltip": "Paid-in capital (us-gaap_AdditionalPaidInCapitalCommonStock)"
       },
       {
         "label": "Retained earnings",
@@ -8332,7 +8462,9 @@
           "FY2015": 4686600000.0,
           "FY2014": null,
           "LTM": 32261000000.0
-        }
+        },
+        "spanish_label": "Resultados acumulados / Ganancias retenidas",
+        "orig_tooltip": "Retained earnings (us-gaap_RetainedEarningsAccumulatedDeficit)"
       },
       {
         "label": "Accumulated other comprehensive income (loss):",
@@ -8355,7 +8487,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otro resultado integral acumulado (AOCI)",
+        "orig_tooltip": "Accumulated other comprehensive income (loss): (us-gaap_AOCIAttributableToParentAbstract)"
       },
       {
         "label": "Net unrealized gains (losses) on fixed-maturity securities",
@@ -8378,7 +8512,9 @@
           "FY2015": 809000000.0,
           "FY2014": null,
           "LTM": -832000000.0
-        }
+        },
+        "spanish_label": "Plusvalías (minusvalías) no realizadas en cartera de renta fija",
+        "orig_tooltip": "Net unrealized gains (losses) on fixed-maturity securities (us-gaap_AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax)"
       },
       {
         "label": "Net unrealized losses on forecasted transactions",
@@ -8401,7 +8537,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": -13000000.0
-        }
+        },
+        "spanish_label": "Pérdidas no realizadas en coberturas de flujos previstos",
+        "orig_tooltip": "Net unrealized losses on forecasted transactions (us-gaap_AociLossCashFlowHedgeCumulativeGainLossAfterTax)"
       },
       {
         "label": "Foreign currency translation adjustment",
@@ -8424,7 +8562,9 @@
           "FY2015": -1500000.0,
           "FY2014": null,
           "LTM": -2000000.0
-        }
+        },
+        "spanish_label": "Ajuste por conversión de divisas extranjeras",
+        "orig_tooltip": "Foreign currency translation adjustment (us-gaap_AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax)"
       },
       {
         "label": "Total accumulated other comprehensive income (loss)",
@@ -8447,7 +8587,9 @@
           "FY2015": 800400000.0,
           "FY2014": null,
           "LTM": -847000000.0
-        }
+        },
+        "spanish_label": "Otro resultado integral acumulado (AOCI)",
+        "orig_tooltip": "Total accumulated other comprehensive income (loss) (us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax)"
       },
       {
         "label": "Total shareholders’ equity",
@@ -8470,7 +8612,9 @@
           "FY2015": 7289400000.0,
           "FY2014": null,
           "LTM": 34333000000.0
-        }
+        },
+        "spanish_label": "Total de patrimonio neto de los accionistas",
+        "orig_tooltip": "Total shareholders’ equity (us-gaap_StockholdersEquity)"
       },
       {
         "label": "Total liabilities and shareholders’ equity",
@@ -8493,7 +8637,9 @@
           "FY2015": 29819300000.0,
           "FY2014": null,
           "LTM": 124925000000.0
-        }
+        },
+        "spanish_label": "Patrimonio neto de los accionistas",
+        "orig_tooltip": "Total liabilities and shareholders’ equity (us-gaap_LiabilitiesAndStockholdersEquity)"
       }
     ],
     "cash_flow_statement": [
@@ -8518,7 +8664,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujos de efectivo de actividades de operación",
+        "orig_tooltip": "Cash Flows From Operating Activities (us-gaap_NetCashProvidedByUsedInOperatingActivitiesAbstract)"
       },
       {
         "label": "Net income",
@@ -8541,7 +8689,9 @@
           "FY2015": 1300500000.0,
           "FY2014": 1281000000.0,
           "LTM": 11695000000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net income (us-gaap_NetIncomeLoss)"
       },
       {
         "label": "Adjustments to reconcile net income to net cash provided by operating activities:",
@@ -8564,7 +8714,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujo neto provisto por actividades operativas",
+        "orig_tooltip": "Adjustments to reconcile net income to net cash provided by operating activities: (us-gaap_AdjustmentsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivitiesAbstract)"
       },
       {
         "label": "Depreciation",
@@ -8587,7 +8739,9 @@
           "FY2015": 103700000.0,
           "FY2014": 97100000.0,
           "LTM": 321000000.0
-        }
+        },
+        "spanish_label": "Dotación para depreciación de inmovilizado",
+        "orig_tooltip": "Depreciation (us-gaap_Depreciation)"
       },
       {
         "label": "Net amortization (accretion) of fixed-income securities",
@@ -8610,7 +8764,9 @@
           "FY2015": 98400000.0,
           "FY2014": 78200000.0,
           "LTM": -148000000.0
-        }
+        },
+        "spanish_label": "Amortización neta (devengo) de cartera de renta fija",
+        "orig_tooltip": "Net amortization (accretion) of fixed-income securities (us-gaap_AccretionAmortizationOfDiscountsAndPremiumsInvestments)"
       },
       {
         "label": "Amortization of equity-based compensation",
@@ -8633,7 +8789,9 @@
           "FY2015": 66200000.0,
           "FY2014": 51400000.0,
           "LTM": 136000000.0
-        }
+        },
+        "spanish_label": "Amortización del gasto por remuneración basada en acciones",
+        "orig_tooltip": "Amortization of equity-based compensation (us-gaap_RestrictedStockExpense)"
       },
       {
         "label": "Net realized (gains) losses on securities",
@@ -8656,7 +8814,9 @@
           "FY2015": -112700000.0,
           "FY2014": -224200000.0,
           "LTM": -1036000000.0
-        }
+        },
+        "spanish_label": "(Ganancias) pérdidas netas realizadas en venta de valores",
+        "orig_tooltip": "Net realized (gains) losses on securities (us-gaap_RealizedInvestmentGainsLosses)"
       },
       {
         "label": "Net (gains) losses on disposition of property and equipment",
@@ -8679,7 +8839,9 @@
           "FY2015": 2000000.0,
           "FY2014": 5400000.0,
           "LTM": 17000000.0
-        }
+        },
+        "spanish_label": "(Ganancias) pérdidas netas por enajenación de inmovilizado",
+        "orig_tooltip": "Net (gains) losses on disposition of property and equipment (us-gaap_GainLossOnSaleOfPropertyPlantEquipment)"
       },
       {
         "label": "Changes in:",
@@ -8702,7 +8864,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Variaciones en",
+        "orig_tooltip": "Changes in: (us-gaap_IncreaseDecreaseInOperatingCapitalAbstract)"
       },
       {
         "label": "Premiums receivable",
@@ -8725,7 +8889,9 @@
           "FY2015": -421100000.0,
           "FY2014": -227100000.0,
           "LTM": -700000000.0
-        }
+        },
+        "spanish_label": "Primas de seguros pendientes de cobro",
+        "orig_tooltip": "Premiums receivable (us-gaap_IncreaseDecreaseInPremiumsReceivable)"
       },
       {
         "label": "Reinsurance recoverables",
@@ -8748,7 +8914,9 @@
           "FY2015": -202600000.0,
           "FY2014": -141700000.0,
           "LTM": 278000000.0
-        }
+        },
+        "spanish_label": "Créditos frente a entidades reaseguradoras por siniestros",
+        "orig_tooltip": "Reinsurance recoverables (us-gaap_IncreaseDecreaseInReinsuranceRecoverable)"
       },
       {
         "label": "Prepaid reinsurance premiums",
@@ -8771,7 +8939,9 @@
           "FY2015": 32500000.0,
           "FY2014": -10400000.0,
           "LTM": 61000000.0
-        }
+        },
+        "spanish_label": "Primas de reaseguro cedidas pagadas por anticipado",
+        "orig_tooltip": "Prepaid reinsurance premiums (us-gaap_IncreaseDecreaseInPrepaidReinsurancePremiums)"
       },
       {
         "label": "Deferred acquisition costs",
@@ -8794,7 +8964,9 @@
           "FY2015": -42300000.0,
           "FY2014": -9600000.0,
           "LTM": -101000000.0
-        }
+        },
+        "spanish_label": "Costes de adquisición de pólizas diferidos",
+        "orig_tooltip": "Deferred acquisition costs (us-gaap_IncreaseDecreaseInDeferredPolicyAcquisitionCosts)"
       },
       {
         "label": "Income taxes",
@@ -8817,7 +8989,9 @@
           "FY2015": -107200000.0,
           "FY2014": 97500000.0,
           "LTM": 214000000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios / Ganancias",
+        "orig_tooltip": "Income taxes (us-gaap_IncreaseDecreaseInIncomeTaxes)"
       },
       {
         "label": "Unearned premiums",
@@ -8840,7 +9014,9 @@
           "FY2015": 632400000.0,
           "FY2014": 266400000.0,
           "LTM": 1066000000.0
-        }
+        },
+        "spanish_label": "Provisiones para primas no devengadas",
+        "orig_tooltip": "Unearned premiums (us-gaap_IncreaseDecreaseInUnearnedPremiums)"
       },
       {
         "label": "Loss and loss adjustment expense reserves",
@@ -8863,7 +9039,9 @@
           "FY2015": 917700000.0,
           "FY2014": 378000000.0,
           "LTM": 4413000000.0
-        }
+        },
+        "spanish_label": "Reservas técnicas para siniestros y gastos de liquidación",
+        "orig_tooltip": "Loss and loss adjustment expense reserves (us-gaap_IncreaseDecreaseInLiabilityForClaimsAndClaimsAdjustmentExpenseReserve)"
       },
       {
         "label": "Accounts payable, accrued expenses, and other liabilities",
@@ -8886,7 +9064,9 @@
           "FY2015": 37900000.0,
           "FY2014": 92000000.0,
           "LTM": 434000000.0
-        }
+        },
+        "spanish_label": "Otros pasivos operativos no corrientes",
+        "orig_tooltip": "Accounts payable, accrued expenses, and other liabilities (us-gaap_IncreaseDecreaseInAccountsPayableAndAccruedLiabilities)"
       },
       {
         "label": "Other, net",
@@ -8909,7 +9089,9 @@
           "FY2015": -60200000.0,
           "FY2014": -13200000.0,
           "LTM": -311000000.0
-        }
+        },
+        "spanish_label": "Otros conceptos operativos netos",
+        "orig_tooltip": "Other, net (us-gaap_IncreaseDecreaseInOtherOperatingCapitalNet)"
       },
       {
         "label": "Net cash provided by operating activities",
@@ -8932,7 +9114,9 @@
           "FY2015": 2292900000.0,
           "FY2014": 1725600000.0,
           "LTM": 16339000000.0
-        }
+        },
+        "spanish_label": "Flujo neto provisto por actividades operativas",
+        "orig_tooltip": "Net cash provided by operating activities (us-gaap_NetCashProvidedByUsedInOperatingActivities)"
       },
       {
         "label": "Cash Flows From Investing Activities",
@@ -8955,7 +9139,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujos de efectivo de actividades de inversión",
+        "orig_tooltip": "Cash Flows From Investing Activities (us-gaap_NetCashProvidedByUsedInInvestingActivitiesAbstract)"
       },
       {
         "label": "Purchases:",
@@ -8978,7 +9164,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pagos por adquisición de inversiones de renta fija",
+        "orig_tooltip": "Purchases: (us-gaap_PaymentsToAcquireInvestmentsAbstract)"
       },
       {
         "label": "Fixed maturities",
@@ -9001,7 +9189,9 @@
           "FY2015": -9311100000.0,
           "FY2014": -7967500000.0,
           "LTM": -55424000000.0
-        }
+        },
+        "spanish_label": "Valores de renta fija y vencimiento fijo (bonos y pagarés)",
+        "orig_tooltip": "Fixed maturities (us-gaap_PaymentsToAcquireAvailableForSaleSecuritiesDebt)"
       },
       {
         "label": "Equity securities",
@@ -9024,7 +9214,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": -278000000.0
-        }
+        },
+        "spanish_label": "Inversiones en valores de renta variable",
+        "orig_tooltip": "Equity securities (us-gaap_PaymentsToAcquireEquitySecuritiesFvNi)"
       },
       {
         "label": "Sales:",
@@ -9047,7 +9239,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Sales",
+        "orig_tooltip": "Sales: (us-gaap_ProceedsFromSaleMaturityAndCollectionsOfInvestmentsAbstract)"
       },
       {
         "label": "Fixed maturities",
@@ -9070,7 +9264,9 @@
           "FY2015": 4913500000.0,
           "FY2014": 5637500000.0,
           "LTM": 37069000000.0
-        }
+        },
+        "spanish_label": "Valores de renta fija y vencimiento fijo (bonos y pagarés)",
+        "orig_tooltip": "Fixed maturities (us-gaap_ProceedsFromSaleOfAvailableForSaleSecuritiesDebt)"
       },
       {
         "label": "Equity securities",
@@ -9093,7 +9289,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 230000000.0
-        }
+        },
+        "spanish_label": "Inversiones en valores de renta variable",
+        "orig_tooltip": "Equity securities (us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi)"
       },
       {
         "label": "Maturities, paydowns, calls, and other:",
@@ -9116,7 +9314,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Maturities, paydowns, calls, and other",
+        "orig_tooltip": "Maturities, paydowns, calls, and other: (us-gaap_ProceedsFromSaleAndMaturityOfAvailableForSaleSecuritiesAbstract)"
       },
       {
         "label": "Fixed maturities",
@@ -9139,7 +9339,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 9544000000.0
-        }
+        },
+        "spanish_label": "Valores de renta fija y vencimiento fijo (bonos y pagarés)",
+        "orig_tooltip": "Fixed maturities (us-gaap_ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities)"
       },
       {
         "label": "Equity securities",
@@ -9162,7 +9364,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 262000000.0
-        }
+        },
+        "spanish_label": "Inversiones en valores de renta variable",
+        "orig_tooltip": "Equity securities (pgr_ProceedsFromMaturitiesPrepaymentsAndCallsOfEquitySecuritiesFVNI)"
       },
       {
         "label": "Net (purchases) sales of short-term investments",
@@ -9185,7 +9389,9 @@
           "FY2015": 20500000.0,
           "FY2014": -876000000.0,
           "LTM": 227000000.0
-        }
+        },
+        "spanish_label": "Inversiones financieras temporales a corto plazo",
+        "orig_tooltip": "Net (purchases) sales of short-term investments (us-gaap_PaymentsForProceedsFromShortTermInvestments)"
       },
       {
         "label": "Net change in unsettled security transactions",
@@ -9208,7 +9414,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": 265000000.0
-        }
+        },
+        "spanish_label": "Variación neta en operaciones de valores pendientes de liquidación",
+        "orig_tooltip": "Net change in unsettled security transactions (pgr_ProceedsFromPayablesToBrokerDealersInvestingActivities)"
       },
       {
         "label": "Purchases of property and equipment",
@@ -9231,7 +9439,9 @@
           "FY2015": -130700000.0,
           "FY2014": -108100000.0,
           "LTM": -388000000.0
-        }
+        },
+        "spanish_label": "Compras de propiedad y equipamiento (CapEx)",
+        "orig_tooltip": "Purchases of property and equipment (us-gaap_PaymentsToAcquirePropertyPlantAndEquipment)"
       },
       {
         "label": "Sales of property and equipment",
@@ -9254,7 +9464,9 @@
           "FY2015": 10600000.0,
           "FY2014": 5900000.0,
           "LTM": 63000000.0
-        }
+        },
+        "spanish_label": "Cobros por enajenación de inmovilizado material y equipos",
+        "orig_tooltip": "Sales of property and equipment (us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment)"
       },
       {
         "label": "Net cash used in investing activities",
@@ -9277,7 +9489,9 @@
           "FY2015": -1923900000.0,
           "FY2014": -836900000.0,
           "LTM": -8430000000.0
-        }
+        },
+        "spanish_label": "Flujo neto usado en actividades de inversión",
+        "orig_tooltip": "Net cash used in investing activities (us-gaap_NetCashProvidedByUsedInInvestingActivities)"
       },
       {
         "label": "Cash Flows From Financing Activities",
@@ -9300,7 +9514,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujos de efectivo de actividades de financiación",
+        "orig_tooltip": "Cash Flows From Financing Activities (us-gaap_NetCashProvidedByUsedInFinancingActivitiesAbstract)"
       },
       {
         "label": "Dividends paid to common shareholders",
@@ -9323,7 +9539,9 @@
           "FY2015": -403600000.0,
           "FY2014": -892600000.0,
           "LTM": -8147000000.0
-        }
+        },
+        "spanish_label": "Dividendos pagados",
+        "orig_tooltip": "Dividends paid to common shareholders (us-gaap_PaymentsOfDividendsCommonStock)"
       },
       {
         "label": "Acquisition of treasury shares for equity award tax liabilities",
@@ -9346,7 +9564,9 @@
           "FY2015": -30600000.0,
           "FY2014": null,
           "LTM": -81000000.0
-        }
+        },
+        "spanish_label": "Recompra de acciones para cubrir obligaciones fiscales de planes de incentivos",
+        "orig_tooltip": "Acquisition of treasury shares for equity award tax liabilities (pgr_PaymentsforRepurchaseofCommonStockforRestrictedStockTaxLiabilities)"
       },
       {
         "label": "Acquisition of treasury shares acquired in open market",
@@ -9369,7 +9589,9 @@
           "FY2015": -177900000.0,
           "FY2014": null,
           "LTM": -1110000000.0
-        }
+        },
+        "spanish_label": "Recompra de acciones propias en el mercado abierto",
+        "orig_tooltip": "Acquisition of treasury shares acquired in open market (pgr_PaymentsforRepurchaseofCommonStockintheOpenMarket)"
       },
       {
         "label": "Redemption of preferred shares",
@@ -9392,7 +9614,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Reembolso y amortización de acciones preferentes",
+        "orig_tooltip": "Redemption of preferred shares (us-gaap_PaymentsForRepurchaseOfPreferredStockAndPreferenceStock)"
       },
       {
         "label": "Dividends paid to preferred shareholders",
@@ -9415,7 +9639,9 @@
           "FY2015": null,
           "FY2014": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Dividendos pagados a accionistas preferentes",
+        "orig_tooltip": "Dividends paid to preferred shareholders (us-gaap_PaymentsOfDividendsPreferredStockAndPreferenceStock)"
       },
       {
         "label": "Net proceeds from debt issuance",
@@ -9438,7 +9664,9 @@
           "FY2015": 382000000.0,
           "FY2014": 344700000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Fondos netos captados por emisión de deuda",
+        "orig_tooltip": "Net proceeds from debt issuance (us-gaap_ProceedsFromIssuanceOfDebt)"
       },
       {
         "label": "Net cash provided by (used in) financing activities",
@@ -9461,7 +9689,9 @@
           "FY2015": -252800000.0,
           "FY2014": -855400000.0,
           "LTM": -7851000000.0
-        }
+        },
+        "spanish_label": "Flujo neto de actividades de financiación (CFF)",
+        "orig_tooltip": "Net cash provided by (used in) financing activities (us-gaap_NetCashProvidedByUsedInFinancingActivities)"
       },
       {
         "label": "Increase (decrease) in cash, cash equivalents, restricted cash, and restricted cash equivalents",
@@ -9484,7 +9714,9 @@
           "FY2015": 116000000.0,
           "FY2014": null,
           "LTM": 58000000.0
-        }
+        },
+        "spanish_label": "Variación neta en el efectivo, equivalentes y fondos restringidos",
+        "orig_tooltip": "Increase (decrease) in cash, cash equivalents, restricted cash, and restricted cash equivalents (us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect)"
       }
     ]
   }

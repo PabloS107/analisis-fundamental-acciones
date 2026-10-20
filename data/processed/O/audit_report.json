@@ -2,7 +2,7 @@
   "ticker": "O",
   "company_name": "REALTY INCOME CORP",
   "cik": "0000726728",
-  "audit_timestamp": "2026-10-19T18:32:43.157483",
+  "audit_timestamp": "2026-10-20T03:45:59.252327",
   "years_audited": {
     "LTM": [
       {
@@ -578,9 +578,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Datos insuficientes de Net Income o Acciones para FY2017."
+        "passed": true,
+        "status": "PASS",
+        "net_income": 301514000.0,
+        "shares_diluted": 273936752.0,
+        "eps_reported": 1.1,
+        "eps_calculated": 1.1,
+        "eps_adjusted": 1.1,
+        "split_factor": 1.0,
+        "discrepancy": 0.0
       }
     ],
     "FY2016": [
@@ -637,7 +643,7 @@
         "shares_diluted": 255624250.0,
         "eps_reported": 1.13,
         "eps_calculated": 1.13,
-        "eps_adjusted": 0.27,
+        "eps_adjusted": 1.13,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -696,7 +702,7 @@
         "shares_diluted": 236208390.0,
         "eps_reported": 1.09,
         "eps_calculated": 1.09,
-        "eps_adjusted": 0.25,
+        "eps_adjusted": 1.09,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -704,8 +710,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 72,
-  "passed_tests": 58,
+  "passed_tests": 59,
   "failed_tests": 0,
-  "skipped_tests": 14,
+  "skipped_tests": 13,
   "compliance_score_pct": 100.0
 }

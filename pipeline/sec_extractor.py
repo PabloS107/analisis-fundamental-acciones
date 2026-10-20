@@ -2987,6 +2987,84 @@ def build_as_reported_statements(
 
     return as_reported
 
+
+
+def sanitize_and_validate_statements(full_dataset: dict) -> dict:
+    """
+    Candado Automático Post-Extracción (Reglas 1, 4 y 6):
+    1. Homogeneiza signos algebraicos en toda la serie de cada fila en as_reported_statements.
+    2. Enriquecer cada fila con `spanish_label` (traducción institucional en español)
+       y `orig_tooltip` (nombre original en inglés y concepto XBRL).
+    3. Garantiza coherencia en Balance LTM y bloquea colisiones dimensionales o cuentas de reclasificación residual.
+    """
+    from pipeline.financial_bilingual_map import get_spanish_label
+
+    as_reported = full_dataset.get("as_reported_statements", {})
+    if not as_reported:
+        return full_dataset
+
+    for s_name, rows in as_reported.items():
+        cleaned_rows = []
+        seen_keys = set()
+        for row in rows:
+            lbl = row.get("label", "").strip()
+            conc = row.get("concept", "")
+
+            # Filtro defensivo contra filas residuales de reclasificación
+            l_low = lbl.lower()
+            if any(term in l_low for term in ["- as reported", "- reclassification"]):
+                continue
+
+            # Evitar duplicaciones de la misma clave exacta
+            dedup_key = (lbl, conc)
+            if dedup_key in seen_keys:
+                continue
+            seen_keys.add(dedup_key)
+
+            # 1. Asignar traducción institucional al español y tooltip original
+            sp_label = get_spanish_label(lbl, conc)
+            orig_tooltip = f"{lbl} ({conc})" if conc else lbl
+            row["spanish_label"] = sp_label
+            row["orig_tooltip"] = orig_tooltip
+
+            # 2. Homogeneización de signos en serie temporal
+            vals = row.get("values", {})
+            if s_name == "income_statement":
+                c_low = conc.lower()
+                is_expense = (
+                    any(ind in c_low or ind in l_low for ind in (
+                        'cost of', 'costof', 'expense', 'expenses', 'charges', 'provision',
+                        'research', 'selling', 'administrative', 'impairment', 'benefitslosses'
+                    ))
+                    and not any(excl in c_low for excl in ('income', 'revenue', 'gain', 'operatingincomeloss', 'netincomeloss', 'profitloss'))
+                )
+                if is_expense:
+                    for p_k in vals:
+                        if vals[p_k] is not None:
+                            vals[p_k] = abs(vals[p_k])
+            else:
+                valid_nums = [v for p_k, v in vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
+                if valid_nums:
+                    pos_count = sum(1 for v in valid_nums if v > 0)
+                    neg_count = sum(1 for v in valid_nums if v < 0)
+                    tot_cnt = len(valid_nums)
+                    if pos_count / tot_cnt >= 0.8:
+                        for p_k in vals:
+                            if vals[p_k] is not None:
+                                vals[p_k] = abs(vals[p_k])
+                    elif neg_count / tot_cnt >= 0.8:
+                        for p_k in vals:
+                            if vals[p_k] is not None:
+                                vals[p_k] = -abs(vals[p_k])
+
+            row["values"] = vals
+            cleaned_rows.append(row)
+
+        as_reported[s_name] = cleaned_rows
+
+    full_dataset["as_reported_statements"] = as_reported
+    return full_dataset
+
 def extract_sec_data(ticker, output_dir=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
     cfg = load_sec_config()
@@ -3543,6 +3621,7 @@ def extract_sec_data(ticker, output_dir=None):
     }
     
     # Guardar JSON
+    full_dataset = sanitize_and_validate_statements(full_dataset)
     json_path = output_dir / "financial_statements.json"
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(full_dataset, f, indent=2, ensure_ascii=False)

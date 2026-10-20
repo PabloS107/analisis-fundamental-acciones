@@ -133,10 +133,10 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
-        # Verify Statements and Analytical Memo rows
-        self.assertIn('EBITDA NORMALIZADO', content)
-        self.assertIn('FLUJO DE CAJA LIBRE (FCF)', content)
-        self.assertIn('LIQUIDEZ INMEDIATA TOTAL', content)
+        # Verify Banking Statements and Analytical Memo rows (Regla 3 y 4.5)
+        self.assertIn('MARGEN NETO DE INTERÉS (NIM %)', content)
+        self.assertIn('DEPÓSITOS TOTALES DE CLIENTES', content)
+        self.assertIn('LIQUIDEZ REGULATORIA INMEDIATA', content)
 
         # Verify NU M&A captures acquisition ($5.6M in FY2024)
         self.assertIn('-$5.6M', content)

@@ -148,5 +148,45 @@ class TestAsReportedIntegrity(unittest.TestCase):
                 f"[NVDA] Dividends paid mismatch: as_reported={div_as_reported} vs canonical={canonical_div}"
             )
 
+    def test_5_100_percent_spanish_labels(self):
+        """5. Verifica que el 100% de las partidas en as_reported_statements cuenten con traducción al español y tooltip."""
+        for ticker in TICKERS:
+            data = load_statements(ticker)
+            as_reported = data.get("as_reported_statements", {})
+            for s_name, rows in as_reported.items():
+                for r in rows:
+                    lbl = r.get("label", "")
+                    sp_lbl = r.get("spanish_label")
+                    orig_tt = r.get("orig_tooltip")
+                    self.assertTrue(
+                        bool(sp_lbl and sp_lbl.strip()),
+                        f"[{ticker}] [{s_name}] Missing spanish_label for row '{lbl}'"
+                    )
+                    self.assertTrue(
+                        bool(orig_tt and orig_tt.strip()),
+                        f"[{ticker}] [{s_name}] Missing orig_tooltip for row '{lbl}'"
+                    )
+
+    def test_6_dual_view_context_integrity(self):
+        """6. Verifica que la vista Django company_detail construya ambos modelos de estados financieros (std y as_rep)."""
+        import os, sys
+        sys.path.insert(0, os.path.abspath('web_dashboard'))
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "web_dashboard.settings")
+        import django
+        django.setup()
+        from django.test import RequestFactory
+        from analytics.views import company_detail
+
+        rf = RequestFactory()
+        req = rf.get("/company/AAPL/")
+
+        for ticker in TICKERS:
+            res = company_detail(req, ticker=ticker)
+            self.assertEqual(res.status_code, 200, f"[{ticker}] company_detail failed with status {res.status_code}")
+            html = res.content.decode("utf-8")
+            self.assertIn("table-view-std", html, f"[{ticker}] Standardized table view missing in HTML")
+            self.assertIn("table-view-asrep", html, f"[{ticker}] As-reported table view missing in HTML")
+            self.assertIn("btn-view-std", html, f"[{ticker}] View switch toggle missing in HTML")
+
 if __name__ == "__main__":
     unittest.main()

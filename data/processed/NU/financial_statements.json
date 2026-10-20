@@ -4823,7 +4823,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cuenta de pérdidas y ganancias",
+        "orig_tooltip": "Profit or loss [abstract] (ifrs-full_IncomeStatementAbstract)"
       },
       {
         "label": "Interest income and gains net of losses on financial instruments",
@@ -4841,7 +4843,9 @@
           "FY2020": 382922000.0,
           "FY2019": 337851000.0,
           "LTM": 16609690000.0
-        }
+        },
+        "spanish_label": "Ingresos por intereses y ganancias netas en instrumentos financieros",
+        "orig_tooltip": "Interest income and gains net of losses on financial instruments (nu_IncomeExpenseGainsOrLossesOfFinancialInstruments)"
       },
       {
         "label": "Fee and commission income",
@@ -4859,7 +4863,9 @@
           "FY2020": 354211000.0,
           "FY2019": 274258000.0,
           "LTM": 2730067000.0
-        }
+        },
+        "spanish_label": "Ingresos por comisiones y tarifas bancarias",
+        "orig_tooltip": "Fee and commission income (ifrs-full_FeeAndCommissionIncome)"
       },
       {
         "label": "Total revenue",
@@ -4877,7 +4883,9 @@
           "FY2020": 737133000.0,
           "FY2019": 612109000.0,
           "LTM": 19339757000.0
-        }
+        },
+        "spanish_label": "Ingresos totales",
+        "orig_tooltip": "Total revenue (ifrs-full_Revenue)"
       },
       {
         "label": "Interest and other financial expenses",
@@ -4895,7 +4903,9 @@
           "FY2020": 113924000.0,
           "FY2019": 109697000.0,
           "LTM": 5478321000.0
-        }
+        },
+        "spanish_label": "Gastos por intereses y cargas financieras",
+        "orig_tooltip": "Interest and other financial expenses (ifrs-full_InterestExpense)"
       },
       {
         "label": "Transactional expenses",
@@ -4913,7 +4923,9 @@
           "FY2020": 126815000.0,
           "FY2019": 79316000.0,
           "LTM": 473086000.0
-        }
+        },
+        "spanish_label": "Gastos de liquidación y procesamiento transaccional",
+        "orig_tooltip": "Transactional expenses (nu_TransactionalExpenses)"
       },
       {
         "label": "Expected credit loss",
@@ -4931,7 +4943,9 @@
           "FY2020": 169485000.0,
           "FY2019": -175178000.0,
           "LTM": -5419368000.0
-        }
+        },
+        "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
+        "orig_tooltip": "Expected credit loss (nu_ExpectedCreditLoss)"
       },
       {
         "label": "Total cost of financial and transactional services provided",
@@ -4949,7 +4963,9 @@
           "FY2020": 410224000.0,
           "FY2019": 364191000.0,
           "LTM": 11370775000.0
-        }
+        },
+        "spanish_label": "Coste total de servicios financieros y transaccionales",
+        "orig_tooltip": "Total cost of financial and transactional services provided (nu_TotalCostOfFinancialAndTransactionalServicesProvided)"
       },
       {
         "label": "Gross profit",
@@ -4967,7 +4983,9 @@
           "FY2020": 326909000.0,
           "FY2019": 247918000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio bruto (Margen bruto)",
+        "orig_tooltip": "Gross profit (ifrs-full_GrossProfit)"
       },
       {
         "label": "Operating (expenses) income",
@@ -4985,7 +5003,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Ingresos (gastos) de explotación",
+        "orig_tooltip": "Operating (expenses) income (nu_OperatingExpensesAbstract1)"
       },
       {
         "label": "Customer support and operations",
@@ -5003,7 +5023,9 @@
           "FY2020": -123950000.0,
           "FY2019": -115567000.0,
           "LTM": -769971000.0
-        }
+        },
+        "spanish_label": "Gastos de atención al cliente y soporte operativo",
+        "orig_tooltip": "Customer support and operations (nu_CustomerSupportAndOperations)"
       },
       {
         "label": "General and administrative expenses",
@@ -5021,7 +5043,9 @@
           "FY2020": 266024000.0,
           "FY2019": 199919000.0,
           "LTM": 1881214000.0
-        }
+        },
+        "spanish_label": "Gastos generales y administrativos",
+        "orig_tooltip": "General and administrative expenses (nu_GeneralAndAdministrativeExpenses)"
       },
       {
         "label": "Marketing expenses",
@@ -5039,7 +5063,9 @@
           "FY2020": 19426000.0,
           "FY2019": 41817000.0,
           "LTM": 357700000.0
-        }
+        },
+        "spanish_label": "Gastos de comercialización y publicidad",
+        "orig_tooltip": "Marketing expenses (ifrs-full_SalesAndMarketingExpense)"
       },
       {
         "label": "Other expenses",
@@ -5057,7 +5083,9 @@
           "FY2020": 9535000.0,
           "FY2019": 19914000.0,
           "LTM": 658476000.0
-        }
+        },
+        "spanish_label": "Otros gastos operativos y de gestión",
+        "orig_tooltip": "Other expenses (ifrs-full_OtherExpenseByFunction)"
       },
       {
         "label": "Non-Operating Income (Expense)",
@@ -5075,7 +5103,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Ingresos (gastos) no operativos",
+        "orig_tooltip": "Non-Operating Income (Expense) (ifrs-full_OtherIncome)"
       },
       {
         "label": "Total operating (expenses) income",
@@ -5093,7 +5123,9 @@
           "FY2020": 418935000.0,
           "FY2019": 377217000.0,
           "LTM": 3577147000.0
-        }
+        },
+        "spanish_label": "Total gastos e ingresos operativos de explotación",
+        "orig_tooltip": "Total operating (expenses) income (ifrs-full_OperatingExpense)"
       },
       {
         "label": "Share of loss in associates",
@@ -5111,7 +5143,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": -7232000.0
-        }
+        },
+        "spanish_label": "Participación en pérdidas de entidades asociadas",
+        "orig_tooltip": "Share of loss in associates (nu_ShareOfLossInAssociates)"
       },
       {
         "label": "Income before income taxes",
@@ -5129,7 +5163,9 @@
           "FY2020": -193178000.0,
           "FY2019": -129299000.0,
           "LTM": 4384603000.0
-        }
+        },
+        "spanish_label": "Beneficio antes de impuestos (EBT)",
+        "orig_tooltip": "Income before income taxes (ifrs-full_ProfitLossBeforeTax)"
       },
       {
         "label": "Income taxes",
@@ -5147,7 +5183,9 @@
           "FY2020": 21687000.0,
           "FY2019": 36768000.0,
           "LTM": -774606000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios / Ganancias",
+        "orig_tooltip": "Income taxes (ifrs-full_IncomeTaxExpenseContinuingOperations)"
       },
       {
         "label": "Net income for the year",
@@ -5165,7 +5203,9 @@
           "FY2020": -171491000.0,
           "FY2019": -92531000.0,
           "LTM": 3609997000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado del ejercicio",
+        "orig_tooltip": "Net income for the year (ifrs-full_ProfitLoss)"
       },
       {
         "label": "Net Income",
@@ -5183,7 +5223,9 @@
           "FY2020": -171491000.0,
           "FY2019": -92531000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net Income (ifrs-full_ProfitLossAttributableToOwnersOfParent)"
       },
       {
         "label": "Net Income Attributable to Noncontrolling Interest",
@@ -5201,7 +5243,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio neto atribuible a intereses no dominantes",
+        "orig_tooltip": "Net Income Attributable to Noncontrolling Interest (ifrs-full_ProfitLossAttributableToNoncontrollingInterests)"
       },
       {
         "label": "Net income for the year",
@@ -5219,7 +5263,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 3609997000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado del ejercicio",
+        "orig_tooltip": "Net income for the year (nu_NetIncomeForYear)"
       },
       {
         "label": "Earnings Per Share (Basic)",
@@ -5237,7 +5283,9 @@
           "FY2020": -0.1304,
           "FY2019": -0.0813,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio básico por acción ($)",
+        "orig_tooltip": "Earnings Per Share (Basic) (ifrs-full_BasicEarningsLossPerShare)"
       },
       {
         "label": "Earnings Per Share (Diluted)",
@@ -5255,7 +5303,9 @@
           "FY2020": 1315578.0,
           "FY2019": 1137931.0,
           "LTM": 0.5846
-        }
+        },
+        "spanish_label": "Beneficio diluido por acción ($)",
+        "orig_tooltip": "Earnings Per Share (Diluted) (ifrs-full_DilutedEarningsLossPerShare)"
       },
       {
         "label": "Weighted Average Shares Outstanding",
@@ -5273,7 +5323,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Acciones ordinarias básicas",
+        "orig_tooltip": "Weighted Average Shares Outstanding (ifrs-full_WeightedAverageShares)"
       },
       {
         "label": "Weighted Average Shares Outstanding, Diluted",
@@ -5291,7 +5343,9 @@
           "FY2020": 405394.0,
           "FY2019": null,
           "LTM": 4908841000.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias diluidas",
+        "orig_tooltip": "Weighted Average Shares Outstanding, Diluted (ifrs-full_AdjustedWeightedAverageShares)"
       }
     ],
     "balance_sheet": [
@@ -5311,7 +5365,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Balance de situación patrimonial",
+        "orig_tooltip": "Statement of financial position [abstract] (ifrs-full_StatementOfFinancialPositionAbstract)"
       },
       {
         "label": "Assets",
@@ -5329,7 +5385,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activos",
+        "orig_tooltip": "Assets (ifrs-full_AssetsAbstract)"
       },
       {
         "label": "Cash and Cash Equivalents",
@@ -5347,7 +5405,9 @@
           "FY2020": 2343780000.0,
           "FY2019": null,
           "LTM": 13551611000.0
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Cash and Cash Equivalents (ifrs-full_CashAndCashEquivalents)"
       },
       {
         "label": "Financial assets at fair value through profit or loss",
@@ -5365,7 +5425,9 @@
           "FY2020": 4378118000.0,
           "FY2019": null,
           "LTM": 1473272000.0
-        }
+        },
+        "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
+        "orig_tooltip": "Financial assets at fair value through profit or loss (ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss)"
       },
       {
         "label": "Securities",
@@ -5383,7 +5445,9 @@
           "FY2020": 4287277000.0,
           "FY2019": null,
           "LTM": 1358015000.0
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Securities (nu_Securities)"
       },
       {
         "label": "Derivatives",
@@ -5401,7 +5465,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 115257000.0
-        }
+        },
+        "spanish_label": "Instrumentos financieros derivados (activo/pasivo)",
+        "orig_tooltip": "Derivatives (nu_Derivatives)"
       },
       {
         "label": "Financial assets at fair value through other comprehensive income",
@@ -5419,7 +5485,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 14046844000.0
-        }
+        },
+        "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
+        "orig_tooltip": "Financial assets at fair value through other comprehensive income (ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome)"
       },
       {
         "label": "Securities",
@@ -5437,7 +5505,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 14046844000.0
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Securities (nu_OtherSecurities)"
       },
       {
         "label": "Financial assets at amortized cost",
@@ -5455,7 +5525,9 @@
           "FY2020": 3150013000.0,
           "FY2019": null,
           "LTM": 46722060000.0
-        }
+        },
+        "spanish_label": "Activos financieros al coste amortizado",
+        "orig_tooltip": "Financial assets at amortized cost (ifrs-full_FinancialAssetsAtAmortisedCost)"
       },
       {
         "label": "Credit card receivables",
@@ -5473,7 +5545,9 @@
           "FY2020": 2908907000.0,
           "FY2019": null,
           "LTM": 21494406000.0
-        }
+        },
+        "spanish_label": "Cartera de créditos por operaciones de tarjetas",
+        "orig_tooltip": "Credit card receivables (nu_CreditCardReceivables1)"
       },
       {
         "label": "Loans to customers",
@@ -5491,7 +5565,9 @@
           "FY2020": 174694000.0,
           "FY2019": null,
           "LTM": 11317422000.0
-        }
+        },
+        "spanish_label": "Cartera de créditos y préstamos a clientes",
+        "orig_tooltip": "Loans to customers (ifrs-full_LoansAndAdvancesToCustomers)"
       },
       {
         "label": "Compulsory and other deposits at central banks",
@@ -5509,7 +5585,9 @@
           "FY2020": 43542000.0,
           "FY2019": null,
           "LTM": 9149128000.0
-        }
+        },
+        "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
+        "orig_tooltip": "Compulsory and other deposits at central banks (nu_CompulsoryAndOtherDepositsAtCentralBanks)"
       },
       {
         "label": "Securities",
@@ -5527,7 +5605,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 3776505000.0
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Securities (nu_Securitie)"
       },
       {
         "label": "Other Non-Operating Current Assets",
@@ -5545,7 +5625,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros activos corrientes no operativos",
+        "orig_tooltip": "Other Non-Operating Current Assets (ifrs-full_OtherReceivables)"
       },
       {
         "label": "Other financial assets",
@@ -5563,7 +5645,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 134702000.0
-        }
+        },
+        "spanish_label": "Otros activos e inversiones financieras",
+        "orig_tooltip": "Other financial assets (ifrs-full_OtherFinancialAssets)"
       },
       {
         "label": "Other Non-Operating Current Assets",
@@ -5581,7 +5665,9 @@
           "FY2020": 123495000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros activos corrientes no operativos",
+        "orig_tooltip": "Other Non-Operating Current Assets (ifrs-full_OtherAssets)"
       },
       {
         "label": "Deferred Tax Assets, Non-Current",
@@ -5599,7 +5685,9 @@
           "FY2020": 125131000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activos por impuestos diferidos no corrientes",
+        "orig_tooltip": "Deferred Tax Assets, Non-Current (ifrs-full_DeferredTaxAssets)"
       },
       {
         "label": "Investments in associates",
@@ -5617,7 +5705,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 93004000.0
-        }
+        },
+        "spanish_label": "Inversiones financieras en entidades asociadas",
+        "orig_tooltip": "Investments in associates (ifrs-full_InvestmentsInAssociates)"
       },
       {
         "label": "Operating Lease Right-of-Use Asset",
@@ -5635,7 +5725,9 @@
           "FY2020": 10660000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+        "orig_tooltip": "Operating Lease Right-of-Use Asset (ifrs-full_RightofuseAssets)"
       },
       {
         "label": "Property, Plant and Equipment",
@@ -5653,7 +5745,9 @@
           "FY2020": 9850000.0,
           "FY2019": null,
           "LTM": 50665000.0
-        }
+        },
+        "spanish_label": "Propiedad, planta y equipo",
+        "orig_tooltip": "Property, Plant and Equipment (ifrs-full_PropertyPlantAndEquipment)"
       },
       {
         "label": "Intangible Assets",
@@ -5671,7 +5765,9 @@
           "FY2020": 12372000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activos intangibles",
+        "orig_tooltip": "Intangible Assets (ifrs-full_IntangibleAssetsOtherThanGoodwill)"
       },
       {
         "label": "Goodwill",
@@ -5689,7 +5785,9 @@
           "FY2020": 831000.0,
           "FY2019": null,
           "LTM": 409371000.0
-        }
+        },
+        "spanish_label": "Fondo de comercio (Goodwill)",
+        "orig_tooltip": "Goodwill (ifrs-full_Goodwill)"
       },
       {
         "label": "Total assets",
@@ -5707,7 +5805,9 @@
           "FY2020": 10154250000.0,
           "FY2019": null,
           "LTM": 82753414000.0
-        }
+        },
+        "spanish_label": "Total de activos",
+        "orig_tooltip": "Total assets (ifrs-full_Assets)"
       },
       {
         "label": "Liabilities",
@@ -5725,7 +5825,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pasivos",
+        "orig_tooltip": "Liabilities (ifrs-full_LiabilitiesAbstract)"
       },
       {
         "label": "Financial liabilities at fair value through profit or loss",
@@ -5743,7 +5845,9 @@
           "FY2020": 90796000.0,
           "FY2019": null,
           "LTM": 116068000.0
-        }
+        },
+        "spanish_label": "Pasivos financieros a valor razonable con cambios en resultados",
+        "orig_tooltip": "Financial liabilities at fair value through profit or loss (ifrs-full_FinancialLiabilitiesAtFairValueThroughProfitOrLoss)"
       },
       {
         "label": "Derivatives",
@@ -5761,7 +5865,9 @@
           "FY2020": 75304000.0,
           "FY2019": null,
           "LTM": 89659000.0
-        }
+        },
+        "spanish_label": "Instrumentos financieros derivados (activo/pasivo)",
+        "orig_tooltip": "Derivatives (ifrs-full_DerivativeFinancialLiabilities)"
       },
       {
         "label": "Financial liabilities at amortized cost",
@@ -5779,7 +5885,9 @@
           "FY2020": 9421710000.0,
           "FY2019": null,
           "LTM": 66610671000.0
-        }
+        },
+        "spanish_label": "Pasivos financieros al coste amortizado",
+        "orig_tooltip": "Financial liabilities at amortized cost (ifrs-full_FinancialLiabilitiesAtAmortisedCost)"
       },
       {
         "label": "Deposits",
@@ -5797,7 +5905,9 @@
           "FY2020": 5584862000.0,
           "FY2019": null,
           "LTM": 45328419000.0
-        }
+        },
+        "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
+        "orig_tooltip": "Deposits (ifrs-full_DepositsFromCustomers)"
       },
       {
         "label": "Payables to network",
@@ -5815,7 +5925,9 @@
           "FY2020": 3331258000.0,
           "FY2019": null,
           "LTM": 15541657000.0
-        }
+        },
+        "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+        "orig_tooltip": "Payables to network (ifrs-full_OtherPayables)"
       },
       {
         "label": "Borrowings and financing (i)",
@@ -5833,7 +5945,9 @@
           "FY2020": 97454000.0,
           "FY2019": null,
           "LTM": 4682252000.0
-        }
+        },
+        "spanish_label": "Financiación bancaria y pasivos por préstamos recibidos",
+        "orig_tooltip": "Borrowings and financing (i) (ifrs-full_Borrowings)"
       },
       {
         "label": "Repurchase agreements",
@@ -5851,7 +5965,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 1058343000.0
-        }
+        },
+        "spanish_label": "Pasivos por acuerdos de recompra (Repos pasivos)",
+        "orig_tooltip": "Repurchase agreements (nu_RepurchaseAgreements)"
       },
       {
         "label": "Salaries, allowances and social security contributions",
@@ -5869,7 +5985,9 @@
           "FY2020": 25848000.0,
           "FY2019": null,
           "LTM": 221770000.0
-        }
+        },
+        "spanish_label": "Sueldos, beneficios y aportaciones a la seguridad social",
+        "orig_tooltip": "Salaries, allowances and social security contributions (nu_SalariesAllowancesAndSocialSecurityContributions)"
       },
       {
         "label": "Tax liabilities",
@@ -5887,7 +6005,9 @@
           "FY2020": 30782000.0,
           "FY2019": null,
           "LTM": 1117397000.0
-        }
+        },
+        "spanish_label": "Pasivos fiscales por impuestos corrientes y diferidos",
+        "orig_tooltip": "Tax liabilities (nu_TaxLiabilities)"
       },
       {
         "label": "Lease liabilities",
@@ -5905,7 +6025,9 @@
           "FY2020": 12014000.0,
           "FY2019": null,
           "LTM": 66433000.0
-        }
+        },
+        "spanish_label": "Pasivos por contratos de arrendamiento",
+        "orig_tooltip": "Lease liabilities (nu_LeaseLiabilities1)"
       },
       {
         "label": "Provisions and contingent liabilities",
@@ -5923,7 +6045,9 @@
           "FY2020": 16469000.0,
           "FY2019": null,
           "LTM": 44343000.0
-        }
+        },
+        "spanish_label": "Dotación a provisiones y pasivos contingentes",
+        "orig_tooltip": "Provisions and contingent liabilities (nu_ProvisionForLawsuitsAndAdministrativeProceedings)"
       },
       {
         "label": "Deferred income",
@@ -5941,7 +6065,9 @@
           "FY2020": 25965000.0,
           "FY2019": null,
           "LTM": 84165000.0
-        }
+        },
+        "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+        "orig_tooltip": "Deferred income (ifrs-full_AccrualsAndDeferredIncomeIncludingContractLiabilities)"
       },
       {
         "label": "Other Non-Operating Current Liabilities",
@@ -5959,7 +6085,9 @@
           "FY2020": 83814000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros pasivos corrientes no operativos",
+        "orig_tooltip": "Other Non-Operating Current Liabilities (ifrs-full_OtherLiabilities)"
       },
       {
         "label": "Total liabilities",
@@ -5977,7 +6105,9 @@
           "FY2020": 9716139000.0,
           "FY2019": null,
           "LTM": 69501693000.0
-        }
+        },
+        "spanish_label": "Total de pasivos",
+        "orig_tooltip": "Total liabilities (ifrs-full_Liabilities)"
       },
       {
         "label": "Equity",
@@ -5995,7 +6125,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Patrimonio neto",
+        "orig_tooltip": "Equity (ifrs-full_EquityAbstract)"
       },
       {
         "label": "Total Stockholders' Equity",
@@ -6013,7 +6145,9 @@
           "FY2020": 45000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Total de patrimonio neto de los accionistas",
+        "orig_tooltip": "Total Stockholders' Equity (ifrs-full_IssuedCapital)"
       },
       {
         "label": "Additional Paid-In Capital",
@@ -6031,7 +6165,9 @@
           "FY2020": 638007000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Prima de emisión de acciones (Capital adicional)",
+        "orig_tooltip": "Additional Paid-In Capital (ifrs-full_SharePremium)"
       },
       {
         "label": "Retained Earnings",
@@ -6049,7 +6185,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": 8496232000.0
-        }
+        },
+        "spanish_label": "Resultados acumulados / Ganancias retenidas",
+        "orig_tooltip": "Retained Earnings (ifrs-full_RetainedEarnings)"
       },
       {
         "label": "Accumulated Other Comprehensive Income",
@@ -6067,7 +6205,9 @@
           "FY2020": -97500000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otro resultado integral acumulado (AOCI)",
+        "orig_tooltip": "Accumulated Other Comprehensive Income (ifrs-full_AccumulatedOtherComprehensiveIncome)"
       },
       {
         "label": "Equity attributable to shareholders of the parent company",
@@ -6085,7 +6225,9 @@
           "FY2020": 438111000.0,
           "FY2019": null,
           "LTM": 13249670000.0
-        }
+        },
+        "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
+        "orig_tooltip": "Equity attributable to shareholders of the parent company (ifrs-full_EquityAttributableToOwnersOfParent)"
       },
       {
         "label": "Noncontrolling Interest",
@@ -6103,7 +6245,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Intereses no dominantes / Socios minoritarios",
+        "orig_tooltip": "Noncontrolling Interest (ifrs-full_NoncontrollingInterests)"
       },
       {
         "label": "Total equity",
@@ -6121,7 +6265,9 @@
           "FY2020": 438111000.0,
           "FY2019": null,
           "LTM": 13251721000.0
-        }
+        },
+        "spanish_label": "Total de patrimonio neto",
+        "orig_tooltip": "Total equity (ifrs-full_Equity)"
       },
       {
         "label": "Total liabilities and equity",
@@ -6139,7 +6285,9 @@
           "FY2020": 10154250000.0,
           "FY2019": null,
           "LTM": 82753414000.0
-        }
+        },
+        "spanish_label": "Total de pasivos y patrimonio neto",
+        "orig_tooltip": "Total liabilities and equity (ifrs-full_EquityAndLiabilities)"
       }
     ],
     "cash_flow_statement": [
@@ -6159,7 +6307,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Estado de flujos de efectivo",
+        "orig_tooltip": "Statement of cash flows [abstract] (ifrs-full_StatementOfCashFlowsAbstract)"
       },
       {
         "label": "Cash flows from operating activities",
@@ -6177,7 +6327,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujos de efectivo de actividades de operación",
+        "orig_tooltip": "Cash flows from operating activities (ifrs-full_CashFlowsFromUsedInOperatingActivitiesAbstract)"
       },
       {
         "label": "Reconciliation of net income to net cash flows from operating activities:",
@@ -6195,7 +6347,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Reconciliation of net income to net cash flows from operating activities: (ifrs-full_AdjustmentsForReconcileProfitLossAbstract)"
       },
       {
         "label": "Net income for the year",
@@ -6213,7 +6367,9 @@
           "FY2020": -171491000.0,
           "FY2019": -92531000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado del ejercicio",
+        "orig_tooltip": "Net income for the year (ifrs-full_ProfitLossFromContinuingOperations)"
       },
       {
         "label": "Adjustments:",
@@ -6231,7 +6387,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Adjustments",
+        "orig_tooltip": "Adjustments: (nu_AdjustmentsForReconcileProfitLossAbstract1)"
       },
       {
         "label": "Depreciation & Amortization (CF)",
@@ -6249,7 +6407,9 @@
           "FY2020": 7428000.0,
           "FY2019": 5073000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Dotación para depreciación y amortización contable",
+        "orig_tooltip": "Depreciation & Amortization (CF) (ifrs-full_AdjustmentsForDepreciationAndAmortisationExpense)"
       },
       {
         "label": "Expected credit loss",
@@ -6267,7 +6427,9 @@
           "FY2020": 187790000.0,
           "FY2019": 193967000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
+        "orig_tooltip": "Expected credit loss (nu_CreditLossAllowanceExpenses1)"
       },
       {
         "label": "Net Cash from Operating Activities",
@@ -6285,7 +6447,9 @@
           "FY2020": -44025000.0,
           "FY2019": -40340000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Net Cash from actividades de operación",
+        "orig_tooltip": "Net Cash from Operating Activities (ifrs-full_AdjustmentsForDeferredTaxExpense)"
       },
       {
         "label": "Provisions and contingent liabilities",
@@ -6303,7 +6467,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Dotación a provisiones y pasivos contingentes",
+        "orig_tooltip": "Provisions and contingent liabilities (nu_ProvisionsAndContingentLiabilities)"
       },
       {
         "label": "Unrealized (gains) losses on financial instruments",
@@ -6321,7 +6487,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pérdidas (ganancias) no realizadas en instrumentos financieros",
+        "orig_tooltip": "Unrealized (gains) losses on financial instruments (nu_UnrealizedLossesOnFinancialInstruments)"
       },
       {
         "label": "Interest accrued",
@@ -6339,7 +6507,9 @@
           "FY2020": 39521000.0,
           "FY2019": 17681000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Intereses devengados pendientes de liquidación",
+        "orig_tooltip": "Interest accrued (nu_InterestAccrued)"
       },
       {
         "label": "Stock-Based Compensation (CF)",
@@ -6357,7 +6527,9 @@
           "FY2020": 35569000.0,
           "FY2019": 18511000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Compensación basada en acciones",
+        "orig_tooltip": "Stock-Based Compensation (CF) (ifrs-full_AdjustmentsForSharebasedPayments)"
       },
       {
         "label": "Share of loss in associates",
@@ -6375,7 +6547,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Participación en pérdidas de entidades asociadas",
+        "orig_tooltip": "Share of loss in associates (nu_ShareOfLossInAssociates)"
       },
       {
         "label": "Others",
@@ -6393,7 +6567,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros flujos y variaciones operativas",
+        "orig_tooltip": "Others (nu_Others)"
       },
       {
         "label": "Net Cash from Operating Activities",
@@ -6411,7 +6587,9 @@
           "FY2020": 103452000.0,
           "FY2019": 111546000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Net Cash from actividades de operación",
+        "orig_tooltip": "Net Cash from Operating Activities (ifrs-full_AdjustmentsForReconcileProfitLoss)"
       },
       {
         "label": "Changes in operating assets and liabilities:",
@@ -6429,7 +6607,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pasivos",
+        "orig_tooltip": "Changes in operating assets and liabilities: (nu_AdjustmentsForChangesInAssetsAndLiabilitiesAbstract)"
       },
       {
         "label": "Securities",
@@ -6447,7 +6627,9 @@
           "FY2020": -2008861000.0,
           "FY2019": -1689547000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Valores e instrumentos de deuda negociables",
+        "orig_tooltip": "Securities (nu_OperatingSecurities)"
       },
       {
         "label": "Credit card receivables",
@@ -6465,7 +6647,9 @@
           "FY2020": -470227000.0,
           "FY2019": -1414489000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cartera de créditos por operaciones de tarjetas",
+        "orig_tooltip": "Credit card receivables (ifrs-full_AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables)"
       },
       {
         "label": "Loans to customers",
@@ -6483,7 +6667,9 @@
           "FY2020": -178686000.0,
           "FY2019": -63009000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cartera de créditos y préstamos a clientes",
+        "orig_tooltip": "Loans to customers (nu_LoansToCustomersOne)"
       },
       {
         "label": "Other receivables",
@@ -6501,7 +6687,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros deudores y saldos por cobrar operativos",
+        "orig_tooltip": "Other receivables (ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables)"
       },
       {
         "label": "Compulsory and other deposits at central banks",
@@ -6519,7 +6707,9 @@
           "FY2020": -43841000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
+        "orig_tooltip": "Compulsory and other deposits at central banks (nu_CompulsoryDepositsAndOthersAtCentralBanks)"
       },
       {
         "label": "Other assets",
@@ -6537,7 +6727,9 @@
           "FY2020": 78319000.0,
           "FY2019": -166173000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros activos operativos y no corrientes",
+        "orig_tooltip": "Other assets (ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets)"
       },
       {
         "label": "Deposits",
@@ -6555,7 +6747,9 @@
           "FY2020": 2871246000.0,
           "FY2019": 2088793000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
+        "orig_tooltip": "Deposits (ifrs-full_AdjustmentsForIncreaseDecreaseInDepositsFromBanks)"
       },
       {
         "label": "Payables to network",
@@ -6573,7 +6767,9 @@
           "FY2020": 312607000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+        "orig_tooltip": "Payables to network (nu_PayablesToNetwork)"
       },
       {
         "label": "Deferred income",
@@ -6591,7 +6787,9 @@
           "FY2020": 3621000.0,
           "FY2019": 10325000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+        "orig_tooltip": "Deferred income (nu_DeferredIncome1)"
       },
       {
         "label": "Other liabilities",
@@ -6609,7 +6807,9 @@
           "FY2020": 57841000.0,
           "FY2019": 52366000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Otros pasivos operativos no corrientes",
+        "orig_tooltip": "Other liabilities (nu_OtherLiabilities1)"
       },
       {
         "label": "Interest paid",
@@ -6627,7 +6827,9 @@
           "FY2020": -6199000.0,
           "FY2019": -15603000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Intereses financieros pagados",
+        "orig_tooltip": "Interest paid (nu_InterestPaid1)"
       },
       {
         "label": "Income tax paid",
@@ -6645,7 +6847,9 @@
           "FY2020": -7880000.0,
           "FY2019": -3457000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+        "orig_tooltip": "Income tax paid (nu_IncomeTaxPaid)"
       },
       {
         "label": "Interest received",
@@ -6663,7 +6867,9 @@
           "FY2020": 263035000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Intereses financieros cobrados",
+        "orig_tooltip": "Interest received (nu_InterestReceived)"
       },
       {
         "label": "Cash flows generated from (used in) operating activities",
@@ -6681,7 +6887,9 @@
           "FY2020": 974520000.0,
           "FY2019": 276137000.0,
           "LTM": 1381616000.0
-        }
+        },
+        "spanish_label": "Flujo de efectivo generado por (usado en) operación",
+        "orig_tooltip": "Cash flows generated from (used in) operating activities (ifrs-full_CashFlowsFromUsedInOperatingActivities)"
       },
       {
         "label": "Cash flows in investing activities",
@@ -6699,7 +6907,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cash flows in actividades de inversión",
+        "orig_tooltip": "Cash flows in investing activities (ifrs-full_CashFlowsFromUsedInInvestingActivitiesAbstract)"
       },
       {
         "label": "Acquisition of property, plant and equipment",
@@ -6717,7 +6927,9 @@
           "FY2020": -3084000.0,
           "FY2019": -2377000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
+        "orig_tooltip": "Acquisition of property, plant and equipment (ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities)"
       },
       {
         "label": "Acquisition and development of intangible assets",
@@ -6735,7 +6947,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": -281135000.0
-        }
+        },
+        "spanish_label": "Adquisición y desarrollo de activos intangibles",
+        "orig_tooltip": "Acquisition and development of intangible assets (nu_AcquisitionAndDevelopmentOfIntangibleAssets)"
       },
       {
         "label": "Investments in associates",
@@ -6753,7 +6967,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Inversiones financieras en entidades asociadas",
+        "orig_tooltip": "Investments in associates (nu_InvestmentInAssociates)"
       },
       {
         "label": "Acquisition of subsidiary, net of cash acquired",
@@ -6771,7 +6987,9 @@
           "FY2020": -8284000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Adquisición de filiales, neta de tesorería adquirida",
+        "orig_tooltip": "Acquisition of subsidiary, net of cash acquired (nu_AcquisitionOfSubsidiaryNetOfCashAcquired)"
       },
       {
         "label": "Derivatives",
@@ -6789,7 +7007,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Instrumentos financieros derivados (activo/pasivo)",
+        "orig_tooltip": "Derivatives (nu_FinancialInstrumentsDerivatives)"
       },
       {
         "label": "Cash flow generated from (used in) investing activities",
@@ -6807,7 +7027,9 @@
           "FY2020": -16270000.0,
           "FY2019": -4679000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujo de efectivo generado por (usado en) inversión",
+        "orig_tooltip": "Cash flow generated from (used in) investing activities (ifrs-full_CashFlowsFromUsedInInvestingActivities)"
       },
       {
         "label": "Cash flows in financing activities",
@@ -6825,7 +7047,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cash flows in actividades de financiación",
+        "orig_tooltip": "Cash flows in financing activities (ifrs-full_CashFlowsFromUsedInFinancingActivitiesAbstract)"
       },
       {
         "label": "Proceeds from borrowings and financing",
@@ -6843,7 +7067,9 @@
           "FY2020": 17974000.0,
           "FY2019": 160577000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Financiación bancaria y pasivos financieros",
+        "orig_tooltip": "Proceeds from borrowings and financing (nu_ProceedsFromBorrowingsAndFinancing)"
       },
       {
         "label": "Payments of borrowings and financing",
@@ -6861,7 +7087,9 @@
           "FY2020": -27893000.0,
           "FY2019": -78185000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Financiación bancaria y pasivos financieros",
+        "orig_tooltip": "Payments of borrowings and financing (nu_PaymentsOfBorrowingsAndFinancing)"
       },
       {
         "label": "Lease payments",
@@ -6879,7 +7107,9 @@
           "FY2020": -4568000.0,
           "FY2019": -2014000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pagos efectuados por arrendamientos",
+        "orig_tooltip": "Lease payments (nu_LeasePayments)"
       },
       {
         "label": "Exercise of stock options",
@@ -6897,7 +7127,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cobros por ejercicio de opciones sobre acciones",
+        "orig_tooltip": "Exercise of stock options (nu_ExerciseOfStockOptions1)"
       },
       {
         "label": "Cash flows generated from (used in) financing activities",
@@ -6915,7 +7147,9 @@
           "FY2020": 240102000.0,
           "FY2019": 611193000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujo de efectivo generado por (usado en) financiación",
+        "orig_tooltip": "Cash flows generated from (used in) financing activities (ifrs-full_CashFlowsFromUsedInFinancingActivities)"
       },
       {
         "label": "Net Change in Cash",
@@ -6933,7 +7167,9 @@
           "FY2020": 1198352000.0,
           "FY2019": 882651000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Variación neta en el efectivo y equivalentes",
+        "orig_tooltip": "Net Change in Cash (ifrs-full_IncreaseDecreaseInCashAndCashEquivalents)"
       },
       {
         "label": "Increase (decrease) in cash and cash equivalents",
@@ -6951,7 +7187,9 @@
           "FY2020": 1198352000.0,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Increase (decrease) in cash and cash equivalents (nu_IncreaseDecreaseInCashAndCashEquivalent)"
       },
       {
         "label": "Non-cash transactions",
@@ -6969,7 +7207,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Transacciones no monetarias",
+        "orig_tooltip": "Non-cash transactions (nu_NoncashTransactionsAbstract)"
       },
       {
         "label": "Shares issued to service providers",
@@ -6987,7 +7227,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Acciones emitidas a proveedores de servicios",
+        "orig_tooltip": "Shares issued to service providers (nu_SharesIssuedToServicesProvider)"
       },
       {
         "label": "Shares issued on business acquisition",
@@ -7005,7 +7247,9 @@
           "FY2020": null,
           "FY2019": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Acciones emitidas en combinación de negocios",
+        "orig_tooltip": "Shares issued on business acquisition (nu_SharesIssuedOnBusinessAcquisition)"
       }
     ]
   }

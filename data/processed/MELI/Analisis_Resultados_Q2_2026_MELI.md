@@ -1,6 +1,6 @@
 # MERCADOLIBRE, INC. (NASDAQ: MELI)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q2 2026 & Gobernanza Corporativa
-*Fecha de Emisión: 17 de Septiembre de 2026 | CIK SEC: 0001099590*  
+*Fecha de Emisión: 20 de Septiembre de 2026 | CIK SEC: 0001099590*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q2 2026 Earnings Call Transcript*
 
 ---
@@ -707,18 +707,18 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **WACC (Tasa de Descuento)** | 11.03% | 10.90% | +0.13 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 10.2% | 24.40% | -14.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **14.0%** | **1.4%** | **+12.6 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **14.0%** | **1.5%** | **+12.5 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 10.03% (Bajo / Expansión) | 13.5% | 13.0% | 12.5% | 12.0% | 11.4% | 10.7% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 10.53% (Favorable) | 14.5% | 14.0% | 13.5% | 13.0% | 12.4% | 11.8% | Escenario de sensibilidad operativa. |
-| 11.03% (WACC Auditado Base) | 15.4% | 15.0% | 14.5% | 14.0% | 13.5% | 12.9% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 11.53% (Exigente) | 16.3% | 15.9% | 15.4% | 15.0% | 14.5% | 13.9% | Escenario de sensibilidad operativa. |
-| 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 15.9% | 15.4% | 14.9% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 10.03% (Bajo / Expansión) | 13.6% | 13.1% | 12.6% | 12.0% | 11.4% | 10.8% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.53% (Favorable) | 14.5% | 14.1% | 13.6% | 13.0% | 12.5% | 11.9% | Escenario de sensibilidad operativa. |
+| 11.03% (WACC Auditado Base) | 15.4% | 15.0% | 14.5% | 14.0% | 13.5% | 13.0% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.53% (Exigente) | 16.3% | 15.9% | 15.5% | 15.0% | 14.5% | 14.0% | Escenario de sensibilidad operativa. |
+| 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 16.0% | 15.5% | 15.0% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)
@@ -726,18 +726,18 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y múltiplos de mercado divergentes, se aplica un modelo de **Suma de las Partes (Sum-of-the-Parts)** desagregando el negocio operativo:
 * **Comercio Electrónico / Marketplace:** Facturación LTM de **$19,350.1 M** valorada a un múltiplo objetivo de **3.2x EV/Ventas** -> Enterprise Value de **$61,920.3 M**.
 * **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **$15,831.9 M** valorada a un múltiplo objetivo de **2.4x EV/Ventas** -> Enterprise Value de **$37,996.6 M**.
-* **Enterprise Value Consolidado:** **$99,916.9 M** | **Posición Financiera Neta:** **$-4,896.0 M** (Deuda neta).
-* **Equity Value Teórico:** **$95,020.9 M** sobre 50.7 M de acciones diluidas.
-* **Valor Intrínseco SOTP:** **$1874.28 por acción** (+2.9% frente a cotización actual de $1821.81).
+* **Enterprise Value Consolidado:** **$99,916.9 M** | **Posición Financiera Neta:** **$-5,183.0 M** (Deuda neta).
+* **Equity Value Teórico:** **$94,733.9 M** sobre 50.7 M de acciones diluidas.
+* **Valor Intrínseco SOTP:** **$1868.62 por acción** (+2.6% frente a cotización actual de $1821.81).
 
 | Segmento de Negocio | Ventas LTM ($ M) | Múltiplo EV/Sales | Enterprise Value ($ M) | Ponderación EV |
 | :--- | :---: | :---: | :---: | :---: |
 | **Comercio Electrónico / Marketplace** | $19,350.1 M | 3.2x | $61,920.3 M | 62.0% |
 | **FinTech y Servicios Financieros** | $15,831.9 M | 2.4x | $37,996.6 M | 38.0% |
 | **Total Enterprise Value (EV)** | **$35,182.0 M** | **—** | **$99,916.9 M** | **100.0%** |
-| (-) Deuda Neta | — | — | $-4,896.0 M | — |
-| **Equity Value Consolidado** | — | — | **$95,020.9 M** | — |
-| **Precio Justo por Acción (SOTP)** | — | — | **$1874.28** | **+2.9%** |
+| (-) Deuda Neta | — | — | $-5,183.0 M | — |
+| **Equity Value Consolidado** | — | — | **$94,733.9 M** | — |
+| **Precio Justo por Acción (SOTP)** | — | — | **$1868.62** | **+2.6%** |
 
 
 ### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -748,7 +748,7 @@ Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y mú
 | **Calidad de Beneficios** | Ratio Sloan: -25.62% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($2.17 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: 13.7x / Altman Z'': 1.56 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $5.7B. |
 | **Productividad del Capital** | ROC Greenblatt: 82.4% / ROIC Adj: 18.1% | **CREADOR DE VALOR** | Spread económico de +7.1 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: 14.0% - 1.4% | **VALORACIÓN EXIGENTE** | Exigencia asumible (+14.0% anual); alineada con el ritmo tendencial de la empresa y su sector. |
+| **Valoración de Mercado** | Crecimiento Implícito: 14.0% - 1.5% | **VALORACIÓN EXIGENTE** | Exigencia asumible (+14.0% anual); alineada con el ritmo tendencial de la empresa y su sector. |
 
 
 

@@ -4280,7 +4280,9 @@
           "FY2017": 1790147000.0,
           "FY2016": 1875197000.0,
           "LTM": 5527289000.0
-        }
+        },
+        "spanish_label": "Ventas netas",
+        "orig_tooltip": "Net sales (Note 2 and Note 13) (us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax)"
       },
       {
         "label": "Cost of sales",
@@ -4302,7 +4304,9 @@
           "FY2017": 954912000.0,
           "FY2016": 1028529000.0,
           "LTM": 2332306000.0
-        }
+        },
+        "spanish_label": "Costo de ventas (COGS)",
+        "orig_tooltip": "Cost of sales (us-gaap_CostOfGoodsAndServicesSold)"
       },
       {
         "label": "Gross profit",
@@ -4324,7 +4328,9 @@
           "FY2017": 835235000.0,
           "FY2016": 846668000.0,
           "LTM": 3194983000.0
-        }
+        },
+        "spanish_label": "Beneficio bruto (Margen bruto)",
+        "orig_tooltip": "Gross profit (us-gaap_GrossProfit)"
       },
       {
         "label": "Selling, general, and administrative expenses (Note 13)",
@@ -4346,7 +4352,9 @@
           "FY2017": 837154000.0,
           "FY2016": 684541000.0,
           "LTM": 1942066000.0
-        }
+        },
+        "spanish_label": "Gastos de venta, generales y admin. (SG&A)",
+        "orig_tooltip": "Selling, general, and administrative expenses (Note 13) (us-gaap_SellingGeneralAndAdministrativeExpense)"
       },
       {
         "label": "Income from operations (Note 13)",
@@ -4368,7 +4376,9 @@
           "FY2017": -1919000.0,
           "FY2016": 162127000.0,
           "LTM": 1252917000.0
-        }
+        },
+        "spanish_label": "Beneficio operativo (EBIT)",
+        "orig_tooltip": "Income from operations (Note 13) (us-gaap_OperatingIncomeLoss)"
       },
       {
         "label": "Interest income",
@@ -4390,7 +4400,9 @@
           "FY2017": -778000.0,
           "FY2016": -420000.0,
           "LTM": -60785000.0
-        }
+        },
+        "spanish_label": "Ingresos financieros por intereses",
+        "orig_tooltip": "Interest income (us-gaap_InvestmentIncomeInterest)"
       },
       {
         "label": "Interest expense",
@@ -4412,7 +4424,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 3822000.0
-        }
+        },
+        "spanish_label": "Gastos por intereses financieros",
+        "orig_tooltip": "Interest expense (us-gaap_InterestExpenseNonoperating)"
       },
       {
         "label": "Other (income) expense, net",
@@ -4434,7 +4448,9 @@
           "FY2017": -1474000.0,
           "FY2016": -152000.0,
           "LTM": -2460000.0
-        }
+        },
+        "spanish_label": "Otros (ingresos) y gastos no operativos, netos",
+        "orig_tooltip": "Other (income) expense, net (us-gaap_OtherNonoperatingIncomeExpense)"
       },
       {
         "label": "Total other income, net",
@@ -4456,7 +4472,9 @@
           "FY2017": 5067000.0,
           "FY2016": 5242000.0,
           "LTM": -63543000.0
-        }
+        },
+        "spanish_label": "Total otros ingresos y gastos no operativos, netos",
+        "orig_tooltip": "Total other income, net (us-gaap_NonoperatingIncomeExpense)"
       },
       {
         "label": "Income before income taxes",
@@ -4478,7 +4496,9 @@
           "FY2017": -6986000.0,
           "FY2016": null,
           "LTM": 1312340000.0
-        }
+        },
+        "spanish_label": "Beneficio antes de impuestos (EBT)",
+        "orig_tooltip": "Income before income taxes (us-gaap_IncomeLossAttributableToParent)"
       },
       {
         "label": "Income tax expense (Note 5)",
@@ -4500,7 +4520,9 @@
           "FY2017": -12696000.0,
           "FY2016": 34620000.0,
           "LTM": 297500000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios",
+        "orig_tooltip": "Income tax expense (Note 5) (us-gaap_IncomeTaxExpenseBenefit)"
       },
       {
         "label": "Net income",
@@ -4522,7 +4544,9 @@
           "FY2017": 5710000.0,
           "FY2016": 122265000.0,
           "LTM": 1014840000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net income (us-gaap_NetIncomeLoss)"
       },
       {
         "label": "Net income per share",
@@ -4544,7 +4568,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cálculo de ganancias por acción ordinaria",
+        "orig_tooltip": "Net income per share (us-gaap_EarningsPerShareAbstract)"
       },
       {
         "label": "Basic (in dollars per share)",
@@ -4566,7 +4592,9 @@
           "FY2017": 0.18,
           "FY2016": 3.76,
           "LTM": 7.09
-        }
+        },
+        "spanish_label": "Beneficio básico por acción ($)",
+        "orig_tooltip": "Basic (in dollars per share) (us-gaap_EarningsPerShareBasic)"
       },
       {
         "label": "Diluted (in dollars per share)",
@@ -4588,7 +4616,9 @@
           "FY2017": 0.18,
           "FY2016": 3.7,
           "LTM": 7.07
-        }
+        },
+        "spanish_label": "Beneficio diluido por acción ($)",
+        "orig_tooltip": "Diluted (in dollars per share) (us-gaap_EarningsPerShareDiluted)"
       },
       {
         "label": "Weighted-average common shares outstanding (Note 12)",
@@ -4610,7 +4640,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Acciones ordinarias emitidas y en circulación",
+        "orig_tooltip": "Weighted-average common shares outstanding (Note 12) (us-gaap_WeightedAverageNumberOfSharesOutstandingAbstract)"
       },
       {
         "label": "Basic (in shares)",
@@ -4632,7 +4664,9 @@
           "FY2017": 32000000.0,
           "FY2016": 32556000.0,
           "LTM": 142734750.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias básicas en circulación",
+        "orig_tooltip": "Basic (in shares) (us-gaap_WeightedAverageNumberOfSharesOutstandingBasic)"
       },
       {
         "label": "Diluted (in shares)",
@@ -4654,7 +4688,9 @@
           "FY2017": 32355000.0,
           "FY2016": 33039000.0,
           "LTM": 143028500.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias diluidas en circulación",
+        "orig_tooltip": "Diluted (in shares) (us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding)"
       }
     ],
     "balance_sheet": [
@@ -4678,7 +4714,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Activos",
+        "orig_tooltip": "ASSETS (us-gaap_AssetsAbstract)"
       },
       {
         "label": "Cash and cash equivalents",
@@ -4700,7 +4738,9 @@
           "FY2017": 291764000.0,
           "FY2016": null,
           "LTM": 1602589000.0
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Cash and cash equivalents (us-gaap_CashAndCashEquivalentsAtCarryingValue)"
       },
       {
         "label": "Trade accounts receivable, net of allowances ($38,198 and $32,883 as of March 31, 2026, and March 31, 2025, respectively) (Note 2 and Schedule II)",
@@ -4722,7 +4762,9 @@
           "FY2017": 158643000.0,
           "FY2016": null,
           "LTM": 378348000.0
-        }
+        },
+        "spanish_label": "Cuentas por cobrar netas",
+        "orig_tooltip": "Trade accounts receivable, net of allowances ($38,198 and $32,883 as of March 31, 2026, and March 31, 2025, respectively) (Note 2 and Schedule II) (us-gaap_AccountsReceivableNetCurrent)"
       },
       {
         "label": "Inventories",
@@ -4744,7 +4786,9 @@
           "FY2017": 298851000.0,
           "FY2016": null,
           "LTM": 807580000.0
-        }
+        },
+        "spanish_label": "Inventarios y existencias",
+        "orig_tooltip": "Inventories (us-gaap_InventoryNet)"
       },
       {
         "label": "Prepaid expenses",
@@ -4766,7 +4810,9 @@
           "FY2017": 15996000.0,
           "FY2016": null,
           "LTM": 61372000.0
-        }
+        },
+        "spanish_label": "Gastos devengados pagados por anticipado",
+        "orig_tooltip": "Prepaid expenses (us-gaap_PrepaidExpenseCurrent)"
       },
       {
         "label": "Other current assets",
@@ -4788,7 +4834,9 @@
           "FY2017": 30781000.0,
           "FY2016": null,
           "LTM": 67940000.0
-        }
+        },
+        "spanish_label": "Otros activos corrientes",
+        "orig_tooltip": "Other current assets (us-gaap_OtherAssetsCurrent)"
       },
       {
         "label": "Income tax receivable",
@@ -4810,7 +4858,9 @@
           "FY2017": 24786000.0,
           "FY2016": null,
           "LTM": 4200000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios a recuperar / Saldo a favor",
+        "orig_tooltip": "Income tax receivable (us-gaap_IncomeTaxesReceivable)"
       },
       {
         "label": "Total current assets",
@@ -4832,7 +4882,9 @@
           "FY2017": 820821000.0,
           "FY2016": null,
           "LTM": 2922029000.0
-        }
+        },
+        "spanish_label": "Total de activos corrientes",
+        "orig_tooltip": "Total current assets (us-gaap_AssetsCurrent)"
       },
       {
         "label": "Property and equipment, net of accumulated depreciation ($457,173 and $402,964 as of March 31, 2026, and March 31, 2025, respectively) (Note 3)",
@@ -4854,7 +4906,9 @@
           "FY2017": 225531000.0,
           "FY2016": null,
           "LTM": 337750000.0
-        }
+        },
+        "spanish_label": "Propiedad, planta y equipo (PP&E neto)",
+        "orig_tooltip": "Property and equipment, net of accumulated depreciation ($457,173 and $402,964 as of March 31, 2026, and March 31, 2025, respectively) (Note 3) (us-gaap_PropertyPlantAndEquipmentNet)"
       },
       {
         "label": "Operating lease assets",
@@ -4876,7 +4930,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 432484000.0
-        }
+        },
+        "spanish_label": "Activos por derecho de uso bajo arrendamiento operativo",
+        "orig_tooltip": "Operating lease assets (us-gaap_OperatingLeaseRightOfUseAsset)"
       },
       {
         "label": "Goodwill (Note 1)",
@@ -4898,7 +4954,9 @@
           "FY2017": 13990000.0,
           "FY2016": null,
           "LTM": 13990000.0
-        }
+        },
+        "spanish_label": "Fondo de comercio (Goodwill)",
+        "orig_tooltip": "Goodwill (Note 1) (us-gaap_Goodwill)"
       },
       {
         "label": "Other intangible assets, net of accumulated amortization ($20,968 and $25,014 as of March 31, 2026, and March 31, 2025, respectively) (Note 1)",
@@ -4920,7 +4978,9 @@
           "FY2017": 65138000.0,
           "FY2016": null,
           "LTM": 15635000.0
-        }
+        },
+        "spanish_label": "Activos intangibles",
+        "orig_tooltip": "Other intangible assets, net of accumulated amortization ($20,968 and $25,014 as of March 31, 2026, and March 31, 2025, respectively) (Note 1) (us-gaap_IntangibleAssetsNetExcludingGoodwill)"
       },
       {
         "label": "Deferred tax assets, net (Note 5)",
@@ -4942,7 +5002,9 @@
           "FY2017": 44708000.0,
           "FY2016": null,
           "LTM": 67295000.0
-        }
+        },
+        "spanish_label": "Activos por impuestos diferidos netos",
+        "orig_tooltip": "Deferred tax assets, net (Note 5) (us-gaap_DeferredIncomeTaxAssetsNet)"
       },
       {
         "label": "Other assets",
@@ -4964,7 +5026,9 @@
           "FY2017": 21592000.0,
           "FY2016": null,
           "LTM": 79438000.0
-        }
+        },
+        "spanish_label": "Otros activos operativos y no corrientes",
+        "orig_tooltip": "Other assets (us-gaap_OtherAssetsNoncurrent)"
       },
       {
         "label": "Total assets",
@@ -4986,7 +5050,9 @@
           "FY2017": 1191780000.0,
           "FY2016": null,
           "LTM": 3868621000.0
-        }
+        },
+        "spanish_label": "Total de activos",
+        "orig_tooltip": "Total assets (us-gaap_Assets)"
       },
       {
         "label": "LIABILITIES AND STOCKHOLDERS’ EQUITY",
@@ -5008,7 +5074,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Total pasivos y patrimonio neto",
+        "orig_tooltip": "LIABILITIES AND STOCKHOLDERS’ EQUITY (us-gaap_LiabilitiesAndStockholdersEquityAbstract)"
       },
       {
         "label": "Trade accounts payable",
@@ -5030,7 +5098,9 @@
           "FY2017": 95893000.0,
           "FY2016": null,
           "LTM": 726407000.0
-        }
+        },
+        "spanish_label": "Cuentas por pagar comerciales (Proveedores)",
+        "orig_tooltip": "Trade accounts payable (us-gaap_AccountsPayableTradeCurrent)"
       },
       {
         "label": "Accrued payroll",
@@ -5052,7 +5122,9 @@
           "FY2017": 22608000.0,
           "FY2016": null,
           "LTM": 57325000.0
-        }
+        },
+        "spanish_label": "Sueldos y remuneraciones devengadas pendientes de pago",
+        "orig_tooltip": "Accrued payroll (us-gaap_EmployeeRelatedLiabilitiesCurrent)"
       },
       {
         "label": "Operating lease liabilities (Note 7)",
@@ -5074,7 +5146,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 73358000.0
-        }
+        },
+        "spanish_label": "Pasivos por arrendamiento operativo",
+        "orig_tooltip": "Operating lease liabilities (Note 7) (us-gaap_OperatingLeaseLiabilityCurrent)"
       },
       {
         "label": "Other accrued expenses",
@@ -5096,7 +5170,9 @@
           "FY2017": 31815000.0,
           "FY2016": null,
           "LTM": 146713000.0
-        }
+        },
+        "spanish_label": "Gastos",
+        "orig_tooltip": "Other accrued expenses (us-gaap_OtherAccruedLiabilitiesCurrent)"
       },
       {
         "label": "Income tax payable",
@@ -5118,7 +5194,9 @@
           "FY2017": 2719000.0,
           "FY2016": null,
           "LTM": 57294000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios corriente a pagar",
+        "orig_tooltip": "Income tax payable (us-gaap_AccruedIncomeTaxesCurrent)"
       },
       {
         "label": "Value added tax payable",
@@ -5140,7 +5218,9 @@
           "FY2017": 5466000.0,
           "FY2016": null,
           "LTM": 2534000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre el valor añadido (IVA) a ingresar",
+        "orig_tooltip": "Value added tax payable (deck_ValueAddedTaxPayable)"
       },
       {
         "label": "Total current liabilities",
@@ -5162,7 +5242,9 @@
           "FY2017": 159051000.0,
           "FY2016": null,
           "LTM": 1063631000.0
-        }
+        },
+        "spanish_label": "Total de pasivos corrientes",
+        "orig_tooltip": "Total current liabilities (us-gaap_LiabilitiesCurrent)"
       },
       {
         "label": "Long-term operating lease liabilities (Note 7)",
@@ -5184,7 +5266,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 398976000.0
-        }
+        },
+        "spanish_label": "Pasivos por arrendamiento operativo a largo plazo",
+        "orig_tooltip": "Long-term operating lease liabilities (Note 7) (us-gaap_OperatingLeaseLiabilityNoncurrent)"
       },
       {
         "label": "Income tax liability",
@@ -5206,7 +5290,9 @@
           "FY2017": 13216000.0,
           "FY2016": null,
           "LTM": 28234000.0
-        }
+        },
+        "spanish_label": "Pasivo por impuestos corrientes y diferidos",
+        "orig_tooltip": "Income tax liability (us-gaap_AccruedIncomeTaxesNoncurrent)"
       },
       {
         "label": "Other long-term liabilities",
@@ -5228,7 +5314,9 @@
           "FY2017": 14743000.0,
           "FY2016": null,
           "LTM": 76098000.0
-        }
+        },
+        "spanish_label": "Otros pasivos no corrientes a largo plazo",
+        "orig_tooltip": "Other long-term liabilities (us-gaap_OtherLiabilitiesNoncurrent)"
       },
       {
         "label": "Total long-term liabilities",
@@ -5250,7 +5338,9 @@
           "FY2017": 78474000.0,
           "FY2016": null,
           "LTM": 503308000.0
-        }
+        },
+        "spanish_label": "Total pasivos exigibles a largo plazo",
+        "orig_tooltip": "Total long-term liabilities (us-gaap_LiabilitiesNoncurrent)"
       },
       {
         "label": "Commitments and contingencies (Note 8)",
@@ -5272,7 +5362,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Compromisos contractuales y contingencias legales",
+        "orig_tooltip": "Commitments and contingencies (Note 8) (us-gaap_CommitmentsAndContingencies)"
       },
       {
         "label": "Stockholders’ equity",
@@ -5294,7 +5386,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Patrimonio neto",
+        "orig_tooltip": "Stockholders’ equity (us-gaap_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterestAbstract)"
       },
       {
         "label": "Common stock ($0.01 par value per share",
@@ -5316,7 +5410,9 @@
           "FY2017": 320000.0,
           "FY2016": null,
           "LTM": 1367000.0
-        }
+        },
+        "spanish_label": "Acciones ordinarias ($0.01 par value per share",
+        "orig_tooltip": "Common stock ($0.01 par value per share (us-gaap_CommonStockValue)"
       },
       {
         "label": "Additional paid-in capital",
@@ -5338,7 +5434,9 @@
           "FY2017": 160797000.0,
           "FY2016": null,
           "LTM": 298049000.0
-        }
+        },
+        "spanish_label": "Prima de emisión de acciones (Capital adicional)",
+        "orig_tooltip": "Additional paid-in capital (us-gaap_AdditionalPaidInCapital)"
       },
       {
         "label": "Retained earnings",
@@ -5360,7 +5458,9 @@
           "FY2017": 819589000.0,
           "FY2016": null,
           "LTM": 2034898000.0
-        }
+        },
+        "spanish_label": "Resultados acumulados / Ganancias retenidas",
+        "orig_tooltip": "Retained earnings (us-gaap_RetainedEarningsAccumulatedDeficit)"
       },
       {
         "label": "Accumulated other comprehensive loss (Note 11)",
@@ -5382,7 +5482,9 @@
           "FY2017": -26451000.0,
           "FY2016": null,
           "LTM": -32632000.0
-        }
+        },
+        "spanish_label": "Otro resultado integral acumulado (pérdida)",
+        "orig_tooltip": "Accumulated other comprehensive loss (Note 11) (us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax)"
       },
       {
         "label": "Total stockholders’ equity",
@@ -5404,7 +5506,9 @@
           "FY2017": 954255000.0,
           "FY2016": null,
           "LTM": 2301682000.0
-        }
+        },
+        "spanish_label": "Total de patrimonio neto de los accionistas",
+        "orig_tooltip": "Total stockholders’ equity (us-gaap_StockholdersEquity)"
       },
       {
         "label": "Total liabilities and stockholders’ equity",
@@ -5426,7 +5530,9 @@
           "FY2017": 1191780000.0,
           "FY2016": null,
           "LTM": 3868621000.0
-        }
+        },
+        "spanish_label": "Total de pasivos y patrimonio neto",
+        "orig_tooltip": "Total liabilities and stockholders’ equity (us-gaap_LiabilitiesAndStockholdersEquity)"
       }
     ],
     "cash_flow_statement": [
@@ -5450,7 +5556,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Actividades de operación",
+        "orig_tooltip": "OPERATING ACTIVITIES (us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperationsAbstract)"
       },
       {
         "label": "Net income",
@@ -5472,7 +5580,9 @@
           "FY2017": 5710000.0,
           "FY2016": 122265000.0,
           "LTM": 1014840000.0
-        }
+        },
+        "spanish_label": "Beneficio neto consolidado",
+        "orig_tooltip": "Net income (us-gaap_NetIncomeLoss)"
       },
       {
         "label": "Reconciliation of net income to net cash provided by (used in) operating activities:",
@@ -5494,7 +5604,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Flujo neto de actividades de operación (CFO)",
+        "orig_tooltip": "Reconciliation of net income to net cash provided by (used in) operating activities: (us-gaap_AdjustmentsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivitiesAbstract)"
       },
       {
         "label": "Depreciation, amortization, and accretion",
@@ -5516,7 +5628,9 @@
           "FY2017": 52628000.0,
           "FY2016": 50024000.0,
           "LTM": 74062000.0
-        }
+        },
+        "spanish_label": "Depreciación, amortización y devengo de primas/descuentos",
+        "orig_tooltip": "Depreciation, amortization, and accretion (us-gaap_DepreciationAmortizationAndAccretionNet)"
       },
       {
         "label": "Amortization on cloud computing arrangements",
@@ -5538,7 +5652,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 2239000.0
-        }
+        },
+        "spanish_label": "Amortización de acuerdos informáticos en la nube",
+        "orig_tooltip": "Amortization on cloud computing arrangements (deck_AmortizationOfCloudComputingArrangements)"
       },
       {
         "label": "Bad debt expense",
@@ -5560,7 +5676,9 @@
           "FY2017": 2847000.0,
           "FY2016": 5120000.0,
           "LTM": 960000.0
-        }
+        },
+        "spanish_label": "Gasto por insolvencias y provisiones de dudoso cobro",
+        "orig_tooltip": "Bad debt expense (us-gaap_ProvisionForDoubtfulAccounts)"
       },
       {
         "label": "Deferred tax expense (benefit)",
@@ -5582,7 +5700,9 @@
           "FY2017": -24495000.0,
           "FY2016": 8167000.0,
           "LTM": 9967000.0
-        }
+        },
+        "spanish_label": "Gasto (beneficio) por impuesto sobre beneficios diferido",
+        "orig_tooltip": "Deferred tax expense (benefit) (us-gaap_DeferredIncomeTaxExpenseBenefit)"
       },
       {
         "label": "Stock-based compensation",
@@ -5604,7 +5724,9 @@
           "FY2017": 6011000.0,
           "FY2016": 6622000.0,
           "LTM": 46837000.0
-        }
+        },
+        "spanish_label": "Compensación basada en acciones",
+        "orig_tooltip": "Stock-based compensation (us-gaap_ShareBasedCompensation)"
       },
       {
         "label": "Loss on disposal of assets",
@@ -5626,7 +5748,9 @@
           "FY2017": 538000.0,
           "FY2016": 1338000.0,
           "LTM": 1251000.0
-        }
+        },
+        "spanish_label": "Pérdida por enajenación o baja de activos fijos",
+        "orig_tooltip": "Loss on disposal of assets (us-gaap_GainLossOnDispositionOfAssets1)"
       },
       {
         "label": "Impairment of intangible assets",
@@ -5648,7 +5772,9 @@
           "FY2017": 8829000.0,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Deterioro de valor de activos intangibles",
+        "orig_tooltip": "Impairment of intangible assets (us-gaap_ImpairmentOfIntangibleAssetsFinitelived)"
       },
       {
         "label": "Impairment of property and equipment and cloud computing arrangements",
@@ -5670,7 +5796,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Deterioro de PP&E y acuerdos de computación en la nube",
+        "orig_tooltip": "Impairment of property and equipment and cloud computing arrangements (deck_ImpairmentChargesOfCloudComputingArrangementsOperatingLeaseAndOtherLongLivedAssets)"
       },
       {
         "label": "Changes in operating assets and liabilities:",
@@ -5692,7 +5820,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pasivos",
+        "orig_tooltip": "Changes in operating assets and liabilities: (us-gaap_IncreaseDecreaseInOperatingCapitalAbstract)"
       },
       {
         "label": "Trade accounts receivable, net",
@@ -5714,7 +5844,9 @@
           "FY2017": -1336000.0,
           "FY2016": -23545000.0,
           "LTM": -2833000.0
-        }
+        },
+        "spanish_label": "Cuentas por cobrar comerciales netas",
+        "orig_tooltip": "Trade accounts receivable, net (us-gaap_IncreaseDecreaseInAccountsReceivable)"
       },
       {
         "label": "Inventories",
@@ -5736,7 +5868,9 @@
           "FY2017": 1060000.0,
           "FY2016": -61492000.0,
           "LTM": 41771000.0
-        }
+        },
+        "spanish_label": "Inventarios y existencias",
+        "orig_tooltip": "Inventories (us-gaap_IncreaseDecreaseInInventories)"
       },
       {
         "label": "Prepaid expenses and other current assets",
@@ -5758,7 +5892,9 @@
           "FY2017": 7975000.0,
           "FY2016": -3681000.0,
           "LTM": -5415000.0
-        }
+        },
+        "spanish_label": "Gastos pagados por anticipado y otros activos corrientes",
+        "orig_tooltip": "Prepaid expenses and other current assets (us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets)"
       },
       {
         "label": "Income tax receivable",
@@ -5780,7 +5916,9 @@
           "FY2017": -1331000.0,
           "FY2016": -8286000.0,
           "LTM": 11159000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios a recuperar / Saldo a favor",
+        "orig_tooltip": "Income tax receivable (us-gaap_IncreaseDecreaseInIncomeTaxesReceivable)"
       },
       {
         "label": "Net operating lease assets and lease liabilities",
@@ -5802,7 +5940,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": -2183000.0
-        }
+        },
+        "spanish_label": "Activos por derecho de uso bajo arrendamiento operativo",
+        "orig_tooltip": "Net operating lease assets and lease liabilities (deck_IncreaseDecreaseInOperatingLeaseRightofUseAssetsAndOperatingLeaseLiabilities)"
       },
       {
         "label": "Other assets",
@@ -5824,7 +5964,9 @@
           "FY2017": 1882000.0,
           "FY2016": -3082000.0,
           "LTM": -33936000.0
-        }
+        },
+        "spanish_label": "Otros activos operativos y no corrientes",
+        "orig_tooltip": "Other assets (us-gaap_IncreaseDecreaseInOtherOperatingAssets)"
       },
       {
         "label": "Trade accounts payable",
@@ -5846,7 +5988,9 @@
           "FY2017": -7825000.0,
           "FY2016": 14775000.0,
           "LTM": -1131000.0
-        }
+        },
+        "spanish_label": "Cuentas por pagar comerciales (Proveedores)",
+        "orig_tooltip": "Trade accounts payable (us-gaap_IncreaseDecreaseInAccountsPayableTrade)"
       },
       {
         "label": "Other accrued expenses",
@@ -5868,7 +6012,9 @@
           "FY2017": -403000.0,
           "FY2016": -16221000.0,
           "LTM": -13110000.0
-        }
+        },
+        "spanish_label": "Gastos",
+        "orig_tooltip": "Other accrued expenses (us-gaap_IncreaseDecreaseInAccruedLiabilities)"
       },
       {
         "label": "Income tax payable",
@@ -5890,7 +6036,9 @@
           "FY2017": -3643000.0,
           "FY2016": -397000.0,
           "LTM": 34559000.0
-        }
+        },
+        "spanish_label": "Impuesto sobre beneficios corriente a pagar",
+        "orig_tooltip": "Income tax payable (us-gaap_IncreaseDecreaseInAccruedIncomeTaxesPayable)"
       },
       {
         "label": "Other long-term liabilities",
@@ -5912,7 +6060,9 @@
           "FY2017": 3023000.0,
           "FY2016": 7195000.0,
           "LTM": 14549000.0
-        }
+        },
+        "spanish_label": "Otros pasivos no corrientes a largo plazo",
+        "orig_tooltip": "Other long-term liabilities (us-gaap_IncreaseDecreaseInOtherNoncurrentLiabilities)"
       },
       {
         "label": "Net cash provided by operating activities",
@@ -5934,7 +6084,9 @@
           "FY2017": 199330000.0,
           "FY2016": 125813000.0,
           "LTM": 1193713000.0
-        }
+        },
+        "spanish_label": "Flujo neto provisto por actividades operativas",
+        "orig_tooltip": "Net cash provided by operating activities (us-gaap_NetCashProvidedByUsedInOperatingActivities)"
       },
       {
         "label": "INVESTING ACTIVITIES",
@@ -5956,7 +6108,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Actividades de inversión",
+        "orig_tooltip": "INVESTING ACTIVITIES (us-gaap_NetCashProvidedByUsedInInvestingActivitiesContinuingOperationsAbstract)"
       },
       {
         "label": "Purchases of property and equipment",
@@ -5978,7 +6132,9 @@
           "FY2017": -44499000.0,
           "FY2016": -66186000.0,
           "LTM": -75905000.0
-        }
+        },
+        "spanish_label": "Compras de propiedad y equipamiento (CapEx)",
+        "orig_tooltip": "Purchases of property and equipment (us-gaap_PaymentsToAcquirePropertyPlantAndEquipment)"
       },
       {
         "label": "Proceeds from sale of assets",
@@ -6000,7 +6156,9 @@
           "FY2017": 0.0,
           "FY2016": 830000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cobros por enajenación de inmovilizado y activos",
+        "orig_tooltip": "Proceeds from sale of assets (us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment)"
       },
       {
         "label": "Net cash used in investing activities",
@@ -6022,7 +6180,9 @@
           "FY2017": -44499000.0,
           "FY2016": -67221000.0,
           "LTM": -75896000.0
-        }
+        },
+        "spanish_label": "Flujo neto usado en actividades de inversión",
+        "orig_tooltip": "Net cash used in investing activities (us-gaap_NetCashProvidedByUsedInInvestingActivities)"
       },
       {
         "label": "FINANCING ACTIVITIES",
@@ -6044,7 +6204,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Actividades de financiación",
+        "orig_tooltip": "FINANCING ACTIVITIES (us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperationsAbstract)"
       },
       {
         "label": "Proceeds from issuance of stock",
@@ -6066,7 +6228,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Fondos captados por emisión y ampliación de capital",
+        "orig_tooltip": "Proceeds from issuance of stock (us-gaap_ProceedsFromIssuanceOfCommonStock)"
       },
       {
         "label": "Proceeds from exercise of stock options",
@@ -6088,7 +6252,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Cobros por ejercicio de opciones sobre acciones por empleados",
+        "orig_tooltip": "Proceeds from exercise of stock options (us-gaap_ProceedsFromStockOptionsExercised)"
       },
       {
         "label": "Repurchases of common stock",
@@ -6110,7 +6276,9 @@
           "FY2017": -12572000.0,
           "FY2016": -94200000.0,
           "LTM": -1230295000.0
-        }
+        },
+        "spanish_label": "Recompras de acciones ordinarias",
+        "orig_tooltip": "Repurchases of common stock (us-gaap_PaymentsForRepurchaseOfCommonStock)"
       },
       {
         "label": "Cash paid for excise taxes related to repurchases of common stock",
@@ -6132,7 +6300,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Impuestos especiales pagados por recompras de acciones",
+        "orig_tooltip": "Cash paid for excise taxes related to repurchases of common stock (deck_CashPaidForExciseTaxesRelatedToRepurchasesOfCommonStock)"
       },
       {
         "label": "Cash paid for shares withheld for taxes",
@@ -6154,7 +6324,9 @@
           "FY2017": -8452000.0,
           "FY2016": -3691000.0,
           "LTM": -8464000.0
-        }
+        },
+        "spanish_label": "Pagos en efectivo por retenciones fiscales de acciones",
+        "orig_tooltip": "Cash paid for shares withheld for taxes (us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation)"
       },
       {
         "label": "Net cash used in financing activities",
@@ -6176,7 +6348,9 @@
           "FY2017": -103757000.0,
           "FY2016": -36811000.0,
           "LTM": -1239293000.0
-        }
+        },
+        "spanish_label": "Flujo neto usado en actividades de financiación",
+        "orig_tooltip": "Net cash used in financing activities (us-gaap_NetCashProvidedByUsedInFinancingActivities)"
       },
       {
         "label": "Effect of foreign currency exchange rates on cash and cash equivalents",
@@ -6198,7 +6372,9 @@
           "FY2017": -5266000.0,
           "FY2016": null,
           "LTM": 3649000.0
-        }
+        },
+        "spanish_label": "Efectivo y equivalentes de efectivo",
+        "orig_tooltip": "Effect of foreign currency exchange rates on cash and cash equivalents (us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents)"
       },
       {
         "label": "SUPPLEMENTAL CASH FLOW DISCLOSURE",
@@ -6220,7 +6396,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Información complementaria de flujos de efectivo",
+        "orig_tooltip": "SUPPLEMENTAL CASH FLOW DISCLOSURE (us-gaap_SupplementalCashFlowInformationAbstract)"
       },
       {
         "label": "Cash paid during the period",
@@ -6242,7 +6420,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Efectivo pagado durante el período",
+        "orig_tooltip": "Cash paid during the period (deck_CashPaidDuringPeriodForAbstract)"
       },
       {
         "label": "Interest",
@@ -6264,7 +6444,9 @@
           "FY2017": 5494000.0,
           "FY2016": 4640000.0,
           "LTM": 3119000.0
-        }
+        },
+        "spanish_label": "Intereses financieros pagados / devengados",
+        "orig_tooltip": "Interest (us-gaap_InterestPaidNet)"
       },
       {
         "label": "Operating leases",
@@ -6286,7 +6468,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 99766000.0
-        }
+        },
+        "spanish_label": "Pagos por arrendamientos operativos",
+        "orig_tooltip": "Operating leases (us-gaap_OperatingLeasePayments)"
       },
       {
         "label": "Non-cash investing activities",
@@ -6308,7 +6492,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Non-cash actividades de inversión",
+        "orig_tooltip": "Non-cash investing activities (deck_NoncashInvestingItemAbstract)"
       },
       {
         "label": "Changes in trade accounts payable and other accrued expenses for purchases of property and equipment",
@@ -6330,7 +6516,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": -5348000.0
-        }
+        },
+        "spanish_label": "Variación en cuentas por pagar por compras de inmovilizado",
+        "orig_tooltip": "Changes in trade accounts payable and other accrued expenses for purchases of property and equipment (deck_ChangeInCapitalExpendituresIncurredButNotYetPaid)"
       },
       {
         "label": "Accrued for asset retirement obligation assets related to leasehold improvements",
@@ -6352,7 +6540,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 10565000.0
-        }
+        },
+        "spanish_label": "Obligaciones acumuladas por retiro de activos en mejoras de inmuebles",
+        "orig_tooltip": "Accrued for asset retirement obligation assets related to leasehold improvements (deck_AccruedAssetRetirementObligations)"
       },
       {
         "label": "Leasehold improvements acquired through tenant allowances",
@@ -6374,7 +6564,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Mejoras de inmuebles sufragadas mediante concesiones de arrendatarios",
+        "orig_tooltip": "Leasehold improvements acquired through tenant allowances (deck_LeaseholdImprovementsFromTenantAllowance)"
       },
       {
         "label": "Non-cash financing activities",
@@ -6396,7 +6588,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": null
-        }
+        },
+        "spanish_label": "Non-cash actividades de financiación",
+        "orig_tooltip": "Non-cash financing activities (deck_NoncashFinancingItemAbstract)"
       },
       {
         "label": "Accrued for shares withheld for taxes",
@@ -6418,7 +6612,9 @@
           "FY2017": 0.0,
           "FY2016": 919000.0,
           "LTM": null
-        }
+        },
+        "spanish_label": "Pasivos acumulados por acciones retenidas para impuestos",
+        "orig_tooltip": "Accrued for shares withheld for taxes (deck_AccrualsForSharesWithheldForTaxes)"
       },
       {
         "label": "Accrued excise taxes related to repurchases of common stock",
@@ -6440,7 +6636,9 @@
           "FY2017": null,
           "FY2016": null,
           "LTM": 12069000.0
-        }
+        },
+        "spanish_label": "Recompras de acciones ordinarias",
+        "orig_tooltip": "Accrued excise taxes related to repurchases of common stock (deck_ExciseTaxesAccruedForRepurchasesOfCommonStock)"
       }
     ]
   }
