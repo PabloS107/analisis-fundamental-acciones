@@ -65,6 +65,18 @@ def normalize_fiscal_year(col_name):
     return col_str
 
 
+def _clean_concept_token(c):
+    """Limpia prefijos de namespace (us-gaap:, ifrs-full_) y normaliza a minusculas."""
+    if not c or pd.isna(c):
+        return ""
+    s = str(c).strip()
+    if ":" in s:
+        s = s.split(":")[-1]
+    if "_" in s:
+        s = s.split("_")[-1]
+    return s.lower()
+
+
 def dataframe_to_concept_dict(df, periods):
     """Convierte un DataFrame con columnas de períodos a un diccionario indexado por concepto US-GAAP."""
     data_by_concept = {}
@@ -447,6 +459,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "cash_and_equivalents": {},
         "short_term_investments": {},
         "total_liquid_cash": {},
+        "short_term_debt": {},
+        "long_term_debt": {},
         "total_debt": {},
         "net_debt": {},
         "total_assets": {},
@@ -1104,6 +1118,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             tot_debt = round(lt_debt + st_debt, 2)
             canonical["borrowings"][p] = lt_debt
             canonical["repurchase_agreements"][p] = st_debt
+            canonical["short_term_debt"][p] = st_debt
+            canonical["long_term_debt"][p] = lt_debt
             canonical["total_debt"][p] = tot_debt
             canonical["net_debt"][p] = round(tot_debt - cash, 2)
 
@@ -1131,13 +1147,17 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             cash = cash or 0.0
             canonical["cash_and_equivalents"][p] = cash
             
+            st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p) or 0.0
+            lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p) or 0.0
             comb_debt = get_first_matching_value(bal_data, ["DebtLongtermAndShorttermCombinedAmount", "us-gaap_DebtLongtermAndShorttermCombinedAmount", "TotalDebt"], p)
             if comb_debt is not None:
                 tot_debt = round(float(comb_debt), 2)
+                if lt_debt == 0.0 and tot_debt > st_debt:
+                    lt_debt = round(tot_debt - st_debt, 2)
             else:
-                st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p) or 0.0
-                lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p) or 0.0
                 tot_debt = round(st_debt + lt_debt, 2)
+            canonical["short_term_debt"][p] = st_debt
+            canonical["long_term_debt"][p] = lt_debt
             canonical["total_debt"][p] = tot_debt
             canonical["net_debt"][p] = round(tot_debt - cash, 2)
 
@@ -1202,20 +1222,22 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             tot_liquid_cash = round(cash + st_inv, 2)
             canonical["total_liquid_cash"][p] = tot_liquid_cash
             
+            st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+            if st_debt is None and facts_df is not None:
+                st_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+            st_debt = st_debt or 0.0
+
+            lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+            if lt_debt is None and facts_df is not None:
+                lt_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+            lt_debt = lt_debt or 0.0
+
             comb_debt = get_first_matching_value(bal_data, ["DebtLongtermAndShorttermCombinedAmount", "us-gaap_DebtLongtermAndShorttermCombinedAmount", "TotalDebt"], p)
             if comb_debt is not None:
                 tot_debt = round(float(comb_debt), 2)
+                if lt_debt == 0.0 and tot_debt > st_debt:
+                    lt_debt = round(tot_debt - st_debt, 2)
             else:
-                st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p)
-                if st_debt is None and facts_df is not None:
-                    st_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["short_term_debt"], p)
-                st_debt = st_debt or 0.0
-
-                lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p)
-                if lt_debt is None and facts_df is not None:
-                    lt_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["long_term_debt"], p)
-                lt_debt = lt_debt or 0.0
-
                 # Para empresas con tramos específicos de pagarés, notas y préstamos (ej. REITs)
                 # que presentan NotesPayable + LoansPayable + SecuredDebt por separado sin un total consolidado
                 notes_p = get_first_matching_value(bal_data, ["NotesPayable", "us-gaap_NotesPayable", "SeniorNotes"], p) or 0.0
@@ -1230,6 +1252,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                     st_debt = round(revolving_p, 2)
 
                 tot_debt = round(st_debt + lt_debt, 2)
+            canonical["short_term_debt"][p] = st_debt
+            canonical["long_term_debt"][p] = lt_debt
             canonical["total_debt"][p] = tot_debt
             canonical["net_debt"][p] = round(tot_debt - tot_liquid_cash, 2)
             
@@ -2108,8 +2132,6 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                                     val = vc
                                 else:
                                     val = float(fy_val) - vp + vc
-                            elif pd.notna(fy_val):
-                                val = float(fy_val)
                             ltm_col.append(val)
                         inc_df.insert(inc_df.columns.get_loc(latest_fy), 'LTM', ltm_col)
 
@@ -2162,43 +2184,79 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             if cf_scale < calib_factor:
                                 cf_scale = calib_factor
 
+                    used_bs_indices = set()
                     def find_bs_match(c_name, l_name):
                         if 'abstract' in c_name.lower():
                             return None, None
                         c_clean = clean_txt(c_name)
                         l_clean = clean_txt(l_name)
-                        for lbl, v in interim_bs:
+                        for idx, (lbl, v) in enumerate(interim_bs):
+                            if idx in used_bs_indices:
+                                continue
                             if l_clean == lbl:
+                                used_bs_indices.add(idx)
                                 return lbl, v
                         if 'cash' in c_clean and 'cash' in l_clean and 'central' not in l_clean:
-                            for lbl, v in interim_bs:
-                                if lbl == 'cash and cash equivalents': return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if lbl == 'cash and cash equivalents':
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'central' in c_clean or 'central' in l_clean:
-                            for lbl, v in interim_bs:
-                                if 'central' in lbl: return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if 'central' in lbl:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'creditcard' in c_clean or 'credit card' in l_clean:
-                            for lbl, v in interim_bs:
-                                if 'credit card' in lbl: return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if 'credit card' in lbl:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'loansandadvances' in c_clean or 'loans to customers' in l_clean:
-                            for lbl, v in interim_bs:
-                                if 'loans to customers' in lbl: return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if 'loans to customers' in lbl:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'depositsfromcustomers' in c_clean or l_clean == 'deposits':
-                            for lbl, v in interim_bs:
-                                if lbl == 'deposits': return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if lbl == 'deposits':
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'borrowings' in c_clean or 'borrowing' in l_clean:
-                            for lbl, v in interim_bs:
-                                if 'borrowing' in lbl: return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if 'borrowing' in lbl:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'repurchase' in c_clean or 'repurchase' in l_clean:
-                            for lbl, v in interim_bs:
-                                if 'repurchase' in lbl: return lbl, v
-                        if c_clean.endswith('assets') or l_clean in ['assets', 'total assets']:
-                            for lbl, v in interim_bs:
-                                if lbl == 'total assets': return lbl, v
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if 'repurchase' in lbl:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
+                        if c_clean in ['assets', 'totalassets'] or l_clean in ['assets', 'total assets']:
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if lbl in ['total assets', 'assets']:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
                         if 'total' in l_clean and 'equity' in l_clean:
-                            for lbl, v in interim_bs:
-                                if lbl == 'total equity': return lbl, v
-                        for lbl, v in interim_bs:
-                            if len(lbl) > 8 and (lbl in l_clean or l_clean in lbl):
+                            for idx, (lbl, v) in enumerate(interim_bs):
+                                if idx in used_bs_indices: continue
+                                if lbl in ['total equity', 'total shareholders equity', 'total stockholders equity']:
+                                    used_bs_indices.add(idx)
+                                    return lbl, v
+                        for idx, (lbl, v) in enumerate(interim_bs):
+                            if idx in used_bs_indices: continue
+                            # Excluir explícitamente que cuentas 'total' coincidan con cuentas no-totales
+                            if ('total' in lbl) != ('total' in l_clean):
+                                continue
+                            if len(lbl) > 8 and (lbl == l_clean):
+                                used_bs_indices.add(idx)
                                 return lbl, v
                         return None, None
 
@@ -2212,8 +2270,6 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             m_lbl, v_match = find_bs_match(concept, label)
                             if m_lbl:
                                 val = v_match
-                            elif pd.notna(fy_val):
-                                val = float(fy_val)
                             ltm_bal_col.append(val)
                         bal_df.insert(bal_df.columns.get_loc(latest_fy), 'LTM', ltm_bal_col)
 
@@ -2333,8 +2389,6 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             elif any(k in c_name for k in ['sharesrepurchased', 'paymentsforpurchaseofownshares', 'repurchaseofcommonstock', 'purchaseoftreasuryshares', 'paymentstorepurchasecommonstock']) and rep_ltm is not None:
                                 val = rep_ltm
                                 rep_matched_in_cf = True
-                            elif pd.notna(fy_val):
-                                val = float(fy_val)
                             ltm_cf_col.append(val)
                         cf_df.insert(cf_df.columns.get_loc(latest_fy), 'LTM', ltm_cf_col)
 
@@ -2463,6 +2517,7 @@ def build_as_reported_statements(
     """
     Construye los tres estados financieros principales bajo formato As-Reported (Filing Presentation fiel a la SEC).
     Preserva jerarquía, líneas oficiales, notas anuales y reconciliación de 10 años + LTM mediante emparejamiento de 3 niveles.
+    Aplica candado dimensional estricto, homogeneización de signos y prohibición de defaults ficticios (Regla 6).
     """
     def _clean_concept_token(c):
         if not c or pd.isna(c):
@@ -2526,7 +2581,11 @@ def build_as_reported_statements(
         if k_df is None or k_df.empty:
             continue
 
-        # Filtrado de líneas puras de carátula (Face-only items)
+        # Filtrar líneas de reclasificación de notas (- As reported, - Reclassification)
+        if "label" in k_df.columns:
+            k_df = k_df[~k_df["label"].astype(str).str.contains(r'-\s*(?:As reported|Reclassification)', case=False, regex=True)].copy()
+
+        # Filtrado de líneas de carátula (Face-only items)
         if "dimension" in k_df.columns:
             if s_name == "income_statement":
                 # En Income Statement, permitir la apertura oficial de carátula Product / Service (ej. AAPL, MELI)
@@ -2542,6 +2601,11 @@ def build_as_reported_statements(
             face_df = k_df[k_df["is_breakdown"] == False].copy()
         else:
             face_df = k_df.copy()
+
+        # Excluir filas de Other Comprehensive Income (OCI) del Income Statement principal (DECK, O, PGR)
+        oci_pattern = r'OtherComprehensiveIncome|ComprehensiveIncomeNetOfTax|StatementOfIncomeAndComprehensiveIncome'
+        if s_name == "income_statement" and "concept" in face_df.columns:
+            face_df = face_df[~face_df["concept"].astype(str).str.contains(oci_pattern, case=False, regex=True)].copy()
 
         # Obtener 10-Q correspondiente
         q_stmt = None
@@ -2566,6 +2630,8 @@ def build_as_reported_statements(
             q_df = q_cf
 
         if q_df is not None and not q_df.empty:
+            if "label" in q_df.columns:
+                q_df = q_df[~q_df["label"].astype(str).str.contains(r'-\s*(?:As reported|Reclassification)', case=False, regex=True)].copy()
             if "dimension" in q_df.columns:
                 if s_name == "income_statement":
                     is_prod_serv_q = q_df["dimension_member"].astype(str).str.contains(r'ProductMember|ServiceMember', case=False, na=False) if "dimension_member" in q_df.columns else False
@@ -2580,6 +2646,8 @@ def build_as_reported_statements(
                 q_face = q_df[q_df["is_breakdown"] == False].copy()
             else:
                 q_face = q_df.copy()
+            if s_name == "income_statement" and "concept" in q_face.columns:
+                q_face = q_face[~q_face["concept"].astype(str).str.contains(oci_pattern, case=False, regex=True)].copy()
         else:
             q_face = pd.DataFrame()
 
@@ -2626,8 +2694,14 @@ def build_as_reported_statements(
                 if norm_h.startswith("FY") or norm_h == "LTM":
                     hist_cols_norm[norm_h] = col_h
 
+        # Registrar conceptos explícitos presentes en la carátula para evitar usurpación en Nivel 3
+        face_concept_tokens = set(face_df["concept"].astype(str).apply(_clean_concept_token)) if "concept" in face_df.columns else set()
+
         rows = []
         seen_cash_flow_ending_cash = False
+        seen_statement_concepts = set()
+        used_hist_indices = set()
+
         for _, r in face_df.iterrows():
             lbl = str(r.get("label", "")).strip()
             conc = str(r.get("concept", "")).strip()
@@ -2635,6 +2709,16 @@ def build_as_reported_statements(
             lvl = int(r.get("level", 0)) if pd.notna(r.get("level")) else 0
             is_tot = ("total" in lbl.lower()) or bool(r.get("is_total", False))
             conc_tok = _clean_concept_token(conc)
+
+            # Evitar filas duplicadas de NetIncomeLoss en Income Statement (PGR, O)
+            if s_name == "income_statement" and not is_abs and conc_tok == "netincomeloss":
+                if "netincomeloss" in seen_statement_concepts:
+                    continue
+                seen_statement_concepts.add("netincomeloss")
+
+            # Candado dimensional
+            is_row_dim = bool(r.get("dimension", False)) or (pd.notna(r.get("dimension_member")) and str(r.get("dimension_member")).strip() not in ("", "nan", "None"))
+            row_dim_member = str(r.get("dimension_member", "")).strip() if is_row_dim else ""
 
             # Limpiar etiquetas excesivamente extensas (par value, shares authorized)
             clean_lbl = lbl
@@ -2665,39 +2749,65 @@ def build_as_reported_statements(
                 else:
                     seen_cash_flow_ending_cash = True
 
-            # Reconciliación Histórica de 3 Niveles en hist_df
+            # Reconciliación Histórica de 3 Niveles en hist_df con candado dimensional
             matched_h_row = None
             if hist_df is not None and not hist_df.empty:
-                # Nivel 1: Coincidencia por token de concepto (sin prefijo us-gaap_)
-                if conc_tok:
-                    m1 = hist_df[hist_concept_toks == conc_tok]
+                if is_row_dim and "dimension_member" in hist_df.columns:
+                    h_cand_df = hist_df[hist_df["dimension_member"].astype(str).str.strip() == row_dim_member]
+                    if h_cand_df.empty and clean_lbl:
+                        lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
+                        h_cand_df = hist_df[hist_labels_clean == lbl_clean_val]
+                elif is_row_dim and "label" in hist_df.columns:
+                    lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
+                    h_cand_df = hist_df[hist_labels_clean == lbl_clean_val]
+                elif not is_row_dim and "dimension" in hist_df.columns:
+                    h_cand_df = hist_df[(hist_df["dimension"] == False) | hist_df["dimension"].isna() | hist_df["dimension"].astype(str).isin(["", "nan", "None"])]
+                else:
+                    h_cand_df = hist_df
+
+                h_cand_concept_toks = hist_concept_toks.loc[h_cand_df.index] if not h_cand_df.empty else pd.Series()
+                h_cand_labels_clean = hist_labels_clean.loc[h_cand_df.index] if not h_cand_df.empty else pd.Series()
+
+                # Filtrar filas de hist_df ya reclamadas por otras cuentas de la carátula
+                h_unclaimed_cand_df = h_cand_df[~h_cand_df.index.isin(used_hist_indices)] if not h_cand_df.empty else pd.DataFrame()
+                h_unclaimed_toks = h_cand_concept_toks.loc[h_unclaimed_cand_df.index] if not h_unclaimed_cand_df.empty else pd.Series()
+                h_unclaimed_labels = h_cand_labels_clean.loc[h_unclaimed_cand_df.index] if not h_unclaimed_cand_df.empty else pd.Series()
+
+                # Nivel 1: Coincidencia por token de concepto
+                if conc_tok and not h_unclaimed_cand_df.empty:
+                    m1 = h_unclaimed_cand_df[h_unclaimed_toks == conc_tok]
                     if len(m1) == 1:
                         matched_h_row = m1.iloc[0]
                     elif len(m1) > 1:
                         lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
-                        m1_lbl = m1[hist_labels_clean.loc[m1.index] == lbl_clean_val]
+                        m1_lbl = m1[h_unclaimed_labels.loc[m1.index] == lbl_clean_val]
                         matched_h_row = m1_lbl.iloc[0] if not m1_lbl.empty else m1.iloc[0]
 
-                # Nivel 2: Coincidencia por nombre de cuenta en carátula limpia
-                if matched_h_row is None and clean_lbl:
+                # Nivel 2: Coincidencia por nombre de cuenta en carátula limpia (solo si el concepto no entra en conflicto)
+                if matched_h_row is None and clean_lbl and not h_unclaimed_cand_df.empty:
                     lbl_clean_val = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
                     if lbl_clean_val:
-                        m2 = hist_df[hist_labels_clean == lbl_clean_val]
+                        m2 = h_unclaimed_cand_df[h_unclaimed_labels == lbl_clean_val]
                         if not m2.empty:
                             matched_h_row = m2.iloc[0]
 
-                # Nivel 3: Grupo sinónimo de taxonomía canónica
-                if matched_h_row is None and conc_tok:
+                # Nivel 3: Grupo sinónimo de taxonomía canónica (restringido para no usurpar cuentas de la carátula)
+                if matched_h_row is None and conc_tok and not is_row_dim and not h_unclaimed_cand_df.empty:
                     for tmap in all_tax_maps:
                         for syn_group, cands in tmap.items():
                             tok_cands = [_clean_concept_token(c_item) for c_item in cands]
                             if conc_tok in tok_cands:
-                                m3 = hist_df[hist_concept_toks.isin(tok_cands)]
-                                if not m3.empty:
-                                    matched_h_row = m3.iloc[0]
-                                    break
+                                allowed_cands = [tok for tok in tok_cands if (tok == conc_tok) or (tok not in face_concept_tokens)]
+                                if allowed_cands:
+                                    m3 = h_unclaimed_cand_df[h_unclaimed_toks.isin(allowed_cands)]
+                                    if not m3.empty:
+                                        matched_h_row = m3.iloc[0]
+                                        break
                         if matched_h_row is not None:
                             break
+
+                if matched_h_row is not None and hasattr(matched_h_row, 'name'):
+                    used_hist_indices.add(matched_h_row.name)
 
             # Extracción de importes anuales
             row_vals = {}
@@ -2721,23 +2831,25 @@ def build_as_reported_statements(
                                 val = float(v_h)
                             except (ValueError, TypeError):
                                 val = None
-                # 3. Respaldo por grupo sinónimo para año específico
-                if val is None and conc_tok and hist_df is not None and not hist_df.empty:
+                # 3. Respaldo por grupo sinónimo para año específico (respetando allowed_cands)
+                if val is None and conc_tok and not is_row_dim and hist_df is not None and not hist_df.empty:
                     for tmap in all_tax_maps:
                         for syn_group, cands in tmap.items():
                             tok_cands = [_clean_concept_token(c_item) for c_item in cands]
                             if conc_tok in tok_cands:
-                                syn_matches = hist_df[hist_concept_toks.isin(tok_cands)]
-                                h_col = hist_cols_norm.get(p)
-                                if h_col and not syn_matches.empty:
-                                    for _, syn_r in syn_matches.iterrows():
-                                        v_syn = syn_r.get(h_col)
-                                        if pd.notna(v_syn):
-                                            try:
-                                                val = float(v_syn)
-                                                break
-                                            except (ValueError, TypeError):
-                                                pass
+                                allowed_cands = [tok for tok in tok_cands if (tok == conc_tok) or (tok not in face_concept_tokens)]
+                                if allowed_cands:
+                                    syn_matches = hist_df[hist_concept_toks.isin(allowed_cands)]
+                                    h_col = hist_cols_norm.get(p)
+                                    if h_col and not syn_matches.empty:
+                                        for _, syn_r in syn_matches.iterrows():
+                                            v_syn = syn_r.get(h_col)
+                                            if pd.notna(v_syn):
+                                                try:
+                                                    val = float(v_syn)
+                                                    break
+                                                except (ValueError, TypeError):
+                                                    pass
                                 if val is not None:
                                     break
                         if val is not None:
@@ -2745,7 +2857,7 @@ def build_as_reported_statements(
 
                 row_vals[p] = val
 
-            # Cálculo de LTM bajo integridad temporal
+            # Cálculo de LTM bajo integridad temporal y candado dimensional
             if is_abs:
                 row_vals["LTM"] = None
             else:
@@ -2753,16 +2865,27 @@ def build_as_reported_statements(
                 # 1. Para Balance Sheet (point-in-time), consultar el 10-Q trimestral oficial al cierre de MRQ
                 if not is_flow and not q_face.empty and q_mrq_col:
                     q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
-                    q_match = q_face[(q_toks == conc_tok) & (q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
-                    if q_match.empty:
-                        q_match = q_face[q_toks == conc_tok]
-                    if not q_match.empty:
-                        v_q = q_match.iloc[0].get(q_mrq_col)
-                        if pd.notna(v_q):
-                            try:
-                                ltm_val = float(v_q)
-                            except (ValueError, TypeError):
-                                pass
+                    if is_row_dim and "dimension_member" in q_face.columns:
+                        q_cand = q_face[q_face["dimension_member"].astype(str).str.strip() == row_dim_member]
+                    elif is_row_dim and "label" in q_face.columns:
+                        q_cand = q_face[q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower()]
+                    elif not is_row_dim and "dimension" in q_face.columns:
+                        q_cand = q_face[(q_face["dimension"] == False) | q_face["dimension"].isna() | q_face["dimension"].astype(str).isin(["", "nan", "None"])]
+                    else:
+                        q_cand = q_face
+
+                    if not q_cand.empty:
+                        q_cand_toks = q_toks.loc[q_cand.index]
+                        q_match = q_cand[(q_cand_toks == conc_tok) & (q_cand["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
+                        if q_match.empty:
+                            q_match = q_cand[q_cand_toks == conc_tok]
+                        if not q_match.empty:
+                            v_q = q_match.iloc[0].get(q_mrq_col)
+                            if pd.notna(v_q):
+                                try:
+                                    ltm_val = float(v_q)
+                                except (ValueError, TypeError):
+                                    pass
 
                 # 2. Consultar LTM calibrado en hist_df (4Q sum EPS, flujo acumulado TTM)
                 if ltm_val is None and matched_h_row is not None and "LTM" in hist_cols_norm:
@@ -2773,22 +2896,81 @@ def build_as_reported_statements(
                         except (ValueError, TypeError):
                             ltm_val = None
 
-                # 3. Respaldo de flujo (YTD delta) si no figuraba en hist_df
+                # 3. Respaldo de flujo (YTD delta) con candado dimensional
                 if ltm_val is None and is_flow and not q_face.empty:
                     q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
-                    q_match = q_face[(q_toks == conc_tok) & (q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
-                    if q_match.empty:
-                        q_match = q_face[q_toks == conc_tok]
-                    if not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
-                        v_curr = q_match.iloc[0].get(ytd_curr)
-                        v_prev = q_match.iloc[0].get(ytd_prev)
-                        if pd.notna(v_curr) and pd.notna(v_prev):
-                            try:
-                                ltm_val = row_vals[latest_fy] + float(v_curr) - float(v_prev)
-                            except (ValueError, TypeError):
-                                pass
+                    if is_row_dim and "dimension_member" in q_face.columns:
+                        q_cand = q_face[q_face["dimension_member"].astype(str).str.strip() == row_dim_member]
+                    elif is_row_dim and "label" in q_face.columns:
+                        q_cand = q_face[q_face["label"].astype(str).str.strip().str.lower() == clean_lbl.lower()]
+                    elif not is_row_dim and "dimension" in q_face.columns:
+                        q_cand = q_face[(q_face["dimension"] == False) | q_face["dimension"].isna() | q_face["dimension"].astype(str).isin(["", "nan", "None"])]
+                    else:
+                        q_cand = q_face
+
+                    if not q_cand.empty:
+                        q_cand_toks = q_toks.loc[q_cand.index]
+                        q_match = q_cand[(q_cand_toks == conc_tok) & (q_cand["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
+                        if q_match.empty:
+                            q_match = q_cand[q_cand_toks == conc_tok]
+                        if not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
+                            v_curr = q_match.iloc[0].get(ytd_curr)
+                            v_prev = q_match.iloc[0].get(ytd_prev)
+                            if pd.notna(v_curr) and pd.notna(v_prev):
+                                try:
+                                    ltm_val = row_vals[latest_fy] + float(v_curr) - float(v_prev)
+                                except (ValueError, TypeError):
+                                    pass
+
+                # 4. Respaldo de facts_df para partidas de flujo sin delta en 10-Q (Regla 6: NUNCA copiar FY_latest)
+                if ltm_val is None and is_flow and facts_df is not None and not facts_df.empty and conc_tok and not is_row_dim:
+                    q4_sum = get_ltm_quarterly_metric(facts_df, [conc_tok], mode='sum')
+                    if q4_sum is not None:
+                        ltm_val = float(q4_sum)
+
+                # 5. Para Balance Sheet (APIC en META y partidas condensadas en 10-Q)
+                is_apic_row = ('additionalpaidincapital' in conc_tok) or ('additional paid-in' in clean_lbl.lower()) or ('paid-in capital' in clean_lbl.lower())
+                if not is_flow and is_apic_row and ltm_val is None:
+                    if facts_df is not None and not facts_df.empty:
+                        ltm_val = get_mrq_fact(facts_df, ['AdditionalPaidInCapital', 'AdditionalPaidInCapitalCommonStock'])
+                        if ltm_val is None:
+                            eq_m = get_mrq_fact(facts_df, ['StockholdersEquity', 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'])
+                            re_m = get_mrq_fact(facts_df, ['RetainedEarningsAccumulatedDeficit', 'RetainedEarnings'])
+                            aoci_m = get_mrq_fact(facts_df, ['AccumulatedOtherComprehensiveIncomeLossNetOfTax']) or 0.0
+                            treas_m = get_mrq_fact(facts_df, ['TreasuryStockValue', 'TreasuryStockCommonValue']) or 0.0
+                            if eq_m is not None and re_m is not None:
+                                derived_apic = round(eq_m - re_m - aoci_m + abs(treas_m), 2)
+                                if derived_apic > 0:
+                                    ltm_val = derived_apic
 
                 row_vals["LTM"] = ltm_val
+
+            # Homogeneización de signos algebraicos a lo largo de toda la serie temporal
+            if s_name == "income_statement":
+                c_low = conc.lower()
+                l_low = clean_lbl.lower()
+                is_expense = (
+                    any(ind in c_low or ind in l_low for ind in ('cost of', 'costof', 'expense', 'expenses', 'charges', 'provision', 'research', 'selling', 'administrative', 'impairment'))
+                    and not any(excl in c_low for excl in ('income', 'revenue', 'gain', 'operatingincomeloss', 'netincomeloss', 'profitloss'))
+                )
+                if is_expense:
+                    for p_k in row_vals:
+                        if row_vals[p_k] is not None:
+                            row_vals[p_k] = abs(row_vals[p_k])
+            else:
+                valid_nums = [v for p_k, v in row_vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
+                if valid_nums:
+                    pos_count = sum(1 for v in valid_nums if v > 0)
+                    neg_count = sum(1 for v in valid_nums if v < 0)
+                    tot_cnt = len(valid_nums)
+                    if pos_count / tot_cnt >= 0.8:
+                        for p_k in row_vals:
+                            if row_vals[p_k] is not None:
+                                row_vals[p_k] = abs(row_vals[p_k])
+                    elif neg_count / tot_cnt >= 0.8:
+                        for p_k in row_vals:
+                            if row_vals[p_k] is not None:
+                                row_vals[p_k] = -abs(row_vals[p_k])
 
             rows.append({
                 "label": clean_lbl,
@@ -2804,7 +2986,6 @@ def build_as_reported_statements(
         print(f"[SEC Extractor] {s_name}: {len(rows)} partidas As-Reported extraídas fielmente de la SEC.")
 
     return as_reported
-
 
 def extract_sec_data(ticker, output_dir=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
@@ -3098,21 +3279,29 @@ def extract_sec_data(ticker, output_dir=None):
             q4_sh_d = get_ltm_quarterly_metric(facts_df, XBRL_TAXONOMY_MAP["shares_diluted"], mode='avg') if facts_df is not None else None
             q4_sh_b = get_ltm_quarterly_metric(facts_df, XBRL_TAXONOMY_MAP["shares_basic"], mode='avg') if facts_df is not None else None
             
+            clean_sh_d_toks = {_clean_concept_token(x) for x in XBRL_TAXONOMY_MAP["shares_diluted"]}
+            clean_sh_b_toks = {_clean_concept_token(x) for x in XBRL_TAXONOMY_MAP["shares_basic"]}
+            clean_eps_d_toks = {_clean_concept_token(x) for x in XBRL_TAXONOMY_MAP["eps_diluted"]}
+            clean_eps_b_toks = {_clean_concept_token(x) for x in XBRL_TAXONOMY_MAP["eps_basic"]}
+
             for idx_r, r in inc_df.iterrows():
-                cn = str(r.get('concept', '')).lower()
-                if 'earningspersharediluted' in cn or 'dilutedearningspershare' in cn:
+                cn = str(r.get('concept', ''))
+                cn_tok = _clean_concept_token(cn)
+                if 'adjustment' in cn.lower():
+                    continue
+                if cn_tok in clean_eps_d_toks:
                     if q4_eps_d is not None and q4_eps_d > 0:
                         inc_df.at[idx_r, 'LTM'] = q4_eps_d
                         print(f"[SEC Extractor] LTM Diluted EPS calibrado por suma de 4 trimestres: ${q4_eps_d}")
-                elif 'earningspersharebasic' in cn or 'basicearningspershare' in cn:
+                elif cn_tok in clean_eps_b_toks:
                     if q4_eps_b is not None and q4_eps_b > 0:
                         inc_df.at[idx_r, 'LTM'] = q4_eps_b
                         print(f"[SEC Extractor] LTM Basic EPS calibrado por suma de 4 trimestres: ${q4_eps_b}")
-                elif 'dilutedshares' in cn or 'sharesoutstandingdiluted' in cn or 'weightedaveragenumberofdilutedshares' in cn:
+                elif cn_tok in clean_sh_d_toks:
                     if q4_sh_d is not None and q4_sh_d > 0:
                         inc_df.at[idx_r, 'LTM'] = q4_sh_d
                         print(f"[SEC Extractor] LTM Diluted Shares calibrado por promedio de 4 trimestres: {q4_sh_d:,.0f}")
-                elif 'basicshares' in cn or 'sharesoutstandingbasic' in cn or 'weightedaveragenumberofsharesoutstandingbasic' in cn:
+                elif cn_tok in clean_sh_b_toks:
                     if q4_sh_b is not None and q4_sh_b > 0:
                         inc_df.at[idx_r, 'LTM'] = q4_sh_b
                         print(f"[SEC Extractor] LTM Basic Shares calibrado por promedio de 4 trimestres: {q4_sh_b:,.0f}")

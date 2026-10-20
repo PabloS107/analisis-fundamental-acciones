@@ -225,6 +225,8 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "OtherCurrentFinancialAssets",
     ],
     "short_term_debt": [
+        "DebtCurrent",
+        "us-gaap_DebtCurrent",
         "ShortTermDebt",
         "CurrentPortionOfLongTermDebt",
         "CommercialPaper",
@@ -239,9 +241,9 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "ShortTermBorrowings",
     ],
     "long_term_debt": [
-        "DebtLongtermAndShorttermCombinedAmount",
-        "LongTermDebt",
         "LongTermDebtNoncurrent",
+        "LongTermDebt",
+        "DebtLongtermAndShorttermCombinedAmount",
         "NotesPayable",
         "LoansPayable",
         "SecuredDebt",

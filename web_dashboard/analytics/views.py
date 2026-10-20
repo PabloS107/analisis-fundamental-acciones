@@ -817,6 +817,7 @@ def company_detail(request, ticker):
     is_corporate = (archetype == "STANDARD_CORPORATE")
     is_reit = (archetype == "REAL_ESTATE_REIT")
     is_insurance = (archetype == "INSURANCE")
+    is_financial = bool(fs.get("is_financial") or scores.get("is_financial_institution") or is_banking or is_insurance)
 
     # Ingesta de KPIs Enriquecidos de Presentaciones (presentation_reconciliation.json)
     pr_file = ticker_dir / "presentation_reconciliation.json"
@@ -2131,7 +2132,7 @@ def company_detail(request, ticker):
                 data_m[p] = float(v)
             else:
                 f_v = float(v)
-                data_m[p] = round(f_v / 1e6, 1) if abs(f_v) >= 1e3 else round(f_v, 1)
+                data_m[p] = _to_m(f_v)
 
         if is_eps:
             row_type = "eps"
@@ -2464,7 +2465,7 @@ def company_detail(request, ticker):
     statements_balancesheet = [_build_statement_cells(r, statements_fys, canonical, bs_tot_assets=bs_tot_assets_dict) for r in bs_rows]
 
 
-    # Highlights de Cabecera
+    # Highlights de Cabecera adaptados dinámicamente por Arquetipo
     latest_p = statements_fys[0] if statements_fys else "LTM"
     rev_ltm_val = _to_m(canonical.get("revenue", {}).get(latest_p))
     gp_ltm_val = _to_m(canonical.get("gross_profit", {}).get(latest_p))
@@ -2478,7 +2479,34 @@ def company_detail(request, ticker):
     cl_val = _to_m(canonical.get("current_liabilities", {}).get(latest_p))
     cr_val = round(ca_val / cl_val, 2) if (ca_val and cl_val and cl_val != 0) else None
 
+    # Métricas especializadas
+    nim_val = key_ratios.get("nim_pct", {}).get(latest_p) or key_ratios.get("risk_adj_nim_pct", {}).get(latest_p)
+    eff_val = key_ratios.get("efficiency_ratio_pct", {}).get(latest_p)
+    roe_val = key_ratios.get("roe_pct", {}).get(latest_p)
+    rotce_val = key_ratios.get("rotce_pct", {}).get(latest_p)
+    cet1_val = key_ratios.get("cet1_ratio_pct", {}).get(latest_p)
+    npl_cov_val = key_ratios.get("provision_coverage_pct", {}).get(latest_p)
+    npl_ratio_val = key_ratios.get("npl_ratio_pct", {}).get(latest_p)
+
+    comb_ratio_val = key_ratios.get("combined_ratio_pct", {}).get(latest_p)
+    loss_ratio_val = key_ratios.get("loss_ratio_pct", {}).get(latest_p)
+    exp_ratio_val = key_ratios.get("expense_ratio_pct", {}).get(latest_p)
+    inv_yield_val = key_ratios.get("investment_yield_pct", {}).get(latest_p)
+    net_prem_val = _to_m(canonical.get("net_premiums_earned", {}).get(latest_p))
+    float_val = _to_m(canonical.get("float_usd", {}).get(latest_p))
+
+    rental_rev_val = _to_m(canonical.get("rental_revenue", {}).get(latest_p))
+    noi_val = _to_m(canonical.get("noi", {}).get(latest_p))
+    ffo_val = _to_m(canonical.get("ffo", {}).get(latest_p))
+    affo_val = _to_m(canonical.get("affo", {}).get(latest_p))
+    tot_debt_val = _to_m(canonical.get("total_debt", {}).get(latest_p))
+    tot_assets_val = _to_m(canonical.get("total_assets", {}).get(latest_p))
+    ltv_val = round(tot_debt_val / tot_assets_val * 100.0, 1) if (tot_debt_val and tot_assets_val and tot_assets_val > 0) else None
+
     statements_summary = {
+        "archetype": archetype,
+        "is_financial": is_financial,
+        # Standard corporate
         "rev_ltm": _fmt_money(rev_ltm_val),
         "gm_ltm": f"{round(gp_ltm_val / rev_ltm_val * 100.0, 1)}%" if (gp_ltm_val and rev_ltm_val) else "-",
         "om_ltm": f"{round(ebit_ltm_val / rev_ltm_val * 100.0, 1)}%" if (ebit_ltm_val and rev_ltm_val) else "-",
@@ -2488,7 +2516,32 @@ def company_detail(request, ticker):
         "net_debt_display": _fmt_money(abs(nd_ltm_val)) if (nd_ltm_val and nd_ltm_val < 0) else _fmt_money(nd_ltm_val),
         "net_debt_is_cash": (nd_ltm_val is not None and nd_ltm_val < 0),
         "current_ratio": f"{cr_val:.2f}x" if cr_val else "-",
-        "equity_ltm": _fmt_money(eq_ltm_val)
+        "equity_ltm": _fmt_money(eq_ltm_val),
+        "net_income_ltm": _fmt_money(ni_ltm_val),
+        "net_margin_ltm": f"{round(ni_ltm_val / rev_ltm_val * 100.0, 1)}%" if (ni_ltm_val and rev_ltm_val) else "-",
+        # Banking
+        "nim_ltm": f"{nim_val:.2f}%" if nim_val is not None else "-",
+        "cost_to_income": f"{eff_val:.1f}%" if eff_val is not None else "-",
+        "roe_ltm": f"{roe_val:.1f}%" if roe_val is not None else (f"{round(ni_ltm_val / eq_ltm_val * 100.0, 1)}%" if (ni_ltm_val and eq_ltm_val and eq_ltm_val > 0) else "-"),
+        "rotce_ltm": f"{rotce_val:.1f}%" if rotce_val is not None else "-",
+        "cet1_ratio": f"{cet1_val:.1f}%" if cet1_val is not None else "-",
+        "npl_coverage": f"{npl_cov_val:.1f}%" if npl_cov_val is not None else "-",
+        "npl_ratio": f"{npl_ratio_val:.1f}%" if npl_ratio_val is not None else "-",
+        # Insurance
+        "net_premiums_ltm": _fmt_money(net_prem_val if net_prem_val else rev_ltm_val),
+        "combined_ratio": f"{comb_ratio_val:.1f}%" if comb_ratio_val is not None else "-",
+        "loss_ratio": f"{loss_ratio_val:.1f}%" if loss_ratio_val is not None else "-",
+        "expense_ratio": f"{exp_ratio_val:.1f}%" if exp_ratio_val is not None else "-",
+        "inv_yield": f"{inv_yield_val:.1f}%" if inv_yield_val is not None else "-",
+        "float_usd": _fmt_money(float_val),
+        # REIT
+        "rental_rev_ltm": _fmt_money(rental_rev_val if rental_rev_val else rev_ltm_val),
+        "noi_ltm": _fmt_money(noi_val),
+        "noi_margin": f"{round(noi_val / rev_ltm_val * 100.0, 1)}%" if (noi_val and rev_ltm_val) else "-",
+        "ffo_ltm": _fmt_money(ffo_val),
+        "ffo_margin": f"{round(ffo_val / rev_ltm_val * 100.0, 1)}%" if (ffo_val and rev_ltm_val) else "-",
+        "affo_ltm": _fmt_money(affo_val),
+        "ltv_ratio": f"{ltv_val:.1f}%" if ltv_val is not None else "-",
     }
 
     # Conservamos table_pnl por retrocompatibilidad

@@ -1,3 +1,7 @@
+---
+trigger: always_on
+description: "Reglas institucionales de auditoría contable, parada obligatoria (STOP & PROPOSE), cero datos inventados y verificación triangulada."
+---
 # REGLAS FUNDAMENTALES DEL PROYECTO: ORQUESTADOR UNIVERSAL DE ANÁLISIS FUNDAMENTAL
 
 Estas reglas son de cumplimiento continuo, irrestricto y mandatorio para todo agente de IA y desarrollador que opere en este proyecto. Tienen prioridad absoluta sobre cualquier iniciativa de refactorización o edición de código.

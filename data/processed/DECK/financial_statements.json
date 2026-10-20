@@ -8,7 +8,7 @@
   "is_financial": false,
   "business_model": "CORPORATE_TRADITIONAL",
   "source": "SEC EDGAR (US-GAAP Oficial)",
-  "extraction_timestamp": "2026-10-19T16:13:35.748831",
+  "extraction_timestamp": "2026-10-20T02:00:31.667812",
   "fiscal_years": [
     "LTM",
     "FY2026",
@@ -233,6 +233,34 @@
       "FY2018": 429970000.0,
       "FY2017": 291764000.0,
       "FY2016": 245956000.0
+    },
+    "short_term_debt": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
+    },
+    "long_term_debt": {
+      "LTM": null,
+      "FY2026": null,
+      "FY2025": null,
+      "FY2024": null,
+      "FY2023": null,
+      "FY2022": null,
+      "FY2021": null,
+      "FY2020": null,
+      "FY2019": null,
+      "FY2018": null,
+      "FY2017": null,
+      "FY2016": null
     },
     "total_debt": {
       "LTM": 0.0,
@@ -4322,7 +4350,7 @@
       },
       {
         "label": "Income from operations (Note 13)",
-        "clarification": "Resultado operativo (EBIT)",
+        "clarification": "Beneficio operativo (EBIT)",
         "concept": "us-gaap_OperatingIncomeLoss",
         "level": 2,
         "is_abstract": false,
@@ -4366,7 +4394,7 @@
       },
       {
         "label": "Interest expense",
-        "clarification": "Gastos por intereses",
+        "clarification": "Gasto por intereses",
         "concept": "us-gaap_InterestExpenseNonoperating",
         "level": 1,
         "is_abstract": false,
@@ -4388,7 +4416,7 @@
       },
       {
         "label": "Other (income) expense, net",
-        "clarification": null,
+        "clarification": "Otros (ingresos) y gastos no operativos, netos",
         "concept": "us-gaap_OtherNonoperatingIncomeExpense",
         "level": 1,
         "is_abstract": false,
@@ -4410,7 +4438,7 @@
       },
       {
         "label": "Total other income, net",
-        "clarification": null,
+        "clarification": "Total otros ingresos y gastos no operativos, netos",
         "concept": "us-gaap_NonoperatingIncomeExpense",
         "level": 2,
         "is_abstract": false,
@@ -4432,7 +4460,7 @@
       },
       {
         "label": "Income before income taxes",
-        "clarification": "Resultado antes de impuestos (EBT)",
+        "clarification": "Beneficio antes de impuestos (EBT)",
         "concept": "us-gaap_IncomeLossAttributableToParent",
         "level": 1,
         "is_abstract": false,
@@ -4454,7 +4482,7 @@
       },
       {
         "label": "Income tax expense (Note 5)",
-        "clarification": "Impuesto a las ganancias",
+        "clarification": "Impuesto sobre beneficios",
         "concept": "us-gaap_IncomeTaxExpenseBenefit",
         "level": 1,
         "is_abstract": false,
@@ -4476,7 +4504,7 @@
       },
       {
         "label": "Net income",
-        "clarification": "Utilidad neta consolidada",
+        "clarification": "Beneficio neto consolidado",
         "concept": "us-gaap_NetIncomeLoss",
         "level": 2,
         "is_abstract": false,
@@ -4497,118 +4525,8 @@
         }
       },
       {
-        "label": "Other comprehensive income (loss), net of tax",
-        "clarification": null,
-        "concept": "us-gaap_OtherComprehensiveIncomeLossNetOfTaxPeriodIncreaseDecreaseAbstract",
-        "level": 1,
-        "is_abstract": true,
-        "is_total": false,
-        "values": {
-          "FY2026": null,
-          "FY2025": null,
-          "FY2024": null,
-          "FY2023": null,
-          "FY2022": null,
-          "FY2021": null,
-          "FY2020": null,
-          "FY2019": null,
-          "FY2018": null,
-          "FY2017": null,
-          "FY2016": null,
-          "LTM": null
-        }
-      },
-      {
-        "label": "Unrealized gain on cash flow hedges",
-        "clarification": null,
-        "concept": "us-gaap_OtherComprehensiveIncomeLossCashFlowHedgeGainLossAfterReclassificationAndTaxParent",
-        "level": 2,
-        "is_abstract": false,
-        "is_total": false,
-        "values": {
-          "FY2026": 3980000.0,
-          "FY2025": 1584000.0,
-          "FY2024": 0.0,
-          "FY2023": 0.0,
-          "FY2022": null,
-          "FY2021": null,
-          "FY2020": null,
-          "FY2019": null,
-          "FY2018": null,
-          "FY2017": null,
-          "FY2016": null,
-          "LTM": 26967000.0
-        }
-      },
-      {
-        "label": "Foreign currency translation gain (loss)",
-        "clarification": null,
-        "concept": "us-gaap_OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPortionAttributableToParent",
-        "level": 2,
-        "is_abstract": false,
-        "is_total": false,
-        "values": {
-          "FY2026": 9755000.0,
-          "FY2025": -505000.0,
-          "FY2024": -11698000.0,
-          "FY2023": -14080000.0,
-          "FY2022": -8212000.0,
-          "FY2021": 8816000.0,
-          "FY2020": -2905000.0,
-          "FY2019": -9428000.0,
-          "FY2018": 14081000.0,
-          "FY2017": -6598000.0,
-          "FY2016": null,
-          "LTM": -1510000.0
-        }
-      },
-      {
-        "label": "Total other comprehensive income (loss), net of tax",
-        "clarification": null,
-        "concept": "us-gaap_OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent",
-        "level": 2,
-        "is_abstract": false,
-        "is_total": true,
-        "values": {
-          "FY2026": 13735000.0,
-          "FY2025": 1079000.0,
-          "FY2024": -11698000.0,
-          "FY2023": -14080000.0,
-          "FY2022": -8212000.0,
-          "FY2021": 8816000.0,
-          "FY2020": -2905000.0,
-          "FY2019": -9671000.0,
-          "FY2018": 13468000.0,
-          "FY2017": -5894000.0,
-          "FY2016": null,
-          "LTM": 25457000.0
-        }
-      },
-      {
-        "label": "Comprehensive income",
-        "clarification": null,
-        "concept": "us-gaap_ComprehensiveIncomeNetOfTax",
-        "level": 1,
-        "is_abstract": false,
-        "is_total": false,
-        "values": {
-          "FY2026": 1037806000.0,
-          "FY2025": 967170000.0,
-          "FY2024": 747865000.0,
-          "FY2023": 502742000.0,
-          "FY2022": 443737000.0,
-          "FY2021": 391391000.0,
-          "FY2020": 273237000.0,
-          "FY2019": 254637000.0,
-          "FY2018": 127862000.0,
-          "FY2017": -184000.0,
-          "FY2016": null,
-          "LTM": 1040297000.0
-        }
-      },
-      {
         "label": "Net income per share",
-        "clarification": "Utilidad neta consolidada",
+        "clarification": "Beneficio neto consolidado",
         "concept": "us-gaap_EarningsPerShareAbstract",
         "level": 1,
         "is_abstract": true,
@@ -4630,7 +4548,7 @@
       },
       {
         "label": "Basic (in dollars per share)",
-        "clarification": "EPS básico ($/acc)",
+        "clarification": "Beneficio por acción ordinaria básico (BPA básico)",
         "concept": "us-gaap_EarningsPerShareBasic",
         "level": 2,
         "is_abstract": false,
@@ -4652,7 +4570,7 @@
       },
       {
         "label": "Diluted (in dollars per share)",
-        "clarification": "EPS diluido ($/acc)",
+        "clarification": "Beneficio por acción ordinaria diluido (BPA diluido)",
         "concept": "us-gaap_EarningsPerShareDiluted",
         "level": 2,
         "is_abstract": false,
@@ -4674,7 +4592,7 @@
       },
       {
         "label": "Weighted-average common shares outstanding (Note 12)",
-        "clarification": null,
+        "clarification": "Acciones ordinarias promedio ponderadas en circulación",
         "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingAbstract",
         "level": 1,
         "is_abstract": true,
@@ -4696,7 +4614,7 @@
       },
       {
         "label": "Basic (in shares)",
-        "clarification": "Acciones básicas en circulación",
+        "clarification": null,
         "concept": "us-gaap_WeightedAverageNumberOfSharesOutstandingBasic",
         "level": 2,
         "is_abstract": false,
@@ -4718,7 +4636,7 @@
       },
       {
         "label": "Diluted (in shares)",
-        "clarification": "Acciones diluidas en circulación",
+        "clarification": null,
         "concept": "us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding",
         "level": 2,
         "is_abstract": false,
@@ -4742,7 +4660,7 @@
     "balance_sheet": [
       {
         "label": "ASSETS",
-        "clarification": "ACTIVOS",
+        "clarification": null,
         "concept": "us-gaap_AssetsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -4830,7 +4748,7 @@
       },
       {
         "label": "Prepaid expenses",
-        "clarification": null,
+        "clarification": "Gastos devengados pagados por anticipado",
         "concept": "us-gaap_PrepaidExpenseCurrent",
         "level": 3,
         "is_abstract": false,
@@ -4852,7 +4770,7 @@
       },
       {
         "label": "Other current assets",
-        "clarification": "Otros activos corrientes",
+        "clarification": null,
         "concept": "us-gaap_OtherAssetsCurrent",
         "level": 3,
         "is_abstract": false,
@@ -4874,7 +4792,7 @@
       },
       {
         "label": "Income tax receivable",
-        "clarification": null,
+        "clarification": "Impuesto sobre beneficios a recuperar / Saldo a favor",
         "concept": "us-gaap_IncomeTaxesReceivable",
         "level": 3,
         "is_abstract": false,
@@ -4896,7 +4814,7 @@
       },
       {
         "label": "Total current assets",
-        "clarification": "Total activos corrientes",
+        "clarification": null,
         "concept": "us-gaap_AssetsCurrent",
         "level": 3,
         "is_abstract": false,
@@ -4940,7 +4858,7 @@
       },
       {
         "label": "Operating lease assets",
-        "clarification": null,
+        "clarification": "Activos por derecho de uso bajo arrendamiento operativo",
         "concept": "us-gaap_OperatingLeaseRightOfUseAsset",
         "level": 3,
         "is_abstract": false,
@@ -4962,7 +4880,7 @@
       },
       {
         "label": "Goodwill (Note 1)",
-        "clarification": "Fondo de comercio (Goodwill)",
+        "clarification": null,
         "concept": "us-gaap_Goodwill",
         "level": 3,
         "is_abstract": false,
@@ -4984,7 +4902,7 @@
       },
       {
         "label": "Other intangible assets, net of accumulated amortization ($20,968 and $25,014 as of March 31, 2026, and March 31, 2025, respectively) (Note 1)",
-        "clarification": "Activos intangibles netos",
+        "clarification": "Activos intangibles",
         "concept": "us-gaap_IntangibleAssetsNetExcludingGoodwill",
         "level": 3,
         "is_abstract": false,
@@ -5006,7 +4924,7 @@
       },
       {
         "label": "Deferred tax assets, net (Note 5)",
-        "clarification": null,
+        "clarification": "Activos por impuestos diferidos netos",
         "concept": "us-gaap_DeferredIncomeTaxAssetsNet",
         "level": 3,
         "is_abstract": false,
@@ -5028,7 +4946,7 @@
       },
       {
         "label": "Other assets",
-        "clarification": null,
+        "clarification": "Otros activos operativos y no corrientes",
         "concept": "us-gaap_OtherAssetsNoncurrent",
         "level": 3,
         "is_abstract": false,
@@ -5050,7 +4968,7 @@
       },
       {
         "label": "Total assets",
-        "clarification": "ACTIVOS TOTALES",
+        "clarification": null,
         "concept": "us-gaap_Assets",
         "level": 2,
         "is_abstract": false,
@@ -5116,7 +5034,7 @@
       },
       {
         "label": "Accrued payroll",
-        "clarification": null,
+        "clarification": "Sueldos y remuneraciones devengadas pendientes de pago",
         "concept": "us-gaap_EmployeeRelatedLiabilitiesCurrent",
         "level": 3,
         "is_abstract": false,
@@ -5138,7 +5056,7 @@
       },
       {
         "label": "Operating lease liabilities (Note 7)",
-        "clarification": null,
+        "clarification": "Pasivos por arrendamientos operativos",
         "concept": "us-gaap_OperatingLeaseLiabilityCurrent",
         "level": 3,
         "is_abstract": false,
@@ -5160,7 +5078,7 @@
       },
       {
         "label": "Other accrued expenses",
-        "clarification": "Gastos acumulados por pagar",
+        "clarification": null,
         "concept": "us-gaap_OtherAccruedLiabilitiesCurrent",
         "level": 3,
         "is_abstract": false,
@@ -5182,7 +5100,7 @@
       },
       {
         "label": "Income tax payable",
-        "clarification": null,
+        "clarification": "Impuesto sobre beneficios corriente a pagar",
         "concept": "us-gaap_AccruedIncomeTaxesCurrent",
         "level": 3,
         "is_abstract": false,
@@ -5204,7 +5122,7 @@
       },
       {
         "label": "Value added tax payable",
-        "clarification": null,
+        "clarification": "Impuesto sobre el valor añadido (IVA) a ingresar",
         "concept": "deck_ValueAddedTaxPayable",
         "level": 3,
         "is_abstract": false,
@@ -5226,7 +5144,7 @@
       },
       {
         "label": "Total current liabilities",
-        "clarification": "Total pasivos corrientes",
+        "clarification": null,
         "concept": "us-gaap_LiabilitiesCurrent",
         "level": 3,
         "is_abstract": false,
@@ -5248,7 +5166,7 @@
       },
       {
         "label": "Long-term operating lease liabilities (Note 7)",
-        "clarification": null,
+        "clarification": "Pasivos por arrendamiento operativo a largo plazo",
         "concept": "us-gaap_OperatingLeaseLiabilityNoncurrent",
         "level": 3,
         "is_abstract": false,
@@ -5270,7 +5188,7 @@
       },
       {
         "label": "Income tax liability",
-        "clarification": null,
+        "clarification": "Pasivo por impuestos corrientes y diferidos",
         "concept": "us-gaap_AccruedIncomeTaxesNoncurrent",
         "level": 3,
         "is_abstract": false,
@@ -5292,7 +5210,7 @@
       },
       {
         "label": "Other long-term liabilities",
-        "clarification": null,
+        "clarification": "Otros pasivos no corrientes a largo plazo",
         "concept": "us-gaap_OtherLiabilitiesNoncurrent",
         "level": 3,
         "is_abstract": false,
@@ -5314,7 +5232,7 @@
       },
       {
         "label": "Total long-term liabilities",
-        "clarification": null,
+        "clarification": "Total pasivos exigibles a largo plazo",
         "concept": "us-gaap_LiabilitiesNoncurrent",
         "level": 3,
         "is_abstract": false,
@@ -5336,7 +5254,7 @@
       },
       {
         "label": "Commitments and contingencies (Note 8)",
-        "clarification": "Compromisos y contingencias",
+        "clarification": "Compromisos contractuales y contingencias legales",
         "concept": "us-gaap_CommitmentsAndContingencies",
         "level": 3,
         "is_abstract": false,
@@ -5358,7 +5276,7 @@
       },
       {
         "label": "Stockholders’ equity",
-        "clarification": "Patrimonio neto",
+        "clarification": null,
         "concept": "us-gaap_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterestAbstract",
         "level": 2,
         "is_abstract": true,
@@ -5380,7 +5298,7 @@
       },
       {
         "label": "Common stock ($0.01 par value per share",
-        "clarification": "Acciones ordinarias · 750,000 shares authorized; 139,978 and 150,201 shares issued and outstanding as of March 31, 2026, and March 31, 2025, respectively)",
+        "clarification": "Acciones ordinarias emitidas y en circulación · 750,000 shares authorized; 139,978 and 150,201 shares issued and outstanding as of March 31, 2026, and March 31, 2025, respectively)",
         "concept": "us-gaap_CommonStockValue",
         "level": 3,
         "is_abstract": false,
@@ -5402,7 +5320,7 @@
       },
       {
         "label": "Additional paid-in capital",
-        "clarification": "Prima de emisión de acciones (APIC)",
+        "clarification": "Prima de emisión y aportaciones adicionales de capital (APIC)",
         "concept": "us-gaap_AdditionalPaidInCapital",
         "level": 3,
         "is_abstract": false,
@@ -5424,7 +5342,7 @@
       },
       {
         "label": "Retained earnings",
-        "clarification": "Ganancias retenidas",
+        "clarification": "Resultados acumulados / Ganancias retenidas",
         "concept": "us-gaap_RetainedEarningsAccumulatedDeficit",
         "level": 3,
         "is_abstract": false,
@@ -5446,7 +5364,7 @@
       },
       {
         "label": "Accumulated other comprehensive loss (Note 11)",
-        "clarification": "Otros resultados integrales acumulados (AOCI)",
+        "clarification": null,
         "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
         "level": 3,
         "is_abstract": false,
@@ -5468,7 +5386,7 @@
       },
       {
         "label": "Total stockholders’ equity",
-        "clarification": "TOTAL PATRIMONIO NETO",
+        "clarification": "Patrimonio neto total",
         "concept": "us-gaap_StockholdersEquity",
         "level": 3,
         "is_abstract": false,
@@ -5490,7 +5408,7 @@
       },
       {
         "label": "Total liabilities and stockholders’ equity",
-        "clarification": "TOTAL PASIVO Y PATRIMONIO NETO",
+        "clarification": null,
         "concept": "us-gaap_LiabilitiesAndStockholdersEquity",
         "level": 2,
         "is_abstract": false,
@@ -5514,7 +5432,7 @@
     "cash_flow_statement": [
       {
         "label": "OPERATING ACTIVITIES",
-        "clarification": "ACTIVIDADES OPERATIVAS",
+        "clarification": null,
         "concept": "us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperationsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -5536,7 +5454,7 @@
       },
       {
         "label": "Net income",
-        "clarification": "Utilidad neta consolidada",
+        "clarification": "Beneficio neto consolidado",
         "concept": "us-gaap_NetIncomeLoss",
         "level": 3,
         "is_abstract": false,
@@ -5558,7 +5476,7 @@
       },
       {
         "label": "Reconciliation of net income to net cash provided by (used in) operating activities:",
-        "clarification": "Utilidad neta consolidada",
+        "clarification": "Beneficio neto consolidado",
         "concept": "us-gaap_AdjustmentsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivitiesAbstract",
         "level": 2,
         "is_abstract": true,
@@ -5580,7 +5498,7 @@
       },
       {
         "label": "Depreciation, amortization, and accretion",
-        "clarification": null,
+        "clarification": "Depreciación, amortización y devengo de primas/descuentos",
         "concept": "us-gaap_DepreciationAmortizationAndAccretionNet",
         "level": 3,
         "is_abstract": false,
@@ -5602,7 +5520,7 @@
       },
       {
         "label": "Amortization on cloud computing arrangements",
-        "clarification": null,
+        "clarification": "Amortización de acuerdos informáticos en la nube",
         "concept": "deck_AmortizationOfCloudComputingArrangements",
         "level": 3,
         "is_abstract": false,
@@ -5624,7 +5542,7 @@
       },
       {
         "label": "Bad debt expense",
-        "clarification": null,
+        "clarification": "Gasto por insolvencias y provisiones de dudoso cobro",
         "concept": "us-gaap_ProvisionForDoubtfulAccounts",
         "level": 3,
         "is_abstract": false,
@@ -5634,7 +5552,7 @@
           "FY2025": 5032000.0,
           "FY2024": 789000.0,
           "FY2023": 1983000.0,
-          "FY2022": -342000.0,
+          "FY2022": 342000.0,
           "FY2021": 3053000.0,
           "FY2020": 3498000.0,
           "FY2019": 2849000.0,
@@ -5646,7 +5564,7 @@
       },
       {
         "label": "Deferred tax expense (benefit)",
-        "clarification": null,
+        "clarification": "Gasto (beneficio) por impuesto sobre beneficios diferido",
         "concept": "us-gaap_DeferredIncomeTaxExpenseBenefit",
         "level": 3,
         "is_abstract": false,
@@ -5668,7 +5586,7 @@
       },
       {
         "label": "Stock-based compensation",
-        "clarification": "Compensación basada en acciones (SBC)",
+        "clarification": "Compensación basada en acciones (Stock-Based Compensation)",
         "concept": "us-gaap_ShareBasedCompensation",
         "level": 3,
         "is_abstract": false,
@@ -5690,7 +5608,7 @@
       },
       {
         "label": "Loss on disposal of assets",
-        "clarification": null,
+        "clarification": "Pérdida por enajenación o baja de activos fijos",
         "concept": "us-gaap_GainLossOnDispositionOfAssets1",
         "level": 3,
         "is_abstract": false,
@@ -5706,13 +5624,13 @@
           "FY2019": 277000.0,
           "FY2018": 387000.0,
           "FY2017": 538000.0,
-          "FY2016": -1338000.0,
+          "FY2016": 1338000.0,
           "LTM": 1251000.0
         }
       },
       {
         "label": "Impairment of intangible assets",
-        "clarification": null,
+        "clarification": "Deterioro de valor de activos intangibles",
         "concept": "us-gaap_ImpairmentOfIntangibleAssetsFinitelived",
         "level": 3,
         "is_abstract": false,
@@ -5734,7 +5652,7 @@
       },
       {
         "label": "Impairment of property and equipment and cloud computing arrangements",
-        "clarification": null,
+        "clarification": "Deterioro de PP&E y acuerdos de computación en la nube",
         "concept": "deck_ImpairmentChargesOfCloudComputingArrangementsOperatingLeaseAndOtherLongLivedAssets",
         "level": 3,
         "is_abstract": false,
@@ -5756,7 +5674,7 @@
       },
       {
         "label": "Changes in operating assets and liabilities:",
-        "clarification": "Variaciones de capital de trabajo:",
+        "clarification": null,
         "concept": "us-gaap_IncreaseDecreaseInOperatingCapitalAbstract",
         "level": 3,
         "is_abstract": true,
@@ -5778,7 +5696,7 @@
       },
       {
         "label": "Trade accounts receivable, net",
-        "clarification": "Cuentas por cobrar comerciales netas",
+        "clarification": null,
         "concept": "us-gaap_IncreaseDecreaseInAccountsReceivable",
         "level": 4,
         "is_abstract": false,
@@ -5800,7 +5718,7 @@
       },
       {
         "label": "Inventories",
-        "clarification": "Inventarios / Existencias",
+        "clarification": null,
         "concept": "us-gaap_IncreaseDecreaseInInventories",
         "level": 4,
         "is_abstract": false,
@@ -5822,7 +5740,7 @@
       },
       {
         "label": "Prepaid expenses and other current assets",
-        "clarification": "Gastos pagados por anticipado y otros activos ctes.",
+        "clarification": "Gastos pagados por anticipado y otros activos corrientes",
         "concept": "us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets",
         "level": 4,
         "is_abstract": false,
@@ -5831,20 +5749,20 @@
           "FY2026": -23804000.0,
           "FY2025": 20946000.0,
           "FY2024": -38490000.0,
-          "FY2023": 5609000.0,
-          "FY2022": 19095000.0,
-          "FY2021": 22128000.0,
+          "FY2023": -5609000.0,
+          "FY2022": -19095000.0,
+          "FY2021": -22128000.0,
           "FY2020": 2477000.0,
-          "FY2019": 515000.0,
+          "FY2019": -515000.0,
           "FY2018": 11124000.0,
           "FY2017": 7975000.0,
-          "FY2016": 3681000.0,
-          "LTM": 5415000.0
+          "FY2016": -3681000.0,
+          "LTM": -5415000.0
         }
       },
       {
         "label": "Income tax receivable",
-        "clarification": null,
+        "clarification": "Impuesto sobre beneficios a recuperar / Saldo a favor",
         "concept": "us-gaap_IncreaseDecreaseInIncomeTaxesReceivable",
         "level": 4,
         "is_abstract": false,
@@ -5866,7 +5784,7 @@
       },
       {
         "label": "Net operating lease assets and lease liabilities",
-        "clarification": null,
+        "clarification": "Activos por derecho de uso bajo arrendamiento operativo",
         "concept": "deck_IncreaseDecreaseInOperatingLeaseRightofUseAssetsAndOperatingLeaseLiabilities",
         "level": 4,
         "is_abstract": false,
@@ -5888,7 +5806,7 @@
       },
       {
         "label": "Other assets",
-        "clarification": null,
+        "clarification": "Otros activos operativos y no corrientes",
         "concept": "us-gaap_IncreaseDecreaseInOtherOperatingAssets",
         "level": 4,
         "is_abstract": false,
@@ -5910,7 +5828,7 @@
       },
       {
         "label": "Trade accounts payable",
-        "clarification": "Cuentas por pagar comerciales (Proveedores)",
+        "clarification": null,
         "concept": "us-gaap_IncreaseDecreaseInAccountsPayableTrade",
         "level": 4,
         "is_abstract": false,
@@ -5932,7 +5850,7 @@
       },
       {
         "label": "Other accrued expenses",
-        "clarification": "Gastos acumulados por pagar",
+        "clarification": null,
         "concept": "us-gaap_IncreaseDecreaseInAccruedLiabilities",
         "level": 4,
         "is_abstract": false,
@@ -5954,7 +5872,7 @@
       },
       {
         "label": "Income tax payable",
-        "clarification": null,
+        "clarification": "Impuesto sobre beneficios corriente a pagar",
         "concept": "us-gaap_IncreaseDecreaseInAccruedIncomeTaxesPayable",
         "level": 4,
         "is_abstract": false,
@@ -5976,15 +5894,15 @@
       },
       {
         "label": "Other long-term liabilities",
-        "clarification": null,
+        "clarification": "Otros pasivos no corrientes a largo plazo",
         "concept": "us-gaap_IncreaseDecreaseInOtherNoncurrentLiabilities",
         "level": 4,
         "is_abstract": false,
         "is_total": false,
         "values": {
           "FY2026": 18450000.0,
-          "FY2025": -33214000.0,
-          "FY2024": -5222000.0,
+          "FY2025": 33214000.0,
+          "FY2024": 5222000.0,
           "FY2023": 17600000.0,
           "FY2022": 999000.0,
           "FY2021": 530000.0,
@@ -5998,7 +5916,7 @@
       },
       {
         "label": "Net cash provided by operating activities",
-        "clarification": "FLUJO DE CAJA OPERATIVO (CFO)",
+        "clarification": "Flujo de caja operativo (CFO)",
         "concept": "us-gaap_NetCashProvidedByUsedInOperatingActivities",
         "level": 2,
         "is_abstract": false,
@@ -6020,7 +5938,7 @@
       },
       {
         "label": "INVESTING ACTIVITIES",
-        "clarification": "ACTIVIDADES DE INVERSIÓN",
+        "clarification": null,
         "concept": "us-gaap_NetCashProvidedByUsedInInvestingActivitiesContinuingOperationsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6042,7 +5960,7 @@
       },
       {
         "label": "Purchases of property and equipment",
-        "clarification": "Compras de propiedad y equipo (CapEx)",
+        "clarification": null,
         "concept": "us-gaap_PaymentsToAcquirePropertyPlantAndEquipment",
         "level": 3,
         "is_abstract": false,
@@ -6064,7 +5982,7 @@
       },
       {
         "label": "Proceeds from sale of assets",
-        "clarification": null,
+        "clarification": "Cobros por enajenación de inmovilizado y activos",
         "concept": "us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment",
         "level": 3,
         "is_abstract": false,
@@ -6086,7 +6004,7 @@
       },
       {
         "label": "Net cash used in investing activities",
-        "clarification": "FLUJO DE CAJA DE INVERSIÓN (CFI)",
+        "clarification": null,
         "concept": "us-gaap_NetCashProvidedByUsedInInvestingActivities",
         "level": 2,
         "is_abstract": false,
@@ -6108,7 +6026,7 @@
       },
       {
         "label": "FINANCING ACTIVITIES",
-        "clarification": "ACTIVIDADES DE FINANCIACIÓN",
+        "clarification": null,
         "concept": "us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperationsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6130,7 +6048,7 @@
       },
       {
         "label": "Proceeds from issuance of stock",
-        "clarification": null,
+        "clarification": "Fondos captados por emisión y ampliación de capital",
         "concept": "us-gaap_ProceedsFromIssuanceOfCommonStock",
         "level": 3,
         "is_abstract": false,
@@ -6152,7 +6070,7 @@
       },
       {
         "label": "Proceeds from exercise of stock options",
-        "clarification": null,
+        "clarification": "Cobros por ejercicio de opciones sobre acciones por empleados",
         "concept": "us-gaap_ProceedsFromStockOptionsExercised",
         "level": 3,
         "is_abstract": false,
@@ -6196,7 +6114,7 @@
       },
       {
         "label": "Cash paid for excise taxes related to repurchases of common stock",
-        "clarification": "Acciones ordinarias",
+        "clarification": "Impuestos especiales pagados por recompras de acciones",
         "concept": "deck_CashPaidForExciseTaxesRelatedToRepurchasesOfCommonStock",
         "level": 3,
         "is_abstract": false,
@@ -6218,7 +6136,7 @@
       },
       {
         "label": "Cash paid for shares withheld for taxes",
-        "clarification": null,
+        "clarification": "Pagos en efectivo por retenciones fiscales de acciones",
         "concept": "us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation",
         "level": 3,
         "is_abstract": false,
@@ -6240,7 +6158,7 @@
       },
       {
         "label": "Net cash used in financing activities",
-        "clarification": "FLUJO DE CAJA DE FINANCIACIÓN (CFF)",
+        "clarification": null,
         "concept": "us-gaap_NetCashProvidedByUsedInFinancingActivities",
         "level": 2,
         "is_abstract": false,
@@ -6262,7 +6180,7 @@
       },
       {
         "label": "Effect of foreign currency exchange rates on cash and cash equivalents",
-        "clarification": "Efectivo y equivalentes de efectivo",
+        "clarification": null,
         "concept": "us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
         "level": 2,
         "is_abstract": false,
@@ -6328,7 +6246,7 @@
       },
       {
         "label": "Interest",
-        "clarification": null,
+        "clarification": "Intereses financieros pagados / devengados",
         "concept": "us-gaap_InterestPaidNet",
         "level": 3,
         "is_abstract": false,
@@ -6350,7 +6268,7 @@
       },
       {
         "label": "Operating leases",
-        "clarification": null,
+        "clarification": "Pagos por arrendamientos operativos",
         "concept": "us-gaap_OperatingLeasePayments",
         "level": 3,
         "is_abstract": false,
@@ -6372,7 +6290,7 @@
       },
       {
         "label": "Non-cash investing activities",
-        "clarification": "ACTIVIDADES DE INVERSIÓN",
+        "clarification": null,
         "concept": "deck_NoncashInvestingItemAbstract",
         "level": 2,
         "is_abstract": true,
@@ -6394,7 +6312,7 @@
       },
       {
         "label": "Changes in trade accounts payable and other accrued expenses for purchases of property and equipment",
-        "clarification": "Cuentas por pagar comerciales (Proveedores)",
+        "clarification": null,
         "concept": "deck_ChangeInCapitalExpendituresIncurredButNotYetPaid",
         "level": 3,
         "is_abstract": false,
@@ -6416,7 +6334,7 @@
       },
       {
         "label": "Accrued for asset retirement obligation assets related to leasehold improvements",
-        "clarification": null,
+        "clarification": "Obligaciones acumuladas por retiro de activos en mejoras de inmuebles",
         "concept": "deck_AccruedAssetRetirementObligations",
         "level": 3,
         "is_abstract": false,
@@ -6438,7 +6356,7 @@
       },
       {
         "label": "Leasehold improvements acquired through tenant allowances",
-        "clarification": null,
+        "clarification": "Mejoras de inmuebles sufragadas mediante concesiones de arrendatarios",
         "concept": "deck_LeaseholdImprovementsFromTenantAllowance",
         "level": 3,
         "is_abstract": false,
@@ -6460,7 +6378,7 @@
       },
       {
         "label": "Non-cash financing activities",
-        "clarification": "ACTIVIDADES DE FINANCIACIÓN",
+        "clarification": null,
         "concept": "deck_NoncashFinancingItemAbstract",
         "level": 2,
         "is_abstract": true,
@@ -6482,7 +6400,7 @@
       },
       {
         "label": "Accrued for shares withheld for taxes",
-        "clarification": null,
+        "clarification": "Pasivos acumulados por acciones retenidas para impuestos",
         "concept": "deck_AccrualsForSharesWithheldForTaxes",
         "level": 3,
         "is_abstract": false,
@@ -6504,7 +6422,7 @@
       },
       {
         "label": "Accrued excise taxes related to repurchases of common stock",
-        "clarification": "Acciones ordinarias",
+        "clarification": null,
         "concept": "deck_ExciseTaxesAccruedForRepurchasesOfCommonStock",
         "level": 3,
         "is_abstract": false,
