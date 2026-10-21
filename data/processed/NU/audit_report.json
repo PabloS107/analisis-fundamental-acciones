@@ -2,7 +2,7 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-10-19T18:32:43.085487",
+  "audit_timestamp": "2026-10-21T15:01:48.288747",
   "years_audited": {
     "LTM": [
       {
@@ -45,11 +45,11 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 2868892000.0,
-        "shares_diluted": 4946365517.0,
-        "eps_reported": 0.58,
-        "eps_calculated": 0.58,
-        "eps_adjusted": 0.58,
+        "net_income": 3609997000.0,
+        "shares_diluted": 4878374324.0,
+        "eps_reported": 0.74,
+        "eps_calculated": 0.74,
+        "eps_adjusted": 0.74,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }

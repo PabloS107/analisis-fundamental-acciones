@@ -3770,7 +3770,10 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
         debt = lt_debt + st_debt
     elif tot_debt_canonical is not None and tot_debt_canonical > 0:
         debt = tot_debt_canonical
-        if lt_debt is None and st_debt is not None:
+        if (lt_debt or 0.0) + (st_debt or 0.0) == 0.0:
+            lt_debt = debt
+            st_debt = 0.0
+        elif lt_debt is None and st_debt is not None:
             lt_debt = max(0.0, debt - st_debt)
         elif st_debt is None and lt_debt is not None:
             st_debt = max(0.0, debt - lt_debt)
@@ -3786,8 +3789,13 @@ def extract_period_metrics(financials: Dict[str, Any], period: str) -> Dict[str,
     # Fallback incondicional si el cálculo arroja deuda nula pero canonical_summary posee deuda real
     if debt <= 0.0 and tot_debt_canonical is not None and tot_debt_canonical > 0.0:
         debt = tot_debt_canonical
-        if lt_debt is None and st_debt is not None:
+        if (lt_debt or 0.0) + (st_debt or 0.0) == 0.0:
+            lt_debt = debt
+            st_debt = 0.0
+        elif lt_debt is None and st_debt is not None:
             lt_debt = max(0.0, debt - st_debt)
+        elif st_debt is None and lt_debt is not None:
+            st_debt = max(0.0, debt - lt_debt)
 
     # 5. Activos Corrientes y Pasivos Corrientes
     ca = get_val(bal_detail, "AssetsCurrent")

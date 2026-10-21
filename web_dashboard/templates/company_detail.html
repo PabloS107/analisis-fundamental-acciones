@@ -653,7 +653,7 @@
 
         <!-- Barra de 3 Tarjetas de Resumen de Cabecera (Quick Highlights Adaptativos) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {% if statements_summary.is_financial or statements_summary.archetype == 'FINANCIAL_BANKING' %}
+            {% if statements_summary.archetype == 'FINANCIAL_BANKING' %}
             <!-- Card 1: Banking Net Revenue & Margins -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                 <div class="flex items-center justify-between">
@@ -866,14 +866,14 @@
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-xs uppercase font-extrabold tracking-wider text-indigo-400">Guía Pedagógica Institucional · Modelo No Estándar</span>
                         <span class="text-[10px] bg-indigo-900/60 text-indigo-200 px-2.5 py-0.5 rounded-full border border-indigo-700/50 font-bold">
-                            {% if statements_summary.is_financial or statements_summary.archetype == 'FINANCIAL_BANKING' %}Arquetipo Financiero / Banca
+                            {% if statements_summary.archetype == 'FINANCIAL_BANKING' %}Arquetipo Financiero / Banca
                             {% elif statements_summary.archetype == 'INSURANCE' %}Arquetipo Seguros / Inversión de Float
                             {% elif statements_summary.archetype == 'REAL_ESTATE_REIT' %}Arquetipo Real Estate / REIT
                             {% endif %}
                         </span>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed">
-                        {% if statements_summary.is_financial or statements_summary.archetype == 'FINANCIAL_BANKING' %}
+                        {% if statements_summary.archetype == 'FINANCIAL_BANKING' %}
                         En entidades bancarias y de intermediación financiera, el dinero es el inventario primario y los depósitos constituyen el fondeo operativo. Por rigor contable universal, las métricas corporativas tradicionales (<strong>Margen Bruto</strong>, <strong>EBIT</strong>, <strong>Fondo de Maniobra</strong> y <strong>FCF tradicional</strong>) son inaplicables y no se imputan artificialmente. El desempeño se audita mediante el <strong>Margen Neto de Interés (NIM)</strong>, el <strong>Ratio de Eficiencia (Cost-to-Income)</strong>, la rentabilidad sobre patrimonio neto (<strong>ROE / ROTCE</strong>), y la solidez prudencial bajo <strong>CET1 Ratio</strong> y <strong>Cobertura de Provisiones</strong>.
                         {% elif statements_summary.archetype == 'INSURANCE' %}
                         En empresas de seguros, los ingresos se estructuran en <strong>Primas Netas Ganadas</strong> y el fondeo proviene del <strong>Float de Inversión</strong>. La rentabilidad operativa no se evalúa por márgenes industriales, sino mediante el <strong>Ratio Combinado</strong> (Suma de Siniestralidad y Gastos de Adquisición; &lt;100% indica beneficio técnico directo), complementado por el rendimiento de la cartera invertida.

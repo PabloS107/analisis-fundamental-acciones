@@ -1,6 +1,6 @@
 # MERCADOLIBRE, INC. (NASDAQ: MELI)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q2 2026 & Gobernanza Corporativa
-*Fecha de Emisión: 20 de Septiembre de 2026 | CIK SEC: 0001099590*  
+*Fecha de Emisión: 21 de Septiembre de 2026 | CIK SEC: 0001099590*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q2 2026 Earnings Call Transcript*
 
 ---

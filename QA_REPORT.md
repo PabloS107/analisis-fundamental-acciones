@@ -1,6 +1,6 @@
 # Reporte de Salud y Calidad del Asistente (QA Report)
 
-*Última comprobación: 19/10/2026 18:32:43*
+*Última comprobación: 21/10/2026 15:01:48*
 
 ---
 
@@ -14,7 +14,7 @@
 ## Tabla de Diagnóstico de Componentes
 | Estado | Componente / Instrumento | Diagnóstico Detallado |
 | :---: | :--- | :--- |
-| ✅ **PASS** | SEC EDGAR API | Conectado exitosamente con User-Agent: 'Pablo Inversiones pablo_inversiones@gmail.com' (Latencia: 742ms, Rate-Limited) |
+| ✅ **PASS** | SEC EDGAR API | Conectado exitosamente con User-Agent: 'Pablo Inversiones pablo_inversiones@gmail.com' (Latencia: 647ms, Rate-Limited) |
 | ✅ **PASS** | Google Drive | Unidad montada con permisos R/W en G:\Mi unidad\analisis fundamental (Acceso directo workspace: OK) |
 | ✅ **PASS** | Skill: fundamental-data-extractor | Estándar Antigravity válido con frontmatter y scripts consolidados en pipeline/ (24 scripts). |
 | ✅ **PASS** | Skill: fundamental-scoring-benchmark | Estándar Antigravity válido con frontmatter y scripts consolidados en pipeline/ (24 scripts). |
@@ -25,5 +25,5 @@
 | ✅ **PASS** | Auditoría Contable: META | Fidelidad contable: 100.0% (77 de 77 pruebas superadas) |
 | ✅ **PASS** | Auditoría Contable: NU | Fidelidad contable: 100.0% (23 de 23 pruebas superadas) |
 | ✅ **PASS** | Auditoría Contable: NVDA | Fidelidad contable: 100.0% (77 de 77 pruebas superadas) |
-| ✅ **PASS** | Auditoría Contable: O | Fidelidad contable: 100.0% (58 de 58 pruebas superadas) |
+| ✅ **PASS** | Auditoría Contable: O | Fidelidad contable: 100.0% (59 de 59 pruebas superadas) |
 | ✅ **PASS** | Auditoría Contable: PGR | Fidelidad contable: 100.0% (51 de 51 pruebas superadas) |

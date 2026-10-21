@@ -682,6 +682,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
 
             # 3. Gastos Operativos y Siniestros
             op_exp = get_first_matching_value(inc_data, XBRL_TAXONOMY_MAP["operating_expenses"], p)
+            if op_exp is None:
+                op_exp = get_first_matching_value(inc_data, ["BenefitsLossesAndExpenses", "us-gaap_BenefitsLossesAndExpenses", "PolicyholderBenefitsAndClaimsAndExpenses"], p)
             if op_exp is not None:
                 op_exp = abs(op_exp)
             canonical["operating_expenses"][p] = op_exp
@@ -785,7 +787,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         ebit = get_first_matching_value(inc_data, ebit_cands, p)
         if ebit is None and facts_df is not None:
             ebit = get_fact_fallback(facts_df, ebit_cands, p, is_flow=True)
-        if ebit is None and rev is not None and op_exp is not None and abs(op_exp) > 0 and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+        if ebit is None and rev is not None and op_exp is not None and abs(op_exp) > 0 and archetype != "FINANCIAL_BANKING":
             ebit = round(rev - abs(op_exp), 2)
         canonical["operating_income"][p] = ebit
 
@@ -3061,6 +3063,47 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
             cleaned_rows.append(row)
 
         as_reported[s_name] = cleaned_rows
+
+    # Candado de carátula para evitar contaminación por notas dimensionales (Regla 6)
+    can_summary = full_dataset.get("canonical_summary", {})
+    as_rep_bs = as_reported.get("balance_sheet", [])
+    as_rep_cf = as_reported.get("cash_flow_statement", [])
+    as_rep_inc = as_reported.get("income_statement", [])
+    bs_detail = full_dataset.get("balance_sheet_detail", {})
+    cf_detail = full_dataset.get("cash_flow_detail", {})
+    inc_detail = full_dataset.get("income_statement_detail", {})
+
+    # A. Sincronizar Inversiones a Corto Plazo con carátula de Balance Sheet si difieren materialmente (caso META)
+    for r in as_rep_bs:
+        c_tok = str(r.get("concept", "")).split(":")[-1].split("_")[-1].lower()
+        if c_tok in ("marketablesecuritiescurrent", "shortterminvestments"):
+            v_ltm = r.get("values", {}).get("LTM")
+            if v_ltm is not None and float(v_ltm) > 0:
+                can_sti = can_summary.get("short_term_investments", {}).get("LTM")
+                if can_sti is not None and abs(float(v_ltm) - float(can_sti)) > 1000.0:
+                    can_summary["short_term_investments"]["LTM"] = float(v_ltm)
+                    for k_bs in ("us-gaap_MarketableSecuritiesCurrent", "MarketableSecuritiesCurrent"):
+                        if k_bs in bs_detail:
+                            bs_detail[k_bs]["values"]["LTM"] = float(v_ltm)
+                    c_v = can_summary.get("cash_and_equivalents", {}).get("LTM") or 0.0
+                    tot_liq = round(c_v + float(v_ltm), 2)
+                    can_summary["total_liquid_cash"]["LTM"] = tot_liq
+                    tot_d = can_summary.get("total_debt", {}).get("LTM") or 0.0
+                    can_summary["net_debt"]["LTM"] = round(tot_d - tot_liq, 2)
+            break
+
+    # B. Sincronizar Dividendos LTM con carátula si la suma de trimestres generó sobre-acumulación (caso NVDA)
+    for r in as_rep_cf:
+        c_tok = str(r.get("concept", "")).split(":")[-1].split("_")[-1].lower()
+        if c_tok in ("paymentsofdividends", "paymentsofdividendscommonstock"):
+            v_ltm = r.get("values", {}).get("LTM")
+            can_div = can_summary.get("dividends_paid", {}).get("LTM")
+            if can_div is not None and v_ltm is not None and abs(abs(float(v_ltm)) - abs(float(can_div))) > 1000.0:
+                # Priorizar el valor auditado de canonical si es el correcto o viceversa
+                target_div = min(abs(float(v_ltm)), abs(float(can_div)))
+                r["values"]["LTM"] = -target_div
+                can_summary["dividends_paid"]["LTM"] = target_div
+            break
 
     full_dataset["as_reported_statements"] = as_reported
     return full_dataset

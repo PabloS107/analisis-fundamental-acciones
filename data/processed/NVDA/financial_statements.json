@@ -551,7 +551,7 @@
       "FY2015": 4877000000.0
     },
     "dividends_paid": {
-      "LTM": 6776000000.0,
+      "LTM": 974000000.0,
       "FY2026": 974000000.0,
       "FY2025": 834000000.0,
       "FY2024": 395000000.0,
@@ -1549,7 +1549,7 @@
       "label": "Other Nonoperating Income (Expense)",
       "standard_concept": "",
       "values": {
-        "LTM": 22629000000.0,
+        "LTM": 30399000000.0,
         "FY2026": 9022000000.0,
         "FY2025": 1034000000.0,
         "FY2024": 237000000.0,
@@ -3416,7 +3416,8 @@
         "FY2020": 390000000.0,
         "FY2019": 371000000.0,
         "FY2018": 341000000.0,
-        "FY2017": 261000000.0
+        "FY2017": 261000000.0,
+        "LTM": 974000000.0
       },
       "depth": 1,
       "is_abstract": false,
@@ -3605,7 +3606,7 @@
       "label": "Payments of Dividends",
       "standard_concept": "",
       "values": {
-        "LTM": 6729000000.0,
+        "LTM": 974000000.0,
         "FY2026": 974000000.0,
         "FY2025": 834000000.0,
         "FY2024": 395000000.0,
@@ -3878,7 +3879,7 @@
       "label": "Payments of Dividends",
       "standard_concept": "",
       "values": {
-        "LTM": -6776000000.0,
+        "LTM": -974000000.0,
         "FY2026": -974000000.0,
         "FY2025": -834000000.0,
         "FY2024": -395000000.0,
@@ -4805,7 +4806,7 @@
           "FY2017": -25000000.0,
           "FY2016": 4000000.0,
           "FY2015": 14000000.0,
-          "LTM": 22629000000.0
+          "LTM": 30399000000.0
         },
         "spanish_label": "Otros ingresos no operativos, netos",
         "orig_tooltip": "Other income, net (us-gaap_OtherNonoperatingIncomeExpense)"
@@ -6734,7 +6735,7 @@
           "FY2017": -261000000.0,
           "FY2016": -213000000.0,
           "FY2015": -186000000.0,
-          "LTM": -6776000000.0
+          "LTM": -974000000.0
         },
         "spanish_label": "Dividendos pagados",
         "orig_tooltip": "Dividends paid (us-gaap_PaymentsOfDividends)"

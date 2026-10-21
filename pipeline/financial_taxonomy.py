@@ -216,7 +216,6 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "MarketableSecuritiesCurrent",
         "ShortTermInvestments",
         "AvailableForSaleSecuritiesCurrent",
-        "AvailableForSaleSecuritiesDebtSecuritiesCurrent",
         "DebtSecuritiesCurrent",
         "EquitySecuritiesFvNi",
         "MarketableSecurities",
@@ -294,6 +293,9 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "us-gaap_PrepaidExpenseCurrent",
     ],
     "net_ppe": [
+        "RealEstateInvestmentPropertyNet",
+        "us-gaap_RealEstateInvestmentPropertyNet",
+        "InvestmentProperties",
         "PropertyPlantAndEquipmentNet",
         "PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization",
         "PropertyPlantAndEquipmentNetOfAccumulatedDepreciationAndAmortization",
@@ -541,11 +543,11 @@ BANKING_TAXONOMY_MAP: Dict[str, List[str]] = {
         "LongTermDebt",
     ],
     "short_term_interbank": [
+        "ShortTermBorrowings",
         "MoneyMarketRepurchaseAgreements",
         "InterbankTransactionsAndRepurchaseAgreements",
         "RepurchaseAgreements",
         "FederalFundsPurchasedAndSecuritiesSoldUnderAgreementsToRepurchase",
-        "ShortTermBorrowings",
     ],
     "accounts_payable": [
         "OtherPayables",
