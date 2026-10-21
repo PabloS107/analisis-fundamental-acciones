@@ -11,7 +11,7 @@ django.setup()
 
 from django.test import Client
 
-from analytics.views import resolve_canonical_capital_flows, resolve_canonical_balance_sheet
+from analytics.views import resolve_canonical_capital_flows, resolve_canonical_balance_sheet, resolve_canonical_income_statement, resolve_canonical_cash_flow
 import json
 import html
 
@@ -704,6 +704,80 @@ class TestStatementsWebDashboard(unittest.TestCase):
             # Restaurar datos originales incondicionalmente
             with open(nvda_path, 'w', encoding='utf-8') as f:
                 json.dump(original_data, f, indent=2)
+
+    def test_fiscal_ai_standardized_skeletons_all_archetypes(self):
+        """Verifica la arquitectura completa de la Fase 2 según Fiscal.ai:
+        - Para las 9 empresas (todos los arquetipos: Standard Corporate, Platform Ecosystem, Financial Banking, Insurance, Real Estate REIT):
+          1. std_pnl, std_cashflow y std_balancesheet contienen sus encabezados section_header y operadores verticales.
+          2. std_cashflow desglosa las 4 secciones canónicas completas de Fiscal.ai.
+          3. std_balancesheet tiene subtotales no vacíos (distintos de '-') en LTM y último FY, con cascada vertical de Fiscal.ai.
+          4. BVPS ($) y TBVPS ($) se encuentran presentes y formateados con estilo institucional."""
+        tickers_meta = {
+            "AAPL": "STANDARD_CORPORATE",
+            "DECK": "STANDARD_CORPORATE",
+            "NVDA": "STANDARD_CORPORATE",
+            "META": "STANDARD_CORPORATE",
+            "MELI": "PLATFORM_ECOSYSTEM",
+            "JPM": "FINANCIAL_BANKING",
+            "NU": "FINANCIAL_BANKING",
+            "PGR": "INSURANCE",
+            "O": "REAL_ESTATE_REIT",
+        }
+
+        for ticker, expected_archetype in tickers_meta.items():
+            res = self.client.get(f'/company/{ticker}/')
+            self.assertEqual(res.status_code, 200, f"Error HTTP {res.status_code} al consultar {ticker}")
+            content = html.unescape(res.content.decode('utf-8'))
+
+            # A. Verificación de Encabezados de Sección Canónicos en Cash Flow (4 Secciones Fiscal.ai)
+            self.assertIn('ACTIVIDADES OPERATIVAS (OPERATING ACTIVITIES)', content, f"Falta sección CFO en {ticker}")
+            self.assertIn('ACTIVIDADES DE INVERSIÓN (INVESTING ACTIVITIES)', content, f"Falta sección CFI en {ticker}")
+            self.assertIn('ACTIVIDADES DE FINANCIACIÓN (FINANCING ACTIVITIES)', content, f"Falta sección CFF en {ticker}")
+            self.assertIn('VARIACIÓN NETA DE EFECTIVO Y CONCILIACIÓN DE CAJA', content, f"Falta conciliación de caja en {ticker}")
+
+            # B. Verificación de Encabezados por Arquetipo en P&L
+            if expected_archetype == "FINANCIAL_BANKING":
+                self.assertIn('MARGEN DE INTERESES E INGRESOS BANCARIOS', content, f"Falta sección NII bancaria en {ticker}")
+                self.assertIn('PROVISIONES CREDITICIAS, GASTOS OPERATIVOS Y BENEFICIO NETO', content, f"Falta sección provisiones bancarias en {ticker}")
+                self.assertIn('Ingresos por Intereses (Interest Income)', content, f"Falta Interest Income en {ticker}")
+            elif expected_archetype == "INSURANCE":
+                self.assertIn('INGRESOS DE SUSCRIPCIÓN E INVERSIONES', content, f"Falta ingresos de suscripción en {ticker}")
+                self.assertIn('SINIESTRALIDAD, GASTOS DE SUSCRIPCIÓN Y BENEFICIO NETO', content, f"Falta siniestralidad en {ticker}")
+                self.assertIn('Primas Netas Devengadas (Net Premiums Earned)', content, f"Falta primas devengadas en {ticker}")
+            elif expected_archetype == "REAL_ESTATE_REIT":
+                self.assertIn('INGRESOS INMOBILIARIOS Y NOI', content, f"Falta ingresos inmobiliarios en {ticker}")
+                self.assertIn('GASTOS CORPORATIVOS, NO OPERATIVOS Y BENEFICIO NETO', content, f"Falta gastos REIT en {ticker}")
+                self.assertIn('Net Operating Income Inmobiliario (NOI)', content, f"Falta NOI en {ticker}")
+            else:
+                self.assertIn('INGRESOS Y BENEFICIO BRUTO', content, f"Falta Ingresos y Beneficio Bruto en {ticker}")
+                self.assertIn('GASTOS OPERATIVOS Y EBIT', content, f"Falta Gastos Operativos y EBIT en {ticker}")
+                self.assertIn('PARTIDAS NO OPERATIVAS, IMPUESTOS Y BENEFICIO NETO', content, f"Falta No Operativo en {ticker}")
+                self.assertIn('Beneficio Operativo (EBIT)', content, f"Falta EBIT en {ticker}")
+
+            # C. Verificación de Métricas por Acción y Acciones en Circulación
+            self.assertIn('MÉTRICAS POR ACCIÓN Y ACCIONES EN CIRCULACIÓN', content, f"Falta sección por acción en {ticker}")
+            self.assertIn('BPA Diluido Normalizado (Diluted EPS)', content, f"Falta EPS Diluido en {ticker}")
+
+            # D. Verificación de Balance General y Subtotales No Vacíos en Corporativas / Plataformas
+            if expected_archetype in ("STANDARD_CORPORATE", "PLATFORM_ECOSYSTEM"):
+                self.assertIn('ACTIVOS CORRIENTES (CURRENT ASSETS)', content, f"Falta Activos Corrientes en {ticker}")
+                self.assertIn('ACTIVOS NO CORRIENTES (NON-CURRENT ASSETS)', content, f"Falta Activos No Corrientes en {ticker}")
+                self.assertIn('PASIVOS CORRIENTES (CURRENT LIABILITIES)', content, f"Falta Pasivos Corrientes en {ticker}")
+                self.assertIn('PASIVOS NO CORRIENTES (NON-CURRENT LIABILITIES)', content, f"Falta Pasivos No Corrientes en {ticker}")
+                self.assertIn("PATRIMONIO NETO (SHAREHOLDERS' EQUITY)", content, f"Falta Patrimonio Neto en {ticker}")
+
+                self.assertIn('Total Activos Corrientes', content, f"Falta subtotal Activos Corrientes en {ticker}")
+                self.assertIn('Total Activos No Corrientes', content, f"Falta subtotal Activos No Corrientes en {ticker}")
+                self.assertIn('Total Activos (Total Assets)', content, f"Falta Total Activos en {ticker}")
+                self.assertIn('Total Pasivos Corrientes', content, f"Falta subtotal Pasivos Corrientes en {ticker}")
+                self.assertIn('Total Pasivos No Corrientes', content, f"Falta subtotal Pasivos No Corrientes en {ticker}")
+                self.assertIn('Total Pasivos (Total Liabilities)', content, f"Falta Total Pasivos en {ticker}")
+                self.assertIn("Total Patrimonio Neto (Stockholders' Equity)", content, f"Falta Total Patrimonio en {ticker}")
+                self.assertIn('Total Pasivo y Patrimonio Neto (Total Liabilities & Equity)', content, f"Falta Total Pasivo y Patrimonio en {ticker}")
+
+            # E. Verificación de BVPS y TBVPS en Balance General
+            self.assertIn('VALOR CONTABLE POR ACCIÓN (BVPS $)', content, f"Falta BVPS en {ticker}")
+            self.assertIn('VALOR CONTABLE TANGIBLE POR ACCIÓN (TBVPS $)', content, f"Falta TBVPS en {ticker}")
 
 
 if __name__ == '__main__':

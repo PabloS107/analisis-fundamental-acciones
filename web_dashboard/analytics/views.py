@@ -394,6 +394,13 @@ def resolve_canonical_balance_sheet(fs, periods):
         bs_detail,
         fs.get("balance_sheet", {}) if isinstance(fs, dict) else {}
     ]
+    as_rep_bs_raw = fs.get("as_reported_statements", {}).get("balance_sheet", []) if isinstance(fs, dict) else []
+    as_rep_bs_rows = as_rep_bs_raw if isinstance(as_rep_bs_raw, list) else (as_rep_bs_raw.get("rows", []) if isinstance(as_rep_bs_raw, dict) else [])
+    as_rep_bs_dict = {}
+    for r in as_rep_bs_rows:
+        if isinstance(r, dict) and "concept" in r:
+            as_rep_bs_dict[r["concept"]] = r.get("values", {})
+    bal_sources.append(as_rep_bs_dict)
 
     def _extract_val(key_cands, p, can_key=None):
         if can_key:
@@ -560,6 +567,39 @@ def resolve_canonical_balance_sheet(fs, periods):
         "DeferredIncomeTaxesAndOtherLiabilitiesNoncurrent"
     ]
 
+    net_loans_keys = [
+        "LoansAndLeasesReceivableNetOfDeferredIncome", "us-gaap_LoansAndLeasesReceivableNetOfDeferredIncome",
+        "FinancingReceivableExcludingAccruedInterestAfterAllowanceForCreditLoss",
+        "FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLossesNetOfDeferredIncome",
+        "ifrs-full_LoansAndAdvancesToCustomers", "nu_CreditCardReceivables1", "nu_LoansAndAdvancesToCustomers1",
+        "LoansAndLeasesReceivableNetReportedAmount", "LoansReceivableNet"
+    ]
+    allow_loss_keys = [
+        "FinancingReceivableAllowanceForCreditLosses", "us-gaap_FinancingReceivableAllowanceForCreditLosses",
+        "AllowanceAccountForCreditLossesOfFinancialAssets", "LoansAndLeasesReceivableAllowance",
+        "AllowanceForLoanAndLeaseLosses"
+    ]
+    deposit_keys = [
+        "Deposits", "us-gaap_Deposits", "ifrs-full_DepositsFromCustomers", "DepositsDomestic",
+        "InterestBearingDepositLiabilities", "NoninterestBearingDepositLiabilities"
+    ]
+    prem_rec_keys = [
+        "PremiumsReceivableAtCarryingValue", "us-gaap_PremiumsReceivableAtCarryingValue",
+        "AccountsAndOtherReceivablesNetCurrent", "AccountsReceivableNet"
+    ]
+    dac_keys = [
+        "DeferredPolicyAcquisitionCosts", "us-gaap_DeferredPolicyAcquisitionCosts",
+        "DeferredPolicyAcquisitionCostAmortizationExpense"
+    ]
+    loss_res_keys = [
+        "LiabilityForClaimsAndClaimsAdjustmentExpense", "us-gaap_LiabilityForClaimsAndClaimsAdjustmentExpense",
+        "LiabilityForUnpaidClaimsAndClaimsAdjustmentExpenseNet",
+        "LiabilityForClaimsAndClaimsAdjustmentExpenseIncurredClaims1"
+    ]
+    unearn_prem_keys = [
+        "UnearnedPremiums", "us-gaap_UnearnedPremiums", "UnearnedPremiumsNet"
+    ]
+
     res = {
         "cash": {},
         "short_term_investments": {},
@@ -599,7 +639,16 @@ def resolve_canonical_balance_sheet(fs, periods):
         "net_working_capital": {},
         "net_financial_position": {},
         "book_value_per_share": {},
-        "tangible_book_value_per_share": {}
+        "tangible_book_value_per_share": {},
+        "net_loans": {},
+        "allowance_for_loan_losses": {},
+        "deposits": {},
+        "premiums_receivable": {},
+        "deferred_policy_acquisition_costs": {},
+        "loss_reserves": {},
+        "unearned_premiums": {},
+        "other_assets_sectoral": {},
+        "other_liabilities_sectoral": {}
     }
 
     for p in periods:
@@ -806,6 +855,618 @@ def resolve_canonical_balance_sheet(fs, periods):
         res["book_value_per_share"][p] = bvps
         res["tangible_book_value_per_share"][p] = tbvps
 
+        net_loans_v = _extract_val(net_loans_keys, p, "net_loans")
+        allow_loss_v = _extract_val(allow_loss_keys, p, "allowance_for_loan_losses")
+        dep_v = _extract_val(deposit_keys, p, "deposits")
+        prem_rec_v = _extract_val(prem_rec_keys, p, "premiums_receivable")
+        dac_v = _extract_val(dac_keys, p, "deferred_policy_acquisition_costs")
+        loss_res_v = _extract_val(loss_res_keys, p, "loss_reserves")
+        unearn_prem_v = _extract_val(unearn_prem_keys, p, "unearned_premiums")
+
+        other_ast_sec = None
+        if tot_ast is not None:
+            if net_loans_v is not None or dep_v is not None:
+                other_ast_sec = round(tot_ast - (tot_liquid or 0.0) - (net_loans_v or 0.0) - (gw_int_v or 0.0) - (ppe_v or 0.0), 1)
+            elif prem_rec_v is not None or loss_res_v is not None:
+                other_ast_sec = round(tot_ast - (tot_liquid or 0.0) - (prem_rec_v or 0.0) - (dac_v or 0.0) - (ppe_v or 0.0), 1)
+
+        other_liab_sec = None
+        if tot_liab is not None:
+            if dep_v is not None:
+                other_liab_sec = round(tot_liab - (dep_v or 0.0) - (tot_debt or 0.0), 1)
+            elif loss_res_v is not None:
+                other_liab_sec = round(tot_liab - (loss_res_v or 0.0) - (unearn_prem_v or 0.0) - (tot_debt or 0.0), 1)
+
+        res["net_loans"][p] = net_loans_v
+        res["allowance_for_loan_losses"][p] = allow_loss_v
+        res["deposits"][p] = dep_v
+        res["premiums_receivable"][p] = prem_rec_v
+        res["deferred_policy_acquisition_costs"][p] = dac_v
+        res["loss_reserves"][p] = loss_res_v
+        res["unearned_premiums"][p] = unearn_prem_v
+        res["other_assets_sectoral"][p] = other_ast_sec
+        res["other_liabilities_sectoral"][p] = other_liab_sec
+
+    return res
+
+
+def _extract_multi_source_val(fs, section_type, key_cands, p, canon_keys=None):
+    """
+    Función universal multi-fuente (SSOT) para extraer valores de estados financieros:
+    1. canonical_summary (si canon_keys se especifica y existe en p y != None)
+    2. *_detail (income_statement_detail, balance_sheet_detail, cash_flow_detail)
+    3. as_reported_statements (income_statement, balance_sheet, cash_flow_statement)
+    """
+    if not isinstance(fs, dict):
+        return None
+    canonical = fs.get("canonical_summary", {})
+    if canon_keys:
+        if isinstance(canon_keys, str):
+            canon_keys = [canon_keys]
+        for ck in canon_keys:
+            if ck in canonical and isinstance(canonical[ck], dict):
+                v = canonical[ck].get(p)
+                if v is not None:
+                    try:
+                        return float(v)
+                    except (ValueError, TypeError):
+                        pass
+
+    # 2. *_detail
+    det_map = {
+        "income": "income_statement_detail",
+        "balance": "balance_sheet_detail",
+        "cashflow": "cash_flow_detail",
+    }
+    det_key = det_map.get(section_type, f"{section_type}_detail")
+    detail_dict = fs.get(det_key, {})
+    if isinstance(detail_dict, dict):
+        for k in key_cands:
+            variants = [k, f"us-gaap_{k}", f"ifrs-full_{k}"]
+            if k.startswith("us-gaap_"):
+                variants.append(k[len("us-gaap_"):])
+            elif k.startswith("ifrs-full_"):
+                variants.append(k[len("ifrs-full_"):])
+            for var in variants:
+                if var in detail_dict:
+                    obj = detail_dict[var]
+                    vals = obj.get("values", obj) if isinstance(obj, dict) else {}
+                    if isinstance(vals, dict) and p in vals and vals[p] is not None:
+                        try:
+                            return float(vals[p])
+                        except (ValueError, TypeError):
+                            pass
+            k_token = k.lower().split(':')[-1].split('_')[-1]
+            for dk, dobj in detail_dict.items():
+                d_token = dk.lower().split(':')[-1].split('_')[-1]
+                if dk.lower() == k.lower() or d_token == k_token:
+                    vals = dobj.get("values", dobj) if isinstance(dobj, dict) else {}
+                    if isinstance(vals, dict) and p in vals and vals[p] is not None:
+                        try:
+                            return float(vals[p])
+                        except (ValueError, TypeError):
+                            pass
+
+    # 3. as_reported_statements
+    as_reported = fs.get("as_reported_statements", {})
+    if isinstance(as_reported, dict):
+        as_rep_map = {
+            "income": "income_statement",
+            "balance": "balance_sheet",
+            "cashflow": "cash_flow_statement",
+        }
+        sec_name = as_rep_map.get(section_type, section_type)
+        sec_obj = as_reported.get(sec_name, [])
+        rows_list = sec_obj if isinstance(sec_obj, list) else (sec_obj.get("rows", []) if isinstance(sec_obj, dict) else [])
+        if isinstance(rows_list, list):
+            for row in rows_list:
+                if not isinstance(row, dict):
+                    continue
+                concept = str(row.get("concept", ""))
+                c_token = concept.lower().split(':')[-1].split('_')[-1]
+                for k in key_cands:
+                    k_token = k.lower().split(':')[-1].split('_')[-1]
+                    if concept == k or concept.lower() == k.lower() or c_token == k_token:
+                        vals = row.get("values", {})
+                        if isinstance(vals, dict) and p in vals and vals[p] is not None:
+                            try:
+                                return float(vals[p])
+                            except (ValueError, TypeError):
+                                pass
+    return None
+
+
+def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORATE"):
+    """
+    Función canónica y unificada (SSOT) para resolver el Estado de Resultados Estandarizado (10Y + LTM)
+    adaptado dinámicamente por arquetipo contable según Fiscal.ai.
+    Retorna series en dólares crudos (salvo EPS/DPS en $/acción y acciones en unidades).
+    """
+    res = {
+        "revenue": {}, "cogs": {}, "gross_profit": {},
+        "rd_expense": {}, "sga_expense": {}, "credit_loss_provision": {},
+        "other_operating_expense": {}, "total_operating_expenses": {},
+        "operating_income": {}, "interest_income": {}, "interest_expense": {},
+        "other_non_operating": {}, "total_non_operating": {},
+        "ebt": {}, "income_tax": {}, "net_income": {},
+        "minority_interest_pnl": {}, "preferred_dividends": {}, "net_income_common": {},
+        "eps_basic": {}, "eps_diluted": {}, "shares_basic": {}, "shares_diluted": {}, "dps": {},
+        "net_interest_income": {}, "non_interest_income": {}, "non_interest_expense": {},
+        "net_premiums_earned": {}, "net_investment_income": {}, "investment_gains_losses": {},
+        "fees_and_other_revenues": {}, "losses_and_lae": {}, "dac_amortization": {},
+        "other_underwriting_expenses": {}, "total_benefits_and_expenses": {},
+        "rental_revenue": {}, "tenant_reimbursements_other": {}, "property_operating_expenses": {},
+        "noi": {}, "reit_da": {}, "reit_ga": {}, "reit_impairment": {}, "gain_on_sale_properties": {}
+    }
+
+    for p in periods:
+        rev = _extract_multi_source_val(fs, "income", [
+            "Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet",
+            "TotalRevenuesAndOtherIncome", "Revenue", "ifrs-full_Revenue", "RevenuesNetOfInterestExpense"
+        ], p, "revenue")
+
+        cogs = _extract_multi_source_val(fs, "income", [
+            "CostOfGoodsAndServicesSold", "CostOfRevenue", "CostOfGoodsSold",
+            "CostOfPurchasedGoodsAndServices", "ifrs-full_CostOfSales"
+        ], p, "cost_of_goods_sold")
+        if cogs is not None:
+            cogs = abs(cogs)
+
+        gp = _extract_multi_source_val(fs, "income", [
+            "GrossProfit", "ifrs-full_GrossProfit"
+        ], p, "gross_profit")
+        if gp is None and rev is not None and cogs is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+            gp = round(rev - cogs, 2)
+        if cogs is None and rev is not None and gp is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+            cogs = round(rev - gp, 2)
+
+        rd = _extract_multi_source_val(fs, "income", [
+            "ResearchAndDevelopmentExpense", "TechnologyAndContentExpense", "TechnologyAndDevelopmentExpense",
+            "ResearchAndDevelopmentExpenseSoftware", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost"
+        ], p, ["rd_expense", "research_and_development"])
+        if rd is not None:
+            rd = abs(rd)
+
+        sga = _extract_multi_source_val(fs, "income", [
+            "SellingGeneralAndAdministrativeExpense", "SellingGeneralAndAdministrative"
+        ], p, ["sga_expense", "selling_general_and_administrative"])
+        if sga is None:
+            sm = _extract_multi_source_val(fs, "income", [
+                "SellingAndMarketingExpense", "MarketingAndAdvertisingExpense", "SellingExpense", "AdvertisingExpense"
+            ], p, "sm_expense")
+            ga = _extract_multi_source_val(fs, "income", [
+                "GeneralAndAdministrativeExpense", "AdministrativeExpense"
+            ], p, "ga_expense")
+            if sm is not None or ga is not None:
+                sga = (abs(sm) if sm else 0.0) + (abs(ga) if ga else 0.0)
+            elif _extract_multi_source_val(fs, "income", ["GeneralAndAdministrativeExpense"], p) is not None:
+                sga = abs(_extract_multi_source_val(fs, "income", ["GeneralAndAdministrativeExpense"], p))
+        if sga is not None:
+            sga = abs(sga)
+
+        credit_loss = _extract_multi_source_val(fs, "income", [
+            "ProvisionForLoanLeaseAndOtherLosses", "ProvisionForLoanLossesExpensed", "ProvisionForDoubtfulAccounts",
+            "nu_CreditLossAllowanceExpenses", "CreditLossAllowanceExpenses1",
+            "ifrs-full_AdditionalAllowanceRecognisedInProfitOrLossAllowanceAccountForCreditLossesOfFinancialAssets"
+        ], p, ["credit_loss_provisions", "provision_for_credit_losses"])
+        if credit_loss is not None:
+            credit_loss = abs(credit_loss)
+
+        other_opex = _extract_multi_source_val(fs, "income", [
+            "RestructuringCharges", "OtherCostAndExpenseOperating", "BusinessCombinationAcquisitionRelatedCosts",
+            "AmortizationOfIntangibleAssets", "OperatingExpensesOther", "ImpairmentOfIntangibleAssetsFinitelived"
+        ], p)
+        if other_opex is not None:
+            other_opex = abs(other_opex)
+
+        ebit = _extract_multi_source_val(fs, "income", [
+            "OperatingIncomeLoss", "ifrs-full_ProfitLossFromOperatingActivities", "OperatingIncome"
+        ], p, "operating_income")
+
+        tot_opex = _extract_multi_source_val(fs, "income", [
+            "OperatingExpenses", "CostsAndExpenses", "ifrs-full_OperatingExpense"
+        ], p, "operating_expenses")
+        if tot_opex is None and gp is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+            tot_opex = round(gp - ebit, 2)
+        if tot_opex is not None:
+            tot_opex = abs(tot_opex)
+
+        int_inc = _extract_multi_source_val(fs, "income", [
+            "InvestmentIncomeInterest", "InterestIncomeOperating", "InterestAndDividendIncomeOperating",
+            "InterestIncome", "ifrs-full_RevenueFromInterest", "nu_InterestIncomeAndGainsLossesOnFinancialInstruments"
+        ], p, "interest_income")
+
+        int_exp = _extract_multi_source_val(fs, "income", [
+            "InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt", "InterestExpenseOperating",
+            "meli_InterestExpenseAndOtherFinancialCharges"
+        ], p, "interest_expense")
+        if int_exp is not None:
+            int_exp = abs(int_exp)
+
+        other_non_op = _extract_multi_source_val(fs, "income", [
+            "OtherNonoperatingIncomeExpense", "GainLossOnInvestments", "ForeignCurrencyTransactionGainLossBeforeTax",
+            "GainLossOnSaleOfSecuritiesNet", "OtherNonoperatingIncomeExpenseNet"
+        ], p, "other_non_operating")
+
+        tot_non_op = _extract_multi_source_val(fs, "income", [
+            "NonoperatingIncomeExpense", "InterestRevenueExpenseNet", "deck_InterestAndOtherExpense",
+            "NonoperatingIncomeExpenseNet"
+        ], p, "non_operating_income")
+        if tot_non_op is None and (int_inc is not None or int_exp is not None or other_non_op is not None):
+            tot_non_op = round((int_inc or 0.0) - (int_exp or 0.0) + (other_non_op or 0.0), 2)
+
+        ebt = _extract_multi_source_val(fs, "income", [
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "ProfitLossBeforeTax", "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"
+        ], p, "ebt")
+        if ebt is None and ebit is not None and tot_non_op is not None:
+            ebt = round(ebit + tot_non_op, 2)
+
+        tax = _extract_multi_source_val(fs, "income", [
+            "IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations", "nu_IncomeTaxInStatementOfProfitOrLoss",
+            "CurrentIncomeTaxExpenseBenefit", "ifrs-full_IncomeTaxExpenseContinuingOperations"
+        ], p, "income_tax_expense")
+        if tax is None:
+            c_tax = _extract_multi_source_val(fs, "income", ["CurrentTaxExpenseIncome"], p)
+            d_tax = _extract_multi_source_val(fs, "income", ["DeferredTaxExpenseIncome"], p)
+            if c_tax is not None or d_tax is not None:
+                tax = (c_tax or 0.0) + (d_tax or 0.0)
+        if tax is not None:
+            tax = abs(tax)
+
+        ni = _extract_multi_source_val(fs, "income", [
+            "NetIncomeLoss", "ProfitLoss", "NetIncome", "ifrs-full_ProfitLoss"
+        ], p, "net_income")
+        if ni is None and ebt is not None and tax is not None:
+            ni = round(ebt - tax, 2)
+        if ebt is None and ni is not None and tax is not None:
+            ebt = round(ni + tax, 2)
+
+        min_int_pnl = _extract_multi_source_val(fs, "income", [
+            "NetIncomeLossAttributableToNoncontrollingInterest", "ProfitLossAttributableToNoncontrollingInterests"
+        ], p)
+        if min_int_pnl is not None:
+            min_int_pnl = abs(min_int_pnl)
+
+        pref_div = _extract_multi_source_val(fs, "income", [
+            "PreferredStockDividendsIncomeStatementImpact", "RedeemablePreferredStockDividends",
+            "PreferredStockDividendsAndOtherAdjustments"
+        ], p)
+        if pref_div is not None:
+            pref_div = abs(pref_div)
+
+        ni_comm = _extract_multi_source_val(fs, "income", [
+            "NetIncomeLossAvailableToCommonStockholdersBasic", "ProfitLossAttributableToOwnersOfParent"
+        ], p)
+        if ni_comm is None and ni is not None:
+            ni_comm = round(ni - (min_int_pnl or 0.0) - (pref_div or 0.0), 2)
+
+        eps_b = _extract_multi_source_val(fs, "income", [
+            "EarningsPerShareBasic", "BasicEarningsLossPerShare", "ifrs-full_BasicEarningsLossPerShare"
+        ], p, "eps_basic")
+
+        eps_d = _extract_multi_source_val(fs, "income", [
+            "EarningsPerShareDiluted", "DilutedEarningsLossPerShare", "ifrs-full_DilutedEarningsLossPerShare"
+        ], p, ["eps_diluted_adjusted", "eps_diluted"])
+
+        sh_b = _extract_multi_source_val(fs, "income", [
+            "WeightedAverageNumberOfSharesOutstandingBasic", "ifrs-full_WeightedAverageShares"
+        ], p, "shares_basic")
+
+        sh_d = _extract_multi_source_val(fs, "income", [
+            "WeightedAverageNumberOfDilutedSharesOutstanding", "ifrs-full_AdjustedWeightedAverageShares"
+        ], p, ["shares_diluted_adjusted", "shares_diluted"])
+
+        dps_val = _extract_multi_source_val(fs, "income", [
+            "CommonStockDividendsPerShareDeclared", "CommonStockDividendsPerShareCashPaid", "DividendsPerShareDeclared"
+        ], p, "dps")
+
+        nii = _extract_multi_source_val(fs, "income", ["InterestIncomeExpenseNet", "NetInterestIncome"], p, "net_interest_income")
+        if nii is None and int_inc is not None and int_exp is not None:
+            nii = round(int_inc - int_exp, 2)
+
+        non_int_inc = _extract_multi_source_val(fs, "income", ["NoninterestIncome", "ifrs-full_FeeAndCommissionIncome", "jpm_FeesAndCommissions1"], p, "non_interest_income")
+        if non_int_inc is None and rev is not None and nii is not None:
+            non_int_inc = round(rev - nii, 2)
+
+        non_int_exp = _extract_multi_source_val(fs, "income", [
+            "NoninterestExpense", "GeneralAndAdministrativeExpense", "SellingExpense", "nu_CustomerSupportAndOperations"
+        ], p, ["operating_expenses", "non_interest_expense"])
+        if non_int_exp is None and rev is not None and credit_loss is not None and ebt is not None:
+            non_int_exp = round(rev - credit_loss - ebt, 2)
+        if non_int_exp is not None:
+            non_int_exp = abs(non_int_exp)
+
+        prem_earned = _extract_multi_source_val(fs, "income", ["PremiumsEarnedNet", "PremiumsEarnedNetPropertyAndCasualty"], p, "net_premiums_earned")
+        net_inv_inc = _extract_multi_source_val(fs, "income", ["NetInvestmentIncome", "InvestmentIncomeNet", "InterestAndDividendIncomeOperating"], p, "net_investment_income")
+        inv_gains = _extract_multi_source_val(fs, "income", ["DebtAndEquitySecuritiesGainLoss", "RealizedInvestmentGainsLosses", "GainLossOnInvestments"], p)
+        fees_other = _extract_multi_source_val(fs, "income", ["pgr_FeesAndOtherRevenues", "pgr_NonInsuranceServiceRevenues"], p)
+        losses_lae = _extract_multi_source_val(fs, "income", [
+            "PolicyholderBenefitsAndClaimsIncurredNet", "LiabilityForUnpaidClaimsAndClaimsAdjustmentExpenseIncurredClaims1", "IncurredClaimsPropertyCasualtyAndLiability"
+        ], p, ["losses_and_loss_expenses", "losses_and_lae"])
+        if losses_lae is not None:
+            losses_lae = abs(losses_lae)
+
+        dac_amort = _extract_multi_source_val(fs, "income", ["DeferredPolicyAcquisitionCostAmortizationExpense"], p)
+        if dac_amort is not None:
+            dac_amort = abs(dac_amort)
+
+        other_uw_exp = _extract_multi_source_val(fs, "income", ["OtherUnderwritingExpense", "pgr_NonInsuranceServiceExpenses"], p, "other_underwriting_expenses")
+        if other_uw_exp is not None:
+            other_uw_exp = abs(other_uw_exp)
+
+        tot_ben_exp = _extract_multi_source_val(fs, "income", ["BenefitsLossesAndExpenses"], p, "operating_expenses")
+        if tot_ben_exp is None and losses_lae is not None:
+            tot_ben_exp = round(losses_lae + (dac_amort or 0.0) + (other_uw_exp or 0.0), 2)
+        if tot_ben_exp is not None:
+            tot_ben_exp = abs(tot_ben_exp)
+
+        rental_rev = _extract_multi_source_val(fs, "income", ["LeaseIncome", "OperatingLeasesIncomeStatementLeaseRevenue", "RealEstateRevenueNet"], p, "revenue")
+        tenant_reimb = _extract_multi_source_val(fs, "income", ["TenantReimbursements", "OtherRealEstateRevenue", "OtherIncome"], p)
+        prop_exp = _extract_multi_source_val(fs, "income", ["DirectCostsOfLeasedAndRentedPropertyOrEquipment", "o_DirectCostsOfLeasedAndRentedPropertyOrEquipmentIncludingReimbursableExpense"], p, ["property_operating_expenses", "cost_of_goods_sold"])
+        if prop_exp is not None:
+            prop_exp = abs(prop_exp)
+
+        noi = _extract_multi_source_val(fs, "income", [], p, ["noi", "gross_profit"])
+        if noi is None and rev is not None and prop_exp is not None:
+            noi = round(rev - prop_exp, 2)
+
+        reit_da = _extract_multi_source_val(fs, "income", ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization"], p, "depreciation_and_amortization")
+        if reit_da is not None:
+            reit_da = abs(reit_da)
+
+        reit_ga = _extract_multi_source_val(fs, "income", ["GeneralAndAdministrativeExpense", "SellingGeneralAndAdministrativeExpense"], p, "ga_expense")
+        if reit_ga is not None:
+            reit_ga = abs(reit_ga)
+
+        reit_imp = _extract_multi_source_val(fs, "income", ["ImpairmentOfRealEstate", "AssetImpairmentCharges"], p)
+        if reit_imp is not None:
+            reit_imp = abs(reit_imp)
+
+        gain_sale = _extract_multi_source_val(fs, "income", ["GainLossOnSaleOfProperties", "o_GainOnSaleOfPropertiesContinuingOperations"], p)
+
+        res["revenue"][p] = rev
+        res["cogs"][p] = cogs
+        res["gross_profit"][p] = gp
+        res["rd_expense"][p] = rd
+        res["sga_expense"][p] = sga
+        res["credit_loss_provision"][p] = credit_loss
+        res["other_operating_expense"][p] = other_opex
+        res["total_operating_expenses"][p] = tot_opex
+        res["operating_income"][p] = ebit
+        res["interest_income"][p] = int_inc
+        res["interest_expense"][p] = int_exp
+        res["other_non_operating"][p] = other_non_op
+        res["total_non_operating"][p] = tot_non_op
+        res["ebt"][p] = ebt
+        res["income_tax"][p] = tax
+        res["net_income"][p] = ni
+        res["minority_interest_pnl"][p] = min_int_pnl
+        res["preferred_dividends"][p] = pref_div
+        res["net_income_common"][p] = ni_comm
+        res["eps_basic"][p] = eps_b
+        res["eps_diluted"][p] = eps_d
+        res["shares_basic"][p] = sh_b
+        res["shares_diluted"][p] = sh_d
+        res["dps"][p] = dps_val
+        res["net_interest_income"][p] = nii
+        res["non_interest_income"][p] = non_int_inc
+        res["non_interest_expense"][p] = non_int_exp
+        res["net_premiums_earned"][p] = prem_earned
+        res["net_investment_income"][p] = net_inv_inc
+        res["investment_gains_losses"][p] = inv_gains
+        res["fees_and_other_revenues"][p] = fees_other
+        res["losses_and_lae"][p] = losses_lae
+        res["dac_amortization"][p] = dac_amort
+        res["other_underwriting_expenses"][p] = other_uw_exp
+        res["total_benefits_and_expenses"][p] = tot_ben_exp
+        res["rental_revenue"][p] = rental_rev
+        res["tenant_reimbursements_other"][p] = tenant_reimb
+        res["property_operating_expenses"][p] = prop_exp
+        res["noi"][p] = noi
+        res["reit_da"][p] = reit_da
+        res["reit_ga"][p] = reit_ga
+        res["reit_impairment"][p] = reit_imp
+        res["gain_on_sale_properties"][p] = gain_sale
+
+    return res
+
+
+def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STANDARD_CORPORATE"):
+    """
+    Función canónica y unificada (SSOT) para resolver el Estado de Flujos de Caja en 4 secciones
+    según Fiscal.ai, integrando capital allocation auditado y respetando estrictamente la Regla 6 (Cero Plugs Sintéticos).
+    """
+    if capital_flows is None:
+        capital_flows = resolve_canonical_capital_flows(fs, periods)
+    canonical = fs.get("canonical_summary", {}) if isinstance(fs, dict) else {}
+
+    res = {
+        "net_income": {}, "da": {}, "sbc": {}, "deferred_taxes": {}, "other_noncash": {},
+        "wc_ar": {}, "wc_inv": {}, "wc_ap": {}, "wc_other": {}, "cfo": {},
+        "capex": {}, "acquisitions_ma": {}, "purchases_investments": {},
+        "sales_maturities_investments": {}, "other_investing": {}, "cfi": {},
+        "debt_issued": {}, "debt_repaid": {}, "net_debt_issued": {},
+        "stock_issued": {}, "share_repurchases_open_market": {}, "share_repurchases_sbc_tax": {},
+        "dividends_paid": {}, "other_financing": {}, "cff": {},
+        "fx_effect": {}, "net_change_in_cash": {}, "ending_cash": {}, "fcf": {}
+    }
+
+    for p in periods:
+        ni = _extract_multi_source_val(fs, "cashflow", [
+            "NetIncomeLoss", "ProfitLoss", "ProfitLossFromContinuingOperations"
+        ], p, "net_income")
+
+        da = _extract_multi_source_val(fs, "cashflow", [
+            "DepreciationDepletionAndAmortization", "DepreciationAmortizationAndAccretionNet", "Depreciation",
+            "ifrs-full_AdjustmentsForDepreciationAndAmortisationExpense", "DepreciationAndAmortization"
+        ], p, "depreciation_and_amortization")
+        if da is not None:
+            da = abs(da)
+
+        sbc = _extract_multi_source_val(fs, "cashflow", [
+            "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense", "AdjustmentsForSharebasedPayments",
+            "ExpenseFromSharebasedPaymentTransactionsWithEmployees"
+        ], p, "stock_based_compensation")
+        if sbc is not None:
+            sbc = abs(sbc)
+
+        def_taxes = _extract_multi_source_val(fs, "cashflow", [
+            "DeferredIncomeTaxExpenseBenefit", "DeferredIncomeTaxesAndTaxCredits", "ifrs-full_AdjustmentsForDeferredTaxExpense"
+        ], p)
+
+        other_nc = _extract_multi_source_val(fs, "cashflow", [
+            "OtherNoncashIncomeExpense", "ProvisionForLoanLeaseAndOtherLosses", "ProvisionForDoubtfulAccounts",
+            "GainLossOnInvestments", "AdjustmentsNoncashItemsToReconcileNetIncomeLossToCashProvidedByUsedInOperatingActivities",
+            "CreditLossAllowanceExpenses1", "UnrealizedGainLossOnInvestments", "GainsLossesOnExtinguishmentOfDebt"
+        ], p)
+
+        wc_ar = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInAccountsReceivable", "IncreaseDecreaseInOtherReceivables",
+            "meli_IncreaseDecreaseInPrincipalLoansReceivableNet", "TradeAndOtherReceivablesNetCurrent"
+        ], p)
+
+        wc_inv = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInInventories"
+        ], p)
+
+        wc_ap = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInAccountsPayable", "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities"
+        ], p)
+
+        wc_other = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInContractWithCustomerLiability", "IncreaseDecreaseInOtherOperatingAssets",
+            "IncreaseDecreaseInOtherOperatingLiabilities", "IncreaseDecreaseInAccruedLiabilities",
+            "meli_IncreaseDecreaseInFundsPayableToCustomers", "IncreaseDecreaseInOperatingCapital"
+        ], p)
+
+        cfo = _extract_multi_source_val(fs, "cashflow", [
+            "NetCashProvidedByUsedInOperatingActivities", "CashFlowsFromUsedInOperatingActivities"
+        ], p, "cash_from_operations")
+
+        can_capex = canonical.get("capital_expenditures", {}).get(p)
+        if can_capex is not None:
+            capex = abs(float(can_capex))
+        else:
+            raw_cx = _extract_multi_source_val(fs, "cashflow", [
+                "PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets",
+                "PaymentsForPropertyPlantAndEquipment", "ifrs-full_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"
+            ], p)
+            capex = abs(raw_cx) if raw_cx is not None else None
+
+        acq_ma = capital_flows["acquisitions_ma"].get(p)
+        if acq_ma is not None:
+            acq_ma = abs(acq_ma)
+
+        purch_inv = _extract_multi_source_val(fs, "cashflow", [
+            "PaymentsToAcquireAvailableForSaleSecuritiesDebt", "PaymentsToAcquireMarketableSecurities",
+            "PaymentsToAcquireInvestments", "PaymentsToAcquireOtherInvestments"
+        ], p)
+        if purch_inv is not None:
+            purch_inv = abs(purch_inv)
+
+        p1 = _extract_multi_source_val(fs, "cashflow", [
+            "ProceedsFromSaleOfAvailableForSaleSecuritiesDebt", "ProceedsFromSaleOfMarketableSecurities"
+        ], p)
+        p2 = _extract_multi_source_val(fs, "cashflow", [
+            "ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities", "ProceedsFromMaturityOfMarketableSecurities"
+        ], p)
+        p3 = _extract_multi_source_val(fs, "cashflow", [
+            "ProceedsFromSaleAndMaturityOfMarketableSecurities", "ProceedsFromSaleOfAvailableForSaleSecurities"
+        ], p)
+        sales_inv = None
+        if p1 is not None or p2 is not None or p3 is not None:
+            sales_inv = round((p1 or 0.0) + (p2 or 0.0) + (p3 or 0.0), 2)
+
+        other_inv = _extract_multi_source_val(fs, "cashflow", [
+            "PaymentsForProceedsFromOtherInvestingActivities", "ProceedsFromSaleOfRealEstate", "PaymentsToAcquireRealEstate"
+        ], p)
+
+        cfi = _extract_multi_source_val(fs, "cashflow", [
+            "NetCashProvidedByUsedInInvestingActivities", "CashFlowsFromUsedInInvestingActivities"
+        ], p, "cash_from_investing")
+
+        di = capital_flows["debt_issuances"].get(p)
+        dr = capital_flows["debt_repayments"].get(p)
+        net_debt = capital_flows["net_debt_change"].get(p)
+        cp = _extract_multi_source_val(fs, "cashflow", ["ProceedsFromRepaymentsOfCommercialPaper"], p)
+        if cp is not None and net_debt is not None:
+            net_debt = round(net_debt + cp, 2)
+
+        stk_iss = capital_flows["stock_plans_proceeds"].get(p) or _extract_multi_source_val(fs, "cashflow", [
+            "ProceedsFromIssuanceOfCommonStock", "ProceedsFromIssuanceOfShares"
+        ], p)
+
+        rep_om = capital_flows["share_repurchases_open_market"].get(p)
+        rep_tax = capital_flows["share_repurchases_sbc_tax"].get(p)
+        div_paid = capital_flows["dividends_paid"].get(p)
+
+        other_fin = _extract_multi_source_val(fs, "cashflow", [
+            "ProceedsFromPaymentsForOtherFinancingActivities", "IncreaseDecreaseInDeposits",
+            "PaymentsForProceedsFromOtherFinancingActivities"
+        ], p)
+
+        cff = _extract_multi_source_val(fs, "cashflow", [
+            "NetCashProvidedByUsedInFinancingActivities", "CashFlowsFromUsedInFinancingActivities"
+        ], p, "cash_from_financing")
+
+        fx = _extract_multi_source_val(fs, "cashflow", [
+            "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+            "EffectOfExchangeRateOnCashAndCashEquivalents", "nu_ForeignExchangeRateChangesOnCashAndCashEquivalents",
+            "ifrs-full_EffectOfExchangeRateChangesOnCashAndCashEquivalents"
+        ], p)
+
+        net_chg_cash = _extract_multi_source_val(fs, "cashflow", [
+            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+            "CashAndCashEquivalentsPeriodIncreaseDecrease", "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents"
+        ], p)
+        if net_chg_cash is None and cfo is not None and cfi is not None and cff is not None:
+            net_chg_cash = round(cfo + cfi + cff + (fx or 0.0), 2)
+
+        end_cash = _extract_multi_source_val(fs, "cashflow", [
+            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "CashAndCashEquivalentsAtCarryingValue",
+            "ifrs-full_CashAndCashEquivalents"
+        ], p)
+
+        can_fcf = canonical.get("free_cash_flow", {}).get(p)
+        if can_fcf is not None and archetype != "FINANCIAL_BANKING":
+            fcf = float(can_fcf)
+        elif archetype != "FINANCIAL_BANKING" and cfo is not None and capex is not None:
+            fcf = round(cfo - capex, 2)
+        else:
+            fcf = None
+
+        res["net_income"][p] = ni
+        res["da"][p] = da
+        res["sbc"][p] = sbc
+        res["deferred_taxes"][p] = def_taxes
+        res["other_noncash"][p] = other_nc
+        res["wc_ar"][p] = wc_ar
+        res["wc_inv"][p] = wc_inv
+        res["wc_ap"][p] = wc_ap
+        res["wc_other"][p] = wc_other
+        res["cfo"][p] = cfo
+        res["capex"][p] = capex
+        res["acquisitions_ma"][p] = acq_ma
+        res["purchases_investments"][p] = purch_inv
+        res["sales_maturities_investments"][p] = sales_inv
+        res["other_investing"][p] = other_inv
+        res["cfi"][p] = cfi
+        res["debt_issued"][p] = di
+        res["debt_repaid"][p] = dr
+        res["net_debt_issued"][p] = net_debt
+        res["stock_issued"][p] = stk_iss
+        res["share_repurchases_open_market"][p] = rep_om
+        res["share_repurchases_sbc_tax"][p] = rep_tax
+        res["dividends_paid"][p] = div_paid
+        res["other_financing"][p] = other_fin
+        res["cff"][p] = cff
+        res["fx_effect"][p] = fx
+        res["net_change_in_cash"][p] = net_chg_cash
+        res["ending_cash"][p] = end_cash
+        res["fcf"][p] = fcf
+
     return res
 
 
@@ -827,7 +1488,7 @@ def company_detail(request, ticker):
     company_name = scores.get("company_name", ticker)
     cik = scores.get("cik", "N/A")
     fys = fs.get("fiscal_years", [])[:10]
-    statements_fys = [p for p in fys[:11]]
+    statements_fys = [p for p in fs.get("fiscal_years", [])[:11]]
     latest_p = statements_fys[0] if statements_fys else "LTM"
     canonical = fs.get("canonical_summary", {})
     key_ratios = fs.get("key_ratios", {})
@@ -856,6 +1517,10 @@ def company_detail(request, ticker):
     is_reit = (archetype == "REAL_ESTATE_REIT")
     is_insurance = (archetype == "INSURANCE")
     is_financial = bool(fs.get("is_financial") or scores.get("is_financial_institution") or is_banking or is_insurance)
+
+    pnl_data = resolve_canonical_income_statement(fs, statements_fys, archetype=archetype)
+    cap_flows = resolve_canonical_capital_flows(fs, statements_fys)
+    cf_data = resolve_canonical_cash_flow(fs, statements_fys, capital_flows=cap_flows, archetype=archetype)
 
     # Ingesta de KPIs Enriquecidos de Presentaciones (presentation_reconciliation.json)
     pr_file = ticker_dir / "presentation_reconciliation.json"
@@ -2376,273 +3041,365 @@ def company_detail(request, ticker):
                     {"label": "POSICIÓN FINANCIERA NETA (DEUDA NETA)", "orig_tooltip": "Net Financial Position ($M)", "clarification": "Deuda Total − Liquidez Inmediata Total", "operator": "[⚡]", "row_type": "net_debt", "indent": False, "is_bold": True, "data": {p: _to_m(bs_data.get("net_financial_position", {}).get(p)) for p in target_fys}, "pct_mode": "assets"},
                     {"label": "FONDO DE MANIOBRA (NET WORKING CAPITAL)", "orig_tooltip": "Net Working Capital ($M)", "clarification": "Activo Corriente − Pasivo Corriente", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": {p: _to_m(bs_data.get("net_working_capital", {}).get(p)) for p in target_fys}, "pct_mode": "assets"},
                 ])
+
+            memo.extend([
+                {"label": "VALOR CONTABLE POR ACCIÓN (BVPS $)", "orig_tooltip": "Book Value Per Share ($/acción)", "clarification": "Patrimonio Neto / Acciones Diluidas", "operator": "[⚡]", "row_type": "eps", "indent": False, "is_bold": True, "data": {p: bs_data.get("book_value_per_share", {}).get(p) for p in target_fys}, "pct_mode": None},
+                {"label": "VALOR CONTABLE TANGIBLE POR ACCIÓN (TBVPS $)", "orig_tooltip": "Tangible Book Value Per Share ($/acción)", "clarification": "(Patrimonio Neto − Fondo de Comercio e Intangibles) / Acciones Diluidas", "operator": "[⚡]", "row_type": "eps", "indent": True, "is_bold": False, "data": {p: bs_data.get("tangible_book_value_per_share", {}).get(p) for p in target_fys}, "pct_mode": None},
+            ])
         return memo
 
-    # Diccionarios auxiliares para Vista Estandarizada completa (Cero celdas '-' injustificadas)
-    rd_dict_std = {}
-    sga_dict_std = {}
-    non_op_dict_std = {}
-    taxes_dict = {}
-    ebt_dict_std = {}
-
-    for p in statements_fys:
-        # I+D
-        rd_val = canonical.get("rd_expense", {}).get(p)
-        if rd_val is None:
-            rd_val = _num(inc_det, "ResearchAndDevelopmentExpense", p) or _num(inc_det, "TechnologyAndContentExpense", p) or _num(inc_det, "TechnologyAndDevelopmentExpense", p) or _num(inc_det, "ResearchAndDevelopmentExpenseSoftware", p)
-        rd_dict_std[p] = _to_m(rd_val) if rd_val is not None else None
-
-        # SG&A
-        sga_val = canonical.get("sga_expense", {}).get(p)
-        if sga_val is None:
-            sm_v = canonical.get("sm_expense", {}).get(p) or _num(inc_det, "SellingAndMarketingExpense", p) or _num(inc_det, "SellingExpense", p)
-            ga_v = canonical.get("ga_expense", {}).get(p) or _num(inc_det, "GeneralAndAdministrativeExpense", p) or _num(inc_det, "AdministrativeExpense", p)
-            if sm_v is not None or ga_v is not None:
-                sga_val = (sm_v or 0.0) + (ga_v or 0.0)
-            else:
-                sga_val = _num(inc_det, "SellingGeneralAndAdministrativeExpense", p) or _num(inc_det, "SellingGeneralAndAdministrative", p)
-        sga_dict_std[p] = _to_m(sga_val) if sga_val is not None else None
-
-        # Impuestos
-        tax_raw = _num(inc_det, "IncomeTaxExpenseBenefit", p) or _num(inc_det, "IncomeTaxExpenseContinuingOperations", p) or _num(inc_det, "CurrentIncomeTaxExpenseBenefit", p)
-        if tax_raw is None:
-            c_tax = _num(inc_det, "CurrentTaxExpenseIncome", p)
-            d_tax = _num(inc_det, "DeferredTaxExpenseIncome", p)
-            if c_tax is not None or d_tax is not None:
-                tax_raw = (c_tax or 0.0) + (d_tax or 0.0)
-        taxes_dict[p] = _to_m(tax_raw) if tax_raw is not None else None
-
-        # EBT
-        ebt_raw = _num(inc_det, "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest", p) or _num(inc_det, "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments", p) or _num(inc_det, "ProfitLossBeforeTax", p) or _num(inc_det, "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic", p)
-        ebit_v = _to_m(canonical.get("operating_income", {}).get(p))
-        ni_v = _to_m(canonical.get("net_income", {}).get(p))
-        tax_v = taxes_dict.get(p)
-        if ebt_raw is not None:
-            ebt_dict_std[p] = _to_m(ebt_raw)
-        elif ni_v is not None and tax_v is not None:
-            ebt_dict_std[p] = round(ni_v + tax_v, 1)
-        elif ni_v is not None:
-            ebt_dict_std[p] = ni_v
-        else:
-            ebt_dict_std[p] = ebit_v
-
-        # Otros Ingresos / Gastos No Operativos
-        non_op_raw = _num(inc_det, "NonoperatingIncomeExpense", p) or _num(inc_det, "OtherNonoperatingIncomeExpense", p) or _num(inc_det, "us-gaap_NonoperatingIncomeExpense", p) or _num(inc_det, "us-gaap_OtherNonoperatingIncomeExpense", p)
-        if non_op_raw is not None:
-            non_op_dict_std[p] = _to_m(non_op_raw)
-        else:
-            int_exp_v = _to_m(canonical.get("interest_expense", {}).get(p))
-            if ebt_dict_std.get(p) is not None and ebit_v is not None:
-                non_op_dict_std[p] = round(ebt_dict_std[p] - ebit_v + (int_exp_v or 0.0), 1)
-            else:
-                non_op_dict_std[p] = None
-
+    # Diccionarios de referencia para % vertical As-Reported y EBT
+    ebt_dict_std = {p: _to_m(pnl_data["ebt"].get(p)) for p in statements_fys}
     ebt_dict_asrep = {p: ebt_dict_std.get(p) for p in as_rep_fys}
     bs_tot_assets_std = {p: _to_m(bs_data.get("total_assets", {}).get(p)) for p in statements_fys}
     bs_tot_assets_asrep = {p: bs_tot_assets_std.get(p) for p in as_rep_fys}
 
+    def _should_include_row(row_def, data_dict):
+        # row_def: (label, key, operator, row_type, indent, is_bold, negate_val, always_show, pct_mode, tooltip)
+        if row_def[7]:  # always_show
+            return True
+        for p in statements_fys:
+            v = data_dict.get(p)
+            if v is not None:
+                try:
+                    if abs(float(v)) > 1e-6:
+                        return True
+                except (ValueError, TypeError):
+                    pass
+        return False
+
+    def _build_standardized_section(sections_def, source_data, default_pct_mode=None):
+        out_rows = []
+        for sec_title, items in sections_def:
+            sec_visible_items = []
+            for item in items:
+                lbl, k, op, r_type, ind, bold, neg, alw, p_mode, tip = item
+                is_unit = r_type in ("shares", "eps", "dps")
+                if is_unit:
+                    val_dict = {p: source_data.get(k, {}).get(p) for p in statements_fys}
+                else:
+                    val_dict = {p: _to_m(source_data.get(k, {}).get(p)) for p in statements_fys}
+
+                if _should_include_row(item, val_dict):
+                    sec_visible_items.append({
+                        "label": lbl,
+                        "orig_tooltip": tip or f"Estándar Canónico: {k}",
+                        "clarification": None,
+                        "operator": op,
+                        "row_type": r_type,
+                        "indent": ind,
+                        "is_bold": bold,
+                        "negate_val": neg,
+                        "data": val_dict,
+                        "pct_mode": p_mode or default_pct_mode
+                    })
+            if sec_visible_items:
+                if sec_title:
+                    out_rows.append({
+                        "label": sec_title,
+                        "orig_tooltip": f"Sección Canónica: {sec_title}",
+                        "clarification": None,
+                        "operator": "",
+                        "row_type": "section_header",
+                        "indent": False,
+                        "is_bold": True,
+                        "negate_val": False,
+                        "data": {p: None for p in statements_fys},
+                        "pct_mode": None
+                    })
+                out_rows.extend(sec_visible_items)
+        return out_rows
+
     # =============================================================
     # 1.A. CONSTRUCCIÓN DE VISTA ESTANDARIZADA (10Y + LTM)
     # =============================================================
-    std_inc_rows = []
+    # 1. ESTADO DE RESULTADOS (INCOME STATEMENT)
     if archetype == "FINANCIAL_BANKING":
-        std_inc_defs = [
-            ("Ingresos por Intereses", "interest_income", False, "rev"),
-            ("Gastos por Intereses", "interest_expense", False, "rev"),
-            ("Margen Neto de Intereses (NII)", "net_interest_income", True, "rev"),
-            ("Ingresos por Comisiones (Non-Interest Income)", "non_interest_income", False, "rev"),
-            ("Ingresos Totales Netos (NII + Fees)", "revenue", True, "rev"),
-            ("Provisión para Pérdidas Crediticias", "credit_loss_provisions", False, "rev"),
-            ("Gastos No Financieros / Operativos", "operating_expenses", False, "rev"),
-            ("Beneficio Operativo (EBIT)", "operating_income", True, "rev"),
-            ("Beneficio Antes de Impuestos (EBT)", "ebt", True, "rev"),
-            ("Impuesto sobre Beneficios (Income Tax)", "income_tax_expense", False, "rev"),
-            ("Beneficio Neto Consolidado (Net Income)", "net_income", True, "rev"),
-            ("Acciones Diluidas en Circulación", "shares_diluted_adjusted", False, None),
-            ("Beneficio por Acción Diluido (EPS)", "eps_diluted_adjusted", True, None),
+        pnl_sections = [
+            ("MARGEN DE INTERESES E INGRESOS BANCARIOS", [
+                ("Ingresos por Intereses (Interest Income)", "interest_income", "[+]", "item", True, False, False, True, "rev", "Interest Income"),
+                ("Gastos por Intereses (Interest Expense)", "interest_expense", "[-]", "item", True, False, True, True, "rev", "Interest Expense"),
+                ("Margen Neto de Intereses (Net Interest Income — NII)", "net_interest_income", "[=]", "subtotal", False, True, False, True, "rev", "Net Interest Income"),
+                ("Ingresos por Comisiones y Servicios (Non-Interest Income)", "non_interest_income", "[+]", "item", True, False, False, True, "rev", "Non-Interest Income"),
+                ("Ingresos Totales Netos de Explotación (Total Net Revenue)", "revenue", "[=]", "subtotal", False, True, False, True, "rev", "Total Net Revenue"),
+            ]),
+            ("PROVISIONES CREDITICIAS, GASTOS OPERATIVOS Y BENEFICIO NETO", [
+                ("Provisión para Pérdidas Crediticias (Provision for Credit Losses)", "credit_loss_provision", "[-]", "item", True, False, True, True, "rev", "Provision for Credit Losses"),
+                ("Gastos Operativos No Financieros (Non-Interest Expense)", "non_interest_expense", "[-]", "item", True, False, True, True, "rev", "Non-Interest Expense"),
+                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+                ("Beneficio Antes de Impuestos (Pre-Tax Income / EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
+                ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
+                ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
+                ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
+                ("Beneficio Neto Atribuible a Accionistas Ordinarios", "net_income_common", "[=]", "subtotal", False, True, False, False, "rev", "Net Income Available to Common"),
+            ]),
+            ("MÉTRICAS POR ACCIÓN Y ACCIONES EN CIRCULACIÓN", [
+                ("BPA Básico (Basic EPS)", "eps_basic", "", "eps", False, False, False, True, None, "Basic EPS"),
+                ("BPA Diluido Normalizado (Diluted EPS)", "eps_diluted", "", "eps", False, True, False, True, None, "Diluted EPS"),
+                ("Acciones Básicas Promedio Ponderado (M)", "shares_basic", "", "shares", True, False, False, True, None, "Weighted Average Shares Basic"),
+                ("Acciones Diluidas Promedio Ponderado (M)", "shares_diluted", "", "shares", True, True, False, True, None, "Weighted Average Shares Diluted"),
+                ("Dividendos por Acción (DPS)", "dps", "", "dps", True, False, False, False, None, "Dividends Per Share"),
+            ])
         ]
     elif archetype == "INSURANCE":
-        std_inc_defs = [
-            ("Primas Devengadas Netas", "net_premiums_earned", False, "rev"),
-            ("Ingresos de Inversión", "net_investment_income", False, "rev"),
-            ("Ingresos Totales de Seguros", "revenue", True, "rev"),
-            ("Siniestros y Gastos de Liquidación", "losses_and_loss_expenses", False, "rev"),
-            ("Costes de Adquisición", "acquisition_costs", False, "rev"),
-            ("Otros Gastos de Suscripción", "other_underwriting_expenses", False, "rev"),
-            ("Gastos Operativos Totales (OpEx)", "operating_expenses", True, "rev"),
-            ("Beneficio Operativo de Seguros (EBIT)", "operating_income", True, "rev"),
-            ("Gastos por Intereses", "interest_expense", False, "rev"),
-            ("Beneficio Antes de Impuestos (EBT)", "ebt", True, "rev"),
-            ("Impuesto sobre Beneficios (Income Tax)", "income_tax_expense", False, "rev"),
-            ("Beneficio Neto Consolidado (Net Income)", "net_income", True, "rev"),
-            ("Acciones Diluidas en Circulación", "shares_diluted_adjusted", False, None),
-            ("Beneficio por Acción Diluido (EPS)", "eps_diluted_adjusted", True, None),
+        pnl_sections = [
+            ("INGRESOS DE SUSCRIPCIÓN E INVERSIONES", [
+                ("Primas Netas Devengadas (Net Premiums Earned)", "net_premiums_earned", "[+]", "item", True, False, False, True, "rev", "Net Premiums Earned"),
+                ("Ingresos Netos por Inversiones (Net Investment Income)", "net_investment_income", "[+]", "item", True, False, False, True, "rev", "Net Investment Income"),
+                ("Ganancias / (Pérdidas) Realizadas y No Realizadas en Cartera", "investment_gains_losses", "[±]", "item", True, False, False, False, "rev", "Investment Gains / Losses"),
+                ("Comisiones y Otros Ingresos de Servicios", "fees_and_other_revenues", "[+]", "item", True, False, False, False, "rev", "Service and Fee Revenues"),
+                ("Ingresos Totales de Seguros (Total Revenues)", "revenue", "[=]", "subtotal", False, True, False, True, "rev", "Total Revenues"),
+            ]),
+            ("SINIESTRALIDAD, GASTOS DE SUSCRIPCIÓN Y BENEFICIO NETO", [
+                ("Siniestros y Gastos de Liquidación (Losses & LAE)", "losses_and_lae", "[-]", "item", True, False, True, True, "rev", "Losses and Loss Adjustment Expenses"),
+                ("Amortización de Costes de Adquisición de Pólizas (DAC)", "dac_amortization", "[-]", "item", True, False, True, False, "rev", "Policy Acquisition Cost Amortization"),
+                ("Otros Gastos de Suscripción y Operativos", "other_underwriting_expenses", "[-]", "item", True, False, True, False, "rev", "Other Underwriting Expenses"),
+                ("Total Siniestros y Gastos Operativos (Total Benefits & Expenses)", "total_benefits_and_expenses", "[=]", "subtotal", False, True, True, True, "rev", "Total Benefits and Expenses"),
+                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+                ("Gastos por Intereses Financieros", "interest_expense", "[-]", "item", True, False, True, False, "rev", "Interest Expense"),
+                ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
+                ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
+                ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
+                ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
+                ("Beneficio Neto Atribuible a Accionistas Ordinarios", "net_income_common", "[=]", "subtotal", False, True, False, False, "rev", "Net Income Available to Common"),
+            ]),
+            ("MÉTRICAS POR ACCIÓN Y ACCIONES EN CIRCULACIÓN", [
+                ("BPA Básico (Basic EPS)", "eps_basic", "", "eps", False, False, False, True, None, "Basic EPS"),
+                ("BPA Diluido Normalizado (Diluted EPS)", "eps_diluted", "", "eps", False, True, False, True, None, "Diluted EPS"),
+                ("Acciones Básicas Promedio Ponderado (M)", "shares_basic", "", "shares", True, False, False, True, None, "Weighted Average Shares Basic"),
+                ("Acciones Diluidas Promedio Ponderado (M)", "shares_diluted", "", "shares", True, True, False, True, None, "Weighted Average Shares Diluted"),
+                ("Dividendos por Acción (DPS)", "dps", "", "dps", True, False, False, False, None, "Dividends Per Share"),
+            ])
         ]
     elif archetype == "REAL_ESTATE_REIT":
-        std_inc_defs = [
-            ("Ingresos por Alquileres y Rentas (Revenue)", "revenue", True, "rev"),
-            ("Gastos Operativos Directos de Inmuebles", "property_operating_expenses", False, "rev"),
-            ("Net Operating Income (NOI Inmobiliario)", "gross_profit", True, "rev"),
-            ("Gastos Generales, Admin. y D&A Inmobiliaria", "operating_expenses", False, "rev"),
-            ("Beneficio Operativo Inmobiliario (EBIT)", "operating_income", True, "rev"),
-            ("Gastos por Intereses", "interest_expense", False, "rev"),
-            ("Beneficio Antes de Impuestos (EBT)", "ebt", True, "rev"),
-            ("Impuesto sobre Beneficios (Income Tax)", "income_tax_expense", False, "rev"),
-            ("Beneficio Neto Consolidado", "net_income", True, "rev"),
-            ("Acciones Diluidas en Circulación", "shares_diluted_adjusted", False, None),
-            ("Beneficio por Acción Diluido (EPS)", "eps_diluted_adjusted", True, None),
+        pnl_sections = [
+            ("INGRESOS INMOBILIARIOS Y NOI", [
+                ("Ingresos por Alquileres y Arrendamientos (Rental Revenue)", "rental_revenue", "[+]", "item", True, False, False, True, "rev", "Rental Revenue"),
+                ("Reembolsos de Inquilinos y Otros Ingresos Inmobiliarios", "tenant_reimbursements_other", "[+]", "item", True, False, False, False, "rev", "Tenant Reimbursements & Other"),
+                ("Ingresos Inmobiliarios Totales (Total Revenue)", "revenue", "[=]", "subtotal", False, True, False, True, "rev", "Total Revenue"),
+                ("Gastos Operativos de Propiedades (Property Operating Expenses)", "property_operating_expenses", "[-]", "item", True, False, True, True, "rev", "Property Operating Expenses"),
+                ("Net Operating Income Inmobiliario (NOI)", "noi", "[=]", "subtotal", False, True, False, True, "rev", "Net Operating Income"),
+            ]),
+            ("GASTOS CORPORATIVOS, NO OPERATIVOS Y BENEFICIO NETO", [
+                ("Depreciación y Amortización Inmobiliaria (D&A)", "reit_da", "[-]", "item", True, False, True, True, "rev", "Depreciation and Amortization"),
+                ("Gastos Generales y Administrativos (G&A)", "reit_ga", "[-]", "item", True, False, True, True, "rev", "General & Administrative"),
+                ("Deterioro de Activos Inmobiliarios (Impairment Charges)", "reit_impairment", "[-]", "item", True, False, True, False, "rev", "Real Estate Impairment"),
+                ("Beneficio Operativo Inmobiliario (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+                ("Gastos por Intereses Financieros", "interest_expense", "[-]", "item", True, False, True, True, "rev", "Interest Expense"),
+                ("Ganancia en Venta de Propiedades Inmobiliarias", "gain_on_sale_properties", "[+]", "item", True, False, False, False, "rev", "Gain on Sale of Properties"),
+                ("Otros Ingresos / (Gastos) No Operativos y Fusiones", "other_non_operating", "[±]", "item", True, False, False, False, "rev", "Other Non-Operating"),
+                ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
+                ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
+                ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
+                ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
+                ("Beneficio Neto Atribuible a Accionistas Ordinarios", "net_income_common", "[=]", "subtotal", False, True, False, False, "rev", "Net Income Available to Common"),
+            ]),
+            ("MÉTRICAS POR ACCIÓN Y ACCIONES EN CIRCULACIÓN", [
+                ("BPA Básico (Basic EPS)", "eps_basic", "", "eps", False, False, False, True, None, "Basic EPS"),
+                ("BPA Diluido Normalizado (Diluted EPS)", "eps_diluted", "", "eps", False, True, False, True, None, "Diluted EPS"),
+                ("Acciones Básicas Promedio Ponderado (M)", "shares_basic", "", "shares", True, False, False, True, None, "Weighted Average Shares Basic"),
+                ("Acciones Diluidas Promedio Ponderado (M)", "shares_diluted", "", "shares", True, True, False, True, None, "Weighted Average Shares Diluted"),
+                ("Dividendos por Acción (DPS)", "dps", "", "dps", True, False, False, False, None, "Dividends Per Share"),
+            ])
         ]
     else:
-        std_inc_defs = [
-            ("Ingresos Netos Totales (Revenue)", "revenue", True, "rev"),
-            ("Coste de Bienes y Servicios (COGS)", "cost_of_goods_sold", False, "rev"),
-            ("Margen Bruto (Gross Profit)", "gross_profit", True, "rev"),
-            ("Gastos de Investigación y Desarrollo (R&D)", "rd_expense", False, "rev"),
-            ("Gastos de Ventas, Generales y Admin (SG&A)", "sga_expense", False, "rev"),
-            ("Gastos Operativos Totales (OpEx)", "operating_expenses", False, "rev"),
-            ("Beneficio Operativo (EBIT)", "operating_income", True, "rev"),
-            ("Gastos / (Ingresos) por Intereses Netos", "interest_expense", False, "rev"),
-            ("Otros Ingresos / (Gastos) No Operativos", "non_operating_income", False, "rev"),
-            ("Beneficio Antes de Impuestos (EBT)", "ebt", True, "rev"),
-            ("Impuesto sobre Beneficios (Income Tax)", "income_tax_expense", False, "rev"),
-            ("Beneficio Neto Consolidado (Net Income)", "net_income", True, "rev"),
-            ("Acciones Diluidas en Circulación", "shares_diluted_adjusted", False, None),
-            ("Beneficio por Acción Diluido (EPS)", "eps_diluted_adjusted", True, None),
+        pnl_sections = [
+            ("INGRESOS Y BENEFICIO BRUTO", [
+                ("Ingresos Totales (Revenue)", "revenue", "[+]", "subtotal", False, True, False, True, "rev", "Revenue"),
+                ("Coste de Ventas (COGS)", "cogs", "[-]", "item", True, False, True, True, "rev", "Cost of Goods Sold"),
+                ("Beneficio Bruto (Gross Profit)", "gross_profit", "[=]", "subtotal", False, True, False, True, "rev", "Gross Profit"),
+            ]),
+            ("GASTOS OPERATIVOS Y EBIT", [
+                ("Investigación y Desarrollo (I+D / R&D)", "rd_expense", "[-]", "item", True, False, True, False, "rev", "Research & Development"),
+                ("Ventas, Generales y Administrativos (SG&A)", "sga_expense", "[-]", "item", True, False, True, True, "rev", "Selling, General & Administrative"),
+                ("Provisión para Pérdidas Crediticias (Fintech)", "credit_loss_provision", "[-]", "item", True, False, True, False, "rev", "Provision for Credit Losses"),
+                ("Otros Gastos / (Ingresos) Operativos", "other_operating_expense", "[-]", "item", True, False, True, False, "rev", "Other Operating Expenses"),
+                ("Total Gastos Operativos (OpEx)", "total_operating_expenses", "[=]", "subtotal", False, True, True, True, "rev", "Total Operating Expenses"),
+                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+            ]),
+            ("PARTIDAS NO OPERATIVAS, IMPUESTOS Y BENEFICIO NETO", [
+                ("Ingresos por Intereses e Inversiones", "interest_income", "[+]", "item", True, False, False, False, "rev", "Interest & Investment Income"),
+                ("Gastos por Intereses Financieros", "interest_expense", "[-]", "item", True, False, True, False, "rev", "Interest Expense"),
+                ("Otros Ingresos / (Gastos) No Operativos Netos", "other_non_operating", "[±]", "item", True, False, False, False, "rev", "Other Non-Operating Income / Expense"),
+                ("Total Ingresos / (Gastos) No Operativos Netos", "total_non_operating", "[=]", "subtotal", False, True, False, True, "rev", "Total Non-Operating"),
+                ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income (EBT)"),
+                ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
+                ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
+                ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
+                ("Beneficio Neto Atribuible a Accionistas Ordinarios", "net_income_common", "[=]", "subtotal", False, True, False, False, "rev", "Net Income Available to Common"),
+            ]),
+            ("MÉTRICAS POR ACCIÓN Y ACCIONES EN CIRCULACIÓN", [
+                ("BPA Básico (Basic EPS)", "eps_basic", "", "eps", False, False, False, True, None, "Basic EPS"),
+                ("BPA Diluido Normalizado (Diluted EPS)", "eps_diluted", "", "eps", False, True, False, True, None, "Diluted EPS"),
+                ("Acciones Básicas Promedio Ponderado (M)", "shares_basic", "", "shares", True, False, False, True, None, "Weighted Average Shares Basic"),
+                ("Acciones Diluidas Promedio Ponderado (M)", "shares_diluted", "", "shares", True, True, False, True, None, "Weighted Average Shares Diluted"),
+                ("Dividendos por Acción (DPS)", "dps", "", "dps", True, False, False, False, None, "Dividends Per Share"),
+            ])
         ]
 
-    def _get_std_inc_val(key, period):
-        if key == "shares_diluted_adjusted":
-            val_sh = canonical.get("shares_diluted_adjusted", {}).get(period) or canonical.get("shares_diluted", {}).get(period)
-            return float(val_sh) if val_sh is not None else None
-        if key == "eps_diluted_adjusted":
-            val_eps = canonical.get("eps_diluted_adjusted", {}).get(period) or canonical.get("eps_diluted", {}).get(period)
-            return float(val_eps) if val_eps is not None else None
-        if key in ("research_and_development", "rd_expense"):
-            return rd_dict_std.get(period)
-        if key in ("selling_general_and_administrative", "sga_expense"):
-            return sga_dict_std.get(period)
-        if key in ("non_operating_income", "other_non_operating"):
-            return non_op_dict_std.get(period)
-        if key == "ebt":
-            return ebt_dict_std.get(period)
-        if key in ("income_tax_expense", "taxes"):
-            return taxes_dict.get(period)
-        if key in canonical and canonical[key].get(period) is not None:
-            return _to_m(canonical[key].get(period))
-        return None
-
-    for lbl, k, bold, p_mode in std_inc_defs:
-        is_sh = (k == "shares_diluted_adjusted")
-        is_e = (k == "eps_diluted_adjusted")
-        std_inc_rows.append({
-            "label": lbl,
-            "orig_tooltip": f"Estándar Canónico: {k}",
-            "clarification": None,
-            "operator": "[=]" if bold else "",
-            "row_type": "shares" if is_sh else ("eps" if is_e else ("subtotal" if bold else "item")),
-            "indent": not bold and not is_sh and not is_e,
-            "is_bold": bold,
-            "data": {p: _get_std_inc_val(k, p) for p in statements_fys},
-            "pct_mode": p_mode
-        })
-
+    std_inc_rows = _build_standardized_section(pnl_sections, pnl_data, default_pct_mode="rev")
     std_inc_rows.extend(_get_memo_rows(statements_fys, "pnl"))
     std_pnl = [_build_statement_cells(r, statements_fys, canonical, ebt_dict=ebt_dict_std) for r in std_inc_rows]
 
-    # Standardized Cash Flow
-    std_cf_rows = []
-    std_cf_defs = [
-        ("Flujo de Caja Operativo (CFO)", "cash_from_operations", True),
-        ("Inversiones en CapEx / Inmovilizado", "capital_expenditures", False),
-        ("Flujo de Caja Libre (FCF)", "free_cash_flow", True),
-        ("Flujo de Caja de Inversión (CFI)", "cash_from_investing", True),
-        ("Flujo de Caja de Financiación (CFF)", "cash_from_financing", True),
+    # 2. ESTADO DE FLUJOS DE CAJA (CASH FLOW STATEMENT)
+    cf_sections = [
+        ("ACTIVIDADES OPERATIVAS (OPERATING ACTIVITIES)", [
+            ("Beneficio Neto Consolidado (Net Income)", "net_income", "[+]", "subtotal", False, True, False, True, "ni", "Net Income"),
+            ("Depreciación y Amortización (D&A)", "da", "[+]", "item", True, False, False, True, "ni", "Depreciation & Amortization"),
+            ("Compensación Basada en Acciones (SBC)", "sbc", "[+]", "item", True, False, False, False, "ni", "Share-Based Compensation"),
+            ("Impuestos sobre Beneficios Diferidos (Deferred Taxes)", "deferred_taxes", "[±]", "item", True, False, False, False, "ni", "Deferred Income Taxes"),
+            ("Otros Ajustes Operativos No Monetarios (Other Non-Cash)", "other_noncash", "[±]", "item", True, False, False, False, "ni", "Other Non-Cash Adjustments"),
+            ("Variación en Cuentas por Cobrar (AR)", "wc_ar", "[±]", "item", True, False, False, False, "ni", "Change in Accounts Receivable"),
+            ("Variación en Inventarios", "wc_inv", "[±]", "item", True, False, False, False, "ni", "Change in Inventories"),
+            ("Variación en Cuentas por Pagar (AP)", "wc_ap", "[±]", "item", True, False, False, False, "ni", "Change in Accounts Payable"),
+            ("Variación en Otros Activos y Pasivos Operativos", "wc_other", "[±]", "item", True, False, False, False, "ni", "Change in Other Operating Working Capital"),
+            ("Flujo de Caja Operativo (CFO)", "cfo", "[=]", "result", False, True, False, True, "ni", "Cash Provided by Operating Activities"),
+        ]),
+        ("ACTIVIDADES DE INVERSIÓN (INVESTING ACTIVITIES)", [
+            ("Inversiones en Inmovilizado / CapEx", "capex", "[-]", "item", True, False, True, True, "ni", "Capital Expenditures"),
+            ("Adquisiciones Netas de Caja (M&A)", "acquisitions_ma", "[-]", "item", True, False, True, False, "ni", "Acquisitions Net of Cash"),
+            ("Compras de Inversiones y Valores Negociables", "purchases_investments", "[-]", "item", True, False, True, False, "ni", "Purchases of Investments"),
+            ("Ventas y Vencimientos de Inversiones Negociables", "sales_maturities_investments", "[+]", "item", True, False, False, False, "ni", "Sales & Maturities of Investments"),
+            ("Otros Flujos de Inversión", "other_investing", "[±]", "item", True, False, False, False, "ni", "Other Investing Activities"),
+            ("Flujo de Caja de Inversión (CFI)", "cfi", "[=]", "subtotal", False, True, False, True, "ni", "Cash Used in Investing Activities"),
+        ]),
+        ("ACTIVIDADES DE FINANCIACIÓN (FINANCING ACTIVITIES)", [
+            ("Emisión de Deuda Financiera (Debt Issued)", "debt_issued", "[+]", "item", True, False, False, False, "ni", "Issuance of Debt"),
+            ("Amortización y Reembolso de Deuda (Debt Repaid)", "debt_repaid", "[-]", "item", True, False, True, False, "ni", "Repayments of Debt"),
+            ("Emisión / (Reembolso) Neto de Deuda", "net_debt_issued", "[=]", "subtotal", False, True, False, True, "ni", "Net Debt Issuance / Repayment"),
+            ("Emisión de Acciones Ordinarias y Planes de Empleados", "stock_issued", "[+]", "item", True, False, False, False, "ni", "Issuance of Common Stock"),
+            ("Recompra de Acciones en Mercado Abierto (Buybacks)", "share_repurchases_open_market", "[-]", "item", True, False, True, False, "ni", "Repurchase of Common Stock"),
+            ("Retenciones Fiscales por Liquidación de RSU / SBC", "share_repurchases_sbc_tax", "[-]", "item", True, False, True, False, "ni", "Tax Withholding for Share Awards"),
+            ("Dividendos Pagados en Efectivo (Dividends Paid)", "dividends_paid", "[-]", "item", True, False, True, True, "ni", "Payment of Dividends"),
+            ("Otros Flujos de Financiación (y Depósitos en Banca)", "other_financing", "[±]", "item", True, False, False, False, "ni", "Other Financing Activities"),
+            ("Flujo de Caja de Financiación (CFF)", "cff", "[=]", "subtotal", False, True, False, True, "ni", "Cash Provided by / Used in Financing Activities"),
+        ]),
+        ("VARIACIÓN NETA DE EFECTIVO Y CONCILIACIÓN DE CAJA", [
+            ("Efecto del Tipo de Cambio en el Efectivo (FX Effect)", "fx_effect", "[±]", "item", True, False, False, False, "ni", "Effect of Exchange Rate on Cash"),
+            ("Variación Neta de Efectivo en el Período (Net Change in Cash)", "net_change_in_cash", "[=]", "subtotal", False, True, False, True, "ni", "Net Change in Cash & Equivalents"),
+            ("Efectivo, Equivalentes y Efectivo Restringido al Cierre", "ending_cash", "[=]", "subtotal", False, True, False, True, "ni", "Ending Cash & Equivalents"),
+            ("Flujo de Caja Libre (FCF = CFO − CapEx)", "fcf", "[=]", "result", False, True, False, (archetype != "FINANCIAL_BANKING"), "ni", "Free Cash Flow"),
+        ])
     ]
-    for lbl, k, bold in std_cf_defs:
-        std_cf_rows.append({
-            "label": lbl,
-            "orig_tooltip": f"Estándar Canónico: {k}",
-            "clarification": None,
-            "operator": "[=]" if bold else "",
-            "row_type": "subtotal" if bold else "item",
-            "indent": not bold,
-            "is_bold": bold,
-            "data": {p: _to_m(canonical.get(k, {}).get(p)) for p in statements_fys},
-            "pct_mode": "ni"
-        })
+
+    std_cf_rows = _build_standardized_section(cf_sections, cf_data, default_pct_mode="ni")
     std_cf_rows.extend(_get_memo_rows(statements_fys, "cashflow"))
     std_cashflow = [_build_statement_cells(r, statements_fys, canonical) for r in std_cf_rows]
 
-    # Standardized Balance Sheet
-    std_bs_rows = []
+    # 3. BALANCE GENERAL CONSOLIDADO (BALANCE SHEET)
     if archetype == "FINANCIAL_BANKING":
-        std_bs_defs = [
-            ("Efectivo y Fondos en Bancos Centrales", "cash", False),
-            ("Inversiones en Valores Negociables", "short_term_investments", False),
-            ("Tesorería e Inversiones Líquidas Totales", "total_liquid_cash", True),
-            ("Inversiones Financieras a Largo Plazo", "long_term_investments", False),
-            ("Inmovilizado Material Neto (PP&E)", "net_ppe", False),
-            ("Activos Totales", "total_assets", True),
-            ("Deuda Financiera a Corto Plazo", "short_term_debt", False),
-            ("Deuda Financiera a Largo Plazo", "long_term_debt", False),
-            ("Deuda Financiera Total", "total_debt", True),
-            ("Pasivos Totales", "total_liabilities", True),
-            ("Patrimonio Neto de los Accionistas", "stockholders_equity", True),
-            ("Total Pasivo y Patrimonio Neto", "total_liab_and_equity", True),
+        bs_sections = [
+            ("ACTIVOS BANCARIOS Y CARTERA CREDITICIA", [
+                ("Efectivo y Depósitos en Bancos Centrales", "cash", "[+]", "item", True, False, False, True, "assets", "Cash and Due from Banks"),
+                ("Inversiones Financieras y Valores Negociables", "short_term_investments", "[+]", "item", True, False, False, True, "assets", "Trading and Investment Securities"),
+                ("Tesorería e Inversiones Líquidas Totales", "total_liquid_cash", "[=]", "subtotal", False, True, False, True, "assets", "Total Liquid Assets"),
+                ("Cartera de Préstamos y Crédito Neta (Net Loans)", "net_loans", "[+]", "item", True, False, False, True, "assets", "Loans and Leases Net of Allowance"),
+                ("Provisión Acumulada para Pérdidas Crediticias (Allowance)", "allowance_for_loan_losses", "[-]", "item", True, False, True, False, "assets", "Allowance for Loan Losses"),
+                ("Inmovilizado Material Neto (PP&E)", "net_ppe", "[+]", "item", True, False, False, False, "assets", "Premises and Equipment Net"),
+                ("Fondo de Comercio e Intangibles Netos", "goodwill_and_intangibles", "[+]", "item", True, False, False, False, "assets", "Goodwill and Other Intangibles"),
+                ("Otros Activos Financieros y Operativos", "other_assets_sectoral", "[+]", "item", True, False, False, True, "assets", "Other Banking Assets"),
+                ("Total Activos (Total Assets)", "total_assets", "[=]", "result", False, True, False, True, "assets", "Total Assets"),
+            ]),
+            ("DEPÓSITOS Y PASIVOS BANCARIOS", [
+                ("Depósitos Totales de Clientes (Total Deposits)", "deposits", "[+]", "item", True, False, False, True, "assets", "Total Customer Deposits"),
+                ("Deuda Financiera a Corto Plazo y Repos", "short_term_debt", "[+]", "item", True, False, False, False, "assets", "Short-Term Debt and Borrowings"),
+                ("Deuda Financiera a Largo Plazo", "long_term_debt", "[+]", "item", True, False, False, False, "assets", "Long-Term Debt"),
+                ("Deuda Financiera Total", "total_debt", "[=]", "subtotal", False, True, False, True, "assets", "Total Debt"),
+                ("Otros Pasivos Financieros y Operativos", "other_liabilities_sectoral", "[+]", "item", True, False, False, True, "assets", "Other Banking Liabilities"),
+                ("Total Pasivos (Total Liabilities)", "total_liabilities", "[=]", "result", False, True, False, True, "assets", "Total Liabilities"),
+            ]),
+            ("PATRIMONIO NETO (SHAREHOLDERS' EQUITY)", [
+                ("Capital Social y Prima de Emisión (Common Stock & APIC)", "common_stock_and_apic", "[+]", "item", True, False, False, True, "assets", "Common Stock & APIC"),
+                ("Ganancias Retenidas / (Déficit Acumulado)", "retained_earnings", "[+]", "item", True, False, False, True, "assets", "Retained Earnings"),
+                ("Acciones en Tesorería, AOCI y Otros Fondos Propios", "other_equity", "[±]", "item", True, False, False, True, "assets", "Treasury Stock & AOCI"),
+                ("Intereses Minoritarios (Noncontrolling Interests)", "minority_interest", "[+]", "item", True, False, False, False, "assets", "Noncontrolling Interests"),
+                ("Total Patrimonio Neto (Stockholders' Equity)", "stockholders_equity", "[=]", "result", False, True, False, True, "assets", "Total Stockholders Equity"),
+                ("Total Pasivo y Patrimonio Neto (Total Liabilities & Equity)", "total_liab_and_equity", "[=]", "result", False, True, False, True, "assets", "Total Liabilities and Equity"),
+            ])
         ]
     elif archetype == "INSURANCE":
-        std_bs_defs = [
-            ("Efectivo y Equivalentes", "cash", False),
-            ("Inversiones a Corto Plazo", "short_term_investments", False),
-            ("Tesorería e Inversiones Líquidas Totales", "total_liquid_cash", True),
-            ("Inversiones Financieras a Largo Plazo", "long_term_investments", False),
-            ("Fondo de Comercio e Intangibles", "goodwill_and_intangibles", False),
-            ("Activos Totales", "total_assets", True),
-            ("Deuda Financiera a Corto Plazo", "short_term_debt", False),
-            ("Deuda Financiera a Largo Plazo", "long_term_debt", False),
-            ("Deuda Financiera Total", "total_debt", True),
-            ("Pasivos Totales", "total_liabilities", True),
-            ("Patrimonio Neto (Equity)", "stockholders_equity", True),
-            ("Total Pasivo y Patrimonio Neto", "total_liab_and_equity", True),
+        bs_sections = [
+            ("ACTIVOS ASEGURADORES Y CARTERA DE INVERSIONES", [
+                ("Efectivo y Equivalentes de Efectivo", "cash", "[+]", "item", True, False, False, True, "assets", "Cash and Equivalents"),
+                ("Cartera de Inversiones (Renta Fija y Variable)", "short_term_investments", "[+]", "item", True, False, False, True, "assets", "Fixed Maturities and Equity Securities"),
+                ("Tesorería e Inversiones Líquidas Totales", "total_liquid_cash", "[=]", "subtotal", False, True, False, True, "assets", "Total Cash and Invested Assets"),
+                ("Cuentas por Cobrar de Primas (Premiums Receivable)", "premiums_receivable", "[+]", "item", True, False, False, True, "assets", "Premiums Receivable"),
+                ("Costes de Adquisición de Pólizas Diferidos (DAC)", "deferred_policy_acquisition_costs", "[+]", "item", True, False, False, True, "assets", "Deferred Acquisition Costs"),
+                ("Inmovilizado Material Neto (PP&E)", "net_ppe", "[+]", "item", True, False, False, False, "assets", "Property and Equipment Net"),
+                ("Fondo de Comercio e Intangibles", "goodwill_and_intangibles", "[+]", "item", True, False, False, False, "assets", "Goodwill and Intangible Assets"),
+                ("Otros Activos Aseguradores", "other_assets_sectoral", "[+]", "item", True, False, False, True, "assets", "Other Insurance Assets"),
+                ("Total Activos (Total Assets)", "total_assets", "[=]", "result", False, True, False, True, "assets", "Total Assets"),
+            ]),
+            ("RESERVAS TÉCNICAS Y PASIVOS ASEGURADORES", [
+                ("Reservas para Siniestros y Gastos de Liquidación (Loss & LAE Reserves)", "loss_reserves", "[+]", "item", True, False, False, True, "assets", "Unpaid Losses and Loss Adjustment Expenses"),
+                ("Primas No Devengadas (Unearned Premiums)", "unearned_premiums", "[+]", "item", True, False, False, True, "assets", "Unearned Premiums"),
+                ("Deuda Financiera Total", "total_debt", "[+]", "item", True, False, False, False, "assets", "Total Debt"),
+                ("Cuentas por Pagar y Otros Pasivos Aseguradores", "other_liabilities_sectoral", "[+]", "item", True, False, False, True, "assets", "Accounts Payable and Other Liabilities"),
+                ("Total Pasivos (Total Liabilities)", "total_liabilities", "[=]", "result", False, True, False, True, "assets", "Total Liabilities"),
+            ]),
+            ("PATRIMONIO NETO (SHAREHOLDERS' EQUITY)", [
+                ("Capital Social y Prima de Emisión (Common Stock & APIC)", "common_stock_and_apic", "[+]", "item", True, False, False, True, "assets", "Common Stock & APIC"),
+                ("Ganancias Retenidas / (Déficit Acumulado)", "retained_earnings", "[+]", "item", True, False, False, True, "assets", "Retained Earnings"),
+                ("Acciones en Tesorería, AOCI y Otros Fondos Propios", "other_equity", "[±]", "item", True, False, False, True, "assets", "Treasury Stock & AOCI"),
+                ("Intereses Minoritarios (Noncontrolling Interests)", "minority_interest", "[+]", "item", True, False, False, False, "assets", "Noncontrolling Interests"),
+                ("Total Patrimonio Neto (Stockholders' Equity)", "stockholders_equity", "[=]", "result", False, True, False, True, "assets", "Total Stockholders Equity"),
+                ("Total Pasivo y Patrimonio Neto (Total Liabilities & Equity)", "total_liab_and_equity", "[=]", "result", False, True, False, True, "assets", "Total Liabilities and Equity"),
+            ])
         ]
     else:
-        std_bs_defs = [
-            ("Activos Corrientes Totales", "total_current_assets", True),
-            ("Efectivo y Equivalentes", "cash", False),
-            ("Inversiones a Corto Plazo", "short_term_investments", False),
-            ("Cuentas por Cobrar (Clientes)", "accounts_receivable", False),
-            ("Inventarios / Existencias", "inventories", False),
-            ("Otros Activos Corrientes", "other_current_assets", False),
-            ("Activos No Corrientes Totales", "total_noncurrent_assets", True),
-            ("Inmovilizado Material Neto (PP&E)", "net_ppe", False),
-            ("Activos por Derecho de Uso (Leases ROU)", "rou_asset", False),
-            ("Fondo de Comercio e Intangibles", "goodwill_and_intangibles", False),
-            ("Inversiones a Largo Plazo", "long_term_investments", False),
-            ("Activos Totales", "total_assets", True),
-            ("Pasivos Corrientes Totales", "total_current_liabilities", True),
-            ("Cuentas por Pagar (Proveedores)", "accounts_payable", False),
-            ("Gastos Acumulados y Otros Pasivos CP", "accrued_liabilities", False),
-            ("Deuda Financiera a Corto Plazo", "short_term_debt", False),
-            ("Pasivos No Corrientes Totales", "total_noncurrent_liabilities", True),
-            ("Deuda Financiera a Largo Plazo", "long_term_debt", False),
-            ("Pasivos Operativos por Arrendamiento LP", "operating_lease_liability_noncurrent", False),
-            ("Pasivos Totales", "total_liabilities", True),
-            ("Patrimonio Neto (Equity)", "stockholders_equity", True),
-            ("Total Pasivo y Patrimonio Neto", "total_liab_and_equity", True),
+        # STANDARD_CORPORATE, PLATFORM_ECOSYSTEM, REAL_ESTATE_REIT
+        ppe_title = "Propiedades Inmobiliarias Netas (Real Estate Net)" if archetype == "REAL_ESTATE_REIT" else "Inmovilizado Material Neto (PP&E Neto)"
+        bs_sections = [
+            ("ACTIVOS CORRIENTES (CURRENT ASSETS)", [
+                ("Efectivo y Equivalentes de Efectivo", "cash", "[+]", "item", True, False, False, True, "assets", "Cash and Cash Equivalents"),
+                ("Inversiones a Corto Plazo (Valores Negociables)", "short_term_investments", "[+]", "item", True, False, False, True, "assets", "Short-Term Marketable Securities"),
+                ("Efectivo e Inversiones Líquidas Totales", "total_liquid_cash", "[=]", "subtotal", False, True, False, True, "assets", "Total Liquid Cash & Investments"),
+                ("Cuentas por Cobrar Comerciales y Otras Netas", "accounts_receivable", "[+]", "item", True, False, False, True, "assets", "Accounts Receivable Net"),
+                ("Inventarios / Existencias", "inventories", "[+]", "item", True, False, False, False, "assets", "Inventories Net"),
+                ("Gastos Pagados por Anticipado y Otros Activos Corrientes", "other_current_assets", "[+]", "item", True, False, False, True, "assets", "Prepaid Expenses & Other Current Assets"),
+                ("Total Activos Corrientes", "total_current_assets", "[=]", "subtotal", False, True, False, True, "assets", "Total Current Assets"),
+            ]),
+            ("ACTIVOS NO CORRIENTES (NON-CURRENT ASSETS)", [
+                (ppe_title, "net_ppe", "[+]", "item", True, False, False, True, "assets", "Property, Plant & Equipment Net"),
+                ("Activos por Derecho de Uso en Arrendamiento (ROU Assets)", "rou_asset", "[+]", "item", True, False, False, False, "assets", "Operating Lease Right-of-Use Assets"),
+                ("Fondo de Comercio e Intangibles Netos (Goodwill & Intangibles)", "goodwill_and_intangibles", "[+]", "item", True, False, False, True, "assets", "Goodwill & Net Intangible Assets"),
+                ("Inversiones Financieras a Largo Plazo", "long_term_investments", "[+]", "item", True, False, False, False, "assets", "Long-Term Marketable Securities"),
+                ("Activos por Impuestos Diferidos", "deferred_tax_assets", "[+]", "item", True, False, False, False, "assets", "Deferred Tax Assets Noncurrent"),
+                ("Otros Activos No Corrientes", "other_noncurrent_assets", "[+]", "item", True, False, False, True, "assets", "Other Non-Current Assets"),
+                ("Total Activos No Corrientes", "total_noncurrent_assets", "[=]", "subtotal", False, True, False, True, "assets", "Total Non-Current Assets"),
+                ("Total Activos (Total Assets)", "total_assets", "[=]", "result", False, True, False, True, "assets", "Total Assets"),
+            ]),
+            ("PASIVOS CORRIENTES (CURRENT LIABILITIES)", [
+                ("Cuentas por Pagar Comerciales (Proveedores)", "accounts_payable", "[+]", "item", True, False, False, True, "assets", "Accounts Payable"),
+                ("Gastos Acumulados y Pasivos Devengados (Accrued Liabilities)", "accrued_liabilities", "[+]", "item", True, False, False, True, "assets", "Accrued Expenses & Other Current Liabilities"),
+                ("Ingresos Diferidos a Corto Plazo (Deferred Revenue)", "deferred_revenue_current", "[+]", "item", True, False, False, False, "assets", "Deferred Revenue Current"),
+                ("Deuda Financiera a Corto Plazo y Porción Corriente", "short_term_debt", "[+]", "item", True, False, False, True, "assets", "Commercial Paper & Current Portion of LT Debt"),
+                ("Otros Pasivos Corrientes (incl. Arrendamientos CP / Fondos Clientes)", "other_current_liabilities", "[+]", "item", True, False, False, False, "assets", "Other Current Liabilities"),
+                ("Total Pasivos Corrientes", "total_current_liabilities", "[=]", "subtotal", False, True, False, True, "assets", "Total Current Liabilities"),
+            ]),
+            ("PASIVOS NO CORRIENTES (NON-CURRENT LIABILITIES)", [
+                ("Deuda Financiera a Largo Plazo", "long_term_debt", "[+]", "item", True, False, False, True, "assets", "Long-Term Debt Noncurrent"),
+                ("Pasivos por Arrendamiento Operativo a Largo Plazo", "operating_lease_liability_noncurrent", "[+]", "item", True, False, False, False, "assets", "Operating Lease Liabilities Noncurrent"),
+                ("Pasivos por Impuestos Diferidos No Corrientes", "deferred_tax_liabilities_noncurrent", "[+]", "item", True, False, False, False, "assets", "Deferred Tax Liabilities Noncurrent"),
+                ("Otros Pasivos No Corrientes", "other_noncurrent_liabilities", "[+]", "item", True, False, False, True, "assets", "Other Non-Current Liabilities"),
+                ("Total Pasivos No Corrientes", "total_noncurrent_liabilities", "[=]", "subtotal", False, True, False, True, "assets", "Total Non-Current Liabilities"),
+                ("Total Pasivos (Total Liabilities)", "total_liabilities", "[=]", "result", False, True, False, True, "assets", "Total Liabilities"),
+            ]),
+            ("PATRIMONIO NETO (SHAREHOLDERS' EQUITY)", [
+                ("Capital Social y Prima de Emisión (Common Stock & APIC)", "common_stock_and_apic", "[+]", "item", True, False, False, True, "assets", "Common Stock & Additional Paid-in Capital"),
+                ("Ganancias Retenidas / (Déficit Acumulado)", "retained_earnings", "[+]", "item", True, False, False, True, "assets", "Retained Earnings / Accumulated Deficit"),
+                ("Acciones en Tesorería, AOCI y Otros Fondos Propios", "other_equity", "[±]", "item", True, False, False, True, "assets", "Treasury Stock & Accumulated Other Comprehensive Income"),
+                ("Intereses Minoritarios (Noncontrolling Interests)", "minority_interest", "[+]", "item", True, False, False, False, "assets", "Noncontrolling Interests"),
+                ("Total Patrimonio Neto (Stockholders' Equity)", "stockholders_equity", "[=]", "result", False, True, False, True, "assets", "Total Stockholders Equity"),
+                ("Total Pasivo y Patrimonio Neto (Total Liabilities & Equity)", "total_liab_and_equity", "[=]", "result", False, True, False, True, "assets", "Total Liabilities & Stockholders Equity"),
+            ])
         ]
 
-    for lbl, k, bold in std_bs_defs:
-        std_bs_rows.append({
-            "label": lbl,
-            "orig_tooltip": f"Estándar Canónico: {k}",
-            "clarification": None,
-            "operator": "[=]" if bold else "",
-            "row_type": "subtotal" if bold else "item",
-            "indent": not bold,
-            "is_bold": bold,
-            "data": {p: _to_m(bs_data.get(k, {}).get(p)) for p in statements_fys},
-            "pct_mode": "assets"
-        })
+    std_bs_rows = _build_standardized_section(bs_sections, bs_data, default_pct_mode="assets")
     std_bs_rows.extend(_get_memo_rows(statements_fys, "balancesheet"))
     std_balancesheet = [_build_statement_cells(r, statements_fys, canonical, bs_tot_assets=bs_tot_assets_std) for r in std_bs_rows]
 

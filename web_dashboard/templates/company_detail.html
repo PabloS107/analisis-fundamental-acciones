@@ -1126,6 +1126,7 @@
                                 data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1138,6 +1139,7 @@
                                 data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1188,6 +1190,7 @@
                                 data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1200,6 +1203,7 @@
                                 data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1261,6 +1265,7 @@
                                 data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1273,6 +1278,7 @@
                                 data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1323,6 +1329,7 @@
                                 data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1335,6 +1342,7 @@
                                 data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
