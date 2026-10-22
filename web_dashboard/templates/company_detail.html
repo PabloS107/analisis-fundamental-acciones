@@ -934,6 +934,9 @@
                            class="bg-slate-50 text-xs text-slate-900 pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 w-44 focus:outline-none focus:border-sky-500 transition">
                     <span class="absolute right-2.5 top-1.5 text-xs text-slate-400">🔍</span>
                 </div>
+                <button id="btn-export-csv" onclick="exportActiveStatementsCSV()" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5" title="Exportar tabla activa a CSV">
+                    <span>📥</span> CSV
+                </button>
             </div>
         </div>
 
@@ -963,17 +966,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in std_pnl %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -984,10 +988,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -997,10 +1001,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1027,17 +1031,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in as_rep_pnl %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -1048,10 +1053,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1061,10 +1066,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1102,17 +1107,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in std_cashflow %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -1123,10 +1129,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1136,10 +1142,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1166,17 +1172,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in as_rep_cashflow %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -1187,10 +1194,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1200,10 +1207,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1241,17 +1248,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in std_balancesheet %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -1262,10 +1270,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1275,10 +1283,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1305,17 +1313,18 @@
                     <tbody class="divide-y divide-slate-100">
                         {% for row in as_rep_balancesheet %}
                         {% if row.row_type == 'section_header' %}
-                        <tr class="bg-slate-100/90 border-y border-slate-300">
+                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
                             <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
                                 {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
                             </td>
                         </tr>
                         {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
+                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
                             <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
                                 <div class="flex items-center justify-between gap-1.5">
                                     <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="text-slate-400 font-mono text-[11px] select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
                                     {% if row.orig_tooltip %}
@@ -1326,10 +1335,10 @@
                                 </div>
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}">
+                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
                                 {% else %}{{ row.ltm_val }}{% endif %}
                             </td>
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
@@ -1339,10 +1348,10 @@
                             </td>
                             {% for cell in row.annual_cells %}
                             <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}">
+                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
                                 {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
                                 {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
                                 {% else %}{{ cell.abs }}{% endif %}
                             </td>
                             {% endfor %}
@@ -1356,7 +1365,7 @@
 
     </div>
 
-    <!-- Script de Interactividad para Sub-pestañas, Selector de 3 Modos y Búsqueda de Estados Financieros -->
+    <!-- Script de Interactividad para Sub-pestañas, Selector de 3 Modos, Colapsado, Búsqueda Inteligente y Exportación CSV -->
     <script>
         let currentViewType = 'std';
         function setStatementViewModeType(type) {
@@ -1469,10 +1478,23 @@
 
             const dataCells = document.querySelectorAll('.stmt-data-cell');
             dataCells.forEach(td => {
-                td.classList.remove('text-emerald-600', 'text-rose-600', 'font-bold', 'text-slate-400');
+                td.classList.remove('text-emerald-600', 'text-rose-600', 'font-bold', 'text-slate-400', 'text-slate-900', 'text-slate-700');
                 if (mode === 'abs') {
-                    td.textContent = td.getAttribute('data-abs') || '-';
-                    td.classList.add('text-slate-700');
+                    const val = td.getAttribute('data-abs') || '-';
+                    const rType = td.getAttribute('data-row-type') || 'item';
+                    const isLtm = td.getAttribute('data-is-ltm') === 'true';
+
+                    if (rType === 'result' || rType === 'net_income') {
+                        td.innerHTML = `<span class="text-slate-900 font-black">${val}</span>`;
+                    } else if (rType === 'subtotal') {
+                        td.innerHTML = `<span class="text-slate-900 font-bold">${val}</span>`;
+                    } else if (rType === 'eps' || rType === 'dps' || rType === 'multiple') {
+                        td.innerHTML = `<span class="text-indigo-700 font-black">${val}</span>`;
+                    } else {
+                        td.textContent = val;
+                    }
+                    td.classList.add(isLtm ? 'text-slate-900' : 'text-slate-700');
+                    if (isLtm) td.classList.add('font-bold');
                 } else if (mode === 'pct') {
                     td.textContent = td.getAttribute('data-pct') || '-';
                     td.classList.add('text-slate-700');
@@ -1490,18 +1512,131 @@
             });
         }
 
+        function toggleStatementSection(headerTr) {
+            const isCollapsed = headerTr.getAttribute('data-collapsed') === 'true';
+            const nextState = !isCollapsed;
+            headerTr.setAttribute('data-collapsed', nextState ? 'true' : 'false');
+            const chevron = headerTr.querySelector('.section-chevron');
+            if (chevron) chevron.textContent = nextState ? '▸' : '▾';
+            let nextTr = headerTr.nextElementSibling;
+            while (nextTr && !nextTr.classList.contains('stmt-section-header')) {
+                if (nextState) {
+                    nextTr.classList.add('hidden');
+                } else {
+                    nextTr.classList.remove('hidden');
+                }
+                nextTr = nextTr.nextElementSibling;
+            }
+        }
+
         function filterStatements() {
             const input = document.getElementById('statementSearch');
-            const filter = input.value.toUpperCase();
-            const rows = document.querySelectorAll('.statement-row');
-            rows.forEach(row => {
-                const text = row.textContent || row.innerText;
-                if (text.toUpperCase().indexOf(filter) > -1) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
+            const filter = (input ? input.value : '').trim().toUpperCase();
+            const tbodies = document.querySelectorAll('.statement-table tbody');
+
+            tbodies.forEach(tbody => {
+                let currentHeader = null;
+                let sectionHasMatch = false;
+
+                Array.from(tbody.children).forEach(tr => {
+                    if (tr.classList.contains('stmt-section-header')) {
+                        if (currentHeader) {
+                            currentHeader.style.display = (filter === '' || sectionHasMatch) ? '' : 'none';
+                        }
+                        currentHeader = tr;
+                        sectionHasMatch = false;
+                        if (filter === '') {
+                            currentHeader.style.display = '';
+                            currentHeader.setAttribute('data-collapsed', 'false');
+                            const chev = currentHeader.querySelector('.section-chevron');
+                            if (chev) chev.textContent = '▾';
+                        }
+                    } else if (tr.classList.contains('statement-row')) {
+                        if (filter === '') {
+                            tr.style.display = '';
+                            tr.classList.remove('hidden');
+                        } else {
+                            const text = (tr.textContent || tr.innerText || '').toUpperCase();
+                            if (text.indexOf(filter) > -1) {
+                                tr.style.display = '';
+                                tr.classList.remove('hidden');
+                                sectionHasMatch = true;
+                            } else {
+                                tr.style.display = 'none';
+                            }
+                        }
+                    }
+                });
+
+                if (currentHeader) {
+                    currentHeader.style.display = (filter === '' || sectionHasMatch) ? '' : 'none';
                 }
             });
+        }
+
+        function exportActiveStatementsCSV() {
+            const sections = document.querySelectorAll('.statement-section:not(.hidden)');
+            if (!sections.length) return;
+
+            let csvRows = [];
+            const activeViewClass = (currentViewType === 'std') ? '.table-view-std' : '.table-view-asrep';
+
+            sections.forEach(sec => {
+                const titleH3 = sec.querySelector('h3');
+                const secTitle = titleH3 ? titleH3.textContent.trim() : 'ESTADO FINANCIERO';
+                csvRows.push([`"${secTitle.replace(/"/g, '""')}"`]);
+
+                const tableWrap = sec.querySelector(activeViewClass);
+                if (!tableWrap) return;
+                const table = tableWrap.querySelector('table');
+                if (!table) return;
+
+                // Header
+                const ths = table.querySelectorAll('thead tr th');
+                const headerRow = [];
+                ths.forEach(th => {
+                    headerRow.push(`"${th.textContent.trim().replace(/"/g, '""')}"`);
+                });
+                csvRows.push(headerRow);
+
+                // Body rows
+                const trs = table.querySelectorAll('tbody tr');
+                trs.forEach(tr => {
+                    if (tr.style.display === 'none' || tr.classList.contains('hidden')) return;
+
+                    if (tr.classList.contains('stmt-section-header')) {
+                        const td = tr.querySelector('td');
+                        let txt = td ? td.textContent.trim() : '';
+                        txt = txt.replace(/^[▾▸]\s*/, '');
+                        csvRows.push([`"--- ${txt.replace(/"/g, '""')} ---"`]);
+                    } else if (tr.classList.contains('statement-row')) {
+                        const rowData = [];
+                        const tds = tr.querySelectorAll('td');
+                        tds.forEach((td, idx) => {
+                            let cellText = td.textContent.trim();
+                            if (idx === 0) {
+                                cellText = cellText.replace(/ⓘ\s*$/, '').trim();
+                            }
+                            rowData.push(`"${cellText.replace(/"/g, '""')}"`);
+                        });
+                        csvRows.push(rowData);
+                    }
+                });
+
+                csvRows.push([]); // Empty line separator between sections
+            });
+
+            const csvContent = '\uFEFF' + csvRows.map(r => r.join(',')).join('\r\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            const filename = `{{ ticker }}_estados_financieros_${currentViewType}_${currentStatementMode}.csv`;
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 

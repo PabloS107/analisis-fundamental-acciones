@@ -887,6 +887,40 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('AFFO POR ACCIÓN (AFFO / SHARE $)', content_o)
 
 
+    def test_phase4_fiscal_ai_ux_and_full_audit_certification(self):
+        """
+        Fase 4: Certificación E2E de UX/UI Fiscal.ai, interactividad de tablas,
+        acordeones colapsables, exportación CSV y consistencia de datos en los 9 tickers.
+        """
+        tickers = ['AAPL', 'DECK', 'JPM', 'MELI', 'META', 'NU', 'NVDA', 'O', 'PGR']
+        for ticker in tickers:
+            resp = self.client.get(f'/company/{ticker}/')
+            self.assertEqual(resp.status_code, 200, f"Error cargando dashboard para {ticker}")
+            content = html.unescape(resp.content.decode('utf-8'))
+
+            # 1. Componentes interactivos Fase 4
+            self.assertIn('id="btn-export-csv"', content, f"Botón CSV ausente en {ticker}")
+            self.assertIn('exportActiveStatementsCSV()', content, f"Función exportActiveStatementsCSV ausente en {ticker}")
+            self.assertIn('toggleStatementSection(this)', content, f"Acordeón toggleStatementSection ausente en {ticker}")
+            self.assertIn('stmt-section-header', content, f"Clase stmt-section-header ausente en {ticker}")
+            self.assertIn('data-row-type=', content, f"Atributo data-row-type ausente en {ticker}")
+            self.assertIn('text-indigo-700 font-black', content, f"Clase de énfasis per-share/multiple ausente en {ticker}")
+
+            # 2. Cero valores corruptos o nulos sin formato en tablas
+            for bad_token in ['None</td>', 'nan</td>', 'NaN</td>', 'null</td>', 'undefined</td>']:
+                self.assertNotIn(bad_token, content, f"Token no formateado '{bad_token}' detectado en HTML de {ticker}")
+
+            # 3. Estructura temporal canónica y as-reported
+            expected_fys = 8 if ticker == 'NU' else 11
+            self.assertEqual(len(resp.context['statements_fys']), expected_fys, f"statements_fys incorrecto en {ticker}")
+            self.assertEqual(len(resp.context['as_rep_fys']), 4, f"as_rep_fys incorrecto en {ticker}")
+
+            # 4. Contexto de series para gráficos interactivos (años fiscales cerrados)
+            chart_periods = json.loads(resp.context['chart_periods_json'])
+            expected_chart_periods = 8 if ticker == 'NU' else 10
+            self.assertEqual(len(chart_periods), expected_chart_periods, f"chart_periods debe tener {expected_chart_periods} en {ticker}")
+
+
 if __name__ == '__main__':
     unittest.main()
 

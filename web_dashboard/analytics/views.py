@@ -2715,6 +2715,8 @@ def company_detail(request, ticker):
                 abs_disp = _fmt_eps(val)
             elif row_type == "metric_pct":
                 abs_disp = f"{val:.1f}%" if val is not None else "-"
+            elif row_type == "multiple":
+                abs_disp = f"{val:.2f}x" if val is not None else "-"
             elif row_type in ("net_debt", "net_cash", "metric"):
                 if val is not None:
                     abs_disp = f"-${abs(val):,.1f}M" if val < 0 else f"${val:,.1f}M"
@@ -2728,7 +2730,7 @@ def company_detail(request, ticker):
 
             # 2. pct_disp (Vertical %)
             pct_mode = r.get("pct_mode")
-            if row_type in ("shares", "eps", "dps"):
+            if row_type in ("shares", "eps", "dps", "multiple"):
                 pct_disp = "-"
             elif row_type == "metric_pct":
                 pct_disp = f"{val:.1f}%" if val is not None else "-"
