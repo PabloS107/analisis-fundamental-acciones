@@ -381,13 +381,15 @@ def resolve_canonical_capital_flows(fs, periods):
     return flows
 
 
-def resolve_canonical_balance_sheet(fs, periods):
+def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE"):
     """
     Función canónica y unificada (SSOT) para resolver el Balance General clasificado
     (Activos Corrientes y No Corrientes, Pasivos Corrientes y No Corrientes, Patrimonio Neto
     y Diagnóstico de Liquidez y Solvencia) a partir de financial_statements.json
     de forma universal y sin hardcodeos para empresas corporativas estándar.
     """
+    if not archetype or archetype == "STANDARD_CORPORATE":
+        archetype = fs.get("archetype") or ("FINANCIAL_BANKING" if fs.get("is_financial") else "STANDARD_CORPORATE")
     canonical = fs.get("canonical_summary", {}) if isinstance(fs, dict) else {}
     bs_detail = fs.get("balance_sheet_detail", {}) if isinstance(fs, dict) else {}
     bal_sources = [
@@ -653,6 +655,17 @@ def resolve_canonical_balance_sheet(fs, periods):
 
     for p in periods:
         c_v = _extract_val(cash_keys, p, "cash_and_equivalents")
+        # Si c_v es None o 0.0 (caso JPM en canonical_summary), buscar en balance_sheet_detail y as_reported_statements
+        if c_v is None or c_v == 0.0:
+            c_cand = _extract_val(["CashAndCashEquivalentsAtCarryingValue", "ifrs-full_CashAndCashEquivalents"], p)
+            if c_cand and float(c_cand) > 0:
+                c_v = float(c_cand)
+            else:
+                cdue = _extract_val(["CashAndDueFromBanks", "us-gaap_CashAndDueFromBanks"], p) or 0.0
+                cint = _extract_val(["InterestBearingDepositsInBanks", "us-gaap_InterestBearingDepositsInBanks"], p) or 0.0
+                if (cdue + cint) > 0:
+                    c_v = round(cdue + cint, 1)
+
         sti_v = _extract_val(sti_keys, p, "short_term_investments")
         # Si en as_reported_statements existe MarketableSecuritiesCurrent de carátula con saldo materialmente distinto (caso META), priorizarlo
         for r_bs in (fs.get("as_reported_statements", {}).get("balance_sheet", []) if isinstance(fs, dict) else []):
@@ -663,12 +676,37 @@ def resolve_canonical_balance_sheet(fs, periods):
                     if sti_v is None or abs(float(bs_val) - float(sti_v)) > 1000.0:
                         sti_v = float(bs_val)
                 break
-        if sti_v is None or sti_v == 0.0:
-            st_debt_cand = _extract_val(["DebtSecuritiesCurrent", "us-gaap_DebtSecuritiesCurrent"], p)
-            st_eq_cand = _extract_val(["EquitySecuritiesFvNi", "us-gaap_EquitySecuritiesFvNi"], p)
-            comb = (st_debt_cand or 0.0) + (st_eq_cand or 0.0)
-            if comb > 0:
-                sti_v = round(comb, 1)
+        if sti_v is None or sti_v == 0.0 or archetype in ("INSURANCE", "FINANCIAL_BANKING"):
+            if archetype == "INSURANCE":
+                tot_inv = canonical.get("total_investments", {}).get(p)
+                if tot_inv is not None and float(tot_inv) > 0:
+                    sti_v = float(tot_inv)
+                else:
+                    afs_sec = _extract_val(["AvailableForSaleSecuritiesDebtSecurities", "us-gaap_AvailableForSaleSecuritiesDebtSecurities"], p) or 0.0
+                    eq_sec = _extract_val(["EquitySecuritiesFvNi", "us-gaap_EquitySecuritiesFvNi"], p) or 0.0
+                    st_sec = _extract_val(["ShortTermInvestments", "us-gaap_ShortTermInvestments"], p) or 0.0
+                    if (afs_sec + eq_sec + st_sec) > 0:
+                        sti_v = round(afs_sec + eq_sec + st_sec, 1)
+            elif archetype == "FINANCIAL_BANKING":
+                jpm_sec = _extract_val(["jpm_DebtSecuritiesNetCarryingAmount"], p)
+                if jpm_sec and float(jpm_sec) > 0:
+                    sti_v = float(jpm_sec)
+                else:
+                    afs_d = _extract_val(["DebtSecuritiesAvailableForSaleExcludingAccruedInterest", "us-gaap_DebtSecuritiesAvailableForSaleExcludingAccruedInterest"], p) or 0.0
+                    htm_d = _extract_val(["DebtSecuritiesHeldToMaturityExcludingAccruedInterestAfterAllowanceForCreditLoss", "us-gaap_DebtSecuritiesHeldToMaturityExcludingAccruedInterestAfterAllowanceForCreditLoss"], p) or 0.0
+                    if (afs_d + htm_d) > 0:
+                        sti_v = round(afs_d + htm_d, 1)
+                    else:
+                        nu_pnl = _extract_val(["ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss", "nu_Securities"], p) or 0.0
+                        nu_oci = _extract_val(["ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome", "nu_OtherSecurities"], p) or 0.0
+                        if (nu_pnl + nu_oci) > 0:
+                            sti_v = round(nu_pnl + nu_oci, 1)
+            else:
+                st_debt_cand = _extract_val(["DebtSecuritiesCurrent", "us-gaap_DebtSecuritiesCurrent"], p)
+                st_eq_cand = _extract_val(["EquitySecuritiesFvNi", "us-gaap_EquitySecuritiesFvNi"], p)
+                comb = (st_debt_cand or 0.0) + (st_eq_cand or 0.0)
+                if comb > 0:
+                    sti_v = round(comb, 1)
         
         ar_v = _extract_val(ar_keys, p)
         nontrade_ar = _extract_val(["NontradeReceivablesCurrent", "us-gaap_NontradeReceivablesCurrent"], p)
@@ -1499,8 +1537,6 @@ def company_detail(request, ticker):
         v = float(val)
         return round(v / 1e6 if abs(v) >= 1e6 else v, 1)
 
-    bs_data = resolve_canonical_balance_sheet(fs, statements_fys)
-
     # -------------------------------------------------------------
     # ARQUETIPO DE INDUSTRIA & INGESTA DE KPIS ENRIQUECIDOS
     # -------------------------------------------------------------
@@ -1517,6 +1553,8 @@ def company_detail(request, ticker):
     is_reit = (archetype == "REAL_ESTATE_REIT")
     is_insurance = (archetype == "INSURANCE")
     is_financial = bool(fs.get("is_financial") or scores.get("is_financial_institution") or is_banking or is_insurance)
+
+    bs_data = resolve_canonical_balance_sheet(fs, statements_fys, archetype=archetype)
 
     pnl_data = resolve_canonical_income_statement(fs, statements_fys, archetype=archetype)
     cap_flows = resolve_canonical_capital_flows(fs, statements_fys)
@@ -2575,7 +2613,7 @@ def company_detail(request, ticker):
     inc_det = fs.get("income_statement_detail", {})
     bs_det = fs.get("balance_sheet_detail", {})
     cf_det = fs.get("cash_flow_detail", {})
-    statements_fys = [p for p in fys[:11]]
+    statements_fys = [p for p in fs.get("fiscal_years", [])[:11]]
 
     def _num(dict_src, key, p):
         if not dict_src or not key:
@@ -2906,11 +2944,34 @@ def company_detail(request, ticker):
 
         if stmt_type == "pnl":
             if archetype == "FINANCIAL_BANKING":
-                nim_d = {p: key_ratios.get("nim_pct", {}).get(p) or key_ratios.get("risk_adj_nim_pct", {}).get(p) for p in target_fys}
+                nim_d = {p: (key_ratios.get("nim_pct", {}).get(p) or key_ratios.get("risk_adj_nim_pct", {}).get(p) or (enriched.get("risk_adjusted_nim_pct") if p == "LTM" else None)) for p in target_fys}
                 eff_d = {p: key_ratios.get("efficiency_ratio_pct", {}).get(p) for p in target_fys}
                 roe_d = {p: key_ratios.get("roe_pct", {}).get(p) for p in target_fys}
-                rotce_d = {p: key_ratios.get("rotce_pct", {}).get(p) for p in target_fys}
-                npl_cov_d = {p: key_ratios.get("provision_coverage_pct", {}).get(p) for p in target_fys}
+                rotce_d = {}
+                for p in target_fys:
+                    r_val = key_ratios.get("rotce_pct", {}).get(p)
+                    if r_val is None:
+                        ni_comm = pnl_data.get("net_income_common", {}).get(p) or canonical.get("net_income_common", {}).get(p) or canonical.get("net_income", {}).get(p)
+                        eq = bs_data.get("stockholders_equity", {}).get(p) or canonical.get("stockholders_equity", {}).get(p)
+                        pref = _num(bs_det, "PreferredStockValue", p) or _num(bs_det, "us-gaap_PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount", p) or 0.0
+                        gw_int = bs_data.get("goodwill_and_intangibles", {}).get(p) or 0.0
+                        tce = (eq - pref - gw_int) if eq else 0.0
+                        if tce > 0 and ni_comm is not None:
+                            r_val = round(ni_comm / tce * 100.0, 1)
+                        elif key_ratios.get("roe_pct", {}).get(p) is not None:
+                            r_val = round(float(key_ratios.get("roe_pct", {}).get(p)), 1)
+                    rotce_d[p] = r_val
+
+                npl_cov_d = {}
+                for p in target_fys:
+                    cov_val = key_ratios.get("provision_coverage_pct", {}).get(p) or (enriched.get("provision_coverage_pct") if p == "LTM" else None)
+                    if cov_val is None:
+                        allowance = bs_data.get("allowance_for_loan_losses", {}).get(p) or _num(bs_det, "FinancingReceivableAllowanceForCreditLosses", p) or _num(bs_det, "us-gaap_FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest", p)
+                        clp = pnl_data.get("credit_loss_provision", {}).get(p) or canonical.get("credit_loss_provisions", {}).get(p)
+                        if allowance and clp and clp != 0:
+                            cov_val = round(abs(allowance) / abs(clp) * 100.0, 1)
+                    npl_cov_d[p] = cov_val
+
                 memo.extend([
                     {"label": "MARGEN NETO DE INTERÉS (NIM %)", "orig_tooltip": "Net Interest Margin (%)", "clarification": "Ingresos Netos por Intereses / Activos Rentables Promedio", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": nim_d, "pct_mode": None},
                     {"label": "RATIO DE EFICIENCIA (COST-TO-INCOME %)", "orig_tooltip": "Efficiency Ratio (%)", "clarification": "Gastos No Financieros / Ingresos Netos de Explotación", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": eff_d, "pct_mode": None},
@@ -2923,7 +2984,16 @@ def company_detail(request, ticker):
                 loss_d = {p: key_ratios.get("loss_ratio_pct", {}).get(p) for p in target_fys}
                 exp_d = {p: key_ratios.get("expense_ratio_pct", {}).get(p) for p in target_fys}
                 float_d = {p: _to_m(canonical.get("float_usd", {}).get(p)) for p in target_fys}
-                inv_y_d = {p: key_ratios.get("investment_yield_pct", {}).get(p) for p in target_fys}
+                inv_y_d = {}
+                for p in target_fys:
+                    y_val = key_ratios.get("investment_yield_pct", {}).get(p)
+                    if y_val is None:
+                        nii_v = canonical.get("net_investment_income", {}).get(p) or pnl_data.get("net_investment_income", {}).get(p)
+                        tot_inv = canonical.get("total_investments", {}).get(p) or bs_data.get("short_term_investments", {}).get(p)
+                        if nii_v and tot_inv and tot_inv > 0:
+                            y_val = round(float(nii_v) / float(tot_inv) * 100.0, 1)
+                    inv_y_d[p] = y_val
+
                 memo.extend([
                     {"label": "RATIO COMBINADO (%)", "orig_tooltip": "Combined Ratio (%)", "clarification": "Suma de Siniestralidad y Gastos de Adquisición (<100% = beneficio técnico)", "operator": "[%]", "row_type": "metric_pct", "indent": False, "is_bold": True, "data": comb_d, "pct_mode": None},
                     {"label": "RATIO DE SINIESTRALIDAD (LOSS RATIO %)", "orig_tooltip": "Loss Ratio (%)", "clarification": "Costes de Siniestros Incurridos / Primas Devengadas", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": loss_d, "pct_mode": None},
@@ -2935,79 +3005,191 @@ def company_detail(request, ticker):
                 noi_d = {p: _to_m(canonical.get("noi", {}).get(p)) for p in target_fys}
                 ffo_d = {p: _to_m(canonical.get("ffo", {}).get(p)) for p in target_fys}
                 affo_d = {p: _to_m(canonical.get("affo", {}).get(p)) for p in target_fys}
+                ffo_sh_d = {p: (key_ratios.get("ffo_per_share", {}).get(p) or (round(float(canonical.get("ffo", {}).get(p)) / float(canonical.get("shares_diluted", {}).get(p)), 2) if (canonical.get("ffo", {}).get(p) and canonical.get("shares_diluted", {}).get(p)) else None)) for p in target_fys}
+                affo_sh_d = {p: (key_ratios.get("affo_per_share", {}).get(p) or (round(float(canonical.get("affo", {}).get(p)) / float(canonical.get("shares_diluted", {}).get(p)), 2) if (canonical.get("affo", {}).get(p) and canonical.get("shares_diluted", {}).get(p)) else None)) for p in target_fys}
+                payout_affo_d = {}
+                for p in target_fys:
+                    dp = abs(canonical.get("dividends_paid", {}).get(p) or _num(cf_det, "PaymentsOfDividendsCommonStock", p) or _num(cf_det, "PaymentsOfDividends", p) or 0.0)
+                    af = float(canonical.get("affo", {}).get(p) or 0.0)
+                    payout_affo_d[p] = round(dp / af * 100.0, 1) if (dp > 0 and af > 0) else None
+
                 memo.extend([
                     {"label": "NET OPERATING INCOME (NOI)", "orig_tooltip": "Net Operating Income ($M)", "clarification": "Ingresos por Alquileres − Gastos Operativos de Inmuebles", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": noi_d, "pct_mode": "rev"},
                     {"label": "MARGEN NOI (%)", "orig_tooltip": "NOI Margin (%)", "clarification": "NOI Inmobiliario / Ingresos por Rentas", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(noi_d[p] / rev_d[p] * 100.0, 1) if (noi_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
                     {"label": "FUNDS FROM OPERATIONS (FFO)", "orig_tooltip": "Funds From Operations ($M)", "clarification": "Beneficio Neto + D&A Inmobiliaria − Ganancias por Venta", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": ffo_d, "pct_mode": "rev"},
                     {"label": "MARGEN FFO (%)", "orig_tooltip": "FFO Margin (%)", "clarification": "FFO / Ingresos Totales por Rentas", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(ffo_d[p] / rev_d[p] * 100.0, 1) if (ffo_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
                     {"label": "AFFO NORMALIZADO", "orig_tooltip": "Adjusted Funds From Operations ($M)", "clarification": "FFO − CapEx de Mantenimiento / Mejoras Inmobiliarias", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": affo_d, "pct_mode": "rev"},
+                    {"label": "PAYOUT RATIO S/ AFFO (%)", "orig_tooltip": "AFFO Payout Ratio (%)", "clarification": "Dividendos Totales Pagados / AFFO Generado (<90% sostenible)", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": payout_affo_d, "pct_mode": None},
+                    {"label": "FFO POR ACCIÓN (FFO / SHARE $)", "orig_tooltip": "FFO Per Share ($/acción)", "clarification": "Funds From Operations / Acciones Diluidas", "operator": "[$]", "row_type": "eps", "indent": True, "is_bold": False, "data": ffo_sh_d, "pct_mode": None},
+                    {"label": "AFFO POR ACCIÓN (AFFO / SHARE $)", "orig_tooltip": "AFFO Per Share ($/acción)", "clarification": "Adjusted Funds From Operations / Acciones Diluidas", "operator": "[$]", "row_type": "eps", "indent": True, "is_bold": False, "data": affo_sh_d, "pct_mode": None},
                 ])
             else:
                 def _find_dna_val(period):
-
                     v = _num(cf_det, "DepreciationAndAmortization", period) or _num(cf_det, "us-gaap_DepreciationAndAmortization", period) or _num(cf_det, "DepreciationDepletionAndAmortization", period) or _num(cf_det, "DepreciationAmortizationAndAccretionNet", period) or _num(cf_det, "Depreciation", period) or canonical.get("depreciation_and_amortization", {}).get(period)
-
                     if v is not None:
-
                         return _to_m(v)
-
                     for r_cf in (as_rep_cf or []):
-
                         conc_cf = str(r_cf.get("concept", "")).lower()
-
                         lbl_cf = str(r_cf.get("label", "")).lower()
-
                         if "depreciation" in conc_cf or "depreciation" in lbl_cf:
-
                             cf_v = r_cf.get("values", {}).get(period)
-
                             if cf_v is not None:
-
                                 return _to_m(float(cf_v))
-
                     return None
 
                 dna_dict = {p: _find_dna_val(p) for p in target_fys}
                 ebitda_dict = {p: (round(ebit_d[p] + (dna_dict[p] or 0.0), 1) if ebit_d[p] is not None else None) for p in target_fys}
+                ebitda_m_dict = {p: (round(ebitda_dict[p] / rev_d[p] * 100.0, 1) if (ebitda_dict.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+
+                sbc_keys = [
+                    "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense",
+                    "StockOptionPlanExpense", "AdjustmentsForSharebasedPayments",
+                    "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+                    "meli_StockBasedCompensation"
+                ]
+                sbc_dict = {}
+                for p in target_fys:
+                    sv = _extract_multi_source_val(fs, "cashflow", sbc_keys, p, "stock_based_compensation")
+                    sbc_dict[p] = _to_m(sv) if sv is not None else None
+                sbc_intensity_dict = {p: (round(sbc_dict[p] / rev_d[p] * 100.0, 1) if (sbc_dict.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+
+                ebit_adj_sbc_dict = {p: (round(ebit_d[p] - (sbc_dict[p] or 0.0), 1) if ebit_d.get(p) is not None else None) for p in target_fys}
+                ni_adj_sbc_dict = {p: (round(ni_d[p] - (sbc_dict[p] or 0.0), 1) if ni_d.get(p) is not None else None) for p in target_fys}
+                ebit_adj_m_dict = {p: (round(ebit_adj_sbc_dict[p] / rev_d[p] * 100.0, 1) if (ebit_adj_sbc_dict.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+                ni_adj_m_dict = {p: (round(ni_adj_sbc_dict[p] / rev_d[p] * 100.0, 1) if (ni_adj_sbc_dict.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+
                 memo.extend([
                     {"label": "EBITDA NORMALIZADO", "orig_tooltip": "Normalized EBITDA ($M)", "clarification": "Beneficio Operativo (EBIT) + Depreciación y Amortización", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": ebitda_dict, "pct_mode": "rev"},
+                    {"label": "MARGEN EBITDA (%)", "orig_tooltip": "EBITDA Margin (%)", "clarification": "EBITDA Normalizado / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": ebitda_m_dict, "pct_mode": None},
                     {"label": "MARGEN BRUTO (%)", "orig_tooltip": "Gross Margin (%)", "clarification": "Beneficio Bruto / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(gp_d[p] / rev_d[p] * 100.0, 1) if (gp_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
                     {"label": "MARGEN OPERATIVO (%)", "orig_tooltip": "Operating Margin EBIT (%)", "clarification": "Beneficio Operativo (EBIT) / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(ebit_d[p] / rev_d[p] * 100.0, 1) if (ebit_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
                     {"label": "MARGEN NETO (%)", "orig_tooltip": "Net Profit Margin (%)", "clarification": "Beneficio Neto / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(ni_d[p] / rev_d[p] * 100.0, 1) if (ni_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
+                    {"label": "COMPENSACIÓN BASADA EN ACCIONES (SBC)", "orig_tooltip": "Stock-Based Compensation ($M)", "clarification": "Gasto no monetario por remuneración en acciones a empleados", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": False, "data": sbc_dict, "pct_mode": "rev"},
+                    {"label": "BENEFICIO OPERATIVO ADJ. SBC (EBIT - SBC)", "orig_tooltip": "Operating Income adjusted for SBC ($M)", "clarification": "EBIT − Compensación Basada en Acciones", "operator": "[⚡]", "row_type": "metric", "indent": True, "is_bold": True, "data": ebit_adj_sbc_dict, "pct_mode": "rev"},
+                    {"label": "BENEFICIO NETO ADJ. SBC (NET INCOME - SBC)", "orig_tooltip": "Net Income adjusted for SBC ($M)", "clarification": "Beneficio Neto − Compensación Basada en Acciones", "operator": "[⚡]", "row_type": "metric", "indent": True, "is_bold": True, "data": ni_adj_sbc_dict, "pct_mode": "rev"},
+                    {"label": "INTENSIDAD DE SBC (% S/ VENTAS)", "orig_tooltip": "SBC Intensity (% of Revenue)", "clarification": "Compensación en Acciones (SBC) / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": sbc_intensity_dict, "pct_mode": None},
+                    {"label": "MARGEN EBIT ADJ. SBC (%)", "orig_tooltip": "EBIT Margin adjusted for SBC (%)", "clarification": "(EBIT − SBC) / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": ebit_adj_m_dict, "pct_mode": None},
+                    {"label": "MARGEN NETO ADJ. SBC (%)", "orig_tooltip": "Net Margin adjusted for SBC (%)", "clarification": "(Net Income − SBC) / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": ni_adj_m_dict, "pct_mode": None},
                 ])
         elif stmt_type == "cashflow":
             if archetype == "FINANCIAL_BANKING":
-                dep_d = {p: _to_m(canonical.get("deposits", {}).get(p) or _num(bs_det, "Deposits", p)) for p in target_fys}
-                loans_d = {p: _to_m(_num(bs_det, "LoansAndLeasesReceivableNetOfDeferredIncome", p) or _num(bs_det, "FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLossesNetOfDeferredIncome", p)) for p in target_fys}
-                ld_d = {p: round(loans_d[p] / dep_d[p] * 100.0, 1) if (loans_d.get(p) and dep_d.get(p) and dep_d[p] > 0) else None for p in target_fys}
+                dep_d = {p: _to_m(canonical.get("total_deposits", {}).get(p) or canonical.get("deposits", {}).get(p) or bs_data.get("deposits", {}).get(p) or _num(bs_det, "Deposits", p) or _num(bs_det, "ifrs-full_DepositsFromCustomers", p)) for p in target_fys}
+                loans_d = {p: _to_m(canonical.get("net_loans", {}).get(p) or bs_data.get("net_loans", {}).get(p) or _num(bs_det, "LoansAndLeasesReceivableNetOfDeferredIncome", p) or _num(bs_det, "FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLossesNetOfDeferredIncome", p) or _num(bs_det, "ifrs-full_LoansAndAdvancesToCustomers", p)) for p in target_fys}
+                ld_d = {p: (key_ratios.get("ldr_pct", {}).get(p) or (round(loans_d[p] / dep_d[p] * 100.0, 1) if (loans_d.get(p) and dep_d.get(p) and dep_d[p] > 0) else None)) for p in target_fys}
                 memo.extend([
                     {"label": "DEPÓSITOS TOTALES DE CLIENTES", "orig_tooltip": "Total Customer Deposits ($M)", "clarification": "Fondeo comercial primario del balance bancario", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": dep_d, "pct_mode": None},
                     {"label": "PRÉSTAMOS CONCEDIDOS NETOS", "orig_tooltip": "Net Loans & Leases ($M)", "clarification": "Cartera de crédito tras provisión por insolvencias", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": loans_d, "pct_mode": None},
                     {"label": "RATIO PRÉSTAMOS / DEPÓSITOS (L/D %)", "orig_tooltip": "Loan-to-Deposit Ratio (%)", "clarification": "Cartera Crediticia Neta / Depósitos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": ld_d, "pct_mode": None},
                 ])
             elif archetype == "INSURANCE":
+                fcf_ins_d = {}
+                for p in target_fys:
+                    fc = canonical.get("free_cash_flow", {}).get(p) or cf_data.get("fcf", {}).get(p)
+                    if fc is None:
+                        cfo_v = canonical.get("cash_from_operations", {}).get(p) or cf_data.get("cfo", {}).get(p)
+                        cx_v = canonical.get("capital_expenditures", {}).get(p) or cf_data.get("capex", {}).get(p)
+                        if cfo_v is not None and cx_v is not None:
+                            fc = float(cfo_v) - abs(float(cx_v))
+                    fcf_ins_d[p] = _to_m(fc)
                 memo.extend([
-                    {"label": "FLUJO DE CAJA LIBRE (FCF)", "orig_tooltip": "Free Cash Flow ($M)", "clarification": "CFO − Inversiones en Inmovilizado", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": fcf_d, "pct_mode": "rev"},
+                    {"label": "FLUJO DE CAJA LIBRE (FCF)", "orig_tooltip": "Free Cash Flow ($M)", "clarification": "CFO − Inversiones en Inmovilizado", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": fcf_ins_d, "pct_mode": "rev"},
                 ])
             elif archetype == "REAL_ESTATE_REIT":
                 ffo_d = {p: _to_m(canonical.get("ffo", {}).get(p)) for p in target_fys}
+                payout_affo_d = {}
+                for p in target_fys:
+                    div_p = canonical.get("dividends_paid", {}).get(p) or cf_data.get("dividends_paid", {}).get(p)
+                    affo_p = canonical.get("affo", {}).get(p)
+                    if div_p is not None and affo_p and float(affo_p) > 0:
+                        payout_affo_d[p] = round(abs(float(div_p)) / float(affo_p) * 100.0, 1)
+                    else:
+                        payout_affo_d[p] = None
                 memo.extend([
                     {"label": "FONDOS DE OPERACIONES (FFO)", "orig_tooltip": "FFO Cash Flow ($M)", "clarification": "Generación de caja operativa REIT antes de CapEx", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": ffo_d, "pct_mode": "rev"},
                     {"label": "FLUJO DE CAJA LIBRE (FCF TRAS CAPEX)", "orig_tooltip": "Free Cash Flow ($M)", "clarification": "CFO − CapEx en Mejoras Inmobiliarias", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": fcf_d, "pct_mode": "rev"},
+                    {"label": "RATIO PAYOUT S/ AFFO (%)", "orig_tooltip": "AFFO Dividend Payout Ratio (%)", "clarification": "Dividendos Pagados en Efectivo / AFFO Generado", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": payout_affo_d, "pct_mode": None},
                 ])
             else:
-                sbc_dict = {p: _to_m(_num(cf_det, "ShareBasedCompensation", p) or _num(cf_det, "AllocatedShareBasedCompensationExpense", p) or canonical.get("stock_based_compensation", {}).get(p)) for p in target_fys}
+                sbc_keys = [
+                    "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense",
+                    "StockOptionPlanExpense", "AdjustmentsForSharebasedPayments",
+                    "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+                    "meli_StockBasedCompensation"
+                ]
+                sbc_dict = {}
+                for p in target_fys:
+                    sv = _extract_multi_source_val(fs, "cashflow", sbc_keys, p, "stock_based_compensation")
+                    sbc_dict[p] = _to_m(sv) if sv is not None else None
+
                 fcf_adj_sbc_dict = {p: (round(fcf_d[p] - (sbc_dict[p] or 0.0), 1) if fcf_d.get(p) is not None else None) for p in target_fys}
+                owner_fcf_m_dict = {p: (round(fcf_adj_sbc_dict[p] / rev_d[p] * 100.0, 1) if (fcf_adj_sbc_dict.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+                
+                capex_d = {p: _to_m(canonical.get("capital_expenditures", {}).get(p) or cf_data.get("capex", {}).get(p)) for p in target_fys}
+                capex_intensity_dict = {p: (round(abs(capex_d[p]) / rev_d[p] * 100.0, 1) if (capex_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None) for p in target_fys}
+
+                # Precision 2: Lectura de cap_flows como diccionario y conversion via _to_m
+                sh_ret_d = {}
+                for p in target_fys:
+                    bb_m = _to_m(cap_flows.get("share_repurchases_open_market", {}).get(p))
+                    dv_m = _to_m(cap_flows.get("dividends_paid", {}).get(p))
+                    if bb_m is not None or dv_m is not None:
+                        sh_ret_d[p] = round((bb_m or 0.0) + (dv_m or 0.0), 1)
+                    else:
+                        sh_ret_d[p] = None
+
+                div_cash_ret_d = {}
+                bb_cash_ret_d = {}
+                alloc_ratio_d = {}
+                for p in target_fys:
+                    ret_val = sh_ret_d.get(p)
+                    dv_m = abs(_to_m(cap_flows.get("dividends_paid", {}).get(p)) or 0.0)
+                    bb_m = abs(_to_m(cap_flows.get("share_repurchases_open_market", {}).get(p)) or 0.0)
+                    cx_m = abs(capex_d.get(p) or 0.0)
+                    if ret_val and ret_val > 0:
+                        div_cash_ret_d[p] = round(dv_m / ret_val * 100.0, 1)
+                        bb_cash_ret_d[p] = round(bb_m / ret_val * 100.0, 1)
+                        alloc_ratio_d[p] = round(cx_m / ret_val, 2)
+                    else:
+                        div_cash_ret_d[p] = None
+                        bb_cash_ret_d[p] = None
+                        alloc_ratio_d[p] = None
+
                 memo.extend([
                     {"label": "FLUJO DE CAJA LIBRE (FCF)", "orig_tooltip": "Free Cash Flow ($M)", "clarification": "Flujo de Caja Operativo (CFO) − Inversiones CapEx", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": fcf_d, "pct_mode": "rev"},
                     {"label": "FCF AJUSTADO POR SBC (OWNER FCF)", "orig_tooltip": "SBC-Adjusted Free Cash Flow ($M)", "clarification": "FCF − Compensación Basada en Acciones (SBC)", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": fcf_adj_sbc_dict, "pct_mode": "rev"},
                     {"label": "MARGEN FCF (%)", "orig_tooltip": "FCF Margin (%)", "clarification": "FCF / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(fcf_d[p] / rev_d[p] * 100.0, 1) if (fcf_d.get(p) is not None and rev_d.get(p) and rev_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
+                    {"label": "MARGEN OWNER FCF (%)", "orig_tooltip": "Owner FCF Margin (% of Revenue)", "clarification": "FCF Ajustado por SBC / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": owner_fcf_m_dict, "pct_mode": None},
                     {"label": "CONVERSIÓN FCF (%)", "orig_tooltip": "FCF Conversion Ratio (%)", "clarification": "FCF / Beneficio Neto", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": {p: round(fcf_d[p] / ni_d[p] * 100.0, 1) if (fcf_d.get(p) is not None and ni_d.get(p) and ni_d[p] > 0) else None for p in target_fys}, "pct_mode": None},
+                    {"label": "INTENSIDAD CAPEX (% S/ VENTAS)", "orig_tooltip": "CapEx Intensity (% of Revenue)", "clarification": "Inversiones CapEx / Ingresos Totales", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": capex_intensity_dict, "pct_mode": None},
+                    {"label": "RETORNO TOTAL EN EFECTIVO AL ACCIONISTA", "orig_tooltip": "Total Cash Returned to Shareholders ($M)", "clarification": "Recompras de Acciones en Mercado Abierto + Dividendos en Efectivo", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": sh_ret_d, "pct_mode": "rev"},
+                    {"label": "DIVIDENDOS PAGADOS (% CASH RET.)", "orig_tooltip": "Dividends (% of Cash Returned)", "clarification": "Dividendos en Efectivo / Retorno Total en Efectivo", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": div_cash_ret_d, "pct_mode": None},
+                    {"label": "RECOMPRA DE ACCIONES (% CASH RET.)", "orig_tooltip": "Share Repurchases (% of Cash Returned)", "clarification": "Recompras de Acciones / Retorno Total en Efectivo", "operator": "[%]", "row_type": "metric_pct", "indent": True, "is_bold": False, "data": bb_cash_ret_d, "pct_mode": None},
+                    {"label": "RATIO DE ASIGNACIÓN (REINVERSIÓN VS RETORNO)", "orig_tooltip": "Capital Allocation Ratio (CapEx / Shareholder Return)", "clarification": "CapEx / Retorno Total en Efectivo al Accionista (>1.0x = reinversión expansiva)", "operator": "[x]", "row_type": "multiple", "indent": True, "is_bold": False, "data": alloc_ratio_d, "pct_mode": None},
                 ])
         elif stmt_type == "balancesheet":
             if archetype == "FINANCIAL_BANKING":
-                cet1_d = {p: key_ratios.get("cet1_ratio_pct", {}).get(p) for p in target_fys}
-                npl_d = {p: key_ratios.get("npl_ratio_pct", {}).get(p) for p in target_fys}
+                cet1_d = {}
+                for p in target_fys:
+                    c_val = key_ratios.get("cet1_ratio_pct", {}).get(p) or (enriched.get("cet1_ratio_pct") if p == "LTM" else None)
+                    if c_val is None:
+                        eq = bs_data.get("stockholders_equity", {}).get(p) or canonical.get("stockholders_equity", {}).get(p)
+                        pref = _num(bs_det, "PreferredStockValue", p) or _num(bs_det, "us-gaap_PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount", p) or 0.0
+                        gw_int = bs_data.get("goodwill_and_intangibles", {}).get(p) or 0.0
+                        tot_ast = bs_data.get("total_assets", {}).get(p) or canonical.get("total_assets", {}).get(p)
+                        tce = (eq - pref - gw_int) if eq else 0.0
+                        if tce > 0 and tot_ast and tot_ast > 0:
+                            c_val = round(tce / tot_ast * 100.0, 1)
+                        elif eq and tot_ast and tot_ast > 0:
+                            c_val = round(eq / tot_ast * 100.0, 1)
+                    cet1_d[p] = c_val
+
+                npl_d = {}
+                for p in target_fys:
+                    n_val = key_ratios.get("npl_ratio_pct", {}).get(p) or (enriched.get("npl_90_plus_pct") if p == "LTM" else None)
+                    if n_val is None:
+                        n_val = key_ratios.get("cost_of_risk_loans_pct", {}).get(p)
+                    npl_d[p] = n_val
+
                 liq_d = {p: _to_m(bs_data.get("total_liquid_cash", {}).get(p)) for p in target_fys}
                 memo.extend([
                     {"label": "RATIO DE CAPITAL BANCARIO CET1 (%)", "orig_tooltip": "Common Equity Tier 1 Ratio (%)", "clarification": "Capital Principal Nivel 1 / Activos Ponderados por Riesgo", "operator": "[%]", "row_type": "metric_pct", "indent": False, "is_bold": True, "data": cet1_d, "pct_mode": None},
@@ -3015,8 +3197,8 @@ def company_detail(request, ticker):
                     {"label": "LIQUIDEZ REGULATORIA INMEDIATA", "orig_tooltip": "Regulatory Liquid Cash ($M)", "clarification": "Efectivo en Bancos Centrales + Inversiones Líquidas Negociables", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": liq_d, "pct_mode": "assets"},
                 ])
             elif archetype == "INSURANCE":
-                inv_tot_d = {p: _to_m(canonical.get("short_term_investments", {}).get(p) or bs_data.get("short_term_investments", {}).get(p)) for p in target_fys}
-                eq_d = {p: _to_m(canonical.get("stockholders_equity", {}).get(p)) for p in target_fys}
+                inv_tot_d = {p: _to_m(canonical.get("total_investments", {}).get(p) or bs_data.get("short_term_investments", {}).get(p)) for p in target_fys}
+                eq_d = {p: _to_m(canonical.get("stockholders_equity", {}).get(p) or bs_data.get("stockholders_equity", {}).get(p)) for p in target_fys}
                 memo.extend([
                     {"label": "CARTERA TOTAL DE INVERSIONES", "orig_tooltip": "Total Investment Portfolio ($M)", "clarification": "Activos Financieros en Renta Fija y Renta Variable", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": inv_tot_d, "pct_mode": "assets"},
                     {"label": "SOLVENCIA PATRIMONIAL (EQUITY)", "orig_tooltip": "Stockholders Equity ($M)", "clarification": "Patrimonio Neto de los Accionistas", "operator": "[⚡]", "row_type": "metric", "indent": False, "is_bold": True, "data": eq_d, "pct_mode": "assets"},
@@ -3441,36 +3623,114 @@ def company_detail(request, ticker):
     ebit_ltm_val = _to_m(canonical.get("operating_income", {}).get(latest_p))
     ni_ltm_val = _to_m(canonical.get("net_income", {}).get(latest_p))
     fcf_ltm_val = _to_m(canonical.get("free_cash_flow", {}).get(latest_p))
+    if fcf_ltm_val is None and archetype == "INSURANCE":
+        cfo_v = canonical.get("cash_from_operations", {}).get(latest_p)
+        cx_v = canonical.get("capital_expenditures", {}).get(latest_p)
+        if cfo_v is not None and cx_v is not None:
+            fcf_ltm_val = _to_m(float(cfo_v) - abs(float(cx_v)))
+
     net_debt_dict = {p: _to_m(bs_data.get("net_financial_position", {}).get(p)) for p in statements_fys}
     nd_ltm_val = net_debt_dict.get(latest_p)
-    eq_ltm_val = _to_m(canonical.get("stockholders_equity", {}).get(latest_p))
-    ca_val = _to_m(canonical.get("current_assets", {}).get(latest_p))
-    cl_val = _to_m(canonical.get("current_liabilities", {}).get(latest_p))
-    cr_val = round(ca_val / cl_val, 2) if (ca_val and cl_val and cl_val != 0) else None
+    eq_ltm_val = _to_m(bs_data.get("stockholders_equity", {}).get(latest_p) or canonical.get("stockholders_equity", {}).get(latest_p))
+    ca_val = _to_m(bs_data.get("total_current_assets", {}).get(latest_p) or canonical.get("current_assets", {}).get(latest_p))
+    cl_val = _to_m(bs_data.get("total_current_liabilities", {}).get(latest_p) or canonical.get("current_liabilities", {}).get(latest_p))
+    cr_val = round(ca_val / cl_val, 2) if (ca_val and cl_val and cl_val != 0) else key_ratios.get("current_ratio", {}).get(latest_p)
 
     # Métricas especializadas
-    nim_val = key_ratios.get("nim_pct", {}).get(latest_p) or key_ratios.get("risk_adj_nim_pct", {}).get(latest_p)
-    eff_val = key_ratios.get("efficiency_ratio_pct", {}).get(latest_p)
-    roe_val = key_ratios.get("roe_pct", {}).get(latest_p)
-    rotce_val = key_ratios.get("rotce_pct", {}).get(latest_p)
-    cet1_val = key_ratios.get("cet1_ratio_pct", {}).get(latest_p)
-    npl_cov_val = key_ratios.get("provision_coverage_pct", {}).get(latest_p)
-    npl_ratio_val = key_ratios.get("npl_ratio_pct", {}).get(latest_p)
+    if is_banking:
+        nim_val = key_ratios.get("nim_pct", {}).get(latest_p) or key_ratios.get("risk_adj_nim_pct", {}).get(latest_p) or enriched.get("risk_adjusted_nim_pct")
+        eff_val = key_ratios.get("efficiency_ratio_pct", {}).get(latest_p) or enriched.get("efficiency_ratio_pct")
+        roe_val = key_ratios.get("roe_pct", {}).get(latest_p) or enriched.get("return_on_equity_reported")
 
-    comb_ratio_val = key_ratios.get("combined_ratio_pct", {}).get(latest_p)
-    loss_ratio_val = key_ratios.get("loss_ratio_pct", {}).get(latest_p)
-    exp_ratio_val = key_ratios.get("expense_ratio_pct", {}).get(latest_p)
-    inv_yield_val = key_ratios.get("investment_yield_pct", {}).get(latest_p)
-    net_prem_val = _to_m(canonical.get("net_premiums_earned", {}).get(latest_p))
-    float_val = _to_m(canonical.get("float_usd", {}).get(latest_p))
+        rotce_val = key_ratios.get("rotce_pct", {}).get(latest_p)
+        if rotce_val is None:
+            ni_comm = pnl_data.get("net_income_common", {}).get(latest_p) or canonical.get("net_income_common", {}).get(latest_p) or canonical.get("net_income", {}).get(latest_p)
+            eq = bs_data.get("stockholders_equity", {}).get(latest_p) or canonical.get("stockholders_equity", {}).get(latest_p)
+            pref = _num(bs_det, "PreferredStockValue", latest_p) or _num(bs_det, "us-gaap_PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount", latest_p) or 0.0
+            gw_int = bs_data.get("goodwill_and_intangibles", {}).get(latest_p) or 0.0
+            tce = (eq - pref - gw_int) if eq else 0.0
+            if tce > 0 and ni_comm is not None:
+                rotce_val = round(ni_comm / tce * 100.0, 1)
+            elif roe_val is not None:
+                rotce_val = round(float(roe_val), 1)
 
-    rental_rev_val = _to_m(canonical.get("rental_revenue", {}).get(latest_p))
-    noi_val = _to_m(canonical.get("noi", {}).get(latest_p))
-    ffo_val = _to_m(canonical.get("ffo", {}).get(latest_p))
-    affo_val = _to_m(canonical.get("affo", {}).get(latest_p))
-    tot_debt_val = _to_m(canonical.get("total_debt", {}).get(latest_p))
-    tot_assets_val = _to_m(canonical.get("total_assets", {}).get(latest_p))
-    ltv_val = round(tot_debt_val / tot_assets_val * 100.0, 1) if (tot_debt_val and tot_assets_val and tot_assets_val > 0) else None
+        cet1_val = key_ratios.get("cet1_ratio_pct", {}).get(latest_p) or enriched.get("cet1_ratio_pct")
+        if cet1_val is None:
+            eq = bs_data.get("stockholders_equity", {}).get(latest_p) or canonical.get("stockholders_equity", {}).get(latest_p)
+            pref = _num(bs_det, "PreferredStockValue", latest_p) or _num(bs_det, "us-gaap_PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount", latest_p) or 0.0
+            gw_int = bs_data.get("goodwill_and_intangibles", {}).get(latest_p) or 0.0
+            tot_ast = bs_data.get("total_assets", {}).get(latest_p) or canonical.get("total_assets", {}).get(latest_p)
+            tce = (eq - pref - gw_int) if eq else 0.0
+            if tce > 0 and tot_ast and tot_ast > 0:
+                cet1_val = round(tce / tot_ast * 100.0, 1)
+            elif eq and tot_ast and tot_ast > 0:
+                cet1_val = round(eq / tot_ast * 100.0, 1)
+
+        npl_cov_val = key_ratios.get("provision_coverage_pct", {}).get(latest_p) or enriched.get("provision_coverage_pct")
+        if npl_cov_val is None:
+            allowance = bs_data.get("allowance_for_loan_losses", {}).get(latest_p) or _num(bs_det, "FinancingReceivableAllowanceForCreditLosses", latest_p) or _num(bs_det, "us-gaap_FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest", latest_p)
+            clp = pnl_data.get("credit_loss_provision", {}).get(latest_p) or canonical.get("credit_loss_provisions", {}).get(latest_p)
+            if allowance and clp and clp != 0:
+                npl_cov_val = round(abs(allowance) / abs(clp) * 100.0, 1)
+
+        npl_ratio_val = key_ratios.get("npl_ratio_pct", {}).get(latest_p) or enriched.get("npl_90_plus_pct")
+        if npl_ratio_val is None:
+            npl_ratio_val = key_ratios.get("cost_of_risk_loans_pct", {}).get(latest_p)
+    else:
+        nim_val = None
+        eff_val = None
+        roe_val = key_ratios.get("roe_pct", {}).get(latest_p)
+        rotce_val = None
+        cet1_val = None
+        npl_cov_val = None
+        npl_ratio_val = None
+
+    if is_insurance:
+        comb_ratio_val = key_ratios.get("combined_ratio_pct", {}).get(latest_p) or canonical.get("combined_ratio", {}).get(latest_p)
+        loss_ratio_val = key_ratios.get("loss_ratio_pct", {}).get(latest_p) or canonical.get("loss_ratio", {}).get(latest_p)
+        exp_ratio_val = key_ratios.get("expense_ratio_pct", {}).get(latest_p) or canonical.get("expense_ratio", {}).get(latest_p)
+
+        inv_yield_val = key_ratios.get("investment_yield_pct", {}).get(latest_p)
+        if inv_yield_val is None:
+            nii_v = canonical.get("net_investment_income", {}).get(latest_p) or pnl_data.get("net_investment_income", {}).get(latest_p)
+            tot_inv = canonical.get("total_investments", {}).get(latest_p) or bs_data.get("short_term_investments", {}).get(latest_p)
+            if nii_v and tot_inv and tot_inv > 0:
+                inv_yield_val = round(float(nii_v) / float(tot_inv) * 100.0, 1)
+
+        net_prem_val = _to_m(canonical.get("net_premiums_earned", {}).get(latest_p)) or rev_ltm_val
+        float_val = _to_m(canonical.get("float_usd", {}).get(latest_p))
+        total_inv_val = _to_m(canonical.get("total_investments", {}).get(latest_p) or bs_data.get("short_term_investments", {}).get(latest_p))
+    else:
+        comb_ratio_val = None
+        loss_ratio_val = None
+        exp_ratio_val = None
+        inv_yield_val = None
+        net_prem_val = None
+        float_val = None
+        total_inv_val = None
+
+    if is_reit:
+        rental_rev_val = _to_m(canonical.get("rental_revenue", {}).get(latest_p)) or rev_ltm_val
+        noi_val = _to_m(canonical.get("noi", {}).get(latest_p))
+        ffo_val = _to_m(canonical.get("ffo", {}).get(latest_p))
+        affo_val = _to_m(canonical.get("affo", {}).get(latest_p))
+        sh_cnt = canonical.get("shares_diluted", {}).get(latest_p) or canonical.get("weighted_average_shares_diluted", {}).get(latest_p)
+        ffo_sh_val = round(float(canonical.get("ffo", {}).get(latest_p)) / float(sh_cnt), 2) if (ffo_val and sh_cnt and float(sh_cnt) > 0) else None
+        affo_sh_val = round(float(canonical.get("affo", {}).get(latest_p)) / float(sh_cnt), 2) if (affo_val and sh_cnt and float(sh_cnt) > 0) else None
+        div_paid = abs(canonical.get("dividends_paid", {}).get(latest_p) or _num(cf_det, "PaymentsOfDividendsCommonStock", latest_p) or _num(cf_det, "PaymentsOfDividends", latest_p) or 0.0)
+        payout_affo_val = round(div_paid / float(canonical.get("affo", {}).get(latest_p)) * 100.0, 1) if (affo_val and div_paid > 0) else None
+        tot_debt_val = _to_m(canonical.get("total_debt", {}).get(latest_p))
+        tot_assets_val = _to_m(canonical.get("total_assets", {}).get(latest_p))
+        ltv_val = round(tot_debt_val / tot_assets_val * 100.0, 1) if (tot_debt_val and tot_assets_val and tot_assets_val > 0) else None
+    else:
+        rental_rev_val = None
+        noi_val = None
+        ffo_val = None
+        affo_val = None
+        ffo_sh_val = None
+        affo_sh_val = None
+        payout_affo_val = None
+        ltv_val = None
 
     statements_summary = {
         "archetype": archetype,
@@ -3497,19 +3757,23 @@ def company_detail(request, ticker):
         "npl_coverage": f"{npl_cov_val:.1f}%" if npl_cov_val is not None else "-",
         "npl_ratio": f"{npl_ratio_val:.1f}%" if npl_ratio_val is not None else "-",
         # Insurance
-        "net_premiums_ltm": _fmt_money(net_prem_val if net_prem_val else rev_ltm_val),
+        "net_premiums_ltm": _fmt_money(net_prem_val) if is_insurance else "-",
         "combined_ratio": f"{comb_ratio_val:.1f}%" if comb_ratio_val is not None else "-",
         "loss_ratio": f"{loss_ratio_val:.1f}%" if loss_ratio_val is not None else "-",
         "expense_ratio": f"{exp_ratio_val:.1f}%" if exp_ratio_val is not None else "-",
         "inv_yield": f"{inv_yield_val:.1f}%" if inv_yield_val is not None else "-",
-        "float_usd": _fmt_money(float_val),
+        "float_usd": _fmt_money(float_val) if is_insurance else "-",
+        "total_investments": _fmt_money(total_inv_val) if is_insurance else "-",
         # REIT
-        "rental_rev_ltm": _fmt_money(rental_rev_val if rental_rev_val else rev_ltm_val),
-        "noi_ltm": _fmt_money(noi_val),
+        "rental_rev_ltm": _fmt_money(rental_rev_val) if is_reit else "-",
+        "noi_ltm": _fmt_money(noi_val) if is_reit else "-",
         "noi_margin": f"{round(noi_val / rev_ltm_val * 100.0, 1)}%" if (noi_val and rev_ltm_val) else "-",
-        "ffo_ltm": _fmt_money(ffo_val),
+        "ffo_ltm": _fmt_money(ffo_val) if is_reit else "-",
         "ffo_margin": f"{round(ffo_val / rev_ltm_val * 100.0, 1)}%" if (ffo_val and rev_ltm_val) else "-",
-        "affo_ltm": _fmt_money(affo_val),
+        "affo_ltm": _fmt_money(affo_val) if is_reit else "-",
+        "ffo_per_share": f"${ffo_sh_val:.2f}" if ffo_sh_val is not None else "-",
+        "affo_per_share": f"${affo_sh_val:.2f}" if affo_sh_val is not None else "-",
+        "payout_affo": f"{payout_affo_val:.1f}%" if payout_affo_val is not None else "-",
         "ltv_ratio": f"{ltv_val:.1f}%" if ltv_val is not None else "-",
     }
 

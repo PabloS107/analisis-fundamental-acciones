@@ -1,6 +1,6 @@
 # Reporte de Salud y Calidad del Asistente (QA Report)
 
-*Última comprobación: 21/10/2026 16:23:59*
+*Última comprobación: 22/10/2026 15:49:21*
 
 ---
 
@@ -14,7 +14,7 @@
 ## Tabla de Diagnóstico de Componentes
 | Estado | Componente / Instrumento | Diagnóstico Detallado |
 | :---: | :--- | :--- |
-| ✅ **PASS** | SEC EDGAR API | Conectado exitosamente con User-Agent: 'Pablo Inversiones pablo_inversiones@gmail.com' (Latencia: 1028ms, Rate-Limited) |
+| ✅ **PASS** | SEC EDGAR API | Conectado exitosamente con User-Agent: 'Pablo Inversiones pablo_inversiones@gmail.com' (Latencia: 809ms, Rate-Limited) |
 | ✅ **PASS** | Google Drive | Unidad montada con permisos R/W en G:\Mi unidad\analisis fundamental (Acceso directo workspace: OK) |
 | ✅ **PASS** | Skill: fundamental-data-extractor | Estándar Antigravity válido con frontmatter y scripts consolidados en pipeline/ (24 scripts). |
 | ✅ **PASS** | Skill: fundamental-scoring-benchmark | Estándar Antigravity válido con frontmatter y scripts consolidados en pipeline/ (24 scripts). |

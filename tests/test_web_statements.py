@@ -10,12 +10,23 @@ import django
 django.setup()
 
 from django.test import Client
+from django.test.utils import setup_test_environment, teardown_test_environment
 
 from analytics.views import resolve_canonical_capital_flows, resolve_canonical_balance_sheet, resolve_canonical_income_statement, resolve_canonical_cash_flow
 import json
 import html
 
 class TestStatementsWebDashboard(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        setup_test_environment()
+
+    @classmethod
+    def tearDownClass(cls):
+        teardown_test_environment()
+        super().tearDownClass()
+
     def setUp(self):
         self.client = Client()
 
@@ -778,6 +789,102 @@ class TestStatementsWebDashboard(unittest.TestCase):
             # E. Verificación de BVPS y TBVPS en Balance General
             self.assertIn('VALOR CONTABLE POR ACCIÓN (BVPS $)', content, f"Falta BVPS en {ticker}")
             self.assertIn('VALOR CONTABLE TANGIBLE POR ACCIÓN (TBVPS $)', content, f"Falta TBVPS en {ticker}")
+
+    def test_phase3_earnings_quality_and_sectoral_memo_metrics(self):
+        """Verifica la arquitectura completa de la Fase 3:
+        1. statements_fys contiene exactamente 11 periodos (LTM + 10 FYs cerrados) para AAPL.
+        2. Métricas de Calidad de Beneficios y Asignación de Capital para arquetipos corporativos (AAPL, NVDA, META, DECK, MELI).
+        3. Ratios bancarios sectoriales normalizados y liquidez regulatoria (JPM, NU).
+        4. Métricas aseguradoras institucionales (PGR: rendimiento cartera 4.1%, inversiones $92,413.0M, FCF $15,951.0M).
+        5. Métricas REIT institucionales (O: FFO/sh $3.95, AFFO/sh $3.77, Payout/AFFO 85.7%)."""
+
+        # 1. Ajuste 1: 11 periodos en statements_fys para AAPL
+        resp_aapl = self.client.get('/company/AAPL/')
+        self.assertEqual(resp_aapl.status_code, 200)
+        statements_fys = resp_aapl.context.get('statements_fys', [])
+        self.assertEqual(len(statements_fys), 11, f"statements_fys debe tener 11 periodos (LTM + 10 FY), pero tiene {len(statements_fys)}: {statements_fys}")
+
+        # 2. Métricas Analíticas en Empresas Corporativas / Plataforma
+        corp_tickers = ["AAPL", "NVDA", "META", "DECK", "MELI"]
+        expected_corp_pnl_labels = [
+            'COMPENSACIÓN BASADA EN ACCIONES (SBC)',
+            'BENEFICIO OPERATIVO ADJ. SBC (EBIT - SBC)',
+            'BENEFICIO NETO ADJ. SBC (NET INCOME - SBC)',
+            'INTENSIDAD DE SBC (% S/ VENTAS)',
+            'MARGEN EBIT ADJ. SBC (%)',
+            'MARGEN NETO ADJ. SBC (%)',
+        ]
+        expected_corp_cf_labels = [
+            'MARGEN OWNER FCF (%)',
+            'RETORNO TOTAL EN EFECTIVO AL ACCIONISTA',
+            'DIVIDENDOS PAGADOS (% CASH RET.)',
+            'RECOMPRA DE ACCIONES (% CASH RET.)',
+            'RATIO DE ASIGNACIÓN (REINVERSIÓN VS RETORNO)',
+        ]
+
+        for ticker in corp_tickers:
+            res = self.client.get(f'/company/{ticker}/')
+            self.assertEqual(res.status_code, 200)
+            content = html.unescape(res.content.decode('utf-8'))
+            for lbl in expected_corp_pnl_labels:
+                self.assertIn(lbl, content, f"Falta métrica analítica de P&L '{lbl}' en {ticker}")
+            for lbl in expected_corp_cf_labels:
+                self.assertIn(lbl, content, f"Falta métrica analítica de Cash Flow '{lbl}' en {ticker}")
+
+        # 3. Métricas Bancarias Sectoriales (JPM, NU)
+        resp_jpm = self.client.get('/company/JPM/')
+        content_jpm = html.unescape(resp_jpm.content.decode('utf-8'))
+        summary_jpm = resp_jpm.context.get('statements_summary', {})
+        self.assertNotEqual(summary_jpm.get('rotce_ltm'), "-", "JPM ROTCE no debe ser '-'")
+        self.assertNotEqual(summary_jpm.get('cet1_ratio'), "-", "JPM CET1 no debe ser '-'")
+        self.assertNotEqual(summary_jpm.get('npl_coverage'), "-", "JPM NPL Coverage no debe ser '-'")
+        self.assertNotEqual(summary_jpm.get('npl_ratio'), "-", "JPM NPL Ratio no debe ser '-'")
+        self.assertIn('MARGEN NETO DE INTERÉS (NIM %)', content_jpm)
+        self.assertIn('RATIO DE EFICIENCIA (COST-TO-INCOME %)', content_jpm)
+        self.assertIn('DEPÓSITOS TOTALES DE CLIENTES', content_jpm)
+        self.assertIn('LIQUIDEZ REGULATORIA INMEDIATA', content_jpm)
+
+        # Verificar liquidez regulatoria de JPM en balance canónico > $300,000M
+        bs_jpm = resp_jpm.context.get('std_balancesheet', [])
+        liq_row_jpm = next((r for r in bs_jpm if 'LIQUIDEZ REGULATORIA INMEDIATA' in r.get('label', '') or 'LIQUIDEZ' in r.get('label', '')), None)
+        if liq_row_jpm:
+            ltm_liq = liq_row_jpm.get('data', {}).get('LTM')
+            if ltm_liq is not None:
+                self.assertGreater(ltm_liq, 300000.0, f"JPM liquidez regulatoria LTM debe ser > $300,000M, obtenido: {ltm_liq}")
+
+        resp_nu = self.client.get('/company/NU/')
+        summary_nu = resp_nu.context.get('statements_summary', {})
+        self.assertNotEqual(summary_nu.get('rotce_ltm'), "-", "NU ROTCE no debe ser '-'")
+        self.assertNotEqual(summary_nu.get('cet1_ratio'), "-", "NU CET1 no debe ser '-'")
+        self.assertNotEqual(summary_nu.get('npl_coverage'), "-", "NU NPL Coverage no debe ser '-'")
+        self.assertNotEqual(summary_nu.get('npl_ratio'), "-", "NU NPL Ratio no debe ser '-'")
+
+        # 4. Métricas Aseguradoras Institucionales (PGR)
+        resp_pgr = self.client.get('/company/PGR/')
+        content_pgr = html.unescape(resp_pgr.content.decode('utf-8'))
+        summary_pgr = resp_pgr.context.get('statements_summary', {})
+        self.assertEqual(summary_pgr.get('inv_yield'), '4.1%', "PGR Rendimiento de Cartera debe ser 4.1%")
+        self.assertEqual(summary_pgr.get('total_investments'), '$92,413.0M', "PGR Cartera Total de Inversiones debe ser $92,413.0M")
+        self.assertEqual(summary_pgr.get('fcf_ltm'), '$15,951.0M', "PGR FCF LTM debe ser $15,951.0M")
+        self.assertEqual(summary_pgr.get('combined_ratio'), '87.8%', "PGR Combined Ratio debe ser 87.8%")
+        self.assertIn('RATIO COMBINADO (%)', content_pgr)
+        self.assertIn('FLOAT ASEGURADOR DISPONIBLE', content_pgr)
+
+        # 5. Métricas REIT Institucionales (O)
+        resp_o = self.client.get('/company/O/')
+        content_o = html.unescape(resp_o.content.decode('utf-8'))
+        summary_o = resp_o.context.get('statements_summary', {})
+        self.assertEqual(summary_o.get('ffo_per_share'), '$3.95', "O FFO/sh debe ser $3.95")
+        self.assertEqual(summary_o.get('affo_per_share'), '$3.77', "O AFFO/sh debe ser $3.77")
+        self.assertEqual(summary_o.get('payout_affo'), '85.7%', "O Payout/AFFO debe ser 85.7%")
+        self.assertEqual(summary_o.get('ffo_ltm'), '$3,662.7M', "O FFO LTM debe ser $3,662.7M")
+        self.assertEqual(summary_o.get('affo_ltm'), '$3,496.6M', "O AFFO LTM debe ser $3,496.6M")
+        self.assertIn('NET OPERATING INCOME (NOI)', content_o)
+        self.assertIn('FUNDS FROM OPERATIONS (FFO)', content_o)
+        self.assertIn('AFFO NORMALIZADO', content_o)
+        self.assertIn('PAYOUT RATIO S/ AFFO (%)', content_o)
+        self.assertIn('FFO POR ACCIÓN (FFO / SHARE $)', content_o)
+        self.assertIn('AFFO POR ACCIÓN (AFFO / SHARE $)', content_o)
 
 
 if __name__ == '__main__':
