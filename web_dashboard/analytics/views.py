@@ -309,20 +309,23 @@ def resolve_canonical_capital_flows(fs, periods):
         "RepaymentsOfLongTermDebt", "RepaymentsOfDebt", "us-gaap_RepaymentsOfDebt",
         "RepaymentsOfLinesOfCredit", "RepaymentsOfShortTermDebt", "us-gaap_RepaymentsOfShortTermDebt",
         "RepaymentsOfOtherLongTermDebt", "us-gaap_RepaymentsOfOtherLongTermDebt",
-        "RepaymentsOfSecuredDebt", "us-gaap_RepaymentsOfSecuredDebt",
+        "RepaymentsOfSecuredDebt", "us-gaap_RepaymentsOfSecuredDebt", "RepaymentsOfUnsecuredDebt", "us-gaap_RepaymentsOfUnsecuredDebt",
         "us-gaap_RepaymentsOfConvertibleDebt", "RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
         "PaymentsOfBorrowingsAndFinancing", "RepaymentsOfTermLoans", "RepaymentsOfConvertibleDebt",
         "RepaymentsOfSeniorNotes"
     ]
     di_keys = [
         "ProceedsFromIssuanceOfLongTermDebt", "ProceedsFromIssuanceOfDebt",
+        "ProceedsFromIssuanceOfSeniorLongTermDebt", "us-gaap_ProceedsFromIssuanceOfSeniorLongTermDebt",
+        "ProceedsFromIssuanceOfUnsecuredDebt", "us-gaap_ProceedsFromIssuanceOfUnsecuredDebt",
         "us-gaap_ProceedsFromDebtNetOfIssuanceCosts", "ProceedsFromLinesOfCredit",
         "ProceedsFromIssuanceOfOtherLongTermDebt", "us-gaap_ProceedsFromIssuanceOfOtherLongTermDebt",
         "ProceedsFromBorrowingsClassifiedAsFinancingActivities", "ProceedsFromBorrowingsAndFinancing",
         "us-gaap_ProceedsFromConvertibleDebt", "us-gaap_ProceedsFromShortTermDebt",
         "nu_ProceedsFromDebtInstrumentsEligibleAsCapital", "ProceedsFromTermLoans",
         "ProceedsFromConvertibleDebt", "ProceedsFromIssuanceOfConvertibleDebt",
-        "ProceedsFromIssuanceOfSeniorNotes"
+        "ProceedsFromIssuanceOfSeniorNotes", "ProceedsFromLongTermLinesOfCredit",
+        "ProceedsFromNotesPayable", "o_ProceedsFromLongTermLinesOfCreditAndIssuanceOfCommercialPaper"
     ]
 
     flows = {
@@ -406,9 +409,11 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
     def _extract_val(key_cands, p, can_key=None):
         if can_key:
-            can_val = canonical.get(can_key, {}).get(p)
-            if can_val is not None:
-                return float(can_val)
+            can_keys = [can_key] if isinstance(can_key, str) else can_key
+            for ck in can_keys:
+                can_val = canonical.get(ck, {}).get(p)
+                if can_val is not None:
+                    return float(can_val)
         for k in key_cands:
             k_lower = k.lower()
             for src in bal_sources:
@@ -577,7 +582,9 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         "LoansAndLeasesReceivableNetReportedAmount", "LoansReceivableNet"
     ]
     allow_loss_keys = [
+        "FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest", "us-gaap_FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest",
         "FinancingReceivableAllowanceForCreditLosses", "us-gaap_FinancingReceivableAllowanceForCreditLosses",
+        "AllowanceForCreditLossesOnFinancingReceivables", "us-gaap_AllowanceForCreditLossesOnFinancingReceivables",
         "AllowanceAccountForCreditLossesOfFinancialAssets", "LoansAndLeasesReceivableAllowance",
         "AllowanceForLoanAndLeaseLosses"
     ]
@@ -710,17 +717,17 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         
         ar_v = _extract_val(ar_keys, p)
         nontrade_ar = _extract_val(["NontradeReceivablesCurrent", "us-gaap_NontradeReceivablesCurrent"], p)
-        if nontrade_ar is not None and nontrade_ar > 0:
-            ar_v = round((ar_v or 0.0) + nontrade_ar, 1)
         inv_v = _extract_val(inv_keys, p)
         
         ca_raw = _extract_val(ca_keys, p, "current_assets")
-        sum_ca = (c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0)
-        tot_ca = ca_raw if (ca_raw is not None and ca_raw > 0) else (sum_ca if sum_ca > 0 else None)
         other_ca_rep = _extract_val(other_ca_keys, p)
+        if nontrade_ar is not None and nontrade_ar > 0:
+            other_ca_rep = (other_ca_rep or 0.0) + nontrade_ar
 
         # Regla 6: Cero plugs sintéticos (implied_sti eliminado). Solo reflejar partidas reportadas en XBRL.
         other_ca = round(other_ca_rep, 1) if other_ca_rep is not None else None
+        sum_ca = (c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0) + (other_ca or 0.0)
+        tot_ca = ca_raw if (ca_raw is not None and ca_raw > 0) else (sum_ca if sum_ca > 0 else None)
 
         tot_cash_v = round((c_v or 0.0) + (sti_v or 0.0), 1) if (c_v is not None or sti_v is not None) else None
 
@@ -894,7 +901,9 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         res["tangible_book_value_per_share"][p] = tbvps
 
         net_loans_v = _extract_val(net_loans_keys, p, "net_loans")
-        allow_loss_v = _extract_val(allow_loss_keys, p, "allowance_for_loan_losses")
+        allow_loss_v = _extract_val(allow_loss_keys, p, ["allowance_for_credit_losses", "allowance_for_loan_losses"])
+        if allow_loss_v is not None:
+            allow_loss_v = abs(allow_loss_v)
         dep_v = _extract_val(deposit_keys, p, "deposits")
         prem_rec_v = _extract_val(prem_rec_keys, p, "premiums_receivable")
         dac_v = _extract_val(dac_keys, p, "deferred_policy_acquisition_costs")
@@ -1036,6 +1045,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         "rental_revenue": {}, "tenant_reimbursements_other": {}, "property_operating_expenses": {},
         "noi": {}, "reit_da": {}, "reit_ga": {}, "reit_impairment": {}, "gain_on_sale_properties": {}
     }
+    canonical = fs.get("canonical_summary", {}) if isinstance(fs, dict) else {}
 
     for p in periods:
         rev = _extract_multi_source_val(fs, "income", [
@@ -1090,13 +1100,6 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if credit_loss is not None:
             credit_loss = abs(credit_loss)
 
-        other_opex = _extract_multi_source_val(fs, "income", [
-            "RestructuringCharges", "OtherCostAndExpenseOperating", "BusinessCombinationAcquisitionRelatedCosts",
-            "AmortizationOfIntangibleAssets", "OperatingExpensesOther", "ImpairmentOfIntangibleAssetsFinitelived"
-        ], p)
-        if other_opex is not None:
-            other_opex = abs(other_opex)
-
         ebit = _extract_multi_source_val(fs, "income", [
             "OperatingIncomeLoss", "ifrs-full_ProfitLossFromOperatingActivities", "OperatingIncome"
         ], p, "operating_income")
@@ -1108,6 +1111,16 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             tot_opex = round(gp - ebit, 2)
         if tot_opex is not None:
             tot_opex = abs(tot_opex)
+
+        other_opex_raw = _extract_multi_source_val(fs, "income", [
+            "RestructuringCharges", "OtherCostAndExpenseOperating", "BusinessCombinationAcquisitionRelatedCosts",
+            "AmortizationOfIntangibleAssets", "OperatingExpensesOther", "ImpairmentOfIntangibleAssetsFinitelived"
+        ], p)
+        if tot_opex is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+            implied_other = max(0.0, round(tot_opex - (rd or 0.0) - (sga or 0.0), 2))
+            other_opex = implied_other if implied_other > 0.01 else None
+        else:
+            other_opex = abs(other_opex_raw) if other_opex_raw is not None else None
 
         int_inc = _extract_multi_source_val(fs, "income", [
             "InvestmentIncomeInterest", "InterestIncomeOperating", "InterestAndDividendIncomeOperating",
@@ -1182,7 +1195,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
 
         eps_b = _extract_multi_source_val(fs, "income", [
             "EarningsPerShareBasic", "BasicEarningsLossPerShare", "ifrs-full_BasicEarningsLossPerShare"
-        ], p, "eps_basic")
+        ], p, ["eps_basic_adjusted", "eps_basic"])
 
         eps_d = _extract_multi_source_val(fs, "income", [
             "EarningsPerShareDiluted", "DilutedEarningsLossPerShare", "ifrs-full_DilutedEarningsLossPerShare"
@@ -1190,7 +1203,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
 
         sh_b = _extract_multi_source_val(fs, "income", [
             "WeightedAverageNumberOfSharesOutstandingBasic", "ifrs-full_WeightedAverageShares"
-        ], p, "shares_basic")
+        ], p, ["shares_basic_adjusted", "shares_basic"])
 
         sh_d = _extract_multi_source_val(fs, "income", [
             "WeightedAverageNumberOfDilutedSharesOutstanding", "ifrs-full_AdjustedWeightedAverageShares"
@@ -1198,7 +1211,11 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
 
         dps_val = _extract_multi_source_val(fs, "income", [
             "CommonStockDividendsPerShareDeclared", "CommonStockDividendsPerShareCashPaid", "DividendsPerShareDeclared"
-        ], p, "dps")
+        ], p, ["dps_adjusted", "dps"])
+        split_fac = canonical.get("split_adjustment_factor", {}).get(p, 1.0)
+        if split_fac and split_fac > 1.0 and dps_val is not None:
+            if "dps_adjusted" not in canonical or canonical.get("dps_adjusted", {}).get(p) is None:
+                dps_val = round(dps_val / split_fac, 4)
 
         nii = _extract_multi_source_val(fs, "income", ["InterestIncomeExpenseNet", "NetInterestIncome"], p, "net_interest_income")
         if nii is None and int_inc is not None and int_exp is not None:
@@ -1345,7 +1362,8 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
 
         sbc = _extract_multi_source_val(fs, "cashflow", [
             "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense", "AdjustmentsForSharebasedPayments",
-            "ExpenseFromSharebasedPaymentTransactionsWithEmployees"
+            "ExpenseFromSharebasedPaymentTransactionsWithEmployees", "RestrictedStockExpense", "us-gaap_RestrictedStockExpense",
+            "ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense", "us-gaap_ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense"
         ], p, "stock_based_compensation")
         if sbc is not None:
             sbc = abs(sbc)
@@ -3047,6 +3065,8 @@ def company_detail(request, ticker):
                     "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense",
                     "StockOptionPlanExpense", "AdjustmentsForSharebasedPayments",
                     "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+                    "RestrictedStockExpense", "us-gaap_RestrictedStockExpense",
+                    "ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense",
                     "meli_StockBasedCompensation"
                 ]
                 sbc_dict = {}
@@ -3116,6 +3136,8 @@ def company_detail(request, ticker):
                     "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense",
                     "StockOptionPlanExpense", "AdjustmentsForSharebasedPayments",
                     "ExpenseFromSharebasedPaymentTransactionsWithEmployees",
+                    "RestrictedStockExpense", "us-gaap_RestrictedStockExpense",
+                    "ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense",
                     "meli_StockBasedCompensation"
                 ]
                 sbc_dict = {}

@@ -473,6 +473,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "shares_diluted_adjusted": {},
         "eps_basic_adjusted": {},
         "eps_diluted_adjusted": {},
+        "dps_adjusted": {},
         "split_adjustment_factor": {},
         "current_assets": {},
         "current_liabilities": {},
@@ -503,6 +504,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         canonical["credit_loss_provisions"] = {}
         canonical["total_deposits"] = {}
         canonical["net_loans"] = {}
+        canonical["allowance_for_credit_losses"] = {}
         canonical["borrowings"] = {}
         canonical["repurchase_agreements"] = {}
         canonical["interest_income"] = {}
@@ -594,17 +596,22 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 op_exp = abs(op_exp)
             canonical["operating_expenses"][p] = op_exp
         elif archetype == "REAL_ESTATE_REIT":
-            # 1. Ingresos en REIT: Rental Revenue (o fallback a Revenue total)
+            # 1. Ingresos en REIT: Total Revenue consolidado (Revenues) y Rental Revenue
+            tot_rev = get_first_matching_value(inc_data, REIT_TAXONOMY_MAP.get("total_revenue", XBRL_TAXONOMY_MAP["revenue"]), p)
+            if tot_rev is None and facts_df is not None:
+                tot_rev = get_fact_fallback(facts_df, REIT_TAXONOMY_MAP.get("total_revenue", XBRL_TAXONOMY_MAP["revenue"]), p, is_flow=True)
+
             rent_rev = get_first_matching_value(inc_data, REIT_TAXONOMY_MAP["rental_revenue"], p)
             if rent_rev is None and facts_df is not None:
                 rent_rev = get_fact_fallback(facts_df, REIT_TAXONOMY_MAP["rental_revenue"], p, is_flow=True)
             if rent_rev is None:
-                rent_rev = get_first_matching_value(inc_data, XBRL_TAXONOMY_MAP["revenue"], p)
-                if rent_rev is None and facts_df is not None:
-                    rent_rev = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["revenue"], p, is_flow=True)
+                rent_rev = tot_rev
+            if tot_rev is None:
+                tot_rev = rent_rev
+
             canonical["rental_revenue"][p] = rent_rev
-            canonical["revenue"][p] = rent_rev
-            rev = rent_rev
+            canonical["revenue"][p] = tot_rev
+            rev = tot_rev
 
             # 2. En REIT no aplica COGS comercial/industrial tradicional
             canonical["cost_of_goods_sold"][p] = None
@@ -653,7 +660,11 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             canonical["recurring_capex_maintenance"][p] = abs(rec_capex) if rec_capex is not None else None
 
         elif archetype == "INSURANCE":
-            # 1. Ingresos en Seguros: Net Premiums Earned + Net Investment Income
+            # 1. Ingresos en Seguros: Total Revenues oficial auditado de carátula
+            tot_rev = get_first_matching_value(inc_data, INSURANCE_TAXONOMY_MAP.get("total_revenue", XBRL_TAXONOMY_MAP["revenue"]), p)
+            if tot_rev is None and facts_df is not None:
+                tot_rev = get_fact_fallback(facts_df, INSURANCE_TAXONOMY_MAP.get("total_revenue", XBRL_TAXONOMY_MAP["revenue"]), p, is_flow=True)
+
             prem_earned = get_first_matching_value(inc_data, INSURANCE_TAXONOMY_MAP["net_premiums_earned"], p)
             if prem_earned is None and facts_df is not None:
                 prem_earned = get_fact_fallback(facts_df, INSURANCE_TAXONOMY_MAP["net_premiums_earned"], p, is_flow=True)
@@ -664,14 +675,14 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 inv_inc = get_fact_fallback(facts_df, INSURANCE_TAXONOMY_MAP["net_investment_income"], p, is_flow=True)
             canonical["net_investment_income"][p] = inv_inc
 
-            if prem_earned is not None and inv_inc is not None:
+            if tot_rev is not None:
+                rev = tot_rev
+            elif prem_earned is not None and inv_inc is not None:
                 rev = round(prem_earned + inv_inc, 2)
             elif prem_earned is not None:
                 rev = prem_earned
             else:
-                rev = get_first_matching_value(inc_data, XBRL_TAXONOMY_MAP["revenue"], p)
-                if rev is None and facts_df is not None:
-                    rev = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["revenue"], p, is_flow=True)
+                rev = None
             canonical["revenue"][p] = rev
 
             # 2. En aseguradoras no existe COGS comercial ni Margen Bruto
@@ -1137,6 +1148,11 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 tot_l = get_fact_fallback(facts_df, BANKING_TAXONOMY_MAP["net_loans"], p, is_flow=False)
             canonical["net_loans"][p] = tot_l
 
+            allow_l = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p)
+            if allow_l is None and facts_df is not None:
+                allow_l = get_fact_fallback(facts_df, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p, is_flow=False)
+            canonical["allowance_for_credit_losses"][p] = abs(allow_l) if allow_l is not None else None
+
             canonical["current_assets"][p] = None
             canonical["current_liabilities"][p] = None
             canonical["net_ppe"][p] = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["net_ppe"], p)
@@ -1312,6 +1328,11 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                     if (nl_c + nl_nc) > 0:
                         tot_l = round(nl_c + nl_nc, 2)
                 canonical["net_loans"][p] = tot_l
+
+                allow_l = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p)
+                if allow_l is None and facts_df is not None:
+                    allow_l = get_fact_fallback(facts_df, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p, is_flow=False)
+                canonical["allowance_for_credit_losses"][p] = abs(allow_l) if allow_l is not None else None
                 canonical["borrowings"][p] = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["long_term_debt"], p)
 
         # --- Ratios Financieros ---
@@ -1500,6 +1521,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
     canonical["shares_diluted_adjusted"] = {}
     canonical["eps_basic_adjusted"] = {}
     canonical["eps_diluted_adjusted"] = {}
+    canonical["dps_adjusted"] = {}
     
     for p in periods:
         fac = split_factors.get(p, 1.0)
@@ -1526,6 +1548,12 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             canonical["eps_basic_adjusted"][p] = round(ni_val / adj_sb, 2)
         else:
             canonical["eps_basic_adjusted"][p] = None
+
+        dps_raw = canonical.get("dps", {}).get(p)
+        if dps_raw is not None:
+            canonical["dps_adjusted"][p] = round(dps_raw / fac, 4)
+        else:
+            canonical["dps_adjusted"][p] = None
 
         # Reconciliación institucional de identidades contables universales (Gross Profit, OpEx, FCF, Net Debt)
         reconcile_accounting_identities(canonical, p, archetype)

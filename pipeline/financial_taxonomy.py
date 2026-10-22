@@ -558,21 +558,34 @@ BANKING_TAXONOMY_MAP: Dict[str, List[str]] = {
         "Securities",
         "OtherSecurities",
     ],
+    "allowance_for_credit_losses": [
+        "FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest",
+        "FinancingReceivableAllowanceForCreditLosses",
+        "LoansAndLeasesReceivableAllowance",
+        "AllowanceForLoanAndLeaseLosses",
+        "AllowanceAccountForCreditLossesOfFinancialAssets",
+        "AllowanceForCreditLossesOnFinancingReceivables",
+    ],
 }
 
 
 # --- C. ARQUETIPO REIT INMOBILIARIO (Article 6 S-X / SIC 6798) ---
 REIT_TAXONOMY_MAP: Dict[str, List[str]] = {
+    "total_revenue": [
+        "Revenues",
+        "TotalRevenuesAndOtherIncome",
+        "Revenue",
+        "SalesRevenueNet",
+        "OperatingRevenues",
+    ],
     "rental_revenue": [
         "RentalRevenue",
         "OperatingLeaseRevenue",
         "RealEstateRevenueNet",
         "LeaseIncome",
-        "Revenues",
-        "TenantReimbursements",
-        "OperatingLeaseReimbursementRevenue",
-        "PropertyManagementFeeRevenue",
         "RealEstateRentalRevenue",
+        "OperatingLeasesIncomeStatementLeaseRevenue",
+        "PropertyManagementFeeRevenue",
     ],
     "property_operating_expenses": [
         "DirectCostsOfLeasedAndRentedPropertyOrEquipment",
@@ -634,6 +647,12 @@ REIT_TAXONOMY_MAP: Dict[str, List[str]] = {
 
 # --- D. ARQUETIPO DE SEGUROS (Article 7 S-X / SIC 6300-6499) ---
 INSURANCE_TAXONOMY_MAP: Dict[str, List[str]] = {
+    "total_revenue": [
+        "Revenues",
+        "TotalRevenuesAndOtherIncome",
+        "Revenue",
+        "PremiumsAndOtherRevenues",
+    ],
     "net_premiums_earned": [
         "PremiumsEarnedNet",
         "PremiumsEarnedNetPropertyAndCasualty",
