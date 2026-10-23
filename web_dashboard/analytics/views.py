@@ -1151,17 +1151,22 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if int_exp is not None:
             int_exp = abs(int_exp)
 
-        tax = _extract_multi_source_val(fs, "income", [
+        share_assoc = _extract_multi_source_val(fs, "income", [
+            "nu_ShareOfLossInAssociates", "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+            "IncomeLossFromEquityMethodInvestments", "ShareOfLossInAssociates",
+            "meli_EquityInEarningsOfUnconsolidatedEntityNetOfTax", "EquityInEarningsOfUnconsolidatedEntity",
+            "EquityInEarningsLossOfUnconsolidatedEntity", "EquityInLossOfUnconsolidatedEntity"
+        ], p, "share_of_associates")
+
+        tax_raw = _extract_multi_source_val(fs, "income", [
             "IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations", "nu_IncomeTaxInStatementOfProfitOrLoss",
             "CurrentIncomeTaxExpenseBenefit", "ifrs-full_IncomeTaxExpenseContinuingOperations"
         ], p, ["income_tax", "income_tax_expense"])
-        if tax is None:
+        if tax_raw is None:
             c_tax = _extract_multi_source_val(fs, "income", ["CurrentTaxExpenseIncome"], p)
             d_tax = _extract_multi_source_val(fs, "income", ["DeferredTaxExpenseIncome"], p)
             if c_tax is not None or d_tax is not None:
-                tax = (c_tax or 0.0) + (d_tax or 0.0)
-        if tax is not None:
-            tax = abs(tax)
+                tax_raw = (c_tax or 0.0) + (d_tax or 0.0)
 
         ni = _extract_multi_source_val(fs, "income", [
             "NetIncomeLoss", "ProfitLoss", "NetIncome", "ifrs-full_ProfitLoss"
@@ -1173,8 +1178,25 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             "IncomeLossAttributableToParent", "us-gaap_IncomeLossAttributableToParent",
             "IncomeLossBeforeIncomeTaxExpenseBenefit", "ProfitLossBeforeTax"
         ], p, "ebt")
+
+        # Conciliación matemática universal de Impuesto / Crédito Fiscal y Beneficio Neto:
+        # Identidad contable universal: Net Income = EBT - Tax + Share of Associates.
+        tax = tax_raw
+        if ebt is not None and ni is not None:
+            pre_assoc_ni = round(ni - (share_assoc or 0.0), 2)
+            diff = round(ebt - pre_assoc_ni, 2)
+            if tax is None:
+                tax = diff
+            elif diff < -1.0 and (tax is None or tax > 0):
+                # EBT < pre_assoc_ni indica beneficio fiscal (Tax Benefit)
+                tax = -abs(tax if tax is not None else diff)
+            elif diff > 1.0 and (tax is not None and tax < 0):
+                tax = abs(tax)
+        elif tax is not None and tax < 0:
+            tax = tax
+
         if ebt is None and ni is not None and tax is not None:
-            ebt = round(ni + tax, 2)
+            ebt = round(ni - (share_assoc or 0.0) + tax, 2)
 
         tot_non_op_raw = _extract_multi_source_val(fs, "income", [
             "NonoperatingIncomeExpense", "InterestRevenueExpenseNet", "deck_InterestAndOtherExpense",
@@ -1195,7 +1217,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if ebt is None and ebit is not None and tot_non_op is not None:
             ebt = round(ebit + tot_non_op, 2)
         if ni is None and ebt is not None and tax is not None:
-            ni = round(ebt - tax, 2)
+            ni = round(ebt - tax + (share_assoc or 0.0), 2)
 
         other_non_op = _extract_multi_source_val(fs, "income", [
             "OtherNonoperatingIncomeExpense", "GainLossOnInvestments", "ForeignCurrencyTransactionGainLossBeforeTax",
@@ -1270,6 +1292,17 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             if "dps_adjusted" not in canonical or canonical.get("dps_adjusted", {}).get(p) is None:
                 dps_val = round(dps_val / split_fac, 4)
 
+        if dps_val is None:
+            div_paid = _extract_multi_source_val(fs, "cashflow", [
+                "PaymentsOfDividendsCommonStock", "PaymentsOfDividends", "DividendsPaid"
+            ], p, "dividends_paid")
+            if div_paid is not None and abs(div_paid) > 0 and sh_b and sh_b > 0:
+                raw_dps = abs(div_paid) / sh_b
+                if split_fac and split_fac > 1.0:
+                    dps_val = round(raw_dps / split_fac, 4)
+                else:
+                    dps_val = round(raw_dps, 4)
+
         nii = _extract_multi_source_val(fs, "income", ["InterestIncomeExpenseNet", "NetInterestIncome"], p, "net_interest_income")
         if nii is None and int_inc is not None and int_exp is not None:
             nii = round(int_inc - int_exp, 2)
@@ -1291,11 +1324,6 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         ], p, "transactional_expenses")
         if trans_exp is not None:
             trans_exp = abs(trans_exp)
-
-        share_assoc = _extract_multi_source_val(fs, "income", [
-            "nu_ShareOfLossInAssociates", "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
-            "IncomeLossFromEquityMethodInvestments", "ShareOfLossInAssociates"
-        ], p, "share_of_associates")
 
         prem_earned = _extract_multi_source_val(fs, "income", ["PremiumsEarnedNet", "PremiumsEarnedNetPropertyAndCasualty"], p, "net_premiums_earned")
         net_inv_inc = _extract_multi_source_val(fs, "income", ["NetInvestmentIncome", "InvestmentIncomeNet", "InterestAndDividendIncomeOperating"], p, "net_investment_income")
@@ -2811,8 +2839,16 @@ def company_detail(request, ticker):
                 else:
                     abs_disp = "-"
             else:
-                disp_val = -abs(val) if (r.get("negate_val") and val is not None and val > 0) else val
-                abs_disp = _fmt_money(disp_val)
+                if r.get("negate_val") and val is not None:
+                    if val < -0.01:
+                        # Beneficio / Crédito fiscal (Tax benefit) que incrementa el beneficio neto
+                        abs_disp = f"+${abs(val):,.1f}M"
+                    elif val > 0.01:
+                        abs_disp = f"-${val:,.1f}M"
+                    else:
+                        abs_disp = "$0.0M"
+                else:
+                    abs_disp = _fmt_money(val)
 
             row_vals.append(abs_disp)
 
@@ -3356,6 +3392,10 @@ def company_detail(request, ticker):
                 else:
                     val_dict = {p: _to_m(source_data.get(k, {}).get(p)) for p in statements_fys}
 
+                if k in ("preferred_dividends", "minority_interest_pnl"):
+                    if any(v is not None and abs(float(v or 0)) > 1e-6 for v in val_dict.values()):
+                        val_dict = {p: (val_dict[p] if val_dict.get(p) is not None else 0.0) for p in statements_fys}
+
                 if _should_include_row(item, val_dict):
                     eff_tooltip = tip or f"Estándar Canónico: {k}"
                     if k == "sga_expense":
@@ -3441,6 +3481,7 @@ def company_detail(request, ticker):
                 ("Total Siniestros y Gastos Operativos (Total Benefits & Expenses)", "total_benefits_and_expenses", "[=]", "subtotal", False, True, True, True, "rev", "Total Benefits and Expenses"),
                 ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Participación en Resultados de Asociadas y Otros", "share_of_associates", "[±]", "item", True, False, False, False, "rev", "Share of Associates"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
                 ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
                 ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
@@ -3473,6 +3514,7 @@ def company_detail(request, ticker):
                 ("Otros Ingresos / (Gastos) No Operativos y Fusiones", "other_non_operating", "[±]", "item", True, False, False, False, "rev", "Other Non-Operating"),
                 ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Participación en Resultados de Asociadas y Otros", "share_of_associates", "[±]", "item", True, False, False, False, "rev", "Share of Associates"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
                 ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
                 ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
@@ -3508,6 +3550,7 @@ def company_detail(request, ticker):
                 ("Total Ingresos / (Gastos) No Operativos Netos", "total_non_operating", "[=]", "subtotal", False, True, False, True, "rev", "Total Non-Operating"),
                 ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income (EBT)"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
+                ("Participación en Resultados de Asociadas y Otros", "share_of_associates", "[±]", "item", True, False, False, False, "rev", "Equity in Earnings / (Losses) of Associates"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
                 ("Beneficio Atribuible a Intereses Minoritarios", "minority_interest_pnl", "[-]", "item", True, False, True, False, "rev", "Noncontrolling Interest"),
                 ("Dividendos de Acciones Preferentes", "preferred_dividends", "[-]", "item", True, False, True, False, "rev", "Preferred Dividends"),
