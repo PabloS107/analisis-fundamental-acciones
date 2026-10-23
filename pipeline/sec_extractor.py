@@ -968,6 +968,24 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 if sh_basic is None or abs(implied_sh_b - sh_basic) / sh_basic > 0.005:
                     sh_basic = float(implied_sh_b)
                     canonical["shares_basic"][p] = sh_basic
+            elif sh_basic is None and sh is not None and sh > 0:
+                # Reconciliación canónica institucional invariante de escala si sh_basic no vino en hechos trimestrales
+                prev_fys = [f for f in periods if f != "LTM"]
+                if prev_fys:
+                    p_prior = prev_fys[0]
+                    prior_sb = canonical["shares_basic"].get(p_prior)
+                    prior_sd = canonical["shares_diluted"].get(p_prior)
+                    if prior_sb and prior_sd and prior_sd > 0:
+                        ratio = min(1.0, prior_sb / prior_sd)
+                        sh_basic = round(sh * ratio)
+                    else:
+                        sh_basic = sh
+                else:
+                    sh_basic = sh
+                canonical["shares_basic"][p] = sh_basic
+
+            if eps_b is None and ni_for_eps is not None and sh_basic and sh_basic > 0:
+                eps_b = round(ni_for_eps / sh_basic, 2)
                     
         canonical["eps_basic"][p] = eps_b
         canonical["eps_diluted"][p] = eps_d
@@ -2190,12 +2208,30 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             if 'period' in l_clean or 'year' in l_clean or l_clean == 'net income':
                                 for lbl, vc, vp in interim_is:
                                     if 'net income for the period' in lbl: return lbl, vc, vp
-                        if 'adjustedaverageweightedshares' in c_clean or ('diluted' in l_clean and 'share' in l_clean):
+                        is_diluted_shares = 'adjustedaverageweightedshares' in c_clean or ('diluted' in l_clean and 'share' in l_clean) or ('diluted' in c_clean and 'share' in c_clean)
+                        is_basic_shares = ('weightedaverageshares' in c_clean or ('ordinary' in l_clean and 'share' in l_clean) or ('share' in l_clean and 'weighted' in l_clean)) and not is_diluted_shares
+
+                        if is_diluted_shares:
                             for lbl, vc, vp in interim_is:
-                                if 'weighted average' in lbl and vc > 4.9e9: return lbl, vc, vp
-                        if 'weightedaverageshares' in c_clean and 'adjusted' not in c_clean and 'basic' in l_clean:
+                                if 'weighted average' in lbl and 'diluted' in lbl:
+                                    return lbl, vc, vp
+                        elif is_basic_shares:
                             for lbl, vc, vp in interim_is:
-                                if 'weighted average' in lbl and vc < 4.9e9: return lbl, vc, vp
+                                if 'weighted average' in lbl and ('basic' in lbl or 'diluted' not in lbl):
+                                    return lbl, vc, vp
+
+                        is_diluted_eps = ('diluted' in c_clean or 'diluted' in l_clean) and any(w in c_clean or w in l_clean for w in ['eps', 'earnings', 'pershare'])
+                        is_basic_eps = ('basic' in c_clean or 'basic' in l_clean or ('pershare' in c_clean and not is_diluted_eps)) and any(w in c_clean or w in l_clean for w in ['eps', 'earnings', 'pershare'])
+
+                        if is_diluted_eps:
+                            for lbl, vc, vp in interim_is:
+                                if 'earnings per share' in lbl and 'diluted' in lbl:
+                                    return lbl, vc, vp
+                        elif is_basic_eps:
+                            for lbl, vc, vp in interim_is:
+                                if 'earnings per share' in lbl and ('basic' in lbl or 'diluted' not in lbl):
+                                    return lbl, vc, vp
+
                         for lbl, vc, vp in interim_is:
                             if len(lbl) > 8 and (lbl in l_clean or l_clean in lbl):
                                 return lbl, vc, vp
@@ -2212,10 +2248,13 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             
                             m_lbl, vc, vp = find_is_match(concept, label)
                             if m_lbl and pd.notna(fy_val):
-                                if 'earnings per share' in m_lbl or 'pershare' in concept.lower():
-                                    val = float(fy_val)
-                                elif 'weighted average' in m_lbl or 'shares' in concept.lower():
+                                if 'weighted average' in m_lbl or 'shares' in concept.lower():
                                     val = vc
+                                elif 'earnings per share' in m_lbl or 'pershare' in concept.lower():
+                                    if vp is not None and vc is not None:
+                                        val = round(float(fy_val) - vp + vc, 4)
+                                    else:
+                                        val = float(fy_val)
                                 else:
                                     val = float(fy_val) - vp + vc
                             ltm_col.append(val)
@@ -3527,6 +3566,21 @@ def extract_sec_data(ticker, output_dir=None):
                                 if cur_v is None or (exp_ltm_eps > 0 and cur_v < exp_ltm_eps * 0.4):
                                     inc_df.at[idx_r, 'LTM'] = exp_ltm_eps
                                     print(f"[SEC Extractor] LTM Diluted EPS calibrado a 12 meses acumulados (NI/sh): ${exp_ltm_eps} (en vez de ${cur_v})")
+            if q4_eps_b is None:
+                ni_match = inc_df[inc_df['concept'].astype(str).str.lower().str.contains('netincome', na=False)]
+                sh_b_match = inc_df[(inc_df['concept'].astype(str).str.lower().str.contains('shares', na=False) | inc_df['concept'].astype(str).str.lower().str.contains('weightedaverage', na=False)) & (~inc_df['concept'].astype(str).str.lower().str.contains('diluted', na=False)) & (~inc_df['concept'].astype(str).str.lower().str.contains('adjusted', na=False))]
+                if not ni_match.empty and not sh_b_match.empty:
+                    ni_val_ltm = float(ni_match.iloc[0].get('LTM', 0))
+                    sh_b_val_ltm = float(sh_b_match.iloc[0].get('LTM', 0))
+                    if ni_val_ltm > 0 and sh_b_val_ltm > 0:
+                        exp_ltm_eps_b = round(ni_val_ltm / sh_b_val_ltm, 2)
+                        for idx_r, r in inc_df.iterrows():
+                            cn = str(r.get('concept', '')).lower()
+                            if ('earningspershare' in cn or 'basicearnings' in cn) and 'diluted' not in cn:
+                                cur_v = r.get('LTM')
+                                if cur_v is None or (exp_ltm_eps_b > 0 and cur_v < exp_ltm_eps_b * 0.4):
+                                    inc_df.at[idx_r, 'LTM'] = exp_ltm_eps_b
+                                    print(f"[SEC Extractor] LTM Basic EPS calibrado a 12 meses acumulados (NI/sh): ${exp_ltm_eps_b} (en vez de ${cur_v})")
         except Exception as e:
             print(f"[SEC Extractor] Nota sobre calibración de EPS y Acciones LTM: {e}")
         

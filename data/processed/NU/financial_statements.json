@@ -231,7 +231,7 @@
       "FY2019": null
     },
     "shares_basic": {
-      "LTM": null,
+      "LTM": 4856663000.0,
       "FY2025": 4832944000.0,
       "FY2024": 4792081000.0,
       "FY2023": 4738841000.0,
@@ -251,7 +251,7 @@
       "FY2019": 1137931000.0
     },
     "eps_basic": {
-      "LTM": null,
+      "LTM": 0.74,
       "FY2025": 0.5936,
       "FY2024": 0.4115,
       "FY2023": 0.2175,
@@ -271,7 +271,7 @@
       "FY2019": -0.0813
     },
     "shares_basic_adjusted": {
-      "LTM": null,
+      "LTM": 4856663000.0,
       "FY2025": 4832944000.0,
       "FY2024": 4792081000.0,
       "FY2023": 4738841000.0,
@@ -291,7 +291,7 @@
       "FY2019": 3413793000.0
     },
     "eps_basic_adjusted": {
-      "LTM": null,
+      "LTM": 0.74,
       "FY2025": 0.59,
       "FY2024": 0.41,
       "FY2023": 0.22,
@@ -1145,7 +1145,8 @@
         "FY2022": -0.078,
         "FY2021": -0.103,
         "FY2020": -0.1304,
-        "FY2019": -0.0813
+        "FY2019": -0.0813,
+        "LTM": 0.74
       },
       "depth": 1,
       "is_abstract": false,
@@ -1622,7 +1623,8 @@
         "FY2024": 4792081000.0,
         "FY2023": 4738841000.0,
         "FY2022": 4676977000.0,
-        "FY2021": 1602126000.0
+        "FY2021": 1602126000.0,
+        "LTM": 4856663000.0
       },
       "depth": 0,
       "is_abstract": false,
@@ -5298,7 +5300,7 @@
           "FY2021": -0.103,
           "FY2020": -0.1304,
           "FY2019": -0.0813,
-          "LTM": null
+          "LTM": 0.74
         },
         "spanish_label": "Beneficio básico por acción ($)",
         "orig_tooltip": "Earnings Per Share (Basic) (ifrs-full_BasicEarningsLossPerShare)"
@@ -5318,7 +5320,7 @@
           "FY2021": -0.103,
           "FY2020": 1315578.0,
           "FY2019": 1137931.0,
-          "LTM": 0.5846
+          "LTM": 0.74
         },
         "spanish_label": "Beneficio diluido por acción ($)",
         "orig_tooltip": "Earnings Per Share (Diluted) (ifrs-full_DilutedEarningsLossPerShare)"
@@ -5338,7 +5340,7 @@
           "FY2021": 1602126000.0,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 4856663000.0
         },
         "spanish_label": "Acciones ordinarias básicas",
         "orig_tooltip": "Weighted Average Shares Outstanding (ifrs-full_WeightedAverageShares)"

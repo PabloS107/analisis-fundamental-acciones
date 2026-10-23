@@ -1246,6 +1246,22 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             "WeightedAverageNumberOfDilutedSharesOutstanding", "ifrs-full_AdjustedWeightedAverageShares"
         ], p, ["shares_diluted_adjusted", "shares_diluted"])
 
+        if sh_b is None and p == "LTM" and sh_d is not None and sh_d > 0:
+            # Respaldo canónico institucional si las acciones básicas no vinieron directamente para LTM
+            prior_p = next((x for x in periods if x != "LTM"), None)
+            if prior_p:
+                prior_sb = _extract_multi_source_val(fs, "income", ["WeightedAverageNumberOfSharesOutstandingBasic", "ifrs-full_WeightedAverageShares"], prior_p, ["shares_basic_adjusted", "shares_basic"])
+                prior_sd = _extract_multi_source_val(fs, "income", ["WeightedAverageNumberOfDilutedSharesOutstanding", "ifrs-full_AdjustedWeightedAverageShares"], prior_p, ["shares_diluted_adjusted", "shares_diluted"])
+                if prior_sb and prior_sd and prior_sd > 0:
+                    sh_b = round(sh_d * min(1.0, prior_sb / prior_sd))
+                else:
+                    sh_b = sh_d
+            else:
+                sh_b = sh_d
+
+        if eps_b is None and p == "LTM" and ni_comm is not None and sh_b and sh_b > 0:
+            eps_b = round(ni_comm / sh_b, 2)
+
         dps_val = _extract_multi_source_val(fs, "income", [
             "CommonStockDividendsPerShareDeclared", "CommonStockDividendsPerShareCashPaid", "DividendsPerShareDeclared"
         ], p, ["dps_adjusted", "dps"])

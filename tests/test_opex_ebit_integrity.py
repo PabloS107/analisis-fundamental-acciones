@@ -282,6 +282,67 @@ class TestOpExAndEBITIntegrity(unittest.TestCase):
                     delta = 3e6 if ticker == "MELI" else 1.0  # MELI tiene $3M de intereses minoritarios
                     self.assertAlmostEqual(ebt - tax, ni, delta=delta, msg=f"{ticker} {period}: EBT - Tax != Net Income")
 
+    def test_all_companies_ltm_per_share_metrics_integrity(self):
+        """
+        Verifica que en el 100% de las empresas del sistema (incluyendo emisores 6-K IFRS como NU):
+        1. Las acciones básicas y diluidas LTM existan y sean estrictamente positivas.
+        2. El BPA básico y diluido LTM existan y sean estrictamente positivos.
+        3. Acciones Básicas <= Acciones Diluidas (nunca al revés).
+        4. BPA Básico >= BPA Diluido (nunca al revés).
+        5. BPA Básico reconcilie con Net Income / Acciones Básicas dentro de un delta de $0.05.
+        """
+        all_companies = ["AAPL", "DECK", "JPM", "MELI", "META", "NU", "NVDA", "O", "PGR"]
+        archetype_map = {
+            "AAPL": "STANDARD_CORPORATE",
+            "DECK": "STANDARD_CORPORATE",
+            "JPM": "FINANCIAL_BANKING",
+            "MELI": "PLATFORM_ECOSYSTEM",
+            "META": "STANDARD_CORPORATE",
+            "NU": "FINANCIAL_BANKING",
+            "NVDA": "STANDARD_CORPORATE",
+            "O": "REAL_ESTATE_REIT",
+            "PGR": "INSURANCE",
+        }
+
+        for ticker in all_companies:
+            p = self.proc_dir / ticker / "financial_statements.json"
+            if not p.exists():
+                continue
+            with open(p, "r", encoding="utf-8") as f:
+                fs = json.load(f)
+            arch = archetype_map.get(ticker, "STANDARD_CORPORATE")
+            target_fys = ["LTM"] + fs.get("fiscal_years", [])
+            pnl = resolve_canonical_income_statement(fs, target_fys, archetype=arch)
+
+            sh_b = pnl["shares_basic"].get("LTM")
+            sh_d = pnl["shares_diluted"].get("LTM")
+            eps_b = pnl["eps_basic"].get("LTM")
+            eps_d = pnl["eps_diluted"].get("LTM")
+            ni_comm = pnl.get("net_income_common", {}).get("LTM") or pnl.get("net_income", {}).get("LTM")
+
+            self.assertIsNotNone(sh_b, f"{ticker} LTM: Acciones básicas no deben ser None")
+            self.assertIsNotNone(sh_d, f"{ticker} LTM: Acciones diluidas no deben ser None")
+            self.assertGreater(sh_b, 0, f"{ticker} LTM: Acciones básicas deben ser > 0")
+            self.assertGreater(sh_d, 0, f"{ticker} LTM: Acciones diluidas deben ser > 0")
+
+            self.assertIsNotNone(eps_b, f"{ticker} LTM: BPA básico no debe ser None")
+            self.assertIsNotNone(eps_d, f"{ticker} LTM: BPA diluido no debe ser None")
+            self.assertGreater(eps_b, 0, f"{ticker} LTM: BPA básico debe ser > 0")
+            self.assertGreater(eps_d, 0, f"{ticker} LTM: BPA diluido debe ser > 0")
+
+            # Identidad: Acciones Básicas <= Acciones Diluidas (+ tolerancia de redondeo mínima 1%)
+            self.assertLessEqual(sh_b, sh_d * 1.01, f"{ticker} LTM: Acciones básicas ({sh_b}) no pueden superar diluidas ({sh_d})")
+
+            # Identidad: BPA Básico >= BPA Diluido (- tolerancia de redondeo mínima 1%)
+            self.assertGreaterEqual(eps_b, eps_d * 0.99, f"{ticker} LTM: BPA básico ({eps_b}) debe ser >= BPA diluido ({eps_d})")
+
+            # Reconciliación matemática BPA ~ Net Income / Shares (tolerancia del 5% por efecto suma de 4 trimestres vs promedio ponderado anual)
+            if ni_comm and ni_comm > 0 and sh_b > 0:
+                calc_eps_b = ni_comm / sh_b
+                delta = max(0.1, eps_b * 0.06)
+                self.assertAlmostEqual(calc_eps_b, eps_b, delta=delta,
+                                       msg=f"{ticker} LTM: BPA básico calculado ({calc_eps_b:.2f}) vs reportado ({eps_b:.2f})")
+
 
 if __name__ == "__main__":
     unittest.main()

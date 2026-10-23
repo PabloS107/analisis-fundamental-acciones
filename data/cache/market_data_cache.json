@@ -1,32 +1,32 @@
 {
   "AAPL": {
     "ticker": "AAPL",
-    "timestamp": "2026-10-22T20:38:36.943136+00:00",
-    "timestamp_epoch": 1792701522.8599205,
+    "timestamp": "2026-10-23T19:13:07.610530+00:00",
+    "timestamp_epoch": 1792782793.153721,
     "is_offline": false,
     "from_cache": false,
-    "price": 348.22,
-    "market_cap_usd_m": 5081985.36,
+    "price": 346.805,
+    "market_cap_usd_m": 5061334.59,
     "diluted_shares": 14594180000,
-    "rf_10y": 0.04956,
+    "rf_10y": 0.04994,
     "beta": 1.075,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 348.2200012207031,
-        "market_cap": 5081985377415.161,
+        "price": 346.79998779296875,
+        "market_cap": 5061261445848.389,
         "beta": 1.069,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04994999885559082,
         "shares_outstanding": 14594180000,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 348.22,
+        "price": 346.81,
         "market_cap": null,
         "beta": 1.08,
-        "rf_10y": 0.049589999999999995,
+        "rf_10y": 0.04994,
         "shares_outstanding": 14590000000.0,
         "success": true
       }
@@ -37,37 +37,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $348.22 (Yahoo: $348.22, CNBC: $348.22, \u0394=0.00%) | Market Cap calculado: $5,081,985.4M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $346.81 (Yahoo: $346.80, CNBC: $346.81, \u0394=0.00%) | Market Cap calculado: $5,061,334.6M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.995%, CNBC US10Y: 4.994%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, \u0394=0.01)"
     }
   },
   "DECK": {
     "ticker": "DECK",
-    "timestamp": "2026-10-22T20:38:43.736103+00:00",
-    "timestamp_epoch": 1792701527.5273385,
+    "timestamp": "2026-10-23T19:13:20.504866+00:00",
+    "timestamp_epoch": 1792782804.245093,
     "is_offline": false,
     "from_cache": false,
-    "price": 85.28,
-    "market_cap_usd_m": 11613.59,
+    "price": 80.1275,
+    "market_cap_usd_m": 10911.91,
     "diluted_shares": 136181857,
-    "rf_10y": 0.04956,
-    "beta": 1.115,
+    "rf_10y": 0.04994,
+    "beta": 1.111,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 85.27999877929688,
-        "market_cap": 11613588598.722382,
+        "price": 80.125,
+        "market_cap": 10911571292.125,
         "beta": 1.121,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04994999885559082,
         "shares_outstanding": 136181857,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 85.28,
+        "price": 80.13,
         "market_cap": null,
-        "beta": 1.11,
-        "rf_10y": 0.049589999999999995,
+        "beta": 1.1,
+        "rf_10y": 0.04994,
         "shares_outstanding": 136180000.0,
         "success": true
       }
@@ -78,37 +78,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $85.28 (Yahoo: $85.28, CNBC: $85.28, \u0394=0.00%) | Market Cap calculado: $11,613.6M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 1.11 (Yahoo: 1.12, CNBC: 1.11, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $80.13 (Yahoo: $80.12, CNBC: $80.13, \u0394=0.01%) | Market Cap calculado: $10,911.9M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.995%, CNBC US10Y: 4.994%) | Beta validado: 1.11 (Yahoo: 1.12, CNBC: 1.10, \u0394=0.02)"
     }
   },
   "NU": {
     "ticker": "NU",
-    "timestamp": "2026-10-22T20:39:01.454784+00:00",
-    "timestamp_epoch": 1792701545.6948082,
+    "timestamp": "2026-10-23T18:56:38.979439+00:00",
+    "timestamp_epoch": 1792781804.9450307,
     "is_offline": false,
     "from_cache": false,
-    "price": 14.73,
-    "market_cap_usd_m": 71156.04,
+    "price": 15.1575,
+    "market_cap_usd_m": 73221.16,
     "diluted_shares": 4830688659,
-    "rf_10y": 0.04956,
-    "beta": 0.958,
+    "rf_10y": 0.04992,
+    "beta": 0.952,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 14.729999542236328,
-        "market_cap": 71156041735.75623,
+        "price": 15.154999732971191,
+        "market_cap": 73209085337.21196,
         "beta": 0.955,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04990000247955322,
         "shares_outstanding": 4830688659,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 14.73,
+        "price": 15.16,
         "market_cap": null,
-        "beta": 0.96,
-        "rf_10y": 0.049589999999999995,
+        "beta": 0.95,
+        "rf_10y": 0.04994,
         "shares_outstanding": 4830000000.0,
         "success": true
       }
@@ -119,37 +119,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $14.73 (Yahoo: $14.73, CNBC: $14.73, \u0394=0.00%) | Market Cap calculado: $71,156.0M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 0.96 (Yahoo: 0.95, CNBC: 0.96, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $15.16 (Yahoo: $15.15, CNBC: $15.16, \u0394=0.03%) | Market Cap calculado: $73,221.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.992% (Yahoo ^TNX: 4.990%, CNBC US10Y: 4.994%) | Beta validado: 0.95 (Yahoo: 0.95, CNBC: 0.95, \u0394=0.01)"
     }
   },
   "MELI": {
     "ticker": "MELI",
-    "timestamp": "2026-10-22T20:38:52.877316+00:00",
-    "timestamp_epoch": 1792701536.988693,
+    "timestamp": "2026-10-23T19:13:29.821492+00:00",
+    "timestamp_epoch": 1792782813.2812517,
     "is_offline": false,
     "from_cache": false,
-    "price": 1824.9575,
-    "market_cap_usd_m": 92519.51,
+    "price": 1817.7275,
+    "market_cap_usd_m": 92152.97,
     "diluted_shares": 50696802,
-    "rf_10y": 0.04956,
+    "rf_10y": 0.04994,
     "beta": 1.359,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 1824.9549560546875,
-        "market_cap": 92519380066.0232,
+        "price": 1817.7249755859375,
+        "market_cap": 92152843177.7351,
         "beta": 1.308,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04994999885559082,
         "shares_outstanding": 50696802,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 1824.96,
+        "price": 1817.73,
         "market_cap": null,
         "beta": 1.41,
-        "rf_10y": 0.049589999999999995,
+        "rf_10y": 0.04994,
         "shares_outstanding": 50700000.0,
         "success": true
       }
@@ -160,37 +160,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $1824.96 (Yahoo: $1824.95, CNBC: $1824.96, \u0394=0.00%) | Market Cap calculado: $92,519.5M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.41, \u0394=0.10)"
+      "notes": "Precio validado por consenso: $1817.73 (Yahoo: $1817.72, CNBC: $1817.73, \u0394=0.00%) | Market Cap calculado: $92,153.0M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.995%, CNBC US10Y: 4.994%) | Beta validado: 1.36 (Yahoo: 1.31, CNBC: 1.41, \u0394=0.10)"
     }
   },
   "NVDA": {
     "ticker": "NVDA",
-    "timestamp": "2026-10-22T20:39:06.085990+00:00",
-    "timestamp_epoch": 1792701549.741819,
+    "timestamp": "2026-10-23T19:13:25.484990+00:00",
+    "timestamp_epoch": 1792782808.614969,
     "is_offline": false,
     "from_cache": false,
-    "price": 212.21,
-    "market_cap_usd_m": 5124234.87,
+    "price": 212.0325,
+    "market_cap_usd_m": 5119948.78,
     "diluted_shares": 24147000000,
-    "rf_10y": 0.04956,
-    "beta": 2.203,
+    "rf_10y": 0.04994,
+    "beta": 2.208,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 212.2100067138672,
-        "market_cap": 5124235032119.751,
+        "price": 212.02499389648438,
+        "market_cap": 5119767527618.408,
         "beta": 2.216,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04994999885559082,
         "shares_outstanding": 24147000000,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 212.21,
+        "price": 212.04,
         "market_cap": null,
-        "beta": 2.19,
-        "rf_10y": 0.049589999999999995,
+        "beta": 2.2,
+        "rf_10y": 0.04994,
         "shares_outstanding": 24100000000.0,
         "success": true
       }
@@ -201,37 +201,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $212.21 (Yahoo: $212.21, CNBC: $212.21, \u0394=0.00%) | Market Cap calculado: $5,124,234.9M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 2.20 (Yahoo: 2.22, CNBC: 2.19, \u0394=0.03) | ADVERTENCIA AUDITOR\u00cdA: La Beta (2.20) se desv\u00eda fuertemente del promedio del sector (1.10)."
+      "notes": "Precio validado por consenso: $212.03 (Yahoo: $212.02, CNBC: $212.04, \u0394=0.01%) | Market Cap calculado: $5,119,948.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.995%, CNBC US10Y: 4.994%) | Beta validado: 2.21 (Yahoo: 2.22, CNBC: 2.20, \u0394=0.02) | ADVERTENCIA AUDITOR\u00cdA: La Beta (2.21) se desv\u00eda fuertemente del promedio del sector (1.10)."
     }
   },
   "JPM": {
     "ticker": "JPM",
-    "timestamp": "2026-10-22T20:38:48.364304+00:00",
-    "timestamp_epoch": 1792701532.4812725,
+    "timestamp": "2026-10-23T19:13:40.651684+00:00",
+    "timestamp_epoch": 1792782823.9717019,
     "is_offline": false,
     "from_cache": false,
-    "price": 336.54,
-    "market_cap_usd_m": 893715.62,
+    "price": 332.2021,
+    "market_cap_usd_m": 882195.9,
     "diluted_shares": 2655600000,
-    "rf_10y": 0.04956,
+    "rf_10y": 0.04993,
     "beta": 1.022,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 336.5400085449219,
-        "market_cap": 893715646691.8945,
+        "price": 332.2041931152344,
+        "market_cap": 882201455236.8164,
         "beta": 1.015,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04991999626159668,
         "shares_outstanding": 2655600000,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 336.54,
+        "price": 332.2,
         "market_cap": null,
         "beta": 1.03,
-        "rf_10y": 0.049589999999999995,
+        "rf_10y": 0.04994,
         "shares_outstanding": 2660000000.0,
         "success": true
       }
@@ -242,37 +242,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $336.54 (Yahoo: $336.54, CNBC: $336.54, \u0394=0.00%) | Market Cap calculado: $893,715.6M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 1.02 (Yahoo: 1.01, CNBC: 1.03, \u0394=0.02)"
+      "notes": "Precio validado por consenso: $332.20 (Yahoo: $332.20, CNBC: $332.20, \u0394=0.00%) | Market Cap calculado: $882,195.9M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.992%, CNBC US10Y: 4.994%) | Beta validado: 1.02 (Yahoo: 1.01, CNBC: 1.03, \u0394=0.02)"
     }
   },
   "O": {
     "ticker": "O",
-    "timestamp": "2026-10-22T20:39:10.363584+00:00",
-    "timestamp_epoch": 1792701554.6007519,
+    "timestamp": "2026-10-23T19:13:48.763699+00:00",
+    "timestamp_epoch": 1792782832.0041685,
     "is_offline": false,
     "from_cache": false,
-    "price": 57.06,
-    "market_cap_usd_m": 53991.2,
+    "price": 56.77,
+    "market_cap_usd_m": 53716.8,
     "diluted_shares": 946218033,
-    "rf_10y": 0.04956,
+    "rf_10y": 0.04993,
     "beta": 0.678,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 57.060001373291016,
-        "market_cap": 53991202262.41272,
+        "price": 56.77000045776367,
+        "market_cap": 53716798166.554245,
         "beta": 0.696,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04991999626159668,
         "shares_outstanding": 946218033,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 57.06,
+        "price": 56.77,
         "market_cap": null,
         "beta": 0.66,
-        "rf_10y": 0.049589999999999995,
+        "rf_10y": 0.04994,
         "shares_outstanding": 946220000.0,
         "success": true
       }
@@ -283,37 +283,37 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $57.06 (Yahoo: $57.06, CNBC: $57.06, \u0394=0.00%) | Market Cap calculado: $53,991.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
+      "notes": "Precio validado por consenso: $56.77 (Yahoo: $56.77, CNBC: $56.77, \u0394=0.00%) | Market Cap calculado: $53,716.8M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.992%, CNBC US10Y: 4.994%) | Beta validado: 0.68 (Yahoo: 0.70, CNBC: 0.66, \u0394=0.04)"
     }
   },
   "PGR": {
     "ticker": "PGR",
-    "timestamp": "2026-10-22T20:39:50.062907+00:00",
-    "timestamp_epoch": 1792701595.9740088,
+    "timestamp": "2026-10-23T19:13:45.034112+00:00",
+    "timestamp_epoch": 1792782828.2048738,
     "is_offline": false,
     "from_cache": false,
-    "price": 229.62,
-    "market_cap_usd_m": 133271.45,
+    "price": 228.04,
+    "market_cap_usd_m": 132354.42,
     "diluted_shares": 580400000,
-    "rf_10y": 0.04957,
-    "beta": 0.232,
+    "rf_10y": 0.04993,
+    "beta": 0.227,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 229.6199951171875,
-        "market_cap": 133271445166.01562,
+        "price": 228.0399932861328,
+        "market_cap": 132354412103.27148,
         "beta": 0.235,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04991999626159668,
         "shares_outstanding": 580400000,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 229.62,
+        "price": 228.04,
         "market_cap": null,
-        "beta": 0.23,
-        "rf_10y": 0.04961,
+        "beta": 0.22,
+        "rf_10y": 0.04994,
         "shares_outstanding": 579500000.0,
         "success": true
       }
@@ -324,7 +324,7 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $229.62 (Yahoo: $229.62, CNBC: $229.62, \u0394=0.00%) | Market Cap calculado: $133,271.4M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.957% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.961%) | Beta validado: 0.23 (Yahoo: 0.23, CNBC: 0.23, \u0394=0.00) | ADVERTENCIA AUDITOR\u00cdA: La Beta (0.23) se desv\u00eda fuertemente del promedio del sector (1.10)."
+      "notes": "Precio validado por consenso: $228.04 (Yahoo: $228.04, CNBC: $228.04, \u0394=0.00%) | Market Cap calculado: $132,354.4M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.992%, CNBC US10Y: 4.994%) | Beta validado: 0.23 (Yahoo: 0.23, CNBC: 0.22, \u0394=0.01) | ADVERTENCIA AUDITOR\u00cdA: La Beta (0.23) se desv\u00eda fuertemente del promedio del sector (1.10)."
     }
   },
   "SYNBANK": {
@@ -336,32 +336,32 @@
   },
   "META": {
     "ticker": "META",
-    "timestamp": "2026-10-22T20:38:57.467397+00:00",
-    "timestamp_epoch": 1792701540.8808546,
+    "timestamp": "2026-10-23T19:13:16.165914+00:00",
+    "timestamp_epoch": 1792782799.4012315,
     "is_offline": false,
     "from_cache": false,
-    "price": 648.85,
-    "market_cap_usd_m": 1652949.41,
+    "price": 645.8825,
+    "market_cap_usd_m": 1645389.69,
     "diluted_shares": 2547506225,
-    "rf_10y": 0.04956,
-    "beta": 1.218,
+    "rf_10y": 0.04994,
+    "beta": 1.223,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
         "source": "Yahoo Finance",
-        "price": 648.8499755859375,
-        "market_cap": 1652949351896.274,
+        "price": 645.9450073242188,
+        "market_cap": 1645548927166.118,
         "beta": 1.185,
-        "rf_10y": 0.04953000068664551,
+        "rf_10y": 0.04994999885559082,
         "shares_outstanding": 2547506225,
         "success": true
       },
       "cnbc": {
         "source": "CNBC Quote Service",
-        "price": 648.85,
+        "price": 645.82,
         "market_cap": null,
-        "beta": 1.25,
-        "rf_10y": 0.049589999999999995,
+        "beta": 1.26,
+        "rf_10y": 0.04994,
         "shares_outstanding": 2550000000.0,
         "success": true
       }
@@ -372,7 +372,7 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $648.85 (Yahoo: $648.85, CNBC: $648.85, \u0394=0.00%) | Market Cap calculado: $1,652,949.4M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.956% (Yahoo ^TNX: 4.953%, CNBC US10Y: 4.959%) | Beta validado: 1.22 (Yahoo: 1.19, CNBC: 1.25, \u0394=0.06)"
+      "notes": "Precio validado por consenso: $645.88 (Yahoo: $645.95, CNBC: $645.82, \u0394=0.02%) | Market Cap calculado: $1,645,389.7M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.995%, CNBC US10Y: 4.994%) | Beta validado: 1.22 (Yahoo: 1.19, CNBC: 1.26, \u0394=0.07)"
     }
   }
 }
