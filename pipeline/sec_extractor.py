@@ -3238,17 +3238,17 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                     can_summary["net_debt"]["LTM"] = round(tot_d - tot_liq, 2)
             break
 
-    # B. Sincronizar Dividendos LTM con carátula si la suma de trimestres generó sobre-acumulación (caso NVDA)
+    # B. Sincronizar Dividendos LTM canónicos con el flujo acumulado 10-Q oficial
     for r in as_rep_cf:
         c_tok = str(r.get("concept", "")).split(":")[-1].split("_")[-1].lower()
         if c_tok in ("paymentsofdividends", "paymentsofdividendscommonstock"):
             v_ltm = r.get("values", {}).get("LTM")
-            can_div = can_summary.get("dividends_paid", {}).get("LTM")
-            if can_div is not None and v_ltm is not None and abs(abs(float(v_ltm)) - abs(float(can_div))) > 1000.0:
-                # Priorizar el valor auditado de canonical si es el correcto o viceversa
-                target_div = min(abs(float(v_ltm)), abs(float(can_div)))
-                r["values"]["LTM"] = -target_div
-                can_summary["dividends_paid"]["LTM"] = target_div
+            if v_ltm is not None and float(v_ltm) != 0.0:
+                audited_div = abs(float(v_ltm))
+                can_summary.setdefault("dividends_paid", {})["LTM"] = audited_div
+                for k_cf in ("PaymentsOfDividends", "us-gaap_PaymentsOfDividends", "DividendsPaid", "PaymentsOfDividendsCommonStock"):
+                    if k_cf in cf_detail and isinstance(cf_detail[k_cf], dict) and "values" in cf_detail[k_cf]:
+                        cf_detail[k_cf]["values"]["LTM"] = -audited_div if float(v_ltm) < 0 else audited_div
             break
 
     # C. Resolver colisiones dimensionales en as_reported_statements (Regla 1 y Regla 6)
