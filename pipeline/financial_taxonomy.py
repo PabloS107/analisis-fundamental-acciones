@@ -239,6 +239,11 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "PaymentsToAcquireIntangibleAssets",
         "AdditionsToSoftware",
         "AdditionsToProductiveAssets",
+        "nvda_PurchasesOfPropertyAndEquipmentAndIntangibleAssets",
+        "nu_AcquisitionAndDevelopmentOfIntangibleAssets",
+        "nu_AcquisitionOfIntangibleAssets",
+        "ifrs-full_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+        "ifrs-full_PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities",
     ],
     "total_assets": [
         "Assets",
@@ -449,6 +454,8 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "PaymentsToAcquireJointVentures",
         "PaymentsToAcquireBusinessesGross",
         "AcquisitionOfSubsidiaryNetOfCashAcquired",
+        "PaymentsToAcquireCommercialRealEstate",
+        "PaymentsToAcquireLoansReceivable",
     ],
     "debt_repayments": [
         "RepaymentsOfLongTermDebt",
