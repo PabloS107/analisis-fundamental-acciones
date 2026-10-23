@@ -1039,6 +1039,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         "minority_interest_pnl": {}, "preferred_dividends": {}, "net_income_common": {},
         "eps_basic": {}, "eps_diluted": {}, "shares_basic": {}, "shares_diluted": {}, "dps": {},
         "net_interest_income": {}, "non_interest_income": {}, "non_interest_expense": {},
+        "transactional_expenses": {}, "share_of_associates": {},
         "net_premiums_earned": {}, "net_investment_income": {}, "investment_gains_losses": {},
         "fees_and_other_revenues": {}, "losses_and_lae": {}, "dac_amortization": {},
         "other_underwriting_expenses": {}, "total_benefits_and_expenses": {},
@@ -1093,6 +1094,7 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             sga = abs(sga)
 
         credit_loss = _extract_multi_source_val(fs, "income", [
+            "nu_ExpectedCreditLoss", "ExpectedCreditLoss",
             "ProvisionForLoanLeaseAndOtherLosses", "ProvisionForLoanLossesExpensed", "ProvisionForDoubtfulAccounts",
             "nu_CreditLossAllowanceExpenses", "CreditLossAllowanceExpenses1",
             "ifrs-full_AdditionalAllowanceRecognisedInProfitOrLossAllowanceAccountForCreditLossesOfFinancialAssets"
@@ -1268,6 +1270,17 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if non_int_exp is not None:
             non_int_exp = abs(non_int_exp)
 
+        trans_exp = _extract_multi_source_val(fs, "income", [
+            "nu_TransactionalExpenses", "TransactionalExpenses", "TransactionExpenses", "CostOfTransactionalServices"
+        ], p, "transactional_expenses")
+        if trans_exp is not None:
+            trans_exp = abs(trans_exp)
+
+        share_assoc = _extract_multi_source_val(fs, "income", [
+            "nu_ShareOfLossInAssociates", "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+            "IncomeLossFromEquityMethodInvestments", "ShareOfLossInAssociates"
+        ], p, "share_of_associates")
+
         prem_earned = _extract_multi_source_val(fs, "income", ["PremiumsEarnedNet", "PremiumsEarnedNetPropertyAndCasualty"], p, "net_premiums_earned")
         net_inv_inc = _extract_multi_source_val(fs, "income", ["NetInvestmentIncome", "InvestmentIncomeNet", "InterestAndDividendIncomeOperating"], p, "net_investment_income")
         inv_gains = _extract_multi_source_val(fs, "income", ["DebtAndEquitySecuritiesGainLoss", "RealizedInvestmentGainsLosses", "GainLossOnInvestments"], p)
@@ -1316,6 +1329,10 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
 
         gain_sale = _extract_multi_source_val(fs, "income", ["GainLossOnSaleOfProperties", "o_GainOnSaleOfPropertiesContinuingOperations"], p)
 
+        if archetype == "REAL_ESTATE_REIT":
+            if noi is not None and reit_da is not None:
+                ebit = round(noi - reit_da - (reit_ga or 0.0) - (reit_imp or 0.0), 2)
+
         res["revenue"][p] = rev
         res["cogs"][p] = cogs
         res["gross_profit"][p] = gp
@@ -1343,6 +1360,8 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         res["net_interest_income"][p] = nii
         res["non_interest_income"][p] = non_int_inc
         res["non_interest_expense"][p] = non_int_exp
+        res["transactional_expenses"][p] = trans_exp
+        res["share_of_associates"][p] = share_assoc
         res["net_premiums_earned"][p] = prem_earned
         res["net_investment_income"][p] = net_inv_inc
         res["investment_gains_losses"][p] = inv_gains
@@ -3372,8 +3391,9 @@ def company_detail(request, ticker):
             ]),
             ("PROVISIONES CREDITICIAS, GASTOS OPERATIVOS Y BENEFICIO NETO", [
                 ("Provisión para Pérdidas Crediticias (Provision for Credit Losses)", "credit_loss_provision", "[-]", "item", True, False, True, True, "rev", "Provision for Credit Losses"),
+                ("Costes y Gastos Transaccionales (Transactional Expenses)", "transactional_expenses", "[-]", "item", True, False, True, False, "rev", "Transactional Expenses"),
                 ("Gastos Operativos No Financieros (Non-Interest Expense)", "non_interest_expense", "[-]", "item", True, False, True, True, "rev", "Non-Interest Expense"),
-                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, False, "rev", "Operating Income"),
+                ("Participación en Resultados de Asociadas y Otros", "share_of_associates", "[±]", "item", True, False, False, False, "rev", "Share of Associates & Other"),
                 ("Beneficio Antes de Impuestos (Pre-Tax Income / EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
@@ -3403,8 +3423,6 @@ def company_detail(request, ticker):
                 ("Amortización de Costes de Adquisición de Pólizas (DAC)", "dac_amortization", "[-]", "item", True, False, True, False, "rev", "Policy Acquisition Cost Amortization"),
                 ("Otros Gastos de Suscripción y Operativos", "other_underwriting_expenses", "[-]", "item", True, False, True, False, "rev", "Other Underwriting Expenses"),
                 ("Total Siniestros y Gastos Operativos (Total Benefits & Expenses)", "total_benefits_and_expenses", "[=]", "subtotal", False, True, True, True, "rev", "Total Benefits and Expenses"),
-                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, False, "rev", "Operating Income"),
-                ("Gastos por Intereses Financieros", "interest_expense", "[-]", "item", True, False, True, False, "rev", "Interest Expense"),
                 ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),

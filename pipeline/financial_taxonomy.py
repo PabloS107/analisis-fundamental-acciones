@@ -533,6 +533,18 @@ BANKING_TAXONOMY_MAP: Dict[str, List[str]] = {
         "GeneralAndAdministrativeExpense",
         "AdministrativeExpense",
     ],
+    "transactional_expenses": [
+        "nu_TransactionalExpenses",
+        "TransactionalExpenses",
+        "TransactionExpenses",
+        "CostOfTransactionalServices",
+    ],
+    "share_of_associates": [
+        "nu_ShareOfLossInAssociates",
+        "ShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod",
+        "IncomeLossFromEquityMethodInvestments",
+        "ShareOfLossInAssociates",
+    ],
     "cash_and_liquidity": [
         "CashAndCashEquivalents",
         "CashAndBalancesWithCentralBanks",

@@ -800,6 +800,17 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         
         if archetype == "FINANCIAL_BANKING":
             ebit = None
+        elif archetype == "REAL_ESTATE_REIT":
+            # Para REITs, el beneficio operativo (EBIT) se calcula formalmente deduciendo D&A y G&A del NOI
+            da_val = get_first_matching_value(cf_data, ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization"], p) or 0.0
+            ga_val = get_first_matching_value(inc_data, ["GeneralAndAdministrativeExpense", "SellingGeneralAndAdministrativeExpense"], p) or 0.0
+            imp_val = get_first_matching_value(inc_data, ["ImpairmentOfRealEstate", "AssetImpairmentCharges"], p) or 0.0
+            prop_exp_val = get_first_matching_value(inc_data, ["DirectCostsOfLeasedAndRentedPropertyOrEquipment", "o_DirectCostsOfLeasedAndRentedPropertyOrEquipmentIncludingReimbursableExpense"], p) or 0.0
+            if rev is not None:
+                noi_val = round(rev - abs(prop_exp_val), 2)
+                ebit = round(noi_val - abs(da_val) - abs(ga_val) - abs(imp_val), 2)
+            else:
+                ebit = None
         else:
             ebit_cands = XBRL_TAXONOMY_MAP["operating_income"]
             ebit = get_first_matching_value(inc_data, ebit_cands, p)

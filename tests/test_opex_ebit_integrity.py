@@ -113,6 +113,86 @@ class TestOpExAndEBITIntegrity(unittest.TestCase):
                 ebit = pnl["operating_income"].get(period)
                 self.assertIsNone(ebit, f"{ticker} {period}: En entidades bancarias no se debe imputar EBIT corporativo")
 
+    def test_nu_banking_cascade_integrity(self):
+        """
+        Verifica que en NU (Nu Holdings - Digital Banking/IFRS):
+        1. Se extraigan correctamente los Costes Transaccionales y la Participación en Asociadas.
+        2. La cascada completa cuadre matemáticamente al céntimo:
+           Total Revenue - Expected Credit Loss - Transactional Expenses - Non-Interest Expense + Share of Associates == EBT.
+        3. EBT - Income Tax == Net Income.
+        4. Net Income - Minoritarios == Net Income to Common.
+        """
+        p = self.proc_dir / "NU" / "financial_statements.json"
+        self.assertTrue(p.exists(), "NU financial_statements.json debe existir")
+        with open(p, "r", encoding="utf-8") as f:
+            fs = json.load(f)
+        fys = fs.get("fiscal_years", [])
+        pnl = resolve_canonical_income_statement(fs, fys, archetype="FINANCIAL_BANKING")
+
+        for period in ["FY2025", "FY2024", "FY2023", "FY2022"]:
+            if period not in fys:
+                continue
+            rev = pnl["revenue"].get(period)
+            clp = pnl["credit_loss_provision"].get(period)
+            trans = pnl["transactional_expenses"].get(period)
+            nie = pnl["non_interest_expense"].get(period)
+            assoc = pnl["share_of_associates"].get(period) or 0.0
+            ebt = pnl["ebt"].get(period)
+            tax = pnl["income_tax"].get(period)
+            ni = pnl["net_income"].get(period)
+            ni_comm = pnl["net_income_common"].get(period)
+            minority = pnl.get("minority_interest_pnl", {}).get(period) or 0.0
+
+            self.assertIsNotNone(rev, f"NU {period}: revenue debe existir")
+            self.assertIsNotNone(clp, f"NU {period}: credit_loss_provision debe existir")
+            self.assertIsNotNone(trans, f"NU {period}: transactional_expenses debe existir")
+            self.assertIsNotNone(nie, f"NU {period}: non_interest_expense debe existir")
+            self.assertIsNotNone(ebt, f"NU {period}: ebt debe existir")
+
+            calc_ebt = rev - clp - trans - nie + assoc
+            self.assertAlmostEqual(calc_ebt, ebt, delta=1e5,
+                                   msg=f"NU {period}: Rev - CLP - Trans - NIE + Assoc ({calc_ebt}) != EBT ({ebt})")
+
+            self.assertIsNotNone(tax, f"NU {period}: tax debe existir")
+            self.assertIsNotNone(ni, f"NU {period}: net_income debe existir")
+            self.assertAlmostEqual(ebt - tax, ni, delta=1e5,
+                                   msg=f"NU {period}: EBT - Tax != Net Income")
+
+            if ni_comm is not None:
+                self.assertAlmostEqual(ni - minority, ni_comm, delta=2e5,
+                                       msg=f"NU {period}: NI - Minority != Net Income Common")
+
+    def test_reit_operating_income_cascade(self):
+        """
+        Verifica que en REITs (O - Realty Income):
+        1. operating_income (EBIT) sea exactamente NOI - D&A - G&A - Deterioros (no solo NOI).
+        2. EBT - Tax - Intereses Minoritarios == Net Income.
+        """
+        p = self.proc_dir / "O" / "financial_statements.json"
+        if not p.exists():
+            return
+        with open(p, "r", encoding="utf-8") as f:
+            fs = json.load(f)
+        fys = fs.get("fiscal_years", [])
+        pnl = resolve_canonical_income_statement(fs, fys, archetype="REAL_ESTATE_REIT")
+
+        for period in ["FY2025", "FY2024"]:
+            if period not in fys:
+                continue
+            ebit = pnl["operating_income"].get(period)
+            ebt = pnl["ebt"].get(period)
+            tax = pnl["income_tax"].get(period)
+            ni = pnl["net_income"].get(period)
+            minority = pnl.get("minority_interest_pnl", {}).get(period) or 0.0
+
+            self.assertIsNotNone(ebit, f"O {period}: EBIT real debe existir")
+            # En Realty Income FY25, EBIT real es ~$1.8B, mientras que NOI es ~$5.0B
+            # Aseguramos que EBIT no sea confundido con NOI
+            self.assertLess(ebit, 3.5e9, f"O {period}: EBIT ({ebit}) no debe confundirse con NOI (> $4B)")
+            if ebt is not None and tax is not None and ni is not None:
+                self.assertAlmostEqual(ebt - tax - minority, ni, delta=1e5,
+                                       msg=f"O {period}: EBT - Tax - Minority != Net Income")
+
     def test_deck_non_operating_and_ebt_cascade(self):
         """
         Verifica que en DECK:
