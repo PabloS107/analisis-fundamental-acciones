@@ -483,6 +483,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "dividends_paid": {},
         "share_repurchases": {},
         "stock_plans_proceeds": {},
+        "stock_based_compensation": {},
         "share_repurchases_gross": {},
         "share_repurchases_net": {},
         "share_repurchases_sbc_tax": {},
@@ -1111,6 +1112,11 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             sbc_tax_raw = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["share_repurchases_sbc_tax"], p, is_flow=True)
         canonical["share_repurchases_sbc_tax"][p] = abs(float(sbc_tax_raw)) if sbc_tax_raw is not None else None
 
+        sbc_raw = get_first_matching_value(cf_data, XBRL_TAXONOMY_MAP["stock_based_compensation"], p)
+        if sbc_raw is None and facts_df is not None:
+            sbc_raw = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["stock_based_compensation"], p, is_flow=True)
+        canonical["stock_based_compensation"][p] = abs(float(sbc_raw)) if sbc_raw is not None else None
+
         canonical["share_repurchases_gross"][p] = canonical["share_repurchases"][p]
         if canonical["share_repurchases"][p] is not None and canonical["stock_plans_proceeds"][p] is not None:
             canonical["share_repurchases_net"][p] = max(0.0, round(canonical["share_repurchases"][p] - canonical["stock_plans_proceeds"][p], 2))
@@ -1155,6 +1161,7 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 ("share_repurchases", XBRL_TAXONOMY_MAP["share_repurchases"], False),
                 ("stock_plans_proceeds", XBRL_TAXONOMY_MAP["stock_plans_proceeds"], False),
                 ("share_repurchases_sbc_tax", XBRL_TAXONOMY_MAP["share_repurchases_sbc_tax"], False),
+                ("stock_based_compensation", XBRL_TAXONOMY_MAP["stock_based_compensation"], False),
                 ("acquisitions_ma", XBRL_TAXONOMY_MAP["acquisitions_ma"], False),
                 ("debt_repayments", XBRL_TAXONOMY_MAP["debt_repayments"], False),
                 ("debt_issuances", XBRL_TAXONOMY_MAP["debt_issuances"], False),
@@ -1314,22 +1321,38 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             tot_liquid_cash = round(cash + st_inv, 2)
             canonical["total_liquid_cash"][p] = tot_liquid_cash
             
-            st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p)
-            if st_debt is None and facts_df is not None:
-                st_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["short_term_debt"], p)
-            st_debt = st_debt or 0.0
-
-            lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p)
-            if lt_debt is None and facts_df is not None:
-                lt_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["long_term_debt"], p)
-            lt_debt = lt_debt or 0.0
+            # Agregación universal de deuda financiera (SSOT y preservación de tramos)
+            cp_val = get_first_matching_value(bal_data, ["CommercialPaper", "us-gaap_CommercialPaper", "ShortTermBorrowings", "us-gaap_ShortTermBorrowings"], p)
+            ltd_curr = get_first_matching_value(bal_data, ["LongTermDebtCurrent", "us-gaap_LongTermDebtCurrent", "CurrentPortionOfLongTermDebt", "us-gaap_CurrentPortionOfLongTermDebt"], p)
+            ltd_tot = get_first_matching_value(bal_data, ["LongTermDebt", "us-gaap_LongTermDebt"], p)
+            ltd_noncurr = get_first_matching_value(bal_data, ["LongTermDebtNoncurrent", "us-gaap_LongTermDebtNoncurrent"], p)
 
             comb_debt = get_first_matching_value(bal_data, ["DebtLongtermAndShorttermCombinedAmount", "us-gaap_DebtLongtermAndShorttermCombinedAmount", "TotalDebt"], p)
             if comb_debt is not None:
                 tot_debt = round(float(comb_debt), 2)
-                if lt_debt == 0.0 and tot_debt > st_debt:
-                    lt_debt = round(tot_debt - st_debt, 2)
+                st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p) or 0.0
+                lt_debt = round(tot_debt - st_debt, 2) if tot_debt > st_debt else (tot_debt if lt_debt == 0.0 else lt_debt)
+            elif cp_val is not None and ltd_tot is not None:
+                # Caso corporativo con pagarés comerciales y deuda a plazo total (ej. AAPL)
+                tot_debt = round(float(cp_val) + float(ltd_tot), 2)
+                lt_debt = round(float(ltd_noncurr), 2) if ltd_noncurr is not None else round(float(ltd_tot), 2)
+                st_debt = round(tot_debt - lt_debt, 2)
             else:
+                st_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+                if st_debt is None and facts_df is not None:
+                    st_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["short_term_debt"], p)
+                st_debt = st_debt or 0.0
+
+                lt_debt = get_first_matching_value(bal_data, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+                if lt_debt is None and facts_df is not None:
+                    lt_debt = get_fact_fallback(facts_df, XBRL_TAXONOMY_MAP["long_term_debt"], p)
+                lt_debt = lt_debt or 0.0
+
+                if cp_val is not None and ltd_curr is not None:
+                    combined_st = round(float(cp_val) + float(ltd_curr), 2)
+                    if combined_st > st_debt:
+                        st_debt = combined_st
+
                 # Para empresas con tramos específicos de pagarés, notas y préstamos (ej. REITs)
                 # que presentan NotesPayable + LoansPayable + SecuredDebt por separado sin un total consolidado
                 notes_p = get_first_matching_value(bal_data, ["NotesPayable", "us-gaap_NotesPayable", "SeniorNotes"], p) or 0.0
@@ -3227,6 +3250,47 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                 r["values"]["LTM"] = -target_div
                 can_summary["dividends_paid"]["LTM"] = target_div
             break
+
+    # C. Resolver colisiones dimensionales en as_reported_statements (Regla 1 y Regla 6)
+    # Si dos filas no abstractas del mismo estado comparten el mismo LTM no nulo pero difieren en FY_latest,
+    # verificar con los detalles oficiales (detail) cuál de ellas posee legítimamente ese valor LTM.
+    fys = [x for x in full_dataset.get("fiscal_years", []) if x != "LTM"]
+    if fys:
+        latest_fy = fys[0]
+        details_map = {
+            "income_statement": inc_detail,
+            "balance_sheet": bs_detail,
+            "cash_flow_statement": cf_detail
+        }
+        for s_name, rows in as_reported.items():
+            s_det = details_map.get(s_name, {})
+            non_abs = [r for r in rows if not r.get("is_abstract") and r.get("values", {}).get("LTM") is not None]
+            for i in range(len(non_abs)):
+                for j in range(i + 1, len(non_abs)):
+                    r1 = non_abs[i]
+                    r2 = non_abs[j]
+                    v1_ltm = r1["values"].get("LTM")
+                    v2_ltm = r2["values"].get("LTM")
+                    v1_fy = r1["values"].get(latest_fy)
+                    v2_fy = r2["values"].get(latest_fy)
+                    if v1_fy is not None and v2_fy is not None and v1_fy != v2_fy and v1_fy != 0.0 and v2_fy != 0.0:
+                        if v1_ltm == v2_ltm and v1_ltm != 0.0:
+                            c1_tok = str(r1.get("concept", "")).split(":")[-1].split("_")[-1].lower()
+                            c2_tok = str(r2.get("concept", "")).split(":")[-1].split("_")[-1].lower()
+                            
+                            r1_det_val = None
+                            r2_det_val = None
+                            for k, v in s_det.items():
+                                k_tok = k.split(":")[-1].split("_")[-1].lower()
+                                if k_tok == c1_tok and v.get("values", {}).get("LTM") is not None:
+                                    r1_det_val = v["values"]["LTM"]
+                                if k_tok == c2_tok and v.get("values", {}).get("LTM") is not None:
+                                    r2_det_val = v["values"]["LTM"]
+                            
+                            if r1_det_val == v1_ltm and r2_det_val != v2_ltm:
+                                r2["values"]["LTM"] = r2_det_val
+                            elif r2_det_val == v2_ltm and r1_det_val != v1_ltm:
+                                r1["values"]["LTM"] = r1_det_val
 
     full_dataset["as_reported_statements"] = as_reported
     return full_dataset

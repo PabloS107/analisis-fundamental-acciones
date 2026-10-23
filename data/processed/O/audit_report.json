@@ -2,7 +2,7 @@
   "ticker": "O",
   "company_name": "REALTY INCOME CORP",
   "cik": "0000726728",
-  "audit_timestamp": "2026-10-22T16:30:03.051743",
+  "audit_timestamp": "2026-10-23T18:16:01.683504",
   "years_audited": {
     "LTM": [
       {
@@ -51,11 +51,11 @@
         "status": "PASS",
         "net_income": 1267577000.0,
         "shares_diluted": 926400250.0,
-        "eps_reported": 1.38,
+        "eps_reported": 1.37,
         "eps_calculated": 1.37,
-        "eps_adjusted": 1.38,
+        "eps_adjusted": 1.37,
         "split_factor": 1.0,
-        "discrepancy": 0.01
+        "discrepancy": 0.0
       }
     ],
     "FY2025": [
@@ -612,10 +612,10 @@
         "test_name": "Identidad de AFFO / FCF para REITs (FCF = FFO - CapEx Mantenimiento)",
         "passed": true,
         "status": "PASS",
-        "ffo": 743514000.0,
+        "ffo": 765514000.0,
         "recurring_capex_maintenance": 13426000.0,
-        "fcf_reported": 730088000.0,
-        "fcf_calculated": 730088000.0,
+        "fcf_reported": 752088000.0,
+        "fcf_calculated": 752088000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -651,15 +651,9 @@
     "FY2015": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": true,
-        "status": "PASS",
-        "assets": 11845379000.0,
-        "liabilities": 5313783000.0,
-        "equity": 6531596000.0,
-        "mezzanine_equity": null,
-        "liabilities_plus_equity": 11845379000.0,
-        "discrepancy_usd": 0.0,
-        "tolerance_usd": 1184537.9
+        "passed": null,
+        "status": "SKIP",
+        "message": "Partidas insuficientes en FY2015 para verificar balance completo."
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -671,10 +665,10 @@
         "test_name": "Identidad de AFFO / FCF para REITs (FCF = FFO - CapEx Mantenimiento)",
         "passed": true,
         "status": "PASS",
-        "ffo": 670781000.0,
+        "ffo": 692981000.0,
         "recurring_capex_maintenance": 11541000.0,
-        "fcf_reported": 659240000.0,
-        "fcf_calculated": 659240000.0,
+        "fcf_reported": 681440000.0,
+        "fcf_calculated": 681440000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -710,8 +704,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 72,
-  "passed_tests": 59,
+  "passed_tests": 58,
   "failed_tests": 0,
-  "skipped_tests": 13,
+  "skipped_tests": 14,
   "compliance_score_pct": 100.0
 }

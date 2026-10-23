@@ -276,8 +276,12 @@ def resolve_canonical_capital_flows(fs, periods):
     ]
     stock_plans_keys = [
         "ProceedsFromStockPlans", "us-gaap_ProceedsFromStockPlans",
+        "ProceedsFromStockOptionsExercised", "us-gaap_ProceedsFromStockOptionsExercised",
         "ProceedsFromIssuanceOfCommonStock", "us-gaap_ProceedsFromIssuanceOfCommonStock",
-        "ProceedsFromIssuanceOfShares", "ifrs-full_ProceedsFromIssuingShares"
+        "ProceedsFromIssuanceOfShares", "ifrs-full_ProceedsFromIssuingShares",
+        "ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
+        "us-gaap_ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
+        "Netproceedspaymentsrelatedtoemployeestockplans", "nvda_Netproceedspaymentsrelatedtoemployeestockplans"
     ]
     tax_keys = [
         "PaymentsRelatedToTaxWithholdingForShareBasedCompensation",
@@ -312,7 +316,10 @@ def resolve_canonical_capital_flows(fs, periods):
         "RepaymentsOfSecuredDebt", "us-gaap_RepaymentsOfSecuredDebt", "RepaymentsOfUnsecuredDebt", "us-gaap_RepaymentsOfUnsecuredDebt",
         "us-gaap_RepaymentsOfConvertibleDebt", "RepaymentsOfBorrowingsClassifiedAsFinancingActivities",
         "PaymentsOfBorrowingsAndFinancing", "RepaymentsOfTermLoans", "RepaymentsOfConvertibleDebt",
-        "RepaymentsOfSeniorNotes"
+        "RepaymentsOfSeniorNotes", "RepaymentsOfNotesPayable", "us-gaap_RepaymentsOfNotesPayable",
+        "RepaymentsOfLongTermDebtAndCapitalSecurities", "us-gaap_RepaymentsOfLongTermDebtAndCapitalSecurities",
+        "RepaymentsOfLongTermLinesOfCreditAndCommercialPaper", "o_RepaymentsOfLongTermLinesOfCreditAndCommercialPaper",
+        "FinanceLeasePrincipalPayments", "us-gaap_FinanceLeasePrincipalPayments", "PaymentsOfLeaseLiabilities"
     ]
     di_keys = [
         "ProceedsFromIssuanceOfLongTermDebt", "ProceedsFromIssuanceOfDebt",
@@ -325,7 +332,9 @@ def resolve_canonical_capital_flows(fs, periods):
         "nu_ProceedsFromDebtInstrumentsEligibleAsCapital", "ProceedsFromTermLoans",
         "ProceedsFromConvertibleDebt", "ProceedsFromIssuanceOfConvertibleDebt",
         "ProceedsFromIssuanceOfSeniorNotes", "ProceedsFromLongTermLinesOfCredit",
-        "ProceedsFromNotesPayable", "o_ProceedsFromLongTermLinesOfCreditAndIssuanceOfCommercialPaper"
+        "ProceedsFromNotesPayable", "us-gaap_ProceedsFromNotesPayable",
+        "ProceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet", "us-gaap_ProceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet",
+        "o_ProceedsFromLongTermLinesOfCreditAndIssuanceOfCommercialPaper"
     ]
 
     flows = {
@@ -1443,7 +1452,7 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         "debt_issued": {}, "debt_repaid": {}, "net_debt_issued": {},
         "stock_issued": {}, "share_repurchases_open_market": {}, "share_repurchases_sbc_tax": {},
         "dividends_paid": {}, "other_financing": {}, "cff": {},
-        "fx_effect": {}, "net_change_in_cash": {}, "ending_cash": {}, "fcf": {}
+        "fx_effect": {}, "net_change_in_cash": {}, "ending_cash": {}, "fcf": {}, "affo": {}
     }
 
     for p in periods:
@@ -1461,7 +1470,8 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         sbc = _extract_multi_source_val(fs, "cashflow", [
             "ShareBasedCompensation", "AllocatedShareBasedCompensationExpense", "AdjustmentsForSharebasedPayments",
             "ExpenseFromSharebasedPaymentTransactionsWithEmployees", "RestrictedStockExpense", "us-gaap_RestrictedStockExpense",
-            "ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense", "us-gaap_ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense"
+            "ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense", "us-gaap_ShareBasedCompensationArrangementByShareBasedPaymentAwardExpense",
+            "StockOptionPlanExpense", "us-gaap_StockOptionPlanExpense", "StockBasedCompensation", "meli_StockBasedCompensation"
         ], p, "stock_based_compensation")
         if sbc is not None:
             sbc = abs(sbc)
@@ -1476,24 +1486,54 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "CreditLossAllowanceExpenses1", "UnrealizedGainLossOnInvestments", "GainsLossesOnExtinguishmentOfDebt"
         ], p)
 
-        wc_ar = _extract_multi_source_val(fs, "cashflow", [
-            "IncreaseDecreaseInAccountsReceivable", "IncreaseDecreaseInOtherReceivables",
-            "meli_IncreaseDecreaseInPrincipalLoansReceivableNet", "TradeAndOtherReceivablesNetCurrent"
+        wc_ar_trade = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInAccountsReceivable", "meli_IncreaseDecreaseInPrincipalLoansReceivableNet",
+            "TradeAndOtherReceivablesNetCurrent"
         ], p)
+        wc_ar_other = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInOtherReceivables"
+        ], p)
+        if wc_ar_trade is not None and wc_ar_other is not None:
+            wc_ar = round(wc_ar_trade + wc_ar_other, 2)
+        else:
+            wc_ar = wc_ar_trade if wc_ar_trade is not None else (wc_ar_other if wc_ar_other is not None else None)
 
         wc_inv = _extract_multi_source_val(fs, "cashflow", [
             "IncreaseDecreaseInInventories"
         ], p)
 
         wc_ap = _extract_multi_source_val(fs, "cashflow", [
-            "IncreaseDecreaseInAccountsPayable", "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities"
+            "IncreaseDecreaseInAccountsPayable", "IncreaseDecreaseInAccountsPayableTrade",
+            "us-gaap_IncreaseDecreaseInAccountsPayableTrade", "IncreaseDecreaseInAccountsPayableAndAccruedLiabilities"
         ], p)
 
-        wc_other = _extract_multi_source_val(fs, "cashflow", [
-            "IncreaseDecreaseInContractWithCustomerLiability", "IncreaseDecreaseInOtherOperatingAssets",
-            "IncreaseDecreaseInOtherOperatingLiabilities", "IncreaseDecreaseInAccruedLiabilities",
-            "meli_IncreaseDecreaseInFundsPayableToCustomers", "IncreaseDecreaseInOperatingCapital"
+        wc_other_assets = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInOtherOperatingAssets", "IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets"
         ], p)
+        wc_other_liab = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInOtherOperatingLiabilities", "IncreaseDecreaseInOtherNoncurrentLiabilities",
+            "IncreaseDecreaseInAccruedLiabilities", "IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities"
+        ], p)
+        wc_funds_cust = _extract_multi_source_val(fs, "cashflow", [
+            "meli_IncreaseDecreaseInFundsPayableToCustomers", "IncreaseDecreaseInFundsPayableToCustomers"
+        ], p)
+        wc_card_pay = _extract_multi_source_val(fs, "cashflow", [
+            "meli_IncreaseDecreaseInAmountsPayableDueToCreditAndDebitCardTransactions",
+            "IncreaseDecreaseInAmountsPayableDueToCreditAndDebitCardTransactions"
+        ], p)
+        wc_contract = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInContractWithCustomerLiability", "IncreaseDecreaseInDeferredRevenue"
+        ], p)
+        wc_lease = _extract_multi_source_val(fs, "cashflow", [
+            "IncreaseDecreaseInOperatingLeaseLiability"
+        ], p)
+        valid_others = [x for x in [wc_other_assets, wc_other_liab, wc_funds_cust, wc_card_pay, wc_contract, wc_lease] if x is not None]
+        if valid_others:
+            wc_other = round(sum(valid_others), 2)
+        else:
+            wc_other = _extract_multi_source_val(fs, "cashflow", [
+                "IncreaseDecreaseInOperatingCapital"
+            ], p)
 
         cfo = _extract_multi_source_val(fs, "cashflow", [
             "NetCashProvidedByUsedInOperatingActivities", "CashFlowsFromUsedInOperatingActivities"
@@ -1504,8 +1544,12 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             capex = abs(float(can_capex))
         else:
             raw_cx = _extract_multi_source_val(fs, "cashflow", [
-                "PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets",
-                "PaymentsForPropertyPlantAndEquipment", "ifrs-full_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"
+                "PaymentsToAcquirePropertyPlantAndEquipment", "PurchasesOfPropertyAndEquipmentAndIntangibleAssets",
+                "nvda_PurchasesOfPropertyAndEquipmentAndIntangibleAssets", "PurchasesOfPropertyAndEquipment",
+                "PaymentsToAcquireProductiveAssets", "PaymentsForPropertyPlantAndEquipment",
+                "ifrs-full_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+                "AcquisitionAndDevelopmentOfIntangibleAssets", "AcquisitionOfIntangibleAssets",
+                "PurchaseOfIntangibleAssets", "PaymentsToAcquireIntangibleAssets"
             ], p)
             capex = abs(raw_cx) if raw_cx is not None else None
 
@@ -1584,12 +1628,17 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         ], p)
 
         can_fcf = canonical.get("free_cash_flow", {}).get(p)
-        if can_fcf is not None and archetype != "FINANCIAL_BANKING":
+        if can_fcf is not None and archetype not in ("FINANCIAL_BANKING", "REAL_ESTATE_REIT"):
             fcf = float(can_fcf)
         elif archetype != "FINANCIAL_BANKING" and cfo is not None and capex is not None:
             fcf = round(cfo - capex, 2)
         else:
             fcf = None
+
+        affo_val = canonical.get("affo", {}).get(p)
+        if affo_val is None and archetype == "REAL_ESTATE_REIT":
+            affo_val = canonical.get("free_cash_flow", {}).get(p)
+        res["affo"][p] = affo_val
 
         res["net_income"][p] = ni
         res["da"][p] = da
@@ -3584,7 +3633,7 @@ def company_detail(request, ticker):
             ("Flujo de Caja Operativo (CFO)", "cfo", "[=]", "result", False, True, False, True, "ni", "Cash Provided by Operating Activities"),
         ]),
         ("ACTIVIDADES DE INVERSIÓN (INVESTING ACTIVITIES)", [
-            ("Inversiones en Inmovilizado / CapEx", "capex", "[-]", "item", True, False, True, True, "ni", "Capital Expenditures"),
+            ("Inversiones en Inmovilizado / CapEx", "capex", "[-]", "item", True, False, True, (archetype != "FINANCIAL_BANKING" or any(cf_data.get("capex", {}).get(k) is not None for k in cf_data.get("capex", {}))), "ni", "Capital Expenditures"),
             ("Adquisiciones Netas de Caja (M&A)", "acquisitions_ma", "[-]", "item", True, False, True, False, "ni", "Acquisitions Net of Cash"),
             ("Compras de Inversiones y Valores Negociables", "purchases_investments", "[-]", "item", True, False, True, False, "ni", "Purchases of Investments"),
             ("Ventas y Vencimientos de Inversiones Negociables", "sales_maturities_investments", "[+]", "item", True, False, False, False, "ni", "Sales & Maturities of Investments"),
@@ -3607,6 +3656,7 @@ def company_detail(request, ticker):
             ("Variación Neta de Efectivo en el Período (Net Change in Cash)", "net_change_in_cash", "[=]", "subtotal", False, True, False, True, "ni", "Net Change in Cash & Equivalents"),
             ("Efectivo, Equivalentes y Efectivo Restringido al Cierre", "ending_cash", "[=]", "subtotal", False, True, False, True, "ni", "Ending Cash & Equivalents"),
             ("Flujo de Caja Libre (FCF = CFO − CapEx)", "fcf", "[=]", "result", False, True, False, (archetype != "FINANCIAL_BANKING"), "ni", "Free Cash Flow"),
+            ("Flujo de Fondos Ajustado de las Operaciones (AFFO REIT)", "affo", "[=]", "result", False, True, False, (archetype == "REAL_ESTATE_REIT"), "ni", "Adjusted Funds From Operations"),
         ])
     ]
 

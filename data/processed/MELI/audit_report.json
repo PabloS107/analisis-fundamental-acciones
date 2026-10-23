@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-10-22T16:30:03.026023",
+  "audit_timestamp": "2026-10-23T18:16:01.650211",
   "years_audited": {
     "LTM": [
       {
@@ -56,11 +56,11 @@
         "status": "PASS",
         "net_income": 1863000000.0,
         "shares_diluted": 50697282.75,
-        "eps_reported": 36.77,
+        "eps_reported": 36.75,
         "eps_calculated": 36.75,
-        "eps_adjusted": 36.77,
+        "eps_adjusted": 36.75,
         "split_factor": 1.0,
-        "discrepancy": 0.02
+        "discrepancy": 0.0
       }
     ],
     "FY2025": [
@@ -706,15 +706,9 @@
     "FY2015": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": true,
-        "status": "PASS",
-        "assets": 1003606000.0,
-        "liabilities": 664148000.0,
-        "equity": 339458000.0,
-        "mezzanine_equity": null,
-        "liabilities_plus_equity": 1003606000.0,
-        "discrepancy_usd": 0.0,
-        "tolerance_usd": 100360.6
+        "passed": null,
+        "status": "SKIP",
+        "message": "Partidas insuficientes en FY2015 para verificar balance completo."
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -770,8 +764,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 72,
-  "passed_tests": 71,
+  "passed_tests": 70,
   "failed_tests": 0,
-  "skipped_tests": 1,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0
 }
