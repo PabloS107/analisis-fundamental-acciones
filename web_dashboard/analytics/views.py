@@ -1100,9 +1100,12 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if credit_loss is not None:
             credit_loss = abs(credit_loss)
 
-        ebit = _extract_multi_source_val(fs, "income", [
-            "OperatingIncomeLoss", "ifrs-full_ProfitLossFromOperatingActivities", "OperatingIncome"
-        ], p, "operating_income")
+        if archetype == "FINANCIAL_BANKING":
+            ebit = None
+        else:
+            ebit = _extract_multi_source_val(fs, "income", [
+                "OperatingIncomeLoss", "ifrs-full_ProfitLossFromOperatingActivities", "OperatingIncome"
+            ], p, "operating_income")
 
         tot_opex = _extract_multi_source_val(fs, "income", [
             "OperatingExpenses", "CostsAndExpenses", "ifrs-full_OperatingExpense"
@@ -1112,12 +1115,20 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if tot_opex is not None:
             tot_opex = abs(tot_opex)
 
+        # Verificación contable universal de fidelidad al Estado de Resultados publicado:
+        # Si la empresa reporta un Total OpEx compuesto íntegramente por SG&A (abs(tot_opex - sga) <= 1.0),
+        # cualquier cifra de I+D proviene de notas/desgloses complementarios y ya está incluida en SG&A.
+        # No debe figurar como deducción operativa independiente en la cascada del Estado de Resultados.
+        if tot_opex is not None and sga is not None and rd is not None:
+            if abs(tot_opex - sga) <= 1.0 or (sga >= tot_opex - 1.0):
+                rd = None
+
         other_opex_raw = _extract_multi_source_val(fs, "income", [
             "RestructuringCharges", "OtherCostAndExpenseOperating", "BusinessCombinationAcquisitionRelatedCosts",
             "AmortizationOfIntangibleAssets", "OperatingExpensesOther", "ImpairmentOfIntangibleAssetsFinitelived"
         ], p)
         if tot_opex is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
-            implied_other = max(0.0, round(tot_opex - (rd or 0.0) - (sga or 0.0), 2))
+            implied_other = max(0.0, round(tot_opex - (rd or 0.0) - (sga or 0.0) - (credit_loss or 0.0), 2))
             other_opex = implied_other if implied_other > 0.01 else None
         else:
             other_opex = abs(other_opex_raw) if other_opex_raw is not None else None
@@ -3287,9 +3298,15 @@ def company_detail(request, ticker):
                     val_dict = {p: _to_m(source_data.get(k, {}).get(p)) for p in statements_fys}
 
                 if _should_include_row(item, val_dict):
+                    eff_tooltip = tip or f"Estándar Canónico: {k}"
+                    if k == "sga_expense":
+                        canon_rd = canonical.get("rd_expense", {}) if isinstance(canonical, dict) else {}
+                        if any(v is not None for v in canon_rd.values()) and not any(v is not None for v in source_data.get("rd_expense", {}).values()):
+                            eff_tooltip = f"{eff_tooltip}. En empresas que integran I+D/diseño en gastos generales (ej. calzado y retail), incluye la inversión reportada en notas del 10-K."
+
                     sec_visible_items.append({
                         "label": lbl,
-                        "orig_tooltip": tip or f"Estándar Canónico: {k}",
+                        "orig_tooltip": eff_tooltip,
                         "clarification": None,
                         "operator": op,
                         "row_type": r_type,
@@ -3332,7 +3349,7 @@ def company_detail(request, ticker):
             ("PROVISIONES CREDITICIAS, GASTOS OPERATIVOS Y BENEFICIO NETO", [
                 ("Provisión para Pérdidas Crediticias (Provision for Credit Losses)", "credit_loss_provision", "[-]", "item", True, False, True, True, "rev", "Provision for Credit Losses"),
                 ("Gastos Operativos No Financieros (Non-Interest Expense)", "non_interest_expense", "[-]", "item", True, False, True, True, "rev", "Non-Interest Expense"),
-                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, False, "rev", "Operating Income"),
                 ("Beneficio Antes de Impuestos (Pre-Tax Income / EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),
                 ("Beneficio Neto Consolidado (Net Income)", "net_income", "[=]", "result", False, True, False, True, "rev", "Net Income"),
@@ -3362,7 +3379,7 @@ def company_detail(request, ticker):
                 ("Amortización de Costes de Adquisición de Pólizas (DAC)", "dac_amortization", "[-]", "item", True, False, True, False, "rev", "Policy Acquisition Cost Amortization"),
                 ("Otros Gastos de Suscripción y Operativos", "other_underwriting_expenses", "[-]", "item", True, False, True, False, "rev", "Other Underwriting Expenses"),
                 ("Total Siniestros y Gastos Operativos (Total Benefits & Expenses)", "total_benefits_and_expenses", "[=]", "subtotal", False, True, True, True, "rev", "Total Benefits and Expenses"),
-                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, True, "rev", "Operating Income"),
+                ("Beneficio Operativo (EBIT)", "operating_income", "[=]", "result", False, True, False, False, "rev", "Operating Income"),
                 ("Gastos por Intereses Financieros", "interest_expense", "[-]", "item", True, False, True, False, "rev", "Interest Expense"),
                 ("Beneficio Antes de Impuestos (EBT)", "ebt", "[=]", "subtotal", False, True, False, True, "rev", "Pre-Tax Income"),
                 ("Impuesto sobre Beneficios (Income Tax)", "income_tax", "[-]", "item", True, False, True, True, "ebt", "Income Tax Expense"),

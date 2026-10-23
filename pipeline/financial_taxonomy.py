@@ -119,7 +119,6 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "OperatingIncome",
         "ProfitLossFromOperatingActivities",
         "OperatingProfitLoss",
-        "ProfitLossBeforeTax",
     ],
     "net_income": [
         "NetIncomeLoss",
@@ -899,20 +898,20 @@ def reconcile_accounting_identities(
 
         # Reconciliación de OpEx
         expected_opex = round(gp - op_inc, 2) if (gp is not None and op_inc is not None) else None
-        if op_exp is None and (rd is not None or sga is not None):
+        if op_exp is None and expected_opex is not None:
+            canonical["operating_expenses"][period] = expected_opex
+            audit_trail["operating_expenses"] = {
+                "status": "DERIVED",
+                "formula": "GrossProfit - OperatingIncome",
+                "note": "Deducido por identidad contable canónica",
+            }
+        elif op_exp is None and (rd is not None or sga is not None):
             derived_opex = round((abs(rd) if rd else 0.0) + (abs(sga) if sga else 0.0), 2)
             canonical["operating_expenses"][period] = derived_opex
             audit_trail["operating_expenses"] = {
                 "status": "DERIVED",
                 "formula": "R&D + SG&A",
                 "note": "Reconciliado a partir de componentes operativos reportados",
-            }
-        elif op_exp is None and expected_opex is not None:
-            canonical["operating_expenses"][period] = expected_opex
-            audit_trail["operating_expenses"] = {
-                "status": "DERIVED",
-                "formula": "GrossProfit - OperatingIncome",
-                "note": "Deducido por identidad contable canónica",
             }
         elif op_exp is not None and expected_opex is not None and expected_opex > 0:
             if abs(op_exp - expected_opex) > 1.0:

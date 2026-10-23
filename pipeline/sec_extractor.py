@@ -794,12 +794,15 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 non_ii = get_first_matching_value(inc_data, BANKING_TAXONOMY_MAP["non_interest_income"], p)
                 canonical["non_interest_income"][p] = non_ii
         
-        ebit_cands = XBRL_TAXONOMY_MAP["operating_income"]
-        ebit = get_first_matching_value(inc_data, ebit_cands, p)
-        if ebit is None and facts_df is not None:
-            ebit = get_fact_fallback(facts_df, ebit_cands, p, is_flow=True)
-        if ebit is None and rev is not None and op_exp is not None and abs(op_exp) > 0 and archetype != "FINANCIAL_BANKING":
-            ebit = round(rev - abs(op_exp), 2)
+        if archetype == "FINANCIAL_BANKING":
+            ebit = None
+        else:
+            ebit_cands = XBRL_TAXONOMY_MAP["operating_income"]
+            ebit = get_first_matching_value(inc_data, ebit_cands, p)
+            if ebit is None and facts_df is not None:
+                ebit = get_fact_fallback(facts_df, ebit_cands, p, is_flow=True)
+            if ebit is None and rev is not None and op_exp is not None and abs(op_exp) > 0:
+                ebit = round(rev - abs(op_exp), 2)
         canonical["operating_income"][p] = ebit
 
         if gp is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
