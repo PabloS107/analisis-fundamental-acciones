@@ -476,7 +476,7 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-23T20:18:14.387751+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,797.7M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.994% (Yahoo ^TNX: 4.988%, CNBC US10Y: 5.001%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-23T23:05:30.885296+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,797.7M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
@@ -536,7 +536,7 @@ Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza 
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **FY2021** | 255.50% | 48.51% | **41.96%** | $47,645.5M | $239,010.2M | **+31.96 p.p.** |
 | **FY2022** | 292.89% | 51.80% | **43.73%** | $56,116.8M | $245,105.6M | **+33.73 p.p.** |
-| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.55 p.p.** |
+| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.56 p.p.** |
 | **FY2024** | 275.67% | 52.44% | **40.04%** | $72,410.2M | $247,173.8M | **+30.04 p.p.** |
 | **FY2025** | 278.60% | 66.13% | **48.15%** | $79,597.8M | $245,795.5M | **+38.15 p.p.** |
 | **LTM** | 305.85% | 68.22% | **50.06%** | $83,773.2M | $269,400.0M | **+40.06 p.p.** |
@@ -805,8 +805,8 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | 9.00% (Bajo / Expansión) | 15.8% | 15.2% | 14.6% | 13.9% | 13.1% | 12.3% | Escenario favorable; exigencia de crecimiento más moderada. |
 | 9.50% (Favorable) | 16.8% | 16.3% | 15.7% | 15.1% | 14.4% | 13.6% | Escenario de sensibilidad operativa. |
 | 10.00% (WACC Auditado Base) | 17.9% | 17.3% | 16.8% | 16.2% | 15.5% | 14.8% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.50% (Exigente) | 18.8% | 18.4% | 17.8% | 17.3% | 16.7% | 16.0% | Escenario de sensibilidad operativa. |
-| 11.00% (Estrés / Tipos Altos) | 19.8% | 19.3% | 18.8% | 18.3% | 17.8% | 17.1% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 10.50% (Exigente) | 18.8% | 18.3% | 17.8% | 17.3% | 16.7% | 16.0% | Escenario de sensibilidad operativa. |
+| 11.00% (Estrés / Tipos Altos) | 19.8% | 19.3% | 18.8% | 18.3% | 17.7% | 17.1% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión

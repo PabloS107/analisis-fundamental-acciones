@@ -429,7 +429,7 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
             can_keys = [can_key] if isinstance(can_key, str) else can_key
             for ck in can_keys:
                 can_val = canonical.get(ck, {}).get(p)
-                if can_val is not None:
+                if can_val is not None and float(can_val) != 0.0:
                     return float(can_val)
         for k in key_cands:
             k_lower = k.lower()
@@ -447,6 +447,12 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
                         vals = src_obj.get("values", src_obj) if isinstance(src_obj, dict) else {}
                         if isinstance(vals, dict) and p in vals and vals[p] is not None:
                             return float(vals[p])
+        if can_key:
+            can_keys = [can_key] if isinstance(can_key, str) else can_key
+            for ck in can_keys:
+                can_val = canonical.get(ck, {}).get(p)
+                if can_val is not None:
+                    return float(can_val)
         return None
 
     cash_keys = [
@@ -737,14 +743,34 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         inv_v = _extract_val(inv_keys, p)
         
         ca_raw = _extract_val(ca_keys, p, "current_assets")
-        other_ca_rep = _extract_val(other_ca_keys, p)
+        prep_cand = _extract_val(["PrepaidExpenseCurrent", "us-gaap_PrepaidExpenseCurrent", "PrepaidExpensesAndOtherCurrentAssets"], p)
+        oth_cand = _extract_val(["OtherAssetsCurrent", "us-gaap_OtherAssetsCurrent", "OtherCurrentAssets"], p)
+        if prep_cand is not None and oth_cand is not None and prep_cand != oth_cand:
+            other_ca_rep = round(prep_cand + oth_cand, 1)
+        else:
+            other_ca_rep = _extract_val(other_ca_keys, p)
         if nontrade_ar is not None and nontrade_ar > 0:
             other_ca_rep = (other_ca_rep or 0.0) + nontrade_ar
 
-        # Regla 6: Cero plugs sintéticos (implied_sti eliminado). Solo reflejar partidas reportadas en XBRL.
+        # En arquetipos de plataforma/fintech (ej. MELI), agregar partidas corrientes de crédito y efectivo restringido
+        restr_cash = _extract_val(["RestrictedCashAndCashEquivalentsAtCarryingValue", "us-gaap_RestrictedCashAndCashEquivalentsAtCarryingValue", "RestrictedCashAndInvestmentsCurrent"], p)
+        fintech_loans = _extract_val(["NotesAndLoansReceivableNetCurrent", "us-gaap_NotesAndLoansReceivableNetCurrent", "LoansAndAdvancesToCustomersCurrent"], p)
+        broker_rec = _extract_val(["meli_ReceivableFromCustomerInBrokerageCurrent", "ReceivableFromCustomerInBrokerageCurrent"], p)
+        if restr_cash:
+            other_ca_rep = (other_ca_rep or 0.0) + restr_cash
+        if fintech_loans:
+            other_ca_rep = (other_ca_rep or 0.0) + fintech_loans
+        if broker_rec:
+            other_ca_rep = (other_ca_rep or 0.0) + broker_rec
+
+        # Reconciliación canónica de activos corrientes (Fiscal.ai: sum(hijos) == Total Current Assets)
         other_ca = round(other_ca_rep, 1) if other_ca_rep is not None else None
         sum_ca = (c_v or 0.0) + (sti_v or 0.0) + (ar_v or 0.0) + (inv_v or 0.0) + (other_ca or 0.0)
         tot_ca = ca_raw if (ca_raw is not None and ca_raw > 0) else (sum_ca if sum_ca > 0 else None)
+        if tot_ca is not None:
+            diff_ca = round(tot_ca - sum_ca, 1)
+            if abs(diff_ca) > 0.01:
+                other_ca = round((other_ca or 0.0) + diff_ca, 1)
 
         tot_cash_v = round((c_v or 0.0) + (sti_v or 0.0), 1) if (c_v is not None or sti_v is not None) else None
 
@@ -810,6 +836,12 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
         def_rev_v = _extract_val(def_rev_keys, p)
         cl_raw = _extract_val(cl_keys, p, "current_liabilities")
+        if cl_raw is not None and def_rev_v is not None:
+            pre_def_sum = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0)
+            if pre_def_sum + def_rev_v > cl_raw:
+                # Si deferred_revenue está embebido en accrued_liabilities, ajustar para evitar doble cómputo
+                def_rev_v = max(0.0, round(cl_raw - pre_def_sum, 1))
+
         sum_cl = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0) + (def_rev_v or 0.0)
         tot_cl = cl_raw if (cl_raw is not None and cl_raw > 0) else (sum_cl if sum_cl > 0 else None)
         other_cl = max(0.0, round((tot_cl or 0.0) - sum_cl, 1)) if tot_cl is not None else None
@@ -1303,8 +1335,8 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         ], p, "non_operating_income")
 
         # Conciliación de Total No Operativo bajo identidades contables universales:
-        # En arquetipos corporativos con EBIT y EBT definidos, la magnitud neta es exactamente EBT - EBIT.
-        if ebt is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
+        # En arquetipos con EBIT y EBT definidos (Corporativo, Plataforma, REIT, Seguros), la magnitud neta es exactamente EBT - EBIT.
+        if ebt is not None and ebit is not None and archetype != "FINANCIAL_BANKING":
             tot_non_op = round(ebt - ebit, 2)
         elif tot_non_op_raw is not None:
             tot_non_op = tot_non_op_raw
@@ -1348,7 +1380,9 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         ni_comm = _extract_multi_source_val(fs, "income", [
             "NetIncomeLossAvailableToCommonStockholdersBasic", "ProfitLossAttributableToOwnersOfParent"
         ], p)
-        if ni_comm is None and ni is not None:
+        if (min_int_pnl or pref_div) and ni is not None:
+            ni_comm = round(ni - (min_int_pnl or 0.0) - (pref_div or 0.0), 2)
+        elif ni_comm is None and ni is not None:
             ni_comm = round(ni - (min_int_pnl or 0.0) - (pref_div or 0.0), 2)
 
         eps_b = _extract_multi_source_val(fs, "income", [
@@ -1454,9 +1488,10 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if prop_exp is not None:
             prop_exp = abs(prop_exp)
 
-        noi = _extract_multi_source_val(fs, "income", [], p, ["noi", "gross_profit"])
-        if noi is None and rev is not None and prop_exp is not None:
+        if rev is not None and prop_exp is not None:
             noi = round(rev - prop_exp, 2)
+        else:
+            noi = _extract_multi_source_val(fs, "income", [], p, ["noi", "gross_profit"])
 
         reit_da = _extract_multi_source_val(fs, "income", ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization"], p, "depreciation_and_amortization")
         if reit_da is not None:
@@ -1475,6 +1510,9 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         if archetype == "REAL_ESTATE_REIT":
             if noi is not None and reit_da is not None:
                 ebit = round(noi - reit_da - (reit_ga or 0.0) - (reit_imp or 0.0), 2)
+        elif archetype == "INSURANCE":
+            if rev is not None and tot_ben_exp is not None:
+                ebit = round(rev - tot_ben_exp, 2)
 
         res["revenue"][p] = rev
         res["cogs"][p] = cogs
@@ -1542,7 +1580,7 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         "debt_issued": {}, "debt_repaid": {}, "net_debt_issued": {},
         "stock_issued": {}, "share_repurchases_open_market": {}, "share_repurchases_sbc_tax": {},
         "dividends_paid": {}, "other_financing": {}, "cff": {},
-        "fx_effect": {}, "net_change_in_cash": {}, "ending_cash": {}, "fcf": {}, "affo": {}
+        "fx_effect": {}, "beginning_cash": {}, "net_change_in_cash": {}, "ending_cash": {}, "fcf": {}, "affo": {}
     }
 
     for p in periods:
@@ -1731,6 +1769,16 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "ifrs-full_CashAndCashEquivalents"
         ], p)
 
+        beg_cash = _extract_multi_source_val(fs, "cashflow", [
+            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsBeginningOfPeriod",
+            "CashAndCashEquivalentsAtBeginningOfPeriod",
+            "CashAndCashEquivalentsAtCarryingValueBeginningOfPeriod",
+            "ifrs-full_CashAndCashEquivalentsAtBeginningOfPeriod"
+        ], p)
+        if beg_cash is None and end_cash is not None and net_chg_cash is not None:
+            beg_cash = round(end_cash - net_chg_cash, 2)
+
         can_fcf = canonical.get("free_cash_flow", {}).get(p)
         if archetype in ("FINANCIAL_BANKING", "INSURANCE"):
             fcf = None
@@ -1780,6 +1828,7 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         res["other_financing"][p] = other_fin
         res["cff"][p] = cff
         res["fx_effect"][p] = fx
+        res["beginning_cash"][p] = beg_cash
         res["net_change_in_cash"][p] = net_chg_cash
         res["ending_cash"][p] = end_cash
         res["fcf"][p] = fcf
@@ -3766,6 +3815,7 @@ def company_detail(request, ticker):
             ("Emisión / (Amortización) Neta de Deuda Financiera", "net_debt_issued", "[=]", "metric", False, True, False, True, "ni", "Net Debt Issuance / Repayment (Memo)"),
         ]),
         ("VARIACIÓN NETA DE EFECTIVO Y CONCILIACIÓN DE CAJA", [
+            ("Efectivo, Equivalentes y Restringido al Inicio", "beginning_cash", "[+]", "item", True, False, False, True, "ni", "Cash, Cash Equivalents & Restricted Cash at Beginning of Period"),
             ("Efecto del Tipo de Cambio en el Efectivo (FX Effect)", "fx_effect", "[±]", "item", True, False, False, False, "ni", "Effect of Exchange Rate on Cash"),
             ("Variación Neta de Efectivo en el Período (Net Change in Cash)", "net_change_in_cash", "[=]", "subtotal", False, True, False, True, "ni", "Net Change in Cash & Equivalents"),
             ("Efectivo, Equivalentes y Efectivo Restringido al Cierre", "ending_cash", "[=]", "subtotal", False, True, False, True, "ni", "Ending Cash & Equivalents"),
