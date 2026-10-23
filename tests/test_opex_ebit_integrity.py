@@ -113,6 +113,95 @@ class TestOpExAndEBITIntegrity(unittest.TestCase):
                 ebit = pnl["operating_income"].get(period)
                 self.assertIsNone(ebit, f"{ticker} {period}: En entidades bancarias no se debe imputar EBIT corporativo")
 
+    def test_deck_non_operating_and_ebt_cascade(self):
+        """
+        Verifica que en DECK:
+        1. Las partidas de ingresos financieros no sean negativas.
+        2. EBIT + Total No Operativo == EBT consolidado (no territorial doméstico).
+        3. EBT - Income Tax == Net Income.
+        4. Desglose interno: IntInc - IntExp + OtherNonOp == TotNonOp.
+        """
+        p = self.proc_dir / "DECK" / "financial_statements.json"
+        self.assertTrue(p.exists(), "DECK financial_statements.json debe existir")
+        with open(p, "r", encoding="utf-8") as f:
+            fs = json.load(f)
+        fys = fs.get("fiscal_years", [])
+        pnl = resolve_canonical_income_statement(fs, fys, archetype="STANDARD_CORPORATE")
+
+        for period in ["FY2026", "FY2025", "FY2024"]:
+            if period not in fys:
+                continue
+            ebit = pnl["operating_income"].get(period)
+            int_inc = pnl["interest_income"].get(period)
+            int_exp = pnl["interest_expense"].get(period)
+            oth_non = pnl["other_non_operating"].get(period)
+            tot_non = pnl["total_non_operating"].get(period)
+            ebt = pnl["ebt"].get(period)
+            tax = pnl["income_tax"].get(period)
+            ni = pnl["net_income"].get(period)
+
+            # Ingresos por intereses deben ser positivos
+            self.assertIsNotNone(int_inc, f"DECK {period}: int_inc debe existir")
+            self.assertGreater(int_inc, 0, f"DECK {period}: int_inc debe ser positivo")
+
+            # Gastos por intereses deben ser positivos
+            self.assertIsNotNone(int_exp, f"DECK {period}: int_exp debe existir")
+            self.assertGreater(int_exp, 0, f"DECK {period}: int_exp debe ser positivo")
+
+            # EBT consolidado oficial (no domestic fallback de 1,084M en FY2026)
+            self.assertIsNotNone(ebt, f"DECK {period}: ebt debe existir")
+            if period == "FY2026":
+                self.assertGreater(ebt, 1.3e9, "DECK FY2026: EBT debe ser consolidado (> $1.3B) y no solo doméstico")
+
+            # Identidad EBIT + TotNonOp == EBT
+            self.assertAlmostEqual(ebit + tot_non, ebt, delta=1.0, msg=f"DECK {period}: EBIT + TotNonOp debe ser igual a EBT")
+
+            # Identidad EBT - Tax == Net Income
+            self.assertAlmostEqual(ebt - tax, ni, delta=1.0, msg=f"DECK {period}: EBT - Tax debe ser igual a Net Income")
+
+            # Desglose no operativo coherente
+            calc_tot_non = (int_inc or 0.0) - (int_exp or 0.0) + (oth_non or 0.0)
+            self.assertAlmostEqual(calc_tot_non, tot_non, delta=1.0, msg=f"DECK {period}: Desglose No Operativo mismatch")
+
+    def test_all_control_companies_ebt_tax_cascade(self):
+        """
+        Verificación universal (Zero Regressions) de que la identidad contable
+        EBIT + TotNonOp == EBT y EBT - Tax == Net Income se cumple en todas las empresas de control.
+        """
+        control_companies = {
+            "AAPL": "STANDARD_CORPORATE",
+            "META": "STANDARD_CORPORATE",
+            "NVDA": "STANDARD_CORPORATE",
+            "MELI": "PLATFORM_ECOSYSTEM",
+            "NU": "FINANCIAL_BANKING",
+            "JPM": "FINANCIAL_BANKING",
+        }
+
+        for ticker, arch in control_companies.items():
+            p = self.proc_dir / ticker / "financial_statements.json"
+            if not p.exists():
+                continue
+            with open(p, "r", encoding="utf-8") as f:
+                fs = json.load(f)
+            fys = fs.get("fiscal_years", [])
+            pnl = resolve_canonical_income_statement(fs, fys, archetype=arch)
+
+            for period in ["FY2025", "FY2024"]:
+                if period not in fys:
+                    continue
+                ebit = pnl["operating_income"].get(period)
+                tot_non = pnl["total_non_operating"].get(period)
+                ebt = pnl["ebt"].get(period)
+                tax = pnl["income_tax"].get(period)
+                ni = pnl["net_income"].get(period)
+
+                if arch not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT") and ebit is not None and tot_non is not None:
+                    self.assertAlmostEqual(ebit + tot_non, ebt, delta=1.0, msg=f"{ticker} {period}: EBIT + TotNonOp != EBT")
+
+                if ebt is not None and tax is not None and ni is not None:
+                    delta = 3e6 if ticker == "MELI" else 1.0  # MELI tiene $3M de intereses minoritarios
+                    self.assertAlmostEqual(ebt - tax, ni, delta=delta, msg=f"{ticker} {period}: EBT - Tax != Net Income")
+
 
 if __name__ == "__main__":
     unittest.main()

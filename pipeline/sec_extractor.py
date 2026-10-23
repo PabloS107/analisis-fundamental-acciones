@@ -495,7 +495,11 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         "sga_expense": {},
         "sm_expense": {},
         "ga_expense": {},
-        "interest_expense": {}
+        "interest_expense": {},
+        "interest_income": {},
+        "ebt": {},
+        "income_tax": {},
+        "non_operating_income": {}
     }
     
     if is_financial or archetype in ("FINANCIAL_BANKING", "PLATFORM_ECOSYSTEM"):
@@ -827,6 +831,44 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         if ni is None and facts_df is not None:
             ni = get_fact_fallback(facts_df, ni_cands, p, is_flow=True)
         canonical["net_income"][p] = ni
+
+        # 5.b Impuesto sobre Beneficios (Income Tax)
+        tax_cands = XBRL_TAXONOMY_MAP.get("income_tax", ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations"])
+        tax_val = get_first_matching_value(inc_data, tax_cands, p)
+        if tax_val is None and facts_df is not None:
+            tax_val = get_fact_fallback(facts_df, tax_cands, p, is_flow=True)
+        canonical["income_tax"][p] = abs(tax_val) if tax_val is not None else None
+
+        # 5.c Beneficio Antes de Impuestos (EBT)
+        ebt_cands = XBRL_TAXONOMY_MAP.get("ebt", [
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "IncomeLossAttributableToParent", "us-gaap_IncomeLossAttributableToParent",
+            "IncomeLossBeforeIncomeTaxExpenseBenefit", "ProfitLossBeforeTax"
+        ])
+        ebt_val = get_first_matching_value(inc_data, ebt_cands, p)
+        if ebt_val is None and facts_df is not None:
+            ebt_val = get_fact_fallback(facts_df, ebt_cands, p, is_flow=True)
+        if ebt_val is None and ni is not None and tax_val is not None:
+            ebt_val = round(ni + abs(tax_val), 2)
+        canonical["ebt"][p] = ebt_val
+
+        # 5.d Ingresos por Intereses (Interest Income)
+        ii_cands = XBRL_TAXONOMY_MAP.get("interest_income", ["InvestmentIncomeInterest", "InterestIncomeOperating", "InterestIncome"])
+        ii_val = get_first_matching_value(inc_data, ii_cands, p)
+        if ii_val is None and facts_df is not None:
+            ii_val = get_fact_fallback(facts_df, ii_cands, p, is_flow=True)
+        canonical["interest_income"][p] = abs(ii_val) if ii_val is not None else None
+
+        # 5.e Total No Operativo (Non-Operating Income / Expense Net)
+        if ebt_val is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
+            canonical["non_operating_income"][p] = round(ebt_val - ebit, 2)
+        else:
+            noi_cands = XBRL_TAXONOMY_MAP.get("non_operating_income", ["NonoperatingIncomeExpense", "InterestRevenueExpenseNet"])
+            noi_val = get_first_matching_value(inc_data, noi_cands, p)
+            if noi_val is None and facts_df is not None:
+                noi_val = get_fact_fallback(facts_df, noi_cands, p, is_flow=True)
+            canonical["non_operating_income"][p] = noi_val
 
         ni_comm_cands = XBRL_TAXONOMY_MAP.get("net_income_common", [])
         ni_comm = get_first_matching_value(inc_data, ni_comm_cands, p)

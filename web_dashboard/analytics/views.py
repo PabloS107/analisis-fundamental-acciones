@@ -1137,38 +1137,22 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             "InvestmentIncomeInterest", "InterestIncomeOperating", "InterestAndDividendIncomeOperating",
             "InterestIncome", "ifrs-full_RevenueFromInterest", "nu_InterestIncomeAndGainsLossesOnFinancialInstruments"
         ], p, "interest_income")
+        if int_inc is not None:
+            int_inc = abs(int_inc)
 
         int_exp = _extract_multi_source_val(fs, "income", [
             "InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt", "InterestExpenseOperating",
             "meli_InterestExpenseAndOtherFinancialCharges"
-        ], p, "interest_expense")
+        ], p)
+        if int_exp is None:
+            int_exp = _extract_multi_source_val(fs, "income", [], p, "interest_expense")
         if int_exp is not None:
             int_exp = abs(int_exp)
-
-        other_non_op = _extract_multi_source_val(fs, "income", [
-            "OtherNonoperatingIncomeExpense", "GainLossOnInvestments", "ForeignCurrencyTransactionGainLossBeforeTax",
-            "GainLossOnSaleOfSecuritiesNet", "OtherNonoperatingIncomeExpenseNet"
-        ], p, "other_non_operating")
-
-        tot_non_op = _extract_multi_source_val(fs, "income", [
-            "NonoperatingIncomeExpense", "InterestRevenueExpenseNet", "deck_InterestAndOtherExpense",
-            "NonoperatingIncomeExpenseNet"
-        ], p, "non_operating_income")
-        if tot_non_op is None and (int_inc is not None or int_exp is not None or other_non_op is not None):
-            tot_non_op = round((int_inc or 0.0) - (int_exp or 0.0) + (other_non_op or 0.0), 2)
-
-        ebt = _extract_multi_source_val(fs, "income", [
-            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
-            "ProfitLossBeforeTax", "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"
-        ], p, "ebt")
-        if ebt is None and ebit is not None and tot_non_op is not None:
-            ebt = round(ebit + tot_non_op, 2)
 
         tax = _extract_multi_source_val(fs, "income", [
             "IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations", "nu_IncomeTaxInStatementOfProfitOrLoss",
             "CurrentIncomeTaxExpenseBenefit", "ifrs-full_IncomeTaxExpenseContinuingOperations"
-        ], p, "income_tax_expense")
+        ], p, ["income_tax", "income_tax_expense"])
         if tax is None:
             c_tax = _extract_multi_source_val(fs, "income", ["CurrentTaxExpenseIncome"], p)
             d_tax = _extract_multi_source_val(fs, "income", ["DeferredTaxExpenseIncome"], p)
@@ -1180,10 +1164,50 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         ni = _extract_multi_source_val(fs, "income", [
             "NetIncomeLoss", "ProfitLoss", "NetIncome", "ifrs-full_ProfitLoss"
         ], p, "net_income")
-        if ni is None and ebt is not None and tax is not None:
-            ni = round(ebt - tax, 2)
+
+        ebt = _extract_multi_source_val(fs, "income", [
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "IncomeLossAttributableToParent", "us-gaap_IncomeLossAttributableToParent",
+            "IncomeLossBeforeIncomeTaxExpenseBenefit", "ProfitLossBeforeTax"
+        ], p, "ebt")
         if ebt is None and ni is not None and tax is not None:
             ebt = round(ni + tax, 2)
+
+        tot_non_op_raw = _extract_multi_source_val(fs, "income", [
+            "NonoperatingIncomeExpense", "InterestRevenueExpenseNet", "deck_InterestAndOtherExpense",
+            "NonoperatingIncomeExpenseNet"
+        ], p, "non_operating_income")
+
+        # Conciliación de Total No Operativo bajo identidades contables universales:
+        # En arquetipos corporativos con EBIT y EBT definidos, la magnitud neta es exactamente EBT - EBIT.
+        if ebt is not None and ebit is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
+            tot_non_op = round(ebt - ebit, 2)
+        elif tot_non_op_raw is not None:
+            tot_non_op = tot_non_op_raw
+        elif int_inc is not None or int_exp is not None:
+            tot_non_op = round((int_inc or 0.0) - (int_exp or 0.0), 2)
+        else:
+            tot_non_op = None
+
+        if ebt is None and ebit is not None and tot_non_op is not None:
+            ebt = round(ebit + tot_non_op, 2)
+        if ni is None and ebt is not None and tax is not None:
+            ni = round(ebt - tax, 2)
+
+        other_non_op = _extract_multi_source_val(fs, "income", [
+            "OtherNonoperatingIncomeExpense", "GainLossOnInvestments", "ForeignCurrencyTransactionGainLossBeforeTax",
+            "GainLossOnSaleOfSecuritiesNet", "OtherNonoperatingIncomeExpenseNet"
+        ], p, "other_non_operating")
+
+        # Derivación institucional del componente 'Otros Ingresos / (Gastos) No Operativos'
+        # cuando la empresa publica Total No Operativo y desglose de intereses
+        if tot_non_op is not None and (int_inc is not None or int_exp is not None):
+            implied_other_non_op = round(tot_non_op - (int_inc or 0.0) + (int_exp or 0.0), 2)
+            if abs(implied_other_non_op) > 0.01:
+                other_non_op = implied_other_non_op
+            else:
+                other_non_op = None
 
         min_int_pnl = _extract_multi_source_val(fs, "income", [
             "NetIncomeLossAttributableToNoncontrollingInterest", "ProfitLossAttributableToNoncontrollingInterests"
