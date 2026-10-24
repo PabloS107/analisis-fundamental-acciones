@@ -21,6 +21,49 @@ import re
 
 
 # --------------------------------------------------------------------------------------
+# 0. TAXONOMÍA Y ALIAS RECÍPROCOS DE ARQUETIPOS CONTABLES INSTITUCIONALES
+# --------------------------------------------------------------------------------------
+CORPORATE_ARCHETYPE_ALIASES = ("CORPORATE_STANDARD", "STANDARD_CORPORATE")
+
+CANONICAL_ARCHETYPES = {
+    "CORPORATE_STANDARD",
+    "STANDARD_CORPORATE",
+    "FINANCIAL_BANKING",
+    "INSURANCE",
+    "REAL_ESTATE_REIT",
+    "PLATFORM_ECOSYSTEM",
+}
+
+ARCHETYPE_ALIASES = {
+    "CORPORATE_STANDARD": "STANDARD_CORPORATE",
+    "STANDARD_CORPORATE": "STANDARD_CORPORATE",
+    "FINANCIAL_BANKING": "FINANCIAL_BANKING",
+    "BANKING_FINANCIAL": "FINANCIAL_BANKING",
+    "BANKING": "FINANCIAL_BANKING",
+    "INSURANCE": "INSURANCE",
+    "INSURER": "INSURANCE",
+    "REAL_ESTATE_REIT": "REAL_ESTATE_REIT",
+    "REIT": "REAL_ESTATE_REIT",
+    "REAL_ESTATE": "REAL_ESTATE_REIT",
+    "PLATFORM_ECOSYSTEM": "PLATFORM_ECOSYSTEM",
+    "ECOSYSTEM_PLATFORM": "PLATFORM_ECOSYSTEM",
+}
+
+
+def normalize_archetype(archetype: str, default: str = "STANDARD_CORPORATE") -> str:
+    """
+    Normaliza el identificador de arquetipo admitiendo alias canónicos y recíprocos:
+    CORPORATE_STANDARD <-> STANDARD_CORPORATE.
+    """
+    if not archetype:
+        return default
+    arch_clean = str(archetype).strip().upper()
+    if arch_clean in CORPORATE_ARCHETYPE_ALIASES:
+        return default
+    return ARCHETYPE_ALIASES.get(arch_clean, arch_clean)
+
+
+# --------------------------------------------------------------------------------------
 # 1. TAXONOMÍA OFICIAL DE DIVISIONES SIC DE LA SEC (Standard Industrial Classification)
 # --------------------------------------------------------------------------------------
 # SEC Division H (Codes 6000-6799): Único recinto regulatorio de entidades financieras (FIRE).
