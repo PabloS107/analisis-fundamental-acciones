@@ -6,6 +6,13 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
 
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "processed"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+for p_dir in (PROJECT_ROOT, PIPELINE_DIR):
+    if p_dir.exists() and str(p_dir) not in sys.path:
+        sys.path.insert(0, str(p_dir))
+
 from .pipeline_runner import search_companies, launch_pipeline_job, get_job_status
 from .views_statements import (
     resolve_canonical_capital_flows,
@@ -19,11 +26,6 @@ from .views_statements import (
 from .views_scoring import build_scoring_context
 from .views_charts import build_charts_and_segments_context
 from .views_valuation import build_valuation_context
-
-DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "processed"
-PIPELINE_DIR = Path(__file__).resolve().parent.parent.parent / "pipeline"
-if PIPELINE_DIR.exists() and str(PIPELINE_DIR) not in sys.path:
-    sys.path.insert(0, str(PIPELINE_DIR))
 
 
 def index(request):
@@ -267,11 +269,12 @@ def company_detail(request, ticker):
     kpis_enriched = pr_data.get("kpis_enriched", {})
     enriched = {**banking_kpis_enriched, **kpis_enriched}
 
-    # 2. Resolución Canónica de Estados Financieros (Módulo views_statements.py)
-    bs_data = resolve_canonical_balance_sheet(fs, statements_fys, archetype=archetype)
-    pnl_data = resolve_canonical_income_statement(fs, statements_fys, archetype=archetype)
-    cap_flows = resolve_canonical_capital_flows(fs, statements_fys)
-    cf_data = resolve_canonical_cash_flow(fs, statements_fys, capital_flows=cap_flows, archetype=archetype)
+    # 2. Lectura Pre-Calculada o Resolución Canónica de Estados Financieros (Módulo pipeline.canonical_resolvers)
+    resolved_pre = fs.get("resolved_canonical_statements", {})
+    bs_data = resolved_pre.get("balance_sheet") or resolve_canonical_balance_sheet(fs, statements_fys, archetype=archetype)
+    pnl_data = resolved_pre.get("income_statement") or resolve_canonical_income_statement(fs, statements_fys, archetype=archetype)
+    cap_flows = resolved_pre.get("capital_flows") or resolve_canonical_capital_flows(fs, statements_fys)
+    cf_data = resolved_pre.get("cash_flow") or resolve_canonical_cash_flow(fs, statements_fys, capital_flows=cap_flows, archetype=archetype)
 
     statements_ctx = build_statements_context(
         fs=fs,

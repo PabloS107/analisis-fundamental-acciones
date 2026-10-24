@@ -292,18 +292,18 @@ def build_charts_and_segments_context(
     donut_dep_data = [round(float(dep_by_country[k]) * 1000.0, 1) for k in donut_dep_labels]
     donut_dep_colors = ['#8b5cf6', '#38bdf8', '#10b981', '#f59e0b', '#ec4899'][:len(donut_dep_labels)]
 
-    # Bloque estructurado de KPIs Bancarios
+    # Bloque estructurado de KPIs Bancarios (Regla 6: Cero Valores por Defecto Ficticios)
     banking_kpis = {
-        "return_on_equity_reported": enriched.get("return_on_equity_reported") or key_ratios.get("roe_pct", {}).get("LTM") or 17.0,
-        "risk_adjusted_nim_pct": enriched.get("risk_adjusted_nim_pct") or key_ratios.get("risk_adj_nim_pct", {}).get("LTM") or 12.4,
-        "efficiency_ratio_pct": enriched.get("efficiency_ratio_pct") or key_ratios.get("efficiency_ratio_pct", {}).get("LTM") or 25.8,
-        "npl_15_90_pct": enriched.get("npl_15_90_pct", 4.5),
-        "npl_90_plus_pct": enriched.get("npl_90_plus_pct", 4.5),
-        "provision_coverage_pct": enriched.get("provision_coverage_pct", 113.0),
-        "monthly_arpac_usd": enriched.get("monthly_arpac_usd", 1.3),
-        "monthly_cost_to_serve_usd": enriched.get("monthly_cost_to_serve_usd", 0.9),
-        "total_customers_m": enriched.get("total_customers_m") or 105.0,
-        "active_customers_m": enriched.get("active_customers_m") or 88.0,
+        "return_on_equity_reported": enriched.get("return_on_equity_reported") if enriched.get("return_on_equity_reported") is not None else key_ratios.get("roe_pct", {}).get("LTM"),
+        "risk_adjusted_nim_pct": enriched.get("risk_adjusted_nim_pct") if enriched.get("risk_adjusted_nim_pct") is not None else (key_ratios.get("risk_adj_nim_pct", {}).get("LTM") or key_ratios.get("nim_pct", {}).get("LTM")),
+        "efficiency_ratio_pct": enriched.get("efficiency_ratio_pct") if enriched.get("efficiency_ratio_pct") is not None else key_ratios.get("efficiency_ratio_pct", {}).get("LTM"),
+        "npl_15_90_pct": enriched.get("npl_15_90_pct"),
+        "npl_90_plus_pct": enriched.get("npl_90_plus_pct") if enriched.get("npl_90_plus_pct") is not None else key_ratios.get("npl_ratio_pct", {}).get("LTM"),
+        "provision_coverage_pct": enriched.get("provision_coverage_pct") if enriched.get("provision_coverage_pct") is not None else key_ratios.get("provision_coverage_pct", {}).get("LTM"),
+        "monthly_arpac_usd": enriched.get("monthly_arpac_usd"),
+        "monthly_cost_to_serve_usd": enriched.get("monthly_cost_to_serve_usd"),
+        "total_customers_m": enriched.get("total_customers_m"),
+        "active_customers_m": enriched.get("active_customers_m"),
         "deposits_by_country_bn": dep_by_country,
         "customers_by_country_m": enriched.get("customers_by_country_m", {}),
         "capital_adequacy": enriched.get("capital_adequacy", {}),

@@ -3293,6 +3293,29 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                                 r1["values"]["LTM"] = r1_det_val
 
     full_dataset["as_reported_statements"] = as_reported
+    try:
+        from pipeline.canonical_resolvers import (
+            resolve_canonical_balance_sheet,
+            resolve_canonical_income_statement,
+            resolve_canonical_capital_flows,
+            resolve_canonical_cash_flow,
+        )
+    except ImportError:
+        from canonical_resolvers import (
+            resolve_canonical_balance_sheet,
+            resolve_canonical_income_statement,
+            resolve_canonical_capital_flows,
+            resolve_canonical_cash_flow,
+        )
+    periods_res = full_dataset.get("fiscal_years", [])[:11]
+    arch_res = full_dataset.get("archetype") or ("FINANCIAL_BANKING" if full_dataset.get("is_financial") else "STANDARD_CORPORATE")
+    cap_flows_res = resolve_canonical_capital_flows(full_dataset, periods_res)
+    full_dataset["resolved_canonical_statements"] = {
+        "balance_sheet": resolve_canonical_balance_sheet(full_dataset, periods_res, archetype=arch_res),
+        "income_statement": resolve_canonical_income_statement(full_dataset, periods_res, archetype=arch_res),
+        "capital_flows": cap_flows_res,
+        "cash_flow": resolve_canonical_cash_flow(full_dataset, periods_res, capital_flows=cap_flows_res, archetype=arch_res),
+    }
     return full_dataset
 
 def extract_sec_data(ticker, output_dir=None):

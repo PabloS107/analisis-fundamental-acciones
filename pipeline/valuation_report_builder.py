@@ -432,6 +432,18 @@ def get_valuation_parameters(
         rotce_rates = [round(max(0.04, base_r + step), 3) for step in [-0.06, -0.04, -0.02, 0.0, 0.02, 0.04]]
         rotce_labels = [f"{r*100:.1f}%" if r != base_r else f"{r*100:.1f}% (Base)" for r in rotce_rates]
 
+        fair_price_base = fair_value_excess_return if fair_value_excess_return > 0 else price
+        hist_growth_pct_val = float(cagr_5y_dyn or 0.0)
+        g_implied_dec = rotce_implied / 100.0
+        gap_exp_pp = (g_implied_dec - rotce_val) * 100.0
+        premium_pct_val = ((price - fair_price_base) / fair_price_base) * 100.0 if fair_price_base > 0 else 0.0
+        if premium_pct_val > 25.0:
+            val_status = "SOBREVALORADA"
+        elif premium_pct_val < -15.0:
+            val_status = "INFRAVALORADA"
+        else:
+            val_status = "JUSTO"
+
         return {
             "is_financial": True,
             "is_insurance": is_ins,
@@ -455,7 +467,17 @@ def get_valuation_parameters(
             "spread_economic_pct": round(spread_rotce_ke * 100, 2),
             "ptbv_justified": ptbv_justified,
             "fair_value_excess_return": fair_value_excess_return,
+            "fair_price_base": fair_price_base,
             "rotce_implied_pct": rotce_implied,
+            "g_implied_pct": rotce_implied,
+            "hist_growth_pct": hist_growth_pct_val,
+            "init_growth_disp": round(rotce_val * 100, 2),
+            "gap_expectations_str": f"{'+' if gap_exp_pp >= 0 else ''}{gap_exp_pp:.1f} pp",
+            "premium_pct": premium_pct_val,
+            "valuation_status": val_status,
+            "rev_base": tbv_total_m,
+            "fcf_margin_pct": 0.0,
+            "net_debt_m": 0.0,
             "cagr_5y": cagr_5y_dyn,
             "cagr_10y": cagr_10y_dyn,
             "cagr_3y": cagr_3y_dyn,
@@ -634,6 +656,34 @@ def get_valuation_parameters(
         except Exception:
             sotp_valuation = None
 
+    # Cálculo canónico del Valor Intrínseco Teórico Base (DCF a 10 años con Gordon-Shapiro)
+    hist_growth_pct_val = float(cagr_5y or 0.0)
+    hist_growth_dec = hist_growth_pct_val / 100.0
+    gn_dec = 0.025
+    init_proj_growth = min(hist_growth_dec, 0.20) if hist_growth_dec > 0.20 else max(hist_growth_dec, -0.05)
+    pv_fcf = 0.0
+    r_t = base_rev_m
+    for t in range(1, 11):
+        r_t *= (1.0 + init_proj_growth)
+        pv_fcf += (r_t * fcf_margin) / ((1.0 + wacc_val) ** t)
+    tv = (r_t * (1.0 + gn_dec) * fcf_margin) / max(wacc_val - gn_dec, 0.005)
+    pv_tv = tv / ((1.0 + wacc_val) ** 10)
+    ev_total = pv_fcf + pv_tv
+    equity_val = ev_total - net_debt_m
+    shares_m_rounded = round(round(shares_b, 4) * 1000.0, 2)
+    fair_price_base = equity_val / shares_m_rounded if shares_m_rounded > 0 else price
+
+    g_implied_our_pct_rounded = round(g_implied_our * 100, 1)
+    g_implied_dec = g_implied_our_pct_rounded / 100.0
+    gap_exp_pp = (g_implied_dec - init_proj_growth) * 100.0
+    premium_pct_val = ((price - fair_price_base) / fair_price_base) * 100.0 if fair_price_base > 0 else 0.0
+    if premium_pct_val > 25.0:
+        val_status = "SOBREVALORADA"
+    elif premium_pct_val < -15.0:
+        val_status = "INFRAVALORADA"
+    else:
+        val_status = "JUSTO"
+
     return {
         "is_financial": False,
         "price": price,
@@ -658,17 +708,26 @@ def get_valuation_parameters(
         "fcf_margin_operating_pct": round(op_fcf_margin * 100, 1),
         "capex_margin_pct": round(capex_margin * 100, 1),
         "shares_b": round(shares_b, 4),
+        "shares_m": shares_m_rounded,
         "net_debt_m": net_debt_m,
         "base_rev_m": base_rev_m,
+        "rev_base": base_rev_m,
         "cagr_5y": cagr_5y,
         "cagr_10y": cagr_10y,
         "cagr_3y": cagr_3y,
         "guidance_mid": guidance_mid,
-        "g_implied_our_pct": round(g_implied_our * 100, 1),
+        "g_implied_our_pct": g_implied_our_pct_rounded,
         "g_implied_fiscal_pct": round(g_implied_fiscal * 100, 1),
         "gap_hist": round(gap_hist, 1) if gap_hist is not None else None,
         "gap_guide": round(gap_guide, 1) if gap_guide is not None else None,
-        "sotp_valuation": sotp_valuation
+        "sotp_valuation": sotp_valuation,
+        "fair_price_base": fair_price_base,
+        "valuation_status": val_status,
+        "premium_pct": premium_pct_val,
+        "g_implied_pct": g_implied_our_pct_rounded,
+        "hist_growth_pct": hist_growth_pct_val,
+        "init_growth_disp": init_proj_growth * 100.0,
+        "gap_expectations_str": f"{'+' if gap_exp_pp >= 0 else ''}{gap_exp_pp:.1f} pp",
     }
 
 

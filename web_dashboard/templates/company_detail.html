@@ -129,10 +129,10 @@
                     <span class="text-xs text-slate-500 font-medium">ARPAC Mensual (Cliente Activo)</span>
                     <span class="text-lg">💳</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">${{ banking_kpis.monthly_arpac_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span></div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_arpac_usd is not None %}${{ banking_kpis.monthly_arpac_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">Clientes Totales:</span>
-                    <span class="font-bold text-slate-700">{{ banking_kpis.total_customers_m|floatformat:1 }}M</span>
+                    <span class="font-bold text-slate-700">{% if banking_kpis.total_customers_m is not None %}{{ banking_kpis.total_customers_m|floatformat:1 }}M{% else %}N/D{% endif %}</span>
                 </div>
             </div>
 
@@ -141,7 +141,7 @@
                     <span class="text-xs text-slate-500 font-medium">Cost to Serve Mensual</span>
                     <span class="text-lg">⚡</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">${{ banking_kpis.monthly_cost_to_serve_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span></div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_cost_to_serve_usd is not None %}${{ banking_kpis.monthly_cost_to_serve_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">Apalancamiento Operativo:</span>
                     <span class="font-bold text-slate-700">Escala Cloud Propia</span>
@@ -153,10 +153,10 @@
                     <span class="text-xs text-slate-500 font-medium">Morosidad NPL 90+ Días</span>
                     <span class="text-lg">🛡️</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ banking_kpis.npl_90_plus_pct|floatformat:1 }}%</div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.npl_90_plus_pct is not None %}{{ banking_kpis.npl_90_plus_pct|floatformat:1 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">NPL 15-90 Días:</span>
-                    <span class="font-bold text-slate-700">{{ banking_kpis.npl_15_90_pct|floatformat:1 }}%</span>
+                    <span class="font-bold text-slate-700">{% if banking_kpis.npl_15_90_pct is not None %}{{ banking_kpis.npl_15_90_pct|floatformat:1 }}%{% else %}N/D{% endif %}</span>
                 </div>
             </div>
 
@@ -165,7 +165,7 @@
                     <span class="text-xs text-slate-500 font-medium">Cobertura de Provisiones</span>
                     <span class="text-lg">🏦</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ banking_kpis.provision_coverage_pct|floatformat:0 }}%</div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.provision_coverage_pct is not None %}{{ banking_kpis.provision_coverage_pct|floatformat:0 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">Colchón Prudencial:</span>
                     <span class="font-bold text-slate-700">Sobre-colateralizado (&gt;100%)</span>
