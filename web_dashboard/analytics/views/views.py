@@ -1,10 +1,35 @@
 import sys
 import json
+import time
+from typing import Dict, Any, Tuple
 from pathlib import Path
 from django.shortcuts import render, Http404
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
+
+# Caché en memoria para frescura SEC (Salvaguarda 3: TTL de 15 minutos / 900s)
+_FRESHNESS_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
+_FRESHNESS_CACHE_TTL = 900.0
+
+
+def get_cached_sec_freshness(ticker: str, force_refresh: bool = False) -> Dict[str, Any]:
+    t = ticker.strip().upper()
+    now = time.time()
+    if not force_refresh and t in _FRESHNESS_CACHE:
+        cached_time, cached_data = _FRESHNESS_CACHE[t]
+        if (now - cached_time) < _FRESHNESS_CACHE_TTL:
+            return cached_data
+
+    from pipeline.sec_modules.sec_freshness import check_sec_freshness
+    data = check_sec_freshness(t, force_network=True)
+    _FRESHNESS_CACHE[t] = (now, data)
+    return data
+
+
+def clear_freshness_cache(ticker: str):
+    t = ticker.strip().upper()
+    _FRESHNESS_CACHE.pop(t, None)
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" / "processed"
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
@@ -202,6 +227,7 @@ def trigger_pipeline(request):
     if not ticker:
         return JsonResponse({"success": False, "error": "Ticker no especificado."}, status=400)
 
+    clear_freshness_cache(ticker)
     job = launch_pipeline_job(ticker)
     return JsonResponse({"success": True, "job": job})
 
@@ -211,6 +237,14 @@ def pipeline_status(request, ticker):
     """Endpoint JSON para consultar el progreso en vivo de la incorporación."""
     job = get_job_status(ticker)
     return JsonResponse(job)
+
+
+@require_GET
+def sec_freshness_view(request, ticker):
+    """Endpoint JSON para consultar la frescura de reportes SEC con caché de 15 min."""
+    force = request.GET.get("force") in ("1", "true", "True")
+    data = get_cached_sec_freshness(ticker, force_refresh=force)
+    return JsonResponse(data)
 
 
 def company_detail(request, ticker):
@@ -332,6 +366,10 @@ def company_detail(request, ticker):
         is_banking=is_banking,
     )
 
+    # Metadatos SEC del período LTM (con retrocompatibilidad total)
+    from pipeline.sec_modules.sec_freshness import get_local_sec_metadata
+    sec_meta = fs.get("sec_metadata") or get_local_sec_metadata(ticker)
+
     context = {
         "ticker": ticker,
         "company_name": company_name,
@@ -343,6 +381,7 @@ def company_detail(request, ticker):
         "is_corporate": is_corporate,
         "is_reit": is_reit,
         "is_insurance": is_insurance,
+        "sec_meta": sec_meta,
         **statements_ctx,
         **scoring_ctx,
         **charts_ctx,

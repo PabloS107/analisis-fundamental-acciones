@@ -31,6 +31,11 @@ from .sec_segment_extractor import (
     build_and_save_segments_data,
     build_10yr_segment_df,
 )
+from .sec_freshness import (
+    check_sec_freshness,
+    get_local_sec_metadata,
+    derive_period_label,
+)
 
 __all__ = [
     "normalize_fiscal_year",
@@ -54,4 +59,7 @@ __all__ = [
     "sanitize_and_validate_statements",
     "build_and_save_segments_data",
     "build_10yr_segment_df",
+    "check_sec_freshness",
+    "get_local_sec_metadata",
+    "derive_period_label",
 ]

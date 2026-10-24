@@ -137,6 +137,9 @@ try:
         build_10yr_segment_df,
         build_as_reported_statements,
         sanitize_and_validate_statements,
+        derive_period_label,
+        check_sec_freshness,
+        get_local_sec_metadata,
     )
 except ImportError:
     try:
@@ -162,6 +165,9 @@ except ImportError:
             build_10yr_segment_df,
             build_as_reported_statements,
             sanitize_and_validate_statements,
+            derive_period_label,
+            check_sec_freshness,
+            get_local_sec_metadata,
         )
     except ImportError:
         from pipeline.sec_modules import (
@@ -186,6 +192,9 @@ except ImportError:
             build_10yr_segment_df,
             build_as_reported_statements,
             sanitize_and_validate_statements,
+            derive_period_label,
+            check_sec_freshness,
+            get_local_sec_metadata,
         )
 
 
@@ -455,6 +464,42 @@ def extract_sec_data(ticker, output_dir=None):
         q_cf=q_cf,
         facts_df=facts_df
     )
+
+    # 2.6 Metadatos canónicos de frescura y periodicidad SEC
+    latest_k_filing = latest_k_filings[0] if (latest_k_filings and len(latest_k_filings) > 0) else None
+    latest_q_filing = latest_q_filings[0] if (latest_q_filings and len(latest_q_filings) > 0) else None
+    
+    latest_periodic = None
+    if latest_q_filing and latest_k_filing:
+        latest_periodic = latest_q_filing if str(latest_q_filing.filing_date) >= str(latest_k_filing.filing_date) else latest_k_filing
+    else:
+        latest_periodic = latest_q_filing or latest_k_filing
+
+    sec_p_form = str(latest_periodic.form).strip() if latest_periodic else "10-Q"
+    sec_p_filed = str(latest_periodic.filing_date).strip() if latest_periodic else None
+    sec_p_rep = str(getattr(latest_periodic, "report_date", "") or "").strip() if latest_periodic else None
+    sec_p_acc = str(latest_periodic.accession_number).strip() if latest_periodic else None
+    sec_ltm_label = derive_period_label(sec_p_form, sec_p_rep, sec_p_filed)
+
+    latest_8k_date = None
+    try:
+        f_8k = company.get_filings(form=["8-K"])
+        for f in f_8k[:6]:
+            if "2.02" in str(getattr(f, "items", "")):
+                latest_8k_date = str(f.filing_date)
+                break
+    except Exception:
+        latest_8k_date = None
+
+    sec_metadata = {
+        "ltm_period": sec_ltm_label,
+        "ltm_period_end": sec_p_rep if sec_p_rep and sec_p_rep != "None" else None,
+        "latest_periodic_form": sec_p_form,
+        "latest_periodic_date": sec_p_filed,
+        "latest_periodic_accession": sec_p_acc,
+        "latest_8k_earnings_date": latest_8k_date,
+        "extraction_timestamp": datetime.now().isoformat()
+    }
     
     full_dataset = {
         "ticker": ticker.upper(),
@@ -468,6 +513,7 @@ def extract_sec_data(ticker, output_dir=None):
         "source": f"SEC EDGAR ({accounting_std} Oficial)",
         "extraction_timestamp": datetime.now().isoformat(),
         "fiscal_years": all_fys,
+        "sec_metadata": sec_metadata,
         "canonical_summary": canonical,
         "key_ratios": ratios,
         "income_statement_detail": inc_data,

@@ -24,6 +24,18 @@
                 {% endif %}
                 <span class="text-xs text-slate-500">CIK SEC: {{ cik }}</span>
             </div>
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+                <span id="ltmPeriodBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                    <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                    Período LTM: {{ sec_meta.ltm_period|default:"LTM" }} {% if sec_meta.latest_periodic_date %}({{ sec_meta.latest_periodic_form|default:"10-Q" }} del {{ sec_meta.latest_periodic_date }}){% endif %}
+                </span>
+                <button id="btnSyncSec" onclick="syncWithSec('{{ ticker }}')" title="Verificar y forzar sincronización con los últimos estados contables en SEC EDGAR" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white transition shadow-sm cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Sincronizar SEC
+                </button>
+            </div>
+            <!-- Contenedor dinámico de alertas de frescura SEC (Nuevos 10-Q o comunicados 8-K) -->
+            <div id="secAlertContainer" class="mt-2.5"></div>
             <p class="text-xs text-slate-500 mt-1">
                 Auditoría Contable & Modelo de Valoración Institucional en Django · Período: LTM
             </p>
@@ -4191,5 +4203,194 @@
     }
 
     window.addEventListener('DOMContentLoaded', recalcDCF);
+</script>
+
+    <!-- Modal de Progreso del Pipeline de Sincronización SEC -->
+    <div id="pipelineModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">⚙️</span>
+                    <h3 class="font-black text-lg text-slate-900">Sincronizando <span id="modalTickerBadge" class="text-sky-600">{{ ticker }}</span> con SEC EDGAR</h3>
+                </div>
+                <span id="modalStatusBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 animate-pulse">
+                    EN PROCESO
+                </span>
+            </div>
+
+            <p class="text-xs text-slate-500">
+                Descargando últimos reportes 10-Q/10-K, extrayendo Company Facts XBRL, recalculando LTM y actualizando auditoría institucional.
+            </p>
+
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-semibold text-slate-700">
+                    <span id="modalStepText">Iniciando sincronización...</span>
+                    <span id="modalPctText">0%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="modalProgressBar" class="bg-sky-600 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+                </div>
+            </div>
+
+            <div id="modalConsole" class="bg-slate-900 text-slate-200 p-3.5 rounded-xl font-mono text-[11px] h-28 overflow-y-auto space-y-1">
+                <div class="text-slate-400">> Conectando con servidor de pipeline...</div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button id="modalBtnClose" type="button" onclick="document.getElementById('pipelineModal').classList.add('hidden')" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition hidden cursor-pointer">
+                    Cerrar
+                </button>
+                <button id="modalBtnReload" type="button" onclick="window.location.reload()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow transition hidden flex items-center gap-1 cursor-pointer">
+                    <span>Ver LTM Actualizado ⟳</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Chequeo asíncrono de Frescura SEC (con caché de 15 min en backend)
+    function checkSecFreshnessAsync(force=false) {
+        const ticker = "{{ ticker }}";
+        fetch(`/api/sec-freshness/${encodeURIComponent(ticker)}/${force ? '?force=1' : ''}`)
+            .then(res => res.json())
+            .then(data => {
+                const badge = document.getElementById('ltmPeriodBadge');
+                const container = document.getElementById('secAlertContainer');
+                if (!container) return;
+
+                // Actualizar badge con punto de color
+                if (badge && data.local_ltm_period) {
+                    const dotColor = data.has_newer_filing ? 'bg-amber-500' : 'bg-emerald-500';
+                    const formStr = data.local_filing_form || '10-Q';
+                    const dateStr = data.local_filing_date ? ` (${formStr} del ${data.local_filing_date})` : '';
+                    badge.innerHTML = `
+                        <span class="w-2 h-2 rounded-full ${dotColor}"></span>
+                        Período LTM: ${data.local_ltm_period}${dateStr}
+                    `;
+                }
+
+                // Generar alertas si aplica
+                let html = '';
+                if (data.has_newer_filing) {
+                    html += `
+                        <div class="p-3 bg-amber-50 border border-amber-300 rounded-xl flex items-start justify-between gap-3 text-xs text-amber-900 shadow-sm animate-in fade-in">
+                            <div class="flex items-start gap-2">
+                                <span class="text-base leading-none">⚠️</span>
+                                <div>
+                                    <strong class="font-bold">Nuevo Informe Trimestral en SEC EDGAR:</strong>
+                                    Form ${data.sec_latest_form || '10-Q'} (${data.sec_latest_period || 'Nuevo'}) presentado el ${data.sec_latest_filing_date}. Los datos mostrados corresponden a ${data.local_ltm_period}.
+                                </div>
+                            </div>
+                            <button onclick="syncWithSec('${ticker}')" class="shrink-0 px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-[11px] transition cursor-pointer">
+                                Actualizar LTM Ahora
+                            </button>
+                        </div>
+                    `;
+                } else if (data.has_pending_8k) {
+                    html += `
+                        <div class="p-2.5 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between gap-2 text-xs text-sky-800">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm">📢</span>
+                                <div>
+                                    <strong>Form 8-K (Item 2.02 - Resultados de Operaciones)</strong> presentado el ${data.latest_8k_date}. Resultados preliminares publicados por la empresa.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = html;
+            })
+            .catch(err => console.warn('Error verificando frescura SEC:', err));
+    }
+
+    let pollSyncInterval = null;
+
+    function syncWithSec(ticker) {
+        const modal = document.getElementById("pipelineModal");
+        const modalStatusBadge = document.getElementById("modalStatusBadge");
+        const modalStepText = document.getElementById("modalStepText");
+        const modalPctText = document.getElementById("modalPctText");
+        const modalProgressBar = document.getElementById("modalProgressBar");
+        const modalConsole = document.getElementById("modalConsole");
+        const modalBtnClose = document.getElementById("modalBtnClose");
+        const modalBtnReload = document.getElementById("modalBtnReload");
+
+        modalConsole.innerHTML = "";
+        modalBtnClose.classList.add("hidden");
+        modalBtnReload.classList.add("hidden");
+        modalProgressBar.style.width = "5%";
+        modalPctText.textContent = "5%";
+        modalStepText.textContent = "Conectando con SEC EDGAR...";
+        modalStatusBadge.textContent = "EN PROCESO";
+        modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 animate-pulse";
+        modal.classList.remove("hidden");
+
+        const logMsg = (msg, cls="text-slate-300") => {
+            const row = document.createElement("div");
+            row.className = cls;
+            row.textContent = `> ${msg}`;
+            modalConsole.appendChild(row);
+            modalConsole.scrollTop = modalConsole.scrollHeight;
+        };
+
+        logMsg(`Iniciando sincronización SEC y recálculo LTM para ${ticker}...`);
+
+        fetch("/api/pipeline/trigger/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `ticker=${encodeURIComponent(ticker)}`
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (!data.success) {
+                modalStatusBadge.textContent = "ERROR";
+                modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+                logMsg(`Error: ${data.error || 'No se pudo iniciar el proceso.'}`, "text-rose-400");
+                modalBtnClose.classList.remove("hidden");
+                return;
+            }
+
+            clearInterval(pollSyncInterval);
+            pollSyncInterval = setInterval(() => {
+                fetch(`/api/pipeline/status/${encodeURIComponent(ticker)}/`)
+                    .then(r => r.json())
+                    .then(job => {
+                        const pct = job.progress_pct || 0;
+                        modalPctText.textContent = `${pct}%`;
+                        modalProgressBar.style.width = `${pct}%`;
+                        if (job.step) {
+                            modalStepText.textContent = job.step;
+                            logMsg(job.step, "text-sky-300");
+                        }
+                        if (job.status === "COMPLETED") {
+                            clearInterval(pollSyncInterval);
+                            modalStatusBadge.textContent = "COMPLETADO";
+                            modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
+                            modalProgressBar.style.width = "100%";
+                            modalPctText.textContent = "100%";
+                            logMsg("¡LTM y Estados Financieros actualizados exitosamente!", "text-emerald-400 font-bold");
+                            modalBtnReload.classList.remove("hidden");
+                        } else if (job.status === "FAILED") {
+                            clearInterval(pollSyncInterval);
+                            modalStatusBadge.textContent = "FALLÓ";
+                            modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+                            logMsg(`Fallo en el pipeline: ${job.error || 'Desconocido'}`, "text-rose-400 font-bold");
+                            modalBtnClose.classList.remove("hidden");
+                        }
+                    })
+                    .catch(err => logMsg(`Error de sondeo: ${err.message}`, "text-amber-400"));
+            }, 2500);
+        })
+        .catch(err => {
+            modalStatusBadge.textContent = "ERROR RED";
+            modalStatusBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+            logMsg(`Fallo de conexión: ${err.message}`, "text-rose-400");
+            modalBtnClose.classList.remove("hidden");
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        checkSecFreshnessAsync(false);
+    });
 </script>
 {% endblock %}
