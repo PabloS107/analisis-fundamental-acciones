@@ -1,0 +1,17 @@
+# Datos procesados y cachés
+data/processed/
+data/cache/
+web_dashboard/data/cache/
+
+# Entradas pesadas y documentos generados
+drive_input/
+*.docx
+*.pdf
+
+# Carpeta temporal y de archivo de scripts de diagnóstico
+scratch/
+archive/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
