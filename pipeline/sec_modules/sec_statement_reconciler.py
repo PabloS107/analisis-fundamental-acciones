@@ -216,6 +216,60 @@ def build_as_reported_statements(
             if norm_c.startswith("FY"):
                 fy_cols_map[norm_c] = c
 
+        # Incorporar partidas legítimas de carátula presentes en el 10-Q que no existían en el 10-K anual
+        if not q_face.empty and not face_df.empty:
+            k_toks = set(face_df["concept"].astype(str).apply(_clean_concept_token)) if "concept" in face_df.columns else set()
+            new_q_rows = []
+            for q_idx in range(len(q_face)):
+                r_q = q_face.iloc[q_idx]
+                q_conc = str(r_q.get("concept", "")).strip()
+                q_tok = _clean_concept_token(q_conc)
+                is_abs_q = bool(r_q.get("abstract", False))
+                if q_tok and (q_tok not in k_toks) and not is_abs_q:
+                    target_insert_pos = None
+                    for prev_i in range(q_idx - 1, -1, -1):
+                        cand_prev = q_face.iloc[prev_i]
+                        cand_tok = _clean_concept_token(cand_prev.get("concept", ""))
+                        if cand_tok in k_toks:
+                            for f_i in range(len(face_df)):
+                                if _clean_concept_token(face_df.iloc[f_i].get("concept", "")) == cand_tok:
+                                    target_insert_pos = f_i + 1
+                                    break
+                            if target_insert_pos is not None:
+                                break
+                    if target_insert_pos is None:
+                        for next_i in range(q_idx + 1, len(q_face)):
+                            cand_next = q_face.iloc[next_i]
+                            cand_tok = _clean_concept_token(cand_next.get("concept", ""))
+                            if cand_tok in k_toks:
+                                for f_i in range(len(face_df)):
+                                    if _clean_concept_token(face_df.iloc[f_i].get("concept", "")) == cand_tok:
+                                        target_insert_pos = f_i
+                                        break
+                                if target_insert_pos is not None:
+                                    break
+                    new_q_rows.append((target_insert_pos, r_q))
+                    k_toks.add(q_tok)
+
+            for ins_pos, r_q in sorted(new_q_rows, key=lambda x: (x[0] if x[0] is not None else 999999), reverse=True):
+                new_row_dict = {col: None for col in face_df.columns}
+                for col_q in r_q.index:
+                    if col_q in new_row_dict:
+                        new_row_dict[col_q] = r_q[col_q]
+                    else:
+                        norm_q = normalize_fiscal_year(col_q)
+                        if norm_q in fy_cols_map:
+                            new_row_dict[fy_cols_map[norm_q]] = r_q[col_q]
+                new_row_dict["concept"] = r_q.get("concept")
+                new_row_dict["label"] = r_q.get("label")
+                new_row_dict["abstract"] = False
+                new_row_dict["level"] = r_q.get("level", 3)
+                new_row_dict["dimension"] = False
+
+                df_above = face_df.iloc[:ins_pos] if ins_pos is not None else face_df
+                df_below = face_df.iloc[ins_pos:] if ins_pos is not None else pd.DataFrame(columns=face_df.columns)
+                face_df = pd.concat([df_above, pd.DataFrame([new_row_dict]), df_below], ignore_index=True)
+
         # Detectar columnas relevantes en el 10-Q para LTM
         q_mrq_col = None
         ytd_curr = None

@@ -218,17 +218,17 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         archetype = fs.get("archetype") or ("FINANCIAL_BANKING" if fs.get("is_financial") else "STANDARD_CORPORATE")
     canonical = fs.get("canonical_summary", {}) if isinstance(fs, dict) else {}
     bs_detail = fs.get("balance_sheet_detail", {}) if isinstance(fs, dict) else {}
-    bal_sources = [
-        bs_detail,
-        fs.get("balance_sheet", {}) if isinstance(fs, dict) else {}
-    ]
     as_rep_bs_raw = fs.get("as_reported_statements", {}).get("balance_sheet", []) if isinstance(fs, dict) else []
     as_rep_bs_rows = as_rep_bs_raw if isinstance(as_rep_bs_raw, list) else (as_rep_bs_raw.get("rows", []) if isinstance(as_rep_bs_raw, dict) else [])
     as_rep_bs_dict = {}
     for r in as_rep_bs_rows:
         if isinstance(r, dict) and "concept" in r:
             as_rep_bs_dict[r["concept"]] = r.get("values", {})
-    bal_sources.append(as_rep_bs_dict)
+    bal_sources = [
+        as_rep_bs_dict,
+        fs.get("balance_sheet", {}) if isinstance(fs, dict) else {},
+        bs_detail
+    ]
 
     def _extract_val(key_cands, p, can_key=None):
         if can_key:
@@ -237,11 +237,11 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
                 can_val = canonical.get(ck, {}).get(p)
                 if can_val is not None and float(can_val) != 0.0:
                     return float(can_val)
-        for k in key_cands:
-            k_lower = k.lower()
-            for src in bal_sources:
-                if not isinstance(src, dict):
-                    continue
+        for src in bal_sources:
+            if not isinstance(src, dict):
+                continue
+            for k in key_cands:
+                k_lower = k.lower()
                 if k in src:
                     obj = src[k]
                     vals = obj.get("values", obj) if isinstance(obj, dict) else {}
@@ -313,7 +313,9 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
     gw_keys = ["Goodwill", "us-gaap_Goodwill"]
     intang_keys = [
         "IntangibleAssetsNetExcludingGoodwill", "IntangibleAssetsNet",
-        "OtherIntangibleAssetsNet", "us-gaap_IntangibleAssetsNetExcludingGoodwill"
+        "OtherIntangibleAssetsNet", "us-gaap_IntangibleAssetsNetExcludingGoodwill",
+        "IntangibleAssetsNetExcludingGoodwillNoncurrent", "us-gaap_IntangibleAssetsNetExcludingGoodwillNoncurrent",
+        "IntangibleAssetsNetNoncurrent", "us-gaap_IntangibleAssetsNetNoncurrent"
     ]
     lt_inv_keys = [
         "MarketableSecuritiesNoncurrent", "us-gaap_MarketableSecuritiesNoncurrent",
@@ -584,20 +586,28 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         rou_v = _extract_val(rou_keys, p, "operating_lease_rou_asset")
         gw_v = _extract_val(gw_keys, p)
         int_v = _extract_val(intang_keys, p)
+
+        is_gw_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in gw_keys)
+        is_int_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in intang_keys)
+
+        if p == "LTM" and gw_v and not is_gw_on_face and len(periods) > 1:
+            prev_p = periods[1]
+            prev_gw = _extract_val(gw_keys, prev_p)
+            ltm_ma = _extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
+            if (not prev_gw or prev_gw == 0.0) and (abs(ltm_ma) < 5000.0):
+                gw_v = None
+
+        if p == "LTM" and int_v and not is_int_on_face and len(periods) > 1:
+            prev_p = periods[1]
+            prev_int = _extract_val(intang_keys, prev_p)
+            ltm_ma = _extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
+            if (not prev_int or prev_int == 0.0) and (abs(ltm_ma) < 5000.0):
+                int_v = None
+
         if gw_v is not None and int_v is not None and gw_v == int_v:
             gw_int_v = gw_v
         else:
             gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
-
-        # Si en LTM aparece un gw_int_v > 0 pero en el último año fiscal cerrado Goodwill e Intangibles son ambos None o 0
-        # (y no hubo M&A mayor a $5B en LTM), forzar gw_int_v = None para evitar contaminación de notas (caso AAPL)
-        if p == "LTM" and gw_int_v and len(periods) > 1:
-            prev_p = periods[1]
-            prev_gw = _extract_val(gw_keys, prev_p)
-            prev_int = _extract_val(intang_keys, prev_p)
-            ltm_ma = _extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
-            if (not prev_gw or prev_gw == 0.0) and (not prev_int or prev_int == 0.0) and (abs(ltm_ma) < 5000.0):
-                gw_int_v = None
 
         lt_inv_v = _extract_val(lt_inv_keys, p)
         eq_method = _extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)

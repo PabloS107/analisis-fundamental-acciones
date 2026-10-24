@@ -381,6 +381,20 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "OperatingLeaseRightOfUseAssetNet",
         "FinanceLeaseRightOfUseAssetNet",
     ],
+    "goodwill": [
+        "Goodwill",
+        "us-gaap_Goodwill",
+    ],
+    "intangible_assets": [
+        "IntangibleAssetsNetExcludingGoodwill",
+        "us-gaap_IntangibleAssetsNetExcludingGoodwill",
+        "IntangibleAssetsNetExcludingGoodwillNoncurrent",
+        "us-gaap_IntangibleAssetsNetExcludingGoodwillNoncurrent",
+        "IntangibleAssetsNet",
+        "OtherIntangibleAssetsNet",
+        "IntangibleAssetsNetNoncurrent",
+        "us-gaap_IntangibleAssetsNetNoncurrent",
+    ],
     "long_term_investments": [
         "MarketableSecuritiesNoncurrent",
         "NonmarketableEquitySecuritiesCarryingValue",
