@@ -1769,15 +1769,19 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "ifrs-full_CashAndCashEquivalents"
         ], p)
 
-        beg_cash = _extract_multi_source_val(fs, "cashflow", [
-            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
-            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsBeginningOfPeriod",
-            "CashAndCashEquivalentsAtBeginningOfPeriod",
-            "CashAndCashEquivalentsAtCarryingValueBeginningOfPeriod",
-            "ifrs-full_CashAndCashEquivalentsAtBeginningOfPeriod"
-        ], p)
-        if beg_cash is None and end_cash is not None and net_chg_cash is not None:
+        # La caja inicial se deriva de la identidad del estado de flujo:
+        # caja final - variación neta. Los tags de "beginning of period" solo
+        # se usan como respaldo si la identidad no puede calcularse.
+        beg_cash = None
+        if end_cash is not None and net_chg_cash is not None:
             beg_cash = round(end_cash - net_chg_cash, 2)
+        if beg_cash is None:
+            beg_cash = _extract_multi_source_val(fs, "cashflow", [
+                "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsBeginningOfPeriod",
+                "CashAndCashEquivalentsAtBeginningOfPeriod",
+                "CashAndCashEquivalentsAtCarryingValueBeginningOfPeriod",
+                "ifrs-full_CashAndCashEquivalentsAtBeginningOfPeriod"
+            ], p)
 
         can_fcf = canonical.get("free_cash_flow", {}).get(p)
         if archetype in ("FINANCIAL_BANKING", "INSURANCE"):

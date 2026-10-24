@@ -77,6 +77,47 @@ def _clean_concept_token(c):
     return s.lower()
 
 
+# Conceptos de saldo de caja que aparecen dentro del estado de flujo de caja.
+# Son partidas point-in-time: su valor LTM es el saldo del trimestre más
+# reciente, no la identidad de flujo FY + YTD_actual - YTD_previo.
+_POINT_IN_TIME_CASH_TOKENS = {
+    "cashandcashequivalentsatcarryingvalue",
+    "cashcashequivalentsrestrictedcashandrestrictedcashequivalents",
+    "restrictedcashandcashequivalentsatcarryingvalue",
+    "restrictedcashandcashequivalents",
+    "cashandduefrombanks",
+    "cashcashequivalentsandshortterminvestments",
+    "restrictedcashcurrent",
+    "restrictedcashnoncurrent",
+    "restrictedcashandcashequivalentscurrent",
+    "restrictedcashandcashequivalentsnoncurrent",
+}
+
+
+def is_point_in_time_cash_concept(concept, label=""):
+    """Identifica saldos de caja dentro del estado de flujo de caja.
+
+    Estas filas no son flujos: representan la caja disponible en una fecha.
+    Aplicarles la fórmula de flujo (FY + YTD_actual - YTD_previo) corrompe
+    el saldo final LTM y, por identidad, la caja inicial.
+    """
+    tok = _clean_concept_token(concept)
+    if tok in _POINT_IN_TIME_CASH_TOKENS:
+        return True
+    lbl = str(label or "").lower()
+    if "beginning of period" in lbl:
+        return False
+    return "cash" in lbl and any(
+        marker in lbl
+        for marker in (
+            "end of the period",
+            "end of period",
+            "end of the year",
+            "ending balance",
+        )
+    )
+
+
 def dataframe_to_concept_dict(df, periods):
     """Convierte un DataFrame con columnas de períodos a un diccionario indexado por concepto US-GAAP."""
     data_by_concept = {}
@@ -3010,8 +3051,12 @@ def build_as_reported_statements(
                 row_vals["LTM"] = None
             else:
                 ltm_val = None
-                # 1. Para Balance Sheet (point-in-time), consultar el 10-Q trimestral oficial al cierre de MRQ
-                if not is_flow and not q_face.empty and q_mrq_col:
+                # Los saldos de caja dentro del estado de flujo son point-in-time:
+                # su LTM es el saldo del 10-Q actual, no FY + YTD_actual - YTD_previo.
+                is_pt_cash = bool(is_flow) and is_point_in_time_cash_concept(conc, clean_lbl)
+                pt_col = q_mrq_col if not is_flow else (ytd_curr if is_pt_cash else None)
+                # 1. Para Balance Sheet y saldos de caja del CF, consultar el 10-Q al cierre
+                if (not is_flow or is_pt_cash) and not q_face.empty and pt_col:
                     q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
                     if is_row_dim and "dimension_member" in q_face.columns:
                         q_cand = q_face[q_face["dimension_member"].astype(str).str.strip() == row_dim_member]
@@ -3028,7 +3073,7 @@ def build_as_reported_statements(
                         if q_match.empty:
                             q_match = q_cand[q_cand_toks == conc_tok]
                         if not q_match.empty:
-                            v_q = q_match.iloc[0].get(q_mrq_col)
+                            v_q = q_match.iloc[0].get(pt_col)
                             if pd.notna(v_q):
                                 try:
                                     ltm_val = float(v_q)
@@ -3036,7 +3081,7 @@ def build_as_reported_statements(
                                     pass
 
                 # 2. Consultar LTM calibrado en hist_df (4Q sum EPS, flujo acumulado TTM)
-                if ltm_val is None and matched_h_row is not None and "LTM" in hist_cols_norm:
+                if not is_pt_cash and ltm_val is None and matched_h_row is not None and "LTM" in hist_cols_norm:
                     cand_ltm = matched_h_row.get(hist_cols_norm["LTM"])
                     if pd.notna(cand_ltm):
                         try:
@@ -3045,7 +3090,7 @@ def build_as_reported_statements(
                             ltm_val = None
 
                 # 3. Respaldo de flujo (YTD delta) con candado dimensional
-                if ltm_val is None and is_flow and not q_face.empty:
+                if not is_pt_cash and ltm_val is None and is_flow and not q_face.empty:
                     q_toks = q_face["concept"].astype(str).apply(_clean_concept_token)
                     if is_row_dim and "dimension_member" in q_face.columns:
                         q_cand = q_face[q_face["dimension_member"].astype(str).str.strip() == row_dim_member]
@@ -3071,7 +3116,7 @@ def build_as_reported_statements(
                                     pass
 
                 # 4. Respaldo de facts_df para partidas de flujo sin delta en 10-Q (Regla 6: NUNCA copiar FY_latest)
-                if ltm_val is None and is_flow and facts_df is not None and not facts_df.empty and conc_tok and not is_row_dim:
+                if not is_pt_cash and ltm_val is None and is_flow and facts_df is not None and not facts_df.empty and conc_tok and not is_row_dim:
                     q4_sum = get_ltm_quarterly_metric(facts_df, [conc_tok], mode='sum')
                     if q4_sum is not None:
                         ltm_val = float(q4_sum)
@@ -3729,9 +3774,37 @@ def extract_sec_data(ticker, output_dir=None):
         for _, row in cf_df.iterrows():
             c_name = str(row.get('concept', '')).strip()
             fy_val = row.get(latest_fy)
+            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
             val = None
+            is_pt_cash = is_point_in_time_cash_concept(c_name, row.get('label', ''))
+
+            # Saldos de caja: el LTM es el saldo del trimestre más reciente.
+            # Nunca aplicar la identidad de flujo FY + YTD_actual - YTD_previo.
+            if is_pt_cash:
+                if q_cf is not None and ytd_curr_cf:
+                    q_toks = q_cf['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                    match_cf = q_cf[(q_toks == c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
+                    if not match_cf.empty:
+                        v_curr = match_cf.iloc[0].get(ytd_curr_cf)
+                        if pd.notna(v_curr):
+                            try:
+                                val = float(v_curr)
+                            except (ValueError, TypeError):
+                                pass
+                if val is None and not bal_df.empty and 'LTM' in bal_df.columns:
+                    b_toks = bal_df['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
+                    b_match = bal_df[b_toks == c_tok]
+                    if not b_match.empty:
+                        v_b = b_match.iloc[0].get('LTM')
+                        if pd.notna(v_b):
+                            try:
+                                val = float(v_b)
+                            except (ValueError, TypeError):
+                                pass
+                ltm_vals_cf.append(val)
+                continue
+
             if q_cf is not None and ytd_curr_cf and ytd_prev_cf and pd.notna(fy_val):
-                c_tok = c_name.split(':')[-1].split('_')[-1].lower()
                 q_toks = q_cf['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
                 match_cf = q_cf[(q_toks == c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
                 # Si no encuentra coincidencia exacta pero es un concepto de CapEx, buscar variantes en la taxonomía
@@ -3754,7 +3827,6 @@ def extract_sec_data(ticker, output_dir=None):
                         except (ValueError, TypeError):
                             pass
             if val is None and ltm_cf_map:
-                c_tok = c_name.split(':')[-1].split('_')[-1].lower()
                 if c_tok in ltm_cf_map:
                     val = ltm_cf_map[c_tok]
                 elif str(row.get('label', '')).strip().lower() in ltm_cf_map:
