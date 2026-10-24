@@ -2,40 +2,40 @@
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
   "cik": "0001326801",
-  "audit_timestamp": "2026-10-24T10:36:07.594730",
+  "audit_timestamp": "2026-10-24T18:18:33.854544",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 449956000000.0,
-        "liabilities": 188735000000.0,
-        "equity": 261221000000.0,
+        "assets": 478836000000.0,
+        "liabilities": 206450000000.0,
+        "equity": 272386000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 449956000000.0,
+        "liabilities_plus_equity": 478836000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 44995600.0
+        "tolerance_usd": 47883600.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 228247000000.0,
-        "cost_of_goods_sold": 41661000000.0,
-        "gross_profit_reported": 186586000000.0,
-        "gross_profit_calculated": 186586000000.0,
+        "revenue": 241605000000.0,
+        "cost_of_goods_sold": 45823000000.0,
+        "gross_profit_reported": 195782000000.0,
+        "gross_profit_calculated": 195782000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 22824700.0
+        "tolerance_usd": 24160500.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 130301000000.0,
-        "capital_expenditures": 89325000000.0,
-        "fcf_reported": 40976000000.0,
-        "fcf_calculated": 40976000000.0,
+        "cash_from_operations": 133087000000.0,
+        "capital_expenditures": 104438000000.0,
+        "fcf_reported": 28649000000.0,
+        "fcf_calculated": 28649000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -54,11 +54,11 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 68098000000.0,
-        "shares_diluted": 2566000000.0,
-        "eps_reported": 26.54,
-        "eps_calculated": 26.54,
-        "eps_adjusted": 26.54,
+        "net_income": 75249000000.0,
+        "shares_diluted": 2566250000.0,
+        "eps_reported": 29.32,
+        "eps_calculated": 29.32,
+        "eps_adjusted": 29.32,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -770,9 +770,15 @@
     "FY2014": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2014 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 39966000000.0,
+        "liabilities": 3870000000.0,
+        "equity": 36096000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 39966000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 3996600.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -828,8 +834,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 76,
+  "passed_tests": 77,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 1,
   "compliance_score_pct": 100.0
 }

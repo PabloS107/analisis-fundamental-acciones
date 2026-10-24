@@ -1,7 +1,7 @@
 {
   "ticker": "META",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-10-11T21:14:15.308358",
+  "timestamp": "2026-10-24T16:44:14.946839",
   "scorecard": {
     "governance_score": 95,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -9,7 +9,7 @@
     "insider_sentiment_label": "Actividad Ordinaria Predominantemente bajo Planes 10b5-1",
     "is_foreign_private_issuer": false,
     "open_market_buys_usd": 0.0,
-    "routine_10b5_sales_usd": 104697438.54,
+    "routine_10b5_sales_usd": 106958036.04,
     "discretionary_sales_usd": 1718218.04,
     "ratio_10b5_compliance_pct": 98.4,
     "audit_change_detected": false,
@@ -19,16 +19,31 @@
   },
   "form_8k_events": [
     {
+      "filing_date": "2026-10-21",
+      "accession_number": "0001628280-26-066700",
+      "items": [
+        "Item 2.02",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 21, 2026, the Company issued a press release and will hold a conference call regarding its financial results for the quarter ended September 30, 2026. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K. The information furnished with this It..."
+    },
+    {
       "filing_date": "2026-07-29",
       "accession_number": "0001628280-26-050596",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 29, 2026, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended June 30, 2026. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02, i..."
     },
     {
       "filing_date": "2026-05-29",
@@ -40,31 +55,33 @@
       "explanation": "Evento de notificación corporativa ante la SEC.",
       "diagnostic": "Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On May 27, 2026, Meta Platforms, Inc. (the \"Company\") held its annual meeting of shareholders via live audio webcast (the \"Annual Meeting\"). At the Annual Meeting, the Company's shareholders voted on twelve proposals, each of which is described in more detail in the Company's definitive..."
     },
     {
       "filing_date": "2026-05-04",
       "accession_number": "0001193125-26-204128",
       "items": [
-        "Item 8.01,9.01"
+        "Item 8.01",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 8.01,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 8.01 Other Events. On May 4, 2026, Meta Platforms, Inc. (the “Company”) completed an offering of $3,000,000,000 aggregate principal amount of its 4.550% Senior Notes due 2031 (the “2031 Notes”), $2,000,000,000 aggregate principal amount of its 4.875% Senior Notes due 2033 (the “2033 Notes”), $6,000,000,000 aggregate principal amount of its 5.2..."
     },
     {
       "filing_date": "2026-04-29",
       "accession_number": "0001628280-26-028364",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On April 29, 2026, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended March 31, 2026. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02,..."
     },
     {
       "filing_date": "2026-04-14",
@@ -76,19 +93,20 @@
       "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
       "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
       "risk_rating": "MEDIUM",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. (b) On April 8, 2026, Hock E. Tan and Tracey T. Travis notified Meta Platforms, Inc. (the \"Company\") of their decision not to stand for re-election to the Company's Board of Directors at the Co..."
     },
     {
       "filing_date": "2026-01-28",
       "accession_number": "0001628280-26-003832",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On January 28, 2026, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter and full year ended December 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished w..."
     },
     {
       "filing_date": "2026-01-16",
@@ -100,7 +118,7 @@
       "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
       "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
       "risk_rating": "MEDIUM",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. (c) The Board of Directors (the \"Board\") of Meta Platforms, Inc. (the \"Company\") appointed Dina Powell McCormick, age 52, to serve as President and Vice Chairman of the Company, effective Janua..."
     },
     {
       "filing_date": "2025-12-19",
@@ -112,91 +130,98 @@
       "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
       "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
       "risk_rating": "MEDIUM",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. (b) On December 19, 2025, Dina Powell McCormick notified Meta Platforms, Inc. (the \"Company\") that she will resign as a member of the Board of Directors of the Company, effective immediately. S..."
     },
     {
       "filing_date": "2025-12-12",
       "accession_number": "0001628280-25-056768",
       "items": [
-        "Item 8.01,9.01"
+        "Item 8.01",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 8.01,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 8.01 Other Events. As previously disclosed, on July 17, 2025, the parties to the stockholder derivative action in the Delaware Court of Chancery, captionedIn re Facebook Inc. Derivative Litigation, Consolidated C.A. 2018-0307-KSJM (Del. Ch.) (the \"Matter\"), agreed to a settlement in principle to resolve all claims in the Matter, which is subje..."
     },
     {
       "filing_date": "2025-11-03",
       "accession_number": "0001193125-25-262593",
       "items": [
-        "Item 8.01,9.01"
+        "Item 8.01",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 8.01,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 8.01 Other Events. On November 3, 2025, Meta Platforms, Inc. (the “Company”) completed an offering of $4,000,000,000 aggregate principal amount of its 4.200% Senior Notes due 2030 (the “2030 Notes”), $4,000,000,000 aggregate principal amount of its 4.600% Senior Notes due 2032 (the “2032 Notes”), $6,500,000,000 aggregate principal amount of it..."
     },
     {
       "filing_date": "2025-10-29",
       "accession_number": "0001628280-25-047114",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 29, 2025, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended September 30, 2025. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item..."
     },
     {
       "filing_date": "2025-07-30",
       "accession_number": "0001628280-25-036719",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 30, 2025, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended June 30, 2025. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02, i..."
     },
     {
       "filing_date": "2025-05-30",
       "accession_number": "0001326801-25-000090",
       "items": [
-        "Item 5.07,9.01"
+        "Item 5.07",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 5.07,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Hecho Regulatorio (Item 5.07) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On May 28, 2025, Meta Platforms, Inc. (the \"Company\") held its annual meeting of shareholders via live audio webcast (the \"Annual Meeting\"). At the Annual Meeting, the Company's shareholders voted on fourteen proposals, each of which is described in more detail in the Company's definiti..."
     },
     {
       "filing_date": "2025-04-30",
       "accession_number": "0001326801-25-000050",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On April 30, 2025, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended March 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02,..."
     },
     {
       "filing_date": "2025-04-11",
       "accession_number": "0001326801-25-000027",
       "items": [
-        "Item 5.02,9.01"
+        "Item 5.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 5.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On April 11, 2025, the Board of Directors (the \"Board\") of Meta Platforms, Inc. (the \"Company\") approved an increase in the size of the Board to fifteen (15) members and elected Dina Powell McC..."
     },
     {
       "filing_date": "2025-02-20",
@@ -208,115 +233,111 @@
       "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
       "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
       "risk_rating": "MEDIUM",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. As previously disclosed, Meta Platforms, Inc. (the \"Company\") maintains a Bonus Plan (the \"Bonus Plan\") that provides variable cash incentives, payable annually, which are designed to motivate ..."
     },
     {
       "filing_date": "2025-01-29",
       "accession_number": "0001326801-25-000014",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On January 29, 2025, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter and full year ended December 31, 2024. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished w..."
     },
     {
       "filing_date": "2025-01-06",
       "accession_number": "0001326801-25-000005",
       "items": [
-        "Item 5.02,9.01"
+        "Item 5.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 5.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On December 30, 2024, the Board of Directors (the \"Board\") of Meta Platforms, Inc. (the \"Company\") approved an increase in the size of the Board to thirteen (13) members and elected Dana White,..."
     },
     {
       "filing_date": "2024-10-30",
       "accession_number": "0001326801-24-000077",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 30, 2024, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended September 30, 2024. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item..."
     },
     {
       "filing_date": "2024-09-10",
       "accession_number": "0001326801-24-000072",
       "items": [
-        "Item 5.03,9.01"
+        "Item 5.03",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 5.03,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.03 Amendments to Articles of Incorporation or Bylaws; Change in Fiscal Year. On September 5, 2024, the Board of Directors (the “Board”) of Meta Platforms, Inc. (the “Company”) amended and restated the Company’s bylaws (the “Amended and Restated Bylaws”), which became effective as of such date. The Amended and Restated Bylaws, among other thi..."
     },
     {
       "filing_date": "2024-08-09",
       "accession_number": "0001193125-24-197873",
       "items": [
-        "Item 8.01,9.01"
+        "Item 8.01",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 8.01,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 8.01 Other Events. On August 9, 2024, Meta Platforms, Inc. (the “Company”) completed an offering of $1,000,000,000 aggregate principal amount of its 4.300% Senior Notes due 2029 (the “2029 Notes”), $1,000,000,000 aggregate principal amount of its 4.550% Senior Notes due 2031 (the “2031 Notes”), $2,500,000,000 aggregate principal amount of its ..."
     },
     {
       "filing_date": "2024-07-31",
       "accession_number": "0001326801-24-000065",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On July 31, 2024, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended June 30, 2024. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02, i..."
     },
     {
       "filing_date": "2024-05-31",
       "accession_number": "0001326801-24-000057",
       "items": [
-        "Item 5.07,9.01"
+        "Item 5.07",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 5.07,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Hecho Regulatorio (Item 5.07) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On May 29, 2024, Meta Platforms, Inc. (the \"Company\") held its annual meeting of shareholders via live audio webcast (the \"Annual Meeting\"). At the Annual Meeting, the Company's shareholders voted on fourteen proposals, each of which is described in more detail in the Company's definiti..."
     },
     {
       "filing_date": "2024-04-24",
       "accession_number": "0001326801-24-000044",
       "items": [
-        "Item 2.02,9.01"
+        "Item 2.02",
+        "Item 9.01"
       ],
-      "title": "Hecho Regulatorio (Item 2.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
-    },
-    {
-      "filing_date": "2024-02-14",
-      "accession_number": "0001326801-24-000019",
-      "items": [
-        "Item 5.02,9.01"
-      ],
-      "title": "Hecho Regulatorio (Item 5.02,9.01)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Contenido extraído del formulario oficial SEC."
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On April 24, 2024, Meta Platforms, Inc. (\"Meta\") issued a press release and will hold a conference call regarding its financial results for the quarter ended March 31, 2024. A copy of the press release is furnished as Exhibit 99.1 to this report. The information furnished with this Item 2.02,..."
     }
   ],
   "form_6k_events": [],
@@ -325,8 +346,8 @@
       "filings_analyzed": 40,
       "total_open_market_buys_usd": 0.0,
       "total_open_market_buys_shares": 0,
-      "total_10b5_sales_usd": 104697438.54,
-      "total_10b5_sales_shares": 154457,
+      "total_10b5_sales_usd": 106958036.04,
+      "total_10b5_sales_shares": 157607,
       "total_discretionary_sales_usd": 1718218.04,
       "total_discretionary_sales_shares": 2553,
       "total_grants_shares": 0,
@@ -336,12 +357,12 @@
         "Javier Olivan": {
           "position": "Chief Operating Officer",
           "buys_usd": 0.0,
-          "sales_10b5_usd": 15165723.47479999,
+          "sales_10b5_usd": 17426320.97479999,
           "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
-          "shares_sold": 23676,
+          "shares_sold": 26826,
           "grants": 0,
-          "tx_count": 11
+          "tx_count": 13
         },
         "Mark Zuckerberg": {
           "position": "COB and CEO",
@@ -451,7 +472,7 @@
           "shares_bought": 0,
           "shares_sold": 0,
           "grants": 0,
-          "tx_count": 2
+          "tx_count": 1
         },
         "Charles Songhurst": {
           "position": "Director",
@@ -471,7 +492,7 @@
           "shares_bought": 0,
           "shares_sold": 426,
           "grants": 0,
-          "tx_count": 2
+          "tx_count": 1
         },
         "Robert M Kimmitt": {
           "position": "Director",
@@ -496,6 +517,136 @@
       }
     },
     "transactions": [
+      {
+        "filing_date": "2026-10-21",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 946,
+        "price": 707.2,
+        "total_usd": 669011.2,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-21",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 82,
+        "price": 707.2,
+        "total_usd": 57990.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-21",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 57,
+        "price": 707.2,
+        "total_usd": 40310.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-21",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 82,
+        "price": 707.2,
+        "total_usd": 57990.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-21",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 408,
+        "price": 707.2,
+        "total_usd": 288537.6,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 946,
+        "price": 728.1,
+        "total_usd": 688782.6,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 82,
+        "price": 728.1,
+        "total_usd": 59704.2,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 57,
+        "price": 728.1,
+        "total_usd": 41501.7,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 82,
+        "price": 728.1,
+        "total_usd": 59704.2,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Javier Olivan",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 408,
+        "price": 728.1,
+        "total_usd": 297064.8,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
       {
         "filing_date": "2026-10-07",
         "insider": "Javier Olivan",
@@ -1983,13 +2134,33 @@
   "form_144_notices": {
     "summary": {
       "notices_analyzed": 20,
-      "total_shares_proposed": 152183,
-      "total_value_proposed_usd": 103360271.0,
+      "total_shares_proposed": 148632,
+      "total_value_proposed_usd": 101506229.0,
       "notices_under_10b5": 20,
       "notices_discretionary": 0,
       "notices_with_anomalies_count": 3
     },
     "notices": [
+      {
+        "filing_date": "2026-10-19",
+        "person_selling": "Olivan Javier",
+        "shares_to_sell": 1575,
+        "market_value_usd": 1113840.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-10-13",
+        "person_selling": "Olivan Javier",
+        "shares_to_sell": 1575,
+        "market_value_usd": 1146757.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
       {
         "filing_date": "2026-10-05",
         "person_selling": "Olivan Javier",
@@ -2171,26 +2342,6 @@
         "person_selling": "Olivan Javier",
         "shares_to_sell": 2163,
         "market_value_usd": 1429787.0,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
-      },
-      {
-        "filing_date": "2026-07-13",
-        "person_selling": "Olivan Javier",
-        "shares_to_sell": 1466,
-        "market_value_usd": 969217.0,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
-      },
-      {
-        "filing_date": "2026-07-06",
-        "person_selling": "Olivan Javier",
-        "shares_to_sell": 5235,
-        "market_value_usd": 3145422.0,
         "is_10b5_1": true,
         "is_large_liquidation": false,
         "anomaly_flags": [],

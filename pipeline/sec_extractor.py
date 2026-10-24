@@ -16,6 +16,10 @@ import pandas as pd
 import numpy as np
 from edgar import set_identity, Company
 
+project_root = str(Path(__file__).resolve().parent.parent)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 try:
     from sec_rate_limiter import sec_call_with_retry, default_rate_limiter
 except ImportError:

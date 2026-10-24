@@ -1584,12 +1584,17 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "CashAndCashEquivalentsAtCarryingValue",
             "ifrs-full_CashAndCashEquivalents"
         ], p)
+        if end_cash is None:
+            end_cash = _extract_multi_source_val(fs, "balance_sheet", [
+                "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+                "CashAndCashEquivalentsAtCarryingValue", "Cash"
+            ], p)
 
         beg_cash = _extract_multi_source_val(fs, "cashflow", [
-            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
             "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsBeginningOfPeriod",
             "CashAndCashEquivalentsAtBeginningOfPeriod",
             "CashAndCashEquivalentsAtCarryingValueBeginningOfPeriod",
+            "CashBeginningOfPeriod",
             "ifrs-full_CashAndCashEquivalentsAtBeginningOfPeriod"
         ], p)
         if beg_cash is None and end_cash is not None and net_chg_cash is not None:

@@ -609,7 +609,13 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
        y `orig_tooltip` (nombre original en inglés y concepto XBRL).
     3. Garantiza coherencia en Balance LTM y bloquea colisiones dimensionales o cuentas de reclasificación residual.
     """
-    from pipeline.financial_bilingual_map import get_spanish_label
+    try:
+        from pipeline.financial_bilingual_map import get_spanish_label
+    except ImportError:
+        try:
+            from financial_bilingual_map import get_spanish_label
+        except ImportError:
+            from ..financial_bilingual_map import get_spanish_label
 
     as_reported = full_dataset.get("as_reported_statements", {})
     if not as_reported:

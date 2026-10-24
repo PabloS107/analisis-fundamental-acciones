@@ -2,7 +2,7 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-10-24T10:36:07.506635",
+  "audit_timestamp": "2026-10-24T18:16:16.126142",
   "years_audited": {
     "LTM": [
       {
@@ -56,11 +56,11 @@
         "status": "PASS",
         "net_income": 128930000000.0,
         "shares_diluted": 14778628750.0,
-        "eps_reported": 8.72,
+        "eps_reported": 8.71,
         "eps_calculated": 8.72,
-        "eps_adjusted": 8.72,
+        "eps_adjusted": 8.71,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.01
       }
     ],
     "FY2025": [
@@ -770,9 +770,15 @@
     "FY2014": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2014 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 231839000000.0,
+        "liabilities": 120292000000.0,
+        "equity": 111547000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 231839000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 23183900.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -828,8 +834,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 76,
+  "passed_tests": 77,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 1,
   "compliance_score_pct": 100.0
 }

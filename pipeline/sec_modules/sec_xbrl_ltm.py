@@ -1277,19 +1277,43 @@ def compute_and_inject_ltm_columns(
                 except (ValueError, TypeError):
                     pass
 
+    ENDING_CASH_CONCEPTS = {
+        "cashcashequivalentsrestrictedcashandrestrictedcashequivalents",
+        "cashandcashequivalentsatcarryingvalue",
+        "cashandcashequivalents",
+        "cash",
+        "restrictedcashandcashequivalentsatcarryingvalue",
+        "restrictedcashandcashequivalentsnoncurrent",
+        "restrictedcashandcashequivalents",
+        "cashandcashequivalentsfairvaluedisclosure",
+    }
+    BEGINNING_CASH_CONCEPTS = {
+        "cashcashequivalentsrestrictedcashandrestrictedcashequivalentsbeginningofperiod",
+        "cashandcashequivalentsatbeginningofperiod",
+        "cashandcashequivalentsatcarryingvaluebeginningofperiod",
+        "cashbeginningofperiod",
+    }
+
     ltm_vals_cf = []
     for _, row in cf_df.iterrows():
         c_name = str(row.get('concept', '')).strip()
         fy_val = row.get(latest_fy)
         val = None
-        if q_cf is not None and ytd_curr_cf and ytd_prev_cf and pd.notna(fy_val):
-            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
-            q_toks = q_cf['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
-            match_cf = q_cf[(q_toks == c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
+        c_tok = _clean_concept_token(c_name)
+        is_ending_cash = c_tok in ENDING_CASH_CONCEPTS
+        is_beg_cash = c_tok in BEGINNING_CASH_CONCEPTS
+
+        if q_cf is not None and ytd_curr_cf and ytd_prev_cf:
+            q_toks = q_cf['concept'].astype(str).apply(_clean_concept_token)
+            # Coincidencia exacta de token o concepto para evitar colisiones con prefijos como EffectOfExchangeRateOn...
+            match_cf = q_cf[(q_toks == c_tok) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
+            if match_cf.empty:
+                match_cf = q_cf[q_cf['concept'].astype(str).str.lower().str.endswith(':' + c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith('_' + c_tok)]
             # Si no encuentra coincidencia exacta pero es un concepto de CapEx, buscar variantes en la taxonomía
             if match_cf.empty and any(cand.lower() in c_name.lower() for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]):
                 for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]:
-                    cand_match = q_cf[q_cf['concept'].astype(str).str.lower().str.endswith(cand.lower()) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
+                    c_clean = _clean_concept_token(cand)
+                    cand_match = q_cf[(q_toks == c_clean) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
                     if not cand_match.empty:
                         match_cf = cand_match
                         break
@@ -1297,7 +1321,21 @@ def compute_and_inject_ltm_columns(
                 q_row = match_cf.iloc[0]
                 v_curr = q_row.get(ytd_curr_cf)
                 v_prev = q_row.get(ytd_prev_cf)
-                if pd.notna(v_curr) and pd.notna(v_prev):
+                if is_ending_cash:
+                    # El saldo de cierre de LTM es el saldo puntual a la fecha de corte del trimestre más reciente (MRQ)
+                    if pd.notna(v_curr):
+                        try:
+                            val = float(v_curr)
+                        except (ValueError, TypeError):
+                            pass
+                elif is_beg_cash:
+                    # El saldo de inicio del trailing 12M es el saldo puntual a la fecha de inicio (12 meses antes)
+                    if pd.notna(v_prev):
+                        try:
+                            val = float(v_prev)
+                        except (ValueError, TypeError):
+                            pass
+                elif pd.notna(v_curr) and pd.notna(v_prev) and pd.notna(fy_val):
                     try:
                         f_fy = float(fy_val)
                         f_curr = float(v_curr)
@@ -1305,8 +1343,13 @@ def compute_and_inject_ltm_columns(
                         val = f_fy + f_curr - f_prev
                     except (ValueError, TypeError):
                         pass
-        if val is None and ltm_cf_map:
-            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+
+        # Respaldo para ending_cash desde facts_df si no vino en q_cf
+        if val is None and is_ending_cash and facts_df is not None and not facts_df.empty:
+            cand_search = [c_name, c_tok]
+            val = get_mrq_fact(facts_df, cand_search, mrq_date=latest_mrq_date)
+
+        if val is None and ltm_cf_map and not is_ending_cash and not is_beg_cash:
             if c_tok in ltm_cf_map:
                 val = ltm_cf_map[c_tok]
             elif str(row.get('label', '')).strip().lower() in ltm_cf_map:

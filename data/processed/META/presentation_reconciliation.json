@@ -1,30 +1,30 @@
 {
-  "timestamp": "2026-10-11T21:13:29.378682",
+  "timestamp": "2026-10-24T16:42:52.313806",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
-      "sec_value": 449956000000.0,
-      "fst_value": 449956000000.0,
+      "sec_value": 478836000000.0,
+      "fst_value": 478836000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     },
     "stockholders_equity": {
-      "sec_value": 261221000000.0,
-      "fst_value": 261221000000.0,
+      "sec_value": 272386000000.0,
+      "fst_value": 272386000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     },
     "cash_and_equivalents": {
-      "sec_value": 15462000000.0,
-      "fst_value": 15462000000.0,
+      "sec_value": 11222000000.0,
+      "fst_value": 11222000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     }
   },
   "methodological_reconciliation": {},
   "banking_kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
-    "source_sec": "meta-06302026xexhibit991.htm",
+    "archetype": "STANDARD_CORPORATE",
+    "source_sec": "meta-09302026xexhibit991.htm",
     "return_on_equity_reported": null,
     "risk_adjusted_nim_pct": null,
     "efficiency_ratio_pct": null,
@@ -46,38 +46,43 @@
         "revenue_usd_m": 228247.0
       },
       "Other revenue": {
-        "revenue_usd_m": 2934.8
+        "revenue_usd_m": 3787.0
       },
       "Family of Apps": {
-        "revenue_usd_m": 225740.4
+        "revenue_usd_m": 239374.0
       },
       "Reality Labs": {
-        "revenue_usd_m": 2506.6
+        "revenue_usd_m": 2231.0
+      },
+      "Advertising": {
+        "revenue_usd_m": 235587.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
       "United States & Canada": {
-        "revenue_usd_m": 89572.0
+        "revenue_usd_m": 95181.0
       },
       "Europe": {
-        "revenue_usd_m": 52890.7
+        "revenue_usd_m": 55526.0
       },
       "Asia-Pacific": {
-        "revenue_usd_m": 61122.6
+        "revenue_usd_m": 63927.0
       },
       "Rest of World": {
-        "revenue_usd_m": 24661.7
+        "revenue_usd_m": 26971.0
       },
       "United States": {
-        "revenue_usd_m": 84931.3
+        "revenue_usd_m": 74780.0
       }
     },
-    "operational_kpis": {}
+    "operational_kpis": {
+      "diluted_eps": 3.83
+    }
   },
   "kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
-    "source_sec": "meta-06302026xexhibit991.htm",
+    "archetype": "STANDARD_CORPORATE",
+    "source_sec": "meta-09302026xexhibit991.htm",
     "return_on_equity_reported": null,
     "risk_adjusted_nim_pct": null,
     "efficiency_ratio_pct": null,
@@ -99,35 +104,40 @@
         "revenue_usd_m": 228247.0
       },
       "Other revenue": {
-        "revenue_usd_m": 2934.8
+        "revenue_usd_m": 3787.0
       },
       "Family of Apps": {
-        "revenue_usd_m": 225740.4
+        "revenue_usd_m": 239374.0
       },
       "Reality Labs": {
-        "revenue_usd_m": 2506.6
+        "revenue_usd_m": 2231.0
+      },
+      "Advertising": {
+        "revenue_usd_m": 235587.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
       "United States & Canada": {
-        "revenue_usd_m": 89572.0
+        "revenue_usd_m": 95181.0
       },
       "Europe": {
-        "revenue_usd_m": 52890.7
+        "revenue_usd_m": 55526.0
       },
       "Asia-Pacific": {
-        "revenue_usd_m": 61122.6
+        "revenue_usd_m": 63927.0
       },
       "Rest of World": {
-        "revenue_usd_m": 24661.7
+        "revenue_usd_m": 26971.0
       },
       "United States": {
-        "revenue_usd_m": 84931.3
+        "revenue_usd_m": 74780.0
       }
     },
-    "operational_kpis": {}
+    "operational_kpis": {
+      "diluted_eps": 3.83
+    }
   },
   "flags": [],
-  "archetype": "CORPORATE_INDUSTRIAL"
+  "archetype": "STANDARD_CORPORATE"
 }
