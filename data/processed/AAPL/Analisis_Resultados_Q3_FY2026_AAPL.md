@@ -1,6 +1,6 @@
 # APPLE INC. (NASDAQ: AAPL)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q3 FY2026 & Gobernanza Corporativa
-*Fecha de Emisión: 23 de Septiembre de 2026 | CIK SEC: 0000320193*  
+*Fecha de Emisión: 24 de Septiembre de 2026 | CIK SEC: 0000320193*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q3 FY26 Earnings Call Transcript*
 
 ---
@@ -471,12 +471,12 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 | Variable de Mercado | Valor Validado | Fuente Primaria / Secundaria | Tolerancia & Estatus |
 | :--- | :---: | :---: | :---: |
 | **Precio de Mercado de la Acción** | **$347.73** | Yahoo Finance / CNBC | Validado por Consenso (Δ = 0.00%) |
-| **Capitalización Bursátil (Market Cap - E)** | **$5,074,797.7M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
+| **Capitalización Bursátil (Market Cap - E)** | **$5,074,834.2M** | Arbitraje SEC 10-Q & Cotización | Conteo Diluido Auditado |
 | **Tasa Libre de Riesgo ($R_f$ - Bono Tesoro 10Y)** | **4.99%** | Yahoo `^TNX` / CNBC `US10Y` | Consensuado en Tiempo Real |
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-23T23:05:30.885296+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,797.7M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-24T13:06:22.440406+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,834.2M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
@@ -484,7 +484,7 @@ El WACC representa el rendimiento mínimo anual exigido por los accionistas y lo
 
 * **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 4.99% + (1.07 \times 4.75%) =$ **10.10%**
 * **Costo de la Deuda ($K_d$ neto de impuestos)**: Pre-tax: 4.43% | Con Escudo Fiscal (17.3%): **3.67%**.
-* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,074,797.7M) | Deuda $W_d = 1.6%$ ($82,347.0M).
+* **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,074,834.2M) | Deuda $W_d = 1.6%$ ($82,347.0M).
 * **WACC Consolidado**: $\text{WACC} = (W_e \times K_e) + (W_d \times K_d) =$ **10.00%** (vs. Mediana del Sector: **8.80%**).
 
 ---

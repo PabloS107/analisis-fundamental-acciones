@@ -2,7 +2,7 @@
   "ticker": "NVDA",
   "company_name": "NVIDIA CORP",
   "cik": "0001045810",
-  "audit_timestamp": "2026-10-22T16:28:01.771113",
+  "audit_timestamp": "2026-10-24T10:36:07.644905",
   "years_audited": {
     "LTM": [
       {
@@ -412,9 +412,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 5822000000.0,
-        "capital_expenditures": 703000000.0,
-        "fcf_reported": 5119000000.0,
-        "fcf_calculated": 5119000000.0,
+        "capital_expenditures": 1128000000.0,
+        "fcf_reported": 4694000000.0,
+        "fcf_calculated": 4694000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -476,9 +476,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 4761000000.0,
-        "capital_expenditures": 372000000.0,
-        "fcf_reported": 4389000000.0,
-        "fcf_calculated": 4389000000.0,
+        "capital_expenditures": 489000000.0,
+        "fcf_reported": 4272000000.0,
+        "fcf_calculated": 4272000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -540,9 +540,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 3743000000.0,
-        "capital_expenditures": 344000000.0,
-        "fcf_reported": 3399000000.0,
-        "fcf_calculated": 3399000000.0,
+        "capital_expenditures": 600000000.0,
+        "fcf_reported": 3143000000.0,
+        "fcf_calculated": 3143000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -604,9 +604,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 3502000000.0,
-        "capital_expenditures": 397000000.0,
-        "fcf_reported": 3105000000.0,
-        "fcf_calculated": 3105000000.0,
+        "capital_expenditures": 593000000.0,
+        "fcf_reported": 2909000000.0,
+        "fcf_calculated": 2909000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -668,9 +668,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 1672000000.0,
-        "capital_expenditures": 177000000.0,
-        "fcf_reported": 1495000000.0,
-        "fcf_calculated": 1495000000.0,
+        "capital_expenditures": 176000000.0,
+        "fcf_reported": 1496000000.0,
+        "fcf_calculated": 1496000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -732,9 +732,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 1175000000.0,
-        "capital_expenditures": 125000000.0,
-        "fcf_reported": 1050000000.0,
-        "fcf_calculated": 1050000000.0,
+        "capital_expenditures": 86000000.0,
+        "fcf_reported": 1089000000.0,
+        "fcf_calculated": 1089000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -770,15 +770,9 @@
     "FY2015": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": true,
-        "status": "PASS",
-        "assets": 7201000000.0,
-        "liabilities": 2783000000.0,
-        "equity": 4418000000.0,
-        "mezzanine_equity": null,
-        "liabilities_plus_equity": 7201000000.0,
-        "discrepancy_usd": 0.0,
-        "tolerance_usd": 720100.0
+        "passed": null,
+        "status": "SKIP",
+        "message": "Partidas insuficientes en FY2015 para verificar balance completo."
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -796,9 +790,9 @@
         "passed": true,
         "status": "PASS",
         "cash_from_operations": 906000000.0,
-        "capital_expenditures": 71000000.0,
-        "fcf_reported": 835000000.0,
-        "fcf_calculated": 835000000.0,
+        "capital_expenditures": 122000000.0,
+        "fcf_reported": 784000000.0,
+        "fcf_calculated": 784000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -834,8 +828,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 77,
+  "passed_tests": 76,
   "failed_tests": 0,
-  "skipped_tests": 1,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0
 }
