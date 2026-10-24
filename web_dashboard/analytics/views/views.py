@@ -6,14 +6,14 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "processed"
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" / "processed"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 PIPELINE_DIR = PROJECT_ROOT / "pipeline"
 for p_dir in (PROJECT_ROOT, PIPELINE_DIR):
     if p_dir.exists() and str(p_dir) not in sys.path:
         sys.path.insert(0, str(p_dir))
 
-from .pipeline_runner import search_companies, launch_pipeline_job, get_job_status
+from ..pipeline_runner import search_companies, launch_pipeline_job, get_job_status
 from .views_statements import (
     resolve_canonical_capital_flows,
     resolve_canonical_balance_sheet,
