@@ -176,6 +176,121 @@ def dataframe_to_concept_dict(df, periods):
     return data_by_concept
 
 
+def face_concept_token(concept):
+    """Token final del concepto XBRL (admite tags estándar y extensiones del emisor)."""
+    return str(concept or "").strip().split(":")[-1].split("_")[-1].lower()
+
+
+def normalize_face_label(label):
+    """Normaliza etiquetas de carátula para emparejar 10-K y 10-Q (ignora aclaraciones entre paréntesis)."""
+    s = str(label or "").strip().lower()
+    s = re.sub(r"\([^)]*\)", " ", s)
+    s = re.sub(r"[^a-z0-9]", "", s)
+    return s
+
+
+def find_face_value(q_df, date_col, concept, label):
+    """
+    Extrae el importe de una línea de la carátula del 10-Q (incluidos tags de extensión).
+    Prioriza coincidencia exacta de concepto; si no, etiqueta normalizada unívoca.
+    Devuelve None si no hay coincidencia inequívoca (Regla 6: sin imputaciones).
+    """
+    if q_df is None or getattr(q_df, "empty", True) or not date_col or date_col not in q_df.columns:
+        return None
+    df = q_df
+    if "dimension" in df.columns:
+        df = df[(df["dimension"] == False) | df["dimension"].isna() | df["dimension"].astype(str).isin(["", "nan", "None"])]
+    if "abstract" in df.columns:
+        df = df[df["abstract"] != True]
+    if df.empty:
+        return None
+
+    tok = face_concept_token(concept)
+    if tok:
+        cand = df[df["concept"].astype(str).apply(face_concept_token) == tok]
+        if len(cand) == 1:
+            v = cand.iloc[0].get(date_col)
+            return float(v) if pd.notna(v) else None
+        if len(cand) > 1:
+            lbl = normalize_face_label(label)
+            sub = cand[cand["label"].astype(str).apply(normalize_face_label) == lbl] if lbl else cand.iloc[0:0]
+            if len(sub) >= 1:
+                v = sub.iloc[0].get(date_col)
+                return float(v) if pd.notna(v) else None
+            return None
+
+    lbl = normalize_face_label(label)
+    if lbl:
+        cand = df[df["label"].astype(str).apply(normalize_face_label) == lbl]
+        if len(cand) == 1:
+            v = cand.iloc[0].get(date_col)
+            return float(v) if pd.notna(v) else None
+    return None
+
+
+def merge_quarter_only_face_rows(annual_df, q_df):
+    """
+    Incorpora a la carátula anual las líneas nuevas que solo aparecen en el 10-Q
+    (p. ej. intangibles presentados por primera vez en el trimestre), conservando
+    el orden de presentación. Los importes anuales quedan vacíos: la columna LTM
+    se completa desde la carátula del 10-Q.
+    """
+    if annual_df is None or annual_df.empty or q_df is None or q_df.empty:
+        return annual_df
+
+    q_face = q_df
+    if "dimension" in q_face.columns:
+        q_face = q_face[(q_face["dimension"] == False) | q_face["dimension"].isna() | q_face["dimension"].astype(str).isin(["", "nan", "None"])]
+    if "abstract" in q_face.columns:
+        q_face = q_face[q_face["abstract"] != True]
+    if q_face.empty:
+        return annual_df
+
+    ann = annual_df.reset_index(drop=True).copy()
+    ann_tokens = ann["concept"].astype(str).apply(face_concept_token)
+    ann_labels = ann["label"].astype(str).apply(normalize_face_label)
+
+    def find_annual_index(q_row):
+        tok = face_concept_token(q_row.get("concept"))
+        lbl = normalize_face_label(q_row.get("label"))
+        if tok:
+            cand = list(ann.index[ann_tokens == tok])
+            if len(cand) == 1:
+                return cand[0]
+            if len(cand) > 1 and lbl:
+                sub = [i for i in cand if ann_labels[i] == lbl]
+                return sub[0] if len(sub) == 1 else None
+        if lbl:
+            cand = list(ann.index[ann_labels == lbl])
+            if len(cand) == 1:
+                return cand[0]
+        return None
+
+    metadata_cols = {
+        "concept", "label", "standard_concept", "level", "abstract", "is_breakdown",
+        "dimension", "dimension_axis", "dimension_member", "dimension_member_label",
+        "dimension_label", "balance", "weight", "preferred_sign",
+        "parent_concept", "parent_abstract_concept",
+    }
+
+    inserts = {}
+    last_anchor = None
+    for _, q_row in q_face.iterrows():
+        idx = find_annual_index(q_row)
+        if idx is not None:
+            last_anchor = idx
+        elif last_anchor is not None:
+            inserts.setdefault(last_anchor, []).append(q_row)
+
+    for anchor in sorted(inserts, reverse=True):
+        block = pd.DataFrame(inserts[anchor]).copy()
+        # Los importes anuales quedan vacíos: solo se conservan los metadatos de la fila.
+        block = block.reindex(columns=[c for c in ann.columns if c in metadata_cols])
+        ann = pd.concat([ann.iloc[:anchor + 1], block, ann.iloc[anchor + 1:]], ignore_index=True)
+
+    return ann
+
+
 # ==============================================================================
 # TAXONOMÍA Y ALIAS RECÍPROCOS DE ARQUETIPOS CONTABLES INSTITUCIONALES
 # ==============================================================================
@@ -2840,6 +2955,10 @@ def build_as_reported_statements(
         else:
             q_face = pd.DataFrame()
 
+        # Incorporar líneas de carátula que solo existen en el 10-Q (p. ej. intangibles)
+        if s_name == "balance_sheet" and not q_face.empty:
+            face_df = merge_quarter_only_face_rows(face_df, q_face)
+
         # Mapear columnas anuales del 10-K a FYxxxx
         fy_cols_map = {}
         for c in face_df.columns:
@@ -3563,6 +3682,13 @@ def extract_sec_data(ticker, output_dir=None):
             has_ltm = True
 
     all_fys = (["LTM"] + annual_fys) if has_ltm else annual_fys
+
+    # Formulario interino oficial: se reutiliza para la carátula LTM y para As-Reported
+    try:
+        latest_q_filings = company.get_filings(form=["10-Q", "6-K"])
+        latest_10q_obj = latest_q_filings.latest().obj() if latest_q_filings else None
+    except Exception:
+        latest_10q_obj = None
     
     if has_ltm and latest_fy and 'LTM' not in inc_df.columns:
         print("[SEC Extractor] Calculando métricas LTM (Trailing Twelve Months)...")
@@ -3705,21 +3831,44 @@ def extract_sec_data(ticker, output_dir=None):
             else:
                 latest_mrq_date = facts_df['period_end'].dropna().max()
 
+        # Carátula oficial del 10-Q (incluye tags de extensión). Solo se usa si coincide
+        # con la fecha MRQ que gobierna el LTM, para no mezclar trimestres.
+        q_bal_face = None
+        q_bal_face_col = None
+        if latest_10q_obj is not None:
+            try:
+                q_stmt_face = getattr(latest_10q_obj, "balance_sheet", None)
+                if q_stmt_face is None and getattr(latest_10q_obj, "financials", None):
+                    q_stmt_face = latest_10q_obj.financials.balance_sheet()
+                if q_stmt_face is not None:
+                    q_bal_face = q_stmt_face.to_dataframe()
+                    face_cols = sorted([c for c in q_bal_face.columns if re.match(r'^\d{4}-\d{2}-\d{2}$', str(c))], reverse=True)
+                    q_bal_face_col = face_cols[0] if face_cols else None
+            except Exception:
+                q_bal_face = None
+        if q_bal_face_col and latest_mrq_date is not None and str(q_bal_face_col) != str(latest_mrq_date)[:10]:
+            q_bal_face = None
+            q_bal_face_col = None
+
         ltm_vals_bal = []
         for _, row in bal_df.iterrows():
             c_name = str(row.get('concept', '')).strip()
-            fy_val = row.get(latest_fy)
+            lbl_name = str(row.get('label', '')).strip()
             val = None
 
             # Conceptos abstractos de balance (encabezados de sección) no llevan importe
-            if c_name.lower().endswith('abstract') or str(row.get('label', '')).lower().endswith('[abstract]'):
+            if c_name.lower().endswith('abstract') or lbl_name.lower().endswith('[abstract]'):
                 ltm_vals_bal.append(None)
                 continue
 
-            if bal_mrq_df is not None and latest_mrq_col:
-                c_tok = c_name.split(':')[-1].split('_')[-1].lower()
-                b_toks = bal_mrq_df['concept'].astype(str).apply(lambda x: x.split(':')[-1].split('_')[-1].lower())
-                match_b = bal_mrq_df[(b_toks == c_tok) | bal_mrq_df['concept'].astype(str).str.lower().str.endswith(c_name.lower()) | (bal_mrq_df['concept'].astype(str).str.lower() == c_name.lower())]
+            # 1. Carátula oficial del 10-Q (prioridad sobre el agregador y las notas)
+            val = find_face_value(q_bal_face, q_bal_face_col, c_name, lbl_name)
+
+            # 2. Balance condensado estandarizado del 10-Q
+            if val is None and bal_mrq_df is not None and latest_mrq_col:
+                c_tok = face_concept_token(c_name)
+                b_toks = bal_mrq_df['concept'].astype(str).apply(face_concept_token)
+                match_b = bal_mrq_df[(b_toks == c_tok) | (bal_mrq_df['concept'].astype(str).str.lower() == c_name.lower())]
                 if not match_b.empty:
                     v = match_b.iloc[0].get(latest_mrq_col)
                     if pd.notna(v):
@@ -3895,12 +4044,6 @@ def extract_sec_data(ticker, output_dir=None):
         latest_10k_obj = latest_k_filings.latest().obj() if latest_k_filings else None
     except Exception:
         latest_10k_obj = None
-
-    try:
-        latest_q_filings = company.get_filings(form=["10-Q", "6-K"])
-        latest_10q_obj = latest_q_filings.latest().obj() if latest_q_filings else None
-    except Exception:
-        latest_10q_obj = None
 
     as_reported_data = build_as_reported_statements(
         company=company,

@@ -783,16 +783,6 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         else:
             gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
 
-        # Si en LTM aparece un gw_int_v > 0 pero en el último año fiscal cerrado Goodwill e Intangibles son ambos None o 0
-        # (y no hubo M&A mayor a $5B en LTM), forzar gw_int_v = None para evitar contaminación de notas (caso AAPL)
-        if p == "LTM" and gw_int_v and len(periods) > 1:
-            prev_p = periods[1]
-            prev_gw = _extract_val(gw_keys, prev_p)
-            prev_int = _extract_val(intang_keys, prev_p)
-            ltm_ma = _extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
-            if (not prev_gw or prev_gw == 0.0) and (not prev_int or prev_int == 0.0) and (abs(ltm_ma) < 5000.0):
-                gw_int_v = None
-
         lt_inv_v = _extract_val(lt_inv_keys, p)
         eq_method = _extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
         non_mkt_eq = _extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount", "NonmarketableEquitySecuritiesCarryingValue", "meta_NonmarketableEquitySecuritiesCarryingValue"], p)
@@ -808,6 +798,13 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         # Regla 6: Cero plugs sintéticos en Activos No Corrientes. Solo reflejar partidas reportadas en XBRL.
         other_nca = round(other_nca_rep, 1) if other_nca_rep is not None else None
         dta_v = _extract_val(dta_keys, p)
+
+        # Anti-doble-conteo: si el ROU ya está embebido dentro de "Otros activos no corrientes",
+        # la suma sin ROU iguala el total reportado. En ese caso no debe mostrarse como línea separada.
+        if rou_v is not None and tot_nca is not None:
+            nca_without_rou = (ppe_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0) + (other_nca or 0.0) + (dta_v or 0.0)
+            if abs(tot_nca - nca_without_rou) <= 1.0:
+                rou_v = None
 
         ap_v = _extract_val(ap_keys, p)
         accrued_v = _extract_val(accrued_keys, p, "accrued_liabilities")

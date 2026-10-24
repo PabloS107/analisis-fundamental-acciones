@@ -2451,7 +2451,6 @@
       "label": "Goodwill",
       "standard_concept": "",
       "values": {
-        "LTM": 25417000000.0,
         "FY2017": 5717000000.0,
         "FY2016": 5414000000.0,
         "FY2015": 5116000000.0
@@ -2465,7 +2464,7 @@
       "label": "Intangible Assets, Net (Excluding Goodwill)",
       "standard_concept": "",
       "values": {
-        "LTM": 25417000000.0,
+        "LTM": 20342000000.0,
         "FY2017": 2298000000.0,
         "FY2016": 3206000000.0,
         "FY2015": 3893000000.0
@@ -5358,6 +5357,31 @@
         },
         "spanish_label": "Propiedad, planta y equipo (PP&E neto)",
         "orig_tooltip": "Property, plant and equipment, net (us-gaap_PropertyPlantAndEquipmentNet)"
+      },
+      {
+        "label": "Intangible assets, net",
+        "clarification": "Activos intangibles",
+        "concept": "aapl_IntangibleAssetsNetExcludingGoodwillNoncurrent",
+        "level": 4,
+        "is_abstract": false,
+        "is_total": false,
+        "values": {
+          "FY2025": null,
+          "FY2024": null,
+          "FY2023": null,
+          "FY2022": null,
+          "FY2021": null,
+          "FY2020": null,
+          "FY2019": null,
+          "FY2018": null,
+          "FY2017": null,
+          "FY2016": null,
+          "FY2015": null,
+          "FY2014": null,
+          "LTM": 20342000000.0
+        },
+        "spanish_label": "Activos intangibles",
+        "orig_tooltip": "Intangible assets, net (aapl_IntangibleAssetsNetExcludingGoodwillNoncurrent)"
       },
       {
         "label": "Other non-current assets",
