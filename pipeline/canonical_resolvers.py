@@ -587,8 +587,13 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         gw_v = _extract_val(gw_keys, p)
         int_v = _extract_val(intang_keys, p)
 
+        is_rou_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in rou_keys)
         is_gw_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in gw_keys)
         is_int_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in intang_keys)
+
+        # Si el derecho de uso (ROU) no figura en la carátula del balance, contablemente está incluido en Otros Activos No Corrientes
+        if not is_rou_on_face:
+            rou_v = None
 
         if p == "LTM" and gw_v and not is_gw_on_face and len(periods) > 1:
             prev_p = periods[1]
@@ -606,14 +611,20 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
         if gw_v is not None and int_v is not None and gw_v == int_v:
             gw_int_v = gw_v
-        else:
+        elif is_int_on_face:
             gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
+        else:
+            # Si intangibles no está en la carátula, ya forma parte de 'Otros Activos No Corrientes'; no duplicar
+            gw_int_v = gw_v
 
         lt_inv_v = _extract_val(lt_inv_keys, p)
-        eq_method = _extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
-        non_mkt_eq = _extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount", "NonmarketableEquitySecuritiesCarryingValue", "meta_NonmarketableEquitySecuritiesCarryingValue"], p)
-        if eq_method is not None and non_mkt_eq is not None:
-            lt_inv_v = round(eq_method + non_mkt_eq, 1)
+        # Evitar doble conteo de inversiones desglosadas en notas (p. ej. Equity Method ya incluido en el total de carátula)
+        is_lti_on_face = any(k.lower().split(':')[-1].split('_')[-1] in [c.lower().split(':')[-1].split('_')[-1] for c in as_rep_bs_dict] for k in lt_inv_keys)
+        if not is_lti_on_face:
+            eq_method = _extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
+            non_mkt_eq = _extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount"], p)
+            if eq_method is not None and non_mkt_eq is not None:
+                lt_inv_v = round(eq_method + non_mkt_eq, 1)
 
         ta_raw = _extract_val(ta_keys, p, "total_assets")
         sum_ast = (tot_ca or 0.0) + (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0)
@@ -621,9 +632,15 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         tot_nca = max(0.0, round((tot_ast or 0.0) - (tot_ca or 0.0), 1)) if tot_ast is not None else None
         
         other_nca_rep = _extract_val(other_nca_keys, p)
-        # Regla 6: Cero plugs sintéticos en Activos No Corrientes. Solo reflejar partidas reportadas en XBRL.
         other_nca = round(other_nca_rep, 1) if other_nca_rep is not None else None
         dta_v = _extract_val(dta_keys, p)
+
+        # Reconciliación canónica universal de activos no corrientes (Fiscal.ai: sum(hijos) == Total Noncurrent Assets)
+        sum_nca = (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0) + (dta_v or 0.0) + (other_nca or 0.0)
+        if tot_nca is not None:
+            diff_nca = round(tot_nca - sum_nca, 1)
+            if abs(diff_nca) > 0.01:
+                other_nca = round((other_nca or 0.0) + diff_nca, 1)
 
         ap_v = _extract_val(ap_keys, p)
         accrued_v = _extract_val(accrued_keys, p, "accrued_liabilities")
