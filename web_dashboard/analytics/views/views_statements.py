@@ -3,6 +3,17 @@
 Módulo de Estados Financieros (Vista Estandarizada 10Y + LTM y SEC As-Reported 3Y + LTM).
 Consume los estados canónicos desde pipeline.canonical_resolvers y construye las celdas de tabla para Django.
 """
+import re
+
+try:
+    from pipeline.financial_bilingual_map import get_spanish_label
+except ImportError:
+    try:
+        from financial_bilingual_map import get_spanish_label
+    except ImportError:
+        def get_spanish_label(lbl, conc=None):
+            return lbl
+
 from pipeline.canonical_resolvers import (
     resolve_canonical_capital_flows,
     resolve_canonical_balance_sheet,
@@ -259,9 +270,9 @@ def build_statements_context(
 
     # Helper para formatear partidas As-Reported oficiales con metadatos bilingües
     def _format_as_reported_row(row_raw, target_fys, pct_mode=None):
-        lbl = row_raw.get("spanish_label") or row_raw.get("label", "")
         orig_lbl = row_raw.get("label", "")
         conc = row_raw.get("concept", "")
+        lbl = get_spanish_label(orig_lbl, conc) if orig_lbl else (row_raw.get("spanish_label") or "")
         orig_tooltip = row_raw.get("orig_tooltip") or (f"{orig_lbl} ({conc})" if conc else orig_lbl)
         is_abs = row_raw.get("is_abstract", False) or row_raw.get("row_type") == "section_header"
         lvl = row_raw.get("level", 0)
@@ -307,6 +318,24 @@ def build_statements_context(
         data_m = {}
         for p in target_fys:
             v = vals.get(p)
+            if v is None and conc:
+                v = _num(cf_det, conc, p) or _num(bs_det, conc, p) or _num(inc_det, conc, p)
+            if v is None and orig_lbl and not is_abs:
+                clean_target_lbl = re.sub(r'[^a-z0-9]', '', orig_lbl.lower())
+                if len(clean_target_lbl) >= 4:
+                    for src_dict in (cf_det, bs_det, inc_det):
+                        if not isinstance(src_dict, dict):
+                            continue
+                        for item_k, item_obj in src_dict.items():
+                            if isinstance(item_obj, dict):
+                                item_lbl = item_obj.get("label", "")
+                                if item_lbl and re.sub(r'[^a-z0-9]', '', item_lbl.lower()) == clean_target_lbl:
+                                    v_cand = item_obj.get("values", {}).get(p)
+                                    if v_cand is not None:
+                                        v = v_cand
+                                        break
+                        if v is not None:
+                            break
             if v is None:
                 data_m[p] = None
             elif is_eps or is_shares:

@@ -1455,7 +1455,8 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
 
         wc_ar = _extract_multi_source_sum(fs, "cashflow", [
             "IncreaseDecreaseInAccountsReceivable", "IncreaseDecreaseInOtherReceivables",
-            "TradeAndOtherReceivablesNetCurrent", "meli_IncreaseDecreaseInPrincipalLoansReceivableNet"
+            "TradeAndOtherReceivablesNetCurrent", "meli_IncreaseDecreaseInFundsReceivableFromCustomers",
+            "us-gaap_IncreaseDecreaseInAccountsReceivable"
         ], p)
 
         wc_inv = _extract_multi_source_val(fs, "cashflow", [
@@ -1530,11 +1531,15 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "ProceedsFromSaleAndMaturityOfMarketableSecurities", "ProceedsFromSaleOfAvailableForSaleSecurities",
             "ProceedsFromSaleOfEquitySecuritiesFvNi", "meta_ProceedsFromOneTimeVentureDistribution",
             "ProceedsFromSaleOfPropertyHeldForSale", "ProceedsFromCollectionOfNotesReceivable",
-            "ProceedsFromDepositsOnRealEstateSales", "ProceedsFromInsuranceSettlementInvestingActivities"
+            "ProceedsFromDepositsOnRealEstateSales", "ProceedsFromInsuranceSettlementInvestingActivities",
+            "ProceedsFromSaleMaturityAndCollectionsOfInvestments", "us-gaap_ProceedsFromSaleMaturityAndCollectionsOfInvestments"
         ], p)
 
-        other_inv = _extract_multi_source_val(fs, "cashflow", [
-            "PaymentsForProceedsFromOtherInvestingActivities", "ProceedsFromSaleOfRealEstate", "PaymentsToAcquireRealEstate"
+        other_inv = _extract_multi_source_sum(fs, "cashflow", [
+            "PaymentsForProceedsFromOtherInvestingActivities", "ProceedsFromSaleOfRealEstate", "PaymentsToAcquireRealEstate",
+            "IncreaseDecreaseInPrincipalLoansReceivableNet", "meli_IncreaseDecreaseInPrincipalLoansReceivableNet",
+            "ProceedsFromSaleOfIntangibleAssets", "PaymentsForDerivativeInstrumentInvestingActivities",
+            "ProceedsFromDerivativeInstrumentInvestingActivities"
         ], p)
 
         cfi = _extract_multi_source_val(fs, "cashflow", [

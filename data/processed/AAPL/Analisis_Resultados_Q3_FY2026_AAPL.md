@@ -1,6 +1,6 @@
 # APPLE INC. (NASDAQ: AAPL)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q3 FY2026 & Gobernanza Corporativa
-*Fecha de Emisión: 24 de Septiembre de 2026 | CIK SEC: 0000320193*  
+*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0000320193*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q3 FY26 Earnings Call Transcript*
 
 ---
@@ -476,7 +476,7 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-24T21:14:24.116093+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,834.2M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-25T01:39:48.590481+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,834.2M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 

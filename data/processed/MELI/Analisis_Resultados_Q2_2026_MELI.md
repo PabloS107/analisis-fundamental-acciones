@@ -1,6 +1,6 @@
 # MERCADOLIBRE, INC. (NASDAQ: MELI)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q2 2026 & Gobernanza Corporativa
-*Fecha de Emisión: 24 de Septiembre de 2026 | CIK SEC: 0001099590*  
+*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0001099590*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q2 2026 Earnings Call Transcript*
 
 ---
@@ -21,13 +21,23 @@
 
 | Línea de Negocio / Producto | LTM ($M) | FY2025 ($M) | Crecimiento YoY | Margen / Mix | Lectura Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Segmento Comercio Electrónico** | **$19,350.1 M** | $15,891.2 M | **+21.8%** | 55.0% Mix | Aceleración comercial de alta tracción (+21.8% YoY); ganancia de cuota y dinamismo. |
-| **Segmento FinTech y Servicios Financieros** | **$15,831.9 M** | $13,001.9 M | **+21.8%** | 45.0% Mix | Aceleración comercial de alta tracción (+21.8% YoY); ganancia de cuota y dinamismo. |
+| **Net revenues and financial income** | **$35,182.0 M** | $28,893.0 M | **+21.8%** | 41.8% Mix | Aceleración comercial de alta tracción (+21.8% YoY); ganancia de cuota y dinamismo. |
+| **Net service revenues and financial income** | **$30,409.0 M** | $25,286.0 M | **+20.3%** | 36.1% Mix | Aceleración comercial de alta tracción (+20.3% YoY); ganancia de cuota y dinamismo. |
+| **Net product revenues** | **$4,773.0 M** | $3,607.0 M | **+32.3%** | 5.7% Mix | Aceleración comercial de alta tracción (+32.3% YoY); ganancia de cuota y dinamismo. |
+| **Argentina** | **$6,211.0 M** | $5,646.0 M | **+10.0%** | 7.4% Mix | Crecimiento orgánico sostenido (+10.0% YoY); demanda sólida y volumen favorable. |
+| **Operating Segments** | **$30,409.0 M** | $25,286.0 M | **+20.3%** | Subtotal | Subtotal consolidado de canal/categoría (+20.3% YoY). |
+| **Commerce** | **$1,895.0 M** | $1,722.0 M | **+10.0%** | 2.3% Mix | Crecimiento orgánico sostenido (+10.0% YoY); demanda sólida y volumen favorable. |
+| **Fintech** | **$2,742.0 M** | $2,609.0 M | **+5.1%** | 3.3% Mix | Crecimiento orgánico sostenido (+5.1% YoY); demanda sólida y volumen favorable. |
+| **As reported** | **$0.0 M** | $0.0 M | **+0.0%** | 0.0% Mix | Desempeño estable (+0.0% YoY); consolidación en mercados y canales core. |
+| **Reclassification** | **$0.0 M** | $0.0 M | **+0.0%** | 0.0% Mix | Desempeño estable (+0.0% YoY); consolidación en mercados y canales core. |
+| **Operating expenses and indirect costs of net revenues and financial expenses** | **$2,994.0 M** | $2,702.0 M | **+10.8%** | 3.6% Mix | Crecimiento orgánico sostenido (+10.8% YoY); demanda sólida y volumen favorable. |
 
 
 ### Análisis Cualitativo de las Líneas de Negocio:
-* **Segmento Comercio Electrónico (55.0% de facturación):** Genera $19,350.1 M (+21.8% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
-* **Segmento FinTech y Servicios Financieros (45.0% de facturación):** Genera $15,831.9 M (+21.8% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Net revenues and financial income (41.8% de facturación):** Genera $35,182.0 M (+21.8% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Net service revenues and financial income (36.1% de facturación):** Genera $30,409.0 M (+20.3% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Net product revenues (5.7% de facturación):** Genera $4,773.0 M (+32.3% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Argentina (7.4% de facturación):** Genera $6,211.0 M (+10.0% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
 
 ---
 
@@ -35,10 +45,70 @@
 
 | Región Geográfica | LTM ($M) | FY2025 ($M) | Crecimiento YoY | Peso en Ventas % | Diagnóstico Operativo |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Brasil** | **$18,822.4 M** | $15,457.8 M | **+21.8%** | 53.5% | Mercado en fuerte expansión (+21.8% YoY); tracción de demanda local. |
-| **México** | **$8,514.0 M** | $6,992.1 M | **+21.8%** | 24.2% | Mercado en fuerte expansión (+21.8% YoY); tracción de demanda local. |
-| **Argentina** | **$6,367.9 M** | $5,229.6 M | **+21.8%** | 18.1% | Mercado en fuerte expansión (+21.8% YoY); tracción de demanda local. |
-| **Otros Mercados Internacionales** | **$1,477.6 M** | $1,213.5 M | **+21.8%** | 4.2% | Mercado en fuerte expansión (+21.8% YoY); tracción de demanda local. |
+| **Operating Segments - Net service revenues and financial income - Brazil** | **$15,793.0 M** | $12,846.0 M | **+22.9%** | Subtotal | Subtotal consolidado de región (+22.9% YoY). |
+| **Operating Segments - Net service revenues and financial income - Mexico** | **$7,051.0 M** | $5,699.0 M | **+23.7%** | Subtotal | Subtotal consolidado de región (+23.7% YoY). |
+| **Operating Segments - Net service revenues and financial income - Other Countries** | **$1,354.0 M** | $1,095.0 M | **+23.7%** | Subtotal | Subtotal consolidado de región (+23.7% YoY). |
+| **Operating Segments - Net product revenues - Brazil** | **$3,157.0 M** | $2,355.0 M | **+34.1%** | Subtotal | Subtotal consolidado de región (+34.1% YoY). |
+| **Operating Segments - Net product revenues - Mexico** | **$1,009.0 M** | $776.0 M | **+30.0%** | Subtotal | Subtotal consolidado de región (+30.0% YoY). |
+| **Operating Segments - Net product revenues - Other Countries** | **$228.0 M** | $160.0 M | **+42.5%** | Subtotal | Subtotal consolidado de región (+42.5% YoY). |
+| **Operating Segments - Other Countries** | **$1,582.0 M** | $1,255.0 M | **+26.1%** | Subtotal | Subtotal consolidado de región (+26.1% YoY). |
+| **Operating Segments - Services - Brazil - Commerce** | **$8,219.0 M** | $6,859.0 M | **+19.8%** | Subtotal | Subtotal consolidado de región (+19.8% YoY). |
+| **Operating Segments - Services - Mexico - Commerce** | **$4,076.0 M** | $3,432.0 M | **+18.8%** | Subtotal | Subtotal consolidado de región (+18.8% YoY). |
+| **Operating Segments - Services - Other countries - Commerce** | **$888.0 M** | $737.0 M | **+20.5%** | Subtotal | Subtotal consolidado de región (+20.5% YoY). |
+| **Operating Segments - Product Sales - Brazil - Commerce** | **$3,125.0 M** | $2,325.0 M | **+34.4%** | Subtotal | Subtotal consolidado de región (+34.4% YoY). |
+| **Operating Segments - Product Sales - Mexico - Commerce** | **$984.0 M** | $753.0 M | **+30.7%** | Subtotal | Subtotal consolidado de región (+30.7% YoY). |
+| **Operating Segments - Product Sales - Other countries - Commerce** | **$220.0 M** | $154.0 M | **+42.9%** | Subtotal | Subtotal consolidado de región (+42.9% YoY). |
+| **Operating Segments - Brazil - Commerce** | **$11,344.0 M** | $9,184.0 M | **+23.5%** | Subtotal | Subtotal consolidado de región (+23.5% YoY). |
+| **Operating Segments - Mexico - Commerce** | **$5,060.0 M** | $4,185.0 M | **+20.9%** | Subtotal | Subtotal consolidado de región (+20.9% YoY). |
+| **Operating Segments - Other countries - Commerce** | **$1,108.0 M** | $891.0 M | **+24.4%** | Subtotal | Subtotal consolidado de región (+24.4% YoY). |
+| **Operating Segments - Services - Brazil - Fintech** | **$3,289.0 M** | $2,829.0 M | **+16.3%** | Subtotal | Subtotal consolidado de región (+16.3% YoY). |
+| **Operating Segments - Services - Mexico - Fintech** | **$1,188.0 M** | $897.0 M | **+32.4%** | Subtotal | Subtotal consolidado de región (+32.4% YoY). |
+| **Operating Segments - Services - Other countries - Fintech** | **$436.0 M** | $343.0 M | **+27.1%** | Subtotal | Subtotal consolidado de región (+27.1% YoY). |
+| **Operating Segments - Credit revenues - Brazil - Fintech** | **$4,285.0 M** | $3,158.0 M | **+35.7%** | Subtotal | Subtotal consolidado de región (+35.7% YoY). |
+| **Operating Segments - Credit revenues - Mexico - Fintech** | **$1,787.0 M** | $1,370.0 M | **+30.4%** | Subtotal | Subtotal consolidado de región (+30.4% YoY). |
+| **Operating Segments - Credit revenues - Other countries - Fintech** | **$-4,965.0 M** | $15.0 M | **-33200.0%** | Subtotal | Subtotal consolidado de región (-33200.0% YoY). |
+| **Operating Segments - Product Sales - Brazil - Fintech** | **$32.0 M** | $30.0 M | **+6.7%** | Subtotal | Subtotal consolidado de región (+6.7% YoY). |
+| **Operating Segments - Product Sales - Mexico - Fintech** | **$-9,965.0 M** | $23.0 M | **-43426.1%** | Subtotal | Subtotal consolidado de región (-43426.1% YoY). |
+| **Operating Segments - Product Sales - Other countries - Fintech** | **$8,000.0 M** | $6,000.0 M | **+33.3%** | Subtotal | Subtotal consolidado de región (+33.3% YoY). |
+| **Operating Segments - Brazil - Fintech** | **$7,606.0 M** | $6,017.0 M | **+26.4%** | Subtotal | Subtotal consolidado de región (+26.4% YoY). |
+| **Operating Segments - Mexico - Fintech** | **$3,000.0 M** | $2,290.0 M | **+31.0%** | Subtotal | Subtotal consolidado de región (+31.0% YoY). |
+| **Operating Segments - Other countries - Fintech** | **$474.0 M** | $364.0 M | **+30.2%** | Subtotal | Subtotal consolidado de región (+30.2% YoY). |
+| **Operating Segments - Brazil** | **$18,950.0 M** | $15,201.0 M | **+24.7%** | Subtotal | Subtotal consolidado de región (+24.7% YoY). |
+| **Operating Segments - Mexico** | **$8,060.0 M** | $6,475.0 M | **+24.5%** | Subtotal | Subtotal consolidado de región (+24.5% YoY). |
+| **U.S.** | **$68.0 M** | $51.0 M | **+33.3%** | 100.0% | Mercado en fuerte expansión (+33.3% YoY); tracción de demanda local. |
+| **Operating Segments - Services - As reported - Brazil - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - As reported - Mexico - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - As reported - Other countries - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Brazil - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Mexico - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Other countries - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Brazil - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Mexico - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Other countries - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - As reported - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - As reported - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - As reported - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Credit revenues - As reported - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Credit revenues - As reported - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Credit revenues - As reported - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Product Sales - As reported - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Brazil** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Mexico** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - As reported - Other countries** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - Reclassification - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - Reclassification - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Services - Reclassification - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Brazil - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Mexico - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Other countries - Fintech** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Brazil** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Mexico** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Operating Segments - Reclassification - Other countries** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
 
 
 ### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
@@ -707,37 +777,37 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **WACC (Tasa de Descuento)** | 11.03% | 10.90% | +0.13 pp | Menor exigencia de retorno exigido gracias a balance solvente. |
 | **Margen FCF Sostenible** | 10.2% | 24.40% | -14.20 pp | Refleja la rentabilidad real de caja auditada ante la SEC. |
 | **Tasa Terminal ($g_n$)** | 2.50% | 2.50% | 0.00 pp | Hipótesis simétrica estándar de Gordon-Shapiro a largo plazo. |
-| **Crecimiento Implícito (CAGR)** | **14.0%** | **1.4%** | **+12.6 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
+| **Crecimiento Implícito (CAGR)** | **14.0%** | **1.5%** | **+12.5 pp** | **DIFERENCIAL DE EXIGENCIA:** Menor fricción de crecimiento requerida. |
 
 
 ### 14.4. Matriz Bidimensional de Sensibilidad (WACC vs Crecimiento Terminal $g_n$)
 
 | WACC \ Tasa Terminal ($g_n$) | 1.0% | 1.5% | 2.0% | 2.5% (Base) | 3.0% | 3.5% | Diagnóstico de Escenario |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 10.03% (Bajo / Expansión) | 13.5% | 13.0% | 12.5% | 12.0% | 11.4% | 10.7% | Escenario favorable; exigencia de crecimiento más moderada. |
-| 10.53% (Favorable) | 14.5% | 14.0% | 13.5% | 13.0% | 12.4% | 11.8% | Escenario de sensibilidad operativa. |
-| 11.03% (WACC Auditado Base) | 15.4% | 15.0% | 14.5% | 14.0% | 13.5% | 12.9% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 11.53% (Exigente) | 16.3% | 15.9% | 15.4% | 15.0% | 14.5% | 13.9% | Escenario de sensibilidad operativa. |
-| 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 15.9% | 15.4% | 14.9% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 10.03% (Bajo / Expansión) | 13.6% | 13.1% | 12.6% | 12.0% | 11.4% | 10.8% | Escenario favorable; exigencia de crecimiento más moderada. |
+| 10.53% (Favorable) | 14.5% | 14.1% | 13.6% | 13.0% | 12.5% | 11.9% | Escenario de sensibilidad operativa. |
+| 11.03% (WACC Auditado Base) | 15.4% | 15.0% | 14.5% | 14.0% | 13.5% | 13.0% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
+| 11.53% (Exigente) | 16.3% | 15.9% | 15.5% | 15.0% | 14.5% | 14.0% | Escenario de sensibilidad operativa. |
+| 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 16.0% | 15.5% | 15.0% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)
 
 Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y múltiplos de mercado divergentes, se aplica un modelo de **Suma de las Partes (Sum-of-the-Parts)** desagregando el negocio operativo:
-* **Comercio Electrónico / Marketplace:** Facturación LTM de **$19,350.1 M** valorada a un múltiplo objetivo de **3.2x EV/Ventas** -> Enterprise Value de **$61,920.3 M**.
-* **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **$15,831.9 M** valorada a un múltiplo objetivo de **2.4x EV/Ventas** -> Enterprise Value de **$37,996.6 M**.
-* **Enterprise Value Consolidado:** **$99,916.9 M** | **Posición Financiera Neta:** **$-4,896.0 M** (Deuda neta).
-* **Equity Value Teórico:** **$95,020.9 M** sobre 50.7 M de acciones diluidas.
-* **Valor Intrínseco SOTP:** **$1874.28 por acción** (+2.9% frente a cotización actual de $1821.81).
+* **Comercio Electrónico / Marketplace:** Facturación LTM de **$1,895.0 M** valorada a un múltiplo objetivo de **3.2x EV/Ventas** -> Enterprise Value de **$6,064.0 M**.
+* **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **$2,742.0 M** valorada a un múltiplo objetivo de **2.4x EV/Ventas** -> Enterprise Value de **$6,580.8 M**.
+* **Enterprise Value Consolidado:** **$12,644.8 M** | **Posición Financiera Neta:** **$-5,183.0 M** (Deuda neta).
+* **Equity Value Teórico:** **$7,461.8 M** sobre 50.7 M de acciones diluidas.
+* **Valor Intrínseco SOTP:** **$147.18 por acción** (-91.9% frente a cotización actual de $1821.81).
 
 | Segmento de Negocio | Ventas LTM ($ M) | Múltiplo EV/Sales | Enterprise Value ($ M) | Ponderación EV |
 | :--- | :---: | :---: | :---: | :---: |
-| **Comercio Electrónico / Marketplace** | $19,350.1 M | 3.2x | $61,920.3 M | 62.0% |
-| **FinTech y Servicios Financieros** | $15,831.9 M | 2.4x | $37,996.6 M | 38.0% |
-| **Total Enterprise Value (EV)** | **$35,182.0 M** | **—** | **$99,916.9 M** | **100.0%** |
-| (-) Deuda Neta | — | — | $-4,896.0 M | — |
-| **Equity Value Consolidado** | — | — | **$95,020.9 M** | — |
-| **Precio Justo por Acción (SOTP)** | — | — | **$1874.28** | **+2.9%** |
+| **Comercio Electrónico / Marketplace** | $1,895.0 M | 3.2x | $6,064.0 M | 48.0% |
+| **FinTech y Servicios Financieros** | $2,742.0 M | 2.4x | $6,580.8 M | 52.0% |
+| **Total Enterprise Value (EV)** | **$4,637.0 M** | **—** | **$12,644.8 M** | **100.0%** |
+| (-) Deuda Neta | — | — | $-5,183.0 M | — |
+| **Equity Value Consolidado** | — | — | **$7,461.8 M** | — |
+| **Precio Justo por Acción (SOTP)** | — | — | **$147.18** | **-91.9%** |
 
 
 ### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -748,7 +818,7 @@ Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y mú
 | **Calidad de Beneficios** | Ratio Sloan: -25.62% / Montier: 3/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($2.17 CFO por dólar de NI). |
 | **Solvencia y Estructura** | Cobertura EBIT: 13.7x / Altman Z'': 1.56 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $5.7B. |
 | **Productividad del Capital** | ROC Greenblatt: 82.4% / ROIC Adj: 18.1% | **CREADOR DE VALOR** | Spread económico de +7.1 pp sobre WACC (Creación de valor de élite). |
-| **Valoración de Mercado** | Crecimiento Implícito: 14.0% - 1.4% | **VALORACIÓN EXIGENTE** | Exigencia asumible (+14.0% anual); alineada con el ritmo tendencial de la empresa y su sector. |
+| **Valoración de Mercado** | Crecimiento Implícito: 14.0% - 1.5% | **VALORACIÓN EXIGENTE** | Exigencia asumible (+14.0% anual); alineada con el ritmo tendencial de la empresa y su sector. |
 
 
 

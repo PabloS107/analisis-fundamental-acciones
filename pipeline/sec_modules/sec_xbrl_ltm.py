@@ -1317,6 +1317,16 @@ def compute_and_inject_ltm_columns(
                     if not cand_match.empty:
                         match_cf = cand_match
                         break
+            # Fallback por coincidencia de etiqueta normalizada no abstracta (ej. Receivables, Contingencies, Accrued Interest)
+            if match_cf.empty and 'label' in q_cf.columns and 'label' in row:
+                lbl_raw = str(row.get('label', '')).strip()
+                if lbl_raw and not c_name.lower().endswith('abstract'):
+                    lbl_clean = re.sub(r'[^a-z0-9]', '', lbl_raw.lower())
+                    if len(lbl_clean) >= 4:
+                        q_lbls_clean = q_cf['label'].astype(str).apply(lambda s: re.sub(r'[^a-z0-9]', '', str(s).lower()))
+                        cand_lbl = q_cf[(q_lbls_clean == lbl_clean) & (~q_cf['concept'].astype(str).str.lower().str.endswith('abstract'))]
+                        if not cand_lbl.empty:
+                            match_cf = cand_lbl
             if not match_cf.empty:
                 q_row = match_cf.iloc[0]
                 v_curr = q_row.get(ytd_curr_cf)

@@ -219,13 +219,15 @@ def build_as_reported_statements(
         # Incorporar partidas legítimas de carátula presentes en el 10-Q que no existían en el 10-K anual
         if not q_face.empty and not face_df.empty:
             k_toks = set(face_df["concept"].astype(str).apply(_clean_concept_token)) if "concept" in face_df.columns else set()
+            k_lbls = {re.sub(r'[^a-zA-Z0-9]', '', str(l).lower()) for l in face_df["label"].dropna()} if "label" in face_df.columns else set()
             new_q_rows = []
             for q_idx in range(len(q_face)):
                 r_q = q_face.iloc[q_idx]
                 q_conc = str(r_q.get("concept", "")).strip()
                 q_tok = _clean_concept_token(q_conc)
+                q_lbl = re.sub(r'[^a-zA-Z0-9]', '', str(r_q.get("label", "")).lower())
                 is_abs_q = bool(r_q.get("abstract", False))
-                if q_tok and (q_tok not in k_toks) and not is_abs_q:
+                if q_tok and (q_tok not in k_toks) and (q_lbl not in k_lbls) and not is_abs_q:
                     target_insert_pos = None
                     for prev_i in range(q_idx - 1, -1, -1):
                         cand_prev = q_face.iloc[prev_i]
@@ -525,6 +527,10 @@ def build_as_reported_statements(
                         q_match = q_cand[(q_cand_toks == conc_tok) & (q_cand["label"].astype(str).str.strip().str.lower() == clean_lbl.lower())]
                         if q_match.empty:
                             q_match = q_cand[q_cand_toks == conc_tok]
+                        if q_match.empty and clean_lbl:
+                            lbl_clean_norm = re.sub(r'[^a-zA-Z0-9]', '', clean_lbl.lower())
+                            q_lbls_clean = q_cand["label"].astype(str).apply(lambda s: re.sub(r'[^a-zA-Z0-9]', '', str(s).lower()))
+                            q_match = q_cand[q_lbls_clean == lbl_clean_norm]
                         if not q_match.empty and ytd_curr and ytd_prev and latest_fy in row_vals and row_vals[latest_fy] is not None:
                             v_curr = q_match.iloc[0].get(ytd_curr)
                             v_prev = q_match.iloc[0].get(ytd_prev)
