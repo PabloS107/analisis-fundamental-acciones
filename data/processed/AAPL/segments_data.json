@@ -99,6 +99,18 @@
         "FY2024": 167045.0,
         "FY2023": 162560.0,
         "LTM": 193595.0
+      },
+      "operating_income": {
+        "FY2025": 72480.0,
+        "FY2024": 67656.0,
+        "FY2023": 60508.0,
+        "LTM": 82713.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 40.64,
+        "FY2024": 40.5,
+        "FY2023": 37.22,
+        "LTM": 42.72
       }
     },
     {
@@ -111,6 +123,18 @@
         "FY2024": 101328.0,
         "FY2023": 94294.0,
         "LTM": 124299.0
+      },
+      "operating_income": {
+        "FY2025": 47739.0,
+        "FY2024": 41790.0,
+        "FY2023": 36098.0,
+        "LTM": 56600.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 43.0,
+        "FY2024": 41.24,
+        "FY2023": 38.28,
+        "LTM": 45.54
       }
     },
     {
@@ -123,6 +147,18 @@
         "FY2024": 66952.0,
         "FY2023": 72559.0,
         "LTM": 79332.0
+      },
+      "operating_income": {
+        "FY2025": 26917.0,
+        "FY2024": 27082.0,
+        "FY2023": 30328.0,
+        "LTM": 34696.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 41.81,
+        "FY2024": 40.45,
+        "FY2023": 41.8,
+        "LTM": 43.74
       }
     },
     {
@@ -135,6 +171,18 @@
         "FY2024": 25052.0,
         "FY2023": 24257.0,
         "LTM": 31004.0
+      },
+      "operating_income": {
+        "FY2025": 13955.0,
+        "FY2024": 12454.0,
+        "FY2023": 11888.0,
+        "LTM": 14791.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 48.62,
+        "FY2024": 49.71,
+        "FY2023": 49.01,
+        "LTM": 47.71
       }
     },
     {
@@ -147,42 +195,51 @@
         "FY2024": 30658.0,
         "FY2023": 29615.0,
         "LTM": 38593.0
+      },
+      "operating_income": {
+        "FY2025": 14586.0,
+        "FY2024": 13062.0,
+        "FY2023": 12066.0,
+        "LTM": 17768.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 43.29,
+        "FY2024": 42.61,
+        "FY2023": 40.74,
+        "LTM": 46.04
       }
     },
     {
       "name": "U.S.",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "parent": "Americas",
       "values": {
         "FY2025": 151790.0,
         "FY2024": 142196.0,
-        "FY2023": 138573.0,
-        "LTM": 170268.4
+        "FY2023": 138573.0
       }
     },
     {
       "name": "China",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "parent": "Greater China",
       "values": {
         "FY2025": 64377.0,
         "FY2024": 66952.0,
-        "FY2023": 72559.0,
-        "LTM": 72214.0
+        "FY2023": 72559.0
       }
     },
     {
       "name": "Other countries",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "parent": null,
       "values": {
         "FY2025": 199994.0,
         "FY2024": 181887.0,
-        "FY2023": 172153.0,
-        "LTM": 224340.6
+        "FY2023": 172153.0
       }
     }
   ],

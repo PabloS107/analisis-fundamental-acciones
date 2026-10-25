@@ -630,11 +630,16 @@ def generate_full_report(ticker="AAPL"):
             
             cat = ps.get("description") or derive_segment_catalyst(name, yoy, is_subtotal=is_sub)
             mix_pct = (v_c / tot_prod * 100) if (tot_prod > 0 and not is_sub) else 100.0
-            mix_label = f"{mix_pct:.1f}% Mix" if not is_sub else "Subtotal"
-            if scoring_data.get('benchmarks_used', {}).get('peers_detail') and not is_sub:
-                gm = scoring_data.get('benchmarks_used', {}).get('peers_detail', [{}])[0].get('gross_margin')
-                if gm:
-                    mix_label = f"{gm*100:.1f}% Consolidado"
+            if is_sub:
+                mix_label = "Subtotal"
+            else:
+                op_m = None
+                if ps.get("operating_margin_pct"):
+                    op_m = ps["operating_margin_pct"].get(p_curr) or ps["operating_margin_pct"].get("LTM")
+                if op_m is not None:
+                    mix_label = f"{mix_pct:.1f}% Mix | {float(op_m):.1f}% Mgn Op."
+                else:
+                    mix_label = f"{mix_pct:.1f}% Mix"
                 
             seg_data.append([
                 name,

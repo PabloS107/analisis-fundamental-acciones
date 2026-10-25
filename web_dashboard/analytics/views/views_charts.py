@@ -3,6 +3,7 @@
 Módulo de Series para Gráficos (Chart.js), Asignación de Capital, KPIs Sectoriales y Desglose de Segmentos.
 """
 import json
+import re
 from .views_statements import resolve_canonical_capital_flows
 
 
@@ -453,11 +454,42 @@ def build_charts_and_segments_context(
 
     # Tabla 1: Segmentos de Producto & Servicios
     table_products = []
+    seg_op_income_raw = segments_raw.get("segment_operating_income", [])
     for item in ordered_prod_items:
         is_sub = bool(item.get("is_subtotal"))
         is_subseg = bool(item.get("is_subsegment"))
         v_ltm = item["values"].get("LTM")
         mix_pct = (v_ltm / tot_prod_ltm * 100.0) if (tot_prod_ltm > 0 and not is_sub and v_ltm is not None) else None
+        
+        # Extracción o cómputo de Margen Operativo por Segmento (ASC 280)
+        op_m_val = None
+        op_m_dict = item.get("operating_margin_pct", {})
+        if op_m_dict:
+            op_m_val = op_m_dict.get("LTM")
+            if op_m_val is None:
+                for p in seg_periods:
+                    if p in op_m_dict and op_m_dict[p] is not None:
+                        op_m_val = op_m_dict[p]
+                        break
+        if op_m_val is None and not is_sub:
+            item_norm = re.sub(r'\s+', ' ', item["name"].lower().replace('&', 'and')).strip()
+            for op_entry in seg_op_income_raw:
+                op_norm = re.sub(r'\s+', ' ', op_entry.get("name", "").lower().replace('&', 'and')).strip()
+                if op_norm == item_norm or (len(item_norm) > 4 and item_norm in op_norm) or (len(op_norm) > 4 and op_norm in item_norm):
+                    op_v = op_entry.get("values", {}).get("LTM")
+                    rev_v = item["values"].get("LTM")
+                    if op_v is None or rev_v is None:
+                        for p in seg_periods:
+                            if p in op_entry.get("values", {}) and p in item.get("values", {}):
+                                op_v = op_entry["values"][p]
+                                rev_v = item["values"][p]
+                                break
+                    if op_v is not None and rev_v and float(rev_v) != 0.0:
+                        op_m_val = (float(op_v) / float(rev_v)) * 100.0
+                    break
+
+        op_margin_str = f"{float(op_m_val):.1f}%" if (op_m_val is not None and not is_sub) else "-"
+
         row_vals = []
         for p in seg_periods:
             val = item["values"].get(p)
@@ -472,6 +504,7 @@ def build_charts_and_segments_context(
             "indent": is_subseg,
             "is_total": False,
             "mix_pct": f"{mix_pct:.1f}%" if (mix_pct is not None and not is_sub) else "-",
+            "op_margin_ltm": op_margin_str,
             "values": row_vals
         })
 
@@ -484,12 +517,15 @@ def build_charts_and_segments_context(
         else:
             s_val = sum(item["values"].get(p) or 0.0 for item in real_prod_items)
             total_prod_vals.append(_fmt_seg_val(s_val))
+    
+    tot_om_str = f"{corp_kpis['operating_margin_pct']:.1f}%" if corp_kpis.get("operating_margin_pct") is not None else "-"
     table_products.append({
         "name": "(=) Total Neto Consolidado",
         "description": "",
         "is_subtotal": True,
         "is_total": True,
         "mix_pct": "100.0%",
+        "op_margin_ltm": tot_om_str,
         "values": total_prod_vals
     })
 
@@ -532,6 +568,7 @@ def build_charts_and_segments_context(
             "indent": is_subseg,
             "is_total": False,
             "mix_pct": f"{mix_pct:.1f}%" if (mix_pct is not None and not is_sub) else "-",
+            "op_margin_ltm": "-",
             "values": row_vals
         })
 

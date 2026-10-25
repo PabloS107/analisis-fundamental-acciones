@@ -1,6 +1,6 @@
 # META PLATFORMS, INC. (US Exchange: META)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call LTM & Gobernanza Corporativa
-*Fecha de Emisión: 24 de Septiembre de 2026 | CIK SEC: 0001326801*  
+*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0001326801*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Earnings Call Transcript*
 
 ---
@@ -22,8 +22,8 @@
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | **Advertising** | **$235,587.0 M** | $196,175.0 M | **+20.1%** | 49.0% Mix | Aceleración comercial de alta tracción (+20.1% YoY); ganancia de cuota y dinamismo. |
 | **Other revenue** | **$3,787.0 M** | $2,584.0 M | **+46.6%** | 0.8% Mix | Aceleración comercial de alta tracción (+46.6% YoY); ganancia de cuota y dinamismo. |
-| **Family of Apps** | **$239,374.0 M** | $198,759.0 M | **+20.4%** | 49.8% Mix | Aceleración comercial de alta tracción (+20.4% YoY); ganancia de cuota y dinamismo. |
-| **Reality Labs** | **$2,231.0 M** | $2,207.0 M | **+1.1%** | 0.5% Mix | Desempeño estable (+1.1% YoY); consolidación en mercados y canales core. |
+| **Family of Apps** | **$239,374.0 M** | $198,759.0 M | **+20.4%** | 49.8% Mix | 41.0% Mgn Op. | Aceleración comercial de alta tracción (+20.4% YoY); ganancia de cuota y dinamismo. |
+| **Reality Labs** | **$2,231.0 M** | $2,207.0 M | **+1.1%** | 0.5% Mix | -842.5% Mgn Op. | Desempeño estable (+1.1% YoY); consolidación en mercados y canales core. |
 
 
 ### Análisis Cualitativo de las Líneas de Negocio:
@@ -697,7 +697,30 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | 11.54% (Estrés / Tipos Altos) | 27.0% | 26.6% | 26.0% | 25.5% | 24.9% | 24.3% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
-### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
+### 14.5. Valoración por Suma de las Partes (SOTP - Sum-of-the-Parts)
+
+Al operar con divisiones de negocio diferenciadas en rentabilidad, crecimiento y perfil de riesgo, se aplica un modelo institucional de **Suma de las Partes (Sum-of-the-Parts)** desagregando las unidades operativas:
+
+* **Family of Apps:** Facturación Base de **$239,374.0 M** (Margen Op. 41.0%) valorada a **23.0x EV/EBIT** -> Enterprise Value de **$2,258,071.0 M** (99.9% del EV).
+
+* **Reality Labs:** Facturación Base de **$2,231.0 M** (Margen Op. -842.5%) valorada a **0.8x EV/Sales (I+D)** -> Enterprise Value de **$1,784.8 M** (0.1% del EV).
+
+* **Enterprise Value Consolidado:** **$2,259,855.8 M** | **Posición Financiera Neta:** **$+1,527.0 M** (Caja neta).
+* **Equity Value Teórico:** **$2,261,382.8 M** sobre 2,547.5 M de acciones diluidas.
+* **Valor Intrínseco SOTP:** **$887.68 por acción** (+38.1% frente a cotización actual de $642.62).
+
+
+| Segmento de Negocio | Ventas ($ M) | Margen Op. % | Crecimiento YoY | Múltiplo Objetivo | Enterprise Value ($ M) | Peso EV % |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Family of Apps** | $239,374.0 M | 41.0% | +22.4% | 23.0x EV/EBIT | $2,258,071.0 M | 99.9% |
+| **Reality Labs** | $2,231.0 M | -842.5% | +2.8% | 0.8x EV/Sales (I+D) | $1,784.8 M | 0.1% |
+| **Total Enterprise Value (EV)** | **$241,605.0 M** | **—** | **—** | **—** | **$2,259,855.8 M** | **100.0%** |
+| (+) Caja Neta | — | — | — | — | $1,527.0 M | — |
+| **Equity Value Consolidado** | — | — | — | — | **$2,261,382.8 M** | — |
+| **Precio Justo por Acción (SOTP)** | — | — | — | — | **$887.68** | **+38.1%** |
+
+
+### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
 
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |

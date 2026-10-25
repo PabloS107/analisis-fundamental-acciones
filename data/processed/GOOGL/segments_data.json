@@ -16,7 +16,7 @@
   "product_segments": [
     {
       "name": "Revenue from contract with customers",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -96,6 +96,18 @@
         "FY2024": 304930.0,
         "FY2023": 272543.0,
         "LTM": 367091.0
+      },
+      "operating_income": {
+        "FY2025": 139404.0,
+        "FY2024": 121263.0,
+        "FY2023": 95858.0,
+        "LTM": 153792.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 40.68,
+        "FY2024": 39.77,
+        "FY2023": 35.17,
+        "LTM": 41.89
       }
     },
     {
@@ -108,6 +120,18 @@
         "FY2024": 43229.0,
         "FY2023": 33088.0,
         "LTM": 77617.0
+      },
+      "operating_income": {
+        "FY2025": 13910.0,
+        "FY2024": 6112.0,
+        "FY2023": 1716.0,
+        "LTM": 28298.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 23.69,
+        "FY2024": 14.14,
+        "FY2023": 5.19,
+        "LTM": 36.46
       }
     },
     {
@@ -120,11 +144,23 @@
         "FY2024": 1648.0,
         "FY2023": 1527.0,
         "LTM": 1507.0
+      },
+      "operating_income": {
+        "FY2025": -7515.0,
+        "FY2024": -4444.0,
+        "FY2023": -4095.0,
+        "LTM": -4850.0
+      },
+      "operating_margin_pct": {
+        "FY2025": -488.94,
+        "FY2024": -269.66,
+        "FY2023": -268.17,
+        "LTM": -321.83
       }
     },
     {
       "name": "Hedging gains (losses)",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -196,7 +232,7 @@
       }
     },
     {
-      "name": "Operating Segments",
+      "name": "Google Services",
       "values": {
         "FY2025": 139404.0,
         "FY2024": 121263.0,
@@ -205,7 +241,7 @@
       }
     },
     {
-      "name": "Operating Segments",
+      "name": "Google Cloud",
       "values": {
         "FY2025": 13910.0,
         "FY2024": 6112.0,
@@ -214,12 +250,12 @@
       }
     },
     {
-      "name": "Operating Segments",
+      "name": "Other Bets",
       "values": {
         "FY2025": -7515.0,
         "FY2024": -4444.0,
         "FY2023": -4095.0,
-        "LTM": 6873.0
+        "LTM": -4850.0
       }
     },
     {

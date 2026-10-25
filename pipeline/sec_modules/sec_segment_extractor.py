@@ -40,6 +40,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     segment_op_income = []
     detected_prod_names = set()
     detected_geo_names = set()
+    detected_op_inc_names = set()
 
     def _norm_seg_key(name_str):
         return re.sub(r'\s+', ' ', str(name_str).lower().replace('&', 'and')).strip()
@@ -64,8 +65,11 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     geo_keywords = {
         "americas", "europe", "greater china", "china", "japan", "asia", "pacific",
         "international", "domestic", "united states", "u.s.", "non-us", "taiwan",
-        "latin america", "brazil", "mexico", "other countries", "rest of world",
-        "emea", "apac", "ireland", "other regions", "rest of asia pacific"
+        "latin america", "latin america/caribbean", "caribbean", "brazil", "mexico",
+        "argentina", "other countries", "rest of world", "emea", "apac", "ireland",
+        "other regions", "rest of asia pacific", "north america", "south america",
+        "central america", "middle east", "africa", "canada", "united kingdom", "uk",
+        "germany", "france", "india", "singapore", "korea", "australia"
     }
 
     try:
@@ -135,14 +139,16 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         if not has_val:
                             continue
 
-                        clean_name = re.sub(r'^(Reportable segments - |Operating segments - )', '', lbl).strip()
+                        clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
                         parent_segment = None
                         is_subsegment = False
 
                         # Detección de subsegmentos jerárquicos ("Advertising - Family of Apps", etc.)
                         if " - " in clean_name and not any(g in clean_name.lower() for g in geo_keywords):
                             parts = clean_name.split(" - ")
-                            if len(parts) == 2:
+                            if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
+                                clean_name = parts[-1].strip()
+                            elif len(parts) == 2:
                                 clean_name = parts[0].strip()
                                 parent_segment = parts[1].strip()
                                 is_subsegment = True
@@ -152,20 +158,28 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         is_geo = any(g in clean_name.lower() for g in geo_keywords) or any(g in lbl.lower() for g in geo_keywords)
 
                         # Detección de totales consolidados para no mezclarlos con segmentos de producto
-                        is_consolidated_total = clean_name.lower() in [
-                            "revenue", "total revenue", "total revenues", "total net sales",
-                            "total net revenue", "consolidated revenue", "net sales", "total"
-                        ]
+                        is_consolidated_total = any(k in clean_name.lower() for k in [
+                            "total revenue", "total revenues", "total net sales", "total net revenue",
+                            "consolidated revenue", "consolidated net sales", "revenue from contract with customers",
+                            "revenues from external customers", "net revenues and financial income",
+                            "hedging gains (losses)", "as reported", "reclassification"
+                        ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues"]
+
                         is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments", "wholesale", "direct-to-consumer", "direct to consumer", "dtc"])
 
-                        # Detección de subregiones geográficas (ej. "United States" dentro de "United States & Canada")
-                        if is_geo and clean_name.lower() == "united states":
+                        # Detección de subregiones geográficas (ej. "United States" o suplementarias del 10-K)
+                        if is_geo and clean_name.lower() in ["united states", "u.s.", "china", "other countries"]:
                             is_subsegment = True
-                            parent_segment = "United States & Canada"
+                            if clean_name.lower() in ["united states", "u.s."]:
+                                parent_segment = "Americas"
+                            elif clean_name.lower() == "china":
+                                parent_segment = "Greater China"
 
                         norm_key = _norm_seg_key(clean_name)
                         if is_op_inc:
-                            segment_op_income.append({"name": clean_name, "values": v_dict})
+                            if norm_key not in detected_op_inc_names:
+                                segment_op_income.append({"name": clean_name, "values": v_dict})
+                                detected_op_inc_names.add(norm_key)
                         elif is_geo:
                             seg_entry = {
                                 "name": clean_name,
@@ -244,10 +258,13 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 except Exception:
                                     continue
 
-                                q_clean_name = re.sub(r'^(Reportable segments - |Operating segments - )', '', lbl).strip()
+                                q_clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
                                 if " - " in q_clean_name and not any(g in q_clean_name.lower() for g in geo_keywords):
                                     parts = q_clean_name.split(" - ")
-                                    q_clean_name = parts[0].strip() if len(parts) == 2 else parts[-1].strip()
+                                    if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
+                                        q_clean_name = parts[-1].strip()
+                                    else:
+                                        q_clean_name = parts[0].strip() if len(parts) == 2 else parts[-1].strip()
                                 q_norm = _norm_seg_key(q_clean_name)
 
                                 target_lists = [segment_op_income] if is_op_inc else [product_segments, geographic_segments]
@@ -276,23 +293,26 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
         except Exception:
             pass
 
-    # Reconciliación de segmentos primarios sin nota 10-Q explícita (respetando Regla 6 para subsegmentos anuales)
-    can_ltm_m = None
-    if canonical_rev and canonical_rev.get("LTM"):
-        can_ltm = canonical_rev.get("LTM")
-        can_ltm_m = can_ltm / 1e6 if can_ltm > 1e6 else can_ltm
-
+    # Cruce canónico de Ingresos y Beneficio Operativo por Segmento (ASC 280)
     for seg_list in [product_segments, geographic_segments]:
         for item in seg_list:
-            vals = item.get("values", {})
-            if "LTM" not in vals and not item.get("is_subsegment"):
-                v_lat = vals.get(latest_fy)
-                if v_lat is not None and can_ltm_m:
-                    c_lat = canonical_rev.get(latest_fy)
-                    if c_lat:
-                        c_lat_m = c_lat / 1e6 if c_lat > 1e6 else c_lat
-                        ratio = can_ltm_m / c_lat_m if c_lat_m > 0 else 1.0
-                        vals["LTM"] = round(v_lat * ratio, 1)
+            item_norm = _norm_seg_key(item.get("name", ""))
+            matching_op = None
+            for op_item in segment_op_income:
+                op_norm = _norm_seg_key(op_item.get("name", ""))
+                if op_norm == item_norm or (len(item_norm) > 4 and item_norm in op_norm) or (len(op_norm) > 4 and op_norm in item_norm):
+                    matching_op = op_item
+                    break
+            if matching_op:
+                item["operating_income"] = dict(matching_op.get("values", {}))
+                op_margins = {}
+                seg_vals = item.get("values", {})
+                for p, op_val in matching_op.get("values", {}).items():
+                    rev_val = seg_vals.get(p)
+                    if rev_val and rev_val != 0.0:
+                        op_margins[p] = round((op_val / rev_val) * 100.0, 2)
+                if op_margins:
+                    item["operating_margin_pct"] = op_margins
 
     # Construir y persistir segments_data.json
     seg_dict = {

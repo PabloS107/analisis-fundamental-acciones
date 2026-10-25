@@ -48,6 +48,18 @@
         "FY2025": 2233.1,
         "FY2024": 1806.7,
         "LTM": 2658.7
+      },
+      "operating_income": {
+        "FY2026": 911.0,
+        "FY2025": 848.5,
+        "FY2024": 719.0,
+        "LTM": 912.9
+      },
+      "operating_margin_pct": {
+        "FY2026": 35.21,
+        "FY2025": 38.0,
+        "FY2024": 39.8,
+        "LTM": 34.34
       }
     },
     {
@@ -60,6 +72,18 @@
         "FY2025": 2531.4,
         "FY2024": 2239.1,
         "LTM": 2724.4
+      },
+      "operating_income": {
+        "FY2026": 1045.3,
+        "FY2025": 1002.9,
+        "FY2024": 804.8,
+        "LTM": 1045.3
+      },
+      "operating_margin_pct": {
+        "FY2026": 38.17,
+        "FY2025": 39.62,
+        "FY2024": 35.94,
+        "LTM": 38.37
       }
     },
     {
@@ -72,6 +96,18 @@
         "FY2025": 221.2,
         "FY2024": 241.9,
         "LTM": 144.2
+      },
+      "operating_income": {
+        "FY2026": 16.4,
+        "FY2025": 34.6,
+        "FY2024": 23.7,
+        "LTM": 15.3
+      },
+      "operating_margin_pct": {
+        "FY2026": 11.22,
+        "FY2025": 15.64,
+        "FY2024": 9.8,
+        "LTM": 10.61
       }
     }
   ],
@@ -103,8 +139,8 @@
     {
       "name": "International - Sales Revenue, Net - Net sales in foreign currencies",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "parent": "International",
       "values": {
         "FY2026": 1748.1,
         "FY2025": 1376.8,
@@ -147,43 +183,7 @@
         "FY2026": 16.4,
         "FY2025": 34.6,
         "FY2024": 23.7,
-        "LTM": -1194.6
-      }
-    },
-    {
-      "name": "Segment income from operations",
-      "values": {
-        "FY2026": 1972.7,
-        "FY2025": 1886.0,
-        "FY2024": 1547.6,
-        "LTM": 1973.5
-      }
-    },
-    {
-      "name": "HOKA",
-      "values": {
-        "FY2026": 911.0,
-        "FY2025": 848.5,
-        "FY2024": 719.0,
-        "LTM": 912.9
-      }
-    },
-    {
-      "name": "UGG",
-      "values": {
-        "FY2026": 1045.3,
-        "FY2025": 1002.9,
-        "FY2024": 804.8,
-        "LTM": 1045.3
-      }
-    },
-    {
-      "name": "Other Brands",
-      "values": {
-        "FY2026": 16.4,
-        "FY2025": 34.6,
-        "FY2024": 23.7,
-        "LTM": -1194.6
+        "LTM": 15.3
       }
     },
     {

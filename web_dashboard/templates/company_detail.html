@@ -539,6 +539,7 @@
                             <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
                                 <th class="py-2.5 px-3 sticky left-0 bg-slate-50">Segmento</th>
                                 <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                                <th class="py-2.5 px-2 text-right">Margen Op. LTM</th>
                                 {% for p in seg_periods %}
                                 <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
                                 {% endfor %}
@@ -554,6 +555,7 @@
                                     {% endif %}
                                 </td>
                                 <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                                <td class="py-2.5 px-2 text-right {% if row.is_total %}text-purple-700 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-purple-600 font-semibold{% endif %}">{{ row.op_margin_ltm|default:"-" }}</td>
                                 {% for v in row.values %}
                                 <td class="py-2.5 px-2 text-right whitespace-nowrap {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% elif row.indent %}text-slate-500 font-normal{% endif %}">{{ v }}</td>
                                 {% endfor %}
@@ -2849,6 +2851,107 @@
                 </div>
             </div>
         </div>
+
+        {% if sotp_valuation %}
+        <!-- Bloque Institucional de Valoración por Suma de las Partes (SOTP) -->
+        <div class="bg-white p-6 rounded-3xl border border-indigo-200 shadow-xl space-y-5">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🧩</span> Valoración por Suma de las Partes (Sum-of-the-Parts - SOTP)
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">
+                        Desagregación analítica de divisiones operativas con múltiplos diferenciados por crecimiento YoY y rentabilidad ASC 280.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold px-3 py-1.5 rounded-xl border {% if sotp_valuation.upside_sotp_pct >= 0 %}bg-emerald-50 text-emerald-700 border-emerald-200{% else %}bg-amber-50 text-amber-700 border-amber-200{% endif %}">
+                        Fair Value SOTP: ${{ sotp_valuation.fair_value_sotp|floatformat:2 }} ({{ sotp_valuation.upside_sotp_pct|stringformat:"+0.1f" }}%)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tabla de Desglose SOTP por Segmento -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                <table class="w-full text-xs text-left border-collapse">
+                    <thead>
+                        <tr class="bg-indigo-50/80 text-slate-600 uppercase font-semibold border-b border-indigo-100">
+                            <th class="py-3 px-4">Unidad Operativa</th>
+                            <th class="py-3 px-3 text-right">Ventas Base ($M)</th>
+                            <th class="py-3 px-3 text-right">Margen Op. %</th>
+                            <th class="py-3 px-3 text-right">Crecimiento YoY</th>
+                            <th class="py-3 px-3 text-right">Múltiplo Aplicado</th>
+                            <th class="py-3 px-3 text-right">Enterprise Value ($M)</th>
+                            <th class="py-3 px-3 text-right">Peso EV %</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-mono">
+                        {% if sotp_valuation.segments_breakdown %}
+                            {% for seg in sotp_valuation.segments_breakdown %}
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-2.5 px-4 font-sans font-semibold text-slate-900">{{ seg.name }}</td>
+                                <td class="py-2.5 px-3 text-right">${{ seg.rev_m|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right {% if seg.op_margin_pct < 0 %}text-rose-600{% elif seg.op_margin_pct > 25 %}text-emerald-600 font-bold{% else %}text-slate-700{% endif %}">
+                                    {% if seg.op_margin_pct is not None %}{{ seg.op_margin_pct|floatformat:1 }}%{% else %}—{% endif %}
+                                </td>
+                                <td class="py-2.5 px-3 text-right {% if seg.yoy_growth_pct > 0 %}text-emerald-600{% elif seg.yoy_growth_pct < 0 %}text-rose-600{% else %}text-slate-600{% endif %}">
+                                    {% if seg.yoy_growth_pct is not None %}{{ seg.yoy_growth_pct|stringformat:"+0.1f" }}%{% else %}—{% endif %}
+                                </td>
+                                <td class="py-2.5 px-3 text-right font-sans font-medium text-slate-800">{{ seg.mult_val|floatformat:1 }}x <span class="text-[10px] text-slate-500">{{ seg.mult_type }}</span></td>
+                                <td class="py-2.5 px-3 text-right font-bold text-slate-900">${{ seg.ev_segment_m|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right text-slate-600">{{ seg.ev_weight_pct|floatformat:1 }}%</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-2.5 px-4 font-sans font-semibold text-slate-900">Comercio Electrónico / Marketplace</td>
+                                <td class="py-2.5 px-3 text-right">${{ sotp_valuation.commerce_rev|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right">—</td>
+                                <td class="py-2.5 px-3 text-right">—</td>
+                                <td class="py-2.5 px-3 text-right font-sans font-medium text-slate-800">{{ sotp_valuation.commerce_mult|floatformat:1 }}x <span class="text-[10px] text-slate-500">EV/Sales</span></td>
+                                <td class="py-2.5 px-3 text-right font-bold text-slate-900">${{ sotp_valuation.ev_commerce|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right text-slate-600">—</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-2.5 px-4 font-sans font-semibold text-slate-900">FinTech & Servicios Financieros</td>
+                                <td class="py-2.5 px-3 text-right">${{ sotp_valuation.fintech_rev|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right">—</td>
+                                <td class="py-2.5 px-3 text-right">—</td>
+                                <td class="py-2.5 px-3 text-right font-sans font-medium text-slate-800">{{ sotp_valuation.fintech_mult|floatformat:1 }}x <span class="text-[10px] text-slate-500">EV/Sales</span></td>
+                                <td class="py-2.5 px-3 text-right font-bold text-slate-900">${{ sotp_valuation.ev_fintech|floatformat:1 }}M</td>
+                                <td class="py-2.5 px-3 text-right text-slate-600">—</td>
+                            </tr>
+                        {% endif %}
+                        <!-- Totales y Puente a Equity Value -->
+                        <tr class="bg-slate-100 font-bold border-t-2 border-slate-300">
+                            <td class="py-2.5 px-4 font-sans text-slate-900">(=) Enterprise Value Agregado (SOTP)</td>
+                            <td class="py-2.5 px-3 text-right" colspan="4">—</td>
+                            <td class="py-2.5 px-3 text-right text-indigo-700 font-black">${{ sotp_valuation.ev_total|floatformat:1 }}M</td>
+                            <td class="py-2.5 px-3 text-right">100.0%</td>
+                        </tr>
+                        <tr class="bg-slate-50 text-slate-700">
+                            <td class="py-2 px-4 font-sans">
+                                {% if sotp_valuation.net_debt > 0 %}(-) Deuda Financiera Neta{% else %}(+) Caja Neta Excedente{% endif %}
+                            </td>
+                            <td class="py-2 px-3 text-right" colspan="4">—</td>
+                            <td class="py-2 px-3 text-right {% if sotp_valuation.net_debt > 0 %}text-rose-600{% else %}text-emerald-600{% endif %}">
+                                {% if sotp_valuation.net_debt > 0 %}-${{ sotp_valuation.net_debt|floatformat:1 }}M{% else %}+${{ sotp_valuation.net_debt|floatformat:1 }}M{% endif %}
+                            </td>
+                            <td class="py-2 px-3 text-right">—</td>
+                        </tr>
+                        <tr class="bg-indigo-50/70 font-black border-t border-indigo-200 text-slate-900">
+                            <td class="py-2.5 px-4 font-sans text-indigo-950">(=) Equity Value Justificado</td>
+                            <td class="py-2.5 px-3 text-right" colspan="4">
+                                <span class="font-normal text-xs text-slate-500 font-sans">Sobre {{ sotp_valuation.shares_m|floatformat:1 }}M acciones</span>
+                            </td>
+                            <td class="py-2.5 px-3 text-right text-indigo-900 font-black text-sm">${{ sotp_valuation.equity_sotp|floatformat:1 }}M</td>
+                            <td class="py-2.5 px-3 text-right text-indigo-700">${{ sotp_valuation.fair_value_sotp|floatformat:2 }}/acc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
     </div>
 
 </div>

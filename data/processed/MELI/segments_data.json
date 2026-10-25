@@ -16,7 +16,7 @@
   "product_segments": [
     {
       "name": "Net revenues and financial income",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -28,7 +28,7 @@
     },
     {
       "name": "Net service revenues and financial income",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -40,7 +40,7 @@
     },
     {
       "name": "Net product revenues",
-      "is_subtotal": false,
+      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
@@ -48,18 +48,6 @@
         "FY2024": 2139.0,
         "FY2023": 1490.0,
         "LTM": 4773.0
-      }
-    },
-    {
-      "name": "Argentina",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 5646.0,
-        "FY2024": 3614.0,
-        "FY2023": 3322.0,
-        "LTM": 6211.0
       }
     },
     {
@@ -797,6 +785,18 @@
       "parent": null,
       "values": {
         "FY2023": 12.0
+      }
+    },
+    {
+      "name": "Argentina",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "Latin America",
+      "values": {
+        "FY2025": 5646.0,
+        "FY2024": 3614.0,
+        "FY2023": 3322.0,
+        "LTM": 6211.0
       }
     }
   ],
