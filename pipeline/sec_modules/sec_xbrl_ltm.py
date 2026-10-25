@@ -1330,7 +1330,14 @@ def compute_and_inject_ltm_columns(
                             pass
                 elif is_beg_cash:
                     # El saldo de inicio del trailing 12M es el saldo puntual a la fecha de inicio (12 meses antes)
-                    if pd.notna(v_prev):
+                    # En formularios 10-Q trimestrales, el saldo de corte de hace 12 meses exactos proviene de v_prev del concepto de cierre
+                    end_match = q_cf[q_cf['concept'].astype(str).apply(_clean_concept_token).isin(ENDING_CASH_CONCEPTS)]
+                    if not end_match.empty and pd.notna(end_match.iloc[0].get(ytd_prev_cf)):
+                        try:
+                            val = float(end_match.iloc[0].get(ytd_prev_cf))
+                        except (ValueError, TypeError):
+                            pass
+                    if val is None and pd.notna(v_prev):
                         try:
                             val = float(v_prev)
                         except (ValueError, TypeError):

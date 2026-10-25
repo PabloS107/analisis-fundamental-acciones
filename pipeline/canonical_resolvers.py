@@ -1614,8 +1614,33 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "CashBeginningOfPeriod",
             "ifrs-full_CashAndCashEquivalentsAtBeginningOfPeriod"
         ], p)
-        if beg_cash is None and end_cash is not None and net_chg_cash is not None:
+
+        # Regla contable canonica: Si beg_cash es nulo o coincide erroneamente con net_chg_cash
+        # (por taxonomias antiguas que mapearon PeriodIncreaseDecrease), conciliar via end_cash - net_chg_cash
+        if (beg_cash is None or (net_chg_cash is not None and beg_cash == net_chg_cash and end_cash != round(beg_cash * 2, 2))) and end_cash is not None and net_chg_cash is not None:
             beg_cash = round(end_cash - net_chg_cash, 2)
+
+        # Fallback de identidad anual: En anos fiscales (no LTM), el saldo inicial es el saldo final del ejercicio anterior
+        if beg_cash is None and p != "LTM":
+            annual_periods = [yr for yr in periods if yr != "LTM"]
+            if p in annual_periods:
+                p_idx = annual_periods.index(p)
+                if p_idx + 1 < len(annual_periods):
+                    prior_yr = annual_periods[p_idx + 1]
+                    prior_end = _extract_multi_source_val(fs, "cashflow", [
+                        "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "CashAndCashEquivalentsAtCarryingValue",
+                        "ifrs-full_CashAndCashEquivalents"
+                    ], prior_yr)
+                    if prior_end is None:
+                        prior_end = _extract_multi_source_val(fs, "balance_sheet", [
+                            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+                            "CashAndCashEquivalentsAtCarryingValue", "Cash"
+                        ], prior_yr)
+                    if prior_end is not None:
+                        beg_cash = float(prior_end)
+
+        if net_chg_cash is None and end_cash is not None and beg_cash is not None:
+            net_chg_cash = round(end_cash - beg_cash, 2)
 
         can_fcf = canonical.get("free_cash_flow", {}).get(p)
         if archetype in ("FINANCIAL_BANKING", "INSURANCE"):

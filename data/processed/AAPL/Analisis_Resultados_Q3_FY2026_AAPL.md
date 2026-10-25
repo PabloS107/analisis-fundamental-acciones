@@ -458,7 +458,7 @@ Evaluación del retorno económico del capital y la sostenibilidad de las ventaj
 > • **ROC Greenblatt Tangible (LTM):** **305.85%** (Productividad operativa pura pre-tax sobre capital de trabajo y PP&E físico instalado).  
 > • **ROIC Ajustado por Intangibles (LTM):** **50.06%** (Retorno económico post-tax reconstituyendo $83,773.2M de I+D fuera de balance).  
 > • **ROIC Contable Tradicional (LTM):** **68.22%** (Métrica contable estándar que subestima el capital empleado al enviar I+D a gasto corriente).  
-> • **Costo Promedio Ponderado de Capital (WACC):** **10.00%** (Costo del Equity Ke: 10.10% | Costo Deuda Kd post-tax: 3.67%).  
+> • **Costo Promedio Ponderado de Capital (WACC):** **10.00%** (Costo del Equity Ke: 10.10% | Costo Deuda Kd post-tax: 3.72%).  
 > • **Spread Económico Neto (EVA):** **+40.06 p.p.** de rendimiento generado por encima de la tasa de corte exigida por el mercado.  
 > • **Tesis de Foso Defensivo:** Apple Inc. combina una productividad física tangible de 305.8% gracias a su modelo operativo, con un retorno sobre capital total (ROIC Ajustado 50.06%) que supera a su WACC por +40.1 p.p., confirmando ventajas competitivas estructuralmente blindadas frente a sus rivales.
 
@@ -476,14 +476,14 @@ Para garantizar un cálculo contemporáneo y evitar distorsiones por desfases en
 | **Beta de la Acción ($\beta$)** | **1.07** | Yahoo 5Y Monthly / CNBC | Rango Estadístico Sectorial |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Benchmark Aswath Damodaran (NYU Stern) | Estándar Institucional Wall Street |
 
-> **Recuadro de Auditoría**: Captura efectuada el `2026-10-24T13:06:22.440406+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,834.2M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
+> **Recuadro de Auditoría**: Captura efectuada el `2026-10-24T21:14:24.116093+00:00`. Precio validado por consenso: $347.73 (Yahoo: $347.73, CNBC: $347.73, Δ=0.00%) | Market Cap calculado: $5,074,834.2M vía Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.07 (Yahoo: 1.07, CNBC: 1.08, Δ=0.01).
 
 ### 11.2. Bloque B: Estructura de Capital y Costo Promedio Ponderado de Capital (WACC)
 
 El WACC representa el rendimiento mínimo anual exigido por los accionistas y los acreedores para compensar el costo de oportunidad y el riesgo del negocio:
 
 * **Costo del Equity ($K_e$ vía CAPM)**: $K_e = R_f + \beta \times \text{ERP} = 4.99% + (1.07 \times 4.75%) =$ **10.10%**
-* **Costo de la Deuda ($K_d$ neto de impuestos)**: Pre-tax: 4.43% | Con Escudo Fiscal (17.3%): **3.67%**.
+* **Costo de la Deuda ($K_d$ neto de impuestos)**: Pre-tax: 4.50% | Con Escudo Fiscal (17.3%): **3.72%**.
 * **Ponderación de Mercado**: Equity $W_e = 98.4%$ ($5,074,834.2M) | Deuda $W_d = 1.6%$ ($82,347.0M).
 * **WACC Consolidado**: $\text{WACC} = (W_e \times K_e) + (W_d \times K_d) =$ **10.00%** (vs. Mediana del Sector: **8.80%**).
 
@@ -536,7 +536,7 @@ Siguiendo la metodología del Prof. Aswath Damodaran (NYU Stern), se capitaliza 
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **FY2021** | 255.50% | 48.51% | **41.96%** | $47,645.5M | $239,010.2M | **+31.96 p.p.** |
 | **FY2022** | 292.89% | 51.80% | **43.73%** | $56,116.8M | $245,105.6M | **+33.73 p.p.** |
-| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.56 p.p.** |
+| **FY2023** | 266.34% | 52.21% | **42.55%** | $65,248.2M | $247,376.0M | **+32.55 p.p.** |
 | **FY2024** | 275.67% | 52.44% | **40.04%** | $72,410.2M | $247,173.8M | **+30.04 p.p.** |
 | **FY2025** | 278.60% | 66.13% | **48.15%** | $79,597.8M | $245,795.5M | **+38.15 p.p.** |
 | **LTM** | 305.85% | 68.22% | **50.06%** | $83,773.2M | $269,400.0M | **+40.06 p.p.** |
@@ -577,7 +577,7 @@ La siguiente tabla unifica la totalidad de los ratios e indicadores calculados e
 | | Beta de la Acción ($\beta$) | **1.07** | S&P 500 = 1.00x | Sensibilidad cíclica moderada y alineada al mercado. |
 | | Prima de Riesgo de Mercado (ERP) | **4.75%** | NYU Stern Damodaran | Exigencia de prima de retorno sobre el activo libre de riesgo. |
 | **Costo de Capital (WACC)** | Costo del Capital Propio ($K_e$ vía CAPM) | **10.10%** | Rango 9.5% - 10.5% | Retorno anual exigido por los tenedores de acciones comunes. |
-| | Costo de Deuda Neta ($K_d$ Post-Tax) | **3.67%** | Tasa cupón efectiva | Financiación crediticia con escudo fiscal del 17.3%. |
+| | Costo de Deuda Neta ($K_d$ Post-Tax) | **3.72%** | Tasa cupón efectiva | Financiación crediticia con escudo fiscal del 17.3%. |
 | | **WACC Consolidado** | **10.00%** | Mediana Sector (8.80%) | Tasa de corte u obstáculo financiero mínimo para crear valor. |
 | **Productividad Tangible** | **ROC Greenblatt (Pre-Tax)** | **305.85%** | Mediana Sector (29.85%) | Negocio Asset-Light; supera al sector por +276.00 p.p.. |
 | | Capital Tangible Operativo Promedio | **$50,632.5M** | Balance SEC Form 10-Q | Base física operativa tras salvaguarda anti-distorsión. |
@@ -684,7 +684,7 @@ La siguiente matriz sintetiza la totalidad de los indicadores forenses auditados
 ## 13. Solvencia, Deuda y Estrés Financiero (Credit Risk Engine)
 
 > **DICTAMEN INSTITUCIONAL DE SOLVENCIA (LTM)**: **MÁXIMA SOLVENCIA INSTITUCIONAL**
-> FORTALEZA FINANCIERA INQUEBRANTABLE (GRADO INSTITUCIONAL AAA/AA): Apalancamiento óptimo (0.12x), cobertura de intereses de 42.4x y Altman Z''-Score de 3.23 en Zona Segura. Cero estrés crediticio, con capacidad excepcional de financiación en cualquier ciclo macroeconómico.
+> FORTALEZA FINANCIERA INQUEBRANTABLE (GRADO INSTITUCIONAL AAA/AA): Apalancamiento óptimo (0.12x), cobertura de intereses de 41.8x y Altman Z''-Score de 3.23 en Zona Segura. Cero estrés crediticio, con capacidad excepcional de financiación en cualquier ciclo macroeconómico.
 
 A diferencia de los ratios tradicionales de balance (como Deuda/Patrimonio, que se distorsionan severamente por programas de recompra de acciones o en firmas libres de deuda), este módulo evalúa la solvencia corporativa bajo el estándar de **banca de inversión y agencias de calificación crediticia (S&P, Moody's)** a través de cuatro dimensiones fundamentales:
 
@@ -711,10 +711,10 @@ Evalúa el margen de seguridad de los beneficios y del flujo de caja para absorb
 | Parámetro Evaluado | Fórmula Contable | Umbral de Seguridad | Valor LTM | Dictamen de Cobertura |
 | :--- | :--- | :---: | :---: | :--- |
 | **Beneficio Operativo (EBIT)** | Ingresos - Costes Operativos | Fondo de Cobertura | **$154,859.0M** | Margen operativo para servir la deuda. |
-| **Gasto por Intereses** | Carga Financiera Reportada/Estimada | Obligación Anual | **$3,650.0M** | Intereses devengados por bonos y préstamos. |
-| **Cobertura Operativa (EBIT/Int)** | EBIT / Gasto por Intereses | > 10.0x (AAA) | **42.4x** | COBERTURA EXCELENTE (> 10.0x) |
-| **Cobertura en Efectivo (CFO/Int)** | CFO / Gasto por Intereses | > 8.0x (Robusta) | **40.2x** | Cobertura con caja líquida generada. |
-| **Carga Financiera sobre CFO** | (Intereses / CFO) * 100 | < 5.0% (Mínima) | **2.49%** | Porcentaje de la caja consumido por deuda. |
+| **Gasto por Intereses** | Carga Financiera Reportada/Estimada | Obligación Anual | **$3,705.6M** | Intereses devengados por bonos y préstamos. |
+| **Cobertura Operativa (EBIT/Int)** | EBIT / Gasto por Intereses | > 10.0x (AAA) | **41.8x** | COBERTURA EXCELENTE (> 10.0x) |
+| **Cobertura en Efectivo (CFO/Int)** | CFO / Gasto por Intereses | > 8.0x (Robusta) | **39.6x** | Cobertura con caja líquida generada. |
+| **Carga Financiera sobre CFO** | (Intereses / CFO) * 100 | < 5.0% (Mínima) | **2.53%** | Porcentaje de la caja consumido por deuda. |
 
 ---
 
@@ -736,7 +736,7 @@ Analiza la capacidad de responder a obligaciones de corto plazo sin depender de 
 ```mermaid
 graph LR
     Z["Altman Z''-Score<br>3.23"] --> Z1["ZONA SEGURA<br>ZONA SEGURA (BAJO RIESGO DE QUIEBRA)"]
-    R["Cobertura de Intereses<br>42.4x"] --> R1["Rating Sintético Damodaran<br>AAA (GRADO INSTITUCIONAL MÁXIMO (AAA / Aaa))"]
+    R["Cobertura de Intereses<br>41.8x"] --> R1["Rating Sintético Damodaran<br>AAA (GRADO INSTITUCIONAL MÁXIMO (AAA / Aaa))"]
     R1 --> S["Spread de Default: 0.60%<br>Probabilidad de Default: < 0.2%"]
 ```
 
@@ -777,8 +777,8 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | **Tasa Libre de Riesgo ($R_f$)** | **4.99%** | Sección 11.2 (Bonos EE.UU.) | Rendimiento del Bono del Tesoro de EE.UU. a 10 años (^TNX). |
 | **Prima de Riesgo de Mercado (ERP)** | **4.75%** | Damodaran Benchmark | Prima histórica por riesgo accionario demandada por inversores. |
 | **Beta Apalancada (Consenso)** | **1.07** | Sección 11.2 (Arbitraje) | Sensibilidad sistemática del título frente al índice S&P 500. |
-| **Coste de la Deuda ($K_d$ Pre-Tax)** | **4.43%** | Sección 11.2 (Sintético) | Coste de financiamiento bruto estimado por rating sintético. |
-| **Coste de la Deuda ($K_d$ After-Tax)** | **3.67%** | Sección 11.2 (WACC) | Coste efectivo neto del escudo fiscal: $K_d \times (1 - t)$. |
+| **Coste de la Deuda ($K_d$ Pre-Tax)** | **4.5%** | Sección 11.2 (Sintético) | Coste de financiamiento bruto estimado por rating sintético. |
+| **Coste de la Deuda ($K_d$ After-Tax)** | **3.72%** | Sección 11.2 (WACC) | Coste efectivo neto del escudo fiscal: $K_d \times (1 - t)$. |
 | **Tasa Impositiva Efectiva ($t$)** | **17.3%** | Sección 11.2 (SEC 10-K) | Tasa impositiva estructural auditada en estados financieros. |
 | **Ponderación Deuda ($W_d$)** | **1.6%** | Estructura de Capital | Proporción de deuda financiera sobre valor total de la empresa. |
 | **Ponderación Fondos Propios ($W_e$)** | **98.4%** | Estructura de Capital | Proporción de capital propio sobre valor total de la empresa. |
@@ -805,8 +805,8 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | 9.00% (Bajo / Expansión) | 15.8% | 15.2% | 14.6% | 13.9% | 13.1% | 12.3% | Escenario favorable; exigencia de crecimiento más moderada. |
 | 9.50% (Favorable) | 16.8% | 16.3% | 15.7% | 15.1% | 14.4% | 13.6% | Escenario de sensibilidad operativa. |
 | 10.00% (WACC Auditado Base) | 17.9% | 17.3% | 16.8% | 16.2% | 15.5% | 14.8% | ESCENARIO CENTRAL: Crecimiento implícito real de mercado. |
-| 10.50% (Exigente) | 18.8% | 18.3% | 17.8% | 17.3% | 16.7% | 16.0% | Escenario de sensibilidad operativa. |
-| 11.00% (Estrés / Tipos Altos) | 19.8% | 19.3% | 18.8% | 18.3% | 17.7% | 17.1% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
+| 10.50% (Exigente) | 18.8% | 18.4% | 17.8% | 17.3% | 16.7% | 16.0% | Escenario de sensibilidad operativa. |
+| 11.00% (Estrés / Tipos Altos) | 19.8% | 19.3% | 18.8% | 18.3% | 17.8% | 17.1% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
 ### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
@@ -815,7 +815,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | :--- | :--- | :---: | :--- |
 | **Ventaja Competitiva (Moat)** | Costes de Cambio (Switching Costs) + Activos Intangibles y Marca | **WIDE MOAT** | Poder de fijación de precios y resiliencia de márgenes (33.2% EBIT). |
 | **Calidad de Beneficios** | Ratio Sloan: -4.79% / Montier: 2/6 | **CALIDAD SÓLIDA / BAJO RIESGO** | Ganancias avaladas por caja real ($1.14 CFO por dólar de NI). |
-| **Solvencia y Estructura** | Cobertura EBIT: 42.4x / Altman Z'': 3.23 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $62.4B. |
+| **Solvencia y Estructura** | Cobertura EBIT: 41.8x / Altman Z'': 3.23 | **SINTÉTICO AAA** | Cero estrés financiero; colchón de $62.4B. |
 | **Productividad del Capital** | ROC Greenblatt: 305.9% / ROIC Adj: 50.1% | **COMPOUNDING MACHINE** | Spread económico de +40.1 pp sobre WACC (Creación de valor de élite). |
 | **Valoración de Mercado** | Crecimiento Implícito: 16.2% - 20.7% | **PRICED FOR PERFECTION** | Exigencia de crecimiento ambiciosa (+23.1% anual); requiere catalizadores sostenidos en IA y Servicios. |
 
