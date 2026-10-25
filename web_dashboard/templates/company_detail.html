@@ -992,10 +992,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>
@@ -1057,10 +1057,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>
@@ -1133,10 +1133,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>
@@ -1198,10 +1198,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>
@@ -1274,10 +1274,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>
@@ -1339,10 +1339,10 @@
                                         {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
                                         <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
                                     </div>
-                                    {% if row.orig_tooltip %}
+                                    {% if row.clarification %}
+                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+                                    {% elif row.orig_tooltip %}
                                     <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% elif row.clarification %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.clarification }}">ⓘ</span>
                                     {% endif %}
                                 </div>
                             </td>

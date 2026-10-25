@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-10-25T11:20:26.696016",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 921983000000.0,
+      "fst_value": 921983000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 640480000000.0,
+      "fst_value": 640480000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 55911000000.0,
+      "fst_value": 55911000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "STANDARD_CORPORATE",
+    "source_sec": "googexhibit991q22026.htm",
+    "brand_segmentation": {
+      "Revenue from contract with customers": {
+        "revenue_usd_m": 446215.0
+      },
+      "Google Search & other": {
+        "revenue_usd_m": 243310.0
+      },
+      "YouTube ads": {
+        "revenue_usd_m": 42582.0
+      },
+      "Google Network": {
+        "revenue_usd_m": 29456.0
+      },
+      "Google advertising": {
+        "revenue_usd_m": 315348.0
+      },
+      "Google subscriptions, platforms, and devices": {
+        "revenue_usd_m": 51743.0
+      },
+      "Google Services": {
+        "revenue_usd_m": 367091.0
+      },
+      "Google Cloud": {
+        "revenue_usd_m": 77617.0
+      },
+      "Other Bets": {
+        "revenue_usd_m": 1507.0
+      },
+      "Hedging gains (losses)": {
+        "revenue_usd_m": -349.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States": {
+        "revenue_usd_m": 219023.0
+      },
+      "EMEA": {
+        "revenue_usd_m": 126936.0
+      },
+      "APAC": {
+        "revenue_usd_m": 73951.0
+      },
+      "Other Americas": {
+        "revenue_usd_m": 26305.0
+      }
+    },
+    "operational_kpis": {}
+  },
+  "kpis_enriched": {
+    "archetype": "STANDARD_CORPORATE",
+    "source_sec": "googexhibit991q22026.htm",
+    "brand_segmentation": {
+      "Revenue from contract with customers": {
+        "revenue_usd_m": 446215.0
+      },
+      "Google Search & other": {
+        "revenue_usd_m": 243310.0
+      },
+      "YouTube ads": {
+        "revenue_usd_m": 42582.0
+      },
+      "Google Network": {
+        "revenue_usd_m": 29456.0
+      },
+      "Google advertising": {
+        "revenue_usd_m": 315348.0
+      },
+      "Google subscriptions, platforms, and devices": {
+        "revenue_usd_m": 51743.0
+      },
+      "Google Services": {
+        "revenue_usd_m": 367091.0
+      },
+      "Google Cloud": {
+        "revenue_usd_m": 77617.0
+      },
+      "Other Bets": {
+        "revenue_usd_m": 1507.0
+      },
+      "Hedging gains (losses)": {
+        "revenue_usd_m": -349.0
+      }
+    },
+    "channel_breakdown": {},
+    "geographic_breakdown": {
+      "United States": {
+        "revenue_usd_m": 219023.0
+      },
+      "EMEA": {
+        "revenue_usd_m": 126936.0
+      },
+      "APAC": {
+        "revenue_usd_m": 73951.0
+      },
+      "Other Americas": {
+        "revenue_usd_m": 26305.0
+      }
+    },
+    "operational_kpis": {}
+  },
+  "flags": [],
+  "archetype": "STANDARD_CORPORATE"
+}

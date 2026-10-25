@@ -921,6 +921,36 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertEqual(len(chart_periods), expected_chart_periods, f"chart_periods debe tener {expected_chart_periods} en {ticker}")
 
 
+    def test_memo_analytical_formula_tooltips_exclamation_badge(self):
+        """
+        Verifica que al posicionar el cursor sobre el signo de exclamacion
+        se pueda visualizar la formula contable de calculo en cada metrica analitica (MEMO)
+        a traves de todos los arquetipos contables (Corporativo, Banca, Seguros y REITs).
+        """
+        archetype_checks = [
+            ('AAPL', 'Beneficio Operativo (EBIT) + Depreciaci', 'EBITDA Normalizado'),
+            ('DECK', 'Flujo de Caja Operativo (CFO) \u2212 Inversiones CapEx', 'FCF'),
+            ('JPM', 'Ingresos Netos por Intereses / Activos Rentables Promedio', 'NIM'),
+            ('PGR', 'Suma de Siniestralidad y Gastos de Adquisici', 'Combined Ratio'),
+            ('O', 'Ingresos por Alquileres \u2212 Gastos Operativos de Inmuebles', 'NOI')
+        ]
+        badge_snippet = 'inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300'
+
+        for ticker, formula_substr, metric_name in archetype_checks:
+            resp = self.client.get(f'/company/{ticker}/')
+            self.assertEqual(resp.status_code, 200, f'Error cargando {ticker}')
+            html_content = html.unescape(resp.content.decode('utf-8'))
+
+            # 1. Distintivo con signo de exclamacion presente
+            self.assertIn(badge_snippet, html_content, f'Badge ausente en {ticker}')
+            
+            # 2. Encabezado de tooltip estructurado presente
+            self.assertIn('FÓRMULA DE CÁLCULO:', html_content, f'Header de formula ausente en {ticker}')
+
+            # 3. Subcadena de la formula especifica presente en el HTML
+            self.assertIn(formula_substr, html_content, f'Formula de {metric_name} ausente en HTML de {ticker}')
+
+
 if __name__ == '__main__':
     unittest.main()
 

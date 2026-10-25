@@ -1,0 +1,1342 @@
+{
+  "ticker": "JPM",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-10-25T11:12:19.607989",
+  "scorecard": {
+    "governance_score": 85,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "OPPORTUNISTIC_SELLING",
+    "insider_sentiment_label": "Venta Discrecional Significativa (Toma de Beneficios)",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 0.0,
+    "routine_10b5_sales_usd": 0.0,
+    "discretionary_sales_usd": 70801099.79,
+    "ratio_10b5_compliance_pct": 0.0,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 7 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-10-20",
+      "accession_number": "0001193125-26-426704",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On October 20, 2026, JPMorgan Chase & Co. closed public offerings of (i) $350,000,000 aggregate principal amount of Floating Rate Notes due 2030 (the “Floating Rate Notes”), (ii) $2,900,000,000 aggregate principal amount of Fixed-to-FloatingRate Notes due 2030 (the “2030Fixed-to-FloatingRate Notes”) and (iii) $3,750,000,000..."
+    },
+    {
+      "filing_date": "2026-10-13",
+      "accession_number": "0001628280-26-065616",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On October 13, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) held an investor presentation to review 2026 third quarter earnings. Exhibit 99 is a copy of slides furnished for, and posted on the Firm’s website in connection with, the presentation. The slides are being furnished pursuant to Item 7.01, a..."
+    },
+    {
+      "filing_date": "2026-10-13",
+      "accession_number": "0001628280-26-065582",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition On October 13, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) reported 2026 third quarter net income of $15.3 billion, or $5.57 per share, compared with net income of $14.4 billion, or $5.07 per share, in the third quarter of 2025. A copy of the 2026 third quarter earnings release ..."
+    },
+    {
+      "filing_date": "2026-07-23",
+      "accession_number": "0001193125-26-314128",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On July 23, 2026, JPMorgan Chase & Co. closed public offerings of (i) $500,000,000 aggregate principal amount of Floating Rate Notes due 2030 (the “Floating Rate Notes”), (ii) $2,500,000,000 aggregate principal amount of Fixed-to-FloatingRate Notes due 2030 (the “2030Fixed-to-FloatingRate Notes”), (iii) $3,000,000,000 aggre..."
+    },
+    {
+      "filing_date": "2026-07-23",
+      "accession_number": "0000019617-26-000288",
+      "items": [
+        "Item 5.03",
+        "Item 9.01"
+      ],
+      "title": "Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.03 Amendments to Articles of Incorporation or Bylaws; Change in Fiscal Year The Board of Directors (the “Board”) of JPMorgan Chase & Co. (the “Corporation”) has adopted an amendment to Section 2.03 of the Corporation’s By-laws, effective July 21, 2026 (as so amended, the \"By-laws\"), to provide that a Lead Independent Director, if any, shall ..."
+    },
+    {
+      "filing_date": "2026-07-14",
+      "accession_number": "0001628280-26-048086",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On July 14, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) held an investor presentation to review 2026 second quarter earnings. Exhibit 99 is a copy of slides furnished for, and posted on the Firm’s website in connection with, the presentation. The slides are being furnished pursuant to Item 7.01, and..."
+    },
+    {
+      "filing_date": "2026-07-14",
+      "accession_number": "0001628280-26-048078",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition On July 14, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) reported 2026 second quarter net income of $21.2 billion, or $7.70 per share, compared with net income of $15.0 billion, or $5.24 per share, in the second quarter of 2025. A copy of the 2026 second quarter earnings release ..."
+    },
+    {
+      "filing_date": "2026-06-25",
+      "accession_number": "0000019617-26-000241",
+      "items": [
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers On June 25, 2026, JPMorgan Chase & Co. (\"JPMorganChase\" or the “Firm”) announced that Doug Petno, 61, and Troy Rohrbaugh, 56, Co-CEOs of the Commercial & Investment Bank (\"CIB\"), have been elect..."
+    },
+    {
+      "filing_date": "2026-06-24",
+      "accession_number": "0001628280-26-045169",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On June 24, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) released the results of its company-run 2026 Dodd-Frank Act Stress Test (“DFAST”) for JPMorganChase and JPMorgan Chase Bank, National Association. A copy of that information is attached as Exhibit 99. The company-run 2026 DFAST results are bein..."
+    },
+    {
+      "filing_date": "2026-06-24",
+      "accession_number": "0001628280-26-045167",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events On June 24, 2026, JPMorgan Chase & Co. (\"JPMorganChase\" or the \"Firm\") issued a press release concerning its common stock and regulatory capital matters. A copy of the Firm’s press release is attached as Exhibit 99. The information set forth in Exhibit 99 shall be deemed to be “filed” for purposes of the Securities Exchange A..."
+    },
+    {
+      "filing_date": "2026-06-02",
+      "accession_number": "0001193125-26-253533",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On June 2, 2026, JPMorgan Chase & Co. closed a public offering of $500,000,000 aggregate principal amount of Fixed-to-FloatingRate Notes due 2030 (the “Notes”). The Notes are an additional issuance of, and constitute a single series with, the $2,750,000,000 aggregate principal amount ofFixed-to-FloatingRate Notes due 2030 i..."
+    },
+    {
+      "filing_date": "2026-05-27",
+      "accession_number": "0001193125-26-242018",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On May 27, 2026, JPMorgan Chase & Co. issued a press release announcing the redemption on June 1, 2026 of all of the 2,000,000 outstanding depositary shares, each representing a one-tenth interest in a share of JPMorgan Chase & Co.’s 3.65% Fixed-Rate Reset Non-Cumulative Preferred Stock, Series KK, par value $1.00 per share..."
+    },
+    {
+      "filing_date": "2026-05-21",
+      "accession_number": "0000019617-26-000228",
+      "items": [
+        "Item 5.07",
+        "Item 9.01"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. (a) Registrant held its Annual Meeting of Shareholders on Tuesday, May 19, 2026; 2,284,422,677 shares were represented in person or by proxy, or 85.17% of the total shares outstanding. (b) The results of the shareholder voting on the proposals presented were as follows: MANAGEMENT PROPO..."
+    },
+    {
+      "filing_date": "2026-05-07",
+      "accession_number": "0001193125-26-211978",
+      "items": [
+        "Item 3.03",
+        "Item 5.03",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Hecho Regulatorio (Item 3.03) / Enmiendas a Estatutos Corporativos o Código de Ética / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC. Modificación de estatutos, derechos de voto o normas de gobernanza interna. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario. | Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 3.03. Material Modification to Rights of Security Holders. On May 7, 2026, JPMorgan Chase & Co. (the “Company”) issued 300,000 shares (the “Shares”) of the Company’s 6.100% Fixed-Rate Reset Non-CumulativePreferred Stock, Series PP, par value of $1.00 per share and with a liquidation preference of $10,000 per share (the “Series PP Preferred Sto..."
+    },
+    {
+      "filing_date": "2026-04-24",
+      "accession_number": "0000019617-26-000119",
+      "items": [
+        "Item 5.03",
+        "Item 9.01"
+      ],
+      "title": "Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.03 Amendments to Articles of Incorporation or Bylaws; Change in Fiscal Year. The Board of Directors (the “Board”) of JPMorgan Chase & Co. (the “Corporation”) has adopted amendments to the Corporation’s By-laws, effective April 21, 2026 (as so amended, the \"By-laws\"), to update the advancement provisions in Article IX, including by requiring ..."
+    },
+    {
+      "filing_date": "2026-04-23",
+      "accession_number": "0001193125-26-173739",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On April 23, 2026, JPMorgan Chase & Co. closed public offerings of (i) $500,000,000 aggregate principal amount of Floating Rate Notes due 2030 (the “Floating Rate Notes”), (ii) $2,750,000,000 aggregate principal amount of Fixed-to-FloatingRate Notes due 2030 (the “2030Fixed-to-FloatingRate Notes”), (iii) $3,000,000,000 aggr..."
+    },
+    {
+      "filing_date": "2026-04-14",
+      "accession_number": "0001628280-26-025013",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On April 14, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) held an investor presentation to review 2026 first quarter earnings. Exhibit 99 is a copy of slides furnished for, and posted on the Firm’s website in connection with, the presentation. The slides are being furnished pursuant to Item 7.01, and..."
+    },
+    {
+      "filing_date": "2026-04-14",
+      "accession_number": "0001628280-26-024990",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition On April 14, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) reported 2026 first quarter net income of $16.5 billion, or $5.94 per share, compared with net income of $14.6 billion, or $5.07 per share, in the first quarter of 2025. A copy of the 2026 first quarter earnings release is..."
+    },
+    {
+      "filing_date": "2026-02-23",
+      "accession_number": "0001628280-26-010693",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On February 23, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) held a Company Update presentation during which it provided information to investors about the Firm. Exhibits 99.1, 99.2, and 99.3 are copies of the slides furnished at, and posted on the Firm’s website in connection with, the presentation...."
+    },
+    {
+      "filing_date": "2026-02-05",
+      "accession_number": "0001193125-26-039427",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On February 5, 2026, JPMorgan Chase & Co. closed a public offering of $3,000,000,000 aggregate principal amount of Fixed-to-FloatingRate Subordinated Notes due 2037 (the “Subordinated Notes”). The offering of the Subordinated Notes was registered under the Securities Act of 1933, as amended, pursuant to a registration state..."
+    },
+    {
+      "filing_date": "2026-01-22",
+      "accession_number": "0000019617-26-000052",
+      "items": [
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02(e) Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. JPMorgan Chase & Co. (the “Firm”) announced that the independent members of the Board of Directors (the “Board”) approved the annual compensation for 2025 for Mr. James Dimon, CEO, in the am..."
+    },
+    {
+      "filing_date": "2026-01-22",
+      "accession_number": "0001193125-26-019450",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On January 22, 2026, JPMorgan Chase & Co. closed public offerings of (i) $400,000,000 aggregate principal amount of Floating Rate Notes due 2032 (the “Floating Rate Notes”), (ii) $2,600,000,000 aggregate principal amount of Fixed-to-FloatingRate Notes due 2032 (the “2032Fixed-to-FloatingRate Notes”) and (iii) $3,000,000,000..."
+    },
+    {
+      "filing_date": "2026-01-13",
+      "accession_number": "0001628280-26-001915",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure On January 13, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) held an investor presentation to review 2025 fourth quarter earnings. Exhibit 99 is a copy of slides furnished for, and posted on the Firm’s website in connection with, the presentation. The slides are being furnished pursuant to Item 7.01, ..."
+    },
+    {
+      "filing_date": "2026-01-13",
+      "accession_number": "0001628280-26-001902",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition On January 13, 2026, JPMorgan Chase & Co. (“JPMorganChase” or the “Firm”) reported 2025 fourth quarter net income of $13.0 billion, or $4.63 per share, compared with net income of $14.0 billion, or $4.81 per share, in the fourth quarter of 2024. A copy of the 2025 fourth quarter earnings relea..."
+    },
+    {
+      "filing_date": "2025-12-08",
+      "accession_number": "0000019617-25-001100",
+      "items": [
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02(b) Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On December 7, 2025, Todd A. Combs notified JPMorgan Chase & Co. (the \"Company\") of his intention to resign as a member of the Board of Directors, effective December 7, 2025. Mr. Combs’ resi..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 0.0,
+      "total_open_market_buys_shares": 0,
+      "total_10b5_sales_usd": 0.0,
+      "total_10b5_sales_shares": 0,
+      "total_discretionary_sales_usd": 70801099.79,
+      "total_discretionary_sales_shares": 230236,
+      "total_grants_shares": 1711,
+      "ratio_10b5_vs_discretionary_pct": 0.0,
+      "active_insiders_count": 16,
+      "insiders_breakdown": {
+        "Stephen B Burke": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 532,
+          "tx_count": 4
+        },
+        "Virginia M Rometty": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 377,
+          "tx_count": 3
+        },
+        "Phebe N Novakovic": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 377,
+          "tx_count": 3
+        },
+        "Mellody L Hobson": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 425,
+          "tx_count": 3
+        },
+        "Robin Leopold": {
+          "position": "Head of Human Resources",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 1785544.5,
+          "shares_bought": 0,
+          "shares_sold": 5000,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Stacey Friedman": {
+          "position": "General Counsel",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 3449976.7195,
+          "shares_bought": 0,
+          "shares_sold": 10935,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Douglas B Petno": {
+          "position": "Co-President; CEO CIB",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 3433201.978,
+          "shares_bought": 0,
+          "shares_sold": 11319,
+          "grants": 0,
+          "tx_count": 4
+        },
+        "Marianne Lake": {
+          "position": "CEO CCB",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 3887834.3367,
+          "shares_bought": 0,
+          "shares_sold": 12854,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Jennifer Piepszak": {
+          "position": "Chief Operating Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 4322750.4463,
+          "shares_bought": 0,
+          "shares_sold": 14055,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Troy L Rohrbaugh": {
+          "position": "Co-President; CEO CCB",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "Mary E. Erdoes": {
+          "position": "CEO Asset & Wealth Management",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 5768080.0977,
+          "shares_bought": 0,
+          "shares_sold": 18993,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "JPMORGAN CHASE & CO / DNT Asset Trust": {
+          "position": "10% Owner/ 10% Owner",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "Lori A Beer": {
+          "position": "Chief Information Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 1920318.0742000001,
+          "shares_bought": 0,
+          "shares_sold": 6331,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Jeremy Barnum": {
+          "position": "Chief Financial Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 2655095.9746000003,
+          "shares_bought": 0,
+          "shares_sold": 8633,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "Ashley Bacon": {
+          "position": "Chief Risk Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 3576287.847,
+          "shares_bought": 0,
+          "shares_sold": 11628,
+          "grants": 0,
+          "tx_count": 2
+        },
+        "James Dimon": {
+          "position": "Chairman & CEO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 40002009.816,
+          "shares_bought": 0,
+          "shares_sold": 130488,
+          "grants": 0,
+          "tx_count": 1
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-10-01",
+        "insider": "Virginia M Rometty",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 120,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-10-01",
+        "insider": "Phebe N Novakovic",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 120,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-10-01",
+        "insider": "Mellody L Hobson",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 136,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-10-01",
+        "insider": "Stephen B Burke",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 170,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-10",
+        "insider": "Robin Leopold",
+        "position": "Head of Human Resources",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 2500,
+        "price": 352.81,
+        "total_usd": 882026.5,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-08-11",
+        "insider": "Robin Leopold",
+        "position": "Head of Human Resources",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 2500,
+        "price": 361.41,
+        "total_usd": 903518.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-01",
+        "insider": "Virginia M Rometty",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 122,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-01",
+        "insider": "Phebe N Novakovic",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 122,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-01",
+        "insider": "Mellody L Hobson",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 137,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-01",
+        "insider": "Stephen B Burke",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 171,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-06-22",
+        "insider": "Stacey Friedman",
+        "position": "General Counsel",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 5467,
+        "price": 330.73,
+        "total_usd": 1808121.14,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-20",
+        "insider": "Stacey Friedman",
+        "position": "General Counsel",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 5468,
+        "price": 300.27,
+        "total_usd": 1641855.58,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "insider": "Mary E. Erdoes",
+        "position": "CEO Asset & Wealth Management",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 6648,
+        "price": 298.36,
+        "total_usd": 1983526.53,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "insider": "Marianne Lake",
+        "position": "CEO CCB",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 6427,
+        "price": 298.36,
+        "total_usd": 1917530.8,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "insider": "Douglas B Petno",
+        "position": "Co-CEO CIB",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 5659,
+        "price": 300.05,
+        "total_usd": 1697982.95,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "insider": "Lori A Beer",
+        "position": "Chief Information Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 3165,
+        "price": 300.05,
+        "total_usd": 949658.25,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "insider": "Jeremy Barnum",
+        "position": "Chief Financial Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 3022,
+        "price": 309.41,
+        "total_usd": 935031.58,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "insider": "Ashley Bacon",
+        "position": "Chief Risk Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 4070,
+        "price": 309.42,
+        "total_usd": 1259356.49,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "insider": "Jennifer Piepszak",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 4919,
+        "price": 309.42,
+        "total_usd": 1522037.47,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Jennifer Piepszak",
+        "position": "Chief Operating Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 9136,
+        "price": 306.56,
+        "total_usd": 2800712.97,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Douglas B Petno",
+        "position": "Co-CEO CIB",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 5660,
+        "price": 306.58,
+        "total_usd": 1735219.03,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Marianne Lake",
+        "position": "CEO CCB",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 6427,
+        "price": 306.57,
+        "total_usd": 1970303.54,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Mary E. Erdoes",
+        "position": "CEO Asset & Wealth Management",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 12345,
+        "price": 306.57,
+        "total_usd": 3784553.57,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Lori A Beer",
+        "position": "Chief Information Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 3166,
+        "price": 306.59,
+        "total_usd": 970659.82,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Jeremy Barnum",
+        "position": "Chief Financial Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 5611,
+        "price": 306.55,
+        "total_usd": 1720064.39,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "Ashley Bacon",
+        "position": "Chief Risk Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 7558,
+        "price": 306.55,
+        "total_usd": 2316931.35,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "insider": "James Dimon",
+        "position": "Chairman & CEO",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 130488,
+        "price": 306.56,
+        "total_usd": 40002009.82,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-04-01",
+        "insider": "Virginia M Rometty",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 135,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-04-01",
+        "insider": "Phebe N Novakovic",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 135,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-04-01",
+        "insider": "Mellody L Hobson",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 152,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-04-01",
+        "insider": "Stephen B Burke",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 191,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 20,
+      "total_shares_proposed": 243367,
+      "total_value_proposed_usd": 75291363.16,
+      "notices_under_10b5": 18,
+      "notices_discretionary": 1,
+      "notices_with_anomalies_count": 7
+    },
+    "notices": [
+      {
+        "filing_date": "2026-09-10",
+        "person_selling": "Robin Leopold",
+        "shares_to_sell": 2500,
+        "market_value_usd": 882026.4,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-07-21",
+        "person_selling": "Marianne Lake",
+        "shares_to_sell": 15631,
+        "market_value_usd": 5393778.23,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-06-22",
+        "person_selling": "Stacey Friedman",
+        "shares_to_sell": 5467,
+        "market_value_usd": 1808120.88,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-05-20",
+        "person_selling": "Stacey Friedman",
+        "shares_to_sell": 5468,
+        "market_value_usd": 1641855.82,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "person_selling": "Douglas B. Petno",
+        "shares_to_sell": 5659,
+        "market_value_usd": 1697982.95,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "person_selling": "Marianne Lake",
+        "shares_to_sell": 6427,
+        "market_value_usd": 1917530.84,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "person_selling": "Mary E. Erdoes",
+        "shares_to_sell": 6648,
+        "market_value_usd": 1983526.26,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "person_selling": "Lori Beer",
+        "shares_to_sell": 3165,
+        "market_value_usd": 949658.25,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "person_selling": "Jeremy Barnum",
+        "shares_to_sell": 3022,
+        "market_value_usd": 935031.49,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "person_selling": "Ashley Bacon",
+        "shares_to_sell": 4070,
+        "market_value_usd": 1259356.48,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-05",
+        "person_selling": "Jennifer Piepszak",
+        "shares_to_sell": 4919,
+        "market_value_usd": 1522037.48,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Jennifer Piepszak",
+        "shares_to_sell": 9136,
+        "market_value_usd": 2800713.32,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Douglas B. Petno",
+        "shares_to_sell": 5660,
+        "market_value_usd": 1735218.88,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Marianne Lake",
+        "shares_to_sell": 6427,
+        "market_value_usd": 1970303.85,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Mary E. Erdoes",
+        "shares_to_sell": 12345,
+        "market_value_usd": 3784553.36,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Lori Beer",
+        "shares_to_sell": 3166,
+        "market_value_usd": 970659.69,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Jeremy Barnum",
+        "shares_to_sell": 5611,
+        "market_value_usd": 1720064.57,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Ashley Bacon",
+        "shares_to_sell": 7558,
+        "market_value_usd": 2316931.46,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "James Dimon",
+        "shares_to_sell": 130488,
+        "market_value_usd": 40002012.95,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2026-09-10",
+        "seller": "Robin Leopold",
+        "market_value_usd": 882026.4,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-07-21",
+        "seller": "Marianne Lake",
+        "market_value_usd": 5393778.23,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-22",
+        "seller": "Stacey Friedman",
+        "market_value_usd": 1808120.88,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-20",
+        "seller": "Stacey Friedman",
+        "market_value_usd": 1641855.82,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-15",
+        "seller": "Douglas B. Petno",
+        "market_value_usd": 1735218.88,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-15",
+        "seller": "Lori Beer",
+        "market_value_usd": 970659.69,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-15",
+        "seller": "Jeremy Barnum",
+        "market_value_usd": 1720064.57,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}

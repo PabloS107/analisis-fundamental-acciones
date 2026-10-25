@@ -2,7 +2,7 @@
   "ticker": "JPM",
   "company_name": "JPMORGAN CHASE & CO",
   "cik": "0000019617",
-  "audit_timestamp": "2026-10-24T10:36:07.555488",
+  "audit_timestamp": "2026-10-25T11:10:20.130805",
   "years_audited": {
     "LTM": [
       {
@@ -47,11 +47,11 @@
         "status": "PASS",
         "net_income": 63634000000.0,
         "shares_diluted": 2730600000.0,
-        "eps_reported": 23.3,
+        "eps_reported": 23.35,
         "eps_calculated": 23.3,
-        "eps_adjusted": 23.3,
+        "eps_adjusted": 23.35,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.05
       }
     ],
     "FY2025": [
@@ -662,9 +662,15 @@
     "FY2014": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2014 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 2572274000000.0,
+        "liabilities": 2340547000000.0,
+        "equity": 231727000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 2572274000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 257227400.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -711,8 +717,8 @@
   },
   "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 50,
+  "passed_tests": 51,
   "failed_tests": 0,
-  "skipped_tests": 28,
+  "skipped_tests": 27,
   "compliance_score_pct": 100.0
 }

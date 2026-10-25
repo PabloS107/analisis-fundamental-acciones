@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-10-25T11:10:19.919912",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 5015069000000.0,
+      "fst_value": 5015069000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 374598000000.0,
+      "fst_value": 374598000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 0.0,
+      "fst_value": 0.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "FINANCIAL_BANKING",
+    "source_sec": "jpm-20261013.htm",
+    "return_on_equity_reported": null,
+    "risk_adjusted_nim_pct": null,
+    "efficiency_ratio_pct": null,
+    "npl_15_90_pct": null,
+    "npl_90_plus_pct": null,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": null,
+    "active_customers_m": null,
+    "monthly_arpac_usd": null,
+    "monthly_cost_to_serve_usd": 1.0,
+    "deposits_by_country_bn": {},
+    "customers_by_country_m": {},
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    }
+  },
+  "kpis_enriched": {
+    "archetype": "FINANCIAL_BANKING",
+    "source_sec": "jpm-20261013.htm",
+    "return_on_equity_reported": null,
+    "risk_adjusted_nim_pct": null,
+    "efficiency_ratio_pct": null,
+    "npl_15_90_pct": null,
+    "npl_90_plus_pct": null,
+    "provision_coverage_pct": 113.0,
+    "total_customers_m": null,
+    "active_customers_m": null,
+    "monthly_arpac_usd": null,
+    "monthly_cost_to_serve_usd": 1.0,
+    "deposits_by_country_bn": {},
+    "customers_by_country_m": {},
+    "capital_adequacy": {
+      "total_capital_usd_bn": 9.1,
+      "liquidity_ratio_pct": 57.0
+    }
+  },
+  "flags": [],
+  "archetype": "FINANCIAL_BANKING"
+}

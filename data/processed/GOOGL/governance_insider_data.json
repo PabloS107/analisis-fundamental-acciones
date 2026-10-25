@@ -1,0 +1,1523 @@
+{
+  "ticker": "GOOGL",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-10-25T11:21:40.561639",
+  "scorecard": {
+    "governance_score": 90,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "NEUTRAL_ROUTINE",
+    "insider_sentiment_label": "Actividad Ordinaria Predominantemente bajo Planes 10b5-1",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 0.0,
+    "routine_10b5_sales_usd": 0.0,
+    "discretionary_sales_usd": 6298503.65,
+    "ratio_10b5_compliance_pct": 0.0,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 14 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-08-10",
+      "accession_number": "0001193125-26-342390",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. U.S. Dollar-Denominated Senior Notes Offering On August 10, 2026, Alphabet Inc. (“Alphabet”) closed its underwritten public offering of $25 billion aggregate principal amount of U.S. dollar-denominated senior notes (the “Notes”) pursuant to Alphabet’s registration statement on FormS-3(File No. 333-296395). The..."
+    },
+    {
+      "filing_date": "2026-07-22",
+      "accession_number": "0001652044-26-000066",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On July 22, 2026, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended June 30, 2026. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
+    {
+      "filing_date": "2026-06-11",
+      "accession_number": "0001193125-26-267578",
+      "items": [
+        "Item 5.02",
+        "Item 5.07",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 5.07) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02. Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. Amended and Restated Alphabet Inc. 2021 Stock Plan At the Annual Meeting of Shareholders of Alphabet Inc. (“ Alphabet”) held on June 5, 2026 (the “2026 Annual Meeting”), Alphabet’s shareholder..."
+    },
+    {
+      "filing_date": "2026-06-05",
+      "accession_number": "0001193125-26-259830",
+      "items": [
+        "Item 1.01",
+        "Item 3.03",
+        "Item 5.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Hecho Regulatorio (Item 3.03) / Enmiendas a Estatutos Corporativos o Código de Ética / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Evento de notificación corporativa ante la SEC. Modificación de estatutos, derechos de voto o normas de gobernanza interna. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Evento regulatorio ordinario. | Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 1.01. Entry into a Material Definitive Agreement. Mandatory Convertible Preferred Stock Offering On June 2, 2026, Alphabet Inc. (“Alphabet” or the “Company”) entered into an underwriting agreement (the “Underwriting Agreement”) with Goldman Sachs & Co. LLC, J.P. Morgan Securities LLC, and Morgan Stanley & Co. LLC as the representatives of the ..."
+    },
+    {
+      "filing_date": "2026-06-05",
+      "accession_number": "0001652044-26-000059",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02(c) Appointment of Principal Officer On June 5, 2026, Alphabet Inc. (“Alphabet”) announced the appointment of Marsida Saraci, Vice President and Controller, as its Principal Accounting Officer, effective immediately. Marsida Saraci, age 47, has worked for Alphabet since April 2011, most recently as Vice President, Finance - Deputy Controll..."
+    },
+    {
+      "filing_date": "2026-06-04",
+      "accession_number": "0001193125-26-257724",
+      "items": [
+        "Item 1.01",
+        "Item 7.01",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Regulación FD (Fair Disclosure) / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Información cualitativa compartida con analistas o conferencias del sector. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 1.01. Entry into a Material Definitive Agreement. Equity Distribution Agreement On June 1, 2026, Alphabet Inc. (“Alphabet” or the “Company”) entered into an equity distribution agreement (the “Equity Distribution Agreement”) with Goldman Sachs & Co. LLC, J.P. Morgan Securities LLC, and Morgan Stanley & Co. LLC (each, a “Manager” and collective..."
+    },
+    {
+      "filing_date": "2026-05-21",
+      "accession_number": "0001193125-26-234488",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Japanese Yen Senior Notes Offering On May 21, 2026, Alphabet Inc. (“Alphabet”) closed its underwritten public offerings of ¥576.9 billion aggregate principal amount of Japanese yen-denominatedsenior notes (the “Notes”) pursuant to Alphabet’s registration statement on FormS-3(File No. 333-286752). The Notes wer..."
+    },
+    {
+      "filing_date": "2026-05-11",
+      "accession_number": "0001193125-26-216986",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Euro and Canadian Dollar Senior Notes Offering On May 11, 2026, Alphabet Inc. (“Alphabet”) closed its concurrent underwritten public offerings of €9 billion aggregate principal amount of euro-denominated senior notes (the “Euro Notes”) and C$9.5 billion aggregate principal amount of Canadian dollar-denominated..."
+    },
+    {
+      "filing_date": "2026-04-29",
+      "accession_number": "0001652044-26-000043",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On April 29, 2026, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended March 31, 2026. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
+    {
+      "filing_date": "2026-04-10",
+      "accession_number": "0001652044-26-000034",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On April 7, 2026, the Leadership Development, Inclusion and Compensation Committee (“LDICC”) of the Board of Directors of Alphabet Inc. (“Alphabet”) approved equity awards for the following exe..."
+    },
+    {
+      "filing_date": "2026-04-02",
+      "accession_number": "0001652044-26-000031",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On March 30, 2026, Amie Thuener O'Toole notified Alphabet Inc. (the “Company”) of her resignation as Vice President, Corporate Controller and Principal Accounting Officer of the Company, effect..."
+    },
+    {
+      "filing_date": "2026-03-06",
+      "accession_number": "0001652044-26-000026",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02. Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On March 4, 2026, the Leadership Development, Inclusion and Compensation Committee (the “Committee”) of the Board of Directors of Alphabet Inc. (“Alphabet”) approved compensation for Sundar Pi..."
+    },
+    {
+      "filing_date": "2026-02-13",
+      "accession_number": "0001193125-26-051423",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Sterling and U.S. Dollar Senior Notes Offering On February 13, 2026, Alphabet Inc. (“Alphabet”) closed its concurrent underwritten public offerings of $20 billion aggregate principal amount of U.S. dollar-denominated senior notes (the “U.S. Notes”) and £5.5 billion aggregate principal amount of Sterling-denomi..."
+    },
+    {
+      "filing_date": "2026-02-04",
+      "accession_number": "0001652044-26-000012",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On February 4, 2026, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter and fiscal year ended December 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report ..."
+    },
+    {
+      "filing_date": "2025-11-06",
+      "accession_number": "0001193125-25-269979",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Euro and U.S. Dollar Senior Notes Offering On November 6, 2025, Alphabet Inc. (“Alphabet”) closed its concurrent underwritten public offerings of $17.5 billion aggregate principal amount of U.S. dollar-denominated senior notes (the “U.S. Notes”) and €6.5 billion aggregate principal amount of euro-denominated s..."
+    },
+    {
+      "filing_date": "2025-10-29",
+      "accession_number": "0001652044-25-000087",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On October 29, 2025, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended September 30, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
+    {
+      "filing_date": "2025-09-05",
+      "accession_number": "0001652044-25-000074",
+      "items": [
+        "Item 8.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+      "diagnostic": "Hechos corporativos diversos de interés general.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On September 5, 2025, the European Commission (EC) announced its decision that Google LLC (“Google”), a wholly-owned subsidiary of Alphabet Inc. (“Alphabet”), had infringed European competition laws through “self-preferencing” practices on the buy-side and the sell-side relating to its advertising technology business. The E..."
+    },
+    {
+      "filing_date": "2025-09-03",
+      "accession_number": "0001652044-25-000067",
+      "items": [
+        "Item 8.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+      "diagnostic": "Hechos corporativos diversos de interés general.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On September 2, 2025, Judge Amit P. Mehta of U.S. District Court for the District of Columbia issued his remedies decision in the U.S. Department of Justice’s antitrust case against Google LLC (\"Google\"), a subsidiary of Alphabet Inc., related to online search. This remedies decision relates to the previously disclosed Augu..."
+    },
+    {
+      "filing_date": "2025-07-23",
+      "accession_number": "0001652044-25-000056",
+      "items": [
+        "Item 2.02",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On July 23, 2025, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended June 30, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
+    {
+      "filing_date": "2025-07-18",
+      "accession_number": "0001193125-25-161225",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On July 8, 2025, United States District Court for the Northern District of California (the “Court”) preliminarily approved the settlement (“Settlement”) of a stockholder derivative action captioned In re Alphabet Inc. Shareholder Derivative Litigation, Consolidated Case No.3:21-cv-09388-RFL(the “Action”). Pursuant to the Co..."
+    },
+    {
+      "filing_date": "2025-06-12",
+      "accession_number": "0001193125-25-139948",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 5.07. Submission of Matters to a Vote of Security Holders. At the Annual Meeting of Stockholders of Alphabet Inc. (“ Alphabet”) held on June 6, 2025 (the “2025 Annual Meeting”), Alphabet’s stockholders voted on fifteen proposals as set forth below, fourteen of which are described in detail in Alphabet’s definitive proxy statement on Form 14A f..."
+    },
+    {
+      "filing_date": "2025-05-06",
+      "accession_number": "0001193125-25-113864",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Euro-Denominated Bond Offering On May 6, 2025, Alphabet Inc. (“Alphabet”) closed its underwritten public offering of €1,500,000,000 aggregate principal amount of 2.500% notes due 2029 (the “2029 Notes”), €1,500,000,000 aggregate principal amount of 3.000% notes due 2033 (the “2033 Notes”), €1,250,000,000 aggre..."
+    },
+    {
+      "filing_date": "2025-05-01",
+      "accession_number": "0001193125-25-110020",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. U.S. Dollar-Denominated Bond Offering On May 1, 2025, Alphabet Inc. (“Alphabet”) closed its underwritten public offering of $750,000,000 aggregate principal amount of 4.000% notes due 2030 (the “2030 Notes”), $1,250,000,000 aggregate principal amount of 4.500% notes due 2035 (the “2035 Notes”), $1,500,000,000 ..."
+    },
+    {
+      "filing_date": "2025-04-24",
+      "accession_number": "0001652044-25-000040",
+      "items": [
+        "Item 2.02",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On April 24, 2025, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended March 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
+    {
+      "filing_date": "2025-04-18",
+      "accession_number": "0001652044-25-000033",
+      "items": [
+        "Item 8.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+      "diagnostic": "Hechos corporativos diversos de interés general.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. On April 17, 2025, Judge Leonie M. Brinkema of U.S. District Court for the Eastern District of Virginia issued a mixed decision in the U.S. Department of Justice’s (“DOJ”) case against Google LLC (\"Google\"), a subsidiary of Alphabet Inc., ruling that the DOJ failed to show that Google’s advertiser tools or acquisitions of D..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 0.0,
+      "total_open_market_buys_shares": 0,
+      "total_10b5_sales_usd": 0.0,
+      "total_10b5_sales_shares": 0,
+      "total_discretionary_sales_usd": 6298503.65,
+      "total_discretionary_sales_shares": 315765,
+      "total_grants_shares": 2521,
+      "ratio_10b5_vs_discretionary_pct": 0.0,
+      "active_insiders_count": 15,
+      "insiders_breakdown": {
+        "Kavitark Ram Shriram": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 2
+        },
+        "Frances Arnold": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 83287.54999999999,
+          "shares_bought": 0,
+          "shares_sold": 247,
+          "grants": 12,
+          "tx_count": 4
+        },
+        "John Kent Walker": {
+          "position": "President, Global Affairs, CLO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 82,
+          "tx_count": 4
+        },
+        "Marsida Saraci": {
+          "position": "VP, Chief Accounting Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 149606.8,
+          "shares_bought": 0,
+          "shares_sold": 449,
+          "grants": 2022,
+          "tx_count": 5
+        },
+        "Ruth Porat": {
+          "position": "President and CIO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 82,
+          "tx_count": 4
+        },
+        "Anat Ashkenazi": {
+          "position": "SVP, Chief Financial Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 82,
+          "tx_count": 3
+        },
+        "Sundar Pichai": {
+          "position": "Chief Executive Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 131,
+          "tx_count": 4
+        },
+        "Philipp Schindler": {
+          "position": "SVP, Chief Business Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 104,
+          "tx_count": 5
+        },
+        "Robin L Washington": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 1
+        },
+        "John L. Hennessy": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 2
+        },
+        "DOERR L JOHN": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 1
+        },
+        "Roger W. Ferguson Jr.": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 1
+        },
+        "CHAVEZ R. MARTIN": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 1,
+          "tx_count": 2
+        },
+        "Brin Sergey": {
+          "position": "Director, 10% Owner",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        },
+        "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.": {
+          "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 6065609.3047,
+          "shares_bought": 0,
+          "shares_sold": 315069,
+          "grants": 0,
+          "tx_count": 1
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-10-02",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 83,
+        "price": 340.45,
+        "total_usd": 28257.35,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 11,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Robin L Washington",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Robin L Washington",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Kavitark Ram Shriram",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Kavitark Ram Shriram",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "John L. Hennessy",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "DOERR L JOHN",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "DOERR L JOHN",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Roger W. Ferguson Jr.",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Roger W. Ferguson Jr.",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "CHAVEZ R. MARTIN",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "CHAVEZ R. MARTIN",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 2,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 3,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 0,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "John Kent Walker",
+        "position": "President, Global Affairs, CLO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 37,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "John Kent Walker",
+        "position": "President, Global Affairs, CLO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 12,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "John Kent Walker",
+        "position": "President, Global Affairs, CLO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 33,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Ruth Porat",
+        "position": "President and CIO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 37,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Ruth Porat",
+        "position": "President and CIO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 12,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Ruth Porat",
+        "position": "President and CIO",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 33,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Philipp Schindler",
+        "position": "SVP, Chief Business Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 16,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Philipp Schindler",
+        "position": "SVP, Chief Business Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 41,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Philipp Schindler",
+        "position": "SVP, Chief Business Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 47,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Anat Ashkenazi",
+        "position": "SVP, Chief Financial Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 11,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Anat Ashkenazi",
+        "position": "SVP, Chief Financial Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 33,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Anat Ashkenazi",
+        "position": "SVP, Chief Financial Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 38,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-16",
+        "insider": "Sundar Pichai",
+        "position": "Chief Executive Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 131,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-08-31",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 82,
+        "price": 337.71,
+        "total_usd": 27692.22,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-30",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 82,
+        "price": 333.39,
+        "total_usd": 27337.98,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-29",
+        "insider": "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.",
+        "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 196931,
+        "price": 19.46,
+        "total_usd": 3832848.36,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-29",
+        "insider": "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.",
+        "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 118138,
+        "price": 18.9,
+        "total_usd": 2232760.94,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-29",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 449,
+        "price": 333.2,
+        "total_usd": 149606.8,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-28",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 1232,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-28",
+        "insider": "Marsida Saraci",
+        "position": "VP, Chief Accounting Officer",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 784,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 20,
+      "total_shares_proposed": 1377044,
+      "total_value_proposed_usd": 512909173.0,
+      "notices_under_10b5": 18,
+      "notices_discretionary": 2,
+      "notices_with_anomalies_count": 14
+    },
+    "notices": [
+      {
+        "filing_date": "2026-09-30",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 83,
+        "market_value_usd": 28257.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-08-28",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 82,
+        "market_value_usd": 27692.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-07-30",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 82,
+        "market_value_usd": 27338.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-07-29",
+        "person_selling": "MARSIDA SARACI",
+        "shares_to_sell": 449,
+        "market_value_usd": 149337.4,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-07-09",
+        "person_selling": "The Lawrence Page Trust II",
+        "shares_to_sell": 19360,
+        "market_value_usd": 6975698.4,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-07-09",
+        "person_selling": "The Lawrence Page Trust III",
+        "shares_to_sell": 33760,
+        "market_value_usd": 12164234.4,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-07-09",
+        "person_selling": "The Lawrence Page Trust",
+        "shares_to_sell": 450720,
+        "market_value_usd": 162401176.8,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-06-30",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 112,
+        "market_value_usd": 39343.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-06-29",
+        "person_selling": "JOHN KENT WALKER JR, TTEE OF THE ARETE TRUST, UAD 8/22/2001",
+        "shares_to_sell": 8998,
+        "market_value_usd": 3011540.62,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-06-26",
+        "person_selling": "MARSIDA SARACI",
+        "shares_to_sell": 449,
+        "market_value_usd": 153643.31,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-06-15",
+        "person_selling": "Hennessy John L.",
+        "shares_to_sell": 1050,
+        "market_value_usd": 384289.5,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-05-29",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 102,
+        "market_value_usd": 38862.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-05-15",
+        "person_selling": "Hennessy John L.",
+        "shares_to_sell": 1050,
+        "market_value_usd": 412875.75,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-12",
+        "person_selling": "MDC TRUST I",
+        "shares_to_sell": 409000,
+        "market_value_usd": 156396405.7,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-05-12",
+        "person_selling": "MDC TRUST I",
+        "shares_to_sell": 409000,
+        "market_value_usd": 157704960.3,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-30",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 102,
+        "market_value_usd": 37842.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-15",
+        "person_selling": "Hennessy John L.",
+        "shares_to_sell": 1050,
+        "market_value_usd": 347088.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-03-30",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 102,
+        "market_value_usd": 28069.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-03-27",
+        "person_selling": "JOHN KENT WALKER JR, TTEE OF THE ARETE TRUST, UAD 8/22/2001",
+        "shares_to_sell": 8993,
+        "market_value_usd": 2524694.82,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-03-18",
+        "person_selling": "SUNDAR PICHAI",
+        "shares_to_sell": 32500,
+        "market_value_usd": 10055825.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2026-09-30",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 28257.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-08-28",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 27692.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-07-30",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 27338.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-07-29",
+        "seller": "MARSIDA SARACI",
+        "market_value_usd": 149337.4,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-30",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 39343.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-29",
+        "seller": "JOHN KENT WALKER JR, TTEE OF THE ARETE TRUST, UAD 8/22/2001",
+        "market_value_usd": 3011540.62,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-26",
+        "seller": "MARSIDA SARACI",
+        "market_value_usd": 153643.31,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD",
+          "COOLING_OFF_VIOLATION"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-15",
+        "seller": "Hennessy John L.",
+        "market_value_usd": 384289.5,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-29",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 38862.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-12",
+        "seller": "MDC TRUST I",
+        "market_value_usd": 156396405.7,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-05-12",
+        "seller": "MDC TRUST I",
+        "market_value_usd": 157704960.3,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-30",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 37842.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-03-30",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 28069.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-03-27",
+        "seller": "JOHN KENT WALKER JR, TTEE OF THE ARETE TRUST, UAD 8/22/2001",
+        "market_value_usd": 2524694.82,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}
