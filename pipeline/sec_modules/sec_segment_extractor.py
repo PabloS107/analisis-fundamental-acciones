@@ -80,20 +80,28 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
         if not f10q_list:
             f10q_list = company.get_filings(form="6-K")
 
-        if f10k_list:
-            x_10k = f10k_list[0].xbrl()
+        valid_k_filings = [f for f in (f10k_list or []) if not str(getattr(f, "form", "")).upper().endswith("/A")]
+
+        # Escaneo multi-anual de reportes 10-K/20-F (hasta 8 filings para cubrir 10+ ejercicios)
+        for f_idx, doc_filing in enumerate(valid_k_filings[:8]):
+            try:
+                x_10k = doc_filing.xbrl()
+            except Exception:
+                continue
+            if not x_10k or not hasattr(x_10k, "statements"):
+                continue
+
             statements_to_scan = []
-            if x_10k and hasattr(x_10k, "statements"):
-                for s in x_10k.statements:
-                    r = str(getattr(s, "role_or_type", ""))
-                    r_low = r.lower()
-                    if any(bad in r_low for bad in [
-                        "marketable", "fairvalue", "cash", "receivable", "deferredrevenue",
-                        "performanceobligation", "debt", "concentration", "accumulatedothercomprehensive"
-                    ]):
-                        continue
-                    if any(k in r_low for k in ["segment", "disaggregation", "brand", "market", "channel", "geographic"]) and "details" in r_low:
-                        statements_to_scan.append(s)
+            for s in x_10k.statements:
+                r = str(getattr(s, "role_or_type", ""))
+                r_low = r.lower()
+                if any(bad in r_low for bad in [
+                    "marketable", "fairvalue", "cash", "receivable", "deferredrevenue",
+                    "performanceobligation", "debt", "concentration", "accumulatedothercomprehensive"
+                ]):
+                    continue
+                if any(k in r_low for k in ["segment", "disaggregation", "brand", "market", "channel", "geographic"]) and "details" in r_low:
+                    statements_to_scan.append(s)
 
             for s in statements_to_scan:
                 try:
@@ -101,7 +109,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                     fy_cols = {}
                     for c in df.columns:
                         c_str = str(c)
-                        if "(FY)" in c_str or re.search(r'\b202\d\b', c_str):
+                        if "(FY)" in c_str or re.search(r'\b20\d\d\b', c_str):
                             fy_cols[c] = _map_col_to_fy(c_str)
 
                     for _, row in df.iterrows():
@@ -112,12 +120,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             continue
                         # Filtrar filas irrelevantes o de costos no operacionales
                         if any(bad in lbl.lower() for bad in [
-                            "reclassifications, net of tax", "hedges", "pension and other postretirement",
+                            "reclassifications, net of tax", "reclassification out of aoci", "pension and other postretirement",
                             "payroll", "advertising expense", "rent and occupancy", "depreciation", "sg&a", "impairment"
                         ]):
                             continue
 
-                        # Extracción de ingresos
+                        # Extracción de ingresos y beneficio operativo
                         is_rev = any(k in conc for k in ["revenue", "sales"])
                         is_op_inc = any(k in conc for k in ["operatingincome", "incomelossfromcontinuingoperations"])
 
@@ -157,54 +165,101 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
 
                         is_geo = any(g in clean_name.lower() for g in geo_keywords) or any(g in lbl.lower() for g in geo_keywords)
 
+                        # Partidas de conciliación y coberturas corporativas (ASC 280 / ASC 815)
+                        is_reconciling = any(k in clean_name.lower() for k in [
+                            "hedging gains (losses)", "hedging gain", "hedging loss", "hedges",
+                            "reconciling items", "corporate and reconciling", "corporate reconciling", "corporate items",
+                            "intersegment eliminations", "eliminations", "other reconciling items"
+                        ])
+
                         # Detección de totales consolidados para no mezclarlos con segmentos de producto
-                        is_consolidated_total = any(k in clean_name.lower() for k in [
+                        is_consolidated_total = (not is_reconciling) and (any(k in clean_name.lower() for k in [
                             "total revenue", "total revenues", "total net sales", "total net revenue",
                             "consolidated revenue", "consolidated net sales", "revenue from contract with customers",
                             "revenues from external customers", "net revenues and financial income",
-                            "hedging gains (losses)", "as reported", "reclassification"
-                        ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues"]
+                            "as reported", "reclassification"
+                        ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues"])
 
                         is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments", "wholesale", "direct-to-consumer", "direct to consumer", "dtc"])
 
-                        # Detección de subregiones geográficas (ej. "United States" o suplementarias del 10-K)
-                        if is_geo and clean_name.lower() in ["united states", "u.s.", "china", "other countries"]:
-                            is_subsegment = True
-                            if clean_name.lower() in ["united states", "u.s."]:
-                                parent_segment = "Americas"
-                            elif clean_name.lower() == "china":
-                                parent_segment = "Greater China"
-
                         norm_key = _norm_seg_key(clean_name)
                         if is_op_inc:
-                            if norm_key not in detected_op_inc_names:
+                            existing = next((item for item in segment_op_income if _norm_seg_key(item.get("name", "")) == norm_key), None)
+                            if existing:
+                                for fy, v in v_dict.items():
+                                    if fy not in existing["values"]:
+                                        existing["values"][fy] = v
+                            else:
                                 segment_op_income.append({"name": clean_name, "values": v_dict})
                                 detected_op_inc_names.add(norm_key)
                         elif is_geo:
-                            seg_entry = {
-                                "name": clean_name,
-                                "is_subtotal": is_sub,
-                                "is_subsegment": is_subsegment,
-                                "parent": parent_segment,
-                                "values": v_dict
-                            }
-                            if norm_key not in detected_geo_names:
+                            existing = next((item for item in geographic_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
+                            if existing:
+                                for fy, v in v_dict.items():
+                                    if fy not in existing["values"]:
+                                        existing["values"][fy] = v
+                            else:
+                                seg_entry = {
+                                    "name": clean_name,
+                                    "is_subtotal": is_sub,
+                                    "is_subsegment": is_subsegment,
+                                    "parent": parent_segment,
+                                    "values": v_dict
+                                }
                                 geographic_segments.append(seg_entry)
                                 detected_geo_names.add(norm_key)
                         elif not is_geo and not is_consolidated_total:
-                            seg_entry = {
-                                "name": clean_name,
-                                "is_subtotal": is_sub,
-                                "is_subsegment": is_subsegment,
-                                "parent": parent_segment,
-                                "values": v_dict
-                            }
-                            if norm_key not in detected_prod_names:
+                            existing = next((item for item in product_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
+                            if existing:
+                                for fy, v in v_dict.items():
+                                    if fy not in existing["values"]:
+                                        existing["values"][fy] = v
+                            else:
+                                seg_entry = {
+                                    "name": clean_name,
+                                    "is_subtotal": is_sub,
+                                    "is_subsegment": is_subsegment,
+                                    "is_reconciling": is_reconciling,
+                                    "parent": parent_segment,
+                                    "values": v_dict
+                                }
                                 product_segments.append(seg_entry)
                                 detected_prod_names.add(norm_key)
 
                 except Exception as s_err:
-                    print(f"[SEC Extractor] Aviso analizando tabla de segmentos 10-K: {s_err}")
+                    pass
+
+        # Resolución dinámica de jerarquías sin hardcoding (Regla 4)
+        all_geo_names = {item["name"].lower() for item in geographic_segments}
+        for item in geographic_segments:
+            name_low = item["name"].lower()
+            if item.get("parent") and item["parent"].lower() not in all_geo_names:
+                item["parent"] = None
+                item["is_subsegment"] = False
+
+            if name_low in ["united states", "u.s."]:
+                parent_found = next((p for p in ["americas", "united states & canada", "north america"] if p in all_geo_names), None)
+                if parent_found:
+                    item["is_subsegment"] = True
+                    parent_item = next(g for g in geographic_segments if g["name"].lower() == parent_found)
+                    item["parent"] = parent_item["name"]
+                else:
+                    item["is_subsegment"] = False
+                    item["parent"] = None
+            elif name_low == "china":
+                if "greater china" in all_geo_names:
+                    item["is_subsegment"] = True
+                    parent_item = next(g for g in geographic_segments if g["name"].lower() == "greater china")
+                    item["parent"] = parent_item["name"]
+                else:
+                    item["is_subsegment"] = False
+                    item["parent"] = None
+
+        all_prod_names = {item["name"].lower() for item in product_segments}
+        for item in product_segments:
+            if item.get("parent") and item["parent"].lower() not in all_prod_names:
+                item["parent"] = None
+                item["is_subsegment"] = False
 
         # Escaneo de Formulario 10-Q para cálculo exacto de LTM (FY_latest + YTD_actual - YTD_anterior)
         if f10q_list and (product_segments or geographic_segments):
@@ -278,6 +333,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             print(f"[SEC Extractor] Aviso analizando tabla de segmentos 10-Q: {q_s_err}")
             except Exception as q_err:
                 print(f"[SEC Extractor] Aviso en escaneo 10-Q de segmentos: {q_err}")
+
+        # Fallback canónico de LTM: si no hay 10-Q posterior o LTM no fue poblado, sincronizar con latest_fy
+        for t_list in [product_segments, geographic_segments, segment_op_income]:
+            for item in t_list:
+                if "LTM" not in item["values"] and latest_fy in item["values"]:
+                    item["values"]["LTM"] = item["values"][latest_fy]
 
     except Exception as e:
         print(f"[SEC Extractor] Aviso escaneando XBRL de segmentos: {e}")

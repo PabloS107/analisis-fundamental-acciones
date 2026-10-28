@@ -399,24 +399,30 @@ def build_charts_and_segments_context(
             return "-"
         return f"${val:,.0f}M" if abs(val) >= 10000 else f"${val:,.1f}M"
 
-    # Identificación universal de partidas primarias (excluyendo subtotales y subsegmentos)
+    # Identificación universal de partidas primarias (excluyendo subtotales, subsegmentos y partidas de conciliación)
     real_prod_items = [
         item for item in prod_items
-        if not item.get("is_subtotal") and not item.get("is_subsegment") and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue"]
+        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue"]
     ]
     if not real_prod_items:
-        real_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_subsegment")]
+        real_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")]
     if not real_prod_items:
-        real_prod_items = [item for item in prod_items if not item.get("is_subtotal")]
+        real_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
     if not real_prod_items:
         real_prod_items = prod_items
 
+    # Partidas de conciliación explícitas de producto (coberturas, ajustes intersegmentos, etc.)
+    reconciling_prod_items = [
+        item for item in prod_items
+        if item.get("is_reconciling") or any(k in item.get("name", "").lower() for k in ["hedging", "reconciling", "intersegment"])
+    ]
+
     real_geo_items = [
         item for item in geo_items
-        if not item.get("is_subtotal") and not item.get("is_subsegment")
+        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and item.get("name", "").lower() not in ["revenue", "total net sales", "total revenues", "total revenue"]
     ]
     if not real_geo_items:
-        real_geo_items = [item for item in geo_items if not item.get("is_subtotal")]
+        real_geo_items = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
     if not real_geo_items:
         real_geo_items = geo_items
 
@@ -436,7 +442,7 @@ def build_charts_and_segments_context(
 
     # Construcción jerárquica ordenada de filas de productos con subsegmentos agrupados
     ordered_prod_items = []
-    primary_prods = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_subsegment") and item.get("name", "").lower() not in ["revenue", "total revenue", "total revenues", "total net sales"]]
+    primary_prods = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and item.get("name", "").lower() not in ["revenue", "total revenue", "total revenues", "total net sales"]]
     sub_prods = [item for item in prod_items if item.get("is_subsegment")]
     if primary_prods and sub_prods:
         for prim in primary_prods:
@@ -450,7 +456,12 @@ def build_charts_and_segments_context(
     elif primary_prods:
         ordered_prod_items = primary_prods
     else:
-        ordered_prod_items = [item for item in prod_items if not item.get("is_subtotal")]
+        ordered_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
+
+    # Añadir partidas de conciliación explícitas de producto al final del desglose
+    for rec_item in reconciling_prod_items:
+        if rec_item not in ordered_prod_items:
+            ordered_prod_items.append(rec_item)
 
     # Tabla 1: Segmentos de Producto & Servicios
     table_products = []
@@ -506,6 +517,34 @@ def build_charts_and_segments_context(
             "mix_pct": f"{mix_pct:.1f}%" if (mix_pct is not None and not is_sub) else "-",
             "op_margin_ltm": op_margin_str,
             "values": row_vals
+        })
+
+    # Conciliación residual universal de productos para cuadre al 100.0% con el P&L
+    has_unreconciled_prod = False
+    residual_prod_vals = {}
+    for p in seg_periods:
+        c_m = canonical_rev_m.get(p)
+        s_val = sum((item["values"].get(p) or 0.0) for item in ordered_prod_items if not item.get("is_subsegment") and not item.get("is_subtotal"))
+        if c_m is not None and s_val != 0.0 and abs(c_m - s_val) > 1.0:
+            has_unreconciled_prod = True
+            residual_prod_vals[p] = round(c_m - s_val, 1)
+        else:
+            residual_prod_vals[p] = None
+
+    if has_unreconciled_prod:
+        res_ltm = residual_prod_vals.get("LTM")
+        res_mix = (res_ltm / tot_prod_ltm * 100.0) if (tot_prod_ltm > 0 and res_ltm is not None) else None
+        res_row_vals = [_fmt_seg_val(residual_prod_vals.get(p)) for p in seg_periods]
+        table_products.append({
+            "name": "Partidas de Conciliación y Coberturas Corporativas",
+            "description": "Ajustes contables, eliminaciones y coberturas que concilian la suma de segmentos con los ingresos netos consolidados.",
+            "is_subtotal": False,
+            "is_subsegment": False,
+            "indent": False,
+            "is_total": False,
+            "mix_pct": f"{res_mix:.1f}%" if res_mix is not None else "-",
+            "op_margin_ltm": "-",
+            "values": res_row_vals
         })
 
     # Fila Institucional de Total Neto Consolidado (100.0%)
@@ -572,6 +611,34 @@ def build_charts_and_segments_context(
             "values": row_vals
         })
 
+    # Conciliación residual universal geográfica para cuadre al 100.0% con el P&L
+    has_unreconciled_geo = False
+    residual_geo_vals = {}
+    for p in seg_periods:
+        c_m = canonical_rev_m.get(p)
+        s_val = sum((item["values"].get(p) or 0.0) for item in ordered_geo_items if not item.get("is_subsegment") and not item.get("is_subtotal"))
+        if c_m is not None and s_val != 0.0 and abs(c_m - s_val) > 1.0:
+            has_unreconciled_geo = True
+            residual_geo_vals[p] = round(c_m - s_val, 1)
+        else:
+            residual_geo_vals[p] = None
+
+    if has_unreconciled_geo:
+        res_ltm = residual_geo_vals.get("LTM")
+        res_mix = (res_ltm / tot_geo_ltm * 100.0) if (tot_geo_ltm > 0 and res_ltm is not None) else None
+        res_row_vals = [_fmt_seg_val(residual_geo_vals.get(p)) for p in seg_periods]
+        table_geos.append({
+            "name": "Ajustes no Asignados / Coberturas Corporativas",
+            "description": "Partidas corporativas consolidadas, coberturas cambiarias o ingresos no asignados a regiones geográficas individuales.",
+            "is_subtotal": False,
+            "is_subsegment": False,
+            "indent": False,
+            "is_total": False,
+            "mix_pct": f"{res_mix:.1f}%" if res_mix is not None else "-",
+            "op_margin_ltm": "-",
+            "values": res_row_vals
+        })
+
     # Fila Institucional de Total Neto Consolidado Geográfico (100.0%)
     total_geo_vals = []
     for p in seg_periods:
@@ -630,7 +697,10 @@ def build_charts_and_segments_context(
     products_trend_datasets = []
     for idx, item in enumerate(real_prod_items):
         c = palette[idx % len(palette)]
-        data_pts = [round(float(item["values"].get(p) or 0), 1) for p in seg_chart_periods]
+        data_pts = [
+            round(float(item["values"][p]), 1) if (p in item["values"] and item["values"][p] is not None) else None
+            for p in seg_chart_periods
+        ]
         products_trend_datasets.append({
             "label": item["name"],
             "data": data_pts,
@@ -646,7 +716,10 @@ def build_charts_and_segments_context(
     geos_trend_datasets = []
     for idx, item in enumerate(real_geo_items):
         c = palette[idx % len(palette)]
-        data_pts = [round(float(item["values"].get(p) or 0), 1) for p in seg_chart_periods]
+        data_pts = [
+            round(float(item["values"][p]), 1) if (p in item["values"] and item["values"][p] is not None) else None
+            for p in seg_chart_periods
+        ]
         geos_trend_datasets.append({
             "label": item["name"],
             "data": data_pts,

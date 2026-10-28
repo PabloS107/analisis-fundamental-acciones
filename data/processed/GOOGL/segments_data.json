@@ -15,38 +15,51 @@
   ],
   "product_segments": [
     {
-      "name": "Revenue from contract with customers",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 402963.0,
-        "FY2024": 349807.0,
-        "FY2023": 307158.0,
-        "LTM": 446215.0
-      }
-    },
-    {
       "name": "Google Search & other",
       "is_subtotal": false,
       "is_subsegment": true,
+      "is_reconciling": false,
       "parent": "Google Services",
       "values": {
         "FY2025": 224532.0,
         "FY2024": 198084.0,
         "FY2023": 175033.0,
+        "FY2022": 162450.0,
+        "FY2021": 148951.0,
+        "FY2020": 104062.0,
+        "FY2019": 98115.0,
+        "FY2018": 85296.0,
+        "FY2017": 69811.0,
         "LTM": 243310.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 42.47,
+        "FY2018": 42.97,
+        "FY2017": 46.49
       }
     },
     {
       "name": "YouTube ads",
       "is_subtotal": false,
       "is_subsegment": true,
+      "is_reconciling": false,
       "parent": "Google Services",
       "values": {
         "FY2025": 40367.0,
         "FY2024": 36147.0,
         "FY2023": 31510.0,
+        "FY2022": 29243.0,
+        "FY2021": 28845.0,
+        "FY2020": 19772.0,
+        "FY2019": 15149.0,
+        "FY2018": 11155.0,
+        "FY2017": 8150.0,
         "LTM": 42582.0
       }
     },
@@ -54,59 +67,116 @@
       "name": "Google Network",
       "is_subtotal": false,
       "is_subsegment": true,
+      "is_reconciling": false,
       "parent": "Google Services",
       "values": {
         "FY2025": 29792.0,
         "FY2024": 30359.0,
         "FY2023": 31312.0,
+        "FY2022": 32780.0,
+        "FY2021": 31701.0,
+        "FY2020": 23090.0,
+        "FY2019": 21547.0,
         "LTM": 29456.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 193.41
       }
     },
     {
       "name": "Google advertising",
       "is_subtotal": false,
       "is_subsegment": true,
+      "is_reconciling": false,
       "parent": "Google Services",
       "values": {
         "FY2025": 294691.0,
         "FY2024": 264590.0,
         "FY2023": 237855.0,
+        "FY2022": 224473.0,
+        "FY2021": 209497.0,
+        "FY2020": 146924.0,
+        "FY2019": 134811.0,
+        "FY2018": 116461.0,
+        "FY2017": 95577.0,
         "LTM": 315348.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 30.91,
+        "FY2018": 31.47,
+        "FY2017": 33.96
       }
     },
     {
       "name": "Google subscriptions, platforms, and devices",
       "is_subtotal": false,
       "is_subsegment": true,
+      "is_reconciling": false,
       "parent": "Google Services",
       "values": {
         "FY2025": 48030.0,
         "FY2024": 40340.0,
         "FY2023": 34688.0,
+        "FY2022": 29055.0,
+        "FY2021": 28032.0,
         "LTM": 51743.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
       }
     },
     {
       "name": "Google Services",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2025": 342721.0,
         "FY2024": 304930.0,
         "FY2023": 272543.0,
+        "FY2022": 253528.0,
+        "FY2021": 237529.0,
+        "FY2020": 168635.0,
+        "FY2019": 151825.0,
+        "FY2018": 130524.0,
         "LTM": 367091.0
       },
       "operating_income": {
         "FY2025": 139404.0,
         "FY2024": 121263.0,
         "FY2023": 95858.0,
+        "FY2022": 82699.0,
+        "FY2021": 88132.0,
+        "FY2020": 54606.0,
+        "FY2019": 48999.0,
+        "FY2018": 43137.0,
         "LTM": 153792.0
       },
       "operating_margin_pct": {
         "FY2025": 40.68,
         "FY2024": 39.77,
         "FY2023": 35.17,
+        "FY2022": 32.62,
+        "FY2021": 37.1,
+        "FY2020": 32.38,
+        "FY2019": 32.27,
+        "FY2018": 33.05,
         "LTM": 41.89
       }
     },
@@ -114,54 +184,94 @@
       "name": "Google Cloud",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2025": 58705.0,
         "FY2024": 43229.0,
         "FY2023": 33088.0,
+        "FY2022": 26280.0,
+        "FY2021": 19206.0,
+        "FY2020": 13059.0,
+        "FY2019": 8918.0,
+        "FY2018": 5838.0,
+        "FY2017": 4056.0,
         "LTM": 77617.0
       },
       "operating_income": {
         "FY2025": 13910.0,
         "FY2024": 6112.0,
         "FY2023": 1716.0,
-        "LTM": 28298.0
+        "FY2022": -1922.0,
+        "FY2021": -2282.0,
+        "FY2020": -5607.0,
+        "FY2019": -4645.0,
+        "FY2018": -4348.0,
+        "LTM": 24319.0
       },
       "operating_margin_pct": {
         "FY2025": 23.69,
         "FY2024": 14.14,
         "FY2023": 5.19,
-        "LTM": 36.46
+        "FY2022": -7.31,
+        "FY2021": -11.88,
+        "FY2020": -42.94,
+        "FY2019": -52.09,
+        "FY2018": -74.48,
+        "LTM": 31.33
       }
     },
     {
       "name": "Other Bets",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2025": 1537.0,
         "FY2024": 1648.0,
         "FY2023": 1527.0,
+        "FY2022": 1068.0,
+        "FY2021": 753.0,
+        "FY2020": 657.0,
+        "FY2019": 659.0,
+        "FY2018": 595.0,
+        "FY2017": 477.0,
+        "FY2016": 288.0,
         "LTM": 1507.0
       },
       "operating_income": {
         "FY2025": -7515.0,
         "FY2024": -4444.0,
         "FY2023": -4095.0,
-        "LTM": -4850.0
+        "FY2022": -4636.0,
+        "FY2021": -4051.0,
+        "FY2020": -4476.0,
+        "FY2019": -4824.0,
+        "FY2018": -3358.0,
+        "FY2017": -2734.0,
+        "FY2016": -2741.0,
+        "LTM": -8942.0
       },
       "operating_margin_pct": {
         "FY2025": -488.94,
         "FY2024": -269.66,
         "FY2023": -268.17,
-        "LTM": -321.83
+        "FY2022": -434.08,
+        "FY2021": -537.98,
+        "FY2020": -681.28,
+        "FY2019": -732.02,
+        "FY2018": -564.37,
+        "FY2017": -573.17,
+        "FY2016": -951.74,
+        "LTM": -593.36
       }
     },
     {
       "name": "Hedging gains (losses)",
-      "is_subtotal": true,
+      "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": true,
       "parent": null,
       "values": {
         "FY2025": -127.0,
@@ -169,18 +279,186 @@
         "FY2023": 236.0,
         "LTM": -349.0
       }
+    },
+    {
+      "name": "Unrealized Gains (Losses) on Cash Flow Hedges",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": true,
+      "parent": null,
+      "values": {
+        "FY2024": 174.0,
+        "FY2023": 213.0,
+        "FY2022": 2046.0,
+        "FY2021": 165.0,
+        "FY2020": 144.0,
+        "FY2019": 367.0,
+        "FY2018": -139.0,
+        "FY2017": -169.0,
+        "FY2016": 539.0
+      }
+    },
+    {
+      "name": "Revenues from contract with customer",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2023": 307394.0,
+        "FY2022": 282836.0,
+        "FY2021": 257637.0,
+        "FY2020": 182527.0,
+        "FY2019": 161402.0,
+        "FY2018": 136957.0
+      }
+    },
+    {
+      "name": "Google other",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google Services",
+      "values": {
+        "FY2022": 29055.0,
+        "FY2021": 28032.0,
+        "FY2020": 21711.0,
+        "FY2019": 17014.0,
+        "FY2018": 14063.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 244.93,
+        "FY2018": 260.65
+      }
+    },
+    {
+      "name": "Google Network Members' properties",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google Services",
+      "values": {
+        "FY2020": 23090.0,
+        "FY2019": 21547.0,
+        "FY2018": 20010.0,
+        "FY2017": 17616.0,
+        "FY2016": 15598.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 193.41,
+        "FY2018": 183.18,
+        "FY2017": 184.24,
+        "FY2016": 173.45
+      }
+    },
+    {
+      "name": "Google Properties",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 113264.0,
+        "FY2018": 96451.0,
+        "FY2017": 77961.0,
+        "FY2016": 63785.0
+      },
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 36.79,
+        "FY2018": 38.0,
+        "FY2017": 41.63,
+        "FY2016": 42.42
+      }
+    },
+    {
+      "name": "Other Revenues",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 17014.0,
+        "FY2018": 14063.0,
+        "FY2017": 10914.0,
+        "FY2016": 10601.0
+      }
+    },
+    {
+      "name": "Google",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 160743.0,
+        "FY2018": 136362.0,
+        "FY2017": 110547.0,
+        "FY2016": 89984.0
+      },
+      "operating_income": {
+        "FY2025": 139404.0,
+        "FY2024": 121263.0,
+        "FY2023": 95858.0,
+        "FY2022": 82699.0,
+        "FY2021": 88132.0,
+        "FY2020": 54606.0,
+        "FY2019": 48999.0,
+        "FY2018": 43137.0,
+        "LTM": 153792.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 30.48,
+        "FY2018": 31.63
+      }
+    },
+    {
+      "name": "Advertising revenues",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2018": 116318.0,
+        "FY2017": 95375.0,
+        "FY2016": 79383.0
+      }
     }
   ],
   "geographic_segments": [
     {
       "name": "United States",
       "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "United States & Canada",
+      "is_subsegment": false,
+      "parent": null,
       "values": {
         "FY2025": 194229.0,
         "FY2024": 170447.0,
         "FY2023": 146286.0,
+        "FY2022": 134814.0,
+        "FY2021": 117854.0,
+        "FY2020": 85014.0,
+        "FY2019": 74843.0,
+        "FY2018": 63269.0,
+        "FY2017": 52449.0,
+        "FY2016": 42781.0,
         "LTM": 219023.0
       }
     },
@@ -193,6 +471,13 @@
         "FY2025": 117152.0,
         "FY2024": 102127.0,
         "FY2023": 91038.0,
+        "FY2022": 82062.0,
+        "FY2021": 79107.0,
+        "FY2020": 55370.0,
+        "FY2019": 50645.0,
+        "FY2018": 44739.0,
+        "FY2017": 36236.0,
+        "FY2016": 30304.0,
         "LTM": 126936.0
       }
     },
@@ -205,6 +490,13 @@
         "FY2025": 67680.0,
         "FY2024": 56815.0,
         "FY2023": 51514.0,
+        "FY2022": 47024.0,
+        "FY2021": 46123.0,
+        "FY2020": 32550.0,
+        "FY2019": 26928.0,
+        "FY2018": 21341.0,
+        "FY2017": 16192.0,
+        "FY2016": 12559.0,
         "LTM": 73951.0
       }
     },
@@ -217,6 +509,13 @@
         "FY2025": 23902.0,
         "FY2024": 20418.0,
         "FY2023": 18320.0,
+        "FY2022": 16976.0,
+        "FY2021": 14404.0,
+        "FY2020": 9417.0,
+        "FY2019": 8986.0,
+        "FY2018": 7608.0,
+        "FY2017": 6147.0,
+        "FY2016": 4628.0,
         "LTM": 26305.0
       }
     }
@@ -228,6 +527,7 @@
         "FY2025": 129039.0,
         "FY2024": 112390.0,
         "FY2023": 84293.0,
+        "FY2022": 74842.0,
         "LTM": 147628.0
       }
     },
@@ -237,6 +537,11 @@
         "FY2025": 139404.0,
         "FY2024": 121263.0,
         "FY2023": 95858.0,
+        "FY2022": 82699.0,
+        "FY2021": 88132.0,
+        "FY2020": 54606.0,
+        "FY2019": 48999.0,
+        "FY2018": 43137.0,
         "LTM": 153792.0
       }
     },
@@ -246,7 +551,12 @@
         "FY2025": 13910.0,
         "FY2024": 6112.0,
         "FY2023": 1716.0,
-        "LTM": 28298.0
+        "FY2022": -1922.0,
+        "FY2021": -2282.0,
+        "FY2020": -5607.0,
+        "FY2019": -4645.0,
+        "FY2018": -4348.0,
+        "LTM": 24319.0
       }
     },
     {
@@ -255,7 +565,14 @@
         "FY2025": -7515.0,
         "FY2024": -4444.0,
         "FY2023": -4095.0,
-        "LTM": -4850.0
+        "FY2022": -4636.0,
+        "FY2021": -4051.0,
+        "FY2020": -4476.0,
+        "FY2019": -4824.0,
+        "FY2018": -3358.0,
+        "FY2017": -2734.0,
+        "FY2016": -2741.0,
+        "LTM": -8942.0
       }
     },
     {
@@ -264,7 +581,36 @@
         "FY2025": -16760.0,
         "FY2024": -10541.0,
         "FY2023": -9186.0,
+        "FY2022": -1299.0,
+        "FY2021": -3085.0,
+        "FY2020": -3299.0,
+        "FY2019": -5299.0,
+        "FY2018": -7907.0,
+        "FY2017": -3544.0,
+        "FY2016": -598.0,
         "LTM": -21541.0
+      }
+    },
+    {
+      "name": "Segment operating income / (loss)",
+      "values": {
+        "FY2023": 84293.0,
+        "FY2022": 74842.0,
+        "FY2021": 78714.0,
+        "FY2020": 41224.0,
+        "FY2019": 34231.0,
+        "FY2018": 27524.0,
+        "FY2017": 26178.0,
+        "FY2016": 23716.0
+      }
+    },
+    {
+      "name": "Google",
+      "values": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
       }
     }
   ],
