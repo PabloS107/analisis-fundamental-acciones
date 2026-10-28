@@ -94,7 +94,6 @@ def build_valuation_context(
         "fcf_margin_pct": vp.get("fcf_margin", 0.0) * 100.0,
         "net_debt_m": vp.get("net_debt_m", 0.0),
         "sensitivity_grid": sensitivity_grid,
-        "sotp_valuation": vp.get("sotp_valuation"),
         "vp": vp,
         "market_updated_at": market_updated_at,
         "is_live_price": (live_price is not None),

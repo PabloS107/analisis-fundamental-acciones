@@ -41,7 +41,7 @@ El motor clasifica dinámicamente cada compañía según su naturaleza financier
 | **Banca y Neobancos** | `FINANCIAL_BANKING` | `NU`, `JPM` | Margen de Intereses (NII), Net Interest Margin (NIM), Risk-Adjusted NIM, Cost-to-Income, Ratio CET1, NPLs (15-90d, >90d), Cobertura, Cost of Risk, ROTCE vs Ke | Excluye COGS, Gross Profit, FCF tradicional, Capital de Trabajo y Altman Z'' (evitando falsos positivos de quiebra). |
 | **Aseguradoras** | `INSURANCE` | `PGR` | Combined Ratio (Loss Ratio + Expense Ratio), Primas Emitidas (GWP/NWP), Rendimiento de Cartera de Inversión (Float), Ratio de Solvencia / RBC, ROE vs Ke | Excluye WACC corporativo tradicional; aplica Blume Adjusted Beta con piso prudencial de Cost of Equity ($K_e \ge r_f + 3.25\%$). |
 | **Inmobiliario** | `REIT` | `O` | FFO (Funds From Operations), AFFO (Adjusted FFO), Tasa de Ocupación, Deuda Neta / EBITDAre, Cobertura de Intereses | Reemplaza el FCF por AFFO; neutraliza la depreciación inmobiliaria no monetaria. |
-| **Plataformas Híbridas** | `PLATFORM_HYBRID` | `MELI` | Desglose Dual SOTP (Commerce + FinTech / Mercado Pago), Normalización de Fondos de Clientes (Float), FCF Normalizado | Aísla el capital de trabajo de los depósitos transaccionales de clientes para evitar distorsiones en el Reverse DCF. |
+| **Plataformas Híbridas** | `PLATFORM_HYBRID` | `MELI` | Desglose Segmental (Commerce + FinTech / Mercado Pago), Normalización de Fondos de Clientes (Float), FCF Normalizado | Aísla el capital de trabajo de los depósitos transaccionales de clientes para evitar distorsiones en el Reverse DCF. |
 
 ---
 

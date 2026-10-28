@@ -950,8 +950,8 @@ class TestStatementsWebDashboard(unittest.TestCase):
             # 3. Subcadena de la formula especifica presente en el HTML
             self.assertIn(formula_substr, html_content, f'Formula de {metric_name} ausente en HTML de {ticker}')
 
-    def test_segment_operating_margin_and_sotp_in_dashboard(self):
-        """Verifica que el dashboard Django renderice el Margen Operativo por Segmento (Tab 2) y la Valoración SOTP (Tab 6)."""
+    def test_segment_operating_margin_in_dashboard(self):
+        """Verifica que el dashboard Django renderice el Margen Operativo por Segmento (Tab 2)."""
         # 1. META
         resp_meta = self.client.get('/company/META/')
         self.assertEqual(resp_meta.status_code, 200)
@@ -959,8 +959,6 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('Margen Op. LTM', html_meta)
         self.assertIn('41.0%', html_meta)     # Margen LTM Family of Apps
         self.assertIn('-842.5%', html_meta)   # Margen LTM Reality Labs
-        self.assertIn('Valoración por Suma de las Partes (Sum-of-the-Parts - SOTP)', html_meta)
-        self.assertIn('Fair Value SOTP:', html_meta)
         self.assertIn('Family of Apps', html_meta)
         self.assertIn('Reality Labs', html_meta)
 
@@ -971,7 +969,6 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('Margen Op. LTM', html_deck)
         self.assertIn('34.3%', html_deck)     # Margen LTM HOKA
         self.assertIn('38.4%', html_deck)     # Margen LTM UGG
-        self.assertIn('Valoración por Suma de las Partes (Sum-of-the-Parts - SOTP)', html_deck)
         self.assertIn('HOKA', html_deck)
         self.assertIn('UGG', html_deck)
 

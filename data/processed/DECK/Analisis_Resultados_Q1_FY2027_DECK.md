@@ -1,6 +1,6 @@
 # DECKERS OUTDOOR CORPORATION (NYSE: DECK)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q1 FY2027 & Gobernanza Corporativa
-*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0000910521*  
+*Fecha de Emisión: 28 de Septiembre de 2026 | CIK SEC: 0000910521*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q1 FY27 Earnings Call Transcript*
 
 ---
@@ -805,33 +805,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | 11.52% (Estrés / Tipos Altos) | -0.6% | -0.9% | -1.2% | -1.5% | -1.9% | -2.2% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
-### 14.5. Valoración por Suma de las Partes (SOTP - Sum-of-the-Parts)
-
-Al operar con divisiones de negocio diferenciadas en rentabilidad, crecimiento y perfil de riesgo, se aplica un modelo institucional de **Suma de las Partes (Sum-of-the-Parts)** desagregando las unidades operativas:
-
-* **HOKA:** Facturación Base de **$2,658.7 M** (Margen Op. 34.3%) valorada a **19.7x EV/EBIT** -> Enterprise Value de **$17,984.1 M** (49.3% del EV).
-
-* **UGG:** Facturación Base de **$2,724.4 M** (Margen Op. 38.4%) valorada a **17.6x EV/EBIT** -> Enterprise Value de **$18,397.3 M** (50.4% del EV).
-
-* **Other Brands:** Facturación Base de **$144.2 M** (Margen Op. 10.6%) valorada a **8.0x EV/EBIT** -> Enterprise Value de **$122.4 M** (0.3% del EV).
-
-* **Enterprise Value Consolidado:** **$36,503.8 M** | **Posición Financiera Neta:** **$+1,602.6 M** (Caja neta).
-* **Equity Value Teórico:** **$38,106.4 M** sobre 136.2 M de acciones diluidas.
-* **Valor Intrínseco SOTP:** **$279.82 por acción** (+237.9% frente a cotización actual de $82.82).
-
-
-| Segmento de Negocio | Ventas ($ M) | Margen Op. % | Crecimiento YoY | Múltiplo Objetivo | Enterprise Value ($ M) | Peso EV % |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **HOKA** | $2,658.7 M | 34.3% | +15.9% | 19.7x EV/EBIT | $17,984.1 M | 49.3% |
-| **UGG** | $2,724.4 M | 38.4% | +8.2% | 17.6x EV/EBIT | $18,397.3 M | 50.4% |
-| **Other Brands** | $144.2 M | 10.6% | -33.9% | 8.0x EV/EBIT | $122.4 M | 0.3% |
-| **Total Enterprise Value (EV)** | **$5,527.3 M** | **—** | **—** | **—** | **$36,503.8 M** | **100.0%** |
-| (+) Caja Neta | — | — | — | — | $1,602.6 M | — |
-| **Equity Value Consolidado** | — | — | — | — | **$38,106.4 M** | — |
-| **Precio Justo por Acción (SOTP)** | — | — | — | — | **$279.82** | **+237.9%** |
-
-
-### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
+### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
 
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |

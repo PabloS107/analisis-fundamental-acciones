@@ -1,6 +1,6 @@
 # NU HOLDINGS LTD. (NYSE: NU)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q2 2026 & Gobernanza Corporativa
-*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0001691493*  
+*Fecha de Emisión: 28 de Septiembre de 2026 | CIK SEC: 0001691493*  
 *Fuentes: Formulario 6-K, Formulario 20-F (SEC EDGAR) & Q2 2026 Earnings Call Transcript*
 
 ---

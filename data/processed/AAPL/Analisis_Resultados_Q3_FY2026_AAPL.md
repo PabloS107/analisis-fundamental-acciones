@@ -1,6 +1,6 @@
 # APPLE INC. (NASDAQ: AAPL)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q3 FY2026 & Gobernanza Corporativa
-*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0000320193*  
+*Fecha de Emisión: 28 de Septiembre de 2026 | CIK SEC: 0000320193*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q3 FY26 Earnings Call Transcript*
 
 ---
@@ -41,20 +41,20 @@
 
 | Región Geográfica | LTM ($M) | FY2025 ($M) | Crecimiento YoY | Peso en Ventas % | Diagnóstico Operativo |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Americas** | **$193,595.0 M** | $178,353.0 M | **+8.5%** | 20.7% | Mercado estratégico consolidado (+8.5% YoY); estabilidad operativa. |
-| **Europe** | **$124,299.0 M** | $111,032.0 M | **+11.9%** | 13.3% | Mercado estratégico consolidado (+11.9% YoY); estabilidad operativa. |
-| **Greater China** | **$79,332.0 M** | $64,377.0 M | **+23.2%** | 8.5% | Mercado en fuerte expansión (+23.2% YoY); tracción de demanda local. |
-| **Japan** | **$31,004.0 M** | $28,703.0 M | **+8.0%** | 3.3% | Mercado estratégico consolidado (+8.0% YoY); estabilidad operativa. |
-| **Rest of Asia Pacific** | **$38,593.0 M** | $33,696.0 M | **+14.5%** | 4.1% | Mercado estratégico consolidado (+14.5% YoY); estabilidad operativa. |
-| **U.S.** | **$170,268.4 M** | $151,790.0 M | **+12.2%** | 18.2% | Mercado estratégico consolidado (+12.2% YoY); estabilidad operativa. |
-| **China** | **$72,214.0 M** | $64,377.0 M | **+12.2%** | 7.7% | Mercado estratégico consolidado (+12.2% YoY); estabilidad operativa. |
-| **Other countries** | **$224,340.6 M** | $199,994.0 M | **+12.2%** | 24.0% | Mercado estratégico consolidado (+12.2% YoY); estabilidad operativa. |
+| **Americas** | **$193,595.0 M** | $178,353.0 M | **+8.5%** | 41.5% | Mercado estratégico consolidado (+8.5% YoY); estabilidad operativa. |
+| **Europe** | **$124,299.0 M** | $111,032.0 M | **+11.9%** | 26.6% | Mercado estratégico consolidado (+11.9% YoY); estabilidad operativa. |
+| **Greater China** | **$79,332.0 M** | $64,377.0 M | **+23.2%** | 17.0% | Mercado en fuerte expansión (+23.2% YoY); tracción de demanda local. |
+| **Japan** | **$31,004.0 M** | $28,703.0 M | **+8.0%** | 6.6% | Mercado estratégico consolidado (+8.0% YoY); estabilidad operativa. |
+| **Rest of Asia Pacific** | **$38,593.0 M** | $33,696.0 M | **+14.5%** | 8.3% | Mercado estratégico consolidado (+14.5% YoY); estabilidad operativa. |
+| **U.S.** | **$0.0 M** | $151,790.0 M | **-100.0%** | 0.0% | Mercado en ajuste (-100.0% YoY); presión macroeconómica o vientos cambiarios (FX). |
+| **China** | **$0.0 M** | $64,377.0 M | **-100.0%** | 0.0% | Mercado en ajuste (-100.0% YoY); presión macroeconómica o vientos cambiarios (FX). |
+| **Other countries** | **$0.0 M** | $199,994.0 M | **-100.0%** | 0.0% | Mercado en ajuste (-100.0% YoY); presión macroeconómica o vientos cambiarios (FX). |
 
 
 ### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
-* **Mercado Americas (20.7% del total):** Aporta $193,595.0 M con variación YoY de +8.5%, diversificando la exposición geográfica de Apple Inc..
-* **Mercado Europe (13.3% del total):** Aporta $124,299.0 M con variación YoY de +11.9%, diversificando la exposición geográfica de Apple Inc..
-* **Mercado Greater China (8.5% del total):** Aporta $79,332.0 M con variación YoY de +23.2%, diversificando la exposición geográfica de Apple Inc..
+* **Mercado Americas (41.5% del total):** Aporta $193,595.0 M con variación YoY de +8.5%, diversificando la exposición geográfica de Apple Inc..
+* **Mercado Europe (26.6% del total):** Aporta $124,299.0 M con variación YoY de +11.9%, diversificando la exposición geográfica de Apple Inc..
+* **Mercado Greater China (17.0% del total):** Aporta $79,332.0 M con variación YoY de +23.2%, diversificando la exposición geográfica de Apple Inc..
 
 ---
 

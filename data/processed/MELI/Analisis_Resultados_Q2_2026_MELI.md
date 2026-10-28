@@ -1,6 +1,6 @@
 # MERCADOLIBRE, INC. (NASDAQ: MELI)
 ## Informe Ejecutivo de Análisis Fundamental, Earnings Call Q2 2026 & Gobernanza Corporativa
-*Fecha de Emisión: 25 de Septiembre de 2026 | CIK SEC: 0001099590*  
+*Fecha de Emisión: 28 de Septiembre de 2026 | CIK SEC: 0001099590*  
 *Fuentes: Formulario 10-Q, Formularios 8-K, Form 4, Form 144 (SEC EDGAR) & Q2 2026 Earnings Call Transcript*
 
 ---
@@ -21,23 +21,22 @@
 
 | Línea de Negocio / Producto | LTM ($M) | FY2025 ($M) | Crecimiento YoY | Margen / Mix | Lectura Estratégica |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Net revenues and financial income** | **$35,182.0 M** | $28,893.0 M | **+21.8%** | 41.8% Mix | Aceleración comercial de alta tracción (+21.8% YoY); ganancia de cuota y dinamismo. |
-| **Net service revenues and financial income** | **$30,409.0 M** | $25,286.0 M | **+20.3%** | 36.1% Mix | Aceleración comercial de alta tracción (+20.3% YoY); ganancia de cuota y dinamismo. |
-| **Net product revenues** | **$4,773.0 M** | $3,607.0 M | **+32.3%** | 5.7% Mix | Aceleración comercial de alta tracción (+32.3% YoY); ganancia de cuota y dinamismo. |
-| **Argentina** | **$6,211.0 M** | $5,646.0 M | **+10.0%** | 7.4% Mix | Crecimiento orgánico sostenido (+10.0% YoY); demanda sólida y volumen favorable. |
+| **Net revenues and financial income** | **$35,182.0 M** | $28,893.0 M | **+21.8%** | Subtotal | Subtotal consolidado de canal/categoría (+21.8% YoY). |
+| **Net service revenues and financial income** | **$30,409.0 M** | $25,286.0 M | **+20.3%** | Subtotal | Subtotal consolidado de canal/categoría (+20.3% YoY). |
+| **Net product revenues** | **$4,773.0 M** | $3,607.0 M | **+32.3%** | Subtotal | Subtotal consolidado de canal/categoría (+32.3% YoY). |
 | **Operating Segments** | **$30,409.0 M** | $25,286.0 M | **+20.3%** | Subtotal | Subtotal consolidado de canal/categoría (+20.3% YoY). |
-| **Commerce** | **$1,895.0 M** | $1,722.0 M | **+10.0%** | 2.3% Mix | Crecimiento orgánico sostenido (+10.0% YoY); demanda sólida y volumen favorable. |
-| **Fintech** | **$2,742.0 M** | $2,609.0 M | **+5.1%** | 3.3% Mix | Crecimiento orgánico sostenido (+5.1% YoY); demanda sólida y volumen favorable. |
+| **Commerce** | **$1,895.0 M** | $1,722.0 M | **+10.0%** | 24.8% Mix | Crecimiento orgánico sostenido (+10.0% YoY); demanda sólida y volumen favorable. |
+| **Fintech** | **$2,742.0 M** | $2,609.0 M | **+5.1%** | 35.9% Mix | Crecimiento orgánico sostenido (+5.1% YoY); demanda sólida y volumen favorable. |
 | **As reported** | **$0.0 M** | $0.0 M | **+0.0%** | 0.0% Mix | Desempeño estable (+0.0% YoY); consolidación en mercados y canales core. |
 | **Reclassification** | **$0.0 M** | $0.0 M | **+0.0%** | 0.0% Mix | Desempeño estable (+0.0% YoY); consolidación en mercados y canales core. |
-| **Operating expenses and indirect costs of net revenues and financial expenses** | **$2,994.0 M** | $2,702.0 M | **+10.8%** | 3.6% Mix | Crecimiento orgánico sostenido (+10.8% YoY); demanda sólida y volumen favorable. |
+| **Operating expenses and indirect costs of net revenues and financial expenses** | **$2,994.0 M** | $2,702.0 M | **+10.8%** | 39.2% Mix | Crecimiento orgánico sostenido (+10.8% YoY); demanda sólida y volumen favorable. |
 
 
 ### Análisis Cualitativo de las Líneas de Negocio:
-* **Net revenues and financial income (41.8% de facturación):** Genera $35,182.0 M (+21.8% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
-* **Net service revenues and financial income (36.1% de facturación):** Genera $30,409.0 M (+20.3% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
-* **Net product revenues (5.7% de facturación):** Genera $4,773.0 M (+32.3% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
-* **Argentina (7.4% de facturación):** Genera $6,211.0 M (+10.0% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Commerce (24.8% de facturación):** Genera $1,895.0 M (+10.0% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Fintech (35.9% de facturación):** Genera $2,742.0 M (+5.1% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **As reported (0.0% de facturación):** Genera $0.0 M (+0.0% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
+* **Reclassification (0.0% de facturación):** Genera $0.0 M (+0.0% YoY), consolidándose como pilar operativo clave de MercadoLibre, Inc..
 
 ---
 
@@ -75,7 +74,7 @@
 | **Operating Segments - Other countries - Fintech** | **$474.0 M** | $364.0 M | **+30.2%** | Subtotal | Subtotal consolidado de región (+30.2% YoY). |
 | **Operating Segments - Brazil** | **$18,950.0 M** | $15,201.0 M | **+24.7%** | Subtotal | Subtotal consolidado de región (+24.7% YoY). |
 | **Operating Segments - Mexico** | **$8,060.0 M** | $6,475.0 M | **+24.5%** | Subtotal | Subtotal consolidado de región (+24.5% YoY). |
-| **U.S.** | **$68.0 M** | $51.0 M | **+33.3%** | 100.0% | Mercado en fuerte expansión (+33.3% YoY); tracción de demanda local. |
+| **U.S.** | **$68.0 M** | $51.0 M | **+33.3%** | 1.1% | Mercado en fuerte expansión (+33.3% YoY); tracción de demanda local. |
 | **Operating Segments - Services - As reported - Brazil - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
 | **Operating Segments - Services - As reported - Mexico - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
 | **Operating Segments - Services - As reported - Other countries - Commerce** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
@@ -109,6 +108,7 @@
 | **Operating Segments - Reclassification - Brazil** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
 | **Operating Segments - Reclassification - Mexico** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
 | **Operating Segments - Reclassification - Other countries** | **$0.0 M** | $0.0 M | **+0.0%** | Subtotal | Subtotal consolidado de región (+0.0% YoY). |
+| **Argentina** | **$6,211.0 M** | $5,646.0 M | **+10.0%** | 98.9% | Mercado estratégico consolidado (+10.0% YoY); estabilidad operativa. |
 
 
 ### Conclusión sobre Exposición Geográfica y Riesgo Cambiario (FX):
@@ -791,26 +791,7 @@ Para modelar cualquier compañía de forma rigurosa y evitar sesgos especulativo
 | 12.03% (Estrés / Tipos Altos) | 17.2% | 16.8% | 16.4% | 16.0% | 15.5% | 15.0% | Vulnerabilidad a correcciones si el coste de capital aumenta. |
 
 
-### 14.5. Valoración por Suma de las Partes (SOTP - Platform Ecosystem)
-
-Al operar bajo un modelo híbrido de plataforma con segmentos de márgenes y múltiplos de mercado divergentes, se aplica un modelo de **Suma de las Partes (Sum-of-the-Parts)** desagregando el negocio operativo:
-* **Comercio Electrónico / Marketplace:** Facturación LTM de **$1,895.0 M** valorada a un múltiplo objetivo de **3.2x EV/Ventas** -> Enterprise Value de **$6,064.0 M**.
-* **FinTech / Servicios Financieros y Crédito:** Facturación LTM de **$2,742.0 M** valorada a un múltiplo objetivo de **2.4x EV/Ventas** -> Enterprise Value de **$6,580.8 M**.
-* **Enterprise Value Consolidado:** **$12,644.8 M** | **Posición Financiera Neta:** **$-5,183.0 M** (Deuda neta).
-* **Equity Value Teórico:** **$7,461.8 M** sobre 50.7 M de acciones diluidas.
-* **Valor Intrínseco SOTP:** **$147.18 por acción** (-91.9% frente a cotización actual de $1821.81).
-
-| Segmento de Negocio | Ventas LTM ($ M) | Múltiplo EV/Sales | Enterprise Value ($ M) | Ponderación EV |
-| :--- | :---: | :---: | :---: | :---: |
-| **Comercio Electrónico / Marketplace** | $1,895.0 M | 3.2x | $6,064.0 M | 48.0% |
-| **FinTech y Servicios Financieros** | $2,742.0 M | 2.4x | $6,580.8 M | 52.0% |
-| **Total Enterprise Value (EV)** | **$4,637.0 M** | **—** | **$12,644.8 M** | **100.0%** |
-| (-) Deuda Neta | — | — | $-5,183.0 M | — |
-| **Equity Value Consolidado** | — | — | **$7,461.8 M** | — |
-| **Precio Justo por Acción (SOTP)** | — | — | **$147.18** | **-91.9%** |
-
-
-### 14.6. Cuadro de Mando Consolidado y Tesis Final de Inversión
+### 14.5. Cuadro de Mando Consolidado y Tesis Final de Inversión
 
 | Dimensión Fundamental | Diagnóstico Auditado | Calificación Institucional | Veredicto para la Asignación de Capital |
 | :--- | :--- | :---: | :--- |
