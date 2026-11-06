@@ -604,7 +604,7 @@ def get_valuation_parameters(
     pv_tv = tv / ((1.0 + wacc_val) ** 10)
     ev_total = pv_fcf + pv_tv
     equity_val = ev_total - net_debt_m
-    shares_m_rounded = round(round(shares_b, 4) * 1000.0, 2)
+    shares_m_rounded = round(round(shares_b, 4) * 1000, 2)
     fair_price_base = equity_val / shares_m_rounded if shares_m_rounded > 0 else price
 
     g_implied_our_pct_rounded = round(g_implied_our * 100, 1)

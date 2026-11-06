@@ -29,7 +29,7 @@ class TestSegmentChartPeriods(unittest.TestCase):
         ticker_dir = ROOT_DIR / "data" / "processed" / "AAPL"
         with open(ticker_dir / "financial_statements.json", "r", encoding="utf-8") as f:
             fs = json.load(f)
-        fys = fs.get("fiscal_years", [])[:10]
+        fys = [p for p in fs.get("fiscal_years", [])[:11]]
         canonical = fs.get("canonical_summary", {})
         key_ratios = fs.get("key_ratios", {})
 
@@ -42,19 +42,24 @@ class TestSegmentChartPeriods(unittest.TestCase):
             enriched={},
         )
 
+        chart_periods = json.loads(ctx["chart_periods_json"])
         seg_chart_periods = json.loads(ctx["seg_chart_periods_json"])
         prod_chart_periods = json.loads(ctx["prod_chart_periods_json"])
         geo_chart_periods = json.loads(ctx["geo_chart_periods_json"])
         prod_datasets = json.loads(ctx["products_trend_json"])
         geo_datasets = json.loads(ctx["geos_trend_json"])
 
-        # In AAPL, segment data begins in FY2017
+        # Main financial charts and segments start at earliest year with data (FY2017)
+        self.assertEqual(chart_periods[0], "FY2017")
+        self.assertEqual(chart_periods[-1], "LTM")
         self.assertEqual(seg_chart_periods[0], "FY2017")
         self.assertEqual(seg_chart_periods[-1], "LTM")
         self.assertEqual(prod_chart_periods[0], "FY2017")
         self.assertEqual(geo_chart_periods[0], "FY2017")
 
         # Must not contain empty historical periods FY2015 or FY2016
+        self.assertNotIn("FY2015", chart_periods)
+        self.assertNotIn("FY2016", chart_periods)
         self.assertNotIn("FY2015", seg_chart_periods)
         self.assertNotIn("FY2016", seg_chart_periods)
         self.assertNotIn("FY2015", prod_chart_periods)
@@ -73,7 +78,7 @@ class TestSegmentChartPeriods(unittest.TestCase):
         ticker_dir = ROOT_DIR / "data" / "processed" / "DECK"
         with open(ticker_dir / "financial_statements.json", "r", encoding="utf-8") as f:
             fs = json.load(f)
-        fys = fs.get("fiscal_years", [])[:10]
+        fys = [p for p in fs.get("fiscal_years", [])[:11]]
         canonical = fs.get("canonical_summary", {})
         key_ratios = fs.get("key_ratios", {})
 
@@ -86,10 +91,15 @@ class TestSegmentChartPeriods(unittest.TestCase):
             enriched={},
         )
 
+        chart_periods = json.loads(ctx["chart_periods_json"])
         prod_chart_periods = json.loads(ctx["prod_chart_periods_json"])
         geo_chart_periods = json.loads(ctx["geo_chart_periods_json"])
         prod_datasets = json.loads(ctx["products_trend_json"])
         geo_datasets = json.loads(ctx["geos_trend_json"])
+
+        # DECK main financial charts start at FY2017 (earliest quantitative data in 10-K canonical)
+        self.assertEqual(chart_periods[0], "FY2017")
+        self.assertEqual(chart_periods[-1], "LTM")
 
         # DECK product segments (HOKA, UGG, Other Brands) start at FY2023
         self.assertEqual(prod_chart_periods[0], "FY2023")

@@ -32,7 +32,14 @@ def build_scoring_context(
     bs_data,
 ):
     """Construye el contexto de F-Score, G-Score, Novy-Marx, Pares, ROIC/WACC, Solvencia y Forense."""
-    chart_periods = list(reversed(fys))
+    raw_chart_periods = list(reversed(fys))
+    valid_chart_indices = [
+        idx for idx, p in enumerate(raw_chart_periods)
+        if canonical.get("revenue", {}).get(p) is not None
+        or canonical.get("net_income", {}).get(p) is not None
+        or canonical.get("operating_income", {}).get(p) is not None
+    ]
+    chart_periods = raw_chart_periods[valid_chart_indices[0]:] if valid_chart_indices else raw_chart_periods
     # KPIs y Señales Auditadas
     f_obj = scores.get("piotroski_f_score", {}).get("LTM", {})
     f_score = f_obj.get("total_score") or f_obj.get("score", 7)

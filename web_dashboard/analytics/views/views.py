@@ -264,8 +264,8 @@ def company_detail(request, ticker):
 
     company_name = scores.get("company_name", ticker)
     cik = scores.get("cik", "N/A")
-    fys = fs.get("fiscal_years", [])[:10]
     statements_fys = [p for p in fs.get("fiscal_years", [])[:11]]
+    fys = [p for p in statements_fys]
     latest_p = statements_fys[0] if statements_fys else "LTM"
     canonical = fs.get("canonical_summary", {})
     key_ratios = fs.get("key_ratios", {})

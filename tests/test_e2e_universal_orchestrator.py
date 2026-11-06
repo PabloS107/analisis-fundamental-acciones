@@ -379,7 +379,8 @@ class TestTier1FeatureCoverage(unittest.TestCase):
 
     def test_r5_04_segment_mix_denominator_excludes_subtotals(self):
         """R5.4: views.py segment mix calculation strictly excludes items with is_subtotal == True."""
-        views_path = WEB_DIR / "analytics" / "views.py"
+        views_charts_path = WEB_DIR / "analytics" / "views" / "views_charts.py"
+        views_path = views_charts_path if views_charts_path.exists() else (WEB_DIR / "analytics" / "views.py")
         content = views_path.read_text(encoding="utf-8")
         self.assertIn(
             "not item.get(\"is_subtotal\")",
