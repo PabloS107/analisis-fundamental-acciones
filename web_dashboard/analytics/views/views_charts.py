@@ -414,17 +414,48 @@ def build_charts_and_segments_context(
     # Partidas de conciliación explícitas de producto (coberturas, ajustes intersegmentos, etc.)
     reconciling_prod_items = [
         item for item in prod_items
-        if item.get("is_reconciling") or any(k in item.get("name", "").lower() for k in ["hedging", "reconciling", "intersegment"])
+        if (item.get("is_reconciling") or any(k in item.get("name", "").lower() for k in ["hedging", "reconciling", "intersegment"]))
+        and any(v is not None and v != 0.0 for v in item.get("values", {}).values())
     ]
 
     real_geo_items = [
         item for item in geo_items
-        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and item.get("name", "").lower() not in ["revenue", "total net sales", "total revenues", "total revenue"]
+        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and not item.get("is_country_breakdown") and item.get("name", "").lower() not in ["revenue", "total net sales", "total revenues", "total revenue"]
     ]
+    if not real_geo_items:
+        real_geo_items = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_reconciling") and not item.get("is_country_breakdown")]
     if not real_geo_items:
         real_geo_items = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
     if not real_geo_items:
         real_geo_items = geo_items
+
+    # Canales de distribución (Wholesale, DTC, etc.) si fueron detectados
+    channel_items = segments_raw.get("channel_segments", [])
+    table_channels = []
+    can_ltm_m_ref = canonical.get("revenue", {}).get("LTM") or canonical.get("revenue", {}).get(seg_periods[0] if seg_periods else None)
+    tot_chan_ltm = _to_m(can_ltm_m_ref) if can_ltm_m_ref else 1.0
+    primary_channels = [item for item in channel_items if not item.get("is_subsegment") and not item.get("is_subtotal")]
+    for item in primary_channels:
+        v_ltm = item["values"].get("LTM")
+        mix_pct = (v_ltm / tot_chan_ltm * 100.0) if (tot_chan_ltm and tot_chan_ltm > 0 and v_ltm is not None) else None
+        row_vals = [_fmt_seg_val(item["values"].get(p)) for p in seg_periods]
+        table_channels.append({
+            "name": item["name"],
+            "mix_pct": f"{mix_pct:.1f}%" if mix_pct is not None else "-",
+            "values": row_vals,
+            "is_total": False
+        })
+    if table_channels:
+        tot_chan_vals = []
+        for p in seg_periods:
+            p_sum = sum(item["values"].get(p, 0.0) for item in primary_channels if item["values"].get(p) is not None)
+            tot_chan_vals.append(_fmt_seg_val(p_sum) if p_sum > 0 else "-")
+        table_channels.append({
+            "name": "(=) Total Neto Consolidado",
+            "mix_pct": "100.0%",
+            "values": tot_chan_vals,
+            "is_total": True
+        })
 
     # Obtener ingresos canónicos oficiales de referencia para cada período
     canonical_rev_m = {}
@@ -570,7 +601,7 @@ def build_charts_and_segments_context(
 
     # Construcción jerárquica ordenada de filas geográficas con subregiones agrupadas
     ordered_geo_items = []
-    primary_geos = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_subsegment")]
+    primary_geos = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_country_breakdown")]
     sub_geos = [item for item in geo_items if item.get("is_subsegment")]
     if primary_geos and sub_geos:
         for prim in primary_geos:
@@ -762,6 +793,7 @@ def build_charts_and_segments_context(
         "buybacks_summary": buybacks_summary,
         "seg_periods": seg_periods,
         "table_products": table_products,
+        "table_channels": table_channels,
         "table_geos": table_geos,
         "kpis_segments": kpis_segments,
         "seg_chart_periods_json": json.dumps(seg_chart_periods),

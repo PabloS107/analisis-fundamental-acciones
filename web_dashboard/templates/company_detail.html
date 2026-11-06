@@ -609,6 +609,45 @@
             </div>
         </div>
 
+        {% if table_channels %}
+        <!-- Bloque 2b: Desglose por Canal de Distribución -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span>🏷️</span> Desglose por Canal de Distribución
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Mix y ventas por canal comercial (Wholesale, DTC, Retail)</p>
+                </div>
+                <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Auditado 10-K</span>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-xs text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                            <th class="py-2.5 px-3 sticky left-0 bg-slate-50">Canal</th>
+                            <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                            {% for p in seg_periods %}
+                            <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100/70 font-mono">
+                        {% for row in table_channels %}
+                        <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
+                            <td class="py-2.5 px-3 sticky left-0 {% if row.is_total %}bg-slate-100 font-black text-slate-900{% else %}bg-white font-sans text-slate-900 font-semibold{% endif %}">{{ row.name }}</td>
+                            <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                            {% for v in row.values %}
+                            <td class="py-2.5 px-2 text-right whitespace-nowrap {% if row.is_total %}font-black text-slate-900{% endif %}">{{ v }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
         <!-- Bloque 3: Gráficos de Evolución y Mix -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Gráfico A: Evolución Líneas de Negocio ($M) -->

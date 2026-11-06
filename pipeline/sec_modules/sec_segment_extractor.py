@@ -36,9 +36,11 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     print(f"[SEC Extractor] Extracción dinámica de segmentos XBRL para {ticker_str}...")
 
     product_segments = []
+    channel_segments = []
     geographic_segments = []
     segment_op_income = []
     detected_prod_names = set()
+    detected_channel_names = set()
     detected_geo_names = set()
     detected_op_inc_names = set()
 
@@ -46,12 +48,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
         return re.sub(r'\s+', ' ', str(name_str).lower().replace('&', 'and')).strip()
 
     def _scale_to_millions(num):
-        if abs(num) > 1e7:
+        if num is None:
+            return None
+        # Hechos cuantitativos monetarios en XBRL (USD). Si el valor absoluto es >= 10,000
+        # proviene en unidades base de moneda (USD) y se convierte a millones ($M) dividiendo por 1e6.
+        if abs(num) >= 1e4:
             return num / 1e6
-        elif abs(num) > 1e4 and canonical_rev and abs(num) < (canonical_rev.get("LTM", 1e9) / 100.0):
-            return num / 1000.0
-        elif abs(num) > 5e5 and not canonical_rev:
-            return num / 1000.0
         return num
 
     # Función auxiliar para mapear columnas XBRL a etiquetas canónicas FY
@@ -62,15 +64,27 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
             return f"FY{m.group(1)}"
         return c_str
 
-    geo_keywords = {
-        "americas", "europe", "greater china", "china", "japan", "asia", "pacific",
-        "international", "domestic", "united states", "u.s.", "non-us", "taiwan",
-        "latin america", "latin america/caribbean", "caribbean", "brazil", "mexico",
-        "argentina", "other countries", "rest of world", "emea", "apac", "ireland",
-        "other regions", "rest of asia pacific", "north america", "south america",
-        "central america", "middle east", "africa", "canada", "united kingdom", "uk",
-        "germany", "france", "india", "singapore", "korea", "australia"
-    }
+    GEO_REGEX = re.compile(
+        r'(?:\b('
+        r'americas|europe|greater china|china|japan|asia|pacific|international|domestic|'
+        r'united states|non-us|taiwan|latin america|latin america/caribbean|caribbean|brazil|mexico|'
+        r'argentina|rest of world|emea|apac|ireland|other regions|rest of asia pacific|'
+        r'north america|south america|central america|middle east|africa|canada|'
+        r'united kingdom|germany|france|india|singapore|korea|australia|other countries'
+        r')\b|\bu\.s\.?|\buk\b)',
+        re.IGNORECASE
+    )
+
+    DISCLOSURE_NOISE_REGEX = re.compile(
+        r'(foreign currencies|foreign currency|constant currency|exchange rate|translation adjustment|'
+        r'sales revenue, net - net sales|sales revenue, net - international|international net sales)',
+        re.IGNORECASE
+    )
+
+    CHANNEL_REGEX = re.compile(
+        r'^(wholesale|direct-to-consumer|direct to consumer|directly to consumer|dtc|retail|e-commerce|consumer direct|distributor)$',
+        re.IGNORECASE
+    )
 
     try:
         f10k_list = company.get_filings(form="10-K")
@@ -118,6 +132,11 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
 
                         if not lbl or len(lbl) < 2:
                             continue
+
+                        # Descartar partidas de notas cambiarias, divisas y reconciliaciones no operacionales
+                        if DISCLOSURE_NOISE_REGEX.search(lbl):
+                            continue
+
                         # Filtrar filas irrelevantes o de costos no operacionales
                         if any(bad in lbl.lower() for bad in [
                             "reclassifications, net of tax", "reclassification out of aoci", "pension and other postretirement",
@@ -148,11 +167,16 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             continue
 
                         clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
+                        if clean_name.strip().lower() in ["directly to consumer", "direct to consumer"]:
+                            clean_name = "Direct-to-Consumer"
+                        if DISCLOSURE_NOISE_REGEX.search(clean_name):
+                            continue
+
                         parent_segment = None
                         is_subsegment = False
 
                         # Detección de subsegmentos jerárquicos ("Advertising - Family of Apps", etc.)
-                        if " - " in clean_name and not any(g in clean_name.lower() for g in geo_keywords):
+                        if " - " in clean_name and not GEO_REGEX.search(clean_name):
                             parts = clean_name.split(" - ")
                             if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
                                 clean_name = parts[-1].strip()
@@ -163,13 +187,14 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             else:
                                 clean_name = parts[-1].strip()
 
-                        is_geo = any(g in clean_name.lower() for g in geo_keywords) or any(g in lbl.lower() for g in geo_keywords)
+                        is_geo = bool(GEO_REGEX.search(clean_name)) or bool(GEO_REGEX.search(lbl))
+                        is_channel = bool(CHANNEL_REGEX.match(clean_name.strip()))
 
                         # Partidas de conciliación y coberturas corporativas (ASC 280 / ASC 815)
                         is_reconciling = any(k in clean_name.lower() for k in [
                             "hedging gains (losses)", "hedging gain", "hedging loss", "hedges",
                             "reconciling items", "corporate and reconciling", "corporate reconciling", "corporate items",
-                            "intersegment eliminations", "eliminations", "other reconciling items"
+                            "corporate non-segment", "intersegment eliminations", "eliminations", "other reconciling items"
                         ])
 
                         # Detección de totales consolidados para no mezclarlos con segmentos de producto
@@ -180,7 +205,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             "as reported", "reclassification"
                         ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues"])
 
-                        is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments", "wholesale", "direct-to-consumer", "direct to consumer", "dtc"])
+                        is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments"])
 
                         norm_key = _norm_seg_key(clean_name)
                         if is_op_inc:
@@ -192,6 +217,22 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             else:
                                 segment_op_income.append({"name": clean_name, "values": v_dict})
                                 detected_op_inc_names.add(norm_key)
+                        elif is_channel:
+                            existing = next((item for item in channel_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
+                            if existing:
+                                for fy, v in v_dict.items():
+                                    if fy not in existing["values"]:
+                                        existing["values"][fy] = v
+                            else:
+                                seg_entry = {
+                                    "name": clean_name,
+                                    "is_subtotal": False,
+                                    "is_subsegment": is_subsegment,
+                                    "parent": parent_segment,
+                                    "values": v_dict
+                                }
+                                channel_segments.append(seg_entry)
+                                detected_channel_names.add(norm_key)
                         elif is_geo:
                             existing = next((item for item in geographic_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
                             if existing:
@@ -225,6 +266,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 }
                                 product_segments.append(seg_entry)
                                 detected_prod_names.add(norm_key)
+                                detected_prod_names.add(norm_key)
 
                 except Exception as s_err:
                     pass
@@ -237,7 +279,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 item["parent"] = None
                 item["is_subsegment"] = False
 
-            if name_low in ["united states", "u.s."]:
+            if name_low in ["united states", "u.s.", "u.s", "us"]:
                 parent_found = next((p for p in ["americas", "united states & canada", "north america"] if p in all_geo_names), None)
                 if parent_found:
                     item["is_subsegment"] = True
@@ -254,6 +296,8 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 else:
                     item["is_subsegment"] = False
                     item["parent"] = None
+            elif name_low == "other countries":
+                item["is_country_breakdown"] = True
 
         all_prod_names = {item["name"].lower() for item in product_segments}
         for item in product_segments:
@@ -262,7 +306,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 item["is_subsegment"] = False
 
         # Escaneo de Formulario 10-Q para cálculo exacto de LTM (FY_latest + YTD_actual - YTD_anterior)
-        if f10q_list and (product_segments or geographic_segments):
+        if f10q_list and (product_segments or geographic_segments or channel_segments):
             try:
                 k_rep_date = str(getattr(f10k_list[0], "period_of_report", "")) if f10k_list else ""
                 q_rep_date = str(getattr(f10q_list[0], "period_of_report", ""))
@@ -298,6 +342,8 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 conc = str(row.get("concept", "")).lower()
                                 if not lbl or len(lbl) < 2:
                                     continue
+                                if DISCLOSURE_NOISE_REGEX.search(lbl):
+                                    continue
                                 is_rev = any(k in conc for k in ["revenue", "sales"])
                                 is_op_inc = any(k in conc for k in ["operatingincome", "incomelossfromcontinuingoperations"])
                                 if not (is_rev or is_op_inc):
@@ -314,7 +360,9 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                     continue
 
                                 q_clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
-                                if " - " in q_clean_name and not any(g in q_clean_name.lower() for g in geo_keywords):
+                                if DISCLOSURE_NOISE_REGEX.search(q_clean_name):
+                                    continue
+                                if " - " in q_clean_name and not GEO_REGEX.search(q_clean_name):
                                     parts = q_clean_name.split(" - ")
                                     if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
                                         q_clean_name = parts[-1].strip()
@@ -322,7 +370,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                         q_clean_name = parts[0].strip() if len(parts) == 2 else parts[-1].strip()
                                 q_norm = _norm_seg_key(q_clean_name)
 
-                                target_lists = [segment_op_income] if is_op_inc else [product_segments, geographic_segments]
+                                target_lists = [segment_op_income] if is_op_inc else [product_segments, channel_segments, geographic_segments]
                                 for t_list in target_lists:
                                     for item in t_list:
                                         if _norm_seg_key(item.get("name", "")) == q_norm:
@@ -335,7 +383,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 print(f"[SEC Extractor] Aviso en escaneo 10-Q de segmentos: {q_err}")
 
         # Fallback canónico de LTM: si no hay 10-Q posterior o LTM no fue poblado, sincronizar con latest_fy
-        for t_list in [product_segments, geographic_segments, segment_op_income]:
+        for t_list in [product_segments, channel_segments, geographic_segments, segment_op_income]:
             for item in t_list:
                 if "LTM" not in item["values"] and latest_fy in item["values"]:
                     item["values"]["LTM"] = item["values"][latest_fy]
@@ -349,13 +397,14 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
             with open(seg_json_path, "r", encoding="utf-8") as f:
                 cached = json.load(f)
             product_segments = cached.get("product_segments", [])
+            channel_segments = cached.get("channel_segments", [])
             geographic_segments = cached.get("geographic_segments", [])
             segment_op_income = cached.get("segment_operating_income", [])
         except Exception:
             pass
 
     # Cruce canónico de Ingresos y Beneficio Operativo por Segmento (ASC 280)
-    for seg_list in [product_segments, geographic_segments]:
+    for seg_list in [product_segments, channel_segments, geographic_segments]:
         for item in seg_list:
             item_norm = _norm_seg_key(item.get("name", ""))
             matching_op = None
@@ -379,6 +428,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     seg_dict = {
         "periods": all_fys,
         "product_segments": product_segments,
+        "channel_segments": channel_segments,
         "geographic_segments": geographic_segments,
         "segment_operating_income": segment_op_income,
         "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",

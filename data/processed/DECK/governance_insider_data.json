@@ -1,7 +1,7 @@
 {
   "ticker": "DECK",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-09-27T22:34:17.216657",
+  "timestamp": "2026-11-04T16:04:28.617420",
   "scorecard": {
     "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -16,10 +16,25 @@
     "debt_default_detected": false,
     "ceo_transition_detected": true,
     "critical_flags": [
-      "Detectadas 13 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+      "Detectadas 12 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-10-22",
+      "accession_number": "0000910521-26-000028",
+      "items": [
+        "Item 2.02",
+        "Item 5.02",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition.* On October 22, 2026, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2026, and updating its financial outlook for the fiscal year ending March 31, 2027. The Company intends to hold a conference call ..."
+    },
     {
       "filing_date": "2026-09-15",
       "accession_number": "0000910521-26-000026",
@@ -337,18 +352,6 @@
       "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 27, 2022, Deckers Outdoor Corporation (the “Company”) issued a press release announcing its financial results for the three months ended September 30, 2022 and providing financial guidance for the fiscal year ending March 31, 2023. The Company also held a conference call regarding ..."
-    },
-    {
-      "filing_date": "2022-09-14",
-      "accession_number": "0000910521-22-000034",
-      "items": [
-        "Item 5.07"
-      ],
-      "title": "Hecho Regulatorio (Item 5.07)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. On September 12, 2022, Deckers Outdoor Corporation (the “Company”) held its 2022 Annual Meeting of Stockholders (the “Annual Meeting”) virtually via live webcast at www.virtualshareholdermeeting.com/DECK2022, during which the Company's stockholders voted on three proposals. The Company ..."
     }
   ],
   "form_6k_events": [],
@@ -949,11 +952,11 @@
   "form_144_notices": {
     "summary": {
       "notices_analyzed": 20,
-      "total_shares_proposed": 165121,
-      "total_value_proposed_usd": 35534438.96,
+      "total_shares_proposed": 140121,
+      "total_value_proposed_usd": 32063471.81,
       "notices_under_10b5": 11,
-      "notices_discretionary": 9,
-      "notices_with_anomalies_count": 13
+      "notices_discretionary": 8,
+      "notices_with_anomalies_count": 12
     },
     "notices": [
       {
@@ -1066,16 +1069,6 @@
         "is_large_liquidation": false,
         "anomaly_flags": [],
         "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
-      },
-      {
-        "filing_date": "2025-02-28",
-        "person_selling": "Powers David",
-        "shares_to_sell": 25000,
-        "market_value_usd": 3470967.15,
-        "is_10b5_1": false,
-        "is_large_liquidation": false,
-        "anomaly_flags": [],
-        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
       },
       {
         "filing_date": "2024-12-11",
@@ -1236,14 +1229,6 @@
         "flags": [
           "SHORT_HOLD"
         ],
-        "is_large": false
-      },
-      {
-        "date": "2025-02-28",
-        "seller": "Powers David",
-        "market_value_usd": 3470967.15,
-        "is_10b5_1": false,
-        "flags": [],
         "is_large": false
       },
       {

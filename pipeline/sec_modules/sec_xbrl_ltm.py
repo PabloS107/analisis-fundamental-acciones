@@ -1081,6 +1081,26 @@ def compute_and_inject_ltm_columns(
         ytd_cols_inc = all_q_cols
     ytd_curr_inc = sorted(ytd_cols_inc, reverse=True)[0] if len(ytd_cols_inc) >= 1 else None
     ytd_prev_inc = sorted(ytd_cols_inc, reverse=True)[1] if len(ytd_cols_inc) >= 2 else None
+
+    # Verificar si el formulario 10-Q es efectivamente posterior al 10-K anual más reciente
+    q_is_newer = True
+    if ytd_curr_inc and facts_df is not None and not facts_df.empty and latest_fy:
+        m_q = re.search(r'(\d{4}-\d{2}-\d{2})', str(ytd_curr_inc))
+        if m_q:
+            q_date = m_q.group(1)
+            try:
+                fy_num = int(str(latest_fy).replace('FY', ''))
+                # En facts_df de edgar-tools, la columna de período es 'fiscal_period' ('FY')
+                k_facts = facts_df[(facts_df['fiscal_year'] == fy_num) & (facts_df.get('fiscal_period', '') == 'FY')]
+                if k_facts.empty and 'period_end' in facts_df.columns:
+                    k_facts = facts_df[facts_df['fiscal_year'] == fy_num]
+                if not k_facts.empty:
+                    k_period_end = str(k_facts['period_end'].dropna().max())
+                    if k_period_end and q_date <= k_period_end:
+                        q_is_newer = False
+                        print(f"[SEC Extractor] El 10-Q ({q_date}) es previo o igual al cierre del 10-K ({k_period_end}) de {latest_fy}. LTM sincronizado canónicamente con {latest_fy}.")
+            except Exception:
+                pass
     
     q_cols_ttm = [col for col in inc_ttm_df.columns if col.startswith('Q')] if inc_ttm_df is not None else []
     latest_q_ttm = q_cols_ttm[0] if q_cols_ttm else None
@@ -1098,6 +1118,15 @@ def compute_and_inject_ltm_columns(
         lbl = str(row.get('label', '')).strip()
         fy_val = row.get(latest_fy)
         val = None
+
+        # Si el último informe presentado es el 10-K anual y no hay 10-Q posterior, LTM == latest_fy
+        if not q_is_newer and pd.notna(fy_val):
+            try:
+                val = float(fy_val)
+            except (ValueError, TypeError):
+                val = None
+            ltm_vals_inc.append(val)
+            continue
         
         # Conceptos de acciones (point in time: saldo al cierre del trimestre) vs EPS (flujo acumulado 12M)
         is_share_count = any(k in c_name.lower() or k in lbl.lower() for k in ['sharesoutstanding', 'numberofshares'])
@@ -1218,6 +1247,15 @@ def compute_and_inject_ltm_columns(
         fy_val = row.get(latest_fy)
         val = None
 
+        # Si el último informe presentado es el 10-K anual y no hay 10-Q posterior, LTM == latest_fy
+        if not q_is_newer and pd.notna(fy_val):
+            try:
+                val = float(fy_val)
+            except (ValueError, TypeError):
+                val = None
+            ltm_vals_bal.append(val)
+            continue
+
         # Conceptos abstractos de balance (encabezados de sección) no llevan importe
         if c_name.lower().endswith('abstract') or str(row.get('label', '')).lower().endswith('[abstract]'):
             ltm_vals_bal.append(None)
@@ -1299,6 +1337,15 @@ def compute_and_inject_ltm_columns(
         c_name = str(row.get('concept', '')).strip()
         fy_val = row.get(latest_fy)
         val = None
+
+        # Si el último informe presentado es el 10-K anual y no hay 10-Q posterior, LTM == latest_fy
+        if not q_is_newer and pd.notna(fy_val):
+            try:
+                val = float(fy_val)
+            except (ValueError, TypeError):
+                val = None
+            ltm_vals_cf.append(val)
+            continue
         c_tok = _clean_concept_token(c_name)
         is_ending_cash = c_tok in ENDING_CASH_CONCEPTS
         is_beg_cash = c_tok in BEGINNING_CASH_CONCEPTS

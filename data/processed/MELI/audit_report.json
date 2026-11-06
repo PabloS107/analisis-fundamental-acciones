@@ -2,40 +2,40 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-10-25T11:19:21.058833",
+  "audit_timestamp": "2026-11-06T17:38:25.645707",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 51356000000.0,
-        "liabilities": 43522000000.0,
-        "equity": 7834000000.0,
+        "assets": 57254000000.0,
+        "liabilities": 49054000000.0,
+        "equity": 8200000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 51356000000.0,
+        "liabilities_plus_equity": 57254000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 5135600.0
+        "tolerance_usd": 5725400.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 35182000000.0,
-        "cost_of_goods_sold": 20168000000.0,
-        "gross_profit_reported": 15014000000.0,
-        "gross_profit_calculated": 15014000000.0,
+        "revenue": 38523000000.0,
+        "cost_of_goods_sold": 22334000000.0,
+        "gross_profit_reported": 16189000000.0,
+        "gross_profit_calculated": 16189000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 3518200.0
+        "tolerance_usd": 3852300.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 13905000000.0,
-        "capital_expenditures": 1496000000.0,
-        "fcf_reported": 12409000000.0,
-        "fcf_calculated": 12409000000.0,
+        "cash_from_operations": 13896000000.0,
+        "capital_expenditures": 1642000000.0,
+        "fcf_reported": 12254000000.0,
+        "fcf_calculated": 12254000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -54,13 +54,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 1863000000.0,
-        "shares_diluted": 50697282.75,
-        "eps_reported": 36.77,
-        "eps_calculated": 36.75,
-        "eps_adjusted": 36.77,
+        "net_income": 1890000000.0,
+        "shares_diluted": 50697238.25,
+        "eps_reported": 37.28,
+        "eps_calculated": 37.28,
+        "eps_adjusted": 37.28,
         "split_factor": 1.0,
-        "discrepancy": 0.02
+        "discrepancy": 0.0
       }
     ],
     "FY2025": [

@@ -1,7 +1,7 @@
 {
   "ticker": "MELI",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-09-27T22:26:42.444898",
+  "timestamp": "2026-11-06T15:20:59.761318",
   "scorecard": {
     "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -20,6 +20,19 @@
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-11-04",
+      "accession_number": "0001099590-26-000027",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On November 4, 2026, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
+    },
     {
       "filing_date": "2026-09-14",
       "accession_number": "0001140361-26-036495",
@@ -328,18 +341,6 @@
       "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On May 2, 2024, the Registrant issued a press release, a copy of which is attached hereto as Exhibit 99.1 and is incorporated herein by reference."
-    },
-    {
-      "filing_date": "2024-04-23",
-      "accession_number": "0001099590-24-000011",
-      "items": [
-        "Item 5.02"
-      ],
-      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
-      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
-      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
-      "risk_rating": "MEDIUM",
-      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors: Appointment of Certain Officers: Compensatory Arrangements of Certain Officers. Establishment of Performance Goals under the 2024 Bonus Program On April 18, 2024, the Board of Directors (the “Board”) of MercadoLibre, Inc. (the “Company”) established the performance goals f..."
     }
   ],
   "form_6k_events": [],

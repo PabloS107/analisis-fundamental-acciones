@@ -1,25 +1,38 @@
 {
   "ticker": "AAPL",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-09-10T20:33:16.881311",
+  "timestamp": "2026-11-04T16:10:53.562099",
   "scorecard": {
-    "governance_score": 85,
+    "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
-    "insider_sentiment": "OPPORTUNISTIC_SELLING",
-    "insider_sentiment_label": "Venta Discrecional Significativa (Toma de Beneficios)",
+    "insider_sentiment": "NEUTRAL_ROUTINE",
+    "insider_sentiment_label": "Actividad Ordinaria Predominantemente bajo Planes 10b5-1",
     "is_foreign_private_issuer": false,
     "open_market_buys_usd": 0.0,
-    "routine_10b5_sales_usd": 84830503.67,
-    "discretionary_sales_usd": 87758377.27,
-    "ratio_10b5_compliance_pct": 49.2,
+    "routine_10b5_sales_usd": 121299416.77,
+    "discretionary_sales_usd": 86740722.31,
+    "ratio_10b5_compliance_pct": 58.3,
     "audit_change_detected": false,
     "debt_default_detected": false,
     "ceo_transition_detected": true,
     "critical_flags": [
-      "Detectadas 20 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+      "Detectadas 19 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-11-02",
+      "accession_number": "0000320193-26-000024",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On November 2, 2026, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its fourth fiscal quarter ended September 26, 2026. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed..."
+    },
     {
       "filing_date": "2026-09-01",
       "accession_number": "0001140361-26-035325",
@@ -321,18 +334,6 @@
       "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 2, 2024, Apple Inc. (“Apple”) issued a press release regarding Apple’s financial results for its second fiscal quarter ended March 30, 2024. A copy of Apple’s press release is attached hereto as Exhibit 99.1. The information contained in this Current Report shall not be deemed “filed” ..."
-    },
-    {
-      "filing_date": "2024-02-28",
-      "accession_number": "0001140361-24-010155",
-      "items": [
-        "Item 5.07"
-      ],
-      "title": "Hecho Regulatorio (Item 5.07)",
-      "explanation": "Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Item 5.07 Submission of Matters to a Vote of Security Holders. The 2024 Annual Meeting of Shareholders (the “Annual Meeting”) of Apple Inc. (“Apple”) was held onFebruary 28, 2024. At the Annual Meeting, Apple’s shareholders voted on the following eight proposals and cast their votes as described below. The individuals listed below were elected at t..."
     }
   ],
   "form_6k_events": [],
@@ -341,41 +342,81 @@
       "filings_analyzed": 40,
       "total_open_market_buys_usd": 0.0,
       "total_open_market_buys_shares": 0,
-      "total_10b5_sales_usd": 84830503.67,
-      "total_10b5_sales_shares": 329369,
-      "total_discretionary_sales_usd": 87758377.27,
-      "total_discretionary_sales_shares": 303752,
+      "total_10b5_sales_usd": 121299416.77,
+      "total_10b5_sales_shares": 387127,
+      "total_discretionary_sales_usd": 86740722.31,
+      "total_discretionary_sales_shares": 300000,
       "total_grants_shares": 0,
-      "ratio_10b5_vs_discretionary_pct": 49.2,
-      "active_insiders_count": 16,
+      "ratio_10b5_vs_discretionary_pct": 58.3,
+      "active_insiders_count": 11,
       "insiders_breakdown": {
         "Jennifer Newstead": {
           "position": "SVP, GC and Government Affairs",
           "buys_usd": 0.0,
-          "sales_10b5_usd": 2245141.54,
+          "sales_10b5_usd": 7604870.53,
           "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
-          "shares_sold": 7194,
+          "shares_sold": 23026,
           "grants": 0,
-          "tx_count": 7
+          "tx_count": 15
+        },
+        "Ben Borders": {
+          "position": "Principal Accounting Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 845803.78,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 2670,
+          "grants": 0,
+          "tx_count": 4
+        },
+        "Kevan Parekh": {
+          "position": "Senior Vice President,  CFO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 902165.3600000001,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 2926,
+          "grants": 0,
+          "tx_count": 4
+        },
+        "Timothy D Cook": {
+          "position": "Executive Chair",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 80358038.76999998,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 256702,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Deirdre O'Brien": {
+          "position": "Senior Vice President",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 23127798.19,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 76391,
+          "grants": 0,
+          "tx_count": 3
         },
         "John Ternus": {
           "position": "CEO",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 8460740.139999999,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 25412,
+          "grants": 0,
+          "tx_count": 3
+        },
+        "Sabih Khan": {
+          "position": "COO",
           "buys_usd": 0.0,
           "sales_10b5_usd": 0.0,
           "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
           "shares_sold": 0,
-          "grants": 0,
-          "tx_count": 1
-        },
-        "Ben Borders": {
-          "position": "Principal Accounting Officer",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 403696.24,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 1390,
           "grants": 0,
           "tx_count": 3
         },
@@ -387,46 +428,6 @@
           "shares_bought": 0,
           "shares_sold": 300000,
           "grants": 0,
-          "tx_count": 4
-        },
-        "Kevan Parekh": {
-          "position": "Senior Vice President, CFO",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 1460637.48,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 5733,
-          "grants": 0,
-          "tx_count": 3
-        },
-        "Deirdre O'Brien": {
-          "position": "Senior Vice President",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 18731953.52,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 73015,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Sabih Khan": {
-          "position": "COO",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 0,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Timothy D Cook": {
-          "position": "Chief Executive Officer",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 49887920.95,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 194912,
-          "grants": 0,
           "tx_count": 2
         },
         "Susan Wagner": {
@@ -437,7 +438,7 @@
           "shares_bought": 0,
           "shares_sold": 0,
           "grants": 0,
-          "tx_count": 2
+          "tx_count": 1
         },
         "Ronald D Sugar": {
           "position": "Director",
@@ -447,7 +448,7 @@
           "shares_bought": 0,
           "shares_sold": 0,
           "grants": 0,
-          "tx_count": 2
+          "tx_count": 1
         },
         "Monica C Lozano": {
           "position": "Director",
@@ -457,61 +458,362 @@
           "shares_bought": 0,
           "shares_sold": 0,
           "grants": 0,
-          "tx_count": 2
-        },
-        "Andrea Jung": {
-          "position": "Director",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 0,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Alex Gorsky": {
-          "position": "Director",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 0,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Wanda M Austin": {
-          "position": "Director",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 0,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Katherine L. Adams": {
-          "position": "SVP, GC and Secretary",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 12101153.940000001,
-          "sales_discretionary_usd": 0.0,
-          "shares_bought": 0,
-          "shares_sold": 47125,
-          "grants": 0,
-          "tx_count": 2
-        },
-        "Chris Kondo": {
-          "position": "Principal Accounting Officer",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 1017654.9600000001,
-          "shares_bought": 0,
-          "shares_sold": 3752,
-          "grants": 0,
-          "tx_count": 2
+          "tx_count": 1
         }
       }
     },
     "transactions": [
+      {
+        "filing_date": "2026-10-29",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 343.36,
+        "total_usd": 823720.64,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-22",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 339.62,
+        "total_usd": 814748.38,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 151,
+        "price": 343.08,
+        "total_usd": 51805.08,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 80,
+        "price": 344.18,
+        "total_usd": 27534.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 969,
+        "price": 345.74,
+        "total_usd": 335022.06,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 40,
+        "price": 346.22,
+        "total_usd": 13848.8,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Ben Borders",
+        "position": "Principal Accounting Officer",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 40,
+        "price": 347.43,
+        "total_usd": 13897.2,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President,  CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 200,
+        "price": 342.66,
+        "total_usd": 68532.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President,  CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 192,
+        "price": 343.68,
+        "total_usd": 65986.56,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President,  CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 880,
+        "price": 345.66,
+        "total_usd": 304180.8,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President,  CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 80,
+        "price": 346.47,
+        "total_usd": 27717.6,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-19",
+        "insider": "Kevan Parekh",
+        "position": "Senior Vice President,  CFO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 40,
+        "price": 347.46,
+        "total_usd": 13898.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-15",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 345.0,
+        "total_usd": 827655.0,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-08",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 332.01,
+        "total_usd": 796491.99,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Timothy D Cook",
+        "position": "Executive Chair",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 23143,
+        "price": 331.44,
+        "total_usd": 7670515.92,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Timothy D Cook",
+        "position": "Executive Chair",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 39492,
+        "price": 332.16,
+        "total_usd": 13117662.72,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Timothy D Cook",
+        "position": "Executive Chair",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 88239,
+        "price": 333.26,
+        "total_usd": 29406529.14,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Timothy D Cook",
+        "position": "Executive Chair",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 40879,
+        "price": 333.94,
+        "total_usd": 13651133.26,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 40764,
+        "price": 333.35,
+        "total_usd": 13588679.4,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "Deirdre O'Brien",
+        "position": "Senior Vice President",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 5625,
+        "price": 333.91,
+        "total_usd": 1878243.75,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "John Ternus",
+        "position": "CEO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 3564,
+        "price": 331.38,
+        "total_usd": 1181038.32,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "John Ternus",
+        "position": "CEO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 5348,
+        "price": 332.26,
+        "total_usd": 1776926.48,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "John Ternus",
+        "position": "CEO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 12746,
+        "price": 333.34,
+        "total_usd": 4248751.64,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-05",
+        "insider": "John Ternus",
+        "position": "CEO",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 3754,
+        "price": 334.05,
+        "total_usd": 1254023.7,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-10-01",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 336.18,
+        "total_usd": 806495.82,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-09-24",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 2399,
+        "price": 340.06,
+        "total_usd": 815803.94,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
+      {
+        "filing_date": "2026-09-17",
+        "insider": "Jennifer Newstead",
+        "position": "SVP, GC and Government Affairs",
+        "type": "VENTA_PROGRAMADA_10B5",
+        "code": "S",
+        "shares": 1438,
+        "price": 330.19,
+        "total_usd": 474813.22,
+        "is_10b5_1": true,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
+      },
       {
         "filing_date": "2026-09-10",
         "insider": "Jennifer Newstead",
@@ -758,214 +1060,77 @@
         "is_10b5_1": true,
         "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
         "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-11-12",
-        "insider": "Chris Kondo",
-        "position": "Principal Accounting Officer",
-        "type": "VENTA_DISCRECIONAL",
-        "code": "S",
-        "shares": 3752,
-        "price": 271.23,
-        "total_usd": 1017654.96,
-        "is_10b5_1": false,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
-      },
-      {
-        "filing_date": "2025-10-17",
-        "insider": "Kevan Parekh",
-        "position": "Senior Vice President, CFO",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 500,
-        "price": 245.89,
-        "total_usd": 122945.0,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-17",
-        "insider": "Kevan Parekh",
-        "position": "Senior Vice President, CFO",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 1665,
-        "price": 247.04,
-        "total_usd": 411321.6,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-17",
-        "insider": "Kevan Parekh",
-        "position": "Senior Vice President, CFO",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 1534,
-        "price": 247.82,
-        "total_usd": 380155.88,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-17",
-        "insider": "Kevan Parekh",
-        "position": "Senior Vice President, CFO",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 500,
-        "price": 248.73,
-        "total_usd": 124365.0,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Timothy D Cook",
-        "position": "Chief Executive Officer",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 8395,
-        "price": 254.83,
-        "total_usd": 2139297.85,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Timothy D Cook",
-        "position": "Chief Executive Officer",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 22524,
-        "price": 255.86,
-        "total_usd": 5762990.64,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Timothy D Cook",
-        "position": "Chief Executive Officer",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 39293,
-        "price": 256.62,
-        "total_usd": 10083369.66,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Timothy D Cook",
-        "position": "Chief Executive Officer",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 59751,
-        "price": 257.57,
-        "total_usd": 15390065.07,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Deirdre O'Brien",
-        "position": "Senior Vice President",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 41273,
-        "price": 257.36,
-        "total_usd": 10622019.28,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Deirdre O'Brien",
-        "position": "Senior Vice President",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 1740,
-        "price": 258.08,
-        "total_usd": 449059.2,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Katherine L. Adams",
-        "position": "SVP, GC and Secretary",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 3500,
-        "price": 254.83,
-        "total_usd": 891905.0,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Katherine L. Adams",
-        "position": "SVP, GC and Secretary",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 8100,
-        "price": 255.96,
-        "total_usd": 2073276.0,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Katherine L. Adams",
-        "position": "SVP, GC and Secretary",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 13974,
-        "price": 256.6,
-        "total_usd": 3585728.4,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
-      },
-      {
-        "filing_date": "2025-10-03",
-        "insider": "Katherine L. Adams",
-        "position": "SVP, GC and Secretary",
-        "type": "VENTA_PROGRAMADA_10B5",
-        "code": "S",
-        "shares": 21551,
-        "price": 257.54,
-        "total_usd": 5550244.54,
-        "is_10b5_1": true,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA RUTINARIA (PLAN 10b5-1): Venta programada previamente para diversificación o liquidez periódica."
       }
     ]
   },
   "form_144_notices": {
     "summary": {
       "notices_analyzed": 20,
-      "total_shares_proposed": 1158750,
-      "total_value_proposed_usd": 298690388.19,
-      "notices_under_10b5": 15,
-      "notices_discretionary": 5,
-      "notices_with_anomalies_count": 20
+      "total_shares_proposed": 1292666,
+      "total_value_proposed_usd": 294949616.49,
+      "notices_under_10b5": 16,
+      "notices_discretionary": 4,
+      "notices_with_anomalies_count": 19
     },
     "notices": [
+      {
+        "filing_date": "2026-10-16",
+        "person_selling": "KEVAN PAREKH",
+        "shares_to_sell": 1392,
+        "market_value_usd": 476064.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-10-02",
+        "person_selling": "John Ternus",
+        "shares_to_sell": 25412,
+        "market_value_usd": 8479730.28,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-10-02",
+        "person_selling": "COOK TIMOTHY D",
+        "shares_to_sell": 218078,
+        "market_value_usd": 3329584.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-10-02",
+        "person_selling": "O'BRIEN DEIRDRE",
+        "shares_to_sell": 46389,
+        "market_value_usd": 15459598.14,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-09-22",
+        "person_selling": "JENNIFER NEWSTEAD",
+        "shares_to_sell": 31182,
+        "market_value_usd": 10570074.36,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
       {
         "filing_date": "2026-08-11",
         "person_selling": "JENNIFER NEWSTEAD",
@@ -1137,69 +1302,49 @@
           "SHORT_HOLD"
         ],
         "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2025-04-23",
-        "person_selling": "KEVAN PAREKH",
-        "shares_to_sell": 4570,
-        "market_value_usd": 912811.8,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [
-          "SHORT_HOLD"
-        ],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2025-04-02",
-        "person_selling": "KATHERINE L ADAMS",
-        "shares_to_sell": 38822,
-        "market_value_usd": 8664682.18,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [
-          "SHORT_HOLD"
-        ],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2025-04-02",
-        "person_selling": "WILLIAMS JEFFREY E",
-        "shares_to_sell": 35493,
-        "market_value_usd": 7950684.0,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [
-          "SHORT_HOLD"
-        ],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2025-04-02",
-        "person_selling": "COOK TIMOTHY D",
-        "shares_to_sell": 108136,
-        "market_value_usd": 24184497.5,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [
-          "SHORT_HOLD"
-        ],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2025-02-03",
-        "person_selling": "LEVINSON ARTHUR D",
-        "shares_to_sell": 1516,
-        "market_value_usd": 343147.0,
-        "is_10b5_1": false,
-        "is_large_liquidation": false,
-        "anomaly_flags": [
-          "SHORT_HOLD"
-        ],
-        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
       }
     ],
     "anomalies": [
+      {
+        "date": "2026-10-16",
+        "seller": "KEVAN PAREKH",
+        "market_value_usd": 476064.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-10-02",
+        "seller": "John Ternus",
+        "market_value_usd": 8479730.28,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-10-02",
+        "seller": "O'BRIEN DEIRDRE",
+        "market_value_usd": 15459598.14,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-09-22",
+        "seller": "JENNIFER NEWSTEAD",
+        "market_value_usd": 10570074.36,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
       {
         "date": "2026-08-11",
         "seller": "JENNIFER NEWSTEAD",
@@ -1337,56 +1482,6 @@
         "seller": "O'BRIEN DEIRDRE",
         "market_value_usd": 7772064.61,
         "is_10b5_1": true,
-        "flags": [
-          "SHORT_HOLD"
-        ],
-        "is_large": false
-      },
-      {
-        "date": "2025-04-23",
-        "seller": "KEVAN PAREKH",
-        "market_value_usd": 912811.8,
-        "is_10b5_1": true,
-        "flags": [
-          "SHORT_HOLD"
-        ],
-        "is_large": false
-      },
-      {
-        "date": "2025-04-02",
-        "seller": "KATHERINE L ADAMS",
-        "market_value_usd": 8664682.18,
-        "is_10b5_1": true,
-        "flags": [
-          "SHORT_HOLD"
-        ],
-        "is_large": false
-      },
-      {
-        "date": "2025-04-02",
-        "seller": "WILLIAMS JEFFREY E",
-        "market_value_usd": 7950684.0,
-        "is_10b5_1": true,
-        "flags": [
-          "SHORT_HOLD"
-        ],
-        "is_large": false
-      },
-      {
-        "date": "2025-04-02",
-        "seller": "COOK TIMOTHY D",
-        "market_value_usd": 24184497.5,
-        "is_10b5_1": true,
-        "flags": [
-          "SHORT_HOLD"
-        ],
-        "is_large": false
-      },
-      {
-        "date": "2025-02-03",
-        "seller": "LEVINSON ARTHUR D",
-        "market_value_usd": 343147.0,
-        "is_10b5_1": false,
         "flags": [
           "SHORT_HOLD"
         ],

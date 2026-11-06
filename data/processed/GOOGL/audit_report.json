@@ -2,40 +2,40 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-10-28T16:19:24.661214",
+  "audit_timestamp": "2026-11-02T20:34:41.506340",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 921983000000.0,
-        "liabilities": 281503000000.0,
-        "equity": 640480000000.0,
+        "assets": 1003312000000.0,
+        "liabilities": 325763000000.0,
+        "equity": 677549000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 921983000000.0,
+        "liabilities_plus_equity": 1003312000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 92198300.0
+        "tolerance_usd": 100331200.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 445866000000.0,
-        "cost_of_goods_sold": 174349000000.0,
-        "gross_profit_reported": 271517000000.0,
-        "gross_profit_calculated": 271517000000.0,
+        "revenue": 471098000000.0,
+        "cost_of_goods_sold": 184400000000.0,
+        "gross_profit_reported": 286698000000.0,
+        "gross_profit_calculated": 286698000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 44586600.0
+        "tolerance_usd": 47109800.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 185675000000.0,
-        "capital_expenditures": 132402000000.0,
-        "fcf_reported": 53273000000.0,
-        "fcf_calculated": 53273000000.0,
+        "cash_from_operations": 179551000000.0,
+        "capital_expenditures": 159804000000.0,
+        "fcf_reported": 19747000000.0,
+        "fcf_calculated": 19747000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -54,13 +54,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 244119000000.0,
-        "shares_diluted": 12245000000.0,
-        "eps_reported": 19.91,
-        "eps_calculated": 19.94,
-        "eps_adjusted": 19.91,
+        "net_income": 235310000000.0,
+        "shares_diluted": 12286250000.0,
+        "eps_reported": 19.16,
+        "eps_calculated": 19.15,
+        "eps_adjusted": 19.16,
         "split_factor": 1.0,
-        "discrepancy": 0.03
+        "discrepancy": 0.01
       }
     ],
     "FY2025": [

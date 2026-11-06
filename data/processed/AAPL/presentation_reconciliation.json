@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T15:58:52.511531",
+  "timestamp": "2026-11-04T16:09:58.171962",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -23,99 +23,123 @@
   },
   "methodological_reconciliation": {},
   "banking_kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
+    "archetype": "STANDARD_CORPORATE",
     "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
     "total_slides": 3,
     "brand_segmentation": {
       "Products": {
-        "revenue_usd_m": 346345.0
+        "revenue_usd_m": 355533.0
       },
       "Services": {
-        "revenue_usd_m": 120478.0
+        "revenue_usd_m": 123301.0
       },
       "iPhone": {
-        "revenue_usd_m": 245540.0
+        "revenue_usd_m": 254098.0
       },
       "Mac": {
-        "revenue_usd_m": 35863.0
+        "revenue_usd_m": 37929.0
       },
       "iPad": {
-        "revenue_usd_m": 28652.0
+        "revenue_usd_m": 27929.0
       },
       "Wearables, Home and Accessories": {
-        "revenue_usd_m": 36290.0
+        "revenue_usd_m": 35577.0
+      },
+      "Corporate non-segment": {
+        "revenue_usd_m": 0.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
       "Americas": {
-        "revenue_usd_m": 193595.0
+        "revenue_usd_m": 198083.0
       },
       "Europe": {
-        "revenue_usd_m": 124299.0
+        "revenue_usd_m": 127604.0
       },
       "Greater China": {
-        "revenue_usd_m": 79332.0
+        "revenue_usd_m": 82378.0
       },
       "Japan": {
-        "revenue_usd_m": 31004.0
+        "revenue_usd_m": 30908.0
       },
       "Rest of Asia Pacific": {
-        "revenue_usd_m": 38593.0
+        "revenue_usd_m": 39861.0
+      },
+      "U.S.": {
+        "revenue_usd_m": 167746.0
+      },
+      "China": {
+        "revenue_usd_m": 82378.0
+      },
+      "Other countries": {
+        "revenue_usd_m": 228710.0
       }
     },
     "operational_kpis": {
-      "diluted_eps": 2.02
+      "diluted_eps": 2.1
     },
-    "source_sec": "a8-kex991q3202606272026.htm"
+    "source_sec": "a8-kex991q4202609262026.htm"
   },
   "kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
+    "archetype": "STANDARD_CORPORATE",
     "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
     "total_slides": 3,
     "brand_segmentation": {
       "Products": {
-        "revenue_usd_m": 346345.0
+        "revenue_usd_m": 355533.0
       },
       "Services": {
-        "revenue_usd_m": 120478.0
+        "revenue_usd_m": 123301.0
       },
       "iPhone": {
-        "revenue_usd_m": 245540.0
+        "revenue_usd_m": 254098.0
       },
       "Mac": {
-        "revenue_usd_m": 35863.0
+        "revenue_usd_m": 37929.0
       },
       "iPad": {
-        "revenue_usd_m": 28652.0
+        "revenue_usd_m": 27929.0
       },
       "Wearables, Home and Accessories": {
-        "revenue_usd_m": 36290.0
+        "revenue_usd_m": 35577.0
+      },
+      "Corporate non-segment": {
+        "revenue_usd_m": 0.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
       "Americas": {
-        "revenue_usd_m": 193595.0
+        "revenue_usd_m": 198083.0
       },
       "Europe": {
-        "revenue_usd_m": 124299.0
+        "revenue_usd_m": 127604.0
       },
       "Greater China": {
-        "revenue_usd_m": 79332.0
+        "revenue_usd_m": 82378.0
       },
       "Japan": {
-        "revenue_usd_m": 31004.0
+        "revenue_usd_m": 30908.0
       },
       "Rest of Asia Pacific": {
-        "revenue_usd_m": 38593.0
+        "revenue_usd_m": 39861.0
+      },
+      "U.S.": {
+        "revenue_usd_m": 167746.0
+      },
+      "China": {
+        "revenue_usd_m": 82378.0
+      },
+      "Other countries": {
+        "revenue_usd_m": 228710.0
       }
     },
     "operational_kpis": {
-      "diluted_eps": 2.02
+      "diluted_eps": 2.1
     },
-    "source_sec": "a8-kex991q3202606272026.htm"
+    "source_sec": "a8-kex991q4202609262026.htm"
   },
   "flags": [],
-  "archetype": "CORPORATE_INDUSTRIAL"
+  "archetype": "STANDARD_CORPORATE"
 }

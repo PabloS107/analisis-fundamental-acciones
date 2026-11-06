@@ -1,7 +1,7 @@
 {
   "ticker": "GOOGL",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-10-25T11:21:40.561639",
+  "timestamp": "2026-11-02T20:35:51.111519",
   "scorecard": {
     "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -10,16 +10,29 @@
     "is_foreign_private_issuer": false,
     "open_market_buys_usd": 0.0,
     "routine_10b5_sales_usd": 0.0,
-    "discretionary_sales_usd": 6298503.65,
+    "discretionary_sales_usd": 106575.55,
     "ratio_10b5_compliance_pct": 0.0,
     "audit_change_detected": false,
     "debt_default_detected": false,
     "ceo_transition_detected": true,
     "critical_flags": [
-      "Detectadas 14 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+      "Detectadas 15 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-10-28",
+      "accession_number": "0001652044-26-000080",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On October 28, 2026, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended September 30, 2026. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
+    },
     {
       "filing_date": "2026-08-10",
       "accession_number": "0001193125-26-342390",
@@ -331,18 +344,6 @@
       "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On April 24, 2025, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended March 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
-    },
-    {
-      "filing_date": "2025-04-18",
-      "accession_number": "0001652044-25-000033",
-      "items": [
-        "Item 8.01"
-      ],
-      "title": "Otros Eventos Materiales no Clasificados",
-      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
-      "diagnostic": "Hechos corporativos diversos de interés general.",
-      "risk_rating": "LOW",
-      "text_snippet": "Item 8.01. Other Events. On April 17, 2025, Judge Leonie M. Brinkema of U.S. District Court for the Eastern District of Virginia issued a mixed decision in the U.S. Department of Justice’s (“DOJ”) case against Google LLC (\"Google\"), a subsidiary of Alphabet Inc., ruling that the DOJ failed to show that Google’s advertiser tools or acquisitions of D..."
     }
   ],
   "form_6k_events": [],
@@ -353,30 +354,30 @@
       "total_open_market_buys_shares": 0,
       "total_10b5_sales_usd": 0.0,
       "total_10b5_sales_shares": 0,
-      "total_discretionary_sales_usd": 6298503.65,
-      "total_discretionary_sales_shares": 315765,
-      "total_grants_shares": 2521,
+      "total_discretionary_sales_usd": 106575.55,
+      "total_discretionary_sales_shares": 329,
+      "total_grants_shares": 505,
       "ratio_10b5_vs_discretionary_pct": 0.0,
-      "active_insiders_count": 15,
+      "active_insiders_count": 14,
       "insiders_breakdown": {
-        "Kavitark Ram Shriram": {
+        "Frances Arnold": {
           "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 106575.54999999999,
+          "shares_bought": 0,
+          "shares_sold": 329,
+          "grants": 12,
+          "tx_count": 5
+        },
+        "Marsida Saraci": {
+          "position": "VP, Chief Accounting Officer",
           "buys_usd": 0.0,
           "sales_10b5_usd": 0.0,
           "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
           "shares_sold": 0,
-          "grants": 1,
-          "tx_count": 2
-        },
-        "Frances Arnold": {
-          "position": "Director",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 83287.54999999999,
-          "shares_bought": 0,
-          "shares_sold": 247,
-          "grants": 12,
+          "grants": 6,
           "tx_count": 4
         },
         "John Kent Walker": {
@@ -389,14 +390,14 @@
           "grants": 82,
           "tx_count": 4
         },
-        "Marsida Saraci": {
-          "position": "VP, Chief Accounting Officer",
+        "Philipp Schindler": {
+          "position": "SVP, Chief Business Officer",
           "buys_usd": 0.0,
           "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 149606.8,
+          "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
-          "shares_sold": 449,
-          "grants": 2022,
+          "shares_sold": 0,
+          "grants": 104,
           "tx_count": 5
         },
         "Ruth Porat": {
@@ -417,7 +418,7 @@
           "shares_bought": 0,
           "shares_sold": 0,
           "grants": 82,
-          "tx_count": 3
+          "tx_count": 4
         },
         "Sundar Pichai": {
           "position": "Chief Executive Officer",
@@ -429,15 +430,15 @@
           "grants": 131,
           "tx_count": 4
         },
-        "Philipp Schindler": {
-          "position": "SVP, Chief Business Officer",
+        "Kavitark Ram Shriram": {
+          "position": "Director",
           "buys_usd": 0.0,
           "sales_10b5_usd": 0.0,
           "sales_discretionary_usd": 0.0,
           "shares_bought": 0,
           "shares_sold": 0,
-          "grants": 104,
-          "tx_count": 5
+          "grants": 1,
+          "tx_count": 2
         },
         "Robin L Washington": {
           "position": "Director",
@@ -498,20 +499,23 @@
           "shares_sold": 0,
           "grants": 0,
           "tx_count": 1
-        },
-        "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.": {
-          "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
-          "buys_usd": 0.0,
-          "sales_10b5_usd": 0.0,
-          "sales_discretionary_usd": 6065609.3047,
-          "shares_bought": 0,
-          "shares_sold": 315069,
-          "grants": 0,
-          "tx_count": 1
         }
       }
     },
     "transactions": [
+      {
+        "filing_date": "2026-10-30",
+        "insider": "Frances Arnold",
+        "position": "Director",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 82,
+        "price": 284.0,
+        "total_usd": 23288.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
       {
         "filing_date": "2026-10-02",
         "insider": "Frances Arnold",
@@ -953,84 +957,31 @@
         "is_10b5_1": false,
         "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
         "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
-      },
-      {
-        "filing_date": "2026-07-29",
-        "insider": "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.",
-        "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
-        "type": "VENTA_DISCRECIONAL",
-        "code": "S",
-        "shares": 196931,
-        "price": 19.46,
-        "total_usd": 3832848.36,
-        "is_10b5_1": false,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
-      },
-      {
-        "filing_date": "2026-07-29",
-        "insider": "GV 2019 GP, L.L.C. / GV 2019 GP, L.P. / GV 2019, L.P. / GV 2021 GP, L.L.C. / GV 2021 GP, L.P. / GV 2021, L.P. / Alphabet Inc.",
-        "position": "10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner/ 10% Owner",
-        "type": "VENTA_DISCRECIONAL",
-        "code": "S",
-        "shares": 118138,
-        "price": 18.9,
-        "total_usd": 2232760.94,
-        "is_10b5_1": false,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
-      },
-      {
-        "filing_date": "2026-07-29",
-        "insider": "Marsida Saraci",
-        "position": "VP, Chief Accounting Officer",
-        "type": "VENTA_DISCRECIONAL",
-        "code": "S",
-        "shares": 449,
-        "price": 333.2,
-        "total_usd": 149606.8,
-        "is_10b5_1": false,
-        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
-        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
-      },
-      {
-        "filing_date": "2026-07-28",
-        "insider": "Marsida Saraci",
-        "position": "VP, Chief Accounting Officer",
-        "type": "CONCESIÓN_RSU_ACCIONES",
-        "code": "A",
-        "shares": 1232,
-        "price": 0.0,
-        "total_usd": 0.0,
-        "is_10b5_1": false,
-        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
-        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
-      },
-      {
-        "filing_date": "2026-07-28",
-        "insider": "Marsida Saraci",
-        "position": "VP, Chief Accounting Officer",
-        "type": "CONCESIÓN_RSU_ACCIONES",
-        "code": "A",
-        "shares": 784,
-        "price": 0.0,
-        "total_usd": 0.0,
-        "is_10b5_1": false,
-        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
-        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
       }
     ]
   },
   "form_144_notices": {
     "summary": {
       "notices_analyzed": 20,
-      "total_shares_proposed": 1377044,
-      "total_value_proposed_usd": 512909173.0,
+      "total_shares_proposed": 1344626,
+      "total_value_proposed_usd": 502876636.0,
       "notices_under_10b5": 18,
       "notices_discretionary": 2,
-      "notices_with_anomalies_count": 14
+      "notices_with_anomalies_count": 15
     },
     "notices": [
+      {
+        "filing_date": "2026-10-29",
+        "person_selling": "ARNOLD FRANCES",
+        "shares_to_sell": 82,
+        "market_value_usd": 23288.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
       {
         "filing_date": "2026-09-30",
         "person_selling": "ARNOLD FRANCES",
@@ -1246,19 +1197,19 @@
           "SHORT_HOLD"
         ],
         "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
-      },
-      {
-        "filing_date": "2026-03-18",
-        "person_selling": "SUNDAR PICHAI",
-        "shares_to_sell": 32500,
-        "market_value_usd": 10055825.0,
-        "is_10b5_1": true,
-        "is_large_liquidation": false,
-        "anomaly_flags": [],
-        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
       }
     ],
     "anomalies": [
+      {
+        "date": "2026-10-29",
+        "seller": "ARNOLD FRANCES",
+        "market_value_usd": 23288.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
       {
         "date": "2026-09-30",
         "seller": "ARNOLD FRANCES",

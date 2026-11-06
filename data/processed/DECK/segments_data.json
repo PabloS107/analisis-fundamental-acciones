@@ -10,104 +10,189 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017",
-    "FY2016"
+    "FY2017"
   ],
   "product_segments": [
-    {
-      "name": "Wholesale",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2026": 3208.1,
-        "FY2025": 2855.9,
-        "FY2024": 2432.3,
-        "LTM": 3222.4
-      }
-    },
-    {
-      "name": "Direct-to-Consumer",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2026": 2264.2,
-        "FY2025": 2129.7,
-        "FY2024": 1855.5,
-        "LTM": 2304.8
-      }
-    },
     {
       "name": "HOKA",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2026": 2587.3,
         "FY2025": 2233.1,
         "FY2024": 1806.7,
-        "LTM": 2658.7
+        "FY2023": 1412.9,
+        "LTM": 2680.8
       },
       "operating_income": {
         "FY2026": 911.0,
         "FY2025": 848.5,
         "FY2024": 719.0,
-        "LTM": 912.9
+        "FY2023": 528.5,
+        "LTM": 928.2
       },
       "operating_margin_pct": {
         "FY2026": 35.21,
         "FY2025": 38.0,
         "FY2024": 39.8,
-        "LTM": 34.34
+        "FY2023": 37.41,
+        "LTM": 34.62
       }
     },
     {
       "name": "UGG",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2026": 2738.8,
         "FY2025": 2531.4,
         "FY2024": 2239.1,
-        "LTM": 2724.4
+        "FY2023": 1929.2,
+        "LTM": 2778.5
       },
       "operating_income": {
         "FY2026": 1045.3,
         "FY2025": 1002.9,
         "FY2024": 804.8,
-        "LTM": 1045.3
+        "FY2023": 572.5,
+        "LTM": 1098.8
       },
       "operating_margin_pct": {
         "FY2026": 38.17,
         "FY2025": 39.62,
         "FY2024": 35.94,
-        "LTM": 38.37
+        "FY2023": 29.68,
+        "LTM": 39.55
       }
     },
     {
       "name": "Other Brands",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2026": 146.2,
         "FY2025": 221.2,
         "FY2024": 241.9,
-        "LTM": 144.2
+        "FY2023": 285.2,
+        "LTM": 117.6
       },
       "operating_income": {
         "FY2026": 16.4,
         "FY2025": 34.6,
         "FY2024": 23.7,
-        "LTM": 15.3
+        "FY2023": 49.5,
+        "LTM": 11.3
       },
       "operating_margin_pct": {
         "FY2026": 11.22,
         "FY2025": 15.64,
         "FY2024": 9.8,
-        "LTM": 10.61
+        "FY2023": 17.36,
+        "LTM": 9.61
+      }
+    }
+  ],
+  "channel_segments": [
+    {
+      "name": "Wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2026": 3208.1,
+        "FY2025": 2855.9,
+        "FY2024": 2432.3,
+        "FY2023": 2160.7,
+        "FY2022": 1088.1,
+        "FY2021": 871.8,
+        "FY2020": 893.0,
+        "FY2019": 888.3,
+        "FY2018": 841.9,
+        "FY2017": 93.1,
+        "LTM": 3279.2
+      },
+      "operating_income": {
+        "FY2024": 349.5,
+        "FY2023": 267.0,
+        "FY2022": 315.2,
+        "FY2021": 292.7,
+        "FY2020": 303.9,
+        "FY2019": 300.8,
+        "FY2018": 247.8,
+        "FY2017": 2.6
+      },
+      "operating_margin_pct": {
+        "FY2024": 14.37,
+        "FY2023": 12.36,
+        "FY2022": 28.97,
+        "FY2021": 33.57,
+        "FY2020": 34.03,
+        "FY2019": 33.86,
+        "FY2018": 29.43,
+        "FY2017": 2.79
+      }
+    },
+    {
+      "name": "Direct-to-Consumer",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2026": 2264.2,
+        "FY2025": 2129.7,
+        "FY2024": 1855.5,
+        "FY2023": 1466.6,
+        "FY2022": 1213.6,
+        "FY2021": 1066.7,
+        "FY2020": 736.9,
+        "FY2019": 715.0,
+        "LTM": 2297.8
+      },
+      "operating_income": {
+        "FY2024": 748.7,
+        "FY2023": 508.9,
+        "FY2022": 435.4,
+        "FY2021": 349.5,
+        "FY2020": 182.5,
+        "FY2019": 185.4
+      },
+      "operating_margin_pct": {
+        "FY2024": 40.35,
+        "FY2023": 34.7,
+        "FY2022": 35.88,
+        "FY2021": 32.76,
+        "FY2020": 24.77,
+        "FY2019": 25.93
+      }
+    },
+    {
+      "name": "Directly to Consumer",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "Direct-to-Consumer",
+      "values": {
+        "FY2020": 736.9,
+        "FY2019": 715.0,
+        "FY2018": 715.7,
+        "FY2017": 666.3
+      },
+      "operating_income": {
+        "FY2020": 182.5,
+        "FY2019": 185.4,
+        "FY2018": 156.9,
+        "FY2017": 109.8
+      },
+      "operating_margin_pct": {
+        "FY2020": 24.77,
+        "FY2019": 25.93,
+        "FY2018": 21.92,
+        "FY2017": 16.48
       }
     }
   ],
@@ -121,7 +206,7 @@
         "FY2026": 3191.5,
         "FY2025": 3186.7,
         "FY2024": 2863.7,
-        "LTM": 3174.9
+        "LTM": 3204.0
       }
     },
     {
@@ -133,19 +218,7 @@
         "FY2026": 2280.8,
         "FY2025": 1798.9,
         "FY2024": 1424.1,
-        "LTM": 2352.4
-      }
-    },
-    {
-      "name": "International - Sales Revenue, Net - Net sales in foreign currencies",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "International",
-      "values": {
-        "FY2026": 1748.1,
-        "FY2025": 1376.8,
-        "FY2024": 1105.1,
-        "LTM": 1765.7
+        "LTM": 2373.0
       }
     }
   ],
@@ -156,7 +229,8 @@
         "FY2026": 1972.7,
         "FY2025": 1886.0,
         "FY2024": 1547.6,
-        "LTM": 1973.5
+        "FY2023": 1150.4,
+        "LTM": 2038.3
       }
     },
     {
@@ -165,7 +239,8 @@
         "FY2026": 911.0,
         "FY2025": 848.5,
         "FY2024": 719.0,
-        "LTM": 912.9
+        "FY2023": 528.5,
+        "LTM": 928.2
       }
     },
     {
@@ -174,7 +249,8 @@
         "FY2026": 1045.3,
         "FY2025": 1002.9,
         "FY2024": 804.8,
-        "LTM": 1045.3
+        "FY2023": 572.5,
+        "LTM": 1098.8
       }
     },
     {
@@ -183,7 +259,8 @@
         "FY2026": 16.4,
         "FY2025": 34.6,
         "FY2024": 23.7,
-        "LTM": 15.3
+        "FY2023": 49.5,
+        "LTM": 11.3
       }
     },
     {
@@ -192,7 +269,74 @@
         "FY2026": 63.5,
         "FY2025": 64.2,
         "FY2024": 51.4,
-        "LTM": 59.5
+        "FY2023": 13.3,
+        "LTM": 57.6
+      }
+    },
+    {
+      "name": "Income (loss) from operations",
+      "values": {
+        "FY2024": 927.5,
+        "FY2023": 652.8,
+        "FY2022": 564.7,
+        "FY2021": 504.2,
+        "FY2020": 338.1,
+        "FY2019": 327.3
+      }
+    },
+    {
+      "name": "Wholesale",
+      "values": {
+        "FY2024": 349.5,
+        "FY2023": 267.0,
+        "FY2022": 315.2,
+        "FY2021": 292.7,
+        "FY2020": 303.9,
+        "FY2019": 300.8,
+        "FY2018": 247.8,
+        "FY2017": 2.6
+      }
+    },
+    {
+      "name": "Direct-to-Consumer",
+      "values": {
+        "FY2024": 748.7,
+        "FY2023": 508.9,
+        "FY2022": 435.4,
+        "FY2021": 349.5,
+        "FY2020": 182.5,
+        "FY2019": 185.4
+      }
+    },
+    {
+      "name": "Segment reconciling items",
+      "values": {
+        "FY2024": -557.5,
+        "FY2023": -442.3,
+        "FY2022": -395.1,
+        "FY2021": -297.7,
+        "FY2020": -260.2,
+        "FY2019": -245.7,
+        "FY2018": -239.3,
+        "FY2017": -226.2
+      }
+    },
+    {
+      "name": "(Loss) income from operations",
+      "values": {
+        "FY2020": 338.1,
+        "FY2019": 327.3,
+        "FY2018": 222.6,
+        "FY2017": -1.9
+      }
+    },
+    {
+      "name": "Directly to Consumer",
+      "values": {
+        "FY2020": 182.5,
+        "FY2019": 185.4,
+        "FY2018": 156.9,
+        "FY2017": 109.8
       }
     }
   ],

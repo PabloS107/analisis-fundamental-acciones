@@ -15,55 +15,540 @@
   ],
   "product_segments": [
     {
-      "name": "Net revenues and financial income",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 28893.0,
-        "FY2024": 20777.0,
-        "FY2023": 15107.0,
-        "LTM": 35182.0
-      }
-    },
-    {
       "name": "Net service revenues and financial income",
-      "is_subtotal": true,
+      "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2025": 25286.0,
         "FY2024": 18638.0,
         "FY2023": 13617.0,
-        "LTM": 30409.0
+        "FY2022": 9685.0,
+        "LTM": 33138.0
       }
     },
     {
       "name": "Net product revenues",
-      "is_subtotal": true,
+      "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
       "values": {
         "FY2025": 3607.0,
         "FY2024": 2139.0,
         "FY2023": 1490.0,
-        "LTM": 4773.0
+        "FY2022": 1095.0,
+        "FY2021": 920.0,
+        "LTM": 5385.0
+      }
+    },
+    {
+      "name": "Services",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Commerce",
+      "values": {
+        "FY2025": 12750.0,
+        "FY2024": 10076.0,
+        "FY2023": 6754.0,
+        "FY2022": 4764.0,
+        "FY2021": 3750.0,
+        "FY2020": 2305.0,
+        "LTM": 16433.0
+      }
+    },
+    {
+      "name": "Product Sales",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Commerce",
+      "values": {
+        "FY2025": 3544.0,
+        "FY2024": 2083.0,
+        "FY2023": 1447.0,
+        "FY2022": 1044.0,
+        "FY2021": 885.0,
+        "FY2020": 255.0,
+        "LTM": 5316.0
+      }
+    },
+    {
+      "name": "Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 16294.0,
+        "FY2024": 12159.0,
+        "FY2023": 8201.0,
+        "FY2022": 5808.0,
+        "FY2021": 4635.0,
+        "FY2020": 2560.0,
+        "FY2019": 1346.4,
+        "FY2018": 838.6,
+        "LTM": 21749.0
+      }
+    },
+    {
+      "name": "Credit revenues",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fintech",
+      "values": {
+        "FY2025": 5858.0,
+        "FY2024": 3600.0,
+        "FY2023": 2546.0,
+        "FY2022": 2033.0,
+        "FY2021": 809.0,
+        "FY2020": 246.0,
+        "LTM": 8561.0
+      }
+    },
+    {
+      "name": "Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 12599.0,
+        "FY2024": 8618.0,
+        "FY2023": 6906.0,
+        "FY2022": 4972.0,
+        "FY2021": 2434.0,
+        "FY2020": 1414.0,
+        "FY2019": 949.9,
+        "FY2018": 601.0,
+        "LTM": 16774.0
       }
     },
     {
       "name": "Operating Segments",
       "is_subtotal": true,
-      "is_subsegment": true,
-      "parent": "Net service revenues and financial income",
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
       "values": {
-        "FY2025": 25286.0,
-        "FY2024": 18638.0,
-        "FY2023": 13617.0,
-        "LTM": 30409.0
+        "FY2025": 28893.0,
+        "FY2024": 20777.0,
+        "FY2023": 15107.0,
+        "FY2022": 10780.0,
+        "FY2021": 7069.0,
+        "FY2020": 3974.0,
+        "LTM": 38523.0
       }
     },
     {
-      "name": "Commerce",
+      "name": "Operating expenses and indirect costs of net revenues and financial expenses",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2702.0,
+        "FY2024": 2301.0,
+        "FY2023": 2084.0,
+        "FY2022": 1238.0,
+        "LTM": 3130.0
+      }
+    },
+    {
+      "name": "Argentinean Subsidiaries",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Operating Segments",
+      "values": {
+        "FY2024": 3818.0,
+        "FY2023": 3550.0,
+        "FY2022": 2575.0,
+        "FY2021": 1531.0,
+        "FY2020": 980.0
+      }
+    },
+    {
+      "name": "Net revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2023": 14473.0,
+        "FY2022": 10537.0,
+        "FY2021": 7069.0,
+        "FY2020": 3974.0,
+        "FY2019": 2296.3,
+        "FY2018": 1439.7,
+        "FY2017": 1216.5,
+        "FY2016": 844.4
+      }
+    },
+    {
+      "name": "Net service revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12983.0,
+        "FY2022": 9442.0,
+        "FY2021": 6149.0
+      }
+    },
+    {
+      "name": "Operating expenses and indirect costs of net revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2023": 2084.0,
+        "FY2022": 1238.0,
+        "FY2021": 878.0,
+        "FY2020": 599.0,
+        "FY2019": 361.2,
+        "FY2018": 247.7,
+        "FY2017": 201.5,
+        "FY2016": 136.4
+      }
+    },
+    {
+      "name": "Service",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2022": 9442.0,
+        "FY2021": 6149.0,
+        "FY2020": 3690.0,
+        "FY2019": 2265.7
+      }
+    },
+    {
+      "name": "Product",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2022": 1095.0,
+        "FY2021": 920.0,
+        "FY2020": 284.0,
+        "FY2019": 30.6
+      }
+    },
+    {
+      "name": "Enchanced Marketplace",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 1199.2,
+        "FY2018": 702.4,
+        "FY2017": 737.5
+      }
+    },
+    {
+      "name": "Non-marketplace",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 1097.1,
+        "FY2018": 737.3,
+        "FY2017": 479.1,
+        "FY2016": 296.3
+      }
+    },
+    {
+      "name": "Venezuela Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2017": 54.3,
+        "FY2016": 37.2
+      }
+    },
+    {
+      "name": "Marketplace",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2018": 702.4,
+        "FY2017": 737.5,
+        "FY2016": 548.1
+      }
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "Net service revenues and financial income - Brazil",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 12846.0,
+        "FY2024": 10033.0,
+        "FY2023": 6946.0,
+        "FY2022": 5283.0,
+        "LTM": 17371.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 4.9
+      }
+    },
+    {
+      "name": "Net service revenues and financial income - Mexico",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 5699.0,
+        "FY2024": 4183.0,
+        "FY2023": 2734.0,
+        "FY2022": 1638.0,
+        "LTM": 7711.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 4.52
+      }
+    },
+    {
+      "name": "Net service revenues and financial income - Argentina",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 5646.0,
+        "FY2024": 3614.0,
+        "FY2023": 3322.0,
+        "FY2022": 2299.0,
+        "LTM": 6550.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 30.4
+      }
+    },
+    {
+      "name": "Net service revenues and financial income - Other Countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 1095.0,
+        "FY2024": 808.0,
+        "FY2023": 615.0,
+        "FY2022": 465.0,
+        "LTM": 1506.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -9.68
+      }
+    },
+    {
+      "name": "Net product revenues - Brazil",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2355.0,
+        "FY2024": 1373.0,
+        "FY2023": 875.0,
+        "FY2022": 515.0,
+        "LTM": 3571.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 50.29
+      }
+    },
+    {
+      "name": "Net product revenues - Mexico",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 776.0,
+        "FY2024": 481.0,
+        "FY2023": 337.0,
+        "FY2022": 255.0,
+        "LTM": 1127.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 29.02
+      }
+    },
+    {
+      "name": "Net product revenues - Argentina",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 316.0,
+        "FY2024": 204.0,
+        "FY2023": 228.0,
+        "FY2022": 276.0,
+        "LTM": 417.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 253.26
+      }
+    },
+    {
+      "name": "Net product revenues - Other Countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 160.0,
+        "FY2024": 81.0,
+        "FY2023": 50.0,
+        "FY2022": 49.0,
+        "LTM": 270.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -91.84
+      }
+    },
+    {
+      "name": "Other Countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 1255.0,
+        "FY2024": 889.0,
+        "FY2023": 665.0,
+        "FY2022": 514.0,
+        "FY2021": 456.0,
+        "FY2020": 225.0,
+        "LTM": 1776.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -8.75,
+        "FY2021": 1535.09,
+        "FY2020": 2222.22
+      }
+    },
+    {
+      "name": "Services - Brazil - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 6859.0,
+        "FY2024": 5695.0,
+        "FY2023": 3655.0,
+        "FY2022": 2585.0,
+        "FY2021": 2076.0,
+        "FY2020": 1257.0,
+        "LTM": 9048.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 10.02,
+        "FY2021": 9.1,
+        "FY2020": 6.28
+      }
+    },
+    {
+      "name": "Services - Mexico - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 3432.0,
+        "FY2024": 2608.0,
+        "FY2023": 1653.0,
+        "FY2022": 1036.0,
+        "FY2021": 756.0,
+        "FY2020": 428.0,
+        "LTM": 4362.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 7.14,
+        "FY2021": -17.2,
+        "FY2020": -31.31
+      }
+    },
+    {
+      "name": "Services - Argentina - Commerce",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -71,11 +556,311 @@
         "FY2025": 1722.0,
         "FY2024": 1207.0,
         "FY2023": 1036.0,
-        "LTM": 1895.0
+        "FY2022": 814.0,
+        "FY2021": 614.0,
+        "FY2020": 461.0,
+        "LTM": 2040.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 85.87,
+        "FY2021": 63.36,
+        "FY2020": 40.13
       }
     },
     {
-      "name": "Fintech",
+      "name": "Services - Other countries - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 737.0,
+        "FY2024": 566.0,
+        "FY2023": 410.0,
+        "FY2022": 329.0,
+        "FY2021": 304.0,
+        "FY2020": 159.0,
+        "LTM": 983.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -13.68,
+        "FY2021": 2302.63,
+        "FY2020": 3144.65
+      }
+    },
+    {
+      "name": "Product Sales - Brazil - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2325.0,
+        "FY2024": 1343.0,
+        "FY2023": 857.0,
+        "FY2022": 487.0,
+        "FY2021": 405.0,
+        "FY2020": 100.0,
+        "LTM": 3539.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 53.18,
+        "FY2021": 46.67,
+        "FY2020": 79.0
+      }
+    },
+    {
+      "name": "Product Sales - Mexico - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 753.0,
+        "FY2024": 464.0,
+        "FY2023": 326.0,
+        "FY2022": 246.0,
+        "FY2021": 168.0,
+        "FY2020": 43.0,
+        "LTM": 1102.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 30.08,
+        "FY2021": -77.38,
+        "FY2020": -311.63
+      }
+    },
+    {
+      "name": "Product Sales - Argentina - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 312.0,
+        "FY2024": 200.0,
+        "FY2023": 225.0,
+        "FY2022": 271.0,
+        "FY2021": 242.0,
+        "FY2020": 100.0,
+        "LTM": 413.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 257.93,
+        "FY2021": 160.74,
+        "FY2020": 185.0
+      }
+    },
+    {
+      "name": "Product Sales - Other countries - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 154.0,
+        "FY2024": 76.0,
+        "FY2023": 39.0,
+        "FY2022": 40.0,
+        "FY2021": 70.0,
+        "FY2020": 12.0,
+        "LTM": 262.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -112.5,
+        "FY2021": 10000.0,
+        "FY2020": 41666.67
+      }
+    },
+    {
+      "name": "Brazil - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 9184.0,
+        "FY2024": 7038.0,
+        "FY2023": 4512.0,
+        "FY2022": 3072.0,
+        "FY2021": 2481.0,
+        "FY2020": 1357.0,
+        "LTM": 12587.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 8.43,
+        "FY2021": 7.62,
+        "FY2020": 5.82
+      }
+    },
+    {
+      "name": "Mexico - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 4185.0,
+        "FY2024": 3072.0,
+        "FY2023": 1979.0,
+        "FY2022": 1282.0,
+        "FY2021": 924.0,
+        "FY2020": 471.0,
+        "LTM": 5464.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 5.77,
+        "FY2021": -14.07,
+        "FY2020": -28.45
+      }
+    },
+    {
+      "name": "Argentina - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2034.0,
+        "FY2024": 1407.0,
+        "FY2023": 1261.0,
+        "FY2022": 1085.0,
+        "FY2021": 856.0,
+        "FY2020": 561.0,
+        "LTM": 2453.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 64.42,
+        "FY2021": 45.44,
+        "FY2020": 32.98
+      }
+    },
+    {
+      "name": "Other countries - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 891.0,
+        "FY2024": 642.0,
+        "FY2023": 449.0,
+        "FY2022": 369.0,
+        "FY2021": 374.0,
+        "FY2020": 171.0,
+        "LTM": 1245.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -12.2,
+        "FY2021": 1871.66,
+        "FY2020": 2923.98
+      }
+    },
+    {
+      "name": "Services - Brazil - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 2829.0,
+        "FY2024": 2416.0,
+        "FY2023": 2136.0,
+        "FY2022": 1596.0,
+        "FY2021": 938.0,
+        "FY2020": 671.0,
+        "LTM": 3496.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 16.23,
+        "FY2021": 20.15,
+        "FY2020": 11.77
+      }
+    },
+    {
+      "name": "Services - Mexico - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 897.0,
+        "FY2024": 566.0,
+        "FY2023": 382.0,
+        "FY2022": 181.0,
+        "FY2021": 80.0,
+        "FY2020": 64.0,
+        "LTM": 1339.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 40.88,
+        "FY2021": -162.5,
+        "FY2020": -209.38
+      }
+    },
+    {
+      "name": "Services - Argentina - Fintech",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -83,399 +868,433 @@
         "FY2025": 2609.0,
         "FY2024": 1748.0,
         "FY2023": 1602.0,
-        "LTM": 2742.0
+        "FY2022": 979.0,
+        "FY2021": 490.0,
+        "FY2020": 350.0,
+        "LTM": 2827.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 71.4,
+        "FY2021": 79.39,
+        "FY2020": 52.86
       }
     },
     {
-      "name": "As reported",
+      "name": "Services - Other countries - Fintech",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 14473.0
-      }
-    },
-    {
-      "name": "Reclassification",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 634.0
-      }
-    },
-    {
-      "name": "Operating expenses and indirect costs of net revenues and financial expenses",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 2702.0,
-        "FY2024": 2301.0,
-        "FY2023": 2084.0,
-        "LTM": 2994.0
-      }
-    }
-  ],
-  "geographic_segments": [
-    {
-      "name": "Operating Segments - Net service revenues and financial income - Brazil",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 12846.0,
-        "FY2024": 10033.0,
-        "FY2023": 6946.0,
-        "LTM": 15793.0
-      }
-    },
-    {
-      "name": "Operating Segments - Net service revenues and financial income - Mexico",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 5699.0,
-        "FY2024": 4183.0,
-        "FY2023": 2734.0,
-        "LTM": 7051.0
-      }
-    },
-    {
-      "name": "Operating Segments - Net service revenues and financial income - Other Countries",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 1095.0,
-        "FY2024": 808.0,
-        "FY2023": 615.0,
-        "LTM": 1354.0
-      }
-    },
-    {
-      "name": "Operating Segments - Net product revenues - Brazil",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 2355.0,
-        "FY2024": 1373.0,
-        "FY2023": 875.0,
-        "LTM": 3157.0
-      }
-    },
-    {
-      "name": "Operating Segments - Net product revenues - Mexico",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 776.0,
-        "FY2024": 481.0,
-        "FY2023": 337.0,
-        "LTM": 1009.0
-      }
-    },
-    {
-      "name": "Operating Segments - Net product revenues - Other Countries",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 160.0,
-        "FY2024": 81.0,
-        "FY2023": 50.0,
-        "LTM": 228.0
-      }
-    },
-    {
-      "name": "Operating Segments - Other Countries",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 1255.0,
-        "FY2024": 889.0,
-        "FY2023": 665.0,
-        "LTM": 1582.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Brazil - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 6859.0,
-        "FY2024": 5695.0,
-        "FY2023": 3655.0,
-        "LTM": 8219.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Mexico - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 3432.0,
-        "FY2024": 2608.0,
-        "FY2023": 1653.0,
-        "LTM": 4076.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Other countries - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 737.0,
-        "FY2024": 566.0,
-        "FY2023": 410.0,
-        "LTM": 888.0
-      }
-    },
-    {
-      "name": "Operating Segments - Product Sales - Brazil - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 2325.0,
-        "FY2024": 1343.0,
-        "FY2023": 857.0,
-        "LTM": 3125.0
-      }
-    },
-    {
-      "name": "Operating Segments - Product Sales - Mexico - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 753.0,
-        "FY2024": 464.0,
-        "FY2023": 326.0,
-        "LTM": 984.0
-      }
-    },
-    {
-      "name": "Operating Segments - Product Sales - Other countries - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 154.0,
-        "FY2024": 76.0,
-        "FY2023": 39.0,
-        "LTM": 220.0
-      }
-    },
-    {
-      "name": "Operating Segments - Brazil - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 9184.0,
-        "FY2024": 7038.0,
-        "FY2023": 4512.0,
-        "LTM": 11344.0
-      }
-    },
-    {
-      "name": "Operating Segments - Mexico - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 4185.0,
-        "FY2024": 3072.0,
-        "FY2023": 1979.0,
-        "LTM": 5060.0
-      }
-    },
-    {
-      "name": "Operating Segments - Other countries - Commerce",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 891.0,
-        "FY2024": 642.0,
-        "FY2023": 449.0,
-        "LTM": 1108.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Brazil - Fintech",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 2829.0,
-        "FY2024": 2416.0,
-        "FY2023": 2136.0,
-        "LTM": 3289.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Mexico - Fintech",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2025": 897.0,
-        "FY2024": 566.0,
-        "FY2023": 382.0,
-        "LTM": 1188.0
-      }
-    },
-    {
-      "name": "Operating Segments - Services - Other countries - Fintech",
-      "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 343.0,
         "FY2024": 232.0,
         "FY2023": 197.0,
-        "LTM": 436.0
+        "FY2022": 125.0,
+        "FY2021": 82.0,
+        "FY2020": 54.0,
+        "LTM": 482.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -36.0,
+        "FY2021": 8536.59,
+        "FY2020": 9259.26
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - Brazil - Fintech",
-      "is_subtotal": true,
+      "name": "Credit revenues - Brazil - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 3158.0,
         "FY2024": 1922.0,
         "FY2023": 1155.0,
-        "LTM": 4285.0
+        "FY2022": 1102.0,
+        "FY2021": 468.0,
+        "FY2020": 143.0,
+        "LTM": 4827.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 23.5,
+        "FY2021": 40.38,
+        "FY2020": 55.24
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - Mexico - Fintech",
-      "is_subtotal": true,
+      "name": "Credit revenues - Mexico - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 1370.0,
         "FY2024": 1009.0,
         "FY2023": 699.0,
-        "LTM": 1787.0
+        "FY2022": 421.0,
+        "FY2021": 163.0,
+        "FY2020": 39.0,
+        "LTM": 2010.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 17.58,
+        "FY2021": -79.75,
+        "FY2020": -343.59
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - Other countries - Fintech",
-      "is_subtotal": true,
+      "name": "Credit revenues - Argentina - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 1315.0,
+        "FY2024": 659.0,
+        "FY2023": 684.0,
+        "FY2022": 506.0,
+        "FY2021": 178.0,
+        "FY2020": 64.0,
+        "LTM": 1683.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 138.14,
+        "FY2021": 218.54,
+        "FY2020": 289.06
+      }
+    },
+    {
+      "name": "Credit revenues - Other countries - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 15.0,
         "FY2024": 10000.0,
         "FY2023": 8000.0,
-        "LTM": -4965.0
+        "FY2022": 4000.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
+        "LTM": -8950.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -1.12
       }
     },
     {
-      "name": "Operating Segments - Product Sales - Brazil - Fintech",
-      "is_subtotal": true,
+      "name": "Product Sales - Brazil - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 30.0,
         "FY2024": 30.0,
         "FY2023": 18.0,
+        "FY2022": 28.0,
+        "FY2021": 23.0,
+        "FY2020": 23.0,
         "LTM": 32.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 925.0,
+        "FY2021": 821.74,
+        "FY2020": 343.48
       }
     },
     {
-      "name": "Operating Segments - Product Sales - Mexico - Fintech",
-      "is_subtotal": true,
+      "name": "Product Sales - Mexico - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 23.0,
         "FY2024": 17.0,
         "FY2023": 11.0,
-        "LTM": -9965.0
+        "FY2022": 9000.0,
+        "FY2021": 5000.0,
+        "FY2020": 1000.0,
+        "LTM": 25.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 0.82,
+        "FY2021": -2.6,
+        "FY2020": -13.4
       }
     },
     {
-      "name": "Operating Segments - Product Sales - Other countries - Fintech",
-      "is_subtotal": true,
+      "name": "Product Sales - Argentina - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 4000.0,
+        "FY2024": 4000.0,
+        "FY2023": 3000.0,
+        "FY2022": 5000.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "LTM": 4000.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 13.98,
+        "FY2021": 5.56,
+        "FY2020": 3.7
+      }
+    },
+    {
+      "name": "Product Sales - Other countries - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 6000.0,
         "FY2024": 5000.0,
         "FY2023": 11.0,
+        "FY2022": 9000.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
         "LTM": 8000.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -0.5
       }
     },
     {
-      "name": "Operating Segments - Brazil - Fintech",
-      "is_subtotal": true,
+      "name": "Brazil - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 6017.0,
         "FY2024": 4368.0,
         "FY2023": 3309.0,
-        "LTM": 7606.0
+        "FY2022": 2726.0,
+        "FY2021": 1429.0,
+        "FY2020": 837.0,
+        "LTM": 8355.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 9.5,
+        "FY2021": 13.23,
+        "FY2020": 9.44
       }
     },
     {
-      "name": "Operating Segments - Mexico - Fintech",
-      "is_subtotal": true,
+      "name": "Mexico - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 2290.0,
         "FY2024": 1592.0,
         "FY2023": 1092.0,
-        "LTM": 3000.0
+        "FY2022": 611.0,
+        "FY2021": 248.0,
+        "FY2020": 104.0,
+        "LTM": 3374.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 12.11,
+        "FY2021": -52.42,
+        "FY2020": -128.85
       }
     },
     {
-      "name": "Operating Segments - Other countries - Fintech",
-      "is_subtotal": true,
+      "name": "Argentina - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 3928.0,
+        "FY2024": 2411.0,
+        "FY2023": 2289.0,
+        "FY2022": 1490.0,
+        "FY2021": 675.0,
+        "FY2020": 419.0,
+        "LTM": 4514.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 46.91,
+        "FY2021": 57.63,
+        "FY2020": 44.15
+      }
+    },
+    {
+      "name": "Other countries - Fintech",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 364.0,
         "FY2024": 247.0,
         "FY2023": 216.0,
-        "LTM": 474.0
+        "FY2022": 138.0,
+        "FY2021": 82.0,
+        "FY2020": 54.0,
+        "LTM": 531.0
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2022": -32.61,
+        "FY2021": 8536.59,
+        "FY2020": 9259.26
       }
     },
     {
-      "name": "Operating Segments - Brazil",
-      "is_subtotal": true,
+      "name": "Brazil",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 15201.0,
         "FY2024": 11406.0,
         "FY2023": 7821.0,
-        "LTM": 18950.0
+        "FY2022": 5798.0,
+        "FY2021": 3910.0,
+        "FY2020": 2194.0,
+        "LTM": 20942.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2022": 4.47,
+        "FY2021": 4.83,
+        "FY2020": 3.6
       }
     },
     {
-      "name": "Operating Segments - Mexico",
-      "is_subtotal": true,
+      "name": "Mexico",
+      "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2025": 6475.0,
         "FY2024": 4664.0,
         "FY2023": 3071.0,
-        "LTM": 8060.0
+        "FY2022": 1893.0,
+        "FY2021": 1172.0,
+        "FY2020": 575.0,
+        "LTM": 8838.0
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2022": 3.91,
+        "FY2021": -11.09,
+        "FY2020": -23.3
+      }
+    },
+    {
+      "name": "Argentina",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 5962.0,
+        "FY2024": 3818.0,
+        "FY2023": 3550.0,
+        "FY2022": 2575.0,
+        "FY2021": 1531.0,
+        "FY2020": 980.0,
+        "LTM": 6967.0
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2022": 27.15,
+        "FY2021": 25.41,
+        "FY2020": 18.88
       }
     },
     {
@@ -487,316 +1306,1275 @@
         "FY2025": 51.0,
         "FY2024": 35.0,
         "FY2023": 0.0,
-        "LTM": 68.0
+        "FY2022": 0.0,
+        "LTM": 77.0
+      },
+      "operating_income": {
+        "FY2024": 94.0,
+        "FY2023": -362.0,
+        "FY2022": -207.0,
+        "FY2021": -214.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 268.57
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Brazil - Commerce",
+      "name": "Services - As reported - Brazil - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 3655.0
+        "FY2023": 3655.0,
+        "FY2022": 2585.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 49.88,
+        "FY2022": 40.0
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Mexico - Commerce",
+      "name": "Services - As reported - Mexico - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 1653.0
+        "FY2023": 1653.0,
+        "FY2022": 1036.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 110.28,
+        "FY2022": 99.81
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Other countries - Commerce",
+      "name": "Services - As reported - Argentina - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 1036.0,
+        "FY2022": 814.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 175.97,
+        "FY2022": 127.03
+      }
+    },
+    {
+      "name": "Services - As reported - Other countries - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 410.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 444.63
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Brazil - Commerce",
+      "name": "Product Sales - As reported - Brazil - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 857.0
+        "FY2023": 857.0,
+        "FY2022": 487.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 212.72,
+        "FY2022": 212.32
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Mexico - Commerce",
+      "name": "Product Sales - As reported - Mexico - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 326.0
+        "FY2023": 326.0,
+        "FY2022": 246.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 559.2,
+        "FY2022": 420.33
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Other countries - Commerce",
+      "name": "Product Sales - As reported - Argentina - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 225.0,
+        "FY2022": 271.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 810.22,
+        "FY2022": 381.55
+      }
+    },
+    {
+      "name": "Product Sales - As reported - Other countries - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 39.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 4674.36
       }
     },
     {
-      "name": "Operating Segments - As reported - Brazil - Commerce",
+      "name": "As reported - Brazil - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 4512.0
+        "FY2023": 4512.0,
+        "FY2022": 3072.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 40.4,
+        "FY2022": 33.66
       }
     },
     {
-      "name": "Operating Segments - As reported - Mexico - Commerce",
+      "name": "As reported - Mexico - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 1979.0
+        "FY2023": 1979.0,
+        "FY2022": 1282.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 92.12,
+        "FY2022": 80.66
       }
     },
     {
-      "name": "Operating Segments - As reported - Other countries - Commerce",
+      "name": "As reported - Argentina - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 1261.0,
+        "FY2022": 1085.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 144.57,
+        "FY2022": 95.3
+      }
+    },
+    {
+      "name": "As reported - Other countries - Commerce",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 449.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 406.01
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Brazil - Fintech",
+      "name": "Services - As reported - Brazil - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 1910.0
+        "FY2023": 1910.0,
+        "FY2022": 1464.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 95.45,
+        "FY2022": 70.63
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Mexico - Fintech",
+      "name": "Services - As reported - Mexico - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 296.0
+        "FY2023": 296.0,
+        "FY2022": 152.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 615.88,
+        "FY2022": 680.26
       }
     },
     {
-      "name": "Operating Segments - Services - As reported - Other countries - Fintech",
+      "name": "Services - As reported - Argentina - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 1292.0,
+        "FY2022": 904.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 141.1,
+        "FY2022": 114.38
+      }
+    },
+    {
+      "name": "Services - As reported - Other countries - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 185.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 985.41
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - As reported - Brazil - Fintech",
+      "name": "Credit revenues - As reported - Brazil - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 1155.0
+        "FY2023": 1155.0,
+        "FY2022": 1102.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 157.84,
+        "FY2022": 93.83
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - As reported - Mexico - Fintech",
+      "name": "Credit revenues - As reported - Mexico - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 699.0
+        "FY2023": 699.0,
+        "FY2022": 421.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 260.8,
+        "FY2022": 245.61
       }
     },
     {
-      "name": "Operating Segments - Credit revenues - As reported - Other countries - Fintech",
+      "name": "Credit revenues - As reported - Argentina - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 684.0,
+        "FY2022": 506.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 266.52,
+        "FY2022": 204.35
+      }
+    },
+    {
+      "name": "Credit revenues - As reported - Other countries - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 8000.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 22.79
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Brazil - Fintech",
+      "name": "Product Sales - As reported - Brazil - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 18.0
+        "FY2023": 18.0,
+        "FY2022": 28.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 10127.78,
+        "FY2022": 3692.86
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Mexico - Fintech",
+      "name": "Product Sales - As reported - Mexico - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 11.0,
+        "FY2022": 9000.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 16572.73,
+        "FY2022": 11.49
+      }
+    },
+    {
+      "name": "Product Sales - As reported - Argentina - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 3000.0,
+        "FY2022": 5000.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 60.77,
+        "FY2022": 20.68
+      }
+    },
+    {
+      "name": "Product Sales - As reported - Other countries - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 11.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 16572.73
       }
     },
     {
-      "name": "Operating Segments - Product Sales - As reported - Other countries - Fintech",
+      "name": "As reported - Brazil - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 11.0
+        "FY2023": 3083.0,
+        "FY2022": 2594.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 59.13,
+        "FY2022": 39.86
       }
     },
     {
-      "name": "Operating Segments - As reported - Brazil - Fintech",
+      "name": "As reported - Mexico - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 3083.0
+        "FY2023": 1006.0,
+        "FY2022": 582.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 181.21,
+        "FY2022": 177.66
       }
     },
     {
-      "name": "Operating Segments - As reported - Mexico - Fintech",
+      "name": "As reported - Argentina - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 1006.0
+        "FY2023": 1979.0,
+        "FY2022": 1415.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 92.12,
+        "FY2022": 73.07
       }
     },
     {
-      "name": "Operating Segments - As reported - Other countries - Fintech",
+      "name": "As reported - Other countries - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 204.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 893.63
       }
     },
     {
-      "name": "Operating Segments - As reported - Brazil",
+      "name": "As reported - Brazil",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 7595.0
+        "FY2023": 7595.0,
+        "FY2022": 5666.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 24.0,
+        "FY2022": 18.25
       }
     },
     {
-      "name": "Operating Segments - As reported - Mexico",
+      "name": "As reported - Mexico",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 2985.0
+        "FY2023": 2985.0,
+        "FY2022": 1864.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 61.07,
+        "FY2022": 55.47
       }
     },
     {
-      "name": "Operating Segments - As reported - Other countries",
+      "name": "As reported - Argentina",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 3240.0,
+        "FY2022": 2500.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 56.27,
+        "FY2022": 41.36
+      }
+    },
+    {
+      "name": "As reported - Other countries",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 653.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 279.17
       }
     },
     {
-      "name": "Operating Segments - Services - Reclassification - Brazil - Fintech",
+      "name": "Services - Reclassification - Brazil - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 226.0
+        "FY2023": 226.0,
+        "FY2022": 132.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 169.91,
+        "FY2022": 26.52
       }
     },
     {
-      "name": "Operating Segments - Services - Reclassification - Mexico - Fintech",
+      "name": "Services - Reclassification - Mexico - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 86.0
+        "FY2023": 86.0,
+        "FY2022": 29.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 446.51,
+        "FY2022": 120.69
       }
     },
     {
-      "name": "Operating Segments - Services - Reclassification - Other countries - Fintech",
+      "name": "Services - Reclassification - Argentina - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2023": 12.0
+        "FY2023": 310.0,
+        "FY2022": 75.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 123.87,
+        "FY2022": 46.67
       }
     },
     {
-      "name": "Operating Segments - Reclassification - Brazil - Fintech",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 226.0
-      }
-    },
-    {
-      "name": "Operating Segments - Reclassification - Mexico - Fintech",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 86.0
-      }
-    },
-    {
-      "name": "Operating Segments - Reclassification - Other countries - Fintech",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 12.0
-      }
-    },
-    {
-      "name": "Operating Segments - Reclassification - Brazil",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 226.0
-      }
-    },
-    {
-      "name": "Operating Segments - Reclassification - Mexico",
-      "is_subtotal": true,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 86.0
-      }
-    },
-    {
-      "name": "Operating Segments - Reclassification - Other countries",
+      "name": "Services - Reclassification - Other countries - Fintech",
       "is_subtotal": true,
       "is_subsegment": false,
       "parent": null,
       "values": {
         "FY2023": 12.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0
       }
     },
     {
-      "name": "Argentina",
+      "name": "Reclassification - Brazil - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 226.0,
+        "FY2022": 132.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 169.91,
+        "FY2022": 26.52
+      }
+    },
+    {
+      "name": "Reclassification - Mexico - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 86.0,
+        "FY2022": 29.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 446.51,
+        "FY2022": 120.69
+      }
+    },
+    {
+      "name": "Reclassification - Argentina - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 310.0,
+        "FY2022": 75.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 123.87,
+        "FY2022": 46.67
+      }
+    },
+    {
+      "name": "Reclassification - Other countries - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0
+      }
+    },
+    {
+      "name": "Reclassification - Brazil",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 226.0,
+        "FY2022": 132.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 169.91,
+        "FY2022": 26.52
+      }
+    },
+    {
+      "name": "Reclassification - Mexico",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 86.0,
+        "FY2022": 29.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 446.51,
+        "FY2022": 120.69
+      }
+    },
+    {
+      "name": "Reclassification - Argentina",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 310.0,
+        "FY2022": 75.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 123.87,
+        "FY2022": 46.67
+      }
+    },
+    {
+      "name": "Reclassification - Other countries",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0
+      }
+    },
+    {
+      "name": "Services - Non-U.S. - Commerce",
       "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "Latin America",
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "FY2025": 5646.0,
-        "FY2024": 3614.0,
-        "FY2023": 3322.0,
-        "LTM": 6211.0
+        "FY2024": 566.0,
+        "FY2023": 410.0,
+        "FY2022": 329.0,
+        "FY2021": 304.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 413.07,
+        "FY2023": 467.07,
+        "FY2022": 300.0,
+        "FY2021": 149.67
+      }
+    },
+    {
+      "name": "Product Sales - Non-U.S. - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 76.0,
+        "FY2023": 39.0,
+        "FY2022": 40.0,
+        "FY2021": 70.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 3076.32,
+        "FY2023": 4910.26,
+        "FY2022": 2467.5,
+        "FY2021": 650.0
+      }
+    },
+    {
+      "name": "Non-U.S. - Commerce",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 642.0,
+        "FY2023": 449.0,
+        "FY2022": 369.0,
+        "FY2021": 374.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 364.17,
+        "FY2023": 426.5,
+        "FY2022": 267.48,
+        "FY2021": 121.66
+      }
+    },
+    {
+      "name": "Services - Non-U.S. - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 232.0,
+        "FY2023": 197.0,
+        "FY2022": 132.0,
+        "FY2021": 82.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 1007.76,
+        "FY2023": 972.08,
+        "FY2022": 747.73,
+        "FY2021": 554.88
+      }
+    },
+    {
+      "name": "Credit revenues - Non-U.S. - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 10000.0,
+        "FY2023": 8000.0,
+        "FY2022": 4000.0,
+        "FY2021": 0.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 23.38,
+        "FY2023": 23.94,
+        "FY2022": 24.68
+      }
+    },
+    {
+      "name": "Product Sales - Non-U.S. - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 5000.0,
+        "FY2023": 11.0,
+        "FY2022": 9000.0,
+        "FY2021": 0.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 46.76,
+        "FY2023": 17409.09,
+        "FY2022": 10.97
+      }
+    },
+    {
+      "name": "Non-U.S. - Fintech",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 247.0,
+        "FY2023": 216.0,
+        "FY2022": 145.0,
+        "FY2021": 82.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 946.56,
+        "FY2023": 886.57,
+        "FY2022": 680.69,
+        "FY2021": 554.88
+      }
+    },
+    {
+      "name": "Non-U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 889.0,
+        "FY2023": 665.0,
+        "FY2022": 514.0,
+        "FY2021": 456.0
+      },
+      "operating_income": {
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 262.99,
+        "FY2023": 287.97,
+        "FY2022": 192.02,
+        "FY2021": 99.78
+      }
+    },
+    {
+      "name": "Services - As reported - Non-U.S. - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 410.0,
+        "FY2022": 329.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 444.63,
+        "FY2022": 314.29
+      }
+    },
+    {
+      "name": "Product Sales - As reported - Non-U.S. - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 39.0,
+        "FY2022": 40.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 4674.36,
+        "FY2022": 2585.0
+      }
+    },
+    {
+      "name": "As reported - Non-U.S. - Commerce",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 449.0,
+        "FY2022": 369.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 406.01,
+        "FY2022": 280.22
+      }
+    },
+    {
+      "name": "Services - As reported - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 185.0,
+        "FY2022": 125.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 985.41,
+        "FY2022": 827.2
+      }
+    },
+    {
+      "name": "Credit revenues - As reported - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 8000.0,
+        "FY2022": 4000.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 22.79,
+        "FY2022": 25.85
+      }
+    },
+    {
+      "name": "Product Sales - As reported - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 11.0,
+        "FY2022": 9000.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 16572.73,
+        "FY2022": 11.49
+      }
+    },
+    {
+      "name": "As reported - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 204.0,
+        "FY2022": 138.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 893.63,
+        "FY2022": 749.28
+      }
+    },
+    {
+      "name": "As reported - Non-U.S.",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 653.0,
+        "FY2022": 507.0
+      },
+      "operating_income": {
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 279.17,
+        "FY2022": 203.94
+      }
+    },
+    {
+      "name": "Services - Reclassification - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12.0,
+        "FY2022": 7000.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0,
+        "FY2022": 0.5
+      }
+    },
+    {
+      "name": "Reclassification - Non-U.S. - Fintech",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12.0,
+        "FY2022": 7000.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0,
+        "FY2022": 0.5
+      }
+    },
+    {
+      "name": "Reclassification - Non-U.S.",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 12.0,
+        "FY2022": 7000.0
+      },
+      "operating_income": {
+        "FY2023": 384.0,
+        "FY2022": 35.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 3200.0,
+        "FY2022": 0.5
+      }
+    },
+    {
+      "name": "Brazil Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 3909.6,
+        "FY2020": 2194.0,
+        "FY2019": 1461.5,
+        "FY2018": 866.2,
+        "FY2017": 690.8,
+        "FY2016": 455.0
+      },
+      "operating_income": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      },
+      "operating_margin_pct": {
+        "FY2021": 4.83,
+        "FY2020": 3.6,
+        "FY2019": 1.76
+      }
+    },
+    {
+      "name": "Argentina Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 1531.0,
+        "FY2020": 980.3,
+        "FY2019": 456.3,
+        "FY2018": 376.6,
+        "FY2017": 359.4,
+        "FY2016": 262.3
+      },
+      "operating_income": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      },
+      "operating_margin_pct": {
+        "FY2021": 25.41,
+        "FY2020": 18.87,
+        "FY2019": 13.41
+      }
+    },
+    {
+      "name": "Mexico Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 1172.4,
+        "FY2020": 575.2,
+        "FY2019": 275.1,
+        "FY2018": 109.1,
+        "FY2017": 51.3,
+        "FY2016": 46.3
+      },
+      "operating_income": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      },
+      "operating_margin_pct": {
+        "FY2021": -11.09,
+        "FY2020": -23.3,
+        "FY2019": -61.18
+      }
+    },
+    {
+      "name": "Other Countries Segment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 456.4,
+        "FY2020": 224.0,
+        "FY2019": 103.3,
+        "FY2018": 87.8,
+        "FY2017": 60.7,
+        "FY2016": 43.6
+      },
+      "operating_income": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      },
+      "operating_margin_pct": {
+        "FY2021": 1533.74,
+        "FY2020": 2232.14,
+        "FY2019": -27.78
       }
     }
   ],
@@ -807,19 +2585,24 @@
         "FY2025": 3201.0,
         "FY2024": 2631.0,
         "FY2023": 2207.0,
-        "LTM": 2907.0
+        "FY2022": 1069.0,
+        "FY2021": 441.0,
+        "FY2020": 128.0,
+        "LTM": 2859.0
       }
     },
     {
       "name": "As reported",
       "values": {
-        "FY2023": 1823.0
+        "FY2023": 1823.0,
+        "FY2022": 1034.0
       }
     },
     {
       "name": "Reclassification",
       "values": {
-        "FY2023": 384.0
+        "FY2023": 384.0,
+        "FY2022": 35.0
       }
     },
     {
@@ -827,19 +2610,138 @@
       "values": {
         "FY2025": 2842.0,
         "FY2024": 2432.0,
-        "FY2023": 1553.0
+        "FY2023": 1553.0,
+        "FY2022": 780.0,
+        "FY2021": 241.0,
+        "LTM": 2842.0
       }
     },
     {
-      "name": "As reported",
+      "name": "U.S.",
       "values": {
-        "FY2023": 1553.0
+        "FY2024": 94.0,
+        "FY2023": -362.0,
+        "FY2022": -207.0,
+        "FY2021": -214.0
       }
     },
     {
-      "name": "Reclassification",
+      "name": "Non-U.S.",
       "values": {
-        "FY2023": 0.0
+        "FY2024": 2338.0,
+        "FY2023": 1915.0,
+        "FY2022": 987.0,
+        "FY2021": 455.0
+      }
+    },
+    {
+      "name": "Net income before income tax expense",
+      "values": {
+        "FY2022": 780.0,
+        "FY2021": 241.0,
+        "FY2020": 81.0
+      }
+    },
+    {
+      "name": "United States",
+      "values": {
+        "FY2022": -207.0,
+        "FY2021": -214.0,
+        "FY2020": -54.0
+      }
+    },
+    {
+      "name": "Brazil",
+      "values": {
+        "FY2022": 259.0,
+        "FY2021": 189.0,
+        "FY2020": 79.0,
+        "FY2019": 25.7
+      }
+    },
+    {
+      "name": "Argentina",
+      "values": {
+        "FY2022": 699.0,
+        "FY2021": 389.0,
+        "FY2020": 185.0,
+        "FY2019": 61.2
+      }
+    },
+    {
+      "name": "Mexico",
+      "values": {
+        "FY2022": 74.0,
+        "FY2021": -130.0,
+        "FY2020": -134.0,
+        "FY2019": -168.3
+      }
+    },
+    {
+      "name": "Other Countries",
+      "values": {
+        "FY2022": -45.0,
+        "FY2021": 7000.0,
+        "FY2020": 5000.0,
+        "FY2019": -28.7
+      }
+    },
+    {
+      "name": "Income (loss) from operations",
+      "values": {
+        "FY2021": 440.7,
+        "FY2020": 127.7,
+        "FY2019": -153.2,
+        "FY2018": -69.5
+      }
+    },
+    {
+      "name": "Net income (loss) before income tax expense",
+      "values": {
+        "FY2021": 240.6,
+        "FY2020": 81.3,
+        "FY2019": -107.2
+      }
+    },
+    {
+      "name": "US",
+      "values": {
+        "FY2021": -214.0,
+        "FY2020": -54.4,
+        "FY2019": 2900.0
+      }
+    },
+    {
+      "name": "Net income (loss) before income tax (expense) gain",
+      "values": {
+        "FY2020": 81.3,
+        "FY2019": -107.2,
+        "FY2018": -65.5
+      }
+    },
+    {
+      "name": "(Loss) income from operations",
+      "values": {
+        "FY2019": -153.2,
+        "FY2018": -69.5,
+        "FY2017": 56.3,
+        "FY2016": 181.1
+      }
+    },
+    {
+      "name": "Net (loss) income before income tax (expense) gain",
+      "values": {
+        "FY2019": -107.2,
+        "FY2018": -65.5,
+        "FY2017": 54.1
+      }
+    },
+    {
+      "name": "Net (loss) income before income tax gain (expense)",
+      "values": {
+        "FY2018": -65.5,
+        "FY2017": 54.1,
+        "FY2016": 185.3
       }
     }
   ],
