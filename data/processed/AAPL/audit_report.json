@@ -2,40 +2,40 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-11-04T16:09:58.247952",
+  "audit_timestamp": "2026-11-06T18:32:01.699593",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 383266000000.0,
-        "liabilities": 275746000000.0,
-        "equity": 107520000000.0,
+        "assets": 404548000000.0,
+        "liabilities": 292455000000.0,
+        "equity": 112093000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 383266000000.0,
+        "liabilities_plus_equity": 404548000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 38326600.0
+        "tolerance_usd": 40454800.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
         "passed": true,
         "status": "PASS",
-        "revenue": 529496000000.0,
-        "cost_of_goods_sold": 263972000000.0,
-        "gross_profit_reported": 265524000000.0,
-        "gross_profit_calculated": 265524000000.0,
+        "revenue": 478834000000.0,
+        "cost_of_goods_sold": 245232000000.0,
+        "gross_profit_reported": 233602000000.0,
+        "gross_profit_calculated": 233602000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 52949600.0
+        "tolerance_usd": 47883400.0
       },
       {
         "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
         "passed": true,
         "status": "PASS",
-        "cash_from_operations": 180339000000.0,
-        "capital_expenditures": 6367000000.0,
-        "fcf_reported": 173972000000.0,
-        "fcf_calculated": 173972000000.0,
+        "cash_from_operations": 145097000000.0,
+        "capital_expenditures": 9041000000.0,
+        "fcf_reported": 136056000000.0,
+        "fcf_calculated": 136056000000.0,
         "discrepancy_usd": 0.0
       },
       {
@@ -52,15 +52,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
-        "net_income": 149095000000.0,
+        "passed": true,
+        "status": "PASS",
+        "net_income": 132175000000.0,
         "shares_diluted": 14720305750.0,
         "eps_reported": 8.97,
-        "eps_calculated": 10.13,
+        "eps_calculated": 8.98,
         "eps_adjusted": 8.97,
         "split_factor": 1.0,
-        "discrepancy": 1.16
+        "discrepancy": 0.01
       }
     ],
     "FY2026": [
@@ -832,10 +832,10 @@
       }
     ]
   },
-  "overall_status": "FAIL",
+  "overall_status": "PASS",
   "total_tests": 78,
-  "passed_tests": 76,
-  "failed_tests": 1,
+  "passed_tests": 77,
+  "failed_tests": 0,
   "skipped_tests": 1,
-  "compliance_score_pct": 98.7
+  "compliance_score_pct": 100.0
 }

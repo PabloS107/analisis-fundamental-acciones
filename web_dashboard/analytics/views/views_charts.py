@@ -36,7 +36,14 @@ def build_charts_and_segments_context(
         return round(v * 100.0 if abs(v) <= 1.0 else v, 2)
 
     # Series para Gráficos en Millones ($M)
-    chart_periods = list(reversed(fys))
+    raw_chart_periods = list(reversed(fys))
+    valid_chart_indices = [
+        idx for idx, p in enumerate(raw_chart_periods)
+        if canonical.get("revenue", {}).get(p) is not None
+        or canonical.get("net_income", {}).get(p) is not None
+        or canonical.get("operating_income", {}).get(p) is not None
+    ]
+    chart_periods = raw_chart_periods[valid_chart_indices[0]:] if valid_chart_indices else raw_chart_periods
     rev_series = [_to_millions(canonical.get("revenue", {}).get(p)) for p in chart_periods]
     gp_series = [_to_millions(canonical.get("gross_profit", {}).get(p)) for p in chart_periods]
     ebit_series = [_to_millions(canonical.get("operating_income", {}).get(p)) for p in chart_periods]
@@ -384,14 +391,26 @@ def build_charts_and_segments_context(
     
 
     raw_seg_periods = segments_raw.get("periods", fys)
-    seg_periods = []
-    for p in (raw_seg_periods or []):
-        if p not in seg_periods:
-            seg_periods.append(p)
-
     prod_items = segments_raw.get("product_segments", [])
     geo_items = segments_raw.get("geographic_segments", [])
+    channel_items = segments_raw.get("channel_segments", [])
+    seg_op_income_raw = segments_raw.get("segment_operating_income", [])
     can_rev_dict = canonical.get("revenue", {})
+
+    # Detectar dinámicamente los períodos que poseen datos cuantitativos válidos en segmentos
+    all_seg_items = prod_items + geo_items + channel_items + seg_op_income_raw
+    active_seg_periods = set()
+    for item in all_seg_items:
+        for k, v in item.get("values", {}).items():
+            if v is not None and v != "":
+                active_seg_periods.add(k)
+
+    seg_periods = []
+    for p in (raw_seg_periods or []):
+        if p not in seg_periods and (not active_seg_periods or p in active_seg_periods):
+            seg_periods.append(p)
+    if "LTM" in (raw_seg_periods or []) and "LTM" not in seg_periods and (not active_seg_periods or "LTM" in active_seg_periods):
+        seg_periods.insert(0, "LTM")
 
     # Helper para formatear cifras monetarias de segmentos de manera homogénea
     def _fmt_seg_val(val):
@@ -725,12 +744,25 @@ def build_charts_and_segments_context(
     seg_chart_periods = list(reversed(seg_periods))
     palette = ["#38bdf8", "#a855f7", "#10b981", "#f59e0b", "#f43f5e", "#ec4899", "#6366f1", "#14b8a6", "#84cc16", "#eab308"]
 
+    # Determinar dinámicamente los períodos del eje X para cada gráfico según el año más temprano con datos cuantitativos
+    prod_valid_periods = [
+        p for p in seg_chart_periods
+        if any(item.get("values", {}).get(p) is not None for item in real_prod_items)
+    ]
+    prod_chart_periods = seg_chart_periods[seg_chart_periods.index(prod_valid_periods[0]):] if prod_valid_periods else seg_chart_periods
+
+    geo_valid_periods = [
+        p for p in seg_chart_periods
+        if any(item.get("values", {}).get(p) is not None for item in real_geo_items)
+    ]
+    geo_chart_periods = seg_chart_periods[seg_chart_periods.index(geo_valid_periods[0]):] if geo_valid_periods else seg_chart_periods
+
     products_trend_datasets = []
     for idx, item in enumerate(real_prod_items):
         c = palette[idx % len(palette)]
         data_pts = [
             round(float(item["values"][p]), 1) if (p in item["values"] and item["values"][p] is not None) else None
-            for p in seg_chart_periods
+            for p in prod_chart_periods
         ]
         products_trend_datasets.append({
             "label": item["name"],
@@ -749,7 +781,7 @@ def build_charts_and_segments_context(
         c = palette[idx % len(palette)]
         data_pts = [
             round(float(item["values"][p]), 1) if (p in item["values"] and item["values"][p] is not None) else None
-            for p in seg_chart_periods
+            for p in geo_chart_periods
         ]
         geos_trend_datasets.append({
             "label": item["name"],
@@ -797,6 +829,8 @@ def build_charts_and_segments_context(
         "table_geos": table_geos,
         "kpis_segments": kpis_segments,
         "seg_chart_periods_json": json.dumps(seg_chart_periods),
+        "prod_chart_periods_json": json.dumps(prod_chart_periods),
+        "geo_chart_periods_json": json.dumps(geo_chart_periods),
         "products_trend_json": json.dumps(products_trend_datasets),
         "geos_trend_json": json.dumps(geos_trend_datasets),
         "donut_prod_labels_json": json.dumps(donut_prod_labels),

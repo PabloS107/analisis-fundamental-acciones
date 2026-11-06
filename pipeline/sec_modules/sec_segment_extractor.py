@@ -425,8 +425,19 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                     item["operating_margin_pct"] = op_margins
 
     # Construir y persistir segments_data.json
+    all_seg_items = product_segments + channel_segments + geographic_segments + segment_op_income
+    periods_with_seg_data = set()
+    for item in all_seg_items:
+        for k, v in item.get("values", {}).items():
+            if v is not None and v != "":
+                periods_with_seg_data.add(k)
+
+    clean_periods = [p for p in all_fys if p in periods_with_seg_data] if periods_with_seg_data else all_fys
+    if "LTM" in all_fys and "LTM" not in clean_periods:
+        clean_periods.insert(0, "LTM")
+
     seg_dict = {
-        "periods": all_fys,
+        "periods": clean_periods,
         "product_segments": product_segments,
         "channel_segments": channel_segments,
         "geographic_segments": geographic_segments,

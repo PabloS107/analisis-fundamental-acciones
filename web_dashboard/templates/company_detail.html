@@ -3946,6 +3946,8 @@
         segmentsChartsDone = true;
 
         const segPeriods = {{ seg_chart_periods_json|safe }};
+        const prodChartPeriods = {{ prod_chart_periods_json|default:seg_chart_periods_json|safe }};
+        const geoChartPeriods = {{ geo_chart_periods_json|default:seg_chart_periods_json|safe }};
         const prodDatasets = {{ products_trend_json|safe }};
         const geoDatasets = {{ geos_trend_json|safe }};
 
@@ -3961,7 +3963,7 @@
         new Chart(document.getElementById('chartProductTrends'), {
             type: 'line',
             data: {
-                labels: segPeriods,
+                labels: prodChartPeriods,
                 datasets: prodDatasets
             },
             options: {
@@ -3988,7 +3990,7 @@
         new Chart(document.getElementById('chartGeoTrends'), {
             type: 'line',
             data: {
-                labels: segPeriods,
+                labels: geoChartPeriods,
                 datasets: geoDatasets
             },
             options: {
