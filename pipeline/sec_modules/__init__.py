@@ -36,6 +36,7 @@ from .sec_freshness import (
     get_local_sec_metadata,
     derive_period_label,
 )
+from .filing_context import SharedFilingContext
 
 __all__ = [
     "normalize_fiscal_year",
@@ -62,4 +63,5 @@ __all__ = [
     "check_sec_freshness",
     "get_local_sec_metadata",
     "derive_period_label",
+    "SharedFilingContext",
 ]

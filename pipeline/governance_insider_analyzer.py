@@ -184,10 +184,10 @@ def load_sec_config():
 # 1. SCANNER DE FORMULARIO 8-K
 # =====================================================================
 
-def scan_8k_filings(company, max_filings=25):
+def scan_8k_filings(company, max_filings=25, filing_context=None):
     """Escanea los formularios 8-K recientes, mapea ítems, extrae contexto y elabora diagnósticos."""
     print(f"[Governance Analyzer] Escaneando formularios 8-K en SEC EDGAR...")
-    filings = sec_call_with_retry(company.get_filings, form="8-K")
+    filings = filing_context.get_filings(form="8-K") if filing_context else sec_call_with_retry(company.get_filings, form="8-K")
     if not filings or len(filings) == 0:
         return []
 
@@ -200,7 +200,7 @@ def scan_8k_filings(company, max_filings=25):
         try:
             if default_rate_limiter:
                 default_rate_limiter.pace()
-            obj = sec_call_with_retry(f.obj)
+            obj = filing_context.get_filing_obj(f) if filing_context else sec_call_with_retry(f.obj)
             items_raw = getattr(obj, "items", []) or []
             if not items_raw and hasattr(f, "items"):
                 items_raw = [f.items] if isinstance(f.items, str) else list(f.items)
@@ -285,8 +285,10 @@ def scan_8k_filings(company, max_filings=25):
 # 1.1 SCANNER DE FORMULARIO 6-K (FOREIGN PRIVATE ISSUERS - FPI)
 # =====================================================================
 
-def check_is_foreign_private_issuer(company):
+def check_is_foreign_private_issuer(company, filing_context=None):
     """Verifica si la empresa es un Foreign Private Issuer (FPI) que reporta bajo 20-F / 40-F / 6-K."""
+    if filing_context:
+        return filing_context.is_fpi
     try:
         f_20f = sec_call_with_retry(company.get_filings, form="20-F")
         if f_20f is not None and len(f_20f) > 0:
@@ -299,10 +301,10 @@ def check_is_foreign_private_issuer(company):
     return False
 
 
-def scan_6k_filings(company, max_filings=25):
+def scan_6k_filings(company, max_filings=25, filing_context=None):
     """Escanea los formularios 6-K recientes de Emisores Privados Extranjeros (FPI)."""
     print(f"[Governance Analyzer] Escaneando formularios 6-K (FPI / Extranjero) en SEC EDGAR...")
-    filings = sec_call_with_retry(company.get_filings, form="6-K")
+    filings = filing_context.get_filings(form="6-K") if filing_context else sec_call_with_retry(company.get_filings, form="6-K")
     if not filings or len(filings) == 0:
         return []
 
@@ -332,10 +334,10 @@ def scan_6k_filings(company, max_filings=25):
 # 2. SCANNER DE FORMULARIO 4 (INSIDER TRADING)
 # =====================================================================
 
-def scan_form4_filings(company, max_filings=40):
+def scan_form4_filings(company, max_filings=40, filing_context=None):
     """Escanea las transacciones de Form 4, separa compras abiertas, ventas 10b5-1 y retenciones fiscales."""
     print(f"[Governance Analyzer] Escaneando transacciones de insiders (Formulario 4)...")
-    filings = sec_call_with_retry(company.get_filings, form="4")
+    filings = filing_context.get_filings(form="4") if filing_context else sec_call_with_retry(company.get_filings, form="4")
     if not filings or len(filings) == 0:
         return {"summary": {}, "transactions": []}
 
@@ -555,10 +557,10 @@ def scan_form4_filings(company, max_filings=40):
 # 3. SCANNER DE FORMULARIO 144 (AVISOS PREVIOS DE VENTA)
 # =====================================================================
 
-def scan_form144_filings(company, max_filings=20):
+def scan_form144_filings(company, max_filings=20, filing_context=None):
     """Escanea avisos preventivos de venta bajo la Regla 144, detectando banderas de anomalía."""
     print(f"[Governance Analyzer] Escaneando avisos preventivos de venta (Formulario 144)...")
-    filings = sec_call_with_retry(company.get_filings, form="144")
+    filings = filing_context.get_filings(form="144") if filing_context else sec_call_with_retry(company.get_filings, form="144")
     if not filings or len(filings) == 0:
         return {"summary": {}, "notices": []}
 
@@ -643,7 +645,7 @@ def scan_form144_filings(company, max_filings=20):
 # 4. ORQUESTADOR Y SCORECARD DE GOBERNANZA INTEGRADO
 # =====================================================================
 
-def analyze_governance_and_insiders(ticker="AAPL", output_dir=None):
+def analyze_governance_and_insiders(ticker="AAPL", output_dir=None, filing_context=None):
     """Ejecuta el escaneo completo de 8-K, Form 4 y Form 144, generando el veredicto y guardando JSON."""
     cfg = load_sec_config()
     set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
@@ -652,7 +654,7 @@ def analyze_governance_and_insiders(ticker="AAPL", output_dir=None):
     print(f"  MÓDULO DE GOBERNANZA, INSIDERS Y ALERTAS TEMPRANAS: {ticker.upper()}")
     print(f"===========================================================================")
     
-    company = sec_call_with_retry(Company, ticker.upper())
+    company = filing_context.company if filing_context else sec_call_with_retry(Company, ticker.upper())
     
     if output_dir is None:
         output_dir = Path(cfg.get("local_output_path", "data/processed")) / ticker.upper()
@@ -661,15 +663,15 @@ def analyze_governance_and_insiders(ticker="AAPL", output_dir=None):
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # 1. Escanear formularios (detectando si es Foreign Private Issuer)
-    is_fpi = check_is_foreign_private_issuer(company)
+    is_fpi = check_is_foreign_private_issuer(company, filing_context=filing_context)
     events_6k = []
     if is_fpi:
         print(f"[Governance Analyzer] {ticker.upper()} identificado como Foreign Private Issuer (FPI / Reporta bajo 20-F / 6-K).")
-        events_6k = scan_6k_filings(company, max_filings=25)
+        events_6k = scan_6k_filings(company, max_filings=25, filing_context=filing_context)
 
-    events_8k = scan_8k_filings(company, max_filings=25)
-    f4_data = scan_form4_filings(company, max_filings=40)
-    f144_data = scan_form144_filings(company, max_filings=20)
+    events_8k = scan_8k_filings(company, max_filings=25, filing_context=filing_context)
+    f4_data = scan_form4_filings(company, max_filings=40, filing_context=filing_context)
+    f144_data = scan_form144_filings(company, max_filings=20, filing_context=filing_context)
     
     # 2. Evaluación de Riesgo de Gobernanza y Convicción
     # Puntuación base de Gobernanza (100 = Impecable)

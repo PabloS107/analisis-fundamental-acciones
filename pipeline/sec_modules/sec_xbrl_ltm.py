@@ -423,7 +423,7 @@ def detect_table_scale_factor(table, doc_context="", preceding_html=""):
     return 1.0
 
 
-def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df=None):
+def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df=None, filing_context=None):
     """
     Parsea los estados financieros interinos de Form 6-K para Foreign Private Issuers
     y calcula el período LTM acumulado mediante la identidad móvil:
@@ -431,7 +431,10 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
     """
     try:
         import io, re
-        f_list = company.get_filings(form='6-K')
+        if filing_context:
+            f_list = filing_context.get_filings(form='6-K')
+        else:
+            f_list = company.get_filings(form='6-K')
         cand_filings = [f for f in f_list if any(k in str(getattr(f, 'primary_document', '')).lower() for k in ['nufs', 'financial', 'statement', 'interim'])]
         if not cand_filings:
             cand_filings = f_list[:8]
@@ -980,22 +983,27 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
                 target_df.loc[len(target_df)] = new_row_dict
 
 
-def enrich_annual_statements_with_individual_filings(company, inc_df, bal_df, cf_df, annual_fys):
+def enrich_annual_statements_with_individual_filings(company, inc_df, bal_df, cf_df, annual_fys, filing_context=None):
     """
     Enriquece los estados contables de 10 años con los formularios anuales individuales (10-K o 20-F).
     Permite capturar conceptos contables modernos, extensiones o ejercicios recientes (Latest Filed Priority).
     """
     latest_fy = annual_fys[0] if annual_fys else None
     try:
-        ann_filings = company.get_filings(form="10-K")
-        if not ann_filings:
-            ann_filings = company.get_filings(form="20-F")
+        if filing_context:
+            ann_filings = filing_context.get_filings(form="10-K")
+            if not ann_filings:
+                ann_filings = filing_context.get_filings(form="20-F")
+        else:
+            ann_filings = company.get_filings(form="10-K")
+            if not ann_filings:
+                ann_filings = company.get_filings(form="20-F")
         if ann_filings and len(ann_filings) > 0:
             updated_cells_inc = set()
             updated_cells_bal = set()
             updated_cells_cf = set()
             for doc_filing in ann_filings[:10]:
-                doc_single = doc_filing.obj()
+                doc_single = filing_context.get_filing_obj(doc_filing) if filing_context else doc_filing.obj()
                 if not doc_single or not doc_single.financials:
                     continue
                 # 1. Detectar si el reporte anual individual contiene ejercicios fiscales más recientes (ej. FY2025)

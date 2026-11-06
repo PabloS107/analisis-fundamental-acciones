@@ -81,7 +81,7 @@ except ImportError:
 # 1. PARSEO Y EXTRACCIÓN DESDE SEC EDGAR (FORM 8-K / 6-K EXHIBIT 99.1)
 # ==============================================================================
 
-def extract_from_sec_ex99(ticker):
+def extract_from_sec_ex99(ticker, filing_context=None):
     """
     Localiza y descarga el documento oficial de resultados más reciente (Ex-99.1 o Press Release)
     desde SEC EDGAR mediante edgar-tools.
@@ -95,7 +95,7 @@ def extract_from_sec_ex99(ticker):
     set_identity(identity)
 
     print(f"[KPI Extractor] Buscando comunicados de resultados oficiales (Ex-99.1) para {ticker} en SEC EDGAR...")
-    company = sec_call_with_retry(Company, ticker.upper())
+    company = filing_context.company if filing_context else sec_call_with_retry(Company, ticker.upper())
     if not company:
         return None
 
@@ -103,7 +103,7 @@ def extract_from_sec_ex99(ticker):
 
     # 1. Explorar formularios 8-K (Emisores domésticos US-GAAP, ej. DECK, MELI)
     try:
-        f8k = sec_call_with_retry(company.get_filings, form="8-K")
+        f8k = filing_context.get_filings(form="8-K") if filing_context else sec_call_with_retry(company.get_filings, form="8-K")
         if f8k and len(f8k) > 0:
             for f in f8k[:15]:
                 items = str(getattr(f, "items", ""))
@@ -136,7 +136,7 @@ def extract_from_sec_ex99(ticker):
 
     # 2. Explorar formularios 6-K (Foreign Private Issuers / FPI, ej. NU)
     try:
-        f6k = sec_call_with_retry(company.get_filings, form="6-K")
+        f6k = filing_context.get_filings(form="6-K") if filing_context else sec_call_with_retry(company.get_filings, form="6-K")
         if f6k and len(f6k) > 0:
             for f in f6k[:15]:
                 for att in getattr(f, "attachments", []):
@@ -847,7 +847,7 @@ def build_comparisons_block(ticker, processed_dir):
 # 5. ORQUESTADOR PRINCIPAL: EXTRACT_OPERATIONAL_KPIS
 # ==============================================================================
 
-def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_drive_path=None):
+def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_drive_path=None, filing_context=None):
     """
     Función de entrada principal:
     1. Carga presentation_reconciliation.json existente (si existe) para preservar datos curados.
@@ -915,7 +915,7 @@ def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_dri
     print(f"[KPI Extractor] Arquetipo de industria: {arch_norm}")
 
     # 3. Extracción de fuentes oficiales
-    sec_data = extract_from_sec_ex99(ticker)
+    sec_data = extract_from_sec_ex99(ticker, filing_context=filing_context)
     pdf_data = extract_from_presentation_pdf(ticker, custom_drive_path)
 
     # 4. Normalizar según arquetipo

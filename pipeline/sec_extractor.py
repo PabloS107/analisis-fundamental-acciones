@@ -144,6 +144,7 @@ try:
         derive_period_label,
         check_sec_freshness,
         get_local_sec_metadata,
+        SharedFilingContext,
     )
 except ImportError:
     try:
@@ -172,6 +173,7 @@ except ImportError:
             derive_period_label,
             check_sec_freshness,
             get_local_sec_metadata,
+            SharedFilingContext,
         )
     except ImportError:
         from pipeline.sec_modules import (
@@ -199,6 +201,7 @@ except ImportError:
             derive_period_label,
             check_sec_freshness,
             get_local_sec_metadata,
+            SharedFilingContext,
         )
 
 
@@ -221,27 +224,22 @@ def load_sec_config():
     }
 
 
-def extract_sec_data(ticker, output_dir=None):
+def extract_sec_data(ticker, output_dir=None, filing_context=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
     cfg = load_sec_config()
     set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
     
+    if filing_context is None:
+        filing_context = SharedFilingContext(ticker)
+        
     print(f"\n[SEC Extractor] Conectando a SEC EDGAR para {ticker.upper()}...")
-    company = sec_call_with_retry(Company, ticker.upper())
-    cik = str(company.cik).zfill(10)
-    name = company.name
+    company = filing_context.company
+    cik = filing_context.cik
+    name = filing_context.name
     print(f"[SEC Extractor] Empresa verificada: {name} (CIK: {cik})")
     
     # Detectar estándar contable oficial (US-GAAP vs IFRS / Form 20-F o 40-F)
-    accounting_std = "US-GAAP"
-    try:
-        latest_filings = company.get_filings(form=["10-K", "20-F", "40-F"])
-        if latest_filings and len(latest_filings) > 0:
-            top_form = str(latest_filings[0].form).upper()
-            if "20-F" in top_form or "40-F" in top_form:
-                accounting_std = "IFRS"
-    except Exception:
-        pass
+    accounting_std = filing_context.accounting_standard
     print(f"[SEC Extractor] Estándar contable detectado: {accounting_std}")
     
     if output_dir is None:
@@ -295,7 +293,8 @@ def extract_sec_data(ticker, output_dir=None):
         inc_df=inc_df,
         bal_df=bal_df,
         cf_df=cf_df,
-        annual_fys=annual_fys
+        annual_fys=annual_fys,
+        filing_context=filing_context
     )
     
     # 2. Obtener Estados Trimestrales para cálculo de LTM
@@ -325,13 +324,14 @@ def extract_sec_data(ticker, output_dir=None):
         bal_mrq_df = None
         
     # Cargar facts_df tempranamente para calibración de LTM (MRQ Balance Sheet y 4Q EPS/Shares)
-    facts_df = None
-    try:
-        facts_obj = sec_call_with_retry(company.get_facts)
-        if hasattr(facts_obj, 'to_dataframe'):
-            facts_df = facts_obj.to_dataframe()
-    except Exception as e:
-        print(f"[SEC Extractor] Nota al obtener facts_df temprano: {e}")
+    facts_df = filing_context.get_facts_df() if filing_context else None
+    if facts_df is None:
+        try:
+            facts_obj = sec_call_with_retry(company.get_facts)
+            if hasattr(facts_obj, 'to_dataframe'):
+                facts_df = facts_obj.to_dataframe()
+        except Exception as e:
+            print(f"[SEC Extractor] Nota al obtener facts_df temprano: {e}")
 
     latest_mrq_date = None
     if facts_df is not None and not facts_df.empty and 'period_end' in facts_df.columns:
@@ -371,7 +371,7 @@ def extract_sec_data(ticker, output_dir=None):
     # Si no hay 10-Q trimestral directo (Foreign Private Issuers bajo IFRS/6-K), consultar Form 6-K
     if not has_ltm:
         print("[SEC Extractor] Consultando reportes interinos 6-K para Foreign Private Issuer...")
-        ltm_6k_ok = extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df)
+        ltm_6k_ok = extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df, filing_context=filing_context)
         if ltm_6k_ok:
             has_ltm = True
 
@@ -431,7 +431,7 @@ def extract_sec_data(ticker, output_dir=None):
     
     # 3. Datos de Segmentos (10 Años + LTM de Productos y Geografías)
     print("[SEC Extractor] Extrayendo desglose de segmentos histórico de 10 años + LTM...")
-    segment_df = build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical.get("revenue"), latest_10q_inc=q_inc)
+    segment_df = build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical.get("revenue"), latest_10q_inc=q_inc, filing_context=filing_context)
     if segment_df is None or segment_df.empty:
         try:
             single_fins = sec_call_with_retry(company.get_financials)
@@ -443,14 +443,14 @@ def extract_sec_data(ticker, output_dir=None):
     # 2.5 Estados Financieros Oficiales As-Reported (Filing Presentation fiel a la SEC)
     print("[SEC Extractor] Extrayendo estados contables As-Reported oficiales...")
     try:
-        latest_k_filings = company.get_filings(form=["10-K", "20-F"])
-        latest_10k_obj = latest_k_filings.latest().obj() if latest_k_filings else None
+        latest_k_filings = filing_context.get_filings(form=["10-K", "20-F"]) if filing_context else company.get_filings(form=["10-K", "20-F"])
+        latest_10k_obj = (filing_context.get_filing_obj(latest_k_filings.latest()) if filing_context else latest_k_filings.latest().obj()) if latest_k_filings else None
     except Exception:
         latest_10k_obj = None
 
     try:
-        latest_q_filings = company.get_filings(form=["10-Q", "6-K"])
-        latest_10q_obj = latest_q_filings.latest().obj() if latest_q_filings else None
+        latest_q_filings = filing_context.get_filings(form=["10-Q", "6-K"]) if filing_context else company.get_filings(form=["10-Q", "6-K"])
+        latest_10q_obj = (filing_context.get_filing_obj(latest_q_filings.latest()) if filing_context else latest_q_filings.latest().obj()) if latest_q_filings else None
     except Exception:
         latest_10q_obj = None
 
@@ -487,8 +487,8 @@ def extract_sec_data(ticker, output_dir=None):
 
     latest_8k_date = None
     try:
-        f_8k = company.get_filings(form=["8-K"])
-        for f in f_8k[:6]:
+        f_8k = filing_context.get_filings(form=["8-K"]) if filing_context else company.get_filings(form=["8-K"])
+        for f in (f_8k[:6] if f_8k else []):
             if "2.02" in str(getattr(f, "items", "")):
                 latest_8k_date = str(f.filing_date)
                 break
@@ -535,7 +535,9 @@ def extract_sec_data(ticker, output_dir=None):
     
     # 4. Narrativas 10-K
     print("[SEC Extractor] Extrayendo secciones cualitativas del último 10-K...")
-    filings = company.get_filings(form="10-K")
+    filings = filing_context.get_filings(form="10-K") if filing_context else company.get_filings(form="10-K")
+    if not filings:
+        filings = filing_context.get_filings(form="20-F") if filing_context else company.get_filings(form="20-F")
     narratives = {
         "ticker": ticker.upper(),
         "company_name": name,
@@ -547,13 +549,13 @@ def extract_sec_data(ticker, output_dir=None):
         "item_7_mda": ""
     }
     
-    if len(filings) > 0:
+    if filings and len(filings) > 0:
         latest_10k = filings[0]
         narratives["filing_date"] = str(latest_10k.filing_date)
         narratives["accession_number"] = str(latest_10k.accession_number)
         
         try:
-            doc_10k = latest_10k.obj()
+            doc_10k = filing_context.get_filing_obj(latest_10k) if filing_context else latest_10k.obj()
             if hasattr(doc_10k, 'items'):
                 if 'Item 1' in doc_10k.items:
                     narratives["item_1_business"] = str(doc_10k['Item 1'])
@@ -630,4 +632,5 @@ __all__ = [
     # Limitador de tasa SEC
     "sec_call_with_retry",
     "default_rate_limiter",
+    "SharedFilingContext",
 ]

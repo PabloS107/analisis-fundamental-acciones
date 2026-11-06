@@ -25,7 +25,7 @@ if sys.platform == "win32":
         pass
 
 # Importar extractores internos
-from sec_extractor import extract_sec_data, load_sec_config
+from sec_extractor import extract_sec_data, load_sec_config, SharedFilingContext
 from doc_parser import parse_driver_documents, find_ticker_drive_dir
 from drive_manager import resolve_google_drive_path, safe_copy_file, get_ticker_drive_processed_dir
 from audit_engine import run_full_audit
@@ -322,8 +322,11 @@ def run_pipeline(ticker, custom_drive_path=None, custom_output_dir=None):
         out_dir = Path(cfg.get("local_output_path", "data/processed")) / ticker
     out_dir.mkdir(parents=True, exist_ok=True)
     
+    # 2.5. Manifiesto Único en Memoria (SharedFilingContext)
+    filing_context = SharedFilingContext(ticker)
+
     # 3. Paso A: Extracción SEC EDGAR
-    financials, sec_narratives = extract_sec_data(ticker, out_dir)
+    financials, sec_narratives = extract_sec_data(ticker, out_dir, filing_context=filing_context)
     
     # 4. Paso B: Ingesta de Documentos de Google Drive
     qualitative_dossier = parse_driver_documents(ticker, custom_drive_path, out_dir)
@@ -331,7 +334,7 @@ def run_pipeline(ticker, custom_drive_path=None, custom_output_dir=None):
     # 4b. Paso B2: Extracción Automática Universal de Conferencia de Resultados (Earnings Calls)
     print(f"\n[Pipeline] Extrayendo y estructurando conferencia de resultados (Earnings Call)...")
     try:
-        ec_data = extract_and_generate_earnings_call_data(ticker, out_dir)
+        ec_data = extract_and_generate_earnings_call_data(ticker, out_dir, filing_context=filing_context)
         print(f"[Pipeline] Conferencia de resultados integrada exitosamente.")
     except Exception as e:
         print(f"[Pipeline Warning] Extracción automática de earnings call con observaciones: {e}")
@@ -342,7 +345,8 @@ def run_pipeline(ticker, custom_drive_path=None, custom_output_dir=None):
         ticker,
         archetype=financials.get("archetype"),
         output_dir=out_dir,
-        custom_drive_path=custom_drive_path
+        custom_drive_path=custom_drive_path,
+        filing_context=filing_context
     )
     
     # 6. Paso D: Motor de Auditoría Contable (Post-Flight Check)
@@ -350,7 +354,7 @@ def run_pipeline(ticker, custom_drive_path=None, custom_output_dir=None):
     audit_results = run_full_audit(ticker, out_dir)
     
     # 7. Paso E: Módulo de Gobernanza, Insiders (Form 4 y 144) y Alertas 8-K
-    gov_data = analyze_governance_and_insiders(ticker, out_dir)
+    gov_data = analyze_governance_and_insiders(ticker, out_dir, filing_context=filing_context)
     
     # 8. Paso F: Motor Cuantitativo de Scoring Fundamental (Piotroski & Mohanram)
     print(f"\n[Pipeline] Ejecutando motor cuantitativo de scoring fundamental (Piotroski & Mohanram)...")
@@ -378,6 +382,7 @@ def run_pipeline(ticker, custom_drive_path=None, custom_output_dir=None):
     print(f"  PIPELINE COMPLETADO CON ÉXITO PARA {ticker}")
     print(f"  Dictamen de Auditoría: {audit_results.get('overall_status')} ({audit_results.get('compliance_score_pct')}%)")
     print(f"  Archivos listos en: {out_dir}")
+    filing_context.print_telemetry_summary()
     print(f"{'='*70}\n")
     
     return out_dir

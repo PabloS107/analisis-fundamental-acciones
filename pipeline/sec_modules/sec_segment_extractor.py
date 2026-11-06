@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 
-def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_rev=None, latest_10q_inc=None):
+def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_rev=None, latest_10q_inc=None, filing_context=None):
     """
     Extractor Dinámico y Universal de Segmentos Contables Oficiales desde SEC EDGAR (XBRL).
     Bajo normativas contables ASC 280 (Segment Reporting) y ASC 606 (Disaggregation of Revenue).
@@ -87,19 +87,27 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     )
 
     try:
-        f10k_list = company.get_filings(form="10-K")
-        if not f10k_list:
-            f10k_list = company.get_filings(form="20-F")
-        f10q_list = company.get_filings(form="10-Q")
-        if not f10q_list:
-            f10q_list = company.get_filings(form="6-K")
+        if filing_context:
+            f10k_list = filing_context.get_filings(form="10-K")
+            if not f10k_list:
+                f10k_list = filing_context.get_filings(form="20-F")
+            f10q_list = filing_context.get_filings(form="10-Q")
+            if not f10q_list:
+                f10q_list = filing_context.get_filings(form="6-K")
+        else:
+            f10k_list = company.get_filings(form="10-K")
+            if not f10k_list:
+                f10k_list = company.get_filings(form="20-F")
+            f10q_list = company.get_filings(form="10-Q")
+            if not f10q_list:
+                f10q_list = company.get_filings(form="6-K")
 
         valid_k_filings = [f for f in (f10k_list or []) if not str(getattr(f, "form", "")).upper().endswith("/A")]
 
         # Escaneo multi-anual de reportes 10-K/20-F (hasta 8 filings para cubrir 10+ ejercicios)
         for f_idx, doc_filing in enumerate(valid_k_filings[:8]):
             try:
-                x_10k = doc_filing.xbrl()
+                x_10k = filing_context.get_filing_xbrl(doc_filing) if filing_context else doc_filing.xbrl()
             except Exception:
                 continue
             if not x_10k or not hasattr(x_10k, "statements"):
@@ -311,7 +319,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 k_rep_date = str(getattr(f10k_list[0], "period_of_report", "")) if f10k_list else ""
                 q_rep_date = str(getattr(f10q_list[0], "period_of_report", ""))
                 if not k_rep_date or q_rep_date > k_rep_date:
-                    x_10q = f10q_list[0].xbrl()
+                    x_10q = filing_context.get_filing_xbrl(f10q_list[0]) if filing_context else f10q_list[0].xbrl()
                     q_stmts = []
                     if x_10q and hasattr(x_10q, "statements"):
                         for s in x_10q.statements:
@@ -467,6 +475,6 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     return pd.DataFrame(rows) if rows else None
 
 
-def build_10yr_segment_df(company, all_fys, latest_10q_inc=None, output_dir=None, canonical_rev=None):
+def build_10yr_segment_df(company, all_fys, latest_10q_inc=None, output_dir=None, canonical_rev=None, filing_context=None):
     """Enlace retrocompatible para extracción de segmentos."""
-    return build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical_rev, latest_10q_inc=latest_10q_inc)
+    return build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical_rev, latest_10q_inc=latest_10q_inc, filing_context=filing_context)

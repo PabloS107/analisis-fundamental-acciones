@@ -56,7 +56,7 @@ def get_sec_headers():
     }
 
 
-def fetch_sec_8k_earnings_guidance(ticker):
+def fetch_sec_8k_earnings_guidance(ticker, filing_context=None):
     """Consulta SEC EDGAR para obtener los últimos formularios 8-K de resultados (Item 2.02/7.01) y sus exhibits."""
     ticker_clean = ticker.upper()
     sec_info = {
@@ -67,19 +67,26 @@ def fetch_sec_8k_earnings_guidance(ticker):
     }
     
     try:
-        # 1. Obtener CIK de la compañía
-        cik_url = f"https://data.sec.gov/submissions/CIK{ticker_clean}.json"
-        # Resolver CIK numérico consultando company_tickers.json si no es CIK directo
-        tickers_map_url = "https://www.sec.gov/files/company_tickers.json"
-        headers_sec = {"User-Agent": load_sec_config().get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")}
-        
-        map_resp = requests.get(tickers_map_url, headers=headers_sec, timeout=10)
-        cik_str = None
-        if map_resp.status_code == 200:
-            for item in map_resp.json().values():
-                if item.get("ticker", "").upper() == ticker_clean:
-                    cik_str = str(item.get("cik_str")).zfill(10)
-                    break
+        # 1. Obtener CIK de la compañía vía contexto compartido o archivo local
+        cik_str = filing_context.cik if filing_context else None
+        if not cik_str:
+            local_fin = Path("data/processed") / ticker_clean / "financial_statements.json"
+            if local_fin.exists():
+                try:
+                    with open(local_fin, "r", encoding="utf-8") as f:
+                        cik_str = json.load(f).get("cik")
+                except Exception:
+                    pass
+        if not cik_str:
+            # Fallback a submissions de la SEC si no está en contexto ni en disco
+            tickers_map_url = "https://www.sec.gov/files/company_tickers.json"
+            headers_sec = {"User-Agent": load_sec_config().get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")}
+            map_resp = requests.get(tickers_map_url, headers=headers_sec, timeout=10)
+            if map_resp.status_code == 200:
+                for item in map_resp.json().values():
+                    if item.get("ticker", "").upper() == ticker_clean:
+                        cik_str = str(item.get("cik_str")).zfill(10)
+                        break
                     
         if not cik_str:
             print(f"[EarningsCall Auto] No se pudo resolver CIK SEC para {ticker_clean}.")
@@ -463,7 +470,7 @@ def parse_and_structure_transcript(ticker, transcript_data, sec_info, company_na
     }
 
 
-def extract_and_generate_earnings_call_data(ticker, output_dir=None, force=False):
+def extract_and_generate_earnings_call_data(ticker, output_dir=None, force=False, filing_context=None):
     """Función principal del extractor: coordina la extracción web, SEC 8-K y guarda earnings_call_data.json."""
     ticker_clean = ticker.strip().upper()
     cfg = load_sec_config()
@@ -489,13 +496,13 @@ def extract_and_generate_earnings_call_data(ticker, output_dir=None, force=False
     print(f"\n[EarningsCall Auto] Iniciando extracción automática para {ticker_clean}...")
     
     # 2. Consultar SEC EDGAR 8-K
-    sec_info = fetch_sec_8k_earnings_guidance(ticker_clean)
+    sec_info = fetch_sec_8k_earnings_guidance(ticker_clean, filing_context=filing_context)
     
     # 3. Consultar transcripción en la web abierta
     transcript_data = fetch_open_web_transcript(ticker_clean)
     
-    # 4. Obtener nombre de empresa si existe company_profile.json
-    company_name = None
+    # 4. Obtener nombre de empresa si existe company_profile.json o filing_context
+    company_name = filing_context.name if filing_context else None
     profile_path = out_dir / "company_profile.json"
     if profile_path.exists():
         try:
