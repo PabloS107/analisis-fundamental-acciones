@@ -471,6 +471,7 @@ def build_charts_and_segments_context(
     real_prod_items = [
         item for item in prod_items
         if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")
+        and not any(k in item.get("name", "").lower() for k in ["hedging", "reconcil", "intersegment", "elimination"])
         and item.get("status") != "discontinued"
         and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue", "google", "apple"]
         and (item.get("values", {}).get("LTM") is not None or (seg_periods and item.get("values", {}).get(seg_periods[0]) is not None))
@@ -479,6 +480,7 @@ def build_charts_and_segments_context(
         real_prod_items = [
             item for item in prod_items
             if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")
+            and not any(k in item.get("name", "").lower() for k in ["hedging", "reconcil", "intersegment", "elimination"])
             and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue"]
         ]
     if not real_prod_items:
@@ -562,18 +564,16 @@ def build_charts_and_segments_context(
             for sub in sub_prods:
                 if sub.get("parent") and sub.get("parent", "").lower() == prim.get("name", "").lower():
                     ordered_prod_items.append(sub)
+        # Anexar únicamente subsegmentos huérfanos legítimos (descartando aperturas ortogonales de contrato ASC 606 y cruces con países)
         for sub in sub_prods:
             if sub not in ordered_prod_items:
-                ordered_prod_items.append(sub)
+                sub_parent = (sub.get("parent") or "").lower()
+                if not any(bad in sub_parent for bad in ["asc 606", "tipo de ingreso", "revenue"]) and not any(bad in sub.get("name", "").lower() for bad in ["net service", "net product"]):
+                    ordered_prod_items.append(sub)
     elif primary_prods:
         ordered_prod_items = primary_prods
     else:
         ordered_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
-
-    # Añadir partidas de conciliación explícitas de producto al final del desglose
-    for rec_item in reconciling_prod_items:
-        if rec_item not in ordered_prod_items:
-            ordered_prod_items.append(rec_item)
 
     # Tabla 1: Segmentos de Producto & Servicios
     table_products = []
@@ -639,6 +639,7 @@ def build_charts_and_segments_context(
             "mix_pct_num": mix_pct_num,
             "yoy_str": yoy_str,
             "op_margin_ltm": op_margin_str,
+            "op_margin_num": round(float(op_m_val), 1) if (op_m_val is not None and not is_sub) else None,
             "values": row_vals
         }
         if is_discontinued:
@@ -649,9 +650,10 @@ def build_charts_and_segments_context(
     # Conciliación residual universal de productos para cuadre al 100.0% con el P&L
     has_unreconciled_prod = False
     residual_prod_vals = {}
+    active_ordered_prods = [item for item in ordered_prod_items if item.get("status") != "discontinued" and (item["values"].get("LTM") is not None or any(item["values"].get(p) is not None for p in seg_periods[:3]))]
     for p in seg_periods:
         c_m = canonical_rev_m.get(p)
-        s_val = sum((item["values"].get(p) or 0.0) for item in ordered_prod_items if not item.get("is_subsegment") and not item.get("is_subtotal"))
+        s_val = sum((item["values"].get(p) or 0.0) for item in active_ordered_prods if not item.get("is_subsegment") and not item.get("is_subtotal"))
         if c_m is not None and s_val != 0.0 and abs(c_m - s_val) > 1.0:
             has_unreconciled_prod = True
             residual_prod_vals[p] = round(c_m - s_val, 1)
@@ -663,13 +665,17 @@ def build_charts_and_segments_context(
         res_mix = (res_ltm / tot_prod_ltm * 100.0) if (tot_prod_ltm > 0 and res_ltm is not None) else None
         res_row_vals = [_fmt_seg_val(residual_prod_vals.get(p)) for p in seg_periods]
         table_products.append({
-            "name": "Partidas de Conciliación y Coberturas Corporativas",
-            "description": "Ajustes contables, eliminaciones y coberturas que concilian la suma de segmentos con los ingresos netos consolidados.",
+            "name": "Ajustes de Conciliación y Coberturas (Hedging / ASC 280)",
+            "raw_name": "Ajustes de Conciliación y Coberturas",
+            "description": "Ajustes contables, eliminaciones y coberturas de divisas que concilian la suma de segmentos con los ingresos consolidados.",
             "is_subtotal": False,
             "is_subsegment": False,
             "indent": False,
             "is_total": False,
+            "is_reconciling": True,
             "mix_pct": f"{res_mix:.1f}%" if res_mix is not None else "-",
+            "mix_pct_num": 0.0,
+            "yoy_str": "-",
             "op_margin_ltm": "-",
             "values": res_row_vals
         })
@@ -715,9 +721,12 @@ def build_charts_and_segments_context(
 
     # Tabla 2: Segmentos Geográficos
     table_geos = []
+    table_geos_discontinued = []
+    active_ordered_geos = []
     for item in ordered_geo_items:
         is_sub = bool(item.get("is_subtotal"))
         is_subseg = bool(item.get("is_subsegment"))
+        is_discontinued = item.get("status") == "discontinued" or (item["values"].get("LTM") is None and all(item["values"].get(p) is None for p in seg_periods[:3]))
         v_ltm = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else None)
         mix_pct = (v_ltm / tot_geo_ltm * 100.0) if (tot_geo_ltm > 0 and not is_sub and v_ltm is not None) else None
         yoy_geo_table_str = _calc_seg_yoy(v_ltm, item["values"]) if not is_sub else "-"
@@ -727,8 +736,9 @@ def build_charts_and_segments_context(
             row_vals.append(_fmt_seg_val(val) if val is not None else "-")
 
         display_name = ("↳ " + item["name"]) if is_subseg else item["name"]
-        table_geos.append({
+        row_dict = {
             "name": display_name,
+            "raw_name": item["name"],
             "description": item.get("description", ""),
             "is_subtotal": is_sub,
             "is_subsegment": is_subseg,
@@ -738,14 +748,19 @@ def build_charts_and_segments_context(
             "yoy_str": yoy_geo_table_str,
             "op_margin_ltm": "-",
             "values": row_vals
-        })
+        }
+        if is_discontinued:
+            table_geos_discontinued.append(row_dict)
+        else:
+            table_geos.append(row_dict)
+            active_ordered_geos.append(item)
 
     # Conciliación residual universal geográfica para cuadre al 100.0% con el P&L
     has_unreconciled_geo = False
     residual_geo_vals = {}
     for p in seg_periods:
         c_m = canonical_rev_m.get(p)
-        s_val = sum((item["values"].get(p) or 0.0) for item in ordered_geo_items if not item.get("is_subsegment") and not item.get("is_subtotal"))
+        s_val = sum((item["values"].get(p) or 0.0) for item in active_ordered_geos if not item.get("is_subsegment") and not item.get("is_subtotal"))
         if c_m is not None and s_val != 0.0 and abs(c_m - s_val) > 1.0:
             has_unreconciled_geo = True
             residual_geo_vals[p] = round(c_m - s_val, 1)
@@ -823,12 +838,28 @@ def build_charts_and_segments_context(
     seg_chart_periods = list(reversed(seg_periods))
     palette = ["#38bdf8", "#a855f7", "#10b981", "#f59e0b", "#f43f5e", "#ec4899", "#6366f1", "#14b8a6", "#84cc16", "#eab308"]
 
-    # Determinar dinámicamente los períodos del eje X para cada gráfico según el año más temprano con datos cuantitativos
-    prod_valid_periods = [
-        p for p in seg_chart_periods
-        if any(item.get("values", {}).get(p) is not None for item in real_prod_items)
-    ]
-    prod_chart_periods = seg_chart_periods[seg_chart_periods.index(prod_valid_periods[0]):] if prod_valid_periods else seg_chart_periods
+    # Determinar dinámicamente los períodos del eje X para que los segmentos primarios comiencen de forma homogénea
+    # Evaluamos el año más temprano donde los segmentos principales concurrentes (que concentran >=10% de ventas)
+    # tienen datos válidos, evitando que micro-segmentos o partidas aisladas desfasen el eje temporal.
+    major_prods = [item for item in sorted_prods if (item.get("values", {}).get("LTM") or item.get("values", {}).get(first_fy) or 0.0) / tot_prod_ltm >= 0.10]
+    if not major_prods and real_prod_items:
+        major_prods = sorted_prods[:2]
+
+    candidate_start_periods = []
+    for p in seg_chart_periods:
+        if major_prods and all(item.get("values", {}).get(p) is not None for item in major_prods):
+            candidate_start_periods.append(p)
+            break
+
+    if candidate_start_periods:
+        start_p = candidate_start_periods[0]
+        prod_chart_periods = seg_chart_periods[seg_chart_periods.index(start_p):]
+    else:
+        prod_valid_periods = [
+            p for p in seg_chart_periods
+            if any(item.get("values", {}).get(p) is not None for item in real_prod_items)
+        ]
+        prod_chart_periods = seg_chart_periods[seg_chart_periods.index(prod_valid_periods[0]):] if prod_valid_periods else seg_chart_periods
 
     geo_valid_periods = [
         p for p in seg_chart_periods
@@ -970,6 +1001,8 @@ def build_charts_and_segments_context(
         "has_discontinued_products": len(table_products_discontinued) > 0,
         "table_channels": table_channels,
         "table_geos": table_geos,
+        "table_geos_discontinued": table_geos_discontinued,
+        "has_discontinued_geos": len(table_geos_discontinued) > 0,
         "geo_territories": geo_territories,
         "has_geo_territories": len(geo_territories) > 0,
         "kpis_segments": kpis_segments,

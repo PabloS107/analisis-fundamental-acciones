@@ -26,8 +26,6 @@
         "FY2021": 114934.0,
         "FY2020": 84169.0,
         "FY2019": 69655.0,
-        "FY2018": 55013.0,
-        "FY2017": 39942.0,
         "LTM": 235587.0
       },
       "status": "active"
@@ -46,8 +44,6 @@
         "FY2021": 721.0,
         "FY2020": 657.0,
         "FY2019": 541.0,
-        "FY2018": 825.0,
-        "FY2017": 711.0,
         "LTM": 3787.0
       },
       "status": "active"
@@ -127,6 +123,34 @@
         "FY2019": -898.8,
         "LTM": -842.54
       }
+    },
+    {
+      "name": "Advertising",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 84169.0,
+        "FY2019": 69655.0,
+        "FY2018": 55013.0,
+        "FY2017": 39942.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other revenue",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 1796.0,
+        "FY2019": 1042.0,
+        "FY2018": 825.0,
+        "FY2017": 711.0
+      },
+      "status": "discontinued"
     }
   ],
   "channel_segments": [],
@@ -142,6 +166,10 @@
         "FY2023": 52888.0,
         "FY2022": 50150.0,
         "FY2021": 51541.0,
+        "FY2020": 38433.0,
+        "FY2019": 32206.0,
+        "FY2018": 25727.0,
+        "FY2017": 19065.0,
         "LTM": 95181.0
       },
       "status": "active"
@@ -232,21 +260,6 @@
         "FY2023": 13690.0,
         "FY2022": 7400.0,
         "FY2021": 7590.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "US & Canada",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2022": 50150.0,
-        "FY2021": 51541.0,
-        "FY2020": 38433.0,
-        "FY2019": 32206.0,
-        "FY2018": 25727.0,
-        "FY2017": 19065.0
       },
       "status": "discontinued"
     }

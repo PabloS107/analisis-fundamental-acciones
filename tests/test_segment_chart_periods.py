@@ -51,9 +51,10 @@ class TestSegmentChartPeriods(unittest.TestCase):
 
         # Main financial charts and segments start at earliest year with data (FY2017)
         self.assertEqual(chart_periods[0], "FY2017")
-        self.assertEqual(chart_periods[-1], "LTM")
+        # For AAPL, LTM is suppressed when identical to latest fiscal year (FY2026) to prevent redundant duplicate points
+        self.assertEqual(chart_periods[-1], "FY2026")
         self.assertEqual(seg_chart_periods[0], "FY2017")
-        self.assertEqual(seg_chart_periods[-1], "LTM")
+        self.assertEqual(seg_chart_periods[-1], "FY2026")
         self.assertEqual(prod_chart_periods[0], "FY2017")
         self.assertEqual(geo_chart_periods[0], "FY2017")
 

@@ -14,6 +14,17 @@
   ],
   "product_segments": [
     {
+      "name": "Restatement Adjustment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2020": 283.5,
+        "FY2019": 30.6
+      }
+    },
+    {
       "name": "Net service revenues and financial income",
       "is_subtotal": false,
       "is_subsegment": true,
@@ -39,7 +50,6 @@
         "FY2024": 2139.0,
         "FY2023": 1490.0,
         "FY2022": 1095.0,
-        "FY2021": 920.0,
         "LTM": 5385.0
       },
       "status": "active"
@@ -281,11 +291,24 @@
         "FY2024": 12159.0,
         "FY2023": 8201.0,
         "FY2022": 5808.0,
-        "FY2021": 4635.0,
-        "FY2020": 2560.0,
-        "FY2019": 1346.4,
-        "FY2018": 838.6,
         "LTM": 21749.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Financial services and income",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fintech",
+      "values": {
+        "FY2025": 6678.0,
+        "FY2024": 4962.0,
+        "FY2023": 4317.0,
+        "FY2022": 2888.0,
+        "FY2021": 1590.0,
+        "FY2020": 1139.0,
+        "LTM": 8144.0
       },
       "status": "active"
     },
@@ -307,6 +330,23 @@
       "status": "active"
     },
     {
+      "name": "Fintech product sales",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fintech",
+      "values": {
+        "FY2025": 63.0,
+        "FY2024": 56.0,
+        "FY2023": 43.0,
+        "FY2022": 51.0,
+        "FY2021": 35.0,
+        "FY2020": 29.0,
+        "LTM": 69.0
+      },
+      "status": "active"
+    },
+    {
       "name": "Fintech",
       "is_subtotal": false,
       "is_subsegment": false,
@@ -317,10 +357,6 @@
         "FY2024": 8618.0,
         "FY2023": 6906.0,
         "FY2022": 4972.0,
-        "FY2021": 2434.0,
-        "FY2020": 1414.0,
-        "FY2019": 949.9,
-        "FY2018": 601.0,
         "LTM": 16774.0
       },
       "status": "active"
@@ -334,9 +370,7 @@
       "values": {
         "FY2024": 3818.0,
         "FY2023": 3550.0,
-        "FY2022": 2575.0,
-        "FY2021": 1531.0,
-        "FY2020": 980.0
+        "FY2022": 2575.0
       },
       "status": "discontinued"
     },
@@ -361,9 +395,9 @@
     {
       "name": "Net service revenues",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2023": 12983.0,
         "FY2022": 9442.0,
@@ -372,11 +406,56 @@
       "status": "discontinued"
     },
     {
+      "name": "Net product revenues",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Net revenues",
+      "values": {
+        "FY2023": 1490.0,
+        "FY2022": 1095.0,
+        "FY2021": 920.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Commerce",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Net revenues",
+      "values": {
+        "FY2023": 8201.0,
+        "FY2022": 5808.0,
+        "FY2021": 4635.0,
+        "FY2020": 2560.0,
+        "FY2019": 1346.4,
+        "FY2018": 838.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Fintech",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Net revenues",
+      "values": {
+        "FY2023": 6272.0,
+        "FY2022": 4729.0,
+        "FY2021": 2434.0,
+        "FY2020": 1414.0,
+        "FY2019": 949.9,
+        "FY2018": 601.0
+      },
+      "status": "discontinued"
+    },
+    {
       "name": "Service",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2022": 9442.0,
         "FY2021": 6149.0,
@@ -388,9 +467,9 @@
     {
       "name": "Product",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2022": 1095.0,
         "FY2021": 920.0,
@@ -400,11 +479,36 @@
       "status": "discontinued"
     },
     {
+      "name": "Argentinean Subsidiaries",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Net revenues",
+      "values": {
+        "FY2022": 2500.0,
+        "FY2021": 1531.0,
+        "FY2020": 980.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Product",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Restatement Adjustment",
+      "values": {
+        "FY2020": 283.5,
+        "FY2019": 30.6
+      },
+      "status": "discontinued"
+    },
+    {
       "name": "Enchanced Marketplace",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2019": 1199.2,
         "FY2018": 702.4,
@@ -415,9 +519,9 @@
     {
       "name": "Non-marketplace",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2019": 1097.1,
         "FY2018": 737.3,
@@ -429,9 +533,9 @@
     {
       "name": "Venezuela Segment",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2017": 54.3,
         "FY2016": 37.2
@@ -441,9 +545,9 @@
     {
       "name": "Marketplace",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Net revenues",
       "values": {
         "FY2018": 702.4,
         "FY2017": 737.5,
@@ -468,7 +572,7 @@
         "FY2020": 225.0,
         "LTM": 1776.0
       },
-      "is_country_breakdown": true,
+      "is_country_breakdown": false,
       "status": "active",
       "operating_income": {
         "FY2022": -45.0,
@@ -488,13 +592,13 @@
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2025": 9184.0,
-        "FY2024": 7038.0,
-        "FY2023": 4512.0,
-        "FY2022": 3072.0,
+        "FY2025": 15201.0,
+        "FY2024": 11406.0,
+        "FY2023": 7821.0,
+        "FY2022": 5798.0,
         "FY2021": 3910.0,
         "FY2020": 2194.0,
-        "LTM": 14925.0
+        "LTM": 20942.0
       },
       "status": "active",
       "operating_income": {
@@ -504,7 +608,7 @@
         "FY2019": 25.7
       },
       "operating_margin_pct": {
-        "FY2022": 8.43,
+        "FY2022": 4.47,
         "FY2021": 4.83,
         "FY2020": 3.6
       }
@@ -515,13 +619,13 @@
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2025": 4185.0,
-        "FY2024": 3072.0,
-        "FY2023": 1979.0,
-        "FY2022": 1282.0,
+        "FY2025": 6475.0,
+        "FY2024": 4664.0,
+        "FY2023": 3071.0,
+        "FY2022": 1893.0,
         "FY2021": 1172.0,
         "FY2020": 575.0,
-        "LTM": 6548.0
+        "LTM": 8838.0
       },
       "status": "active",
       "operating_income": {
@@ -531,7 +635,7 @@
         "FY2019": -168.3
       },
       "operating_margin_pct": {
-        "FY2022": 5.77,
+        "FY2022": 3.91,
         "FY2021": -11.09,
         "FY2020": -23.3
       }
@@ -542,13 +646,13 @@
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2025": 2034.0,
-        "FY2024": 1407.0,
-        "FY2023": 1261.0,
-        "FY2022": 1085.0,
+        "FY2025": 5962.0,
+        "FY2024": 3818.0,
+        "FY2023": 3550.0,
+        "FY2022": 2575.0,
         "FY2021": 1531.0,
         "FY2020": 980.0,
-        "LTM": 3039.0
+        "LTM": 6967.0
       },
       "status": "active",
       "operating_income": {
@@ -558,7 +662,7 @@
         "FY2019": 61.2
       },
       "operating_margin_pct": {
-        "FY2022": 64.42,
+        "FY2022": 27.15,
         "FY2021": 25.41,
         "FY2020": 18.88
       }
@@ -566,8 +670,8 @@
     {
       "name": "U.S.",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "parent": "Other Countries",
       "values": {
         "FY2025": 51.0,
         "FY2024": 35.0,
@@ -575,6 +679,7 @@
         "FY2022": 0.0,
         "LTM": 77.0
       },
+      "is_country_breakdown": true,
       "status": "active",
       "operating_income": {
         "FY2024": 94.0,
@@ -592,10 +697,10 @@
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2024": 642.0,
-        "FY2023": 449.0,
-        "FY2022": 369.0,
-        "FY2021": 374.0
+        "FY2024": 889.0,
+        "FY2023": 665.0,
+        "FY2022": 514.0,
+        "FY2021": 456.0
       },
       "status": "discontinued",
       "operating_income": {
@@ -605,10 +710,10 @@
         "FY2021": 455.0
       },
       "operating_margin_pct": {
-        "FY2024": 364.17,
-        "FY2023": 426.5,
-        "FY2022": 267.48,
-        "FY2021": 121.66
+        "FY2024": 262.99,
+        "FY2023": 287.97,
+        "FY2022": 192.02,
+        "FY2021": 99.78
       }
     },
     {

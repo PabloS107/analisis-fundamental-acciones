@@ -213,6 +213,14 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             "commercial lines segment": "Commercial Lines",
                             "personal lines": "Personal Lines",
                             "commercial lines": "Commercial Lines",
+                            "us & canada": "United States & Canada",
+                            "us and canada": "United States & Canada",
+                            "u.s. & canada": "United States & Canada",
+                            "u.s. and canada": "United States & Canada",
+                            "usa & canada": "United States & Canada",
+                            "usa and canada": "United States & Canada",
+                            "united states & canada": "United States & Canada",
+                            "united states and canada": "United States & Canada",
                         }
                         clean_low = clean_name.strip().lower()
                         if clean_low in ALIAS_MAP:
@@ -242,6 +250,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 if p0_low in ALIAS_MAP: p0 = ALIAS_MAP[p0_low]
                                 if p1_low in ALIAS_MAP: p1 = ALIAS_MAP[p1_low]
 
+                                # Cruces hiperdimensionales entre geografía y unidad de negocio (ej. "Brazil - Commerce", "Fintech - Mexico")
+                                # Son celdas de intersección en hipercubos; se descartan para priorizar el segmento geográfico consolidado y las líneas puras
+                                if (GEO_REGEX.search(p0) and not GEO_REGEX.search(p1) and any(b in p1.lower() for b in ["commerce", "fintech", "corporate"])) or \
+                                   (not GEO_REGEX.search(p0) and GEO_REGEX.search(p1) and any(b in p0.lower() for b in ["commerce", "fintech", "corporate"])):
+                                    continue
+
                                 # Caso A: Ambas son entidades geográficas (ej. "Americas - United States", "Greater China - China")
                                 if GEO_REGEX.search(p0) and GEO_REGEX.search(p1):
                                     clean_name = p1
@@ -257,11 +271,16 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                     clean_name = re.sub(r'\s+segment$', '', p1, flags=re.IGNORECASE).strip()
                                     parent_segment = None
                                     is_subsegment = False
-                                # Caso D: Subsegmento jerárquico dentro de una división (ej. "Advertising - Family of Apps")
+                                # Caso D: Subsegmento jerárquico dentro de una división (ej. "Advertising - Family of Apps", "Services - Fintech")
                                 else:
                                     clean_name = p0
                                     parent_segment = p1
                                     is_subsegment = True
+                                    # Homologación institucional de nombres de subsegmentos en Fintech para evitar colisiones
+                                    if p1_low == "fintech" and p0_low in ["services", "net service revenues and financial income"]:
+                                        clean_name = "Financial services and income"
+                                    elif p1_low == "fintech" and p0_low == "product sales":
+                                        clean_name = "Fintech product sales"
                             elif len(parts) == 1:
                                 clean_name = parts[0]
 
@@ -338,9 +357,16 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         elif is_geo:
                             existing = next((item for item in geographic_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
                             if existing:
-                                for fy, v in v_dict.items():
-                                    if fy not in existing["values"]:
+                                # Supremacía del segmento geográfico puro consolidado sobre cruces o subsegmentos parciales
+                                if not is_subsegment and parent_segment is None and (existing.get("is_subsegment") or existing.get("parent")):
+                                    existing["is_subsegment"] = False
+                                    existing["parent"] = None
+                                    for fy, v in v_dict.items():
                                         existing["values"][fy] = v
+                                else:
+                                    for fy, v in v_dict.items():
+                                        if fy not in existing["values"]:
+                                            existing["values"][fy] = v
                             else:
                                 seg_entry = {
                                     "name": clean_name,
@@ -352,7 +378,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 geographic_segments.append(seg_entry)
                                 detected_geo_names.add(norm_key)
                         elif not is_geo and not is_consolidated_total:
-                            existing = next((item for item in product_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
+                            # La búsqueda de duplicados considera también el padre para no colisionar subsegmentos homónimos (ej. Services bajo Commerce vs Services bajo Fintech)
+                            existing = next((
+                                item for item in product_segments
+                                if _norm_seg_key(item.get("name", "")) == norm_key
+                                and _norm_seg_key(item.get("parent") or "") == _norm_seg_key(parent_segment or "")
+                            ), None)
                             if existing:
                                 for fy, v in v_dict.items():
                                     # Supremacía de re-expresión cronológica: el filing más reciente manda
@@ -373,9 +404,6 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 except Exception as s_err:
                     pass
 
-                except Exception as s_err:
-                    pass
-
         # Resolución dinámica de jerarquías sin hardcoding (Regla 4)
         all_geo_names = {item["name"].lower() for item in geographic_segments}
         for item in geographic_segments:
@@ -390,6 +418,16 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                     item["is_subsegment"] = True
                     parent_item = next(g for g in geographic_segments if g["name"].lower() == parent_found)
                     item["parent"] = parent_item["name"]
+                elif any(k in all_geo_names for k in ["brazil", "mexico", "latin america", "europe"]) and "other countries" in all_geo_names:
+                    # Si los segmentos operativos son latinoamericanos/internacionales y ya existe "other countries",
+                    # la mención de U.S. proviene de la revelación de domicilio corporativo (Delaware) requerida por ASC 280,
+                    # la cual ya está incluida por la dirección dentro de "other countries".
+                    # Se marca como desglose de país secundario para evitar doble cómputo en el total.
+                    item["is_country_breakdown"] = True
+                    item["is_subsegment"] = True
+                    parent_item = next((g for g in geographic_segments if g["name"].lower() == "other countries"), None)
+                    if parent_item:
+                        item["parent"] = parent_item["name"]
                 else:
                     item["is_subsegment"] = False
                     item["parent"] = None
@@ -402,7 +440,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                     item["is_subsegment"] = False
                     item["parent"] = None
             elif name_low == "other countries":
-                item["is_country_breakdown"] = True
+                # Si existen regiones continentales (ej. Americas, Europe como en AAPL), "other countries" es un desglose de pie de página.
+                # Pero si los segmentos primarios son países (ej. Brasil, México como en MELI o NU), "Other countries" es un segmento operativo primario.
+                if any(r in all_geo_names for r in ["americas", "europe", "greater china", "rest of asia pacific"]):
+                    item["is_country_breakdown"] = True
+                else:
+                    item["is_country_breakdown"] = False
 
         for item in product_segments:
             if item.get("parent") and item["parent"].lower() in ["other", "u.k."]:
@@ -503,18 +546,32 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 q_clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
                                 if DISCLOSURE_NOISE_REGEX.search(q_clean_name):
                                     continue
+                                q_parent = None
                                 if " - " in q_clean_name and not GEO_REGEX.search(q_clean_name):
                                     parts = q_clean_name.split(" - ")
                                     if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
                                         q_clean_name = parts[-1].strip()
+                                    elif len(parts) == 2:
+                                        q_clean_name = parts[0].strip()
+                                        q_parent = parts[1].strip()
                                     else:
-                                        q_clean_name = parts[0].strip() if len(parts) == 2 else parts[-1].strip()
-                                q_norm = _norm_seg_key(q_clean_name)
+                                        q_clean_name = parts[-1].strip()
+
+                                if q_parent and q_parent.lower() == "fintech" and q_clean_name.lower() in ["services", "net service revenues and financial income"]:
+                                    q_norm_names = [_norm_seg_key(q_clean_name), "financial services and income"]
+                                elif q_parent and q_parent.lower() == "fintech" and q_clean_name.lower() == "product sales":
+                                    q_norm_names = [_norm_seg_key(q_clean_name), "fintech product sales"]
+                                else:
+                                    q_norm_names = [_norm_seg_key(q_clean_name)]
 
                                 target_lists = [segment_op_income] if is_op_inc else [product_segments, channel_segments, geographic_segments]
                                 for t_list in target_lists:
                                     for item in t_list:
-                                        if _norm_seg_key(item.get("name", "")) == q_norm:
+                                        matches_name = _norm_seg_key(item.get("name", "")) in q_norm_names or _norm_seg_key(item.get("name", "")) == _norm_seg_key(lbl)
+                                        matches_parent = True
+                                        if q_parent and item.get("parent"):
+                                            matches_parent = _norm_seg_key(item.get("parent")) == _norm_seg_key(q_parent)
+                                        if matches_name and matches_parent:
                                             v_fy = item.get("values", {}).get(latest_fy)
                                             if v_fy is not None and "LTM" not in item["values"]:
                                                 item["values"]["LTM"] = round(v_fy + v_curr_m - v_prev_m, 1)
