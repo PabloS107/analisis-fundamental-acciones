@@ -31,7 +31,8 @@
         "FY2018": 225847.0,
         "FY2017": 196534.0,
         "LTM": 355533.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "iPhone",
@@ -51,7 +52,8 @@
         "FY2018": 164888.0,
         "FY2017": 139337.0,
         "LTM": 254098.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Mac",
@@ -71,7 +73,8 @@
         "FY2018": 25198.0,
         "FY2017": 25569.0,
         "LTM": 37929.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "iPad",
@@ -91,7 +94,8 @@
         "FY2018": 18380.0,
         "FY2017": 18802.0,
         "LTM": 27929.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Wearables, Home and Accessories",
@@ -111,7 +115,8 @@
         "FY2018": 17381.0,
         "FY2017": 12826.0,
         "LTM": 35577.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Services",
@@ -131,7 +136,8 @@
         "FY2018": 39748.0,
         "FY2017": 32700.0,
         "LTM": 123301.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Corporate non-segment",
@@ -145,6 +151,7 @@
         "FY2024": 0.0,
         "LTM": 0.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": -54405.0,
         "FY2025": -42627.0,
@@ -174,6 +181,7 @@
         "FY2017": 96600.0,
         "LTM": 198083.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 86008.0,
         "FY2025": 72480.0,
@@ -219,6 +227,7 @@
         "FY2017": 54938.0,
         "LTM": 127604.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 58098.0,
         "FY2025": 47739.0,
@@ -264,6 +273,7 @@
         "FY2017": 44764.0,
         "LTM": 82378.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 35326.0,
         "FY2025": 26917.0,
@@ -309,6 +319,7 @@
         "FY2017": 17733.0,
         "LTM": 30908.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 14650.0,
         "FY2025": 13955.0,
@@ -354,6 +365,7 @@
         "FY2017": 15199.0,
         "LTM": 39861.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 18386.0,
         "FY2025": 14586.0,
@@ -398,7 +410,8 @@
         "FY2018": 98061.0,
         "FY2017": 84339.0,
         "LTM": 167746.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "China",
@@ -418,6 +431,7 @@
         "FY2017": 44764.0,
         "LTM": 82378.0
       },
+      "status": "active",
       "operating_income": {
         "FY2026": 35326.0,
         "FY2025": 26917.0,
@@ -463,7 +477,8 @@
         "FY2017": 100131.0,
         "LTM": 228710.0
       },
-      "is_country_breakdown": true
+      "is_country_breakdown": true,
+      "status": "active"
     }
   ],
   "segment_operating_income": [

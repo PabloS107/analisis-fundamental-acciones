@@ -418,13 +418,20 @@ def build_charts_and_segments_context(
             return "-"
         return f"${val:,.0f}M" if abs(val) >= 10000 else f"${val:,.1f}M"
 
-    # Identificación universal de partidas primarias (excluyendo subtotales, subsegmentos y partidas de conciliación)
+    # Identificación universal de partidas primarias (excluyendo subtotales, subsegmentos, conciliaciones y descontinuadas)
     real_prod_items = [
         item for item in prod_items
-        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue"]
+        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")
+        and item.get("status") != "discontinued"
+        and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue", "google", "apple"]
+        and (item.get("values", {}).get("LTM") is not None or (seg_periods and item.get("values", {}).get(seg_periods[0]) is not None))
     ]
     if not real_prod_items:
-        real_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")]
+        real_prod_items = [
+            item for item in prod_items
+            if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling")
+            and item.get("name", "").lower() not in ["revenue", "products", "total net sales", "total revenues", "total revenue"]
+        ]
     if not real_prod_items:
         real_prod_items = [item for item in prod_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
     if not real_prod_items:
@@ -439,10 +446,16 @@ def build_charts_and_segments_context(
 
     real_geo_items = [
         item for item in geo_items
-        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and not item.get("is_country_breakdown") and item.get("name", "").lower() not in ["revenue", "total net sales", "total revenues", "total revenue"]
+        if not item.get("is_subtotal") and not item.get("is_subsegment") and not item.get("is_reconciling") and not item.get("is_country_breakdown")
+        and item.get("status") != "discontinued"
+        and item.get("name", "").lower() not in ["revenue", "total net sales", "total revenues", "total revenue"]
+        and (item.get("values", {}).get("LTM") is not None or (seg_periods and item.get("values", {}).get(seg_periods[0]) is not None))
     ]
     if not real_geo_items:
-        real_geo_items = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_reconciling") and not item.get("is_country_breakdown")]
+        real_geo_items = [
+            item for item in geo_items
+            if not item.get("is_subtotal") and not item.get("is_reconciling") and not item.get("is_country_breakdown")
+        ]
     if not real_geo_items:
         real_geo_items = [item for item in geo_items if not item.get("is_subtotal") and not item.get("is_reconciling")]
     if not real_geo_items:
@@ -515,12 +528,29 @@ def build_charts_and_segments_context(
 
     # Tabla 1: Segmentos de Producto & Servicios
     table_products = []
+    table_products_discontinued = []
     seg_op_income_raw = segments_raw.get("segment_operating_income", [])
     for item in ordered_prod_items:
         is_sub = bool(item.get("is_subtotal"))
         is_subseg = bool(item.get("is_subsegment"))
+        is_discontinued = item.get("status") == "discontinued" or (item["values"].get("LTM") is None and all(item["values"].get(p) is None for p in seg_periods[:3]))
         v_ltm = item["values"].get("LTM")
         mix_pct = (v_ltm / tot_prod_ltm * 100.0) if (tot_prod_ltm > 0 and not is_sub and v_ltm is not None) else None
+        mix_pct_num = round(mix_pct, 1) if (mix_pct is not None and not is_sub) else 0.0
+
+        # Cómputo de crecimiento YoY dinámico (LTM vs período fiscal inmediatamente anterior)
+        yoy_str = "-"
+        v_curr = item["values"].get("LTM") or (item["values"].get(seg_periods[0]) if seg_periods else None)
+        prior_p = None
+        if len(seg_periods) > 1:
+            for p_cand in seg_periods[1:]:
+                if p_cand in item["values"] and item["values"][p_cand] is not None:
+                    prior_p = p_cand
+                    break
+        v_prev = item["values"].get(prior_p) if prior_p else None
+        if v_curr is not None and v_prev is not None and float(v_prev) > 0:
+            g = ((float(v_curr) - float(v_prev)) / float(v_prev)) * 100.0
+            yoy_str = f"+{g:.1f}%" if g >= 0 else f"{g:.1f}%"
         
         # Extracción o cómputo de Margen Operativo por Segmento (ASC 280)
         op_m_val = None
@@ -557,17 +587,25 @@ def build_charts_and_segments_context(
             row_vals.append(_fmt_seg_val(val) if val is not None else "-")
 
         display_name = ("↳ " + item["name"]) if is_subseg else item["name"]
-        table_products.append({
+        row_dict = {
             "name": display_name,
+            "raw_name": item["name"],
             "description": item.get("description", ""),
             "is_subtotal": is_sub,
             "is_subsegment": is_subseg,
+            "is_discontinued": is_discontinued,
             "indent": is_subseg,
             "is_total": False,
             "mix_pct": f"{mix_pct:.1f}%" if (mix_pct is not None and not is_sub) else "-",
+            "mix_pct_num": mix_pct_num,
+            "yoy_str": yoy_str,
             "op_margin_ltm": op_margin_str,
             "values": row_vals
-        })
+        }
+        if is_discontinued:
+            table_products_discontinued.append(row_dict)
+        else:
+            table_products.append(row_dict)
 
     # Conciliación residual universal de productos para cuadre al 100.0% con el P&L
     has_unreconciled_prod = False
@@ -794,14 +832,78 @@ def build_charts_and_segments_context(
             "pointHoverRadius": 7,
         })
 
-    # Datos para Donut Charts LTM en Millones ($M) usando ítems primarios
-    donut_prod_labels = [item["name"] for item in real_prod_items]
-    donut_prod_data = [round(float(item["values"].get("LTM") or 0), 1) for item in real_prod_items]
-    donut_prod_colors = [palette[idx % len(palette)] for idx in range(len(donut_prod_labels))]
+    def _get_geo_icon(name):
+        n = str(name).lower()
+        if any(k in n for k in ["united states", "u.s", "domestic", "estados unidos"]):
+            return "🇺🇸"
+        elif any(k in n for k in ["brazil", "brasil"]):
+            return "🇧🇷"
+        elif "mexico" in n or "méxico" in n:
+            return "🇲🇽"
+        elif "argentina" in n:
+            return "🇦🇷"
+        elif "china" in n:
+            return "🇨🇳"
+        elif "japan" in n or "japón" in n:
+            return "🇯🇵"
+        elif any(k in n for k in ["europe", "europa", "emea", "germany", "france"]):
+            return "🇪🇺"
+        elif "united kingdom" in n or "uk" in n or "reino unido" in n:
+            return "🇬🇧"
+        elif any(k in n for k in ["asia", "apac"]):
+            return "🌏"
+        elif "taiwan" in n:
+            return "🇹🇼"
+        elif "colombia" in n:
+            return "🇨🇴"
+        elif any(k in n for k in ["international", "internacional", "world", "foreign", "resto"]):
+            return "🌐"
+        return "📍"
 
-    donut_geo_labels = [item["name"] for item in real_geo_items]
-    donut_geo_data = [round(float(item["values"].get("LTM") or 0), 1) for item in real_geo_items]
-    donut_geo_colors = [palette[idx % len(palette)] for idx in range(len(donut_geo_labels))]
+    geo_territories = []
+    for item in real_geo_items:
+        v_ltm = item["values"].get("LTM")
+        if v_ltm is None or v_ltm <= 0:
+            continue
+        mix_num = (v_ltm / tot_geo_ltm * 100.0) if tot_geo_ltm > 0 else 0.0
+        yoy_geo_str = "-"
+        prior_p = seg_periods[1] if len(seg_periods) > 1 else None
+        v_prev = item["values"].get(prior_p) if prior_p else None
+        if v_ltm is not None and v_prev is not None and float(v_prev) > 0:
+            g = ((float(v_ltm) - float(v_prev)) / float(v_prev)) * 100.0
+            yoy_geo_str = f"+{g:.1f}%" if g >= 0 else f"{g:.1f}%"
+
+        geo_territories.append({
+            "name": item["name"],
+            "icon": _get_geo_icon(item["name"]),
+            "ltm_str": _fmt_seg_val(v_ltm),
+            "mix_pct": f"{mix_num:.1f}%",
+            "mix_num": round(mix_num, 1),
+            "yoy_str": yoy_geo_str,
+            "values": [_fmt_seg_val(item["values"].get(p)) for p in seg_periods[:5]]
+        })
+    geo_territories = sorted(geo_territories, key=lambda x: x["mix_num"], reverse=True)
+
+    # Datos para Donut Charts LTM en Millones ($M) usando ítems primarios estrictamente activos con datos > 0
+    donut_prod_labels = []
+    donut_prod_data = []
+    donut_prod_colors = []
+    for idx, item in enumerate(real_prod_items):
+        v = item["values"].get("LTM")
+        if v is not None and float(v) > 0:
+            donut_prod_labels.append(item["name"])
+            donut_prod_data.append(round(float(v), 1))
+            donut_prod_colors.append(palette[len(donut_prod_labels) % len(palette)])
+
+    donut_geo_labels = []
+    donut_geo_data = []
+    donut_geo_colors = []
+    for idx, item in enumerate(real_geo_items):
+        v = item["values"].get("LTM")
+        if v is not None and float(v) > 0:
+            donut_geo_labels.append(item["name"])
+            donut_geo_data.append(round(float(v), 1))
+            donut_geo_colors.append(palette[len(donut_geo_labels) % len(palette)])
 
 
     return {
@@ -824,9 +926,15 @@ def build_charts_and_segments_context(
         "buybacks_unit": buybacks_unit,
         "buybacks_summary": buybacks_summary,
         "seg_periods": seg_periods,
+        "seg_periods_3y": seg_periods[:3],
+        "seg_periods_5y": seg_periods[:5],
         "table_products": table_products,
+        "table_products_discontinued": table_products_discontinued,
+        "has_discontinued_products": len(table_products_discontinued) > 0,
         "table_channels": table_channels,
         "table_geos": table_geos,
+        "geo_territories": geo_territories,
+        "has_geo_territories": len(geo_territories) > 0,
         "kpis_segments": kpis_segments,
         "seg_chart_periods_json": json.dumps(seg_chart_periods),
         "prod_chart_periods_json": json.dumps(prod_chart_periods),

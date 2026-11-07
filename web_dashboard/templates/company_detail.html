@@ -522,90 +522,216 @@
 
         <!-- Bloque 2: Tablas de Desglose Histórico (Productos y Geografías) -->
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <!-- Tabla 1: Segmentos de Producto & Servicios -->
+            <!-- Tabla 1: Segmentos de Producto & Servicios (Smart Financial Matrix) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>📦</span> Desglose por Línea de Producto & Servicios
+                            <span>📦</span> Matriz de Líneas de Negocio & Servicios
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Ingresos históricos y mix actual (% LTM)</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Ingresos por segmento operativo (ASC 280), mix actual y tracción YoY</p>
                     </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Auditado 10-K</span>
+                    <div class="flex items-center gap-2">
+                        <!-- Selector de Periodos Históricos -->
+                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
+                            <button type="button" onclick="setSegPeriodView('3y', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
+                            <button type="button" onclick="setSegPeriodView('5y', this)" class="seg-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer">5A</button>
+                            <button type="button" onclick="setSegPeriodView('all', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">Todos</button>
+                        </div>
+                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 hidden sm:inline-block">Auditado 10-K</span>
+                    </div>
                 </div>
+
                 <div class="overflow-x-auto rounded-xl border border-slate-200">
                     <table class="w-full text-xs text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                <th class="py-2.5 px-3 sticky left-0 bg-slate-50">Segmento</th>
+                                <th class="py-2.5 px-3 sticky left-0 bg-slate-50 z-10">Segmento</th>
                                 <th class="py-2.5 px-2 text-right">Mix LTM</th>
-                                <th class="py-2.5 px-2 text-right">Margen Op. LTM</th>
+                                <th class="py-2.5 px-2 text-center">YoY</th>
+                                <th class="py-2.5 px-2 text-right">Margen Op.</th>
                                 {% for p in seg_periods %}
-                                <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
+                                <th class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %}">{{ p }}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100/70 font-mono">
                             {% for row in table_products %}
                             <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/30 text-slate-600{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
-                                <td class="py-2.5 px-3 sticky left-0 {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50/30 text-slate-600 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
+                                <td class="py-2.5 px-3 sticky left-0 z-10 {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50/30 text-slate-600 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
                                     <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% else %}font-semibold{% endif %}">{{ row.name }}</div>
                                     {% if row.description %}
                                     <div class="text-[11px] text-slate-500 font-normal leading-snug mt-0.5 max-w-xs md:max-w-md">{{ row.description }}</div>
                                     {% endif %}
                                 </td>
-                                <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                                <td class="py-2.5 px-2 text-right">
+                                    <div class="flex items-center justify-end gap-1.5">
+                                        <span class="{% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</span>
+                                        {% if row.mix_pct_num > 0 and not row.is_total and not row.indent %}
+                                        <div class="w-10 h-1.5 bg-slate-100 rounded-full overflow-hidden hidden sm:block">
+                                            <div class="h-full bg-cyan-500 rounded-full" style="width: {{ row.mix_pct_num }}%;"></div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="py-2.5 px-2 text-center whitespace-nowrap">
+                                    {% if row.yoy_str != '-' and not row.is_total %}
+                                        {% if row.yoy_str|slice:":1" == "+" %}
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                ▲ {{ row.yoy_str }}
+                                            </span>
+                                        {% else %}
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                                ▼ {{ row.yoy_str }}
+                                            </span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-slate-300 font-normal">-</span>
+                                    {% endif %}
+                                </td>
                                 <td class="py-2.5 px-2 text-right {% if row.is_total %}text-purple-700 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-purple-600 font-semibold{% endif %}">{{ row.op_margin_ltm|default:"-" }}</td>
                                 {% for v in row.values %}
-                                <td class="py-2.5 px-2 text-right whitespace-nowrap {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% elif row.indent %}text-slate-500 font-normal{% endif %}">{{ v }}</td>
+                                <td class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% elif row.indent %}text-slate-500 font-normal{% endif %}">{{ v }}</td>
                                 {% endfor %}
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
+
+                {% if has_discontinued_products %}
+                <!-- Acordeón de Segmentos Históricos Descontinuados -->
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                        <span class="flex items-center gap-1.5">
+                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                            <span>Estructuras y Segmentos Históricos Precedentes ({{ table_products_discontinued|length }})</span>
+                        </span>
+                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">Descontinuados / Reclasificados</span>
+                    </summary>
+                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                    <th class="py-2 px-3 sticky left-0 bg-slate-50 z-10">Segmento Histórico</th>
+                                    {% for p in seg_periods %}
+                                    <th class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %}">{{ p }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono">
+                                {% for row in table_products_discontinued %}
+                                <tr class="text-slate-600 hover:bg-slate-50">
+                                    <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-medium text-slate-800">
+                                        <div class="whitespace-nowrap">{{ row.name }}</div>
+                                        {% if row.description %}
+                                        <div class="text-[10px] text-slate-400 font-normal leading-tight">{{ row.description }}</div>
+                                        {% endif %}
+                                    </td>
+                                    {% for v in row.values %}
+                                    <td class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %}">{{ v }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                {% endif %}
             </div>
 
-            <!-- Tabla 2: Segmentos Geográficos -->
+            <!-- Panel Territorial con Barras de Penetración -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                         <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>🗺️</span> Desglose por Región Geográfica
+                            <span>🗺️</span> Panel Territorial & Penetración
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Distribución geográfica global e internacionalización</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Distribución regional, cuota de ventas y diversificación global</p>
                     </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Auditado 10-K</span>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
+                            Doméstico: <strong class="text-slate-900">{{ kpis_segments.top_geo_mix }}</strong>
+                        </span>
+                        <span class="font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+                            Global: <strong>{{ kpis_segments.intl_pct }}</strong>
+                        </span>
+                    </div>
                 </div>
-                <div class="overflow-x-auto rounded-xl border border-slate-200">
-                    <table class="w-full text-xs text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                <th class="py-2.5 px-3 sticky left-0 bg-slate-50">Región</th>
-                                <th class="py-2.5 px-2 text-right">Mix LTM</th>
-                                {% for p in seg_periods %}
-                                <th class="py-2.5 px-2 text-right whitespace-nowrap">{{ p }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100/70 font-mono">
-                            {% for row in table_geos %}
-                            <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/30 text-slate-600{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
-                                <td class="py-2.5 px-3 sticky left-0 {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50/30 text-slate-600 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
-                                    <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% else %}font-semibold{% endif %}">{{ row.name }}</div>
-                                    {% if row.description %}
-                                    <div class="text-[11px] text-slate-500 font-normal leading-snug mt-0.5 max-w-xs md:max-w-md">{{ row.description }}</div>
-                                    {% endif %}
-                                </td>
-                                <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
-                                {% for v in row.values %}
-                                <td class="py-2.5 px-2 text-right whitespace-nowrap {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% endif %}">{{ v }}</td>
-                                {% endfor %}
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+
+                {% if has_geo_territories %}
+                <!-- Grid de Tarjetas Territoriales -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {% for t in geo_territories %}
+                    <div class="p-3.5 rounded-xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/50 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-xl shrink-0 p-1 bg-slate-100 rounded-lg">{{ t.icon }}</span>
+                                <span class="font-bold text-slate-900 text-xs truncate" title="{{ t.name }}">{{ t.name }}</span>
+                            </div>
+                            {% if t.yoy_str != '-' %}
+                                {% if t.yoy_str|slice:":1" == "+" %}
+                                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">
+                                        ▲ {{ t.yoy_str }}
+                                    </span>
+                                {% else %}
+                                    <span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 shrink-0">
+                                        ▼ {{ t.yoy_str }}
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                        <div class="flex items-baseline justify-between pt-1">
+                            <span class="text-xl font-black text-slate-900 tracking-tight">{{ t.ltm_str }}</span>
+                            <span class="text-xs font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-200">{{ t.mix_pct }}</span>
+                        </div>
+
+                        <!-- Barra de Penetración -->
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-500" style="width: {{ t.mix_num }}%;"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+                {% endif %}
+
+                <!-- Acordeón con Tabla Histórica Multi-Anual Geográfica -->
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                        <span class="flex items-center gap-1.5">
+                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                            <span>Ver Tabla de Desglose Histórico Multi-Anual Geográfico</span>
+                        </span>
+                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">10-K Completo</span>
+                    </summary>
+                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                    <th class="py-2 px-3 sticky left-0 bg-slate-50 z-10">Región</th>
+                                    <th class="py-2 px-2 text-right">Mix LTM</th>
+                                    {% for p in seg_periods %}
+                                    <th class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %}">{{ p }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono">
+                                {% for row in table_geos %}
+                                <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/30 text-slate-600{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
+                                    <td class="py-2 px-3 sticky left-0 z-10 {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50/30 text-slate-600 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
+                                        <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% else %}font-semibold{% endif %}">{{ row.name }}</div>
+                                    </td>
+                                    <td class="py-2 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                                    {% for v in row.values %}
+                                    <td class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}col-over-5 hidden{% elif forloop.counter > 3 %}col-over-3{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% endif %}">{{ v }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </div>
 
@@ -4074,6 +4200,35 @@
                     }
                 },
                 cutout: '68%'
+            }
+        });
+    }
+
+    function setSegPeriodView(mode, btn) {
+        document.querySelectorAll('.seg-period-btn').forEach(b => {
+            b.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+            b.classList.add('text-slate-600');
+        });
+        if (btn) {
+            btn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+            btn.classList.remove('text-slate-600');
+        }
+
+        document.querySelectorAll('.seg-year-col').forEach(col => {
+            if (mode === '3y') {
+                if (col.classList.contains('col-over-3')) {
+                    col.classList.add('hidden');
+                } else {
+                    col.classList.remove('hidden');
+                }
+            } else if (mode === '5y') {
+                if (col.classList.contains('col-over-5')) {
+                    col.classList.add('hidden');
+                } else {
+                    col.classList.remove('hidden');
+                }
+            } else {
+                col.classList.remove('hidden');
             }
         });
     }

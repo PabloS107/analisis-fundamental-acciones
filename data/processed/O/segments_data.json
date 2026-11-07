@@ -10,91 +10,670 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016",
-    "FY2015"
+    "FY2016"
   ],
   "product_segments": [
     {
-      "name": "Shares of common stock",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "ATM Program",
-      "values": {
-        "FY2025": 34.2,
-        "FY2024": 17.3,
-        "FY2023": 43.7
-      }
-    },
-    {
       "name": "Retail",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "United Kingdom",
-      "values": {
-        "FY2025": 619.9,
-        "FY2024": 508.2,
-        "FY2023": 374.1
-      }
-    },
-    {
-      "name": "Industrial",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "United Kingdom",
-      "values": {
-        "FY2025": 54.8,
-        "FY2024": 48.1,
-        "FY2023": 43.7
-      }
-    },
-    {
-      "name": "Other",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "parent": "United Kingdom",
-      "values": {
-        "FY2025": 6492.0,
-        "FY2024": 794.0,
-        "FY2023": 0.0
-      }
-    }
-  ],
-  "geographic_segments": [
-    {
-      "name": "Retail - U.S.",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "status": "active",
+      "values": {
+        "FY2025": 4135.3,
+        "FY2024": 3876.7,
+        "FY2023": 3128.3,
+        "FY2022": 2455.9,
+        "FY2021": 1566.7,
+        "FY2020": 1312.5,
+        "LTM": 4135.3
+      }
+    },
+    {
+      "name": "U.K.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2021": 135.0,
+        "FY2020": 55.7,
+        "FY2019": 17.8,
+        "FY2018": 37.9,
+        "FY2017": 30.3
+      }
+    },
+    {
+      "name": "casual dining",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2021": 71.3,
+        "FY2020": 46.3,
+        "FY2019": 45.2
+      }
+    },
+    {
+      "name": "Retail (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Retail",
       "values": {
         "FY2025": 3515.4,
         "FY2024": 3368.5,
         "FY2023": 2754.2,
-        "LTM": 3914.7
-      }
+        "FY2022": 2455.9,
+        "FY2021": 1566.7,
+        "FY2020": 1312.5,
+        "LTM": 3515.4
+      },
+      "status": "active"
     },
     {
-      "name": "Industrial - U.S.",
+      "name": "Retail (United Kingdom)",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Retail",
+      "values": {
+        "FY2025": 619.9,
+        "FY2024": 508.2,
+        "FY2023": 374.1,
+        "LTM": 619.9
+      },
+      "status": "active"
+    },
+    {
+      "name": "Industrial (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Industrial",
       "values": {
         "FY2025": 785.9,
         "FY2024": 747.0,
         "FY2023": 515.4,
-        "LTM": 875.2
-      }
+        "FY2022": 465.2,
+        "FY2021": 261.5,
+        "FY2020": 184.6,
+        "LTM": 785.9
+      },
+      "status": "active"
     },
     {
-      "name": "Other - U.S.",
+      "name": "Industrial (United Kingdom)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Industrial",
+      "values": {
+        "FY2025": 54.8,
+        "FY2024": 48.1,
+        "FY2023": 43.7,
+        "LTM": 54.8
+      },
+      "status": "active"
+    },
+    {
+      "name": "Industrial",
       "is_subtotal": false,
       "is_subsegment": false,
+      "is_reconciling": false,
       "parent": null,
+      "values": {
+        "FY2025": 864.4,
+        "FY2024": 795.1,
+        "FY2023": 559.1,
+        "FY2022": 495.4,
+        "FY2021": 271.1,
+        "FY2020": 185.9,
+        "LTM": 864.4
+      },
+      "status": "active"
+    },
+    {
+      "name": "Other (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Other",
       "values": {
         "FY2025": 240.7,
         "FY2024": 237.9,
         "FY2023": 205.5,
-        "LTM": 268.0
-      }
+        "FY2022": 74.2,
+        "FY2021": 84.1,
+        "LTM": 240.7
+      },
+      "status": "active"
+    },
+    {
+      "name": "Other (United Kingdom)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Other",
+      "values": {
+        "FY2025": 6.5,
+        "FY2024": 0.8,
+        "FY2023": 0.0,
+        "LTM": 6.5
+      },
+      "status": "active"
+    },
+    {
+      "name": "Other",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 247.2,
+        "FY2024": 238.7,
+        "FY2023": 205.5,
+        "FY2022": 74.2,
+        "FY2021": 84.1,
+        "FY2018": 6.3,
+        "FY2017": 3.5,
+        "FY2016": 2.7,
+        "LTM": 247.2
+      },
+      "status": "active"
+    },
+    {
+      "name": "Other (2) (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Other (2)",
+      "values": {
+        "FY2022": 74.2,
+        "FY2021": 84.1,
+        "FY2020": 85.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other (2)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2022": 74.2,
+        "FY2021": 84.1,
+        "FY2020": 85.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Automotive service",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 47.8,
+        "FY2020": 35.1,
+        "FY2019": 32.4,
+        "FY2018": 28.3,
+        "FY2017": 25.3
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Beverages",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 37.3,
+        "FY2020": 32.8,
+        "FY2019": 31.8,
+        "FY2018": 31.5,
+        "FY2017": 31.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Child care",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 36.4,
+        "FY2020": 35.6,
+        "FY2019": 31.7,
+        "FY2018": 21.9,
+        "FY2017": 20.8
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Dollar stores",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 149.1,
+        "FY2020": 126.7,
+        "FY2019": 102.7,
+        "FY2018": 94.8,
+        "FY2017": 91.1
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Drug stores",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 153.2,
+        "FY2020": 141.0,
+        "FY2019": 127.9,
+        "FY2018": 129.6,
+        "FY2017": 126.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Financial services",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 36.8,
+        "FY2020": 30.5,
+        "FY2019": 30.2,
+        "FY2018": 29.4,
+        "FY2017": 28.7
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Grocery stores",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "U.K.",
+      "values": {
+        "FY2021": 100.5,
+        "FY2020": 51.5,
+        "FY2019": 17.8,
+        "FY2018": 0.0,
+        "FY2017": 0.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Health and fitness",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 115.9,
+        "FY2020": 104.7,
+        "FY2019": 105.9,
+        "FY2018": 94.6,
+        "FY2017": 88.1
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home improvement",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "U.K.",
+      "values": {
+        "FY2021": 34.5,
+        "FY2020": 4.2,
+        "FY2019": 0.0,
+        "FY2018": 37.9,
+        "FY2017": 30.3
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Restaurants",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "casual dining",
+      "values": {
+        "FY2021": 71.3,
+        "FY2020": 46.3,
+        "FY2019": 45.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Restaurants (quick service- U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Restaurants",
+      "values": {
+        "FY2021": 115.8,
+        "FY2020": 88.2,
+        "FY2019": 92.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Theaters",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 90.8,
+        "FY2020": 78.7,
+        "FY2019": 87.7,
+        "FY2018": 70.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Transportation services",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 72.0,
+        "FY2020": 64.1,
+        "FY2019": 66.5,
+        "FY2018": 63.6,
+        "FY2017": 62.3
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Wholesale clubs",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 46.1,
+        "FY2020": 38.7,
+        "FY2019": 38.1,
+        "FY2018": 37.6,
+        "FY2017": 37.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Convenience stores",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 189.7,
+        "FY2019": 166.8,
+        "FY2018": 142.2,
+        "FY2017": 111.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "General merchandise",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 49.4,
+        "FY2019": 35.4,
+        "FY2018": 29.2,
+        "FY2017": 23.8
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Restaurants-casual dining",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 46.3,
+        "FY2019": 45.2,
+        "FY2018": 46.2,
+        "FY2017": 43.9
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Restaurants-quick service",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 88.2,
+        "FY2019": 92.0,
+        "FY2018": 72.5,
+        "FY2017": 59.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Automotive tire services",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 31.3,
+        "FY2018": 30.1,
+        "FY2017": 29.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Tenant reimbursements",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2018": 47.0,
+        "FY2017": 46.1,
+        "FY2016": 43.1
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Rental",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2018": 1274.6,
+        "FY2017": 1166.2,
+        "FY2016": 1057.4
+      },
+      "status": "discontinued"
+    }
+  ],
+  "channel_segments": [
+    {
+      "name": "Retail",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "Other",
+      "values": {
+        "FY2025": 190.4,
+        "FY2024": 133.2,
+        "FY2023": 65.3,
+        "FY2022": 243.3,
+        "FY2021": 138.9,
+        "FY2020": 55.9,
+        "LTM": 190.4
+      },
+      "status": "active"
+    }
+  ],
+  "geographic_segments": [
+    {
+      "name": "U.S.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 4542.1,
+        "FY2024": 4353.4,
+        "FY2023": 3475.1,
+        "FY2022": 2995.3,
+        "FY2021": 1912.3,
+        "FY2020": 1582.3,
+        "LTM": 4542.1
+      },
+      "status": "active"
+    },
+    {
+      "name": "United Kingdom",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 681.2,
+        "FY2024": 557.1,
+        "FY2023": 417.7,
+        "LTM": 681.2
+      },
+      "status": "active"
+    },
+    {
+      "name": "Other",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 214.1,
+        "FY2024": 133.2,
+        "FY2023": 65.3,
+        "FY2022": 30.9,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
+        "LTM": 214.1
+      },
+      "status": "active"
+    },
+    {
+      "name": "U.K.",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 557.1,
+        "FY2023": 417.7,
+        "FY2022": 273.5,
+        "FY2021": 148.5,
+        "FY2020": 57.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Convenience stores (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 217.2,
+        "FY2020": 189.7,
+        "FY2019": 166.8
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "General merchandise (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 72.4,
+        "FY2020": 49.4,
+        "FY2019": 35.4
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Grocery stores (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 88.4,
+        "FY2020": 78.1,
+        "FY2019": 69.7,
+        "FY2018": 63.6,
+        "FY2017": 50.7
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Health care (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 33.6,
+        "FY2020": 25.6,
+        "FY2019": 21.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home furnishings (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 21.5,
+        "FY2020": 12.4,
+        "FY2019": 10.5
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home improvement (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 62.1,
+        "FY2020": 46.4,
+        "FY2019": 42.4,
+        "FY2018": 37.9
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Theaters (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2019": 87.7,
+        "FY2018": 70.6,
+        "FY2017": 58.4
+      },
+      "status": "discontinued"
     }
   ],
   "segment_operating_income": [],

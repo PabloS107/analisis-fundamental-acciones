@@ -117,9 +117,13 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
             for s in x_10k.statements:
                 r = str(getattr(s, "role_or_type", ""))
                 r_low = r.lower()
+                # Excluir statements de balances, PP&E, Goodwill, ROU assets, reclasificaciones contables y notas accesorias
                 if any(bad in r_low for bad in [
                     "marketable", "fairvalue", "cash", "receivable", "deferredrevenue",
-                    "performanceobligation", "debt", "concentration", "accumulatedothercomprehensive"
+                    "performanceobligation", "debt", "concentration", "accumulatedothercomprehensive",
+                    "goodwill", "propertyplant", "propertyandequipment", "rightofuse",
+                    "leaseassets", "leaseliabilit", "reclassification", "minimumfutureannualrental",
+                    "scheduleofoperatinglease", "scheduleofgoodwill"
                 ]):
                     continue
                 if any(k in r_low for k in ["segment", "disaggregation", "brand", "market", "channel", "geographic"]) and "details" in r_low:
@@ -134,9 +138,12 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         if "(FY)" in c_str or re.search(r'\b20\d\d\b', c_str):
                             fy_cols[c] = _map_col_to_fy(c_str)
 
+                    last_prod_level_map = {}
                     for _, row in df.iterrows():
                         lbl = str(row.get("label", "")).strip()
                         conc = str(row.get("concept", "")).lower()
+                        dim_axis = str(row.get("dimension_axis") or row.get("dimension") or "").lower()
+                        row_lvl = int(row.get("level", 0)) if (pd.notna(row.get("level")) and str(row.get("level")).isdigit()) else 0
 
                         if not lbl or len(lbl) < 2:
                             continue
@@ -145,15 +152,21 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         if DISCLOSURE_NOISE_REGEX.search(lbl):
                             continue
 
-                        # Filtrar filas irrelevantes o de costos no operacionales
+                        # Filtrar filas irrelevantes, balance sheet, o de costos no operacionales
                         if any(bad in lbl.lower() for bad in [
                             "reclassifications, net of tax", "reclassification out of aoci", "pension and other postretirement",
-                            "payroll", "advertising expense", "rent and occupancy", "depreciation", "sg&a", "impairment"
+                            "payroll", "advertising expense", "rent and occupancy", "depreciation", "sg&a", "impairment",
+                            "accounting standards update", "minimum", "maximum", "shares of common stock",
+                            "movement in deferred revenue", "balance at end of period", "useful life",
+                            "operating expenses and indirect costs", "indirect costs of net revenues",
+                            "compensation expense", "noncompensation expense", "provision for loan", "provision for credit",
+                            "benefit driven by tax", "tax audit", "return on equity", "overhead ratio", "average equity",
+                            "total assets", "retained loans", "noncurrent assets", "long-lived assets"
                         ]):
                             continue
 
-                        # Extracción de ingresos y beneficio operativo
-                        is_rev = any(k in conc for k in ["revenue", "sales"])
+                        # Extracción de ingresos y beneficio operativo (incluyendo primas de seguros y rentas inmobiliarias)
+                        is_rev = any(k in conc for k in ["revenue", "sales", "premiumsearned", "leaseincome", "contractwithcustomer"])
                         is_op_inc = any(k in conc for k in ["operatingincome", "incomelossfromcontinuingoperations"])
 
                         if not (is_rev or is_op_inc):
@@ -174,28 +187,92 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                         if not has_val:
                             continue
 
-                        clean_name = re.sub(r'^(reportable segments?|operating segments?|segment reporting|segments?)\s*[-:]\s*', '', lbl, flags=re.IGNORECASE).strip()
-                        if clean_name.strip().lower() in ["directly to consumer", "direct to consumer"]:
-                            clean_name = "Direct-to-Consumer"
+                        clean_name = re.sub(
+                            r'^(reportable segments?|operating segments?|segment reporting|segments?|similar products and services|underwriting operations)\s*[-:]\s*',
+                            '', lbl, flags=re.IGNORECASE
+                        ).strip()
+                        clean_name = re.sub(r'\s*\[member\]', '', clean_name, flags=re.IGNORECASE).strip()
+                        clean_name = re.sub(r'^(country of|region of)\s+', '', clean_name, flags=re.IGNORECASE).strip()
+
+                        # Diccionario de unificación universal de alias contables para series continuas
+                        ALIAS_MAP = {
+                            "directly to consumer": "Direct-to-Consumer",
+                            "direct to consumer": "Direct-to-Consumer",
+                            "ccb": "Consumer & Community Banking (CCB)",
+                            "consumer & community banking": "Consumer & Community Banking (CCB)",
+                            "consumer and community banking": "Consumer & Community Banking (CCB)",
+                            "cib": "Commercial & Investment Bank (CIB)",
+                            "corporate & investment bank": "Commercial & Investment Bank (CIB)",
+                            "corporate and investment bank": "Commercial & Investment Bank (CIB)",
+                            "commercial banking": "Commercial Banking",
+                            "asset & wealth management": "Asset & Wealth Management",
+                            "datacenter": "Data Center",
+                            "oem & ip": "OEM & Other",
+                            "oem and other": "OEM & Other",
+                            "personal lines segment": "Personal Lines",
+                            "commercial lines segment": "Commercial Lines",
+                            "personal lines": "Personal Lines",
+                            "commercial lines": "Commercial Lines",
+                        }
+                        clean_low = clean_name.strip().lower()
+                        if clean_low in ALIAS_MAP:
+                            clean_name = ALIAS_MAP[clean_low]
+
                         if DISCLOSURE_NOISE_REGEX.search(clean_name):
                             continue
 
                         parent_segment = None
                         is_subsegment = False
 
-                        # Detección de subsegmentos jerárquicos ("Advertising - Family of Apps", etc.)
-                        if " - " in clean_name and not GEO_REGEX.search(clean_name):
-                            parts = clean_name.split(" - ")
-                            if any(k in parts[0].lower() for k in ["operating segment", "reportable segment", "segment reporting"]):
-                                clean_name = parts[-1].strip()
-                            elif len(parts) == 2:
-                                clean_name = parts[0].strip()
-                                parent_segment = parts[1].strip()
-                                is_subsegment = True
-                            else:
-                                clean_name = parts[-1].strip()
+                        # Desarmado universal de etiquetas compuestas multidimensionales de hipercubos XBRL (" - ")
+                        if " - " in clean_name:
+                            parts = [p.strip() for p in clean_name.split(" - ")]
+                            parts = [re.sub(r'\s*\[member\]', '', p, flags=re.IGNORECASE).strip() for p in parts]
+                            parts = [re.sub(r'^(country of|region of)\s+', '', p, flags=re.IGNORECASE).strip() for p in parts]
+                            # Filtrar partes que sean ruido contable como "As reported" o "Reclassification"
+                            parts = [p for p in parts if not any(bad in p.lower() for bad in ["as reported", "reclassification", "operating segment", "reportable segment"])]
 
-                        is_geo = bool(GEO_REGEX.search(clean_name)) or bool(GEO_REGEX.search(lbl))
+                            if len(parts) >= 3:
+                                # Intersección hiperdimensional (ej. "Services - Brazil - Commerce")
+                                # No es un segmento primario ni una región pura, se descarta para evitar duplicidades masivas
+                                continue
+                            elif len(parts) == 2:
+                                p0, p1 = parts[0], parts[1]
+                                p0_low, p1_low = p0.lower(), p1.lower()
+                                if p0_low in ALIAS_MAP: p0 = ALIAS_MAP[p0_low]
+                                if p1_low in ALIAS_MAP: p1 = ALIAS_MAP[p1_low]
+
+                                # Caso A: Ambas son entidades geográficas (ej. "Americas - United States", "Greater China - China")
+                                if GEO_REGEX.search(p0) and GEO_REGEX.search(p1):
+                                    clean_name = p1
+                                    parent_segment = p0
+                                    is_subsegment = True
+                                # Caso B: La primera es producto y la segunda es región geográfica (ej. "Retail - U.S.", "Services - Brazil")
+                                elif not GEO_REGEX.search(p0) and GEO_REGEX.search(p1):
+                                    clean_name = f"{p0} ({p1})"
+                                    parent_segment = p0
+                                    is_subsegment = True
+                                # Caso C: Categoría de suscripción aseguradora (ej. "Underwriting Operations - Personal Lines Segment")
+                                elif any(k in p0.lower() for k in ["underwriting operations", "underwriting", "insurance operations"]):
+                                    clean_name = re.sub(r'\s+segment$', '', p1, flags=re.IGNORECASE).strip()
+                                    parent_segment = None
+                                    is_subsegment = False
+                                # Caso D: Subsegmento jerárquico dentro de una división (ej. "Advertising - Family of Apps")
+                                else:
+                                    clean_name = p0
+                                    parent_segment = p1
+                                    is_subsegment = True
+                            elif len(parts) == 1:
+                                clean_name = parts[0]
+
+                        clean_low = clean_name.strip().lower()
+                        if clean_low in ALIAS_MAP:
+                            clean_name = ALIAS_MAP[clean_low]
+
+                        is_geo_axis = any(g_ax in dim_axis for g_ax in ["geograph", "country", "territor"])
+                        is_prod_axis = any(p_ax in dim_axis for p_ax in ["product", "service", "market"])
+                        is_geo = (is_geo_axis or bool(GEO_REGEX.search(clean_name))) and not is_prod_axis and not any(k in clean_name.lower() for k in ["commerce", "fintech", "retail", "industrial", "product", "service"])
+
                         is_channel = bool(CHANNEL_REGEX.match(clean_name.strip()))
 
                         # Partidas de conciliación y coberturas corporativas (ASC 280 / ASC 815)
@@ -205,15 +282,32 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             "corporate non-segment", "intersegment eliminations", "eliminations", "other reconciling items"
                         ])
 
-                        # Detección de totales consolidados para no mezclarlos con segmentos de producto
+                        # Detección exhaustiva de totales consolidados para no mezclarlos con segmentos de producto
                         is_consolidated_total = (not is_reconciling) and (any(k in clean_name.lower() for k in [
                             "total revenue", "total revenues", "total net sales", "total net revenue",
-                            "consolidated revenue", "consolidated net sales", "revenue from contract with customers",
+                            "consolidated revenue", "consolidated net sales", "revenue from contract with customer",
+                            "revenues from contract with customer", "revenues from contract with customers",
                             "revenues from external customers", "net revenues and financial income",
-                            "as reported", "reclassification"
-                        ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues"])
+                            "total underwriting revenue", "total net revenue", "operating segments", "operating segment",
+                            "reportable segments", "reportable segment", "rental (including reimbursements)",
+                            "rental (including reimbursable)", "net premiums earned",
+                            "property, liability and casualty insurance product line",
+                            "as reported", "reclassification", "parent company"
+                        ]) or clean_name.lower() in ["revenue", "net sales", "total", "revenues", "google", "apple", "reportable segments", "operating segments"])
 
                         is_sub = is_consolidated_total or any(k in clean_name.lower() for k in ["total", "products", "operating segments"])
+
+                        # Jerarquía de subsegmentos por nivel XBRL (preserva sub-partidas como Compute & Networking bajo Data Center)
+                        if not is_geo and not is_consolidated_total and not is_reconciling:
+                            if not is_subsegment and row_lvl > 0:
+                                parent_candidate = last_prod_level_map.get(row_lvl - 1)
+                                if parent_candidate:
+                                    parent_segment = parent_candidate
+                                    is_subsegment = True
+                                else:
+                                    last_prod_level_map[row_lvl] = clean_name
+                            elif not is_subsegment:
+                                last_prod_level_map[row_lvl] = clean_name
 
                         norm_key = _norm_seg_key(clean_name)
                         if is_op_inc:
@@ -261,6 +355,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                             existing = next((item for item in product_segments if _norm_seg_key(item.get("name", "")) == norm_key), None)
                             if existing:
                                 for fy, v in v_dict.items():
+                                    # Supremacía de re-expresión cronológica: el filing más reciente manda
                                     if fy not in existing["values"]:
                                         existing["values"][fy] = v
                             else:
@@ -274,7 +369,9 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                                 }
                                 product_segments.append(seg_entry)
                                 detected_prod_names.add(norm_key)
-                                detected_prod_names.add(norm_key)
+
+                except Exception as s_err:
+                    pass
 
                 except Exception as s_err:
                     pass
@@ -306,6 +403,42 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                     item["parent"] = None
             elif name_low == "other countries":
                 item["is_country_breakdown"] = True
+
+        for item in product_segments:
+            if item.get("parent") and item["parent"].lower() in ["other", "u.k."]:
+                if any(c.get("parent") and c.get("parent").lower() == item["name"].lower() for c in product_segments):
+                    item["parent"] = None
+                    item["is_subsegment"] = False
+                    # Actualizar valores si los hijos suman más que la entrada aislada
+                    matching_children = [c for c in product_segments if c.get("parent") and c.get("parent").lower() == item["name"].lower()]
+                    for c in matching_children:
+                        for k, v in c.get("values", {}).items():
+                            if v is not None:
+                                item["values"][k] = round(item["values"].get(k, 0.0) + float(v), 1)
+
+        all_prod_names = {item["name"].lower() for item in product_segments}
+        synthetic_parents = []
+        for item in product_segments:
+            p_name = item.get("parent")
+            if p_name and p_name.lower() not in all_prod_names:
+                matching_children = [c for c in product_segments if c.get("parent") and c.get("parent").lower() == p_name.lower()]
+                if len(matching_children) >= 1 and not any(sp["name"].lower() == p_name.lower() for sp in synthetic_parents):
+                    p_vals = {}
+                    for c in matching_children:
+                        for k, v in c.get("values", {}).items():
+                            if v is not None:
+                                p_vals[k] = round(p_vals.get(k, 0.0) + float(v), 1)
+                    synthetic_parents.append({
+                        "name": p_name,
+                        "is_subtotal": False,
+                        "is_subsegment": False,
+                        "parent": None,
+                        "status": "active" if any(p_vals.get(p) for p in [latest_fy, "LTM"]) else "discontinued",
+                        "values": p_vals
+                    })
+                    all_prod_names.add(p_name.lower())
+        if synthetic_parents:
+            product_segments = synthetic_parents + product_segments
 
         all_prod_names = {item["name"].lower() for item in product_segments}
         for item in product_segments:
@@ -396,8 +529,82 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
                 if "LTM" not in item["values"] and latest_fy in item["values"]:
                     item["values"]["LTM"] = item["values"][latest_fy]
 
+        # Etiquetado del ciclo de vida y régimen contable (Active vs Discontinued)
+        for item in product_segments + channel_segments + geographic_segments:
+            vals = item.get("values", {})
+            if vals.get("LTM") is not None or vals.get(latest_fy) is not None:
+                item["status"] = "active"
+            else:
+                item["status"] = "discontinued"
+
+        # Detección de particiones ortogonales en productos (ASC 280 vs ASC 606)
+        active_prods = [
+            p for p in product_segments
+            if p.get("status") == "active" and not p.get("is_subtotal") and not p.get("is_subsegment") and not p.get("is_reconciling")
+        ]
+        can_ltm_ref = None
+        if canonical_rev:
+            can_ltm_ref = canonical_rev.get("LTM") or canonical_rev.get(latest_fy)
+            if can_ltm_ref and abs(can_ltm_ref) >= 1e4:
+                can_ltm_ref = can_ltm_ref / 1e6
+
+        if can_ltm_ref and len(active_prods) >= 3:
+            rev_type_items = [
+                p for p in active_prods
+                if any(k in p["name"].lower() for k in ["net service", "net product", "service revenue", "product revenue", "product sales"])
+            ]
+            business_unit_items = [p for p in active_prods if p not in rev_type_items]
+            if rev_type_items and business_unit_items:
+                sum_rev_types = sum((p.get("values", {}).get("LTM") or 0.0) for p in rev_type_items)
+                sum_bus_units = sum((p.get("values", {}).get("LTM") or 0.0) for p in business_unit_items)
+                if abs(sum_rev_types - can_ltm_ref) / can_ltm_ref < 0.05 and abs(sum_bus_units - can_ltm_ref) / can_ltm_ref < 0.05:
+                    for p in rev_type_items:
+                        p["is_subsegment"] = True
+                        p["parent"] = "Tipo de Ingreso (ASC 606)"
+
     except Exception as e:
         print(f"[SEC Extractor] Aviso escaneando XBRL de segmentos: {e}")
+
+    # Arquetipo Bancario / FinTech: si no existen líneas de producto en la nota ASC 280, derivar de los flujos de ingresos canónicos del P&L
+    active_prod_count = len([p for p in product_segments if p.get("status") == "active" and not p.get("is_subtotal")])
+    if active_prod_count == 0 and output_dir:
+        fin_stmt_path = Path(output_dir) / "financial_statements.json"
+        if fin_stmt_path.exists():
+            try:
+                with open(fin_stmt_path, "r", encoding="utf-8") as f_in:
+                    f_data = json.load(f_in)
+                arch = f_data.get("archetype", "")
+                is_fin = f_data.get("is_financial", False)
+                if arch == "FINANCIAL_BANKING" or is_fin:
+                    inc_det = f_data.get("income_statement_detail", {})
+                    nii_k = next((k for k in inc_det if any(w in k.lower() for w in ["interestincome", "interest_income", "financialinstruments", "revenuefrominterest"])), None)
+                    fee_k = next((k for k in inc_det if any(w in k.lower() for w in ["feeandcommission", "fee_income", "noninterestincome", "commissions"])), None)
+                    int_exp_k = next((k for k in inc_det if "interestexpense" in k.lower()), None)
+                    if nii_k and fee_k:
+                        v_nii_gross = {p: _scale_to_millions(v) for p, v in inc_det[nii_k].get("values", {}).items() if v is not None}
+                        v_exp = {p: _scale_to_millions(v) for p, v in inc_det[int_exp_k].get("values", {}).items() if v is not None} if int_exp_k else {}
+                        v_nii_net = {p: round(v_nii_gross.get(p, 0.0) - v_exp.get(p, 0.0), 1) if p in v_exp else v_nii_gross.get(p, 0.0) for p in v_nii_gross}
+                        v_fee = {p: _scale_to_millions(v) for p, v in inc_det[fee_k].get("values", {}).items() if v is not None}
+                        product_segments = [
+                            {
+                                "name": "Ingreso Neto por Intereses (Net Interest Income - NII)",
+                                "description": "Margen de intermediación financiera: rendimiento de cartera y activos menos costo de fondeo y depósitos.",
+                                "is_subtotal": False,
+                                "is_subsegment": False,
+                                "status": "active",
+                                "values": v_nii_net
+                            },
+                            {
+                                "name": "Ingresos por Comisiones y Tarifas (Fee & Commission Income)",
+                                "description": "Comisiones por transacciones, servicios bancarios, interchange fees y productos de valor agregado.",
+                                "is_subtotal": False,
+                                "is_subsegment": False,
+                                "status": "active",
+                                "values": v_fee
+                            }
+                        ]
+            except Exception:
+                pass
 
     # Si no se extrajeron elementos por XBRL, cargar segments_data.json preexistente si está disponible
     if not product_segments and not geographic_segments and seg_json_path.exists():

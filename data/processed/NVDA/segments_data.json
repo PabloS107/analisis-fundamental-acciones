@@ -10,144 +10,685 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017",
-    "FY2016"
+    "FY2017"
   ],
   "product_segments": [
     {
-      "name": "Data Center — Hyperscale",
-      "description": "Grandes hiperescaladores de nube pública global: Microsoft Azure, AWS, Google Cloud, Meta, Oracle.",
+      "name": "Data Center",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
       "values": {
-        "LTM": 170000.0,
-        "FY2026": 108493.0,
-        "FY2025": 62200.0,
-        "FY2024": 23763.0,
-        "FY2023": 7502.0,
-        "FY2022": 5305.0,
-        "FY2021": 3350.0,
-        "FY2020": 1492.0,
-        "FY2019": 1466.0,
-        "FY2018": 966.0,
-        "FY2017": 415.0,
-        "FY2016": 170.0
+        "FY2026": 193737.0,
+        "FY2025": 115186.0,
+        "FY2024": 47525.0,
+        "FY2023": 15005.0,
+        "FY2022": 10613.0,
+        "FY2021": 6696.0,
+        "FY2020": 2983.0,
+        "FY2019": 2932.0,
+        "FY2018": 1932.0,
+        "FY2017": 830.0,
+        "LTM": 277798.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Compute",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Data Center",
+      "values": {
+        "FY2026": 162361.0,
+        "FY2025": 102196.0,
+        "FY2024": 38950.0,
+        "FY2023": 11317.0,
+        "LTM": 162361.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2026": 130141.0,
+        "FY2025": 82875.0,
+        "FY2024": 32016.0,
+        "FY2023": 5083.0,
+        "FY2022": 4598.0,
+        "FY2021": 2548.0,
+        "FY2020": 751.0,
+        "FY2019": 1251.0,
+        "LTM": 195755.0
+      },
+      "operating_margin_pct": {
+        "FY2026": 80.16,
+        "FY2025": 81.09,
+        "FY2024": 82.2,
+        "FY2023": 44.91,
+        "LTM": 120.57
       }
     },
     {
-      "name": "Data Center — AI Clouds, Industrial & Enterprise",
-      "description": "Nubes nativas de IA (CoreWeave, Lambda), corporaciones privadas (banca, salud, manufactura) e iniciativas gubernamentales de IA Soberana.",
+      "name": "Networking",
       "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Data Center",
       "values": {
-        "LTM": 107798.0,
-        "FY2026": 85244.0,
-        "FY2025": 52986.0,
-        "FY2024": 23762.0,
-        "FY2023": 7503.0,
-        "FY2022": 5305.0,
-        "FY2021": 3350.0,
-        "FY2020": 1491.0,
-        "FY2019": 1466.0,
-        "FY2018": 966.0,
-        "FY2017": 415.0,
-        "FY2016": 169.0
+        "FY2026": 31376.0,
+        "FY2025": 12990.0,
+        "FY2024": 8575.0,
+        "FY2023": 3688.0,
+        "LTM": 31376.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2026": 130141.0,
+        "FY2025": 82875.0,
+        "FY2024": 32016.0,
+        "FY2023": 5083.0,
+        "FY2022": 4598.0,
+        "FY2021": 2548.0,
+        "FY2020": 751.0,
+        "FY2019": 1251.0,
+        "LTM": 195755.0
+      },
+      "operating_margin_pct": {
+        "FY2026": 414.78,
+        "FY2025": 637.99,
+        "FY2024": 373.36,
+        "FY2023": 137.83,
+        "LTM": 623.9
       }
     },
     {
-      "name": "Edge Computing",
-      "description": "Ecosistema en el borde que consolida Gaming (GeForce RTX), Visualización Profesional (Omniverse), Automoción (DRIVE) y robótica OEM.",
+      "name": "Gaming",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
       "values": {
-        "LTM": 25171.0,
-        "FY2026": 22201.0,
-        "FY2025": 15311.0,
-        "FY2024": 13397.0,
-        "FY2023": 11969.0,
-        "FY2022": 16304.0,
-        "FY2021": 9975.0,
-        "FY2020": 7935.0,
-        "FY2019": 8784.0,
-        "FY2018": 7782.0,
-        "FY2017": 6080.0,
-        "FY2016": 4671.0
+        "FY2026": 16042.0,
+        "FY2025": 11350.0,
+        "FY2024": 10447.0,
+        "FY2023": 9067.0,
+        "FY2022": 12462.0,
+        "FY2021": 7759.0,
+        "FY2020": 5518.0,
+        "FY2019": 6246.0,
+        "FY2018": 5513.0,
+        "FY2017": 4060.0,
+        "LTM": 16042.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Professional Visualization",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2026": 3191.0,
+        "FY2025": 1878.0,
+        "FY2024": 1553.0,
+        "FY2023": 1544.0,
+        "FY2022": 2111.0,
+        "FY2021": 1053.0,
+        "FY2020": 1212.0,
+        "FY2019": 1130.0,
+        "FY2018": 934.0,
+        "FY2017": 835.0,
+        "LTM": 3191.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Automotive",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2026": 2349.0,
+        "FY2025": 1694.0,
+        "FY2024": 1091.0,
+        "FY2023": 903.0,
+        "FY2022": 566.0,
+        "FY2021": 536.0,
+        "FY2020": 700.0,
+        "FY2019": 641.0,
+        "FY2018": 558.0,
+        "FY2017": 487.0,
+        "LTM": 2349.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "OEM & Other",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2026": 619.0,
+        "FY2025": 389.0,
+        "FY2024": 306.0,
+        "FY2023": 455.0,
+        "FY2022": 1162.0,
+        "FY2021": 631.0,
+        "FY2020": 505.0,
+        "FY2019": 767.0,
+        "FY2018": 777.0,
+        "FY2017": 698.0,
+        "LTM": 619.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 0.77,
+        "FY2024": -9.8,
+        "FY2023": -17.36,
+        "FY2022": 0.0
+      }
+    },
+    {
+      "name": "Graphics",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 14304.0,
+        "FY2024": 13517.0,
+        "FY2023": 11906.0,
+        "FY2022": 15868.0,
+        "FY2021": 9834.0,
+        "FY2020": 7639.0,
+        "FY2019": 8159.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2026": 9156.0,
+        "FY2025": 5085.0,
+        "FY2024": 5846.0,
+        "FY2023": 4552.0,
+        "FY2022": 8492.0,
+        "FY2021": 4612.0,
+        "FY2020": 3267.0,
+        "FY2019": 3417.0,
+        "LTM": 12114.0
+      },
+      "operating_margin_pct": {
+        "FY2025": 35.55,
+        "FY2024": 43.25,
+        "FY2023": 38.23,
+        "FY2022": 53.52,
+        "FY2021": 46.9,
+        "FY2020": 42.77,
+        "FY2019": 41.88
+      }
+    },
+    {
+      "name": "All Other",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 0.0,
+        "FY2024": 0.0,
+        "FY2023": 0.0,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
+        "FY2019": 0.0,
+        "FY2018": 43.0,
+        "FY2017": 264.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2026": 139297.0,
+        "FY2025": 87960.0,
+        "FY2024": 37862.0,
+        "FY2023": -5411.0,
+        "FY2022": -3049.0,
+        "FY2021": -2628.0,
+        "FY2020": -1172.0,
+        "FY2019": -864.0,
+        "FY2018": -600.0,
+        "FY2017": -237.0,
+        "LTM": 139297.0
+      },
+      "operating_margin_pct": {
+        "FY2018": -1395.35,
+        "FY2017": -89.77
+      }
+    },
+    {
+      "name": "Compute & Networking",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2024": 47405.0,
+        "FY2023": 15068.0,
+        "FY2022": 11046.0,
+        "FY2021": 6841.0,
+        "FY2020": 3279.0,
+        "FY2019": 3557.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2026": 130141.0,
+        "FY2025": 82875.0,
+        "FY2024": 32016.0,
+        "FY2023": 5083.0,
+        "FY2022": 4598.0,
+        "FY2021": 2548.0,
+        "FY2020": 751.0,
+        "FY2019": 1251.0,
+        "LTM": 195755.0
+      },
+      "operating_margin_pct": {
+        "FY2024": 67.54,
+        "FY2023": 33.73,
+        "FY2022": 41.63,
+        "FY2021": 37.25,
+        "FY2020": 22.9,
+        "FY2019": 35.17
+      }
+    },
+    {
+      "name": "Unallocated revenue",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 10918.0,
+        "FY2019": 11716.0,
+        "FY2018": 9714.0,
+        "FY2017": 6910.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "GPU",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 9465.0,
+        "FY2019": 10175.0,
+        "FY2018": 8137.0,
+        "FY2017": 5822.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2020": 3806.0,
+        "FY2019": 4443.0,
+        "FY2018": 3507.0,
+        "FY2017": 2180.0
+      },
+      "operating_margin_pct": {
+        "FY2020": 40.21,
+        "FY2019": 43.67,
+        "FY2018": 43.1,
+        "FY2017": 37.44
+      }
+    },
+    {
+      "name": "Tegra Processor",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 1453.0,
+        "FY2019": 1541.0,
+        "FY2018": 1534.0,
+        "FY2017": 824.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2020": 196.0,
+        "FY2019": 241.0,
+        "FY2018": 303.0,
+        "FY2017": -9.0
+      },
+      "operating_margin_pct": {
+        "FY2020": 13.49,
+        "FY2019": 15.64,
+        "FY2018": 19.75,
+        "FY2017": -1.09
       }
     }
   ],
+  "channel_segments": [],
   "geographic_segments": [
     {
       "name": "United States",
-      "description": "Sede de los mayores laboratorios de IA (frontier models), hiperescaladores y clústeres Blackwell.",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 209655.0,
         "FY2026": 149617.0,
         "FY2025": 77482.0,
         "FY2024": 31533.0,
         "FY2023": 8292.0,
-        "FY2022": 4357.0,
-        "FY2021": 2692.0,
-        "FY2020": 1262.0,
-        "FY2019": 1379.0,
-        "FY2018": 1399.0,
-        "FY2017": 1050.0,
-        "FY2016": 750.0
-      }
+        "FY2022": 4349.0,
+        "FY2021": 3214.0,
+        "FY2020": 886.0,
+        "FY2019": 1506.0,
+        "FY2018": 1274.0,
+        "FY2017": 904.0,
+        "LTM": 214878.0
+      },
+      "status": "active"
     },
     {
       "name": "Taiwan",
-      "description": "Ecosistema ODM/OEM y centros de integración y ensamblaje de servidores (Foxconn, Quanta, Wistron).",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 59382.0,
         "FY2026": 42345.0,
         "FY2025": 23600.0,
         "FY2024": 14912.0,
         "FY2023": 6986.0,
-        "FY2022": 8536.0,
-        "FY2021": 4570.0,
-        "FY2020": 3402.0,
-        "FY2019": 3546.0,
-        "FY2018": 2787.0,
-        "FY2017": 1850.0,
-        "FY2016": 1400.0
-      }
+        "FY2022": 8544.0,
+        "FY2021": 4531.0,
+        "FY2020": 3025.0,
+        "FY2019": 3360.0,
+        "FY2018": 2991.0,
+        "FY2017": 2546.0,
+        "LTM": 64786.0
+      },
+      "status": "active"
     },
     {
-      "name": "China (incl. Hong Kong)",
-      "description": "Demanda sujeta a controles de exportación y licencias regulatorias del Departamento de Comercio de EE.UU.",
+      "name": "China (including Hong Kong)",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 27570.0,
         "FY2026": 19677.0,
         "FY2025": 25048.0,
         "FY2024": 12330.0,
         "FY2023": 5785.0,
         "FY2022": 7111.0,
-        "FY2021": 3874.0,
-        "FY2020": 2654.0,
-        "FY2019": 2800.0,
-        "FY2018": 1943.0,
-        "FY2017": 1400.0,
-        "FY2016": 1050.0
-      }
+        "FY2021": 3886.0,
+        "FY2020": 2731.0,
+        "FY2019": 2801.0,
+        "FY2018": 1896.0,
+        "FY2017": 1305.0,
+        "LTM": 18463.0
+      },
+      "status": "active"
     },
     {
-      "name": "Other Countries",
-      "description": "Mercados internacionales (Europa, Japón, Singapur, Corea del Sur y Oriente Medio) e iniciativas de IA Soberana.",
+      "name": "Other",
       "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
       "values": {
-        "LTM": 6363.0,
         "FY2026": 4299.0,
         "FY2025": 4367.0,
         "FY2024": 2147.0,
+        "FY2023": 3623.0,
+        "LTM": 4843.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2026": 139297.0,
+        "FY2025": 87960.0,
+        "FY2024": 37862.0,
+        "FY2023": -5411.0,
+        "FY2022": -3049.0,
+        "FY2021": -2628.0,
+        "FY2020": -1172.0,
+        "FY2019": -864.0,
+        "FY2018": -600.0,
+        "FY2017": -237.0,
+        "LTM": 139297.0
+      },
+      "operating_margin_pct": {
+        "FY2026": 3240.22,
+        "FY2025": 2014.2,
+        "FY2024": 1763.48,
+        "FY2023": -149.35,
+        "LTM": 2876.25
+      }
+    },
+    {
+      "name": "Singapore",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 23684.0,
+        "FY2024": 6831.0,
+        "FY2023": 2288.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 10245.0,
         "FY2023": 5911.0,
         "FY2022": 6910.0,
-        "FY2021": 5539.0,
-        "FY2020": 3600.0,
-        "FY2019": 3991.0,
-        "FY2018": 3585.0,
-        "FY2017": 2610.0,
-        "FY2016": 1810.0
+        "FY2021": 5044.0,
+        "FY2020": 4276.0,
+        "FY2019": 767.0,
+        "FY2018": 719.0,
+        "FY2017": 486.0
+      },
+      "is_country_breakdown": true,
+      "status": "discontinued",
+      "operating_income": {
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
+      },
+      "operating_margin_pct": {
+        "FY2024": -0.29,
+        "FY2023": -1.34,
+        "FY2022": 0.0
+      }
+    },
+    {
+      "name": "Other Asia Pacific",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 3093.0,
+        "FY2020": 2685.0,
+        "FY2019": 2368.0,
+        "FY2018": 2066.0,
+        "FY2017": 1010.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
+      }
+    },
+    {
+      "name": "Europe",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2021": 1118.0,
+        "FY2020": 992.0,
+        "FY2019": 914.0,
+        "FY2018": 768.0,
+        "FY2017": 659.0
+      },
+      "status": "discontinued"
+    }
+  ],
+  "segment_operating_income": [
+    {
+      "name": "Operating income",
+      "values": {
+        "FY2026": 130387.0,
+        "FY2025": 81453.0,
+        "FY2024": 32972.0,
+        "FY2023": 4224.0,
+        "FY2022": 10041.0,
+        "LTM": 197579.0
+      }
+    },
+    {
+      "name": "Compute & Networking",
+      "values": {
+        "FY2026": 130141.0,
+        "FY2025": 82875.0,
+        "FY2024": 32016.0,
+        "FY2023": 5083.0,
+        "FY2022": 4598.0,
+        "FY2021": 2548.0,
+        "FY2020": 751.0,
+        "FY2019": 1251.0,
+        "LTM": 195755.0
+      }
+    },
+    {
+      "name": "Graphics",
+      "values": {
+        "FY2026": 9156.0,
+        "FY2025": 5085.0,
+        "FY2024": 5846.0,
+        "FY2023": 4552.0,
+        "FY2022": 8492.0,
+        "FY2021": 4612.0,
+        "FY2020": 3267.0,
+        "FY2019": 3417.0,
+        "LTM": 12114.0
+      }
+    },
+    {
+      "name": "Operating Segments",
+      "values": {
+        "FY2026": 139297.0,
+        "FY2025": 87960.0,
+        "FY2024": 37862.0,
+        "LTM": 207869.0
+      }
+    },
+    {
+      "name": "All Other",
+      "values": {
+        "FY2026": 139297.0,
+        "FY2025": 87960.0,
+        "FY2024": 37862.0,
+        "FY2023": -5411.0,
+        "FY2022": -3049.0,
+        "FY2021": -2628.0,
+        "FY2020": -1172.0,
+        "FY2019": -864.0,
+        "FY2018": -600.0,
+        "FY2017": -237.0,
+        "LTM": 139297.0
+      }
+    },
+    {
+      "name": "Segment operating income",
+      "values": {
+        "FY2026": 130387.0,
+        "FY2025": 81453.0,
+        "FY2024": 32972.0,
+        "LTM": 130387.0
+      }
+    },
+    {
+      "name": "Other income, net",
+      "values": {
+        "FY2026": 9022.0,
+        "FY2025": 1034.0,
+        "FY2024": 237.0,
+        "LTM": 30123.0
+      }
+    },
+    {
+      "name": "Income before income tax",
+      "values": {
+        "FY2026": 141450.0,
+        "FY2025": 84026.0,
+        "FY2024": 33818.0,
+        "LTM": 229743.0
+      }
+    },
+    {
+      "name": "Operating income (loss)",
+      "values": {
+        "FY2025": 81453.0,
+        "FY2024": 32972.0,
+        "FY2023": 4224.0,
+        "FY2022": 10041.0,
+        "FY2021": 4532.0,
+        "FY2020": 2846.0,
+        "FY2019": 3804.0,
+        "FY2018": 3210.0,
+        "FY2017": 1934.0
+      }
+    },
+    {
+      "name": "Other",
+      "values": {
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
+      }
+    },
+    {
+      "name": "Income from operations",
+      "values": {
+        "FY2023": 4224.0,
+        "FY2022": 10041.0,
+        "FY2021": 4532.0,
+        "FY2020": 2846.0,
+        "FY2019": 3804.0,
+        "FY2018": 3210.0,
+        "FY2017": 1934.0
+      }
+    },
+    {
+      "name": "GPU",
+      "values": {
+        "FY2020": 3806.0,
+        "FY2019": 4443.0,
+        "FY2018": 3507.0,
+        "FY2017": 2180.0
+      }
+    },
+    {
+      "name": "Tegra Processor",
+      "values": {
+        "FY2020": 196.0,
+        "FY2019": 241.0,
+        "FY2018": 303.0,
+        "FY2017": -9.0
       }
     }
-  ]
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "NVDA"
 }

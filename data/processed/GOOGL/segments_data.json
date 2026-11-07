@@ -10,8 +10,7 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016",
-    "FY2015"
+    "FY2016"
   ],
   "product_segments": [
     {
@@ -32,6 +31,7 @@
         "FY2017": 69811.0,
         "LTM": 250093.0
       },
+      "status": "active",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -61,7 +61,8 @@
         "FY2018": 11155.0,
         "FY2017": 8150.0,
         "LTM": 43528.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Google Network",
@@ -79,6 +80,7 @@
         "FY2019": 21547.0,
         "LTM": 29557.0
       },
+      "status": "active",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -107,6 +109,7 @@
         "FY2017": 95577.0,
         "LTM": 323178.0
       },
+      "status": "active",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -133,6 +136,7 @@
         "FY2021": 28032.0,
         "LTM": 53163.0
       },
+      "status": "active",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -157,6 +161,7 @@
         "FY2018": 130524.0,
         "LTM": 376341.0
       },
+      "status": "active",
       "operating_income": {
         "FY2025": 139404.0,
         "FY2024": 121263.0,
@@ -198,6 +203,7 @@
         "FY2017": 4056.0,
         "LTM": 93169.0
       },
+      "status": "active",
       "operating_income": {
         "FY2025": 13910.0,
         "FY2024": 6112.0,
@@ -240,6 +246,7 @@
         "FY2016": 288.0,
         "LTM": 1535.0
       },
+      "status": "active",
       "operating_income": {
         "FY2025": -7515.0,
         "FY2024": -4444.0,
@@ -278,22 +285,8 @@
         "FY2024": 211.0,
         "FY2023": 236.0,
         "LTM": 53.0
-      }
-    },
-    {
-      "name": "Revenues from contract with customer",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2023": 307394.0,
-        "FY2022": 282836.0,
-        "FY2021": 257637.0,
-        "FY2020": 182527.0,
-        "FY2019": 161402.0,
-        "FY2018": 136957.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Google other",
@@ -308,6 +301,7 @@
         "FY2019": 17014.0,
         "FY2018": 14063.0
       },
+      "status": "discontinued",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -332,6 +326,7 @@
         "FY2017": 17616.0,
         "FY2016": 15598.0
       },
+      "status": "discontinued",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -348,15 +343,16 @@
     {
       "name": "Google Properties",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Google",
+      "parent": null,
       "values": {
         "FY2019": 113264.0,
         "FY2018": 96451.0,
         "FY2017": 77961.0,
         "FY2016": 63785.0
       },
+      "status": "discontinued",
       "operating_income": {
         "FY2019": 41673.0,
         "FY2018": 36655.0,
@@ -373,57 +369,32 @@
     {
       "name": "Other Revenues",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Google",
+      "parent": null,
       "values": {
         "FY2019": 17014.0,
         "FY2018": 14063.0,
         "FY2017": 10914.0,
         "FY2016": 10601.0
-      }
+      },
+      "status": "discontinued"
     },
     {
-      "name": "Google",
+      "name": "Advertising revenues",
       "is_subtotal": false,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
       "values": {
-        "FY2019": 160743.0,
-        "FY2018": 136362.0,
-        "FY2017": 110547.0,
-        "FY2016": 89984.0
-      },
-      "operating_income": {
-        "FY2025": 139404.0,
-        "FY2024": 121263.0,
-        "FY2023": 95858.0,
-        "FY2022": 82699.0,
-        "FY2021": 88132.0,
-        "FY2020": 54606.0,
-        "FY2019": 48999.0,
-        "FY2018": 43137.0,
-        "LTM": 159422.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 30.48,
-        "FY2018": 31.63
-      }
-    },
-    {
-      "name": "Advertising revenues",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Google",
-      "values": {
         "FY2018": 116318.0,
         "FY2017": 95375.0,
         "FY2016": 79383.0
-      }
+      },
+      "status": "discontinued"
     }
   ],
+  "channel_segments": [],
   "geographic_segments": [
     {
       "name": "United States",
@@ -442,7 +413,8 @@
         "FY2017": 52449.0,
         "FY2016": 42781.0,
         "LTM": 237946.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "EMEA",
@@ -461,7 +433,8 @@
         "FY2017": 36236.0,
         "FY2016": 30304.0,
         "LTM": 129720.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "APAC",
@@ -480,7 +453,8 @@
         "FY2017": 16192.0,
         "FY2016": 12559.0,
         "LTM": 76038.0
-      }
+      },
+      "status": "active"
     },
     {
       "name": "Other Americas",
@@ -499,7 +473,8 @@
         "FY2017": 6147.0,
         "FY2016": 4628.0,
         "LTM": 27341.0
-      }
+      },
+      "status": "active"
     }
   ],
   "segment_operating_income": [

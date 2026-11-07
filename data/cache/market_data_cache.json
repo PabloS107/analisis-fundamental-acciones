@@ -1,13 +1,13 @@
 {
   "AAPL": {
     "ticker": "AAPL",
-    "timestamp": "2026-11-07T13:23:30.694116+00:00",
-    "timestamp_epoch": 1794057820.5008073,
+    "timestamp": "2026-11-07T14:34:21.561067+00:00",
+    "timestamp_epoch": 1794062067.1469355,
     "is_offline": false,
     "from_cache": false,
     "price": 342.37,
-    "market_cap_usd_m": 5039791.08,
-    "diluted_shares": 14720305750.0,
+    "market_cap_usd_m": 4975383.15,
+    "diluted_shares": 14532182000,
     "rf_10y": 0.04859,
     "beta": 1.085,
     "erp": 0.0475,
@@ -37,18 +37,18 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $342.37 (Yahoo: $342.37, CNBC: $342.37, \u0394=0.00%) | Market Cap calculado: $5,039,791.1M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.08 (Yahoo: 1.09, CNBC: 1.08, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $342.37 (Yahoo: $342.37, CNBC: $342.37, \u0394=0.00%) | Market Cap calculado: $4,975,383.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.08 (Yahoo: 1.09, CNBC: 1.08, \u0394=0.01)"
     }
   },
   "DECK": {
     "ticker": "DECK",
-    "timestamp": "2026-11-07T13:23:40.518810+00:00",
-    "timestamp_epoch": 1794057823.3146188,
+    "timestamp": "2026-11-07T14:34:29.439949+00:00",
+    "timestamp_epoch": 1794062072.6966667,
     "is_offline": false,
     "from_cache": false,
     "price": 86.71,
-    "market_cap_usd_m": 12134.24,
-    "diluted_shares": 139940500.0,
+    "market_cap_usd_m": 11574.05,
+    "diluted_shares": 133479987,
     "rf_10y": 0.04859,
     "beta": 1.088,
     "erp": 0.0475,
@@ -78,13 +78,13 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $86.71 (Yahoo: $86.71, CNBC: $86.71, \u0394=0.00%) | Market Cap calculado: $12,134.2M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.09 (Yahoo: 1.11, CNBC: 1.07, \u0394=0.04)"
+      "notes": "Precio validado por consenso: $86.71 (Yahoo: $86.71, CNBC: $86.71, \u0394=0.00%) | Market Cap calculado: $11,574.0M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.09 (Yahoo: 1.11, CNBC: 1.07, \u0394=0.04)"
     }
   },
   "NU": {
     "ticker": "NU",
-    "timestamp": "2026-11-07T13:28:51.436540+00:00",
-    "timestamp_epoch": 1794058134.6103082,
+    "timestamp": "2026-11-07T14:56:57.590401+00:00",
+    "timestamp_epoch": 1794063421.1768441,
     "is_offline": false,
     "from_cache": false,
     "price": 12.03,
@@ -124,8 +124,8 @@
   },
   "MELI": {
     "ticker": "MELI",
-    "timestamp": "2026-11-07T13:28:48.047483+00:00",
-    "timestamp_epoch": 1794058131.1820464,
+    "timestamp": "2026-11-07T14:56:49.078420+00:00",
+    "timestamp_epoch": 1794063413.1979897,
     "is_offline": false,
     "from_cache": false,
     "price": 1510.0,
@@ -165,8 +165,8 @@
   },
   "NVDA": {
     "ticker": "NVDA",
-    "timestamp": "2026-11-07T13:28:54.769946+00:00",
-    "timestamp_epoch": 1794058138.1169775,
+    "timestamp": "2026-11-07T14:57:01.717028+00:00",
+    "timestamp_epoch": 1794063425.0288684,
     "is_offline": false,
     "from_cache": false,
     "price": 186.64,
@@ -206,8 +206,8 @@
   },
   "JPM": {
     "ticker": "JPM",
-    "timestamp": "2026-11-07T13:28:42.945230+00:00",
-    "timestamp_epoch": 1794058127.8657963,
+    "timestamp": "2026-11-07T14:56:43.262669+00:00",
+    "timestamp_epoch": 1794063408.65318,
     "is_offline": false,
     "from_cache": false,
     "price": 334.49,
@@ -247,8 +247,8 @@
   },
   "O": {
     "ticker": "O",
-    "timestamp": "2026-11-07T13:28:58.315555+00:00",
-    "timestamp_epoch": 1794058141.4333518,
+    "timestamp": "2026-11-07T14:57:05.427724+00:00",
+    "timestamp_epoch": 1794063429.246437,
     "is_offline": false,
     "from_cache": false,
     "price": 59.04,
@@ -288,8 +288,8 @@
   },
   "PGR": {
     "ticker": "PGR",
-    "timestamp": "2026-11-07T13:29:01.630958+00:00",
-    "timestamp_epoch": 1794058144.9671445,
+    "timestamp": "2026-11-07T14:57:09.450158+00:00",
+    "timestamp_epoch": 1794063433.23858,
     "is_offline": false,
     "from_cache": false,
     "price": 227.77,
@@ -331,13 +331,13 @@
     "price": 10.0,
     "market_cap_usd_m": 25000.0,
     "diluted_shares": 2500000000.0,
-    "timestamp_epoch": 1793937887.9721732,
+    "timestamp_epoch": 1795063467.8115704,
     "is_offline": true
   },
   "META": {
     "ticker": "META",
-    "timestamp": "2026-11-07T13:29:23.635272+00:00",
-    "timestamp_epoch": 1794058166.7087004,
+    "timestamp": "2026-11-07T14:56:53.803533+00:00",
+    "timestamp_epoch": 1794063417.249078,
     "is_offline": false,
     "from_cache": false,
     "price": 610.15,
