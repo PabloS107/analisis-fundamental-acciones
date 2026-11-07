@@ -35,8 +35,27 @@ def build_charts_and_segments_context(
         v = float(val)
         return round(v * 100.0 if abs(v) <= 1.0 else v, 2)
 
+    meta = fs.get("sec_metadata", {})
+    latest_form = meta.get("latest_periodic_form")
+    first_fy = next((p for p in fys if p != "LTM"), None)
+
+    # Identificación contable canónica: ¿LTM coincide con el último año fiscal cerrado (10-K / 20-F)?
+    is_ltm_equal_latest_fy = False
+    if latest_form in ["10-K", "20-F"] and first_fy:
+        ltm_period = meta.get("ltm_period")
+        if ltm_period == first_fy or (ltm_period and ltm_period.startswith("FY")):
+            is_ltm_equal_latest_fy = True
+    elif first_fy:
+        c_rev = canonical.get("revenue", {})
+        rev_ltm = c_rev.get("LTM")
+        rev_fy = c_rev.get(first_fy)
+        if rev_ltm is not None and rev_fy is not None and abs(float(rev_ltm) - float(rev_fy)) < 1.0:
+            is_ltm_equal_latest_fy = True
+
     # Series para Gráficos en Millones ($M)
     raw_chart_periods = list(reversed(fys))
+    if is_ltm_equal_latest_fy and "LTM" in raw_chart_periods:
+        raw_chart_periods = [p for p in raw_chart_periods if p != "LTM"]
     valid_chart_indices = [
         idx for idx, p in enumerate(raw_chart_periods)
         if canonical.get("revenue", {}).get(p) is not None
@@ -412,11 +431,41 @@ def build_charts_and_segments_context(
     if "LTM" in (raw_seg_periods or []) and "LTM" not in seg_periods and (not active_seg_periods or "LTM" in active_seg_periods):
         seg_periods.insert(0, "LTM")
 
+    # Si LTM coincide contablemente con el último año fiscal cerrado (ej. 10-K), eliminamos la columna duplicada de LTM
+    # de las columnas multi-anuales, dejando que el último año fiscal (ej. FY2026) actúe como columna de cierre auditada
+    if is_ltm_equal_latest_fy and "LTM" in seg_periods and first_fy in seg_periods:
+        seg_periods = [p for p in seg_periods if p != "LTM"]
+
     # Helper para formatear cifras monetarias de segmentos de manera homogénea
     def _fmt_seg_val(val):
         if val is None:
             return "-"
         return f"${val:,.0f}M" if abs(val) >= 10000 else f"${val:,.1f}M"
+
+    # Helper para calcular el crecimiento interanual (YoY) dinámico sin comparar contra períodos duplicados
+    def _calc_seg_yoy(v_curr, values_dict):
+        if v_curr is None or float(v_curr) <= 0:
+            return "-"
+        prior_p = None
+        for p in seg_periods:
+            if is_ltm_equal_latest_fy and p in ["LTM", first_fy]:
+                continue
+            if p == "LTM":
+                continue
+            if p in values_dict and values_dict[p] is not None:
+                v_cand = float(values_dict[p])
+                if v_cand > 0:
+                    if is_ltm_equal_latest_fy and abs(v_cand - float(v_curr)) < 0.01:
+                        continue
+                    prior_p = p
+                    break
+        if not prior_p or prior_p not in values_dict or values_dict[prior_p] is None:
+            return "-"
+        v_prev = float(values_dict[prior_p])
+        if v_prev <= 0:
+            return "-"
+        g = ((float(v_curr) - v_prev) / v_prev) * 100.0
+        return f"+{g:.1f}%" if g >= 0 else f"{g:.1f}%"
 
     # Identificación universal de partidas primarias (excluyendo subtotales, subsegmentos, conciliaciones y descontinuadas)
     real_prod_items = [
@@ -539,18 +588,8 @@ def build_charts_and_segments_context(
         mix_pct_num = round(mix_pct, 1) if (mix_pct is not None and not is_sub) else 0.0
 
         # Cómputo de crecimiento YoY dinámico (LTM vs período fiscal inmediatamente anterior)
-        yoy_str = "-"
-        v_curr = item["values"].get("LTM") or (item["values"].get(seg_periods[0]) if seg_periods else None)
-        prior_p = None
-        if len(seg_periods) > 1:
-            for p_cand in seg_periods[1:]:
-                if p_cand in item["values"] and item["values"][p_cand] is not None:
-                    prior_p = p_cand
-                    break
-        v_prev = item["values"].get(prior_p) if prior_p else None
-        if v_curr is not None and v_prev is not None and float(v_prev) > 0:
-            g = ((float(v_curr) - float(v_prev)) / float(v_prev)) * 100.0
-            yoy_str = f"+{g:.1f}%" if g >= 0 else f"{g:.1f}%"
+        v_curr = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else (item["values"].get(seg_periods[0]) if seg_periods else None))
+        yoy_str = _calc_seg_yoy(v_curr, item["values"])
         
         # Extracción o cómputo de Margen Operativo por Segmento (ASC 280)
         op_m_val = None
@@ -679,8 +718,9 @@ def build_charts_and_segments_context(
     for item in ordered_geo_items:
         is_sub = bool(item.get("is_subtotal"))
         is_subseg = bool(item.get("is_subsegment"))
-        v_ltm = item["values"].get("LTM")
+        v_ltm = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else None)
         mix_pct = (v_ltm / tot_geo_ltm * 100.0) if (tot_geo_ltm > 0 and not is_sub and v_ltm is not None) else None
+        yoy_geo_table_str = _calc_seg_yoy(v_ltm, item["values"]) if not is_sub else "-"
         row_vals = []
         for p in seg_periods:
             val = item["values"].get(p)
@@ -695,6 +735,7 @@ def build_charts_and_segments_context(
             "indent": is_subseg,
             "is_total": False,
             "mix_pct": f"{mix_pct:.1f}%" if (mix_pct is not None and not is_sub) else "-",
+            "yoy_str": yoy_geo_table_str,
             "op_margin_ltm": "-",
             "values": row_vals
         })
@@ -862,16 +903,11 @@ def build_charts_and_segments_context(
 
     geo_territories = []
     for item in real_geo_items:
-        v_ltm = item["values"].get("LTM")
+        v_ltm = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else None)
         if v_ltm is None or v_ltm <= 0:
             continue
         mix_num = (v_ltm / tot_geo_ltm * 100.0) if tot_geo_ltm > 0 else 0.0
-        yoy_geo_str = "-"
-        prior_p = seg_periods[1] if len(seg_periods) > 1 else None
-        v_prev = item["values"].get(prior_p) if prior_p else None
-        if v_ltm is not None and v_prev is not None and float(v_prev) > 0:
-            g = ((float(v_ltm) - float(v_prev)) / float(v_prev)) * 100.0
-            yoy_geo_str = f"+{g:.1f}%" if g >= 0 else f"{g:.1f}%"
+        yoy_geo_str = _calc_seg_yoy(v_ltm, item["values"])
 
         geo_territories.append({
             "name": item["name"],
@@ -889,7 +925,7 @@ def build_charts_and_segments_context(
     donut_prod_data = []
     donut_prod_colors = []
     for idx, item in enumerate(real_prod_items):
-        v = item["values"].get("LTM")
+        v = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else None)
         if v is not None and float(v) > 0:
             donut_prod_labels.append(item["name"])
             donut_prod_data.append(round(float(v), 1))
@@ -899,7 +935,7 @@ def build_charts_and_segments_context(
     donut_geo_data = []
     donut_geo_colors = []
     for idx, item in enumerate(real_geo_items):
-        v = item["values"].get("LTM")
+        v = item["values"].get("LTM") or (item["values"].get(first_fy) if is_ltm_equal_latest_fy else None)
         if v is not None and float(v) > 0:
             donut_geo_labels.append(item["name"])
             donut_geo_data.append(round(float(v), 1))
@@ -925,6 +961,7 @@ def build_charts_and_segments_context(
         "shares_unit": shares_unit,
         "buybacks_unit": buybacks_unit,
         "buybacks_summary": buybacks_summary,
+        "ltm_is_latest_fy": is_ltm_equal_latest_fy,
         "seg_periods": seg_periods,
         "seg_periods_3y": seg_periods[:3],
         "seg_periods_5y": seg_periods[:5],
