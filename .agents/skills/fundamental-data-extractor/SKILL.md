@@ -88,13 +88,12 @@ python pipeline/fundamental_pipeline.py --ticker <TICKER>
    - `fundamental_scores.json`: Puntuación detallada criterio por criterio de Piotroski F-Score (0-9 pts) y Mohanram G-Score (0-8 pts) con benchmarks sectoriales (SIC/GICS), evolución histórica multianual (2016-2025 + LTM) y clasificación estratégica en matriz 2x2 (*Compounder de Élite*, *Cash Cow*, *Crecimiento Vulnerable*, *Trampa de Valor*).
    - Incorpora 5 mejoras institucionales: Acciones Básicas para $EQ\_OFFER$, Deuda Financiera Total para $F\_\Delta LEVER$, Apalancamiento Operativo Comercial ($\% \Delta \text{Ventas} > \% \Delta \text{SG\&A}$) para $G8$, Coeficiente de Variación / Cláusula de Hipercrecimiento para $G4/G5$, y Tasa de Inversión Total para modelos *Asset-Light* en $G7$.
 
-7. **Generador de Informe Ejecutivo Institucional (Word y Markdown):**
+7. **Pipeline Unificado y Servidor Web Django:**
    ```powershell
-   python pipeline/generate_earnings_report.py <TICKER>
+   python pipeline/fundamental_pipeline.py <TICKER>
+   python web_dashboard/manage.py runserver
    ```
-   Genera:
-   - `Analisis_Resultados_Q3_FY26_<TICKER>.docx`: Informe formateado en Word con tablas, tipografía ejecutiva, cuadro de mando de gobernanza y scorecard cuantitativo de Piotroski y Mohanram.
-   - `Analisis_Resultados_Q3_FY26_<TICKER>.md`: Informe equivalente en Markdown.
+   Ejecuta el procesamiento integral de datos y disponibiliza la visualización interactiva en el Dashboard Web Django.
 
 8. **Suite de Pruebas Unitarias y Diagnóstico del Sistema:**
    ```powershell

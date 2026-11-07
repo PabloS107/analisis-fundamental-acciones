@@ -218,14 +218,10 @@ def _execute_pipeline_worker(ticker: str):
         run_full_audit(t, out_dir)
         analyze_governance_and_insiders(t, out_dir)
 
-        update_step("Calculando modelos cuantitativos (Piotroski, Novy-Marx, WACC, Reverse DCF)...", 85)
+        update_step("Calculando modelos cuantitativos (Piotroski, Novy-Marx, WACC, Reverse DCF)...", 90)
         from financial_scoring_engine import calculate_fundamental_scores
         fin_json = out_dir / "financial_statements.json"
         calculate_fundamental_scores(t, fin_json, out_dir)
-
-        update_step("Compilando informes ejecutivos Word (.docx) y Markdown (.md)...", 95)
-        from generate_earnings_report import generate_full_report
-        generate_full_report(t)
 
         update_step("¡Análisis completado! Entregables e interfaz web listos.", 100)
         with _JOBS_LOCK:

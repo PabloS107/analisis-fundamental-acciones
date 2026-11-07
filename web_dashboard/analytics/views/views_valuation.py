@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Módulo de Valuación Intrínseca / Inversa (DCF & Excess Return), Grilla de Sensibilidad y Cotización en Tiempo Real.
-Consume el cálculo unificado desde pipeline.valuation_report_builder.
+Consume el cálculo unificado desde pipeline.valuation_engine.
 """
 import json
 
@@ -39,7 +39,7 @@ def build_valuation_context(
     except Exception:
         pass
 
-    from valuation_report_builder import get_valuation_parameters, _generate_sensitivity_grid
+    from valuation_engine import get_valuation_parameters, _generate_sensitivity_grid
 
     vp = get_valuation_parameters(scores, ticker=ticker, profile_data=prof_data, live_price=live_price, fs_data=fs)
     raw_grid = _generate_sensitivity_grid(vp)

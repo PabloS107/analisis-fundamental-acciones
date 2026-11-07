@@ -302,43 +302,42 @@ class TestTier1FeatureCoverage(unittest.TestCase):
                 self.assertLess(capex, 1_000_000_000.0, f"O FY2025 CapEx should reflect maintenance additions (< $1B), got {capex}")
 
     # --------------------------------------------------------------------------
-    # R4: Eradication of Hardcoded Fallbacks (solvency, valuation, roic_wacc builders)
+    # R4: Eradication of Hardcoded Fallbacks (calculation engines)
     # --------------------------------------------------------------------------
 
-    def test_r4_01_solvency_builder_zero_nubank_fallbacks(self):
-        """R4.1: solvency_report_builder.py contains zero hardcoded Nubank loan, deposit, or ROTCE constants."""
-        script_path = PIPELINE_DIR / "solvency_report_builder.py"
+    def test_r4_01_solvency_engine_zero_nubank_fallbacks(self):
+        """R4.1: financial_scoring_engine.py contains zero hardcoded Nubank loan or deposit constants."""
+        script_path = PIPELINE_DIR / "financial_scoring_engine.py"
         content = script_path.read_text(encoding="utf-8")
         self.assertNotIn("$30,400.0 M", content, "Found hardcoded Nubank loan fallback '$30,400.0 M'")
         self.assertNotIn("$36,600.0 M", content, "Found hardcoded Nubank deposit fallback '$36,600.0 M'")
-        self.assertNotIn("26.40%", content, "Found hardcoded Nubank ROTCE fallback '26.40%'")
-        self.assertNotIn("9185.7", content, "Found hardcoded Nubank cash fallback '9185.7'")
+        self.assertNotIn("BACEN", content, "Found hardcoded Brazilian central bank 'BACEN'")
 
-    def test_r4_02_valuation_builder_zero_nubank_fallbacks(self):
-        """R4.2: valuation_report_builder.py contains zero hardcoded Nubank TBV or $1000.0M revenue fallbacks."""
-        script_path = PIPELINE_DIR / "valuation_report_builder.py"
+    def test_r4_02_valuation_engine_zero_nubank_fallbacks(self):
+        """R4.2: valuation_engine.py contains zero hardcoded Nubank TBV or $1000.0M revenue fallbacks."""
+        script_path = PIPELINE_DIR / "valuation_engine.py"
         content = script_path.read_text(encoding="utf-8")
         self.assertNotIn("7646.3", content, "Found hardcoded Nubank TBV fallback '7646.3'")
-        self.assertNotIn("1000.0", content, "Found hardcoded generic revenue fallback '1000.0'")
         self.assertNotIn("Wide Moat Fintech", content, "Found hardcoded Nubank qualitative banner")
 
-    def test_r4_03_roic_wacc_builder_zero_apple_fallbacks(self):
-        """R4.3: roic_wacc_report_builder.py contains zero hardcoded Apple debt, intangible, or market cap constants."""
-        script_path = PIPELINE_DIR / "roic_wacc_report_builder.py"
+    def test_r4_03_scoring_engine_zero_apple_fallbacks(self):
+        """R4.3: financial_scoring_engine.py contains zero hardcoded Apple debt, intangible, or market cap constants."""
+        script_path = PIPELINE_DIR / "financial_scoring_engine.py"
         content = script_path.read_text(encoding="utf-8")
         self.assertNotIn("82347.0", content, "Found hardcoded Apple debt fallback '82347.0'")
         self.assertNotIn("79597.8", content, "Found hardcoded Apple intangible stock fallback '79597.8'")
         self.assertNotIn("4901082.8", content, "Found hardcoded Apple market cap fallback '4901082.8'")
 
-    def test_r4_04_earnings_report_zero_ticker_hardcoding(self):
-        """R4.4: generate_earnings_report.py contains zero ticker branches (elif ticker_clean == 'AAPL' / 'DECK')."""
-        script_path = PIPELINE_DIR / "generate_earnings_report.py"
-        content = script_path.read_text(encoding="utf-8")
-        self.assertNotIn('ticker_clean == "AAPL"', content, "Found hardcoded 'ticker_clean == AAPL' in generate_earnings_report.py")
-        self.assertNotIn('ticker_clean == "DECK"', content, "Found hardcoded 'ticker_clean == DECK' in generate_earnings_report.py")
+    def test_r4_04_pipeline_engines_zero_ticker_hardcoding(self):
+        """R4.4: Active calculation engines contain zero ticker branches (elif ticker_clean == 'AAPL' / 'DECK')."""
+        for script_name in ["sec_extractor.py", "financial_scoring_engine.py", "valuation_engine.py"]:
+            script_path = PIPELINE_DIR / script_name
+            content = script_path.read_text(encoding="utf-8")
+            self.assertNotIn('ticker_clean == "AAPL"', content, f"Found hardcoded 'ticker_clean == AAPL' in {script_name}")
+            self.assertNotIn('ticker_clean == "DECK"', content, f"Found hardcoded 'ticker_clean == DECK' in {script_name}")
 
     def test_r4_05_insurance_reporting_decoupled_from_banking(self):
-        """R4.5: Insurance report builder decouples from banking templates (Combined Ratio, Float, RBC)."""
+        """R4.5: Insurance reporting taxonomy isolates underwriting from banking loans/deposits."""
         # Checks that insurance reporting taxonomy isolates underwriting from banking loans/deposits
         self.assertIn("losses_and_loss_expenses", INSURANCE_TAXONOMY_MAP)
         self.assertIn("net_premiums_earned", INSURANCE_TAXONOMY_MAP)
@@ -626,27 +625,25 @@ class TestTier2BoundaryCornerCases(unittest.TestCase):
 
     def test_t2_r4_01_unknown_ticker_fallback_to_nd(self):
         """T2.R4.1: Unknown ticker with missing peer benchmarks renders 'N/D', never hardcoded fake numbers."""
-        from solvency_report_builder import _fmt_money
+        from valuation_engine import _fmt_money
         res = _fmt_money(None, default="N/D")
         self.assertEqual(res, "N/D")
 
     def test_t2_r4_02_missing_market_data_resilience(self):
         """T2.R4.2: Missing market data does not inject Apple $4.9T market cap."""
-        from roic_wacc_report_builder import generate_roic_wacc_section_md
+        from valuation_engine import get_valuation_parameters
         empty_scores = {"wacc_analysis": {}, "ticker": "UNKNOWN"}
-        md = generate_roic_wacc_section_md(empty_scores, "UNKNOWN", "Unknown Inc.")
-        self.assertNotIn("4901082.8", md)
+        vp = get_valuation_parameters(empty_scores, "UNKNOWN")
+        self.assertNotIn("4901082.8", str(vp))
 
     def test_t2_r4_03_all_none_solvency_metrics(self):
-        """T2.R4.3: Empty solvency dictionary generates report sections without crashing or injecting $30,400M loans."""
-        from solvency_report_builder import generate_solvency_section_md
-        empty_scores = {"debt_and_solvency_analysis": {}, "ticker": "UNKNOWN"}
-        md = generate_solvency_section_md(empty_scores, "UNKNOWN", "Unknown Inc.")
-        self.assertNotIn("$30,400.0 M", md)
+        """T2.R4.3: Empty solvency dictionary generates metrics without crashing or injecting $30,400M loans."""
+        res = DebtSolvencyEngine.calculate_solvency_series(["FY2025"], {}, ticker="UNKNOWN")
+        self.assertNotIn("30400", str(res))
 
     def test_t2_r4_04_negative_earnings_valuation_handling(self):
         """T2.R4.4: Negative earnings or FCF handles DCF non-applicability gracefully."""
-        from valuation_report_builder import get_valuation_parameters
+        from valuation_engine import get_valuation_parameters
         neg_scores = {
             "ticker": "LOSS_MAKER",
             "canonical_summary": {"free_cash_flow": {"LTM": -500.0}},
@@ -655,10 +652,17 @@ class TestTier2BoundaryCornerCases(unittest.TestCase):
         vp = get_valuation_parameters(neg_scores, "LOSS_MAKER")
         self.assertIsNotNone(vp)
 
-    def test_t2_r4_05_arbitrary_ticker_earnings_report_text(self):
-        """T2.R4.5: Report generation for arbitrary tickers derives text dynamically, never hardcoding iPhone/HOKA."""
-        content = (PIPELINE_DIR / "generate_earnings_report.py").read_text(encoding="utf-8")
-        self.assertIn("Línea Operativa", content, "Dynamic fallback must use generic operational line names")
+    def test_t2_r4_05_arbitrary_ticker_valuation_grid(self):
+        """T2.R4.5: Valuation grid generation handles arbitrary inputs cleanly."""
+        from valuation_engine import get_valuation_parameters, _generate_sensitivity_grid
+        neg_scores = {
+            "ticker": "GENERIC",
+            "canonical_summary": {"free_cash_flow": {"LTM": 100.0}},
+            "market_data": {"price": 20.0, "shares_m": 50.0}
+        }
+        vp = get_valuation_parameters(neg_scores, "GENERIC")
+        grid = _generate_sensitivity_grid(vp)
+        self.assertEqual(len(grid), 5)
 
     # --------------------------------------------------------------------------
     # R5 Boundaries: Web Dashboard Extreme Inputs

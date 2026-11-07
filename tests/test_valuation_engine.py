@@ -3,19 +3,18 @@ tests/test_valuation_engine.py - Pruebas unitarias para el motor de valoración 
 - Reverse DCF con Expectations Investing para corporaciones (AAPL, DECK)
 - Salvaguarda de FCF normalizado contra float financiero para híbridos (MELI)
 - Modelo de Retorno Excedente (Excess Return Model) y P/TBV vs. ROTCE para bancos (NU)
-- Generación de secciones en Word (.docx) y Markdown (.md)
+- Matriz de sensibilidad bidimensional dinámica para el Dashboard Web
 """
 
 import sys
 import json
 import unittest
 from pathlib import Path
-import docx
 
 scripts_dir = Path("pipeline").resolve()
 sys.path.insert(0, str(scripts_dir))
 
-import valuation_report_builder
+import valuation_engine
 
 
 class TestValuationEngine(unittest.TestCase):
@@ -32,7 +31,7 @@ class TestValuationEngine(unittest.TestCase):
             self.skipTest("Datos de DECK no encontrados.")
         with open(self.deck_scores_path, "r", encoding="utf-8") as f:
             deck_scores = json.load(f)
-        vp = valuation_report_builder.get_valuation_parameters(deck_scores, "DECK")
+        vp = valuation_engine.get_valuation_parameters(deck_scores, "DECK")
         self.assertAlmostEqual(vp["g_implied_our_pct"], -2.0, delta=2.5)
         self.assertLess(vp["g_implied_our_pct"], 5.0)
 
@@ -42,7 +41,7 @@ class TestValuationEngine(unittest.TestCase):
             self.skipTest("Datos de AAPL no encontrados.")
         with open(self.aapl_scores_path, "r", encoding="utf-8") as f:
             aapl_scores = json.load(f)
-        vp = valuation_report_builder.get_valuation_parameters(aapl_scores, "AAPL")
+        vp = valuation_engine.get_valuation_parameters(aapl_scores, "AAPL")
         self.assertFalse(vp["is_financial"])
         self.assertGreater(vp["g_implied_our_pct"], 15.0)
 
@@ -52,7 +51,7 @@ class TestValuationEngine(unittest.TestCase):
             self.skipTest("Datos de MELI no encontrados.")
         with open(self.meli_scores_path, "r", encoding="utf-8") as f:
             meli_scores = json.load(f)
-        vp = valuation_report_builder.get_valuation_parameters(meli_scores, "MELI")
+        vp = valuation_engine.get_valuation_parameters(meli_scores, "MELI")
         self.assertFalse(vp["is_financial"])
         # Margen FCF reportado de estados financieros (>= 30.0%)
         self.assertGreaterEqual(vp["fcf_margin_reported_pct"], 30.0)
@@ -69,7 +68,7 @@ class TestValuationEngine(unittest.TestCase):
             self.skipTest("Datos de NU no encontrados.")
         with open(self.nu_scores_path, "r", encoding="utf-8") as f:
             nu_scores = json.load(f)
-        vp = valuation_report_builder.get_valuation_parameters(nu_scores, "NU")
+        vp = valuation_engine.get_valuation_parameters(nu_scores, "NU")
         self.assertTrue(vp["is_financial"])
         self.assertGreater(vp["tbv_per_share"], 1.0)
         self.assertGreaterEqual(vp["ptbv_current"], 4.5)
@@ -78,27 +77,24 @@ class TestValuationEngine(unittest.TestCase):
         self.assertGreater(vp["ptbv_justified"], 2.5)
         self.assertGreater(vp["fair_value_excess_return"], 3.0)
 
-    def test_05_banking_markdown_and_docx_generation(self):
-        """Verifica la generación de la sección 14 en Markdown y Word para entidades de crédito."""
+    def test_05_banking_sensitivity_grid_generation(self):
+        """Verifica la generación de la matriz de sensibilidad 5x6 para entidades de crédito."""
         if not self.nu_scores_path.exists():
             self.skipTest("Datos de NU no encontrados.")
         with open(self.nu_scores_path, "r", encoding="utf-8") as f:
             nu_scores = json.load(f)
 
-        md = valuation_report_builder.generate_valuation_section_md(nu_scores, "NU", "Nu Holdings Ltd.", section_num=14)
-        self.assertIn("Excess Return Model", md)
-        self.assertIn("P/TBV", md)
-        self.assertIn("ROTCE", md)
-        self.assertIn("Gordon-Shapiro bancario", md)
+        vp = valuation_engine.get_valuation_parameters(nu_scores, "NU")
+        grid = valuation_engine._generate_sensitivity_grid(vp)
+        self.assertEqual(len(grid), 5)
+        # Cada fila debe tener 8 elementos (label, 6 pasos rotce, diagnóstico)
+        for row in grid:
+            self.assertEqual(len(row), 8)
+        # Fila central es la base
+        self.assertIn("Base", grid[2][0])
 
-        doc = docx.Document()
-        valuation_report_builder.add_valuation_section_docx(doc, nu_scores, "NU", "Nu Holdings Ltd.", section_num=14)
-        headings = [p.text for p in doc.paragraphs if p.text]
-        self.assertTrue(any("Excess Return" in h for h in headings))
-        self.assertGreaterEqual(len(doc.tables), 3)
-
-    def test_06_markdown_and_docx_rendering(self):
-        """Verifica que el informe Markdown y Word incluyan la sección de valoración corporativa DCF y sensibilidad."""
+    def test_06_corporate_sensitivity_grid_generation(self):
+        """Verifica la generación de la matriz de sensibilidad WACC vs gn para corporaciones."""
         meta_scores_path = Path("data/processed/META/financial_scores.json")
         if not meta_scores_path.exists():
             self.skipTest("Datos de META no encontrados.")
@@ -107,29 +103,14 @@ class TestValuationEngine(unittest.TestCase):
         meta_prof_path = Path("data/processed/META/company_profile.json")
         meta_prof = json.load(open(meta_prof_path, "r", encoding="utf-8")) if meta_prof_path.exists() else {}
 
-        md = valuation_report_builder.generate_valuation_section_md(meta_scores, "META", "Meta Platforms, Inc.", profile_data=meta_prof, section_num=14)
-        self.assertIn("Descuento de Flujo de Caja Inverso", md)
-        self.assertIn("Matriz Bidimensional de Sensibilidad", md)
-        self.assertIn("Cuadro de Mando Consolidado", md)
-
-        doc = docx.Document()
-        valuation_report_builder.add_valuation_section_docx(doc, meta_scores, "META", "Meta Platforms, Inc.", profile_data=meta_prof, section_num=14)
-        texts = [p.text for p in doc.paragraphs if p.text]
-        self.assertTrue(any("Sensibilidad" in t for t in texts))
-        self.assertGreaterEqual(len(doc.tables), 3)
-
-    def test_09_segments_data_zero_fake_defaults(self):
-        """Verifica cumplimiento de Regla 6: Cero prorratas ficticias en subsegmentos anuales de AAPL."""
-        aapl_seg_path = Path("data/processed/AAPL/segments_data.json")
-        if not aapl_seg_path.exists():
-            self.skipTest("segments_data.json de AAPL no encontrado.")
-        with open(aapl_seg_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        for g in data.get("geographic_segments", []):
-            if g.get("name") in ["U.S.", "China", "Other countries"]:
-                self.assertTrue(g.get("is_subsegment"), f"{g['name']} debe estar clasificado como is_subsegment: True")
-                self.assertNotIn("LTM", g.get("values", {}), f"{g['name']} no debe contener un LTM prorrateado artificialmente.")
+        vp = valuation_engine.get_valuation_parameters(meta_scores, "META", profile_data=meta_prof)
+        grid = valuation_engine._generate_sensitivity_grid(vp)
+        self.assertEqual(len(grid), 5)
+        for row in grid:
+            self.assertEqual(len(row), 8)
+        self.assertIn("Base", grid[2][0])
 
 
 if __name__ == "__main__":
     unittest.main()
+

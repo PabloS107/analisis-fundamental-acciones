@@ -18,7 +18,6 @@ from financial_scoring_engine import (
     ForensicAccountingEngine,
     calculate_fundamental_scores
 )
-from forensic_report_builder import generate_forensic_section_md
 
 
 class TestForensicEngine(unittest.TestCase):
@@ -197,18 +196,6 @@ class TestForensicEngine(unittest.TestCase):
             self.assertIsNotNone(diag["forensic_audit"].get("sloan_ratio_pct"))
             self.assertIsNotNone(diag["forensic_audit"].get("montier_score"))
 
-    def test_07_markdown_forensic_report_builder(self):
-        """Verifica que generate_forensic_section_md genere la estructura esperada."""
-        fin_path = Path("data/processed/AAPL/fundamental_scores.json")
-        if not fin_path.exists():
-            return
-        with open(fin_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            
-        md = generate_forensic_section_md(data, ticker="AAPL", company_name="Apple Inc.", section_num=13)
-        self.assertIn("## 13. Auditoría Forense Contable y Calidad de Beneficios", md)
-        self.assertIn("Ratio de Devengos de Sloan", md)
-        self.assertIn("Montier C-Score", md)
     def test_08_percentage_scaling_and_t_minus_1(self):
         """Verifica que porcentajes pequeños (< 1.0%) se almacenen como decimales puros y que sin t-1 sea N/D."""
         res = ForensicAccountingEngine.calculate_forensic_series(
