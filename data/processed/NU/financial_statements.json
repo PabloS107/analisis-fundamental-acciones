@@ -8,7 +8,7 @@
   "is_financial": true,
   "business_model": "BANKING_FINTECH",
   "source": "SEC EDGAR (IFRS Oficial)",
-  "extraction_timestamp": "2026-11-08T17:26:08.831431",
+  "extraction_timestamp": "2026-11-08T17:47:30.865683",
   "fiscal_years": [
     "LTM",
     "FY2025",
@@ -26,7 +26,7 @@
     "latest_periodic_date": "2026-10-23",
     "latest_periodic_accession": "0001292814-26-005000",
     "latest_8k_earnings_date": null,
-    "extraction_timestamp": "2026-11-08T17:26:08.831419"
+    "extraction_timestamp": "2026-11-08T17:47:30.865668"
   },
   "canonical_summary": {
     "revenue": {
@@ -650,10 +650,10 @@
       "FY2019": null
     },
     "allowance_for_credit_losses": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
+      "LTM": 6642313000.0,
+      "FY2025": 5021996000.0,
+      "FY2024": 3184096000.0,
+      "FY2023": 2608403000.0,
       "FY2022": null,
       "FY2021": null,
       "FY2020": null,
@@ -2824,7 +2824,7 @@
   "balance_sheet_detail": {
     "AssetsAbstract": {
       "label": "ASSETS",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {},
       "depth": 0,
       "is_abstract": true,
@@ -2833,7 +2833,7 @@
     },
     "Assets": {
       "label": "Total Assets",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 82753414000.0,
         "FY2025": 74893877000.0,
@@ -2850,7 +2850,7 @@
     },
     "Goodwill": {
       "label": "Goodwill",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 409371000.0,
         "FY2025": 409371000.0,
@@ -2867,7 +2867,7 @@
     },
     "LiabilitiesAndStockholdersEquityAbstract": {
       "label": "LIABILITIES AND EQUITY",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {},
       "depth": 0,
       "is_abstract": true,
@@ -2876,7 +2876,7 @@
     },
     "Liabilities": {
       "label": "Total Liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 69501693000.0,
         "FY2025": 63572315000.0,
@@ -2893,7 +2893,7 @@
     },
     "AdditionalItems": {
       "label": "Additional Financial Items",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {},
       "depth": 0,
       "is_abstract": true,
@@ -2901,10 +2901,13 @@
       "section": "Additional"
     },
     "AllowanceAccountForCreditLossesOfFinancialAssets": {
-      "label": "AllowanceAccountForCreditLossesOfFinancialAssets",
-      "standard_concept": "",
+      "label": "Allowance for expected credit losses",
+      "standard_concept": "FinancingReceivableAllowanceForCreditLosses",
       "values": {
-        "FY2023": 1417000.0
+        "LTM": 6642313000.0,
+        "FY2025": 5021996000.0,
+        "FY2024": 3184096000.0,
+        "FY2023": 2608403000.0
       },
       "depth": 1,
       "is_abstract": false,
@@ -2913,7 +2916,7 @@
     },
     "DeferredTaxAssets": {
       "label": "DeferredTaxAssets",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 3649091000.0,
         "FY2025": 2510967000.0,
@@ -2930,7 +2933,7 @@
     },
     "DeferredTaxLiabilities": {
       "label": "DeferredTaxLiabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2022": 41118000.0,
         "FY2021": 29334000.0,
@@ -2943,7 +2946,7 @@
     },
     "IntangibleAssetsOtherThanGoodwill": {
       "label": "IntangibleAssetsOtherThanGoodwill",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 747101000.0,
         "FY2025": 601669000.0,
@@ -2960,7 +2963,7 @@
     },
     "IssuedCapital": {
       "label": "IssuedCapital",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 84000.0,
         "FY2025": 84000.0,
@@ -2977,7 +2980,7 @@
     },
     "NoncontrollingInterests": {
       "label": "NoncontrollingInterests",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 2051000.0,
         "FY2025": 30614000.0,
@@ -2991,7 +2994,7 @@
     },
     "TradeAndOtherCurrentReceivables": {
       "label": "TradeAndOtherCurrentReceivables",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2024": 6100636000.0,
         "FY2023": 6296788000.0,
@@ -3006,7 +3009,7 @@
     },
     "TradeAndOtherReceivables": {
       "label": "TradeAndOtherReceivables",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 849897000.0,
         "FY2024": 14619312000.0,
@@ -3022,7 +3025,7 @@
     },
     "ifrs-full_CashAndCashEquivalents": {
       "label": "Cash and Cash Equivalents",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 13551611000.0,
         "FY2025": 15003643000.0,
@@ -3039,7 +3042,7 @@
     },
     "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss": {
       "label": "Financial assets at fair value through profit or loss",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1473272000.0,
         "FY2025": 1140671000.0,
@@ -3056,7 +3059,7 @@
     },
     "nu_Securities": {
       "label": "Securities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1358015000.0,
         "FY2025": 1059923000.0,
@@ -3073,7 +3076,7 @@
     },
     "nu_Derivatives": {
       "label": "Derivatives",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 115257000.0,
         "FY2025": 80748000.0,
@@ -3086,7 +3089,7 @@
     },
     "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome": {
       "label": "Financial assets at fair value through other comprehensive income",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 14046844000.0,
         "FY2025": 12157076000.0,
@@ -3102,7 +3105,7 @@
     },
     "nu_OtherSecurities": {
       "label": "Securities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 14046844000.0,
         "FY2025": 12157076000.0,
@@ -3118,7 +3121,7 @@
     },
     "ifrs-full_FinancialAssetsAtAmortisedCost": {
       "label": "Financial assets at amortized cost",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 46722060000.0,
         "FY2025": 41518114000.0,
@@ -3135,7 +3138,7 @@
     },
     "nu_CreditCardReceivables1": {
       "label": "Credit card receivables",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 21494406000.0,
         "FY2025": 18267904000.0,
@@ -3152,7 +3155,7 @@
     },
     "ifrs-full_LoansAndAdvancesToCustomers": {
       "label": "Loans to customers",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 11317422000.0,
         "FY2025": 9421458000.0,
@@ -3169,7 +3172,7 @@
     },
     "nu_CompulsoryAndOtherDepositsAtCentralBanks": {
       "label": "Compulsory and other deposits at central banks",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 9149128000.0,
         "FY2025": 9537788000.0,
@@ -3186,7 +3189,7 @@
     },
     "nu_Securitie": {
       "label": "Securities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 3776505000.0,
         "FY2025": 3141504000.0,
@@ -3200,7 +3203,7 @@
     },
     "ifrs-full_OtherReceivables": {
       "label": "Other Non-Operating Current Assets",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2025": 1000683000.0,
         "FY2024": 1413443000.0,
@@ -3215,7 +3218,7 @@
     },
     "ifrs-full_OtherFinancialAssets": {
       "label": "Other financial assets",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 134702000.0,
         "FY2025": 148777000.0,
@@ -3231,7 +3234,7 @@
     },
     "ifrs-full_OtherAssets": {
       "label": "Other Non-Operating Current Assets",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1955741000.0,
         "FY2025": 1403870000.0,
@@ -3248,7 +3251,7 @@
     },
     "ifrs-full_InvestmentsInAssociates": {
       "label": "Investments in associates",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 93004000.0,
         "FY2025": 98702000.0,
@@ -3261,7 +3264,7 @@
     },
     "ifrs-full_RightofuseAssets": {
       "label": "Operating Lease Right-of-Use Asset",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 54654000.0,
         "FY2025": 22244000.0,
@@ -3278,7 +3281,7 @@
     },
     "ifrs-full_PropertyPlantAndEquipment": {
       "label": "Property, Plant and Equipment",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 50665000.0,
         "FY2025": 27550000.0,
@@ -3295,7 +3298,7 @@
     },
     "ifrs-full_FinancialLiabilitiesAtFairValueThroughProfitOrLoss": {
       "label": "Financial liabilities at fair value through profit or loss",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 116068000.0,
         "FY2025": 65969000.0,
@@ -3312,7 +3315,7 @@
     },
     "ifrs-full_DerivativeFinancialLiabilities": {
       "label": "Derivatives",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 89659000.0,
         "FY2025": 65969000.0,
@@ -3329,7 +3332,7 @@
     },
     "ifrs-full_FinancialLiabilitiesAtAmortisedCost": {
       "label": "Financial liabilities at amortized cost",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 66610671000.0,
         "FY2025": 60741103000.0,
@@ -3346,7 +3349,7 @@
     },
     "ifrs-full_DepositsFromCustomers": {
       "label": "Deposits",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 45328419000.0,
         "FY2025": 41925101000.0,
@@ -3363,7 +3366,7 @@
     },
     "ifrs-full_OtherPayables": {
       "label": "Payables to network",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 15541657000.0,
         "FY2025": 13633949000.0,
@@ -3380,7 +3383,7 @@
     },
     "ifrs-full_Borrowings": {
       "label": "Borrowings and financing (i)",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 4682252000.0,
         "FY2025": 4398216000.0,
@@ -3397,7 +3400,7 @@
     },
     "nu_RepurchaseAgreements": {
       "label": "Repurchase agreements",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1058343000.0,
         "FY2025": 783837000.0,
@@ -3410,7 +3413,7 @@
     },
     "nu_SalariesAllowancesAndSocialSecurityContributions": {
       "label": "Salaries, allowances and social security contributions",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 221770000.0,
         "FY2025": 236565000.0,
@@ -3427,7 +3430,7 @@
     },
     "nu_TaxLiabilities": {
       "label": "Tax liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1117397000.0,
         "FY2025": 1424118000.0,
@@ -3444,7 +3447,7 @@
     },
     "nu_LeaseLiabilities1": {
       "label": "Lease liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 66433000.0,
         "FY2025": 29197000.0,
@@ -3461,7 +3464,7 @@
     },
     "nu_ProvisionForLawsuitsAndAdministrativeProceedings": {
       "label": "Provisions and contingent liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 44343000.0,
         "FY2025": 30920000.0,
@@ -3478,7 +3481,7 @@
     },
     "ifrs-full_AccrualsAndDeferredIncomeIncludingContractLiabilities": {
       "label": "Deferred income",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 84165000.0,
         "FY2025": 77521000.0,
@@ -3495,7 +3498,7 @@
     },
     "ifrs-full_OtherLiabilities": {
       "label": "Other Non-Operating Current Liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 1240846000.0,
         "FY2025": 966922000.0,
@@ -3512,7 +3515,7 @@
     },
     "ifrs-full_SharePremium": {
       "label": "Additional Paid-In Capital",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 4566905000.0,
         "FY2025": 5062464000.0,
@@ -3529,7 +3532,7 @@
     },
     "ifrs-full_RetainedEarnings": {
       "label": "Retained Earnings",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 8496232000.0,
         "FY2025": 6412700000.0,
@@ -3542,7 +3545,7 @@
     },
     "ifrs-full_AccumulatedOtherComprehensiveIncome": {
       "label": "Accumulated Other Comprehensive Income",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 186449000.0,
         "FY2025": -184300000.0,
@@ -3559,7 +3562,7 @@
     },
     "ifrs-full_EquityAttributableToOwnersOfParent": {
       "label": "Equity attributable to shareholders of the parent company",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 13249670000.0,
         "FY2025": 11290948000.0,
@@ -3576,7 +3579,7 @@
     },
     "ifrs-full_Equity": {
       "label": "Total equity",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 13251721000.0,
         "FY2025": 11321562000.0,
@@ -3593,7 +3596,7 @@
     },
     "ifrs-full_EquityAndLiabilities": {
       "label": "Total liabilities and equity",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "LTM": 82753414000.0,
         "FY2025": 74893877000.0,
@@ -3610,7 +3613,7 @@
     },
     "nu_DerivativeFinancialInstruments": {
       "label": "Derivative financial instruments",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2024": 75464000.0,
         "FY2023": 20981000.0,
@@ -3625,7 +3628,7 @@
     },
     "nu_CollateralForCreditCardOperations": {
       "label": "Collateral for credit card operations",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2024": 336000.0,
         "FY2023": 320000.0,
@@ -3640,7 +3643,7 @@
     },
     "nu_InstrumentsEligibleAsCapital": {
       "label": "Instruments eligible as capital",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2023": 3988000.0,
         "FY2022": 11507000.0,
@@ -3654,7 +3657,7 @@
     },
     "ifrs-full_RepurchaseAgreementsAndCashCollateralOnSecuritiesLent": {
       "label": "Repurchase agreements",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2024": 308583000.0,
         "FY2023": 210454000.0,
@@ -3668,7 +3671,7 @@
     },
     "nu_AccumulatedGains": {
       "label": "Accumulated gains",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2024": 3420596000.0,
         "FY2023": 1276949000.0,
@@ -3681,7 +3684,7 @@
     },
     "nu_CustomerCryptoSafeguardingAsset": {
       "label": "Customer crypto safeguarding asset",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2023": 153254000.0,
         "FY2022": 18313000.0
@@ -3693,7 +3696,7 @@
     },
     "nu_CustomerCryptoSafeguardingLiability": {
       "label": "Customer crypto safeguarding liability",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2023": 153254000.0,
         "FY2022": 18313000.0
@@ -3705,7 +3708,7 @@
     },
     "ifrs-full_OtherBorrowings": {
       "label": "Total Liabilities",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2021": 10011000.0,
         "FY2020": 79742000.0
@@ -3717,7 +3720,7 @@
     },
     "nu_AccumulatedGainLosses": {
       "label": "Accumulated gain (losses)",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2022": 64577000.0,
         "FY2021": -128409000.0,
@@ -3730,7 +3733,7 @@
     },
     "nu_OtherFinancialAssetsAtAmortisedCost": {
       "label": "Other financial assets at amortized cost",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2021": 18493000.0,
         "FY2020": 22870000.0
@@ -3742,7 +3745,7 @@
     },
     "nu_SeniorPreferredShares": {
       "label": "Senior preferred shares",
-      "standard_concept": "",
+      "standard_concept": "nan",
       "values": {
         "FY2020": 328394000.0
       },
@@ -7762,10 +7765,10 @@
         "FY2019": null
       },
       "allowance_for_loan_losses": {
-        "LTM": null,
-        "FY2025": null,
-        "FY2024": null,
-        "FY2023": null,
+        "LTM": 6642313000.0,
+        "FY2025": 5021996000.0,
+        "FY2024": 3184096000.0,
+        "FY2023": 2608403000.0,
         "FY2022": null,
         "FY2021": null,
         "FY2020": null,

@@ -975,7 +975,7 @@ def build_statements_context(
                 ("Inversiones Financieras y Valores Negociables", "short_term_investments", "[+]", "item", True, False, False, True, "assets", "Trading and Investment Securities"),
                 ("Tesorería e Inversiones Líquidas Totales", "total_liquid_cash", "[=]", "subtotal", False, True, False, True, "assets", "Total Liquid Assets"),
                 ("Cartera de Préstamos y Crédito Neta (Net Loans)", "net_loans", "[+]", "item", True, False, False, True, "assets", "Loans and Leases Net of Allowance"),
-                ("Provisión Acumulada para Pérdidas Crediticias (Allowance)", "allowance_for_loan_losses", "[-]", "item", True, False, True, False, "assets", "Allowance for Loan Losses"),
+                ("Provisión Acumulada para Pérdidas Crediticias (Allowance)", "allowance_for_loan_losses", "[-]", "item", True, False, True, True, "assets", "Allowance for Loan Losses"),
                 ("Inmovilizado Material Neto (PP&E)", "net_ppe", "[+]", "item", True, False, False, False, "assets", "Premises and Equipment Net"),
                 ("Fondo de Comercio e Intangibles Netos", "goodwill_and_intangibles", "[+]", "item", True, False, False, False, "assets", "Goodwill and Other Intangibles"),
                 ("Otros Activos Financieros y Operativos", "other_assets_sectoral", "[+]", "item", True, False, False, True, "assets", "Other Banking Assets"),

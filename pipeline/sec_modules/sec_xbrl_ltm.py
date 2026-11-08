@@ -88,7 +88,7 @@ def dataframe_to_concept_dict(df, periods):
         is_total = bool(row.get('is_total', False)) if pd.notna(row.get('is_total')) else False
         section_val = str(row.get('section', '')).strip() if pd.notna(row.get('section')) else ''
 
-        if concept_str not in data_by_concept or len(values) > len(data_by_concept[concept_str].get("values", {})):
+        if concept_str not in data_by_concept:
             data_by_concept[concept_str] = {
                 "label": label,
                 "standard_concept": std_concept if std_concept != 'None' else None,
@@ -98,6 +98,17 @@ def dataframe_to_concept_dict(df, periods):
                 "is_total": is_total,
                 "section": section_val
             }
+        else:
+            # Universal merge: ensure non-null period values are retained and enhanced
+            for p_k, p_v in values.items():
+                old_v = data_by_concept[concept_str]["values"].get(p_k)
+                if p_v is not None:
+                    if old_v is None or (old_v < 1e7 and p_v > 1e7):
+                        data_by_concept[concept_str]["values"][p_k] = p_v
+            if not data_by_concept[concept_str].get("label") and label:
+                data_by_concept[concept_str]["label"] = label
+            if not data_by_concept[concept_str].get("standard_concept") and std_concept and std_concept != 'None':
+                data_by_concept[concept_str]["standard_concept"] = std_concept
             
     return data_by_concept
 
@@ -779,12 +790,23 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                         bal_df.insert(bal_df.columns.get_loc(latest_fy), 'LTM', ltm_bal_col)
 
                     # Extracción dinámica y universal de provisiones acumuladas / ECL para bancos FPI
-                    has_allowance = any(
-                        any(w in str(r.get('concept', '')).lower() or w in str(r.get('label', '')).lower() for w in ['allowance', 'creditloss', 'expectedcreditloss'])
-                        and pd.notna(r.get(latest_fy)) and float(r.get(latest_fy) or 0) > 1e6
+                    def _is_credit_loss_allowance_row(r_concept, r_label):
+                        c_low = str(r_concept or '').lower()
+                        l_low = str(r_label or '').lower()
+                        if any(ex in l_low or ex in c_low for ex in ['salar', 'social security', 'remuneration', 'employee']):
+                            return False
+                        if any(k.lower() in c_low for k in BANKING_TAXONOMY_MAP.get("allowance_for_credit_losses", [])):
+                            return True
+                        if ('credit' in l_low or 'loan' in l_low or 'financing' in l_low) and ('loss' in l_low or 'allowance' in l_low or 'expected' in l_low):
+                            return True
+                        return False
+
+                    has_ltm_allowance = any(
+                        _is_credit_loss_allowance_row(r.get('concept'), r.get('label'))
+                        and pd.notna(r.get('LTM')) and float(r.get('LTM') or 0) > 1e7
                         for _, r in bal_df.iterrows()
-                    )
-                    if not has_allowance:
+                    ) if 'LTM' in bal_df.columns else False
+                    if not has_ltm_allowance:
                         ecl_ltm_sum = 0.0
                         ecl_prev_sum = 0.0
                         for t in tables:
@@ -816,14 +838,29 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                                                     ecl_prev_sum += float(v2)
                         if ecl_ltm_sum > 0:
                             scale = calib_factor if calib_factor > 1.0 else 1000.0
-                            new_row = {col: None for col in bal_df.columns}
-                            new_row['concept'] = 'AllowanceAccountForCreditLossesOfFinancialAssets'
-                            new_row['label'] = 'Allowance for expected credit losses'
-                            new_row['standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
-                            new_row['LTM'] = ecl_ltm_sum * scale
-                            if latest_fy in bal_df.columns and ecl_prev_sum > 0:
-                                new_row[latest_fy] = ecl_prev_sum * scale
-                            bal_df.loc[len(bal_df)] = new_row
+                            allow_indices = [
+                                i for i, r in bal_df.iterrows()
+                                if str(r.get('concept', '')).strip() in (
+                                    'AllowanceAccountForCreditLossesOfFinancialAssets',
+                                    'FinancingReceivableAllowanceForCreditLosses'
+                                )
+                            ]
+                            if allow_indices:
+                                for idx in allow_indices:
+                                    bal_df.at[idx, 'LTM'] = ecl_ltm_sum * scale
+                                    if latest_fy in bal_df.columns and ecl_prev_sum > 0:
+                                        bal_df.at[idx, latest_fy] = ecl_prev_sum * scale
+                                    bal_df.at[idx, 'label'] = 'Allowance for expected credit losses'
+                                    bal_df.at[idx, 'standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
+                            else:
+                                new_row = {col: None for col in bal_df.columns}
+                                new_row['concept'] = 'AllowanceAccountForCreditLossesOfFinancialAssets'
+                                new_row['label'] = 'Allowance for expected credit losses'
+                                new_row['standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
+                                new_row['LTM'] = ecl_ltm_sum * scale
+                                if latest_fy in bal_df.columns and ecl_prev_sum > 0:
+                                    new_row[latest_fy] = ecl_prev_sum * scale
+                                bal_df.loc[len(bal_df)] = new_row
 
                     # Población de LTM en cf_df
                     if cf_df is not None and 'LTM' not in cf_df.columns and latest_fy in cf_df.columns:
@@ -1123,6 +1160,88 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
                 target_df.loc[len(target_df)] = new_row_dict
 
 
+def _extract_20f_ecl_notes(doc_filing, bal_df, annual_fys):
+    """
+    Extrae provisiones acumuladas / ECL por etapa de las notas de riesgo de crédito en Form 20-F
+    para bancos internacionales bajo IFRS cuando el balance general reporta cartera neta.
+    """
+    try:
+        missing_fys = [
+            fy for fy in annual_fys[:5]
+            if fy in bal_df.columns and not any(
+                str(r.get('concept', '')).strip() in BANKING_TAXONOMY_MAP.get("allowance_for_credit_losses", [])
+                and pd.notna(r.get(fy)) and float(r.get(fy) or 0) > 1e7
+                for _, r in bal_df.iterrows()
+            )
+        ]
+        if not missing_fys:
+            return
+
+        doc_html = doc_filing.html() if hasattr(doc_filing, 'html') else None
+        if not doc_html or 'expected credit loss' not in doc_html.lower():
+            return
+
+        matches = re.findall(
+            r'<table[^>]*>(?:(?!<table).)*?expected credit loss(?:(?!<table).)*?stage 1(?:(?!<table).)*?</table>',
+            doc_html, re.IGNORECASE | re.DOTALL
+        )
+        if not matches:
+            return
+
+        ecl_by_fy = {}
+        for m in matches:
+            try:
+                t = pd.read_html(io.StringIO(m), flavor='lxml')[0]
+                header_txt = ' '.join(t.iloc[:3, :].astype(str).values.flatten())
+                years = re.findall(r'\b(202\d)\b', header_txt)
+                if not years:
+                    continue
+                yr_tag = f"FY{years[0]}"
+                if yr_tag not in annual_fys:
+                    continue
+                for r_idx in range(len(t)):
+                    lbl = ' '.join(str(t.iloc[r_idx, 0]).split()).lower()
+                    if 'expected credit loss at end of the year' in lbl:
+                        for c_idx in range(t.shape[1] - 1, -1, -1):
+                            raw_v = str(t.iloc[r_idx, c_idx]).replace(',', '').strip()
+                            m_v = re.search(r'^\(?(\d+(?:\.\d+)?)\)?$', raw_v)
+                            if m_v:
+                                ecl_by_fy[yr_tag] = ecl_by_fy.get(yr_tag, 0.0) + float(m_v.group(1))
+                                break
+                        break
+            except Exception:
+                continue
+
+        if ecl_by_fy:
+            scale = 1000.0
+            allow_indices = [
+                i for i, r in bal_df.iterrows()
+                if str(r.get('concept', '')).strip() in (
+                    'AllowanceAccountForCreditLossesOfFinancialAssets',
+                    'FinancingReceivableAllowanceForCreditLosses'
+                )
+            ]
+            if allow_indices:
+                for idx in allow_indices:
+                    for fy_k, fy_v in ecl_by_fy.items():
+                        if fy_k in bal_df.columns and (pd.isna(bal_df.at[idx, fy_k]) or float(bal_df.at[idx, fy_k] or 0) < 1e7):
+                            bal_df.at[idx, fy_k] = fy_v * scale
+                    bal_df.at[idx, 'label'] = 'Allowance for expected credit losses'
+                    bal_df.at[idx, 'standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
+            else:
+                new_row = {col: None for col in bal_df.columns}
+                new_row['concept'] = 'AllowanceAccountForCreditLossesOfFinancialAssets'
+                new_row['label'] = 'Allowance for expected credit losses'
+                new_row['standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
+                for fy_k, fy_v in ecl_by_fy.items():
+                    if fy_k in bal_df.columns:
+                        new_row[fy_k] = fy_v * scale
+                bal_df.loc[len(bal_df)] = new_row
+            print(f"[SEC Extractor] Provisiones crediticias anuales extraídas de notas 20-F: {ecl_by_fy}")
+    except Exception as e:
+        print(f"[SEC Extractor] Nota al extraer ECL de 20-F: {e}")
+
+
 def enrich_annual_statements_with_individual_filings(company, inc_df, bal_df, cf_df, annual_fys, filing_context=None):
     """
     Enriquece los estados contables de 10 años con los formularios anuales individuales (10-K o 20-F).
@@ -1206,6 +1325,12 @@ def enrich_annual_statements_with_individual_filings(company, inc_df, bal_df, cf
                                         merge_annual_statement_df(xb_df, inc_df, annual_fys, updated_cells=updated_cells_inc, overwrite_if_newer=True)
                     except Exception:
                         pass
+
+            # Extracción complementaria de notas ECL para bancos FPI (20-F Note 11)
+            for doc_filing in ann_filings[:2]:
+                if str(getattr(doc_filing, 'form', '')).upper() == '20-F':
+                    _extract_20f_ecl_notes(doc_filing, bal_df, annual_fys)
+                    break
     except Exception as e:
         print(f"[SEC Extractor] Nota al enriquecer con reportes anuales individuales: {e}")
     return annual_fys, latest_fy
