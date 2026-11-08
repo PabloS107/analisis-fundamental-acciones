@@ -222,20 +222,20 @@
                 <div class="h-80"><canvas id="chartDepositsCountryDonut"></canvas></div>
             </div>
 
-            <!-- Gráfico 5: Asignación de Capital (Recompras, Acciones y BPA) -->
+            <!-- Gráfico 5: Dinámica del Accionista (Banca: Recompra Neta vs Float) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Asignación de Capital: Recompras, Float &amp; BPA</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Float: {{ buybacks_summary.float_change_pct }} | Recompras: {{ buybacks_summary.total_buybacks }}</span>
+                    <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Float: {{ buybacks_summary.float_change_pct }} | Recompras Netas: {{ buybacks_summary.total_net_buybacks }}</span>
                 </div>
-                <div class="h-80"><canvas id="chartBuybacksSharesEPS"></canvas></div>
+                <div class="h-80"><canvas id="chartNetBuybacksFloatBanking"></canvas></div>
             </div>
         </div>
 
         {% else %}
         <!-- Gráficos Comerciales Estándar (Corporativo / Plataforma) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Gráfico 1: Ingresos vs Beneficios & FCF -->
+            <!-- Gráfico 1: Ingresos vs Beneficios & FCF (Intacto) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-bold text-slate-900 text-base">Ingresos vs. Beneficios &amp; FCF ($M)</h3>
@@ -244,7 +244,7 @@
                 <div class="h-80"><canvas id="chartRevNI"></canvas></div>
             </div>
 
-            <!-- Gráfico 2: Estructura de Márgenes -->
+            <!-- Gráfico 2: Estructura de Márgenes (Intacto) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-bold text-slate-900 text-base">Estructura de Márgenes de Rentabilidad (%)</h3>
@@ -253,22 +253,46 @@
                 <div class="h-80"><canvas id="chartMargins"></canvas></div>
             </div>
 
-            <!-- Gráfico 3: Flujos de Caja (Opción A: CFO, CapEx, FCF) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Flujos de Caja: CFO, CapEx &amp; FCF ($M)</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">FCF = CFO - CapEx</span>
+            <!-- Gráfico 3: Calidad Contable y Conversión de Caja (Ancho Completo 100%) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-900 text-base">Calidad Contable &amp; Conversión de Caja (Beneficio Neto vs. FCF)</h3>
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                                {{ cash_conv_summary.badge }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">Compara el beneficio contable ($M) con la generación real de caja libre (FCF $M) y su tasa de conversión (%)</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs flex-wrap">
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Conversión LTM: <strong class="text-slate-900">{{ cash_conv_summary.ltm_str }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Media 5Y: <strong class="text-slate-900">{{ cash_conv_summary.avg_5y_str }}</strong></span>
+                    </div>
                 </div>
-                <div class="h-80"><canvas id="chartCashFlow"></canvas></div>
+                <div class="h-80"><canvas id="chartCashConversion"></canvas></div>
             </div>
 
-            <!-- Gráfico 4: Asignación de Capital (Recompras, Acciones y BPA) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Asignación de Capital: Recompras, Float &amp; BPA</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Float: {{ buybacks_summary.float_change_pct }} | Recompras: {{ buybacks_summary.total_buybacks }}</span>
+            <!-- Gráfico 4: Dinámica del Accionista: Recompra Neta vs Float (Ancho Completo 100%) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                                Float Acum: {{ buybacks_summary.float_change_pct }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">Recompra Neta = Recompras Mercado Abierto - Compensación en Acciones (SBC) | Línea = Conteo de Acciones Diluidas</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs flex-wrap">
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompras Brutas: <strong class="text-purple-700">{{ buybacks_summary.total_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">SBC Ejecutiva: <strong class="text-amber-700">{{ buybacks_summary.total_sbc }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompra Neta: <strong class="text-emerald-700">{{ buybacks_summary.total_net_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Cobertura Recompras/SBC: <strong class="text-slate-900">{{ buybacks_summary.sbc_coverage_ratio }}</strong></span>
+                    </div>
                 </div>
-                <div class="h-80"><canvas id="chartBuybacksSharesEPS"></canvas></div>
+                <div class="h-80"><canvas id="chartNetBuybacksFloat"></canvas></div>
             </div>
         </div>
         {% endif %}
@@ -352,20 +376,19 @@
                 </div>
             </div>
 
-            <!-- Gráfico Stacked Bar: Destinos de Capital vs Línea CFO -->
+            <!-- Gráfico: Asignación Anual de Capital: Retorno vs Reinversión -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                     <div>
-                        <h4 class="font-bold text-slate-900 text-base">Asignación Anual de Capital vs. Generación Operativa (${{ alloc_unit }})</h4>
-                        <p class="text-xs text-slate-500">Barras apiladas (usos de capital) contrastadas con la línea de Flujo de Caja Operativo (CFO)</p>
+                        <h4 class="font-bold text-slate-900 text-base">Asignación Anual de Capital: Retorno al Accionista vs. Reinversión en Negocio (${{ alloc_unit }})</h4>
+                        <p class="text-xs text-slate-500">Dos columnas contiguas por año (Columna Retorno vs. Columna Reinversión) contrastadas con el Flujo Operativo (CFO)</p>
                     </div>
                     <div class="flex items-center gap-3 text-xs flex-wrap">
-                        <span class="inline-flex items-center gap-1.5 text-slate-700"><span class="w-3 h-3 rounded-sm bg-blue-600"></span> CapEx</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700"><span class="w-3 h-3 rounded-sm bg-purple-600"></span> Recompras</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700"><span class="w-3 h-3 rounded-sm bg-amber-500"></span> Dividendos</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700"><span class="w-3 h-3 rounded-sm bg-rose-600"></span> M&amp;A</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700"><span class="w-3 h-3 rounded-sm bg-slate-500"></span> Deuda Neta</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-bold"><span class="w-3 h-0.5 bg-emerald-600"></span> Línea CFO</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-purple-600"></span> Recompras</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-amber-500"></span> Dividendos</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-blue-600"></span> CapEx Orgánico</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-rose-600"></span> M&amp;A</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-bold"><span class="w-3 h-0.5 bg-emerald-600"></span> Línea CFO (Techo de Generación)</span>
                     </div>
                 </div>
                 <div class="h-96"><canvas id="chartCapitalAllocation"></canvas></div>
@@ -3511,6 +3534,12 @@
         const buybacks = {{ buybacks_series_json|safe }};
         const shares = {{ shares_series_json|safe }};
         const epss = {{ eps_series_json|safe }};
+        const cashConvRates = {{ cash_conv_rates_json|default:"[]"|safe }};
+        const netBuybacks = {{ net_buybacks_series_json|default:"[]"|safe }};
+        const netBuybackColors = {{ net_buyback_colors_json|default:"[]"|safe }};
+        const netBuybackBorders = {{ net_buyback_borders_json|default:"[]"|safe }};
+        const sbcSeries = {{ sbc_series_json|default:"[]"|safe }};
+        const sharesYoY = {{ shares_yoy_pct_json|default:"[]"|safe }};
 
         // Arquetipos y Series Específicas
         const niiSeries = {{ nii_series_json|safe }};
@@ -3600,32 +3629,95 @@
             });
         }
 
-        // Gráfico 3: Flujos de Caja (CFO vs CapEx vs FCF) (Corporativo / Plataforma)
-        const elCashFlow = document.getElementById('chartCashFlow');
-        if (elCashFlow) {
-            new Chart(elCashFlow, {
-                type: 'bar',
+        // Gráfico 3: Calidad Contable y Conversión de Caja (Beneficio Neto vs FCF y Ratio %)
+        const elCashConv = document.getElementById('chartCashConversion');
+        if (elCashConv) {
+            new Chart(elCashConv, {
                 data: {
                     labels: periods,
                     datasets: [
-                        { label: 'CFO ($M)', data: cfos, backgroundColor: 'rgba(99, 102, 241, 0.65)', borderColor: '#6366f1', borderWidth: 1 },
-                        { label: 'CapEx ($M)', data: capexs, backgroundColor: 'rgba(244, 63, 94, 0.65)', borderColor: '#f43f5e', borderWidth: 1 },
-                        { label: 'FCF ($M)', data: fcfs, backgroundColor: 'rgba(16, 185, 129, 0.75)', borderColor: '#10b981', borderWidth: 1 }
+                        {
+                            type: 'bar',
+                            label: 'Beneficio Neto ($M)',
+                            data: nis,
+                            backgroundColor: 'rgba(59, 130, 246, 0.70)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1.5,
+                            order: 2,
+                            yAxisID: 'yLeft'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Flujo de Caja Libre (FCF $M)',
+                            data: fcfs,
+                            backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                            borderColor: '#10b981',
+                            borderWidth: 1.5,
+                            order: 2,
+                            yAxisID: 'yLeft'
+                        },
+                        {
+                            type: 'line',
+                            label: 'Conversión FCF / Neto (%)',
+                            data: cashConvRates,
+                            borderColor: '#a855f7',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2.5,
+                            pointBackgroundColor: '#a855f7',
+                            pointRadius: 4,
+                            pointHoverRadius: 7,
+                            order: 1,
+                            yAxisID: 'yRightConv'
+                        }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    interaction: { mode: 'nearest', intersect: true },
+                    interaction: { mode: 'index', intersect: false },
                     scales: {
                         x: { grid: { color: 'rgba(226, 232, 240, 0.8)' }, ticks: { color: '#64748b' } },
-                        y: { grid: { color: 'rgba(226, 232, 240, 0.8)' }, ticks: { color: '#64748b', callback: v => '$' + fmtThousands(v) + 'M' } }
+                        yLeft: {
+                            type: 'linear',
+                            position: 'left',
+                            grid: { color: 'rgba(226, 232, 240, 0.8)' },
+                            ticks: {
+                                color: '#64748b',
+                                callback: v => '$' + fmtThousands(v) + 'M'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Magnitudes Financieras ($M)',
+                                color: '#64748b',
+                                font: { size: 10 }
+                            }
+                        },
+                        yRightConv: {
+                            type: 'linear',
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                color: '#a855f7',
+                                callback: v => v + '%'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Conversión FCF/Neto (%)',
+                                color: '#a855f7',
+                                font: { size: 10 }
+                            }
+                        }
                     },
                     plugins: {
-                        legend: { labels: { color: '#334155', font: { size: 11 } } },
+                        legend: { labels: { color: '#334155', font: { size: 11, weight: '600' } } },
                         tooltip: {
                             callbacks: {
-                                label: ctx => ctx.dataset.label + ': ' + fmtUSD_M(ctx.parsed.y, 1)
+                                label: function(ctx) {
+                                    if (ctx.dataset.yAxisID === 'yRightConv') {
+                                        return ctx.parsed.y !== null ? `Conversión FCF/Neto: ${ctx.parsed.y.toFixed(1)}%` : 'Conversión: N/D';
+                                    }
+                                    return `${ctx.dataset.label}: ${fmtUSD_M(ctx.parsed.y, 1)}`;
+                                }
                             }
                         }
                     }
@@ -3906,70 +3998,59 @@
             });
         }
 
-        // Gráfico Común: Asignación de Capital (Recompras, Acciones y BPA)
-        const elBuybacks = document.getElementById('chartBuybacksSharesEPS');
-        if (elBuybacks) {
-            new Chart(elBuybacks, {
+        // Gráfico 4: Dinámica del Accionista: Recompra Neta ($M) vs Float (Acciones Diluidas)
+        const elNetBuybacks = document.getElementById('chartNetBuybacksFloat') || document.getElementById('chartNetBuybacksFloatBanking') || document.getElementById('chartBuybacksSharesEPS');
+        if (elNetBuybacks) {
+            new Chart(elNetBuybacks, {
                 data: {
                     labels: periods,
                     datasets: [
                         {
                             type: 'bar',
-                            label: 'Recompras (${{ buybacks_unit }})',
-                            data: buybacks,
-                            backgroundColor: 'rgba(168, 85, 247, 0.35)',
-                            borderColor: '#a855f7',
+                            label: 'Recompra Neta ($M = Recompras - SBC)',
+                            data: netBuybacks,
+                            backgroundColor: netBuybackColors,
+                            borderColor: netBuybackBorders,
                             borderWidth: 1.5,
-                            yAxisID: 'yLeft',
-                            order: 3
+                            yAxisID: 'yLeftNetBB',
+                            order: 2
                         },
                         {
                             type: 'line',
                             label: 'Acciones Diluidas ({{ shares_unit }})',
                             data: shares,
-                            borderColor: '#38bdf8',
+                            borderColor: '#0284c7',
                             backgroundColor: 'transparent',
-                            borderWidth: 2.5,
-                            pointRadius: 4,
-                            pointHoverRadius: 7,
-                            pointHitRadius: 10,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#0284c7',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 1.5,
+                            pointRadius: 4.5,
+                            pointHoverRadius: 7.5,
                             yAxisID: 'yRightShares',
                             order: 1
-                        },
-                        {
-                            type: 'line',
-                            label: 'BPA Diluido ($/acc)',
-                            data: epss,
-                            borderColor: '#10b981',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2.5,
-                            pointRadius: 4,
-                            pointHoverRadius: 7,
-                            pointHitRadius: 10,
-                            yAxisID: 'yRightEPS',
-                            order: 2
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    interaction: { mode: 'nearest', intersect: true },
+                    interaction: { mode: 'index', intersect: false },
                     scales: {
                         x: { grid: { color: 'rgba(226, 232, 240, 0.8)' }, ticks: { color: '#64748b' } },
-                        yLeft: {
+                        yLeftNetBB: {
                             type: 'linear',
                             position: 'left',
                             grid: { color: 'rgba(226, 232, 240, 0.8)' },
                             ticks: {
-                                color: '#c084fc',
-                                callback: function(v) { return '$' + fmtThousands(v) + '{{ buybacks_unit }}'; }
+                                color: '#10b981',
+                                callback: v => '$' + fmtThousands(v) + 'M'
                             },
                             title: {
                                 display: true,
-                                text: 'Recompras (${{ buybacks_unit }})',
-                                color: '#c084fc',
-                                font: { size: 10 }
+                                text: 'Recompra Neta ($M)',
+                                color: '#059669',
+                                font: { size: 10, weight: 'bold' }
                             }
                         },
                         yRightShares: {
@@ -3977,43 +4058,35 @@
                             position: 'right',
                             grid: { drawOnChartArea: false },
                             ticks: {
-                                color: '#38bdf8',
-                                callback: function(v) { return fmtThousands(v) + '{{ shares_unit }}'; }
+                                color: '#0284c7',
+                                callback: v => fmtThousands(v) + '{{ shares_unit }}'
                             },
                             title: {
                                 display: true,
-                                text: 'Acciones ({{ shares_unit }})',
-                                color: '#38bdf8',
-                                font: { size: 10 }
-                            }
-                        },
-                        yRightEPS: {
-                            type: 'linear',
-                            position: 'right',
-                            grid: { drawOnChartArea: false },
-                            ticks: {
-                                color: '#34d399',
-                                callback: function(v) { return '$' + Number(v).toFixed(2); }
-                            },
-                            title: {
-                                display: true,
-                                text: 'BPA ($/acc)',
-                                color: '#34d399',
-                                font: { size: 10 }
+                                text: 'Acciones Diluidas ({{ shares_unit }})',
+                                color: '#0284c7',
+                                font: { size: 10, weight: 'bold' }
                             }
                         }
                     },
                     plugins: {
-                        legend: { labels: { color: '#334155', font: { size: 11 } } },
+                        legend: { labels: { color: '#334155', font: { size: 11, weight: '600' } } },
                         tooltip: {
                             callbacks: {
                                 label: function(ctx) {
-                                    if (ctx.dataset.yAxisID === 'yLeft') {
-                                        return ctx.dataset.label + ': ' + fmtUSD_M(ctx.parsed.y, 1);
-                                    } else if (ctx.dataset.yAxisID === 'yRightShares') {
-                                        return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + '{{ shares_unit }} acciones';
+                                    const idx = ctx.dataIndex;
+                                    if (ctx.dataset.yAxisID === 'yLeftNetBB') {
+                                        const bb = (buybacks && buybacks[idx] !== undefined) ? buybacks[idx] : 0;
+                                        const sbc = (sbcSeries && sbcSeries[idx] !== undefined) ? sbcSeries[idx] : 0;
+                                        const netVal = ctx.parsed.y;
+                                        return [
+                                            `Recompra Neta: ${fmtUSD_M(netVal, 1)}`,
+                                            `  ├─ Recompras Brutas: ${fmtUSD_M(bb, 1)}`,
+                                            `  └─ SBC Ejecutiva: ${fmtUSD_M(sbc, 1)}`
+                                        ];
                                     } else {
-                                        return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toFixed(2) + ' USD';
+                                        const yoy = (sharesYoY && sharesYoY[idx] !== null && sharesYoY[idx] !== undefined) ? ` (${sharesYoY[idx] > 0 ? '+' : ''}${sharesYoY[idx]}% YoY)` : '';
+                                        return `Acciones Diluidas: ${Number(ctx.parsed.y).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1})} {{ shares_unit }} acciones${yoy}`;
                                     }
                                 }
                             }
@@ -4023,7 +4096,7 @@
             });
         }
 
-        // Gráfico Marco de Asignación de Capital (Capital Allocation Framework)
+        // Gráfico Marco de Asignación de Capital: Retorno vs. Reinversión (Dos Columnas Contiguas vs CFO)
         const elAlloc = document.getElementById('chartCapitalAllocation');
         if (elAlloc && typeof chartAllocData !== 'undefined' && chartAllocData.labels) {
             new Chart(elAlloc, {
@@ -4037,33 +4110,23 @@
                             data: chartAllocData.cfo,
                             borderColor: '#059669',
                             backgroundColor: 'transparent',
-                            borderWidth: 3,
+                            borderWidth: 3.5,
                             pointBackgroundColor: '#059669',
                             pointBorderColor: '#ffffff',
                             pointBorderWidth: 1.5,
-                            pointRadius: 5,
-                            pointHoverRadius: 8,
+                            pointRadius: 5.5,
+                            pointHoverRadius: 8.5,
                             tension: 0.25,
                             order: 0,
                             yAxisID: 'y'
                         },
                         {
-                            label: 'Inversión en CapEx',
-                            data: chartAllocData.capex,
-                            backgroundColor: 'rgba(37, 99, 235, 0.85)',
-                            borderColor: '#2563eb',
-                            borderWidth: 1,
-                            stack: 'alloc',
-                            order: 1,
-                            yAxisID: 'y'
-                        },
-                        {
                             label: 'Recompras de Acciones',
                             data: chartAllocData.buybacks,
-                            backgroundColor: 'rgba(147, 51, 234, 0.85)',
+                            backgroundColor: 'rgba(147, 51, 234, 0.88)',
                             borderColor: '#9333ea',
                             borderWidth: 1,
-                            stack: 'alloc',
+                            stack: 'stackReturn',
                             order: 1,
                             yAxisID: 'y'
                         },
@@ -4073,27 +4136,27 @@
                             backgroundColor: 'rgba(245, 158, 11, 0.88)',
                             borderColor: '#f59e0b',
                             borderWidth: 1,
-                            stack: 'alloc',
+                            stack: 'stackReturn',
                             order: 1,
                             yAxisID: 'y'
                         },
                         {
-                            label: 'Adquisiciones M&A',
+                            label: 'Inversión en CapEx Orgánico',
+                            data: chartAllocData.capex,
+                            backgroundColor: 'rgba(37, 99, 235, 0.88)',
+                            borderColor: '#2563eb',
+                            borderWidth: 1,
+                            stack: 'stackReinvest',
+                            order: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Adquisiciones M&A (Inorgánico)',
                             data: chartAllocData.ma,
-                            backgroundColor: 'rgba(225, 29, 72, 0.85)',
+                            backgroundColor: 'rgba(225, 29, 72, 0.88)',
                             borderColor: '#e11d48',
                             borderWidth: 1,
-                            stack: 'alloc',
-                            order: 1,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Deuda Neta Retirada',
-                            data: chartAllocData.debt,
-                            backgroundColor: 'rgba(100, 116, 139, 0.80)',
-                            borderColor: '#64748b',
-                            borderWidth: 1,
-                            stack: 'alloc',
+                            stack: 'stackReinvest',
                             order: 1,
                             yAxisID: 'y'
                         }
@@ -4113,10 +4176,16 @@
                             stacked: true,
                             grid: { color: 'rgba(226, 232, 240, 0.8)' },
                             ticks: {
-                                color: '#94a3b8',
+                                color: '#64748b',
                                 callback: function(v) {
                                     return '$' + fmtThousands(v) + chartAllocData.unit;
                                 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Flujos Asignados vs CFO ($' + chartAllocData.unit + ')',
+                                color: '#64748b',
+                                font: { size: 10 }
                             }
                         }
                     },
@@ -4127,7 +4196,30 @@
                         tooltip: {
                             callbacks: {
                                 label: function(ctx) {
-                                    return ctx.dataset.label + ': ' + fmtUSD_M(ctx.parsed.y, 1);
+                                    const val = ctx.parsed.y;
+                                    if (val === 0 || val === null || val === undefined) return null;
+                                    const idx = ctx.dataIndex;
+                                    const cfoVal = (chartAllocData.cfo && chartAllocData.cfo[idx]) ? chartAllocData.cfo[idx] : null;
+                                    const pctCfo = (cfoVal && cfoVal > 0) ? ` (${((val / cfoVal) * 100).toFixed(1)}% del CFO)` : '';
+                                    return `${ctx.dataset.label}: ${fmtUSD_M(val, 1)}${pctCfo}`;
+                                },
+                                afterBody: function(items) {
+                                    if (!items || items.length === 0) return [];
+                                    const idx = items[0].dataIndex;
+                                    const cfoVal = (chartAllocData.cfo && chartAllocData.cfo[idx]) ? chartAllocData.cfo[idx] : 0;
+                                    const bbVal = (chartAllocData.buybacks && chartAllocData.buybacks[idx]) ? chartAllocData.buybacks[idx] : 0;
+                                    const divVal = (chartAllocData.dividends && chartAllocData.dividends[idx]) ? chartAllocData.dividends[idx] : 0;
+                                    const capexVal = (chartAllocData.capex && chartAllocData.capex[idx]) ? chartAllocData.capex[idx] : 0;
+                                    const maVal = (chartAllocData.ma && chartAllocData.ma[idx]) ? chartAllocData.ma[idx] : 0;
+                                    const totReturn = bbVal + divVal;
+                                    const totReinvest = capexVal + maVal;
+                                    const pctRet = cfoVal > 0 ? ((totReturn / cfoVal) * 100).toFixed(1) : '0.0';
+                                    const pctReinv = cfoVal > 0 ? ((totReinvest / cfoVal) * 100).toFixed(1) : '0.0';
+                                    return [
+                                        '──────────────────────────────',
+                                        `👑 Total Retorno Accionista: ${fmtUSD_M(totReturn, 1)} (${pctRet}% CFO)`,
+                                        `🏭 Total Reinversión Negocio: ${fmtUSD_M(totReinvest, 1)} (${pctReinv}% CFO)`
+                                    ];
                                 }
                             }
                         }

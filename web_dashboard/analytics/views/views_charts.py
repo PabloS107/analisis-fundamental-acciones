@@ -87,29 +87,109 @@ def build_charts_and_segments_context(
     capex_series = [_to_millions(canonical.get("capital_expenditures", {}).get(p)) for p in chart_periods]
     fcf_series = [_to_millions(canonical.get("free_cash_flow", {}).get(p)) for p in chart_periods]
 
-    # Recompras, Acciones y BPA: Ingesta unificada vía Helper Canónico SSOT
+    # -------------------------------------------------------------
+    # 1. CALIDAD CONTABLE Y CONVERSIÓN DE CAJA (FCF vs Net Income)
+    # -------------------------------------------------------------
+    cash_conv_rates = []
+    for p in chart_periods:
+        ni_val = canonical.get("net_income", {}).get(p)
+        fcf_val = canonical.get("free_cash_flow", {}).get(p)
+        if ni_val is not None and ni_val > 0 and fcf_val is not None:
+            cash_conv_rates.append(round((float(fcf_val) / float(ni_val)) * 100.0, 1))
+        else:
+            cash_conv_rates.append(None)
+
+    valid_conv_ltm = cash_conv_rates[-1] if cash_conv_rates and cash_conv_rates[-1] is not None else None
+    non_ltm_rates = [r for idx, r in enumerate(cash_conv_rates) if chart_periods[idx] != "LTM" and r is not None]
+    recent_rates = non_ltm_rates[-5:] if non_ltm_rates else [r for r in cash_conv_rates if r is not None][-5:]
+    avg_conv_5y = round(sum(recent_rates) / len(recent_rates), 1) if recent_rates else None
+
+    if avg_conv_5y is not None:
+        if avg_conv_5y >= 95.0:
+            conv_badge = "🟢 ALTA CALIDAD (FCF ≥ 95% BENEFICIOS)"
+            conv_badge_color = "emerald"
+        elif avg_conv_5y >= 75.0:
+            conv_badge = "🟡 CALIDAD SALUDABLE (75% - 94%)"
+            conv_badge_color = "amber"
+        else:
+            conv_badge = "🔴 ABSORCIÓN DE CAJA / DEVENGOS ALTOS (< 75%)"
+            conv_badge_color = "rose"
+    else:
+        conv_badge = "⚪ DATO LIMITADO"
+        conv_badge_color = "slate"
+
+    cash_conv_summary = {
+        "ltm_str": f"{valid_conv_ltm:.1f}%" if valid_conv_ltm is not None else "N/D",
+        "avg_5y_str": f"{avg_conv_5y:.1f}%" if avg_conv_5y is not None else "N/D",
+        "badge": conv_badge,
+        "badge_color": conv_badge_color
+    }
+
+    # -------------------------------------------------------------
+    # 2. DINÁMICA DEL ACCIONISTA: RECOMPRA NETA (RECOMPRAS - SBC) Y FLOAT
+    # -------------------------------------------------------------
     all_known_periods = list(dict.fromkeys(list(fys) + list(chart_periods) + list(fs.get("fiscal_years", []))))
     capital_flows = resolve_canonical_capital_flows(fs, all_known_periods)
 
-    # Recompras de acciones puras en mercado abierto (sin contaminar con retención fiscal de RSUs)
     buybacks_dict = {p: capital_flows["share_repurchases_open_market"].get(p, 0.0) for p in chart_periods}
 
-    # Unidades para recompras en Millones ($M)
-    raw_buybacks = [buybacks_dict.get(p, 0.0) for p in chart_periods]
-    buybacks_unit = "M"
-    bb_scale = 1e6
-    buybacks_series = [round(buybacks_dict.get(p, 0.0) / bb_scale, 1) for p in chart_periods]
+    cf_sources = [fs.get("cash_flow_detail", {}), fs.get("cash_flow_statement", {})]
+    sbc_can = canonical.get("stock_based_compensation", {})
+    sbc_dict = {}
+    for p in chart_periods:
+        val = sbc_can.get(p)
+        if val is not None and abs(float(val)) > 0:
+            sbc_dict[p] = abs(float(val))
+        else:
+            found_sbc = None
+            for cf_src in cf_sources:
+                if not cf_src:
+                    continue
+                for c_k in ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense", "StockOptionPlanExpense", "RestrictedStockExpense", "us-gaap_AllocatedShareBasedCompensationExpense", "stock_based_compensation"]:
+                    c_k_lower = c_k.lower()
+                    for src_k, src_obj in cf_src.items():
+                        src_k_token = src_k.lower().split(':')[-1].split('_')[-1]
+                        if src_k == c_k or src_k.lower() == c_k_lower or src_k_token == c_k_lower:
+                            if isinstance(src_obj, dict) and "values" in src_obj:
+                                v_cand = src_obj["values"].get(p)
+                                if v_cand is not None and abs(float(v_cand)) > 0:
+                                    found_sbc = abs(float(v_cand))
+                                    break
+                            elif isinstance(src_obj, dict):
+                                v_cand = src_obj.get(p)
+                                if v_cand is not None and abs(float(v_cand)) > 0:
+                                    found_sbc = abs(float(v_cand))
+                                    break
+                    if found_sbc is not None:
+                        break
+                if found_sbc is not None:
+                    break
+            sbc_dict[p] = found_sbc or 0.0
 
-    # Unidades para acciones en circulación en Millones (M acciones)
+    buybacks_unit = "M"
+    buybacks_scale = 1e6
+    buybacks_series = [round((buybacks_dict.get(p) or 0.0) / buybacks_scale, 1) for p in chart_periods]
+    sbc_series = [round((sbc_dict.get(p) or 0.0) / buybacks_scale, 1) for p in chart_periods]
+    net_buybacks_series = [round(((buybacks_dict.get(p) or 0.0) - (sbc_dict.get(p) or 0.0)) / buybacks_scale, 1) for p in chart_periods]
+    net_buyback_colors = ['rgba(16, 185, 129, 0.85)' if val >= 0 else 'rgba(244, 63, 94, 0.85)' for val in net_buybacks_series]
+    net_buyback_borders = ['#10b981' if val >= 0 else '#f43f5e' for val in net_buybacks_series]
+
     shares_dict = canonical.get("shares_diluted_adjusted", {}) or canonical.get("shares_diluted", {})
     shares_unit = "M"
     shares_scale = 1e6
     shares_series = [round(float(shares_dict.get(p, 0) or 0) / shares_scale, 1) for p in chart_periods]
 
+    shares_yoy_pct = []
+    for i, p in enumerate(chart_periods):
+        if i > 0 and shares_series[i - 1] > 0 and shares_series[i] > 0:
+            yoy = ((shares_series[i] - shares_series[i - 1]) / shares_series[i - 1]) * 100.0
+            shares_yoy_pct.append(round(yoy, 2))
+        else:
+            shares_yoy_pct.append(None)
+
     eps_dict = canonical.get("eps_diluted_adjusted", {}) or canonical.get("eps_diluted", {})
     eps_series = [round(float(eps_dict.get(p, 0) or 0), 2) for p in chart_periods]
 
-    # Resumen de float y recompras dinámico
     valid_shares = [(p, float(shares_dict.get(p, 0) or 0)) for p in chart_periods if float(shares_dict.get(p, 0) or 0) > 0]
     if len(valid_shares) >= 2:
         sh_start = valid_shares[0][1]
@@ -119,16 +199,29 @@ def build_charts_and_segments_context(
     else:
         float_str = "-"
 
-    annual_bb_periods = [p for p in chart_periods if p != "LTM"] or list(chart_periods)
-    total_bb = sum(abs(float(buybacks_dict.get(p) or 0.0)) for p in annual_bb_periods)
-    if total_bb >= 1e6:
-        bb_str = f"${total_bb/1e6:,.1f}M"
-    else:
-        bb_str = f"${total_bb:,.0f}"
+    annual_periods = [p for p in chart_periods if p != "LTM"] or list(chart_periods)
+    tot_bb_ann = sum(abs(float(buybacks_dict.get(p) or 0.0)) for p in annual_periods)
+    tot_sbc_ann = sum(abs(float(sbc_dict.get(p) or 0.0)) for p in annual_periods)
+    tot_net_bb_ann = tot_bb_ann - tot_sbc_ann
+
+    def _fmt_usd_m(val):
+        abs_v = abs(val)
+        if abs_v >= 1e9:
+            return f"${val/1e9:,.1f}B"
+        elif abs_v >= 1e6:
+            return f"${val/1e6:,.1f}M"
+        else:
+            return f"${val:,.0f}"
+
+    sbc_cov_ratio = f"{tot_bb_ann / tot_sbc_ann:.1f}x" if tot_sbc_ann > 0 else "N/A"
+    bb_str = f"${tot_bb_ann/1e6:,.1f}M" if tot_bb_ann >= 1e6 else f"${tot_bb_ann:,.0f}"
 
     buybacks_summary = {
         "float_change_pct": float_str,
-        "total_buybacks": bb_str
+        "total_buybacks": bb_str,
+        "total_sbc": _fmt_usd_m(tot_sbc_ann),
+        "total_net_buybacks": _fmt_usd_m(tot_net_bb_ann),
+        "sbc_coverage_ratio": sbc_cov_ratio
     }
 
     # -------------------------------------------------------------
@@ -291,6 +384,17 @@ def build_charts_and_segments_context(
         "recent_years_label": f"{alloc_periods[0]}-{alloc_periods[-1]}" if alloc_periods else "N/D"
     }
 
+    reinvest_rate_series = [
+        round(((alloc_capex_dict.get(p, 0.0) + alloc_ma_dict.get(p, 0.0)) / alloc_cfo_dict.get(p, 1.0)) * 100.0, 1)
+        if (alloc_cfo_dict.get(p) or 0) > 0 else 0.0
+        for p in chart_periods
+    ]
+    return_rate_series = [
+        round(((alloc_bb_dict.get(p, 0.0) + alloc_div_dict.get(p, 0.0)) / alloc_cfo_dict.get(p, 1.0)) * 100.0, 1)
+        if (alloc_cfo_dict.get(p) or 0) > 0 else 0.0
+        for p in chart_periods
+    ]
+
     chart_alloc_data = {
         "labels": chart_periods,
         "unit": alloc_unit,
@@ -300,6 +404,8 @@ def build_charts_and_segments_context(
         "ma": alloc_ma_series,
         "debt": alloc_debt_series,
         "cfo": alloc_cfo_series,
+        "reinvest_rate_series": reinvest_rate_series,
+        "return_rate_series": return_rate_series,
     }
 
     # -------------------------------------------------------------
@@ -986,6 +1092,13 @@ def build_charts_and_segments_context(
         "om_series_json": json.dumps(om_series),
         "nm_series_json": json.dumps(nm_series),
         "fcf_m_series_json": json.dumps(fcf_m_series),
+        "cash_conv_rates_json": json.dumps(cash_conv_rates),
+        "cash_conv_summary": cash_conv_summary,
+        "net_buybacks_series_json": json.dumps(net_buybacks_series),
+        "net_buyback_colors_json": json.dumps(net_buyback_colors),
+        "net_buyback_borders_json": json.dumps(net_buyback_borders),
+        "sbc_series_json": json.dumps(sbc_series),
+        "shares_yoy_pct_json": json.dumps(shares_yoy_pct),
         "buybacks_series_json": json.dumps(buybacks_series),
         "shares_series_json": json.dumps(shares_series),
         "eps_series_json": json.dumps(eps_series),
