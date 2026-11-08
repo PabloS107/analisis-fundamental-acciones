@@ -575,20 +575,26 @@ def build_as_reported_statements(
                     for p_k in row_vals:
                         if row_vals[p_k] is not None:
                             row_vals[p_k] = abs(row_vals[p_k])
-            else:
-                valid_nums = [v for p_k, v in row_vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
-                if valid_nums:
-                    pos_count = sum(1 for v in valid_nums if v > 0)
-                    neg_count = sum(1 for v in valid_nums if v < 0)
-                    tot_cnt = len(valid_nums)
-                    if pos_count / tot_cnt >= 0.8:
-                        for p_k in row_vals:
-                            if row_vals[p_k] is not None:
-                                row_vals[p_k] = abs(row_vals[p_k])
-                    elif neg_count / tot_cnt >= 0.8:
-                        for p_k in row_vals:
-                            if row_vals[p_k] is not None:
-                                row_vals[p_k] = -abs(row_vals[p_k])
+            elif s_name == "balance_sheet":
+                c_low = conc.lower()
+                is_equity_or_fluctuating = any(x in c_low for x in (
+                    'retainedearnings', 'accumulateddeficit', 'accumulatedothercomprehensiveincome',
+                    'othercomprehensiveincome', 'treasurystock', 'accumulatedgain', 'accumulatedloss'
+                ))
+                if not is_equity_or_fluctuating:
+                    valid_nums = [v for p_k, v in row_vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
+                    if valid_nums:
+                        pos_count = sum(1 for v in valid_nums if v > 0)
+                        neg_count = sum(1 for v in valid_nums if v < 0)
+                        tot_cnt = len(valid_nums)
+                        if pos_count / tot_cnt >= 0.8:
+                            for p_k in row_vals:
+                                if row_vals[p_k] is not None:
+                                    row_vals[p_k] = abs(row_vals[p_k])
+                        elif neg_count / tot_cnt >= 0.8:
+                            for p_k in row_vals:
+                                if row_vals[p_k] is not None:
+                                    row_vals[p_k] = -abs(row_vals[p_k])
 
             rows.append({
                 "label": clean_lbl,
@@ -666,20 +672,26 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                     for p_k in vals:
                         if vals[p_k] is not None:
                             vals[p_k] = abs(vals[p_k])
-            else:
-                valid_nums = [v for p_k, v in vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
-                if valid_nums:
-                    pos_count = sum(1 for v in valid_nums if v > 0)
-                    neg_count = sum(1 for v in valid_nums if v < 0)
-                    tot_cnt = len(valid_nums)
-                    if pos_count / tot_cnt >= 0.8:
-                        for p_k in vals:
-                            if vals[p_k] is not None:
-                                vals[p_k] = abs(vals[p_k])
-                    elif neg_count / tot_cnt >= 0.8:
-                        for p_k in vals:
-                            if vals[p_k] is not None:
-                                vals[p_k] = -abs(vals[p_k])
+            elif s_name == "balance_sheet":
+                c_low = conc.lower()
+                is_equity_or_fluctuating = any(x in c_low for x in (
+                    'retainedearnings', 'accumulateddeficit', 'accumulatedothercomprehensiveincome',
+                    'othercomprehensiveincome', 'treasurystock', 'accumulatedgain', 'accumulatedloss'
+                ))
+                if not is_equity_or_fluctuating:
+                    valid_nums = [v for p_k, v in vals.items() if v is not None and v != 0.0 and p_k != "LTM"]
+                    if valid_nums:
+                        pos_count = sum(1 for v in valid_nums if v > 0)
+                        neg_count = sum(1 for v in valid_nums if v < 0)
+                        tot_cnt = len(valid_nums)
+                        if pos_count / tot_cnt >= 0.8:
+                            for p_k in vals:
+                                if vals[p_k] is not None:
+                                    vals[p_k] = abs(vals[p_k])
+                        elif neg_count / tot_cnt >= 0.8:
+                            for p_k in vals:
+                                if vals[p_k] is not None:
+                                    vals[p_k] = -abs(vals[p_k])
 
             row["values"] = vals
             cleaned_rows.append(row)
@@ -726,6 +738,16 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                     if k_cf in cf_detail and isinstance(cf_detail[k_cf], dict) and "values" in cf_detail[k_cf]:
                         cf_detail[k_cf]["values"]["LTM"] = -audited_div if float(v_ltm) < 0 else audited_div
             break
+
+    # Sincronizar signos de flujos de caja As-Reported con el detalle oficial SEC auditado (Regla 6)
+    for r in as_rep_cf:
+        conc = r.get("concept", "")
+        if conc in cf_detail and isinstance(cf_detail[conc], dict):
+            det_vals = cf_detail[conc].get("values", {})
+            for p_k, det_v in det_vals.items():
+                if det_v is not None and r.get("values", {}).get(p_k) is not None:
+                    if abs(r["values"][p_k]) == abs(det_v):
+                        r["values"][p_k] = det_v
 
     # C. Resolver colisiones dimensionales en as_reported_statements (Regla 1 y Regla 6)
     # Si dos filas no abstractas del mismo estado comparten el mismo LTM no nulo pero difieren en FY_latest,

@@ -387,11 +387,17 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
     ]
     apic_keys = [
         "CommonStocksIncludingAdditionalPaidInCapital",
-        "us-gaap_CommonStocksIncludingAdditionalPaidInCapital"
+        "us-gaap_CommonStocksIncludingAdditionalPaidInCapital",
+        "CommonStocksAndAdditionalPaidInCapital",
     ]
     re_keys = [
         "RetainedEarningsAccumulatedDeficit", "RetainedEarnings",
-        "us-gaap_RetainedEarningsAccumulatedDeficit"
+        "us-gaap_RetainedEarningsAccumulatedDeficit",
+        "ifrs-full_RetainedEarnings",
+        "nu_AccumulatedGains",
+        "nu_AccumulatedGainLosses",
+        "AccumulatedLosses",
+        "nu_TotalAccumulatedLosses",
     ]
 
     def_rev_keys = [
@@ -689,12 +695,12 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
         apic_v = _extract_val(apic_keys, p)
         if apic_v is None or apic_v == 0.0:
-            v_cs = _extract_val(["CommonStockValue", "us-gaap_CommonStockValue"], p)
-            v_apic = _extract_val(["AdditionalPaidInCapital", "us-gaap_AdditionalPaidInCapital"], p)
+            v_cs = _extract_val(["CommonStockValue", "us-gaap_CommonStockValue", "IssuedCapital", "ifrs-full_IssuedCapital"], p)
+            v_apic = _extract_val(["AdditionalPaidInCapital", "us-gaap_AdditionalPaidInCapital", "SharePremium", "ifrs-full_SharePremium"], p)
             if v_cs is not None or v_apic is not None:
                 apic_v = round((v_cs or 0.0) + (v_apic or 0.0), 1)
         re_v = _extract_val(re_keys, p)
-        aoci_v = _extract_val(["AccumulatedOtherComprehensiveIncomeLossNetOfTax", "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax", "AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesNetOfTax"], p)
+        aoci_v = _extract_val(["AccumulatedOtherComprehensiveIncomeLossNetOfTax", "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax", "AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesNetOfTax", "ifrs-full_AccumulatedOtherComprehensiveIncome"], p)
         treas_v = _extract_val(["TreasuryStockValue", "TreasuryStockCommonValue", "us-gaap_TreasuryStockValue"], p)
 
         if (apic_v is None or apic_v == 0.0) and eq_v is not None and re_v is not None:
@@ -735,8 +741,12 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         if shares_v and float(shares_v) > 0:
             sh_count = float(shares_v)
             sh_m = sh_count / 1e6 if sh_count >= 1e6 else sh_count
-            eq_m = (eq_v / 1e6) if (eq_v and abs(eq_v) >= 1e6) else (eq_v or 0.0)
-            gw_m = (gw_int_v / 1e6) if (gw_int_v and abs(gw_int_v) >= 1e6) else (gw_int_v or 0.0)
+            if eq_v and abs(eq_v) >= 1e6:
+                eq_m = eq_v / 1e6
+                gw_m = (gw_int_v / 1e6) if gw_int_v else 0.0
+            else:
+                eq_m = eq_v or 0.0
+                gw_m = gw_int_v or 0.0
             bvps = round(eq_m / sh_m, 2) if sh_m > 0 else None
             tbvps = round((eq_m - gw_m) / sh_m, 2) if sh_m > 0 else None
         else:
@@ -1101,7 +1111,8 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
 
         int_inc = _extract_multi_source_val(fs, "income", [
             "InvestmentIncomeInterest", "InterestIncomeOperating", "InterestAndDividendIncomeOperating",
-            "InterestIncome", "ifrs-full_RevenueFromInterest", "nu_InterestIncomeAndGainsLossesOnFinancialInstruments"
+            "InterestIncome", "ifrs-full_RevenueFromInterest", "nu_IncomeExpenseGainsOrLossesOfFinancialInstruments",
+            "IncomeExpenseGainsOrLossesOfFinancialInstruments", "InterestIncomeBank"
         ], p, "interest_income")
         if int_inc is not None:
             int_inc = abs(int_inc)
@@ -1272,6 +1283,8 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
         nii = _extract_multi_source_val(fs, "income", ["InterestIncomeExpenseNet", "NetInterestIncome"], p, "net_interest_income")
         if nii is None and int_inc is not None and int_exp is not None:
             nii = round(int_inc - int_exp, 2)
+        if int_inc is None and nii is not None and int_exp is not None and archetype == "FINANCIAL_BANKING":
+            int_inc = round(nii + int_exp, 2)
 
         non_int_inc = _extract_multi_source_val(fs, "income", ["NoninterestIncome", "ifrs-full_FeeAndCommissionIncome", "jpm_FeesAndCommissions1"], p, "non_interest_income")
         if non_int_inc is None and rev is not None and nii is not None:

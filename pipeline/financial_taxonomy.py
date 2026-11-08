@@ -162,7 +162,8 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "InterestAndDividendIncomeOperating",
         "InterestIncome",
         "ifrs-full_RevenueFromInterest",
-        "nu_InterestIncomeAndGainsLossesOnFinancialInstruments",
+        "nu_IncomeExpenseGainsOrLossesOfFinancialInstruments",
+        "IncomeExpenseGainsOrLossesOfFinancialInstruments",
         "us-gaap_InvestmentIncomeInterest",
     ],
     "interest_expense": [
@@ -540,7 +541,9 @@ BANKING_TAXONOMY_MAP: Dict[str, List[str]] = {
         "OtherNoninterestIncome",
     ],
     "interest_income": [
+        "nu_IncomeExpenseGainsOrLossesOfFinancialInstruments",
         "IncomeExpenseGainsOrLossesOfFinancialInstruments",
+        "ifrs-full_RevenueFromInterest",
         "InterestIncomeOperating",
         "InterestAndDividendIncomeOperating",
         "InterestIncome",
