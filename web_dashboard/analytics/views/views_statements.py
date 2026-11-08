@@ -907,8 +907,19 @@ def build_statements_context(
     std_pnl = [_build_statement_cells(r, statements_fys, canonical, ebt_dict=ebt_dict_std) for r in std_inc_rows]
 
     # 2. ESTADO DE FLUJOS DE CAJA (CASH FLOW STATEMENT)
-    cf_sections = [
-        ("ACTIVIDADES OPERATIVAS (OPERATING ACTIVITIES)", [
+    if archetype == "FINANCIAL_BANKING":
+        cf_op_items = [
+            ("Beneficio Neto Consolidado (Net Income)", "net_income", "[+]", "subtotal", False, True, False, True, "ni", "Net Income"),
+            ("Depreciación y Amortización (D&A)", "da", "[+]", "item", True, False, False, True, "ni", "Depreciation & Amortization"),
+            ("Compensación Basada en Acciones (SBC)", "sbc", "[+]", "item", True, False, False, False, "ni", "Share-Based Compensation"),
+            ("Impuestos sobre Beneficios Diferidos (Deferred Taxes)", "deferred_taxes", "[±]", "item", True, False, False, False, "ni", "Deferred Income Taxes"),
+            ("Variación Neta en Depósitos de Clientes", "banking_deposits_cf", "[±]", "item", True, False, False, True, "ni", "Net Change in Customer Deposits"),
+            ("Variación Neta en Préstamos y Cartera de Crédito", "banking_loans_cf", "[±]", "item", True, False, False, True, "ni", "Net Change in Customer Loans & Receivables"),
+            ("Otros Ajustes Operativos No Monetarios", "other_noncash", "[±]", "item", True, False, False, False, "ni", "Other Banking Operating and Non-Cash Adjustments"),
+            ("Flujo de Caja Operativo (CFO)", "cfo", "[=]", "result", False, True, False, True, "ni", "Cash Provided by Operating Activities"),
+        ]
+    else:
+        cf_op_items = [
             ("Beneficio Neto Consolidado (Net Income)", "net_income", "[+]", "subtotal", False, True, False, True, "ni", "Net Income"),
             ("Depreciación y Amortización (D&A)", "da", "[+]", "item", True, False, False, True, "ni", "Depreciation & Amortization"),
             ("Compensación Basada en Acciones (SBC)", "sbc", "[+]", "item", True, False, False, False, "ni", "Share-Based Compensation"),
@@ -919,7 +930,10 @@ def build_statements_context(
             ("Variación en Cuentas por Pagar (AP)", "wc_ap", "[±]", "item", True, False, False, False, "ni", "Change in Accounts Payable"),
             ("Variación en Otros Activos y Pasivos Operativos", "wc_other", "[±]", "item", True, False, False, False, "ni", "Change in Other Operating Working Capital"),
             ("Flujo de Caja Operativo (CFO)", "cfo", "[=]", "result", False, True, False, True, "ni", "Cash Provided by Operating Activities"),
-        ]),
+        ]
+
+    cf_sections = [
+        ("ACTIVIDADES OPERATIVAS (OPERATING ACTIVITIES)", cf_op_items),
         ("ACTIVIDADES DE INVERSIÓN (INVESTING ACTIVITIES)", [
             ("Inversiones en Inmovilizado / CapEx", "capex", "[-]", "item", True, False, True, (archetype not in ("FINANCIAL_BANKING", "INSURANCE") or any(cf_data.get("capex", {}).get(k) is not None for k in cf_data.get("capex", {}))), "ni", "Capital Expenditures"),
             ("Adquisiciones Netas de Caja (M&A)", "acquisitions_ma", "[-]", "item", True, False, True, False, "ni", "Acquisitions Net of Cash"),
@@ -1110,12 +1124,16 @@ def build_statements_context(
         if cfo_v is not None and cx_v is not None:
             fcf_ltm_val = _to_m(float(cfo_v) - abs(float(cx_v)))
 
-    net_debt_dict = {p: _to_m(bs_data.get("net_financial_position", {}).get(p)) for p in statements_fys}
-    nd_ltm_val = net_debt_dict.get(latest_p)
+    if is_banking:
+        nd_ltm_val = None
+        cr_val = None
+    else:
+        net_debt_dict = {p: _to_m(bs_data.get("net_financial_position", {}).get(p)) for p in statements_fys}
+        nd_ltm_val = net_debt_dict.get(latest_p)
+        ca_val = _to_m(bs_data.get("total_current_assets", {}).get(latest_p) or canonical.get("current_assets", {}).get(latest_p))
+        cl_val = _to_m(bs_data.get("total_current_liabilities", {}).get(latest_p) or canonical.get("current_liabilities", {}).get(latest_p))
+        cr_val = round(ca_val / cl_val, 2) if (ca_val and cl_val and cl_val != 0) else key_ratios.get("current_ratio", {}).get(latest_p)
     eq_ltm_val = _to_m(bs_data.get("stockholders_equity", {}).get(latest_p) or canonical.get("stockholders_equity", {}).get(latest_p))
-    ca_val = _to_m(bs_data.get("total_current_assets", {}).get(latest_p) or canonical.get("current_assets", {}).get(latest_p))
-    cl_val = _to_m(bs_data.get("total_current_liabilities", {}).get(latest_p) or canonical.get("current_liabilities", {}).get(latest_p))
-    cr_val = round(ca_val / cl_val, 2) if (ca_val and cl_val and cl_val != 0) else key_ratios.get("current_ratio", {}).get(latest_p)
 
     # Métricas especializadas
     if is_banking:

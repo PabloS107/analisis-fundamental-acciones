@@ -862,6 +862,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
             allow_l = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p)
             if allow_l is None and facts_df is not None:
                 allow_l = get_fact_fallback(facts_df, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p, is_flow=False)
+            if allow_l is not None and allow_l < 1e7 and (tot_l or 0.0) > 1e9:
+                allow_l = None
             canonical["allowance_for_credit_losses"][p] = abs(allow_l) if allow_l is not None else None
 
             canonical["current_assets"][p] = None
@@ -1059,6 +1061,8 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
                 allow_l = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p)
                 if allow_l is None and facts_df is not None:
                     allow_l = get_fact_fallback(facts_df, BANKING_TAXONOMY_MAP["allowance_for_credit_losses"], p, is_flow=False)
+                if allow_l is not None and allow_l < 1e7 and (tot_l or 0.0) > 1e9:
+                    allow_l = None
                 canonical["allowance_for_credit_losses"][p] = abs(allow_l) if allow_l is not None else None
                 canonical["borrowings"][p] = get_first_matching_value(bal_data, BANKING_TAXONOMY_MAP["long_term_debt"], p)
 

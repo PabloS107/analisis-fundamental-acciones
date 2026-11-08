@@ -116,7 +116,7 @@
             🛡️ Auditoría Forense & Solvencia Financiera
         </button>
         <button onclick="switchTab('reversedcf')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
-            🎯 Simulador Reverse DCF
+            💎 Valoración & Futuro (360°)
         </button>
     </nav>
 
@@ -2917,220 +2917,904 @@
 
     <!-- TAB 6: REVERSE DCF -->
     <div id="tab-reversedcf" class="tab-content hidden space-y-6">
+        <!-- ENCABEZADO INSTITUCIONAL DE VALORACIÓN 360° -->
         <div class="bg-white p-6 rounded-3xl border border-sky-200 shadow-xl space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                 <div>
-                    <h3 class="text-xl font-bold text-slate-900">
+                    <div class="flex items-center gap-2">
+                        <span class="p-2 rounded-xl bg-sky-50 text-sky-700 text-lg">💎</span>
+                        <h3 class="text-xl font-black text-slate-900 tracking-tight">
+                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}
+                            Valoración Excess Return 360° & Rentabilidad de Balance
+                            {% else %}
+                            Valoración Fundamental 360° & Futuro Multidimensional
+                            {% endif %}
+                        </h3>
+                        <span class="text-[10px] bg-slate-900 text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            Multi-Factor Engine
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">
                         {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}
-                        Simulador de Valoración Excess Return & Gordon-Shapiro
+                        Triangulación institucional de valor: Modelo de Rentabilidad Excedente (Excess Return sobre Tangible Book Value), Gordon-Shapiro, Múltiplos Sectoriales (P/TBV & P/E) y Proyección 5 Años.
                         {% else %}
-                        Simulador de Valoración & Descuento Inverso (Reverse DCF)
-                        {% endif %}
-                    </h3>
-                    <p class="text-xs text-slate-500 mt-1">
-                        {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}
-                        Ajusta la rentabilidad proyectada (ROTCE / ROE) y el coste de capital propio (Ke) para valorar la entidad financiera por Excess Return vs mercado (${{ stock_price|floatformat:2 }} USD).
-                        {% else %}
-                        Ajusta el crecimiento proyectado de ventas, el margen FCF normativo y las tasas para comparar tu valor intrínseco con la cotización actual (${{ stock_price|floatformat:2 }} USD).
+                        Triangulación institucional de valor: Reverse DCF (3-Stage Fade a 10 años), Múltiplos Históricos & Pares, Greenwald EPV (Sin Crecimiento), Economic Value Added (EVA) y Retorno Anual Esperado a 5 Años (Forward IRR).
                         {% endif %}
                     </p>
                 </div>
-                <div class="flex items-center space-x-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
-                    {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}
-                    <span class="text-slate-500">Valor Contable Tangible / Acción:</span>
-                    <span class="font-bold text-purple-700">${{ vp.tbv_per_share|default:0.0|floatformat:2 }} USD</span>
+                <div class="flex items-center gap-3">
+                    <div class="bg-slate-50 px-3.5 py-2 rounded-2xl border border-slate-200 text-right">
+                        <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Cotización Mercado (P0)</span>
+                        <div class="flex items-baseline justify-end gap-1">
+                            <span class="text-lg font-black text-slate-900">${{ stock_price|floatformat:2 }}</span>
+                            <span class="text-xs text-slate-500 font-bold">USD</span>
+                        </div>
+                    </div>
+                    {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                    <div class="bg-sky-50/70 px-3.5 py-2 rounded-2xl border border-sky-200 text-right">
+                        <span class="text-[10px] text-sky-700 uppercase tracking-wider block font-semibold">True FCF LTM (ex-SBC)</span>
+                        <div class="flex items-baseline justify-end gap-1">
+                            <span class="text-lg font-black text-sky-700">{{ fcf_margin_true_pct|floatformat:1 }}%</span>
+                            <span class="text-xs text-slate-500 font-bold">de ventas</span>
+                        </div>
+                    </div>
                     {% else %}
-                    <span class="text-slate-500">Margen FCF Auditado:</span>
-                    <span class="font-bold text-purple-700">{{ fcf_margin_pct|floatformat:1 }}%</span>
+                    <div class="bg-purple-50/70 px-3.5 py-2 rounded-2xl border border-purple-200 text-right">
+                        <span class="text-[10px] text-purple-700 uppercase tracking-wider block font-semibold">TBV / Acción</span>
+                        <div class="flex items-baseline justify-end gap-1">
+                            <span class="text-lg font-black text-purple-700">${{ vp.tbv_per_share|default:0.0|floatformat:2 }}</span>
+                            <span class="text-xs text-slate-500 font-bold">USD</span>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
 
-            <!-- Sliders de Parametrización -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}lg:grid-cols-3{% else %}lg:grid-cols-4{% endif %} gap-6 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                <div>
-                    <div class="flex justify-between items-center mb-1.5">
-                        <label class="text-xs text-slate-700 font-semibold">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" %}Rentabilidad ROTCE Proyectada:{% elif is_insurance or archetype == "INSURANCE" %}Rentabilidad ROE Proyectada:{% else %}Crecimiento Ventas Proyectado:{% endif %}
-                        </label>
-                        <span id="gRevDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">
-                            {{ init_growth_disp|floatformat:2 }}%
+            <!-- TARJETAS RESUMEN DE LOS 4 PILARES ESTRATÉGICOS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- 1. Consenso & Margen de Seguridad -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">1. Precio Consenso Fundamental</span>
+                        <span class="text-xs cursor-help" title="Mediana de los 5 métodos fundamentales auditados: Reverse DCF, Múltiplos, EPV, EVA y Proyección 5Y.">ℹ️</span>
+                    </div>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span id="topConsensusPriceDisplay" class="text-2xl font-black text-slate-900">${{ football_field.consensus_price|floatformat:2 }}</span>
+                        <span class="text-xs text-slate-500">USD</span>
+                    </div>
+                    <div class="mt-2 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 text-[11px]">Rango Multifactorial:</span>
+                        <span class="font-semibold text-slate-700">${{ football_field.methods.2.low|default:football_field.consensus_price|floatformat:0 }} - ${{ football_field.methods.0.high|default:football_field.consensus_price|floatformat:0 }}</span>
+                    </div>
+                    <div class="mt-1.5">
+                        {% if football_field.margin_safety_pct >= 0 %}
+                        <span id="topMarginSafetyBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> +{{ football_field.margin_safety_pct|floatformat:1 }}% Descuento vs Consenso
+                        </span>
+                        {% else %}
+                        <span id="topMarginSafetyBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> {{ football_field.margin_safety_pct|floatformat:1 }}% Prima vs Consenso
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- 2. Runway Competitivo Implícito (Implied CAP) -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">2. Runway Competitivo (CAP)</span>
+                        <span class="text-xs cursor-help" title="Competitive Advantage Period: Años de ventaja competitiva que descuenta la cotización actual antes de que los retornos sobre capital converjan al coste de capital.">ℹ️</span>
+                    </div>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span id="topImpliedCapDisplay" class="text-2xl font-black text-sky-700">{{ implied_cap_years|floatformat:1 }} Años</span>
+                    </div>
+                    <div class="mt-2 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 text-[11px]">Durabilidad del Moat:</span>
+                        <span class="font-semibold text-slate-700">{% if implied_cap_years <= 5 %}Fácilmente Alcanzable{% elif implied_cap_years <= 10 %}Exigencia Normal (Moat){% else %}Elevada Exigencia{% endif %}</span>
+                    </div>
+                    <div class="mt-1.5">
+                        {% if implied_cap_years <= 5.0 %}
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Moat no sobrepagado (&le; 5A)
+                        </span>
+                        {% elif implied_cap_years <= 10.0 %}
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> Expectativa estándar (5-10A)
+                        </span>
+                        {% else %}
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Requiere Moat infinito (> 10A)
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- 3. Retorno Anual Esperado a 5 Años (Forward IRR) -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">3. Retorno Anual Esperado (5Y)</span>
+                        <span class="text-xs cursor-help" title="TIR anualizada compuesta proyectada considerando crecimiento de ventas, evolución de margen FCF, recompras netas, dividendo y re-rating del múltiplo.">ℹ️</span>
+                    </div>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span id="topForwardIrrDisplay" class="text-2xl font-black {% if forward_5y_analysis.forward_irr_pct >= 10.0 %}text-emerald-700{% elif forward_5y_analysis.forward_irr_pct >= 0.0 %}text-sky-700{% else %}text-rose-700{% endif %}">
+                            {{ forward_5y_analysis.forward_irr_pct|floatformat:1 }}% CAGR
                         </span>
                     </div>
-                    <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{{ init_growth_disp|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                    <span class="text-[10px] text-slate-500 mt-1 block">
-                        {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% elif is_insurance or archetype == "INSURANCE" %}ROE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% else %}Referencia Histórica 5Y: {{ hist_growth_pct|floatformat:1 }}% anual{% endif %}
-                    </span>
-                </div>
-                {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
-                <div>
-                    <div class="flex justify-between items-center mb-1.5">
-                        <label class="text-xs text-slate-700 font-semibold">Margen FCF Proyectado (10Y):</label>
-                        <span id="fcfDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">{{ fcf_margin_pct|floatformat:1 }}%</span>
+                    <div class="mt-2 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 text-[11px]">Precio Objetivo 5Y:</span>
+                        <span id="topTargetPriceDisplay" class="font-bold text-slate-900">${{ forward_5y_analysis.target_price_5y|floatformat:2 }} USD</span>
                     </div>
-                    <input type="range" id="fcfSlider" min="0.5" max="75.0" step="0.1" value="{% if fcf_margin_pct < 0.5 %}5.0{% elif fcf_margin_pct > 75.0 %}75.0{% else %}{{ fcf_margin_pct|floatformat:1 }}{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Margen FCF Auditado: {{ fcf_margin_pct|floatformat:1 }}%</span>
-                </div>
-                {% endif %}
-                <div>
-                    <div class="flex justify-between items-center mb-1.5">
-                        <label class="text-xs text-slate-700 font-semibold">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Coste de Capital Propio (Ke):{% else %}Costo de Capital (WACC):{% endif %}
-                        </label>
-                        <span id="wDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">{{ wacc_val }}</span>
+                    <div class="mt-1.5">
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold {% if forward_5y_analysis.total_return_pct >= 50.0 %}bg-emerald-50 text-emerald-700 border border-emerald-200{% elif forward_5y_analysis.total_return_pct >= 0.0 %}bg-sky-50 text-sky-700 border border-sky-200{% else %}bg-rose-50 text-rose-700 border border-rose-200{% endif %}">
+                            Retorno Total 5Y: {% if forward_5y_analysis.total_return_pct >= 0 %}+{% endif %}{{ forward_5y_analysis.total_return_pct|floatformat:0 }}%
+                        </span>
                     </div>
-                    <input type="range" id="wSlider" min="4.0" max="25.0" step="0.1" value="{{ wacc_val|slice:':-1' }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                    <span class="text-[10px] text-slate-500 mt-1 block">
-                        {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Ke (CAPM / Retorno Exigido): {{ wacc_val }}{% else %}WACC Auditado por Ratios: {{ wacc_val }}{% endif %}
-                    </span>
                 </div>
-                <div>
-                    <div class="flex justify-between items-center mb-1.5">
-                        <label class="text-xs text-slate-700 font-semibold">Tasa Perpetuidad (gn):</label>
-                        <span id="gDisplay" class="text-xs font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.00%{% else %}2.50%{% endif %}</span>
+
+                <!-- 4. Descomposición EPV / PVGO (Columbia University) -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">4. Descomposición Greenwald EPV</span>
+                        <span class="text-xs cursor-help" title="Earnings Power Value vs Present Value of Growth Options: Proporción del precio actual respaldada por beneficios sostenibles actuales sin crecimiento vs especulación sobre crecimiento futuro.">ℹ️</span>
                     </div>
-                    <input type="range" id="gSlider" min="1.0" max="4.0" step="0.1" value="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.0{% else %}2.5{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-emerald-500 cursor-pointer">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Crecimiento tendencial del PIB</span>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span class="text-2xl font-black text-purple-700">{{ epv_analysis.epv_pct|floatformat:0 }}% / {{ epv_analysis.pvgo_pct|floatformat:0 }}%</span>
+                    </div>
+                    <div class="mt-2 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 text-[11px]">EPV / PVGO por Acción:</span>
+                        <span class="font-semibold text-slate-700">${{ epv_analysis.epv_per_share|floatformat:0 }} / ${{ epv_analysis.pvgo_per_share|floatformat:0 }}</span>
+                    </div>
+                    <div class="mt-1.5">
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200 truncate max-w-full">
+                            {{ epv_analysis.status }}
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Métricas Resultantes -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-lg">
-                    <div class="flex items-center justify-center space-x-1">
-                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Precio Justo (Excess Return){% else %}Precio Justo Teórico{% endif %}
-                        </span>
-                        <span class="text-[10px] text-sky-700 cursor-help" title="Descuento de flujos tradicional o Gordon-Shapiro según arquetipo contable.">ℹ️</span>
-                    </div>
-                    <span id="fairDisplay" class="text-3xl font-black text-slate-900 mt-1 block">${{ fair_price_base|floatformat:2 }}</span>
-                    <span id="fairSubtext" class="text-xs text-slate-500 mt-1 block font-medium">Basado en tus parámetros</span>
-                    <span class="text-[10px] text-slate-500 block mt-0.5">
-                        {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Modulado por ROTCE, Ke y g<sub>n</sub>{% else %}Modulado por Crecimiento Ventas, Margen FCF, WACC y g<sub>n</sub>{% endif %}
-                    </span>
-                </div>
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-lg">
-                    <div class="flex items-center justify-center space-x-1">
-                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Implícito (Mdo){% elif is_insurance or archetype == "INSURANCE" %}ROE Implícito (Mdo){% else %}Crecimiento Implícito (Mdo){% endif %}
-                        </span>
-                        <span class="text-[10px] text-sky-700 cursor-help" title="Tasa o rentabilidad requerida para justificar la cotización de mercado actual ($P0).">ℹ️</span>
-                    </div>
-                    <span id="gImpliedDisplay" class="text-3xl font-black text-sky-700 mt-1 block">{{ g_implied_pct|floatformat:2 }}%</span>
-                    <span class="text-xs text-slate-500 mt-1 block">Exigido por ${{ stock_price|floatformat:2 }} USD</span>
-                    <span class="text-[10px] text-slate-500 block mt-0.5">
-                        {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Excess Return: Responde a Ke y g<sub>n</sub>{% else %}Reverse DCF: Responde a Margen FCF, WACC y g<sub>n</sub>{% endif %}
-                    </span>
-                </div>
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-lg">
-                    <div class="flex items-center justify-center space-x-1">
-                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
-                            {% if is_banking or archetype == "FINANCIAL_BANKING" %}Brecha ROTCE vs Mercado{% elif is_insurance or archetype == "INSURANCE" %}Brecha ROE vs Mercado{% else %}Brecha de Expectativas{% endif %}
-                        </span>
-                        <span class="text-[10px] text-sky-700 cursor-help" title="Diferencia entre lo que descuenta el mercado y tu hipótesis.">ℹ️</span>
-                    </div>
-                    <span id="gapDisplay" class="text-3xl font-black {% if gap_exp > 5.0 %}text-rose-700{% elif gap_exp >= 0.0 %}text-amber-700{% else %}text-emerald-700{% endif %} mt-1 block">{{ gap_expectations_str }}</span>
-                    <span class="text-xs text-slate-500 mt-1 block">Exceso sobre tu hipótesis</span>
-                    <span class="text-[10px] text-slate-500 block mt-0.5">Implícito − Hipótesis Proyectada</span>
-                </div>
-            </div>
-
-            <!-- Banner Explicativo Dinámico -->
-            <div id="dcfAlertBox" class="p-4 rounded-2xl border border-slate-200 bg-slate-50 text-xs text-slate-700">
-                <!-- Se actualiza dinámicamente con recalcDCF() -->
-            </div>
-
-            <!-- Matriz Bidimensional de Sensibilidad (Sección 14.4 Word Auditada) -->
-            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <!-- VALUATION FOOTBALL FIELD: GRÁFICO COMPARATIVO DE RANGOS FUNDAMENTALES -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 pb-3">
                     <div>
-                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
-                            <span>📊 Matriz Bidimensional de Sensibilidad Excess Return (Ke vs. {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %} Sostenible)</span>
-                            {% else %}
-                            <span>📊 Matriz Bidimensional de Sensibilidad Reverse DCF</span>
-                            {% endif %}
-                            <span class="text-[10px] bg-sky-50 text-sky-700 font-semibold px-2 py-0.5 rounded-full border border-sky-200">Sección 14.4 Word Auditada</span>
+                        <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <span>📊 Valuation Football Field (Distribución de Rangos Intrínsecos vs. Mercado)</span>
+                            <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-full">Multi-Model</span>
                         </h4>
                         <p class="text-xs text-slate-500 mt-0.5">
-                            {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
-                            Valor intrínseco por acción ($) ante distintas combinaciones de Coste de Capital Propio (Ke) y rentabilidad sostenible sobre libros.
-                            {% else %}
-                            Crecimiento anual de ingresos requerido por la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) ante distintas combinaciones de WACC y tasa terminal (g<sub>n</sub>).
-                            {% endif %}
+                            Comparación visual de la cotización actual (<strong class="text-rose-600">${{ stock_price|floatformat:2 }} USD</strong>) frente al rango de dispersión [Pesimista, Central, Optimista] de cada marco de valoración.
                         </p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-slate-600 font-medium">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-rose-500 ring-2 ring-rose-200 inline-block"></span>
+                            <span>Cotización Actual (P0)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-md bg-amber-400 inline-block"></span>
+                            <span>Consenso Fundamental</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto">
+                <!-- Contenedor del Gráfico Football Field (CSS Puro) -->
+                <div class="space-y-3 pt-1">
+                    {% for m in football_field.methods %}
+                    <div class="grid grid-cols-12 items-center gap-2 text-xs">
+                        <div class="col-span-12 sm:col-span-4 flex items-center justify-between sm:justify-start gap-2">
+                            <span class="font-bold text-slate-800 text-[11px] truncate">{{ m.name }}</span>
+                            <span class="text-[10px] bg-slate-200/80 text-slate-700 px-1.5 py-0.5 rounded font-mono">{{ m.badge }}</span>
+                        </div>
+                        <div class="col-span-12 sm:col-span-8 flex items-center gap-3">
+                            <span class="w-12 text-right font-mono text-[11px] text-slate-500">${{ m.low|floatformat:0 }}</span>
+                            <!-- Barra de Rango -->
+                            <div class="flex-1 relative h-6 bg-slate-200/60 rounded-lg overflow-hidden border border-slate-200/90 flex items-center">
+                                <!-- Línea vertical de referencia: Cotización Actual P0 -->
+                                <div id="ff-p0-line-{{ m.id }}" class="absolute top-0 bottom-0 w-0.5 bg-rose-500 z-20 shadow-sm" style="left: calc(({{ stock_price }} / 400) * 100%);" title="Cotización Actual: ${{ stock_price|floatformat:2 }} USD"></div>
+                                
+                                <!-- Rango coloreado [Low, High] -->
+                                <div id="ff-bar-{{ m.id }}" class="absolute top-1 bottom-1 rounded-md opacity-85 transition-all duration-300 {% if m.color == 'sky' %}bg-sky-400{% elif m.color == 'amber' %}bg-amber-400{% elif m.color == 'emerald' %}bg-emerald-400{% elif m.color == 'purple' %}bg-purple-400{% else %}bg-indigo-400{% endif %}"
+                                     style="left: calc(({{ m.low }} / 400) * 100%); width: calc((({{ m.high }} - {{ m.low }}) / 400) * 100%);">
+                                </div>
+                                <!-- Punto Central (Base) -->
+                                <div id="ff-dot-{{ m.id }}" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-slate-900 rounded-full border-2 border-white shadow z-10 transition-all duration-300"
+                                     style="left: calc(({{ m.base }} / 400) * 100% - 6px);" title="Escenario Base: ${{ m.base|floatformat:2 }} USD">
+                                </div>
+                            </div>
+                            <span class="w-12 text-left font-mono text-[11px] text-slate-500">${{ m.high|floatformat:0 }}</span>
+                            <span id="ff-base-text-{{ m.id }}" class="w-16 text-right font-mono font-bold text-slate-900 text-[11px]">${{ m.base|floatformat:1 }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Fila Especial: Consenso Multifactorial -->
+                    <div class="grid grid-cols-12 items-center gap-2 text-xs pt-2 border-t border-slate-200/90">
+                        <div class="col-span-12 sm:col-span-4 flex items-center justify-between sm:justify-start gap-2">
+                            <span class="font-black text-amber-900 text-xs">👑 Consenso Multifactorial (Mediana)</span>
+                            <span class="text-[10px] bg-amber-200 text-amber-900 font-bold px-1.5 py-0.5 rounded">Consensus</span>
+                        </div>
+                        <div class="col-span-12 sm:col-span-8 flex items-center gap-3">
+                            <span class="w-12 text-right font-mono text-[11px] text-amber-800 font-bold">${{ football_field.methods.2.low|default:football_field.consensus_price|floatformat:0 }}</span>
+                            <div class="flex-1 relative h-6 bg-amber-100/70 rounded-lg overflow-hidden border border-amber-300 flex items-center">
+                                <div class="absolute top-0 bottom-0 w-0.5 bg-rose-500 z-20" style="left: calc(({{ stock_price }} / 400) * 100%);"></div>
+                                <div class="absolute top-1 bottom-1 rounded-md bg-amber-400 opacity-90"
+                                     style="left: calc(({{ football_field.methods.2.low|default:football_field.consensus_price }} / 400) * 100%); width: calc((({{ football_field.methods.0.high|default:football_field.consensus_price }} - {{ football_field.methods.2.low|default:football_field.consensus_price }}) / 400) * 100%);">
+                                </div>
+                                <div class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-amber-950 rounded-full border-2 border-white shadow z-10"
+                                     style="left: calc(({{ football_field.consensus_price }} / 400) * 100% - 7px);">
+                                </div>
+                            </div>
+                            <span class="w-12 text-left font-mono text-[11px] text-amber-800 font-bold">${{ football_field.methods.0.high|default:football_field.consensus_price|floatformat:0 }}</span>
+                            <span class="w-16 text-right font-mono font-black text-amber-950 text-xs">${{ football_field.consensus_price|floatformat:1 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVEGACIÓN POR SUB-PESTAÑAS DE VALORACIÓN -->
+            <div class="border-b border-slate-200 pt-2">
+                <nav class="flex space-x-2 sm:space-x-3 overflow-x-auto text-xs" aria-label="Subtabs">
+                    <button id="btn-val-subtab-dcf" onclick="switchValuationSubTab('dcf')"
+                            class="val-subtab-btn px-4 py-2.5 font-bold rounded-t-xl bg-slate-900 text-white shadow transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+                        <span>🎯 Reverse DCF 2.0 & Expectativas</span>
+                    </button>
+                    <button id="btn-val-subtab-multiples" onclick="switchValuationSubTab('multiples')"
+                            class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+                        <span>📊 Múltiplos & Valoración Relativa</span>
+                    </button>
+                    <button id="btn-val-subtab-forward" onclick="switchValuationSubTab('forward')"
+                            class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+                        <span>🚀 Futuro a 5 Años & TIR (Forward IRR)</span>
+                    </button>
+                    <button id="btn-val-subtab-value" onclick="switchValuationSubTab('value')"
+                            class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+                        <span>🏰 Creación de Valor (EVA) & EPV Greenwald</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- SUB-PESTAÑA 1: REVERSE DCF 2.0 & DESCOMPOSICIÓN DE EXPECTATIVAS -->
+            <!-- ========================================================================= -->
+            <div id="val-subtab-dcf" class="val-subtab-panel space-y-6">
+                <!-- Selectores de Modo de Modelo (3-Stage Fade vs 2-Stage) y True FCF Toggle -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-sky-50/50 rounded-2xl border border-sky-100">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-700">Modelo de Descuento:</span>
+                        <div class="inline-flex rounded-xl p-1 bg-white border border-slate-200 text-xs">
+                            <button id="btnModelStage3" type="button" onclick="setDcfModelStage(3)"
+                                    class="px-3 py-1 rounded-lg font-bold bg-sky-600 text-white shadow-sm transition cursor-pointer">
+                                3-Stage Fade (Institucional)
+                            </button>
+                            <button id="btnModelStage2" type="button" onclick="setDcfModelStage(2)"
+                                    class="px-3 py-1 rounded-lg font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                                2-Stage (10Y Plano)
+                            </button>
+                        </div>
+                    </div>
+                    {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                    <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-slate-200">
+                        <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+                            <input type="checkbox" id="trueFcfToggle" onchange="recalcDCF()" checked class="rounded text-sky-600 focus:ring-sky-500 cursor-pointer">
+                            <span>Descontar Dilución por SBC (True FCF)</span>
+                        </label>
+                        <span class="text-[10px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded font-bold" title="SBC Auditado LTM: ${{ sbc_usd_m|floatformat:1 }}M ({{ sbc_margin_pct|floatformat:1 }}% de ingresos)">
+                            -{{ sbc_margin_pct|floatformat:1 }}% SBC
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Sliders de Parametrización -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}lg:grid-cols-3{% else %}lg:grid-cols-4{% endif %} gap-6 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="text-xs text-slate-700 font-semibold">
+                                {% if is_banking or archetype == "FINANCIAL_BANKING" %}Rentabilidad ROTCE Proyectada:{% elif is_insurance or archetype == "INSURANCE" %}Rentabilidad ROE Proyectada:{% else %}Crecimiento Ventas Proyectado:{% endif %}
+                            </label>
+                            <span id="gRevDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">
+                                {{ init_growth_disp|floatformat:2 }}%
+                            </span>
+                        </div>
+                        <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{{ init_growth_disp|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 mt-1 block">
+                            {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% elif is_insurance or archetype == "INSURANCE" %}ROE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% else %}Referencia Histórica 5Y: {{ hist_growth_pct|floatformat:1 }}% anual{% endif %}
+                        </span>
+                    </div>
+                    {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="text-xs text-slate-700 font-semibold">Margen FCF Proyectado:</label>
+                            <span id="fcfDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">{{ fcf_margin_pct|floatformat:1 }}%</span>
+                        </div>
+                        <input type="range" id="fcfSlider" min="0.5" max="75.0" step="0.1" value="{% if fcf_margin_pct < 0.5 %}5.0{% elif fcf_margin_pct > 75.0 %}75.0{% else %}{{ fcf_margin_pct|floatformat:1 }}{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 mt-1 block">Margen Auditado: {{ fcf_margin_pct|floatformat:1 }}% | True FCF ex-SBC: {{ fcf_margin_true_pct|floatformat:1 }}%</span>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="text-xs text-slate-700 font-semibold">
+                                {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Coste de Capital Propio (Ke):{% else %}Costo de Capital (WACC):{% endif %}
+                            </label>
+                            <span id="wDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">{{ wacc_val }}</span>
+                        </div>
+                        <input type="range" id="wSlider" min="4.0" max="25.0" step="0.1" value="{{ wacc_val|slice:':-1' }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 mt-1 block">
+                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Ke (CAPM / Retorno Exigido): {{ wacc_val }}{% else %}WACC Auditado por Ratios: {{ wacc_val }}{% endif %}
+                        </span>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="text-xs text-slate-700 font-semibold">Tasa Perpetuidad (gn):</label>
+                            <span id="gDisplay" class="text-xs font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.00%{% else %}2.50%{% endif %}</span>
+                        </div>
+                        <input type="range" id="gSlider" min="1.0" max="4.0" step="0.1" value="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.0{% else %}2.5{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-emerald-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 mt-1 block">Crecimiento tendencial del PIB</span>
+                    </div>
+                </div>
+
+                <!-- Métricas Resultantes y Auditoría de Valor Terminal -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">
+                            {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Precio Justo (Excess Return){% else %}Precio Justo Teórico{% endif %}
+                        </span>
+                        <span id="fairDisplay" class="text-2xl font-black text-slate-900 mt-1 block">${{ fair_price_base|floatformat:2 }}</span>
+                        <span id="fairSubtext" class="text-[11px] text-slate-500 mt-1 block font-medium">Basado en tus parámetros</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">
+                            {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Implícito (Mdo){% elif is_insurance or archetype == "INSURANCE" %}ROE Implícito (Mdo){% else %}Crecimiento Implícito (Mdo){% endif %}
+                        </span>
+                        <span id="gImpliedDisplay" class="text-2xl font-black text-sky-700 mt-1 block">{{ g_implied_pct|floatformat:2 }}%</span>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Exigido por ${{ stock_price|floatformat:2 }} USD</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Brecha de Expectativas</span>
+                        <span id="gapDisplay" class="text-2xl font-black {% if gap_exp > 5.0 %}text-rose-700{% elif gap_exp >= 0.0 %}text-amber-700{% else %}text-emerald-700{% endif %} mt-1 block">{{ gap_expectations_str }}</span>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Implícito − Tu Hipótesis</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Auditoría Terminal Value</span>
+                        <span id="pctTvDisplay" class="text-2xl font-black text-slate-900 mt-1 block">68.5%</span>
+                        <span id="terminalMultipleDisplay" class="text-[11px] text-slate-500 mt-1 block">Múltiplo Terminal: 17.5x FCF</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Runway Implícito (CAP)</span>
+                        <span id="impliedCapYearsDCF" class="text-2xl font-black text-purple-700 mt-1 block">{{ implied_cap_years|floatformat:1 }} Años</span>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Años de super-crecimiento</span>
+                    </div>
+                </div>
+
+                <!-- Banner Explicativo Dinámico -->
+                <div id="dcfAlertBox" class="p-4 rounded-2xl border border-slate-200 bg-slate-50 text-xs text-slate-700">
+                    <!-- Se actualiza dinámicamente con recalcDCF() -->
+                </div>
+
+                <!-- Matriz Bidimensional de Sensibilidad (Sección 14.4 Word Auditada) -->
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                                {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                                <span>📊 Matriz Bidimensional de Sensibilidad Excess Return (Ke vs. {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %} Sostenible)</span>
+                                {% else %}
+                                <span>📊 Matriz Bidimensional de Sensibilidad Reverse DCF</span>
+                                {% endif %}
+                                <span class="text-[10px] bg-sky-50 text-sky-700 font-semibold px-2 py-0.5 rounded-full border border-sky-200">Sección 14.4 Word Auditada</span>
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                                Valor intrínseco por acción ($) ante distintas combinaciones de Coste de Capital Propio (Ke) y rentabilidad sostenible sobre libros.
+                                {% else %}
+                                Crecimiento anual de ingresos requerido por la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) ante distintas combinaciones de WACC y tasa terminal (g<sub>n</sub>).
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-white/60">
+                                    {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
+                                    <th class="py-3 px-3">Coste Equity (Ke) \ {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %}</th>
+                                    {% for lbl in vp.rotce_labels %}
+                                    <th class="py-3 px-2 text-center {% if '(Base)' in lbl %}text-sky-700 bg-sky-50{% endif %}">{{ lbl }}</th>
+                                    {% endfor %}
+                                    <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
+                                    {% else %}
+                                    <th class="py-3 px-3">WACC \ Tasa Terminal (g<sub>n</sub>)</th>
+                                    <th class="py-3 px-2 text-center">1.0%</th>
+                                    <th class="py-3 px-2 text-center">1.5%</th>
+                                    <th class="py-3 px-2 text-center">2.0%</th>
+                                    <th class="py-3 px-2 text-center text-sky-700 bg-sky-50">2.5% (Base)</th>
+                                    <th class="py-3 px-2 text-center">3.0%</th>
+                                    <th class="py-3 px-2 text-center">3.5%</th>
+                                    <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody id="sensitivityGridBody" class="divide-y divide-slate-100/80">
+                                {% for row in sensitivity_grid %}
+                                <tr class="transition hover:bg-slate-50 {% if row.is_base %}bg-sky-50 border-l-4 border-sky-400 font-bold{% endif %}">
+                                    <td class="py-3 px-3 whitespace-nowrap {% if row.is_base %}text-slate-900 font-bold{% else %}text-slate-700{% endif %}">
+                                        {{ row.wacc_label }}
+                                        {% if row.is_base %}<span class="ml-1.5 text-[9px] bg-sky-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">BASE</span>{% endif %}
+                                    </td>
+                                    <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_10 }}</td>
+                                    <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_15 }}</td>
+                                    <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_20 }}</td>
+                                    <td class="py-3 px-2 text-center font-mono font-bold {% if row.is_base %}text-sky-700 bg-sky-50 rounded{% else %}text-sky-700 bg-sky-500/5{% endif %}">
+                                        {{ row.g_25 }}
+                                    </td>
+                                    <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_30 }}</td>
+                                    <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_35 }}</td>
+                                    <td class="py-3 px-3 text-slate-500 text-[11px] leading-relaxed">
+                                        {% if row.is_base %}
+                                            <span class="text-emerald-700 font-semibold">{{ row.diagnosis }}</span>
+                                        {% else %}
+                                            {{ row.diagnosis }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Nota Metodológica Didáctica -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-[11px] text-slate-500">
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-sky-700 block mb-0.5">📌 ¿Por qué el Crecimiento Implícito no varía con el slider de ventas?</strong>
+                            El modelo <em>Reverse DCF</em> toma la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) como dato objetivo e inmutable. El crecimiento implícito es la <strong>exigencia que el mercado ya descuenta</strong> para esa cotización. Modificar tu hipótesis de ventas altera el <strong>Precio Justo Teórico</strong> y la <strong>Brecha de Expectativas</strong>, pero no lo que el mercado cotiza.
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200">
+                            <strong class="text-emerald-700 block mb-0.5">💡 Relación entre los Controles y los Resultados:</strong>
+                            <ul class="list-disc list-inside space-y-0.5">
+                                <li><span class="text-slate-800">Slider Crecimiento Ventas:</span> Altera el <em>Precio Justo Teórico</em> y la <em>Brecha de Expectativas</em>.</li>
+                                <li><span class="text-slate-800">Sliders WACC y g<sub>n</sub>:</span> Modifican simultáneamente el <em>Precio Justo Teórico</em> y el <em>Crecimiento Implícito</em>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- SUB-PESTAÑA 2: MÚLTIPLOS & VALORACIÓN RELATIVA -->
+            <!-- ========================================================================= -->
+            <div id="val-subtab-multiples" class="val-subtab-panel hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>📊 Comparativa de Múltiplos Históricos y Reversión a la Media</span>
+                        </h4>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Compara los múltiplos de cotización actuales frente a la mediana de los últimos 5 años y el grupo de pares sectoriales, calculando el precio justo imputado por reversión a la media.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 text-xs">
+                        <span class="text-amber-800 font-semibold">Precio Imputado Compuesto:</span>
+                        <span class="font-bold text-amber-950 ml-1">${{ multiples_analysis.imputed_prices.composite|floatformat:2 }} USD</span>
+                    </div>
+                </div>
+
+                <!-- Tabla de Múltiplos Comparables -->
+                <div class="overflow-x-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
                     <table class="w-full text-xs text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-white/60">
-                                {% if is_banking or is_financial or archetype == "FINANCIAL_BANKING" or archetype == "INSURANCE" %}
-                                <th class="py-3 px-3">Coste Equity (Ke) \ {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}ROE{% else %}ROTCE{% endif %}</th>
-                                {% for lbl in vp.rotce_labels %}
-                                <th class="py-3 px-2 text-center {% if '(Base)' in lbl %}text-sky-700 bg-sky-50{% endif %}">{{ lbl }}</th>
-                                {% endfor %}
-                                <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
-                                {% else %}
-                                <th class="py-3 px-3">WACC \ Tasa Terminal (g<sub>n</sub>)</th>
-                                <th class="py-3 px-2 text-center">1.0%</th>
-                                <th class="py-3 px-2 text-center">1.5%</th>
-                                <th class="py-3 px-2 text-center">2.0%</th>
-                                <th class="py-3 px-2 text-center text-sky-700 bg-sky-50">2.5% (Base)</th>
-                                <th class="py-3 px-2 text-center">3.0%</th>
-                                <th class="py-3 px-2 text-center">3.5%</th>
-                                <th class="py-3 px-3 text-left">Diagnóstico de Escenario</th>
-                                {% endif %}
+                                <th class="py-3 px-3">Múltiplo de Valoración</th>
+                                <th class="py-3 px-3 text-center">LTM Actual</th>
+                                <th class="py-3 px-3 text-center">Mediana Histórica (5Y)</th>
+                                <th class="py-3 px-3 text-center">Mediana Pares Sector</th>
+                                <th class="py-3 px-3 text-center">Múltiplo Normal / Objetivo</th>
+                                <th class="py-3 px-3 text-center">Precio Imputado ($)</th>
+                                <th class="py-3 px-3 text-right">Diagnóstico de Valoración</th>
                             </tr>
                         </thead>
-                        <tbody id="sensitivityGridBody" class="divide-y divide-slate-100/80">
-                            {% for row in sensitivity_grid %}
-                            <tr class="transition hover:bg-slate-50 {% if row.is_base %}bg-sky-50 border-l-4 border-sky-400 font-bold{% endif %}">
-                                <td class="py-3 px-3 whitespace-nowrap {% if row.is_base %}text-slate-900 font-bold{% else %}text-slate-700{% endif %}">
-                                    {{ row.wacc_label }}
-                                    {% if row.is_base %}<span class="ml-1.5 text-[9px] bg-sky-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">BASE</span>{% endif %}
+                        <tbody class="divide-y divide-slate-100/80">
+                            <!-- PER (P/E) -->
+                            <tr class="hover:bg-white/80 transition">
+                                <td class="py-3 px-3 font-semibold text-slate-800">
+                                    P/E Ratio (Precio / Beneficio)
                                 </td>
-                                <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_10 }}</td>
-                                <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_15 }}</td>
-                                <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_20 }}</td>
-                                <td class="py-3 px-2 text-center font-mono font-bold {% if row.is_base %}text-sky-700 bg-sky-50 rounded{% else %}text-sky-700 bg-sky-500/5{% endif %}">
-                                    {{ row.g_25 }}
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    {% if multiples_analysis.pe_current %}{{ multiples_analysis.pe_current|floatformat:1 }}x{% else %}N/D{% endif %}
                                 </td>
-                                <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_30 }}</td>
-                                <td class="py-3 px-2 text-center font-mono text-slate-700">{{ row.g_35 }}</td>
-                                <td class="py-3 px-3 text-slate-500 text-[11px] leading-relaxed">
-                                    {% if row.is_base %}
-                                        <span class="text-emerald-700 font-semibold">{{ row.diagnosis }}</span>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">
+                                    {% if multiples_analysis.pe_5y_median %}{{ multiples_analysis.pe_5y_median|floatformat:1 }}x{% else %}--{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">
+                                    {{ multiples_analysis.peer_median_pe|floatformat:1 }}x
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">
+                                    {{ multiples_analysis.normal_pe|floatformat:1 }}x
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    ${{ multiples_analysis.imputed_prices.pe|floatformat:2 }}
+                                </td>
+                                <td class="py-3 px-3 text-right">
+                                    {% if multiples_analysis.imputed_prices.pe < stock_price %}
+                                    <span class="text-rose-700 font-semibold text-[11px]">Sobrevalorado vs Historia</span>
                                     {% else %}
-                                        {{ row.diagnosis }}
+                                    <span class="text-emerald-700 font-semibold text-[11px]">Descuento vs Historia</span>
                                     {% endif %}
                                 </td>
                             </tr>
-                            {% endfor %}
+
+                            {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                            <!-- EV / FCF -->
+                            <tr class="hover:bg-white/80 transition">
+                                <td class="py-3 px-3 font-semibold text-slate-800">
+                                    EV / Free Cash Flow (Empresa / Flujo Libre)
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    {% if multiples_analysis.ev_fcf_current %}{{ multiples_analysis.ev_fcf_current|floatformat:1 }}x{% else %}N/D{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">
+                                    {% if multiples_analysis.peer_median_ev_fcf %}{{ multiples_analysis.peer_median_ev_fcf|floatformat:1 }}x{% else %}18.0x{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">
+                                    {% if multiples_analysis.normal_ev_fcf %}{{ multiples_analysis.normal_ev_fcf|floatformat:1 }}x{% else %}18.0x{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    ${{ multiples_analysis.imputed_prices.ev_fcf|floatformat:2 }}
+                                </td>
+                                <td class="py-3 px-3 text-right">
+                                    {% if multiples_analysis.imputed_prices.ev_fcf < stock_price %}
+                                    <span class="text-rose-700 font-semibold text-[11px]">Múltiplo Exigente</span>
+                                    {% else %}
+                                    <span class="text-emerald-700 font-semibold text-[11px]">Margen FCF Favorable</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <!-- EV / EBITDA -->
+                            <tr class="hover:bg-white/80 transition">
+                                <td class="py-3 px-3 font-semibold text-slate-800">
+                                    EV / EBITDA
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    {% if multiples_analysis.ev_ebitda_current %}{{ multiples_analysis.ev_ebitda_current|floatformat:1 }}x{% else %}N/D{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">14.0x</td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">14.0x</td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    ${{ multiples_analysis.imputed_prices.ev_ebitda|floatformat:2 }}
+                                </td>
+                                <td class="py-3 px-3 text-right">
+                                    {% if multiples_analysis.imputed_prices.ev_ebitda < stock_price %}
+                                    <span class="text-rose-700 font-semibold text-[11px]">Prima Operativa</span>
+                                    {% else %}
+                                    <span class="text-emerald-700 font-semibold text-[11px]">Descuento Operativo</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <!-- P/S & FCF Yield -->
+                            <tr class="hover:bg-white/80 transition">
+                                <td class="py-3 px-3 font-semibold text-slate-800">
+                                    FCF Yield (Rendimiento Flujo de Caja)
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-purple-700">
+                                    {% if multiples_analysis.fcf_yield_pct %}{{ multiples_analysis.fcf_yield_pct|floatformat:2 }}%{% else %}N/D{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">~4.5%</td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">5.0%</td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
+                                <td class="py-3 px-3 text-right">
+                                    {% if multiples_analysis.fcf_yield_pct and multiples_analysis.fcf_yield_pct < 3.5 %}
+                                    <span class="text-rose-700 font-semibold text-[11px]">Rendimiento Comprimido</span>
+                                    {% else %}
+                                    <span class="text-emerald-700 font-semibold text-[11px]">Rendimiento Atractivo</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <!-- P/TBV Bancario -->
+                            <tr class="hover:bg-white/80 transition">
+                                <td class="py-3 px-3 font-semibold text-slate-800">
+                                    P/TBV (Precio / Valor Contable Tangible)
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    {% if vp.tbv_per_share and vp.tbv_per_share > 0 %}{{ stock_price|default:1.0|floatformat:2 }} ÷ {{ vp.tbv_per_share|floatformat:2 }}{% else %}N/D{% endif %}
+                                </td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
+                                <td class="py-3 px-3 text-center font-mono text-slate-600">1.5x - 2.5x</td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">P/TBV Justo</td>
+                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
+                                    ${{ multiples_analysis.imputed_prices.ptbv|floatformat:2 }}
+                                </td>
+                                <td class="py-3 px-3 text-right">
+                                    <span class="text-sky-700 font-semibold text-[11px]">Regulado por ROTCE / Ke</span>
+                                </td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Nota Metodológica Didáctica -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-[11px] text-slate-500">
-                    <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-                        <strong class="text-sky-700 block mb-0.5">📌 ¿Por qué el Crecimiento Implícito no varía con el slider de ventas?</strong>
-                        El modelo <em>Reverse DCF</em> toma la cotización de mercado actual (${{ stock_price|floatformat:2 }} USD) como dato objetivo e inmutable. El crecimiento implícito es la <strong>exigencia que el mercado ya descuenta</strong> para esa cotización. Modificar tu hipótesis de ventas altera el <strong>Precio Justo Teórico</strong> y la <strong>Brecha de Expectativas</strong>, pero no lo que el mercado cotiza.
+                <!-- ANÁLISIS DEL RATIO PEG (PETER LYNCH) & PEDAGOGÍA CONTABLE -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs uppercase tracking-wider text-slate-500 font-bold">Ratio PEG (Peter Lynch)</span>
+                            <span class="text-xs font-mono font-bold text-slate-500">P/E ÷ Crecimiento</span>
+                        </div>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-black text-slate-900">
+                                {% if multiples_analysis.peg_ratio %}{{ multiples_analysis.peg_ratio|floatformat:2 }}x{% else %}N/D{% endif %}
+                            </span>
+                            <span class="text-xs text-slate-500">
+                                {% if multiples_analysis.peg_ratio and multiples_analysis.peg_ratio < 1.0 %}
+                                <span class="text-emerald-700 font-bold">Atractivo (&lt; 1.0x)</span>
+                                {% elif multiples_analysis.peg_ratio and multiples_analysis.peg_ratio <= 2.0 %}
+                                <span class="text-sky-700 font-bold">Razonable (1.0 - 2.0x)</span>
+                                {% elif multiples_analysis.peg_ratio %}
+                                <span class="text-rose-700 font-bold">Exigente (&gt; 2.0x)</span>
+                                {% else %}
+                                <span class="text-slate-500">Sin crecimiento positivo</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-500">
+                            Cálculo: {{ multiples_analysis.peg_explanation }}
+                        </p>
                     </div>
-                    <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-                        <strong class="text-emerald-700 block mb-0.5">💡 Relación entre los Controles y los Resultados:</strong>
-                        <ul class="list-disc list-inside space-y-0.5">
-                            <li><span class="text-slate-800">Slider Crecimiento Ventas:</span> Altera el <em>Precio Justo Teórico</em> y la <em>Brecha de Expectativas</em>.</li>
-                            <li><span class="text-slate-800">Sliders WACC y g<sub>n</sub>:</span> Modifican simultáneamente el <em>Precio Justo Teórico</em> y el <em>Crecimiento Implícito</em>.</li>
-                        </ul>
+
+                    <div class="col-span-2 p-5 bg-white rounded-2xl border border-slate-200 space-y-2 text-xs text-slate-600">
+                        <strong class="text-slate-900 font-bold flex items-center gap-1.5">
+                            <span>📖 Guía Institucional del Ratio PEG</span>
+                        </strong>
+                        <p class="leading-relaxed">
+                            El ratio <strong>Price/Earnings-to-Growth (PEG)</strong> ideado por Peter Lynch normaliza el múltiplo P/E dividiéndolo por la tasa anual de crecimiento. Un P/E de 30x puede parecer costoso de forma aislada, pero si la compañía expande sus beneficios al 35% anual (PEG = 0.86x), cotiza con un descuento relativo superior al de una empresa estancada cotizando a 12x con crecimiento del 2% (PEG = 6.0x).
+                        </p>
+                        <p class="leading-relaxed text-[11px] text-slate-500 border-t border-slate-100 pt-1.5">
+                            <strong>Principio de Integridad (Regla 6):</strong> Si el crecimiento histórico o projected es negativo o nulo, el PEG no imputa valores ficticios de 0.0x, sino que reporta explícitamente <strong>N/D</strong> para advertir al analista de que el modelo requiere expansión de beneficios positivos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- SUB-PESTAÑA 3: SIMULADOR FUTURO A 5 AÑOS & TIR (FORWARD IRR) -->
+            <!-- ========================================================================= -->
+            <div id="val-subtab-forward" class="val-subtab-panel hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>🚀 Simulador de Retorno Esperado a 5 Años (Forward IRR & Target Price)</span>
+                        </h4>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Descompone matemáticamente la rentabilidad del inversor en los 4 motores fundamentales (John Bogle / Michael Mauboussin): Crecimiento de Ventas, Margen FCF, Múltiplo de Salida y Retorno al Accionista.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sliders Interactivos para la Proyección 5 Años -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-[11px] font-bold text-slate-700">1. Crecimiento Ventas 5Y:</label>
+                            <span id="fwdSliderRevDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
+                                {{ hist_growth_pct|floatformat:1 }}%
+                            </span>
+                        </div>
+                        <input type="range" id="fwdSliderRev" min="-5.0" max="40.0" step="0.5" value="{{ hist_growth_pct|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 block mt-1">CAGR de facturación</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-[11px] font-bold text-slate-700">2. Margen FCF Año 5:</label>
+                            <span id="fwdSliderMarginDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
+                                {{ fcf_margin_pct|floatformat:1 }}%
+                            </span>
+                        </div>
+                        <input type="range" id="fwdSliderMargin" min="1.0" max="60.0" step="0.5" value="{{ fcf_margin_pct|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 block mt-1">Margen final proyectado</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-[11px] font-bold text-slate-700">3. Múltiplo de Salida (Año 5):</label>
+                            <span id="fwdSliderMultipleDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
+                                {{ multiples_analysis.normal_pe|default:20.0|floatformat:1 }}x
+                            </span>
+                        </div>
+                        <input type="range" id="fwdSliderMultiple" min="8.0" max="50.0" step="0.5" value="{{ multiples_analysis.normal_pe|default:20.0|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 block mt-1">P/FCF o P/E al salir</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-[11px] font-bold text-slate-700">4. Recompras Netas / Año:</label>
+                            <span id="fwdSliderBuybackDisp" class="text-xs font-black text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">
+                                {{ buyback_rate_pct|default:1.5|floatformat:1 }}%
+                            </span>
+                        </div>
+                        <input type="range" id="fwdSliderBuyback" min="-3.0" max="8.0" step="0.2" value="{{ buyback_rate_pct|default:1.5|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-purple-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 block mt-1">Reducción neta de acciones</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-[11px] font-bold text-slate-700">5. Dividend Yield Anual:</label>
+                            <span id="fwdSliderDivDisp" class="text-xs font-black text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                                {{ dividend_yield_pct|default:0.0|floatformat:1 }}%
+                            </span>
+                        </div>
+                        <input type="range" id="fwdSliderDiv" min="0.0" max="10.0" step="0.2" value="{{ dividend_yield_pct|default:0.0|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-amber-500 cursor-pointer">
+                        <span class="text-[10px] text-slate-500 block mt-1">Cobro de dividendos</span>
+                    </div>
+                </div>
+
+                <!-- Tarjetas de Salida y Retorno Compuesto 5Y -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Precio Objetivo Año 5</span>
+                        <span id="fwdTargetPrice" class="text-3xl font-black text-slate-900 mt-1 block">${{ forward_5y_analysis.target_price_5y|floatformat:2 }}</span>
+                        <span class="text-xs text-slate-500 mt-1 block">Para una cotización inicial de ${{ stock_price|floatformat:2 }} USD</span>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-white to-sky-50/50 p-5 rounded-2xl border border-sky-200 shadow-sm">
+                        <span class="text-[10px] text-sky-800 font-bold uppercase tracking-wider block">TIR Anual Proyectada (Forward IRR)</span>
+                        <span id="fwdIrrPct" class="text-3xl font-black text-sky-700 mt-1 block">{{ forward_5y_analysis.forward_irr_pct|floatformat:1 }}% CAGR</span>
+                        <span class="text-xs text-slate-500 mt-1 block">Retorno compuesto anualizado</span>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Retorno Total Acumulado (5Y)</span>
+                        <span id="fwdTotalReturn" class="text-3xl font-black text-purple-700 mt-1 block">{% if forward_5y_analysis.total_return_pct >= 0 %}+{% endif %}{{ forward_5y_analysis.total_return_pct|floatformat:0 }}%</span>
+                        <span class="text-xs text-slate-500 mt-1 block">Multiplicador: {{ forward_5y_analysis.target_price_5y|default:1.0|floatformat:2 }}x</span>
+                    </div>
+                </div>
+
+                <!-- WATERFALL ATTRIBUTION BRIDGE (DESGLOSE DE LOS 5 MOTORES) -->
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div>
+                            <h5 class="text-sm font-bold text-slate-900">Bridge de Atribución del Retorno Anual Esperado</h5>
+                            <p class="text-xs text-slate-500">Cómo contribuye cada factor contable y de mercado a la rentabilidad anual compuesta (CAGR).</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center text-xs">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">1. Crecimiento Ventas</span>
+                            <span id="bridgeGrowth" class="text-lg font-black text-sky-700 block mt-1">+{{ forward_5y_analysis.bridge.growth_contrib|floatformat:1 }}%</span>
+                            <span class="text-[10px] text-slate-400">Expansión de escala</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">2. Margen FCF</span>
+                            <span id="bridgeMargin" class="text-lg font-black text-slate-900 block mt-1">{% if forward_5y_analysis.bridge.margin_contrib >= 0 %}+{% endif %}{{ forward_5y_analysis.bridge.margin_contrib|floatformat:1 }}%</span>
+                            <span class="text-[10px] text-slate-400">Apalancamiento operativo</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">3. Re-rating Múltiplo</span>
+                            <span id="bridgeMultiple" class="text-lg font-black text-slate-900 block mt-1">{% if forward_5y_analysis.bridge.multiple_contrib >= 0 %}+{% endif %}{{ forward_5y_analysis.bridge.multiple_contrib|floatformat:1 }}%</span>
+                            <span class="text-[10px] text-slate-400">Expansión / Contracción</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">4. Recompras Netas</span>
+                            <span id="bridgeBuyback" class="text-lg font-black text-purple-700 block mt-1">+{{ forward_5y_analysis.bridge.buyback_contrib|floatformat:1 }}%</span>
+                            <span class="text-[10px] text-slate-400">Reducción de acciones</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">5. Dividend Yield</span>
+                            <span id="bridgeDiv" class="text-lg font-black text-amber-700 block mt-1">+{{ forward_5y_analysis.bridge.div_contrib|floatformat:1 }}%</span>
+                            <span class="text-[10px] text-slate-400">Flujo de caja directo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- SUB-PESTAÑA 4: CREACIÓN DE VALOR (EVA) & EPV GREENWALD -->
+            <!-- ========================================================================= -->
+            <div id="val-subtab-value" class="val-subtab-panel hidden space-y-6">
+                <!-- SECCIÓN A: GREENWALD EARNINGS POWER VALUE (EPV) -->
+                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                                <span>🏛️ Earnings Power Value (EPV) & Present Value of Growth (PVGO)</span>
+                                <span class="text-[10px] bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded-full">Columbia Business School</span>
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                Metodología de Bruce Greenwald: Valora la empresa asumiendo estrictamente <strong>cero crecimiento futuro</strong>, aislando cuánto del precio actual paga por activos en marcha y cuánto es pura especulación sobre el futuro.
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold">EPV por Acción</span>
+                            <span class="text-xl font-black text-purple-700">${{ epv_analysis.epv_per_share|floatformat:2 }} USD</span>
+                        </div>
+                    </div>
+
+                    <!-- Métricas del EPV -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">NOPAT Sostenible</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.sustainable_nopat_m|floatformat:1 }}M</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">EPV Operativo (÷ WACC)</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.epv_operating_m|floatformat:1 }}M</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">EPV Equity Neto</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.epv_equity_m|floatformat:1 }}M</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">PVGO (Valor del Crecimiento)</span>
+                            <span class="text-base font-black text-amber-700 block mt-0.5">${{ epv_analysis.pvgo_per_share|floatformat:2 }} USD</span>
+                        </div>
+                    </div>
+
+                    <!-- Barra Visual Proporcional EPV vs PVGO -->
+                    <div class="space-y-1.5 pt-1">
+                        <div class="flex justify-between text-xs font-bold text-slate-700">
+                            <span>Respaldado por Beneficios Actuales: {{ epv_analysis.epv_pct|floatformat:0 }}% (EPV)</span>
+                            <span>Especulación sobre Crecimiento Futuro: {{ epv_analysis.pvgo_pct|floatformat:0 }}% (PVGO)</span>
+                        </div>
+                        <div class="w-full h-4 bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
+                            <div class="bg-purple-600 h-full transition-all duration-500" style="width: {{ epv_analysis.epv_pct|floatformat:0 }}%;" title="EPV: {{ epv_analysis.epv_pct|floatformat:1 }}%"></div>
+                            <div class="bg-amber-400 h-full transition-all duration-500" style="width: {{ epv_analysis.pvgo_pct|floatformat:0 }}%;" title="PVGO: {{ epv_analysis.pvgo_pct|floatformat:1 }}%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN B: ECONOMIC VALUE ADDED (EVA) / ROIC vs WACC SPREAD -->
+                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                                <span>🏰 Economic Value Added (EVA) & Capital Invertido</span>
+                                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Stern Stewart / Damodaran</span>
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                Valora la compañía en función del retorno excedente generado sobre el capital operativo empleado: $EV = IC_0 + PV(EVA_{1..10}) + PV(EVA_{Terminal})$.
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold">Valor Teórico por EVA</span>
+                            <span class="text-xl font-black text-emerald-700">${{ eva_analysis.fair_price_eva|floatformat:2 }} USD</span>
+                        </div>
+                    </div>
+
+                    <!-- Métricas del Modelo EVA -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Capital Invertido (IC)</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.ic_base_m|floatformat:1 }}M</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Spread Económico</span>
+                            <span class="text-base font-black {% if eva_analysis.spread_pct > 0 %}text-emerald-700{% else %}text-rose-700{% endif %} block mt-0.5">
+                                {% if eva_analysis.spread_pct > 0 %}+{% endif %}{{ eva_analysis.spread_pct|floatformat:2 }} pp
+                            </span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">PV de EVA (10 Años)</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.pv_eva_sum|floatformat:1 }}M</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Valor Terminal EVA</span>
+                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.pv_terminal_eva|floatformat:1 }}M</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3.5 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                        <strong class="text-slate-900">Principio Contable de Creación de Valor (Stern Stewart):</strong>
+                        El crecimiento en ventas solo crea valor si el retorno sobre el capital invertido (ROIC) supera el coste medio ponderado del capital (WACC). Si el spread es negativo, cada nuevo dólar invertido destruye riqueza para el accionista aunque el beneficio neto contable aumente.
                     </div>
                 </div>
             </div>
         </div>
-
-
-    </div>
+</div>
 
 </div>
 
@@ -3166,6 +3850,12 @@
     const rotceLabels = [{% for l in vp.rotce_labels %}"{{ l }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
     const isInsurance = {% if is_insurance or archetype == 'INSURANCE' or vp.is_insurance %}true{% else %}false{% endif %};
     const cagr5y = {{ vp.cagr_5y_dyn|default:vp.cagr_5y|default:hist_growth_pct|default:0.0 }} / 100.0;
+    const fcfTrueM = {{ fcf_margin_true_pct|default:fcf_margin_pct }} / 100.0;
+    const sbcMarginM = {{ sbc_margin_pct|default:0.0 }} / 100.0;
+    const peCurrent = {{ multiples_analysis.pe_current|default:20.0 }};
+    const baseWaccVal = parseFloat("{{ wacc_val|slice:':-1' }}") / 100.0;
+    let selectedDcfStage = 3;
+
 
     function computeTwoStagePtbv(rotceVal, keVal, gTerm, cagr5yVal, isIns, fadeYears = 5) {
         if (keVal <= gTerm || rotceVal <= 0) return 1.0;
@@ -3272,15 +3962,52 @@
         });
     }
 
+    function switchValuationSubTab(subTabId) {
+        document.querySelectorAll('.val-subtab-panel').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('.val-subtab-btn').forEach(b => {
+            b.className = 'val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap';
+        });
+        const panel = document.getElementById('val-subtab-' + subTabId);
+        const btn = document.getElementById('btn-val-subtab-' + subTabId);
+        if (panel) panel.classList.remove('hidden');
+        if (btn) {
+            btn.className = 'val-subtab-btn px-4 py-2.5 font-bold rounded-t-xl bg-slate-900 text-white shadow transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap';
+        }
+    }
+
+    function setDcfModelStage(stage) {
+        selectedDcfStage = stage;
+        const btn3 = document.getElementById('btnModelStage3');
+        const btn2 = document.getElementById('btnModelStage2');
+        if (stage === 3) {
+            if (btn3) btn3.className = 'px-3 py-1 rounded-lg font-bold bg-sky-600 text-white shadow-sm transition cursor-pointer';
+            if (btn2) btn2.className = 'px-3 py-1 rounded-lg font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        } else {
+            if (btn2) btn2.className = 'px-3 py-1 rounded-lg font-bold bg-sky-600 text-white shadow-sm transition cursor-pointer';
+            if (btn3) btn3.className = 'px-3 py-1 rounded-lg font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        }
+        recalcDCF();
+    }
+
     function recalcDCF() {
         const slider1Val = parseFloat(document.getElementById('gRevSlider').value) / 100.0;
         const discountRate = parseFloat(document.getElementById('wSlider').value) / 100.0;
         const gn = parseFloat(document.getElementById('gSlider').value) / 100.0;
 
         const fcfSliderElem = document.getElementById('fcfSlider');
-        const currentFcfM = fcfSliderElem ? (parseFloat(fcfSliderElem.value) / 100.0) : fcfM;
+        const trueFcfCheck = document.getElementById('trueFcfToggle');
+        const useTrueFcf = trueFcfCheck ? trueFcfCheck.checked : false;
+
+        let activeFcfM = fcfM;
+        if (useTrueFcf && fcfTrueM > 0) {
+            activeFcfM = fcfTrueM;
+        }
+        if (fcfSliderElem) {
+            activeFcfM = parseFloat(fcfSliderElem.value) / 100.0;
+        }
+
         if (document.getElementById('fcfDisplay')) {
-            document.getElementById('fcfDisplay').textContent = (currentFcfM * 100).toFixed(1) + '%';
+            document.getElementById('fcfDisplay').textContent = (activeFcfM * 100).toFixed(1) + '%';
         }
 
         document.getElementById('gRevDisplay').textContent = (slider1Val * 100).toFixed(2) + '%';
@@ -3290,9 +4017,11 @@
         let fairPrice = 0.0;
         let g_implied = 0.0;
         let gap = 0.0;
+        let pctTv = 65.0;
+        let terminalMult = 16.5;
 
         if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
-            // Modelo Excess Return de 2 Etapas con Convergencia (Damodaran)
+            // Modelo Excess Return de 2 Etapas con Convergencia
             const rotceHyp = slider1Val;
             const ke = discountRate;
             const tbv = tbvPerShare > 0 ? tbvPerShare : (shares > 0 ? (rev0 / shares) : 0);
@@ -3303,38 +4032,83 @@
             const ptbvCurrent = tbv > 0 ? (targetPrice / tbv) : 1.0;
             g_implied = (ptbvCurrent * (ke - gn)) + gn;
             gap = (g_implied - rotceHyp) * 100.0;
+            pctTv = 60.0;
+            terminalMult = ptbvJustified;
         } else {
-            // Arquetipo Corporativo Estándar: Forward DCF & Reverse DCF
+            // Arquetipo Corporativo Estándar: 3-Stage Fade vs 2-Stage
             const gRev = slider1Val;
             const wacc = discountRate;
+            const targetEV = (targetPrice * shares) + netDebt;
 
-            let pv_hyp = 0, r_hyp = rev0;
-            for (let t = 1; t <= 10; t++) {
-                r_hyp *= (1 + gRev);
-                pv_hyp += (r_hyp * currentFcfM) / Math.pow(1 + wacc, t);
+            let pv_hyp = 0.0, r_hyp = rev0;
+
+            if (selectedDcfStage === 3) {
+                // Etapa 1: Años 1-5 a tasa gRev
+                for (let t = 1; t <= 5; t++) {
+                    r_hyp *= (1.0 + gRev);
+                    pv_hyp += (r_hyp * activeFcfM) / Math.pow(1.0 + wacc, t);
+                }
+                // Etapa 2: Años 6-10 desvanecimiento lineal hacia gn
+                for (let t = 6; t <= 10; t++) {
+                    const weight = (t - 5.0) / 5.0;
+                    const g_t = gRev * (1.0 - weight) + gn * weight;
+                    r_hyp *= (1.0 + g_t);
+                    pv_hyp += (r_hyp * activeFcfM) / Math.pow(1.0 + wacc, t);
+                }
+            } else {
+                // Etapa 1: 10 años planos
+                for (let t = 1; t <= 10; t++) {
+                    r_hyp *= (1.0 + gRev);
+                    pv_hyp += (r_hyp * activeFcfM) / Math.pow(1.0 + wacc, t);
+                }
             }
-            let tv_hyp = (r_hyp * (1 + gn) * currentFcfM) / Math.max(wacc - gn, 0.005);
-            let ev_hyp = pv_hyp + (tv_hyp / Math.pow(1 + wacc, 10));
-            let equity_hyp = ev_hyp - netDebt;
+
+            // Etapa Terminal (Año 10 a perpetuidad)
+            const fcf_10 = r_hyp * activeFcfM;
+            const denom = Math.max(wacc - gn, 0.005);
+            const tv_hyp = (fcf_10 * (1.0 + gn)) / denom;
+            const pv_tv = tv_hyp / Math.pow(1.0 + wacc, 10);
+            const ev_hyp = pv_hyp + pv_tv;
+            const equity_hyp = ev_hyp - netDebt;
             fairPrice = shares > 0 ? (equity_hyp / shares) : 0.0;
 
-            // 2. Reverse DCF: qué crecimiento anual exige la cotización de mercado P0
-            const targetEV = (targetPrice * shares) + netDebt;
-            let low = -0.50, high = 1.50;
+            if (ev_hyp > 0) {
+                pctTv = (pv_tv / ev_hyp) * 100.0;
+            }
+            if (fcf_10 > 0) {
+                terminalMult = tv_hyp / fcf_10;
+            }
+
+            // Reverse DCF: Bisección numérica para g_implied
+            let low = -0.50, high = 1.80;
             for (let iter = 0; iter < 60; iter++) {
                 let mid = (low + high) / 2.0;
-                let pv = 0, r_t = rev0;
-                for (let t = 1; t <= 10; t++) {
-                    r_t *= (1 + mid);
-                    pv += (r_t * currentFcfM) / Math.pow(1 + wacc, t);
+                let pv_b = 0.0, r_b = rev0;
+                if (selectedDcfStage === 3) {
+                    for (let t = 1; t <= 5; t++) {
+                        r_b *= (1.0 + mid);
+                        pv_b += (r_b * activeFcfM) / Math.pow(1.0 + wacc, t);
+                    }
+                    for (let t = 6; t <= 10; t++) {
+                        const weight = (t - 5.0) / 5.0;
+                        const g_t = mid * (1.0 - weight) + gn * weight;
+                        r_b *= (1.0 + g_t);
+                        pv_b += (r_b * activeFcfM) / Math.pow(1.0 + wacc, t);
+                    }
+                } else {
+                    for (let t = 1; t <= 10; t++) {
+                        r_b *= (1.0 + mid);
+                        pv_b += (r_b * activeFcfM) / Math.pow(1.0 + wacc, t);
+                    }
                 }
-                let tv = (r_t * (1 + gn) * currentFcfM) / Math.max(wacc - gn, 0.005);
-                let ev = pv + (tv / Math.pow(1 + wacc, 10));
-                if (Math.abs(ev - targetEV) < 1.0) {
+                let tv_b = (r_b * (1.0 + gn) * activeFcfM) / denom;
+                let ev_b = pv_b + (tv_b / Math.pow(1.0 + wacc, 10));
+
+                if (Math.abs(ev_b - targetEV) < 1.0) {
                     g_implied = mid;
                     break;
                 }
-                if (ev < targetEV) low = mid; else high = mid;
+                if (ev_b < targetEV) low = mid; else high = mid;
                 g_implied = mid;
             }
             gap = (g_implied - gRev) * 100.0;
@@ -3344,19 +4118,35 @@
 
         document.getElementById('fairDisplay').textContent = '$' + fairPrice.toFixed(2);
         document.getElementById('gImpliedDisplay').textContent = (g_implied * 100).toFixed(2) + '%';
+        
         const gapElem = document.getElementById('gapDisplay');
         if (gapElem) {
             gapElem.textContent = (gap >= 0 ? '+' : '') + gap.toFixed(2) + ' pp';
             if (gap > 5.0) {
-                gapElem.className = "text-3xl font-black text-rose-700 mt-1 block";
+                gapElem.className = "text-2xl font-black text-rose-700 mt-1 block";
             } else if (gap >= 0.0) {
-                gapElem.className = "text-3xl font-black text-amber-700 mt-1 block";
+                gapElem.className = "text-2xl font-black text-amber-700 mt-1 block";
             } else {
-                gapElem.className = "text-3xl font-black text-emerald-700 mt-1 block";
+                gapElem.className = "text-2xl font-black text-emerald-700 mt-1 block";
             }
         }
 
-        // Sincronización reactiva con la Tarjeta Superior del Encabezado
+        const pctTvElem = document.getElementById('pctTvDisplay');
+        if (pctTvElem) {
+            pctTvElem.textContent = pctTv.toFixed(1) + '%';
+            if (pctTv > 75.0) {
+                pctTvElem.className = "text-2xl font-black text-amber-700 mt-1 block";
+            } else {
+                pctTvElem.className = "text-2xl font-black text-slate-900 mt-1 block";
+            }
+        }
+
+        const termMultElem = document.getElementById('terminalMultipleDisplay');
+        if (termMultElem) {
+            termMultElem.textContent = `Múltiplo Terminal: ${terminalMult.toFixed(1)}x FCF`;
+        }
+
+        // Sincronización con el Encabezado Superior
         const headerFair = document.getElementById('headerFairPrice');
         if (headerFair) headerFair.textContent = '$' + fairPrice.toFixed(2);
         const headerSub = document.getElementById('headerFairSubtext');
@@ -3364,7 +4154,7 @@
             if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
                 headerSub.textContent = `ROTCE Proyectado: ${(slider1Val * 100).toFixed(1)}%`;
             } else {
-                headerSub.textContent = `Proyección DCF: ${(slider1Val * 100).toFixed(1)}% | FCF: ${(currentFcfM * 100).toFixed(1)}%`;
+                headerSub.textContent = `Proyección DCF: ${(slider1Val * 100).toFixed(1)}% | FCF: ${(activeFcfM * 100).toFixed(1)}%`;
             }
         }
         const headerBadge = document.getElementById('headerValuationBadge');
@@ -3381,31 +4171,145 @@
         const fairSub = document.getElementById('fairSubtext');
         const alertBox = document.getElementById('dcfAlertBox');
         if (fairPrice < targetPrice) {
-            fairSub.className = "text-xs text-rose-700 mt-1 block font-medium";
+            fairSub.className = "text-[11px] text-rose-700 mt-1 block font-medium";
             fairSub.textContent = `Cotiza con +${Math.abs(diffPricePct).toFixed(0)}% de prima vs este modelo`;
             if (alertBox) {
                 alertBox.className = "p-4 rounded-2xl border border-rose-200 bg-rose-50 text-xs text-rose-700 leading-relaxed";
                 if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
                     alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige una rentabilidad implícita (ROTCE/ROE) del <strong>${(g_implied * 100).toFixed(2)}%</strong>. Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong> por Excess Return.`;
                 } else {
-                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige un crecimiento anual de ventas del <strong>${(g_implied * 100).toFixed(2)}%</strong> durante una década completa (con margen FCF del ${(currentFcfM * 100).toFixed(1)}%). Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong>.`;
+                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige un crecimiento anual de ventas del <strong>${(g_implied * 100).toFixed(2)}%</strong> durante la fase de supercrecimiento (con margen FCF del ${(activeFcfM * 100).toFixed(1)}%). Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong>.`;
                 }
             }
         } else {
-            fairSub.className = "text-xs text-emerald-700 mt-1 block font-medium";
+            fairSub.className = "text-[11px] text-emerald-700 mt-1 block font-medium";
             fairSub.textContent = `Margen de seguridad: +${diffPricePct.toFixed(1)}%`;
             if (alertBox) {
                 alertBox.className = "p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-xs text-emerald-700 leading-relaxed";
                 if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
                     alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de rentabilidad (ROTCE/ROE) del <strong>${(slider1Val * 100).toFixed(2)}%</strong>, el valor intrínseco por Excess Return (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
                 } else {
-                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de crecimiento de ventas del <strong>${(slider1Val * 100).toFixed(2)}%</strong> anual y margen FCF del <strong>${(currentFcfM * 100).toFixed(1)}%</strong>, el valor intrínseco teórico resultante (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
+                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de crecimiento de ventas del <strong>${(slider1Val * 100).toFixed(2)}%</strong> anual y margen FCF del <strong>${(activeFcfM * 100).toFixed(1)}%</strong>, el valor intrínseco teórico resultante (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
                 }
             }
         }
 
-        // Recálculo dinámico en tiempo real de la Matriz Bidimensional de Sensibilidad
-        updateSensitivityMatrix(discountRate, currentFcfM);
+        // Recálculo reactivo de la Matriz de Sensibilidad
+        updateSensitivityMatrix(discountRate, activeFcfM);
+
+        // Actualizar barra de Reverse DCF en el Football Field
+        updateFootballFieldDcf(fairPrice);
+    }
+
+    function recalcForward5Y() {
+        const elRev = document.getElementById('fwdSliderRev');
+        const elMargin = document.getElementById('fwdSliderMargin');
+        const elMult = document.getElementById('fwdSliderMultiple');
+        const elBb = document.getElementById('fwdSliderBuyback');
+        const elDiv = document.getElementById('fwdSliderDiv');
+        if (!elRev || !elMargin || !elMult || !elBb || !elDiv) return;
+
+        const gRev5 = parseFloat(elRev.value) / 100.0;
+        const mTarget5 = parseFloat(elMargin.value) / 100.0;
+        const exitMult5 = parseFloat(elMult.value);
+        const buyback5 = parseFloat(elBb.value) / 100.0;
+        const divYield5 = parseFloat(elDiv.value) / 100.0;
+
+        document.getElementById('fwdSliderRevDisp').textContent = (gRev5 * 100).toFixed(1) + '%';
+        document.getElementById('fwdSliderMarginDisp').textContent = (mTarget5 * 100).toFixed(1) + '%';
+        document.getElementById('fwdSliderMultipleDisp').textContent = exitMult5.toFixed(1) + 'x';
+        document.getElementById('fwdSliderBuybackDisp').textContent = (buyback5 * 100).toFixed(1) + '%';
+        document.getElementById('fwdSliderDivDisp').textContent = (divYield5 * 100).toFixed(1) + '%';
+
+        const rev5 = rev0 * Math.pow(1.0 + gRev5, 5);
+        const fcf5 = rev5 * mTarget5;
+        const shares5 = shares * Math.pow(1.0 - buyback5, 5);
+        const fcfPerShare5 = shares5 > 0 ? (fcf5 / shares5) : 0.0;
+        const targetPrice5y = Math.max(0.01, fcfPerShare5 * exitMult5);
+
+        const priceCagr = targetPrice5y > 0 && targetPrice > 0 ? (Math.pow(targetPrice5y / targetPrice, 0.2) - 1.0) : -1.0;
+        const forwardIrr = priceCagr + divYield5;
+        const totalReturn5y = targetPrice > 0 ? (((targetPrice5y * Math.pow(1.0 + divYield5, 5) - targetPrice) / targetPrice) * 100.0) : 0.0;
+
+        // Bridge de Atribución
+        const growthContrib = gRev5 * 100.0;
+        const mBase = fcfM > 0 ? fcfM : mTarget5;
+        const marginContrib = ((Math.pow(mTarget5 / mBase, 0.2) - 1.0) * 100.0);
+        const buybackContrib = buyback5 * 100.0;
+        const curMult = peCurrent > 0 ? peCurrent : exitMult5;
+        const multContrib = curMult > 0 ? ((Math.pow(exitMult5 / curMult, 0.2) - 1.0) * 100.0) : 0.0;
+        const divContrib = divYield5 * 100.0;
+
+        // Actualizar DOM
+        const elTarget = document.getElementById('fwdTargetPrice');
+        if (elTarget) elTarget.textContent = '$' + targetPrice5y.toFixed(2);
+        const elIrr = document.getElementById('fwdIrrPct');
+        if (elIrr) elIrr.textContent = (forwardIrr * 100.0).toFixed(1) + '% CAGR';
+        const elTot = document.getElementById('fwdTotalReturn');
+        if (elTot) elTot.textContent = (totalReturn5y >= 0 ? '+' : '') + totalReturn5y.toFixed(0) + '%';
+
+        const topIrr = document.getElementById('topForwardIrrDisplay');
+        if (topIrr) topIrr.textContent = (forwardIrr * 100.0).toFixed(1) + '% CAGR';
+        const topTarget = document.getElementById('topTargetPriceDisplay');
+        if (topTarget) topTarget.textContent = '$' + targetPrice5y.toFixed(2) + ' USD';
+
+        // Bridge Spans
+        const bG = document.getElementById('bridgeGrowth');
+        if (bG) bG.textContent = (growthContrib >= 0 ? '+' : '') + growthContrib.toFixed(1) + '%';
+        const bM = document.getElementById('bridgeMargin');
+        if (bM) bM.textContent = (marginContrib >= 0 ? '+' : '') + marginContrib.toFixed(1) + '%';
+        const bMult = document.getElementById('bridgeMultiple');
+        if (bMult) bMult.textContent = (multContrib >= 0 ? '+' : '') + multContrib.toFixed(1) + '%';
+        const bBb = document.getElementById('bridgeBuyback');
+        if (bBb) bBb.textContent = (buybackContrib >= 0 ? '+' : '') + buybackContrib.toFixed(1) + '%';
+        const bD = document.getElementById('bridgeDiv');
+        if (bD) bD.textContent = (divContrib >= 0 ? '+' : '') + divContrib.toFixed(1) + '%';
+
+        // Actualizar barra de Target 5Y en el Football Field
+        updateFootballFieldTarget5Y(targetPrice5y);
+    }
+
+    function updateFootballFieldDcf(dcfPrice) {
+        const bar = document.getElementById('ff-bar-dcf');
+        const dot = document.getElementById('ff-dot-dcf');
+        const text = document.getElementById('ff-base-text-dcf');
+        if (!bar || !dot || !text) return;
+
+        const maxScale = Math.max(400.0, targetPrice * 1.5, dcfPrice * 1.5);
+        const low = dcfPrice * 0.85;
+        const high = dcfPrice * 1.18;
+
+        const leftPct = (low / maxScale) * 100.0;
+        const widthPct = ((high - low) / maxScale) * 100.0;
+        const dotPct = (dcfPrice / maxScale) * 100.0;
+
+        bar.style.left = leftPct.toFixed(1) + '%';
+        bar.style.width = widthPct.toFixed(1) + '%';
+        dot.style.left = `calc(${dotPct.toFixed(1)}% - 6px)`;
+        text.textContent = '$' + dcfPrice.toFixed(1);
+    }
+
+    function updateFootballFieldTarget5Y(target5yPrice) {
+        const bar = document.getElementById('ff-bar-target5y');
+        const dot = document.getElementById('ff-dot-target5y');
+        const text = document.getElementById('ff-base-text-target5y');
+        if (!bar || !dot || !text) return;
+
+        const ke = baseWaccVal > 0 ? baseWaccVal : 0.095;
+        const pvTarget = target5yPrice / Math.pow(1.0 + ke, 5);
+
+        const maxScale = Math.max(400.0, targetPrice * 1.5, pvTarget * 1.5);
+        const low = pvTarget * 0.85;
+        const high = pvTarget * 1.20;
+
+        const leftPct = (low / maxScale) * 100.0;
+        const widthPct = ((high - low) / maxScale) * 100.0;
+        const dotPct = (pvTarget / maxScale) * 100.0;
+
+        bar.style.left = leftPct.toFixed(1) + '%';
+        bar.style.width = widthPct.toFixed(1) + '%';
+        dot.style.left = `calc(${dotPct.toFixed(1)}% - 6px)`;
+        text.textContent = '$' + pvTarget.toFixed(1);
     }
 
     function updateSensitivityMatrix(discountRate, currentFcfM) {
@@ -3481,17 +4385,31 @@
         const targetEV = (targetPrice * shares) + netDebt;
 
         function solveCell(w, gn) {
-            let low = -0.50, high = 1.50;
+            let low = -0.50, high = 1.80;
             let res = 0.0;
+            const denom = Math.max(w - gn, 0.005);
             for (let iter = 0; iter < 45; iter++) {
                 let mid = (low + high) / 2.0;
-                let pv = 0, r_t = rev0;
-                for (let t = 1; t <= 10; t++) {
-                    r_t *= (1 + mid);
-                    pv += (r_t * fcfMVal) / Math.pow(1 + w, t);
+                let pv = 0.0, r_t = rev0;
+                if (selectedDcfStage === 3) {
+                    for (let t = 1; t <= 5; t++) {
+                        r_t *= (1.0 + mid);
+                        pv += (r_t * fcfMVal) / Math.pow(1.0 + w, t);
+                    }
+                    for (let t = 6; t <= 10; t++) {
+                        const weight = (t - 5.0) / 5.0;
+                        const g_t = mid * (1.0 - weight) + gn * weight;
+                        r_t *= (1.0 + g_t);
+                        pv += (r_t * fcfMVal) / Math.pow(1.0 + w, t);
+                    }
+                } else {
+                    for (let t = 1; t <= 10; t++) {
+                        r_t *= (1.0 + mid);
+                        pv += (r_t * fcfMVal) / Math.pow(1.0 + w, t);
+                    }
                 }
-                let tv = (r_t * (1 + gn) * fcfMVal) / Math.max(w - gn, 0.005);
-                let ev = pv + (tv / Math.pow(1 + w, 10));
+                let tv = (r_t * (1.0 + gn) * fcfMVal) / denom;
+                let ev = pv + (tv / Math.pow(1.0 + w, 10));
                 if (Math.abs(ev - targetEV) < 1.0) {
                     res = mid;
                     break;
@@ -4587,7 +5505,7 @@
         });
     }
 
-    window.addEventListener('DOMContentLoaded', recalcDCF);
+    window.addEventListener('DOMContentLoaded', () => { recalcDCF(); recalcForward5Y(); });
 </script>
 
     <!-- Modal de Progreso del Pipeline de Sincronización SEC -->

@@ -395,6 +395,8 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "OtherIntangibleAssetsNet",
         "IntangibleAssetsNetNoncurrent",
         "us-gaap_IntangibleAssetsNetNoncurrent",
+        "IntangibleAssetsOtherThanGoodwill",
+        "ifrs-full_IntangibleAssetsOtherThanGoodwill",
     ],
     "long_term_investments": [
         "MarketableSecuritiesNoncurrent",
@@ -676,7 +678,11 @@ BANKING_TAXONOMY_MAP: Dict[str, List[str]] = {
         "LoansAndLeasesReceivableAllowance",
         "AllowanceForLoanAndLeaseLosses",
         "AllowanceAccountForCreditLossesOfFinancialAssets",
+        "ifrs-full_AllowanceAccountForCreditLossesOfFinancialAssets",
         "AllowanceForCreditLossesOnFinancingReceivables",
+        "CreditCardExpectedCreditLoss",
+        "LoansExpectedCreditLoss",
+        "AllowanceForExpectedCreditLosses",
     ],
 }
 

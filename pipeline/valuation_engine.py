@@ -114,6 +114,36 @@ def _is_financial(scoring_data: Dict[str, Any]) -> bool:
     return get_report_archetype(scoring_data) in ("FINANCIAL_BANKING", "INSURANCE")
 
 
+def _compute_series_cagr(val_map: Optional[Dict[str, Any]], years: int = 5) -> Optional[float]:
+    """Calcula el CAGR histórico entre los últimos N períodos fiscales cerrados (FY)."""
+    if not val_map or not isinstance(val_map, dict):
+        return None
+    fy_keys = sorted(
+        [k for k in val_map.keys() if k.startswith("FY") and val_map[k] is not None and float(val_map[k]) > 0],
+        key=lambda x: int(x.replace("FY", "")) if x.replace("FY", "").isdigit() else 0
+    )
+    if len(fy_keys) >= (years + 1):
+        v_now = float(val_map[fy_keys[-1]])
+        v_prev = float(val_map[fy_keys[-(years + 1)]])
+        if v_prev > 0 and v_now > 0:
+            return round((((v_now / v_prev) ** (1.0 / float(years))) - 1.0) * 100.0, 1)
+    elif len(fy_keys) >= 2:
+        n = len(fy_keys) - 1
+        v_now = float(val_map[fy_keys[-1]])
+        v_prev = float(val_map[fy_keys[0]])
+        if v_prev > 0 and v_now > 0:
+            return round((((v_now / v_prev) ** (1.0 / float(n))) - 1.0) * 100.0, 1)
+    return None
+
+
+def _compute_share_reduction_rate(shares_map: Optional[Dict[str, Any]], years: int = 5) -> float:
+    """Calcula la tasa anualizada de reducción neta de acciones diluidas (Buyback Yield positivo / Dilución negativa)."""
+    cagr = _compute_series_cagr(shares_map, years=years)
+    if cagr is not None:
+        return -round(cagr, 2)
+    return 1.5
+
+
 def compute_two_stage_excess_return_ptbv(
     rotce_val: float,
     ke_val: float,
@@ -203,6 +233,554 @@ def solve_reverse_dcf(
         else:
             high = mid
     return mid
+
+
+def solve_reverse_dcf_3stage(
+    share_price: float,
+    shares_out_b: float,
+    net_debt_m: float,
+    base_revenue_m: float,
+    wacc: float,
+    terminal_growth: float = 0.025,
+    fcf_margin: float = 0.252,
+    forecast_years: int = 10,
+    fade_start_year: int = 5,
+) -> float:
+    """
+    Resuelve numéricamente la tasa anual de crecimiento inicial g1 (años 1..5)
+    bajo un modelo de 3 Etapas con Fade Competitivo (Damodaran & Mauboussin):
+    - Etapa 1 (años 1..5): crecimiento g1 constante.
+    - Etapa 2 (años 6..10): desaceleración lineal de g_t hacia terminal_growth.
+    - Etapa 3 (año 11+): valor terminal perpetuo a terminal_growth.
+    """
+    if share_price <= 0 or shares_out_b <= 0 or base_revenue_m <= 0 or wacc <= terminal_growth:
+        return 0.10
+
+    target_ev = (share_price * shares_out_b * 1000) + net_debt_m
+    fade_span = float(max(1, forecast_years - fade_start_year))
+
+    def calc_ev_3stage(g: float) -> float:
+        pv_ufcf = 0.0
+        rev_t = base_revenue_m
+        for t in range(1, forecast_years + 1):
+            if t <= fade_start_year:
+                g_t = g
+            else:
+                weight = float(t - fade_start_year) / fade_span
+                g_t = g * (1.0 - weight) + terminal_growth * weight
+            rev_t *= (1.0 + g_t)
+            ufcf_t = rev_t * fcf_margin
+            pv_ufcf += ufcf_t / ((1.0 + wacc) ** t)
+        
+        tv_n = (ufcf_t * (1.0 + terminal_growth)) / max(0.005, wacc - terminal_growth)
+        pv_tv = tv_n / ((1.0 + wacc) ** forecast_years)
+        return pv_ufcf + pv_tv
+
+    low = -0.50
+    high = 1.50
+    for _ in range(80):
+        mid = (low + high) / 2.0
+        ev_mid = calc_ev_3stage(mid)
+        if abs(ev_mid - target_ev) < 1.0:
+            return mid
+        if ev_mid < target_ev:
+            low = mid
+        else:
+            high = mid
+    return mid
+
+
+def calculate_dcf_details(
+    base_revenue_m: float,
+    g_rev: float,
+    fcf_margin: float,
+    wacc: float,
+    terminal_growth: float,
+    net_debt_m: float,
+    shares_m: float,
+    model_type: str = "2STAGE",
+    forecast_years: int = 10,
+    fade_start_year: int = 5,
+) -> Dict[str, Any]:
+    """Calcula el valor presente, valor terminal, múltiplo de salida y precio justo teórico."""
+    if base_revenue_m <= 0 or shares_m <= 0 or wacc <= terminal_growth:
+        return {
+            "fair_price": 0.0,
+            "ev": 0.0,
+            "equity_val": 0.0,
+            "pv_fcf": 0.0,
+            "pv_tv": 0.0,
+            "tv_pct": 0.0,
+            "terminal_multiple": 0.0,
+        }
+
+    pv_ufcf = 0.0
+    rev_t = base_revenue_m
+    fade_span = float(max(1, forecast_years - fade_start_year))
+
+    for t in range(1, forecast_years + 1):
+        if model_type == "3STAGE" and t > fade_start_year:
+            weight = float(t - fade_start_year) / fade_span
+            g_t = g_rev * (1.0 - weight) + terminal_growth * weight
+        else:
+            g_t = g_rev
+        rev_t *= (1.0 + g_t)
+        ufcf_t = rev_t * fcf_margin
+        pv_ufcf += ufcf_t / ((1.0 + wacc) ** t)
+
+    tv_n = (ufcf_t * (1.0 + terminal_growth)) / max(0.005, wacc - terminal_growth)
+    pv_tv = tv_n / ((1.0 + wacc) ** forecast_years)
+    ev_total = pv_ufcf + pv_tv
+    equity_val = ev_total - net_debt_m
+    fair_price = equity_val / shares_m if shares_m > 0 else 0.0
+    tv_pct = (pv_tv / ev_total * 100.0) if ev_total > 0 else 0.0
+    terminal_multiple = (1.0 + terminal_growth) / max(0.005, wacc - terminal_growth)
+
+    return {
+        "fair_price": round(max(0.0, fair_price), 2),
+        "ev": round(ev_total, 1),
+        "equity_val": round(equity_val, 1),
+        "pv_fcf": round(pv_ufcf, 1),
+        "pv_tv": round(pv_tv, 1),
+        "tv_pct": round(tv_pct, 1),
+        "terminal_multiple": round(terminal_multiple, 1),
+    }
+
+
+def calculate_implied_cap(
+    share_price: float,
+    shares_b: float,
+    net_debt_m: float,
+    base_revenue_m: float,
+    wacc: float,
+    base_growth: float,
+    fcf_margin: float,
+    terminal_growth: float = 0.025,
+    max_cap_years: int = 35,
+) -> float:
+    """
+    Despeja cuántos años N (Competitive Advantage Period - Mauboussin) de crecimiento
+    sostenido a base_growth justifican la cotización actual antes de converger a terminal_growth.
+    """
+    if share_price <= 0 or shares_b <= 0 or base_revenue_m <= 0 or wacc <= terminal_growth:
+        return 10.0
+
+    target_ev = (share_price * shares_b * 1000) + net_debt_m
+    shares_m = shares_b * 1000
+
+    details_1 = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=1)
+    if details_1["ev"] >= target_ev:
+        return 1.0
+
+    low_n = 1.0
+    high_n = float(max_cap_years)
+
+    def eval_n(n_years: float) -> float:
+        n_floor = int(n_years)
+        n_ceil = min(max_cap_years, n_floor + 1)
+        frac = n_years - n_floor
+        d_floor = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=n_floor)
+        d_ceil = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=n_ceil)
+        return d_floor["ev"] * (1.0 - frac) + d_ceil["ev"] * frac
+
+    if eval_n(high_n) < target_ev:
+        return float(max_cap_years)
+
+    for _ in range(30):
+        mid_n = (low_n + high_n) / 2.0
+        ev_mid = eval_n(mid_n)
+        if abs(ev_mid - target_ev) < 5.0:
+            return round(mid_n, 1)
+        if ev_mid < target_ev:
+            low_n = mid_n
+        else:
+            high_n = mid_n
+    return round(mid_n, 1)
+
+
+def calculate_epv_pvgo(
+    base_revenue_m: float,
+    ebit_margin: float,
+    tax_rate: float,
+    sbc_usd_m: float,
+    wacc: float,
+    net_debt_m: float,
+    shares_m: float,
+    current_price: float,
+) -> Dict[str, Any]:
+    """
+    Calcula el Earnings Power Value (Bruce Greenwald - Columbia) sin crecimiento
+    y descompone el precio en valor actual sostenible (EPV) vs. expectativas futuras (PVGO).
+    """
+    if base_revenue_m <= 0 or shares_m <= 0 or wacc <= 0:
+        return {
+            "epv_operating_m": 0.0,
+            "epv_equity_m": 0.0,
+            "epv_per_share": 0.0,
+            "pvgo_per_share": 0.0,
+            "epv_pct": 0.0,
+            "pvgo_pct": 0.0,
+            "status": "N/D",
+            "sustainable_nopat_m": 0.0,
+        }
+
+    norm_ebit_m = base_revenue_m * ebit_margin
+    sustainable_nopat_m = max(0.0, (norm_ebit_m * (1.0 - tax_rate)) - sbc_usd_m)
+    epv_operating_m = sustainable_nopat_m / wacc
+    epv_equity_m = epv_operating_m - net_debt_m
+    epv_per_share = round(max(0.0, epv_equity_m / shares_m), 2)
+
+    if current_price > 0:
+        pvgo_per_share = round(max(0.0, current_price - epv_per_share), 2)
+        epv_pct = round(min(100.0, max(0.0, (epv_per_share / current_price) * 100.0)), 1)
+        pvgo_pct = round(max(0.0, 100.0 - epv_pct), 1)
+
+        if epv_per_share >= current_price:
+            status = "CRECIMIENTO GRATIS (EPV ≥ Precio Mercado)"
+        elif pvgo_pct <= 35.0:
+            status = "ALTA PROTECCIÓN DE BENEFICIOS ACTUALES"
+        elif pvgo_pct <= 65.0:
+            status = "EXPECTATIVAS EQUILIBRADAS DE CRECIMIENTO"
+        else:
+            status = "ALTA DEPENDENCIA DE CRECIMIENTO FUTURO"
+    else:
+        pvgo_per_share = 0.0
+        epv_pct = 100.0
+        pvgo_pct = 0.0
+        status = "N/D"
+
+    return {
+        "epv_operating_m": round(epv_operating_m, 1),
+        "epv_equity_m": round(epv_equity_m, 1),
+        "epv_per_share": epv_per_share,
+        "pvgo_per_share": pvgo_per_share,
+        "epv_pct": epv_pct,
+        "pvgo_pct": pvgo_pct,
+        "status": status,
+        "sustainable_nopat_m": round(sustainable_nopat_m, 1),
+    }
+
+
+def calculate_eva_valuation(
+    invested_capital_m: float,
+    roic_val: float,
+    wacc_val: float,
+    net_debt_m: float,
+    shares_m: float,
+    growth_reinvest: float = 0.035,
+    fade_years: int = 10,
+    g_terminal: float = 0.025,
+) -> Dict[str, Any]:
+    """
+    Valora la empresa según el Beneficio Económico (EVA / Residual Income) sobre el Capital Invertido:
+    EV = IC_0 + PV(EVA_1..N) + PV(Terminal EVA)
+    """
+    if invested_capital_m <= 0 or shares_m <= 0 or wacc_val <= g_terminal:
+        return {
+            "fair_price_eva": 0.0,
+            "ev_eva": 0.0,
+            "ic_base_m": 0.0,
+            "pv_eva_sum": 0.0,
+            "pv_terminal_eva": 0.0,
+            "spread_pct": 0.0,
+        }
+
+    spread = roic_val - wacc_val
+    ic_t = invested_capital_m
+    pv_eva_sum = 0.0
+    r_term = min(roic_val, wacc_val + 0.04)
+
+    for t in range(1, fade_years + 1):
+        weight = float(t) / float(fade_years)
+        r_t = roic_val * (1.0 - weight) + r_term * weight
+        eva_t = ic_t * (r_t - wacc_val)
+        pv_eva_sum += eva_t / ((1.0 + wacc_val) ** t)
+        ic_t *= (1.0 + growth_reinvest)
+
+    eva_terminal = ic_t * (r_term - wacc_val)
+    terminal_val = (eva_terminal * (1.0 + g_terminal)) / max(0.005, wacc_val - g_terminal)
+    pv_terminal_eva = terminal_val / ((1.0 + wacc_val) ** fade_years)
+
+    ev_eva = invested_capital_m + pv_eva_sum + pv_terminal_eva
+    equity_eva = ev_eva - net_debt_m
+    fair_price_eva = round(max(0.0, equity_eva / shares_m), 2)
+
+    return {
+        "fair_price_eva": fair_price_eva,
+        "ev_eva": round(ev_eva, 1),
+        "ic_base_m": round(invested_capital_m, 1),
+        "pv_eva_sum": round(pv_eva_sum, 1),
+        "pv_terminal_eva": round(pv_terminal_eva, 1),
+        "spread_pct": round(spread * 100.0, 2),
+    }
+
+
+def calculate_5y_forward_irr(
+    price: float,
+    base_revenue_m: float,
+    revenue_growth_pct: float,
+    fcf_margin_pct: float,
+    shares_m: float,
+    net_buyback_yield_pct: float,
+    exit_multiple: float,
+    dividend_yield_pct: float,
+    base_fcf_margin_pct: Optional[float] = None,
+    current_multiple: Optional[float] = None,
+) -> Dict[str, Any]:
+    """
+    Simula el Retorno Total Anualizado Esperado (Forward IRR / CAGR) a 5 Años
+    descomponiendo los 4 motores de retorno: ventas, margen, recompras/dilución y re-rating de múltiplo.
+    """
+    if price <= 0 or base_revenue_m <= 0 or shares_m <= 0:
+        return {
+            "target_price_5y": 0.0,
+            "forward_irr_pct": 0.0,
+            "price_cagr_pct": 0.0,
+            "total_return_pct": 0.0,
+            "bridge": {
+                "growth_contrib": 0.0,
+                "margin_contrib": 0.0,
+                "buyback_contrib": 0.0,
+                "multiple_contrib": 0.0,
+                "div_contrib": 0.0,
+            }
+        }
+
+    g_rev = revenue_growth_pct / 100.0
+    m_target = fcf_margin_pct / 100.0
+    m_base = (base_fcf_margin_pct / 100.0) if (base_fcf_margin_pct and base_fcf_margin_pct > 0) else m_target
+    r_buyback = net_buyback_yield_pct / 100.0
+    div_y = dividend_yield_pct / 100.0
+
+    rev_5 = base_revenue_m * ((1.0 + g_rev) ** 5)
+    fcf_5 = rev_5 * m_target
+    shares_5 = shares_m * ((1.0 - r_buyback) ** 5)
+    fcf_per_share_5 = (fcf_5 / shares_5) if shares_5 > 0 else 0.0
+    target_price_5y = round(max(0.01, fcf_per_share_5 * exit_multiple), 2)
+
+    price_cagr = ((target_price_5y / price) ** (1.0 / 5.0)) - 1.0 if target_price_5y > 0 else -1.0
+    forward_irr = price_cagr + div_y
+    total_return_5y = ((target_price_5y * ((1.0 + div_y) ** 5) - price) / price) * 100.0
+
+    growth_contrib = g_rev * 100.0
+    margin_ratio = (m_target / m_base) if m_base > 0 else 1.0
+    margin_contrib = ((margin_ratio ** (1.0 / 5.0)) - 1.0) * 100.0
+    buyback_contrib = r_buyback * 100.0
+
+    cur_mult = current_multiple if (current_multiple and current_multiple > 0) else exit_multiple
+    mult_ratio = (exit_multiple / cur_mult) if cur_mult > 0 else 1.0
+    mult_contrib = ((mult_ratio ** (1.0 / 5.0)) - 1.0) * 100.0
+    div_contrib = div_y * 100.0
+
+    return {
+        "target_price_5y": target_price_5y,
+        "forward_irr_pct": round(forward_irr * 100.0, 2),
+        "price_cagr_pct": round(price_cagr * 100.0, 2),
+        "total_return_pct": round(total_return_5y, 1),
+        "fcf_per_share_5y": round(fcf_per_share_5, 2),
+        "shares_5y_m": round(shares_5, 1),
+        "rev_5y_m": round(rev_5, 1),
+        "bridge": {
+            "growth_contrib": round(growth_contrib, 2),
+            "margin_contrib": round(margin_contrib, 2),
+            "buyback_contrib": round(buyback_contrib, 2),
+            "multiple_contrib": round(mult_contrib, 2),
+            "div_contrib": round(div_contrib, 2),
+        }
+    }
+
+
+def calculate_multiples_valuation(
+    price: float,
+    shares_m: float,
+    net_debt_m: float,
+    base_rev_m: float,
+    ebit_m: float,
+    ebitda_m: float,
+    net_income_m: float,
+    fcf_m: float,
+    eps_diluted: float,
+    cagr_5y: Optional[float] = None,
+    cagr_eps_5y: Optional[float] = None,
+    cagr_fcf_5y: Optional[float] = None,
+    peers_detail: Optional[List[Dict[str, Any]]] = None,
+    is_financial: bool = False,
+    tbv_per_share: float = 0.0,
+    ptbv_justified: float = 1.0,
+) -> Dict[str, Any]:
+    """
+    Calcula los múltiplos actuales, históricos y de pares sectoriales,
+    el ratio PEG riguroso y los precios justos imputados por reversión a la media.
+    """
+    market_cap_m = price * shares_m if (price > 0 and shares_m > 0) else 0.0
+    ev_m = market_cap_m + net_debt_m if market_cap_m > 0 else 0.0
+
+    # Múltiplos actuales
+    pe_current = round(price / eps_diluted, 2) if (eps_diluted > 0 and price > 0) else (
+        round(market_cap_m / net_income_m, 2) if (net_income_m > 0 and market_cap_m > 0) else None
+    )
+    ev_ebitda_current = round(ev_m / ebitda_m, 2) if (ebitda_m > 0 and ev_m > 0) else None
+    ev_ebit_current = round(ev_m / ebit_m, 2) if (ebit_m > 0 and ev_m > 0) else None
+    ev_fcf_current = round(ev_m / fcf_m, 2) if (fcf_m > 0 and ev_m > 0) else None
+    ps_current = round(market_cap_m / base_rev_m, 2) if (base_rev_m > 0 and market_cap_m > 0) else None
+    fcf_yield_pct = round((fcf_m / market_cap_m) * 100.0, 2) if (fcf_m > 0 and market_cap_m > 0) else None
+
+    # Ratio PEG
+    peg_ratio = None
+    peg_explanation = "Crecimiento ≤ 0% o No Disponible"
+    if pe_current and pe_current > 0:
+        if cagr_eps_5y and cagr_eps_5y > 0:
+            peg_ratio = round(pe_current / cagr_eps_5y, 2)
+            peg_explanation = f"P/E {pe_current:.1f}x ÷ CAGR EPS 5Y ({cagr_eps_5y:.1f}%)"
+        elif cagr_5y and cagr_5y > 0:
+            peg_ratio = round(pe_current / cagr_5y, 2)
+            peg_explanation = f"P/E {pe_current:.1f}x ÷ CAGR Ventas 5Y ({cagr_5y:.1f}%)"
+
+    # Mediana de pares sectoriales
+    peer_pes = []
+    peer_ev_ebitdas = []
+    peer_ev_fcfs = []
+    if peers_detail:
+        for p in peers_detail:
+            if p.get("is_target"):
+                continue
+            p_mc = p.get("market_cap_usd_m", 0.0)
+            p_ni = p.get("net_income_usd_m", 0.0)
+            p_cfo = p.get("cfo_usd_m", 0.0)
+            p_capex = p.get("capex_usd_m", 0.0)
+            p_debt = p.get("total_debt_usd_m", 0.0)
+            p_cash = p.get("cash_usd_m", 0.0)
+            p_ev = p_mc + p_debt - p_cash
+            p_fcf = p_cfo - p_capex
+            if p_mc > 0 and p_ni > 0:
+                p_pe = p_mc / p_ni
+                if 2.0 <= p_pe <= 80.0:
+                    peer_pes.append(p_pe)
+            if p_ev > 0 and p_fcf > 0:
+                p_ev_fcf = p_ev / p_fcf
+                if 2.0 <= p_ev_fcf <= 80.0:
+                    peer_ev_fcfs.append(p_ev_fcf)
+
+    peer_median_pe = round(float(sorted(peer_pes)[len(peer_pes) // 2]), 1) if peer_pes else (14.0 if is_financial else 22.0)
+    peer_median_ev_fcf = round(float(sorted(peer_ev_fcfs)[len(peer_ev_fcfs) // 2]), 1) if peer_ev_fcfs else 18.0
+
+    # Múltiplos históricos / normales de referencia (blended target vs peers)
+    if is_financial:
+        normal_pe = min(18.0, max(8.0, peer_median_pe))
+        normal_ptbv = ptbv_justified
+        imputed_pe = round(eps_diluted * normal_pe, 2) if eps_diluted > 0 else price
+        imputed_ptbv = round(tbv_per_share * normal_ptbv, 2) if tbv_per_share > 0 else price
+        imputed_prices = {
+            "pe": imputed_pe,
+            "ptbv": imputed_ptbv,
+            "composite": round((imputed_pe + imputed_ptbv) / 2.0, 2),
+        }
+    else:
+        normal_pe = min(32.0, max(12.0, round((pe_current * 0.4 + peer_median_pe * 0.6), 1) if pe_current else peer_median_pe))
+        normal_ev_ebitda = 14.0
+        normal_ev_fcf = min(30.0, max(10.0, round((ev_fcf_current * 0.4 + peer_median_ev_fcf * 0.6), 1) if ev_fcf_current else peer_median_ev_fcf))
+
+        imputed_pe = round(eps_diluted * normal_pe, 2) if eps_diluted > 0 else price
+        imputed_ev_ebitda = round((ebitda_m * normal_ev_ebitda - net_debt_m) / shares_m, 2) if (shares_m > 0 and ebitda_m > 0) else price
+        imputed_ev_fcf = round((fcf_m * normal_ev_fcf - net_debt_m) / shares_m, 2) if (shares_m > 0 and fcf_m > 0) else price
+
+        valid_imputed = [v for v in [imputed_pe, imputed_ev_ebitda, imputed_ev_fcf] if v > 0]
+        composite_imputed = round(sum(valid_imputed) / len(valid_imputed), 2) if valid_imputed else price
+        imputed_prices = {
+            "pe": imputed_pe,
+            "ev_ebitda": imputed_ev_ebitda,
+            "ev_fcf": imputed_ev_fcf,
+            "composite": composite_imputed,
+        }
+
+    return {
+        "pe_current": pe_current,
+        "ev_ebitda_current": ev_ebitda_current,
+        "ev_ebit_current": ev_ebit_current,
+        "ev_fcf_current": ev_fcf_current,
+        "ps_current": ps_current,
+        "fcf_yield_pct": fcf_yield_pct,
+        "peg_ratio": peg_ratio,
+        "peg_explanation": peg_explanation,
+        "peer_median_pe": peer_median_pe,
+        "peer_median_ev_fcf": peer_median_ev_fcf if not is_financial else None,
+        "normal_pe": normal_pe,
+        "normal_ev_fcf": normal_ev_fcf if not is_financial else None,
+        "imputed_prices": imputed_prices,
+    }
+
+
+def get_valuation_football_field(
+    price: float,
+    dcf_price: float,
+    multiples_price: float,
+    epv_price: float,
+    eva_price: float,
+    target_5y_price: float,
+    ke_val: float = 0.095,
+) -> Dict[str, Any]:
+    """Genera las barras comparativas de rango [Min, Base, Max] para el gráfico Football Field."""
+    target_pv = round(target_5y_price / ((1.0 + ke_val) ** 5), 2) if target_5y_price > 0 else price
+
+    methods = [
+        {
+            "id": "dcf",
+            "name": "Reverse DCF (Expectations)",
+            "badge": "Flujos Descontados",
+            "low": round(dcf_price * 0.85, 2),
+            "base": round(dcf_price, 2),
+            "high": round(dcf_price * 1.18, 2),
+            "color": "sky",
+        },
+        {
+            "id": "multiples",
+            "name": "Múltiplos Comparables",
+            "badge": "Valoración Relativa",
+            "low": round(multiples_price * 0.88, 2),
+            "base": round(multiples_price, 2),
+            "high": round(multiples_price * 1.15, 2),
+            "color": "amber",
+        },
+        {
+            "id": "epv",
+            "name": "Earnings Power Value (EPV)",
+            "badge": "Columbia / Crecimiento 0%",
+            "low": round(epv_price * 0.90, 2),
+            "base": round(epv_price, 2),
+            "high": round((epv_price + dcf_price) / 2.0, 2) if epv_price < dcf_price else round(epv_price * 1.20, 2),
+            "color": "emerald",
+        },
+        {
+            "id": "eva",
+            "name": "Beneficio Económico (EVA)",
+            "badge": "ROIC vs. WACC",
+            "low": round(eva_price * 0.86, 2),
+            "base": round(eva_price, 2),
+            "high": round(eva_price * 1.16, 2),
+            "color": "purple",
+        },
+        {
+            "id": "target5y",
+            "name": "Simulador 5Y (PV a hoy)",
+            "badge": "Retorno Compuesto",
+            "low": round(target_pv * 0.85, 2),
+            "base": round(target_pv, 2),
+            "high": round(target_pv * 1.20, 2),
+            "color": "indigo",
+        },
+    ]
+
+    base_prices = [m["base"] for m in methods if m["base"] > 0]
+    sorted_bases = sorted(base_prices)
+    consensus_price = round(sorted_bases[len(sorted_bases) // 2], 2) if sorted_bases else price
+    margin_safety_pct = round(((consensus_price - price) / price) * 100.0, 1) if price > 0 else 0.0
+
+    return {
+        "methods": methods,
+        "consensus_price": consensus_price,
+        "margin_safety_pct": margin_safety_pct,
+        "current_price": price,
+    }
 
 
 def get_valuation_parameters(
@@ -405,6 +983,94 @@ def get_valuation_parameters(
         else:
             val_status = "JUSTO"
 
+        # Métricas complementarias de valoración bancaria/aseguradora
+        fin_canon = (fs_obj or {}).get("canonical_summary", {})
+        eps_diluted_fin = fin_canon.get("eps_diluted_adjusted", {}).get("LTM") or 0.0
+        cagr_eps_fin = _compute_series_cagr(fin_canon.get("eps_diluted_adjusted"), 5)
+        buyback_rate_fin = _compute_share_reduction_rate(fin_canon.get("shares_diluted_adjusted"), 5)
+        div_ltm_fin = fin_canon.get("dividends_paid", {}).get("LTM") or 0.0
+        div_m_fin = abs(float(div_ltm_fin)) / 1e6 if (div_ltm_fin and abs(float(div_ltm_fin)) > 1e6) else float(div_ltm_fin or 0.0)
+        div_yield_fin = round((div_m_fin / (price * shares_m) * 100.0), 2) if (price * shares_m) > 0 else 0.0
+
+        multiples_fin = calculate_multiples_valuation(
+            price=price,
+            shares_m=shares_m,
+            net_debt_m=0.0,
+            base_rev_m=tbv_total_m,
+            ebit_m=0.0,
+            ebitda_m=0.0,
+            net_income_m=tbv_total_m * rotce_val,
+            fcf_m=0.0,
+            eps_diluted=eps_diluted_fin,
+            cagr_5y=cagr_5y_dyn,
+            cagr_eps_5y=cagr_eps_fin,
+            peers_detail=peers,
+            is_financial=True,
+            tbv_per_share=tbv_per_share,
+            ptbv_justified=ptbv_justified,
+        )
+
+        sustainable_ni_fin = tbv_total_m * rotce_val
+        epv_eq_fin = (sustainable_ni_fin / ke_val) if ke_val > 0 else tbv_total_m
+        epv_ps_fin = round(max(0.01, epv_eq_fin / shares_m), 2) if shares_m > 0 else 0.0
+        pvgo_ps_fin = round(max(0.0, price - epv_ps_fin), 2)
+        epv_pct_fin = round(min(100.0, max(0.0, (epv_ps_fin / price) * 100.0)), 1) if price > 0 else 100.0
+        pvgo_pct_fin = round(max(0.0, 100.0 - epv_pct_fin), 1)
+
+        epv_fin = {
+            "epv_operating_m": round(epv_eq_fin, 1),
+            "epv_equity_m": round(epv_eq_fin, 1),
+            "epv_per_share": epv_ps_fin,
+            "pvgo_per_share": pvgo_ps_fin,
+            "epv_pct": epv_pct_fin,
+            "pvgo_pct": pvgo_pct_fin,
+            "status": "CRECIMIENTO GRATIS (EPV ≥ Precio)" if epv_ps_fin >= price else ("ALTA PROTECCIÓN DE BENEFICIOS" if pvgo_pct_fin <= 35.0 else "ALTA DEPENDENCIA DE CRECIMIENTO"),
+            "sustainable_nopat_m": round(sustainable_ni_fin, 1),
+        }
+
+        eva_fin = {
+            "fair_price_eva": fair_value_excess_return,
+            "ev_eva": round(tbv_total_m * ptbv_justified, 1),
+            "ic_base_m": round(tbv_total_m, 1),
+            "pv_eva_sum": round(max(0.0, fair_value_excess_return - tbv_per_share) * shares_m, 1),
+            "pv_terminal_eva": 0.0,
+            "spread_pct": round(spread_rotce_ke * 100.0, 2),
+        }
+
+        retention_fin = 0.50 if not is_ins else 0.45
+        g_tbv_fin = rotce_val * retention_fin
+        tbv_5y_fin = tbv_per_share * ((1.0 + g_tbv_fin) ** 5)
+        target_5y_fin = round(tbv_5y_fin * ptbv_justified, 2)
+        price_cagr_fin = ((target_5y_fin / price) ** (1.0 / 5.0)) - 1.0 if price > 0 else 0.0
+        irr_fin = price_cagr_fin + (div_yield_fin / 100.0)
+
+        forward_5y_fin = {
+            "target_price_5y": target_5y_fin,
+            "forward_irr_pct": round(irr_fin * 100.0, 2),
+            "price_cagr_pct": round(price_cagr_fin * 100.0, 2),
+            "total_return_pct": round(((target_5y_fin * ((1.0 + div_yield_fin/100.0)**5) - price) / price) * 100.0, 1) if price > 0 else 0.0,
+            "fcf_per_share_5y": round(tbv_5y_fin, 2),
+            "shares_5y_m": shares_m,
+            "rev_5y_m": round(tbv_total_m * ((1.0 + g_tbv_fin)**5), 1),
+            "bridge": {
+                "growth_contrib": round(g_tbv_fin * 100.0, 2),
+                "margin_contrib": 0.0,
+                "buyback_contrib": round(buyback_rate_fin, 2),
+                "multiple_contrib": 0.0,
+                "div_contrib": div_yield_fin,
+            }
+        }
+
+        football_field_fin = get_valuation_football_field(
+            price=price,
+            dcf_price=fair_value_excess_return,
+            multiples_price=multiples_fin["imputed_prices"]["composite"],
+            epv_price=epv_ps_fin,
+            eva_price=fair_value_excess_return,
+            target_5y_price=target_5y_fin,
+            ke_val=ke_val,
+        )
+
         return {
             "is_financial": True,
             "is_insurance": is_ins,
@@ -431,6 +1097,11 @@ def get_valuation_parameters(
             "fair_price_base": fair_price_base,
             "rotce_implied_pct": rotce_implied,
             "g_implied_pct": rotce_implied,
+            "g_implied_3stage_pct": rotce_implied,
+            "implied_cap_years": 10.0,
+            "fcf_margin_true_pct": 0.0,
+            "sbc_usd_m": 0.0,
+            "sbc_margin_pct": 0.0,
             "hist_growth_pct": hist_growth_pct_val,
             "init_growth_disp": round(rotce_val * 100, 2),
             "gap_expectations_str": f"{'+' if gap_exp_pp >= 0 else ''}{gap_exp_pp:.1f} pp",
@@ -443,6 +1114,13 @@ def get_valuation_parameters(
             "cagr_10y": cagr_10y_dyn,
             "cagr_3y": cagr_3y_dyn,
             "guidance_mid": guidance_dyn,
+            "multiples_analysis": multiples_fin,
+            "epv_analysis": epv_fin,
+            "eva_analysis": eva_fin,
+            "forward_5y_analysis": forward_5y_fin,
+            "football_field": football_field_fin,
+            "dividend_yield_pct": div_yield_fin,
+            "buyback_rate_pct": buyback_rate_fin,
         }
 
     # -------------------------------------------------------------
@@ -575,6 +1253,153 @@ def get_valuation_parameters(
     else:
         val_status = "JUSTO"
 
+    # -------------------------------------------------------------------------
+    # MEJORAS INSTITUCIONALES REVERSE DCF (True FCF ex-SBC, 3-Stage Fade & CAP)
+    # -------------------------------------------------------------------------
+    canon_sum = (fs_obj or {}).get("canonical_summary", {})
+    sbc_raw = canon_sum.get("stock_based_compensation", {}).get("LTM")
+    if sbc_raw is None and canon_sum.get("stock_based_compensation"):
+        sbc_raw = list(canon_sum["stock_based_compensation"].values())[0]
+    sbc_usd_m = (abs(float(sbc_raw)) / 1e6) if (sbc_raw and abs(float(sbc_raw)) > 1e6) else float(sbc_raw or 0.0)
+    sbc_margin_pct = round((sbc_usd_m / base_rev_m) * 100.0, 2) if base_rev_m > 0 else 0.0
+    fcf_margin_true_pct = round(max(1.0, (fcf_margin * 100.0) - sbc_margin_pct), 2)
+    fcf_margin_true = fcf_margin_true_pct / 100.0
+
+    # Reverse DCF de 3 Etapas con Fade Competitivo (Damodaran & Mauboussin)
+    g_implied_3stage = solve_reverse_dcf_3stage(
+        share_price=price,
+        shares_out_b=shares_b,
+        net_debt_m=net_debt_m,
+        base_revenue_m=base_rev_m,
+        wacc=wacc_val,
+        terminal_growth=0.025,
+        fcf_margin=fcf_margin,
+        forecast_years=10,
+        fade_start_year=5
+    )
+    g_implied_3stage_pct = round(g_implied_3stage * 100.0, 1)
+
+    g_implied_3stage_true = solve_reverse_dcf_3stage(
+        share_price=price,
+        shares_out_b=shares_b,
+        net_debt_m=net_debt_m,
+        base_revenue_m=base_rev_m,
+        wacc=wacc_val,
+        terminal_growth=0.025,
+        fcf_margin=fcf_margin_true,
+        forecast_years=10,
+        fade_start_year=5
+    )
+    g_implied_3stage_true_pct = round(g_implied_3stage_true * 100.0, 1)
+
+    # Detalle de Valor Terminal y Auditoría de Flujos
+    dcf_details_2stage = calculate_dcf_details(base_rev_m, init_proj_growth, fcf_margin, wacc_val, gn_dec, net_debt_m, shares_m_rounded, model_type="2STAGE")
+    dcf_details_3stage = calculate_dcf_details(base_rev_m, init_proj_growth, fcf_margin, wacc_val, gn_dec, net_debt_m, shares_m_rounded, model_type="3STAGE")
+
+    # Años de Ventaja Competitiva Implícita (Implied CAP - Mauboussin Runway)
+    implied_cap_years = calculate_implied_cap(
+        share_price=price,
+        shares_b=shares_b,
+        net_debt_m=net_debt_m,
+        base_revenue_m=base_rev_m,
+        wacc=wacc_val,
+        base_growth=init_proj_growth,
+        fcf_margin=fcf_margin
+    )
+
+    # -------------------------------------------------------------------------
+    # 4 NUEVOS PILARES DE VALORACIÓN (Múltiplos, EPV, EVA & 5Y Forward IRR)
+    # -------------------------------------------------------------------------
+    eps_diluted_val = canon_sum.get("eps_diluted_adjusted", {}).get("LTM") or 0.0
+    if not eps_diluted_val and canon_sum.get("eps_diluted_adjusted"):
+        eps_diluted_val = list(canon_sum["eps_diluted_adjusted"].values())[0] or 0.0
+    cagr_eps_5y = _compute_series_cagr(canon_sum.get("eps_diluted_adjusted"), 5)
+    cagr_fcf_5y = _compute_series_cagr(canon_sum.get("free_cash_flow"), 5)
+    buyback_rate_pct = _compute_share_reduction_rate(canon_sum.get("shares_diluted_adjusted"), 5)
+
+    div_ltm_raw = canon_sum.get("dividends_paid", {}).get("LTM")
+    if div_ltm_raw is None and canon_sum.get("dividends_paid"):
+        div_ltm_raw = list(canon_sum["dividends_paid"].values())[0]
+    div_m = abs(float(div_ltm_raw)) / 1e6 if (div_ltm_raw and abs(float(div_ltm_raw)) > 1e6) else float(div_ltm_raw or 0.0)
+    dividend_yield_pct = round((div_m / (price * shares_m_rounded) * 100.0), 2) if (price * shares_m_rounded) > 0 else 0.0
+
+    net_inc_raw = canon_sum.get("net_income", {}).get("LTM")
+    net_inc_m = (float(net_inc_raw) / 1e6) if (net_inc_raw and abs(float(net_inc_raw)) > 1e6) else float(net_inc_raw or 0.0)
+    ebitda_val = s_ebit + s_dna if (s_ebit > 0 or s_dna > 0) else (base_rev_m * (ebit_margin + dna_margin))
+
+    # Pilar A: Múltiplos
+    multiples_analysis = calculate_multiples_valuation(
+        price=price,
+        shares_m=shares_m_rounded,
+        net_debt_m=net_debt_m,
+        base_rev_m=base_rev_m,
+        ebit_m=s_ebit if s_ebit > 0 else (base_rev_m * ebit_margin),
+        ebitda_m=ebitda_val,
+        net_income_m=net_inc_m,
+        fcf_m=base_rev_m * fcf_margin,
+        eps_diluted=eps_diluted_val,
+        cagr_5y=cagr_5y,
+        cagr_eps_5y=cagr_eps_5y,
+        cagr_fcf_5y=cagr_fcf_5y,
+        peers_detail=peers,
+        is_financial=False
+    )
+
+    # Pilar B: EPV & PVGO
+    epv_analysis = calculate_epv_pvgo(
+        base_revenue_m=base_rev_m,
+        ebit_margin=ebit_margin,
+        tax_rate=tax_rate,
+        sbc_usd_m=sbc_usd_m,
+        wacc=wacc_val,
+        net_debt_m=net_debt_m,
+        shares_m=shares_m_rounded,
+        current_price=price
+    )
+
+    # Pilar C: EVA (Beneficio Económico sobre Capital Invertido)
+    ic_val = 0.0
+    roic_periods = scoring_data.get("roic_wacc_analysis", {}).get("roic", {}).get("by_period", {})
+    if roic_periods:
+        latest_k = sorted(list(roic_periods.keys()))[-1]
+        ic_val = float(roic_periods[latest_k].get("ic_adj_end", 0.0))
+    if ic_val <= 0:
+        ic_val = max(100.0, base_rev_m * 0.70)
+    roic_used = scoring_data.get("wacc_analysis", {}).get("roic_adjusted") or 0.22
+    eva_analysis = calculate_eva_valuation(
+        invested_capital_m=ic_val,
+        roic_val=roic_used,
+        wacc_val=wacc_val,
+        net_debt_m=net_debt_m,
+        shares_m=shares_m_rounded
+    )
+
+    # Pilar D: Simulador 5Y Forward IRR
+    exit_pe_ref = multiples_analysis.get("normal_pe") or 22.0
+    forward_5y_analysis = calculate_5y_forward_irr(
+        price=price,
+        base_revenue_m=base_rev_m,
+        revenue_growth_pct=cagr_5y if cagr_5y is not None else (init_proj_growth * 100.0),
+        fcf_margin_pct=fcf_margin * 100.0,
+        shares_m=shares_m_rounded,
+        net_buyback_yield_pct=buyback_rate_pct,
+        exit_multiple=exit_pe_ref,
+        dividend_yield_pct=dividend_yield_pct,
+        base_fcf_margin_pct=fcf_margin * 100.0,
+        current_multiple=multiples_analysis.get("pe_current")
+    )
+
+    # Resumen Ejecutivo: Valuation Football Field
+    football_field = get_valuation_football_field(
+        price=price,
+        dcf_price=fair_price_base,
+        multiples_price=multiples_analysis["imputed_prices"]["composite"],
+        epv_price=epv_analysis["epv_per_share"],
+        eva_price=eva_analysis["fair_price_eva"],
+        target_5y_price=forward_5y_analysis["target_price_5y"],
+        ke_val=wacc_val
+    )
+
     return {
         "is_financial": False,
         "price": price,
@@ -618,6 +1443,25 @@ def get_valuation_parameters(
         "hist_growth_pct": hist_growth_pct_val,
         "init_growth_disp": init_proj_growth * 100.0,
         "gap_expectations_str": f"{'+' if gap_exp_pp >= 0 else ''}{gap_exp_pp:.1f} pp",
+        # Nuevas Métricas Institucionales
+        "sbc_usd_m": sbc_usd_m,
+        "sbc_margin_pct": sbc_margin_pct,
+        "fcf_margin_true_pct": fcf_margin_true_pct,
+        "fcf_margin_true": fcf_margin_true,
+        "g_implied_3stage_pct": g_implied_3stage_pct,
+        "g_implied_3stage_true_pct": g_implied_3stage_true_pct,
+        "implied_cap_years": implied_cap_years,
+        "dcf_details_2stage": dcf_details_2stage,
+        "dcf_details_3stage": dcf_details_3stage,
+        "cagr_eps_5y": cagr_eps_5y,
+        "cagr_fcf_5y": cagr_fcf_5y,
+        "buyback_rate_pct": buyback_rate_pct,
+        "dividend_yield_pct": dividend_yield_pct,
+        "multiples_analysis": multiples_analysis,
+        "epv_analysis": epv_analysis,
+        "eva_analysis": eva_analysis,
+        "forward_5y_analysis": forward_5y_analysis,
+        "football_field": football_field,
     }
 
 

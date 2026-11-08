@@ -778,6 +778,53 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             ltm_bal_col.append(val)
                         bal_df.insert(bal_df.columns.get_loc(latest_fy), 'LTM', ltm_bal_col)
 
+                    # Extracción dinámica y universal de provisiones acumuladas / ECL para bancos FPI
+                    has_allowance = any(
+                        any(w in str(r.get('concept', '')).lower() or w in str(r.get('label', '')).lower() for w in ['allowance', 'creditloss', 'expectedcreditloss'])
+                        and pd.notna(r.get(latest_fy)) and float(r.get(latest_fy) or 0) > 1e6
+                        for _, r in bal_df.iterrows()
+                    )
+                    if not has_allowance:
+                        ecl_ltm_sum = 0.0
+                        ecl_prev_sum = 0.0
+                        for t in tables:
+                            t_clean = ' '.join(' '.join(t.astype(str).values.flatten()).split()).lower()
+                            if 'expected credit loss' in t_clean and ('coverage ratio' in t_clean or 'gross exposures' in t_clean) and 'stage 1' in t_clean:
+                                r3_lbl = ' '.join(str(t.iloc[3, 0]).split()).lower() if len(t) > 3 else ''
+                                if 'stage 1' not in r3_lbl:
+                                    continue
+                                c_ltm_ecl = None
+                                c_prev_ecl = None
+                                for c in range(t.shape[1]):
+                                    h_date = ' '.join(str(t.iloc[0, c]).split()).lower()
+                                    h_hdr = ' '.join(str(t.iloc[1, c]).split()).lower()
+                                    if 'expected credit loss' in h_hdr and '%' not in h_hdr:
+                                        if str(curr_yr) in h_date and c_ltm_ecl is None:
+                                            c_ltm_ecl = c
+                                        elif str(prev_yr) in h_date and c_prev_ecl is None:
+                                            c_prev_ecl = c
+                                if c_ltm_ecl is not None:
+                                    for r in range(len(t)):
+                                        lbl = ' '.join(str(t.iloc[r, 0]).split()).lower()
+                                        if any(st in lbl for st in ['stage 1', 'stage 2', 'stage 3']):
+                                            v1 = re.sub(r'[^\d.]', '', str(t.iloc[r, c_ltm_ecl]))
+                                            if v1:
+                                                ecl_ltm_sum += float(v1)
+                                            if c_prev_ecl is not None:
+                                                v2 = re.sub(r'[^\d.]', '', str(t.iloc[r, c_prev_ecl]))
+                                                if v2:
+                                                    ecl_prev_sum += float(v2)
+                        if ecl_ltm_sum > 0:
+                            scale = calib_factor if calib_factor > 1.0 else 1000.0
+                            new_row = {col: None for col in bal_df.columns}
+                            new_row['concept'] = 'AllowanceAccountForCreditLossesOfFinancialAssets'
+                            new_row['label'] = 'Allowance for expected credit losses'
+                            new_row['standard_concept'] = 'FinancingReceivableAllowanceForCreditLosses'
+                            new_row['LTM'] = ecl_ltm_sum * scale
+                            if latest_fy in bal_df.columns and ecl_prev_sum > 0:
+                                new_row[latest_fy] = ecl_prev_sum * scale
+                            bal_df.loc[len(bal_df)] = new_row
+
                     # Población de LTM en cf_df
                     if cf_df is not None and 'LTM' not in cf_df.columns and latest_fy in cf_df.columns:
                         col_curr_cf, col_prev_cf = None, None

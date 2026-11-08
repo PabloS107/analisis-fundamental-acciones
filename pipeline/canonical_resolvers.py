@@ -319,7 +319,8 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         "IntangibleAssetsNetExcludingGoodwill", "IntangibleAssetsNet",
         "OtherIntangibleAssetsNet", "us-gaap_IntangibleAssetsNetExcludingGoodwill",
         "IntangibleAssetsNetExcludingGoodwillNoncurrent", "us-gaap_IntangibleAssetsNetExcludingGoodwillNoncurrent",
-        "IntangibleAssetsNetNoncurrent", "us-gaap_IntangibleAssetsNetNoncurrent"
+        "IntangibleAssetsNetNoncurrent", "us-gaap_IntangibleAssetsNetNoncurrent",
+        "IntangibleAssetsOtherThanGoodwill", "ifrs-full_IntangibleAssetsOtherThanGoodwill"
     ]
     lt_inv_keys = [
         "MarketableSecuritiesNoncurrent", "us-gaap_MarketableSecuritiesNoncurrent",
@@ -426,8 +427,9 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         "FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest", "us-gaap_FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest",
         "FinancingReceivableAllowanceForCreditLosses", "us-gaap_FinancingReceivableAllowanceForCreditLosses",
         "AllowanceForCreditLossesOnFinancingReceivables", "us-gaap_AllowanceForCreditLossesOnFinancingReceivables",
-        "AllowanceAccountForCreditLossesOfFinancialAssets", "LoansAndLeasesReceivableAllowance",
-        "AllowanceForLoanAndLeaseLosses"
+        "AllowanceAccountForCreditLossesOfFinancialAssets", "ifrs-full_AllowanceAccountForCreditLossesOfFinancialAssets",
+        "LoansAndLeasesReceivableAllowance", "AllowanceForLoanAndLeaseLosses",
+        "CreditCardExpectedCreditLoss", "LoansExpectedCreditLoss", "AllowanceForExpectedCreditLosses"
     ]
     deposit_keys = [
         "Deposits", "us-gaap_Deposits", "ifrs-full_DepositsFromCustomers", "DepositsDomestic",
@@ -737,8 +739,16 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
 
         tot_liab_eq = round((tot_liab or 0.0) + (eq_v or 0.0), 1) if (tot_liab is not None or eq_v is not None) else None
-        nwc_v = round((tot_ca or 0.0) - (tot_cl or 0.0), 1) if (tot_ca is not None and tot_cl is not None) else None
-        net_fin_pos = round((tot_debt or 0.0) - (tot_cash_v or 0.0), 1) if (tot_debt is not None and tot_cash_v is not None) else None
+        if archetype == "FINANCIAL_BANKING":
+            nwc_v = None
+            net_fin_pos = None
+            tot_ca = None
+            tot_cl = None
+            tot_nca = None
+            tot_ncl = None
+        else:
+            nwc_v = round((tot_ca or 0.0) - (tot_cl or 0.0), 1) if (tot_ca is not None and tot_cl is not None) else None
+            net_fin_pos = round((tot_debt or 0.0) - (tot_cash_v or 0.0), 1) if (tot_debt is not None and tot_cash_v is not None) else None
 
         tot_liquid = round((c_v or 0.0) + (sti_v or 0.0), 1) if (c_v is not None or sti_v is not None) else None
         shares_v = _extract_val(["WeightedAverageNumberOfDilutedSharesOutstanding", "us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding", "CommonStockSharesOutstanding"], p, "shares_diluted_adjusted") or canonical.get("shares_diluted", {}).get(p)
@@ -800,6 +810,8 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         allow_loss_v = _extract_val(allow_loss_keys, p, ["allowance_for_credit_losses", "allowance_for_loan_losses"])
         if allow_loss_v is not None:
             allow_loss_v = abs(allow_loss_v)
+            if allow_loss_v < 1e7 and (net_loans_v or 0.0) > 1e9:
+                allow_loss_v = None
         dep_v = _extract_val(deposit_keys, p, "deposits")
         prem_rec_v = _extract_val(prem_rec_keys, p, "premiums_receivable")
         dac_v = _extract_val(dac_keys, p, "deferred_policy_acquisition_costs")
@@ -1364,6 +1376,46 @@ def resolve_canonical_income_statement(fs, periods, archetype="STANDARD_CORPORAT
             if rev is not None and tot_ben_exp is not None:
                 ebit = round(rev - tot_ben_exp, 2)
 
+        if archetype == "FINANCIAL_BANKING":
+            gp = None
+            cogs = None
+            ebit = None
+            rental_rev = None
+            tenant_reimb = None
+            prop_exp = None
+            noi = None
+            reit_da = None
+            reit_ga = None
+            reit_imp = None
+            gain_sale = None
+            losses_lae = None
+            dac_amort = None
+            other_uw_exp = None
+            tot_ben_exp = None
+            prem_earned = None
+            net_inv_inc = None
+            inv_gains = None
+            fees_other = None
+        elif archetype != "REAL_ESTATE_REIT":
+            rental_rev = None
+            tenant_reimb = None
+            prop_exp = None
+            noi = None
+            reit_da = None
+            reit_ga = None
+            reit_imp = None
+            gain_sale = None
+
+        if archetype != "INSURANCE":
+            losses_lae = None
+            dac_amort = None
+            other_uw_exp = None
+            tot_ben_exp = None
+            prem_earned = None
+            net_inv_inc = None
+            inv_gains = None
+            fees_other = None
+
         res["revenue"][p] = rev
         res["cogs"][p] = cogs
         res["gross_profit"][p] = gp
@@ -1424,7 +1476,7 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
 
     res = {
         "net_income": {}, "da": {}, "sbc": {}, "deferred_taxes": {}, "other_noncash": {},
-        "wc_ar": {}, "wc_inv": {}, "wc_ap": {}, "wc_other": {}, "cfo": {},
+        "wc_ar": {}, "wc_inv": {}, "wc_ap": {}, "wc_other": {}, "banking_loans_cf": {}, "banking_deposits_cf": {}, "cfo": {},
         "capex": {}, "acquisitions_ma": {}, "purchases_investments": {},
         "sales_maturities_investments": {}, "other_investing": {}, "cfi": {},
         "debt_issued": {}, "debt_repaid": {}, "net_debt_issued": {},
@@ -1495,6 +1547,26 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
             "IncreaseDecreaseInOperatingCapital"
         ], p)
 
+        banking_loans_cf = None
+        banking_deposits_cf = None
+        if archetype == "FINANCIAL_BANKING":
+            loans_cf_cand = _extract_multi_source_sum(fs, "cashflow", [
+                "nu_LoansToCustomersOne", "LoansToCustomersOne",
+                "IncreaseDecreaseInLoansAndLeasesReceivable", "AdjustmentsForDecreaseIncreaseInLoansAndAdvancesToCustomers"
+            ], p)
+            cc_cf_cand = _extract_multi_source_sum(fs, "cashflow", [
+                "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables",
+                "AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables", "nu_CreditCardReceivablesCF",
+                "IncreaseDecreaseInCreditCardReceivables"
+            ], p)
+            banking_loans_cf = round((loans_cf_cand or 0.0) + (cc_cf_cand or 0.0), 2) if (loans_cf_cand or cc_cf_cand) else None
+
+            banking_deposits_cf = _extract_multi_source_sum(fs, "cashflow", [
+                "ifrs-full_AdjustmentsForIncreaseDecreaseInDepositsFromBanks",
+                "AdjustmentsForIncreaseDecreaseInDepositsFromBanks", "AdjustmentsForIncreaseDecreaseInDepositsFromCustomers",
+                "nu_DepositsCF", "IncreaseDecreaseInDepositLiabilities"
+            ], p)
+
         cfo = _extract_multi_source_val(fs, "cashflow", [
             "NetCashProvidedByUsedInOperatingActivities", "CashFlowsFromUsedInOperatingActivities",
             "NetCashProvidedByOperatingActivities", "ifrs-full_CashFlowsFromUsedInOperatingActivities"
@@ -1502,7 +1574,7 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
 
         # Conciliación matemática exacta de CFO (Regla 6 y Fiscal.ai: sum(hijos) == CFO)
         if cfo is not None:
-            sub_cfo = (ni or 0.0) + (da or 0.0) + (sbc or 0.0) + (def_taxes or 0.0) + (wc_ar or 0.0) + (wc_inv or 0.0) + (wc_ap or 0.0) + (wc_other or 0.0) + (other_nc or 0.0)
+            sub_cfo = (ni or 0.0) + (da or 0.0) + (sbc or 0.0) + (def_taxes or 0.0) + (wc_ar or 0.0) + (wc_inv or 0.0) + (wc_ap or 0.0) + (wc_other or 0.0) + (banking_loans_cf or 0.0) + (banking_deposits_cf or 0.0) + (other_nc or 0.0)
             diff_cfo = round(cfo - sub_cfo, 2)
             if abs(diff_cfo) > 0.01:
                 other_nc = round((other_nc or 0.0) + diff_cfo, 2)
@@ -1698,6 +1770,8 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         res["wc_inv"][p] = wc_inv
         res["wc_ap"][p] = wc_ap
         res["wc_other"][p] = wc_other
+        res["banking_loans_cf"][p] = banking_loans_cf
+        res["banking_deposits_cf"][p] = banking_deposits_cf
         res["cfo"][p] = cfo
         res["capex"][p] = capex
         res["acquisitions_ma"][p] = acq_ma
