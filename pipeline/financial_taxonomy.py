@@ -421,8 +421,14 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
     "dividends_paid": [
         "PaymentsOfDividends",
         "PaymentsOfDividendsCommonStock",
+        "PaymentsOfOrdinaryDividends",
         "DividendsPaid",
         "Dividends",
+        "PaymentsOfDividendsClassifiedAsFinancingActivities",
+        "PaymentsOfOrdinaryDividendsCommonStock",
+        "aapl_PaymentsOfDividendsAndDividendEquivalentsOnCommonStockAndRestrictedStockUnits",
+        "PaymentsOfDividendsPreferredStockAndPreferenceStock",
+        "PaymentsOfDividendsMinorityInterest",
     ],
     "share_repurchases": [
         "PaymentsForRepurchaseOfCommonStock",
@@ -434,6 +440,7 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "PurchaseOfTreasuryShares",
         "PaymentsForPurchaseOfOwnShares",
         "PurchaseOfOwnShares",
+        "nu_SharesRepurchased",
     ],
     "stock_plans_proceeds": [
         "ProceedsFromStockPlans",
@@ -444,12 +451,18 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "ProceedsFromIssuingShares",
         "ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
         "Netproceedspaymentsrelatedtoemployeestockplans",
+        "ProceedsFromIssuanceOfConvertiblePreferredStock",
     ],
     "share_repurchases_sbc_tax": [
         "PaymentsRelatedToTaxWithholdingForShareBasedCompensation",
         "PaymentsForTaxesRelatedToNetShareSettlementOfEquityAwards",
         "PaymentsRelatedToTaxWithholdingForStockBasedAwards",
         "TaxWithholdingForShareBasedCompensation",
+        "goog_NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "goog:NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "deck_AccrualsForSharesWithheldForTaxes",
+        "deck:AccrualsForSharesWithheldForTaxes",
     ],
     "stock_based_compensation": [
         "ShareBasedCompensation",

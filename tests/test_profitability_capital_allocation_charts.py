@@ -180,6 +180,63 @@ class TestProfitabilityCapitalAllocationCharts(unittest.TestCase):
         # DECK debe ser $0 (0.0%) M&A en todas sus series anuales
         self.assertIn('$0 (0.0%)', html_deck)
 
+    def test_5y_audited_capital_allocation_kpis(self):
+        """Verifica que las tarjetas de Asignación de Capital reflejen con precisión matemática los 5 años fiscales auditados."""
+        expected_benchmarks = {
+            'GOOGL': {
+                'label': 'FY2021-FY2025 (5Y Auditado)',
+                'tot_bb': '$279,005.0M',
+                'tot_div': '$17,412.0M',
+                'tot_return': '$296,417.0M',
+            },
+            'META': {
+                'label': 'FY2021-FY2025 (5Y Auditado)',
+                'tot_bb': '$148,640.0M',
+                'tot_div': '$10,396.0M',
+                'tot_return': '$159,036.0M',
+            },
+            'NVDA': {
+                'label': 'FY2022-FY2026 (5Y Auditado)',
+                'tot_bb': '$93,364.0M',
+                'tot_div': '$3,000.0M',
+                'tot_return': '$96,364.0M',
+            },
+            'AAPL': {
+                'label': 'FY2022-FY2026 (5Y Auditado)',
+                'tot_bb': '$439,002.0M',
+                'tot_div': '$76,242.0M',
+                'tot_return': '$515,244.0M',
+            },
+            'DECK': {
+                'label': 'FY2022-FY2026 (5Y Auditado)',
+                'tot_bb': '$2,711.1M',
+                'tot_div': '$0',
+                'tot_return': '$2,711.1M',
+            },
+        }
+
+        for ticker, exp in expected_benchmarks.items():
+            path = f"data/processed/{ticker}/financial_statements.json"
+            with open(path, "r", encoding="utf-8") as f:
+                fs = json.load(f)
+            fys = fs.get("fiscal_years", [])
+            canonical = fs.get("canonical_summary", {})
+            key_ratios = fs.get("key_ratios", {})
+            ticker_dir = Path(f"data/processed/{ticker}")
+            ctx = build_charts_and_segments_context(
+                ticker_dir=ticker_dir,
+                fs=fs,
+                fys=fys,
+                canonical=canonical,
+                key_ratios=key_ratios,
+                enriched={}
+            )
+            kpis = ctx.get("alloc_kpis", {})
+            self.assertEqual(kpis.get("recent_years_label"), exp["label"], f"{ticker} label mismatch")
+            self.assertEqual(kpis.get("tot_bb_5y_str"), exp["tot_bb"], f"{ticker} buybacks mismatch")
+            self.assertEqual(kpis.get("tot_div_5y_str"), exp["tot_div"], f"{ticker} dividends mismatch")
+            self.assertEqual(kpis.get("total_shareholder_return_5y_str"), exp["tot_return"], f"{ticker} total return mismatch")
+
 
 if __name__ == '__main__':
     unittest.main()

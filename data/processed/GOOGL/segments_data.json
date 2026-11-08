@@ -14,6 +14,34 @@
   ],
   "product_segments": [
     {
+      "name": "Google",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2019": 408818.0,
+        "FY2018": 465592.0,
+        "FY2017": 379460.0,
+        "FY2016": 169367.0
+      },
+      "operating_income": {
+        "FY2025": 139404.0,
+        "FY2024": 121263.0,
+        "FY2023": 95858.0,
+        "FY2022": 82699.0,
+        "FY2021": 88132.0,
+        "FY2020": 54606.0,
+        "FY2019": 48999.0,
+        "FY2018": 43137.0,
+        "LTM": 159422.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 11.99,
+        "FY2018": 9.26
+      }
+    },
+    {
       "name": "Google Search & other",
       "is_subtotal": false,
       "is_subsegment": true,
@@ -28,7 +56,6 @@
         "FY2020": 104062.0,
         "FY2019": 98115.0,
         "FY2018": 85296.0,
-        "FY2017": 69811.0,
         "LTM": 250093.0
       },
       "status": "active",
@@ -40,8 +67,7 @@
       },
       "operating_margin_pct": {
         "FY2019": 42.47,
-        "FY2018": 42.97,
-        "FY2017": 46.49
+        "FY2018": 42.97
       }
     },
     {
@@ -59,7 +85,6 @@
         "FY2020": 19772.0,
         "FY2019": 15149.0,
         "FY2018": 11155.0,
-        "FY2017": 8150.0,
         "LTM": 43528.0
       },
       "status": "active"
@@ -106,7 +131,6 @@
         "FY2020": 146924.0,
         "FY2019": 134811.0,
         "FY2018": 116461.0,
-        "FY2017": 95577.0,
         "LTM": 323178.0
       },
       "status": "active",
@@ -118,8 +142,7 @@
       },
       "operating_margin_pct": {
         "FY2019": 30.91,
-        "FY2018": 31.47,
-        "FY2017": 33.96
+        "FY2018": 31.47
       }
     },
     {
@@ -200,7 +223,6 @@
         "FY2020": 13059.0,
         "FY2019": 8918.0,
         "FY2018": 5838.0,
-        "FY2017": 4056.0,
         "LTM": 93169.0
       },
       "status": "active",
@@ -322,9 +344,7 @@
       "values": {
         "FY2020": 23090.0,
         "FY2019": 21547.0,
-        "FY2018": 20010.0,
-        "FY2017": 17616.0,
-        "FY2016": 15598.0
+        "FY2018": 20010.0
       },
       "status": "discontinued",
       "operating_income": {
@@ -335,17 +355,52 @@
       },
       "operating_margin_pct": {
         "FY2019": 193.41,
-        "FY2018": 183.18,
-        "FY2017": 184.24,
-        "FY2016": 173.45
+        "FY2018": 183.18
       }
+    },
+    {
+      "name": "Google Search & other",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 98115.0,
+        "FY2018": 85296.0,
+        "FY2017": 69811.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 42.47,
+        "FY2018": 42.97,
+        "FY2017": 46.49
+      }
+    },
+    {
+      "name": "YouTube ads",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 15149.0,
+        "FY2018": 11155.0,
+        "FY2017": 8150.0
+      },
+      "status": "discontinued"
     },
     {
       "name": "Google Properties",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Google",
       "values": {
         "FY2019": 113264.0,
         "FY2018": 96451.0,
@@ -367,11 +422,89 @@
       }
     },
     {
+      "name": "Google Network Members' properties",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 21547.0,
+        "FY2018": 20010.0,
+        "FY2017": 17616.0,
+        "FY2016": 15598.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 193.41,
+        "FY2018": 183.18,
+        "FY2017": 184.24,
+        "FY2016": 173.45
+      }
+    },
+    {
+      "name": "Google advertising",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 134811.0,
+        "FY2018": 116461.0,
+        "FY2017": 95577.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 30.91,
+        "FY2018": 31.47,
+        "FY2017": 33.96
+      }
+    },
+    {
+      "name": "Google Cloud",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Google",
+      "values": {
+        "FY2019": 8918.0,
+        "FY2018": 5838.0,
+        "FY2017": 4056.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2025": 13910.0,
+        "FY2024": 6112.0,
+        "FY2023": 1716.0,
+        "FY2022": -1922.0,
+        "FY2021": -2282.0,
+        "FY2020": -5607.0,
+        "FY2019": -4645.0,
+        "FY2018": -4348.0,
+        "LTM": 31846.0
+      },
+      "operating_margin_pct": {
+        "FY2019": -52.09,
+        "FY2018": -74.48
+      }
+    },
+    {
       "name": "Other Revenues",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Google",
       "values": {
         "FY2019": 17014.0,
         "FY2018": 14063.0,
@@ -383,9 +516,9 @@
     {
       "name": "Advertising revenues",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Google",
       "values": {
         "FY2018": 116318.0,
         "FY2017": 95375.0,

@@ -20,7 +20,14 @@ def resolve_canonical_capital_flows(fs, periods):
     - net_debt_change: Variación algebraica ($) = debt_issuances - debt_repayments
     """
     canonical = fs.get("canonical_summary", {}) if isinstance(fs, dict) else {}
+    as_rep_cf_raw = fs.get("as_reported_statements", {}).get("cash_flow_statement", []) if isinstance(fs, dict) else []
+    as_rep_cf_rows = as_rep_cf_raw if isinstance(as_rep_cf_raw, list) else (as_rep_cf_raw.get("rows", []) if isinstance(as_rep_cf_raw, dict) else [])
+    as_rep_cf_dict = {}
+    for r in as_rep_cf_rows:
+        if isinstance(r, dict) and "concept" in r:
+            as_rep_cf_dict[r["concept"]] = r.get("values", {})
     cf_sources = [
+        as_rep_cf_dict,
         fs.get("cash_flow_detail", {}) if isinstance(fs, dict) else {},
         fs.get("cash_flow_statement", {}) if isinstance(fs, dict) else {}
     ]
@@ -88,7 +95,8 @@ def resolve_canonical_capital_flows(fs, periods):
         "ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
         "us-gaap_ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
         "Netproceedspaymentsrelatedtoemployeestockplans", "nvda_Netproceedspaymentsrelatedtoemployeestockplans",
-        "ProceedsFromMinorityShareholders", "o_ProceedsFromDividendReinvestmentAndStockPurchasePlanNet",
+        "ProceedsFromIssuanceOfConvertiblePreferredStock", "us-gaap_ProceedsFromIssuanceOfConvertiblePreferredStock",
+        "o_ProceedsFromDividendReinvestmentAndStockPurchasePlanNet",
         "ProceedsFromDividendReinvestmentAndStockPurchasePlanNet"
     ]
     tax_keys = [
@@ -96,7 +104,11 @@ def resolve_canonical_capital_flows(fs, periods):
         "PaymentsForTaxesRelatedToNetShareSettlementOfEquityAwards",
         "PaymentsRelatedToTaxWithholdingForStockBasedAwards",
         "TaxWithholdingForShareBasedCompensation",
-        "deck_AccrualsForSharesWithheldForTaxes"
+        "goog_NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "goog:NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "NetProceedsPaymentsRelatedToStockBasedAwardActivities",
+        "deck_AccrualsForSharesWithheldForTaxes",
+        "deck:AccrualsForSharesWithheldForTaxes"
     ]
     div_keys = [
         "PaymentsOfDividends", "PaymentsOfDividendsCommonStock", "PaymentsOfOrdinaryDividends",

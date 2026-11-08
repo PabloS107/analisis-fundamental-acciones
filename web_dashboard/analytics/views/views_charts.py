@@ -317,11 +317,9 @@ def build_charts_and_segments_context(
     alloc_debt_series = [round(max(0.0, (alloc_dr_dict.get(p) or 0.0) - (alloc_di_dict.get(p) or 0.0)) / alloc_scale, 1) for p in chart_periods]
     alloc_cfo_series = [round(alloc_cfo_dict[p] / alloc_scale, 1) if alloc_cfo_dict.get(p) is not None else 0.0 for p in chart_periods]
 
-    # Métricas acumuladas sobre la ventana completa hasta LTM (sustituyendo el último FY solapado si LTM está presente)
-    if "LTM" in chart_periods and len(chart_periods) >= 3:
-        alloc_periods = [p for p in chart_periods if p != chart_periods[-2]]
-    else:
-        alloc_periods = [p for p in chart_periods if p != "LTM"] or list(chart_periods)
+    # Métricas acumuladas sobre los últimos 5 ejercicios fiscales cerrados auditados (5Y Auditado)
+    annual_periods = [p for p in chart_periods if p != "LTM"]
+    alloc_periods = annual_periods[-5:] if len(annual_periods) >= 5 else annual_periods
 
     tot_cfo_5y = sum(alloc_cfo_dict.get(p) or 0.0 for p in alloc_periods)
     tot_capex_5y = sum(alloc_capex_dict.get(p) or 0.0 for p in alloc_periods)
@@ -392,7 +390,7 @@ def build_charts_and_segments_context(
         "tot_bb_5y_str": _fmt_alloc_num(tot_bb_5y),
         "tot_div_5y_str": _fmt_alloc_num(tot_div_5y),
         "tot_ma_5y_str": _fmt_alloc_num(tot_ma_5y),
-        "recent_years_label": f"{alloc_periods[0]}-{alloc_periods[-1]}" if alloc_periods else "N/D"
+        "recent_years_label": f"{alloc_periods[0]}-{alloc_periods[-1]} (5Y Auditado)" if alloc_periods else "N/D"
     }
 
     reinvest_rate_series = [

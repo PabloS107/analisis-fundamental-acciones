@@ -1629,13 +1629,25 @@ def compute_and_inject_ltm_columns(
             match_cf = q_cf[(q_toks == c_tok) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
             if match_cf.empty:
                 match_cf = q_cf[q_cf['concept'].astype(str).str.lower().str.endswith(':' + c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith('_' + c_tok)]
-            # Si no encuentra coincidencia exacta pero es un concepto de CapEx, buscar variantes en la taxonomía
-            if match_cf.empty and any(cand.lower() in c_name.lower() for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]):
-                for cand in XBRL_TAXONOMY_MAP["capital_expenditures"]:
-                    c_clean = _clean_concept_token(cand)
-                    cand_match = q_cf[(q_toks == c_clean) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
-                    if not cand_match.empty:
-                        match_cf = cand_match
+            # Si no encuentra coincidencia exacta, buscar variantes sinónimas en la taxonomía contable (ej. dividendos, recompras, CapEx, M&A, impuestos SBC, deuda)
+            if match_cf.empty:
+                cf_categories = [
+                    "dividends_paid", "share_repurchases", "share_repurchases_sbc_tax",
+                    "capital_expenditures", "acquisitions_ma", "stock_plans_proceeds",
+                    "debt_repayments", "debt_issuances", "operating_cash_flow",
+                    "cash_from_operations"
+                ]
+                for cat in cf_categories:
+                    cand_list = XBRL_TAXONOMY_MAP.get(cat, [])
+                    cand_tokens = {_clean_concept_token(cand) for cand in cand_list}
+                    if c_tok in cand_tokens or any(cand.lower() in c_name.lower() for cand in cand_list):
+                        for cand in cand_list:
+                            c_clean = _clean_concept_token(cand)
+                            cand_match = q_cf[(q_toks == c_clean) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
+                            if not cand_match.empty:
+                                match_cf = cand_match
+                                break
+                    if not match_cf.empty:
                         break
             # Fallback por coincidencia de etiqueta normalizada no abstracta (ej. Receivables, Contingencies, Accrued Interest)
             if match_cf.empty and 'label' in q_cf.columns and 'label' in row:
@@ -1672,12 +1684,15 @@ def compute_and_inject_ltm_columns(
                             val = float(v_prev)
                         except (ValueError, TypeError):
                             pass
-                elif pd.notna(v_curr) and pd.notna(v_prev) and pd.notna(fy_val):
+                elif pd.notna(v_curr):
                     try:
-                        f_fy = float(fy_val)
                         f_curr = float(v_curr)
-                        f_prev = float(v_prev)
-                        val = f_fy + f_curr - f_prev
+                        if pd.notna(v_prev) and pd.notna(fy_val):
+                            f_fy = float(fy_val)
+                            f_prev = float(v_prev)
+                            val = f_fy + f_curr - f_prev
+                        elif pd.notna(v_prev):
+                            val = f_curr - float(v_prev)
                     except (ValueError, TypeError):
                         pass
 
