@@ -4019,6 +4019,16 @@
         // Gráfico 4: Dinámica del Accionista: Recompra Neta ($M) vs Float (Acciones Diluidas)
         const elNetBuybacks = document.getElementById('chartNetBuybacksFloat') || document.getElementById('chartNetBuybacksFloatBanking') || document.getElementById('chartBuybacksSharesEPS');
         if (elNetBuybacks) {
+            window.buybackChartState = {
+                periods: periods,
+                netBuybacks: netBuybacks,
+                netBuybackColors: netBuybackColors,
+                netBuybackBorders: netBuybackBorders,
+                shares: shares,
+                buybacks: buybacks,
+                sbcSeries: sbcSeries,
+                sharesUnit: '{{ shares_unit }}'
+            };
             window.chartNetBuybacksInstance = new Chart(elNetBuybacks, {
                 data: {
                     labels: periods,
@@ -4777,22 +4787,23 @@
             btn.className = 'bb-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer font-bold';
         }
 
-        if (!window.chartNetBuybacksInstance || !periods) return;
+        const state = window.buybackChartState;
+        const ch = window.chartNetBuybacksInstance;
+        if (!ch || !state || !state.periods) return;
 
-        let count = periods.length;
+        let count = state.periods.length;
         if (view === '3y') count = 3;
         else if (view === '5y') count = 5;
 
-        const sliceIdx = Math.max(0, periods.length - count);
-        const subPeriods = periods.slice(sliceIdx);
-        const subNet = netBuybacks.slice(sliceIdx);
-        const subColors = netBuybackColors.slice(sliceIdx);
-        const subBorders = netBuybackBorders.slice(sliceIdx);
-        const subShares = shares.slice(sliceIdx);
-        const subGross = buybacks.slice(sliceIdx);
-        const subSbc = sbcSeries.slice(sliceIdx);
+        const sliceIdx = Math.max(0, state.periods.length - count);
+        const subPeriods = state.periods.slice(sliceIdx);
+        const subNet = state.netBuybacks.slice(sliceIdx);
+        const subColors = state.netBuybackColors.slice(sliceIdx);
+        const subBorders = state.netBuybackBorders.slice(sliceIdx);
+        const subShares = state.shares.slice(sliceIdx);
+        const subGross = state.buybacks.slice(sliceIdx);
+        const subSbc = state.sbcSeries.slice(sliceIdx);
 
-        const ch = window.chartNetBuybacksInstance;
         ch.data.labels = subPeriods;
         ch.data.datasets[0].data = subNet;
         ch.data.datasets[0].backgroundColor = subColors;
@@ -4800,7 +4811,7 @@
         ch.data.datasets[1].data = subShares;
         ch.update();
 
-        // Recalcular métricas de resumen
+        // Recalcular métricas de resumen sobre la ventana seleccionada
         const totGross = subGross.reduce((acc, v) => acc + (v || 0), 0);
         const totSbc = subSbc.reduce((acc, v) => acc + (v || 0), 0);
         const totNet = totGross - totSbc;
