@@ -277,19 +277,25 @@
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
                             <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
-                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                            <span id="badgeFloatChange" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
                                 Float Acum: {{ buybacks_summary.float_change_pct }}
                             </span>
                         </div>
                         <p class="text-xs text-slate-500 mt-0.5">Recompra Neta = Recompras Mercado Abierto - Compensación en Acciones (SBC) | Línea = Conteo de Acciones Diluidas</p>
                     </div>
-                    <div class="flex items-center gap-3 text-xs flex-wrap">
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompras Brutas: <strong class="text-purple-700">{{ buybacks_summary.total_buybacks }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">SBC Ejecutiva: <strong class="text-amber-700">{{ buybacks_summary.total_sbc }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompra Neta: <strong class="text-emerald-700">{{ buybacks_summary.total_net_buybacks }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Cobertura Recompras/SBC: <strong class="text-slate-900">{{ buybacks_summary.sbc_coverage_ratio }}</strong></span>
+                    <div class="flex items-center gap-2.5 text-xs flex-wrap">
+                        <!-- Selector de Periodos [3A | 5A | Todos] -->
+                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
+                            <button type="button" onclick="setBuybackPeriodView('3y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
+                            <button type="button" onclick="setBuybackPeriodView('5y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">5A</button>
+                            <button type="button" onclick="setBuybackPeriodView('all', this)" class="bb-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer font-bold">Todos</button>
+                        </div>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompras Brutas: <strong id="bbGrossSum" class="text-slate-900">{{ buybacks_summary.total_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">SBC Ejecutiva: <strong id="bbSbcSum" class="text-slate-900">{{ buybacks_summary.total_sbc }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompra Neta: <strong id="bbNetSum" class="text-slate-900">{{ buybacks_summary.total_net_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Cobertura Recompras/SBC: <strong id="bbCovRatio" class="text-slate-900">{{ buybacks_summary.sbc_coverage_ratio }}</strong></span>
                     </div>
                 </div>
                 <div class="h-80"><canvas id="chartNetBuybacksFloat"></canvas></div>
@@ -321,7 +327,7 @@
 
             <!-- Mini-Grid 4 KPIs Ejecutivos de Asignación Acumulada -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1: Retorno al Accionista Acum. -->
+                <!-- Card 1: Retorno Total al Accionista Acum. -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
                     <div class="flex justify-between items-center">
                         <span class="text-xs text-slate-500 font-medium">Retorno Total al Accionista (Acum.)</span>
@@ -334,7 +340,34 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Reinversión en Negocio (CapEx Acum.) -->
+                <!-- Card 2: Mix Recompras vs Dividendos (Ubicada a la derecha de Retorno al Accionista) -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Mix Recompras vs. Dividendos</span>
+                        <span class="text-lg">⚖️</span>
+                    </div>
+                    <div class="mt-2 space-y-1">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-purple-600"></span> Recompras:
+                            </span>
+                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_bb_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.bb_share_return_pct }})</span></span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Dividendos:
+                            </span>
+                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_div_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.div_share_return_pct }})</span></span>
+                        </div>
+                    </div>
+                    <!-- Mini barra apilada bicolor -->
+                    <div class="w-full bg-slate-100 rounded-full h-2 mt-2.5 flex overflow-hidden">
+                        <div class="bg-purple-600 h-2 transition-all duration-300" style="width: {{ alloc_kpis.bb_share_return_pct }};" title="Recompras: {{ alloc_kpis.bb_share_return_pct }}"></div>
+                        <div class="bg-amber-500 h-2 transition-all duration-300" style="width: {{ alloc_kpis.div_share_return_pct }};" title="Dividendos: {{ alloc_kpis.div_share_return_pct }}"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Reinversión en Negocio (CapEx Acum.) -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
                     <div class="flex justify-between items-center">
                         <span class="text-xs text-slate-500 font-medium">Reinversión Orgánica (CapEx Acum.)</span>
@@ -344,21 +377,6 @@
                     <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                         <span class="text-slate-500">% Reinversión / CFO:</span>
                         <span class="font-bold text-slate-700">{{ alloc_kpis.pct_reinvestment_capex_5y }}</span>
-                    </div>
-                </div>
-
-                <!-- Card 3: Recompras vs Dividendos -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Mix Recompras vs Dividendos</span>
-                        <span class="text-lg">⚖️</span>
-                    </div>
-                    <div class="text-2xl font-black text-slate-900 mt-1">
-                        {{ alloc_kpis.pct_buybacks_5y }} <span class="text-xs font-normal text-slate-500">recompras</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">Dividendos Directos:</span>
-                        <span class="font-bold text-slate-700">{{ alloc_kpis.pct_dividends_5y }}</span>
                     </div>
                 </div>
 
@@ -4001,7 +4019,7 @@
         // Gráfico 4: Dinámica del Accionista: Recompra Neta ($M) vs Float (Acciones Diluidas)
         const elNetBuybacks = document.getElementById('chartNetBuybacksFloat') || document.getElementById('chartNetBuybacksFloatBanking') || document.getElementById('chartBuybacksSharesEPS');
         if (elNetBuybacks) {
-            new Chart(elNetBuybacks, {
+            window.chartNetBuybacksInstance = new Chart(elNetBuybacks, {
                 data: {
                     labels: periods,
                     datasets: [
@@ -4749,5 +4767,69 @@
     document.addEventListener("DOMContentLoaded", () => {
         checkSecFreshnessAsync(false);
     });
+
+    // Selector Interactivo de Periodo [3A | 5A | Todos] para Dinámica del Accionista
+    window.setBuybackPeriodView = function(view, btn) {
+        document.querySelectorAll('.bb-period-btn').forEach(b => {
+            b.className = 'bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        });
+        if (btn) {
+            btn.className = 'bb-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer font-bold';
+        }
+
+        if (!window.chartNetBuybacksInstance || !periods) return;
+
+        let count = periods.length;
+        if (view === '3y') count = 3;
+        else if (view === '5y') count = 5;
+
+        const sliceIdx = Math.max(0, periods.length - count);
+        const subPeriods = periods.slice(sliceIdx);
+        const subNet = netBuybacks.slice(sliceIdx);
+        const subColors = netBuybackColors.slice(sliceIdx);
+        const subBorders = netBuybackBorders.slice(sliceIdx);
+        const subShares = shares.slice(sliceIdx);
+        const subGross = buybacks.slice(sliceIdx);
+        const subSbc = sbcSeries.slice(sliceIdx);
+
+        const ch = window.chartNetBuybacksInstance;
+        ch.data.labels = subPeriods;
+        ch.data.datasets[0].data = subNet;
+        ch.data.datasets[0].backgroundColor = subColors;
+        ch.data.datasets[0].borderColor = subBorders;
+        ch.data.datasets[1].data = subShares;
+        ch.update();
+
+        // Recalcular métricas de resumen
+        const totGross = subGross.reduce((acc, v) => acc + (v || 0), 0);
+        const totSbc = subSbc.reduce((acc, v) => acc + (v || 0), 0);
+        const totNet = totGross - totSbc;
+
+        const fmtM = (v) => {
+            const absV = Math.abs(v);
+            if (absV >= 1000) return '$' + (v / 1000).toFixed(1) + 'B';
+            return '$' + v.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + 'M';
+        };
+
+        const elGross = document.getElementById('bbGrossSum');
+        const elSbc = document.getElementById('bbSbcSum');
+        const elNet = document.getElementById('bbNetSum');
+        const elCov = document.getElementById('bbCovRatio');
+        const elFloat = document.getElementById('badgeFloatChange');
+
+        if (elGross) elGross.textContent = fmtM(totGross);
+        if (elSbc) elSbc.textContent = fmtM(totSbc);
+        if (elNet) elNet.textContent = fmtM(totNet);
+        if (elCov) elCov.textContent = (totSbc > 0) ? (totGross / totSbc).toFixed(1) + 'x' : 'N/A';
+
+        if (elFloat && subShares.length >= 2) {
+            const startSh = subShares[0];
+            const endSh = subShares[subShares.length - 1];
+            if (startSh > 0) {
+                const chg = ((endSh - startSh) / startSh) * 100;
+                elFloat.textContent = 'Float Acum: ' + (chg > 0 ? '+' : '') + chg.toFixed(1) + '%';
+            }
+        }
+    };
 </script>
 {% endblock %}

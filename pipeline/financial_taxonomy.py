@@ -460,6 +460,10 @@ CORPORATE_TAXONOMY_MAP: Dict[str, List[str]] = {
         "StockBasedCompensation",
     ],
     "acquisitions_ma": [
+        "AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "goog_AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "goog:AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAssets",
         "PaymentsToAcquireBusinessesNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
         "PaymentsToAcquireBusinessesNetOfCashAcquired",
         "PaymentsToAcquireBusinessTwoNetOfCashAcquired",

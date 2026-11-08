@@ -317,8 +317,11 @@ def build_charts_and_segments_context(
     alloc_debt_series = [round(max(0.0, (alloc_dr_dict.get(p) or 0.0) - (alloc_di_dict.get(p) or 0.0)) / alloc_scale, 1) for p in chart_periods]
     alloc_cfo_series = [round(alloc_cfo_dict[p] / alloc_scale, 1) if alloc_cfo_dict.get(p) is not None else 0.0 for p in chart_periods]
 
-    # Métricas acumuladas sobre los años fiscales cerrados completos (sin solapar el último FY con LTM)
-    alloc_periods = [p for p in chart_periods if p != "LTM"] or list(chart_periods)
+    # Métricas acumuladas sobre la ventana completa hasta LTM (sustituyendo el último FY solapado si LTM está presente)
+    if "LTM" in chart_periods and len(chart_periods) >= 3:
+        alloc_periods = [p for p in chart_periods if p != chart_periods[-2]]
+    else:
+        alloc_periods = [p for p in chart_periods if p != "LTM"] or list(chart_periods)
 
     tot_cfo_5y = sum(alloc_cfo_dict.get(p) or 0.0 for p in alloc_periods)
     tot_capex_5y = sum(alloc_capex_dict.get(p) or 0.0 for p in alloc_periods)
@@ -328,12 +331,16 @@ def build_charts_and_segments_context(
     tot_debt_repay_5y = sum(max(0.0, (alloc_dr_dict.get(p) or 0.0) - (alloc_di_dict.get(p) or 0.0)) for p in alloc_periods)
 
     total_shareholder_return_5y = tot_bb_5y + tot_div_5y
+    tot_reinvest_5y = tot_capex_5y + tot_ma_5y
     pct_reinvestment_capex_5y = round((tot_capex_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
+    pct_total_reinvestment_5y = round((tot_reinvest_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
     pct_shareholder_return_5y = round((total_shareholder_return_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
     pct_buybacks_5y = round((tot_bb_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
     pct_dividends_5y = round((tot_div_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
     pct_ma_5y = round((tot_ma_5y / tot_cfo_5y * 100.0), 1) if tot_cfo_5y > 0 else 0.0
 
+    bb_share_return = round((tot_bb_5y / total_shareholder_return_5y * 100.0), 1) if total_shareholder_return_5y > 0 else 0.0
+    div_share_return = round((tot_div_5y / total_shareholder_return_5y * 100.0), 1) if total_shareholder_return_5y > 0 else 0.0
     # Diagnóstico de Perfil de Asignación de Capital
     if total_shareholder_return_5y > 0 and (tot_bb_5y / total_shareholder_return_5y) > 0.60 and pct_shareholder_return_5y >= 45.0:
         capital_allocation_profile = "Caníbal de Acciones (Buyback Heavy)"
@@ -367,7 +374,11 @@ def build_charts_and_segments_context(
         "unit": alloc_unit,
         "total_shareholder_return_5y_str": _fmt_alloc_num(total_shareholder_return_5y),
         "total_shareholder_return_5y_num": total_shareholder_return_5y,
+        "bb_share_return_pct": f"{bb_share_return:.1f}%",
+        "div_share_return_pct": f"{div_share_return:.1f}%",
+        "tot_reinvest_5y_str": _fmt_alloc_num(tot_reinvest_5y),
         "pct_reinvestment_capex_5y": f"{pct_reinvestment_capex_5y:.1f}%",
+        "pct_total_reinvestment_5y": f"{pct_total_reinvestment_5y:.1f}%",
         "pct_shareholder_return_5y": f"{pct_shareholder_return_5y:.1f}%",
         "pct_buybacks_5y": f"{pct_buybacks_5y:.1f}%",
         "pct_dividends_5y": f"{pct_dividends_5y:.1f}%",

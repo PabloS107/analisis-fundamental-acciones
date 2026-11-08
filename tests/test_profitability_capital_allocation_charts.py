@@ -146,8 +146,8 @@ class TestProfitabilityCapitalAllocationCharts(unittest.TestCase):
         self.assertIn("banking_kpis", ctx)
 
     def test_view_renders_company_detail_html(self):
-        """Verifica que la vista web completa de Django renderice 200 OK y contenga los nuevos canvases"""
-        for ticker in ['AAPL', 'NVDA', 'DECK', 'JPM']:
+        """Verifica que la vista web completa de Django renderice 200 OK y contenga los nuevos canvases y selectores"""
+        for ticker in ['AAPL', 'NVDA', 'DECK', 'GOOGL', 'JPM']:
             response = self.client.get(f"/company/{ticker}/")
             self.assertEqual(response.status_code, 200, f"Failed to render company detail for {ticker}")
             html = response.content.decode('utf-8')
@@ -155,9 +155,30 @@ class TestProfitabilityCapitalAllocationCharts(unittest.TestCase):
                 self.assertIn('chartCashConversion', html, f"chartCashConversion canvas missing in {ticker}")
                 self.assertIn('chartNetBuybacksFloat', html, f"chartNetBuybacksFloat canvas missing in {ticker}")
                 self.assertIn('chartCapitalAllocation', html, f"chartCapitalAllocation canvas missing in {ticker}")
+                self.assertIn('setBuybackPeriodView', html, f"setBuybackPeriodView missing in {ticker}")
+                self.assertIn('bb-period-btn', html, f"bb-period-btn selector missing in {ticker}")
+                self.assertIn('Mix Recompras vs. Dividendos', html, f"Mix card missing in {ticker}")
                 self.assertNotIn('chartCashFlow', html, f"Old chartCashFlow canvas still in {ticker}")
             else:
                 self.assertIn('chartNetBuybacksFloatBanking', html, f"chartNetBuybacksFloatBanking canvas missing in JPM")
+
+    def test_googl_and_deck_acquisitions_ma(self):
+        """Verifica que GOOGL extraiga adquisiciones M&A ($34.2B LTM, $6.9B Mandiant) y DECK mantenga $0.0 orgánico"""
+        # 1. GOOGL
+        resp_googl = self.client.get("/company/GOOGL/")
+        self.assertEqual(resp_googl.status_code, 200)
+        html_googl = resp_googl.content.decode('utf-8')
+        # GOOGL M&A debe estar presente en el dataset JSON del gráfico de asignación
+        self.assertIn('"ma": [', html_googl)
+        # 34270.0 ($34.2B) en LTM
+        self.assertIn('34270.0', html_googl)
+
+        # 2. DECK
+        resp_deck = self.client.get("/company/DECK/")
+        self.assertEqual(resp_deck.status_code, 200)
+        html_deck = resp_deck.content.decode('utf-8')
+        # DECK debe ser $0 (0.0%) M&A en todas sus series anuales
+        self.assertIn('$0 (0.0%)', html_deck)
 
 
 if __name__ == '__main__':

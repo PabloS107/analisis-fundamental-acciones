@@ -106,6 +106,10 @@ def resolve_canonical_capital_flows(fs, periods):
         "PaymentsOfDividendsMinorityInterest", "us-gaap_PaymentsOfDividendsMinorityInterest"
     ]
     ma_keys = [
+        "AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "goog_AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "goog:AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+        "AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAssets",
         "PaymentsToAcquireBusinessesNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
         "PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessTwoNetOfCashAcquired",
         "us-gaap_PaymentsToAcquireBusinessTwoNetOfCashAcquired", "PaymentsToAcquireBusinessThreeNetOfCashAcquired",
@@ -1521,6 +1525,8 @@ def resolve_canonical_cash_flow(fs, periods, capital_flows=None, archetype="STAN
         acq_ma = capital_flows["acquisitions_ma"].get(p)
         if acq_ma is None:
             acq_ma = _extract_multi_source_sum(fs, "cashflow", [
+                "AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
+                "goog_AcquisitionsNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
                 "PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessTwoNetOfCashAcquired",
                 "PaymentsToAcquireBusinessesNetOfCashAcquiredAndPurchasesOfIntangibleAndOtherAssets",
                 "PaymentsToAcquireCommercialRealEstate", "PaymentsToAcquireLoansReceivable",
