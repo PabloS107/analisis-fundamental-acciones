@@ -8,7 +8,7 @@
   "is_financial": true,
   "business_model": "BANKING_FINTECH",
   "source": "SEC EDGAR (IFRS Oficial)",
-  "extraction_timestamp": "2026-10-20T02:41:40.377439",
+  "extraction_timestamp": "2026-11-08T13:11:06.651951",
   "fiscal_years": [
     "LTM",
     "FY2025",
@@ -19,6 +19,15 @@
     "FY2020",
     "FY2019"
   ],
+  "sec_metadata": {
+    "ltm_period": "Q4 2026",
+    "ltm_period_end": "2026-12-31",
+    "latest_periodic_form": "6-K",
+    "latest_periodic_date": "2026-10-23",
+    "latest_periodic_accession": "0001292814-26-005000",
+    "latest_8k_earnings_date": null,
+    "extraction_timestamp": "2026-11-08T13:11:06.651938"
+  },
   "canonical_summary": {
     "revenue": {
       "LTM": 13861436000.0,
@@ -121,7 +130,7 @@
       "FY2019": null
     },
     "capital_expenditures": {
-      "LTM": 281135000.0,
+      "LTM": 269303000.0,
       "FY2025": 333554000.0,
       "FY2024": 169572000.0,
       "FY2023": 156760000.0,
@@ -174,11 +183,11 @@
       "LTM": 1058343000.0,
       "FY2025": 783837000.0,
       "FY2024": 308583000.0,
-      "FY2023": 0.0,
-      "FY2022": 0.0,
-      "FY2021": 0.0,
-      "FY2020": 0.0,
-      "FY2019": 0.0
+      "FY2023": 1136344000.0,
+      "FY2022": 585568000.0,
+      "FY2021": 147243000.0,
+      "FY2020": 97454000.0,
+      "FY2019": 133401000.0
     },
     "long_term_debt": {
       "LTM": 4682252000.0,
@@ -194,21 +203,21 @@
       "LTM": 5740595000.0,
       "FY2025": 5182053000.0,
       "FY2024": 2038940000.0,
-      "FY2023": 1136344000.0,
-      "FY2022": 585568000.0,
-      "FY2021": 147243000.0,
-      "FY2020": 97454000.0,
-      "FY2019": 0.0
+      "FY2023": 2272688000.0,
+      "FY2022": 1171136000.0,
+      "FY2021": 294486000.0,
+      "FY2020": 194908000.0,
+      "FY2019": 133401000.0
     },
     "net_debt": {
       "LTM": -16960144000.0,
       "FY2025": -19359378000.0,
       "FY2024": -13890138000.0,
-      "FY2023": -12234579000.0,
-      "FY2022": -6364767000.0,
-      "FY2021": -3497091000.0,
-      "FY2020": -2289868000.0,
-      "FY2019": 0.0
+      "FY2023": -11098235000.0,
+      "FY2022": -5779199000.0,
+      "FY2021": -3349848000.0,
+      "FY2020": -2192414000.0,
+      "FY2019": 133401000.0
     },
     "total_assets": {
       "LTM": 82753414000.0,
@@ -228,7 +237,7 @@
       "FY2022": 4890783000.0,
       "FY2021": 4441032000.0,
       "FY2020": 438111000.0,
-      "FY2019": null
+      "FY2019": 612251000.0
     },
     "shares_basic": {
       "LTM": 4856663000.0,
@@ -411,7 +420,7 @@
       "FY2019": null
     },
     "stock_based_compensation": {
-      "LTM": null,
+      "LTM": 353835000.0,
       "FY2025": 271845000.0,
       "FY2024": 272382000.0,
       "FY2023": 212551000.0,
@@ -461,7 +470,7 @@
       "FY2019": null
     },
     "debt_repayments": {
-      "LTM": null,
+      "LTM": 612619000.0,
       "FY2025": 532755000.0,
       "FY2024": 580642000.0,
       "FY2023": 46501000.0,
@@ -471,7 +480,7 @@
       "FY2019": 95020000.0
     },
     "debt_issuances": {
-      "LTM": null,
+      "LTM": 2711861000.0,
       "FY2025": 2823472000.0,
       "FY2024": 1309890000.0,
       "FY2023": 469501000.0,
@@ -551,11 +560,11 @@
       "FY2019": 109697000.0
     },
     "interest_income": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
+      "LTM": 16609690000.0,
+      "FY2025": 13434683000.0,
+      "FY2024": 9631043000.0,
+      "FY2023": 6439712000.0,
+      "FY2022": 3555213000.0,
       "FY2021": 667768000.0,
       "FY2020": 256431000.0,
       "FY2019": 223202000.0
@@ -664,11 +673,11 @@
       "LTM": 1058343000.0,
       "FY2025": 783837000.0,
       "FY2024": 308583000.0,
-      "FY2023": 0.0,
-      "FY2022": 0.0,
-      "FY2021": 0.0,
-      "FY2020": 0.0,
-      "FY2019": 0.0
+      "FY2023": 1136344000.0,
+      "FY2022": 585568000.0,
+      "FY2021": 147243000.0,
+      "FY2020": 97454000.0,
+      "FY2019": 133401000.0
     },
     "rental_revenue": {
       "LTM": null,
@@ -922,16 +931,7 @@
       "FY2020": null,
       "FY2019": null
     },
-    "operating_margin_pct": {
-      "LTM": 31.63,
-      "FY2025": 34.55,
-      "FY2024": 32.19,
-      "FY2023": 25.69,
-      "FY2022": -9.52,
-      "FY2021": -12.79,
-      "FY2020": -31.0,
-      "FY2019": -25.74
-    },
+    "operating_margin_pct": {},
     "net_margin_pct": {
       "LTM": 26.04,
       "FY2025": 25.65,
@@ -969,7 +969,8 @@
       "FY2023": 18.24,
       "FY2022": -7.81,
       "FY2021": -6.78,
-      "FY2020": -39.14
+      "FY2020": -32.65,
+      "FY2019": -15.11
     },
     "roa_pct": {
       "LTM": 4.58,
@@ -994,10 +995,11 @@
       "LTM": 0.43,
       "FY2025": 0.46,
       "FY2024": 0.27,
-      "FY2023": 0.18,
-      "FY2022": 0.12,
-      "FY2021": 0.03,
-      "FY2020": 0.22
+      "FY2023": 0.35,
+      "FY2022": 0.24,
+      "FY2021": 0.07,
+      "FY2020": 0.44,
+      "FY2019": 0.22
     },
     "roc_greenblatt_pct": {
       "LTM": null,
@@ -1110,7 +1112,8 @@
       "FY2023": 16.09,
       "FY2022": -7.46,
       "FY2021": -3.72,
-      "FY2020": -39.14
+      "FY2020": -39.14,
+      "FY2019": -15.11
     },
     "roa_avg_pct": {
       "LTM": 4.58,
@@ -1128,7 +1131,8 @@
       "FY2023": 18.24,
       "FY2022": -7.81,
       "FY2021": -6.78,
-      "FY2020": -39.14
+      "FY2020": -32.65,
+      "FY2019": -15.11
     }
   },
   "income_statement_detail": {
@@ -1179,14 +1183,14 @@
       "label": "BasicEarningsLossPerShare",
       "standard_concept": "",
       "values": {
+        "LTM": 150.8936,
         "FY2025": 0.5936,
         "FY2024": 0.4115,
         "FY2023": 0.2175,
         "FY2022": -0.078,
         "FY2021": -0.103,
         "FY2020": -0.1304,
-        "FY2019": -0.0813,
-        "LTM": 0.74
+        "FY2019": -0.0813
       },
       "depth": 1,
       "is_abstract": false,
@@ -1229,7 +1233,7 @@
       "label": "DilutedEarningsLossPerShare",
       "standard_concept": "",
       "values": {
-        "LTM": 0.5846,
+        "LTM": 150.2846,
         "FY2025": 0.5846,
         "FY2024": 0.4034,
         "FY2023": 0.2121,
@@ -1659,12 +1663,12 @@
       "label": "Weighted Average Shares Outstanding",
       "standard_concept": "",
       "values": {
+        "LTM": 4856663000.0,
         "FY2025": 4832944000.0,
         "FY2024": 4792081000.0,
         "FY2023": 4738841000.0,
         "FY2022": 4676977000.0,
-        "FY2021": 1602126000.0,
-        "LTM": 4856663000.0
+        "FY2021": 1602126000.0
       },
       "depth": 0,
       "is_abstract": false,
@@ -2911,6 +2915,7 @@
       "label": "DeferredTaxAssets",
       "standard_concept": "",
       "values": {
+        "LTM": 3649091000.0,
         "FY2025": 2510967000.0,
         "FY2024": 1818339000.0,
         "FY2023": 1537835000.0,
@@ -2940,6 +2945,7 @@
       "label": "IntangibleAssetsOtherThanGoodwill",
       "standard_concept": "",
       "values": {
+        "LTM": 747101000.0,
         "FY2025": 601669000.0,
         "FY2024": 347616000.0,
         "FY2023": 295881000.0,
@@ -2956,6 +2962,7 @@
       "label": "IssuedCapital",
       "standard_concept": "",
       "values": {
+        "LTM": 84000.0,
         "FY2025": 84000.0,
         "FY2024": 84000.0,
         "FY2023": 84000.0,
@@ -2972,6 +2979,7 @@
       "label": "NoncontrollingInterests",
       "standard_concept": "",
       "values": {
+        "LTM": 2051000.0,
         "FY2025": 30614000.0,
         "FY2024": 787000.0,
         "FY2021": 1509000.0
@@ -3000,6 +3008,7 @@
       "label": "TradeAndOtherReceivables",
       "standard_concept": "",
       "values": {
+        "LTM": 849897000.0,
         "FY2024": 14619312000.0,
         "FY2023": 14488304000.0,
         "FY2022": 9266225000.0,
@@ -3224,6 +3233,7 @@
       "label": "Other Non-Operating Current Assets",
       "standard_concept": "",
       "values": {
+        "LTM": 1955741000.0,
         "FY2025": 1403870000.0,
         "FY2024": 663578000.0,
         "FY2023": 936209000.0,
@@ -3253,6 +3263,7 @@
       "label": "Operating Lease Right-of-Use Asset",
       "standard_concept": "",
       "values": {
+        "LTM": 54654000.0,
         "FY2025": 22244000.0,
         "FY2024": 20344000.0,
         "FY2023": 30459000.0,
@@ -3486,6 +3497,7 @@
       "label": "Other Non-Operating Current Liabilities",
       "standard_concept": "",
       "values": {
+        "LTM": 1240846000.0,
         "FY2025": 966922000.0,
         "FY2024": 621612000.0,
         "FY2023": 532331000.0,
@@ -3502,6 +3514,7 @@
       "label": "Additional Paid-In Capital",
       "standard_concept": "",
       "values": {
+        "LTM": 4566905000.0,
         "FY2025": 5062464000.0,
         "FY2024": 5053776000.0,
         "FY2023": 4972922000.0,
@@ -3531,6 +3544,7 @@
       "label": "Accumulated Other Comprehensive Income",
       "standard_concept": "",
       "values": {
+        "LTM": 186449000.0,
         "FY2025": -184300000.0,
         "FY2024": -828167000.0,
         "FY2023": 156430000.0,
@@ -3759,6 +3773,7 @@
       "label": "Profit or Loss",
       "standard_concept": "",
       "values": {
+        "LTM": 1932520000.0,
         "FY2024": 1972112000.0,
         "FY2023": 1030530000.0,
         "FY2022": -364634000.0,
@@ -3783,6 +3798,7 @@
       "label": "AdjustmentsForSharebasedPayments",
       "standard_concept": "",
       "values": {
+        "LTM": 353835000.0,
         "FY2025": 271845000.0,
         "FY2024": 272382000.0,
         "FY2023": 212551000.0,
@@ -3859,6 +3875,7 @@
       "label": "Depreciation & Amortization (CF)",
       "standard_concept": "",
       "values": {
+        "LTM": 130310000.0,
         "FY2025": 97968000.0,
         "FY2024": 77128000.0,
         "FY2023": 62895000.0,
@@ -3876,6 +3893,7 @@
       "label": "Expected credit loss",
       "standard_concept": "",
       "values": {
+        "LTM": 6176728000.0,
         "FY2025": 4701058000.0,
         "FY2024": 3469044000.0,
         "FY2023": 2487648000.0,
@@ -3893,6 +3911,7 @@
       "label": "Net Cash from Operating Activities",
       "standard_concept": "",
       "values": {
+        "LTM": 1377976000.0,
         "FY2025": 427259000.0,
         "FY2024": 713435000.0,
         "FY2023": 675682000.0,
@@ -3910,6 +3929,7 @@
       "label": "Provisions and contingent liabilities",
       "standard_concept": "",
       "values": {
+        "LTM": 52704000.0,
         "FY2025": 29238000.0,
         "FY2024": 18406000.0,
         "FY2023": 17098000.0
@@ -3923,6 +3943,7 @@
       "label": "Unrealized (gains) losses on financial instruments",
       "standard_concept": "",
       "values": {
+        "LTM": -154207000.0,
         "FY2025": -50432000.0,
         "FY2024": 47933000.0,
         "FY2023": 15885000.0,
@@ -3938,6 +3959,7 @@
       "label": "Interest accrued",
       "standard_concept": "",
       "values": {
+        "LTM": 417270000.0,
         "FY2025": 288682000.0,
         "FY2024": 179203000.0,
         "FY2023": 103572000.0,
@@ -3955,6 +3977,7 @@
       "label": "Share of loss in associates",
       "standard_concept": "",
       "values": {
+        "LTM": 7232000.0,
         "FY2025": 3689000.0
       },
       "depth": 0,
@@ -3966,6 +3989,7 @@
       "label": "Others",
       "standard_concept": "",
       "values": {
+        "LTM": 99624000.0,
         "FY2025": 86676000.0,
         "FY2024": -2723000.0,
         "FY2023": 23076000.0,
@@ -3997,6 +4021,7 @@
       "label": "Securities",
       "standard_concept": "",
       "values": {
+        "LTM": -6668161000.0,
         "FY2025": -4812896000.0,
         "FY2024": -2552241000.0,
         "FY2023": 699076000.0,
@@ -4014,6 +4039,7 @@
       "label": "Credit card receivables",
       "standard_concept": "",
       "values": {
+        "LTM": -15019360000.0,
         "FY2025": -12445835000.0,
         "FY2024": -5873063000.0,
         "FY2023": -7878307000.0,
@@ -4031,6 +4057,7 @@
       "label": "Loans to customers",
       "standard_concept": "",
       "values": {
+        "LTM": -11838966000.0,
         "FY2025": -10306930000.0,
         "FY2024": -7024003000.0,
         "FY2023": -3577534000.0,
@@ -4048,6 +4075,7 @@
       "label": "Other receivables",
       "standard_concept": "",
       "values": {
+        "LTM": 76049000.0,
         "FY2025": 406251000.0,
         "FY2024": 385192000.0,
         "FY2023": -1136488000.0,
@@ -4062,6 +4090,7 @@
       "label": "Compulsory and other deposits at central banks",
       "standard_concept": "",
       "values": {
+        "LTM": -976221000.0,
         "FY2025": -2749819000.0,
         "FY2024": 805963000.0,
         "FY2023": -4540463000.0,
@@ -4078,6 +4107,7 @@
       "label": "Other assets",
       "standard_concept": "",
       "values": {
+        "LTM": -735278000.0,
         "FY2025": -828600000.0,
         "FY2024": 369190000.0,
         "FY2023": -60982000.0,
@@ -4095,6 +4125,7 @@
       "label": "Deposits",
       "standard_concept": "",
       "values": {
+        "LTM": 8923170000.0,
         "FY2025": 12861282000.0,
         "FY2024": 5910612000.0,
         "FY2023": 7664820000.0,
@@ -4112,6 +4143,7 @@
       "label": "Payables to network",
       "standard_concept": "",
       "values": {
+        "LTM": 4354132000.0,
         "FY2025": 4132411000.0,
         "FY2024": -528511000.0,
         "FY2023": 2818592000.0,
@@ -4128,6 +4160,7 @@
       "label": "Deferred income",
       "standard_concept": "",
       "values": {
+        "LTM": -20266000.0,
         "FY2025": 5791000.0,
         "FY2024": 3750000.0,
         "FY2023": 25935000.0,
@@ -4145,6 +4178,7 @@
       "label": "Other liabilities",
       "standard_concept": "",
       "values": {
+        "LTM": 2874620000.0,
         "FY2025": 2659676000.0,
         "FY2024": 1111830000.0,
         "FY2023": 1279987000.0,
@@ -4162,6 +4196,7 @@
       "label": "Interest paid",
       "standard_concept": "",
       "values": {
+        "LTM": -248920000.0,
         "FY2025": -92292000.0,
         "FY2024": -88082000.0,
         "FY2023": -82904000.0,
@@ -4179,6 +4214,7 @@
       "label": "Income tax paid",
       "standard_concept": "",
       "values": {
+        "LTM": -2108055000.0,
         "FY2025": -1641663000.0,
         "FY2024": -1262541000.0,
         "FY2023": -612447000.0,
@@ -4196,6 +4232,7 @@
       "label": "Interest received",
       "standard_concept": "",
       "values": {
+        "LTM": 10690123000.0,
         "FY2025": 8439951000.0,
         "FY2024": 5820898000.0,
         "FY2023": 3389331000.0,
@@ -4230,6 +4267,7 @@
       "label": "Acquisition of property, plant and equipment",
       "standard_concept": "",
       "values": {
+        "LTM": -19047000.0,
         "FY2025": -7215000.0,
         "FY2024": -5418000.0,
         "FY2023": -20243000.0,
@@ -4247,7 +4285,7 @@
       "label": "Acquisition and development of intangible assets",
       "standard_concept": "",
       "values": {
-        "LTM": 281135000.0,
+        "LTM": -269303000.0,
         "FY2025": -333554000.0,
         "FY2024": -169572000.0,
         "FY2023": -156760000.0,
@@ -4299,6 +4337,7 @@
       "label": "Cash flow generated from (used in) investing activities",
       "standard_concept": "",
       "values": {
+        "LTM": -289889000.0,
         "FY2025": -342308000.0,
         "FY2024": -330627000.0,
         "FY2023": -177003000.0,
@@ -4316,6 +4355,7 @@
       "label": "Proceeds from borrowings and financing",
       "standard_concept": "",
       "values": {
+        "LTM": 2711861000.0,
         "FY2025": 2823472000.0,
         "FY2024": 1309890000.0,
         "FY2023": 469501000.0,
@@ -4333,6 +4373,7 @@
       "label": "Payments of borrowings and financing",
       "standard_concept": "",
       "values": {
+        "LTM": -612619000.0,
         "FY2025": -532755000.0,
         "FY2024": -580642000.0,
         "FY2023": -46501000.0,
@@ -4350,6 +4391,7 @@
       "label": "Lease payments",
       "standard_concept": "",
       "values": {
+        "LTM": -10227000.0,
         "FY2025": -6708000.0,
         "FY2024": -7053000.0,
         "FY2023": -6933000.0,
@@ -4367,6 +4409,7 @@
       "label": "Exercise of stock options",
       "standard_concept": "",
       "values": {
+        "LTM": 9234000.0,
         "FY2025": 6221000.0,
         "FY2024": 5546000.0,
         "FY2023": 9148000.0,
@@ -4381,6 +4424,7 @@
       "label": "Cash flows generated from (used in) financing activities",
       "standard_concept": "",
       "values": {
+        "LTM": 1597856000.0,
         "FY2025": 2290230000.0,
         "FY2024": 727741000.0,
         "FY2023": 425215000.0,
@@ -4398,6 +4442,7 @@
       "label": "Net Change in Cash",
       "standard_concept": "",
       "values": {
+        "LTM": -73649000.0,
         "FY2025": 5448386000.0,
         "FY2024": 2796158000.0,
         "FY2023": 1514401000.0,
@@ -4415,6 +4460,7 @@
       "label": "Cash and cash equivalents - end of the year",
       "standard_concept": "",
       "values": {
+        "LTM": 13551611000.0,
         "FY2025": 15003643000.0,
         "FY2024": 9185742000.0,
         "FY2023": 5923440000.0,
@@ -4432,6 +4478,7 @@
       "label": "Foreign exchange rate changes on cash and cash equivalents",
       "standard_concept": "",
       "values": {
+        "LTM": 356243000.0,
         "FY2025": 369515000.0,
         "FY2024": 466144000.0,
         "FY2023": 236723000.0,
@@ -4449,6 +4496,7 @@
       "label": "Increase (decrease) in cash and cash equivalents",
       "standard_concept": "",
       "values": {
+        "LTM": -73649000.0,
         "FY2025": 5448386000.0,
         "FY2024": 2796158000.0,
         "FY2023": 1514401000.0,
@@ -4478,6 +4526,7 @@
       "label": "Shares issued on business acquisition",
       "standard_concept": "",
       "values": {
+        "LTM": 3320000.0,
         "FY2025": 2467000.0,
         "FY2024": 75308000.0
       },
@@ -4600,7 +4649,6 @@
       "label": "Acquisition of intangible assets",
       "standard_concept": "",
       "values": {
-        "LTM": 281135000.0,
         "FY2023": -156760000.0,
         "FY2022": -94305000.0,
         "FY2021": -22473000.0,
@@ -4654,7 +4702,7 @@
       "label": "Shares repurchased",
       "standard_concept": "",
       "values": {
-        "LTM": 500393000.0,
+        "LTM": -500393000.0,
         "FY2021": -4607000.0,
         "FY2020": -15000.0,
         "FY2019": -3774000.0
@@ -4867,7 +4915,7 @@
     "income_statement": [
       {
         "label": "Profit or loss [abstract]",
-        "clarification": null,
+        "clarification": "Cuenta de pérdidas y ganancias",
         "concept": "ifrs-full_IncomeStatementAbstract",
         "level": 0,
         "is_abstract": true,
@@ -5027,7 +5075,7 @@
       },
       {
         "label": "Gross profit",
-        "clarification": "Utilidad bruta",
+        "clarification": "Beneficio bruto (Margen bruto)",
         "concept": "ifrs-full_GrossProfit",
         "level": 2,
         "is_abstract": false,
@@ -5040,14 +5088,14 @@
           "FY2021": 732917000.0,
           "FY2020": 326909000.0,
           "FY2019": 247918000.0,
-          "LTM": 7968982000.0
+          "LTM": null
         },
         "spanish_label": "Beneficio bruto (Margen bruto)",
         "orig_tooltip": "Gross profit (ifrs-full_GrossProfit)"
       },
       {
         "label": "Operating (expenses) income",
-        "clarification": null,
+        "clarification": "Ingresos (gastos) de explotación",
         "concept": "nu_OperatingExpensesAbstract1",
         "level": 1,
         "is_abstract": true,
@@ -5087,7 +5135,7 @@
       },
       {
         "label": "General and administrative expenses",
-        "clarification": "Gastos generales y administrativos (G&A)",
+        "clarification": "Gastos generales y administrativos",
         "concept": "nu_GeneralAndAdministrativeExpenses",
         "level": 1,
         "is_abstract": false,
@@ -5227,7 +5275,7 @@
       },
       {
         "label": "Income taxes",
-        "clarification": "Gasto por impuesto sobre las ganancias",
+        "clarification": "Impuesto sobre beneficios / Ganancias",
         "concept": "ifrs-full_IncomeTaxExpenseContinuingOperations",
         "level": 1,
         "is_abstract": false,
@@ -5327,7 +5375,7 @@
       },
       {
         "label": "Earnings Per Share (Basic)",
-        "clarification": "Beneficio por acción ordinaria básico (BPA básico)",
+        "clarification": "Beneficio básico por acción ($)",
         "concept": "ifrs-full_BasicEarningsLossPerShare",
         "level": 1,
         "is_abstract": false,
@@ -5340,14 +5388,14 @@
           "FY2021": -0.103,
           "FY2020": -0.1304,
           "FY2019": -0.0813,
-          "LTM": 0.74
+          "LTM": 150.8936
         },
         "spanish_label": "Beneficio básico por acción ($)",
         "orig_tooltip": "Earnings Per Share (Basic) (ifrs-full_BasicEarningsLossPerShare)"
       },
       {
         "label": "Earnings Per Share (Diluted)",
-        "clarification": "Beneficio por acción ordinaria diluido (BPA diluido)",
+        "clarification": "Beneficio diluido por acción ($)",
         "concept": "ifrs-full_DilutedEarningsLossPerShare",
         "level": 1,
         "is_abstract": false,
@@ -5358,16 +5406,16 @@
           "FY2023": 0.2121,
           "FY2022": -0.078,
           "FY2021": -0.103,
-          "FY2020": -0.1304,
-          "FY2019": -0.0813,
-          "LTM": 0.5846
+          "FY2020": 1315578.0,
+          "FY2019": 1137931.0,
+          "LTM": 150.2846
         },
         "spanish_label": "Beneficio diluido por acción ($)",
         "orig_tooltip": "Earnings Per Share (Diluted) (ifrs-full_DilutedEarningsLossPerShare)"
       },
       {
         "label": "Weighted Average Shares Outstanding",
-        "clarification": "Acciones ordinarias promedio ponderadas en circulación",
+        "clarification": "Acciones ordinarias básicas",
         "concept": "ifrs-full_WeightedAverageShares",
         "level": 1,
         "is_abstract": false,
@@ -5387,7 +5435,7 @@
       },
       {
         "label": "Weighted Average Shares Outstanding, Diluted",
-        "clarification": "Acciones ordinarias promedio ponderadas en circulación (Diluidas)",
+        "clarification": "Acciones ordinarias diluidas",
         "concept": "ifrs-full_AdjustedWeightedAverageShares",
         "level": 1,
         "is_abstract": false,
@@ -5409,7 +5457,7 @@
     "balance_sheet": [
       {
         "label": "Statement of financial position [abstract]",
-        "clarification": null,
+        "clarification": "Balance de situación patrimonial",
         "concept": "ifrs-full_StatementOfFinancialPositionAbstract",
         "level": 0,
         "is_abstract": true,
@@ -5429,7 +5477,7 @@
       },
       {
         "label": "Assets",
-        "clarification": null,
+        "clarification": "Activos",
         "concept": "ifrs-full_AssetsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -5449,7 +5497,7 @@
       },
       {
         "label": "Cash and Cash Equivalents",
-        "clarification": null,
+        "clarification": "Efectivo y equivalentes de efectivo",
         "concept": "ifrs-full_CashAndCashEquivalents",
         "level": 3,
         "is_abstract": false,
@@ -5629,7 +5677,7 @@
       },
       {
         "label": "Compulsory and other deposits at central banks",
-        "clarification": null,
+        "clarification": "Depósitos totales de clientes (A la vista y a plazo)",
         "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
         "level": 1,
         "is_abstract": false,
@@ -5669,7 +5717,7 @@
       },
       {
         "label": "Other Non-Operating Current Assets",
-        "clarification": null,
+        "clarification": "Otros activos corrientes no operativos",
         "concept": "ifrs-full_OtherReceivables",
         "level": 1,
         "is_abstract": false,
@@ -5709,7 +5757,7 @@
       },
       {
         "label": "Other Non-Operating Current Assets",
-        "clarification": null,
+        "clarification": "Otros activos corrientes no operativos",
         "concept": "ifrs-full_OtherAssets",
         "level": 1,
         "is_abstract": false,
@@ -5722,7 +5770,7 @@
           "FY2021": 232915000.0,
           "FY2020": 123495000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 1955741000.0
         },
         "spanish_label": "Otros activos corrientes no operativos",
         "orig_tooltip": "Other Non-Operating Current Assets (ifrs-full_OtherAssets)"
@@ -5742,7 +5790,7 @@
           "FY2021": 360752000.0,
           "FY2020": 125131000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 3649091000.0
         },
         "spanish_label": "Activos por impuestos diferidos no corrientes",
         "orig_tooltip": "Deferred Tax Assets, Non-Current (ifrs-full_DeferredTaxAssets)"
@@ -5782,14 +5830,14 @@
           "FY2021": 6426000.0,
           "FY2020": 10660000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 54654000.0
         },
         "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
         "orig_tooltip": "Operating Lease Right-of-Use Asset (ifrs-full_RightofuseAssets)"
       },
       {
         "label": "Property, Plant and Equipment",
-        "clarification": null,
+        "clarification": "Propiedad, planta y equipo",
         "concept": "ifrs-full_PropertyPlantAndEquipment",
         "level": 1,
         "is_abstract": false,
@@ -5822,14 +5870,14 @@
           "FY2021": 72337000.0,
           "FY2020": 12372000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 747101000.0
         },
         "spanish_label": "Activos intangibles",
         "orig_tooltip": "Intangible Assets (ifrs-full_IntangibleAssetsOtherThanGoodwill)"
       },
       {
         "label": "Goodwill",
-        "clarification": null,
+        "clarification": "Fondo de comercio (Goodwill)",
         "concept": "ifrs-full_Goodwill",
         "level": 1,
         "is_abstract": false,
@@ -5849,7 +5897,7 @@
       },
       {
         "label": "Total assets",
-        "clarification": null,
+        "clarification": "Total de activos",
         "concept": "ifrs-full_Assets",
         "level": 1,
         "is_abstract": false,
@@ -5869,7 +5917,7 @@
       },
       {
         "label": "Liabilities",
-        "clarification": null,
+        "clarification": "Pasivos",
         "concept": "ifrs-full_LiabilitiesAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6129,7 +6177,7 @@
       },
       {
         "label": "Other Non-Operating Current Liabilities",
-        "clarification": null,
+        "clarification": "Otros pasivos corrientes no operativos",
         "concept": "ifrs-full_OtherLiabilities",
         "level": 2,
         "is_abstract": false,
@@ -6142,14 +6190,14 @@
           "FY2021": 182247000.0,
           "FY2020": 83814000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 1240846000.0
         },
         "spanish_label": "Otros pasivos corrientes no operativos",
         "orig_tooltip": "Other Non-Operating Current Liabilities (ifrs-full_OtherLiabilities)"
       },
       {
         "label": "Total liabilities",
-        "clarification": null,
+        "clarification": "Total de pasivos",
         "concept": "ifrs-full_Liabilities",
         "level": 2,
         "is_abstract": false,
@@ -6169,7 +6217,7 @@
       },
       {
         "label": "Equity",
-        "clarification": null,
+        "clarification": "Patrimonio neto",
         "concept": "ifrs-full_EquityAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6189,7 +6237,7 @@
       },
       {
         "label": "Total Stockholders' Equity",
-        "clarification": null,
+        "clarification": "Total de patrimonio neto de los accionistas",
         "concept": "ifrs-full_IssuedCapital",
         "level": 2,
         "is_abstract": false,
@@ -6202,14 +6250,14 @@
           "FY2021": 83000.0,
           "FY2020": 45000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 84000.0
         },
         "spanish_label": "Total de patrimonio neto de los accionistas",
         "orig_tooltip": "Total Stockholders' Equity (ifrs-full_IssuedCapital)"
       },
       {
         "label": "Additional Paid-In Capital",
-        "clarification": "Prima de emisión y aportaciones adicionales de capital (APIC)",
+        "clarification": "Prima de emisión de acciones (Capital adicional)",
         "concept": "ifrs-full_SharePremium",
         "level": 2,
         "is_abstract": false,
@@ -6222,14 +6270,14 @@
           "FY2021": 4678585000.0,
           "FY2020": 638007000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 4566905000.0
         },
         "spanish_label": "Prima de emisión de acciones (Capital adicional)",
         "orig_tooltip": "Additional Paid-In Capital (ifrs-full_SharePremium)"
       },
       {
         "label": "Retained Earnings",
-        "clarification": null,
+        "clarification": "Resultados acumulados / Ganancias retenidas",
         "concept": "ifrs-full_RetainedEarnings",
         "level": 2,
         "is_abstract": false,
@@ -6257,12 +6305,12 @@
         "values": {
           "FY2025": -184300000.0,
           "FY2024": -828167000.0,
-          "FY2023": -156430000.0,
+          "FY2023": 156430000.0,
           "FY2022": -137651000.0,
           "FY2021": -109227000.0,
           "FY2020": -97500000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 186449000.0
         },
         "spanish_label": "Otro resultado integral acumulado (AOCI)",
         "orig_tooltip": "Accumulated Other Comprehensive Income (ifrs-full_AccumulatedOtherComprehensiveIncome)"
@@ -6302,14 +6350,14 @@
           "FY2021": 1509000.0,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 2051000.0
         },
         "spanish_label": "Intereses no dominantes / Socios minoritarios",
         "orig_tooltip": "Noncontrolling Interest (ifrs-full_NoncontrollingInterests)"
       },
       {
         "label": "Total equity",
-        "clarification": null,
+        "clarification": "Total de patrimonio neto",
         "concept": "ifrs-full_Equity",
         "level": 2,
         "is_abstract": false,
@@ -6329,7 +6377,7 @@
       },
       {
         "label": "Total liabilities and equity",
-        "clarification": null,
+        "clarification": "Total de pasivos y patrimonio neto",
         "concept": "ifrs-full_EquityAndLiabilities",
         "level": 1,
         "is_abstract": false,
@@ -6351,7 +6399,7 @@
     "cash_flow_statement": [
       {
         "label": "Statement of cash flows [abstract]",
-        "clarification": null,
+        "clarification": "Estado de flujos de efectivo",
         "concept": "ifrs-full_StatementOfCashFlowsAbstract",
         "level": 0,
         "is_abstract": true,
@@ -6371,7 +6419,7 @@
       },
       {
         "label": "Cash flows from operating activities",
-        "clarification": null,
+        "clarification": "Flujos de efectivo de actividades de operación",
         "concept": "ifrs-full_CashFlowsFromUsedInOperatingActivitiesAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6431,7 +6479,7 @@
       },
       {
         "label": "Adjustments:",
-        "clarification": null,
+        "clarification": "Adjustments",
         "concept": "nu_AdjustmentsForReconcileProfitLossAbstract1",
         "level": 1,
         "is_abstract": true,
@@ -6464,7 +6512,7 @@
           "FY2021": 17339000.0,
           "FY2020": 7428000.0,
           "FY2019": 5073000.0,
-          "LTM": null
+          "LTM": 130310000.0
         },
         "spanish_label": "Dotación para depreciación y amortización contable",
         "orig_tooltip": "Depreciation & Amortization (CF) (ifrs-full_AdjustmentsForDepreciationAndAmortisationExpense)"
@@ -6484,14 +6532,14 @@
           "FY2021": 503679000.0,
           "FY2020": 187790000.0,
           "FY2019": 193967000.0,
-          "LTM": null
+          "LTM": 6176728000.0
         },
         "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
         "orig_tooltip": "Expected credit loss (nu_CreditLossAllowanceExpenses1)"
       },
       {
         "label": "Net Cash from Operating Activities",
-        "clarification": null,
+        "clarification": "Net Cash from actividades de operación",
         "concept": "ifrs-full_AdjustmentsForDeferredTaxExpense",
         "level": 1,
         "is_abstract": false,
@@ -6504,7 +6552,7 @@
           "FY2021": 224654000.0,
           "FY2020": 44025000.0,
           "FY2019": 40340000.0,
-          "LTM": null
+          "LTM": 1377976000.0
         },
         "spanish_label": "Net Cash from actividades de operación",
         "orig_tooltip": "Net Cash from Operating Activities (ifrs-full_AdjustmentsForDeferredTaxExpense)"
@@ -6524,7 +6572,7 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 52704000.0
         },
         "spanish_label": "Dotación a provisiones y pasivos contingentes",
         "orig_tooltip": "Provisions and contingent liabilities (nu_ProvisionsAndContingentLiabilities)"
@@ -6544,7 +6592,7 @@
           "FY2021": 19338000.0,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": -154207000.0
         },
         "spanish_label": "Pérdidas (ganancias) no realizadas en instrumentos financieros",
         "orig_tooltip": "Unrealized (gains) losses on financial instruments (nu_UnrealizedLossesOnFinancialInstruments)"
@@ -6564,14 +6612,14 @@
           "FY2021": 11077000.0,
           "FY2020": 39521000.0,
           "FY2019": 17681000.0,
-          "LTM": null
+          "LTM": 417270000.0
         },
         "spanish_label": "Intereses devengados pendientes de liquidación",
         "orig_tooltip": "Interest accrued (nu_InterestAccrued)"
       },
       {
         "label": "Stock-Based Compensation (CF)",
-        "clarification": null,
+        "clarification": "Compensación basada en acciones",
         "concept": "ifrs-full_AdjustmentsForSharebasedPayments",
         "level": 1,
         "is_abstract": false,
@@ -6584,7 +6632,7 @@
           "FY2021": 157324000.0,
           "FY2020": 35569000.0,
           "FY2019": 18511000.0,
-          "LTM": null
+          "LTM": 353835000.0
         },
         "spanish_label": "Compensación basada en acciones",
         "orig_tooltip": "Stock-Based Compensation (CF) (ifrs-full_AdjustmentsForSharebasedPayments)"
@@ -6604,7 +6652,7 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 7232000.0
         },
         "spanish_label": "Participación en pérdidas de entidades asociadas",
         "orig_tooltip": "Share of loss in associates (nu_ShareOfLossInAssociates)"
@@ -6624,14 +6672,14 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 99624000.0
         },
         "spanish_label": "Otros flujos y variaciones operativas",
         "orig_tooltip": "Others (nu_Others)"
       },
       {
         "label": "Net Cash from Operating Activities",
-        "clarification": null,
+        "clarification": "Net Cash from actividades de operación",
         "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
         "level": 2,
         "is_abstract": false,
@@ -6651,7 +6699,7 @@
       },
       {
         "label": "Changes in operating assets and liabilities:",
-        "clarification": null,
+        "clarification": "Pasivos",
         "concept": "nu_AdjustmentsForChangesInAssetsAndLiabilitiesAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6684,7 +6732,7 @@
           "FY2021": -4666792000.0,
           "FY2020": -2008861000.0,
           "FY2019": -1689547000.0,
-          "LTM": null
+          "LTM": -6668161000.0
         },
         "spanish_label": "Valores e instrumentos de deuda negociables",
         "orig_tooltip": "Securities (nu_OperatingSecurities)"
@@ -6704,7 +6752,7 @@
           "FY2021": -2568423000.0,
           "FY2020": -470227000.0,
           "FY2019": -1414489000.0,
-          "LTM": null
+          "LTM": -15019360000.0
         },
         "spanish_label": "Cartera de créditos por operaciones de tarjetas",
         "orig_tooltip": "Credit card receivables (ifrs-full_AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables)"
@@ -6724,7 +6772,7 @@
           "FY2021": -1522217000.0,
           "FY2020": -178686000.0,
           "FY2019": -63009000.0,
-          "LTM": null
+          "LTM": -11838966000.0
         },
         "spanish_label": "Cartera de créditos y préstamos a clientes",
         "orig_tooltip": "Loans to customers (nu_LoansToCustomersOne)"
@@ -6744,14 +6792,14 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 76049000.0
         },
         "spanish_label": "Otros deudores y saldos por cobrar operativos",
         "orig_tooltip": "Other receivables (ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables)"
       },
       {
         "label": "Compulsory and other deposits at central banks",
-        "clarification": null,
+        "clarification": "Depósitos totales de clientes (A la vista y a plazo)",
         "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
         "level": 2,
         "is_abstract": false,
@@ -6764,7 +6812,7 @@
           "FY2021": -924889000.0,
           "FY2020": -43841000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": -976221000.0
         },
         "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
         "orig_tooltip": "Compulsory and other deposits at central banks (nu_CompulsoryDepositsAndOthersAtCentralBanks)"
@@ -6784,7 +6832,7 @@
           "FY2021": -64072000.0,
           "FY2020": 78319000.0,
           "FY2019": -166173000.0,
-          "LTM": null
+          "LTM": -735278000.0
         },
         "spanish_label": "Otros activos operativos y no corrientes",
         "orig_tooltip": "Other assets (ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets)"
@@ -6804,7 +6852,7 @@
           "FY2021": 4001856000.0,
           "FY2020": 2871246000.0,
           "FY2019": 2088793000.0,
-          "LTM": null
+          "LTM": 8923170000.0
         },
         "spanish_label": "Depósitos totales de clientes (A la vista y a plazo)",
         "orig_tooltip": "Deposits (ifrs-full_AdjustmentsForIncreaseDecreaseInDepositsFromBanks)"
@@ -6824,7 +6872,7 @@
           "FY2021": 1602485000.0,
           "FY2020": 312607000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 4354132000.0
         },
         "spanish_label": "Saldos pendientes de liquidación con redes de pago",
         "orig_tooltip": "Payables to network (nu_PayablesToNetwork)"
@@ -6844,7 +6892,7 @@
           "FY2021": 4848000.0,
           "FY2020": 3621000.0,
           "FY2019": 10325000.0,
-          "LTM": null
+          "LTM": -20266000.0
         },
         "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
         "orig_tooltip": "Deferred income (nu_DeferredIncome1)"
@@ -6864,7 +6912,7 @@
           "FY2021": 417225000.0,
           "FY2020": 57841000.0,
           "FY2019": 52366000.0,
-          "LTM": null
+          "LTM": 2874620000.0
         },
         "spanish_label": "Otros pasivos operativos no corrientes",
         "orig_tooltip": "Other liabilities (nu_OtherLiabilities1)"
@@ -6884,7 +6932,7 @@
           "FY2021": -9062000.0,
           "FY2020": -6199000.0,
           "FY2019": -15603000.0,
-          "LTM": null
+          "LTM": -248920000.0
         },
         "spanish_label": "Intereses financieros pagados",
         "orig_tooltip": "Interest paid (nu_InterestPaid1)"
@@ -6904,7 +6952,7 @@
           "FY2021": -52314000.0,
           "FY2020": -7880000.0,
           "FY2019": -3457000.0,
-          "LTM": null
+          "LTM": -2108055000.0
         },
         "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
         "orig_tooltip": "Income tax paid (nu_IncomeTaxPaid)"
@@ -6924,14 +6972,14 @@
           "FY2021": 563550000.0,
           "FY2020": 263035000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": 10690123000.0
         },
         "spanish_label": "Intereses financieros cobrados",
         "orig_tooltip": "Interest received (nu_InterestReceived)"
       },
       {
         "label": "Cash flows generated from (used in) operating activities",
-        "clarification": null,
+        "clarification": "Flujo de efectivo generado por (usado en) operación",
         "concept": "ifrs-full_CashFlowsFromUsedInOperatingActivities",
         "level": 1,
         "is_abstract": false,
@@ -6951,7 +6999,7 @@
       },
       {
         "label": "Cash flows in investing activities",
-        "clarification": null,
+        "clarification": "Cash flows in actividades de inversión",
         "concept": "ifrs-full_CashFlowsFromUsedInInvestingActivitiesAbstract",
         "level": 1,
         "is_abstract": true,
@@ -6971,7 +7019,7 @@
       },
       {
         "label": "Acquisition of property, plant and equipment",
-        "clarification": null,
+        "clarification": "Adquisición de propiedad, planta y equipo (CapEx)",
         "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
         "level": 2,
         "is_abstract": false,
@@ -6984,7 +7032,7 @@
           "FY2021": -6025000.0,
           "FY2020": -3084000.0,
           "FY2019": -2377000.0,
-          "LTM": null
+          "LTM": -19047000.0
         },
         "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
         "orig_tooltip": "Acquisition of property, plant and equipment (ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities)"
@@ -7001,10 +7049,10 @@
           "FY2024": -169572000.0,
           "FY2023": -156760000.0,
           "FY2022": -94305000.0,
-          "FY2021": null,
-          "FY2020": null,
-          "FY2019": null,
-          "LTM": 281135000.0
+          "FY2021": -22473000.0,
+          "FY2020": -4902000.0,
+          "FY2019": -2302000.0,
+          "LTM": -269303000.0
         },
         "spanish_label": "Adquisición y desarrollo de activos intangibles",
         "orig_tooltip": "Acquisition and development of intangible assets (nu_AcquisitionAndDevelopmentOfIntangibleAssets)"
@@ -7071,7 +7119,7 @@
       },
       {
         "label": "Cash flow generated from (used in) investing activities",
-        "clarification": null,
+        "clarification": "Flujo de efectivo generado por (usado en) inversión",
         "concept": "ifrs-full_CashFlowsFromUsedInInvestingActivities",
         "level": 1,
         "is_abstract": false,
@@ -7084,14 +7132,14 @@
           "FY2021": -154195000.0,
           "FY2020": -16270000.0,
           "FY2019": -4679000.0,
-          "LTM": null
+          "LTM": -289889000.0
         },
         "spanish_label": "Flujo de efectivo generado por (usado en) inversión",
         "orig_tooltip": "Cash flow generated from (used in) investing activities (ifrs-full_CashFlowsFromUsedInInvestingActivities)"
       },
       {
         "label": "Cash flows in financing activities",
-        "clarification": null,
+        "clarification": "Cash flows in actividades de financiación",
         "concept": "ifrs-full_CashFlowsFromUsedInFinancingActivitiesAbstract",
         "level": 1,
         "is_abstract": true,
@@ -7124,7 +7172,7 @@
           "FY2021": 116349000.0,
           "FY2020": 17974000.0,
           "FY2019": 160577000.0,
-          "LTM": null
+          "LTM": 2711861000.0
         },
         "spanish_label": "Financiación bancaria y pasivos financieros",
         "orig_tooltip": "Proceeds from borrowings and financing (nu_ProceedsFromBorrowingsAndFinancing)"
@@ -7144,7 +7192,7 @@
           "FY2021": -60523000.0,
           "FY2020": -27893000.0,
           "FY2019": -78185000.0,
-          "LTM": null
+          "LTM": -612619000.0
         },
         "spanish_label": "Financiación bancaria y pasivos financieros",
         "orig_tooltip": "Payments of borrowings and financing (nu_PaymentsOfBorrowingsAndFinancing)"
@@ -7164,7 +7212,7 @@
           "FY2021": -4387000.0,
           "FY2020": -4568000.0,
           "FY2019": -2014000.0,
-          "LTM": null
+          "LTM": -10227000.0
         },
         "spanish_label": "Pagos efectuados por arrendamientos",
         "orig_tooltip": "Lease payments (nu_LeasePayments)"
@@ -7184,14 +7232,14 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 9234000.0
         },
         "spanish_label": "Cobros por ejercicio de opciones sobre acciones",
         "orig_tooltip": "Exercise of stock options (nu_ExerciseOfStockOptions1)"
       },
       {
         "label": "Cash flows generated from (used in) financing activities",
-        "clarification": null,
+        "clarification": "Flujo de efectivo generado por (usado en) financiación",
         "concept": "ifrs-full_CashFlowsFromUsedInFinancingActivities",
         "level": 1,
         "is_abstract": false,
@@ -7204,7 +7252,7 @@
           "FY2021": 3335982000.0,
           "FY2020": 240102000.0,
           "FY2019": 611193000.0,
-          "LTM": null
+          "LTM": 1597856000.0
         },
         "spanish_label": "Flujo de efectivo generado por (usado en) financiación",
         "orig_tooltip": "Cash flows generated from (used in) financing activities (ifrs-full_CashFlowsFromUsedInFinancingActivities)"
@@ -7224,14 +7272,14 @@
           "FY2021": 257469000.0,
           "FY2020": 1198352000.0,
           "FY2019": 882651000.0,
-          "LTM": null
+          "LTM": -73649000.0
         },
         "spanish_label": "Variación neta en el efectivo y equivalentes",
         "orig_tooltip": "Net Change in Cash (ifrs-full_IncreaseDecreaseInCashAndCashEquivalents)"
       },
       {
         "label": "Increase (decrease) in cash and cash equivalents",
-        "clarification": null,
+        "clarification": "Efectivo y equivalentes de efectivo",
         "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
         "level": 1,
         "is_abstract": false,
@@ -7244,14 +7292,14 @@
           "FY2021": 257469000.0,
           "FY2020": 1198352000.0,
           "FY2019": null,
-          "LTM": null
+          "LTM": -73649000.0
         },
         "spanish_label": "Efectivo y equivalentes de efectivo",
         "orig_tooltip": "Increase (decrease) in cash and cash equivalents (nu_IncreaseDecreaseInCashAndCashEquivalent)"
       },
       {
         "label": "Non-cash transactions",
-        "clarification": null,
+        "clarification": "Transacciones no monetarias",
         "concept": "nu_NoncashTransactionsAbstract",
         "level": 1,
         "is_abstract": true,
@@ -7304,223 +7352,12 @@
           "FY2021": null,
           "FY2020": null,
           "FY2019": null,
-          "LTM": null
+          "LTM": 3320000.0
         },
         "spanish_label": "Acciones emitidas en combinación de negocios",
         "orig_tooltip": "Shares issued on business acquisition (nu_SharesIssuedOnBusinessAcquisition)"
       }
     ]
-  },
-  "financial_ratios": {
-    "gross_margin_pct": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "operating_margin_pct": {},
-    "net_margin_pct": {
-      "LTM": 26.04,
-      "FY2025": 25.65,
-      "FY2024": 22.71,
-      "FY2023": 17.2,
-      "FY2022": -11.24,
-      "FY2021": -12.42,
-      "FY2020": -27.52,
-      "FY2019": -18.42
-    },
-    "fcf_margin_pct": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "fcf_conversion_pct": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "roe_pct": {
-      "LTM": 29.42,
-      "FY2025": 30.33,
-      "FY2024": 28.07,
-      "FY2023": 18.24,
-      "FY2022": -7.81,
-      "FY2021": -6.78,
-      "FY2020": -39.14
-    },
-    "roa_pct": {
-      "LTM": 4.58,
-      "FY2025": 4.6,
-      "FY2024": 4.23,
-      "FY2023": 2.81,
-      "FY2022": -1.46,
-      "FY2021": -1.1,
-      "FY2020": -1.69
-    },
-    "current_ratio": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "debt_to_equity": {
-      "LTM": 0.43,
-      "FY2025": 0.46,
-      "FY2024": 0.27,
-      "FY2023": 0.18,
-      "FY2022": 0.12,
-      "FY2021": 0.03,
-      "FY2020": 0.22
-    },
-    "roc_greenblatt_pct": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "tangible_capital_usd": {
-      "LTM": null,
-      "FY2025": null,
-      "FY2024": null,
-      "FY2023": null,
-      "FY2022": null,
-      "FY2021": null,
-      "FY2020": null,
-      "FY2019": null
-    },
-    "efficiency_ratio_pct": {
-      "LTM": 25.81,
-      "FY2025": 24.59,
-      "FY2024": 28.31,
-      "FY2023": 32.57,
-      "FY2022": 60.78,
-      "FY2021": 67.87,
-      "FY2020": 67.22,
-      "FY2019": 75.08
-    },
-    "cost_of_risk_pct": {
-      "LTM": 39.1,
-      "FY2025": 37.56,
-      "FY2024": 36.5,
-      "FY2023": 38.14,
-      "FY2022": 43.3,
-      "FY2021": 36.12,
-      "FY2020": 27.2,
-      "FY2019": 34.87
-    },
-    "risk_adj_nim_pct": {
-      "LTM": 6.9,
-      "FY2025": 6.21,
-      "FY2024": 7.26,
-      "FY2023": 4.89,
-      "FY2022": 2.01,
-      "FY2021": 1.0,
-      "FY2020": 0.98
-    },
-    "ldr_pct": {
-      "LTM": 72.39,
-      "FY2025": 66.04,
-      "FY2024": 60.93,
-      "FY2023": 65.92,
-      "FY2022": 62.67,
-      "FY2021": 61.81,
-      "FY2020": 55.21
-    },
-    "fee_share_pct": {
-      "LTM": 19.7,
-      "FY2025": 20.9,
-      "FY2024": 21.72,
-      "FY2023": 26.52,
-      "FY2022": 38.13,
-      "FY2021": 48.94,
-      "FY2020": 56.84,
-      "FY2019": 54.59
-    },
-    "cost_of_risk_loans_pct": {
-      "LTM": 16.52,
-      "FY2025": 15.19,
-      "FY2024": 18.02,
-      "FY2023": 14.63,
-      "FY2022": 14.18,
-      "FY2021": 8.04,
-      "FY2020": 5.5
-    },
-    "financial_leverage": {
-      "LTM": 6.25,
-      "FY2025": 6.63,
-      "FY2024": 6.53,
-      "FY2023": 6.77,
-      "FY2022": 6.12,
-      "FY2021": 4.47,
-      "FY2020": 23.18
-    },
-    "asset_turnover": {
-      "LTM": 0.1675,
-      "FY2025": 0.1495,
-      "FY2024": 0.1739,
-      "FY2023": 0.1382,
-      "FY2022": 0.1084,
-      "FY2021": 0.067,
-      "FY2020": 0.0614
-    },
-    "roa_ending_pct": {
-      "LTM": 4.36,
-      "FY2025": 3.83,
-      "FY2024": 3.95,
-      "FY2023": 2.38,
-      "FY2022": -1.22,
-      "FY2021": -0.83,
-      "FY2020": -1.69
-    },
-    "roe_ending_pct": {
-      "LTM": 27.25,
-      "FY2025": 25.43,
-      "FY2024": 25.79,
-      "FY2023": 16.09,
-      "FY2022": -7.46,
-      "FY2021": -3.72,
-      "FY2020": -39.14
-    },
-    "roa_avg_pct": {
-      "LTM": 4.58,
-      "FY2025": 4.6,
-      "FY2024": 4.23,
-      "FY2023": 2.81,
-      "FY2022": -1.46,
-      "FY2021": -1.1,
-      "FY2020": -1.69
-    },
-    "roe_avg_pct": {
-      "LTM": 29.42,
-      "FY2025": 30.33,
-      "FY2024": 28.07,
-      "FY2023": 18.24,
-      "FY2022": -7.81,
-      "FY2021": -6.78,
-      "FY2020": -39.14
-    }
   },
   "resolved_canonical_statements": {
     "balance_sheet": {
@@ -7605,7 +7442,7 @@
         "FY2019": null
       },
       "rou_asset": {
-        "LTM": null,
+        "LTM": 54654000.0,
         "FY2025": 22244000.0,
         "FY2024": 20344000.0,
         "FY2023": 30459000.0,
@@ -7615,7 +7452,7 @@
         "FY2019": null
       },
       "net_ppe_plus_rou": {
-        "LTM": null,
+        "LTM": 54654000.0,
         "FY2025": 22244000.0,
         "FY2024": 20344000.0,
         "FY2023": 30459000.0,
@@ -7655,7 +7492,7 @@
         "FY2019": null
       },
       "other_noncurrent_assets": {
-        "LTM": 44030184000.0,
+        "LTM": 43975530000.0,
         "FY2025": 36524382000.0,
         "FY2024": 22813917000.0,
         "FY2023": 20350655000.0,
@@ -7718,31 +7555,31 @@
         "LTM": 1058343000.0,
         "FY2025": 783837000.0,
         "FY2024": 308583000.0,
+        "FY2023": 1136344000.0,
+        "FY2022": 585568000.0,
+        "FY2021": 147243000.0,
+        "FY2020": 97454000.0,
+        "FY2019": 133401000.0
+      },
+      "other_current_liabilities": {
+        "LTM": 0.0,
+        "FY2025": 0.0,
+        "FY2024": 0.0,
         "FY2023": 0.0,
         "FY2022": 0.0,
         "FY2021": 0.0,
         "FY2020": 0.0,
         "FY2019": 0.0
       },
-      "other_current_liabilities": {
-        "LTM": 0.0,
-        "FY2025": 0.0,
-        "FY2024": 0.0,
-        "FY2023": null,
-        "FY2022": null,
-        "FY2021": null,
-        "FY2020": null,
-        "FY2019": null
-      },
       "total_current_liabilities": {
         "LTM": 1058343000.0,
         "FY2025": 783837000.0,
         "FY2024": 308583000.0,
-        "FY2023": null,
-        "FY2022": null,
-        "FY2021": null,
-        "FY2020": null,
-        "FY2019": null
+        "FY2023": 1136344000.0,
+        "FY2022": 585568000.0,
+        "FY2021": 147243000.0,
+        "FY2020": 97454000.0,
+        "FY2019": 133401000.0
       },
       "long_term_debt": {
         "LTM": 4682252000.0,
@@ -7778,20 +7615,20 @@
         "LTM": 63761098000.0,
         "FY2025": 58390262000.0,
         "FY2024": 40245198000.0,
-        "FY2023": null,
-        "FY2022": null,
-        "FY2021": null,
-        "FY2020": null,
+        "FY2023": 34666122000.0,
+        "FY2022": 23872953000.0,
+        "FY2021": 15121654000.0,
+        "FY2020": 9521231000.0,
         "FY2019": null
       },
       "total_noncurrent_liabilities": {
         "LTM": 68443350000.0,
         "FY2025": 62788478000.0,
         "FY2024": 41975555000.0,
-        "FY2023": null,
-        "FY2022": null,
-        "FY2021": null,
-        "FY2020": null,
+        "FY2023": 35802466000.0,
+        "FY2022": 24458521000.0,
+        "FY2021": 15268897000.0,
+        "FY2020": 9618685000.0,
         "FY2019": null
       },
       "total_liabilities": {
@@ -7805,7 +7642,7 @@
         "FY2019": null
       },
       "common_stock_and_apic": {
-        "LTM": 4753438000.0,
+        "LTM": 4566989000.0,
         "FY2025": 5062548000.0,
         "FY2024": 5053860000.0,
         "FY2023": 4973006000.0,
@@ -7825,14 +7662,14 @@
         "FY2019": null
       },
       "other_equity": {
-        "LTM": 0.0,
+        "LTM": 186449000.0,
         "FY2025": -184300000.0,
         "FY2024": -828167000.0,
         "FY2023": 156430000.0,
         "FY2022": -137651000.0,
         "FY2021": -109227000.0,
         "FY2020": -97500000.0,
-        "FY2019": null
+        "FY2019": 612251000.0
       },
       "minority_interest": {
         "LTM": 2051000.0,
@@ -7848,11 +7685,11 @@
         "LTM": 5740595000.0,
         "FY2025": 5182053000.0,
         "FY2024": 2038940000.0,
-        "FY2023": 1136344000.0,
-        "FY2022": 585568000.0,
-        "FY2021": 147243000.0,
-        "FY2020": 97454000.0,
-        "FY2019": 0.0
+        "FY2023": 2272688000.0,
+        "FY2022": 1171136000.0,
+        "FY2021": 294486000.0,
+        "FY2020": 194908000.0,
+        "FY2019": 133401000.0
       },
       "stockholders_equity": {
         "LTM": 13251721000.0,
@@ -7862,7 +7699,7 @@
         "FY2022": 4890783000.0,
         "FY2021": 4442541000.0,
         "FY2020": 438111000.0,
-        "FY2019": null
+        "FY2019": 612251000.0
       },
       "total_liab_and_equity": {
         "LTM": 82753414000.0,
@@ -7872,27 +7709,27 @@
         "FY2022": 29934872000.0,
         "FY2021": 19858681000.0,
         "FY2020": 10154250000.0,
-        "FY2019": null
+        "FY2019": 612251000.0
       },
       "net_working_capital": {
         "LTM": 37162512000.0,
         "FY2025": 37055341000.0,
         "FY2024": 26274718000.0,
-        "FY2023": null,
-        "FY2022": null,
-        "FY2021": null,
-        "FY2020": null,
+        "FY2023": 21430199000.0,
+        "FY2022": 16445548000.0,
+        "FY2021": 12578851000.0,
+        "FY2020": 6667986000.0,
         "FY2019": null
       },
       "net_financial_position": {
         "LTM": -32480260000.0,
         "FY2025": -32657125000.0,
         "FY2024": -24544361000.0,
-        "FY2023": -21430199000.0,
-        "FY2022": -16445548000.0,
-        "FY2021": -12578851000.0,
-        "FY2020": -6667986000.0,
-        "FY2019": 0.0
+        "FY2023": -20293855000.0,
+        "FY2022": -15859980000.0,
+        "FY2021": -12431608000.0,
+        "FY2020": -6570532000.0,
+        "FY2019": 133401000.0
       },
       "book_value_per_share": {
         "LTM": 2.72,
@@ -7902,7 +7739,7 @@
         "FY2022": 1.05,
         "FY2021": 0.92,
         "FY2020": 0.11,
-        "FY2019": 0.0
+        "FY2019": 0.18
       },
       "tangible_book_value_per_share": {
         "LTM": 2.63,
@@ -7912,7 +7749,7 @@
         "FY2022": 0.96,
         "FY2021": 0.84,
         "FY2020": 0.11,
-        "FY2019": 0.0
+        "FY2019": 0.18
       },
       "net_loans": {
         "LTM": 32811828000.0,
@@ -7998,10 +7835,10 @@
         "LTM": 18432679000.0,
         "FY2025": 16465161000.0,
         "FY2024": 11390133000.0,
-        "FY2023": 12111336000.0,
-        "FY2022": 8649980000.0,
-        "FY2021": 5601597000.0,
-        "FY2020": 4033823000.0,
+        "FY2023": 10974992000.0,
+        "FY2022": 8064412000.0,
+        "FY2021": 5454354000.0,
+        "FY2020": 3936369000.0,
         "FY2019": null
       }
     },
@@ -8027,7 +7864,7 @@
         "FY2019": null
       },
       "gross_profit": {
-        "LTM": 7968982000.0,
+        "LTM": null,
         "FY2025": 6625002000.0,
         "FY2024": 5252909000.0,
         "FY2023": 3490903000.0,
@@ -8539,7 +8376,7 @@
         "FY2019": 0.0
       },
       "debt_repayments": {
-        "LTM": 0.0,
+        "LTM": 612619000.0,
         "FY2025": 532755000.0,
         "FY2024": 580642000.0,
         "FY2023": 46501000.0,
@@ -8549,7 +8386,7 @@
         "FY2019": 95020000.0
       },
       "debt_issuances": {
-        "LTM": 0.0,
+        "LTM": 2711861000.0,
         "FY2025": 2823472000.0,
         "FY2024": 1309890000.0,
         "FY2023": 469501000.0,
@@ -8559,7 +8396,7 @@
         "FY2019": 160577000.0
       },
       "net_debt_change": {
-        "LTM": 0.0,
+        "LTM": 2099242000.0,
         "FY2025": 2290717000.0,
         "FY2024": 729248000.0,
         "FY2023": 423000000.0,
@@ -8581,7 +8418,7 @@
         "FY2019": -92531000.0
       },
       "da": {
-        "LTM": null,
+        "LTM": 130310000.0,
         "FY2025": 97968000.0,
         "FY2024": 77128000.0,
         "FY2023": 62895000.0,
@@ -8591,7 +8428,7 @@
         "FY2019": 5073000.0
       },
       "sbc": {
-        "LTM": null,
+        "LTM": 353835000.0,
         "FY2025": 271845000.0,
         "FY2024": 272382000.0,
         "FY2023": 212551000.0,
@@ -8601,7 +8438,7 @@
         "FY2019": 18511000.0
       },
       "deferred_taxes": {
-        "LTM": null,
+        "LTM": 1377976000.0,
         "FY2025": 427259000.0,
         "FY2024": 713435000.0,
         "FY2023": 675682000.0,
@@ -8611,7 +8448,7 @@
         "FY2019": 40340000.0
       },
       "other_noncash": {
-        "LTM": -4991613000.0,
+        "LTM": -6853734000.0,
         "FY2025": -168280000.0,
         "FY2024": -636013000.0,
         "FY2023": -715469000.0,
@@ -8671,7 +8508,7 @@
         "FY2019": 276137000.0
       },
       "capex": {
-        "LTM": 281135000.0,
+        "LTM": 269303000.0,
         "FY2025": 333554000.0,
         "FY2024": 169572000.0,
         "FY2023": 156760000.0,
@@ -8711,7 +8548,7 @@
         "FY2019": null
       },
       "other_investing": {
-        "LTM": null,
+        "LTM": -20586000.0,
         "FY2025": -7215000.0,
         "FY2024": -155418000.0,
         "FY2023": -20243000.0,
@@ -8721,7 +8558,7 @@
         "FY2019": -2377000.0
       },
       "cfi": {
-        "LTM": null,
+        "LTM": -289889000.0,
         "FY2025": -342308000.0,
         "FY2024": -330627000.0,
         "FY2023": -177003000.0,
@@ -8731,7 +8568,7 @@
         "FY2019": -4679000.0
       },
       "debt_issued": {
-        "LTM": 0.0,
+        "LTM": 2711861000.0,
         "FY2025": 2823472000.0,
         "FY2024": 1309890000.0,
         "FY2023": 469501000.0,
@@ -8741,7 +8578,7 @@
         "FY2019": 160577000.0
       },
       "debt_repaid": {
-        "LTM": 0.0,
+        "LTM": 612619000.0,
         "FY2025": 532755000.0,
         "FY2024": 580642000.0,
         "FY2023": 46501000.0,
@@ -8751,7 +8588,7 @@
         "FY2019": 95020000.0
       },
       "net_debt_issued": {
-        "LTM": 0.0,
+        "LTM": 2099242000.0,
         "FY2025": 2290717000.0,
         "FY2024": 729248000.0,
         "FY2023": 423000000.0,
@@ -8801,7 +8638,7 @@
         "FY2019": 0.0
       },
       "other_financing": {
-        "LTM": null,
+        "LTM": -993000.0,
         "FY2025": -487000.0,
         "FY2024": -1507000.0,
         "FY2023": 2215000.0,
@@ -8811,7 +8648,7 @@
         "FY2019": 549410000.0
       },
       "cff": {
-        "LTM": null,
+        "LTM": 1597856000.0,
         "FY2025": 2290230000.0,
         "FY2024": 727741000.0,
         "FY2023": 425215000.0,
@@ -8821,7 +8658,7 @@
         "FY2019": 611193000.0
       },
       "fx_effect": {
-        "LTM": null,
+        "LTM": 356243000.0,
         "FY2025": 369515000.0,
         "FY2024": 466144000.0,
         "FY2023": 236723000.0,
@@ -8831,7 +8668,7 @@
         "FY2019": -15292000.0
       },
       "beginning_cash": {
-        "LTM": null,
+        "LTM": 13625260000.0,
         "FY2025": 9555257000.0,
         "FY2024": 6389584000.0,
         "FY2023": 4409039000.0,
@@ -8841,7 +8678,7 @@
         "FY2019": 363915000.0
       },
       "net_change_in_cash": {
-        "LTM": null,
+        "LTM": -73649000.0,
         "FY2025": 5448386000.0,
         "FY2024": 2796158000.0,
         "FY2023": 1514401000.0,
@@ -8851,7 +8688,7 @@
         "FY2019": 882651000.0
       },
       "ending_cash": {
-        "LTM": null,
+        "LTM": 13551611000.0,
         "FY2025": 15003643000.0,
         "FY2024": 9185742000.0,
         "FY2023": 5923440000.0,

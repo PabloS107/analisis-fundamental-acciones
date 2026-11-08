@@ -92,14 +92,41 @@
         "FY2023": 76.4,
         "LTM": 237.3
       },
-      "is_country_breakdown": true,
+      "is_country_breakdown": false,
       "status": "active"
+    },
+    {
+      "name": "Cayman Islands",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 6.2,
+        "FY2022": -0.0,
+        "FY2021": -0.0,
+        "FY2020": -0.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Colombia",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2024": 111.9,
+        "FY2023": 75.4,
+        "FY2022": 20.4,
+        "FY2021": 0.8,
+        "FY2020": 1000.0
+      },
+      "status": "discontinued"
     },
     {
       "name": "United States",
       "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
+      "is_subsegment": true,
+      "parent": "Other Countries",
       "values": {
         "FY2024": 0.1,
         "FY2023": 1.0,
@@ -107,6 +134,7 @@
         "FY2021": 2.8,
         "FY2020": -0.0
       },
+      "is_country_breakdown": true,
       "status": "discontinued"
     },
     {

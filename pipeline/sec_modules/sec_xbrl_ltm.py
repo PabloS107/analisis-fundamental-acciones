@@ -566,8 +566,14 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             if 'period' in l_clean or 'year' in l_clean or l_clean == 'net income':
                                 for lbl, vc, vp in interim_is:
                                     if 'net income for the period' in lbl: return lbl, vc, vp
-                        is_diluted_shares = 'adjustedaverageweightedshares' in c_clean or ('diluted' in l_clean and 'share' in l_clean) or ('diluted' in c_clean and 'share' in c_clean)
-                        is_basic_shares = ('weightedaverageshares' in c_clean or ('ordinary' in l_clean and 'share' in l_clean) or ('share' in l_clean and 'weighted' in l_clean)) and not is_diluted_shares
+                        is_eps = any(w in l_clean or w in c_clean for w in ['pershare', 'per share', 'eps', 'earnings per share'])
+                        is_shares = ('share' in l_clean or 'share' in c_clean or 'weightedaverageshares' in c_clean) and not is_eps
+
+                        is_diluted_shares = is_shares and ('diluted' in l_clean or 'diluted' in c_clean or 'adjustedaverageweightedshares' in c_clean)
+                        is_basic_shares = is_shares and not is_diluted_shares
+
+                        is_diluted_eps = is_eps and ('diluted' in c_clean or 'diluted' in l_clean)
+                        is_basic_eps = is_eps and not is_diluted_eps
 
                         if is_diluted_shares:
                             for lbl, vc, vp in interim_is:
@@ -577,11 +583,7 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             for lbl, vc, vp in interim_is:
                                 if 'weighted average' in lbl and ('basic' in lbl or 'diluted' not in lbl):
                                     return lbl, vc, vp
-
-                        is_diluted_eps = ('diluted' in c_clean or 'diluted' in l_clean) and any(w in c_clean or w in l_clean for w in ['eps', 'earnings', 'pershare'])
-                        is_basic_eps = ('basic' in c_clean or 'basic' in l_clean or ('pershare' in c_clean and not is_diluted_eps)) and any(w in c_clean or w in l_clean for w in ['eps', 'earnings', 'pershare'])
-
-                        if is_diluted_eps:
+                        elif is_diluted_eps:
                             for lbl, vc, vp in interim_is:
                                 if 'earnings per share' in lbl and 'diluted' in lbl:
                                     return lbl, vc, vp
@@ -667,99 +669,117 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             if cf_scale < calib_factor:
                                 cf_scale = calib_factor
 
+                    # Balance Sheet multi-pass matching
+                    matched_bs = {}
                     used_bs_indices = set()
-                    def find_bs_match(c_name, l_name):
+
+                    # Pass 1: Exact label matches
+                    for idx, row in bal_df.iterrows():
+                        c_name = str(row.get('concept', ''))
                         if 'abstract' in c_name.lower():
-                            return None, None
-                        c_clean = clean_txt(c_name)
-                        l_clean = clean_txt(l_name)
-                        for idx, (lbl, v) in enumerate(interim_bs):
-                            if idx in used_bs_indices:
+                            continue
+                        l_clean = clean_txt(row.get('label', ''))
+                        for b_idx, (lbl, v) in enumerate(interim_bs):
+                            if b_idx in used_bs_indices:
                                 continue
                             if l_clean == lbl:
-                                used_bs_indices.add(idx)
-                                return lbl, v
-                        if 'cash' in c_clean and 'cash' in l_clean and 'central' not in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if lbl == 'cash and cash equivalents':
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'central' in c_clean or 'central' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if 'central' in lbl:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'creditcard' in c_clean or 'credit card' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if 'credit card' in lbl:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'loansandadvances' in c_clean or 'loans to customers' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if 'loans to customers' in lbl:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'depositsfromcustomers' in c_clean or l_clean == 'deposits':
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if lbl == 'deposits':
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'borrowings' in c_clean or 'borrowing' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if 'borrowing' in lbl:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'repurchase' in c_clean or 'repurchase' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if 'repurchase' in lbl:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if c_clean in ['assets', 'totalassets'] or l_clean in ['assets', 'total assets']:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if lbl in ['total assets', 'assets']:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        if 'total' in l_clean and 'equity' in l_clean:
-                            for idx, (lbl, v) in enumerate(interim_bs):
-                                if idx in used_bs_indices: continue
-                                if lbl in ['total equity', 'total shareholders equity', 'total stockholders equity']:
-                                    used_bs_indices.add(idx)
-                                    return lbl, v
-                        for idx, (lbl, v) in enumerate(interim_bs):
-                            if idx in used_bs_indices: continue
-                            # Excluir explícitamente que cuentas 'total' coincidan con cuentas no-totales
+                                used_bs_indices.add(b_idx)
+                                matched_bs[idx] = (lbl, v)
+                                break
+
+                    # Pass 2: Canonical Synonyms
+                    concept_bs_synonyms = [
+                        (['deferredtaxassets'], ['deferred tax assets']),
+                        (['rightofuseassets', 'operatingleaserightofuse'], ['right of use assets']),
+                        (['intangibleassetsotherthangoodwill', 'intangibleassets'], ['intangible assets']),
+                        (['otherreceivables'], ['other receivables']),
+                        (['otherassets'], ['other assets']),
+                        (['otherliabilities'], ['other liabilities']),
+                        (['issuedcapital'], ['share capital']),
+                        (['sharepremium'], ['share premium reserve']),
+                        (['accumulatedothercomprehensiveincome'], ['other comprehensive income loss']),
+                        (['noncontrollinginterests'], ['equity attributable to non controlling interests']),
+                        (['deposits', 'depositsfromcustomers'], ['deposits']),
+                        (['payablestonetwork'], ['payables to network']),
+                        (['borrowingsandfinancing', 'longtermdebt'], ['borrowings and financing']),
+                        (['repurchaseagreements', 'shorttermdebt'], ['repurchase agreements']),
+                        (['salariesallowances'], ['salaries allowances and social security contributions']),
+                        (['taxliabilities'], ['tax liabilities']),
+                        (['leaseliabilities'], ['lease liabilities']),
+                        (['provisionsandcontingentliabilities'], ['provisions and contingent liabilities']),
+                        (['deferredincome'], ['deferred income']),
+                        (['loanstocustomers'], ['loans to customers']),
+                        (['creditcardreceivables'], ['credit card receivables']),
+                        (['compulsorydeposits'], ['compulsory and other deposits at central banks']),
+                        (['investmentsinassociates'], ['investments in associates']),
+                        (['propertyplantandequipment'], ['property plant and equipment']),
+                        (['cashandcashequivalents'], ['cash and cash equivalents']),
+                        (['assets', 'totalassets'], ['total assets', 'assets']),
+                        (['equity', 'totalequity'], ['total equity', 'total shareholders equity', 'total stockholders equity']),
+                        (['liabilities', 'totalliabilities'], ['total liabilities']),
+                        (['liabilitiesandequity', 'totalliabilitiesandequity'], ['total liabilities and equity']),
+                    ]
+
+                    for idx, row in bal_df.iterrows():
+                        if idx in matched_bs:
+                            continue
+                        c_name = str(row.get('concept', ''))
+                        if 'abstract' in c_name.lower():
+                            continue
+                        c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                        l_clean = clean_txt(row.get('label', ''))
+
+                        m_found = False
+                        for c_syns, tbl_syns in concept_bs_synonyms:
+                            if any(cs == c_tok or cs in c_tok or cs in l_clean for cs in c_syns):
+                                for ts in tbl_syns:
+                                    for b_idx, (lbl, v) in enumerate(interim_bs):
+                                        if b_idx in used_bs_indices:
+                                            continue
+                                        if ('total' in lbl) != ('total' in l_clean):
+                                            continue
+                                        if lbl == ts:
+                                            used_bs_indices.add(b_idx)
+                                            matched_bs[idx] = (lbl, v)
+                                            m_found = True
+                                            break
+                                    if m_found:
+                                        break
+                            if m_found:
+                                break
+
+                    # Pass 3: Substring fallback
+                    for idx, row in bal_df.iterrows():
+                        if idx in matched_bs:
+                            continue
+                        c_name = str(row.get('concept', ''))
+                        if 'abstract' in c_name.lower():
+                            continue
+                        c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                        l_clean = clean_txt(row.get('label', ''))
+                        for b_idx, (lbl, v) in enumerate(interim_bs):
+                            if b_idx in used_bs_indices:
+                                continue
                             if ('total' in lbl) != ('total' in l_clean):
                                 continue
-                            if len(lbl) > 8 and (lbl == l_clean):
-                                used_bs_indices.add(idx)
-                                return lbl, v
-                        return None, None
+                            if len(lbl) > 8 and (lbl in l_clean or l_clean in lbl):
+                                used_bs_indices.add(b_idx)
+                                matched_bs[idx] = (lbl, v)
+                                break
+                            if c_tok == lbl.replace(' ', ''):
+                                used_bs_indices.add(b_idx)
+                                matched_bs[idx] = (lbl, v)
+                                break
 
                     if 'LTM' not in bal_df.columns and latest_fy in bal_df.columns:
                         ltm_bal_col = []
-                        for _, row in bal_df.iterrows():
-                            concept = str(row.get('concept', ''))
-                            label = str(row.get('label', ''))
-                            fy_val = row.get(latest_fy)
-                            val = None
-                            m_lbl, v_match = find_bs_match(concept, label)
-                            if m_lbl:
-                                val = v_match
+                        for idx, row in bal_df.iterrows():
+                            val = matched_bs.get(idx, (None, None))[1]
                             ltm_bal_col.append(val)
                         bal_df.insert(bal_df.columns.get_loc(latest_fy), 'LTM', ltm_bal_col)
 
                     # Población de LTM en cf_df
                     if cf_df is not None and 'LTM' not in cf_df.columns and latest_fy in cf_df.columns:
-                        cfo_ltm, capex_ltm = None, None
-                        
                         col_curr_cf, col_prev_cf = None, None
                         active_cf_tbl = cf_o_tbl if cf_o_tbl is not None else cf_i_tbl
                         if active_cf_tbl is not None:
@@ -782,101 +802,174 @@ def extract_6k_fpi_interim(company, annual_fys, latest_fy, inc_df, bal_df, cf_df
                             col_curr_cf = 3 if (active_cf_tbl is not None and active_cf_tbl.shape[1] > 3) else 1
                             col_prev_cf = 5 if (active_cf_tbl is not None and active_cf_tbl.shape[1] > 5) else (col_curr_cf + 1 if active_cf_tbl is not None and active_cf_tbl.shape[1] > col_curr_cf + 1 else None)
 
-                        if cf_o_tbl is not None:
-                            for _, r in cf_o_tbl.iterrows():
-                                r_lbl = clean_txt(r[0])
-                                if 'cash flows generated from' in r_lbl or 'used in operating activities' in r_lbl:
-                                    vc = _clean_val(r[col_curr_cf])
-                                    vp = _clean_val(r[col_prev_cf]) if col_prev_cf is not None else None
-                                    if vc is not None and vp is not None:
-                                        fy_cfo = None
-                                        for _, cr in cf_df.iterrows():
-                                            c_cn = str(cr.get('concept', '')).lower()
-                                            if 'abstract' in c_cn:
-                                                continue
-                                            if 'operatingactivities' in c_cn or 'cashflowsfromusedinoperatingactivities' in c_cn:
-                                                val_chk = cr.get(latest_fy)
-                                                if pd.notna(val_chk):
-                                                    fy_cfo = val_chk
-                                                    break
-                                        if pd.notna(fy_cfo):
-                                            cfo_ltm = float(fy_cfo) - (vp * cf_scale) + (vc * cf_scale)
-                        if cf_i_tbl is not None:
-                            capex_c, capex_p = 0.0, 0.0
-                            for _, r in cf_i_tbl.iterrows():
-                                r_lbl = clean_txt(r[0])
-                                if any(k in r_lbl for k in ['acquisition of property', 'purchase of property', 'acquisition and development of intangible', 'additions to property']):
-                                    vc = _clean_val(r[col_curr_cf])
-                                    vp = _clean_val(r[col_prev_cf]) if col_prev_cf is not None else None
-                                    if vc is not None: capex_c += abs(vc * cf_scale)
-                                    if vp is not None: capex_p += abs(vp * cf_scale)
-                            fy_capex = 0.0
-                            for _, cr in cf_df.iterrows():
-                                c_cn = str(cr.get('concept', '')).lower()
-                                if 'abstract' in c_cn:
-                                    continue
-                                if any(k in c_cn for k in ['intangibleassets', 'productiveassets', 'propertyplantandequipment', 'propertyplantequipment']):
-                                    val_chk = cr.get(latest_fy)
-                                    if pd.notna(val_chk):
-                                        fy_capex += abs(float(val_chk))
-                            if fy_capex > 0:
-                                capex_ltm = fy_capex - capex_p + capex_c
+                        interim_cf = []
+                        seen_tbl_ids = set()
+                        for tbl in [cf_o_tbl, cf_i_tbl, cf_f_tbl]:
+                            if tbl is not None and id(tbl) not in seen_tbl_ids:
+                                seen_tbl_ids.add(id(tbl))
+                                for _, r in tbl.iterrows():
+                                    r_lbl = clean_txt(r[0])
+                                    vc = _clean_val(r[col_curr_cf]) if (col_curr_cf is not None and col_curr_cf < tbl.shape[1]) else None
+                                    vp = _clean_val(r[col_prev_cf]) if (col_prev_cf is not None and col_prev_cf < tbl.shape[1]) else None
+                                    if vc is not None or vp is not None:
+                                        interim_cf.append((r_lbl, (vc or 0.0) * cf_scale, (vp or 0.0) * cf_scale))
 
-                        # Parser de recompras de acciones en tabla de financiación 6-K (cf_f_tbl)
-                        rep_ltm = None
-                        if cf_f_tbl is not None:
-                            rep_c, rep_p = None, None
-                            for _, r in cf_f_tbl.iterrows():
-                                r_lbl = clean_txt(r[0])
-                                if any(k in r_lbl for k in ['share repurchase', 'repurchase of common stock', 'purchase of treasury shares', 'nu_sharesrepurchased', 'purchase of own shares', 'repurchase of shares']):
-                                    vc = _clean_val(r[col_curr_cf])
-                                    vp = _clean_val(r[col_prev_cf]) if col_prev_cf is not None else None
-                                    if vc is not None:
-                                        rep_c = abs(vc * cf_scale)
-                                    if vp is not None:
-                                        rep_p = abs(vp * cf_scale)
+                        matched_cf = {}
+                        used_cf_indices = set()
+
+                        # Pass 1: Exact label matches
+                        for idx, row in cf_df.iterrows():
+                            c_name = str(row.get('concept', ''))
+                            if 'abstract' in c_name.lower():
+                                continue
+                            l_clean = clean_txt(row.get('label', ''))
+                            for c_idx, (lbl, vc, vp) in enumerate(interim_cf):
+                                if c_idx in used_cf_indices:
+                                    continue
+                                if l_clean == lbl:
+                                    used_cf_indices.add(c_idx)
+                                    matched_cf[idx] = (lbl, vc, vp)
                                     break
 
-                            if rep_c is not None:
-                                # Buscar si el concepto tenía valor en latest_fy
-                                fy_rep = None
-                                for _, cr in cf_df.iterrows():
-                                    c_cn = str(cr.get('concept', '')).lower()
-                                    if 'abstract' in c_cn:
-                                        continue
-                                    if any(k in c_cn for k in ['sharesrepurchased', 'paymentsforpurchaseofownshares', 'repurchaseofcommonstock', 'purchaseoftreasuryshares', 'paymentstorepurchasecommonstock']):
-                                        val_chk = cr.get(latest_fy)
-                                        if pd.notna(val_chk) and float(val_chk) != 0.0:
-                                            fy_rep = abs(float(val_chk))
-                                        break
+                        # Pass 2: Master Totals & Concept Synonyms
+                        master_totals = [
+                            (['cashflowsfromusedinoperatingactivities', 'cashflowsfromoperatingactivities', 'netcashprovidedbyusedinoperatingactivities'],
+                             ['cash flows generated from used in operating activities', 'cash flows from operating activities', 'net cash generated from used in operating activities']),
+                            (['cashflowsfromusedininvestingactivities', 'cashflowsfrominvestingactivities', 'netcashprovidedbyusedininvestingactivities'],
+                             ['cash flow generated from used in investing activities', 'cash flows in investing activities', 'cash flows from investing activities']),
+                            (['cashflowsfromusedinfinancingactivities', 'cashflowsfromfinancingactivities', 'netcashprovidedbyusedinfinancingactivities'],
+                             ['cash flows generated from used in financing activities', 'cash flows in financing activities', 'cash flows from financing activities']),
+                            (['increasedecreaseincashandcashequivalents', 'netchangeincash', 'changeincashandcashequivalents'],
+                             ['change in cash and cash equivalents', 'increase decrease in cash and cash equivalents']),
+                            (['cashandcashequivalents'],
+                             ['cash and cash equivalents end of the period', 'cash and cash equivalents end of the year']),
+                        ]
 
-                                # Cálculo dinámico de LTM para recompras sin año base:
-                                # Si el concepto tenía valor nulo o cero en latest_fy, asignar directamente el valor interino actual
-                                if fy_rep is not None and fy_rep > 0:
-                                    rep_ltm = fy_rep - (rep_p or 0.0) + rep_c
-                                else:
-                                    rep_ltm = rep_c
+                        concept_cf_synonyms = [
+                            (['profitlossfromcontinuingoperations', 'profitloss', 'netincome'], ['net income for the period', 'profit loss for the period', 'net income for the year', 'profit for the period']),
+                            (['depreciation', 'amortisation', 'amortization'], ['depreciation and amortization']),
+                            (['expectedcreditloss', 'creditloss', 'creditlossallowance'], ['expected credit loss']),
+                            (['deferredtax', 'deferredincometax', 'deferredtaxexpense'], ['deferred income taxes']),
+                            (['provisionsandcontingentliabilities', 'provisions'], ['provisions and contingent liabilities']),
+                            (['unrealizedgain', 'unrealizedloss', 'unrealizedlosses'], ['unrealized gains losses on financial instruments']),
+                            (['interestaccrued', 'accruedinterest'], ['interest accrued']),
+                            (['sharebased', 'stockcompensation'], ['share based compensation']),
+                            (['shareoflossinassociates', 'lossinassociates'], ['share of loss in associates']),
+                            (['operatingsecurities'], ['securities']),
+                            (['creditcardreceivables', 'cardreceivables'], ['credit card receivables']),
+                            (['loanstocustomers'], ['loans to customers']),
+                            (['compulsorydeposits'], ['compulsory and other deposits at central banks']),
+                            (['depositstocustomers', 'depositsfromcustomers', 'depositliabilities'], ['deposits']),
+                            (['payablestonetwork', 'networkpayables'], ['payables to network']),
+                            (['deferredincome'], ['deferred income']),
+                            (['otherliabilities'], ['other liabilities']),
+                            (['interestpaid'], ['interest paid']),
+                            (['incometaxpaid'], ['income tax paid']),
+                            (['interestreceived'], ['interest received']),
+                            (['propertyplantandequipment', 'propertyplantequipment'], ['acquisition of property plant and equipment']),
+                            (['intangibleassets', 'acquisitionanddevelopmentofintangible'], ['acquisition and development of intangible assets']),
+                            (['proceedsfromborrowings'], ['proceeds from borrowings and financing']),
+                            (['paymentsfromborrowings', 'paymentsofborrowings', 'repaymentsofborrowings'], ['payments of borrowings and financing']),
+                            (['repurchaseofshares', 'sharesrepurchased', 'treasuryshares'], ['repurchase of shares']),
+                            (['stockoptions', 'exerciseofstockoptions'], ['exercise of stock options']),
+                            (['leasepayments'], ['lease payments']),
+                            (['effectofexchangerate', 'foreignexchangerate'], ['foreign exchange rate changes on cash and cash equivalents']),
+                            (['cashandcashequivalentsatbeginning', 'cashbeginning'], ['cash and cash equivalents beginning of the period']),
+                        ]
+
+                        for idx, row in cf_df.iterrows():
+                            if idx in matched_cf:
+                                continue
+                            c_name = str(row.get('concept', ''))
+                            if 'abstract' in c_name.lower():
+                                continue
+                            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                            l_clean = clean_txt(row.get('label', ''))
+
+                            m_found = False
+                            for c_syns, tbl_syns in master_totals:
+                                if c_tok in c_syns:
+                                    for ts in tbl_syns:
+                                        for c_idx, (lbl, vc, vp) in enumerate(interim_cf):
+                                            if c_idx in used_cf_indices:
+                                                continue
+                                            if lbl == ts or ts in lbl:
+                                                used_cf_indices.add(c_idx)
+                                                matched_cf[idx] = (lbl, vc, vp)
+                                                m_found = True
+                                                break
+                                        if m_found:
+                                            break
+                                if m_found:
+                                    break
+                            if m_found:
+                                continue
+
+                            for c_syns, tbl_syns in concept_cf_synonyms:
+                                if any(cs == c_tok or cs in c_tok or cs in l_clean for cs in c_syns):
+                                    for ts in tbl_syns:
+                                        for c_idx, (lbl, vc, vp) in enumerate(interim_cf):
+                                            if c_idx in used_cf_indices:
+                                                continue
+                                            if lbl == ts or ts in lbl:
+                                                used_cf_indices.add(c_idx)
+                                                matched_cf[idx] = (lbl, vc, vp)
+                                                m_found = True
+                                                break
+                                        if m_found:
+                                            break
+                                if m_found:
+                                    break
+
+                        # Pass 3: Substring match fallback
+                        for idx, row in cf_df.iterrows():
+                            if idx in matched_cf:
+                                continue
+                            c_name = str(row.get('concept', ''))
+                            if 'abstract' in c_name.lower():
+                                continue
+                            c_tok = c_name.split(':')[-1].split('_')[-1].lower()
+                            l_clean = clean_txt(row.get('label', ''))
+
+                            for c_idx, (lbl, vc, vp) in enumerate(interim_cf):
+                                if c_idx in used_cf_indices:
+                                    continue
+                                if len(lbl) > 8 and (lbl in l_clean or l_clean in lbl):
+                                    used_cf_indices.add(c_idx)
+                                    matched_cf[idx] = (lbl, vc, vp)
+                                    break
+                                if c_tok == lbl.replace(' ', ''):
+                                    used_cf_indices.add(c_idx)
+                                    matched_cf[idx] = (lbl, vc, vp)
+                                    break
 
                         ltm_cf_col = []
                         rep_matched_in_cf = False
-                        for _, row in cf_df.iterrows():
-                            c_name = str(row.get('concept', '')).lower()
+                        for idx, row in cf_df.iterrows():
                             fy_val = row.get(latest_fy)
                             val = None
-                            if 'abstract' in c_name:
-                                val = None
-                            elif ('operatingactivities' in c_name or 'cashflowsfromusedinoperatingactivities' in c_name) and cfo_ltm is not None:
-                                val = cfo_ltm
-                            elif any(k in c_name for k in ['intangibleassets', 'productiveassets', 'propertyplantandequipment', 'propertyplantequipment']) and capex_ltm is not None:
-                                val = capex_ltm
-                            elif any(k in c_name for k in ['sharesrepurchased', 'paymentsforpurchaseofownshares', 'repurchaseofcommonstock', 'purchaseoftreasuryshares', 'paymentstorepurchasecommonstock']) and rep_ltm is not None:
-                                val = rep_ltm
-                                rep_matched_in_cf = True
+                            if idx in matched_cf:
+                                m_lbl, vc, vp = matched_cf[idx]
+                                if any(k in m_lbl for k in ['cash and cash equivalents end', 'end of the period']):
+                                    val = vc
+                                elif any(k in m_lbl for k in ['repurchase of shares', 'shares repurchased']):
+                                    rep_matched_in_cf = True
+                                    if pd.notna(fy_val) and float(fy_val) != 0.0:
+                                        val = float(fy_val) - (vp or 0.0) + (vc or 0.0)
+                                    else:
+                                        val = vc
+                                elif pd.notna(fy_val):
+                                    val = float(fy_val) - (vp or 0.0) + (vc or 0.0)
+                                else:
+                                    val = vc
                             ltm_cf_col.append(val)
                         cf_df.insert(cf_df.columns.get_loc(latest_fy), 'LTM', ltm_cf_col)
 
-                        # Incorporar la fila extraída a cf_df si no existía el concepto para que se exporte a cash_flow_detail
-                        if rep_ltm is not None and not rep_matched_in_cf:
+                        # Incorporar fila de recompras si existe en 6-K pero no estaba en cf_df
+                        rep_item = next(((lbl, vc, vp) for (lbl, vc, vp) in interim_cf if 'repurchase of shares' in lbl), None)
+                        if rep_item and not rep_matched_in_cf:
+                            lbl, vc, vp = rep_item
+                            rep_ltm = vc
                             prefix = str(cf_df['concept'].iloc[0]).split('_')[0] if (len(cf_df) > 0 and '_' in str(cf_df['concept'].iloc[0])) else None
                             cand_concept = f"{prefix}_SharesRepurchased" if prefix else 'PaymentsForPurchaseOfOwnShares'
                             new_row = {col: None for col in cf_df.columns}
