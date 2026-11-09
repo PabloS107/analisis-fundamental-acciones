@@ -7,6 +7,13 @@ y genera reportes de certificación de datos con tolerancia matemática.
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import json
 import argparse
@@ -306,9 +313,7 @@ class CrossVerifier:
     def _save_reports(self, summary: Dict[str, Any]) -> None:
         """Guarda el informe en formato JSON y Markdown legible."""
         json_out = self.data_dir / "cross_verification_report.json"
-        with open(json_out, "w", encoding="utf-8") as f:
-            json.dump(summary, f, indent=2, ensure_ascii=False)
-
+        atomic_json_write(json_out, summary, indent=2, ensure_ascii=False)
         md_out = self.data_dir / "cross_verification_report.md"
         badge = "🟢 VERIFICACIÓN APROBADA (MATCH)" if summary["overall_status"] == "PASS" else "🔴 DISCREPANCIAS DETECTADAS (ALERTA)"
 

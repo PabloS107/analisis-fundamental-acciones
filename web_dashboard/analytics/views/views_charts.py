@@ -5,6 +5,7 @@ Módulo de Series para Gráficos (Chart.js), Asignación de Capital, KPIs Sector
 import json
 import re
 from .views_statements import resolve_canonical_capital_flows
+from ..json_cache import load_json_cached
 
 
 def _to_m(val):
@@ -518,8 +519,7 @@ def build_charts_and_segments_context(
     segments_raw = {}
     if seg_file.exists():
         try:
-            with open(seg_file, "r", encoding="utf-8") as f:
-                segments_raw = json.load(f)
+            segments_raw = load_json_cached(seg_file)
         except Exception:
             pass
     

@@ -14,6 +14,13 @@ Genera explicaciones educativas para cada evento y diagnósticos fundamentales p
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import re
 import json
@@ -764,8 +771,7 @@ def analyze_governance_and_insiders(ticker="AAPL", output_dir=None, filing_conte
     
     # Guardar archivo JSON
     out_json = output_dir / "governance_insider_data.json"
-    with open(out_json, "w", encoding="utf-8") as f:
-        json.dump(full_governance_report, f, indent=2, ensure_ascii=False)
+    atomic_json_write(out_json, full_governance_report, indent=2, ensure_ascii=False)
     print(f"[Governance Analyzer] Datos consolidados de gobernanza guardados en: {out_json}")
     
     print(f"\n===========================================================================")

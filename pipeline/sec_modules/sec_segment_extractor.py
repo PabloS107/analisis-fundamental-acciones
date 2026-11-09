@@ -4,6 +4,13 @@ líneas de producto y regiones geográficas desde notas XBRL (ASC 280 y ASC 606)
 """
 
 import json
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from ..json_io import atomic_json_write
 import re
 from pathlib import Path
 import pandas as pd
@@ -719,8 +726,7 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     }
 
     try:
-        with open(seg_json_path, "w", encoding="utf-8") as f:
-            json.dump(seg_dict, f, indent=2, ensure_ascii=False)
+        atomic_json_write(seg_json_path, seg_dict, indent=2, ensure_ascii=False)
         print(f"[SEC Extractor] segments_data.json generado dinámicamente y guardado: {seg_json_path}")
     except Exception as w_err:
         print(f"[SEC Extractor] Error guardando segments_data.json: {w_err}")

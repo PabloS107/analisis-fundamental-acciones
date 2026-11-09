@@ -22,6 +22,11 @@ PIPELINE_DIR = PROJECT_ROOT / "pipeline"
 if str(PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(PIPELINE_DIR))
 
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    from pipeline.json_io import atomic_json_write
+
 CACHE_DIR = PROJECT_ROOT / "data" / "cache"
 SEC_TICKERS_CACHE = CACHE_DIR / "sec_company_tickers.json"
 
@@ -58,8 +63,7 @@ def _load_or_fetch_sec_tickers() -> Dict[str, Dict[str, Any]]:
         req = urllib.request.Request("https://www.sec.gov/files/company_tickers.json", headers=get_sec_headers())
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            with open(SEC_TICKERS_CACHE, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
+            atomic_json_write(SEC_TICKERS_CACHE, data, indent=2)
             return data
     except Exception as e:
         print(f"[PipelineRunner] Aviso al descargar company_tickers de SEC: {e}")

@@ -7,6 +7,13 @@ Usado por el Dashboard Web Django (views_valuation.py) para simulación dinámic
 """
 
 import sys
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import re
 import json
 from pathlib import Path
@@ -821,8 +828,7 @@ def calculate_z_score_valuation(
                     with open(cache_path, "r", encoding="utf-8") as f:
                         c_all = json.load(f)
                     c_all.setdefault(ticker, {})["historical_quarterly_prices"] = cached_prices
-                    with open(cache_path, "w", encoding="utf-8") as f:
-                        json.dump(c_all, f, indent=2)
+                    atomic_json_write(cache_path, c_all, indent=2)
         except Exception:
             pass
 

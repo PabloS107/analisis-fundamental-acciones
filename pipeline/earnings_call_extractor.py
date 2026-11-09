@@ -9,6 +9,13 @@ Descarga y procesa en memoria las transcripciones y presentaciones de resultados
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import re
 import json
@@ -515,9 +522,7 @@ def extract_and_generate_earnings_call_data(ticker, output_dir=None, force=False
     structured = parse_and_structure_transcript(ticker_clean, transcript_data, sec_info, company_name=company_name)
     
     # 6. Guardar dataset canónico
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(structured, f, indent=2, ensure_ascii=False)
-        
+    atomic_json_write(out_file, structured, indent=2, ensure_ascii=False)
     print(f"[EarningsCall Auto] Dossier canónico generado exitosamente en: {out_file}")
     return structured
 

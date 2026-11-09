@@ -39,6 +39,7 @@ for p_dir in (PROJECT_ROOT, PIPELINE_DIR):
         sys.path.insert(0, str(p_dir))
 
 from ..pipeline_runner import search_companies, launch_pipeline_job, get_job_status
+from ..json_cache import load_json_cached
 from .views_statements import (
     resolve_canonical_capital_flows,
     resolve_canonical_balance_sheet,
@@ -68,8 +69,7 @@ def index(request):
     cache_data = {}
     if cache_file.exists():
         try:
-            with open(cache_file, "r", encoding="utf-8") as cf:
-                cache_data = json.load(cf)
+            cache_data = load_json_cached(cache_file, timeout=300)
         except Exception:
             pass
 
@@ -77,8 +77,7 @@ def index(request):
         for d in DATA_DIR.iterdir():
             if d.is_dir() and (d / "fundamental_scores.json").exists():
                 try:
-                    with open(d / "fundamental_scores.json", "r", encoding="utf-8") as f:
-                        sc = json.load(f)
+                    sc = load_json_cached(d / "fundamental_scores.json")
                     ticker = sc.get("ticker", d.name)
                     name = sc.get("company_name", ticker)
 
@@ -144,10 +143,9 @@ def index(request):
                     archetype = sc.get("archetype")
                     if fs_path.exists():
                         try:
-                            with open(fs_path, "r", encoding="utf-8") as fs_f:
-                                fs_data = json.load(fs_f)
-                                if not archetype:
-                                    archetype = fs_data.get("archetype")
+                            fs_data = load_json_cached(fs_path)
+                            if not archetype:
+                                archetype = fs_data.get("archetype")
                         except Exception:
                             pass
                     if not archetype:
@@ -257,10 +255,14 @@ def company_detail(request, ticker):
     if not scores_file.exists() or not fs_file.exists():
         raise Http404(f"No se encontraron datos para {ticker}")
 
-    with open(scores_file, "r", encoding="utf-8") as f:
-        scores = json.load(f)
-    with open(fs_file, "r", encoding="utf-8") as f:
-        fs = json.load(f)
+    try:
+        scores = load_json_cached(scores_file)
+        fs = load_json_cached(fs_file)
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError) as exc:
+        raise Http404(
+            f"Los datos de {ticker} están dañados o incompletos ({exc.__class__.__name__}). "
+            f"Reprocese la empresa desde el panel o revise data/processed/{ticker}/."
+        )
 
     company_name = scores.get("company_name", ticker)
     cik = scores.get("cik", "N/A")
@@ -294,8 +296,7 @@ def company_detail(request, ticker):
     pr_data = {}
     if pr_file.exists():
         try:
-            with open(pr_file, "r", encoding="utf-8") as pr_f:
-                pr_data = json.load(pr_f)
+            pr_data = load_json_cached(pr_file)
         except Exception:
             pass
 

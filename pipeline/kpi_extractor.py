@@ -13,6 +13,13 @@ Genera y mantiene sincronizado: data/processed/{TICKER}/presentation_reconciliat
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import re
 import json
@@ -950,8 +957,7 @@ def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_dri
     }
 
     # 7. Guardar archivo local
-    with open(pr_target, "w", encoding="utf-8") as f:
-        json.dump(reconciliation_result, f, indent=2, ensure_ascii=False)
+    atomic_json_write(pr_target, reconciliation_result, indent=2, ensure_ascii=False)
     print(f"[KPI Extractor] Archivo presentation_reconciliation.json generado en: {pr_target}")
 
     # 8. Sincronizar en Drive si procede

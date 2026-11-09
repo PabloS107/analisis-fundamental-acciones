@@ -12,6 +12,13 @@ Garantiza 100% de trazabilidad contable, reconciliación de splits accionarios y
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import json
 import urllib.request
@@ -581,9 +588,7 @@ def verify_financial_data(ticker, local_dir=None, tolerance_pct=2.5):
     }
     
     rep_json_path = local_dir / "cross_verification_report.json"
-    with open(rep_json_path, "w", encoding="utf-8") as f:
-        json.dump(report_dict, f, indent=2, ensure_ascii=False)
-        
+    atomic_json_write(rep_json_path, report_dict, indent=2, ensure_ascii=False)
     rep_md_path = local_dir / "cross_verification_report.md"
     generate_markdown_report(report_dict, rep_md_path)
     
@@ -807,8 +812,7 @@ def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_pat
             "rd_accounting_note": rd_notes
         })
         
-    with open(cfg_file, "w", encoding="utf-8") as f:
-        json.dump(bench_data, f, indent=2, ensure_ascii=False)
+    atomic_json_write(cfg_file, bench_data, indent=2, ensure_ascii=False)
     print(f"[Data Verifier] Configuración {config_path} actualizada con datos auditados.")
     
     out_dir = Path("data/processed") / target_ticker.upper()
@@ -816,9 +820,7 @@ def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_pat
     rep_json_path = out_dir / "peer_verification_report.json"
     rep_md_path = out_dir / "peer_verification_report.md"
     
-    with open(rep_json_path, "w", encoding="utf-8") as f:
-        json.dump(peer_audit_results, f, indent=2, ensure_ascii=False)
-        
+    atomic_json_write(rep_json_path, peer_audit_results, indent=2, ensure_ascii=False)
     lines = [
         f"# Informe de Auditoría y Verificación Cruzada del Grupo de Pares ({eff_sic})",
         f"\n*Generado: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')} | Ticker Objetivo: {target_ticker.upper()}*",

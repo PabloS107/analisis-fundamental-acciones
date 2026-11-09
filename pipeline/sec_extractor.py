@@ -21,6 +21,14 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
+
+try:
     from sec_rate_limiter import sec_call_with_retry, default_rate_limiter
 except ImportError:
     try:
@@ -529,8 +537,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
     # Guardar JSON
     full_dataset = sanitize_and_validate_statements(full_dataset)
     json_path = output_dir / "financial_statements.json"
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(full_dataset, f, indent=2, ensure_ascii=False)
+    atomic_json_write(json_path, full_dataset, indent=2, ensure_ascii=False)
     print(f"[SEC Extractor] JSON canónico generado: {json_path}")
     
     # 4. Narrativas 10-K
@@ -567,8 +574,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
             print(f"[SEC Extractor] Nota sobre items narrativos: {e}")
             
     narrative_path = output_dir / "sec_narrative.json"
-    with open(narrative_path, "w", encoding="utf-8") as f:
-        json.dump(narratives, f, indent=2, ensure_ascii=False)
+    atomic_json_write(narrative_path, narratives, indent=2, ensure_ascii=False)
     print(f"[SEC Extractor] Narrativas guardadas: {narrative_path}")
     
     return full_dataset, narratives

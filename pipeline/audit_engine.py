@@ -5,6 +5,13 @@ márgenes y trazabilidad US-GAAP de la SEC) garantizando precisión milimétrica
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import json
 import argparse
@@ -492,9 +499,7 @@ def run_full_audit(ticker, custom_dir=None):
     
     # Guardar reporte de auditoría
     audit_report_path = output_dir / "audit_report.json"
-    with open(audit_report_path, "w", encoding="utf-8") as f:
-        json.dump(audit_results, f, indent=2, ensure_ascii=False)
-        
+    atomic_json_write(audit_report_path, audit_results, indent=2, ensure_ascii=False)
     return audit_results
 
 

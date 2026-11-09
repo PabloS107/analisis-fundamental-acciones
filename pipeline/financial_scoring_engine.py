@@ -16,6 +16,13 @@ Implementa:
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import re
 import sys
 import json
@@ -4372,14 +4379,12 @@ def calculate_fundamental_scores(ticker: str, financials_json_path: Path, out_di
     # Guardar en JSON de salida si se provee out_dir
     if out_dir:
         out_path = Path(out_dir) / "fundamental_scores.json"
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(scoring_results, f, indent=2)
+        atomic_json_write(out_path, scoring_results, indent=2)
         print(f"[Scoring Engine] Resultados cuantitativos guardados exitosamente en: {out_path}")
 
         # Guardar también como financial_scores.json para compatibilidad total con los requerimientos
         fin_scores_path = Path(out_dir) / "financial_scores.json"
-        with open(fin_scores_path, "w", encoding="utf-8") as f:
-            json.dump(scoring_results, f, indent=2)
+        atomic_json_write(fin_scores_path, scoring_results, indent=2)
         print(f"[Scoring Engine] Copia sincronizada guardada en: {fin_scores_path}")
 
     return scoring_results

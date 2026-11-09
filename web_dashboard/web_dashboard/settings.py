@@ -81,6 +81,20 @@ DATABASES = {
     }
 }
 
+# Caché en proceso (LocMem) para artefactos JSON procesados y frescura SEC.
+# Las claves derivadas de mtime+tamaño invalidan solas cualquier cambio en disco.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'analitica-fundamental',
+        'KEY_PREFIX': 'af',
+        'TIMEOUT': 3600,
+        'OPTIONS': {
+            'MAX_ENTRIES': 512,
+        },
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators

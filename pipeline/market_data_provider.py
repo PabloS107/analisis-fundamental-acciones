@@ -14,6 +14,13 @@ Incorpora:
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import json
 import time
@@ -58,8 +65,7 @@ class MarketDataExtractor:
         """Guarda los datos en caché creando directorios padres si hace falta."""
         try:
             cls.CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
-            with open(cls.CACHE_FILE, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
+            atomic_json_write(cls.CACHE_FILE, data, indent=2)
         except Exception as e:
             print(f"[MarketData] Advertencia al guardar cache: {e}")
 

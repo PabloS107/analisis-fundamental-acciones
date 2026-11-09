@@ -5,6 +5,8 @@ Consume el cálculo unificado desde pipeline.valuation_engine.
 """
 import json
 
+from ..json_cache import load_json_cached
+
 
 def build_valuation_context(
     request,
@@ -22,8 +24,7 @@ def build_valuation_context(
     prof_path = DATA_DIR / ticker / "company_profile.json"
     if prof_path.exists():
         try:
-            with open(prof_path, "r", encoding="utf-8") as pf:
-                prof_data = json.load(pf)
+            prof_data = load_json_cached(prof_path)
         except Exception:
             pass
 

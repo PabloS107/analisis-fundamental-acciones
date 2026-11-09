@@ -4,6 +4,13 @@ Escanea la carpeta de Google Drive correspondiente al Ticker y extrae guidance, 
 """
 
 import os
+try:
+    from json_io import atomic_json_write
+except ImportError:
+    try:
+        from pipeline.json_io import atomic_json_write
+    except ImportError:
+        from .json_io import atomic_json_write
 import sys
 import re
 import json
@@ -281,8 +288,7 @@ def parse_driver_documents(ticker, custom_drive_path=None, output_dir=None):
         
     # Guardar resultado cualitativo unificado
     out_file = output_dir / "qualitative_dossier.json"
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(dossier, f, indent=2, ensure_ascii=False)
+    atomic_json_write(out_file, dossier, indent=2, ensure_ascii=False)
     print(f"[Doc Parser] Dossier cualitativo guardado en: {out_file}")
     
     return dossier
