@@ -310,8 +310,6 @@ def calculate_dcf_details(
             "equity_val": 0.0,
             "pv_fcf": 0.0,
             "pv_tv": 0.0,
-            "tv_pct": 0.0,
-            "terminal_multiple": 0.0,
         }
 
     pv_ufcf = 0.0
@@ -333,8 +331,6 @@ def calculate_dcf_details(
     ev_total = pv_ufcf + pv_tv
     equity_val = ev_total - net_debt_m
     fair_price = equity_val / shares_m if shares_m > 0 else 0.0
-    tv_pct = (pv_tv / ev_total * 100.0) if ev_total > 0 else 0.0
-    terminal_multiple = (1.0 + terminal_growth) / max(0.005, wacc - terminal_growth)
 
     return {
         "fair_price": round(max(0.0, fair_price), 2),
@@ -342,60 +338,7 @@ def calculate_dcf_details(
         "equity_val": round(equity_val, 1),
         "pv_fcf": round(pv_ufcf, 1),
         "pv_tv": round(pv_tv, 1),
-        "tv_pct": round(tv_pct, 1),
-        "terminal_multiple": round(terminal_multiple, 1),
     }
-
-
-def calculate_implied_cap(
-    share_price: float,
-    shares_b: float,
-    net_debt_m: float,
-    base_revenue_m: float,
-    wacc: float,
-    base_growth: float,
-    fcf_margin: float,
-    terminal_growth: float = 0.025,
-    max_cap_years: int = 35,
-) -> float:
-    """
-    Despeja cuántos años N (Competitive Advantage Period - Mauboussin) de crecimiento
-    sostenido a base_growth justifican la cotización actual antes de converger a terminal_growth.
-    """
-    if share_price <= 0 or shares_b <= 0 or base_revenue_m <= 0 or wacc <= terminal_growth:
-        return 10.0
-
-    target_ev = (share_price * shares_b * 1000) + net_debt_m
-    shares_m = shares_b * 1000
-
-    details_1 = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=1)
-    if details_1["ev"] >= target_ev:
-        return 1.0
-
-    low_n = 1.0
-    high_n = float(max_cap_years)
-
-    def eval_n(n_years: float) -> float:
-        n_floor = int(n_years)
-        n_ceil = min(max_cap_years, n_floor + 1)
-        frac = n_years - n_floor
-        d_floor = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=n_floor)
-        d_ceil = calculate_dcf_details(base_revenue_m, base_growth, fcf_margin, wacc, terminal_growth, net_debt_m, shares_m, forecast_years=n_ceil)
-        return d_floor["ev"] * (1.0 - frac) + d_ceil["ev"] * frac
-
-    if eval_n(high_n) < target_ev:
-        return float(max_cap_years)
-
-    for _ in range(30):
-        mid_n = (low_n + high_n) / 2.0
-        ev_mid = eval_n(mid_n)
-        if abs(ev_mid - target_ev) < 5.0:
-            return round(mid_n, 1)
-        if ev_mid < target_ev:
-            low_n = mid_n
-        else:
-            high_n = mid_n
-    return round(mid_n, 1)
 
 
 def calculate_epv_pvgo(
@@ -1685,7 +1628,6 @@ def get_valuation_parameters(
             "rotce_implied_pct": rotce_implied,
             "g_implied_pct": rotce_implied,
             "g_implied_3stage_pct": rotce_implied,
-            "implied_cap_years": 10.0,
             "fcf_margin_true_pct": 0.0,
             "sbc_usd_m": 0.0,
             "sbc_margin_pct": 0.0,
@@ -1896,21 +1838,6 @@ def get_valuation_parameters(
         fade_start_year=5
     )
     g_implied_3stage_true_pct = round(g_implied_3stage_true * 100.0, 1)
-
-    # Detalle de Valor Terminal y Auditoría de Flujos
-    dcf_details_2stage = calculate_dcf_details(base_rev_m, init_proj_growth, fcf_margin, wacc_val, gn_dec, net_debt_m, shares_m_rounded, model_type="2STAGE")
-    dcf_details_3stage = calculate_dcf_details(base_rev_m, init_proj_growth, fcf_margin, wacc_val, gn_dec, net_debt_m, shares_m_rounded, model_type="3STAGE")
-
-    # Años de Ventaja Competitiva Implícita (Implied CAP - Mauboussin Runway)
-    implied_cap_years = calculate_implied_cap(
-        share_price=price,
-        shares_b=shares_b,
-        net_debt_m=net_debt_m,
-        base_revenue_m=base_rev_m,
-        wacc=wacc_val,
-        base_growth=init_proj_growth,
-        fcf_margin=fcf_margin
-    )
 
     # -------------------------------------------------------------------------
     # 4 NUEVOS PILARES DE VALORACIÓN (Múltiplos, EPV, EVA & 5Y Forward IRR)
@@ -2168,9 +2095,6 @@ def get_valuation_parameters(
         "fcf_margin_true": fcf_margin_true,
         "g_implied_3stage_pct": g_implied_3stage_pct,
         "g_implied_3stage_true_pct": g_implied_3stage_true_pct,
-        "implied_cap_years": implied_cap_years,
-        "dcf_details_2stage": dcf_details_2stage,
-        "dcf_details_3stage": dcf_details_3stage,
         "cagr_eps_5y": cagr_eps_5y,
         "cagr_fcf_5y": cagr_fcf_5y,
         "buyback_rate_pct": buyback_rate_pct,

@@ -129,7 +129,6 @@ class TestValuationEngine(unittest.TestCase):
         self.assertGreater(vp["g_implied_3stage_pct"], vp["g_implied_our_pct"])
         self.assertIn("fcf_margin_true_pct", vp)
         self.assertLess(vp["fcf_margin_true_pct"], vp["fcf_margin_pct"])
-        self.assertGreater(vp["implied_cap_years"], 0.0)
 
         # 2. Múltiplos & PEG
         self.assertIn("multiples_analysis", vp)

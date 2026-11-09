@@ -3180,8 +3180,8 @@
                     </div>
                 </div>
 
-                <!-- Métricas Resultantes y Auditoría de Valor Terminal -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                <!-- Métricas Resultantes -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                     <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
                         <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">
                             {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Precio Justo (Excess Return){% else %}Precio Justo Teórico{% endif %}
@@ -3200,16 +3200,6 @@
                         <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Brecha de Expectativas</span>
                         <span id="gapDisplay" class="text-2xl font-black {% if gap_exp > 5.0 %}text-rose-700{% elif gap_exp >= 0.0 %}text-amber-700{% else %}text-emerald-700{% endif %} mt-1 block">{{ gap_expectations_str }}</span>
                         <span class="text-[11px] text-slate-500 mt-1 block">Implícito − Tu Hipótesis</span>
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Auditoría Terminal Value</span>
-                        <span id="pctTvDisplay" class="text-2xl font-black text-slate-900 mt-1 block">68.5%</span>
-                        <span id="terminalMultipleDisplay" class="text-[11px] text-slate-500 mt-1 block">Múltiplo Terminal: 17.5x FCF</span>
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Runway Implícito (CAP)</span>
-                        <span id="impliedCapYearsDCF" class="text-2xl font-black text-purple-700 mt-1 block">{{ implied_cap_years|floatformat:1 }} Años</span>
-                        <span class="text-[11px] text-slate-500 mt-1 block">Años de super-crecimiento</span>
                     </div>
                 </div>
 
@@ -4230,8 +4220,6 @@
         let fairPrice = 0.0;
         let g_implied = 0.0;
         let gap = 0.0;
-        let pctTv = 65.0;
-        let terminalMult = 16.5;
 
         if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
             // Modelo Excess Return de 2 Etapas con Convergencia
@@ -4245,8 +4233,6 @@
             const ptbvCurrent = tbv > 0 ? (targetPrice / tbv) : 1.0;
             g_implied = (ptbvCurrent * (ke - gn)) + gn;
             gap = (g_implied - rotceHyp) * 100.0;
-            pctTv = 60.0;
-            terminalMult = ptbvJustified;
         } else {
             // Arquetipo Corporativo Estándar: 3-Stage Fade vs 2-Stage
             const gRev = slider1Val;
@@ -4285,12 +4271,6 @@
             const equity_hyp = ev_hyp - netDebt;
             fairPrice = shares > 0 ? (equity_hyp / shares) : 0.0;
 
-            if (ev_hyp > 0) {
-                pctTv = (pv_tv / ev_hyp) * 100.0;
-            }
-            if (fcf_10 > 0) {
-                terminalMult = tv_hyp / fcf_10;
-            }
 
             // Reverse DCF: Bisección numérica para g_implied
             let low = -0.50, high = 1.80;
@@ -4344,20 +4324,6 @@
             }
         }
 
-        const pctTvElem = document.getElementById('pctTvDisplay');
-        if (pctTvElem) {
-            pctTvElem.textContent = pctTv.toFixed(1) + '%';
-            if (pctTv > 75.0) {
-                pctTvElem.className = "text-2xl font-black text-amber-700 mt-1 block";
-            } else {
-                pctTvElem.className = "text-2xl font-black text-slate-900 mt-1 block";
-            }
-        }
-
-        const termMultElem = document.getElementById('terminalMultipleDisplay');
-        if (termMultElem) {
-            termMultElem.textContent = `Múltiplo Terminal: ${terminalMult.toFixed(1)}x FCF`;
-        }
 
         // Sincronización con Selector Maestro Dual Lens
         const elLensMargin = document.getElementById('lensBoxMargin');

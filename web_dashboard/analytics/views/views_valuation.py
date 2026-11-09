@@ -97,7 +97,6 @@ def build_valuation_context(
         "fcf_margin_true_pct": vp.get("fcf_margin_true_pct", vp.get("fcf_margin", 0.0) * 100.0),
         "sbc_usd_m": vp.get("sbc_usd_m", 0.0),
         "sbc_margin_pct": vp.get("sbc_margin_pct", 0.0),
-        "implied_cap_years": vp.get("implied_cap_years", 10.0),
         "net_debt_m": vp.get("net_debt_m", 0.0),
         "sensitivity_grid": sensitivity_grid,
         "vp": vp,
