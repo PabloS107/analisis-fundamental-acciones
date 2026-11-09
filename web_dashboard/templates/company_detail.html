@@ -3344,6 +3344,14 @@
                                     class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
                                 <span>🏛️ P / E (GAAP)</span>
                             </button>
+                            <button type="button" data-mult-key="ev_ebit" onclick="selectHistoricalMultiple('ev_ebit')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏢 EV / EBIT</span>
+                            </button>
+                            <button type="button" data-mult-key="ev_ebitda" onclick="selectHistoricalMultiple('ev_ebitda')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏭 EV / EBITDA</span>
+                            </button>
                             <button type="button" data-mult-key="ev_fcf" onclick="selectHistoricalMultiple('ev_fcf')"
                                     class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
                                 <span>🌊 EV / FCF</span>
@@ -3463,6 +3471,8 @@
                                     <th class="py-2.5 px-3 text-right">EV / NOPAT Adj</th>
                                     <th class="py-2.5 px-3 text-right">P / Owner Earnings</th>
                                     <th class="py-2.5 px-3 text-right">P / E (GAAP)</th>
+                                    <th class="py-2.5 px-3 text-right">EV / EBIT</th>
+                                    <th class="py-2.5 px-3 text-right">EV / EBITDA</th>
                                     <th class="py-2.5 px-3 text-right">EV / FCF</th>
                                     <th class="py-2.5 px-3 text-right">EV / Ventas</th>
                                     {% else %}
@@ -3481,6 +3491,8 @@
                                     <td class="py-2.5 px-3 text-right text-indigo-700 font-bold">{% if row.ev_nopat_adj %}{{ row.ev_nopat_adj|floatformat:1 }}x{% else %}--{% endif %}</td>
                                     <td class="py-2.5 px-3 text-right text-emerald-700 font-bold">{% if row.p_oe %}{{ row.p_oe|floatformat:1 }}x{% else %}--{% endif %}</td>
                                     <td class="py-2.5 px-3 text-right text-slate-700">{% if row.pe_gaap %}{{ row.pe_gaap|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-teal-700 font-bold">{% if row.ev_ebit %}{{ row.ev_ebit|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-orange-700 font-bold">{% if row.ev_ebitda %}{{ row.ev_ebitda|floatformat:1 }}x{% else %}--{% endif %}</td>
                                     <td class="py-2.5 px-3 text-right text-sky-700">{% if row.ev_fcf %}{{ row.ev_fcf|floatformat:1 }}x{% else %}--{% endif %}</td>
                                     <td class="py-2.5 px-3 text-right text-amber-700">{% if row.ev_sales %}{{ row.ev_sales|floatformat:1 }}x{% else %}--{% endif %}</td>
                                     {% else %}
@@ -3495,49 +3507,109 @@
                     </div>
                 </div>
 
-                <!-- ANÁLISIS DEL RATIO PEG (PETER LYNCH) & PEDAGOGÍA CONTABLE -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs uppercase tracking-wider text-slate-500 font-bold">Ratio PEG (Peter Lynch)</span>
-                            <span class="text-xs font-mono font-bold text-slate-500">P/E ÷ Crecimiento</span>
-                        </div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-black text-slate-900">
-                                {% if multiples_analysis.peg_ratio %}{{ multiples_analysis.peg_ratio|floatformat:2 }}x{% else %}N/D{% endif %}
+                <!-- ANÁLISIS MULTIDIMENSIONAL DEL RATIO PEG (FORWARD, PEGY & HISTÓRICO) -->
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Tarjeta 1: PEG Forward Dinámico -->
+                        <div class="bg-gradient-to-br from-white to-sky-50/50 p-5 rounded-2xl border border-sky-200/70 shadow-sm space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] uppercase tracking-wider text-sky-800 font-bold flex items-center gap-1">
+                                    <span>🎯 PEG Forward (Predictivo)</span>
+                                </span>
+                                <span class="text-[10px] font-mono text-sky-600 font-semibold bg-sky-100/60 px-1.5 py-0.5 rounded">P/E ÷ Hipótesis</span>
+                            </div>
+                            <div class="flex items-baseline gap-2">
+                                <span id="pegForwardVal" class="text-3xl font-black text-sky-800 block">--</span>
+                                <span id="pegForwardBadge" class="text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">
+                                    Razonable (1.0 - 2.0x)
+                                </span>
+                            </div>
+                            <p id="pegForwardExp" class="text-[11px] text-slate-500 leading-snug">
+                                P/E {{ multiples_analysis.pe_current|floatformat:1 }}x ÷ Proyección {{ init_growth_disp|floatformat:1 }}%
+                            </p>
+                            <span class="text-[10px] text-slate-600 block pt-1 border-t border-sky-100/60">
+                                Reactivo en tiempo real al slider de crecimiento.
                             </span>
-                            <span class="text-xs text-slate-500">
-                                {% if multiples_analysis.peg_ratio and multiples_analysis.peg_ratio < 1.0 %}
-                                <span class="text-emerald-700 font-bold">Atractivo (&lt; 1.0x)</span>
-                                {% elif multiples_analysis.peg_ratio and multiples_analysis.peg_ratio <= 2.0 %}
-                                <span class="text-sky-700 font-bold">Razonable (1.0 - 2.0x)</span>
-                                {% elif multiples_analysis.peg_ratio %}
-                                <span class="text-rose-700 font-bold">Exigente (&gt; 2.0x)</span>
-                                {% else %}
-                                <span class="text-slate-500">Sin crecimiento positivo</span>
-                                {% endif %}
+                        </div>
+
+                        <!-- Tarjeta 2: Ratio PEGY (Peter Lynch con Dividendos) -->
+                        <div class="bg-gradient-to-br from-white to-emerald-50/50 p-5 rounded-2xl border border-emerald-200/70 shadow-sm space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] uppercase tracking-wider text-emerald-800 font-bold flex items-center gap-1">
+                                    <span>💰 Ratio PEGY (Total Return)</span>
+                                </span>
+                                <span class="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-100/60 px-1.5 py-0.5 rounded">P/E ÷ (Crec + Div)</span>
+                            </div>
+                            <div class="flex items-baseline gap-2">
+                                <span id="pegyVal" class="text-3xl font-black text-emerald-800 block">--</span>
+                                <span id="pegyBadge" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                                    Razonable (1.0 - 2.0x)
+                                </span>
+                            </div>
+                            <p id="pegyExp" class="text-[11px] text-slate-500 leading-snug">
+                                P/E {{ multiples_analysis.pe_current|floatformat:1 }}x ÷ (Crec. + Div. {{ dividend_yield_pct|floatformat:1 }}%)
+                            </p>
+                            <span class="text-[10px] text-slate-600 block pt-1 border-t border-emerald-100/60">
+                                Dividend Yield actual: {{ dividend_yield_pct|floatformat:2 }}%
                             </span>
                         </div>
-                        <p class="text-[11px] text-slate-500">
-                            Cálculo: {{ multiples_analysis.peg_explanation }}
-                        </p>
+
+                        <!-- Tarjeta 3: PEG Histórico Auditado (Form 10-K) -->
+                        <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold flex items-center gap-1">
+                                    <span>🏛️ PEG Histórico (5Y Audit)</span>
+                                </span>
+                                <span class="text-[10px] font-mono text-slate-400 font-semibold bg-slate-100 px-1.5 py-0.5 rounded">P/E ÷ 10-K CAGR</span>
+                            </div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-black text-slate-900 block">
+                                    {% if multiples_analysis.peg_ratio %}{{ multiples_analysis.peg_ratio|floatformat:2 }}x{% else %}N/D{% endif %}
+                                </span>
+                                <span class="text-xs">
+                                    {% if multiples_analysis.peg_ratio and multiples_analysis.peg_ratio < 1.0 %}
+                                    <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Atractivo (&lt; 1.0x)</span>
+                                    {% elif multiples_analysis.peg_ratio and multiples_analysis.peg_ratio <= 2.0 %}
+                                    <span class="text-sky-700 font-bold bg-sky-50 px-2 py-0.5 rounded border border-sky-200">Razonable (1.0 - 2.0x)</span>
+                                    {% elif multiples_analysis.peg_ratio %}
+                                    <span class="text-rose-700 font-bold bg-rose-50 px-2 py-0.5 rounded border border-rose-200">Exigente (&gt; 2.0x)</span>
+                                    {% else %}
+                                    <span class="text-slate-500">Sin crecimiento positivo</span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-snug">
+                                {{ multiples_analysis.peg_explanation }}
+                            </p>
+                            <span class="text-[10px] text-slate-600 block pt-1 border-t border-slate-100">
+                                Ancla empírica auditada de los últimos 5 años fiscales.
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="col-span-2 p-5 bg-white rounded-2xl border border-slate-200 space-y-2 text-xs text-slate-600">
+                    <!-- Guía Pedagógica e Institucional -->
+                    <div class="p-5 bg-white rounded-2xl border border-slate-200 space-y-2 text-xs text-slate-600">
                         <strong class="text-slate-900 font-bold flex items-center gap-1.5">
-                            <span>📖 Guía Institucional del Ratio PEG</span>
+                            <span>📖 Arquitectura de Decisión: PEG Forward vs. PEGY vs. PEG Histórico</span>
                         </strong>
-                        <p class="leading-relaxed">
-                            El ratio <strong>Price/Earnings-to-Growth (PEG)</strong> ideado por Peter Lynch normaliza el múltiplo P/E dividiéndolo por la tasa anual de crecimiento. Un P/E de 30x puede parecer costoso de forma aislada, pero si la compañía expande sus beneficios al 35% anual (PEG = 0.86x), cotiza con un descuento relativo superior al de una empresa estancada cotizando a 12x con crecimiento del 2% (PEG = 6.0x).
-                        </p>
-                        <p class="leading-relaxed text-[11px] text-slate-500 border-t border-slate-100 pt-1.5">
-                            <strong>Principio de Integridad (Regla 6):</strong> Si el crecimiento histórico o proyectado es negativo o nulo, el PEG no imputa valores ficticios de 0.0x, sino que reporta explícitamente <strong>N/D</strong> para advertir al analista de que el modelo requiere expansión de beneficios positivos.
-                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1 text-[11px] leading-relaxed">
+                            <div class="p-3 bg-sky-50/40 rounded-xl border border-sky-100">
+                                <strong class="text-sky-900 block mb-1">1. PEG Forward (Predictivo):</strong>
+                                Conecta la cotización actual con tus expectativas futuras. Evalúa si el múltiplo P/E está justificado por el crecimiento que modelas en el slider de ventas.
+                            </div>
+                            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-100">
+                                <strong class="text-emerald-900 block mb-1">2. Ratio PEGY (Peter Lynch):</strong>
+                                Evita el sesgo de castigar injustamente a empresas maduras que devuelven capital. Al sumar el <em>Dividend Yield</em> al crecimiento, mide el retorno total para el accionista.
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-slate-900 block mb-1">3. PEG Histórico (Auditoría):</strong>
+                                Sirve como verificación de realidad: si tu PEG Forward asume un crecimiento del 20% pero el histórico 5Y fue del 6%, la hipótesis exige una aceleración drástica del negocio.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- ========================================================================= -->
+<!-- ========================================================================= -->
             <!-- CAJA BLANCA & AUDITORÍA FORENSE 10-K: TRAZABILIDAD PASO A PASO -->
             <!-- ========================================================================= -->
             {% if audit_traceability and not audit_traceability.is_financial %}
@@ -3954,6 +4026,16 @@
             desc: 'Múltiplo precio/beneficio tradicional bajo normas contables estándar US-GAAP.',
             color: '#0284c7'
         },
+        'ev_ebit': {
+            name: "EV / EBIT (Acquirer's Multiple - Greenblatt & Carlisle)",
+            desc: "Múltiplo rector del Value Investing cuantitativo. Mide la valoración empresarial sobre el beneficio operativo real antes de impuestos e intereses, penalizando el exceso de deuda y considerando el desgaste real del capital (CapEx de reposición).",
+            color: '#0d9488'
+        },
+        'ev_ebitda': {
+            name: 'EV / EBITDA (Estándar Private Equity & LBO)',
+            desc: 'Múltiplo de valoración sobre la generación operativa bruta de caja antes de provisiones y amortizaciones. Estándar de fusiones y adquisiciones para evaluar la capacidad de servicio de deuda y desapalancamiento.',
+            color: '#ea580c'
+        },
         'ev_fcf': {
             name: 'EV / Free Cash Flow',
             desc: 'Valor de empresa sobre el flujo de caja libre reportado (CFO menos 100% del CapEx reportado).',
@@ -4324,6 +4406,62 @@
             }
         }
 
+
+        // Actualización Reactiva de PEG Forward y PEGY
+        const currentPE = parseFloat("{{ multiples_analysis.pe_current|default:0.0 }}");
+        const divYield = parseFloat("{{ dividend_yield_pct|default:0.0 }}");
+        const gProjPercent = slider1Val * 100.0;
+
+        const elPegFwd = document.getElementById('pegForwardVal');
+        const elPegFwdBadge = document.getElementById('pegForwardBadge');
+        const elPegFwdExp = document.getElementById('pegForwardExp');
+        const elPegy = document.getElementById('pegyVal');
+        const elPegyBadge = document.getElementById('pegyBadge');
+        const elPegyExp = document.getElementById('pegyExp');
+
+        if (currentPE > 0 && gProjPercent > 0) {
+            const pegFwd = currentPE / gProjPercent;
+            if (elPegFwd) elPegFwd.textContent = pegFwd.toFixed(2) + 'x';
+            if (elPegFwdExp) elPegFwdExp.textContent = `P/E ${currentPE.toFixed(1)}x ÷ Proyección (${gProjPercent.toFixed(1)}%)`;
+            if (elPegFwdBadge) {
+                if (pegFwd < 1.0) {
+                    elPegFwdBadge.className = "text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200";
+                    elPegFwdBadge.textContent = "Atractivo (< 1.0x)";
+                } else if (pegFwd <= 2.0) {
+                    elPegFwdBadge.className = "text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200";
+                    elPegFwdBadge.textContent = "Razonable (1.0 - 2.0x)";
+                } else {
+                    elPegFwdBadge.className = "text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200";
+                    elPegFwdBadge.textContent = "Exigente (> 2.0x)";
+                }
+            }
+
+            const totReturn = gProjPercent + divYield;
+            if (totReturn > 0) {
+                const pegy = currentPE / totReturn;
+                if (elPegy) elPegy.textContent = pegy.toFixed(2) + 'x';
+                if (elPegyExp) elPegyExp.textContent = `P/E ${currentPE.toFixed(1)}x ÷ (Crec. ${gProjPercent.toFixed(1)}% + Div. ${divYield.toFixed(1)}%)`;
+                if (elPegyBadge) {
+                    if (pegy < 1.0) {
+                        elPegyBadge.className = "text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200";
+                        elPegyBadge.textContent = "Atractivo (< 1.0x)";
+                    } else if (pegy <= 2.0) {
+                        elPegyBadge.className = "text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200";
+                        elPegyBadge.textContent = "Razonable (1.0 - 2.0x)";
+                    } else {
+                        elPegyBadge.className = "text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200";
+                        elPegyBadge.textContent = "Exigente (> 2.0x)";
+                    }
+                }
+            }
+        } else {
+            if (elPegFwd) elPegFwd.textContent = 'N/D';
+            if (elPegFwdBadge) {
+                elPegFwdBadge.className = "text-xs text-slate-400";
+                elPegFwdBadge.textContent = "Crecimiento ≤ 0%";
+            }
+            if (elPegy) elPegy.textContent = 'N/D';
+        }
 
         // Sincronización con Selector Maestro Dual Lens
         const elLensMargin = document.getElementById('lensBoxMargin');

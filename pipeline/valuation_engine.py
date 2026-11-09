@@ -550,6 +550,7 @@ def calculate_multiples_valuation(
     is_financial: bool = False,
     tbv_per_share: float = 0.0,
     ptbv_justified: float = 1.0,
+    dividend_yield_pct: float = 0.0,
 ) -> Dict[str, Any]:
     """
     Calcula los múltiplos actuales, históricos y de pares sectoriales,
@@ -568,7 +569,7 @@ def calculate_multiples_valuation(
     ps_current = round(market_cap_m / base_rev_m, 2) if (base_rev_m > 0 and market_cap_m > 0) else None
     fcf_yield_pct = round((fcf_m / market_cap_m) * 100.0, 2) if (fcf_m > 0 and market_cap_m > 0) else None
 
-    # Ratio PEG
+    # Ratio PEG Histórico
     peg_ratio = None
     peg_explanation = "Crecimiento ≤ 0% o No Disponible"
     if pe_current and pe_current > 0:
@@ -578,6 +579,16 @@ def calculate_multiples_valuation(
         elif cagr_5y and cagr_5y > 0:
             peg_ratio = round(pe_current / cagr_5y, 2)
             peg_explanation = f"P/E {pe_current:.1f}x ÷ CAGR Ventas 5Y ({cagr_5y:.1f}%)"
+
+    # Ratio PEGY (Peter Lynch: P/E ÷ (Crecimiento + Dividend Yield))
+    pegy_ratio = None
+    pegy_explanation = "No disponible"
+    if pe_current and pe_current > 0:
+        base_g = cagr_eps_5y if (cagr_eps_5y and cagr_eps_5y > 0) else (cagr_5y if (cagr_5y and cagr_5y > 0) else 0.0)
+        tot_return_rate = base_g + (dividend_yield_pct or 0.0)
+        if tot_return_rate > 0:
+            pegy_ratio = round(pe_current / tot_return_rate, 2)
+            pegy_explanation = f"P/E {pe_current:.1f}x ÷ (Crec. {base_g:.1f}% + Div. {dividend_yield_pct or 0.0:.1f}%)"
 
     # Mediana de pares sectoriales
     peer_pes = []
@@ -645,6 +656,9 @@ def calculate_multiples_valuation(
         "fcf_yield_pct": fcf_yield_pct,
         "peg_ratio": peg_ratio,
         "peg_explanation": peg_explanation,
+        "pegy_ratio": pegy_ratio,
+        "pegy_explanation": pegy_explanation,
+        "dividend_yield_pct": dividend_yield_pct,
         "peer_median_pe": peer_median_pe,
         "peer_median_ev_fcf": peer_median_ev_fcf if not is_financial else None,
         "normal_pe": normal_pe,
@@ -988,6 +1002,8 @@ def calculate_historical_multiples_analysis(
             "ev_nopat_adj": [],
             "p_oe": [],
             "pe_gaap": [],
+            "ev_ebit": [],
+            "ev_ebitda": [],
             "ev_fcf": [],
             "ev_sales": []
         }
@@ -1019,10 +1035,17 @@ def calculate_historical_multiples_analysis(
             r_raw = canon.get("revenue", {}).get(fy) or 0.0
             r_m = (r_raw / 1e6) if abs(r_raw) > 1e6 else r_raw
 
+            op_inc_raw = canon.get("operating_income", {}).get(fy)
+            if op_inc_raw is None:
+                op_inc_raw = canon.get("ebit", {}).get(fy) or 0.0
+            ebit_m = (op_inc_raw / 1e6) if abs(op_inc_raw) > 1e6 else op_inc_raw
+
             capex_raw = abs(canon.get("capital_expenditures", {}).get(fy) or 0.0)
             capex_m = (capex_raw / 1e6) if capex_raw > 1e6 else capex_raw
             dna_raw = canon.get("depreciation_amortization", {}).get(fy) or (capex_m * 0.70)
             dna_m = (dna_raw / 1e6) if abs(dna_raw) > 1e6 else dna_raw
+            ebitda_m = ebit_m + dna_m
+
             maint_c = min(capex_m, dna_m * 0.90)
             growth_c = max(0.0, capex_m - maint_c)
             rd_exp = ira.get(fy, {}).get("rd_investment") or 0.0
@@ -1032,6 +1055,8 @@ def calculate_historical_multiples_analysis(
             v_ev_nopat = round(ev_m / nopat_adj, 1) if nopat_adj > 0 else None
             v_p_oe = round(mc_m / oe_m, 1) if oe_m > 0 else None
             v_pe = round(mc_m / ni_m, 1) if ni_m > 0 else None
+            v_ev_ebit = round(ev_m / ebit_m, 1) if ebit_m > 0 else None
+            v_ev_ebitda = round(ev_m / ebitda_m, 1) if ebitda_m > 0 else None
             v_ev_fcf = round(ev_m / fcf_m, 1) if fcf_m > 0 else None
             v_ev_sales = round(ev_m / r_m, 1) if r_m > 0 else None
 
@@ -1040,6 +1065,8 @@ def calculate_historical_multiples_analysis(
             series_data["ev_nopat_adj"].append(v_ev_nopat)
             series_data["p_oe"].append(v_p_oe)
             series_data["pe_gaap"].append(v_pe)
+            series_data["ev_ebit"].append(v_ev_ebit)
+            series_data["ev_ebitda"].append(v_ev_ebitda)
             series_data["ev_fcf"].append(v_ev_fcf)
             series_data["ev_sales"].append(v_ev_sales)
 
@@ -1049,6 +1076,8 @@ def calculate_historical_multiples_analysis(
                 "ev_nopat_adj": v_ev_nopat,
                 "p_oe": v_p_oe,
                 "pe_gaap": v_pe,
+                "ev_ebit": v_ev_ebit,
+                "ev_ebitda": v_ev_ebitda,
                 "ev_fcf": v_ev_fcf,
                 "ev_sales": v_ev_sales
             })
@@ -1064,9 +1093,20 @@ def calculate_historical_multiples_analysis(
         cur_rev_m = (cur_rev / 1e6) if abs(cur_rev) > 1e6 else cur_rev
         cur_oe = current_oe_m if current_oe_m > 0 else (cur_fcf_m * 1.08)
 
+        cur_op_inc = list(canon.get("operating_income", {}).values())[0] if canon.get("operating_income") else 0.0
+        cur_ebit_m = (cur_op_inc / 1e6) if abs(cur_op_inc) > 1e6 else cur_op_inc
+        cur_dna = list(canon.get("depreciation_amortization", {}).values())[0] if canon.get("depreciation_amortization") else 0.0
+        cur_dna_m = (cur_dna / 1e6) if abs(cur_dna) > 1e6 else cur_dna
+        if cur_dna_m <= 0:
+            cur_capex = abs(list(canon.get("capital_expenditures", {}).values())[0] or 0.0) if canon.get("capital_expenditures") else 0.0
+            cur_dna_m = ((cur_capex / 1e6) if cur_capex > 1e6 else cur_capex) * 0.70
+        cur_ebitda_m = cur_ebit_m + cur_dna_m
+
         v_ltm_ev_nopat = round(cur_ev / current_nopat_adj_m, 1) if current_nopat_adj_m > 0 else None
         v_ltm_p_oe = round(cur_mc / cur_oe, 1) if cur_oe > 0 else None
         v_ltm_pe = round(cur_mc / cur_ni_m, 1) if cur_ni_m > 0 else None
+        v_ltm_ev_ebit = round(cur_ev / cur_ebit_m, 1) if cur_ebit_m > 0 else None
+        v_ltm_ev_ebitda = round(cur_ev / cur_ebitda_m, 1) if cur_ebitda_m > 0 else None
         v_ltm_ev_fcf = round(cur_ev / cur_fcf_m, 1) if cur_fcf_m > 0 else None
         v_ltm_ev_sales = round(cur_ev / cur_rev_m, 1) if cur_rev_m > 0 else None
 
@@ -1075,6 +1115,8 @@ def calculate_historical_multiples_analysis(
         series_data["ev_nopat_adj"].append(v_ltm_ev_nopat)
         series_data["p_oe"].append(v_ltm_p_oe)
         series_data["pe_gaap"].append(v_ltm_pe)
+        series_data["ev_ebit"].append(v_ltm_ev_ebit)
+        series_data["ev_ebitda"].append(v_ltm_ev_ebitda)
         series_data["ev_fcf"].append(v_ltm_ev_fcf)
         series_data["ev_sales"].append(v_ltm_ev_sales)
 
@@ -1084,6 +1126,8 @@ def calculate_historical_multiples_analysis(
             "ev_nopat_adj": v_ltm_ev_nopat,
             "p_oe": v_ltm_p_oe,
             "pe_gaap": v_ltm_pe,
+            "ev_ebit": v_ltm_ev_ebit,
+            "ev_ebitda": v_ltm_ev_ebitda,
             "ev_fcf": v_ltm_ev_fcf,
             "ev_sales": v_ltm_ev_sales
         })
@@ -1538,6 +1582,7 @@ def get_valuation_parameters(
             is_financial=True,
             tbv_per_share=tbv_per_share,
             ptbv_justified=ptbv_justified,
+            dividend_yield_pct=div_yield_fin,
         )
 
         sustainable_ni_fin = tbv_total_m * rotce_val
@@ -1874,7 +1919,8 @@ def get_valuation_parameters(
         cagr_eps_5y=cagr_eps_5y,
         cagr_fcf_5y=cagr_fcf_5y,
         peers_detail=peers,
-        is_financial=False
+        is_financial=False,
+        dividend_yield_pct=dividend_yield_pct,
     )
 
     # Pilar B: EPV & PVGO

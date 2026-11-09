@@ -134,8 +134,18 @@ class TestValuationEngine(unittest.TestCase):
         self.assertIn("multiples_analysis", vp)
         m = vp["multiples_analysis"]
         self.assertGreater(m["pe_current"], 15.0)
+        self.assertIn("peg_ratio", m)
+        self.assertIn("pegy_ratio", m)
         self.assertIn("imputed_prices", m)
         self.assertGreater(m["imputed_prices"]["composite"], 0.0)
+
+        # Múltiplos Históricos con EV/EBIT y EV/EBITDA
+        self.assertIn("historical_multiples", vp)
+        hm = vp["historical_multiples"]
+        self.assertIn("ev_ebit", hm["series"])
+        self.assertIn("ev_ebitda", hm["series"])
+        self.assertIn("ev_ebit", hm["stats"])
+        self.assertIn("ev_ebitda", hm["stats"])
 
         # 3. EPV & PVGO
         self.assertIn("epv_analysis", vp)
