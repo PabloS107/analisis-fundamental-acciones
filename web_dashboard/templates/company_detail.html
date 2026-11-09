@@ -3376,30 +3376,56 @@
                             {% endif %}
                         </div>
 
-                        <!-- Checkboxes de Líneas de Referencia -->
-                        <div class="flex flex-wrap items-center gap-3 bg-slate-50 px-3.5 py-1.5 rounded-xl border border-slate-200/80 text-xs">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mr-1">Líneas de Referencia:</span>
-                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
-                                <input type="checkbox" id="chkRefMedian" checked onchange="renderHistoricalMultiplesChart()"
-                                       class="rounded text-sky-600 focus:ring-sky-500 w-3.5 h-3.5">
-                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-sky-500 inline-block border-t border-dashed"></span> Mediana</span>
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
-                                <input type="checkbox" id="chkRefMean" checked onchange="renderHistoricalMultiplesChart()"
-                                       class="rounded text-purple-600 focus:ring-purple-500 w-3.5 h-3.5">
-                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-purple-500 inline-block border-t border-dotted"></span> Promedio</span>
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
-                                <input type="checkbox" id="chkRefMin" onchange="renderHistoricalMultiplesChart()"
-                                       class="rounded text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5">
-                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-emerald-500 inline-block"></span> Mínimo</span>
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
-                                <input type="checkbox" id="chkRefMax" onchange="renderHistoricalMultiplesChart()"
-                                       class="rounded text-rose-600 focus:ring-rose-500 w-3.5 h-3.5">
-                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-rose-500 inline-block"></span> Máximo</span>
-                            </label>
+                        <!-- Controles de Líneas de Referencia y Escala -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 px-3.5 py-1.5 rounded-xl border border-slate-200/80 text-xs">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mr-1">Líneas de Referencia:</span>
+                                <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                    <input type="checkbox" id="chkRefMedian" checked onchange="renderHistoricalMultiplesChart()"
+                                           class="rounded text-sky-600 focus:ring-sky-500 w-3.5 h-3.5">
+                                    <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-sky-500 inline-block border-t border-dashed"></span> Mediana</span>
+                                </label>
+                                <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                    <input type="checkbox" id="chkRefMean" checked onchange="renderHistoricalMultiplesChart()"
+                                           class="rounded text-purple-600 focus:ring-purple-500 w-3.5 h-3.5">
+                                    <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-purple-500 inline-block border-t border-dotted"></span> Promedio</span>
+                                </label>
+                                <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                    <input type="checkbox" id="chkRefMin" onchange="renderHistoricalMultiplesChart()"
+                                           class="rounded text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5">
+                                    <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-emerald-500 inline-block"></span> Mínimo</span>
+                                </label>
+                                <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                    <input type="checkbox" id="chkRefMax" onchange="renderHistoricalMultiplesChart()"
+                                           class="rounded text-rose-600 focus:ring-rose-500 w-3.5 h-3.5">
+                                    <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-rose-500 inline-block"></span> Máximo</span>
+                                </label>
+                            </div>
+
+                            <!-- Selector Escala Lineal vs Logarítmica (Anti-Distorsión) -->
+                            <div class="flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-lg border border-slate-200">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Escala:</span>
+                                <button type="button" id="btnScaleLinear" onclick="toggleMultiplesScale('linear')"
+                                        class="px-2 py-0.5 rounded font-bold bg-sky-600 text-white transition text-[11px] shadow-xs">
+                                    Lineal
+                                </button>
+                                <button type="button" id="btnScaleLog" onclick="toggleMultiplesScale('logarithmic')"
+                                        class="px-2 py-0.5 rounded font-bold bg-white text-slate-600 hover:bg-slate-100 transition text-[11px] border border-slate-200">
+                                    Logarítmica (Anti-Distorsión)
+                                </button>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Alerta de Outliers (> 100x) -->
+                    <div id="outlierNotice" class="hidden flex items-center justify-between gap-2 bg-amber-50 border border-amber-200/80 px-3.5 py-1.5 rounded-xl text-amber-800 text-[11px] font-medium">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-amber-600">💡</span>
+                            <span><strong>Múltiplos extremos detectados (>100x en la serie):</strong> Activa la <strong>Escala Logarítmica</strong> para visualizar los años normales con total proporción sin que se aplanen en el fondo.</span>
+                        </div>
+                        <button type="button" onclick="toggleMultiplesScale('logarithmic')" class="shrink-0 underline font-bold text-amber-900 hover:text-amber-950 cursor-pointer">
+                            Activar Logarítmica
+                        </button>
                     </div>
 
                     <!-- Lienzo de Gráfica Chart.js -->
@@ -4009,6 +4035,7 @@
     const histMultiplesData = {{ historical_multiples_json|safe }};
     let historicalMultiplesChart = null;
     let currentMultipleKey = (histMultiplesData && histMultiplesData.is_financial) ? 'p_tbv' : 'ev_nopat_adj';
+    let multiplesScaleType = 'linear';
 
     const multipleMeta = {
         'ev_nopat_adj': {
@@ -4079,6 +4106,20 @@
         renderHistoricalMultiplesChart();
     }
 
+    function toggleMultiplesScale(scaleType) {
+        multiplesScaleType = scaleType;
+        const btnLin = document.getElementById('btnScaleLinear');
+        const btnLog = document.getElementById('btnScaleLog');
+        if (scaleType === 'logarithmic') {
+            if (btnLog) btnLog.className = 'px-2 py-0.5 rounded font-bold bg-sky-600 text-white transition text-[11px] shadow-xs';
+            if (btnLin) btnLin.className = 'px-2 py-0.5 rounded font-bold bg-white text-slate-600 hover:bg-slate-100 transition text-[11px] border border-slate-200';
+        } else {
+            if (btnLin) btnLin.className = 'px-2 py-0.5 rounded font-bold bg-sky-600 text-white transition text-[11px] shadow-xs';
+            if (btnLog) btnLog.className = 'px-2 py-0.5 rounded font-bold bg-white text-slate-600 hover:bg-slate-100 transition text-[11px] border border-slate-200';
+        }
+        renderHistoricalMultiplesChart();
+    }
+
     function renderHistoricalMultiplesChart() {
         if (!histMultiplesData || !histMultiplesData.series) return;
         const periods = histMultiplesData.periods || [];
@@ -4112,6 +4153,18 @@
             elImpPrice.textContent = stats.imputed_price ? `$${stats.imputed_price.toFixed(2)} USD` : '--';
         }
 
+        // Detección proactiva de outliers (> 100x)
+        const validValues = seriesVals.filter(v => v !== null && v !== undefined && v > 0);
+        const hasOutlier = validValues.some(v => v > 100);
+        const outlierEl = document.getElementById('outlierNotice');
+        if (outlierEl) {
+            if (hasOutlier && multiplesScaleType === 'linear') {
+                outlierEl.classList.remove('hidden');
+            } else {
+                outlierEl.classList.add('hidden');
+            }
+        }
+
         const showMedian = document.getElementById('chkRefMedian') ? document.getElementById('chkRefMedian').checked : true;
         const showMean = document.getElementById('chkRefMean') ? document.getElementById('chkRefMean').checked : true;
         const showMin = document.getElementById('chkRefMin') ? document.getElementById('chkRefMin').checked : false;
@@ -4133,6 +4186,7 @@
             pointBorderWidth: 2,
             pointRadius: 5,
             pointHoverRadius: 7,
+            spanGaps: true,
             order: 1
         });
 
@@ -4147,6 +4201,7 @@
                 borderDash: [5, 4],
                 pointRadius: 0,
                 fill: false,
+                spanGaps: true,
                 order: 2
             });
         }
@@ -4160,6 +4215,7 @@
                 borderDash: [2, 3],
                 pointRadius: 0,
                 fill: false,
+                spanGaps: true,
                 order: 3
             });
         }
@@ -4173,6 +4229,7 @@
                 borderDash: [4, 4],
                 pointRadius: 0,
                 fill: false,
+                spanGaps: true,
                 order: 4
             });
         }
@@ -4186,6 +4243,7 @@
                 borderDash: [4, 4],
                 pointRadius: 0,
                 fill: false,
+                spanGaps: true,
                 order: 5
             });
         }
@@ -4234,7 +4292,7 @@
                                 const label = context.dataset.label || '';
                                 const val = context.parsed.y;
                                 if (context.datasetIndex === 0) {
-                                    return [`${label}: ${val.toFixed(1)}x`, `Precio Cierre: $${pVal ? pVal.toFixed(2) : '--'} USD`];
+                                    return [`${label}: ${val ? val.toFixed(1) + 'x' : 'N/D'}`, `Precio Cierre: $${pVal ? pVal.toFixed(2) : '--'} USD`];
                                 }
                                 return `${label}`;
                             }
@@ -4243,10 +4301,11 @@
                 },
                 scales: {
                     y: {
+                        type: multiplesScaleType || 'linear',
                         grid: { color: '#f1f5f9' },
                         ticks: {
                             font: { size: 10, weight: '500' },
-                            callback: function(v) { return v + 'x'; }
+                            callback: function(v) { return Number(v).toLocaleString() + 'x'; }
                         }
                     },
                     x: {

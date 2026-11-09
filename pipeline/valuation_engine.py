@@ -945,19 +945,19 @@ def calculate_historical_multiples_analysis(
             if p_val is None:
                 p_val = current_price * 0.85
 
-            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy) or (current_shares_m * 1e6)
-            sh_m = (sh_raw / 1e6) if sh_raw > 1e6 else sh_raw
+            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy)
+            sh_m = (float(sh_raw) / 1e6) if sh_raw is not None else current_shares_m
             mc_m = p_val * sh_m
-            eq_raw = canon.get("stockholders_equity", {}).get(fy) or 1.0
-            eq_m = (eq_raw / 1e6) if abs(eq_raw) > 1e6 else eq_raw
-            ni_raw = canon.get("net_income", {}).get(fy) or 1.0
-            ni_m = (ni_raw / 1e6) if abs(ni_raw) > 1e6 else ni_raw
-            r_raw = canon.get("revenue", {}).get(fy) or 1.0
-            r_m = (r_raw / 1e6) if abs(r_raw) > 1e6 else r_raw
+            eq_raw = canon.get("stockholders_equity", {}).get(fy)
+            eq_m = (float(eq_raw) / 1e6) if eq_raw is not None else 0.0
+            ni_raw = canon.get("net_income", {}).get(fy)
+            ni_m = (float(ni_raw) / 1e6) if ni_raw is not None else 0.0
+            r_raw = canon.get("revenue", {}).get(fy)
+            r_m = (float(r_raw) / 1e6) if r_raw is not None else 0.0
 
-            v_ptbv = round(mc_m / eq_m, 2) if eq_m > 0 else None
-            v_pe = round(mc_m / ni_m, 1) if ni_m > 0 else None
-            v_ps = round(mc_m / r_m, 1) if r_m > 0 else None
+            v_ptbv = round(mc_m / eq_m, 2) if (mc_m > 0 and eq_m > 0) else None
+            v_pe = round(mc_m / ni_m, 1) if (mc_m > 0 and ni_m > 0) else None
+            v_ps = round(mc_m / r_m, 1) if (mc_m > 0 and r_m > 0) else None
 
             actual_periods.append(fy)
             prices_list.append(round(p_val, 2))
@@ -974,15 +974,19 @@ def calculate_historical_multiples_analysis(
 
         # Añadir LTM
         cur_mc_fin = current_price * current_shares_m
-        cur_eq = tbv_per_share * current_shares_m if tbv_per_share > 0 else 1.0
-        cur_ni = list(canon.get("net_income", {}).values())[0] or 1.0
-        cur_ni_m = (cur_ni / 1e6) if abs(cur_ni) > 1e6 else cur_ni
-        cur_rev = list(canon.get("revenue", {}).values())[0] or 1.0
-        cur_rev_m = (cur_rev / 1e6) if abs(cur_rev) > 1e6 else cur_rev
+        cur_ni = canon.get("net_income", {}).get("LTM")
+        if cur_ni is None and canon.get("net_income"):
+            cur_ni = list(canon["net_income"].values())[0]
+        cur_ni_m = (float(cur_ni) / 1e6) if cur_ni is not None else 0.0
 
-        v_ltm_ptbv = round(current_price / tbv_per_share, 2) if tbv_per_share > 0 else 1.0
-        v_ltm_pe = round(cur_mc_fin / cur_ni_m, 1) if cur_ni_m > 0 else None
-        v_ltm_ps = round(cur_mc_fin / cur_rev_m, 1) if cur_rev_m > 0 else None
+        cur_rev = canon.get("revenue", {}).get("LTM")
+        if cur_rev is None and canon.get("revenue"):
+            cur_rev = list(canon["revenue"].values())[0]
+        cur_rev_m = (float(cur_rev) / 1e6) if cur_rev is not None else 0.0
+
+        v_ltm_ptbv = round(current_price / tbv_per_share, 2) if tbv_per_share > 0 else None
+        v_ltm_pe = round(cur_mc_fin / cur_ni_m, 1) if (cur_mc_fin > 0 and cur_ni_m > 0) else None
+        v_ltm_ps = round(cur_mc_fin / cur_rev_m, 1) if (cur_mc_fin > 0 and cur_rev_m > 0) else None
 
         actual_periods.append("LTM")
         prices_list.append(round(current_price, 2))
@@ -1018,47 +1022,50 @@ def calculate_historical_multiples_analysis(
             if p_val is None:
                 p_val = current_price * 0.85
 
-            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy) or (current_shares_m * 1e6)
-            sh_m = (sh_raw / 1e6) if sh_raw > 1e6 else sh_raw
+            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy)
+            sh_m = (float(sh_raw) / 1e6) if sh_raw is not None else current_shares_m
             mc_m = p_val * sh_m
-            tot_d = canon.get("total_debt", {}).get(fy) or 0.0
-            c_eq = canon.get("cash_and_equivalents", {}).get(fy) or 0.0
-            st_inv = canon.get("short_term_investments", {}).get(fy) or 0.0
-            nd_m = ((tot_d - (c_eq + st_inv)) / 1e6) if abs(tot_d) > 1e6 else (tot_d - (c_eq + st_inv))
+            tot_d = canon.get("total_debt", {}).get(fy)
+            tot_d_m = (float(tot_d) / 1e6) if tot_d is not None else 0.0
+            c_eq = canon.get("cash_and_equivalents", {}).get(fy)
+            c_eq_m = (float(c_eq) / 1e6) if c_eq is not None else 0.0
+            st_inv = canon.get("short_term_investments", {}).get(fy)
+            st_inv_m = (float(st_inv) / 1e6) if st_inv is not None else 0.0
+            nd_m = tot_d_m - (c_eq_m + st_inv_m)
             ev_m = mc_m + nd_m
 
-            nopat_adj = ira.get(fy, {}).get("nopat_adj") or 0.0
-            ni_raw = canon.get("net_income", {}).get(fy) or 0.0
-            ni_m = (ni_raw / 1e6) if abs(ni_raw) > 1e6 else ni_raw
-            fcf_raw = canon.get("free_cash_flow", {}).get(fy) or 0.0
-            fcf_m = (fcf_raw / 1e6) if abs(fcf_raw) > 1e6 else fcf_raw
-            r_raw = canon.get("revenue", {}).get(fy) or 0.0
-            r_m = (r_raw / 1e6) if abs(r_raw) > 1e6 else r_raw
+            nopat_adj = float(ira.get(fy, {}).get("nopat_adj") or 0.0)
+            ni_raw = canon.get("net_income", {}).get(fy)
+            ni_m = (float(ni_raw) / 1e6) if ni_raw is not None else 0.0
+            fcf_raw = canon.get("free_cash_flow", {}).get(fy)
+            fcf_m = (float(fcf_raw) / 1e6) if fcf_raw is not None else 0.0
+            r_raw = canon.get("revenue", {}).get(fy)
+            r_m = (float(r_raw) / 1e6) if r_raw is not None else 0.0
 
             op_inc_raw = canon.get("operating_income", {}).get(fy)
             if op_inc_raw is None:
-                op_inc_raw = canon.get("ebit", {}).get(fy) or 0.0
-            ebit_m = (op_inc_raw / 1e6) if abs(op_inc_raw) > 1e6 else op_inc_raw
+                op_inc_raw = canon.get("ebit", {}).get(fy)
+            ebit_m = (float(op_inc_raw) / 1e6) if op_inc_raw is not None else 0.0
 
-            capex_raw = abs(canon.get("capital_expenditures", {}).get(fy) or 0.0)
-            capex_m = (capex_raw / 1e6) if capex_raw > 1e6 else capex_raw
-            dna_raw = canon.get("depreciation_amortization", {}).get(fy) or (capex_m * 0.70)
-            dna_m = (dna_raw / 1e6) if abs(dna_raw) > 1e6 else dna_raw
+            capex_raw = canon.get("capital_expenditures", {}).get(fy)
+            capex_m = (abs(float(capex_raw)) / 1e6) if capex_raw is not None else 0.0
+            dna_raw = canon.get("depreciation_amortization", {}).get(fy)
+            dna_m = (float(dna_raw) / 1e6) if dna_raw is not None else (capex_m * 0.70)
             ebitda_m = ebit_m + dna_m
 
             maint_c = min(capex_m, dna_m * 0.90)
             growth_c = max(0.0, capex_m - maint_c)
-            rd_exp = ira.get(fy, {}).get("rd_investment") or 0.0
-            rd_amort = ira.get(fy, {}).get("rd_amortization") or (rd_exp * 0.85)
+            rd_exp = float(ira.get(fy, {}).get("rd_investment") or 0.0)
+            rd_amort = float(ira.get(fy, {}).get("rd_amortization") or (rd_exp * 0.85))
             oe_m = fcf_m + growth_c + max(0.0, rd_exp - rd_amort)
 
-            v_ev_nopat = round(ev_m / nopat_adj, 1) if nopat_adj > 0 else None
-            v_p_oe = round(mc_m / oe_m, 1) if oe_m > 0 else None
-            v_pe = round(mc_m / ni_m, 1) if ni_m > 0 else None
-            v_ev_ebit = round(ev_m / ebit_m, 1) if ebit_m > 0 else None
-            v_ev_ebitda = round(ev_m / ebitda_m, 1) if ebitda_m > 0 else None
-            v_ev_fcf = round(ev_m / fcf_m, 1) if fcf_m > 0 else None
-            v_ev_sales = round(ev_m / r_m, 1) if r_m > 0 else None
+            v_ev_nopat = round(ev_m / nopat_adj, 1) if (ev_m > 0 and nopat_adj > 0) else None
+            v_p_oe = round(mc_m / oe_m, 1) if (mc_m > 0 and oe_m > 0) else None
+            v_pe = round(mc_m / ni_m, 1) if (mc_m > 0 and ni_m > 0) else None
+            v_ev_ebit = round(ev_m / ebit_m, 1) if (ev_m > 0 and ebit_m > 0) else None
+            v_ev_ebitda = round(ev_m / ebitda_m, 1) if (ev_m > 0 and ebitda_m > 0) else None
+            v_ev_fcf = round(ev_m / fcf_m, 1) if (ev_m > 0 and fcf_m > 0) else None
+            v_ev_sales = round(ev_m / r_m, 1) if (ev_m > 0 and r_m > 0) else None
 
             actual_periods.append(fy)
             prices_list.append(round(p_val, 2))
@@ -1085,30 +1092,49 @@ def calculate_historical_multiples_analysis(
         # Añadir LTM
         cur_mc = current_price * current_shares_m
         cur_ev = cur_mc + current_net_debt_m
-        cur_ni = list(canon.get("net_income", {}).values())[0] or 1.0
-        cur_ni_m = (cur_ni / 1e6) if abs(cur_ni) > 1e6 else cur_ni
-        cur_fcf = list(canon.get("free_cash_flow", {}).values())[0] or 1.0
-        cur_fcf_m = (cur_fcf / 1e6) if abs(cur_fcf) > 1e6 else cur_fcf
-        cur_rev = list(canon.get("revenue", {}).values())[0] or 1.0
-        cur_rev_m = (cur_rev / 1e6) if abs(cur_rev) > 1e6 else cur_rev
+        cur_ni = canon.get("net_income", {}).get("LTM")
+        if cur_ni is None and canon.get("net_income"):
+            cur_ni = list(canon["net_income"].values())[0]
+        cur_ni_m = (float(cur_ni) / 1e6) if cur_ni is not None else 0.0
+
+        cur_fcf = canon.get("free_cash_flow", {}).get("LTM")
+        if cur_fcf is None and canon.get("free_cash_flow"):
+            cur_fcf = list(canon["free_cash_flow"].values())[0]
+        cur_fcf_m = (float(cur_fcf) / 1e6) if cur_fcf is not None else 0.0
+
+        cur_rev = canon.get("revenue", {}).get("LTM")
+        if cur_rev is None and canon.get("revenue"):
+            cur_rev = list(canon["revenue"].values())[0]
+        cur_rev_m = (float(cur_rev) / 1e6) if cur_rev is not None else 0.0
+
         cur_oe = current_oe_m if current_oe_m > 0 else (cur_fcf_m * 1.08)
 
-        cur_op_inc = list(canon.get("operating_income", {}).values())[0] if canon.get("operating_income") else 0.0
-        cur_ebit_m = (cur_op_inc / 1e6) if abs(cur_op_inc) > 1e6 else cur_op_inc
-        cur_dna = list(canon.get("depreciation_amortization", {}).values())[0] if canon.get("depreciation_amortization") else 0.0
-        cur_dna_m = (cur_dna / 1e6) if abs(cur_dna) > 1e6 else cur_dna
+        cur_op_inc = canon.get("operating_income", {}).get("LTM")
+        if cur_op_inc is None and canon.get("operating_income"):
+            cur_op_inc = list(canon["operating_income"].values())[0]
+        cur_ebit_m = (float(cur_op_inc) / 1e6) if cur_op_inc is not None else 0.0
+
+        cur_dna = canon.get("depreciation_amortization", {}).get("LTM")
+        if cur_dna is None and canon.get("depreciation_amortization"):
+            cur_dna = list(canon["depreciation_amortization"].values())[0]
+        cur_dna_m = (float(cur_dna) / 1e6) if cur_dna is not None else 0.0
+
         if cur_dna_m <= 0:
-            cur_capex = abs(list(canon.get("capital_expenditures", {}).values())[0] or 0.0) if canon.get("capital_expenditures") else 0.0
-            cur_dna_m = ((cur_capex / 1e6) if cur_capex > 1e6 else cur_capex) * 0.70
+            cur_capex = canon.get("capital_expenditures", {}).get("LTM")
+            if cur_capex is None and canon.get("capital_expenditures"):
+                cur_capex = list(canon["capital_expenditures"].values())[0]
+            cur_capex_m = (abs(float(cur_capex)) / 1e6) if cur_capex is not None else 0.0
+            cur_dna_m = cur_capex_m * 0.70
+
         cur_ebitda_m = cur_ebit_m + cur_dna_m
 
-        v_ltm_ev_nopat = round(cur_ev / current_nopat_adj_m, 1) if current_nopat_adj_m > 0 else None
-        v_ltm_p_oe = round(cur_mc / cur_oe, 1) if cur_oe > 0 else None
-        v_ltm_pe = round(cur_mc / cur_ni_m, 1) if cur_ni_m > 0 else None
-        v_ltm_ev_ebit = round(cur_ev / cur_ebit_m, 1) if cur_ebit_m > 0 else None
-        v_ltm_ev_ebitda = round(cur_ev / cur_ebitda_m, 1) if cur_ebitda_m > 0 else None
-        v_ltm_ev_fcf = round(cur_ev / cur_fcf_m, 1) if cur_fcf_m > 0 else None
-        v_ltm_ev_sales = round(cur_ev / cur_rev_m, 1) if cur_rev_m > 0 else None
+        v_ltm_ev_nopat = round(cur_ev / current_nopat_adj_m, 1) if (cur_ev > 0 and current_nopat_adj_m > 0) else None
+        v_ltm_p_oe = round(cur_mc / cur_oe, 1) if (cur_mc > 0 and cur_oe > 0) else None
+        v_ltm_pe = round(cur_mc / cur_ni_m, 1) if (cur_mc > 0 and cur_ni_m > 0) else None
+        v_ltm_ev_ebit = round(cur_ev / cur_ebit_m, 1) if (cur_ev > 0 and cur_ebit_m > 0) else None
+        v_ltm_ev_ebitda = round(cur_ev / cur_ebitda_m, 1) if (cur_ev > 0 and cur_ebitda_m > 0) else None
+        v_ltm_ev_fcf = round(cur_ev / cur_fcf_m, 1) if (cur_ev > 0 and cur_fcf_m > 0) else None
+        v_ltm_ev_sales = round(cur_ev / cur_rev_m, 1) if (cur_ev > 0 and cur_rev_m > 0) else None
 
         actual_periods.append("LTM")
         prices_list.append(round(current_price, 2))
@@ -1143,20 +1169,23 @@ def calculate_historical_multiples_analysis(
             mean_v = round(float(np.mean(hist_vals)), 1)
             min_v = round(float(np.min(clean_vals)), 1)
             max_v = round(float(np.max(clean_vals)), 1)
-            diff = round(((cur_v - med) / med) * 100.0, 1) if (cur_v and med > 0) else 0.0
-
-            if diff > 15.0:
-                status = f"Sobrevalorado (+{diff:.1f}% vs Mediana)"
-                status_color = "rose"
-            elif diff < -15.0:
-                status = f"Descuento ({diff:.1f}% vs Mediana)"
-                status_color = "emerald"
+            if cur_v and med > 0:
+                diff = round(((cur_v - med) / med) * 100.0, 1)
+                if diff > 15.0:
+                    status = f"Sobrevalorado (+{diff:.1f}% vs Mediana)"
+                    status_color = "rose"
+                elif diff < -15.0:
+                    status = f"Descuento ({diff:.1f}% vs Mediana)"
+                    status_color = "emerald"
+                else:
+                    status = f"Rango Histórico Equilibrado ({diff:+.1f}% vs Mediana)"
+                    status_color = "sky"
+                imputed_price = round(current_price * (med / cur_v), 2)
             else:
-                status = f"Rango Histórico Equilibrado ({diff:+.1f}% vs Mediana)"
-                status_color = "sky"
-
-            # Precio imputado por reversión a la mediana
-            imputed_price = round(current_price * (med / cur_v), 2) if (cur_v and cur_v > 0) else current_price
+                diff = None
+                status = "N/D (LTM No Disponible o Pérdidas)"
+                status_color = "slate"
+                imputed_price = current_price
 
             stats[m_key] = {
                 "current": cur_v,
@@ -1466,8 +1495,8 @@ def get_valuation_parameters(
                             break
             st_inv_val = st_inv_val or 0.0
             if tot_d is not None:
-                debt_m = tot_d / 1e6 if abs(tot_d) > 1e6 else tot_d
-                liq_m = (c_eq + st_inv_val) / 1e6 if abs(c_eq + st_inv_val) > 1e6 else (c_eq + st_inv_val)
+                debt_m = float(tot_d) / 1e6
+                liq_m = float((c_eq or 0.0) + (st_inv_val or 0.0)) / 1e6
                 net_debt_m = round(debt_m - liq_m, 1)
         except Exception:
             pass
@@ -1484,7 +1513,7 @@ def get_valuation_parameters(
                 if eq_dict:
                     recent_k = list(eq_dict.keys())[0]
                     val_raw = eq_dict[recent_k]
-                    tbv_total_m = (val_raw / 1e6) if abs(val_raw) > 1e6 else val_raw
+                    tbv_total_m = (float(val_raw) / 1e6) if val_raw is not None else 0.0
             except Exception:
                 pass
         if not tbv_total_m:
@@ -1563,7 +1592,7 @@ def get_valuation_parameters(
         cagr_eps_fin = _compute_series_cagr(fin_canon.get("eps_diluted_adjusted"), 5)
         buyback_rate_fin = _compute_share_reduction_rate(fin_canon.get("shares_diluted_adjusted"), 5)
         div_ltm_fin = fin_canon.get("dividends_paid", {}).get("LTM") or 0.0
-        div_m_fin = abs(float(div_ltm_fin)) / 1e6 if (div_ltm_fin and abs(float(div_ltm_fin)) > 1e6) else float(div_ltm_fin or 0.0)
+        div_m_fin = abs(float(div_ltm_fin)) / 1e6 if div_ltm_fin is not None else 0.0
         div_yield_fin = round((div_m_fin / (price * shares_m) * 100.0), 2) if (price * shares_m) > 0 else 0.0
 
         multiples_fin = calculate_multiples_valuation(
@@ -1729,7 +1758,7 @@ def get_valuation_parameters(
                     if fy_keys:
                         val_r = rev_map[fy_keys[0]]
                 if val_r:
-                    base_rev_m = (val_r / 1e6) if abs(val_r) > 1e6 else float(val_r)
+                    base_rev_m = (float(val_r) / 1e6) if val_r is not None else 0.0
         except Exception:
             pass
     if base_rev_m <= 0:
@@ -1852,7 +1881,7 @@ def get_valuation_parameters(
     sbc_raw = canon_sum.get("stock_based_compensation", {}).get("LTM")
     if sbc_raw is None and canon_sum.get("stock_based_compensation"):
         sbc_raw = list(canon_sum["stock_based_compensation"].values())[0]
-    sbc_usd_m = (abs(float(sbc_raw)) / 1e6) if (sbc_raw and abs(float(sbc_raw)) > 1e6) else float(sbc_raw or 0.0)
+    sbc_usd_m = (abs(float(sbc_raw)) / 1e6) if sbc_raw is not None else 0.0
     sbc_margin_pct = round((sbc_usd_m / base_rev_m) * 100.0, 2) if base_rev_m > 0 else 0.0
     fcf_margin_true_pct = round(max(1.0, (fcf_margin * 100.0) - sbc_margin_pct), 2)
     fcf_margin_true = fcf_margin_true_pct / 100.0
@@ -1897,11 +1926,11 @@ def get_valuation_parameters(
     div_ltm_raw = canon_sum.get("dividends_paid", {}).get("LTM")
     if div_ltm_raw is None and canon_sum.get("dividends_paid"):
         div_ltm_raw = list(canon_sum["dividends_paid"].values())[0]
-    div_m = abs(float(div_ltm_raw)) / 1e6 if (div_ltm_raw and abs(float(div_ltm_raw)) > 1e6) else float(div_ltm_raw or 0.0)
+    div_m = (abs(float(div_ltm_raw)) / 1e6) if div_ltm_raw is not None else 0.0
     dividend_yield_pct = round((div_m / (price * shares_m_rounded) * 100.0), 2) if (price * shares_m_rounded) > 0 else 0.0
 
     net_inc_raw = canon_sum.get("net_income", {}).get("LTM")
-    net_inc_m = (float(net_inc_raw) / 1e6) if (net_inc_raw and abs(float(net_inc_raw)) > 1e6) else float(net_inc_raw or 0.0)
+    net_inc_m = (float(net_inc_raw) / 1e6) if net_inc_raw is not None else 0.0
     ebitda_val = s_ebit + s_dna if (s_ebit > 0 or s_dna > 0) else (base_rev_m * (ebit_margin + dna_margin))
 
     # Pilar A: Múltiplos
@@ -1981,12 +2010,12 @@ def get_valuation_parameters(
     cfo_val_raw = canon_sum.get("cash_from_operations", {}).get("LTM")
     if cfo_val_raw is None and canon_sum.get("cash_from_operations"):
         cfo_val_raw = list(canon_sum["cash_from_operations"].values())[0]
-    cfo_m_val = (float(cfo_val_raw) / 1e6) if (cfo_val_raw and abs(float(cfo_val_raw)) > 1e6) else float(cfo_val_raw or (base_rev_m * fcf_margin))
+    cfo_m_val = (float(cfo_val_raw) / 1e6) if cfo_val_raw is not None else float(base_rev_m * fcf_margin)
 
     capex_val_raw = canon_sum.get("capital_expenditures", {}).get("LTM")
     if capex_val_raw is None and canon_sum.get("capital_expenditures"):
         capex_val_raw = list(canon_sum["capital_expenditures"].values())[0]
-    capex_m_val = (abs(float(capex_val_raw)) / 1e6) if (capex_val_raw and abs(float(capex_val_raw)) > 1e6) else float(capex_val_raw or 0.0)
+    capex_m_val = (abs(float(capex_val_raw)) / 1e6) if capex_val_raw is not None else 0.0
 
     dna_val_raw = canon_sum.get("depreciation_amortization", {}).get("LTM")
     if dna_val_raw is None:
@@ -1995,7 +2024,7 @@ def get_valuation_parameters(
             if v:
                 dna_val_raw = v
                 break
-    da_m_val = (float(dna_val_raw) / 1e6) if (dna_val_raw and abs(float(dna_val_raw)) > 1e6) else (float(dna_val_raw) if dna_val_raw else None)
+    da_m_val = (float(dna_val_raw) / 1e6) if dna_val_raw is not None else None
 
     owner_earnings_analysis = calculate_owner_earnings_and_capex(
         cfo_m=cfo_m_val,
