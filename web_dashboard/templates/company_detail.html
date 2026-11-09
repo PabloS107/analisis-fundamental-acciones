@@ -3860,7 +3860,12 @@
         
         const t = document.getElementById('tab-' + tabId);
         if (t) t.classList.remove('hidden');
-        event.currentTarget.classList.add('active');
+        if (typeof event !== 'undefined' && event && event.currentTarget) {
+            event.currentTarget.classList.add('active');
+        } else {
+            const btn = document.querySelector(`[onclick*="switchTab('${tabId}')"]`);
+            if (btn) btn.classList.add('active');
+        }
 
         if (tabId === 'charts') setTimeout(renderCharts, 50);
         if (tabId === 'segments') setTimeout(renderSegmentsCharts, 50);
@@ -4185,17 +4190,6 @@
                 }
             }
         });
-    }
-
-    // Actualizar switchValuationSubTab para renderizar la gráfica cuando se abre
-    const oldSwitchValuationSubTab = window.switchValuationSubTab;
-);
-        const panel = document.getElementById('val-subtab-' + subTabId);
-        const btn = document.getElementById('btn-val-subtab-' + subTabId);
-        if (panel) panel.classList.remove('hidden');
-        if (btn) {
-            btn.className = 'val-subtab-btn px-4 py-2.5 font-bold rounded-t-xl bg-slate-900 text-white shadow transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap';
-        }
     }
 
     function setDcfModelStage(stage) {
@@ -5626,7 +5620,7 @@
         });
     }
 
-    window.addEventListener('DOMContentLoaded', () => { recalcDCF(); recalcForward5Y(); });
+    window.addEventListener('DOMContentLoaded', () => { recalcDCF(); renderHistoricalMultiplesChart(); });
 </script>
 
     <!-- Modal de Progreso del Pipeline de Sincronización SEC -->
