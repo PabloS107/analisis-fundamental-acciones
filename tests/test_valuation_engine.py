@@ -188,6 +188,69 @@ class TestValuationEngine(unittest.TestCase):
         self.assertIn("football_field", vp)
         self.assertEqual(len(vp["football_field"]["methods"]), 5)
 
+    def test_09_owner_earnings_and_zscore_modules(self):
+        """Verifica los módulos de Owner Earnings, Bandas Z-Score y Trazabilidad Caja Blanca para AAPL."""
+        if not self.aapl_scores_path.exists():
+            self.skipTest("Datos de AAPL no encontrados.")
+        with open(self.aapl_scores_path, "r", encoding="utf-8") as f:
+            aapl_scores = json.load(f)
+        aapl_fs_path = Path("data/processed/AAPL/financial_statements.json")
+        aapl_fs = None
+        if aapl_fs_path.exists():
+            with open(aapl_fs_path, "r", encoding="utf-8") as f_fs:
+                aapl_fs = json.load(f_fs)
+
+        vp = valuation_engine.get_valuation_parameters(aapl_scores, "AAPL", fs_data=aapl_fs)
+        
+        # 1. Owner Earnings Analysis
+        self.assertIn("owner_earnings_analysis", vp)
+        oe = vp["owner_earnings_analysis"]
+        self.assertFalse(oe.get("is_financial"))
+        self.assertGreater(oe["owner_earnings_m"], 0.0)
+        self.assertGreater(oe["oe_margin_pct"], 20.0)
+        self.assertGreater(oe["maint_capex_m"], 0.0)
+        self.assertGreaterEqual(oe["growth_capex_m"], 0.0)
+        self.assertAlmostEqual(oe["capex_total_m"], oe["maint_capex_m"] + oe["growth_capex_m"], delta=0.2)
+        self.assertIn("g_implied_oe_pct", vp)
+        self.assertIn("fair_price_oe", vp)
+        self.assertGreater(vp["fair_price_oe"], 0.0)
+
+        # 2. Z-Score Valuation Bands
+        self.assertIn("z_score_analysis", vp)
+        zs = vp["z_score_analysis"]
+        self.assertIsNotNone(zs["current_multiple"])
+        self.assertIn("bands", zs)
+        self.assertIn("minus_2sigma", zs["bands"])
+        self.assertIn("plus_2sigma", zs["bands"])
+
+        # 3. White-Box Audit Traceability
+        self.assertIn("audit_traceability", vp)
+        audit = vp["audit_traceability"]
+        self.assertFalse(audit.get("is_financial"))
+        self.assertIn("steps_nopat", audit)
+        self.assertIn("steps_capex", audit)
+        self.assertIn("multiyear_table", audit)
+        self.assertGreater(len(audit["multiyear_table"]), 0)
+
+    def test_10_financial_owner_earnings_safeguard(self):
+        """Verifica que para bancos (NU) Owner Earnings y Z-Score se aíslen limpiamente respetando la taxonomía."""
+        if not self.nu_scores_path.exists():
+            self.skipTest("Datos de NU no encontrados.")
+        with open(self.nu_scores_path, "r", encoding="utf-8") as f:
+            nu_scores = json.load(f)
+        nu_fs_path = Path("data/processed/NU/financial_statements.json")
+        nu_fs = None
+        if nu_fs_path.exists():
+            with open(nu_fs_path, "r", encoding="utf-8") as f_nu:
+                nu_fs = json.load(f_nu)
+
+        vp = valuation_engine.get_valuation_parameters(nu_scores, "NU", fs_data=nu_fs)
+        self.assertTrue(vp["is_financial"])
+        self.assertTrue(vp["owner_earnings_analysis"].get("is_financial"))
+        self.assertIn("NO APLICA", vp["owner_earnings_analysis"].get("status", ""))
+        self.assertIn("N/D", vp["z_score_analysis"].get("status", ""))
+        self.assertTrue(vp["audit_traceability"].get("is_financial"))
+
 
 if __name__ == "__main__":
     unittest.main()

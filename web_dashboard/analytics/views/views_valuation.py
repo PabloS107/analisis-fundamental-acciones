@@ -112,4 +112,10 @@ def build_valuation_context(
         "buyback_rate_pct": vp.get("buyback_rate_pct", 1.5),
         "cagr_eps_5y": vp.get("cagr_eps_5y"),
         "cagr_fcf_5y": vp.get("cagr_fcf_5y"),
+        "owner_earnings_analysis": vp.get("owner_earnings_analysis", {}),
+        "z_score_analysis": vp.get("z_score_analysis", {}),
+        "audit_traceability": vp.get("audit_traceability", {}),
+        "oe_margin_pct": vp.get("oe_margin_pct", 0.0),
+        "g_implied_oe_pct": vp.get("g_implied_oe_pct", 0.0),
+        "fair_price_oe": vp.get("fair_price_oe", vp.get("fair_price_base", 0.0)),
     }

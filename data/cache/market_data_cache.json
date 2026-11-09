@@ -1,14 +1,14 @@
 {
   "AAPL": {
     "ticker": "AAPL",
-    "timestamp": "2026-11-08T20:04:38.676832+00:00",
-    "timestamp_epoch": 1794168284.7023222,
+    "timestamp": "2026-11-09T13:47:37.868920+00:00",
+    "timestamp_epoch": 1794232062.7907495,
     "is_offline": false,
     "from_cache": false,
     "price": 342.37,
     "market_cap_usd_m": 4975383.15,
     "diluted_shares": 14532182000,
-    "rf_10y": 0.04859,
+    "rf_10y": 0.04844,
     "beta": 1.085,
     "erp": 0.0475,
     "raw_sources": {
@@ -17,7 +17,7 @@
         "price": 342.3699951171875,
         "market_cap": 4975383080382.08,
         "beta": 1.089,
-        "rf_10y": 0.04859000205993652,
+        "rf_10y": 0.04847000122070313,
         "shares_outstanding": 14532182000,
         "success": true
       },
@@ -26,7 +26,7 @@
         "price": 342.37,
         "market_cap": null,
         "beta": 1.08,
-        "rf_10y": 0.04859,
+        "rf_10y": 0.04841,
         "shares_outstanding": 14530000000.0,
         "success": true
       }
@@ -37,20 +37,43 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $342.37 (Yahoo: $342.37, CNBC: $342.37, \u0394=0.00%) | Market Cap calculado: $4,975,383.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.08 (Yahoo: 1.09, CNBC: 1.08, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $342.37 (Yahoo: $342.37, CNBC: $342.37, \u0394=0.00%) | Market Cap calculado: $4,975,383.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.844% (Yahoo ^TNX: 4.847%, CNBC US10Y: 4.841%) | Beta validado: 1.08 (Yahoo: 1.09, CNBC: 1.08, \u0394=0.01)"
+    },
+    "historical_quarterly_prices": {
+      "2021-11": 170.72,
+      "2022-02": 154.19,
+      "2022-05": 159.17,
+      "2022-08": 150.4,
+      "2022-11": 141.76,
+      "2023-02": 166.96,
+      "2023-05": 193.57,
+      "2023-08": 168.49,
+      "2023-11": 182.18,
+      "2024-02": 168.49,
+      "2024-05": 219.98,
+      "2024-08": 224.04,
+      "2024-11": 234.3,
+      "2025-02": 211.2,
+      "2025-05": 206.57,
+      "2025-08": 269.37,
+      "2025-11": 258.78,
+      "2026-02": 270.87,
+      "2026-05": 308.64,
+      "2026-08": 344.63,
+      "2026-11": 342.37
     }
   },
   "DECK": {
     "ticker": "DECK",
-    "timestamp": "2026-11-08T20:04:45.183930+00:00",
-    "timestamp_epoch": 1794168289.025659,
+    "timestamp": "2026-11-09T13:47:45.442913+00:00",
+    "timestamp_epoch": 1794232068.4857454,
     "is_offline": false,
     "from_cache": false,
     "price": 86.71,
     "market_cap_usd_m": 11574.05,
     "diluted_shares": 133479987,
-    "rf_10y": 0.04859,
-    "beta": 1.088,
+    "rf_10y": 0.04844,
+    "beta": 1.093,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
@@ -58,7 +81,7 @@
         "price": 86.70999908447266,
         "market_cap": 11574049550.565422,
         "beta": 1.106,
-        "rf_10y": 0.04859000205993652,
+        "rf_10y": 0.04847000122070313,
         "shares_outstanding": 133479987,
         "success": true
       },
@@ -66,8 +89,8 @@
         "source": "CNBC Quote Service",
         "price": 86.71,
         "market_cap": null,
-        "beta": 1.07,
-        "rf_10y": 0.04859,
+        "beta": 1.08,
+        "rf_10y": 0.04841,
         "shares_outstanding": 133479999.99999999,
         "success": true
       }
@@ -78,20 +101,43 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $86.71 (Yahoo: $86.71, CNBC: $86.71, \u0394=0.00%) | Market Cap calculado: $11,574.0M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.09 (Yahoo: 1.11, CNBC: 1.07, \u0394=0.04)"
+      "notes": "Precio validado por consenso: $86.71 (Yahoo: $86.71, CNBC: $86.71, \u0394=0.00%) | Market Cap calculado: $11,574.0M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.844% (Yahoo ^TNX: 4.847%, CNBC US10Y: 4.841%) | Beta validado: 1.09 (Yahoo: 1.11, CNBC: 1.08, \u0394=0.03)"
+    },
+    "historical_quarterly_prices": {
+      "2021-11": 53.37,
+      "2022-02": 44.29,
+      "2022-05": 52.2,
+      "2022-08": 58.32,
+      "2022-11": 71.25,
+      "2023-02": 79.89,
+      "2023-05": 90.61,
+      "2023-08": 99.51,
+      "2023-11": 125.62,
+      "2024-02": 136.41,
+      "2024-05": 153.77,
+      "2024-08": 160.89,
+      "2024-11": 177.36,
+      "2025-02": 110.83,
+      "2025-05": 106.17,
+      "2025-08": 81.5,
+      "2025-11": 119.34,
+      "2026-02": 102.2,
+      "2026-05": 96.88,
+      "2026-08": 81.99,
+      "2026-11": 86.71
     }
   },
   "NU": {
     "ticker": "NU",
-    "timestamp": "2026-11-08T20:05:03.892808+00:00",
-    "timestamp_epoch": 1794168307.9158764,
+    "timestamp": "2026-11-09T13:47:49.171947+00:00",
+    "timestamp_epoch": 1794232072.1901772,
     "is_offline": false,
     "from_cache": false,
     "price": 12.03,
     "market_cap_usd_m": 58113.18,
     "diluted_shares": 4830688659,
-    "rf_10y": 0.04859,
-    "beta": 0.964,
+    "rf_10y": 0.04844,
+    "beta": 0.959,
     "erp": 0.0475,
     "raw_sources": {
       "yahoo": {
@@ -99,7 +145,7 @@
         "price": 12.029999732971191,
         "market_cap": 58113183277.83696,
         "beta": 0.968,
-        "rf_10y": 0.04859000205993652,
+        "rf_10y": 0.04847000122070313,
         "shares_outstanding": 4830688659,
         "success": true
       },
@@ -107,8 +153,8 @@
         "source": "CNBC Quote Service",
         "price": 12.03,
         "market_cap": null,
-        "beta": 0.96,
-        "rf_10y": 0.04859,
+        "beta": 0.95,
+        "rf_10y": 0.04841,
         "shares_outstanding": 4830000000.0,
         "success": true
       }
@@ -119,7 +165,7 @@
         "Yahoo Finance",
         "CNBC Quote Service"
       ],
-      "notes": "Precio validado por consenso: $12.03 (Yahoo: $12.03, CNBC: $12.03, \u0394=0.00%) | Market Cap calculado: $58,113.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 0.96 (Yahoo: 0.97, CNBC: 0.96, \u0394=0.01)"
+      "notes": "Precio validado por consenso: $12.03 (Yahoo: $12.03, CNBC: $12.03, \u0394=0.00%) | Market Cap calculado: $58,113.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.844% (Yahoo ^TNX: 4.847%, CNBC US10Y: 4.841%) | Beta validado: 0.96 (Yahoo: 0.97, CNBC: 0.95, \u0394=0.02)"
     }
   },
   "MELI": {
@@ -161,6 +207,29 @@
         "CNBC Quote Service"
       ],
       "notes": "Precio validado por consenso: $1510.00 (Yahoo: $1510.00, CNBC: $1510.00, \u0394=0.00%) | Market Cap calculado: $76,552.2M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.40 (Yahoo: 1.39, CNBC: 1.40, \u0394=0.01)"
+    },
+    "historical_quarterly_prices": {
+      "2021-11": 1132.06,
+      "2022-02": 973.63,
+      "2022-05": 813.71,
+      "2022-08": 901.62,
+      "2022-11": 1181.69,
+      "2023-02": 1277.49,
+      "2023-05": 1238.05,
+      "2023-08": 1240.74,
+      "2023-11": 1711.81,
+      "2024-02": 1458.7,
+      "2024-05": 1668.9,
+      "2024-08": 2037.18,
+      "2024-11": 1922.19,
+      "2025-02": 2330.85,
+      "2025-05": 2373.89,
+      "2025-08": 2327.26,
+      "2025-11": 2147.79,
+      "2026-02": 1792.63,
+      "2026-05": 1877.95,
+      "2026-08": 1624.53,
+      "2026-11": 1510.0
     }
   },
   "NVDA": {
@@ -373,6 +442,29 @@
         "CNBC Quote Service"
       ],
       "notes": "Precio validado por consenso: $610.15 (Yahoo: $610.15, CNBC: $610.15, \u0394=0.00%) | Market Cap calculado: $1,560,051.7M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.859% (Yahoo ^TNX: 4.859%, CNBC US10Y: 4.859%) | Beta validado: 1.27 (Yahoo: 1.28, CNBC: 1.27, \u0394=0.01)"
+    },
+    "historical_quarterly_prices": {
+      "2021-11": 310.29,
+      "2022-02": 198.57,
+      "2022-05": 157.59,
+      "2022-08": 92.28,
+      "2022-11": 147.56,
+      "2023-02": 238.04,
+      "2023-05": 315.58,
+      "2023-08": 298.41,
+      "2023-11": 386.44,
+      "2024-02": 426.54,
+      "2024-05": 471.29,
+      "2024-08": 563.89,
+      "2024-11": 685.25,
+      "2025-02": 546.35,
+      "2025-05": 770.31,
+      "2025-08": 646.16,
+      "2025-11": 714.66,
+      "2026-02": 610.86,
+      "2026-05": 556.27,
+      "2026-08": 614.99,
+      "2026-11": 610.15
     }
   },
   "GOOGL": {
