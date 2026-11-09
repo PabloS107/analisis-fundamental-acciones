@@ -30,8 +30,8 @@ def nav_companies(request):
     analizadas con datos procesados válidos a todas las plantillas.
     """
     companies = []
+    entries = []
     if DATA_DIR.exists():
-        entries = []
         for d in sorted(DATA_DIR.iterdir(), key=lambda x: x.name):
             if d.is_dir() and not d.name.startswith("-") and not d.name.startswith("."):
                 scores_file = d / "fundamental_scores.json"
@@ -39,25 +39,25 @@ def nav_companies(request):
                 if scores_file.exists() or fin_file.exists():
                     entries.append((d, scores_file, fin_file))
 
-        signature = _dir_signature(entries)
+    signature = _dir_signature(entries)
     cache_key = f"{NAV_CACHE_KEY}:{md5(signature.encode('utf-8')).hexdigest()}"
     cached = cache.get(cache_key)
     if cached is not None:
         return {"nav_companies": cached}
 
-        for d, scores_file, _ in entries:
-            ticker = d.name.upper()
-            name = ticker
-            if scores_file.exists():
-                try:
-                    with open(scores_file, "r", encoding="utf-8") as f:
-                        sc = json.load(f)
-                        name = sc.get("company_name", ticker)
-                except Exception:
-                    pass
-            companies.append({
-                "ticker": ticker,
-                "name": name,
-            })
-        cache.set(cache_key, companies, NAV_CACHE_TTL)
+    for d, scores_file, _ in entries:
+        ticker = d.name.upper()
+        name = ticker
+        if scores_file.exists():
+            try:
+                with open(scores_file, "r", encoding="utf-8") as f:
+                    sc = json.load(f)
+                    name = sc.get("company_name", ticker)
+            except Exception:
+                pass
+        companies.append({
+            "ticker": ticker,
+            "name": name,
+        })
+    cache.set(cache_key, companies, NAV_CACHE_TTL)
     return {"nav_companies": companies}
