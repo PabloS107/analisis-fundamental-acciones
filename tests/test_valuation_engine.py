@@ -251,6 +251,49 @@ class TestValuationEngine(unittest.TestCase):
         self.assertIn("N/D", vp["z_score_analysis"].get("status", ""))
         self.assertTrue(vp["audit_traceability"].get("is_financial"))
 
+    def test_11_historical_multiples_and_audit_math(self):
+        """Verifica que historical_multiples y math_formulas se computen con precisión para AAPL y NU."""
+        if not self.aapl_scores_path.exists():
+            self.skipTest("Datos de AAPL no encontrados.")
+        with open(self.aapl_scores_path, "r", encoding="utf-8") as f:
+            aapl_scores = json.load(f)
+        aapl_fs_path = Path("data/processed/AAPL/financial_statements.json")
+        aapl_fs = json.load(open(aapl_fs_path, "r", encoding="utf-8")) if aapl_fs_path.exists() else None
+
+        vp_aapl = valuation_engine.get_valuation_parameters(aapl_scores, "AAPL", fs_data=aapl_fs)
+        self.assertIn("historical_multiples", vp_aapl)
+        hm = vp_aapl["historical_multiples"]
+        self.assertFalse(hm["is_financial"])
+        self.assertGreaterEqual(len(hm["periods"]), 5)
+        self.assertIn("ev_nopat_adj", hm["series"])
+        self.assertIn("p_oe", hm["series"])
+        self.assertIn("ev_nopat_adj", hm["stats"])
+        self.assertGreater(hm["stats"]["ev_nopat_adj"]["median"], 0.0)
+        self.assertGreater(hm["stats"]["ev_nopat_adj"]["imputed_price"], 0.0)
+
+        # Fórmulas matemáticas con sustitución numérica real
+        audit = vp_aapl["audit_traceability"]
+        self.assertIn("math_formulas", audit)
+        self.assertIn("nopat", audit["math_formulas"])
+        self.assertIn("owner_earnings", audit["math_formulas"])
+        self.assertIn("roic", audit["math_formulas"])
+        self.assertIn("reverse_dcf", audit["math_formulas"])
+        self.assertIn("$", audit["math_formulas"]["nopat"]["latex_substituted"])
+        self.assertIn("M", audit["math_formulas"]["nopat"]["latex_substituted"])
+
+        # Arquetipo bancario (NU)
+        if self.nu_scores_path.exists():
+            with open(self.nu_scores_path, "r", encoding="utf-8") as f:
+                nu_scores = json.load(f)
+            nu_fs_path = Path("data/processed/NU/financial_statements.json")
+            nu_fs = json.load(open(nu_fs_path, "r", encoding="utf-8")) if nu_fs_path.exists() else None
+            vp_nu = valuation_engine.get_valuation_parameters(nu_scores, "NU", fs_data=nu_fs)
+            self.assertIn("historical_multiples", vp_nu)
+            hm_nu = vp_nu["historical_multiples"]
+            self.assertTrue(hm_nu["is_financial"])
+            self.assertIn("p_tbv", hm_nu["series"])
+            self.assertGreater(hm_nu["stats"]["p_tbv"]["median"], 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()

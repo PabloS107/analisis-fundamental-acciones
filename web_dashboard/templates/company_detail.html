@@ -2970,186 +2970,6 @@
                 </div>
             </div>
 
-            <!-- TARJETAS RESUMEN DE LOS 4 PILARES ESTRATÉGICOS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- 1. Consenso & Margen de Seguridad -->
-                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">1. Precio Consenso Fundamental</span>
-                        <span class="text-xs cursor-help" title="Mediana de los 5 métodos fundamentales auditados: Reverse DCF, Múltiplos, EPV, EVA y Proyección 5Y.">ℹ️</span>
-                    </div>
-                    <div class="flex items-baseline gap-1 mt-1">
-                        <span id="topConsensusPriceDisplay" class="text-2xl font-black text-slate-900">${{ football_field.consensus_price|floatformat:2 }}</span>
-                        <span class="text-xs text-slate-500">USD</span>
-                    </div>
-                    <div class="mt-2 flex items-center justify-between text-xs">
-                        <span class="text-slate-500 text-[11px]">Rango Multifactorial:</span>
-                        <span class="font-semibold text-slate-700">${{ football_field.methods.2.low|default:football_field.consensus_price|floatformat:0 }} - ${{ football_field.methods.0.high|default:football_field.consensus_price|floatformat:0 }}</span>
-                    </div>
-                    <div class="mt-1.5">
-                        {% if football_field.margin_safety_pct >= 0 %}
-                        <span id="topMarginSafetyBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> +{{ football_field.margin_safety_pct|floatformat:1 }}% Descuento vs Consenso
-                        </span>
-                        {% else %}
-                        <span id="topMarginSafetyBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> {{ football_field.margin_safety_pct|floatformat:1 }}% Prima vs Consenso
-                        </span>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <!-- 2. Runway Competitivo Implícito (Implied CAP) -->
-                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">2. Runway Competitivo (CAP)</span>
-                        <span class="text-xs cursor-help" title="Competitive Advantage Period: Años de ventaja competitiva que descuenta la cotización actual antes de que los retornos sobre capital converjan al coste de capital.">ℹ️</span>
-                    </div>
-                    <div class="flex items-baseline gap-1 mt-1">
-                        <span id="topImpliedCapDisplay" class="text-2xl font-black text-sky-700">{{ implied_cap_years|floatformat:1 }} Años</span>
-                    </div>
-                    <div class="mt-2 flex items-center justify-between text-xs">
-                        <span class="text-slate-500 text-[11px]">Durabilidad del Moat:</span>
-                        <span class="font-semibold text-slate-700">{% if implied_cap_years <= 5 %}Fácilmente Alcanzable{% elif implied_cap_years <= 10 %}Exigencia Normal (Moat){% else %}Elevada Exigencia{% endif %}</span>
-                    </div>
-                    <div class="mt-1.5">
-                        {% if implied_cap_years <= 5.0 %}
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Moat no sobrepagado (&le; 5A)
-                        </span>
-                        {% elif implied_cap_years <= 10.0 %}
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> Expectativa estándar (5-10A)
-                        </span>
-                        {% else %}
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Requiere Moat infinito (> 10A)
-                        </span>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <!-- 3. Retorno Anual Esperado a 5 Años (Forward IRR) -->
-                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">3. Retorno Anual Esperado (5Y)</span>
-                        <span class="text-xs cursor-help" title="TIR anualizada compuesta proyectada considerando crecimiento de ventas, evolución de margen FCF, recompras netas, dividendo y re-rating del múltiplo.">ℹ️</span>
-                    </div>
-                    <div class="flex items-baseline gap-1 mt-1">
-                        <span id="topForwardIrrDisplay" class="text-2xl font-black {% if forward_5y_analysis.forward_irr_pct >= 10.0 %}text-emerald-700{% elif forward_5y_analysis.forward_irr_pct >= 0.0 %}text-sky-700{% else %}text-rose-700{% endif %}">
-                            {{ forward_5y_analysis.forward_irr_pct|floatformat:1 }}% CAGR
-                        </span>
-                    </div>
-                    <div class="mt-2 flex items-center justify-between text-xs">
-                        <span class="text-slate-500 text-[11px]">Precio Objetivo 5Y:</span>
-                        <span id="topTargetPriceDisplay" class="font-bold text-slate-900">${{ forward_5y_analysis.target_price_5y|floatformat:2 }} USD</span>
-                    </div>
-                    <div class="mt-1.5">
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold {% if forward_5y_analysis.total_return_pct >= 50.0 %}bg-emerald-50 text-emerald-700 border border-emerald-200{% elif forward_5y_analysis.total_return_pct >= 0.0 %}bg-sky-50 text-sky-700 border border-sky-200{% else %}bg-rose-50 text-rose-700 border border-rose-200{% endif %}">
-                            Retorno Total 5Y: {% if forward_5y_analysis.total_return_pct >= 0 %}+{% endif %}{{ forward_5y_analysis.total_return_pct|floatformat:0 }}%
-                        </span>
-                    </div>
-                </div>
-
-                <!-- 4. Descomposición EPV / PVGO (Columbia University) -->
-                <div class="bg-gradient-to-br from-slate-50 to-white p-4 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">4. Descomposición Greenwald EPV</span>
-                        <span class="text-xs cursor-help" title="Earnings Power Value vs Present Value of Growth Options: Proporción del precio actual respaldada por beneficios sostenibles actuales sin crecimiento vs especulación sobre crecimiento futuro.">ℹ️</span>
-                    </div>
-                    <div class="flex items-baseline gap-1 mt-1">
-                        <span class="text-2xl font-black text-purple-700">{{ epv_analysis.epv_pct|floatformat:0 }}% / {{ epv_analysis.pvgo_pct|floatformat:0 }}%</span>
-                    </div>
-                    <div class="mt-2 flex items-center justify-between text-xs">
-                        <span class="text-slate-500 text-[11px]">EPV / PVGO por Acción:</span>
-                        <span class="font-semibold text-slate-700">${{ epv_analysis.epv_per_share|floatformat:0 }} / ${{ epv_analysis.pvgo_per_share|floatformat:0 }}</span>
-                    </div>
-                    <div class="mt-1.5">
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200 truncate max-w-full">
-                            {{ epv_analysis.status }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VALUATION FOOTBALL FIELD: GRÁFICO COMPARATIVO DE RANGOS FUNDAMENTALES -->
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 pb-3">
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                            <span>📊 Valuation Football Field (Distribución de Rangos Intrínsecos vs. Mercado)</span>
-                            <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-full">Multi-Model</span>
-                        </h4>
-                        <p class="text-xs text-slate-500 mt-0.5">
-                            Comparación visual de la cotización actual (<strong class="text-rose-600">${{ stock_price|floatformat:2 }} USD</strong>) frente al rango de dispersión [Pesimista, Central, Optimista] de cada marco de valoración.
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 text-xs text-slate-600 font-medium">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-rose-500 ring-2 ring-rose-200 inline-block"></span>
-                            <span>Cotización Actual (P0)</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-md bg-amber-400 inline-block"></span>
-                            <span>Consenso Fundamental</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contenedor del Gráfico Football Field (CSS Puro) -->
-                <div class="space-y-3 pt-1">
-                    {% for m in football_field.methods %}
-                    <div class="grid grid-cols-12 items-center gap-2 text-xs">
-                        <div class="col-span-12 sm:col-span-4 flex items-center justify-between sm:justify-start gap-2">
-                            <span class="font-bold text-slate-800 text-[11px] truncate">{{ m.name }}</span>
-                            <span class="text-[10px] bg-slate-200/80 text-slate-700 px-1.5 py-0.5 rounded font-mono">{{ m.badge }}</span>
-                        </div>
-                        <div class="col-span-12 sm:col-span-8 flex items-center gap-3">
-                            <span class="w-12 text-right font-mono text-[11px] text-slate-500">${{ m.low|floatformat:0 }}</span>
-                            <!-- Barra de Rango -->
-                            <div class="flex-1 relative h-6 bg-slate-200/60 rounded-lg overflow-hidden border border-slate-200/90 flex items-center">
-                                <!-- Línea vertical de referencia: Cotización Actual P0 -->
-                                <div id="ff-p0-line-{{ m.id }}" class="absolute top-0 bottom-0 w-0.5 bg-rose-500 z-20 shadow-sm" style="left: calc(({{ stock_price }} / 400) * 100%);" title="Cotización Actual: ${{ stock_price|floatformat:2 }} USD"></div>
-                                
-                                <!-- Rango coloreado [Low, High] -->
-                                <div id="ff-bar-{{ m.id }}" class="absolute top-1 bottom-1 rounded-md opacity-85 transition-all duration-300 {% if m.color == 'sky' %}bg-sky-400{% elif m.color == 'amber' %}bg-amber-400{% elif m.color == 'emerald' %}bg-emerald-400{% elif m.color == 'purple' %}bg-purple-400{% else %}bg-indigo-400{% endif %}"
-                                     style="left: calc(({{ m.low }} / 400) * 100%); width: calc((({{ m.high }} - {{ m.low }}) / 400) * 100%);">
-                                </div>
-                                <!-- Punto Central (Base) -->
-                                <div id="ff-dot-{{ m.id }}" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-slate-900 rounded-full border-2 border-white shadow z-10 transition-all duration-300"
-                                     style="left: calc(({{ m.base }} / 400) * 100% - 6px);" title="Escenario Base: ${{ m.base|floatformat:2 }} USD">
-                                </div>
-                            </div>
-                            <span class="w-12 text-left font-mono text-[11px] text-slate-500">${{ m.high|floatformat:0 }}</span>
-                            <span id="ff-base-text-{{ m.id }}" class="w-16 text-right font-mono font-bold text-slate-900 text-[11px]">${{ m.base|floatformat:1 }}</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                    <!-- Fila Especial: Consenso Multifactorial -->
-                    <div class="grid grid-cols-12 items-center gap-2 text-xs pt-2 border-t border-slate-200/90">
-                        <div class="col-span-12 sm:col-span-4 flex items-center justify-between sm:justify-start gap-2">
-                            <span class="font-black text-amber-900 text-xs">👑 Consenso Multifactorial (Mediana)</span>
-                            <span class="text-[10px] bg-amber-200 text-amber-900 font-bold px-1.5 py-0.5 rounded">Consensus</span>
-                        </div>
-                        <div class="col-span-12 sm:col-span-8 flex items-center gap-3">
-                            <span class="w-12 text-right font-mono text-[11px] text-amber-800 font-bold">${{ football_field.methods.2.low|default:football_field.consensus_price|floatformat:0 }}</span>
-                            <div class="flex-1 relative h-6 bg-amber-100/70 rounded-lg overflow-hidden border border-amber-300 flex items-center">
-                                <div class="absolute top-0 bottom-0 w-0.5 bg-rose-500 z-20" style="left: calc(({{ stock_price }} / 400) * 100%);"></div>
-                                <div class="absolute top-1 bottom-1 rounded-md bg-amber-400 opacity-90"
-                                     style="left: calc(({{ football_field.methods.2.low|default:football_field.consensus_price }} / 400) * 100%); width: calc((({{ football_field.methods.0.high|default:football_field.consensus_price }} - {{ football_field.methods.2.low|default:football_field.consensus_price }}) / 400) * 100%);">
-                                </div>
-                                <div class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-amber-950 rounded-full border-2 border-white shadow z-10"
-                                     style="left: calc(({{ football_field.consensus_price }} / 400) * 100% - 7px);">
-                                </div>
-                            </div>
-                            <span class="w-12 text-left font-mono text-[11px] text-amber-800 font-bold">${{ football_field.methods.0.high|default:football_field.consensus_price|floatformat:0 }}</span>
-                            <span class="w-16 text-right font-mono font-black text-amber-950 text-xs">${{ football_field.consensus_price|floatformat:1 }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- SELECTOR MAESTRO DE DOBLE LENTE DE VALORACIÓN -->
             {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
             <div class="p-4 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 rounded-2xl text-white shadow-md space-y-3 border border-indigo-900/40">
@@ -3214,19 +3034,11 @@
                 <nav class="flex space-x-2 sm:space-x-3 overflow-x-auto text-xs" aria-label="Subtabs">
                     <button id="btn-val-subtab-dcf" onclick="switchValuationSubTab('dcf')"
                             class="val-subtab-btn px-4 py-2.5 font-bold rounded-t-xl bg-slate-900 text-white shadow transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
-                        <span>🎯 Reverse DCF 2.0 & Expectativas</span>
+                        <span>🎯 1. Reverse DCF Económico & Expectativas</span>
                     </button>
                     <button id="btn-val-subtab-multiples" onclick="switchValuationSubTab('multiples')"
                             class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
-                        <span>📊 Múltiplos & Valoración Relativa</span>
-                    </button>
-                    <button id="btn-val-subtab-forward" onclick="switchValuationSubTab('forward')"
-                            class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
-                        <span>🚀 Futuro a 5 Años & TIR (Forward IRR)</span>
-                    </button>
-                    <button id="btn-val-subtab-value" onclick="switchValuationSubTab('value')"
-                            class="val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
-                        <span>🏰 Creación de Valor (EVA) & EPV Greenwald</span>
+                        <span>📊 2. Múltiplos Históricos & Reversión a la Media</span>
                     </button>
                 </nav>
             </div>
@@ -3496,251 +3308,202 @@
             </div>
 
             <!-- ========================================================================= -->
-            <!-- SUB-PESTAÑA 2: MÚLTIPLOS & VALORACIÓN RELATIVA -->
+            <!-- SUB-PESTAÑA 2: MÚLTIPLOS HISTÓRICOS & REVERSIÓN A LA MEDIA (CHART.JS) -->
             <!-- ========================================================================= -->
             <div id="val-subtab-multiples" class="val-subtab-panel hidden space-y-6">
+                <!-- Header y Descripción -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
                     <div>
                         <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>📊 Comparativa de Múltiplos Históricos y Reversión a la Media</span>
+                            <span>📊 Múltiplos Históricos y Reversión a la Media</span>
+                            <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">Precios Auditados 10-K</span>
                         </h4>
                         <p class="text-xs text-slate-500 mt-0.5">
-                            Compara los múltiplos de cotización actuales frente a la mediana de los últimos 5 años y el grupo de pares sectoriales, calculando el precio justo imputado por reversión a la media.
+                            Evolución multianual de múltiplos construida con precios de cierre reales por ejercicio fiscal. Activa o desactiva líneas de referencia para evaluar si el múltiplo actual cotiza con prima o descuento frente a su historia.
                         </p>
                     </div>
-                    <div class="bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 text-xs">
-                        <span class="text-amber-800 font-semibold">Precio Imputado Compuesto:</span>
-                        <span class="font-bold text-amber-950 ml-1">${{ multiples_analysis.imputed_prices.composite|floatformat:2 }} USD</span>
+                    {% if not is_financial and not is_banking and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                    <div class="bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-200 text-xs">
+                        <span class="text-indigo-800 font-semibold">Múltiplo Rector:</span>
+                        <span class="font-bold text-indigo-950 ml-1">EV / NOPAT Ajustado</span>
+                    </div>
+                    {% else %}
+                    <div class="bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-200 text-xs">
+                        <span class="text-indigo-800 font-semibold">Múltiplo Rector:</span>
+                        <span class="font-bold text-indigo-950 ml-1">P / TBV (Tangible Book)</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- SELECTOR DE MÚLTIPLOS Y LÍNEAS DE REFERENCIA -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                        <!-- Selector de Múltiplos -->
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="text-xs font-bold text-slate-500 mr-1 uppercase tracking-wider text-[10px]">Múltiplo:</span>
+                            {% if not is_financial and not is_banking and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                            <button type="button" data-mult-key="ev_nopat_adj" onclick="selectHistoricalMultiple('ev_nopat_adj')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-bold bg-slate-900 text-white shadow-sm transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🚀 EV / NOPAT Ajustado</span>
+                            </button>
+                            <button type="button" data-mult-key="p_oe" onclick="selectHistoricalMultiple('p_oe')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>💎 P / Owner Earnings</span>
+                            </button>
+                            <button type="button" data-mult-key="pe_gaap" onclick="selectHistoricalMultiple('pe_gaap')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏛️ P / E (GAAP)</span>
+                            </button>
+                            <button type="button" data-mult-key="ev_fcf" onclick="selectHistoricalMultiple('ev_fcf')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🌊 EV / FCF</span>
+                            </button>
+                            <button type="button" data-mult-key="ev_sales" onclick="selectHistoricalMultiple('ev_sales')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏷️ EV / Ventas</span>
+                            </button>
+                            {% else %}
+                            <button type="button" data-mult-key="p_tbv" onclick="selectHistoricalMultiple('p_tbv')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-bold bg-slate-900 text-white shadow-sm transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏛️ P / TBV (Tangible Book)</span>
+                            </button>
+                            <button type="button" data-mult-key="pe_gaap" onclick="selectHistoricalMultiple('pe_gaap')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>💎 P / E (GAAP)</span>
+                            </button>
+                            <button type="button" data-mult-key="p_sales" onclick="selectHistoricalMultiple('p_sales')"
+                                    class="btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer">
+                                <span>🏷️ P / Margen Bruto Financiero</span>
+                            </button>
+                            {% endif %}
+                        </div>
+
+                        <!-- Checkboxes de Líneas de Referencia -->
+                        <div class="flex flex-wrap items-center gap-3 bg-slate-50 px-3.5 py-1.5 rounded-xl border border-slate-200/80 text-xs">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mr-1">Líneas de Referencia:</span>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                <input type="checkbox" id="chkRefMedian" checked onchange="renderHistoricalMultiplesChart()"
+                                       class="rounded text-sky-600 focus:ring-sky-500 w-3.5 h-3.5">
+                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-sky-500 inline-block border-t border-dashed"></span> Mediana</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                <input type="checkbox" id="chkRefMean" checked onchange="renderHistoricalMultiplesChart()"
+                                       class="rounded text-purple-600 focus:ring-purple-500 w-3.5 h-3.5">
+                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-purple-500 inline-block border-t border-dotted"></span> Promedio</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                <input type="checkbox" id="chkRefMin" onchange="renderHistoricalMultiplesChart()"
+                                       class="rounded text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5">
+                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-emerald-500 inline-block"></span> Mínimo</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900">
+                                <input type="checkbox" id="chkRefMax" onchange="renderHistoricalMultiplesChart()"
+                                       class="rounded text-rose-600 focus:ring-rose-500 w-3.5 h-3.5">
+                                <span class="font-semibold flex items-center gap-1"><span class="w-2.5 h-0.5 bg-rose-500 inline-block"></span> Máximo</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Lienzo de Gráfica Chart.js -->
+                    <div class="w-full bg-slate-50/50 rounded-xl p-3 border border-slate-100" style="height: 320px;">
+                        <canvas id="historicalMultiplesChart"></canvas>
+                    </div>
+
+                    <!-- 6 TARJETAS ESTADÍSTICAS DEL MÚLTIPLO SELECCIONADO -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs pt-2 border-t border-slate-100">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-medium">Múltiplo Actual</span>
+                            <span id="statCurrentMultiple" class="text-base font-black text-slate-900 block mt-0.5">--</span>
+                        </div>
+                        <div class="bg-sky-50/60 p-2.5 rounded-xl border border-sky-100">
+                            <span class="text-[10px] text-sky-700 uppercase tracking-wider block font-semibold">Mediana (5Y)</span>
+                            <span id="statMedianMultiple" class="text-base font-black text-sky-900 block mt-0.5">--</span>
+                        </div>
+                        <div class="bg-purple-50/60 p-2.5 rounded-xl border border-purple-100">
+                            <span class="text-[10px] text-purple-700 uppercase tracking-wider block font-semibold">Promedio (5Y)</span>
+                            <span id="statMeanMultiple" class="text-base font-black text-purple-900 block mt-0.5">--</span>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-medium">Rango Histórico</span>
+                            <span id="statRangeMultiple" class="text-xs font-mono font-bold text-slate-800 block mt-1">--</span>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-medium">vs Mediana</span>
+                            <span id="statDiffMultiple" class="mt-1 block">--</span>
+                        </div>
+                        <div class="bg-amber-50/60 p-2.5 rounded-xl border border-amber-200">
+                            <span class="text-[10px] text-amber-800 uppercase tracking-wider block font-semibold">Precio Imputado Mediana</span>
+                            <span id="statImputedPrice" class="text-sm font-black text-amber-950 block mt-0.5">--</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tabla de Múltiplos Comparables -->
-                <div class="overflow-x-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <table class="w-full text-xs text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-white/60">
-                                <th class="py-3 px-3">Múltiplo de Valoración</th>
-                                <th class="py-3 px-3 text-center">LTM Actual</th>
-                                <th class="py-3 px-3 text-center">Mediana Histórica (5Y)</th>
-                                <th class="py-3 px-3 text-center">Mediana Pares Sector</th>
-                                <th class="py-3 px-3 text-center">Múltiplo Normal / Objetivo</th>
-                                <th class="py-3 px-3 text-center">Precio Imputado ($)</th>
-                                <th class="py-3 px-3 text-right">Diagnóstico de Valoración</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100/80">
-                            <!-- PER (P/E) -->
-                            <tr class="hover:bg-white/80 transition">
-                                <td class="py-3 px-3 font-semibold text-slate-800">
-                                    P/E Ratio (Precio / Beneficio)
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    {% if multiples_analysis.pe_current %}{{ multiples_analysis.pe_current|floatformat:1 }}x{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">
-                                    {% if multiples_analysis.pe_5y_median %}{{ multiples_analysis.pe_5y_median|floatformat:1 }}x{% else %}--{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">
-                                    {{ multiples_analysis.peer_median_pe|floatformat:1 }}x
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">
-                                    {{ multiples_analysis.normal_pe|floatformat:1 }}x
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    ${{ multiples_analysis.imputed_prices.pe|floatformat:2 }}
-                                </td>
-                                <td class="py-3 px-3 text-right">
-                                    {% if multiples_analysis.imputed_prices.pe < stock_price %}
-                                    <span class="text-rose-700 font-semibold text-[11px]">Sobrevalorado vs Historia</span>
-                                    {% else %}
-                                    <span class="text-emerald-700 font-semibold text-[11px]">Descuento vs Historia</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-
-                            {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
-                            <!-- EV / FCF -->
-                            <tr class="hover:bg-white/80 transition">
-                                <td class="py-3 px-3 font-semibold text-slate-800">
-                                    EV / Free Cash Flow (Empresa / Flujo Libre)
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    {% if multiples_analysis.ev_fcf_current %}{{ multiples_analysis.ev_fcf_current|floatformat:1 }}x{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">
-                                    {% if multiples_analysis.peer_median_ev_fcf %}{{ multiples_analysis.peer_median_ev_fcf|floatformat:1 }}x{% else %}18.0x{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">
-                                    {% if multiples_analysis.normal_ev_fcf %}{{ multiples_analysis.normal_ev_fcf|floatformat:1 }}x{% else %}18.0x{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    ${{ multiples_analysis.imputed_prices.ev_fcf|floatformat:2 }}
-                                </td>
-                                <td class="py-3 px-3 text-right">
-                                    {% if multiples_analysis.imputed_prices.ev_fcf < stock_price %}
-                                    <span class="text-rose-700 font-semibold text-[11px]">Múltiplo Exigente</span>
-                                    {% else %}
-                                    <span class="text-emerald-700 font-semibold text-[11px]">Margen FCF Favorable</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-
-                            <!-- EV / EBITDA -->
-                            <tr class="hover:bg-white/80 transition">
-                                <td class="py-3 px-3 font-semibold text-slate-800">
-                                    EV / EBITDA
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    {% if multiples_analysis.ev_ebitda_current %}{{ multiples_analysis.ev_ebitda_current|floatformat:1 }}x{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">14.0x</td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">14.0x</td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    ${{ multiples_analysis.imputed_prices.ev_ebitda|floatformat:2 }}
-                                </td>
-                                <td class="py-3 px-3 text-right">
-                                    {% if multiples_analysis.imputed_prices.ev_ebitda < stock_price %}
-                                    <span class="text-rose-700 font-semibold text-[11px]">Prima Operativa</span>
-                                    {% else %}
-                                    <span class="text-emerald-700 font-semibold text-[11px]">Descuento Operativo</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-
-                            <!-- P/S & FCF Yield -->
-                            <tr class="hover:bg-white/80 transition">
-                                <td class="py-3 px-3 font-semibold text-slate-800">
-                                    FCF Yield (Rendimiento Flujo de Caja)
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-purple-700">
-                                    {% if multiples_analysis.fcf_yield_pct %}{{ multiples_analysis.fcf_yield_pct|floatformat:2 }}%{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">~4.5%</td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">5.0%</td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
-                                <td class="py-3 px-3 text-right">
-                                    {% if multiples_analysis.fcf_yield_pct and multiples_analysis.fcf_yield_pct < 3.5 %}
-                                    <span class="text-rose-700 font-semibold text-[11px]">Rendimiento Comprimido</span>
-                                    {% else %}
-                                    <span class="text-emerald-700 font-semibold text-[11px]">Rendimiento Atractivo</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-
-                            <!-- EV / NOPAT AJUSTADO (MÚLTIPLO ECONÓMICO CORREGIDO) -->
-                            <tr class="hover:bg-white/80 transition bg-indigo-50/30">
-                                <td class="py-3 px-3 font-bold text-indigo-950 flex items-center gap-1.5">
-                                    <span>🚀 EV / NOPAT Ajustado (I+D Capitalizado)</span>
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-indigo-900">
-                                    {% if z_score_analysis.current_multiple %}{{ z_score_analysis.current_multiple|floatformat:1 }}x{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-700 font-semibold">
-                                    {% if z_score_analysis.mean_multiple %}{{ z_score_analysis.mean_multiple|floatformat:1 }}x (μ){% else %}--{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">
-                                    ±{{ z_score_analysis.std_multiple|default:0.0|floatformat:1 }}x (σ)
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-indigo-700 bg-indigo-100/60 rounded">
-                                    {{ z_score_analysis.mean_multiple|default:multiples_analysis.normal_pe|floatformat:1 }}x
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    ${{ z_score_analysis.bands.mean|default:multiples_analysis.imputed_prices.pe|floatformat:2 }}
-                                </td>
-                                <td class="py-3 px-3 text-right">
-                                    <span class="inline-flex items-center gap-1 font-bold text-[11px] {% if z_score_analysis.z_score <= -1.0 %}text-emerald-700{% elif z_score_analysis.z_score >= 1.5 %}text-rose-700{% else %}text-sky-700{% endif %}">
-                                        {% if z_score_analysis.z_score > 0 %}+{% endif %}{{ z_score_analysis.z_score|floatformat:2 }}σ: {{ z_score_analysis.status }}
-                                    </span>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <!-- P/TBV Bancario -->
-                            <tr class="hover:bg-white/80 transition">
-                                <td class="py-3 px-3 font-semibold text-slate-800">
-                                    P/TBV (Precio / Valor Contable Tangible)
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    {% if vp.tbv_per_share and vp.tbv_per_share > 0 %}{{ stock_price|default:1.0|floatformat:2 }} ÷ {{ vp.tbv_per_share|floatformat:2 }}{% else %}N/D{% endif %}
-                                </td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">--</td>
-                                <td class="py-3 px-3 text-center font-mono text-slate-600">1.5x - 2.5x</td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-sky-700 bg-sky-50 rounded">P/TBV Justo</td>
-                                <td class="py-3 px-3 text-center font-mono font-bold text-slate-900">
-                                    ${{ multiples_analysis.imputed_prices.ptbv|floatformat:2 }}
-                                </td>
-                                <td class="py-3 px-3 text-right">
-                                    <span class="text-sky-700 font-semibold text-[11px]">Regulado por ROTCE / Ke</span>
-                                </td>
-                            </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
+                <!-- TARJETA EXPLICATIVA DINÁMICA DEL MÚLTIPLO ACTIVO -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-600 flex items-start gap-3">
+                    <span class="text-lg">💡</span>
+                    <div>
+                        <strong id="histMultCardTitle" class="text-slate-900 font-bold block mb-0.5">EV / NOPAT Ajustado</strong>
+                        <p id="histMultCardDesc" class="leading-relaxed text-[11px] text-slate-600">
+                            Mide la valoración empresarial frente al verdadero beneficio operativo económico, corrigiendo la distorsión contable mediante la capitalización de I+D.
+                        </p>
+                    </div>
                 </div>
 
-                {% if not is_banking and not is_financial and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
-                <!-- BANDAS DE VALORACIÓN DINÁMICA Z-SCORE (EV / NOPAT AJUSTADO) -->
-                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 shadow-sm">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                <!-- TABLA HISTÓRICA ANUAL DE MÚLTIPLOS Y PRECIOS DE CIERRE FISCAL -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                         <div>
-                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                                <span>🎯 Bandas de Valoración Dinámica Z-Score (EV / NOPAT Ajustado)</span>
-                                <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">Reversión Estadística ±2σ</span>
-                            </h4>
-                            <p class="text-xs text-slate-500 mt-0.5">
-                                Mide cuántas desviaciones estándar ($\sigma$) se aleja la cotización de su historia de generación de caja operativa real, señalizando techos de euforia o suelos de oportunidad.
+                            <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📅 Historial Multianual de Cierres Fiscales & Múltiplos</span>
+                            </h5>
+                            <p class="text-[11px] text-slate-500 mt-0.5">
+                                Precios de cotización al cierre de cada ejercicio fiscal según el Form 10-K / 10-Q de la SEC.
                             </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate-500 font-semibold">Z-Score Actual:</span>
-                            <span class="text-xs font-black px-3 py-1.5 rounded-xl {% if z_score_analysis.z_score <= -1.5 %}bg-emerald-100 text-emerald-800 border border-emerald-300{% elif z_score_analysis.z_score >= 1.5 %}bg-rose-100 text-rose-800 border border-rose-300{% else %}bg-sky-100 text-sky-800 border border-sky-300{% endif %}">
-                                {% if z_score_analysis.z_score > 0 %}+{% endif %}{{ z_score_analysis.z_score|floatformat:2 }}σ ({{ z_score_analysis.status }})
-                            </span>
-                        </div>
+                        <span class="text-[10px] font-mono text-slate-400">Audited Financial History</span>
                     </div>
 
-                    <!-- Pista Visual de 5 Zonas Z-Score -->
-                    <div class="space-y-2 pt-1">
-                        <div class="grid grid-cols-5 text-center text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                            <span class="text-emerald-700">≤ -2σ (Suelo Extremo)</span>
-                            <span class="text-emerald-600">-1σ (Descuento)</span>
-                            <span class="text-sky-700">μ (Media Histórica)</span>
-                            <span class="text-amber-700">+1σ (Prima Moderada)</span>
-                            <span class="text-rose-700">≥ +2σ (Euforia / Techo)</span>
-                        </div>
-                        <!-- Barra de Progreso de 5 Zonas -->
-                        <div class="grid grid-cols-5 h-4 rounded-xl overflow-hidden shadow-inner border border-slate-200">
-                            <div class="bg-emerald-500/80" title="Zona de Compra Fuerte (≤ -2σ)"></div>
-                            <div class="bg-emerald-300/80" title="Zona de Descuento Moderado (-2σ a -1σ)"></div>
-                            <div class="bg-sky-200/80" title="Rango Histórico Equilibrado (-1σ a +1σ)"></div>
-                            <div class="bg-amber-300/80" title="Zona de Prima Moderada (+1σ a +2σ)"></div>
-                            <div class="bg-rose-400/80" title="Zona de Sobrecompra / Euforia (≥ +2σ)"></div>
-                        </div>
-                        <!-- Precios Imputados por Banda -->
-                        <div class="grid grid-cols-5 text-center text-xs font-mono font-bold">
-                            <span class="text-emerald-800">${{ z_score_analysis.bands.minus_2sigma|floatformat:1 }}</span>
-                            <span class="text-emerald-700">${{ z_score_analysis.bands.minus_1sigma|floatformat:1 }}</span>
-                            <span class="text-sky-900 bg-sky-50 py-0.5 rounded border border-sky-200">${{ z_score_analysis.bands.mean|floatformat:1 }}</span>
-                            <span class="text-amber-800">${{ z_score_analysis.bands.plus_1sigma|floatformat:1 }}</span>
-                            <span class="text-rose-800">${{ z_score_analysis.bands.plus_2sigma|floatformat:1 }}</span>
-                        </div>
-                    </div>
-
-                    <!-- Guía Pedagógica de Bandas Z-Score -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                        <div>
-                            <strong class="text-emerald-800 block mb-1">🟢 Puntos de Entrada Estadísticos (Margen de Seguridad):</strong>
-                            Cuando el múltiplo $EV / NOPAT_{adj}$ se ubica por debajo de $-1.0\sigma$ o $-2.0\sigma$, el mercado está cotizando el activo con un castigo probabilístico inusual frente a su propio historial, generando puntos de entrada asimétricos.
-                        </div>
-                        <div>
-                            <strong class="text-rose-800 block mb-1">🔴 Alerta de Priced for Perfection (Sobrecompra):</strong>
-                            Por encima de $+1.5\sigma$ a $+2.0\sigma$, la cotización asume un escenario de ejecución perfecto sin margen de error. La reversión estadística hacia la media histórica ($\mu$) implicaría una contracción de múltiplo considerable.
-                        </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-[10px] font-bold text-slate-400 uppercase bg-slate-50">
+                                    <th class="py-2.5 px-3">Ejercicio</th>
+                                    <th class="py-2.5 px-3 text-right">Precio Cierre ($)</th>
+                                    {% if not is_financial and not is_banking and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                                    <th class="py-2.5 px-3 text-right">EV / NOPAT Adj</th>
+                                    <th class="py-2.5 px-3 text-right">P / Owner Earnings</th>
+                                    <th class="py-2.5 px-3 text-right">P / E (GAAP)</th>
+                                    <th class="py-2.5 px-3 text-right">EV / FCF</th>
+                                    <th class="py-2.5 px-3 text-right">EV / Ventas</th>
+                                    {% else %}
+                                    <th class="py-2.5 px-3 text-right">P / TBV</th>
+                                    <th class="py-2.5 px-3 text-right">P / E (GAAP)</th>
+                                    <th class="py-2.5 px-3 text-right">P / Ventas</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono text-xs">
+                                {% for row in historical_multiples.annual_table %}
+                                <tr class="hover:bg-slate-50 transition {% if row.period == 'LTM' %}bg-sky-50/40 font-bold{% endif %}">
+                                    <td class="py-2.5 px-3 font-sans font-bold text-slate-900">{{ row.period }}</td>
+                                    <td class="py-2.5 px-3 text-right text-slate-900">${{ row.price|floatformat:2 }}</td>
+                                    {% if not is_financial and not is_banking and archetype != "FINANCIAL_BANKING" and archetype != "INSURANCE" %}
+                                    <td class="py-2.5 px-3 text-right text-indigo-700 font-bold">{% if row.ev_nopat_adj %}{{ row.ev_nopat_adj|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-emerald-700 font-bold">{% if row.p_oe %}{{ row.p_oe|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-slate-700">{% if row.pe_gaap %}{{ row.pe_gaap|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-sky-700">{% if row.ev_fcf %}{{ row.ev_fcf|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-amber-700">{% if row.ev_sales %}{{ row.ev_sales|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    {% else %}
+                                    <td class="py-2.5 px-3 text-right text-indigo-700 font-bold">{% if row.p_tbv %}{{ row.p_tbv|floatformat:2 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-slate-700">{% if row.pe_gaap %}{{ row.pe_gaap|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    <td class="py-2.5 px-3 text-right text-amber-700">{% if row.p_sales %}{{ row.p_sales|floatformat:1 }}x{% else %}--{% endif %}</td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                {% endif %}
 
                 <!-- ANÁLISIS DEL RATIO PEG (PETER LYNCH) & PEDAGOGÍA CONTABLE -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -3778,243 +3541,8 @@
                             El ratio <strong>Price/Earnings-to-Growth (PEG)</strong> ideado por Peter Lynch normaliza el múltiplo P/E dividiéndolo por la tasa anual de crecimiento. Un P/E de 30x puede parecer costoso de forma aislada, pero si la compañía expande sus beneficios al 35% anual (PEG = 0.86x), cotiza con un descuento relativo superior al de una empresa estancada cotizando a 12x con crecimiento del 2% (PEG = 6.0x).
                         </p>
                         <p class="leading-relaxed text-[11px] text-slate-500 border-t border-slate-100 pt-1.5">
-                            <strong>Principio de Integridad (Regla 6):</strong> Si el crecimiento histórico o projected es negativo o nulo, el PEG no imputa valores ficticios de 0.0x, sino que reporta explícitamente <strong>N/D</strong> para advertir al analista de que el modelo requiere expansión de beneficios positivos.
+                            <strong>Principio de Integridad (Regla 6):</strong> Si el crecimiento histórico o proyectado es negativo o nulo, el PEG no imputa valores ficticios de 0.0x, sino que reporta explícitamente <strong>N/D</strong> para advertir al analista de que el modelo requiere expansión de beneficios positivos.
                         </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========================================================================= -->
-            <!-- SUB-PESTAÑA 3: SIMULADOR FUTURO A 5 AÑOS & TIR (FORWARD IRR) -->
-            <!-- ========================================================================= -->
-            <div id="val-subtab-forward" class="val-subtab-panel hidden space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                    <div>
-                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>🚀 Simulador de Retorno Esperado a 5 Años (Forward IRR & Target Price)</span>
-                        </h4>
-                        <p class="text-xs text-slate-500 mt-0.5">
-                            Descompone matemáticamente la rentabilidad del inversor en los 4 motores fundamentales (John Bogle / Michael Mauboussin): Crecimiento de Ventas, Margen FCF, Múltiplo de Salida y Retorno al Accionista.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Sliders Interactivos para la Proyección 5 Años -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-[11px] font-bold text-slate-700">1. Crecimiento Ventas 5Y:</label>
-                            <span id="fwdSliderRevDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
-                                {{ hist_growth_pct|floatformat:1 }}%
-                            </span>
-                        </div>
-                        <input type="range" id="fwdSliderRev" min="-5.0" max="40.0" step="0.5" value="{{ hist_growth_pct|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                        <span class="text-[10px] text-slate-500 block mt-1">CAGR de facturación</span>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-[11px] font-bold text-slate-700">2. Margen FCF Año 5:</label>
-                            <span id="fwdSliderMarginDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
-                                {{ fcf_margin_pct|floatformat:1 }}%
-                            </span>
-                        </div>
-                        <input type="range" id="fwdSliderMargin" min="1.0" max="60.0" step="0.5" value="{{ fcf_margin_pct|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                        <span class="text-[10px] text-slate-500 block mt-1">Margen final proyectado</span>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-[11px] font-bold text-slate-700">3. Múltiplo de Salida (Año 5):</label>
-                            <span id="fwdSliderMultipleDisp" class="text-xs font-black text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded">
-                                {{ multiples_analysis.normal_pe|default:20.0|floatformat:1 }}x
-                            </span>
-                        </div>
-                        <input type="range" id="fwdSliderMultiple" min="8.0" max="50.0" step="0.5" value="{{ multiples_analysis.normal_pe|default:20.0|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
-                        <span class="text-[10px] text-slate-500 block mt-1">P/FCF o P/E al salir</span>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-[11px] font-bold text-slate-700">4. Recompras Netas / Año:</label>
-                            <span id="fwdSliderBuybackDisp" class="text-xs font-black text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">
-                                {{ buyback_rate_pct|default:1.5|floatformat:1 }}%
-                            </span>
-                        </div>
-                        <input type="range" id="fwdSliderBuyback" min="-3.0" max="8.0" step="0.2" value="{{ buyback_rate_pct|default:1.5|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-purple-500 cursor-pointer">
-                        <span class="text-[10px] text-slate-500 block mt-1">Reducción neta de acciones</span>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-[11px] font-bold text-slate-700">5. Dividend Yield Anual:</label>
-                            <span id="fwdSliderDivDisp" class="text-xs font-black text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
-                                {{ dividend_yield_pct|default:0.0|floatformat:1 }}%
-                            </span>
-                        </div>
-                        <input type="range" id="fwdSliderDiv" min="0.0" max="10.0" step="0.2" value="{{ dividend_yield_pct|default:0.0|floatformat:1 }}" oninput="recalcForward5Y()" class="w-full h-2 bg-slate-700 rounded accent-amber-500 cursor-pointer">
-                        <span class="text-[10px] text-slate-500 block mt-1">Cobro de dividendos</span>
-                    </div>
-                </div>
-
-                <!-- Tarjetas de Salida y Retorno Compuesto 5Y -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Precio Objetivo Año 5</span>
-                        <span id="fwdTargetPrice" class="text-3xl font-black text-slate-900 mt-1 block">${{ forward_5y_analysis.target_price_5y|floatformat:2 }}</span>
-                        <span class="text-xs text-slate-500 mt-1 block">Para una cotización inicial de ${{ stock_price|floatformat:2 }} USD</span>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-white to-sky-50/50 p-5 rounded-2xl border border-sky-200 shadow-sm">
-                        <span class="text-[10px] text-sky-800 font-bold uppercase tracking-wider block">TIR Anual Proyectada (Forward IRR)</span>
-                        <span id="fwdIrrPct" class="text-3xl font-black text-sky-700 mt-1 block">{{ forward_5y_analysis.forward_irr_pct|floatformat:1 }}% CAGR</span>
-                        <span class="text-xs text-slate-500 mt-1 block">Retorno compuesto anualizado</span>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-white to-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Retorno Total Acumulado (5Y)</span>
-                        <span id="fwdTotalReturn" class="text-3xl font-black text-purple-700 mt-1 block">{% if forward_5y_analysis.total_return_pct >= 0 %}+{% endif %}{{ forward_5y_analysis.total_return_pct|floatformat:0 }}%</span>
-                        <span class="text-xs text-slate-500 mt-1 block">Multiplicador: {{ forward_5y_analysis.target_price_5y|default:1.0|floatformat:2 }}x</span>
-                    </div>
-                </div>
-
-                <!-- WATERFALL ATTRIBUTION BRIDGE (DESGLOSE DE LOS 5 MOTORES) -->
-                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-900">Bridge de Atribución del Retorno Anual Esperado</h5>
-                            <p class="text-xs text-slate-500">Cómo contribuye cada factor contable y de mercado a la rentabilidad anual compuesta (CAGR).</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center text-xs">
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">1. Crecimiento Ventas</span>
-                            <span id="bridgeGrowth" class="text-lg font-black text-sky-700 block mt-1">+{{ forward_5y_analysis.bridge.growth_contrib|floatformat:1 }}%</span>
-                            <span class="text-[10px] text-slate-400">Expansión de escala</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">2. Margen FCF</span>
-                            <span id="bridgeMargin" class="text-lg font-black text-slate-900 block mt-1">{% if forward_5y_analysis.bridge.margin_contrib >= 0 %}+{% endif %}{{ forward_5y_analysis.bridge.margin_contrib|floatformat:1 }}%</span>
-                            <span class="text-[10px] text-slate-400">Apalancamiento operativo</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">3. Re-rating Múltiplo</span>
-                            <span id="bridgeMultiple" class="text-lg font-black text-slate-900 block mt-1">{% if forward_5y_analysis.bridge.multiple_contrib >= 0 %}+{% endif %}{{ forward_5y_analysis.bridge.multiple_contrib|floatformat:1 }}%</span>
-                            <span class="text-[10px] text-slate-400">Expansión / Contracción</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">4. Recompras Netas</span>
-                            <span id="bridgeBuyback" class="text-lg font-black text-purple-700 block mt-1">+{{ forward_5y_analysis.bridge.buyback_contrib|floatformat:1 }}%</span>
-                            <span class="text-[10px] text-slate-400">Reducción de acciones</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-slate-500 block text-[10px] font-semibold uppercase">5. Dividend Yield</span>
-                            <span id="bridgeDiv" class="text-lg font-black text-amber-700 block mt-1">+{{ forward_5y_analysis.bridge.div_contrib|floatformat:1 }}%</span>
-                            <span class="text-[10px] text-slate-400">Flujo de caja directo</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========================================================================= -->
-            <!-- SUB-PESTAÑA 4: CREACIÓN DE VALOR (EVA) & EPV GREENWALD -->
-            <!-- ========================================================================= -->
-            <div id="val-subtab-value" class="val-subtab-panel hidden space-y-6">
-                <!-- SECCIÓN A: GREENWALD EARNINGS POWER VALUE (EPV) -->
-                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
-                        <div>
-                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                                <span>🏛️ Earnings Power Value (EPV) & Present Value of Growth (PVGO)</span>
-                                <span class="text-[10px] bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded-full">Columbia Business School</span>
-                            </h4>
-                            <p class="text-xs text-slate-500 mt-0.5">
-                                Metodología de Bruce Greenwald: Valora la empresa asumiendo estrictamente <strong>cero crecimiento futuro</strong>, aislando cuánto del precio actual paga por activos en marcha y cuánto es pura especulación sobre el futuro.
-                            </p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold">EPV por Acción</span>
-                            <span class="text-xl font-black text-purple-700">${{ epv_analysis.epv_per_share|floatformat:2 }} USD</span>
-                        </div>
-                    </div>
-
-                    <!-- Métricas del EPV -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">NOPAT Sostenible</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.sustainable_nopat_m|floatformat:1 }}M</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">EPV Operativo (÷ WACC)</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.epv_operating_m|floatformat:1 }}M</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">EPV Equity Neto</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ epv_analysis.epv_equity_m|floatformat:1 }}M</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">PVGO (Valor del Crecimiento)</span>
-                            <span class="text-base font-black text-amber-700 block mt-0.5">${{ epv_analysis.pvgo_per_share|floatformat:2 }} USD</span>
-                        </div>
-                    </div>
-
-                    <!-- Barra Visual Proporcional EPV vs PVGO -->
-                    <div class="space-y-1.5 pt-1">
-                        <div class="flex justify-between text-xs font-bold text-slate-700">
-                            <span>Respaldado por Beneficios Actuales: {{ epv_analysis.epv_pct|floatformat:0 }}% (EPV)</span>
-                            <span>Especulación sobre Crecimiento Futuro: {{ epv_analysis.pvgo_pct|floatformat:0 }}% (PVGO)</span>
-                        </div>
-                        <div class="w-full h-4 bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
-                            <div class="bg-purple-600 h-full transition-all duration-500" style="width: {{ epv_analysis.epv_pct|floatformat:0 }}%;" title="EPV: {{ epv_analysis.epv_pct|floatformat:1 }}%"></div>
-                            <div class="bg-amber-400 h-full transition-all duration-500" style="width: {{ epv_analysis.pvgo_pct|floatformat:0 }}%;" title="PVGO: {{ epv_analysis.pvgo_pct|floatformat:1 }}%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN B: ECONOMIC VALUE ADDED (EVA) / ROIC vs WACC SPREAD -->
-                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
-                        <div>
-                            <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                                <span>🏰 Economic Value Added (EVA) & Capital Invertido</span>
-                                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Stern Stewart / Damodaran</span>
-                            </h4>
-                            <p class="text-xs text-slate-500 mt-0.5">
-                                Valora la compañía en función del retorno excedente generado sobre el capital operativo empleado: $EV = IC_0 + PV(EVA_{1..10}) + PV(EVA_{Terminal})$.
-                            </p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold">Valor Teórico por EVA</span>
-                            <span class="text-xl font-black text-emerald-700">${{ eva_analysis.fair_price_eva|floatformat:2 }} USD</span>
-                        </div>
-                    </div>
-
-                    <!-- Métricas del Modelo EVA -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Capital Invertido (IC)</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.ic_base_m|floatformat:1 }}M</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Spread Económico</span>
-                            <span class="text-base font-black {% if eva_analysis.spread_pct > 0 %}text-emerald-700{% else %}text-rose-700{% endif %} block mt-0.5">
-                                {% if eva_analysis.spread_pct > 0 %}+{% endif %}{{ eva_analysis.spread_pct|floatformat:2 }} pp
-                            </span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">PV de EVA (10 Años)</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.pv_eva_sum|floatformat:1 }}M</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Valor Terminal EVA</span>
-                            <span class="text-base font-black text-slate-900 block mt-0.5">${{ eva_analysis.pv_terminal_eva|floatformat:1 }}M</span>
-                        </div>
-                    </div>
-
-                    <div class="p-3.5 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
-                        <strong class="text-slate-900">Principio Contable de Creación de Valor (Stern Stewart):</strong>
-                        El crecimiento en ventas solo crea valor si el retorno sobre el capital invertido (ROIC) supera el coste medio ponderado del capital (WACC). Si el spread es negativo, cada nuevo dólar invertido destruye riqueza para el accionista aunque el beneficio neto contable aumente.
                     </div>
                 </div>
             </div>
@@ -4024,7 +3552,7 @@
             <!-- ========================================================================= -->
             {% if audit_traceability and not audit_traceability.is_financial %}
             <div class="mt-6">
-                <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-200">
+                <details ontoggle="if(this.open && window.triggerKaTeX) window.triggerKaTeX(this);" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-200">
                     <summary class="flex items-center justify-between p-5 bg-gradient-to-r from-slate-50 via-indigo-50/20 to-white cursor-pointer select-none hover:bg-slate-100/60 transition">
                         <div class="flex items-center gap-3">
                             <span class="p-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-xs">🔬</span>
@@ -4161,41 +3689,44 @@
                             </div>
                         </div>
 
-                        <!-- FILA 3: IDENTIDADES CONTABLES Y FÓRMULAS MATEMÁTICAS EN KATEX -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
-                            <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
-                                <span>📐 Identidades Contables y Fórmulas Matemáticas Universales</span>
-                            </h5>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
-                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                                    <span class="font-bold text-slate-900 block text-[11px]">1. Capitalización de I+D (Inventario Perpetuo N=5):</span>
-                                    <p class="font-mono text-[11px] text-slate-600">
-                                        $$\text{Amortización}_t = \sum_{k=0}^{N-1} \frac{\text{I+D}_{t-k}}{N} \quad\Big|\quad \text{Activo I+D}_t = \sum_{k=0}^{N-1} \text{I+D}_{t-k} \left(1 - \frac{k+0.5}{N}\right)$$
+                        <!-- FILA 3: IDENTIDADES CONTABLES Y FÓRMULAS MATEMÁTICAS CON SUSTITUCIÓN NUMÉRICA REAL -->
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+                            <div class="border-b border-slate-100 pb-2.5 flex items-center justify-between">
+                                <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span>📐 Identidades Contables Universales y Conciliación Numérica Auditada</span>
+                                </h5>
+                                <span class="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded">Fórmulas KaTeX & Cifras Auditadas</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-800">
+                                {% if audit_traceability.math_formulas %}
+                                {% for k, f_obj in audit_traceability.math_formulas.items %}
+                                <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-2">
+                                    <div class="flex items-center justify-between border-b border-slate-200/60 pb-1.5">
+                                        <span class="font-bold text-slate-900 text-xs">{{ f_obj.title }}</span>
+                                    </div>
+                                    <!-- Fórmula Simbólica -->
+                                    <div class="bg-white p-2.5 rounded-lg border border-slate-200/80 overflow-x-auto text-slate-800 font-serif text-[13px]">
+                                        $${{ f_obj.latex_formula }}$$
+                                    </div>
+                                    <!-- Sustitución Numérica Real Auditada -->
+                                    <div class="bg-indigo-50/60 p-2.5 rounded-lg border border-indigo-100 overflow-x-auto text-indigo-950 font-serif text-[13px]">
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-indigo-700 font-sans block mb-1">Cálculo Auditado en Cifras Reales:</span>
+                                        $${{ f_obj.latex_substituted }}$$
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 leading-relaxed pt-1">
+                                        {{ f_obj.explanation }}
                                     </p>
                                 </div>
-                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                                    <span class="font-bold text-slate-900 block text-[11px]">2. NOPAT Ajustado y Beneficios del Propietario (OE):</span>
-                                    <p class="font-mono text-[11px] text-slate-600">
-                                        $$\text{NOPAT}_{adj} = (\text{EBIT} + \text{I+D}_t - \text{Amort}_t) \times (1 - \text{Tax})$$
-                                        $$\text{Owner Earnings} = \text{FCF} + \text{CapEx Crecimiento} + (\text{I+D}_t - \text{Amort}_t)$$
-                                    </p>
+                                {% endfor %}
+                                {% else %}
+                                <div class="col-span-2 p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600">
+                                    Las fórmulas de conciliación se generan dinámicamente según el arquetipo auditado de la empresa.
                                 </div>
-                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                                    <span class="font-bold text-slate-900 block text-[11px]">3. ROIC Ajustado y Economic Spread (Stern Stewart):</span>
-                                    <p class="font-mono text-[11px] text-slate-600">
-                                        $$\text{ROIC}_{adj} = \frac{\text{NOPAT}_{adj}}{\text{Capital Invertido Tangible} + \text{Activo I+D}} \quad\Big|\quad \text{Spread} = \text{ROIC}_{adj} - \text{WACC}$$
-                                    </p>
-                                </div>
-                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                                    <span class="font-bold text-slate-900 block text-[11px]">4. Bandas Dinámicas Z-Score (Desviación Típica):</span>
-                                    <p class="font-mono text-[11px] text-slate-600">
-                                        $$Z = \frac{(EV / NOPAT_{adj}) - \mu}{\sigma} \quad\Big|\quad \text{Precio Imputado}(\text{Banda}) = \frac{\text{Banda} \times \text{NOPAT}_{adj} - \text{Deuda Neta}}{\text{Acciones}}$$
-                                    </p>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
-                    </div>
-                </details>
+                    </div></details>
             </div>
             {% elif audit_traceability and audit_traceability.is_financial %}
             <div class="mt-6">
@@ -4334,7 +3865,7 @@
         if (tabId === 'charts') setTimeout(renderCharts, 50);
         if (tabId === 'segments') setTimeout(renderSegmentsCharts, 50);
         if (tabId === 'quality' || tabId === 'novymarx') setTimeout(renderNovyMarxCharts, 50);
-        if (tabId === 'reversedcf') setTimeout(recalcDCF, 50);
+        if (tabId === 'reversedcf') { setTimeout(recalcDCF, 50); setTimeout(renderHistoricalMultiplesChart, 100); }
     }
 
     function selectModelSubTab(model) {
@@ -4399,6 +3930,266 @@
         document.querySelectorAll('.val-subtab-btn').forEach(b => {
             b.className = 'val-subtab-btn px-4 py-2.5 font-semibold rounded-t-xl text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap';
         });
+        const panel = document.getElementById('val-subtab-' + subTabId);
+        const btn = document.getElementById('btn-val-subtab-' + subTabId);
+        if (panel) panel.classList.remove('hidden');
+        if (btn) {
+            btn.className = 'val-subtab-btn px-4 py-2.5 font-bold rounded-t-xl bg-slate-900 text-white shadow transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap';
+        }
+        if (subTabId === 'multiples') {
+            setTimeout(renderHistoricalMultiplesChart, 60);
+        }
+    }
+    // =========================================================================
+    // GRÁFICO INTERACTIVO DE MÚLTIPLOS HISTÓRICOS Y REVERSIÓN A LA MEDIA (CHART.JS)
+    // =========================================================================
+    const histMultiplesData = {{ historical_multiples_json|safe }};
+    let historicalMultiplesChart = null;
+    let currentMultipleKey = (histMultiplesData && histMultiplesData.is_financial) ? 'p_tbv' : 'ev_nopat_adj';
+
+    const multipleMeta = {
+        'ev_nopat_adj': {
+            name: 'EV / NOPAT Ajustado (I+D Capitalizado)',
+            desc: 'Mide la valoración del Enterprise Value frente al verdadero beneficio operativo económico, corrigiendo la distorsión GAAP mediante la capitalización de I+D.',
+            color: '#4f46e5'
+        },
+        'p_oe': {
+            name: 'P / Owner Earnings (Buffett-Greenwald)',
+            desc: 'Precio sobre la caja real generada para los accionistas, descontando únicamente el CapEx de mantenimiento y reintegrando el CapEx de expansión.',
+            color: '#059669'
+        },
+        'pe_gaap': {
+            name: 'P / E (GAAP Contable)',
+            desc: 'Múltiplo precio/beneficio tradicional bajo normas contables estándar US-GAAP.',
+            color: '#0284c7'
+        },
+        'ev_fcf': {
+            name: 'EV / Free Cash Flow',
+            desc: 'Valor de empresa sobre el flujo de caja libre reportado (CFO menos 100% del CapEx reportado).',
+            color: '#0891b2'
+        },
+        'ev_sales': {
+            name: 'EV / Ventas',
+            desc: 'Valor de empresa sobre la cifra de ingresos brutos anuales.',
+            color: '#d97706'
+        },
+        'p_tbv': {
+            name: 'P / TBV (Tangible Book Value)',
+            desc: 'Precio sobre valor contable tangible, métrica reina en entidades de crédito e intermediación financiera.',
+            color: '#4338ca'
+        },
+        'p_sales': {
+            name: 'P / Margen Bruto Financiero',
+            desc: 'Precio sobre ingresos brutos de intermediación financiera.',
+            color: '#b45309'
+        }
+    };
+
+    function selectHistoricalMultiple(key) {
+        currentMultipleKey = key;
+        
+        document.querySelectorAll('.btn-hist-mult').forEach(btn => {
+            const bKey = btn.getAttribute('data-mult-key');
+            if (bKey === key) {
+                btn.className = 'btn-hist-mult px-3 py-1.5 rounded-xl font-bold bg-slate-900 text-white shadow-sm transition text-xs flex items-center gap-1.5 cursor-pointer';
+            } else {
+                btn.className = 'btn-hist-mult px-3 py-1.5 rounded-xl font-semibold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer';
+            }
+        });
+
+        const meta = multipleMeta[key] || { name: key, desc: '', color: '#4f46e5' };
+        const elTitle = document.getElementById('histMultCardTitle');
+        const elDesc = document.getElementById('histMultCardDesc');
+        if (elTitle) elTitle.textContent = meta.name;
+        if (elDesc) elDesc.textContent = meta.desc;
+
+        renderHistoricalMultiplesChart();
+    }
+
+    function renderHistoricalMultiplesChart() {
+        if (!histMultiplesData || !histMultiplesData.series) return;
+        const periods = histMultiplesData.periods || [];
+        const prices = histMultiplesData.prices || [];
+        const seriesVals = (histMultiplesData.series || {})[currentMultipleKey] || [];
+        const stats = (histMultiplesData.stats || {})[currentMultipleKey] || {};
+
+        const elCur = document.getElementById('statCurrentMultiple');
+        const elMed = document.getElementById('statMedianMultiple');
+        const elMean = document.getElementById('statMeanMultiple');
+        const elRange = document.getElementById('statRangeMultiple');
+        const elDiff = document.getElementById('statDiffMultiple');
+        const elImpPrice = document.getElementById('statImputedPrice');
+
+        if (elCur) elCur.textContent = stats.current ? `${stats.current.toFixed(1)}x` : 'N/D';
+        if (elMed) elMed.textContent = stats.median ? `${stats.median.toFixed(1)}x` : '--';
+        if (elMean) elMean.textContent = stats.mean ? `${stats.mean.toFixed(1)}x` : '--';
+        if (elRange) elRange.textContent = (stats.min && stats.max) ? `${stats.min.toFixed(1)}x - ${stats.max.toFixed(1)}x` : '--';
+
+        if (elDiff) {
+            if (stats.diff_pct !== undefined && stats.diff_pct !== null) {
+                const isOver = stats.diff_pct > 0;
+                elDiff.className = `inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${isOver ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}`;
+                elDiff.textContent = `${isOver ? '+' : ''}${stats.diff_pct.toFixed(1)}% vs Mediana`;
+            } else {
+                elDiff.textContent = '--';
+            }
+        }
+
+        if (elImpPrice) {
+            elImpPrice.textContent = stats.imputed_price ? `$${stats.imputed_price.toFixed(2)} USD` : '--';
+        }
+
+        const showMedian = document.getElementById('chkRefMedian') ? document.getElementById('chkRefMedian').checked : true;
+        const showMean = document.getElementById('chkRefMean') ? document.getElementById('chkRefMean').checked : true;
+        const showMin = document.getElementById('chkRefMin') ? document.getElementById('chkRefMin').checked : false;
+        const showMax = document.getElementById('chkRefMax') ? document.getElementById('chkRefMax').checked : false;
+
+        const meta = multipleMeta[currentMultipleKey] || { color: '#4f46e5', name: currentMultipleKey };
+        const datasets = [];
+
+        datasets.push({
+            label: meta.name,
+            data: seriesVals,
+            borderColor: meta.color,
+            backgroundColor: meta.color + '15',
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.25,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: meta.color,
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            order: 1
+        });
+
+        const nPoints = periods.length;
+
+        if (showMedian && stats.median) {
+            datasets.push({
+                label: `Mediana (5Y): ${stats.median.toFixed(1)}x`,
+                data: Array(nPoints).fill(stats.median),
+                borderColor: '#0284c7',
+                borderWidth: 1.8,
+                borderDash: [5, 4],
+                pointRadius: 0,
+                fill: false,
+                order: 2
+            });
+        }
+
+        if (showMean && stats.mean) {
+            datasets.push({
+                label: `Promedio (5Y): ${stats.mean.toFixed(1)}x`,
+                data: Array(nPoints).fill(stats.mean),
+                borderColor: '#7c3aed',
+                borderWidth: 1.8,
+                borderDash: [2, 3],
+                pointRadius: 0,
+                fill: false,
+                order: 3
+            });
+        }
+
+        if (showMin && stats.min) {
+            datasets.push({
+                label: `Mínimo: ${stats.min.toFixed(1)}x`,
+                data: Array(nPoints).fill(stats.min),
+                borderColor: '#059669',
+                borderWidth: 1.5,
+                borderDash: [4, 4],
+                pointRadius: 0,
+                fill: false,
+                order: 4
+            });
+        }
+
+        if (showMax && stats.max) {
+            datasets.push({
+                label: `Máximo: ${stats.max.toFixed(1)}x`,
+                data: Array(nPoints).fill(stats.max),
+                borderColor: '#e11d48',
+                borderWidth: 1.5,
+                borderDash: [4, 4],
+                pointRadius: 0,
+                fill: false,
+                order: 5
+            });
+        }
+
+        const canvasElem = document.getElementById('historicalMultiplesChart');
+        if (!canvasElem) return;
+
+        if (historicalMultiplesChart) {
+            historicalMultiplesChart.destroy();
+        }
+
+        historicalMultiplesChart = new Chart(canvasElem.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: periods,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 12,
+                            boxHeight: 12,
+                            font: { size: 11, weight: '600' },
+                            padding: 10,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleFont: { size: 12, weight: 'bold' },
+                        bodyFont: { size: 11 },
+                        padding: 10,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                const idx = context.dataIndex;
+                                const pVal = prices[idx];
+                                const label = context.dataset.label || '';
+                                const val = context.parsed.y;
+                                if (context.datasetIndex === 0) {
+                                    return [`${label}: ${val.toFixed(1)}x`, `Precio Cierre: $${pVal ? pVal.toFixed(2) : '--'} USD`];
+                                }
+                                return `${label}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: '#f1f5f9' },
+                        ticks: {
+                            font: { size: 10, weight: '500' },
+                            callback: function(v) { return v + 'x'; }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            font: { size: 11, weight: '600' }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Actualizar switchValuationSubTab para renderizar la gráfica cuando se abre
+    const oldSwitchValuationSubTab = window.switchValuationSubTab;
+);
         const panel = document.getElementById('val-subtab-' + subTabId);
         const btn = document.getElementById('btn-val-subtab-' + subTabId);
         if (panel) panel.classList.remove('hidden');
@@ -4639,119 +4430,7 @@
         // Recálculo reactivo de la Matriz de Sensibilidad
         updateSensitivityMatrix(discountRate, activeFcfM);
 
-        // Actualizar barra de Reverse DCF en el Football Field
-        updateFootballFieldDcf(fairPrice);
-    }
-
-    function recalcForward5Y() {
-        const elRev = document.getElementById('fwdSliderRev');
-        const elMargin = document.getElementById('fwdSliderMargin');
-        const elMult = document.getElementById('fwdSliderMultiple');
-        const elBb = document.getElementById('fwdSliderBuyback');
-        const elDiv = document.getElementById('fwdSliderDiv');
-        if (!elRev || !elMargin || !elMult || !elBb || !elDiv) return;
-
-        const gRev5 = parseFloat(elRev.value) / 100.0;
-        const mTarget5 = parseFloat(elMargin.value) / 100.0;
-        const exitMult5 = parseFloat(elMult.value);
-        const buyback5 = parseFloat(elBb.value) / 100.0;
-        const divYield5 = parseFloat(elDiv.value) / 100.0;
-
-        document.getElementById('fwdSliderRevDisp').textContent = (gRev5 * 100).toFixed(1) + '%';
-        document.getElementById('fwdSliderMarginDisp').textContent = (mTarget5 * 100).toFixed(1) + '%';
-        document.getElementById('fwdSliderMultipleDisp').textContent = exitMult5.toFixed(1) + 'x';
-        document.getElementById('fwdSliderBuybackDisp').textContent = (buyback5 * 100).toFixed(1) + '%';
-        document.getElementById('fwdSliderDivDisp').textContent = (divYield5 * 100).toFixed(1) + '%';
-
-        const rev5 = rev0 * Math.pow(1.0 + gRev5, 5);
-        const fcf5 = rev5 * mTarget5;
-        const shares5 = shares * Math.pow(1.0 - buyback5, 5);
-        const fcfPerShare5 = shares5 > 0 ? (fcf5 / shares5) : 0.0;
-        const targetPrice5y = Math.max(0.01, fcfPerShare5 * exitMult5);
-
-        const priceCagr = targetPrice5y > 0 && targetPrice > 0 ? (Math.pow(targetPrice5y / targetPrice, 0.2) - 1.0) : -1.0;
-        const forwardIrr = priceCagr + divYield5;
-        const totalReturn5y = targetPrice > 0 ? (((targetPrice5y * Math.pow(1.0 + divYield5, 5) - targetPrice) / targetPrice) * 100.0) : 0.0;
-
-        // Bridge de Atribución
-        const growthContrib = gRev5 * 100.0;
-        const mBase = fcfM > 0 ? fcfM : mTarget5;
-        const marginContrib = ((Math.pow(mTarget5 / mBase, 0.2) - 1.0) * 100.0);
-        const buybackContrib = buyback5 * 100.0;
-        const curMult = peCurrent > 0 ? peCurrent : exitMult5;
-        const multContrib = curMult > 0 ? ((Math.pow(exitMult5 / curMult, 0.2) - 1.0) * 100.0) : 0.0;
-        const divContrib = divYield5 * 100.0;
-
-        // Actualizar DOM
-        const elTarget = document.getElementById('fwdTargetPrice');
-        if (elTarget) elTarget.textContent = '$' + targetPrice5y.toFixed(2);
-        const elIrr = document.getElementById('fwdIrrPct');
-        if (elIrr) elIrr.textContent = (forwardIrr * 100.0).toFixed(1) + '% CAGR';
-        const elTot = document.getElementById('fwdTotalReturn');
-        if (elTot) elTot.textContent = (totalReturn5y >= 0 ? '+' : '') + totalReturn5y.toFixed(0) + '%';
-
-        const topIrr = document.getElementById('topForwardIrrDisplay');
-        if (topIrr) topIrr.textContent = (forwardIrr * 100.0).toFixed(1) + '% CAGR';
-        const topTarget = document.getElementById('topTargetPriceDisplay');
-        if (topTarget) topTarget.textContent = '$' + targetPrice5y.toFixed(2) + ' USD';
-
-        // Bridge Spans
-        const bG = document.getElementById('bridgeGrowth');
-        if (bG) bG.textContent = (growthContrib >= 0 ? '+' : '') + growthContrib.toFixed(1) + '%';
-        const bM = document.getElementById('bridgeMargin');
-        if (bM) bM.textContent = (marginContrib >= 0 ? '+' : '') + marginContrib.toFixed(1) + '%';
-        const bMult = document.getElementById('bridgeMultiple');
-        if (bMult) bMult.textContent = (multContrib >= 0 ? '+' : '') + multContrib.toFixed(1) + '%';
-        const bBb = document.getElementById('bridgeBuyback');
-        if (bBb) bBb.textContent = (buybackContrib >= 0 ? '+' : '') + buybackContrib.toFixed(1) + '%';
-        const bD = document.getElementById('bridgeDiv');
-        if (bD) bD.textContent = (divContrib >= 0 ? '+' : '') + divContrib.toFixed(1) + '%';
-
-        // Actualizar barra de Target 5Y en el Football Field
-        updateFootballFieldTarget5Y(targetPrice5y);
-    }
-
-    function updateFootballFieldDcf(dcfPrice) {
-        const bar = document.getElementById('ff-bar-dcf');
-        const dot = document.getElementById('ff-dot-dcf');
-        const text = document.getElementById('ff-base-text-dcf');
-        if (!bar || !dot || !text) return;
-
-        const maxScale = Math.max(400.0, targetPrice * 1.5, dcfPrice * 1.5);
-        const low = dcfPrice * 0.85;
-        const high = dcfPrice * 1.18;
-
-        const leftPct = (low / maxScale) * 100.0;
-        const widthPct = ((high - low) / maxScale) * 100.0;
-        const dotPct = (dcfPrice / maxScale) * 100.0;
-
-        bar.style.left = leftPct.toFixed(1) + '%';
-        bar.style.width = widthPct.toFixed(1) + '%';
-        dot.style.left = `calc(${dotPct.toFixed(1)}% - 6px)`;
-        text.textContent = '$' + dcfPrice.toFixed(1);
-    }
-
-    function updateFootballFieldTarget5Y(target5yPrice) {
-        const bar = document.getElementById('ff-bar-target5y');
-        const dot = document.getElementById('ff-dot-target5y');
-        const text = document.getElementById('ff-base-text-target5y');
-        if (!bar || !dot || !text) return;
-
-        const ke = baseWaccVal > 0 ? baseWaccVal : 0.095;
-        const pvTarget = target5yPrice / Math.pow(1.0 + ke, 5);
-
-        const maxScale = Math.max(400.0, targetPrice * 1.5, pvTarget * 1.5);
-        const low = pvTarget * 0.85;
-        const high = pvTarget * 1.20;
-
-        const leftPct = (low / maxScale) * 100.0;
-        const widthPct = ((high - low) / maxScale) * 100.0;
-        const dotPct = (pvTarget / maxScale) * 100.0;
-
-        bar.style.left = leftPct.toFixed(1) + '%';
-        bar.style.width = widthPct.toFixed(1) + '%';
-        dot.style.left = `calc(${dotPct.toFixed(1)}% - 6px)`;
-        text.textContent = '$' + pvTarget.toFixed(1);
+        // Reverse DCF reactivo
     }
 
     function updateSensitivityMatrix(discountRate, currentFcfM) {

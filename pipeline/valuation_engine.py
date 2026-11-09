@@ -922,6 +922,277 @@ def calculate_z_score_valuation(
     }
 
 
+def calculate_historical_multiples_analysis(
+    ticker: str,
+    current_price: float,
+    current_shares_m: float,
+    current_net_debt_m: float,
+    current_nopat_adj_m: float,
+    current_oe_m: float,
+    fs_obj: Optional[Dict[str, Any]] = None,
+    scoring_data: Optional[Dict[str, Any]] = None,
+    is_financial: bool = False,
+    tbv_per_share: float = 0.0,
+) -> Dict[str, Any]:
+    """
+    Calcula la serie cronológica multianual de múltiplos para graficación interactiva (Chart.js),
+    obteniendo los precios de cierre reales de los ejercicios fiscales anteriores y calculando
+    las líneas de referencia de Mediana, Media, Mínimo y Máximo.
+    """
+    import numpy as np
+
+    canon = (fs_obj or {}).get("canonical_summary", {})
+    sec_meta = (fs_obj or {}).get("sec_metadata", {})
+    ltm_date = sec_meta.get("ltm_period_end", "2026-09-30")
+    f_month = ltm_date.split("-")[1] if "-" in ltm_date else "12"
+
+    # 1. Recuperar histórico de precios
+    hist_prices_dict = {}
+    cache_path = Path("data/cache/market_data_cache.json")
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                c_data = json.load(f)
+                hist_prices_dict = c_data.get(ticker, {}).get("historical_quarterly_prices", {})
+        except Exception:
+            pass
+
+    hist_df = None
+    try:
+        import yfinance as yf
+        t = yf.Ticker(ticker)
+        hist_df = t.history(period="8y")
+    except Exception:
+        pass
+
+    rev_map = canon.get("revenue", {}) or canon.get("net_income", {})
+    fys = sorted(
+        [k for k in rev_map.keys() if k.startswith("FY") and rev_map[k]],
+        key=lambda x: int(x.replace("FY", "")) if x.replace("FY", "").isdigit() else 0
+    )
+    selected_fys = fys[-5:] if len(fys) >= 5 else fys
+
+    actual_periods = []
+    prices_list = []
+    annual_table = []
+
+    if is_financial:
+        series_data = {"p_tbv": [], "pe_gaap": [], "p_sales": []}
+        for fy in selected_fys:
+            yr = fy.replace("FY", "")
+            p_val = None
+            if hist_df is not None and not hist_df.empty:
+                sub = hist_df.loc[:f"{yr}-{f_month}-28"]
+                if not sub.empty:
+                    p_val = float(sub.iloc[-1]["Close"])
+            if p_val is None:
+                p_val = current_price * 0.85
+
+            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy) or (current_shares_m * 1e6)
+            sh_m = (sh_raw / 1e6) if sh_raw > 1e6 else sh_raw
+            mc_m = p_val * sh_m
+            eq_raw = canon.get("stockholders_equity", {}).get(fy) or 1.0
+            eq_m = (eq_raw / 1e6) if abs(eq_raw) > 1e6 else eq_raw
+            ni_raw = canon.get("net_income", {}).get(fy) or 1.0
+            ni_m = (ni_raw / 1e6) if abs(ni_raw) > 1e6 else ni_raw
+            r_raw = canon.get("revenue", {}).get(fy) or 1.0
+            r_m = (r_raw / 1e6) if abs(r_raw) > 1e6 else r_raw
+
+            v_ptbv = round(mc_m / eq_m, 2) if eq_m > 0 else None
+            v_pe = round(mc_m / ni_m, 1) if ni_m > 0 else None
+            v_ps = round(mc_m / r_m, 1) if r_m > 0 else None
+
+            actual_periods.append(fy)
+            prices_list.append(round(p_val, 2))
+            series_data["p_tbv"].append(v_ptbv)
+            series_data["pe_gaap"].append(v_pe)
+            series_data["p_sales"].append(v_ps)
+            annual_table.append({
+                "period": fy,
+                "price": round(p_val, 2),
+                "p_tbv": v_ptbv,
+                "pe_gaap": v_pe,
+                "p_sales": v_ps
+            })
+
+        # Añadir LTM
+        cur_mc_fin = current_price * current_shares_m
+        cur_eq = tbv_per_share * current_shares_m if tbv_per_share > 0 else 1.0
+        cur_ni = list(canon.get("net_income", {}).values())[0] or 1.0
+        cur_ni_m = (cur_ni / 1e6) if abs(cur_ni) > 1e6 else cur_ni
+        cur_rev = list(canon.get("revenue", {}).values())[0] or 1.0
+        cur_rev_m = (cur_rev / 1e6) if abs(cur_rev) > 1e6 else cur_rev
+
+        v_ltm_ptbv = round(current_price / tbv_per_share, 2) if tbv_per_share > 0 else 1.0
+        v_ltm_pe = round(cur_mc_fin / cur_ni_m, 1) if cur_ni_m > 0 else None
+        v_ltm_ps = round(cur_mc_fin / cur_rev_m, 1) if cur_rev_m > 0 else None
+
+        actual_periods.append("LTM")
+        prices_list.append(round(current_price, 2))
+        series_data["p_tbv"].append(v_ltm_ptbv)
+        series_data["pe_gaap"].append(v_ltm_pe)
+        series_data["p_sales"].append(v_ltm_ps)
+        annual_table.append({
+            "period": "LTM",
+            "price": round(current_price, 2),
+            "p_tbv": v_ltm_ptbv,
+            "pe_gaap": v_ltm_pe,
+            "p_sales": v_ltm_ps
+        })
+    else:
+        ira = (scoring_data or {}).get("intangible_roic_analysis", {}).get("by_period", {})
+        series_data = {
+            "ev_nopat_adj": [],
+            "p_oe": [],
+            "pe_gaap": [],
+            "ev_fcf": [],
+            "ev_sales": []
+        }
+
+        for fy in selected_fys:
+            yr = fy.replace("FY", "")
+            p_val = None
+            if hist_df is not None and not hist_df.empty:
+                sub = hist_df.loc[:f"{yr}-{f_month}-28"]
+                if not sub.empty:
+                    p_val = float(sub.iloc[-1]["Close"])
+            if p_val is None:
+                p_val = current_price * 0.85
+
+            sh_raw = canon.get("shares_diluted_adjusted", {}).get(fy) or (current_shares_m * 1e6)
+            sh_m = (sh_raw / 1e6) if sh_raw > 1e6 else sh_raw
+            mc_m = p_val * sh_m
+            tot_d = canon.get("total_debt", {}).get(fy) or 0.0
+            c_eq = canon.get("cash_and_equivalents", {}).get(fy) or 0.0
+            st_inv = canon.get("short_term_investments", {}).get(fy) or 0.0
+            nd_m = ((tot_d - (c_eq + st_inv)) / 1e6) if abs(tot_d) > 1e6 else (tot_d - (c_eq + st_inv))
+            ev_m = mc_m + nd_m
+
+            nopat_adj = ira.get(fy, {}).get("nopat_adj") or 0.0
+            ni_raw = canon.get("net_income", {}).get(fy) or 0.0
+            ni_m = (ni_raw / 1e6) if abs(ni_raw) > 1e6 else ni_raw
+            fcf_raw = canon.get("free_cash_flow", {}).get(fy) or 0.0
+            fcf_m = (fcf_raw / 1e6) if abs(fcf_raw) > 1e6 else fcf_raw
+            r_raw = canon.get("revenue", {}).get(fy) or 0.0
+            r_m = (r_raw / 1e6) if abs(r_raw) > 1e6 else r_raw
+
+            capex_raw = abs(canon.get("capital_expenditures", {}).get(fy) or 0.0)
+            capex_m = (capex_raw / 1e6) if capex_raw > 1e6 else capex_raw
+            dna_raw = canon.get("depreciation_amortization", {}).get(fy) or (capex_m * 0.70)
+            dna_m = (dna_raw / 1e6) if abs(dna_raw) > 1e6 else dna_raw
+            maint_c = min(capex_m, dna_m * 0.90)
+            growth_c = max(0.0, capex_m - maint_c)
+            rd_exp = ira.get(fy, {}).get("rd_investment") or 0.0
+            rd_amort = ira.get(fy, {}).get("rd_amortization") or (rd_exp * 0.85)
+            oe_m = fcf_m + growth_c + max(0.0, rd_exp - rd_amort)
+
+            v_ev_nopat = round(ev_m / nopat_adj, 1) if nopat_adj > 0 else None
+            v_p_oe = round(mc_m / oe_m, 1) if oe_m > 0 else None
+            v_pe = round(mc_m / ni_m, 1) if ni_m > 0 else None
+            v_ev_fcf = round(ev_m / fcf_m, 1) if fcf_m > 0 else None
+            v_ev_sales = round(ev_m / r_m, 1) if r_m > 0 else None
+
+            actual_periods.append(fy)
+            prices_list.append(round(p_val, 2))
+            series_data["ev_nopat_adj"].append(v_ev_nopat)
+            series_data["p_oe"].append(v_p_oe)
+            series_data["pe_gaap"].append(v_pe)
+            series_data["ev_fcf"].append(v_ev_fcf)
+            series_data["ev_sales"].append(v_ev_sales)
+
+            annual_table.append({
+                "period": fy,
+                "price": round(p_val, 2),
+                "ev_nopat_adj": v_ev_nopat,
+                "p_oe": v_p_oe,
+                "pe_gaap": v_pe,
+                "ev_fcf": v_ev_fcf,
+                "ev_sales": v_ev_sales
+            })
+
+        # Añadir LTM
+        cur_mc = current_price * current_shares_m
+        cur_ev = cur_mc + current_net_debt_m
+        cur_ni = list(canon.get("net_income", {}).values())[0] or 1.0
+        cur_ni_m = (cur_ni / 1e6) if abs(cur_ni) > 1e6 else cur_ni
+        cur_fcf = list(canon.get("free_cash_flow", {}).values())[0] or 1.0
+        cur_fcf_m = (cur_fcf / 1e6) if abs(cur_fcf) > 1e6 else cur_fcf
+        cur_rev = list(canon.get("revenue", {}).values())[0] or 1.0
+        cur_rev_m = (cur_rev / 1e6) if abs(cur_rev) > 1e6 else cur_rev
+        cur_oe = current_oe_m if current_oe_m > 0 else (cur_fcf_m * 1.08)
+
+        v_ltm_ev_nopat = round(cur_ev / current_nopat_adj_m, 1) if current_nopat_adj_m > 0 else None
+        v_ltm_p_oe = round(cur_mc / cur_oe, 1) if cur_oe > 0 else None
+        v_ltm_pe = round(cur_mc / cur_ni_m, 1) if cur_ni_m > 0 else None
+        v_ltm_ev_fcf = round(cur_ev / cur_fcf_m, 1) if cur_fcf_m > 0 else None
+        v_ltm_ev_sales = round(cur_ev / cur_rev_m, 1) if cur_rev_m > 0 else None
+
+        actual_periods.append("LTM")
+        prices_list.append(round(current_price, 2))
+        series_data["ev_nopat_adj"].append(v_ltm_ev_nopat)
+        series_data["p_oe"].append(v_ltm_p_oe)
+        series_data["pe_gaap"].append(v_ltm_pe)
+        series_data["ev_fcf"].append(v_ltm_ev_fcf)
+        series_data["ev_sales"].append(v_ltm_ev_sales)
+
+        annual_table.append({
+            "period": "LTM",
+            "price": round(current_price, 2),
+            "ev_nopat_adj": v_ltm_ev_nopat,
+            "p_oe": v_ltm_p_oe,
+            "pe_gaap": v_ltm_pe,
+            "ev_fcf": v_ltm_ev_fcf,
+            "ev_sales": v_ltm_ev_sales
+        })
+
+    # 3. Calcular Estadísticas (Mediana, Media, Mínimo, Máximo y Diagnóstico)
+    stats = {}
+    for m_key, vals in series_data.items():
+        clean_vals = [v for v in vals if v is not None and v > 0]
+        if clean_vals:
+            cur_v = vals[-1]
+            hist_vals = clean_vals[:-1] if len(clean_vals) > 1 else clean_vals
+            med = round(float(np.median(hist_vals)), 1)
+            mean_v = round(float(np.mean(hist_vals)), 1)
+            min_v = round(float(np.min(clean_vals)), 1)
+            max_v = round(float(np.max(clean_vals)), 1)
+            diff = round(((cur_v - med) / med) * 100.0, 1) if (cur_v and med > 0) else 0.0
+
+            if diff > 15.0:
+                status = f"Sobrevalorado (+{diff:.1f}% vs Mediana)"
+                status_color = "rose"
+            elif diff < -15.0:
+                status = f"Descuento ({diff:.1f}% vs Mediana)"
+                status_color = "emerald"
+            else:
+                status = f"Rango Histórico Equilibrado ({diff:+.1f}% vs Mediana)"
+                status_color = "sky"
+
+            # Precio imputado por reversión a la mediana
+            imputed_price = round(current_price * (med / cur_v), 2) if (cur_v and cur_v > 0) else current_price
+
+            stats[m_key] = {
+                "current": cur_v,
+                "median": med,
+                "mean": mean_v,
+                "min": min_v,
+                "max": max_v,
+                "diff_pct": diff,
+                "status": status,
+                "status_color": status_color,
+                "imputed_price": imputed_price
+            }
+
+    return {
+        "is_financial": is_financial,
+        "periods": actual_periods,
+        "prices": prices_list,
+        "series": series_data,
+        "stats": stats,
+        "annual_table": annual_table
+    }
+
+
 def build_audit_traceability(
     ticker: str,
     ebit_reported_m: float,
@@ -981,10 +1252,39 @@ def build_audit_traceability(
         {"item": "(=) Beneficios del Propietario (Owner Earnings)", "val": f"${owner_earnings_m:,.1f}M", "note": "Caja real extraíble sin reducir la escala competitiva"}
     ]
 
+    ev_b = round((shares_m * stock_price + net_debt_m) / 1000.0, 1)
+    math_formulas = {
+        "nopat": {
+            "title": "1. Capitalización de I+D y Reconstrucción del NOPAT Ajustado",
+            "latex_formula": r"\text{NOPAT}_{adj} = \left[ \text{EBIT}_{\text{Reportado}} + \text{Gasto I+D}_t - \text{Amortización I+D}_t \right] \times (1 - \text{Tax Rate})",
+            "latex_substituted": rf"\text{{NOPAT}}_{{adj}} = \left[ \${ebit_reported_m:,.1f}\text{{M}} + \${rd_expense_m:,.1f}\text{{M}} - \${rd_amortization_m:,.1f}\text{{M}} \right] \times \left(1 - {tax_rate_pct/100.0:.2f}\right) = \mathbf{{\${nopat_adjusted_m:,.1f}\text{{M}}}}",
+            "explanation": "El gasto en I+D genera valor duradero multi-ejercicio. Se capitaliza y amortiza linealmente a 5 años, eliminando el castigo contable tradicional y descubriendo el verdadero NOPAT operativo."
+        },
+        "owner_earnings": {
+            "title": "2. Beneficios del Propietario (Owner Earnings - Buffett/Greenwald)",
+            "latex_formula": r"\text{Owner Earnings} = \text{FCF}_{\text{Reportado}} + \text{CapEx Crecimiento} + \text{Inversión Neta I+D}",
+            "latex_substituted": rf"\text{{Owner Earnings}} = \${fcf_reported_m:,.1f}\text{{M}} + \${growth_capex_m:,.1f}\text{{M}} + \${net_rd_inv_m:,.1f}\text{{M}} = \mathbf{{\${owner_earnings_m:,.1f}\text{{M}}}}",
+            "explanation": "El CapEx reportado se divide en mantenimiento (≈ D&A) y crecimiento discrecional. Al reintegrar el CapEx de expansión y la inversión neta de I+D, se revela el flujo de caja económico real."
+        },
+        "roic": {
+            "title": "3. ROIC Ajustado por Intangibles & Economic Spread (Stern Stewart)",
+            "latex_formula": r"\text{ROIC}_{adj} = \frac{\text{NOPAT}_{adj}}{\text{Capital Invertido Tangible} + \text{Activo I+D}} \quad\Big|\quad \text{Spread} = \text{ROIC}_{adj} - \text{WACC}",
+            "latex_substituted": rf"\text{{ROIC}}_{{adj}} = \mathbf{{{roic_adj_pct:.1f}\%}} \quad\Big|\quad \text{{Spread}} = {roic_adj_pct:.1f}\% - {wacc_pct:.1f}\% = \mathbf{{+{spread_pct:.1f}\text{{ pp}}}}",
+            "explanation": "Incorporar el activo intangible acumulado de I+D en el denominador evita inflar el retorno sobre capital. Un spread económico durable confirma la presencia de un foso competitivo (Moat)."
+        },
+        "reverse_dcf": {
+            "title": "4. Reverse DCF Económico (Despeje de Crecimiento Implícito)",
+            "latex_formula": r"\text{EV}_{\text{Mercado}} = \sum_{t=1}^{10} \frac{\text{Owner Earnings}_0 \times (1 + g)^t}{(1 + \text{WACC})^t} + \frac{\text{TV}_{10}}{(1 + \text{WACC})^{10}} \implies \text{Resolver } g",
+            "latex_substituted": rf"\text{{EV}} = \${ev_b:,.1f}\text{{B}} \quad\Big|\quad \text{{WACC}} = {wacc_pct:.1f}\% \implies g_{{\text{{implícito}}}} = \mathbf{{{z_score_obj.get('g_implied_oe_pct', 0.0):.1f}\%}}",
+            "explanation": "En lugar de realizar proyecciones subjetivas, el algoritmo despeja numéricamente qué tasa de crecimiento compuesto exige la cotización actual a 10 años."
+        }
+    }
+
     return {
         "is_financial": False,
         "steps_nopat": steps_nopat,
         "steps_capex": steps_capex,
+        "math_formulas": math_formulas,
         "rd_stock_m": rd_stock_m,
         "roic_trad_pct": roic_trad_pct,
         "roic_adj_pct": roic_adj_pct,
@@ -1408,6 +1708,18 @@ def get_valuation_parameters(
             "football_field": football_field_fin,
             "dividend_yield_pct": div_yield_fin,
             "buyback_rate_pct": buyback_rate_fin,
+            "historical_multiples": calculate_historical_multiples_analysis(
+                ticker=ticker,
+                current_price=price,
+                current_shares_m=round(shares_m, 2),
+                current_net_debt_m=0.0,
+                current_nopat_adj_m=0.0,
+                current_oe_m=0.0,
+                fs_obj=fs_obj,
+                scoring_data=scoring_data,
+                is_financial=True,
+                tbv_per_share=tbv_per_share,
+            ),
             "owner_earnings_analysis": {"is_financial": True, "status": "NO APLICA (Arquetipo Financiero)", "oe_margin_pct": 0.0, "g_implied_oe_pct": 0.0, "fair_price_oe": fair_value_excess_return},
             "z_score_analysis": {"z_score": None, "status": "N/D (Arquetipo Financiero)", "bands": {}},
             "audit_traceability": {"is_financial": True, "dictum": "Arquetipo Financiero: Se audita mediante Tangible Book Value y ROTCE Sostenible."},
@@ -1783,6 +2095,18 @@ def get_valuation_parameters(
         is_financial=False
     )
 
+    historical_multiples = calculate_historical_multiples_analysis(
+        ticker=ticker,
+        current_price=price,
+        current_shares_m=shares_m_rounded,
+        current_net_debt_m=net_debt_m,
+        current_nopat_adj_m=nopat_adj_val,
+        current_oe_m=owner_earnings_analysis.get("owner_earnings_m", 0.0),
+        fs_obj=fs_obj,
+        scoring_data=scoring_data,
+        is_financial=False,
+    )
+
     # Resumen Ejecutivo: Valuation Football Field
     football_field = get_valuation_football_field(
         price=price,
@@ -1856,6 +2180,7 @@ def get_valuation_parameters(
         "eva_analysis": eva_analysis,
         "forward_5y_analysis": forward_5y_analysis,
         "football_field": football_field,
+        "historical_multiples": historical_multiples,
         "owner_earnings_analysis": owner_earnings_analysis,
         "z_score_analysis": z_score_analysis,
         "audit_traceability": audit_traceability,

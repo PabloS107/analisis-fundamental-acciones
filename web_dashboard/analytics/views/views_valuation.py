@@ -112,6 +112,8 @@ def build_valuation_context(
         "buyback_rate_pct": vp.get("buyback_rate_pct", 1.5),
         "cagr_eps_5y": vp.get("cagr_eps_5y"),
         "cagr_fcf_5y": vp.get("cagr_fcf_5y"),
+        "historical_multiples": vp.get("historical_multiples", {}),
+        "historical_multiples_json": json.dumps(vp.get("historical_multiples", {})),
         "owner_earnings_analysis": vp.get("owner_earnings_analysis", {}),
         "z_score_analysis": vp.get("z_score_analysis", {}),
         "audit_traceability": vp.get("audit_traceability", {}),

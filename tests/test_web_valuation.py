@@ -59,17 +59,20 @@ class TestWebValuationSuperTab(unittest.TestCase):
         self.assertIn('btnDcfBaseOE', content)
         self.assertIn('btnDcfBaseFCF', content)
 
-        # 3. Bandas de Valoración Dinámica Z-Score
-        self.assertIn('Bandas de Valoración Dinámica Z-Score', content)
-        self.assertIn('EV / NOPAT Ajustado', content)
-        self.assertIn('Media Histórica', content)
+        # 3. Múltiplos Históricos y Reversión a la Media con Chart.js
+        self.assertIn('Múltiplos Históricos y Reversión a la Media', content)
+        self.assertIn('historicalMultiplesChart', content)
+        self.assertIn('statCurrentMultiple', content)
+        self.assertIn('statMedianMultiple', content)
+        self.assertIn('chkRefMedian', content)
 
-        # 4. Cajón de Trazabilidad y Caja Blanca
+        # 4. Cajón de Trazabilidad y Caja Blanca con KaTeX y Cifras Reales
         self.assertIn('Trazabilidad y Caja Blanca: Conciliación Contable de Datos Auditados (SEC 10-K)', content)
         self.assertIn('Paso 1: Reconstrucción del NOPAT Económico Ajustado', content)
         self.assertIn('Paso 2: Conciliación de Owner Earnings', content)
         self.assertIn('Paso 3: Inventario Histórico Multianual de I+D', content)
-        self.assertIn('Identidades Contables y Fórmulas Matemáticas Universales', content)
+        self.assertIn('Identidades Contables Universales y Conciliación Numérica Auditada', content)
+        self.assertIn('katex', content.lower())
 
     def test_02_deck_valuation_super_tab_rendering(self):
         """Verifica que para DECK se renderice la Super Pestaña sin errores ni regresiones."""
@@ -79,7 +82,7 @@ class TestWebValuationSuperTab(unittest.TestCase):
 
         self.assertIn('Dual Valuation Engine', content)
         self.assertIn('Radiografía Forense del CapEx & Owner Earnings', content)
-        self.assertIn('Bandas de Valoración Dinámica Z-Score', content)
+        self.assertIn('Múltiplos Históricos y Reversión a la Media', content)
         self.assertIn('Trazabilidad y Caja Blanca', content)
 
     def test_03_nu_banking_valuation_isolation(self):
@@ -88,10 +91,10 @@ class TestWebValuationSuperTab(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
-        # En bancos no debe mostrarse el selector corporativo de Dual Engine, Owner Earnings ni Z-Score
+        # En bancos no debe mostrarse el selector corporativo de Dual Engine ni Owner Earnings
         self.assertNotIn('Dual Valuation Engine', content)
         self.assertNotIn('Radiografía Forense del CapEx', content)
-        self.assertNotIn('Bandas de Valoración Dinámica Z-Score', content)
+        self.assertIn('P / TBV (Tangible Book)', content)
 
         # Debe mostrarse el protocolo de transparencia financiera
         self.assertIn('Protocolo de Transparencia para Arquetipo Financiero', content)
