@@ -53,13 +53,13 @@
                     <span class="text-[10px] text-emerald-700 font-semibold flex items-center gap-1 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> En Vivo
                     </span>
-                    <a href="?refresh=1" title="Hacer clic para forzar actualización inmediata de cotización desde Yahoo / CNBC" class="text-[10px] text-sky-700 hover:text-sky-700 font-semibold flex items-center gap-0.5 hover:underline transition bg-slate-50 px-1.5 py-0.5 rounded border border-slate-200">
+                    <a href="?refresh=1" title="Hacer clic para forzar actualización inmediata de cotización desde Yahoo / CNBC" class="text-[10px] text-sky-700 hover:text-sky-900 font-semibold flex items-center gap-0.5 hover:underline transition bg-slate-50 px-1.5 py-0.5 rounded border border-slate-200">
                         🔄 Refrescar
                     </a>
                 </div>
             </div>
 
-            <div class="h-10 w-px bg-slate-50 hidden sm:block"></div>
+            <div class="h-10 w-px bg-slate-200 hidden sm:block"></div>
 
             <div>
                 <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold block">
@@ -74,7 +74,7 @@
                 </span>
             </div>
 
-            <div class="h-10 w-px bg-slate-50 hidden sm:block"></div>
+            <div class="h-10 w-px bg-slate-200 hidden sm:block"></div>
 
             <div class="flex flex-col">
                 <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold block mb-1">Semáforo de Valoración</span>
@@ -100,22 +100,22 @@
 
     <!-- Navegación por Pestañas -->
     <nav class="bg-white border-b border-slate-200 px-4 flex space-x-6 overflow-x-auto text-sm">
-        <button onclick="switchTab('statements')" class="tab-btn active py-3 px-2 whitespace-nowrap text-slate-900 font-bold border-b-2 border-sky-600 transition">
+        <button onclick="switchTab('statements')" class="tab-btn active py-3 px-2 whitespace-nowrap transition cursor-pointer">
             📑 Estados Financieros
         </button>
-        <button onclick="switchTab('segments')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
+        <button onclick="switchTab('segments')" class="tab-btn py-3 px-2 whitespace-nowrap transition cursor-pointer">
             🌍 Segmentos & Geografía
         </button>
-        <button onclick="switchTab('charts')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
+        <button onclick="switchTab('charts')" class="tab-btn py-3 px-2 whitespace-nowrap transition cursor-pointer">
             📈 Rentabilidad & Asignación de Capital
         </button>
-        <button onclick="switchTab('quality')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
+        <button onclick="switchTab('quality')" class="tab-btn py-3 px-2 whitespace-nowrap transition cursor-pointer">
             💎 Calidad de Negocio & Retornos sobre Capital
         </button>
-        <button onclick="switchTab('forensic')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
+        <button onclick="switchTab('forensic')" class="tab-btn py-3 px-2 whitespace-nowrap transition cursor-pointer">
             🛡️ Auditoría Forense & Solvencia Financiera
         </button>
-        <button onclick="switchTab('reversedcf')" class="tab-btn py-3 px-2 whitespace-nowrap text-slate-700 hover:text-slate-900 transition">
+        <button onclick="switchTab('reversedcf')" class="tab-btn py-3 px-2 whitespace-nowrap transition cursor-pointer">
             💎 Valoración & Futuro (360°)
         </button>
     </nav>
@@ -130,814 +130,6 @@
         {% endfor %}
     </div>
     {% endif %}
-
-    <!-- TAB 3: RENTABILIDAD & ASIGNACIÓN DE CAPITAL -->
-    <div id="tab-charts" class="tab-content hidden space-y-6">
-        {% if is_banking %}
-        <!-- Mini-Grid de KPIs Operativos Bancarios (ARPAC, Cost to Serve, NPL, Cobertura) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">ARPAC Mensual (Cliente Activo)</span>
-                    <span class="text-lg">💳</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_arpac_usd is not None %}${{ banking_kpis.monthly_arpac_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Clientes Totales:</span>
-                    <span class="font-bold text-slate-700">{% if banking_kpis.total_customers_m is not None %}{{ banking_kpis.total_customers_m|floatformat:1 }}M{% else %}N/D{% endif %}</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Cost to Serve Mensual</span>
-                    <span class="text-lg">⚡</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_cost_to_serve_usd is not None %}${{ banking_kpis.monthly_cost_to_serve_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Apalancamiento Operativo:</span>
-                    <span class="font-bold text-slate-700">Escala Cloud Propia</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Morosidad NPL 90+ Días</span>
-                    <span class="text-lg">🛡️</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.npl_90_plus_pct is not None %}{{ banking_kpis.npl_90_plus_pct|floatformat:1 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">NPL 15-90 Días:</span>
-                    <span class="font-bold text-slate-700">{% if banking_kpis.npl_15_90_pct is not None %}{{ banking_kpis.npl_15_90_pct|floatformat:1 }}%{% else %}N/D{% endif %}</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Cobertura de Provisiones</span>
-                    <span class="text-lg">🏦</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.provision_coverage_pct is not None %}{{ banking_kpis.provision_coverage_pct|floatformat:0 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Colchón Prudencial:</span>
-                    <span class="font-bold text-slate-700">Sobre-colateralizado (&gt;100%)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Gráfico Bancario 1: Margen de Intereses (NII) vs Comisiones / No Intereses (Non-II) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Margen de Intereses (NII) vs. Comisiones (Non-II) ($M)</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Estructura de Ingresos</span>
-                </div>
-                <div class="h-80"><canvas id="chartBankingIncome"></canvas></div>
-            </div>
-
-            <!-- Gráfico Bancario 2: Estructura de Balance: Depósitos vs Cartera de Crédito -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Estructura de Balance: Depósitos vs. Créditos ($M)</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Fondeo vs Colocación</span>
-                </div>
-                <div class="h-80"><canvas id="chartBankingBalance"></canvas></div>
-            </div>
-
-            <!-- Gráfico Bancario 3: Provisiones Crediticias (CLP) y Cost of Risk -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Provisiones por Pérdidas Crediticias &amp; Cost of Risk</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">CLP ($M) vs CoR (%)</span>
-                </div>
-                <div class="h-80"><canvas id="chartBankingRisk"></canvas></div>
-            </div>
-
-            <!-- Gráfico Bancario 4: Distribución de Depósitos por Geografía -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Distribución Regional de Depósitos</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Fondeo por Mercado ($M)</span>
-                </div>
-                <div class="h-80"><canvas id="chartDepositsCountryDonut"></canvas></div>
-            </div>
-
-            <!-- Gráfico 5: Dinámica del Accionista (Banca: Recompra Neta vs Float) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Float: {{ buybacks_summary.float_change_pct }} | Recompras Netas: {{ buybacks_summary.total_net_buybacks }}</span>
-                </div>
-                <div class="h-80"><canvas id="chartNetBuybacksFloatBanking"></canvas></div>
-            </div>
-        </div>
-
-        {% else %}
-        <!-- Gráficos Comerciales Estándar (Corporativo / Plataforma) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Gráfico 1: Ingresos vs Beneficios & FCF (Intacto) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Ingresos vs. Beneficios &amp; FCF ($M)</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Cascada P&amp;L + Cash Flow</span>
-                </div>
-                <div class="h-80"><canvas id="chartRevNI"></canvas></div>
-            </div>
-
-            <!-- Gráfico 2: Estructura de Márgenes (Intacto) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-900 text-base">Estructura de Márgenes de Rentabilidad (%)</h3>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Bruto, Operativo, Neto &amp; FCF</span>
-                </div>
-                <div class="h-80"><canvas id="chartMargins"></canvas></div>
-            </div>
-
-            <!-- Gráfico 3: Calidad Contable y Conversión de Caja (Ancho Completo 100%) -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h3 class="font-bold text-slate-900 text-base">Calidad Contable &amp; Conversión de Caja (Beneficio Neto vs. FCF)</h3>
-                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
-                                {{ cash_conv_summary.badge }}
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-0.5">Compara el beneficio contable ($M) con la generación real de caja libre (FCF $M) y su tasa de conversión (%)</p>
-                    </div>
-                    <div class="flex items-center gap-3 text-xs flex-wrap">
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Conversión LTM: <strong class="text-slate-900">{{ cash_conv_summary.ltm_str }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Media 5Y: <strong class="text-slate-900">{{ cash_conv_summary.avg_5y_str }}</strong></span>
-                    </div>
-                </div>
-                <div class="h-80"><canvas id="chartCashConversion"></canvas></div>
-            </div>
-
-            <!-- Gráfico 4: Dinámica del Accionista: Recompra Neta vs Float (Ancho Completo 100%) -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
-                            <span id="badgeFloatChange" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
-                                Float Acum: {{ buybacks_summary.float_change_pct }}
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-0.5">Recompra Neta = Recompras Mercado Abierto - Compensación en Acciones (SBC) | Línea = Conteo de Acciones Diluidas</p>
-                    </div>
-                    <div class="flex items-center gap-2.5 text-xs flex-wrap">
-                        <!-- Selector de Periodos [3A | 5A | Todos] -->
-                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
-                            <button type="button" onclick="setBuybackPeriodView('3y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
-                            <button type="button" onclick="setBuybackPeriodView('5y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">5A</button>
-                            <button type="button" onclick="setBuybackPeriodView('all', this)" class="bb-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer font-bold">Todos</button>
-                        </div>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompras Brutas: <strong id="bbGrossSum" class="text-slate-900">{{ buybacks_summary.total_buybacks }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">SBC Ejecutiva: <strong id="bbSbcSum" class="text-slate-900">{{ buybacks_summary.total_sbc }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompra Neta: <strong id="bbNetSum" class="text-slate-900">{{ buybacks_summary.total_net_buybacks }}</strong></span>
-                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Cobertura Recompras/SBC: <strong id="bbCovRatio" class="text-slate-900">{{ buybacks_summary.sbc_coverage_ratio }}</strong></span>
-                    </div>
-                </div>
-                <div class="h-80"><canvas id="chartNetBuybacksFloat"></canvas></div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if alloc_kpis %}
-        <!-- MÓDULO DE ASIGNACIÓN DE CAPITAL INSTITUCIONAL (CAPITAL ALLOCATION FRAMEWORK) -->
-        <div class="mt-8 pt-6 border-t border-slate-200 space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="flex items-center space-x-3">
-                    <span class="text-2xl">🏛️</span>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-lg font-bold text-slate-900">Marco de Asignación de Capital (Capital Allocation Framework)</h3>
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-300 shadow-sm">
-                                {{ alloc_kpis.profile_badge }}
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-0.5">{{ alloc_kpis.profile_desc }}</p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <span class="text-xs text-slate-500">Ventana Auditada:</span>
-                    <span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200">{{ alloc_kpis.recent_years_label }}</span>
-                </div>
-            </div>
-
-            <!-- Mini-Grid 4 KPIs Ejecutivos de Asignación Acumulada -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1: Retorno Total al Accionista Acum. -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Retorno Total al Accionista (Acum.)</span>
-                        <span class="text-lg">💰</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.total_shareholder_return_5y_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">% de Conversión de CFO:</span>
-                        <span class="font-bold text-slate-700">{{ alloc_kpis.pct_shareholder_return_5y }}</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: Mix Recompras vs Dividendos (Ubicada a la derecha de Retorno al Accionista) -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Mix Recompras vs. Dividendos</span>
-                        <span class="text-lg">⚖️</span>
-                    </div>
-                    <div class="mt-2 space-y-1">
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-purple-600"></span> Recompras:
-                            </span>
-                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_bb_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.bb_share_return_pct }})</span></span>
-                        </div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Dividendos:
-                            </span>
-                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_div_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.div_share_return_pct }})</span></span>
-                        </div>
-                    </div>
-                    <!-- Mini barra apilada bicolor -->
-                    <div class="w-full bg-slate-100 rounded-full h-2 mt-2.5 flex overflow-hidden">
-                        <div class="bg-purple-600 h-2 transition-all duration-300" style="width: {{ alloc_kpis.bb_share_return_pct }};" title="Recompras: {{ alloc_kpis.bb_share_return_pct }}"></div>
-                        <div class="bg-amber-500 h-2 transition-all duration-300" style="width: {{ alloc_kpis.div_share_return_pct }};" title="Dividendos: {{ alloc_kpis.div_share_return_pct }}"></div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Reinversión en Negocio (CapEx Acum.) -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Reinversión Orgánica (CapEx Acum.)</span>
-                        <span class="text-lg">🏭</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.tot_capex_5y_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">% Reinversión / CFO:</span>
-                        <span class="font-bold text-slate-700">{{ alloc_kpis.pct_reinvestment_capex_5y }}</span>
-                    </div>
-                </div>
-
-                <!-- Card 4: Generación CFO Acumulada -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Flujo de Caja Operativo (Acum.)</span>
-                        <span class="text-lg">🌊</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.tot_cfo_5y_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">M&amp;A Adquisiciones (Acum.):</span>
-                        <span class="font-bold text-slate-700">{{ alloc_kpis.tot_ma_5y_str }} ({{ alloc_kpis.pct_ma_5y }})</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gráfico: Asignación Anual de Capital: Retorno vs Reinversión -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                    <div>
-                        <h4 class="font-bold text-slate-900 text-base">Asignación Anual de Capital: Retorno al Accionista vs. Reinversión en Negocio (${{ alloc_unit }})</h4>
-                        <p class="text-xs text-slate-500">Dos columnas contiguas por año (Columna Retorno vs. Columna Reinversión) contrastadas con el Flujo Operativo (CFO)</p>
-                    </div>
-                    <div class="flex items-center gap-3 text-xs flex-wrap">
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-purple-600"></span> Recompras</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-amber-500"></span> Dividendos</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-blue-600"></span> CapEx Orgánico</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-rose-600"></span> M&amp;A</span>
-                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-bold"><span class="w-3 h-0.5 bg-emerald-600"></span> Línea CFO (Techo de Generación)</span>
-                    </div>
-                </div>
-                <div class="h-96"><canvas id="chartCapitalAllocation"></canvas></div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if is_platform %}
-        <!-- Sección Específica Ecosistema Híbrido (Marketplace & Fintech) -->
-        <div class="mt-8 pt-6 border-t border-slate-200 space-y-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <span class="text-xl">🌐</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-900">Métricas Clave del Ecosistema (Marketplace &amp; Fintech)</h3>
-                        <p class="text-xs text-slate-500">Escala operativa de comercio electrónico y volumen de procesamiento de pagos</p>
-                    </div>
-                </div>
-                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">PLATFORM ECOSYSTEM</span>
-            </div>
-
-            <!-- 4 KPI Cards Ecosistema -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">GMV Trimestral (Marketplace)</span>
-                        <span class="text-lg">🛒</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.gmv_3m_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">GMV Semestral (6M):</span>
-                        <span class="font-bold text-slate-700">{{ platform_kpis.gmv_6m_str }}</span>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">TPV Trimestral (Fintech Pagos)</span>
-                        <span class="text-lg">💳</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.tpv_3m_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">TPV Semestral (6M):</span>
-                        <span class="font-bold text-slate-700">{{ platform_kpis.tpv_6m_str }}</span>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Compradores Únicos Activos</span>
-                        <span class="text-lg">👥</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.unique_buyers_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">Artículos Vendidos (3M):</span>
-                        <span class="font-bold text-slate-700">{{ platform_kpis.items_sold_3m_str }}</span>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-500 font-medium">Usuarios Activos Fintech (MAUs)</span>
-                        <span class="text-lg">📱</span>
-                    </div>
-                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.fintech_mau_str }}</div>
-                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                        <span class="text-slate-500">Cartera de Crédito:</span>
-                        <span class="font-bold text-slate-700">{{ platform_kpis.credit_portfolio_str }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gráficos de Plataforma / Ecosistema -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Gráfico Ecosistema 1: GMV vs TPV -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-slate-900 text-base">Volumen Bruto: GMV (Comercio) vs. TPV (Fintech) ($M)</h3>
-                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Comercio vs Pagos</span>
-                    </div>
-                    <div class="h-80"><canvas id="chartPlatformGMVTPV"></canvas></div>
-                </div>
-
-                <!-- Gráfico Ecosistema 2: Base de Usuarios -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-slate-900 text-base">Base de Usuarios del Ecosistema (Millones)</h3>
-                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Adopción Compradores &amp; Fintech</span>
-                    </div>
-                    <div class="h-80"><canvas id="chartPlatformUsers"></canvas></div>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    </div>
-
-    <!-- TAB: SEGMENTOS & GEOGRAFÍA -->
-    <div id="tab-segments" class="tab-content hidden space-y-8">
-        
-        <!-- Bloque 1: 4 KPIs de Concentración y Diversificación -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Card Línea Principal -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Línea Principal: {{ kpis_segments.top_product_name }}</span>
-                    <span class="text-lg">📦</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_product_ltm }}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Mix sobre Ventas:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_product_mix }}</span>
-                </div>
-            </div>
-
-            <!-- Card Línea Secundaria -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Línea Secundaria: {{ kpis_segments.second_product_name }}</span>
-                    <span class="text-lg">⭐</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.second_product_ltm }}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Mix sobre Ventas:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.second_product_mix }}</span>
-                </div>
-            </div>
-
-            <!-- Card Región Principal -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Región Principal: {{ kpis_segments.top_geo_name }}</span>
-                    <span class="text-lg">🌎</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_geo_ltm }}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Mix sobre Ventas:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_geo_mix }}</span>
-                </div>
-            </div>
-
-            <!-- Card Internacional -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500 font-medium">Ventas Internacionales / Resto</span>
-                    <span class="text-lg">🌐</span>
-                </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.intl_ltm }}</div>
-                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Diversificación Global:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.intl_pct }}</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bloque 2: Tablas de Desglose Histórico (Productos y Geografías) -->
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <!-- Tabla 1: Segmentos de Producto & Servicios (Smart Financial Matrix) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>📦</span> Matriz de Líneas de Negocio & Servicios
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Ingresos por segmento operativo (ASC 280), mix actual y tracción YoY</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <!-- Selector de Periodos Históricos -->
-                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
-                            <button type="button" onclick="setSegPeriodView('3y', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
-                            <button type="button" onclick="setSegPeriodView('5y', this)" class="seg-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer">5A</button>
-                            <button type="button" onclick="setSegPeriodView('all', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">Todos</button>
-                        </div>
-                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 hidden sm:inline-block">Auditado 10-K</span>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto rounded-xl border border-slate-200">
-                    <table class="w-full text-xs text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                <th class="py-2.5 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Segmento</th>
-                                <th class="py-2.5 px-2 text-right">Mix LTM</th>
-                                <th class="py-2.5 px-2 text-center">YoY</th>
-                                <th class="py-2.5 px-2 text-right">Margen Op.</th>
-                                {% for p in seg_periods %}
-                                <th data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
-                                    {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
-                                </th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100/70 font-mono">
-                            {% for row in table_products %}
-                            <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/60 text-slate-600{% elif row.is_reconciling %}bg-amber-50/60 text-amber-900 italic{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
-                                <td class="py-2.5 px-3 sticky left-0 z-10 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50 text-slate-700 pl-6{% elif row.is_reconciling %}bg-amber-50/90 text-amber-900 font-medium{% else %}bg-white font-sans text-slate-900{% endif %}">
-                                    <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% elif row.is_reconciling %}text-amber-800 font-medium text-[11px]{% else %}font-semibold{% endif %} truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
-                                    {% if row.description %}
-                                    <div class="text-[11px] text-slate-500 font-normal leading-snug mt-0.5 line-clamp-2">{{ row.description }}</div>
-                                    {% endif %}
-                                </td>
-                                <td class="py-2.5 px-2 text-right">
-                                    <div class="flex items-center justify-end gap-1.5">
-                                        <span class="{% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</span>
-                                        {% if row.mix_pct_num > 0 and not row.is_total and not row.indent %}
-                                        <div class="w-10 h-1.5 bg-slate-100 rounded-full overflow-hidden hidden sm:block">
-                                            <div class="h-full bg-cyan-500 rounded-full" style="width: {{ row.mix_pct_num }}%;"></div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </td>
-                                <td class="py-2.5 px-2 text-center whitespace-nowrap">
-                                    {% if row.yoy_str != '-' and not row.is_total %}
-                                        {% if row.yoy_str|slice:":1" == "+" %}
-                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                                ▲ {{ row.yoy_str }}
-                                            </span>
-                                        {% else %}
-                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
-                                                ▼ {{ row.yoy_str }}
-                                            </span>
-                                        {% endif %}
-                                    {% else %}
-                                        <span class="text-slate-300 font-normal">-</span>
-                                    {% endif %}
-                                </td>
-                                <td class="py-2.5 px-2 text-right {% if row.is_total %}text-purple-700 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-purple-600 font-semibold{% endif %}">
-                                    {% if row.op_margin_num and row.op_margin_num < -100 %}
-                                        <span class="inline-flex items-center justify-end gap-1 text-rose-600 font-bold cursor-help" title="Margen Operativo Intensivo en I+D ({{ row.op_margin_ltm }}): La división opera con pérdidas de investigación y desarrollo superiores a sus ingresos comerciales (10-K SEC).">
-                                            <span>{{ row.op_margin_ltm }}</span>
-                                            <span class="text-[10px] text-amber-500 font-mono">⚠️</span>
-                                        </span>
-                                    {% else %}
-                                        {{ row.op_margin_ltm|default:"-" }}
-                                    {% endif %}
-                                </td>
-                                {% for v in row.values %}
-                                <td data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% elif row.indent %}text-slate-500 font-normal{% endif %}">{{ v }}</td>
-                                {% endfor %}
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                {% if has_discontinued_products %}
-                <!-- Acordeón de Segmentos Históricos Descontinuados -->
-                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
-                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
-                        <span class="flex items-center gap-1.5">
-                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
-                            <span>Estructuras y Segmentos Históricos Precedentes ({{ table_products_discontinued|length }})</span>
-                        </span>
-                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">Descontinuados / Reclasificados</span>
-                    </summary>
-                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
-                        <table class="w-full text-xs text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                    <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Segmento Histórico</th>
-                                    {% for p in seg_periods %}
-                                    <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ p }}</th>
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 font-mono">
-                                {% for row in table_products_discontinued %}
-                                <tr class="text-slate-600 hover:bg-slate-50">
-                                    <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-medium text-slate-800 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">
-                                        <div class="whitespace-nowrap truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
-                                        {% if row.description %}
-                                        <div class="text-[10px] text-slate-400 font-normal leading-tight line-clamp-1">{{ row.description }}</div>
-                                        {% endif %}
-                                    </td>
-                                    {% for v in row.values %}
-                                    <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ v }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-                {% endif %}
-            </div>
-
-            <!-- Panel Territorial con Barras de Penetración -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
-                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <span>🗺️</span> Panel Territorial & Penetración
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Distribución regional, cuota de ventas y diversificación global</p>
-                    </div>
-                    <div class="flex items-center gap-2 text-xs">
-                        <span class="font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-                            Doméstico: <strong class="text-slate-900">{{ kpis_segments.top_geo_mix }}</strong>
-                        </span>
-                        <span class="font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
-                            Global: <strong>{{ kpis_segments.intl_pct }}</strong>
-                        </span>
-                    </div>
-                </div>
-
-                {% if has_geo_territories %}
-                <!-- Grid de Tarjetas Territoriales -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {% for t in geo_territories %}
-                    <div class="p-3.5 rounded-xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/50 hover:shadow-md transition space-y-2">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2 min-w-0">
-                                <span class="text-xl shrink-0 p-1 bg-slate-100 rounded-lg">{{ t.icon }}</span>
-                                <span class="font-bold text-slate-900 text-xs truncate" title="{{ t.name }}">{{ t.name }}</span>
-                            </div>
-                            {% if t.yoy_str != '-' %}
-                                {% if t.yoy_str|slice:":1" == "+" %}
-                                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">
-                                        ▲ {{ t.yoy_str }}
-                                    </span>
-                                {% else %}
-                                    <span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 shrink-0">
-                                        ▼ {{ t.yoy_str }}
-                                    </span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-
-                        <div class="flex items-baseline justify-between pt-1">
-                            <span class="text-xl font-black text-slate-900 tracking-tight">{{ t.ltm_str }}</span>
-                            <span class="text-xs font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-200">{{ t.mix_pct }}</span>
-                        </div>
-
-                        <!-- Barra de Penetración -->
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-500" style="width: {{ t.mix_num }}%;"></div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-
-                <!-- Acordeón con Tabla Histórica Multi-Anual Geográfica -->
-                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
-                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
-                        <span class="flex items-center gap-1.5">
-                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
-                            <span>Ver Tabla de Desglose Histórico Multi-Anual Geográfico</span>
-                        </span>
-                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">10-K Completo</span>
-                    </summary>
-                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
-                        <table class="w-full text-xs text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                    <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Región</th>
-                                    <th class="py-2 px-2 text-right">Mix LTM</th>
-                                    <th class="py-2 px-2 text-center">YoY</th>
-                                    {% for p in seg_periods %}
-                                    <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
-                                        {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
-                                    </th>
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 font-mono">
-                                {% for row in table_geos %}
-                                <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/60 text-slate-600{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
-                                    <td class="py-2 px-3 sticky left-0 z-10 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50 text-slate-700 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
-                                        <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% else %}font-semibold{% endif %} truncate" title="{{ row.name }}">{{ row.name }}</div>
-                                    </td>
-                                    <td class="py-2 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
-                                    <td class="py-2 px-2 text-center whitespace-nowrap">
-                                        {% if row.yoy_str != '-' and not row.is_total %}
-                                            {% if row.yoy_str|slice:":1" == "+" %}
-                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                                    ▲ {{ row.yoy_str }}
-                                                </span>
-                                            {% else %}
-                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
-                                                    ▼ {{ row.yoy_str }}
-                                                </span>
-                                            {% endif %}
-                                        {% else %}
-                                            <span class="text-slate-300 font-normal">-</span>
-                                        {% endif %}
-                                    </td>
-                                    {% for v in row.values %}
-                                    <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% endif %}">{{ v }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {% if has_discontinued_geos %}
-                    <!-- Acordeón de Regiones Históricas Descontinuadas -->
-                    <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
-                        <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
-                            <span class="flex items-center gap-1.5">
-                                <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
-                                <span>Estructuras y Regiones Históricas Precedentes ({{ table_geos_discontinued|length }})</span>
-                            </span>
-                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">Descontinuadas / Reclasificadas</span>
-                        </summary>
-                        <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
-                            <table class="w-full text-xs text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                                        <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Región Histórica</th>
-                                        {% for p in seg_periods %}
-                                        <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ p }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-100 font-mono">
-                                    {% for row in table_geos_discontinued %}
-                                    <tr class="text-slate-600 hover:bg-slate-50">
-                                        <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-medium text-slate-800 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">
-                                            <div class="whitespace-nowrap truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
-                                            {% if row.description %}
-                                            <div class="text-[10px] text-slate-400 font-normal leading-tight line-clamp-1">{{ row.description }}</div>
-                                            {% endif %}
-                                        </td>
-                                        {% for v in row.values %}
-                                        <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ v }}</td>
-                                        {% endfor %}
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                    {% endif %}
-                </details>
-            </div>
-        </div>
-
-        {% if table_channels %}
-        <!-- Bloque 2b: Desglose por Canal de Distribución -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                        <span>🏷️</span> Desglose por Canal de Distribución
-                    </h3>
-                    <p class="text-xs text-slate-500 mt-0.5">Mix y ventas por canal comercial (Wholesale, DTC, Retail)</p>
-                </div>
-                <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Auditado 10-K</span>
-            </div>
-            <div class="overflow-x-auto rounded-xl border border-slate-200">
-                <table class="w-full text-xs text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                            <th class="py-2.5 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Canal</th>
-                            <th class="py-2.5 px-2 text-right">Mix LTM</th>
-                            {% for p in seg_periods %}
-                            <th data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
-                                {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
-                            </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100/70 font-mono">
-                        {% for row in table_channels %}
-                        <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
-                            <td class="py-2.5 px-3 sticky left-0 z-10 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% else %}bg-white font-sans text-slate-900 font-semibold{% endif %} truncate" title="{{ row.name }}">{{ row.name }}</td>
-                            <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
-                            {% for v in row.values %}
-                            <td data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% endif %}">{{ v }}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Bloque 3: Gráficos de Evolución y Mix -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Gráfico A: Evolución Líneas de Negocio ($M) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-base">Evolución de Líneas de Negocio ($M)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Ingresos anuales por categoría de producto y servicios</p>
-                    </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Tendencia Multi-Anual</span>
-                </div>
-                <div class="h-80"><canvas id="chartProductTrends"></canvas></div>
-            </div>
-
-            <!-- Gráfico B: Evolución Ventas por Región ($M) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-base">Evolución de Ventas por Región ($M)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Diversificación territorial y tracción internacional</p>
-                    </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Tendencia Geográfica</span>
-                </div>
-                <div class="h-80"><canvas id="chartGeoTrends"></canvas></div>
-            </div>
-
-            <!-- Gráfico C: Mix de Productos LTM (Donut) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Producto (LTM)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Participación sobre ventas totales de productos y servicios</p>
-                    </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
-                </div>
-                <div class="h-80"><canvas id="chartProductDonut"></canvas></div>
-            </div>
-
-            <!-- Gráfico D: Mix Geográfico LTM (Donut) -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Región (LTM)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Participación porcentual por mercado geográfico</p>
-                    </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
-                </div>
-                <div class="h-80"><canvas id="chartGeoDonut"></canvas></div>
-            </div>
-        </div>
-
-    </div>
 
     <!-- TAB 1 (PRINCIPAL): ESTADOS FINANCIEROS DINÁMICOS -->
     <div id="tab-statements" class="tab-content space-y-6">
@@ -1931,6 +1123,814 @@
         }
     </script>
 
+    <!-- TAB: SEGMENTOS & GEOGRAFÍA -->
+    <div id="tab-segments" class="tab-content hidden space-y-8">
+        
+        <!-- Bloque 1: 4 KPIs de Concentración y Diversificación -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card Línea Principal -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Línea Principal: {{ kpis_segments.top_product_name }}</span>
+                    <span class="text-lg">📦</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_product_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Mix sobre Ventas:</span>
+                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_product_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Línea Secundaria -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Línea Secundaria: {{ kpis_segments.second_product_name }}</span>
+                    <span class="text-lg">⭐</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.second_product_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Mix sobre Ventas:</span>
+                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.second_product_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Región Principal -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Región Principal: {{ kpis_segments.top_geo_name }}</span>
+                    <span class="text-lg">🌎</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_geo_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Mix sobre Ventas:</span>
+                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_geo_mix }}</span>
+                </div>
+            </div>
+
+            <!-- Card Internacional -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Ventas Internacionales / Resto</span>
+                    <span class="text-lg">🌐</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.intl_ltm }}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Diversificación Global:</span>
+                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.intl_pct }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 2: Tablas de Desglose Histórico (Productos y Geografías) -->
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <!-- Tabla 1: Segmentos de Producto & Servicios (Smart Financial Matrix) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>📦</span> Matriz de Líneas de Negocio & Servicios
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Ingresos por segmento operativo (ASC 280), mix actual y tracción YoY</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <!-- Selector de Periodos Históricos -->
+                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
+                            <button type="button" onclick="setSegPeriodView('3y', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
+                            <button type="button" onclick="setSegPeriodView('5y', this)" class="seg-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer">5A</button>
+                            <button type="button" onclick="setSegPeriodView('all', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">Todos</button>
+                        </div>
+                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 hidden sm:inline-block">Auditado 10-K</span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                <th class="py-2.5 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Segmento</th>
+                                <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                                <th class="py-2.5 px-2 text-center">YoY</th>
+                                <th class="py-2.5 px-2 text-right">Margen Op.</th>
+                                {% for p in seg_periods %}
+                                <th data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
+                                    {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
+                                </th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100/70 font-mono">
+                            {% for row in table_products %}
+                            <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/60 text-slate-600{% elif row.is_reconciling %}bg-amber-50/60 text-amber-900 italic{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
+                                <td class="py-2.5 px-3 sticky left-0 z-10 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50 text-slate-700 pl-6{% elif row.is_reconciling %}bg-amber-50/90 text-amber-900 font-medium{% else %}bg-white font-sans text-slate-900{% endif %}">
+                                    <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% elif row.is_reconciling %}text-amber-800 font-medium text-[11px]{% else %}font-semibold{% endif %} truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
+                                    {% if row.description %}
+                                    <div class="text-[11px] text-slate-500 font-normal leading-snug mt-0.5 line-clamp-2">{{ row.description }}</div>
+                                    {% endif %}
+                                </td>
+                                <td class="py-2.5 px-2 text-right">
+                                    <div class="flex items-center justify-end gap-1.5">
+                                        <span class="{% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</span>
+                                        {% if row.mix_pct_num > 0 and not row.is_total and not row.indent %}
+                                        <div class="w-10 h-1.5 bg-slate-100 rounded-full overflow-hidden hidden sm:block">
+                                            <div class="h-full bg-cyan-500 rounded-full" style="width: {{ row.mix_pct_num }}%;"></div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="py-2.5 px-2 text-center whitespace-nowrap">
+                                    {% if row.yoy_str != '-' and not row.is_total %}
+                                        {% if row.yoy_str|slice:":1" == "+" %}
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                ▲ {{ row.yoy_str }}
+                                            </span>
+                                        {% else %}
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                                ▼ {{ row.yoy_str }}
+                                            </span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-slate-300 font-normal">-</span>
+                                    {% endif %}
+                                </td>
+                                <td class="py-2.5 px-2 text-right {% if row.is_total %}text-purple-700 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% elif row.indent %}text-slate-500 font-normal{% else %}text-purple-600 font-semibold{% endif %}">
+                                    {% if row.op_margin_num and row.op_margin_num < -100 %}
+                                        <span class="inline-flex items-center justify-end gap-1 text-rose-600 font-bold cursor-help" title="Margen Operativo Intensivo en I+D ({{ row.op_margin_ltm }}): La división opera con pérdidas de investigación y desarrollo superiores a sus ingresos comerciales (10-K SEC).">
+                                            <span>{{ row.op_margin_ltm }}</span>
+                                            <span class="text-[10px] text-amber-500 font-mono">⚠️</span>
+                                        </span>
+                                    {% else %}
+                                        {{ row.op_margin_ltm|default:"-" }}
+                                    {% endif %}
+                                </td>
+                                {% for v in row.values %}
+                                <td data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% elif row.indent %}text-slate-500 font-normal{% endif %}">{{ v }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if has_discontinued_products %}
+                <!-- Acordeón de Segmentos Históricos Descontinuados -->
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                        <span class="flex items-center gap-1.5">
+                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                            <span>Estructuras y Segmentos Históricos Precedentes ({{ table_products_discontinued|length }})</span>
+                        </span>
+                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">Descontinuados / Reclasificados</span>
+                    </summary>
+                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                    <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Segmento Histórico</th>
+                                    {% for p in seg_periods %}
+                                    <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ p }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono">
+                                {% for row in table_products_discontinued %}
+                                <tr class="text-slate-600 hover:bg-slate-50">
+                                    <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-medium text-slate-800 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">
+                                        <div class="whitespace-nowrap truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
+                                        {% if row.description %}
+                                        <div class="text-[10px] text-slate-400 font-normal leading-tight line-clamp-1">{{ row.description }}</div>
+                                        {% endif %}
+                                    </td>
+                                    {% for v in row.values %}
+                                    <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ v }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                {% endif %}
+            </div>
+
+            <!-- Panel Territorial con Barras de Penetración -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span>🗺️</span> Panel Territorial & Penetración
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Distribución regional, cuota de ventas y diversificación global</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
+                            Doméstico: <strong class="text-slate-900">{{ kpis_segments.top_geo_mix }}</strong>
+                        </span>
+                        <span class="font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+                            Global: <strong>{{ kpis_segments.intl_pct }}</strong>
+                        </span>
+                    </div>
+                </div>
+
+                {% if has_geo_territories %}
+                <!-- Grid de Tarjetas Territoriales -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {% for t in geo_territories %}
+                    <div class="p-3.5 rounded-xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/50 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-xl shrink-0 p-1 bg-slate-100 rounded-lg">{{ t.icon }}</span>
+                                <span class="font-bold text-slate-900 text-xs truncate" title="{{ t.name }}">{{ t.name }}</span>
+                            </div>
+                            {% if t.yoy_str != '-' %}
+                                {% if t.yoy_str|slice:":1" == "+" %}
+                                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">
+                                        ▲ {{ t.yoy_str }}
+                                    </span>
+                                {% else %}
+                                    <span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 shrink-0">
+                                        ▼ {{ t.yoy_str }}
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                        <div class="flex items-baseline justify-between pt-1">
+                            <span class="text-xl font-black text-slate-900 tracking-tight">{{ t.ltm_str }}</span>
+                            <span class="text-xs font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-200">{{ t.mix_pct }}</span>
+                        </div>
+
+                        <!-- Barra de Penetración -->
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-500" style="width: {{ t.mix_num }}%;"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Acordeón con Tabla Histórica Multi-Anual Geográfica -->
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                        <span class="flex items-center gap-1.5">
+                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                            <span>Ver Tabla de Desglose Histórico Multi-Anual Geográfico</span>
+                        </span>
+                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">10-K Completo</span>
+                    </summary>
+                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                    <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Región</th>
+                                    <th class="py-2 px-2 text-right">Mix LTM</th>
+                                    <th class="py-2 px-2 text-center">YoY</th>
+                                    {% for p in seg_periods %}
+                                    <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
+                                        {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
+                                    </th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono">
+                                {% for row in table_geos %}
+                                <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/60 text-slate-600{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
+                                    <td class="py-2 px-3 sticky left-0 z-10 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50 text-slate-700 pl-6{% else %}bg-white font-sans text-slate-900{% endif %}">
+                                        <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% else %}font-semibold{% endif %} truncate" title="{{ row.name }}">{{ row.name }}</div>
+                                    </td>
+                                    <td class="py-2 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% elif row.is_subtotal %}text-slate-800 font-bold{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                                    <td class="py-2 px-2 text-center whitespace-nowrap">
+                                        {% if row.yoy_str != '-' and not row.is_total %}
+                                            {% if row.yoy_str|slice:":1" == "+" %}
+                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                    ▲ {{ row.yoy_str }}
+                                                </span>
+                                            {% else %}
+                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                                    ▼ {{ row.yoy_str }}
+                                                </span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="text-slate-300 font-normal">-</span>
+                                        {% endif %}
+                                    </td>
+                                    {% for v in row.values %}
+                                    <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% elif row.is_subtotal %}font-bold text-slate-900{% endif %}">{{ v }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {% if has_discontinued_geos %}
+                    <!-- Acordeón de Regiones Históricas Descontinuadas -->
+                    <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                        <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                            <span class="flex items-center gap-1.5">
+                                <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                                <span>Estructuras y Regiones Históricas Precedentes ({{ table_geos_discontinued|length }})</span>
+                            </span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-semibold">Descontinuadas / Reclasificadas</span>
+                        </summary>
+                        <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                            <table class="w-full text-xs text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                        <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Región Histórica</th>
+                                        {% for p in seg_periods %}
+                                        <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ p }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-mono">
+                                    {% for row in table_geos_discontinued %}
+                                    <tr class="text-slate-600 hover:bg-slate-50">
+                                        <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-medium text-slate-800 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">
+                                            <div class="whitespace-nowrap truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
+                                            {% if row.description %}
+                                            <div class="text-[10px] text-slate-400 font-normal leading-tight line-clamp-1">{{ row.description }}</div>
+                                            {% endif %}
+                                        </td>
+                                        {% for v in row.values %}
+                                        <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ v }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                    {% endif %}
+                </details>
+            </div>
+        </div>
+
+        {% if table_channels %}
+        <!-- Bloque 2b: Desglose por Canal de Distribución -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span>🏷️</span> Desglose por Canal de Distribución
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Mix y ventas por canal comercial (Wholesale, DTC, Retail)</p>
+                </div>
+                <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Auditado 10-K</span>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-xs text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/80 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                            <th class="py-2.5 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">Canal</th>
+                            <th class="py-2.5 px-2 text-right">Mix LTM</th>
+                            {% for p in seg_periods %}
+                            <th data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">
+                                {{ p }}{% if ltm_is_latest_fy and forloop.first %}<span class="ml-1 text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded border border-emerald-300">LTM</span>{% endif %}
+                            </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100/70 font-mono">
+                        {% for row in table_channels %}
+                        <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
+                            <td class="py-2.5 px-3 sticky left-0 z-10 min-w-[180px] max-w-[260px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% else %}bg-white font-sans text-slate-900 font-semibold{% endif %} truncate" title="{{ row.name }}">{{ row.name }}</td>
+                            <td class="py-2.5 px-2 text-right {% if row.is_total %}text-slate-900 font-black{% else %}text-slate-700 font-semibold{% endif %}">{{ row.mix_pct }}</td>
+                            {% for v in row.values %}
+                            <td data-col-idx="{{ forloop.counter }}" class="py-2.5 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %} {% if row.is_total %}font-black text-slate-900{% endif %}">{{ v }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Bloque 3: Gráficos de Evolución y Mix -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico A: Evolución Líneas de Negocio ($M) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Evolución de Líneas de Negocio ($M)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Ingresos anuales por categoría de producto y servicios</p>
+                    </div>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Tendencia Multi-Anual</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartProductTrends"></canvas></div>
+            </div>
+
+            <!-- Gráfico B: Evolución Ventas por Región ($M) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Evolución de Ventas por Región ($M)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Diversificación territorial y tracción internacional</p>
+                    </div>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Tendencia Geográfica</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartGeoTrends"></canvas></div>
+            </div>
+
+            <!-- Gráfico C: Mix de Productos LTM (Donut) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Producto (LTM)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Participación sobre ventas totales de productos y servicios</p>
+                    </div>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartProductDonut"></canvas></div>
+            </div>
+
+            <!-- Gráfico D: Mix Geográfico LTM (Donut) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Región (LTM)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Participación porcentual por mercado geográfico</p>
+                    </div>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartGeoDonut"></canvas></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TAB 3: RENTABILIDAD & ASIGNACIÓN DE CAPITAL -->
+    <div id="tab-charts" class="tab-content hidden space-y-6">
+        {% if is_banking %}
+        <!-- Mini-Grid de KPIs Operativos Bancarios (ARPAC, Cost to Serve, NPL, Cobertura) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">ARPAC Mensual (Cliente Activo)</span>
+                    <span class="text-lg">💳</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_arpac_usd is not None %}${{ banking_kpis.monthly_arpac_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Clientes Totales:</span>
+                    <span class="font-bold text-slate-700">{% if banking_kpis.total_customers_m is not None %}{{ banking_kpis.total_customers_m|floatformat:1 }}M{% else %}N/D{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Cost to Serve Mensual</span>
+                    <span class="text-lg">⚡</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.monthly_cost_to_serve_usd is not None %}${{ banking_kpis.monthly_cost_to_serve_usd|floatformat:1 }} <span class="text-xs font-normal text-slate-500">USD/mes</span>{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Apalancamiento Operativo:</span>
+                    <span class="font-bold text-slate-700">Escala Cloud Propia</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Morosidad NPL 90+ Días</span>
+                    <span class="text-lg">🛡️</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.npl_90_plus_pct is not None %}{{ banking_kpis.npl_90_plus_pct|floatformat:1 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">NPL 15-90 Días:</span>
+                    <span class="font-bold text-slate-700">{% if banking_kpis.npl_15_90_pct is not None %}{{ banking_kpis.npl_15_90_pct|floatformat:1 }}%{% else %}N/D{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-medium">Cobertura de Provisiones</span>
+                    <span class="text-lg">🏦</span>
+                </div>
+                <div class="text-3xl font-black text-slate-900 mt-1">{% if banking_kpis.provision_coverage_pct is not None %}{{ banking_kpis.provision_coverage_pct|floatformat:0 }}%{% else %}<span class="text-slate-400">N/D</span>{% endif %}</div>
+                <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                    <span class="text-slate-500">Colchón Prudencial:</span>
+                    <span class="font-bold text-slate-700">Sobre-colateralizado (&gt;100%)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico Bancario 1: Margen de Intereses (NII) vs Comisiones / No Intereses (Non-II) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Margen de Intereses (NII) vs. Comisiones (Non-II) ($M)</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Estructura de Ingresos</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartBankingIncome"></canvas></div>
+            </div>
+
+            <!-- Gráfico Bancario 2: Estructura de Balance: Depósitos vs Cartera de Crédito -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Estructura de Balance: Depósitos vs. Créditos ($M)</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Fondeo vs Colocación</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartBankingBalance"></canvas></div>
+            </div>
+
+            <!-- Gráfico Bancario 3: Provisiones Crediticias (CLP) y Cost of Risk -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Provisiones por Pérdidas Crediticias &amp; Cost of Risk</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">CLP ($M) vs CoR (%)</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartBankingRisk"></canvas></div>
+            </div>
+
+            <!-- Gráfico Bancario 4: Distribución de Depósitos por Geografía -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Distribución Regional de Depósitos</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Fondeo por Mercado ($M)</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartDepositsCountryDonut"></canvas></div>
+            </div>
+
+            <!-- Gráfico 5: Dinámica del Accionista (Banca: Recompra Neta vs Float) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Float: {{ buybacks_summary.float_change_pct }} | Recompras Netas: {{ buybacks_summary.total_net_buybacks }}</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartNetBuybacksFloatBanking"></canvas></div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Gráficos Comerciales Estándar (Corporativo / Plataforma) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Gráfico 1: Ingresos vs Beneficios & FCF (Intacto) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Ingresos vs. Beneficios &amp; FCF ($M)</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Cascada P&amp;L + Cash Flow</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartRevNI"></canvas></div>
+            </div>
+
+            <!-- Gráfico 2: Estructura de Márgenes (Intacto) -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-900 text-base">Estructura de Márgenes de Rentabilidad (%)</h3>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Bruto, Operativo, Neto &amp; FCF</span>
+                </div>
+                <div class="h-80 relative"><canvas id="chartMargins"></canvas></div>
+            </div>
+
+            <!-- Gráfico 3: Calidad Contable y Conversión de Caja (Ancho Completo 100%) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-900 text-base">Calidad Contable &amp; Conversión de Caja (Beneficio Neto vs. FCF)</h3>
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                                {{ cash_conv_summary.badge }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">Compara el beneficio contable ($M) con la generación real de caja libre (FCF $M) y su tasa de conversión (%)</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs flex-wrap">
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Conversión LTM: <strong class="text-slate-900">{{ cash_conv_summary.ltm_str }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Media 5Y: <strong class="text-slate-900">{{ cash_conv_summary.avg_5y_str }}</strong></span>
+                    </div>
+                </div>
+                <div class="h-80 relative"><canvas id="chartCashConversion"></canvas></div>
+            </div>
+
+            <!-- Gráfico 4: Dinámica del Accionista: Recompra Neta vs Float (Ancho Completo 100%) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl lg:col-span-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h3 class="font-bold text-slate-900 text-base">Dinámica del Accionista: Recompra Neta ($M) vs. Float &amp; Acciones Diluidas</h3>
+                            <span id="badgeFloatChange" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                                Float Acum: {{ buybacks_summary.float_change_pct }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">Recompra Neta = Recompras Mercado Abierto - Compensación en Acciones (SBC) | Línea = Conteo de Acciones Diluidas</p>
+                    </div>
+                    <div class="flex items-center gap-2.5 text-xs flex-wrap">
+                        <!-- Selector de Periodos [3A | 5A | Todos] -->
+                        <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-semibold">
+                            <button type="button" onclick="setBuybackPeriodView('3y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">3A</button>
+                            <button type="button" onclick="setBuybackPeriodView('5y', this)" class="bb-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">5A</button>
+                            <button type="button" onclick="setBuybackPeriodView('all', this)" class="bb-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer font-bold">Todos</button>
+                        </div>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompras Brutas: <strong id="bbGrossSum" class="text-slate-900">{{ buybacks_summary.total_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">SBC Ejecutiva: <strong id="bbSbcSum" class="text-slate-900">{{ buybacks_summary.total_sbc }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Recompra Neta: <strong id="bbNetSum" class="text-slate-900">{{ buybacks_summary.total_net_buybacks }}</strong></span>
+                        <span class="text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Cobertura Recompras/SBC: <strong id="bbCovRatio" class="text-slate-900">{{ buybacks_summary.sbc_coverage_ratio }}</strong></span>
+                    </div>
+                </div>
+                <div class="h-80 relative"><canvas id="chartNetBuybacksFloat"></canvas></div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if alloc_kpis %}
+        <!-- MÓDULO DE ASIGNACIÓN DE CAPITAL INSTITUCIONAL (CAPITAL ALLOCATION FRAMEWORK) -->
+        <div class="mt-8 pt-6 border-t border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🏛️</span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-lg font-bold text-slate-900">Marco de Asignación de Capital (Capital Allocation Framework)</h3>
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-300 shadow-sm">
+                                {{ alloc_kpis.profile_badge }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">{{ alloc_kpis.profile_desc }}</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-slate-500">Ventana Auditada:</span>
+                    <span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200">{{ alloc_kpis.recent_years_label }}</span>
+                </div>
+            </div>
+
+            <!-- Mini-Grid 4 KPIs Ejecutivos de Asignación Acumulada -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1: Retorno Total al Accionista Acum. -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Retorno Total al Accionista (Acum.)</span>
+                        <span class="text-lg">💰</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.total_shareholder_return_5y_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">% de Conversión de CFO:</span>
+                        <span class="font-bold text-slate-700">{{ alloc_kpis.pct_shareholder_return_5y }}</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Mix Recompras vs Dividendos (Ubicada a la derecha de Retorno al Accionista) -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Mix Recompras vs. Dividendos</span>
+                        <span class="text-lg">⚖️</span>
+                    </div>
+                    <div class="mt-2 space-y-1">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-purple-600"></span> Recompras:
+                            </span>
+                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_bb_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.bb_share_return_pct }})</span></span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Dividendos:
+                            </span>
+                            <span class="font-bold text-slate-900 font-mono">{{ alloc_kpis.tot_div_5y_str }} <span class="text-slate-500 font-sans font-normal">({{ alloc_kpis.div_share_return_pct }})</span></span>
+                        </div>
+                    </div>
+                    <!-- Mini barra apilada bicolor -->
+                    <div class="w-full bg-slate-100 rounded-full h-2 mt-2.5 flex overflow-hidden">
+                        <div class="bg-purple-600 h-2 transition-all duration-300" style="width: {{ alloc_kpis.bb_share_return_pct }};" title="Recompras: {{ alloc_kpis.bb_share_return_pct }}"></div>
+                        <div class="bg-amber-500 h-2 transition-all duration-300" style="width: {{ alloc_kpis.div_share_return_pct }};" title="Dividendos: {{ alloc_kpis.div_share_return_pct }}"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Reinversión en Negocio (CapEx Acum.) -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Reinversión Orgánica (CapEx Acum.)</span>
+                        <span class="text-lg">🏭</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.tot_capex_5y_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">% Reinversión / CFO:</span>
+                        <span class="font-bold text-slate-700">{{ alloc_kpis.pct_reinvestment_capex_5y }}</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Generación CFO Acumulada -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Flujo de Caja Operativo (Acum.)</span>
+                        <span class="text-lg">🌊</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ alloc_kpis.tot_cfo_5y_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">M&amp;A Adquisiciones (Acum.):</span>
+                        <span class="font-bold text-slate-700">{{ alloc_kpis.tot_ma_5y_str }} ({{ alloc_kpis.pct_ma_5y }})</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico: Asignación Anual de Capital: Retorno vs Reinversión -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Asignación Anual de Capital: Retorno al Accionista vs. Reinversión en Negocio (${{ alloc_unit }})</h4>
+                        <p class="text-xs text-slate-500">Dos columnas contiguas por año (Columna Retorno vs. Columna Reinversión) contrastadas con el Flujo Operativo (CFO)</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs flex-wrap">
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-purple-600"></span> Recompras</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-amber-500"></span> Dividendos</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-blue-600"></span> CapEx Orgánico</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-medium"><span class="w-3 h-3 rounded-sm bg-rose-600"></span> M&amp;A</span>
+                        <span class="inline-flex items-center gap-1.5 text-slate-700 font-bold"><span class="w-3 h-0.5 bg-emerald-600"></span> Línea CFO (Techo de Generación)</span>
+                    </div>
+                </div>
+                <div class="h-96 relative"><canvas id="chartCapitalAllocation"></canvas></div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if is_platform %}
+        <!-- Sección Específica Ecosistema Híbrido (Marketplace & Fintech) -->
+        <div class="mt-8 pt-6 border-t border-slate-200 space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl">🌐</span>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Métricas Clave del Ecosistema (Marketplace &amp; Fintech)</h3>
+                        <p class="text-xs text-slate-500">Escala operativa de comercio electrónico y volumen de procesamiento de pagos</p>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">PLATFORM ECOSYSTEM</span>
+            </div>
+
+            <!-- 4 KPI Cards Ecosistema -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">GMV Trimestral (Marketplace)</span>
+                        <span class="text-lg">🛒</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.gmv_3m_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">GMV Semestral (6M):</span>
+                        <span class="font-bold text-slate-700">{{ platform_kpis.gmv_6m_str }}</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">TPV Trimestral (Fintech Pagos)</span>
+                        <span class="text-lg">💳</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.tpv_3m_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">TPV Semestral (6M):</span>
+                        <span class="font-bold text-slate-700">{{ platform_kpis.tpv_6m_str }}</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Compradores Únicos Activos</span>
+                        <span class="text-lg">👥</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.unique_buyers_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">Artículos Vendidos (3M):</span>
+                        <span class="font-bold text-slate-700">{{ platform_kpis.items_sold_3m_str }}</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-medium">Usuarios Activos Fintech (MAUs)</span>
+                        <span class="text-lg">📱</span>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 mt-1">{{ platform_kpis.fintech_mau_str }}</div>
+                    <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
+                        <span class="text-slate-500">Cartera de Crédito:</span>
+                        <span class="font-bold text-slate-700">{{ platform_kpis.credit_portfolio_str }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos de Plataforma / Ecosistema -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Gráfico Ecosistema 1: GMV vs TPV -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-slate-900 text-base">Volumen Bruto: GMV (Comercio) vs. TPV (Fintech) ($M)</h3>
+                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Comercio vs Pagos</span>
+                    </div>
+                    <div class="h-80 relative"><canvas id="chartPlatformGMVTPV"></canvas></div>
+                </div>
+
+                <!-- Gráfico Ecosistema 2: Base de Usuarios -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-slate-900 text-base">Base de Usuarios del Ecosistema (Millones)</h3>
+                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Adopción Compradores &amp; Fintech</span>
+                    </div>
+                    <div class="h-80 relative"><canvas id="chartPlatformUsers"></canvas></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
     <!-- TAB 4: CALIDAD DE NEGOCIO & RETORNOS SOBRE CAPITAL -->
     <div id="tab-quality" class="tab-content hidden space-y-6">
         
@@ -2213,7 +2213,7 @@
                     </div>
                     <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Creación de Valor EVA</span>
                 </div>
-                <div class="h-80"><canvas id="chartROICReturns"></canvas></div>
+                <div class="h-80 relative"><canvas id="chartROICReturns"></canvas></div>
             </div>
 
             <!-- Gráfico 2: Productividad de Capital: ROC Greenblatt vs Novy-Marx -->
@@ -2225,7 +2225,7 @@
                     </div>
                     <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Escala Dual</span>
                 </div>
-                <div class="h-80"><canvas id="chartROCNovyMarx"></canvas></div>
+                <div class="h-80 relative"><canvas id="chartROCNovyMarx"></canvas></div>
             </div>
         </div>
 
@@ -3108,22 +3108,22 @@
 
                     <!-- Grid de Métricas de Caja Económica -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
-                        <div class="p-3 bg-white rounded-xl border border-slate-200/90 shadow-2xs">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200/90 shadow-sm">
                             <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">CapEx Total Reportado</span>
                             <span class="text-base font-black text-slate-900 block mt-1">${{ owner_earnings_analysis.capex_total_m|floatformat:1 }}M</span>
                             <span class="text-[10px] text-slate-400 block mt-0.5">Deducción GAAP estándar</span>
                         </div>
-                        <div class="p-3 bg-sky-50/50 rounded-xl border border-sky-200/70 shadow-2xs">
+                        <div class="p-3 bg-sky-50/50 rounded-xl border border-sky-200/70 shadow-sm">
                             <span class="text-[10px] text-sky-800 uppercase tracking-wider block font-semibold">CapEx de Mantenimiento</span>
                             <span class="text-base font-black text-sky-900 block mt-1">${{ owner_earnings_analysis.maint_capex_m|floatformat:1 }}M</span>
                             <span class="text-[10px] text-sky-600 block mt-0.5">{{ owner_earnings_analysis.maint_pct_of_capex|floatformat:0 }}% del CapEx total (PP&E)</span>
                         </div>
-                        <div class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-200/70 shadow-2xs">
+                        <div class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-200/70 shadow-sm">
                             <span class="text-[10px] text-indigo-800 uppercase tracking-wider block font-semibold">CapEx de Crecimiento</span>
                             <span class="text-base font-black text-indigo-900 block mt-1">+${{ owner_earnings_analysis.growth_capex_m|floatformat:1 }}M</span>
                             <span class="text-[10px] text-indigo-600 block mt-0.5">{{ owner_earnings_analysis.growth_pct_of_capex|floatformat:0 }}% expansión opcional</span>
                         </div>
-                        <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-200/70 shadow-2xs">
+                        <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-200/70 shadow-sm">
                             <span class="text-[10px] text-emerald-800 uppercase tracking-wider block font-semibold">Beneficios del Propietario</span>
                             <span class="text-base font-black text-emerald-900 block mt-1">${{ owner_earnings_analysis.owner_earnings_m|floatformat:1 }}M</span>
                             <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">+{{ owner_earnings_analysis.oe_expansion_pct|floatformat:1 }}% vs FCF reportado</span>
@@ -3143,7 +3143,7 @@
                                 {{ init_growth_disp|floatformat:2 }}%
                             </span>
                         </div>
-                        <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{{ init_growth_disp|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <input type="range" id="gRevSlider" min="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}2.0{% else %}-10.0{% endif %}" max="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}50.0{% else %}100.0{% endif %}" step="0.1" value="{{ init_growth_disp|floatformat:2 }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-200 rounded accent-sky-500 cursor-pointer">
                         <span class="text-[10px] text-slate-500 mt-1 block">
                             {% if is_banking or archetype == "FINANCIAL_BANKING" %}ROTCE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% elif is_insurance or archetype == "INSURANCE" %}ROE Auditado LTM: {{ vp.rotce_pct|default:hist_growth_pct|floatformat:1 }}%{% else %}Referencia Histórica 5Y: {{ hist_growth_pct|floatformat:1 }}% anual{% endif %}
                         </span>
@@ -3154,7 +3154,7 @@
                             <label class="text-xs text-slate-700 font-semibold">Margen Flujo de Caja Proyectado:</label>
                             <span id="fcfDisplay" class="text-xs font-black text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">{% if oe_margin_pct > 0 %}{{ oe_margin_pct|floatformat:1 }}{% else %}{{ fcf_margin_pct|floatformat:1 }}{% endif %}%</span>
                         </div>
-                        <input type="range" id="fcfSlider" min="0.5" max="75.0" step="0.1" value="{% if oe_margin_pct > 0 %}{{ oe_margin_pct|floatformat:1 }}{% elif fcf_margin_pct < 0.5 %}5.0{% elif fcf_margin_pct > 75.0 %}75.0{% else %}{{ fcf_margin_pct|floatformat:1 }}{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <input type="range" id="fcfSlider" min="0.5" max="75.0" step="0.1" value="{% if oe_margin_pct > 0 %}{{ oe_margin_pct|floatformat:1 }}{% elif fcf_margin_pct < 0.5 %}5.0{% elif fcf_margin_pct > 75.0 %}75.0{% else %}{{ fcf_margin_pct|floatformat:1 }}{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-200 rounded accent-sky-500 cursor-pointer">
                         <span class="text-[10px] text-slate-500 mt-1 block">Owner Earnings: {{ oe_margin_pct|floatformat:1 }}% | FCF Reportado: {{ fcf_margin_pct|floatformat:1 }}%</span>
                     </div>
                     {% endif %}
@@ -3165,7 +3165,7 @@
                             </label>
                             <span id="wDisplay" class="text-xs font-black text-sky-700 bg-sky-50 px-2 py-0.5 rounded">{{ wacc_val }}</span>
                         </div>
-                        <input type="range" id="wSlider" min="4.0" max="25.0" step="0.1" value="{{ wacc_val|slice:':-1' }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-sky-500 cursor-pointer">
+                        <input type="range" id="wSlider" min="4.0" max="25.0" step="0.1" value="{{ wacc_val|slice:':-1' }}" oninput="recalcDCF()" class="w-full h-2 bg-slate-200 rounded accent-sky-500 cursor-pointer">
                         <span class="text-[10px] text-slate-500 mt-1 block">
                             {% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}Ke (CAPM / Retorno Exigido): {{ wacc_val }}{% else %}WACC Auditado por Ratios: {{ wacc_val }}{% endif %}
                         </span>
@@ -3175,7 +3175,7 @@
                             <label class="text-xs text-slate-700 font-semibold">Tasa Perpetuidad (gn):</label>
                             <span id="gDisplay" class="text-xs font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.00%{% else %}2.50%{% endif %}</span>
                         </div>
-                        <input type="range" id="gSlider" min="1.0" max="4.0" step="0.1" value="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.0{% else %}2.5{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-700 rounded accent-emerald-500 cursor-pointer">
+                        <input type="range" id="gSlider" min="1.0" max="4.0" step="0.1" value="{% if is_banking or archetype == "FINANCIAL_BANKING" or is_insurance or archetype == "INSURANCE" %}3.0{% else %}2.5{% endif %}" oninput="recalcDCF()" class="w-full h-2 bg-slate-200 rounded accent-emerald-500 cursor-pointer">
                         <span class="text-[10px] text-slate-500 mt-1 block">Crecimiento tendencial del PIB</span>
                     </div>
                 </div>
@@ -3336,7 +3336,7 @@
                 </div>
 
                 <!-- SELECTOR DE MÚLTIPLOS Y LÍNEAS DE REFERENCIA -->
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                         <!-- Selector de Múltiplos -->
                         <div class="flex flex-wrap items-center gap-1.5">
@@ -3405,7 +3405,7 @@
                     </div>
 
                     <!-- Lienzo de Gráfica Chart.js -->
-                    <div class="w-full bg-slate-50/50 rounded-xl p-3 border border-slate-100" style="height: 320px;">
+                    <div class="w-full bg-slate-50/50 rounded-xl p-3 border border-slate-100 relative" style="height: 320px;">
                         <canvas id="historicalMultiplesChart"></canvas>
                     </div>
 
@@ -3450,7 +3450,7 @@
                 </div>
 
                 <!-- TABLA HISTÓRICA ANUAL DE MÚLTIPLOS Y PRECIOS DE CIERRE FISCAL -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                         <div>
                             <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
@@ -3555,7 +3555,7 @@
                 <details ontoggle="if(this.open && window.triggerKaTeX) window.triggerKaTeX(this);" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-200">
                     <summary class="flex items-center justify-between p-5 bg-gradient-to-r from-slate-50 via-indigo-50/20 to-white cursor-pointer select-none hover:bg-slate-100/60 transition">
                         <div class="flex items-center gap-3">
-                            <span class="p-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-xs">🔬</span>
+                            <span class="p-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-sm">🔬</span>
                             <div>
                                 <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                                     <span>Trazabilidad y Caja Blanca: Conciliación Contable de Datos Auditados (SEC 10-K)</span>
@@ -3860,12 +3860,15 @@
         
         const t = document.getElementById('tab-' + tabId);
         if (t) t.classList.remove('hidden');
+        
+        let targetBtn = null;
         if (typeof event !== 'undefined' && event && event.currentTarget) {
-            event.currentTarget.classList.add('active');
-        } else {
-            const btn = document.querySelector(`[onclick*="switchTab('${tabId}')"]`);
-            if (btn) btn.classList.add('active');
+            targetBtn = event.currentTarget.closest ? event.currentTarget.closest('.tab-btn') : event.currentTarget;
         }
+        if (!targetBtn) {
+            targetBtn = document.querySelector(`[onclick*="switchTab('${tabId}')"]`);
+        }
+        if (targetBtn) targetBtn.classList.add('active');
 
         if (tabId === 'charts') setTimeout(renderCharts, 50);
         if (tabId === 'segments') setTimeout(renderSegmentsCharts, 50);
@@ -3921,13 +3924,6 @@
             btn2.className = 'px-3.5 py-1.5 rounded-lg font-semibold bg-sky-50 text-sky-700 border border-sky-200 transition';
             btn1.className = 'px-3.5 py-1.5 rounded-lg font-semibold text-slate-500 border border-transparent hover:text-slate-900 transition';
         }
-    }
-
-    function filterPnL() {
-        const q = document.getElementById('pnlSearch').value.toLowerCase();
-        document.querySelectorAll('#pnlTable tbody tr').forEach(r => {
-            r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
-        });
     }
 
     function switchValuationSubTab(subTabId) {
@@ -4403,9 +4399,9 @@
             if (alertBox) {
                 alertBox.className = "p-4 rounded-2xl border border-rose-200 bg-rose-50 text-xs text-rose-700 leading-relaxed";
                 if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
-                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige una rentabilidad implícita (ROTCE/ROE) del <strong>${(g_implied * 100).toFixed(2)}%</strong>. Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong> por Excess Return.`;
+                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$` + targetPrice.toFixed(2) + ` USD</strong> de mercado, el precio exige una rentabilidad implícita (ROTCE/ROE) del <strong>${(g_implied * 100).toFixed(2)}%</strong>. Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$` + fairPrice.toFixed(2) + ` USD</strong> por Excess Return.`;
                 } else {
-                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$${targetPrice.toFixed(2)} USD</strong> de mercado, el precio exige un crecimiento anual de ventas del <strong>${(g_implied * 100).toFixed(2)}%</strong> durante la fase de supercrecimiento (con margen FCF del ${(activeFcfM * 100).toFixed(1)}%). Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$${fairPrice.toFixed(2)} USD</strong>.`;
+                    alertBox.innerHTML = `⚠️ <strong>Cotiza con Sobreprecio / Exigencia Elevada:</strong> Para sostener los <strong>$` + targetPrice.toFixed(2) + ` USD</strong> de mercado, el precio exige un crecimiento anual de ventas del <strong>${(g_implied * 100).toFixed(2)}%</strong> durante la fase de supercrecimiento (con margen FCF del ${(activeFcfM * 100).toFixed(1)}%). Tu hipótesis proyectada (${(slider1Val * 100).toFixed(2)}%) fundamenta un valor intrínseco de <strong>$` + fairPrice.toFixed(2) + ` USD</strong>.`;
                 }
             }
         } else {
@@ -4414,9 +4410,9 @@
             if (alertBox) {
                 alertBox.className = "p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-xs text-emerald-700 leading-relaxed";
                 if (isBanking || isFinancial || archetype === "FINANCIAL_BANKING" || archetype === "INSURANCE") {
-                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de rentabilidad (ROTCE/ROE) del <strong>${(slider1Val * 100).toFixed(2)}%</strong>, el valor intrínseco por Excess Return (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
+                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de rentabilidad (ROTCE/ROE) del <strong>${(slider1Val * 100).toFixed(2)}%</strong>, el valor intrínseco por Excess Return (<strong>$` + fairPrice.toFixed(2) + ` USD</strong>) supera la cotización actual de mercado (<strong>$` + targetPrice.toFixed(2) + ` USD</strong>).`;
                 } else {
-                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de crecimiento de ventas del <strong>${(slider1Val * 100).toFixed(2)}%</strong> anual y margen FCF del <strong>${(activeFcfM * 100).toFixed(1)}%</strong>, el valor intrínseco teórico resultante (<strong>$${fairPrice.toFixed(2)} USD</strong>) supera la cotización actual de mercado (<strong>$${targetPrice.toFixed(2)} USD</strong>).`;
+                    alertBox.innerHTML = `✅ <strong>Margen de Seguridad Favorable:</strong> Con una hipótesis de crecimiento de ventas del <strong>${(slider1Val * 100).toFixed(2)}%</strong> anual y margen FCF del <strong>${(activeFcfM * 100).toFixed(1)}%</strong>, el valor intrínseco teórico resultante (<strong>$` + fairPrice.toFixed(2) + ` USD</strong>) supera la cotización actual de mercado (<strong>$` + targetPrice.toFixed(2) + ` USD</strong>).`;
                 }
             }
         }

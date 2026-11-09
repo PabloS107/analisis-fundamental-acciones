@@ -6,30 +6,25 @@
     <title>{% block title %}Terminal de Análisis Fundamental{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- KaTeX for math formulas -->
+    <!-- KaTeX for math formulas (Scoped Execution) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if (window.initKaTeX) window.initKaTeX();"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script>
         window.triggerKaTeX = function(el) {
             if (typeof renderMathInElement !== 'undefined') {
-                renderMathInElement(el || document.body, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false},
-                        {left: '\(', right: '\)', display: false},
-                        {left: '\[', right: '\]', display: true}
-                    ],
-                    throwOnError: false
-                });
+                const target = el || document.querySelector('.math-container') || document.querySelector('.math-formula');
+                if (target) {
+                    renderMathInElement(target, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '\\(', right: '\\)', display: false}
+                        ],
+                        throwOnError: false
+                    });
+                }
             }
         };
-        window.initKaTeX = function() {
-            setTimeout(() => window.triggerKaTeX(), 50);
-        };
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => window.triggerKaTeX(), 100);
-        });
     </script>
     <style>
         ::-webkit-scrollbar { width: 6px; height: 6px; }
