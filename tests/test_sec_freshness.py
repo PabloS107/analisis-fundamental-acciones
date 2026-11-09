@@ -30,6 +30,16 @@ from pipeline.sec_modules.sec_freshness import (
     check_sec_freshness,
 )
 
+# Los tests de frescura en vivo dependen de que SEC EDGAR responda (HTTP 429
+# por rate limiting) y de estado real-time de filings. Se omiten por defecto;
+# ejecutar con RUN_SEC_NETWORK_TESTS=1 para validarlos contra la red.
+RUN_SEC_NETWORK_TESTS = os.environ.get("RUN_SEC_NETWORK_TESTS") == "1"
+requires_sec_network = unittest.skipUnless(
+    RUN_SEC_NETWORK_TESTS,
+    "Omitido: requiere red SEC EDGAR en vivo (estado real-time de filings y sin rate limiting HTTP 429). "
+    "Ejecutar con RUN_SEC_NETWORK_TESTS=1.",
+)
+
 
 class DummyFiling:
     def __init__(self, form, is_xbrl=0, primary_document="doc.htm", filing_date="2026-08-01"):
@@ -88,6 +98,7 @@ class TestSECFreshnessEngine(unittest.TestCase):
         self.assertTrue(nu_local["has_local_data"])
         self.assertIsNotNone(nu_local["ltm_period"])
 
+    @requires_sec_network
     def test_04_meta_detects_new_quarter_in_sec(self):
         """Verifica que para META se detecte Q3 2026 en SEC frente al Q2 local."""
         res = check_sec_freshness("META", force_network=True)
@@ -99,6 +110,7 @@ class TestSECFreshnessEngine(unittest.TestCase):
         self.assertEqual(res["sec_latest_form"], "10-Q")
         self.assertEqual(res["sec_latest_filing_date"], "2026-10-22")
 
+    @requires_sec_network
     def test_05_deck_and_nu_controls(self):
         """Verifica empresas de control: DECK alerta de 8-K pendiente y NU se mantiene al día."""
         deck_res = check_sec_freshness("DECK", force_network=True)

@@ -86,8 +86,8 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('-$94,949.0M', content)
         self.assertIn('-$9,958.0M', content)
 
-        # Verify SSOT consistency: open-market buybacks summary over closed fiscal years
-        self.assertIn('$683,476.0M', content)
+        # Verify SSOT consistency: open-market buybacks summary over closed fiscal years (FY2017-FY2026 + LTM==FY2026)
+        self.assertIn('$769,866.0M', content)
 
     def test_nvda_financial_statements_and_capital_flows(self):
         response = self.client.get('/company/NVDA/')
@@ -135,9 +135,9 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('-$414.9M', content)
         self.assertIn('-$10.0M', content)
 
-        # Verify DECK Net Financial Position (Net Cash -$1,602.6M)
+        # Verify DECK Net Financial Position (Net Cash -$1,209.7M)
         self.assertIn('POSICIÓN FINANCIERA NETA (DEUDA NETA)', content)
-        self.assertIn('-$1,602.6M', content)
+        self.assertIn('-$1,209.7M', content)
 
     def test_nu_financial_statements_and_capital_flows(self):
         response = self.client.get('/company/NU/')
@@ -264,25 +264,25 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
 
-        # 1. Activos Corrientes LTM
-        self.assertIn('$15,462.0M', content)   # Cash
-        self.assertIn('$74,798.0M', content)   # Short-term investments
-        self.assertIn('$21,752.0M', content)   # Accounts receivable
-        self.assertIn('$13,463.0M', content)   # Other current assets
-        self.assertIn('$125,475.0M', content)  # Total current assets
+        # 1. Activos Corrientes LTM (extracción 2026-11; 10-Q Q3 CY2026 balance)
+        self.assertIn('$11,222.0M', content)   # Cash
+        self.assertIn('$71,227.0M', content)   # Short-term investments
+        self.assertIn('$22,716.0M', content)   # Accounts receivable
+        self.assertIn('$14,735.0M', content)   # Other current assets
+        self.assertIn('$119,900.0M', content)  # Total current assets
 
-        # 2. Activos No Corrientes LTM (Sin sobreestimaciones de 473B o 261B)
-        self.assertIn('$225,724.0M', content)  # PP&E Neto
-        self.assertIn('$23,985.0M', content)   # ROU Asset (Fiscal.ai suma PP&E + ROU = $249,709M)
-        self.assertIn('$23,406.0M', content)   # Goodwill & Intangibles
+        # 2. Activos No Corrientes LTM (expansión AI capex; suma PP&E + ROU = $279,798M)
+        self.assertIn('$253,222.0M', content)  # PP&E Neto
+        self.assertIn('$26,576.0M', content)   # ROU Asset
+        self.assertIn('$23,421.0M', content)   # Goodwill & Intangibles
         self.assertNotIn('$473,362.0M', content)  # Error anterior erradicado
-        self.assertIn('$30,157.0M', content)   # Inversiones a LP
-        self.assertIn('$261,221.0M', content)  # Total Patrimonio Neto (Equity) auditado
-        self.assertIn('$21,209.0M', content)   # Otros activos LP
-        self.assertIn('$449,956.0M', content)  # Total Activos
+        self.assertIn('$32,624.0M', content)   # Inversiones a LP
+        self.assertIn('$272,386.0M', content)  # Total Patrimonio Neto (Equity)
+        self.assertIn('$23,093.0M', content)   # Otros activos LP
+        self.assertIn('$478,836.0M', content)  # Total Activos
 
         # 3. Deuda Financiera (Sin falsa deuda a corto plazo)
-        self.assertIn('$83,664.0M', content)   # Deuda a largo plazo
+        self.assertIn('$80,922.0M', content)   # Deuda a largo plazo
 
     def test_meta_segments_and_geography(self):
         """Verifica que META presente segmentos primarios (FoA, Reality Labs) y desglose jerárquico (Advertising, Other revenue)."""
@@ -313,7 +313,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(json.loads(m_g.group(1)), ["United States & Canada", "Europe", "Asia-Pacific", "Rest of World"])
 
     def test_deck_segments_reconciliation_and_styling(self):
-        """Verifica que DECK tenga Segmentos como Tab 2, cuadre con $5,527.3M LTM, paleta neutral y leyendas legibles."""
+        """Verifica que DECK tenga Segmentos como Tab 2, cuadre con $5,577.0M LTM, paleta neutral y leyendas legibles."""
         response = self.client.get('/company/DECK/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
@@ -326,17 +326,17 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertTrue(pos_statements < pos_segments < pos_charts < pos_quality,
                         "El orden de pestañas debe ser: 1. Statements, 2. Segments, 3. Charts, 4. Quality")
 
-        # 2. Total Neto Consolidado en tablas con valor $5,527.3M y 100.0%
+        # 2. Total Neto Consolidado en tablas con valor $5,577.0M y 100.0%
         self.assertIn('(=) Total Neto Consolidado', content)
-        self.assertIn('$5,527.3M', content)
+        self.assertIn('$5,577.0M', content)
         self.assertIn('100.0%', content)
 
-        # 3. Valores LTM de marcas conciliados exactamente con $5,527.3M
-        self.assertIn('$2,724.4M', content)  # UGG LTM
-        self.assertIn('$2,658.7M', content)  # HOKA LTM
-        self.assertIn('$144.2M', content)    # Other Brands LTM
-        self.assertIn('$3,174.9M', content)  # Domestic LTM
-        self.assertIn('$2,352.4M', content)  # International LTM
+        # 3. Valores LTM de marcas conciliados exactamente con $5,577.0M
+        self.assertIn('$2,778.5M', content)  # UGG LTM
+        self.assertIn('$2,680.8M', content)  # HOKA LTM
+        self.assertIn('$117.6M', content)    # Other Brands LTM
+        self.assertIn('$3,204.0M', content)  # Domestic LTM
+        self.assertIn('$2,373.0M', content)  # International LTM
 
         # 4. Tarjetas resumen con color fijo neutro (slate) y sin colores dispersos o engañosos
         self.assertIn('text-slate-800 bg-slate-100', content)
@@ -361,7 +361,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
 
         # 2. Total Neto Consolidado
         self.assertIn('(=) Total Neto Consolidado', content)
-        self.assertIn('$466,823M', content)
+        self.assertIn('$478,834.0M', content)  # AAPL LTM==FY2026 (post 10-K): revenue auditado FY2026
 
         # 3. Tarjetas con color fijo neutro slate
         self.assertIn('text-slate-800 bg-slate-100', content)
@@ -391,13 +391,13 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn("const ebits = ", content)
         self.assertIn("Cascada P&amp;L + Cash Flow", content)
 
-        # 4. Verificación de valores de EBIT y FCF en el HTML (LTM DECK)
-        self.assertIn('1252.9', content)  # EBIT LTM DECK: $1,252.9M
-        self.assertIn('1117.8', content)  # FCF LTM DECK: $1,117.8M
+        # 4. Verificación de valores de EBIT y FCF en el HTML (LTM DECK, extracción 2026-11)
+        self.assertIn('1315.9', content)  # EBIT LTM DECK: $1,315.9M
+        self.assertIn('1052.6', content)  # FCF LTM DECK: $1,052.6M
 
         # 5. Tarjetas de Capital Allocation Framework y badges en estilo slate unificado dentro de tab-charts
         start_charts = content.find('id="tab-charts"')
-        end_charts = content.find('id="tab-segments"')
+        end_charts = content.find('id="tab-quality"')
         tab_charts_html = content[start_charts:end_charts]
 
         self.assertIn('text-3xl font-black text-slate-900 mt-1', tab_charts_html)
@@ -453,13 +453,13 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertIn('Tesorería y Activos Líquidos', content)
             self.assertIn('Deuda Financiera Neta', content)
             if ticker == 'AAPL':
-                self.assertIn('$84,297.0M', content)
-                self.assertIn('$62,399.0M', content)
-                self.assertIn('$21,898.0M', content)
-                self.assertNotIn('+$21,898.0M', content)
+                self.assertIn('$80,111.0M', content)   # Deuda Financiera Total (total_debt LTM==FY2026)
+                self.assertIn('$59,160.0M', content)   # Tesorería ($36,305.0M + $22,855.0M inversiones CP)
+                self.assertIn('$20,951.0M', content)   # Deuda Financiera Neta
+                self.assertNotIn('+$20,951.0M', content)
             elif ticker == 'DECK':
                 self.assertIn('$0.0M', content)
-                self.assertIn('-$1,602.6M (Caja Neta)', content)
+                self.assertIn('-$1,209.7M (Caja Neta)', content)
 
             # Punto 3: Rating Sintético con estilo institucional y dictamen multi-factor
             self.assertIn('Dictamen Institucional de Solvencia & Riesgo Crediticio', content)
@@ -483,16 +483,16 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(response_aapl.status_code, 200)
         content_aapl = response_aapl.content.decode('utf-8')
         
-        # AAPL: NOPAT $134,859.4M / Cap. Inv. $269,400.0M = 50.1%
-        self.assertIn('NOPAT <strong class="text-slate-300">$134,859.4M</strong> / Cap. Inv. <strong class="text-slate-300">$269,400.0M</strong> = <strong class="text-emerald-400">50.1%</strong>', content_aapl)
+        # AAPL: NOPAT $136,514.9M / Cap. Inv. $303,075.2M = 45.0% (extracción 2026-11)
+        self.assertIn('NOPAT <strong class="text-slate-300">$136,514.9M</strong> / Cap. Inv. <strong class="text-slate-300">$303,075.2M</strong> = <strong class="text-emerald-400">45.0%</strong>', content_aapl)
         self.assertNotIn('NOPAT <strong class="text-slate-300">$0.1M</strong>', content_aapl)
 
         response_deck = self.client.get('/company/DECK/')
         self.assertEqual(response_deck.status_code, 200)
         content_deck = response_deck.content.decode('utf-8')
         
-        # DECK: NOPAT $998.6M / Cap. Inv. $2,040.5M = 48.9%
-        self.assertIn('NOPAT <strong class="text-slate-300">$998.6M</strong> / Cap. Inv. <strong class="text-slate-300">$2,040.5M</strong> = <strong class="text-emerald-400">48.9%</strong>', content_deck)
+        # DECK: NOPAT $1,015.4M / Cap. Inv. $2,259.2M = 45.0% (extracción 2026-11)
+        self.assertIn('NOPAT <strong class="text-slate-300">$1,015.4M</strong> / Cap. Inv. <strong class="text-slate-300">$2,259.2M</strong> = <strong class="text-emerald-400">45.0%</strong>', content_deck)
 
     def test_dynamic_sales_growth_cagr_not_hardcoded_8_pct(self):
         """Verifica que el crecimiento histórico de ventas no esté hardcodeado al 8% y refleje el CAGR auditado de cada firma."""
@@ -505,13 +505,13 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('value="16.50"', c_deck)
         self.assertNotIn('Referencia Histórica 5Y: 8.0% anual', c_deck)
 
-        # 2. AAPL: CAGR 5Y auditado es 8.7%
+        # 2. AAPL: CAGR 5Y auditado es 5.5% (extracción 2026-11, ventana FY2016-FY2026 + LTM)
         res_aapl = self.client.get('/company/AAPL/')
         self.assertEqual(res_aapl.status_code, 200)
         c_aapl = res_aapl.content.decode('utf-8')
-        self.assertIn('CAGR Histórico (8.7%)', c_aapl)
-        self.assertIn('Referencia Histórica 5Y: 8.7% anual', c_aapl)
-        self.assertIn('value="8.70"', c_aapl)
+        self.assertIn('CAGR Histórico (5.5%)', c_aapl)
+        self.assertIn('Referencia Histórica 5Y: 5.5% anual', c_aapl)
+        self.assertIn('value="5.50"', c_aapl)
 
     def test_nvda_segments_and_descriptions(self):
         """Verifica que los segmentos modernos y las descripciones institucionales de NVDA se rendericen con precisión."""
@@ -519,25 +519,24 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertEqual(res_nvda.status_code, 200)
         c_nvda = html.unescape(res_nvda.content.decode('utf-8'))
 
-        # Plataformas modernas
-        self.assertIn('Data Center — Hyperscale', c_nvda)
-        self.assertIn('Data Center — AI Clouds, Industrial & Enterprise', c_nvda)
-        self.assertIn('Edge Computing', c_nvda)
+        # Plataformas modernas (taxonomía oficial FY2026, ASC 280)
+        self.assertIn('Línea Principal: Data Center', c_nvda)
+        self.assertIn('$277,798M', c_nvda)          # Data Center LTM (FY2026 10-K + LTM)
+        self.assertIn('91.7%', c_nvda)
+        self.assertIn('Línea Secundaria: Gaming', c_nvda)
+        self.assertIn('$16,042M', c_nvda)
+        self.assertIn('5.3%', c_nvda)
 
-        # Descripciones pedagógicas de plataformas
-        self.assertIn('Grandes hiperescaladores de nube pública global: Microsoft Azure, AWS, Google Cloud, Meta, Oracle.', c_nvda)
-        self.assertIn('Nubes nativas de IA (CoreWeave, Lambda), corporaciones privadas (banca, salud, manufactura) e iniciativas gubernamentales de IA Soberana.', c_nvda)
-        self.assertIn('Ecosistema en el borde que consolida Gaming (GeForce RTX), Visualización Profesional (Omniverse), Automoción (DRIVE) y robótica OEM.', c_nvda)
+        # Subsegmentos del hipercubo Data Center (Compute / Networking)
+        self.assertIn('Compute', c_nvda)
+        self.assertIn('Networking', c_nvda)
 
-        # Descripciones pedagógicas geográficas
-        self.assertIn('Sede de los mayores laboratorios de IA (frontier models), hiperescaladores y clústeres Blackwell.', c_nvda)
-        self.assertIn('Ecosistema ODM/OEM y centros de integración y ensamblaje de servidores (Foxconn, Quanta, Wistron).', c_nvda)
-        self.assertIn('Demanda sujeta a controles de exportación y licencias regulatorias del Departamento de Comercio de EE.UU.', c_nvda)
-
-        # KPIs superiores
-        self.assertIn('Línea Principal: Data Center — Hyperscale', c_nvda)
-        self.assertIn('Línea Secundaria: Data Center — AI Clouds, Industrial & Enterprise', c_nvda)
+        # Región principal y diversificación internacional
         self.assertIn('Región Principal: United States', c_nvda)
+        self.assertIn('$214,878M', c_nvda)
+        self.assertIn('70.9%', c_nvda)
+        self.assertIn('Ventas Internacionales', c_nvda)
+        self.assertIn('$88,092M', c_nvda)
 
     def test_control_companies_segments_zero_regression(self):
         """Verifica que las empresas de control (AAPL y DECK) preserven su renderizado de segmentos intacto."""
@@ -565,37 +564,37 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertNotIn('<th>LTM</th>\n                                    <th>LTM</th>', c_meta)
         self.assertNotIn('<th>LTM</th>\r\n                                    <th>LTM</th>', c_meta)
 
-        # 2. Segmentos de Producto primarios y LTM auditado
+        # 2. Segmentos de Producto primarios y LTM auditado (extracción 2026-11; ASC 280)
         self.assertIn('Family of Apps', c_meta)
         self.assertIn('Reality Labs', c_meta)
-        self.assertIn('$225,989M', c_meta)
-        self.assertIn('99.0%', c_meta)
-        self.assertIn('$2,258.0M', c_meta)
-        self.assertIn('1.0%', c_meta)
+        self.assertIn('$239,374M', c_meta)
+        self.assertIn('99.1%', c_meta)
+        self.assertIn('$2,231.0M', c_meta)
+        self.assertIn('0.9%', c_meta)
 
         # 3. Subsegmentos identados de Family of Apps
         self.assertIn('↳ Advertising', c_meta)
         self.assertIn('↳ Other revenue', c_meta)
-        self.assertIn('$222,607M', c_meta)
-        self.assertIn('$3,382.0M', c_meta)
+        self.assertIn('$235,587M', c_meta)
+        self.assertIn('$3,787.0M', c_meta)
 
         # 4. Total Neto Consolidado
         self.assertIn('(=) Total Neto Consolidado', c_meta)
-        self.assertIn('$228,247M', c_meta)
+        self.assertIn('$241,605M', c_meta)
 
         # 5. Geografía: 4 regiones primarias reconciliadas
         self.assertIn('United States & Canada', c_meta)
-        self.assertIn('$88,672M', c_meta)
-        self.assertIn('38.8%', c_meta)
+        self.assertIn('$95,181M', c_meta)
+        self.assertIn('39.4%', c_meta)
         self.assertIn('Europe', c_meta)
-        self.assertIn('$53,069M', c_meta)
-        self.assertIn('23.3%', c_meta)
+        self.assertIn('$55,526M', c_meta)
+        self.assertIn('23.0%', c_meta)
         self.assertIn('Asia-Pacific', c_meta)
-        self.assertIn('$61,238M', c_meta)
-        self.assertIn('26.8%', c_meta)
+        self.assertIn('$63,927M', c_meta)
+        self.assertIn('26.5%', c_meta)
         self.assertIn('Rest of World', c_meta)
-        self.assertIn('$25,268M', c_meta)
-        self.assertIn('11.1%', c_meta)
+        self.assertIn('$26,971M', c_meta)
+        self.assertIn('11.2%', c_meta)
 
         # 6. Subregión United States (Regla 6: no imputación falsa en LTM)
         self.assertIn('↳ United States', c_meta)
@@ -618,19 +617,24 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertIsNotNone(m, f"chartAllocData not found in {ticker}")
             chart_alloc = json.loads(m.group(1))
             annual_labels = [lbl for lbl in chart_alloc['labels'] if lbl != 'LTM']
-            expected_label = f"{annual_labels[0]}-{annual_labels[-1]}"
-            self.assertIn(expected_label, content)
-            self.assertEqual(chart_alloc['labels'][-1], 'LTM')
+            # Las etiquetas anuales deben estar en orden cronológico; LTM puede coincidir
+            # con el último FY cerrado (tras 10-K), en cuyo caso el eje termina en ese FY.
+            def _yr(lbl):
+                return 9999 if lbl == 'LTM' else int(lbl.replace('FY', ''))
+            self.assertEqual(chart_alloc['labels'], sorted(chart_alloc['labels'], key=_yr),
+                             "chartAllocData debe listar períodos en orden cronológico")
+            self.assertGreaterEqual(len(annual_labels), 5)
+            self.assertIn(chart_alloc['labels'][-1], ('LTM',) + tuple(annual_labels))
 
-            # 3. Verificación explícita de recompras puras en META (sin contaminación de impuestos RSU)
+            # 3. Tarjetas acumuladas = últimos 5 años fiscales cerrados (ventana 5A), validadas contra el JSON embebido
             if ticker == 'META':
-                self.assertEqual(
-                    chart_alloc['buybacks'],
-                    [1976.0, 12879.0, 4202.0, 6272.0, 44537.0, 27956.0, 19774.0, 30125.0, 26248.0, 3327.0]
-                )
-                self.assertIn('$184,365.0M', content)  # Retorno Total al Accionista (FY2017-FY2025)
-                self.assertIn('$234,781.0M', content)  # CapEx Acum. (FY2017-FY2025)
-                self.assertIn('$514,950.0M', content)  # CFO Acum. (FY2017-FY2025)
+                win5 = [i for i, lbl in enumerate(chart_alloc['labels']) if lbl != 'LTM'][-5:]
+                ret_total = sum(chart_alloc['buybacks'][i] + chart_alloc['dividends'][i] for i in win5)
+                capex_total = sum(chart_alloc['capex'][i] for i in win5)
+                cfo_total = sum(chart_alloc['cfo'][i] for i in win5)
+                for total in (ret_total, capex_total, cfo_total):
+                    self.assertIn(f'${total:,.1f}M', content,
+                                  f"Acumulado 5A ${total:,.1f}M ausente en la tarjeta de {ticker}")
 
             # 4. Nueva paleta institucional de alto contraste en leyenda HTML y Chart.js
             self.assertIn('bg-blue-600', content)
@@ -916,8 +920,10 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertEqual(len(resp.context['as_rep_fys']), 4, f"as_rep_fys incorrecto en {ticker}")
 
             # 4. Contexto de series para gráficos interactivos (años fiscales cerrados)
+            # La ventana empieza en el primer ejercicio con ingresos/beneficio auditados:
+            # NU parte en FY2019 (8), AAPL en FY2017 (10); el resto llega a FY2016 (11).
             chart_periods = json.loads(resp.context['chart_periods_json'])
-            expected_chart_periods = 8 if ticker == 'NU' else 10
+            expected_chart_periods = 8 if ticker == 'NU' else (10 if ticker == 'AAPL' else 11)
             self.assertEqual(len(chart_periods), expected_chart_periods, f"chart_periods debe tener {expected_chart_periods} en {ticker}")
 
 
@@ -956,7 +962,7 @@ class TestStatementsWebDashboard(unittest.TestCase):
         resp_meta = self.client.get('/company/META/')
         self.assertEqual(resp_meta.status_code, 200)
         html_meta = resp_meta.content.decode('utf-8')
-        self.assertIn('Margen Op. LTM', html_meta)
+        self.assertIn('Margen Op.', html_meta)
         self.assertIn('41.0%', html_meta)     # Margen LTM Family of Apps
         self.assertIn('-842.5%', html_meta)   # Margen LTM Reality Labs
         self.assertIn('Family of Apps', html_meta)
@@ -966,9 +972,9 @@ class TestStatementsWebDashboard(unittest.TestCase):
         resp_deck = self.client.get('/company/DECK/')
         self.assertEqual(resp_deck.status_code, 200)
         html_deck = resp_deck.content.decode('utf-8')
-        self.assertIn('Margen Op. LTM', html_deck)
-        self.assertIn('34.3%', html_deck)     # Margen LTM HOKA
-        self.assertIn('38.4%', html_deck)     # Margen LTM UGG
+        self.assertIn('Margen Op.', html_deck)
+        self.assertIn('34.6%', html_deck)     # Margen LTM HOKA
+        self.assertIn('39.5%', html_deck)     # Margen LTM UGG
         self.assertIn('HOKA', html_deck)
         self.assertIn('UGG', html_deck)
 

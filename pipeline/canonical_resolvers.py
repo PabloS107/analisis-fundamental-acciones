@@ -246,7 +246,40 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
         bs_detail
     ]
 
+    # LTM puede ser una duplicación del último FY cerrado (tras 10-K sin 10-Q posterior,
+    # p. ej. AAPL FY2026): canonical mantiene LTM == FY2026 pero la columna as-reported
+    # 'LTM' del 10-Q intermedio quedaría stale. En ese caso los fallbacks as-reported
+    # deben mirar el FY, no el 10-Q, para que la Partida Doble cierre en LTM.
+    ltm_source_period = None
+    fy_candidates = [p for p in periods if p != "LTM"]
+    if "LTM" in periods and fy_candidates:
+        def _fy_year(fp):
+            try:
+                return int(str(fp).replace("FY", ""))
+            except ValueError:
+                return -1
+        fy_latest = max(fy_candidates, key=_fy_year)
+
+        def _ltm_equals_fy(key):
+            d = canonical.get(key, {})
+            if not isinstance(d, dict):
+                return False
+            ltm_v, fy_v = d.get("LTM"), d.get(fy_latest)
+            if ltm_v is None or fy_v is None:
+                return False
+            try:
+                return abs(float(ltm_v) - float(fy_v)) < 1.0
+            except (TypeError, ValueError):
+                return False
+
+        if any(_ltm_equals_fy(k) for k in ("total_assets", "stockholders_equity", "current_assets",
+                                           "current_liabilities", "total_debt", "revenue",
+                                           "cash_and_equivalents")):
+            ltm_source_period = fy_latest
+
     def _extract_val(key_cands, p, can_key=None):
+        # Fallback as-reported: LTM duplicado de FY cerrado -> mirar al FY, no al 10-Q
+        src_p = (ltm_source_period if (p == "LTM" and ltm_source_period) else p)
         if can_key:
             can_keys = [can_key] if isinstance(can_key, str) else can_key
             for ck in can_keys:
@@ -261,14 +294,14 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
                 if k in src:
                     obj = src[k]
                     vals = obj.get("values", obj) if isinstance(obj, dict) else {}
-                    if isinstance(vals, dict) and p in vals and vals[p] is not None:
-                        return float(vals[p])
+                    if isinstance(vals, dict) and src_p in vals and vals[src_p] is not None:
+                        return float(vals[src_p])
                 for src_k, src_obj in src.items():
                     src_token = src_k.lower().split(':')[-1].split('_')[-1]
                     if src_k.lower() == k_lower or src_token == k_lower:
                         vals = src_obj.get("values", src_obj) if isinstance(src_obj, dict) else {}
-                        if isinstance(vals, dict) and p in vals and vals[p] is not None:
-                            return float(vals[p])
+                        if isinstance(vals, dict) and src_p in vals and vals[src_p] is not None:
+                            return float(vals[src_p])
         if can_key:
             can_keys = [can_key] if isinstance(can_key, str) else can_key
             for ck in can_keys:
@@ -530,10 +563,11 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
         sti_v = _extract_val(sti_keys, p, "short_term_investments")
         # Si en as_reported_statements existe MarketableSecuritiesCurrent de carátula con saldo materialmente distinto (caso META), priorizarlo
+        ltm_p_src = (ltm_source_period if (p == "LTM" and ltm_source_period) else p)
         for r_bs in (fs.get("as_reported_statements", {}).get("balance_sheet", []) if isinstance(fs, dict) else []):
             c_tok = str(r_bs.get("concept", "")).split(":")[-1].split("_")[-1].lower()
             if c_tok in ("marketablesecuritiescurrent", "shortterminvestments"):
-                bs_val = r_bs.get("values", {}).get(p)
+                bs_val = r_bs.get("values", {}).get(ltm_p_src)
                 if bs_val is not None and float(bs_val) > 0:
                     if sti_v is None or abs(float(bs_val) - float(sti_v)) > 1000.0:
                         sti_v = float(bs_val)

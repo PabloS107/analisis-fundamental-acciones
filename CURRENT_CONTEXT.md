@@ -1,8 +1,10 @@
 # ESTADO Y CONTEXTO DEL PROYECTO: ORQUESTADOR UNIVERSAL DE ANÁLISIS FUNDAMENTAL
 
-**Última actualización:** 15 de Octubre de 2026 (10:00 ART)  
+**Última actualización:** 9 de Noviembre de 2026 (noche, sesión de cierre)  
 **Rama activa de Git:** `main` (sincronizada con `origin/main`)  
-**Estado del sistema:** ✅ 100% Operativo | Suite de Pruebas: 55/55 PASS | Health Check: 100.0% Cumplimiento Contable | Cero Regresiones  
+**Estado del sistema:** ✅ 100% Operativo | Suite de Pruebas: **364/364 OK** (solo 2 skips de red SEC, `RUN_SEC_NETWORK_TESTS=1`) | Health Check: 100.0% Cumplimiento Contable | Cero Regresiones  
+**Tag de respaldo local:** `archive/banking-excel-d5a4c61` (commit banking-Excel eliminado, preservado en local)  
+**Notas de arquitectura del almacenamiento:** el proyecto sigue sirviendo JSON como artefacto canónico; ver Sección 7 (Opción A aplicada) y Sección 8 (hallazgos de auditoría y pendientes).
 **Universo activo de control y validación (9 empresas en 5 arquetipos contables):**
 - **Corporativo / Industrial:** `AAPL` (Apple), `DECK` (Deckers Outdoor), `NVDA` (NVIDIA)
 - **Banca Tradicional y Digital:** `NU` (Nubank), `JPM` (JPMorgan Chase)
@@ -161,3 +163,49 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 3. **Verificación Triangulada (Regla 2):** Ejecutar las suites de pruebas (`tests/test_web_statements.py`, `health_check.py`, Django tests).
 4. **Actualización del Contexto (`CURRENT_CONTEXT.md`):** Registrar las modificaciones, decisiones de diseño tomadas y el nuevo estado del sistema en este archivo.
 5. **Auto-Sync a GitHub (Regla 7):** Realizar `git add .`, `git commit` descriptivo y `git push origin <rama>` de forma inmediata.
+
+---
+
+## 7. Sesión 2026-11-09 (Registro de la intervención)
+
+### A. Limpieza del repositorio y ramas
+- Eliminadas 7 ramas locales: master y prueba (ancestras de main), y las 4 del commit banking-Excel (d5a4c61, ligado al flujo Excel/docx ya eliminado del proyecto) + audit_project_scripts.
+- d5a4c61 preservado en tag local archive/banking-excel-d5a4c61. Eliminados también sus 3 worktrees (código Excel/docx/presentación, sin commit), descartando trabajo en proceso por decisión del usuario.
+- fix/estados-financieros-auditoria conservada (fixes LTM de caja/balance, no es Excel).
+- Rama activa: main (= origin/main en aca139e).
+
+### B. Evaluación JSON vs base de datos (Opción A aplicada, Opción B pendiente)
+- Web lee JSONs de data/processed en cada request (~6.5MB, ~100ms parseo por carga).
+- Opción A implementada y verificada: pipeline/json_io.py (atomic_json_write temp+os.replace+fsync) en los 19 puntos de escritura; web_dashboard/analytics/json_cache.py (load_json_cached por mtime+size + deepcopy); caché LocMem en settings.py; nav_companies cacheado por firma de directorios (antes re-parseaba 11 fundamental_scores.json por cada página); company_detail sin 500 (404 controlado ante JSON corrupto).
+- Smoke test: 11 páginas HTTP 200; segunda carga 3-7x más rápida (/ de 1868ms a 254ms).
+- Opción B (híbrido JSON canónico + SQLite serving layer) diseñada como siguiente paso, no aplicada aún.
+
+### C. Auditoría de la cadena SEC a Django (hallazgos)
+- GOOGL audit FAIL persistente: shares diluidos históricos no normalizados por split 20:1 (FY2015/FY2020); la auditoría detecta pero no corrige.
+- 214 except:pass silenciosos en pipeline (sec_xbrl_ltm.py concentra 42).
+- financial_scores.json == fundamental_scores.json (duplicado exacto x10, ~3.6MB).
+- JSONs de artefactos mutados por la suite (tests escribían en data/processed/; ahora ruteados a tmp).
+- data/cache/market_data_cache.json cambiando ~2x/día con la suite (red); se revierte en cada corrida.
+
+### D. Bloque 1: salud de la suite de tests (completado)
+- 21 fallos preexistentes de main triageados con causa raíz (AAPL/DECK/META extracción 2026-10/11 + SEC 429):
+  - test_sec_freshness test_04/05: omitidos salvo RUN_SEC_NETWORK_TESTS=1 (red SEC).
+  - test_16: contrato .md/.docx eliminado por diseno (27d3dcf); reescrito a dashboard web.
+  - Goldens de scoring (AAPL FY2026 F=9/G=7, DECK G=5/rating PROMEDIO, DECK cash_drag>0.35) y web (fal 478.834M, DECK total 5.577.0M/HOKA 2.680.8M/EBIT LTM 1,315.9M, META extracción 10-Q + AI capex, NVDA taxonomía FY2026 Data Center > Compute/Networking, AAPL CAGR 5Y 5.5%, ROIC 45.0%, DEUDA Financiera AAPL 80.111,0M) actualizados y verificados contra artefactos auditados.
+  - Tests ya no reescriben artefactos del repo (auditoría y scoring a tmp); artefactos revertidos tras cada corrida.
+- Suite: 364/364 OK (skipped=2).
+
+### E. Bug real encontrado y corregido en la raíz (Regla 4)
+- resolve_canonical_balance_sheet (pipeline/canonical_resolvers.py) mezclaba el FY2026/canonical con el 10-Q intermedio de as-reported cuando LTM==FY2026 (post-10-K), rompiendo la Partida Doble en AAPL LTM por -16.709B.
+- Fix: si el canonical LTM es duplicado del FY más reciente (varios totales canónicos coincidentes), los fallbacks as-reported de LTM resuelven contra ese FY. Verificado: identidad CA+NCA=TA, TL+EQ=TLE=TA al céntimo en AAPL, NVDA, DECK, MELI, META, GOOGL, O, PGR (bancos/aseguradoras no clasificables: N/A).
+- Dashboard AAPL verificado HTTP 200 con las cifras corregidas.
+- Nota: tabla As-Reported AAPL sigue mostrando el 10-Q de junio 2026 (por diseño: crudo vs SSOT resuelto). Decisión pendiente: etiqueta de la columna LTM.
+
+### Pendientes para la próxima sesión (en orden sugerido)
+1. EQ_OFFER en financial_scoring_engine.py: tolerancia 0.001 acciones crudas (250 shares tumban la señal de cero dilución); debe ser epsilon relativo (p. ej. 0.1% de shares previas).
+2. GOOGL split-adjustment de shares históricas en auditoría BPA (L1, requiere Regla 1).
+3. Decidir duplicado financial_scores.json vs fundamental_scores.json.
+4. Logging persistente de la suite/pipeline (print() no sobrevive al reinicio).
+5. data/cache/ en .gitignore + git rm --cached market_data_cache.json (opcional).
+6. Opción B: capa SQLite de lectura para el dashboard (sincronización pipeline→BD tras cada análisis).
+7. Question pendiente: etiqueta 'LTM' en columna as-reported (10-Q intermedio vs FY2026).

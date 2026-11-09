@@ -7,12 +7,25 @@ Cubre:
 - Límites de sanidad contable (rechazo de COGS y OpEx negativos).
 """
 
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "pipeline"))
+
+
+def run_audit_in_tmp(ticker):
+    """Ejecuta run_full_audit sobre una copia temporal del artefacto para no reescribir audit_report.json en el repo."""
+    tmp = tempfile.mkdtemp(prefix="audit_%s_" % ticker.lower())
+    try:
+        shutil.copy2(PROJECT_ROOT / "data" / "processed" / ticker / "financial_statements.json",
+                     Path(tmp) / "financial_statements.json")
+        return run_full_audit(ticker, custom_dir=tmp)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
 
 from audit_engine import (
     audit_gross_profit,
@@ -126,13 +139,13 @@ class TestAuditEngineArtifactVerification(unittest.TestCase):
 
     def test_meli_processed_audit_passes_100_percent(self):
         """MELI procesado debe pasar la auditoría contable con 100% de cumplimiento."""
-        res = run_full_audit("MELI")
+        res = run_audit_in_tmp("MELI")
         self.assertEqual(res["compliance_score_pct"], 100.0)
         self.assertEqual(res["failed_tests"], 0)
 
     def test_realty_income_processed_audit_affo_passes(self):
         """O (Realty Income) procesado debe pasar la auditoría de FCF/AFFO sin fallos de discrepancia inmobiliaria."""
-        res = run_full_audit("O")
+        res = run_audit_in_tmp("O")
         # El cumplimiento debe ser >= 90% (todas las pruebas de FCF pasan)
         self.assertGreaterEqual(res["compliance_score_pct"], 90.0)
         # Verificar que ninguna de las fallas sea de FCF

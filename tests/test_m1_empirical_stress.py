@@ -10,7 +10,9 @@ Targets:
 5. Forensic reproduction of discovered edge cases (whitespace truthiness in normalize_archetype, float SIC codes, and negative debt pass-through).
 """
 
+import shutil
 import sys
+import tempfile
 import unittest
 import json
 from pathlib import Path
@@ -18,6 +20,17 @@ from unittest.mock import MagicMock
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "pipeline"))
+
+
+def run_audit_in_tmp(ticker):
+    """Ejecuta run_full_audit sobre una copia temporal del artefacto para no reescribir audit_report.json en el repo."""
+    tmp = tempfile.mkdtemp(prefix="audit_%s_" % ticker.lower())
+    try:
+        shutil.copy2(PROJECT_ROOT / "data" / "processed" / ticker / "financial_statements.json",
+                     Path(tmp) / "financial_statements.json")
+        return run_full_audit(ticker, custom_dir=tmp)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
 
 from sec_extractor import (
     detect_company_archetype,
@@ -503,7 +516,7 @@ class TestM1ControlCompaniesAndTargets(unittest.TestCase):
         self.assertGreater(fy25_debt, 50000000000.0, "AAPL FY2025 debt should be > $50B in base dollars")
 
         # Verify audit engine pass rate
-        report = run_full_audit("AAPL")
+        report = run_audit_in_tmp("AAPL")
         self.assertEqual(report.get("overall_status"), "PASS")
         self.assertEqual(report.get("failed_tests"), 0)
         self.assertEqual(report.get("compliance_score_pct"), 100.0)
@@ -520,7 +533,7 @@ class TestM1ControlCompaniesAndTargets(unittest.TestCase):
         self.assertEqual(normalize_archetype(archetype), "STANDARD_CORPORATE")
 
         # Verify audit engine pass rate
-        report = run_full_audit("DECK")
+        report = run_audit_in_tmp("DECK")
         self.assertEqual(report.get("overall_status"), "PASS")
         self.assertEqual(report.get("failed_tests"), 0)
         self.assertEqual(report.get("compliance_score_pct"), 100.0)
@@ -579,7 +592,7 @@ class TestM1ControlCompaniesAndTargets(unittest.TestCase):
         self.assertEqual(round(rev_fy25 - cogs_fy25, 2), round(gp_fy25, 2))
 
         # Audit engine check: 100% compliance
-        report = run_full_audit("MELI")
+        report = run_audit_in_tmp("MELI")
         self.assertEqual(report.get("overall_status"), "PASS")
         self.assertEqual(report.get("failed_tests"), 0)
         self.assertEqual(report.get("compliance_score_pct"), 100.0)
@@ -613,7 +626,7 @@ class TestM1ControlCompaniesAndTargets(unittest.TestCase):
         self.assertEqual(round(fy25_ffo - fy25_capex, 2), round(fy25_affo, 2))
 
         # Audit engine check: 100% compliance
-        report = run_full_audit("O")
+        report = run_audit_in_tmp("O")
         self.assertEqual(report.get("overall_status"), "PASS")
         self.assertEqual(report.get("failed_tests"), 0)
         self.assertEqual(report.get("compliance_score_pct"), 100.0)
