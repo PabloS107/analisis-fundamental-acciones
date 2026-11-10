@@ -337,8 +337,43 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 4. **Tests de regresión Capa 3 (`tests/test_capa3_scoring_and_valuation_hygiene.py` `253L`, 10 tests):** Verifican higiene AST (`0` funciones `> 180L`, `0` `except: pass`), ausencia de literales prohibidos, re-exports de fachada y cumplimiento de Regla 4/Regla 6.
 
 ### Próxima intervención pendiente de aprobación (Capa 4 — STOP & PROPOSE)
-- `web_dashboard/analytics/` (`views/views.py` `392L`, `views/views_scoring.py` `807L`, `views/views_charts.py` `1168L`, `views/views_statements.py` `1345L`, `views/views_valuation.py` `123L`, `context_processors.py` `63L`, `tests.py` `117L`):
-  1. Unificar SSOT de rutas (`DATA_PROCESSED_DIR`, `PROJECT_ROOT`) y arquetipos (`normalize_archetype` en `views.py`), eliminando los `10+` `except ...: pass` silenciosos (`views.py`, `views_scoring.py`, `views_charts.py`, `views_statements.py`, `views_valuation.py`).
-  2. Erradicar fallbacks positivos/literales ficticios (`Regla 6`): `"AAA"`, `0.095`, `"WIDE MOAT"` en `views.py`; `f_score=7`, `g_score=6`, `"SALUD EXCEPCIONAL"`, `"EXCELENTE"`, `"41.8x"`, `3.23`, `"+0.40%"`, `"rating_is_safe": True` y dictámenes fijos en `views_scoring.py`; `_to_millions` / `_norm_pct` retornando `0.0` sobre `None` con heurística de escala en `views_charts.py`; fallback `"buyback_rate_pct": 1.5` en `views_valuation.py:112`.
-  3. Corregir el bug REIT en `views_statements.py:1274` (`"affo_per_share"` formatea `ffo_sh_val` en lugar de `affo_sh_val`).
-  4. Descomponer los monolitos `build_scoring_context` (`786L`), `build_charts_and_segments_context` (`1151L`), `build_statements_context` (`1319L`) / `_get_memo_rows` (`312L`) en módulos/helpers `< 180L` sin duplicación (`_to_m` / `_to_millions`) y resolver/actualizar `analytics/tests.py:78` (`test_meli_hybrid_view`).
+- *(Completada en la Sección 13).*
+
+---
+
+## 13. Sesión 2026-11-10 — Auditoría por Capas: Capa 4 completada (STOP & PROPOSE -> Plan P0 AAPL/NU + Capa 5)
+
+### Estado verificado tras Capa 4
+- `python -m unittest tests.test_e2e_universal_orchestrator tests.test_capa4_web_analytics_hygiene tests.test_web_forensics tests.test_web_valuation tests.test_profitability_capital_allocation_charts tests.test_segment_chart_periods tests.test_config_and_pipeline_runner tests.test_as_reported_integrity tests.test_opex_ebit_integrity tests.test_web_statements -q`: **133 tests en 84.071s — OK**.
+- `python web_dashboard/manage.py test analytics`: **6 tests en 13.898s — OK (`6 / 6 PASS`, resuelto el fallo preexistente `test_meli_hybrid_view`)**.
+- `python -m unittest tests.test_capa4_web_analytics_hygiene tests.test_period_integrity -v`: **23 tests en 0.162s — OK** (`7` de higiene Capa 4 + `16` de Plan P0).
+- Dashboard Django (`GET /` y 11 rutas `/company/{TICKER}/`): **12 / 12 HTTP 200**.
+- Auditoría AST sobre los `25` archivos `.py` de `web_dashboard/analytics/`: **0** `except:` desnudos, **0** `except: pass` silenciosos y **0** funciones `> 180L`.
+- *(Nota: durante la ejecución de Capa 4 se incorporó en paralelo **Plan P0** — `pipeline/period_integrity.py`, `tests/test_period_integrity.py` y ediciones en `audit_engine.py`, `data_verifier.py` y `sec_freshness.py` — cuyos nuevos controles de período exponen 2 fallos reales en datasets históricos al correr `python tests/health_check.py`: **13 / 15 PASS | Fallos: 2** en `AAPL` y `NU`, y `test_m1_empirical_stress.py:520` `test_control_company_aapl_integrity` antes del arreglo de datos. Se dejan dichos archivos concurrentes sin alterar bajo **Regla 1**.)*
+
+### Cambios implementados en Capa 4
+1. **SSOT compartida (`web_dashboard/analytics/views/view_utils.py` `173L`) y `context_processors.py` (`62L`):**
+   - Centralizados `DATA_DIR` (`DATA_PROCESSED_DIR`), `DRIVE_INPUT_DIR`, `resolve_market_cache_path` y `resolve_company_archetype` delegando en `pipeline.config_loader` y `pipeline.entity_classifier` (SSOT).
+   - Separación explícita de unidades (`usd_to_m` para USD crudos SEC/canónicos, `already_m` para montos ya en `$M` del JSON de scoring y `pct_from_key_ratio` para ratios ya porcentuales), corrigiendo dos bugs silenciosos reales: la doble división de `ic_adj` en `JPM` (`$4,719,984.5M` frente a `$4.7M`) y la multiplicación `×100` en `cost_of_risk_series` cuando `Cost of Risk <= 1.0%` (`0.60%`/`0.57%` en lugar de `60%`/`57%`).
+2. **Modularización de vistas monolíticas y eliminación de `except: pass`:**
+   - [`views.py`](web_dashboard/analytics/views/views.py) (`325L`): `index` descompuesto con `_build_index_card` y `_resolve_latest_score`; erradicados los `6` `except Exception: pass` + `continue` silencioso.
+   - [`views_scoring.py`](web_dashboard/analytics/views/views_scoring.py) (`91L` fachada) + `views_scoring_quality.py` (`385L`) + `views_scoring_forensics.py` (`469L`).
+   - [`views_charts.py`](web_dashboard/analytics/views/views_charts.py) (`122L` fachada) + `views_charts_series.py` (`280L`) + `views_charts_sector.py` (`120L`) + `views_charts_segments.py` (`441L`).
+   - [`views_statements.py`](web_dashboard/analytics/views/views_statements.py) (`112L` fachada) + `views_statements_schemas.py` (`294L`) + `views_statements_cells.py` (`265L`) + `views_statements_memo.py` (`438L`). (Verificado que `views_statements_memo.py` / `L1274` original ya formateaba `affo_per_share` con `affo_sh_val`).
+   - [`views_valuation.py`](web_dashboard/analytics/views/views_valuation.py) (`142L`): erradicados los `2` `except Exception: pass`.
+3. **Erradicación de defaults ficticios (`Regla 6`) y guardas seguras de plantilla:**
+   - Eliminados defaults inventados: `"AAA"`, `0.095`, `"WIDE MOAT"` en `views.py`; `f_score=7`/`g_score=6` (incluyendo el bug falsy `0 or 7`), `"SALUD EXCEPCIONAL"`, `"EXCELENTE"`, `"41.8x"`, `3.23`, `"+0.40%"`, `"rating_is_safe": True` y dictámenes contradictorios en `O`/`JPM`/`PGR` (`altman_bucket = 0` cuando `altman_val` es `None`/`N/D`); fallback MELI (`7.0`, `18.7`, `105.0`) en `platform_kpis`; `fcf_m_series` y márgenes faltantes como `null` en Chart.js en lugar de `0.0`; y `"buyback_rate_pct": 1.5` en `views_valuation.py` (ahora `0.0`).
+   - Guardas puntuales en `web_dashboard/templates/company_detail.html` (`f_score`/`g_score` `default_if_none:"N/D"`, `wSlider`/`baseWaccVal` leyendo `vp.wacc_pct` y tooltips Chart.js `ctx.parsed.y !== null`).
+4. **Tests (`web_dashboard/analytics/tests.py` `118L`, `tests/test_capa4_web_analytics_hygiene.py` `162L` y `tests/test_e2e_universal_orchestrator.py` `L379`):**
+   - Alineado `test_meli_hybrid_view` con la Super Pestaña de Valoración vigente (`'True FCF LTM (ex-SBC)'` / `'Dual Valuation Engine'`, ya que `'Margen FCF Auditado:'` había sido retirado en `5f78e23`).
+   - Actualizado `test_r5_04_segment_mix_denominator_excludes_subtotals` para inspeccionar `views_charts*.py` tras la modularización de segmentos.
+
+### Próxima intervención pendiente de aprobación (STOP & PROPOSE — Hallazgos Plan P0 AAPL/NU + Capa 5)
+1. **Resolución de hallazgos concurrentes de Plan P0 en `AAPL` y `NU` (prioritario para recuperar `15 / 15 PASS` en `health_check.py` y `test_m1_empirical_stress`):**
+   - `AAPL` (`LTM_IGUAL_FY`): `31` filas de `as_reported_statements` en `data/processed/AAPL/financial_statements.json` tienen `LTM != FY2026` pese a `latest_periodic_form == "10-K"`. Diagnosticar causa en extracción `AAPL` o re-extraer `AAPL` + `data_verifier`.
+   - `NU` (`PERIODO_NO_POSTERIOR` y `PERIODO_NO_FUTURO`): `sec_metadata` registra `ltm_period = "Q4 2026"`, `ltm_period_end = "2026-12-31"` con `latest_periodic_date = "2026-10-23"` y `extraction_timestamp = "2026-11-08"`. Corregir origen del mapeo de período en `6-K` / `NU` o re-extraer `NU` + `data_verifier`.
+   - Decidir si confirmar/commitear el conjunto Plan P0 (`pipeline/period_integrity.py`, `audit_engine.py`, `data_verifier.py`, `sec_freshness.py`, `tests/test_period_integrity.py`).
+2. **Capa 5 (`web_dashboard/templates/`): `company_detail.html` (`6038L`), `index.html` (`432L`) y `base.html` (`121L`):**
+   - Descomponer el monolito `company_detail.html` (`6038L`) en parciales HTML cohesivos por pestaña (`templates/analytics/partials/`) y mover los `~2200L` de JavaScript embebido a módulos estáticos/locales limpios.
+   - Eliminar duplicación JS de `syncWithSec` (`company_detail.html:5885-5967`) vs `startPipeline`/`pollPipeline` (`index.html:338-429`) y los bucles repetidos de DCF 3-Stage vs 2-Stage en `recalcDCF` / `solveCell` (`company_detail.html:4383-4435`, `4661`).
+   - Limpiar defaults y XSS/texto legado en plantillas: `peCurrent` (`|default:20.0` en `company_detail.html:3866`), `ltm_period|default:"LTM"` (`company_detail.html:30`, alinear a `"N/D"`), `vp.rotce_pct|default:hist_growth_pct` (`L73`, `L3148`), escapes HTML en `index.html:271-277` y `company_detail.html:5843-5874`, y texto `"entregables"` legado en `index.html:403`.

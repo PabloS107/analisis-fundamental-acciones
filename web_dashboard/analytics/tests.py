@@ -75,7 +75,8 @@ class ValuationAndSensitivityTests(TestCase):
         self.assertIn('id="headerFairPrice"', content)
         self.assertIn('id="headerValuationBadge"', content)
         self.assertIn('id="sensitivityGridBody"', content)
-        self.assertIn('Margen FCF Auditado:', content)
+        self.assertIn('True FCF LTM (ex-SBC)', content)
+        self.assertIn('Dual Valuation Engine', content)
 
     def test_index_cards_complete(self):
         response = self.client.get('/')

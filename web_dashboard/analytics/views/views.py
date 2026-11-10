@@ -1,12 +1,43 @@
-import sys
+# -*- coding: utf-8 -*-
+"""
+Vistas principales y endpoints JSON de analytics.
+Consume rutas y utilidades SSOT de view_utils delegando cada pestaña a su módulo cohesivo.
+"""
 import json
 import time
-from typing import Dict, Any, Tuple
-from pathlib import Path
-from django.shortcuts import render, Http404
+from typing import Any, Dict, Optional, Tuple
+
 from django.http import JsonResponse
-from django.views.decorators.http import require_GET, require_POST
+from django.shortcuts import Http404, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET, require_POST
+
+from .view_utils import (
+    DATA_DIR,
+    DRIVE_INPUT_DIR,
+    PIPELINE_DIR,
+    PROJECT_ROOT,
+    first_present,
+    logger,
+    ratio_to_pct,
+    resolve_company_archetype,
+    resolve_market_cache_path,
+    safe_float,
+)
+from ..json_cache import load_json_cached
+from ..pipeline_runner import get_job_status, launch_pipeline_job, search_companies
+from .views_charts import build_charts_and_segments_context
+from .views_scoring import build_scoring_context
+from .views_statements import (
+    _extract_multi_source_sum,
+    _extract_multi_source_val,
+    build_statements_context,
+    resolve_canonical_balance_sheet,
+    resolve_canonical_capital_flows,
+    resolve_canonical_cash_flow,
+    resolve_canonical_income_statement,
+)
+from .views_valuation import build_valuation_context
 
 # Caché en memoria para frescura SEC (Salvaguarda 3: TTL de 15 minutos / 900s)
 _FRESHNESS_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
@@ -22,180 +53,140 @@ def get_cached_sec_freshness(ticker: str, force_refresh: bool = False) -> Dict[s
             return cached_data
 
     from pipeline.sec_modules.sec_freshness import check_sec_freshness
+
     data = check_sec_freshness(t, force_network=True)
     _FRESHNESS_CACHE[t] = (now, data)
     return data
 
 
 def clear_freshness_cache(ticker: str):
-    t = ticker.strip().upper()
-    _FRESHNESS_CACHE.pop(t, None)
+    _FRESHNESS_CACHE.pop(ticker.strip().upper(), None)
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" / "processed"
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
-PIPELINE_DIR = PROJECT_ROOT / "pipeline"
-for p_dir in (PROJECT_ROOT, PIPELINE_DIR):
-    if p_dir.exists() and str(p_dir) not in sys.path:
-        sys.path.insert(0, str(p_dir))
 
-from ..pipeline_runner import search_companies, launch_pipeline_job, get_job_status
-from ..json_cache import load_json_cached
-from .views_statements import (
-    resolve_canonical_capital_flows,
-    resolve_canonical_balance_sheet,
-    resolve_canonical_income_statement,
-    resolve_canonical_cash_flow,
-    _extract_multi_source_val,
-    _extract_multi_source_sum,
-    build_statements_context,
-)
-from .views_scoring import build_scoring_context
-from .views_charts import build_charts_and_segments_context
-from .views_valuation import build_valuation_context
+def _resolve_latest_score(score_dict: Dict[str, Any], recent_fy: Optional[str]) -> Any:
+    """Resuelve el puntaje LTM, último FY o latest_result preservando el 0 entero."""
+    if not isinstance(score_dict, dict):
+        return "-"
+    val = score_dict.get("LTM", {}).get("total_score")
+    if val is None and recent_fy:
+        val = score_dict.get(recent_fy, {}).get("total_score")
+    if val is None:
+        val = score_dict.get("latest_result", {}).get("total_score")
+    return val if val is not None else "-"
+
+
+def _load_optional_json(path, timeout: Optional[int] = None) -> Dict[str, Any]:
+    """Carga un artefacto JSON opcional registrando cualquier error de lectura."""
+    if not path or not path.exists():
+        return {}
+    try:
+        return load_json_cached(path, timeout=timeout) if timeout else load_json_cached(path)
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning("Error leyendo artefacto opcional %s: %s", path, exc)
+        return {}
+
+
+def _build_index_card(company_dir, cache_data: Dict[str, Any], mkt_extractor) -> Dict[str, Any]:
+    """Construye la tarjeta de resumen de inicio para un ticker sin valores ficticios."""
+    sc = load_json_cached(company_dir / "fundamental_scores.json")
+    ticker = sc.get("ticker", company_dir.name)
+    name = sc.get("company_name", ticker)
+    recent_fy = sc.get("fiscal_years", [None])[0] if sc.get("fiscal_years") else None
+
+    f_sc = _resolve_latest_score(sc.get("piotroski_f_score", {}), recent_fy)
+    g_sc = _resolve_latest_score(sc.get("mohanram_g_score", {}), recent_fy)
+
+    nm = sc.get("novy_marx_analysis", {}).get("latest_result", {})
+    gpa_pct = ratio_to_pct(nm.get("gross_profitability_total"))
+    gpa_str = f"{gpa_pct:.1f}%" if gpa_pct is not None else "N/A"
+
+    fs_data = _load_optional_json(company_dir / "financial_statements.json")
+    archetype = resolve_company_archetype(fs_data, sc, ticker=ticker)
+    is_banking_card = archetype == "FINANCIAL_BANKING"
+
+    solv = sc.get("debt_and_solvency_analysis", {}).get("latest_result", {})
+    distress = solv.get("distress_models", {})
+    z_score = first_present(distress.get("altman_z_double_prime"), distress.get("altman_z_score"))
+    z_score_str = f"{float(z_score):.2f}" if isinstance(z_score, (int, float)) else (str(z_score) if z_score is not None else "N/A")
+    rating = distress.get("synthetic_rating") or ("Regulada" if is_banking_card else "N/D")
+
+    wacc_obj = sc.get("wacc_and_spread_analysis", {})
+    wacc_raw = first_present(wacc_obj.get("wacc"), sc.get("roic_wacc_analysis", {}).get("wacc", {}).get("wacc"))
+    wacc_num = safe_float(wacc_raw)
+    wacc_pct = (wacc_num * 100.0 if wacc_num <= 1.0 else wacc_num) if wacc_num is not None else None
+
+    roic_raw = first_present(
+        wacc_obj.get("roic_adjusted"),
+        sc.get("intangible_roic_analysis", {}).get("latest_result", {}).get("adjusted_roic"),
+    )
+    roic_pct = ratio_to_pct(roic_raw)
+
+    spread_raw = safe_float(wacc_obj.get("economic_spread_adjusted"))
+    if spread_raw is None and roic_raw is not None and wacc_num is not None:
+        roic_dec = float(roic_raw) / 100.0 if abs(float(roic_raw)) > 1.5 else float(roic_raw)
+        wacc_dec = wacc_num / 100.0 if wacc_num > 1.0 else wacc_num
+        spread_raw = roic_dec - wacc_dec
+    spread_pp = ratio_to_pct(spread_raw)
+
+    moat_badge = wacc_obj.get("moat_badge") or "N/D"
+
+    kr = fs_data.get("key_ratios", {})
+    roe_val = safe_float(first_present(kr.get("roe_pct", {}).get("LTM"), kr.get("roe_pct", {}).get(recent_fy)))
+    nim_val = safe_float(
+        first_present(kr.get("risk_adj_nim_pct", {}).get("LTM"), kr.get("risk_adj_nim_pct", {}).get(recent_fy))
+    )
+
+    price = None
+    if mkt_extractor:
+        try:
+            price = mkt_extractor.get_market_data(ticker, bypass_cache=False).get("price")
+        except Exception as exc:
+            logger.debug("MarketDataExtractor falló para %s en index: %s", ticker, exc)
+    if price is None:
+        price = first_present(cache_data.get(ticker, {}).get("price"), wacc_obj.get("market_data", {}).get("price"))
+
+    return {
+        "ticker": ticker,
+        "name": name,
+        "archetype": archetype,
+        "is_banking": is_banking_card,
+        "price": f"${float(price):.2f}" if safe_float(price) is not None and float(price) > 0 else "-",
+        "price_raw": price,
+        "f_score": f_sc,
+        "g_score": g_sc,
+        "gpa": gpa_str,
+        "roic_adj": f"{roic_pct:.1f}%" if roic_pct is not None else "N/D",
+        "roe": f"{roe_val:.1f}%" if roe_val is not None else "N/D",
+        "nim": f"{nim_val:.1f}%" if nim_val is not None else "N/D",
+        "wacc": f"{wacc_pct:.2f}%" if wacc_pct is not None else "N/D",
+        "spread": (f"+{spread_pp:.1f} pp" if spread_pp > 0 else f"{spread_pp:.1f} pp") if spread_pp is not None else "N/D",
+        "spread_positive": (spread_pp >= 0) if spread_pp is not None else False,
+        "z_score": z_score_str,
+        "rating": rating,
+        "moat_badge": moat_badge,
+    }
 
 
 def index(request):
+    """Portada principal con tarjetas comparativas de empresas analizadas."""
     companies = []
-
-    # Importar MarketDataExtractor para obtener cotizaciones en tiempo real
     mkt_extractor = None
     try:
         from market_data_provider import MarketDataExtractor
-        mkt_extractor = MarketDataExtractor
-    except Exception:
-        pass
 
-    cache_file = DATA_DIR.parent / "cache" / "market_data_cache.json"
-    cache_data = {}
-    if cache_file.exists():
-        try:
-            cache_data = load_json_cached(cache_file, timeout=300)
-        except Exception:
-            pass
+        mkt_extractor = MarketDataExtractor
+    except ImportError as exc:
+        logger.warning("MarketDataExtractor no disponible para index: %s", exc)
+
+    cache_data = _load_optional_json(resolve_market_cache_path(), timeout=300)
 
     if DATA_DIR.exists():
-        for d in DATA_DIR.iterdir():
-            if d.is_dir() and (d / "fundamental_scores.json").exists():
+        for company_dir in DATA_DIR.iterdir():
+            if company_dir.is_dir() and (company_dir / "fundamental_scores.json").exists():
                 try:
-                    sc = load_json_cached(d / "fundamental_scores.json")
-                    ticker = sc.get("ticker", d.name)
-                    name = sc.get("company_name", ticker)
-
-                    # 1. Scores Fundamentales (Piotroski y Mohanram)
-                    recent_fy = sc.get("fiscal_years", [None])[0] if sc.get("fiscal_years") else None
-                    f_dict = sc.get("piotroski_f_score", {})
-                    f_ltm = f_dict.get("LTM", {})
-                    f_sc = f_ltm.get("total_score")
-                    if f_sc is None and recent_fy:
-                        f_sc = f_dict.get(recent_fy, {}).get("total_score")
-                    if f_sc is None:
-                        f_sc = f_dict.get("latest_result", {}).get("total_score", "-")
-
-                    g_dict = sc.get("mohanram_g_score", {})
-                    g_ltm = g_dict.get("LTM", {})
-                    g_sc = g_ltm.get("total_score")
-                    if g_sc is None and recent_fy:
-                        g_sc = g_dict.get(recent_fy, {}).get("total_score")
-                    if g_sc is None:
-                        g_sc = g_dict.get("latest_result", {}).get("total_score", "-")
-
-                    # 2. Novy-Marx GP/A
-                    nm = sc.get("novy_marx_analysis", {}).get("latest_result", {})
-                    gpa_val = nm.get("gross_profitability_total")
-                    if gpa_val is not None:
-                        gpa = (gpa_val * 100.0) if abs(gpa_val) <= 1.5 else gpa_val
-                        gpa_str = f"{gpa:.1f}%"
-                    else:
-                        gpa_str = "N/A"
-
-                    # 3. Solvencia & Rating
-                    solv = sc.get("debt_and_solvency_analysis", {}).get("latest_result", {})
-                    distress = solv.get("distress_models", {})
-                    z_score = distress.get("altman_z_double_prime")
-                    if z_score is None:
-                        z_score = distress.get("altman_z_score")
-                    if z_score is None or str(z_score) == "None":
-                        z_score = "N/A"
-                    rating = distress.get("synthetic_rating", "AAA")
-
-                    # 4. ROIC Ajustado, WACC y Spread EVA (Diferencia entre ROIC y WACC)
-                    wacc_obj = sc.get("wacc_and_spread_analysis", {})
-                    wacc_val = wacc_obj.get("wacc")
-                    if wacc_val is None:
-                        wacc_val = sc.get("roic_wacc_analysis", {}).get("wacc", {}).get("wacc", 0.095)
-                    wacc_pct = (wacc_val * 100.0) if wacc_val <= 1.0 else wacc_val
-
-                    roic_val = wacc_obj.get("roic_adjusted")
-                    if roic_val is None:
-                        roic_val = sc.get("intangible_roic_analysis", {}).get("latest_result", {}).get("adjusted_roic", 0.0)
-                    roic_pct = (roic_val * 100.0) if roic_val <= 1.5 else roic_val
-
-                    spread_val = wacc_obj.get("economic_spread_adjusted")
-                    if spread_val is None:
-                        spread_val = (roic_val - wacc_val) if (roic_val and wacc_val) else 0.0
-                    spread_pp = (spread_val * 100.0) if abs(spread_val) <= 1.5 else spread_val
-
-                    moat_badge = wacc_obj.get("moat_badge") or "WIDE MOAT"
-
-                    # 5. Detección de Arquetipo de Industria
-                    fs_path = d / "financial_statements.json"
-                    fs_data = {}
-                    archetype = sc.get("archetype")
-                    if fs_path.exists():
-                        try:
-                            fs_data = load_json_cached(fs_path)
-                            if not archetype:
-                                archetype = fs_data.get("archetype")
-                        except Exception:
-                            pass
-                    if not archetype:
-                        if sc.get("is_financial_institution") or fs_data.get("is_financial"):
-                            archetype = "FINANCIAL_BANKING"
-                        else:
-                            archetype = "STANDARD_CORPORATE"
-
-                    is_banking_card = (archetype == "FINANCIAL_BANKING")
-
-                    kr = fs_data.get("key_ratios", {})
-                    roe_raw = kr.get("roe_pct", {}).get("LTM") or kr.get("roe_pct", {}).get(recent_fy) or 0.0
-                    roe_val = float(roe_raw) if roe_raw is not None else 0.0
-
-                    nim_raw = kr.get("risk_adj_nim_pct", {}).get("LTM") or kr.get("risk_adj_nim_pct", {}).get(recent_fy) or 0.0
-                    nim_val = float(nim_raw) if nim_raw is not None else 0.0
-
-                    # 6. Cotización de Mercado en Tiempo Real
-                    price = None
-                    if mkt_extractor:
-                        try:
-                            m_data = mkt_extractor.get_market_data(ticker, bypass_cache=False)
-                            price = m_data.get("price")
-                        except Exception:
-                            pass
-                    if not price:
-                        price = cache_data.get(ticker, {}).get("price") or wacc_obj.get("market_data", {}).get("price")
-
-                    companies.append({
-                        "ticker": ticker,
-                        "name": name,
-                        "archetype": archetype,
-                        "is_banking": is_banking_card,
-                        "price": f"${price:.2f}" if price else "-",
-                        "price_raw": price,
-                        "f_score": f_sc,
-                        "g_score": g_sc,
-                        "gpa": gpa_str,
-                        "roic_adj": f"{roic_pct:.1f}%",
-                        "roe": f"{roe_val:.1f}%",
-                        "nim": f"{nim_val:.1f}%",
-                        "wacc": f"{wacc_pct:.2f}%",
-                        "spread": f"+{spread_pp:.1f} pp" if spread_pp > 0 else f"{spread_pp:.1f} pp",
-                        "spread_positive": spread_pp >= 0,
-                        "z_score": f"{z_score:.2f}" if isinstance(z_score, (int, float)) else str(z_score),
-                        "rating": rating,
-                        "moat_badge": moat_badge,
-                    })
-                except Exception:
-                    continue
+                    companies.append(_build_index_card(company_dir, cache_data, mkt_extractor))
+                except Exception as exc:
+                    logger.exception("Error construyendo tarjeta de índice para %s: %s", company_dir.name, exc)
 
     return render(request, "index.html", {"companies": companies})
 
@@ -206,8 +197,7 @@ def company_search(request):
     q = request.GET.get("q", "").strip()
     if not q:
         return JsonResponse({"results": []})
-    results = search_companies(q, limit=6)
-    return JsonResponse({"results": results})
+    return JsonResponse({"results": search_companies(q, limit=6)})
 
 
 @csrf_exempt
@@ -219,8 +209,8 @@ def trigger_pipeline(request):
         try:
             body = json.loads(request.body.decode("utf-8"))
             ticker = body.get("ticker", "").strip().upper()
-        except Exception:
-            pass
+        except (UnicodeDecodeError, json.JSONDecodeError, AttributeError) as exc:
+            logger.debug("Body JSON no válido en trigger_pipeline: %s", exc)
 
     if not ticker:
         return JsonResponse({"success": False, "error": "Ticker no especificado."}, status=400)
@@ -233,16 +223,14 @@ def trigger_pipeline(request):
 @require_GET
 def pipeline_status(request, ticker):
     """Endpoint JSON para consultar el progreso en vivo de la incorporación."""
-    job = get_job_status(ticker)
-    return JsonResponse(job)
+    return JsonResponse(get_job_status(ticker))
 
 
 @require_GET
 def sec_freshness_view(request, ticker):
     """Endpoint JSON para consultar la frescura de reportes SEC con caché de 15 min."""
     force = request.GET.get("force") in ("1", "true", "True")
-    data = get_cached_sec_freshness(ticker, force_refresh=force)
-    return JsonResponse(data)
+    return JsonResponse(get_cached_sec_freshness(ticker, force_refresh=force))
 
 
 def company_detail(request, ticker):
@@ -266,45 +254,29 @@ def company_detail(request, ticker):
 
     company_name = scores.get("company_name", ticker)
     cik = scores.get("cik", "N/A")
-    statements_fys = [p for p in fs.get("fiscal_years", [])[:11]]
-    fys = [p for p in statements_fys]
+    statements_fys = list(fs.get("fiscal_years", [])[:11])
+    fys = list(statements_fys)
     latest_p = statements_fys[0] if statements_fys else "LTM"
     canonical = fs.get("canonical_summary", {})
     key_ratios = fs.get("key_ratios", {})
 
-    # 1. Arquetipo de Industria e Ingesta de KPIs Enriquecidos
-    archetype = fs.get("archetype") or scores.get("archetype")
-    if not archetype:
-        if fs.get("is_financial") or scores.get("is_financial_institution"):
-            archetype = "FINANCIAL_BANKING"
-        else:
-            archetype = "STANDARD_CORPORATE"
-
-    is_banking = (archetype == "FINANCIAL_BANKING")
-    is_platform = (archetype == "PLATFORM_ECOSYSTEM")
-    is_corporate = (archetype == "STANDARD_CORPORATE")
-    is_reit = (archetype == "REAL_ESTATE_REIT")
-    is_insurance = (archetype == "INSURANCE")
+    archetype = resolve_company_archetype(fs, scores, ticker=ticker)
+    is_banking = archetype == "FINANCIAL_BANKING"
+    is_platform = archetype == "PLATFORM_ECOSYSTEM"
+    is_corporate = archetype == "STANDARD_CORPORATE"
+    is_reit = archetype == "REAL_ESTATE_REIT"
+    is_insurance = archetype == "INSURANCE"
     is_financial = bool(fs.get("is_financial") or scores.get("is_financial_institution") or is_banking or is_insurance)
 
     pr_file = ticker_dir / "presentation_reconciliation.json"
     if not pr_file.exists():
-        fallback_pr = PROJECT_ROOT / "drive_input" / ticker / "processed" / "presentation_reconciliation.json"
+        fallback_pr = DRIVE_INPUT_DIR / ticker / "processed" / "presentation_reconciliation.json"
         if fallback_pr.exists():
             pr_file = fallback_pr
 
-    pr_data = {}
-    if pr_file.exists():
-        try:
-            pr_data = load_json_cached(pr_file)
-        except Exception:
-            pass
+    pr_data = _load_optional_json(pr_file)
+    enriched = {**pr_data.get("banking_kpis_enriched", {}), **pr_data.get("kpis_enriched", {})}
 
-    banking_kpis_enriched = pr_data.get("banking_kpis_enriched", {})
-    kpis_enriched = pr_data.get("kpis_enriched", {})
-    enriched = {**banking_kpis_enriched, **kpis_enriched}
-
-    # 2. Lectura Pre-Calculada o Resolución Canónica de Estados Financieros (Módulo pipeline.canonical_resolvers)
     resolved_pre = fs.get("resolved_canonical_statements", {})
     bs_data = resolved_pre.get("balance_sheet") or resolve_canonical_balance_sheet(fs, statements_fys, archetype=archetype)
     pnl_data = resolved_pre.get("income_statement") or resolve_canonical_income_statement(fs, statements_fys, archetype=archetype)
@@ -312,63 +284,25 @@ def company_detail(request, ticker):
     cf_data = resolved_pre.get("cash_flow") or resolve_canonical_cash_flow(fs, statements_fys, capital_flows=cap_flows, archetype=archetype)
 
     statements_ctx = build_statements_context(
-        fs=fs,
-        fys=fys,
-        statements_fys=statements_fys,
-        latest_p=latest_p,
-        canonical=canonical,
-        key_ratios=key_ratios,
-        archetype=archetype,
-        is_banking=is_banking,
-        is_insurance=is_insurance,
-        is_reit=is_reit,
-        is_financial=is_financial,
-        enriched=enriched,
-        bs_data=bs_data,
-        pnl_data=pnl_data,
-        cap_flows=cap_flows,
-        cf_data=cf_data,
+        fs=fs, fys=fys, statements_fys=statements_fys, latest_p=latest_p, canonical=canonical,
+        key_ratios=key_ratios, archetype=archetype, is_banking=is_banking, is_insurance=is_insurance,
+        is_reit=is_reit, is_financial=is_financial, enriched=enriched, bs_data=bs_data,
+        pnl_data=pnl_data, cap_flows=cap_flows, cf_data=cf_data,
     )
-
-    # 3. Scoring, Solvencia, Forense y Retornos sobre el Capital (Módulo views_scoring.py)
     scoring_ctx = build_scoring_context(
-        ticker=ticker,
-        scores=scores,
-        fs=fs,
-        fys=fys,
-        statements_fys=statements_fys,
-        latest_p=latest_p,
-        canonical=canonical,
-        archetype=archetype,
-        is_banking=is_banking,
-        bs_data=bs_data,
+        ticker=ticker, scores=scores, fs=fs, fys=fys, statements_fys=statements_fys,
+        latest_p=latest_p, canonical=canonical, archetype=archetype, is_banking=is_banking, bs_data=bs_data,
     )
-
-    # 4. Gráficos, Asignación de Capital y Segmentos (Módulo views_charts.py)
     charts_ctx = build_charts_and_segments_context(
-        ticker_dir=ticker_dir,
-        fs=fs,
-        fys=fys,
-        canonical=canonical,
-        key_ratios=key_ratios,
-        enriched=enriched,
+        ticker_dir=ticker_dir, fs=fs, fys=fys, canonical=canonical, key_ratios=key_ratios, enriched=enriched,
     )
-
-    # 5. Valuación Intrínseca / Inversa y Mercado en Vivo (Módulo views_valuation.py)
     valuation_ctx = build_valuation_context(
-        request=request,
-        DATA_DIR=DATA_DIR,
-        ticker=ticker,
-        scores=scores,
-        fs=fs,
-        statements_fys=statements_fys,
-        canonical=canonical,
-        archetype=archetype,
-        is_banking=is_banking,
+        request=request, DATA_DIR=DATA_DIR, ticker=ticker, scores=scores, fs=fs,
+        statements_fys=statements_fys, canonical=canonical, archetype=archetype, is_banking=is_banking,
     )
 
-    # Metadatos SEC del período LTM (con retrocompatibilidad total)
     from pipeline.sec_modules.sec_freshness import get_local_sec_metadata
+
     sec_meta = fs.get("sec_metadata") or get_local_sec_metadata(ticker)
 
     context = {
@@ -388,5 +322,4 @@ def company_detail(request, ticker):
         **charts_ctx,
         **valuation_ctx,
     }
-
     return render(request, "company_detail.html", context)

@@ -1,13 +1,12 @@
 import json
+import logging
 from hashlib import md5
-from pathlib import Path
 
 from django.core.cache import cache
 
-# Caché en memoria de la lista de empresas del menú.
-# La clave incorpora los mtimes de los artefactos, por lo que cualquier
-# re-procesado en disco invalida automáticamente el resultado cacheado.
-DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "processed"
+from .views.view_utils import DATA_DIR
+
+logger = logging.getLogger("analytics.context_processors")
 NAV_CACHE_KEY = "nav_companies"
 NAV_CACHE_TTL = 3600
 
@@ -54,7 +53,7 @@ def nav_companies(request):
                     sc = json.load(f)
                     name = sc.get("company_name", ticker)
             except (OSError, json.JSONDecodeError) as exc:
-                print(f"[NavCompanies] Aviso leyendo {scores_file}: {exc}")
+                logger.warning("Error leyendo %s: %s", scores_file, exc)
         companies.append({
             "ticker": ticker,
             "name": name,
