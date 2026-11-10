@@ -22,6 +22,7 @@ import urllib.request
 
 try:
     from json_io import atomic_json_write
+    from period_integrity import file_fingerprint
     from config_loader import (
         load_sec_config,
         CONFIG_DIR,
@@ -31,6 +32,7 @@ try:
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.period_integrity import file_fingerprint
         from pipeline.config_loader import (
             load_sec_config,
             CONFIG_DIR,
@@ -39,6 +41,7 @@ except ImportError:
         )
     except ImportError:
         from .json_io import atomic_json_write
+        from .period_integrity import file_fingerprint
         from .config_loader import (
             load_sec_config,
             CONFIG_DIR,
@@ -343,8 +346,8 @@ def reconcile_item(name, period, val_local, val_facts, val_mkt=None, tol_pct=2.5
             item["status"] = "FLAGGED"
             item["notes"] = f"Difiere de SEC Facts API en {pct_diff_facts:.2f}%: Local (${val_local/1e6:,.1f}M) vs SEC (${val_facts/1e6:,.1f}M)."
     else:
-        item["status"] = "EXACT_MATCH"
-        item["notes"] = "Cifra auditada en filings oficiales de la SEC."
+        item["status"] = "SINGLE_SOURCE"
+        item["notes"] = "Fuente única: cifra de filings SEC sin contraste independiente (no figura en Company Facts)."
 
     if val_mkt is not None:
         denom_mkt = abs(val_mkt) if abs(val_mkt) > 0 else 1.0
@@ -401,8 +404,8 @@ def reconcile_eps_item(name, period, eps_raw, eps_adj, split_fac, fact_eps, mkt_
                     item["status"] = "FLAGGED"
                     item["notes"] = f"Discrepancia en BPA: Local (${target_comp:.2f}) vs SEC Facts (${fact_eps:.2f})."
     else:
-        item["status"] = "EXACT_MATCH"
-        item["notes"] = "BPA auditado en filings oficiales de la SEC."
+        item["status"] = "SINGLE_SOURCE"
+        item["notes"] = "Fuente única: BPA de filings SEC sin contraste independiente (no figura en Company Facts)."
 
     if split_fac > 1.0:
         item["notes"] += f" Normalizado por split {int(split_fac)}:1."
@@ -461,8 +464,8 @@ def reconcile_shares_item(name, period, sh_raw, sh_adj, split_fac, fact_sh, mkt_
                     f"/ Ajustado ({round(sh_adj/1e6, 2) if sh_adj else 'N/A'}M) vs SEC ({round(fact_sh/1e6, 2)}M)."
                 )
     else:
-        item["status"] = "EXACT_MATCH"
-        item["notes"] = f"Conteo de acciones auditado en filings oficiales ({round(sh_raw/1e6, 2) if sh_raw else 'N/A'}M)."
+        item["status"] = "SINGLE_SOURCE"
+        item["notes"] = f"Fuente única: conteo de acciones de filings SEC sin contraste independiente ({round(sh_raw/1e6, 2) if sh_raw else 'N/A'}M)."
 
     if split_fac > 1.0:
         item["notes"] += f" Normalizado por split {int(split_fac)}:1."
@@ -601,6 +604,7 @@ def verify_financial_data(ticker, local_dir=None, tolerance_pct=2.5):
     passed_checks = sum(1 for c in comparisons if c.get("status") == "EXACT_MATCH")
     reconciled_checks = sum(1 for c in comparisons if c.get("status") in ("RECONCILED", "SPLIT_ADJUSTED"))
     flagged_checks = sum(1 for c in comparisons if c.get("status") == "FLAGGED")
+    single_source_checks = sum(1 for c in comparisons if c.get("status") == "SINGLE_SOURCE")
     total_checks = len(comparisons)
     fidelity_pct = round(((passed_checks + reconciled_checks) / total_checks) * 100, 2) if total_checks > 0 else 100.0
 
@@ -613,7 +617,12 @@ def verify_financial_data(ticker, local_dir=None, tolerance_pct=2.5):
         "exact_matches": passed_checks,
         "reconciled_matches": reconciled_checks,
         "flagged_discrepancies": flagged_checks,
-        "overall_status": "CERTIFIED_VALID" if flagged_checks == 0 else "OBSERVATIONS_FLAGGED",
+        "single_source_checks": single_source_checks,
+        "source_fingerprint": file_fingerprint(fin_json),
+        "overall_status": (
+            "OBSERVATIONS_FLAGGED" if flagged_checks > 0
+            else ("PARTIALLY_VERIFIED" if single_source_checks > 0 else "CERTIFIED_VALID")
+        ),
         "detailed_reconciliations": comparisons,
     }
 
@@ -643,6 +652,12 @@ def generate_markdown_report(rep, output_path):
             f"> 🛡️ **ESTADO GLOBAL: CERTIFICADO 100% VÁLIDO ({rep['fidelity_score_pct']}% de Fidelidad)**  \n"
             "> Todas las cifras oficiales de la SEC han sido cruzadas matemáticamente contra la API oficial de SEC Company Facts y las identidades contables invariantes de balance. No existen discrepancias no reconciliadas.\n"
         )
+    elif rep["overall_status"] == "PARTIALLY_VERIFIED":
+        lines.append(
+            f"> ⚠️ **ESTADO GLOBAL: PARCIALMENTE VERIFICADO**  \n"
+            f"> {rep['single_source_checks']} de {rep['total_checks']} partidas provienen de una fuente única sin contraste independiente; "
+            "no pueden considerarse certificadas.\n"
+        )
     else:
         lines.append(
             f"> ⚠️ **ESTADO GLOBAL: OBSERVACIONES ({rep['fidelity_score_pct']}% de Fidelidad)**  \n"
@@ -663,7 +678,7 @@ def generate_markdown_report(rep, output_path):
     )
 
     for c in rep["detailed_reconciliations"]:
-        icon = "✅" if c["status"] == "EXACT_MATCH" else ("🔄" if c["status"] == "RECONCILED" else "❌")
+        icon = {"EXACT_MATCH": "✅", "RECONCILED": "🔄", "SINGLE_SOURCE": "⚠️"}.get(c["status"], "❌")
         if "sec_extracted_usd" in c:
             v_sec = f"${c['sec_extracted_usd']/1e6:,.1f}M" if c.get("sec_extracted_usd") is not None else "-"
             v_facts = f"${c['sec_facts_api_usd']/1e6:,.1f}M" if c.get("sec_facts_api_usd") is not None else "-"

@@ -2,7 +2,7 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-11-10T15:23:19.906940",
+  "audit_timestamp": "2026-11-10T16:00:53.890658",
   "years_audited": {
     "LTM": [
       {
@@ -55,12 +55,12 @@
         "passed": true,
         "status": "PASS",
         "net_income": 132175000000.0,
-        "shares_diluted": 14720305750.0,
-        "eps_reported": 8.97,
+        "shares_diluted": 14720306000.0,
+        "eps_reported": 8.98,
         "eps_calculated": 8.98,
-        "eps_adjusted": 8.97,
+        "eps_adjusted": 8.98,
         "split_factor": 1.0,
-        "discrepancy": 0.01
+        "discrepancy": 0.0
       }
     ],
     "FY2026": [
@@ -833,9 +833,37 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 78,
-  "passed_tests": 77,
+  "total_tests": 83,
+  "passed_tests": 81,
   "failed_tests": 0,
-  "skipped_tests": 1,
-  "compliance_score_pct": 100.0
+  "skipped_tests": 2,
+  "compliance_score_pct": 100.0,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "PASS",
+      "message": "Cierre de período anterior o igual a la presentación."
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "PASS",
+      "message": "Cierre de período no posterior a la extracción."
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "LTM coincide con FY2026 en todas las partidas."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-06. Re-ejecutar data_verifier.",
+      "state": "STALE"
+    }
+  ]
 }

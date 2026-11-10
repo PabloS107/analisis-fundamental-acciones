@@ -1508,7 +1508,8 @@ def compute_and_inject_ltm_columns(
         ltm_vals_inc.append(val)
 
     inc_df.insert(inc_df.columns.get_loc(latest_fy), 'LTM', ltm_vals_inc)
-    _calibrate_ltm_eps_and_shares(inc_df, facts_df)
+    if q_is_newer:
+        _calibrate_ltm_eps_and_shares(inc_df, facts_df)
 
     # --- Balance Sheet MRQ for LTM ---
     mrq_cols = [c for c in bal_mrq_df.columns if c.startswith('Q')] if bal_mrq_df is not None else []

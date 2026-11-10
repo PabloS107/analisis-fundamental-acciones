@@ -14,13 +14,16 @@ from pathlib import Path
 try:
     from json_io import atomic_json_write
     from config_loader import DATA_PROCESSED_DIR
+    from period_integrity import run_period_integrity
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
         from pipeline.config_loader import DATA_PROCESSED_DIR
+        from pipeline.period_integrity import run_period_integrity
     except ImportError:
         from .json_io import atomic_json_write
         from .config_loader import DATA_PROCESSED_DIR
+        from .period_integrity import run_period_integrity
 
 logger = logging.getLogger(__name__)
 
@@ -480,6 +483,22 @@ def run_full_audit(ticker, custom_dir=None):
             else:
                 audit_results["skipped_tests"] += 1
                 print(f"  [SKIP] {t['test_name']} ({t.get('message', '')})")
+
+    print("\n--- Integridad de Período y Vigencia de Verificación ---")
+    period_findings = run_period_integrity(output_dir)
+    audit_results["period_integrity"] = period_findings
+    for f in period_findings:
+        audit_results["total_tests"] += 1
+        if f["severity"] == "PASS":
+            audit_results["passed_tests"] += 1
+            print(f"  [PASS] {f['check']}")
+        elif f["severity"] == "ERROR":
+            audit_results["failed_tests"] += 1
+            audit_results["overall_status"] = "FAIL"
+            print(f"  [FAIL] {f['check']} -> {f['message']}")
+        else:
+            audit_results["skipped_tests"] += 1
+            print(f"  [WARN] {f['check']} ({f['message']})")
 
     executed_tests = audit_results["passed_tests"] + audit_results["failed_tests"]
     if executed_tests > 0:

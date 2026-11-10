@@ -2,7 +2,7 @@
   "ticker": "PGR",
   "company_name": "PROGRESSIVE CORP/OH/",
   "cik": "0000080661",
-  "audit_timestamp": "2026-11-10T15:23:20.089861",
+  "audit_timestamp": "2026-11-10T15:51:22.580701",
   "years_audited": {
     "LTM": [
       {
@@ -710,9 +710,22 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 78,
+  "total_tests": 80,
   "passed_tests": 50,
   "failed_tests": 0,
-  "skipped_tests": 28,
-  "compliance_score_pct": 100.0
+  "skipped_tests": 30,
+  "compliance_score_pct": 100.0,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "WARN",
+      "message": "N/D: falta sec_metadata; no es posible certificar el período LTM ni su filing de origen. Re-ejecutar la extracción SEC."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "N/D: no existe cross_verification_report.json.",
+      "state": "MISSING"
+    }
+  ]
 }

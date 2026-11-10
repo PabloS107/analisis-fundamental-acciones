@@ -2,7 +2,7 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-11-10T15:23:20.038406",
+  "audit_timestamp": "2026-11-10T15:51:22.524926",
   "years_audited": {
     "LTM": [
       {
@@ -399,10 +399,44 @@
       }
     ]
   },
-  "overall_status": "PASS",
-  "total_tests": 48,
-  "passed_tests": 23,
-  "failed_tests": 0,
-  "skipped_tests": 25,
-  "compliance_score_pct": 100.0
+  "overall_status": "FAIL",
+  "total_tests": 53,
+  "passed_tests": 25,
+  "failed_tests": 2,
+  "skipped_tests": 26,
+  "compliance_score_pct": 92.6,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "ERROR",
+      "message": "El período Q4 2026 cierra 2026-12-31 pero el filing se presentó 2026-10-23.",
+      "ltm_period": "Q4 2026",
+      "ltm_period_end": "2026-12-31",
+      "filed": "2026-10-23",
+      "accession": "0001292814-26-005000"
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "ERROR",
+      "message": "El período Q4 2026 cierra 2026-12-31, posterior a la extracción (2026-11-08).",
+      "ltm_period_end": "2026-12-31",
+      "extraction": "2026-11-08"
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "No aplica: el LTM no proviene de un reporte anual."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "STALE: verificada 2026-09-22, extracción posterior 2026-11-08. Re-ejecutar data_verifier.",
+      "state": "STALE"
+    }
+  ]
 }

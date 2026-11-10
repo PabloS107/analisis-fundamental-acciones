@@ -57,6 +57,7 @@ try:
         sanitize_multiclass_eps_df,
         get_mrq_fact,
         get_ltm_quarterly_metric,
+        _check_quarterly_newer_than_fy,
     )
 except ImportError:
     try:
@@ -67,6 +68,7 @@ except ImportError:
             sanitize_multiclass_eps_df,
             get_mrq_fact,
             get_ltm_quarterly_metric,
+            _check_quarterly_newer_than_fy,
         )
     except ImportError:
         from pipeline.sec_modules.sec_xbrl_ltm import (
@@ -76,6 +78,7 @@ except ImportError:
             sanitize_multiclass_eps_df,
             get_mrq_fact,
             get_ltm_quarterly_metric,
+            _check_quarterly_newer_than_fy,
         )
 
 
@@ -304,8 +307,11 @@ def _compute_as_reported_ltm_val(
     clean_lbl: str,
     is_row_dim: bool,
     row_dim_member: str,
+    q_is_newer: bool = True,
 ):
     """Resuelve el importe LTM/MRQ para una fila As-Reported respetando candado dimensional y Regla 6."""
+    if not q_is_newer and row_vals.get(latest_fy) is not None:
+        return row_vals[latest_fy]
     ltm_val = None
     if not is_flow and not q_face.empty and q_mrq_col:
         q_cand = _filter_by_dimension_lock(q_face, is_row_dim, row_dim_member, clean_lbl)
@@ -457,6 +463,7 @@ def build_as_reported_statements(
                 ytd_cols_sorted = sorted(ytd_cols, reverse=True)
                 ytd_curr = ytd_cols_sorted[0] if len(ytd_cols_sorted) >= 1 else None
                 ytd_prev = ytd_cols_sorted[1] if len(ytd_cols_sorted) >= 2 else None
+        q_is_newer = _check_quarterly_newer_than_fy(q_mrq_col or ytd_curr, facts_df, latest_fy)
 
         hist_concept_toks = hist_labels_clean = None
         hist_cols_norm = {}
@@ -544,7 +551,7 @@ def build_as_reported_statements(
             row_vals["LTM"] = None if is_abs else _compute_as_reported_ltm_val(
                 is_flow, q_face, q_mrq_col, ytd_curr, ytd_prev,
                 matched_h_row, hist_cols_norm, facts_df, latest_fy, row_vals,
-                conc_tok, clean_lbl, is_row_dim, row_dim_member,
+                conc_tok, clean_lbl, is_row_dim, row_dim_member, q_is_newer=q_is_newer,
             )
             _normalize_statement_row_signs(s_name, conc, clean_lbl, row_vals)
 
@@ -606,6 +613,43 @@ def _sync_dividends_and_cf_signs(as_rep_cf: list, can_summary: dict, cf_detail: 
             for p_k, det_v in det_vals.items():
                 if det_v is not None and r.get("values", {}).get(p_k) is not None and abs(r["values"][p_k]) == abs(det_v):
                     r["values"][p_k] = det_v
+
+
+def _sync_annual_ltm_when_latest_periodic_is_10k(full_dataset: dict, latest_fy: str) -> None:
+    """Si el último filing periódico es anual (10-K/20-F/40-F) y ltm_period == latest_fy, sincroniza LTM con latest_fy."""
+    sec_meta = full_dataset.get("sec_metadata")
+    if not isinstance(sec_meta, dict) or not latest_fy:
+        return
+    latest_form = str(sec_meta.get("latest_periodic_form", "")).upper().strip()
+    if latest_form not in ("10-K", "20-F", "40-F") or sec_meta.get("ltm_period") != latest_fy:
+        return
+
+    for rows in full_dataset.get("as_reported_statements", {}).values():
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if row.get("is_abstract"):
+                continue
+            vals = row.get("values")
+            if isinstance(vals, dict) and vals.get(latest_fy) is not None:
+                vals["LTM"] = vals[latest_fy]
+
+    for det_key in ("income_statement_detail", "balance_sheet_detail", "cash_flow_detail"):
+        det_dict = full_dataset.get(det_key)
+        if not isinstance(det_dict, dict):
+            continue
+        for item in det_dict.values():
+            vals = item.get("values") if isinstance(item, dict) else None
+            if isinstance(vals, dict) and vals.get(latest_fy) is not None:
+                vals["LTM"] = vals[latest_fy]
+
+    for map_key in ("canonical_summary", "key_ratios"):
+        sec_map = full_dataset.get(map_key)
+        if not isinstance(sec_map, dict):
+            continue
+        for m_vals in sec_map.values():
+            if isinstance(m_vals, dict) and m_vals.get(latest_fy) is not None:
+                m_vals["LTM"] = m_vals[latest_fy]
 
 
 def _resolve_as_reported_dimensional_collisions(as_reported: dict, details_map: dict, latest_fy: str) -> None:
@@ -681,10 +725,13 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
     cf_detail = full_dataset.get("cash_flow_detail", {})
     inc_detail = full_dataset.get("income_statement_detail", {})
 
+    fys = [x for x in full_dataset.get("fiscal_years", []) if x != "LTM"]
+    if fys:
+        _sync_annual_ltm_when_latest_periodic_is_10k(full_dataset, fys[0])
+
     _sync_short_term_investments_and_cash_ltm(as_reported.get("balance_sheet", []), can_summary, bs_detail)
     _sync_dividends_and_cf_signs(as_reported.get("cash_flow_statement", []), can_summary, cf_detail)
 
-    fys = [x for x in full_dataset.get("fiscal_years", []) if x != "LTM"]
     if fys:
         _resolve_as_reported_dimensional_collisions(
             as_reported,

@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-11-10T15:23:20.002744",
+  "audit_timestamp": "2026-11-10T15:51:22.486906",
   "years_audited": {
     "LTM": [
       {
@@ -769,9 +769,37 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 72,
-  "passed_tests": 71,
+  "total_tests": 77,
+  "passed_tests": 75,
   "failed_tests": 0,
-  "skipped_tests": 1,
-  "compliance_score_pct": 100.0
+  "skipped_tests": 2,
+  "compliance_score_pct": 100.0,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "PASS",
+      "message": "Cierre de período anterior o igual a la presentación."
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "PASS",
+      "message": "Cierre de período no posterior a la extracción."
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "No aplica: el LTM no proviene de un reporte anual."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-06. Re-ejecutar data_verifier.",
+      "state": "STALE"
+    }
+  ]
 }

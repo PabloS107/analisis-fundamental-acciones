@@ -127,31 +127,13 @@ def get_local_sec_metadata(ticker: str, processed_dir: Optional[Path] = None) ->
         except (OSError, json.JSONDecodeError) as exc:
             logger.debug("[SECFreshness] No se pudo leer fallback %s: %s", sn_file, exc)
 
-    # Inspeccionar fiscal_years para saber cuál es el año base
-    fys = fs_data.get("fiscal_years", [])
-    latest_fy = fys[1] if len(fys) > 1 and fys[0] == "LTM" else (fys[0] if fys else "FY2025")
-
-    # Si hay extraction_timestamp, derivar período estimado razonable
-    if ext_ts:
-        ext_date = ext_ts[:10]
-        # Estimación preliminar según fecha de extracción
-        m = int(ext_date[5:7]) if len(ext_date) >= 7 else 6
-        y = int(ext_date[:4]) if len(ext_date) >= 4 else 2026
-        if m in (1, 2, 3, 4):
-            result["ltm_period"] = f"Q4 {y-1}" if m <= 2 else f"Q1 {y}"
-        elif m in (5, 6, 7):
-            result["ltm_period"] = f"Q1 {y}" if m <= 5 else f"Q2 {y}"
-        elif m in (8, 9, 10):
-            result["ltm_period"] = f"Q2 {y}" if m <= 9 else f"Q3 {y}"
-        else:
-            result["ltm_period"] = f"Q3 {y}"
-        result["latest_periodic_date"] = ext_date
-        result["latest_periodic_form"] = "10-Q"
-    else:
-        result["ltm_period"] = f"LTM ({latest_fy})"
+    # Regla 6 (Zero Fake Defaults): sin sec_metadata no se infiere el trimestre LTM a partir de la
+    # fecha de extracción. El período queda como N/D hasta re-ejecutar la extracción SEC; solo se
+    # conserva la procedencia comprobable del último 10-K registrado en sec_narrative.json.
+    result["ltm_period"] = "N/D"
+    if k_date or k_acc:
         result["latest_periodic_form"] = "10-K"
         result["latest_periodic_date"] = k_date
-
     result["latest_periodic_accession"] = k_acc
     return result
 

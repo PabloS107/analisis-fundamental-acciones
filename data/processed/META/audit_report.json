@@ -2,7 +2,7 @@
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
   "cik": "0001326801",
-  "audit_timestamp": "2026-11-10T15:23:20.021245",
+  "audit_timestamp": "2026-11-10T15:51:22.511434",
   "years_audited": {
     "LTM": [
       {
@@ -833,9 +833,37 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 78,
-  "passed_tests": 77,
+  "total_tests": 83,
+  "passed_tests": 81,
   "failed_tests": 0,
-  "skipped_tests": 1,
-  "compliance_score_pct": 100.0
+  "skipped_tests": 2,
+  "compliance_score_pct": 100.0,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "PASS",
+      "message": "Cierre de período anterior o igual a la presentación."
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "PASS",
+      "message": "Cierre de período no posterior a la extracción."
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "No aplica: el LTM no proviene de un reporte anual."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "N/D: no existe cross_verification_report.json.",
+      "state": "MISSING"
+    }
+  ]
 }

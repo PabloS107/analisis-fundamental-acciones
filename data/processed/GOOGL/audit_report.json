@@ -2,7 +2,7 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-11-10T15:23:19.963151",
+  "audit_timestamp": "2026-11-10T15:51:22.441745",
   "years_audited": {
     "LTM": [
       {
@@ -700,9 +700,37 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 66,
-  "passed_tests": 64,
+  "total_tests": 71,
+  "passed_tests": 68,
   "failed_tests": 0,
-  "skipped_tests": 2,
-  "compliance_score_pct": 100.0
+  "skipped_tests": 3,
+  "compliance_score_pct": 100.0,
+  "period_integrity": [
+    {
+      "check": "METADATA_PRESENTE",
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "PASS",
+      "message": "Cierre de período anterior o igual a la presentación."
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "PASS",
+      "message": "Cierre de período no posterior a la extracción."
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "No aplica: el LTM no proviene de un reporte anual."
+    },
+    {
+      "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "N/D: no existe cross_verification_report.json.",
+      "state": "MISSING"
+    }
+  ]
 }
