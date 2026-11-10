@@ -156,6 +156,43 @@ def get_local_sec_metadata(ticker: str, processed_dir: Optional[Path] = None) ->
     return result
 
 
+def build_sec_freshness_metadata(company, filing_context, latest_k_filings, latest_q_filings) -> Dict[str, Any]:
+    """Construye el bloque canónico `sec_metadata` con periodicidad y último 8-K de resultados."""
+    latest_k_filing = latest_k_filings[0] if (latest_k_filings and len(latest_k_filings) > 0) else None
+    latest_q_filing = latest_q_filings[0] if (latest_q_filings and len(latest_q_filings) > 0) else None
+
+    if latest_q_filing and latest_k_filing:
+        latest_periodic = latest_q_filing if str(latest_q_filing.filing_date) >= str(latest_k_filing.filing_date) else latest_k_filing
+    else:
+        latest_periodic = latest_q_filing or latest_k_filing
+
+    sec_p_form = str(latest_periodic.form).strip() if latest_periodic else "10-Q"
+    sec_p_filed = str(latest_periodic.filing_date).strip() if latest_periodic else None
+    sec_p_rep = str(getattr(latest_periodic, "report_date", "") or "").strip() if latest_periodic else None
+    sec_p_acc = str(latest_periodic.accession_number).strip() if latest_periodic else None
+    sec_ltm_label = derive_period_label(sec_p_form, sec_p_rep, sec_p_filed)
+
+    latest_8k_date = None
+    try:
+        f_8k = filing_context.get_filings(form=["8-K"]) if filing_context else company.get_filings(form=["8-K"])
+        for f in (f_8k[:6] if f_8k else []):
+            if "2.02" in str(getattr(f, "items", "")):
+                latest_8k_date = str(f.filing_date)
+                break
+    except Exception as exc:
+        logger.debug("No se pudo detectar 8-K Item 2.02: %s", exc)
+
+    return {
+        "ltm_period": sec_ltm_label,
+        "ltm_period_end": sec_p_rep if sec_p_rep and sec_p_rep != "None" else None,
+        "latest_periodic_form": sec_p_form,
+        "latest_periodic_date": sec_p_filed,
+        "latest_periodic_accession": sec_p_acc,
+        "latest_8k_earnings_date": latest_8k_date,
+        "extraction_timestamp": datetime.now().isoformat(),
+    }
+
+
 def _is_valid_periodic_filing(f) -> bool:
     """
     Salvaguarda 2: Filtra formularios para considerar sólo reportes periódicos legítimos:

@@ -7,12 +7,15 @@ Actúa como fachada pública y orquestador modular de alto nivel.
 
 import sys
 import json
+import logging
 import re
 import argparse
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
 from edgar import set_identity
+
+logger = logging.getLogger(__name__)
 
 project_root = str(Path(__file__).resolve().parent.parent)
 if project_root not in sys.path:
@@ -58,16 +61,6 @@ except ImportError:
         def sec_call_with_retry(fn, *args, **kwargs):
             return fn(*args, **kwargs)
         default_rate_limiter = None
-
-try:
-    from pipeline.financial_bilingual_map import get_spanish_clarification
-except ImportError:
-    try:
-        from financial_bilingual_map import get_spanish_clarification
-    except ImportError:
-        def get_spanish_clarification(label, concept=None):
-            return None
-
 
 # --------------------------------------------------------------------------------------
 # RE-EXPORTS DE ARQUETIPOS Y CLASIFICACIÓN (desde entity_classifier)
@@ -151,6 +144,7 @@ try:
     from .sec_modules import (
         normalize_fiscal_year,
         _clean_concept_token,
+        sanitize_multiclass_eps_df,
         dataframe_to_concept_dict,
         get_all_matching_sum,
         get_mrq_fact,
@@ -171,6 +165,7 @@ try:
         build_as_reported_statements,
         sanitize_and_validate_statements,
         derive_period_label,
+        build_sec_freshness_metadata,
         check_sec_freshness,
         get_local_sec_metadata,
         SharedFilingContext,
@@ -180,6 +175,7 @@ except ImportError:
         from sec_modules import (
             normalize_fiscal_year,
             _clean_concept_token,
+            sanitize_multiclass_eps_df,
             dataframe_to_concept_dict,
             get_all_matching_sum,
             get_mrq_fact,
@@ -200,6 +196,7 @@ except ImportError:
             build_as_reported_statements,
             sanitize_and_validate_statements,
             derive_period_label,
+            build_sec_freshness_metadata,
             check_sec_freshness,
             get_local_sec_metadata,
             SharedFilingContext,
@@ -208,6 +205,7 @@ except ImportError:
         from pipeline.sec_modules import (
             normalize_fiscal_year,
             _clean_concept_token,
+            sanitize_multiclass_eps_df,
             dataframe_to_concept_dict,
             get_all_matching_sum,
             get_mrq_fact,
@@ -228,72 +226,149 @@ except ImportError:
             build_as_reported_statements,
             sanitize_and_validate_statements,
             derive_period_label,
+            build_sec_freshness_metadata,
             check_sec_freshness,
             get_local_sec_metadata,
             SharedFilingContext,
         )
 
 
+def _normalize_annual_statement_dfs(company):
+    """Obtiene, desambigua EPS multi-clase y normaliza a `FYxxxx` los 3 estados anuales."""
+    inc_10_obj = sec_call_with_retry(company.income_statement, periods=10)
+    bal_10_obj = sec_call_with_retry(company.balance_sheet, periods=10)
+    cf_fn = getattr(company, 'cash_flow_statement', None) or getattr(company, 'cashflow_statement', None)
+    cf_10_obj = sec_call_with_retry(cf_fn, periods=10) if cf_fn else None
+
+    inc_df = inc_10_obj.to_dataframe().reset_index() if inc_10_obj is not None else pd.DataFrame()
+    bal_df = bal_10_obj.to_dataframe().reset_index() if bal_10_obj is not None else pd.DataFrame()
+    cf_df = cf_10_obj.to_dataframe().reset_index() if cf_10_obj is not None else pd.DataFrame()
+    sanitize_multiclass_eps_df(inc_df)
+
+    def _get_annual_cols(df):
+        fys = []
+        for col in df.columns:
+            s = str(col)
+            if s.startswith('FY ') or (s.startswith('FY') and any(ch.isdigit() for ch in s)) or any(s.startswith(str(yr)) for yr in range(2010, 2035)):
+                fys.append(col)
+        return sorted(
+            fys,
+            key=lambda x: [int(s) for s in str(x).replace('FY', '').split() if s.isdigit()][0] if any(ch.isdigit() for ch in str(x)) else 0,
+            reverse=True,
+        )
+
+    annual_cols_raw = _get_annual_cols(inc_df)
+    rename_map = {}
+    for col in annual_cols_raw:
+        m = re.search(r'(\d{4})', str(col))
+        rename_map[col] = f"FY{m.group(1)}" if m else str(col)
+    for df in (inc_df, bal_df, cf_df):
+        df.rename(columns=rename_map, inplace=True)
+
+    annual_fys = list(dict.fromkeys(rename_map[col] for col in annual_cols_raw if col in rename_map))
+    return cf_fn, inc_df, bal_df, cf_df, annual_fys
+
+
+def _safe_fetch_quarterly_dfs(company, cf_fn):
+    """Obtiene DataFrames trimestrales y TTM/MRQ tolerando emisores FPI sin 10-Q."""
+    try:
+        q_fins = sec_call_with_retry(company.get_quarterly_financials)
+    except Exception as exc:
+        logger.debug("Sin financieros trimestrales directos para %s: %s", getattr(company, 'ticker', '?'), exc)
+        q_fins = None
+
+    q_inc = q_fins.income_statement().to_dataframe() if q_fins and q_fins.income_statement() else None
+    q_bal = q_fins.balance_sheet().to_dataframe() if q_fins and q_fins.balance_sheet() else None
+    q_cf = q_fins.cash_flow_statement().to_dataframe() if q_fins and q_fins.cash_flow_statement() else None
+    sanitize_multiclass_eps_df(q_inc)
+
+    def _try_ttm_df(fn, **kwargs):
+        if not fn:
+            return None
+        try:
+            obj = sec_call_with_retry(fn, **kwargs)
+            return obj.to_dataframe() if obj is not None else None
+        except Exception as exc:
+            logger.debug("Consulta %s(%s) no disponible: %s", getattr(fn, '__name__', 'stmt'), kwargs, exc)
+            return None
+
+    inc_ttm_df = sanitize_multiclass_eps_df(_try_ttm_df(company.income_statement, period='ttm'))
+    cf_ttm_df = _try_ttm_df(cf_fn, period='ttm')
+    bal_mrq_obj = None
+    try:
+        bal_mrq_obj = sec_call_with_retry(company.balance_sheet, period='quarterly', periods=1)
+    except Exception as exc:
+        logger.debug("Balance MRQ trimestral no disponible: %s", exc)
+    bal_mrq_df = bal_mrq_obj.to_dataframe().reset_index() if bal_mrq_obj is not None else None
+    return q_inc, q_bal, q_cf, inc_ttm_df, cf_ttm_df, bal_mrq_df
+
+
+def _extract_10k_narratives(ticker: str, name: str, sic_code, company, filing_context, output_dir: Path):
+    """Extrae e indexa Item 1, Item 1A y Item 7 del último 10-K / 20-F."""
+    print("[SEC Extractor] Extrayendo secciones cualitativas del último 10-K...")
+    filings = (
+        (filing_context.get_filings(form="10-K") or filing_context.get_filings(form="20-F"))
+        if filing_context else (company.get_filings(form="10-K") or company.get_filings(form="20-F"))
+    )
+    narratives = {
+        "ticker": ticker.upper(),
+        "company_name": name,
+        "sic_code": str(sic_code) if sic_code is not None else None,
+        "filing_date": None,
+        "accession_number": None,
+        "item_1_business": "",
+        "item_1a_risk_factors": "",
+        "item_7_mda": "",
+    }
+    if filings and len(filings) > 0:
+        latest_10k = filings[0]
+        narratives["filing_date"] = str(latest_10k.filing_date)
+        narratives["accession_number"] = str(latest_10k.accession_number)
+        try:
+            doc_10k = filing_context.get_filing_obj(latest_10k) if filing_context else latest_10k.obj()
+            if hasattr(doc_10k, 'items'):
+                if 'Item 1' in doc_10k.items:
+                    narratives["item_1_business"] = str(doc_10k['Item 1'])
+                if 'Item 1A' in doc_10k.items:
+                    narratives["item_1a_risk_factors"] = str(doc_10k['Item 1A'])
+                if 'Item 7' in doc_10k.items:
+                    narratives["item_7_mda"] = str(doc_10k['Item 7'])
+        except Exception as exc:
+            print(f"[SEC Extractor] Nota sobre items narrativos: {exc}")
+
+    narrative_path = output_dir / "sec_narrative.json"
+    atomic_json_write(narrative_path, narratives, indent=2, ensure_ascii=False)
+    print(f"[SEC Extractor] Narrativas guardadas: {narrative_path}")
+    return narratives
+
+
 def extract_sec_data(ticker, output_dir=None, filing_context=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
     cfg = load_sec_config()
     set_identity(cfg.get("sec_identity", DEFAULT_SEC_IDENTITY))
-    
+
     if filing_context is None:
         filing_context = SharedFilingContext(ticker)
-        
+
     print(f"\n[SEC Extractor] Conectando a SEC EDGAR para {ticker.upper()}...")
     company = filing_context.company
     cik = filing_context.cik
     name = filing_context.name
     print(f"[SEC Extractor] Empresa verificada: {name} (CIK: {cik})")
-    
+
     # Detectar estándar contable oficial (US-GAAP vs IFRS / Form 20-F o 40-F)
     accounting_std = filing_context.accounting_standard
     print(f"[SEC Extractor] Estándar contable detectado: {accounting_std}")
-    
+
     output_dir = resolve_output_dir(ticker, output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 1. Estados Financieros Anuales (10 Años)
     print("[SEC Extractor] Obteniendo estados contables auditados de los últimos 10 años...")
-    inc_10_obj = sec_call_with_retry(company.income_statement, periods=10)
-    bal_10_obj = sec_call_with_retry(company.balance_sheet, periods=10)
-    cf_fn = getattr(company, 'cash_flow_statement', None) or getattr(company, 'cashflow_statement', None)
-    cf_10_obj = sec_call_with_retry(cf_fn, periods=10) if cf_fn else None
-    
-    inc_df = inc_10_obj.to_dataframe().reset_index() if inc_10_obj is not None else pd.DataFrame()
-    bal_df = bal_10_obj.to_dataframe().reset_index() if bal_10_obj is not None else pd.DataFrame()
-    cf_df = cf_10_obj.to_dataframe().reset_index() if cf_10_obj is not None else pd.DataFrame()
-    
-    # Normalizar columnas de años fiscales
-    def get_annual_cols(df):
-        fys = []
-        for col in df.columns:
-            s = str(col)
-            if s.startswith('FY ') or (s.startswith('FY') and any(ch.isdigit() for ch in s)):
-                fys.append(col)
-            elif any(s.startswith(str(yr)) for yr in range(2010, 2035)):
-                fys.append(col)
-        return sorted(fys, key=lambda x: [int(s) for s in str(x).replace('FY', '').split() if s.isdigit()][0] if any(ch.isdigit() for ch in str(x)) else 0, reverse=True)
-
-    annual_cols_raw = get_annual_cols(inc_df)
-    rename_map = {}
-    for col in annual_cols_raw:
-        m = re.search(r'(\d{4})', str(col))
-        if m:
-            rename_map[col] = f"FY{m.group(1)}"
-        else:
-            rename_map[col] = str(col)
-    inc_df.rename(columns=rename_map, inplace=True)
-    bal_df.rename(columns=rename_map, inplace=True)
-    cf_df.rename(columns=rename_map, inplace=True)
-    
-    annual_fys = [rename_map[col] for col in annual_cols_raw if col in rename_map]
-    annual_fys = list(dict.fromkeys(annual_fys))
+    cf_fn, inc_df, bal_df, cf_df, annual_fys = _normalize_annual_statement_dfs(company)
     latest_fy = annual_fys[0] if annual_fys else None
     print(f"[SEC Extractor] Ejercicios fiscales anuales detectados ({len(annual_fys)}): {annual_fys}")
-    
+
     # 1.1. Enriquecer estados contables con formularios anuales individuales (10-K o 20-F)
     annual_fys, latest_fy = enrich_annual_statements_with_individual_filings(
         company=company,
@@ -303,33 +378,11 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         annual_fys=annual_fys,
         filing_context=filing_context
     )
-    
+
     # 2. Obtener Estados Trimestrales para cálculo de LTM
     print("[SEC Extractor] Consultando formularios trimestrales (10-Q / 6-K) para cálculo de LTM...")
-    try:
-        q_fins = sec_call_with_retry(company.get_quarterly_financials)
-    except Exception:
-        q_fins = None
-    q_inc = q_fins.income_statement().to_dataframe() if q_fins and q_fins.income_statement() else None
-    q_bal = q_fins.balance_sheet().to_dataframe() if q_fins and q_fins.balance_sheet() else None
-    q_cf = q_fins.cash_flow_statement().to_dataframe() if q_fins and q_fins.cash_flow_statement() else None
-    
-    try:
-        inc_ttm_obj = sec_call_with_retry(company.income_statement, period='ttm')
-        inc_ttm_df = inc_ttm_obj.to_dataframe() if inc_ttm_obj else None
-    except Exception:
-        inc_ttm_df = None
-    try:
-        cf_ttm_obj = sec_call_with_retry(cf_fn, period='ttm') if cf_fn else None
-        cf_ttm_df = cf_ttm_obj.to_dataframe() if cf_ttm_obj else None
-    except Exception:
-        cf_ttm_df = None
-    try:
-        bal_mrq_obj = sec_call_with_retry(company.balance_sheet, period='quarterly', periods=1)
-        bal_mrq_df = bal_mrq_obj.to_dataframe().reset_index() if bal_mrq_obj else None
-    except Exception:
-        bal_mrq_df = None
-        
+    q_inc, q_bal, q_cf, inc_ttm_df, cf_ttm_df, bal_mrq_df = _safe_fetch_quarterly_dfs(company, cf_fn)
+
     # Cargar facts_df tempranamente para calibración de LTM (MRQ Balance Sheet y 4Q EPS/Shares)
     facts_df = filing_context.get_facts_df() if filing_context else None
     if facts_df is None:
@@ -347,7 +400,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
             latest_mrq_date = asset_matches['period_end'].dropna().max()
         else:
             latest_mrq_date = facts_df['period_end'].dropna().max()
-    
+
     # 2.1. Clasificación dinámica de sector y modelo contable (Banca/Fintech vs Corporativa)
     profile_path = output_dir / "company_profile.json"
     if not profile_path.exists():
@@ -383,7 +436,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
             has_ltm = True
 
     all_fys = (["LTM"] + annual_fys) if has_ltm else annual_fys
-    
+
     if has_ltm and latest_fy and 'LTM' not in inc_df.columns:
         compute_and_inject_ltm_columns(
             inc_df=inc_df,
@@ -398,20 +451,20 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
             latest_fy=latest_fy,
             latest_mrq_date=latest_mrq_date
         )
-        
+
     # Convertir a diccionarios conceptuales para JSON
     inc_data = dataframe_to_concept_dict(inc_df, all_fys)
     bal_data = dataframe_to_concept_dict(bal_df, all_fys)
     cf_data = dataframe_to_concept_dict(cf_df, all_fys)
-    
+
     # Cargar facts como respaldo para años antiguos si no se cargó previamente
     if facts_df is None:
         try:
             facts_obj = sec_call_with_retry(company.get_facts)
             if hasattr(facts_obj, 'to_dataframe'):
                 facts_df = facts_obj.to_dataframe()
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.debug("Respaldo get_facts no disponible: %s", exc)
 
     # Enriquecer notas a los estados contables para inversiones no corrientes (ej. EquityMethodInvestments)
     if facts_df is not None and not facts_df.empty:
@@ -427,7 +480,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
                         disc_vals[p_cur] = v_disc
                 if disc_vals:
                     bal_data[disc_concept] = {"label": "Equity Method Investments", "values": disc_vals}
-        
+
     print(f"[SEC Extractor] Generando resumen canónico y ratios para períodos: {all_fys}")
     canonical, ratios = extract_canonical_summary(
         inc_data, bal_data, cf_data, all_fys,
@@ -435,31 +488,26 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         is_financial=is_financial,
         archetype=archetype
     )
-    
+
     # 3. Datos de Segmentos (10 Años + LTM de Productos y Geografías)
     print("[SEC Extractor] Extrayendo desglose de segmentos histórico de 10 años + LTM...")
-    segment_df = build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical.get("revenue"), latest_10q_inc=q_inc, filing_context=filing_context)
-    if segment_df is None or segment_df.empty:
-        try:
-            single_fins = sec_call_with_retry(company.get_financials)
-            if single_fins and single_fins.income_statement():
-                segment_df = single_fins.income_statement().to_dataframe()
-        except Exception:
-            segment_df = None
+    build_and_save_segments_data(company, all_fys, output_dir=output_dir, canonical_rev=canonical.get("revenue"), latest_10q_inc=q_inc, filing_context=filing_context)
 
     # 2.5 Estados Financieros Oficiales As-Reported (Filing Presentation fiel a la SEC)
     print("[SEC Extractor] Extrayendo estados contables As-Reported oficiales...")
     try:
         latest_k_filings = filing_context.get_filings(form=["10-K", "20-F"]) if filing_context else company.get_filings(form=["10-K", "20-F"])
         latest_10k_obj = (filing_context.get_filing_obj(latest_k_filings.latest()) if filing_context else latest_k_filings.latest().obj()) if latest_k_filings else None
-    except Exception:
-        latest_10k_obj = None
+    except Exception as exc:
+        logger.debug("No se pudo obtener latest_10k_obj: %s", exc)
+        latest_k_filings, latest_10k_obj = None, None
 
     try:
         latest_q_filings = filing_context.get_filings(form=["10-Q", "6-K"]) if filing_context else company.get_filings(form=["10-Q", "6-K"])
         latest_10q_obj = (filing_context.get_filing_obj(latest_q_filings.latest()) if filing_context else latest_q_filings.latest().obj()) if latest_q_filings else None
-    except Exception:
-        latest_10q_obj = None
+    except Exception as exc:
+        logger.debug("No se pudo obtener latest_10q_obj: %s", exc)
+        latest_q_filings, latest_10q_obj = None, None
 
     as_reported_data = build_as_reported_statements(
         company=company,
@@ -477,41 +525,8 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
     )
 
     # 2.6 Metadatos canónicos de frescura y periodicidad SEC
-    latest_k_filing = latest_k_filings[0] if (latest_k_filings and len(latest_k_filings) > 0) else None
-    latest_q_filing = latest_q_filings[0] if (latest_q_filings and len(latest_q_filings) > 0) else None
-    
-    latest_periodic = None
-    if latest_q_filing and latest_k_filing:
-        latest_periodic = latest_q_filing if str(latest_q_filing.filing_date) >= str(latest_k_filing.filing_date) else latest_k_filing
-    else:
-        latest_periodic = latest_q_filing or latest_k_filing
+    sec_metadata = build_sec_freshness_metadata(company, filing_context, latest_k_filings, latest_q_filings)
 
-    sec_p_form = str(latest_periodic.form).strip() if latest_periodic else "10-Q"
-    sec_p_filed = str(latest_periodic.filing_date).strip() if latest_periodic else None
-    sec_p_rep = str(getattr(latest_periodic, "report_date", "") or "").strip() if latest_periodic else None
-    sec_p_acc = str(latest_periodic.accession_number).strip() if latest_periodic else None
-    sec_ltm_label = derive_period_label(sec_p_form, sec_p_rep, sec_p_filed)
-
-    latest_8k_date = None
-    try:
-        f_8k = filing_context.get_filings(form=["8-K"]) if filing_context else company.get_filings(form=["8-K"])
-        for f in (f_8k[:6] if f_8k else []):
-            if "2.02" in str(getattr(f, "items", "")):
-                latest_8k_date = str(f.filing_date)
-                break
-    except Exception:
-        latest_8k_date = None
-
-    sec_metadata = {
-        "ltm_period": sec_ltm_label,
-        "ltm_period_end": sec_p_rep if sec_p_rep and sec_p_rep != "None" else None,
-        "latest_periodic_form": sec_p_form,
-        "latest_periodic_date": sec_p_filed,
-        "latest_periodic_accession": sec_p_acc,
-        "latest_8k_earnings_date": latest_8k_date,
-        "extraction_timestamp": datetime.now().isoformat()
-    }
-    
     full_dataset = {
         "ticker": ticker.upper(),
         "company_name": name,
@@ -532,50 +547,15 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         "cash_flow_detail": cf_data,
         "as_reported_statements": as_reported_data
     }
-    
+
     # Guardar JSON
     full_dataset = sanitize_and_validate_statements(full_dataset)
     json_path = output_dir / "financial_statements.json"
     atomic_json_write(json_path, full_dataset, indent=2, ensure_ascii=False)
     print(f"[SEC Extractor] JSON canónico generado: {json_path}")
-    
+
     # 4. Narrativas 10-K
-    print("[SEC Extractor] Extrayendo secciones cualitativas del último 10-K...")
-    filings = filing_context.get_filings(form="10-K") if filing_context else company.get_filings(form="10-K")
-    if not filings:
-        filings = filing_context.get_filings(form="20-F") if filing_context else company.get_filings(form="20-F")
-    narratives = {
-        "ticker": ticker.upper(),
-        "company_name": name,
-        "sic_code": str(sic_code) if sic_code is not None else None,
-        "filing_date": None,
-        "accession_number": None,
-        "item_1_business": "",
-        "item_1a_risk_factors": "",
-        "item_7_mda": ""
-    }
-    
-    if filings and len(filings) > 0:
-        latest_10k = filings[0]
-        narratives["filing_date"] = str(latest_10k.filing_date)
-        narratives["accession_number"] = str(latest_10k.accession_number)
-        
-        try:
-            doc_10k = filing_context.get_filing_obj(latest_10k) if filing_context else latest_10k.obj()
-            if hasattr(doc_10k, 'items'):
-                if 'Item 1' in doc_10k.items:
-                    narratives["item_1_business"] = str(doc_10k['Item 1'])
-                if 'Item 1A' in doc_10k.items:
-                    narratives["item_1a_risk_factors"] = str(doc_10k['Item 1A'])
-                if 'Item 7' in doc_10k.items:
-                    narratives["item_7_mda"] = str(doc_10k['Item 7'])
-        except Exception as e:
-            print(f"[SEC Extractor] Nota sobre items narrativos: {e}")
-            
-    narrative_path = output_dir / "sec_narrative.json"
-    atomic_json_write(narrative_path, narratives, indent=2, ensure_ascii=False)
-    print(f"[SEC Extractor] Narrativas guardadas: {narrative_path}")
-    
+    narratives = _extract_10k_narratives(ticker, name, sic_code, company, filing_context, output_dir)
     return full_dataset, narratives
 
 
@@ -584,7 +564,7 @@ if __name__ == "__main__":
     parser.add_argument("--ticker", required=True)
     parser.add_argument("--out-dir", default=None)
     args = parser.parse_args()
-    
+
     extract_sec_data(args.ticker, args.out_dir)
 
 
@@ -612,6 +592,7 @@ __all__ = [
     # Extracción Cruda XBRL y LTM/TTM (desde sec_modules.sec_xbrl_ltm)
     "normalize_fiscal_year",
     "_clean_concept_token",
+    "sanitize_multiclass_eps_df",
     "dataframe_to_concept_dict",
     "get_all_matching_sum",
     "get_mrq_fact",

@@ -12,9 +12,12 @@ el motor de reconciliación de estados financieros para los 5 arquetipos institu
 - INSURANCE
 """
 
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional
+import logging
 import math
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 
 # --------------------------------------------------------------------------------------
@@ -960,8 +963,8 @@ def get_first_matching_value(
                     if val is not None and not pd.isna(val):
                         try:
                             return float(val)
-                        except (ValueError, TypeError):
-                            pass
+                        except (ValueError, TypeError) as exc:
+                            logger.debug("Valor no numérico ignorado para %s[%s]: %r (%s)", c_key, period, val, exc)
     return None
 
 

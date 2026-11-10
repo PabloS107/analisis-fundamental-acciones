@@ -1,7 +1,7 @@
 {
   "ticker": "GOOGL",
   "is_foreign_private_issuer": false,
-  "timestamp": "2026-11-02T20:35:51.111519",
+  "timestamp": "2026-11-10T14:17:12.687638",
   "scorecard": {
     "governance_score": 90,
     "governance_rating": "SÓLIDA / BAJO RIESGO",
@@ -20,6 +20,19 @@
     ]
   },
   "form_8k_events": [
+    {
+      "filing_date": "2026-11-05",
+      "accession_number": "0001193125-26-449835",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01. Other Events. Alphabet Inc. Euro-Denominated Senior Notes Offering On November 5, 2026, Alphabet Inc. (“Alphabet”) closed its underwritten public offering of €6 billion aggregate principal amount of euro-denominated senior notes (the “Notes”) pursuant to Alphabet’s registration statement on FormS-3(File No. 333-296395). The Notes were is..."
+    },
     {
       "filing_date": "2026-10-28",
       "accession_number": "0001652044-26-000080",
@@ -330,20 +343,6 @@
       "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
       "risk_rating": "LOW",
       "text_snippet": "Item 8.01. Other Events. Alphabet Inc. U.S. Dollar-Denominated Bond Offering On May 1, 2025, Alphabet Inc. (“Alphabet”) closed its underwritten public offering of $750,000,000 aggregate principal amount of 4.000% notes due 2030 (the “2030 Notes”), $1,250,000,000 aggregate principal amount of 4.500% notes due 2035 (the “2035 Notes”), $1,500,000,000 ..."
-    },
-    {
-      "filing_date": "2025-04-24",
-      "accession_number": "0001652044-25-000040",
-      "items": [
-        "Item 2.02",
-        "Item 8.01",
-        "Item 9.01"
-      ],
-      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
-      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
-      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
-      "risk_rating": "LOW",
-      "text_snippet": "Item 2.02. Results of Operations and Financial Condition. On April 24, 2025, Alphabet Inc. (“ Alphabet” or the “Company”) is issuing a press release and holding a conference call regarding its financial results for the quarter ended March 31, 2025. A copy of the press release is furnished as Exhibit 99.1 to this Current Report on Form 8-K."
     }
   ],
   "form_6k_events": [],

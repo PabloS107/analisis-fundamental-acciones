@@ -7,6 +7,8 @@ construcción del resumen canónico, conciliación As-Reported y segmentos ASC 2
 from .sec_xbrl_ltm import (
     normalize_fiscal_year,
     _clean_concept_token,
+    _safe_float,
+    sanitize_multiclass_eps_df,
     dataframe_to_concept_dict,
     get_all_matching_sum,
     get_mrq_fact,
@@ -35,12 +37,15 @@ from .sec_freshness import (
     check_sec_freshness,
     get_local_sec_metadata,
     derive_period_label,
+    build_sec_freshness_metadata,
 )
 from .filing_context import SharedFilingContext
 
 __all__ = [
     "normalize_fiscal_year",
     "_clean_concept_token",
+    "_safe_float",
+    "sanitize_multiclass_eps_df",
     "dataframe_to_concept_dict",
     "get_all_matching_sum",
     "get_mrq_fact",
@@ -63,5 +68,6 @@ __all__ = [
     "check_sec_freshness",
     "get_local_sec_metadata",
     "derive_period_label",
+    "build_sec_freshness_metadata",
     "SharedFilingContext",
 ]

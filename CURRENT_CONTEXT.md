@@ -264,4 +264,26 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 5. **Pruebas nuevas (`tests/test_config_and_pipeline_runner.py`):** 6 pruebas de invariancia de CWD, delegación del runner web y ausencia de módulos/carpetas obsoletas.
 
 ### Próxima intervención pendiente de aprobación (Capa 1 — STOP & PROPOSE)
-- `entity_classifier.py:normalize_archetype`, corrección de `FutureWarning` pandas y excepciones silenciosas en `sec_modules/`, modularización de monolitos de extracción y arreglo taxonómico multi-clase EPS (`StatementClassOfStockAxis`, `GOOGL FY2015`).
+- `entity_classifier.py:normalize_archetype`, corrección de `FutureWarning` pandas y excepciones silenciosas en `sec_modules/`, modularización de monolitos de extracción y arreglo taxonómico multi-clase EPS (`StatementClassOfStockAxis`, `GOOGL FY2015`). *(Completada en la Sección 10).*
+
+---
+
+## 10. Sesión 2026-11-10 — Auditoría por Capas: Capa 1 completada (STOP & PROPOSE -> Capa 2)
+
+### Estado verificado tras Capa 1
+- `python -m unittest discover -s tests -q`: **376 tests en 247.252s — OK (`skipped=2` pruebas opt-in de red en `test_sec_freshness.py`)**. Cero `FutureWarning` de pandas.
+- `python tests/health_check.py`: **15 / 15 PASS | Fallos: 0 | Advertencias: 0**. Las 11 emisoras extraídas (`AAPL`, `DECK`, `GOOGL`, `JPM`, `MELI`, `META`, `NU`, `NVDA`, `O`, `PGR`, `UBER`) alcanzan **100.0%** de fidelidad contable.
+- Re-extracción real de `GOOGL` (`python pipeline/fundamental_pipeline.py --ticker GOOGL`): **PASS 100.0%** (`64` aprobados, `0` fallos, `2` omitidos).
+- Dashboard Django (`GET /` y `/company/{TICKER}/` para las 11 empresas, total 12 rutas): todas **HTTP 200**.
+- `python web_dashboard/manage.py test analytics`: **6 tests en 12.735s — 5 OK, 1 fallo preexistente** (`ValuationAndSensitivityTests.test_meli_hybrid_view`, `'Margen FCF Auditado:'` diferido a Capa 5).
+
+### Cambios implementados en Capa 1
+1. **`pipeline/entity_classifier.py`:** Corregida fuga de `default` ajeno en `normalize_archetype()` sobre alias corporativos, añadido logging estructurado, estrechado `except` en `parse_sic_code()` y descompuesto `detect_company_archetype()` en `_has_concept_match`, `_extract_concept_fingerprint` y `_resolve_declared_archetype`.
+2. **Eliminación de suma errónea multi-clase XBRL y blindaje dimensional (`pipeline/sec_modules/sec_xbrl_ltm.py`, `pipeline/sec_modules/sec_statement_reconciler.py`):** Implementados `sanitize_multiclass_eps_df()` y `_select_primary_class_eps()` para corregir promedios/sumas sobre `us-gaap:StatementClassOfStockAxis` priorizando clases A/B sobre clase C sin distorsionar EPS consolidados; protegidos `dataframe_to_concept_dict()` y `merge_annual_statement_df()` frente a sobrescrituras de filas dimensionales; eliminado `df.loc[len(df)]` / `pd.concat` con columnas vacías mediante `_append_rows_safely()` e inserción directa (cero `FutureWarning`).
+3. **Higiene AST y modularización de Capa 1:** Eliminados `bare except:`, los `39` `except ...: pass` silenciosos y las importaciones muertas en los 10 archivos de ingestión (`entity_classifier.py`, `financial_taxonomy.py`, `canonical_resolvers.py`, `sec_extractor.py`, `sec_modules/{__init__,sec_freshness,sec_xbrl_ltm,sec_statement_reconciler,sec_canonical_builder,sec_segment_extractor}.py`). Modularizados `sec_canonical_builder.py` (de monolito 1242L a helpers cohesivos + guard de `lt_debt` no inicializado en `comb_debt`), `canonical_resolvers.py` (`_CAPITAL_FLOW_KEYS`, `_BS_CONCEPT_KEYS` y helpers SSOT de balance, P&L y flujo de caja), `sec_segment_extractor.py` (constantes a nivel de módulo, `_upsert_segment_entry` compartido y eliminación de 4 sets muertos) y `sec_extractor.py` (`622` líneas, bajo el contrato `< 650` y con `build_sec_freshness_metadata` en `sec_freshness.py`).
+4. **Pruebas unitarias nuevas (`tests/test_multiclass_eps_and_xbrl_hygiene.py`):** 5 pruebas con `-W error::FutureWarning` validando EPS multi-clase (`StatementClassOfStockAxis`), aislamiento dimensional, cero `FutureWarning` en pandas y precedencia de `normalize_archetype()`.
+
+### Próxima intervención pendiente de aprobación (Capa 2 — STOP & PROPOSE)
+- `audit_engine.py`: bug de reporte residual `diff_adj` en `audit_eps_consistency()` (p. ej. `DECK FY2016/FY2017` con `status=PASS` pero `discrepancy=3.49 / 0.26`).
+- Módulos huérfanos sin llamadores: `pipeline/cross_verifier.py` (`364L`) y `pipeline/run_scoring.py` (`17L`), además de duplicidad `cross_verifier.py` vs `data_verifier.py`.
+- SSOT, `Regla 6` e higiene en `kpi_extractor.py`, `governance_insider_analyzer.py`, `data_verifier.py`, `market_data_provider.py`, `drive_manager.py`, `sec_rate_limiter.py` y `filing_context.py` (elimina copias locales de arquetipos/años fijos/marcas, `total_tax_withholding_shares` muerto, restos de `"transcripts"` y `except: pass`).
