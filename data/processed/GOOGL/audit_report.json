@@ -2,7 +2,7 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-11-07T10:32:52.586271",
+  "audit_timestamp": "2026-11-10T11:15:47.108417",
   "years_audited": {
     "LTM": [
       {
@@ -436,15 +436,15 @@
       },
       {
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
-        "passed": false,
-        "status": "FAIL",
+        "passed": true,
+        "status": "PASS",
         "net_income": 40269000000.0,
         "shares_diluted": 675222000.0,
         "eps_reported": 2.93,
         "eps_calculated": 59.64,
         "eps_adjusted": 0.15,
         "split_factor": 20.0,
-        "discrepancy": 2.83
+        "discrepancy": 0.05
       }
     ],
     "FY2019": [
@@ -508,7 +508,7 @@
         "eps_calculated": 49.89,
         "eps_adjusted": 2.46,
         "split_factor": 20.0,
-        "discrepancy": 0.03
+        "discrepancy": 0.73
       }
     ],
     "FY2018": [
@@ -572,7 +572,7 @@
         "eps_calculated": 44.19,
         "eps_adjusted": 2.19,
         "split_factor": 20.0,
-        "discrepancy": 0.02
+        "discrepancy": 0.49
       }
     ],
     "FY2017": [
@@ -636,7 +636,7 @@
         "eps_calculated": 18.22,
         "eps_adjusted": 0.9,
         "split_factor": 20.0,
-        "discrepancy": 0.01
+        "discrepancy": 0.22
       }
     ],
     "FY2016": [
@@ -700,7 +700,7 @@
         "eps_calculated": 28.18,
         "eps_adjusted": 1.39,
         "split_factor": 20.0,
-        "discrepancy": 0.02
+        "discrepancy": 0.33
       }
     ],
     "FY2015": [
@@ -764,14 +764,14 @@
         "eps_calculated": 23.02,
         "eps_adjusted": 4.64,
         "split_factor": 20.0,
-        "discrepancy": 3.49
+        "discrepancy": 91.71
       }
     ]
   },
   "overall_status": "FAIL",
   "total_tests": 72,
-  "passed_tests": 69,
-  "failed_tests": 2,
+  "passed_tests": 70,
+  "failed_tests": 1,
   "skipped_tests": 1,
-  "compliance_score_pct": 97.2
+  "compliance_score_pct": 98.6
 }

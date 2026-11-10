@@ -11,15 +11,31 @@ Genera:
 Garantiza 100% de trazabilidad contable, reconciliación de splits accionarios y detección preventiva de discrepancias.
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import (
+        load_sec_config,
+        CONFIG_DIR,
+        DATA_PROCESSED_DIR,
+        DEFAULT_SEC_IDENTITY,
+    )
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import (
+            load_sec_config,
+            CONFIG_DIR,
+            DATA_PROCESSED_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
     except ImportError:
         from .json_io import atomic_json_write
-import sys
+        from .config_loader import (
+            load_sec_config,
+            CONFIG_DIR,
+            DATA_PROCESSED_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
 import json
 import urllib.request
 from pathlib import Path
@@ -54,19 +70,7 @@ except ImportError:
 
 
 def load_sec_identity():
-    config_paths = [
-        Path("config/sec_config.json"),
-        Path(__file__).resolve().parent.parent.parent.parent / "config" / "sec_config.json"
-    ]
-    for cp in config_paths:
-        if cp.exists():
-            try:
-                with open(cp, "r", encoding="utf-8") as f:
-                    cfg = json.load(f)
-                    return cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")
-            except Exception:
-                pass
-    return "Pablo Inversiones pablo_inversiones@gmail.com"
+    return load_sec_config().get("sec_identity", DEFAULT_SEC_IDENTITY)
 
 
 def fetch_sec_company_facts(cik, identity):
@@ -432,7 +436,7 @@ def verify_financial_data(ticker, local_dir=None, tolerance_pct=2.5):
     print(f"{'='*75}\n")
     
     if local_dir is None:
-        local_dir = Path("data/processed") / ticker_upper
+        local_dir = DATA_PROCESSED_DIR / ticker_upper
     else:
         local_dir = Path(local_dir)
         
@@ -690,15 +694,15 @@ PEER_CIK_CATALOG = {
 }
 
 
-def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_path="config/peer_benchmarks.json"):
+def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_path=None):
     """
     Somete a todas las empresas del Grupo de Pares a la verificación cruzada
     contra la API oficial de SEC Company Facts y agregadores de mercado (fiscal.ai / Tikr).
     Actualiza peer_benchmarks.json con las cifras auditadas y genera reportes de trazabilidad.
     """
-    cfg_file = Path(config_path)
+    cfg_file = Path(config_path) if config_path else (CONFIG_DIR / "peer_benchmarks.json")
     if not cfg_file.exists():
-        print(f"[Data Verifier] No se encontró {config_path}")
+        print(f"[Data Verifier] No se encontró {cfg_file}")
         return None
         
     with open(cfg_file, "r", encoding="utf-8") as f:
@@ -751,10 +755,11 @@ def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_pat
         latest_rd = facts_rd.get(latest_fy_r, 0.0) if latest_fy_r else 0.0
         
         if t_tick == target_ticker.upper():
-            local_json = Path("data/processed") / target_ticker.upper() / "financial_statements.json"
+            local_json = DATA_PROCESSED_DIR / target_ticker.upper() / "financial_statements.json"
             if local_json.exists():
                 try:
-                    loc_d = json.load(open(local_json, encoding="utf-8")).get("canonical_summary", {})
+                    with open(local_json, "r", encoding="utf-8") as ljf:
+                        loc_d = json.load(ljf).get("canonical_summary", {})
                     p["revenue_usd_m"] = round(loc_d.get("revenue", {}).get("LTM", 0) / 1e6, 1)
                     p["total_assets_usd_m"] = round(loc_d.get("total_assets", {}).get("LTM", 0) / 1e6, 1)
                     p["net_income_usd_m"] = round(loc_d.get("net_income", {}).get("LTM", 0) / 1e6, 1)
@@ -815,7 +820,7 @@ def verify_peer_group_benchmarks(target_ticker="DECK", sic_code=None, config_pat
     atomic_json_write(cfg_file, bench_data, indent=2, ensure_ascii=False)
     print(f"[Data Verifier] Configuración {config_path} actualizada con datos auditados.")
     
-    out_dir = Path("data/processed") / target_ticker.upper()
+    out_dir = DATA_PROCESSED_DIR / target_ticker.upper()
     out_dir.mkdir(parents=True, exist_ok=True)
     rep_json_path = out_dir / "peer_verification_report.json"
     rep_md_path = out_dir / "peer_verification_report.md"

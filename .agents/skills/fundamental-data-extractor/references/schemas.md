@@ -71,7 +71,7 @@ Abarca **10 ejercicios fiscales completos + período LTM (Last Twelve Months / T
 ## 2. Convenciones de Unidades y Formato
 
 1. **Moneda Base**: Todas las variables en `canonical_summary` se almacenan en **dólares enteros (USD)** dentro de `financial_statements.json` para evitar pérdidas de precisión en cálculos matemáticos.
-2. **Plataforma Web Django (`web_dashboard/`) e Informe Word (`.docx`)**:
+2. **Plataforma Web Django (`web_dashboard/`)**:
    - Vistas y tablas financieras: Cifras formateadas en **Millones de USD ($M)**.
    - Ratios Financieros: Márgenes y Retornos formateados en **Porcentaje (%)**, múltiplos de cobertura y apalancamiento en **(x)**.
    - Columna `LTM`: Con columna diferenciada e identada para doce meses móviles.

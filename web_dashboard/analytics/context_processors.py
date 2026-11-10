@@ -53,8 +53,8 @@ def nav_companies(request):
                 with open(scores_file, "r", encoding="utf-8") as f:
                     sc = json.load(f)
                     name = sc.get("company_name", ticker)
-            except Exception:
-                pass
+            except (OSError, json.JSONDecodeError) as exc:
+                print(f"[NavCompanies] Aviso leyendo {scores_file}: {exc}")
         companies.append({
             "ticker": ticker,
             "name": name,

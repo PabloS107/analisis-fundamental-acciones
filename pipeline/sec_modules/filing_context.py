@@ -12,12 +12,11 @@ Sigue el principio Shared Data Manifest de Fiscal.ai: 'Construir un único manif
 y aplicar sobre él múltiples lentes analíticos sin repetir llamadas de red ni parseos de archivo'.
 """
 
-import os
-import sys
-import json
-from pathlib import Path
+import logging
 from typing import Any, Dict, List, Optional, Tuple, Union
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 try:
     from edgar import Company, set_identity
@@ -27,55 +26,39 @@ except ImportError:
         pass
 
 try:
+    from ..config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
+except ImportError:
+    try:
+        from config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
+    except ImportError:
+        from pipeline.config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
+
+try:
     from sec_rate_limiter import sec_call_with_retry, default_rate_limiter
 except ImportError:
     try:
-        from .sec_rate_limiter import sec_call_with_retry, default_rate_limiter
+        from ..sec_rate_limiter import sec_call_with_retry, default_rate_limiter
     except ImportError:
-        def sec_call_with_retry(fn, *args, **kwargs):
-            return fn(*args, **kwargs)
-        default_rate_limiter = None
-
-
-def load_sec_config() -> dict:
-    """Carga configuración del entorno de SEC EDGAR."""
-    possible_paths = [
-        Path("config/sec_config.json"),
-        Path(__file__).resolve().parents[3] / "config" / "sec_config.json",
-        Path(__file__).resolve().parents[2] / "config" / "sec_config.json",
-        Path(__file__).resolve().parents[4] / "config" / "sec_config.json",
-    ]
-    for p in possible_paths:
-        if p.exists():
-            try:
-                with open(p, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            except Exception:
-                pass
-    return {
-        "sec_identity": "Pablo Inversiones pablo_inversiones@gmail.com",
-        "google_drive_base_path": "G:\\Mi unidad\\analisis fundamental",
-        "local_output_path": "data\\processed"
-    }
+        from pipeline.sec_rate_limiter import sec_call_with_retry, default_rate_limiter
 
 
 class SharedFilingContext:
     """
     Manifiesto de datos compartido en memoria para una compañía durante la corrida del pipeline.
-    Preserva el estado entre sec_extractor, sec_segment_extractor, kpi_extractor,
-    earnings_call_extractor y governance_insider_analyzer.
+    Preserva el estado entre sec_extractor, sec_segment_extractor, kpi_extractor
+    y governance_insider_analyzer.
     """
 
     def __init__(self, ticker: str, company: Any = None, sec_identity: Optional[str] = None):
         self.ticker = str(ticker).strip().upper()
         self._cfg = load_sec_config()
-        self._identity = sec_identity or self._cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")
+        self._identity = sec_identity or self._cfg.get("sec_identity", DEFAULT_SEC_IDENTITY)
         
         # Configurar identidad de una sola vez
         try:
             set_identity(self._identity)
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("[SharedFilingContext] No se pudo fijar identidad SEC (%s): %s", self.ticker, exc)
 
         self._company = company
         self._cik: Optional[str] = None
@@ -149,8 +132,8 @@ class SharedFilingContext:
                 if f_40f is not None and len(f_40f) > 0:
                     self._is_fpi = True
                     return True
-            except Exception:
-                pass
+            except Exception as exc:
+                logger.debug("[SharedFilingContext] No se pudo verificar formularios 20-F/40-F (%s): %s", self.ticker, exc)
             self._is_fpi = False
         return self._is_fpi
 
@@ -165,8 +148,8 @@ class SharedFilingContext:
                     top_form = str(getattr(latest_filings[0], "form", "")).upper()
                     if "20-F" in top_form or "40-F" in top_form:
                         self._accounting_std = "IFRS"
-            except Exception:
-                pass
+            except Exception as exc:
+                logger.debug("[SharedFilingContext] No se pudo detectar estándar contable (%s): %s", self.ticker, exc)
         return self._accounting_std
 
     def _normalize_form_key(self, form: Union[str, List[str], Tuple[str, ...], set]) -> Any:
@@ -285,7 +268,7 @@ class SharedFilingContext:
     def get_latest_earnings_release_data(self) -> Dict[str, Any]:
         """
         Localiza de forma unificada el último comunicado de resultados (Item 2.02 / 7.01 de Form 8-K o Form 6-K)
-        y cachea los metadatos y adjuntos EX-99 para ser compartidos entre kpi_extractor y earnings_call_extractor.
+        y cachea los metadatos y adjuntos EX-99 para ser reutilizados por kpi_extractor.
         """
         if self._earnings_release_data is not None:
             self.stats["cache_hits"] += 1
@@ -343,8 +326,8 @@ class SharedFilingContext:
                         "form_type": getattr(att, "form_type", ""),
                         "is_ex99": is_ex99
                     })
-        except Exception as e:
-            pass
+        except Exception as exc:
+            logger.debug("[SharedFilingContext] Error consultando comunicado de resultados (%s): %s", self.ticker, exc)
 
         self._earnings_release_data = sec_info
         return self._earnings_release_data

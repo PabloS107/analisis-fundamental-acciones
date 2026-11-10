@@ -397,7 +397,8 @@ class TestArchetypeClassifier(unittest.TestCase):
             reit_recon = extract_operational_kpis(
                 ticker="MOCK_REIT",
                 archetype="REAL_ESTATE_REIT",
-                output_dir=out_path
+                output_dir=out_path,
+                custom_drive_path=out_path
             )
             recon_file = out_path / "presentation_reconciliation.json"
             self.assertTrue(recon_file.exists())
@@ -409,7 +410,8 @@ class TestArchetypeClassifier(unittest.TestCase):
             ins_recon = extract_operational_kpis(
                 ticker="MOCK_INS",
                 archetype="INSURANCE",
-                output_dir=out_path
+                output_dir=out_path,
+                custom_drive_path=out_path
             )
             with open(recon_file, "r", encoding="utf-8") as f:
                 data = json.load(f)

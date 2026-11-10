@@ -3,7 +3,7 @@ pipeline_runner.py - Servicio de Ejecución y Monitoreo Asíncrono del Pipeline 
 
 Permite:
 1. Buscar y resolver empresas por Ticker, CIK o Nombre (ej. 'google' -> GOOGL, Alphabet Inc.).
-2. Iniciar el pipeline universal en un hilo desacoplado (Background Thread).
+2. Iniciar el pipeline universal en un hilo desacoplado (Background Thread) delegando a run_pipeline.
 3. Monitorear el progreso en tiempo real con hitos porcentuales y logs estructurados.
 4. Prevenir ejecuciones duplicadas simultáneas sobre el mismo ticker.
 """
@@ -12,22 +12,35 @@ import sys
 import time
 import json
 import threading
+import urllib.parse
 import urllib.request
 import urllib.error
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 if str(PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(PIPELINE_DIR))
 
 try:
-    from json_io import atomic_json_write
-except ImportError:
     from pipeline.json_io import atomic_json_write
+    from pipeline.config_loader import (
+        DATA_CACHE_DIR,
+        DATA_PROCESSED_DIR,
+        get_sec_headers as _shared_sec_headers,
+    )
+except ImportError:
+    from json_io import atomic_json_write
+    from config_loader import (
+        DATA_CACHE_DIR,
+        DATA_PROCESSED_DIR,
+        get_sec_headers as _shared_sec_headers,
+    )
 
-CACHE_DIR = PROJECT_ROOT / "data" / "cache"
+CACHE_DIR = DATA_CACHE_DIR
 SEC_TICKERS_CACHE = CACHE_DIR / "sec_company_tickers.json"
 
 # Estado en memoria de tareas de ejecución {ticker: status_dict}
@@ -36,15 +49,8 @@ _JOBS_LOCK = threading.Lock()
 
 
 def get_sec_headers() -> Dict[str, str]:
-    cfg_p = PROJECT_ROOT / "config" / "sec_config.json"
-    identity = "Pablo Inversiones pablo_inversiones@gmail.com"
-    if cfg_p.exists():
-        try:
-            with open(cfg_p, "r", encoding="utf-8") as f:
-                identity = json.load(f).get("sec_identity", identity)
-        except Exception:
-            pass
-    return {"User-Agent": identity, "Accept-Encoding": "gzip, deflate"}
+    """Retorna encabezados SEC EDGAR desde la configuración centralizada."""
+    return _shared_sec_headers()
 
 
 def _load_or_fetch_sec_tickers() -> Dict[str, Dict[str, Any]]:
@@ -56,8 +62,8 @@ def _load_or_fetch_sec_tickers() -> Dict[str, Dict[str, Any]]:
             if (time.time() - SEC_TICKERS_CACHE.stat().st_mtime) < (7 * 86400):
                 with open(SEC_TICKERS_CACHE, "r", encoding="utf-8") as f:
                     return json.load(f)
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"[PipelineRunner] Aviso leyendo caché SEC tickers: {exc}")
 
     try:
         req = urllib.request.Request("https://www.sec.gov/files/company_tickers.json", headers=get_sec_headers())
@@ -68,8 +74,11 @@ def _load_or_fetch_sec_tickers() -> Dict[str, Dict[str, Any]]:
     except Exception as e:
         print(f"[PipelineRunner] Aviso al descargar company_tickers de SEC: {e}")
         if SEC_TICKERS_CACHE.exists():
-            with open(SEC_TICKERS_CACHE, "r", encoding="utf-8") as f:
-                return json.load(f)
+            try:
+                with open(SEC_TICKERS_CACHE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except (OSError, json.JSONDecodeError) as cache_exc:
+                print(f"[PipelineRunner] Aviso caché SEC corrupto ({SEC_TICKERS_CACHE}): {cache_exc}")
         return {}
 
 
@@ -140,8 +149,8 @@ def search_companies(query: str, limit: int = 8) -> List[Dict[str, Any]]:
                         })
                         if len(results) >= limit:
                             break
-        except Exception:
-            pass
+        except (urllib.error.URLError, json.JSONDecodeError, OSError) as exc:
+            print(f"[PipelineRunner] Aviso en búsqueda Yahoo ({q}): {exc}")
 
     return results[:limit]
 
@@ -152,9 +161,9 @@ def get_job_status(ticker: str) -> Dict[str, Any]:
     with _JOBS_LOCK:
         if t in _ACTIVE_JOBS:
             return dict(_ACTIVE_JOBS[t])
-    
+
     # Comprobar si ya existe analizada en disco
-    proc_dir = PROJECT_ROOT / "data" / "processed" / t
+    proc_dir = DATA_PROCESSED_DIR / t
     if (proc_dir / "fundamental_scores.json").exists() and (proc_dir / "financial_statements.json").exists():
         return {
             "ticker": t,
@@ -176,7 +185,7 @@ def get_job_status(ticker: str) -> Dict[str, Any]:
 
 
 def _execute_pipeline_worker(ticker: str):
-    """Hilo trabajador que ejecuta el orquestador universal paso a paso con telemetría."""
+    """Hilo trabajador que delega al orquestador unificado run_pipeline con telemetría."""
     t = ticker.strip().upper()
     try:
         def update_step(step_desc: str, pct: int):
@@ -187,50 +196,15 @@ def _execute_pipeline_worker(ticker: str):
                     _ACTIVE_JOBS[t]["updated_at"] = time.time()
             print(f"[PipelineRunner] [{t}] ({pct}%) -> {step_desc}")
 
-        update_step("Verificando identidad SEC e inicializando directorios...", 10)
-        from fundamental_pipeline import run_pipeline
-        
-        update_step("Conectando con SEC EDGAR y descargando estados financieros 10-K / 10-Q...", 25)
-        # Importar y configurar identidad de edgar
-        from sec_extractor import extract_sec_data, load_sec_config
-        from edgar import set_identity
-        cfg = load_sec_config()
-        set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
+        from pipeline.fundamental_pipeline import run_pipeline
 
-        out_dir = PROJECT_ROOT / "data" / "processed" / t
-        out_dir.mkdir(parents=True, exist_ok=True)
-        
-        financials, sec_narratives = extract_sec_data(t, out_dir)
-        
-        update_step("Extrayendo conferencias de resultados (Earnings Calls y Guidance)...", 45)
-        try:
-            from earnings_call_extractor import extract_and_generate_earnings_call_data
-            extract_and_generate_earnings_call_data(t, out_dir)
-        except Exception as e:
-            print(f"[PipelineRunner] Earnings call warning: {e}")
+        out_dir = DATA_PROCESSED_DIR / t
+        run_pipeline(t, custom_output_dir=out_dir, progress_callback=update_step)
 
-        update_step("Extrayendo y normalizando KPIs operativos Non-GAAP de 8-K / 6-K...", 60)
-        try:
-            from kpi_extractor import extract_operational_kpis
-            extract_operational_kpis(t, archetype=financials.get("archetype"), output_dir=out_dir)
-        except Exception as e:
-            print(f"[PipelineRunner] KPI warning: {e}")
-
-        update_step("Ejecutando auditoría contable y gobernanza institucional...", 75)
-        from audit_engine import run_full_audit
-        from governance_insider_analyzer import analyze_governance_and_insiders
-        run_full_audit(t, out_dir)
-        analyze_governance_and_insiders(t, out_dir)
-
-        update_step("Calculando modelos cuantitativos (Piotroski, Novy-Marx, WACC, Reverse DCF)...", 90)
-        from financial_scoring_engine import calculate_fundamental_scores
-        fin_json = out_dir / "financial_statements.json"
-        calculate_fundamental_scores(t, fin_json, out_dir)
-
-        update_step("¡Análisis completado! Entregables e interfaz web listos.", 100)
         with _JOBS_LOCK:
             if t in _ACTIVE_JOBS:
                 _ACTIVE_JOBS[t]["status"] = "COMPLETED"
+                _ACTIVE_JOBS[t]["progress_pct"] = 100
                 _ACTIVE_JOBS[t]["completed"] = True
                 _ACTIVE_JOBS[t]["error"] = None
 
@@ -250,7 +224,7 @@ def launch_pipeline_job(ticker: str) -> Dict[str, Any]:
     with _JOBS_LOCK:
         current_job = _ACTIVE_JOBS.get(t)
         if current_job and current_job.get("status") == "RUNNING":
-            return current_job
+            return dict(current_job)
 
         new_job = {
             "ticker": t,
@@ -262,7 +236,8 @@ def launch_pipeline_job(ticker: str) -> Dict[str, Any]:
             "started_at": time.time()
         }
         _ACTIVE_JOBS[t] = new_job
+        snapshot = dict(new_job)
 
     worker = threading.Thread(target=_execute_pipeline_worker, args=(t,), daemon=True)
     worker.start()
-    return new_job
+    return snapshot

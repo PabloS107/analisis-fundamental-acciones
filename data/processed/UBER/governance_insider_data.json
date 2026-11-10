@@ -1,0 +1,1104 @@
+{
+  "ticker": "UBER",
+  "is_foreign_private_issuer": false,
+  "timestamp": "2026-11-10T11:12:23.173447",
+  "scorecard": {
+    "governance_score": 95,
+    "governance_rating": "SÓLIDA / BAJO RIESGO",
+    "insider_sentiment": "STRONG_BUYING",
+    "insider_sentiment_label": "Fuerte Acumulación de Directivos (Convicción Alcista)",
+    "is_foreign_private_issuer": false,
+    "open_market_buys_usd": 35314015.88,
+    "routine_10b5_sales_usd": 0.0,
+    "discretionary_sales_usd": 1135097109.37,
+    "ratio_10b5_compliance_pct": 0.0,
+    "audit_change_detected": false,
+    "debt_default_detected": false,
+    "ceo_transition_detected": true,
+    "critical_flags": [
+      "Detectadas 12 avisos con banderas de venta fuera de plan o liquidaciones relevantes."
+    ]
+  },
+  "form_8k_events": [
+    {
+      "filing_date": "2026-11-04",
+      "accession_number": "0001543151-26-000039",
+      "items": [
+        "Item 2.02",
+        "Item 5.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On November 4, 2026, Uber Technologies, Inc. (the “the Company”) issued a press release announcing its financial results for the third quarter ended September 30, 2026. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information s..."
+    },
+    {
+      "filing_date": "2026-09-15",
+      "accession_number": "0001552781-26-000486",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events. On September 15, 2026, Uber Technologies, Inc. (the “Company”) completed a registered public offering of €750,000,000 aggregate principal amount of the Company’s 3.750% Senior Notes due 2029, €1,000,000,000 aggregate principal amount of the Company’s 4.125% Senior Notes due 2032, €1,000,000,000 aggregate principal amount of ..."
+    },
+    {
+      "filing_date": "2026-08-07",
+      "accession_number": "0001552781-26-000414",
+      "items": [
+        "Item 1.01",
+        "Item 1.02",
+        "Item 2.03",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Terminación de un Acuerdo Comercial Material / Creación de una Obligación Financiera Directa o Fuera de Balance / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico. Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. Term Loan Credit Agreement On August 6, 2026, Uber Technologies, Inc. (the “Company”) entered into a Term Loan Credit Agreement (the “Term Loan Credit Agreement”), among the Company, as borrower, the lenders party thereto and Morgan Stanley Senior Funding, Inc., as administrative agent. The Term..."
+    },
+    {
+      "filing_date": "2026-08-05",
+      "accession_number": "0001543151-26-000027",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On August 5, 2026, Uber Technologies, Inc. (the “the Company”) issued a press release announcing its financial results for the second quarter ended June 30, 2026. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set for..."
+    },
+    {
+      "filing_date": "2026-07-16",
+      "accession_number": "0001552781-26-000382",
+      "items": [
+        "Item 1.01",
+        "Item 2.03",
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Creación de una Obligación Financiera Directa o Fuera de Balance / Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance. Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento. | Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. Business Combination Agreement On July 16, 2026, Uber Technologies, Inc. (the “Company” or “Uber”) entered into a Business Combination Agreement (the “BCA”), by and among, the Company, Uber International Technologies II Corporation, a Delaware corporation and a wholly-owned subsidiary of the Com..."
+    },
+    {
+      "filing_date": "2026-05-11",
+      "accession_number": "0001552781-26-000320",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On May 11, 2026, Uber Technologies, Inc. (the “Company”) announced that Nikki Krishnamurthy, Chief People Officer, has stepped down from her role. Ms. Krishnamurthy will serve as an advisor to ..."
+    },
+    {
+      "filing_date": "2026-05-08",
+      "accession_number": "0001552781-26-000314",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": ""
+    },
+    {
+      "filing_date": "2026-05-06",
+      "accession_number": "0001543151-26-000019",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 6, 2026, Uber Technologies, Inc. (the “the Company”) issued a press release announcing its financial results for the first quarter ended March 31, 2026. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set forth ..."
+    },
+    {
+      "filing_date": "2026-02-09",
+      "accession_number": "0001552781-26-000043",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FD Disclosure. On February 8, 2026, Uber Technologies, Inc. (the “Company”) entered into an agreement with Mubadala Investment Company to acquire Getir Perakende Lojistik A.Ş.’s (“Getir”) delivery portfolio in Türkiye, including food, grocery, retail, and water delivery. The transaction is structured in phases with the agreemen..."
+    },
+    {
+      "filing_date": "2026-02-04",
+      "accession_number": "0001543151-26-000011",
+      "items": [
+        "Item 5.02",
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación / Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones. Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On February 4, 2026, Uber Technologies, Inc. (the “Company”) announced that Prashanth Mahendra-Rajah, Chief Financial Officer, will step down from his role on February 16, 2026. Balaji Krishnam..."
+    },
+    {
+      "filing_date": "2026-01-12",
+      "accession_number": "0001543151-26-000005",
+      "items": [
+        "Item 8.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+      "diagnostic": "Hechos corporativos diversos de interés general.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events. New Non-GAAP Measures Beginning in the first quarter of 2026, Uber Technologies, Inc. (the “Company” or “we”) will report its Non-GAAP Operating Income, Non-GAAP Net Income and Non-GAAP Earnings Per Share (“EPS”). These new non-GAAP measures will replace the Company’s Adjusted EBITDA. These new non-GAAP measures bring the Co..."
+    },
+    {
+      "filing_date": "2025-11-04",
+      "accession_number": "0001543151-25-000030",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On November 4, 2025, Uber Technologies, Inc. (the “Company”) issued a press release announcing its financial results for the third quarter ended September 30, 2025. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set f..."
+    },
+    {
+      "filing_date": "2025-09-11",
+      "accession_number": "0001552781-25-000287",
+      "items": [
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 8.01 Other Events. On September 11, 2025, Uber Technologies, Inc. (the “Company”) completed a registered public offering of $1,000,000,000 aggregate principal amount of the Company’s 4.150% Senior Notes due 2031 (the “2031 Notes”) and $1,250,000,000 aggregate principal amount of the Company’s 4.800% Senior Notes due 2035 (the “2035 Notes” and ..."
+    },
+    {
+      "filing_date": "2025-08-06",
+      "accession_number": "0001543151-25-000020",
+      "items": [
+        "Item 2.02",
+        "Item 8.01",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Otros Eventos Materiales no Clasificados / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Hechos corporativos diversos de interés general. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On August 6, 2025, Uber Technologies, Inc. (the “Company”) issued a press release announcing its financial results for the second quarter ended June 30, 2025. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set forth u..."
+    },
+    {
+      "filing_date": "2025-06-06",
+      "accession_number": "0001552781-25-000205",
+      "items": [
+        "Item 2.03"
+      ],
+      "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+      "explanation": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+      "diagnostic": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": ""
+    },
+    {
+      "filing_date": "2025-06-04",
+      "accession_number": "0001552781-25-000203",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": ""
+    },
+    {
+      "filing_date": "2025-06-02",
+      "accession_number": "0001552781-25-000201",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": ""
+    },
+    {
+      "filing_date": "2025-05-20",
+      "accession_number": "0001552781-25-000191",
+      "items": [
+        "Item 9.01"
+      ],
+      "title": "Hecho Regulatorio (Item 9.01)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 9.01 Financial Statements and Exhibits. (d) Exhibits Exhibit Number Description 4.1 Indenture, dated as of May 20, 2025, among Uber Technologies, Inc., Neben Holdings, LLC and U.S. Bank Trust Company, National Association, as Trustee. 99.1 Press Release dated May 13, 2025. 99.2 Press Release dated May 13, 2025. ────────────────────────────────..."
+    },
+    {
+      "filing_date": "2025-05-09",
+      "accession_number": "0001552781-25-000174",
+      "items": [
+        "Item 5.07"
+      ],
+      "title": "Hecho Regulatorio (Item 5.07)",
+      "explanation": "Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": ""
+    },
+    {
+      "filing_date": "2025-05-07",
+      "accession_number": "0001543151-25-000012",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On May 7, 2025, Uber Technologies, Inc. (the “Company”) issued a press release announcing its financial results for the first quarter ended March 31, 2025. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set forth unde..."
+    },
+    {
+      "filing_date": "2025-05-06",
+      "accession_number": "0001552781-25-000160",
+      "items": [
+        "Item 7.01",
+        "Item 9.01"
+      ],
+      "title": "Regulación FD (Fair Disclosure) / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Información cualitativa compartida con analistas o conferencias del sector. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 7.01 Regulation FDDisclosure. On May 6, 2025, Uber Technologies, Inc. (the “Company”) entered into an agreement with Trendyol Group to acquire an 85% controlling stake in its Trendyol GO online meal and grocery delivery business in Türkiye for approximately $700 million in cash on a cash and debt free basis. Trendyol GO delivered more than 200..."
+    },
+    {
+      "filing_date": "2025-02-07",
+      "accession_number": "0001552781-25-000025",
+      "items": [
+        "Item 5.02"
+      ],
+      "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+      "explanation": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+      "diagnostic": "Cambio o asignación en el equipo directivo/consejo de administración y enmienda de planes de compensación.",
+      "risk_rating": "MEDIUM",
+      "text_snippet": "Item 5.02 Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers; Compensatory Arrangements of Certain Officers. On February 4, 2025, Wan Ling Martello, a member of the board of directors of Uber Technologies, Inc. (the “Company”), informed the Company of her intention not to stand for re-election at the ..."
+    },
+    {
+      "filing_date": "2025-02-05",
+      "accession_number": "0001543151-25-000004",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On February 5, 2025, Uber Technologies, Inc. (the “Company”) issued a press release announcing its financial results for the fourth quarter ended December 31, 2024. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set f..."
+    },
+    {
+      "filing_date": "2024-10-31",
+      "accession_number": "0001543151-24-000033",
+      "items": [
+        "Item 2.02",
+        "Item 9.01"
+      ],
+      "title": "Resultados de Operaciones y Condición Financiera / Hecho Regulatorio (Item 9.01)",
+      "explanation": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Avance de cifras financieras oficiales auditadas o preliminares. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 2.02 Results of Operations and Financial Condition. On October 31, 2024, Uber Technologies, Inc. (the “Company”) issued a press release announcing its financial results for the third quarter ended September 30, 2024. A copy of the press release is furnished herewith as Exhibit 99.1 and is incorporated herein by reference. The information set f..."
+    },
+    {
+      "filing_date": "2024-09-27",
+      "accession_number": "0001552781-24-000539",
+      "items": [
+        "Item 1.01",
+        "Item 1.02",
+        "Item 9.01"
+      ],
+      "title": "Entrada en un Acuerdo Comercial Material No Ordinario / Terminación de un Acuerdo Comercial Material / Hecho Regulatorio (Item 9.01)",
+      "explanation": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos). Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico. Evento de notificación corporativa ante la SEC.",
+      "diagnostic": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa. | Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave. | Evento regulatorio ordinario.",
+      "risk_rating": "LOW",
+      "text_snippet": "Item 1.01 Entry into a Material Definitive Agreement. On September 26, 2024, Uber Technologies, Inc. (the “Company”) entered into a Credit Agreement (the “Credit Agreement”), among the Company, the lenders party thereto, the letter of credit issuers party thereto and Bank of America, N.A., as administrative agent. The Credit Agreement replaces the ..."
+    }
+  ],
+  "form_6k_events": [],
+  "form_4_insiders": {
+    "summary": {
+      "filings_analyzed": 40,
+      "total_open_market_buys_usd": 35314015.88,
+      "total_open_market_buys_shares": 1011000,
+      "total_10b5_sales_usd": 0.0,
+      "total_10b5_sales_shares": 0,
+      "total_discretionary_sales_usd": 1135097109.37,
+      "total_discretionary_sales_shares": 168897781,
+      "total_grants_shares": 1991,
+      "ratio_10b5_vs_discretionary_pct": 0.0,
+      "active_insiders_count": 10,
+      "insiders_breakdown": {
+        "Balaji (A) Krishnamurthy": {
+          "position": "Chief Financial Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 5
+        },
+        "Andrew Macdonald": {
+          "position": "President and Chief Operating Officer",
+          "buys_usd": 5308063.682500001,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 70000,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 6
+        },
+        "Tony West": {
+          "position": "Chief Legal Officer and Corporate Secretary",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 5
+        },
+        "Jill Hazelbaker": {
+          "position": "President & Chief Corporate Affairs Officer",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 2008673.1180000002,
+          "shares_bought": 0,
+          "shares_sold": 28170,
+          "grants": 0,
+          "tx_count": 6
+        },
+        "Glen Ceremony": {
+          "position": "Chief Accounting Officer and Global Corporate Controller",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 5
+        },
+        "John A Thain": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 699,
+          "tx_count": 4
+        },
+        "Ursula M Burns": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 663,
+          "tx_count": 2
+        },
+        "Nikesh Arora": {
+          "position": "Director",
+          "buys_usd": 0.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 0,
+          "shares_sold": 0,
+          "grants": 629,
+          "tx_count": 2
+        },
+        "Uber Technologies, Inc": {
+          "position": "10% Owner",
+          "buys_usd": 20000000.0,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 1133088436.255,
+          "shares_bought": 800000,
+          "shares_sold": 168869611,
+          "grants": 0,
+          "tx_count": 4
+        },
+        "Dara Khosrowshahi": {
+          "position": "Chief Executive Officer",
+          "buys_usd": 10005952.200000001,
+          "sales_10b5_usd": 0.0,
+          "sales_discretionary_usd": 0.0,
+          "shares_bought": 141000,
+          "shares_sold": 0,
+          "grants": 0,
+          "tx_count": 1
+        }
+      }
+    },
+    "transactions": [
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Ursula M Burns",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 332,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "Nikesh Arora",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 315,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-10-14",
+        "insider": "John A Thain",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 350,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-09-17",
+        "insider": "Uber Technologies, Inc",
+        "position": "10% Owner",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 29369611,
+        "price": 6.21,
+        "total_usd": 182238436.25,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-09-15",
+        "insider": "Jill Hazelbaker",
+        "position": "President and Chief Corporate Affairs Officer",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 28170,
+        "price": 71.31,
+        "total_usd": 2008673.12,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-09-10",
+        "insider": "Dara Khosrowshahi",
+        "position": "Chief Executive Officer",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 141000,
+        "price": 70.96,
+        "total_usd": 10005952.2,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-09-08",
+        "insider": "Andrew Macdonald",
+        "position": "President and Chief Operating Officer",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 54325,
+        "price": 75.65,
+        "total_usd": 4109827.5,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-09-08",
+        "insider": "Andrew Macdonald",
+        "position": "President and Chief Operating Officer",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 15675,
+        "price": 76.44,
+        "total_usd": 1198236.19,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-08-19",
+        "insider": "Uber Technologies, Inc",
+        "position": "10% Owner",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 72000000,
+        "price": 6.55,
+        "total_usd": 471600000.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      },
+      {
+        "filing_date": "2026-07-14",
+        "insider": "John A Thain",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 349,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-14",
+        "insider": "Nikesh Arora",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 314,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-14",
+        "insider": "Ursula M Burns",
+        "position": "Director",
+        "type": "CONCESIÓN_RSU_ACCIONES",
+        "code": "A",
+        "shares": 331,
+        "price": 0.0,
+        "total_usd": 0.0,
+        "is_10b5_1": false,
+        "explanation": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "diagnostic": "INCENTIVO DE CAPITAL: Asignación de unidades de acciones restringidas ligadas a permanencia y objetivos de valor."
+      },
+      {
+        "filing_date": "2026-07-02",
+        "insider": "Uber Technologies, Inc",
+        "position": "10% Owner",
+        "type": "COMPRA_MERCADO_ABIERTO",
+        "code": "P",
+        "shares": 800000,
+        "price": 25.0,
+        "total_usd": 20000000.0,
+        "is_10b5_1": false,
+        "explanation": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "diagnostic": "MÁXIMA CONVICCIÓN ALCISTA: Compra directa con fondos propios en mercado abierto."
+      },
+      {
+        "filing_date": "2026-06-04",
+        "insider": "Uber Technologies, Inc",
+        "position": "10% Owner",
+        "type": "VENTA_DISCRECIONAL",
+        "code": "S",
+        "shares": 67500000,
+        "price": 7.1,
+        "total_usd": 479250000.0,
+        "is_10b5_1": false,
+        "explanation": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "diagnostic": "VENTA DISCRECIONAL: Venta no programada en mercado abierto; monitorear si coincide con máximos históricos."
+      }
+    ]
+  },
+  "form_144_notices": {
+    "summary": {
+      "notices_analyzed": 20,
+      "total_shares_proposed": 1028881,
+      "total_value_proposed_usd": 91921958.14,
+      "notices_under_10b5": 10,
+      "notices_discretionary": 10,
+      "notices_with_anomalies_count": 12
+    },
+    "notices": [
+      {
+        "filing_date": "2026-09-11",
+        "person_selling": "Jill Hazelbaker",
+        "shares_to_sell": 157227,
+        "market_value_usd": 11408391.12,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-06-16",
+        "person_selling": "Tanya Nichole Krishnamurthy",
+        "shares_to_sell": 15000,
+        "market_value_usd": 1098750.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-04-27",
+        "person_selling": "PRASHANTH MAHENDRA-RAJAH",
+        "shares_to_sell": 9377,
+        "market_value_usd": 711555.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-23",
+        "person_selling": "PRASHANTH MAHENDRA-RAJAH",
+        "shares_to_sell": 9000,
+        "market_value_usd": 674637.26,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2026-04-16",
+        "person_selling": "PRASHANTH MAHENDRA-RAJAH",
+        "shares_to_sell": 9000,
+        "market_value_usd": 689807.27,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-03-16",
+        "person_selling": "Tanya Nichole Krishnamurthy",
+        "shares_to_sell": 30000,
+        "market_value_usd": 2239800.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2026-01-20",
+        "person_selling": "DEREK ANTHONY WEST",
+        "shares_to_sell": 9375,
+        "market_value_usd": 795468.75,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-11-12",
+        "person_selling": "Prashanth Mahendra-Rajah",
+        "shares_to_sell": 5500,
+        "market_value_usd": 516000.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-10-20",
+        "person_selling": "DEREK ANTHONY WEST",
+        "shares_to_sell": 9375,
+        "market_value_usd": 865312.5,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-09-22",
+        "person_selling": "DEREK ANTHONY WEST",
+        "shares_to_sell": 93750,
+        "market_value_usd": 9235312.5,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-09-22",
+        "person_selling": "DARA KHOSROWSHAHI",
+        "shares_to_sell": 150000,
+        "market_value_usd": 14776500.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-09-16",
+        "person_selling": "PRASHANTH MAHENDRA-RAJAH",
+        "shares_to_sell": 2750,
+        "market_value_usd": 273240.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-09-12",
+        "person_selling": "DARA KHOSROWSHAHI",
+        "shares_to_sell": 300000,
+        "market_value_usd": 28404000.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-08-26",
+        "person_selling": "DEREK ANTHONY WEST",
+        "shares_to_sell": 12500,
+        "market_value_usd": 1189500.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-08-22",
+        "person_selling": "Jill Hazelbaker",
+        "shares_to_sell": 91752,
+        "market_value_usd": 8645791.0,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-08-14",
+        "person_selling": "Tanya Nichole Krishnamurthy",
+        "shares_to_sell": 11571,
+        "market_value_usd": 1057589.4,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Período de tenencia atípicamente corto antes de la liquidación."
+      },
+      {
+        "filing_date": "2025-07-07",
+        "person_selling": "Mahendra-Rajah Prashanth",
+        "shares_to_sell": 2750,
+        "market_value_usd": 261085.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-05-12",
+        "person_selling": "Jill Hazelbaker",
+        "shares_to_sell": 104454,
+        "market_value_usd": 8639390.34,
+        "is_10b5_1": false,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta NO sujeta a plan 10b5-1: Venta de acciones restringidas ejecutada con discreción inmediata. Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-05-05",
+        "person_selling": "Mahendra-Rajah Prashanth",
+        "shares_to_sell": 2750,
+        "market_value_usd": 233578.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Trámite ordinario de notificación de venta de acciones restringidas."
+      },
+      {
+        "filing_date": "2025-03-20",
+        "person_selling": "Mahendra-Rajah Prashanth",
+        "shares_to_sell": 2750,
+        "market_value_usd": 206250.0,
+        "is_10b5_1": true,
+        "is_large_liquidation": false,
+        "anomaly_flags": [
+          "SHORT_HOLD"
+        ],
+        "diagnostic": "Venta amparada bajo plan ciego Rule 10b5-1 (programada con antelación). Período de tenencia atípicamente corto antes de la liquidación."
+      }
+    ],
+    "anomalies": [
+      {
+        "date": "2026-09-11",
+        "seller": "Jill Hazelbaker",
+        "market_value_usd": 11408391.12,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-06-16",
+        "seller": "Tanya Nichole Krishnamurthy",
+        "market_value_usd": 1098750.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-27",
+        "seller": "PRASHANTH MAHENDRA-RAJAH",
+        "market_value_usd": 711555.0,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-23",
+        "seller": "PRASHANTH MAHENDRA-RAJAH",
+        "market_value_usd": 674637.26,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2026-04-16",
+        "seller": "PRASHANTH MAHENDRA-RAJAH",
+        "market_value_usd": 689807.27,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2026-03-16",
+        "seller": "Tanya Nichole Krishnamurthy",
+        "market_value_usd": 2239800.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-11-12",
+        "seller": "Prashanth Mahendra-Rajah",
+        "market_value_usd": 516000.0,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-09-22",
+        "seller": "DEREK ANTHONY WEST",
+        "market_value_usd": 9235312.5,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-08-22",
+        "seller": "Jill Hazelbaker",
+        "market_value_usd": 8645791.0,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-08-14",
+        "seller": "Tanya Nichole Krishnamurthy",
+        "market_value_usd": 1057589.4,
+        "is_10b5_1": false,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      },
+      {
+        "date": "2025-05-12",
+        "seller": "Jill Hazelbaker",
+        "market_value_usd": 8639390.34,
+        "is_10b5_1": false,
+        "flags": [],
+        "is_large": false
+      },
+      {
+        "date": "2025-03-20",
+        "seller": "Mahendra-Rajah Prashanth",
+        "market_value_usd": 206250.0,
+        "is_10b5_1": true,
+        "flags": [
+          "SHORT_HOLD"
+        ],
+        "is_large": false
+      }
+    ]
+  },
+  "regulatory_guides": {
+    "form_8k_guide": {
+      "Item 1.01": {
+        "title": "Entrada en un Acuerdo Comercial Material No Ordinario",
+        "description": "La compañía ha formalizado un contrato estratégico fuera del curso ordinario (alianzas clave, acuerdos de licencia o exclusividad, contratos con proveedores estratégicos).",
+        "risk_level": "NEUTRAL_TO_POSITIVE",
+        "diagnostic_hint": "Evaluar si el contrato amplía el foso defensivo o genera dependencia operativa."
+      },
+      "Item 1.02": {
+        "title": "Terminación de un Acuerdo Comercial Material",
+        "description": "Ruptura, cancelación o vencimiento anticipado de un contrato de negocio crítico.",
+        "risk_level": "WARNING",
+        "diagnostic_hint": "Alerta de riesgo comercial: analizar si supone pérdida de ingresos relevantes o deterioro de relaciones con socios clave."
+      },
+      "Item 2.01": {
+        "title": "Adquisición o Disposición Significativa de Activos (M&A)",
+        "description": "Operaciones corporativas de fusión, adquisición (M&A) o venta sustancial de filiales o unidades de negocio.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Examinar el precio pagado (múltiplos), el apalancamiento asumido y el riesgo de integración del negocio adquirido."
+      },
+      "Item 2.02": {
+        "title": "Resultados de Operaciones y Condición Financiera",
+        "description": "Publicación trimestral de resultados financieros y notas de prensa de resultados antes de la presentación formal del 10-Q o 10-K.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Avance de cifras financieras oficiales auditadas o preliminares."
+      },
+      "Item 2.03": {
+        "title": "Creación de una Obligación Financiera Directa o Fuera de Balance",
+        "description": "Emisión de nueva deuda corporativa, suscripción de líneas de crédito sindicadas o contingencias fuera de balance.",
+        "risk_level": "WATCH",
+        "diagnostic_hint": "Monitorear el aumento de deuda bruta, tipos de interés acordados y fechas de vencimiento."
+      },
+      "Item 2.04": {
+        "title": "Eventos de Aceleración o Impago de Deuda (Default / Covenants)",
+        "description": "Alerta máxima de solvencia: la compañía ha incumplido pagos de deuda o vulnerado covenants bancarios, provocando la exigibilidad inmediata de los pasivos.",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "¡Bandera roja crítica! Riesgo severo de reestructuración forzosa, quiebra o dilución masiva de accionistas."
+      },
+      "Item 3.01": {
+        "title": "Aviso de Incumplimiento de Estándares de Cotización (Delisting)",
+        "description": "Notificación oficial de la bolsa (NASDAQ / NYSE) de que la empresa no cumple requisitos mínimos (precio < $1, retraso en presentar estados contables).",
+        "risk_level": "CRITICAL_RED_FLAG",
+        "diagnostic_hint": "Riesgo inminente de exclusión de cotización y colapso de liquidez para los accionistas."
+      },
+      "Item 4.01": {
+        "title": "Cambio de Contables / Auditores Independientes",
+        "description": "Cese, dimisión o sustitución de la firma de auditoría independiente de la compañía.",
+        "risk_level": "HIGH_WARNING",
+        "diagnostic_hint": "Alerta forense primordial: investigar si existieron discrepancias contables o desacuerdos en principios contables US-GAAP con el auditor saliente."
+      },
+      "Item 5.01": {
+        "title": "Cambio en el Control de la Compañía",
+        "description": "Toma de control hostil, compra mayoritaria o cambio significativo en la estructura del accionariado de control.",
+        "risk_level": "HIGH_IMPACT",
+        "diagnostic_hint": "Evaluar la alineación del nuevo accionista de control con los inversores minoritarios."
+      },
+      "Item 5.02": {
+        "title": "Salida o Nombramiento de Directores y C-Suite; Acuerdos de Compensación",
+        "description": "Modificaciones en los cargos de máxima responsabilidad (CEO, CFO, Director General) o cambios en los paquetes de compensación e incentivos en acciones.",
+        "risk_level": "WATCH_GOVERNANCE",
+        "diagnostic_hint": "Comprobar si es un relevo planificado y ordenado o una dimisión abrupta. Analizar si la compensación incentiva el valor por acción a largo plazo."
+      },
+      "Item 5.03": {
+        "title": "Enmiendas a Estatutos Corporativos o Código de Ética",
+        "description": "Modificación de estatutos, derechos de voto o normas de gobernanza interna.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Verificar que las enmiendas no reduzcan los derechos de voto o protección de los accionistas minoritarios."
+      },
+      "Item 7.01": {
+        "title": "Regulación FD (Fair Disclosure)",
+        "description": "Divulgación pública obligatoria de presentaciones a inversores para garantizar acceso equitativo a la información de mercado.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Información cualitativa compartida con analistas o conferencias del sector."
+      },
+      "Item 8.01": {
+        "title": "Otros Eventos Materiales no Clasificados",
+        "description": "Cualquier otro hecho de relevancia material que la directiva decida comunicar formalmente a los accionistas.",
+        "risk_level": "NEUTRAL",
+        "diagnostic_hint": "Hechos corporativos diversos de interés general."
+      }
+    },
+    "form_4_codes": {
+      "P": {
+        "name": "Compra en Mercado Abierto (Open Market Purchase)",
+        "description": "El directivo compra acciones con dinero propio de su bolsillo a precios de cotización de mercado.",
+        "signal": "BULLISH_CONVICTION",
+        "impact": "Máxima señal de convicción interna: ningún directivo compra con su patrimonio personal a menos que considere que la acción está infravalorada."
+      },
+      "S": {
+        "name": "Venta en Mercado Abierto (Open Market Sale)",
+        "description": "Venta de acciones en el mercado secundario. Debe diferenciarse entre ventas por plan 10b5-1 o ventas discrecionales.",
+        "signal": "NEUTRAL_TO_BEARISH",
+        "impact": "Las ventas bajo planes 10b5-1 son automáticas y rutinarias. Las ventas discrecionales a precios máximos sugieren toma de beneficios."
+      },
+      "F": {
+        "name": "Retención Fiscal (Tax Withholding)",
+        "description": "Entrega obligatoria o retención automática de acciones para cubrir el pago de impuestos derivados de la consolidación de RSUs.",
+        "signal": "NEUTRAL_ROUTINE",
+        "impact": "Operación puramente administrativa/fiscal. No implica en absoluto pérdida de confianza en la compañía."
+      },
+      "A": {
+        "name": "Concesión de Capital (Grant / Award)",
+        "description": "Entrega de opciones sobre acciones o unidades de acciones restringidas (RSUs) como parte de su retribución.",
+        "signal": "ALIGNED_INCENTIVE",
+        "impact": "Incentivo a largo plazo para alinear a los directivos con el rendimiento para el accionista."
+      },
+      "M": {
+        "name": "Ejercicio de Opciones (Option Exercise)",
+        "description": "Conversión de opciones de compra sobre acciones acumuladas.",
+        "signal": "NEUTRAL",
+        "impact": "Aumenta la tenencia bruta de acciones de los directivos tras el pago del precio de ejercicio."
+      }
+    },
+    "form_144_guide": {
+      "definition": "La Regla 144 de la SEC regula la venta pública de acciones restringidas o en manos de personas de control (insiders).",
+      "purpose": "Exige que los directivos notifiquen formalmente a la SEC (Formulario 144) su intención de vender antes o en el momento de dar la orden de venta.",
+      "is_10b5_1": "Si la venta está amparada por un plan Rule 10b5-1, fue programada con meses de antelación sin conocimiento de información privilegiada.",
+      "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
+      "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
+    }
+  }
+}

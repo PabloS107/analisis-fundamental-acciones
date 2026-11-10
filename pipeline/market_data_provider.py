@@ -13,20 +13,21 @@ Incorpora:
 - Modo seguro offline / fallback automático hacia las medianas sectoriales de config/industry_medians.json.
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import resolve_market_cache_path
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import resolve_market_cache_path
     except ImportError:
         from .json_io import atomic_json_write
+        from .config_loader import resolve_market_cache_path
 import sys
 import json
 import time
 import datetime
-from pathlib import Path
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any, Optional
 
 import requests
 try:
@@ -42,7 +43,7 @@ DEFAULT_HEADERS = {
 class MarketDataExtractor:
     """Extractor y Validador Cruzado de Métricas Financieras en Tiempo Real."""
 
-    CACHE_FILE = Path("data/cache/market_data_cache.json")
+    CACHE_FILE = resolve_market_cache_path()
     DEFAULT_CACHE_TTL_SECONDS = 3600  # 1 hora
 
     TOLERANCE_PRICE_PCT = 0.015     # 1.5% max diferencia entre fuentes de precio

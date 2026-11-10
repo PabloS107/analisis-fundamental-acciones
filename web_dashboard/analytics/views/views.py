@@ -289,7 +289,7 @@ def company_detail(request, ticker):
 
     pr_file = ticker_dir / "presentation_reconciliation.json"
     if not pr_file.exists():
-        fallback_pr = Path("drive_input") / ticker / "processed" / "presentation_reconciliation.json"
+        fallback_pr = PROJECT_ROOT / "drive_input" / ticker / "processed" / "presentation_reconciliation.json"
         if fallback_pr.exists():
             pr_file = fallback_pr
 

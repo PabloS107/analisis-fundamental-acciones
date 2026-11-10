@@ -13,21 +13,18 @@ Extrae y analiza de SEC EDGAR:
 Genera explicaciones educativas para cada evento y diagnósticos fundamentales para la tesis de inversión.
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import load_sec_config, resolve_output_dir, DEFAULT_SEC_IDENTITY
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import load_sec_config, resolve_output_dir, DEFAULT_SEC_IDENTITY
     except ImportError:
         from .json_io import atomic_json_write
-import sys
-import re
-import json
+        from .config_loader import load_sec_config, resolve_output_dir, DEFAULT_SEC_IDENTITY
 import argparse
-from pathlib import Path
-from datetime import datetime, timedelta
-import pandas as pd
+from datetime import datetime
 
 from edgar import Company, set_identity
 
@@ -37,9 +34,7 @@ except ImportError:
     try:
         from .sec_rate_limiter import sec_call_with_retry, default_rate_limiter
     except ImportError:
-        def sec_call_with_retry(fn, *args, **kwargs):
-            return fn(*args, **kwargs)
-        default_rate_limiter = None
+        from pipeline.sec_rate_limiter import sec_call_with_retry, default_rate_limiter
 
 
 # =====================================================================
@@ -167,24 +162,6 @@ RULE144_GUIDE = {
     "discretionary_sale": "Si la venta NO está amparada por un plan 10b5-1, el directivo está vendiendo de forma discrecional en el mercado abierto.",
     "large_liquidation": "Alerta cuando el volumen propuesto a vender representa un porcentaje atípicamente elevado de la posición total del directivo."
 }
-
-
-def load_sec_config():
-    """Carga configuración del entorno."""
-    possible_paths = [
-        Path("config/sec_config.json"),
-        Path(__file__).resolve().parents[4] / "config" / "sec_config.json",
-        Path(__file__).resolve().parents[3] / "config" / "sec_config.json",
-    ]
-    for p in possible_paths:
-        if p.exists():
-            with open(p, "r", encoding="utf-8") as f:
-                return json.load(f)
-    return {
-        "sec_identity": "Pablo Inversiones pablo_inversiones@gmail.com",
-        "google_drive_base_path": "G:\\Mi unidad\\analisis fundamental",
-        "local_output_path": "data\\processed"
-    }
 
 
 # =====================================================================
@@ -655,7 +632,7 @@ def scan_form144_filings(company, max_filings=20, filing_context=None):
 def analyze_governance_and_insiders(ticker="AAPL", output_dir=None, filing_context=None):
     """Ejecuta el escaneo completo de 8-K, Form 4 y Form 144, generando el veredicto y guardando JSON."""
     cfg = load_sec_config()
-    set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
+    set_identity(cfg.get("sec_identity", DEFAULT_SEC_IDENTITY))
     
     print(f"\n===========================================================================")
     print(f"  MÓDULO DE GOBERNANZA, INSIDERS Y ALERTAS TEMPRANAS: {ticker.upper()}")
@@ -663,10 +640,7 @@ def analyze_governance_and_insiders(ticker="AAPL", output_dir=None, filing_conte
     
     company = filing_context.company if filing_context else sec_call_with_retry(Company, ticker.upper())
     
-    if output_dir is None:
-        output_dir = Path(cfg.get("local_output_path", "data/processed")) / ticker.upper()
-    else:
-        output_dir = Path(output_dir)
+    output_dir = resolve_output_dir(ticker, output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # 1. Escanear formularios (detectando si es Foreign Private Issuer)

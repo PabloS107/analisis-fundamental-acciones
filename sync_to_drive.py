@@ -10,7 +10,6 @@ e inspección remota en tiempo real.
 
 import sys
 import os
-import json
 import shutil
 from pathlib import Path
 
@@ -70,29 +69,14 @@ EXCLUDED_FILENAMES = {
 }
 
 
+from pipeline.config_loader import DEFAULT_DRIVE_BASE_PATH, load_sec_config
+
+
 def get_drive_destination(source_root: Path) -> Path:
-    """
-    Determina la ruta de destino en Google Drive a partir de config/sec_config.json
-    o usando la ruta por defecto.
-    """
-    config_file = source_root / "config" / "sec_config.json"
-    drive_base = None
-
-    if config_file.exists():
-        try:
-            with open(config_file, "r", encoding="utf-8") as f:
-                cfg = json.load(f)
-                drive_base = cfg.get("google_drive_base_path")
-        except Exception as e:
-            print(f"[Aviso] No se pudo leer sec_config.json: {e}")
-
-    if not drive_base:
-        drive_base = Path("G:/Mi unidad/analisis fundamental")
-    else:
-        drive_base = Path(drive_base)
-
-    target_dir = drive_base / "codigo_analisis_fundamental"
-    return target_dir
+    """Determina la ruta de destino en Google Drive usando config_loader (SSOT)."""
+    cfg = load_sec_config(source_root / "config" / "sec_config.json")
+    drive_base = cfg.get("google_drive_base_path") or DEFAULT_DRIVE_BASE_PATH
+    return Path(drive_base) / "codigo_analisis_fundamental"
 
 
 def should_exclude(rel_path: Path) -> bool:

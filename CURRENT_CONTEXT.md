@@ -245,3 +245,23 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 - data/processed/UBER/ NUEVO (sin tracking): aparece como extracciÃ³n de hoy 10:20; origen no
   confirmado (Â¿re-extracciÃ³n vÃ­a dashboard?). Se deja fuera del commit y pendiente de tu decisiÃ³n
   (commit vs actualizar manualmente vs eliminar).
+
+---
+
+## 9. Sesión 2026-11-10 — Auditoría por Capas: Capa 0 completada (STOP & PROPOSE -> Capa 1)
+
+### Estado verificado tras Capa 0
+- `python -m unittest discover -s tests -q`: **371 tests en 253.340s — OK (`skipped=2` pruebas de red opt-in en `test_sec_freshness.py`)**.
+- `python web_dashboard/manage.py test analytics`: **6 tests en 17.278s — 5 OK, 1 fallo preexistente** (`ValuationAndSensitivityTests.test_meli_hybrid_view`, etiqueta `'Margen FCF Auditado:'` eliminada en `34d4e6e`, diferido a Capa 5).
+- `python tests/health_check.py`: **14 / 15 PASS** (1 fallo preexistente: `GOOGL` 98.6% `70/71` por EPS `FY2015`, diferido a Capa 1). `AAPL`, `DECK`, `JPM`, `MELI`, `META`, `NU`, `NVDA`, `O`, `PGR`, `UBER` al **100.0%**.
+- Dashboard Django (`GET /`, `/company/AAPL/`, `/company/DECK/`, `/company/UBER/` desde CWD `web_dashboard/`): **HTTP 200** sin recrear `web_dashboard/data/`.
+
+### Cambios implementados en Capa 0
+1. **SSOT de rutas y configuración (`pipeline/config_loader.py`):** Centralizados `PROJECT_ROOT`, `CONFIG_DIR`, `DATA_DIR`, `DATA_PROCESSED_DIR`, `DATA_CACHE_DIR`, `DRIVE_INPUT_DIR`, `load_sec_config()`, `get_sec_headers()`, `resolve_output_dir()` y `resolve_market_cache_path()`, eliminando definiciones duplicadas y el import roto `from ..sec_config` en `sec_freshness.py`. Eliminado el anclaje relativo al CWD que generaba `web_dashboard/data/` al ejecutar `manage.py runserver`.
+2. **Orquestación unificada CLI + Web:** `pipeline/fundamental_pipeline.py` (`run_pipeline(..., progress_callback=...)`) pasó a ser la fuente única invocada por CLI y por `web_dashboard/analytics/pipeline_runner.py` (con `import urllib.parse` restaurado, snapshots thread-safe en `launch_pipeline_job` y tolerancia ante JSON corrupto).
+3. **Retiro definitivo de flujo `.docx` / Excel / llamadas de resultados:** Eliminados `pipeline/earnings_call_extractor.py` y `pipeline/doc_parser.py`; limpiadas sus referencias en `fundamental_pipeline.py`, `pipeline_runner.py`, `filing_context.py`, `index.html`, `.agents/skills/*`.
+4. **Limpieza residual y re-extracción de `UBER`:** Eliminados `web_dashboard/data/`, carpetas/copias repetidas en `drive_input/`, artefactos obsoletos (`earnings_call_data.json`, `qualitative_dossier.json`, `audit_certificate.json`, `audit_report.md`, bloqueo `~$financial_statements.xlsx` en Drive) y carpetas mock en Drive (`MOCK_REIT`, `MOCK_INS`, fijando `test_archetype_classifier.py` a `tmp`). Re-extraído `UBER` desde cero con el pipeline unificado (`PASS 100.0%`, 58/58).
+5. **Pruebas nuevas (`tests/test_config_and_pipeline_runner.py`):** 6 pruebas de invariancia de CWD, delegación del runner web y ausencia de módulos/carpetas obsoletas.
+
+### Próxima intervención pendiente de aprobación (Capa 1 — STOP & PROPOSE)
+- `entity_classifier.py:normalize_archetype`, corrección de `FutureWarning` pandas y excepciones silenciosas en `sec_modules/`, modularización de monolitos de extracción y arreglo taxonómico multi-clase EPS (`StatementClassOfStockAxis`, `GOOGL FY2015`).

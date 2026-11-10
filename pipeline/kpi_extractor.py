@@ -12,14 +12,31 @@ Normaliza KPIs estructurados según el Arquetipo de Industria:
 Genera y mantiene sincronizado: data/processed/{TICKER}/presentation_reconciliation.json
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import (
+        load_sec_config,
+        resolve_output_dir,
+        DATA_DIR,
+        DEFAULT_SEC_IDENTITY,
+    )
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import (
+            load_sec_config,
+            resolve_output_dir,
+            DATA_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
     except ImportError:
         from .json_io import atomic_json_write
+        from .config_loader import (
+            load_sec_config,
+            resolve_output_dir,
+            DATA_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
 import sys
 import re
 import json
@@ -38,44 +55,19 @@ if sys.platform == "win32":
 
 # Importar utilidades internas del pipeline
 try:
-    from sec_rate_limiter import sec_call_with_retry, default_rate_limiter
+    from sec_rate_limiter import sec_call_with_retry
     from drive_manager import (
-        load_sec_config,
         resolve_google_drive_path,
         get_ticker_drive_processed_dir,
-        safe_copy_file
+        safe_copy_file,
     )
 except ImportError:
-    try:
-        from .sec_rate_limiter import sec_call_with_retry, default_rate_limiter
-        from .drive_manager import (
-            load_sec_config,
-            resolve_google_drive_path,
-            get_ticker_drive_processed_dir,
-            safe_copy_file
-        )
-    except ImportError:
-        def load_sec_config():
-            cfg_p = Path("config/sec_config.json")
-            if cfg_p.exists():
-                with open(cfg_p, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            return {"sec_identity": "Pablo Inversiones pablo_inversiones@gmail.com", "local_output_path": "data/processed"}
-        def resolve_google_drive_path(p=None):
-            return Path(p) if p else Path("G:/Mi unidad/analisis fundamental")
-        def get_ticker_drive_processed_dir(t, p=None):
-            base = resolve_google_drive_path(p)
-            return base / t.upper() / "processed" if base.exists() else None
-        def safe_copy_file(src, dst, **kwargs):
-            try:
-                import shutil
-                shutil.copy2(src, dst)
-                return True
-            except Exception:
-                return False
-        def sec_call_with_retry(func, *args, **kwargs):
-            return func(*args, **kwargs)
-        default_rate_limiter = None
+    from .sec_rate_limiter import sec_call_with_retry
+    from .drive_manager import (
+        resolve_google_drive_path,
+        get_ticker_drive_processed_dir,
+        safe_copy_file,
+    )
 
 try:
     from edgar import set_identity, Company
@@ -98,7 +90,7 @@ def extract_from_sec_ex99(ticker, filing_context=None):
         return None
 
     cfg = load_sec_config()
-    identity = cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")
+    identity = cfg.get("sec_identity", DEFAULT_SEC_IDENTITY)
     set_identity(identity)
 
     print(f"[KPI Extractor] Buscando comunicados de resultados oficiales (Ex-99.1) para {ticker} en SEC EDGAR...")
@@ -221,7 +213,7 @@ def extract_from_presentation_pdf(ticker, custom_drive_path=None):
             possible_dirs.append(t_drive / "presentations")
             possible_dirs.append(t_drive)
 
-    local_p = Path("data/raw") / ticker.upper() / "presentations"
+    local_p = DATA_DIR / "raw" / ticker.upper() / "presentations"
     if local_p.exists():
         possible_dirs.append(local_p)
 
@@ -865,7 +857,7 @@ def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_dri
     6. Guarda data/processed/{TICKER}/presentation_reconciliation.json y sincroniza con Drive.
     """
     ticker = ticker.strip().upper()
-    out_dir = Path(output_dir) if output_dir else Path("data/processed") / ticker
+    out_dir = resolve_output_dir(ticker, output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n{'='*70}")
@@ -944,7 +936,7 @@ def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_dri
     if not comparisons:
         comparisons = existing_recon.get("comparisons", {})
 
-    # 6. Ensamblar estructura final con compatibilidad cruzada Django/Word
+    # 6. Ensamblar estructura final compatible con el Dashboard Web Django
     reconciliation_result = {
         "timestamp": datetime.now().isoformat(),
         "overall_status": existing_recon.get("overall_status", "CONCILIADO"),

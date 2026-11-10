@@ -1,0 +1,544 @@
+{
+  "periods": [
+    "LTM",
+    "FY2025",
+    "FY2024",
+    "FY2023",
+    "FY2022",
+    "FY2021",
+    "FY2020",
+    "FY2019",
+    "FY2018",
+    "FY2017"
+  ],
+  "product_segments": [
+    {
+      "name": "Mobility",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 29670.0,
+        "FY2024": 25087.0,
+        "FY2023": 19832.0,
+        "FY2022": 14029.0,
+        "FY2021": 6953.0,
+        "FY2020": 6089.0,
+        "FY2019": 10707.0,
+        "FY2018": 9288.0,
+        "LTM": 29670.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Delivery",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 17248.0,
+        "FY2024": 13750.0,
+        "FY2023": 12204.0,
+        "FY2022": 10901.0,
+        "FY2021": 8362.0,
+        "FY2020": 3904.0,
+        "FY2019": 1401.0,
+        "LTM": 17248.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Freight",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2025": 5099.0,
+        "FY2024": 5141.0,
+        "FY2023": 5245.0,
+        "FY2022": 6947.0,
+        "FY2021": 2132.0,
+        "FY2020": 1011.0,
+        "FY2019": 731.0,
+        "LTM": 5099.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2019": -217.0,
+        "FY2018": -102.0,
+        "FY2017": -39.0
+      },
+      "operating_margin_pct": {
+        "FY2019": -29.69
+      }
+    },
+    {
+      "name": "Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": true,
+      "parent": null,
+      "values": {
+        "FY2025": -2.0,
+        "FY2024": -3.0,
+        "FY2023": -84.0,
+        "FY2022": -25.0,
+        "FY2021": -157.0,
+        "FY2020": -317.0,
+        "FY2019": -8.0,
+        "FY2018": -237.0,
+        "LTM": -2.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "All Other",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2023": 0.0,
+        "FY2022": 0.0,
+        "FY2021": 8.0,
+        "FY2020": 135.0,
+        "FY2019": 161.0,
+        "FY2018": 17.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Aurora",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2021": 83.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2021": -731.0
+      },
+      "operating_margin_pct": {
+        "FY2021": -880.72
+      }
+    },
+    {
+      "name": "Previously Reported",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 12422.0,
+        "FY2019": 14147.0,
+        "FY2018": 11270.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Effect of Change",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": -1283.0,
+        "FY2019": -1147.0,
+        "FY2018": -837.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other revenue",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 112.0,
+        "FY2018": 112.0,
+        "FY2017": 45.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Rides",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 10745.0,
+        "FY2018": 9437.0,
+        "FY2017": 7278.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2019": 2071.0,
+        "FY2018": 1541.0,
+        "FY2017": 388.0
+      },
+      "operating_margin_pct": {
+        "FY2019": 19.27,
+        "FY2018": 16.33,
+        "FY2017": 5.33
+      }
+    },
+    {
+      "name": "Other Bets",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2019": 119.0,
+        "FY2018": 17.0,
+        "FY2017": 0.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2019": -251.0,
+        "FY2018": -50.0,
+        "FY2017": -1.0
+      },
+      "operating_margin_pct": {
+        "FY2019": -210.92,
+        "FY2018": -294.12
+      }
+    }
+  ],
+  "channel_segments": [],
+  "geographic_segments": [
+    {
+      "name": "United States and Canada (\"US&CAN\")",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 26469.0,
+        "FY2024": 23618.0,
+        "FY2023": 20436.0,
+        "FY2022": 19474.0,
+        "LTM": 26469.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Latin America (\"LatAm\")",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 3327.0,
+        "FY2024": 2795.0,
+        "FY2023": 2512.0,
+        "FY2022": 1978.0,
+        "FY2020": 1295.0,
+        "FY2019": 1862.0,
+        "FY2018": 1963.0,
+        "LTM": 3327.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Europe, Middle East and Africa (\"EMEA\")",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 16364.0,
+        "FY2024": 12529.0,
+        "FY2023": 9904.0,
+        "FY2022": 6944.0,
+        "FY2020": 2086.0,
+        "FY2019": 1852.0,
+        "FY2018": 1495.0,
+        "LTM": 16364.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "Asia Pacific (\"APAC\")",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 5857.0,
+        "FY2024": 5036.0,
+        "FY2023": 4429.0,
+        "FY2022": 3481.0,
+        "FY2021": 2731.0,
+        "FY2020": 1147.0,
+        "FY2019": 821.0,
+        "FY2018": 749.0,
+        "LTM": 5857.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "United States",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "parent": "United States & Canada",
+      "values": {
+        "FY2025": 23771.0,
+        "FY2024": 21429.0,
+        "FY2023": 18620.0,
+        "FY2022": 17953.0,
+        "FY2021": 9058.0,
+        "FY2020": 6082.0,
+        "FY2019": 7968.0,
+        "FY2018": 5824.0,
+        "FY2017": 4068.0,
+        "LTM": 23771.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "United Kingdom",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 10609.0,
+        "FY2024": 8373.0,
+        "FY2023": 6522.0,
+        "FY2022": 4215.0,
+        "FY2021": 551.0,
+        "FY2020": 637.0,
+        "LTM": 10609.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "All other countries",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2025": 17637.0,
+        "FY2024": 14176.0,
+        "FY2023": 12139.0,
+        "FY2022": 9709.0,
+        "FY2021": 7846.0,
+        "FY2020": 4420.0,
+        "FY2019": 5032.0,
+        "FY2018": 4609.0,
+        "FY2017": 3033.0,
+        "LTM": 17637.0
+      },
+      "status": "active"
+    },
+    {
+      "name": "United States & Canada",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 20436.0,
+        "FY2022": 19474.0,
+        "FY2021": 10094.0,
+        "FY2020": 6611.0,
+        "FY2019": 8465.0,
+        "FY2018": 6226.0,
+        "FY2017": 4367.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Latin America",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 2512.0,
+        "FY2022": 1978.0,
+        "FY2021": 1417.0,
+        "FY2020": 1295.0,
+        "FY2019": 1862.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "EMEA",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2023": 9904.0,
+        "FY2022": 6944.0,
+        "FY2021": 3213.0,
+        "FY2020": 2086.0,
+        "FY2019": 1852.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Latin America (LATAM)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2019": 1947.0,
+        "FY2018": 2002.0,
+        "FY2017": 1645.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Europe, Middle East and Africa (EMEA)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2019": 2148.0,
+        "FY2018": 1721.0,
+        "FY2017": 1157.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Asia Pacific (APAC)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2019": 1247.0,
+        "FY2018": 1026.0,
+        "FY2017": 763.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Brazil",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2019": 918.0,
+        "FY2018": 959.0,
+        "FY2017": 831.0
+      },
+      "status": "discontinued"
+    }
+  ],
+  "segment_operating_income": [
+    {
+      "name": "Income from operations",
+      "values": {
+        "FY2025": 5565.0,
+        "FY2024": 2799.0,
+        "FY2023": 1110.0,
+        "LTM": 5565.0
+      }
+    },
+    {
+      "name": "Other income (expense), net",
+      "values": {
+        "FY2025": -68.0,
+        "FY2024": 1128.0,
+        "FY2023": 1360.0,
+        "FY2022": -7029.0,
+        "LTM": -68.0
+      }
+    },
+    {
+      "name": "Income before income taxes and income (loss) from equity method investments",
+      "values": {
+        "FY2025": 5800.0,
+        "FY2024": 4125.0,
+        "FY2023": 2321.0,
+        "LTM": 5800.0
+      }
+    },
+    {
+      "name": "Income (loss) from operations",
+      "values": {
+        "FY2024": 2799.0,
+        "FY2023": 1110.0,
+        "FY2022": -1832.0,
+        "FY2021": -3834.0
+      }
+    },
+    {
+      "name": "Income (loss) before income taxes and income (loss) from equity method investments",
+      "values": {
+        "FY2024": 4125.0,
+        "FY2023": 2321.0,
+        "FY2022": -9426.0
+      }
+    },
+    {
+      "name": "Aurora",
+      "values": {
+        "FY2021": -731.0
+      }
+    },
+    {
+      "name": "Loss from operations",
+      "values": {
+        "FY2022": -1832.0,
+        "FY2021": -3834.0,
+        "FY2020": -4863.0,
+        "FY2019": -8596.0,
+        "FY2018": -3033.0,
+        "FY2017": -4080.0
+      }
+    },
+    {
+      "name": "Rides",
+      "values": {
+        "FY2019": 2071.0,
+        "FY2018": 1541.0,
+        "FY2017": 388.0
+      }
+    },
+    {
+      "name": "Eats",
+      "values": {
+        "FY2019": -1372.0,
+        "FY2018": -601.0,
+        "FY2017": -355.0
+      }
+    },
+    {
+      "name": "Freight",
+      "values": {
+        "FY2019": -217.0,
+        "FY2018": -102.0,
+        "FY2017": -39.0
+      }
+    },
+    {
+      "name": "Other Bets",
+      "values": {
+        "FY2019": -251.0,
+        "FY2018": -50.0,
+        "FY2017": -1.0
+      }
+    },
+    {
+      "name": "ATG and Other Technology Programs",
+      "values": {
+        "FY2019": -499.0,
+        "FY2018": -537.0,
+        "FY2017": -543.0
+      }
+    },
+    {
+      "name": "Segments",
+      "values": {
+        "FY2019": -268.0,
+        "FY2018": 251.0,
+        "FY2017": -550.0
+      }
+    }
+  ],
+  "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
+  "ticker": "UBER"
+}

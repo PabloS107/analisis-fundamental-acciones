@@ -4,14 +4,16 @@ Ejecuta pruebas matemáticas de identidades contables invariantes (partida doble
 márgenes y trazabilidad US-GAAP de la SEC) garantizando precisión milimétrica en 10 años + LTM.
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import DATA_PROCESSED_DIR
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import DATA_PROCESSED_DIR
     except ImportError:
         from .json_io import atomic_json_write
+        from .config_loader import DATA_PROCESSED_DIR
 import sys
 import json
 import argparse
@@ -31,7 +33,7 @@ def load_financial_data(ticker, custom_dir=None):
     if custom_dir:
         json_path = Path(custom_dir) / "financial_statements.json"
     else:
-        json_path = Path("data/processed") / ticker.upper() / "financial_statements.json"
+        json_path = DATA_PROCESSED_DIR / ticker.upper() / "financial_statements.json"
         
     if not json_path.exists():
         raise FileNotFoundError(f"No se encontró el archivo de datos: {json_path}")

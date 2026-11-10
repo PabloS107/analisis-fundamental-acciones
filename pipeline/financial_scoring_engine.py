@@ -15,21 +15,23 @@ Implementa:
 - Exportación estructurada a JSON y soporte para series multianuales (2016-2025 + LTM).
 """
 
-import os
 try:
     from json_io import atomic_json_write
+    from config_loader import CONFIG_DIR, DATA_PROCESSED_DIR
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import CONFIG_DIR, DATA_PROCESSED_DIR
     except ImportError:
         from .json_io import atomic_json_write
+        from .config_loader import CONFIG_DIR, DATA_PROCESSED_DIR
 import re
 import sys
 import json
 import math
 import statistics
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional
 
 try:
     from market_data_provider import MarketDataExtractor
@@ -82,20 +84,8 @@ def load_industry_medians(config_path: Optional[str] = None) -> Dict[str, Any]:
     if config_path and Path(config_path).exists():
         p = Path(config_path)
     else:
-        # Buscar en config/industry_medians.json relativo a la raíz del proyecto
-        base_dir = Path(__file__).resolve().parent
-        candidates = [
-            base_dir.parent / "config" / "industry_medians.json",
-            base_dir.parent.parent.parent.parent / "config" / "industry_medians.json",
-            base_dir.parent.parent.parent / "config" / "industry_medians.json",
-            Path("config/industry_medians.json"),
-            Path("../config/industry_medians.json")
-        ]
-        p = None
-        for c in candidates:
-            if c.exists():
-                p = c
-                break
+        # Buscar en config/industry_medians.json anclado a CONFIG_DIR
+        p = CONFIG_DIR / "industry_medians.json"
 
     if p and p.exists():
         with open(p, "r", encoding="utf-8") as f:
@@ -4391,12 +4381,12 @@ def calculate_fundamental_scores(ticker: str, financials_json_path: Path, out_di
 if __name__ == "__main__":
     arg = sys.argv[1].upper() if len(sys.argv) > 1 else "ALL"
     if arg == "ALL":
-        proc_dir = Path("data/processed")
+        proc_dir = DATA_PROCESSED_DIR
         tickers = sorted([d.name for d in proc_dir.iterdir() if d.is_dir() and (d / "financial_statements.json").exists()])
     else:
         tickers = [arg]
     for t in tickers:
-        json_path = Path(f"data/processed/{t}/financial_statements.json")
+        json_path = DATA_PROCESSED_DIR / t / "financial_statements.json"
         if not json_path.exists():
             print(f"Error: No se encontró {json_path}")
             continue

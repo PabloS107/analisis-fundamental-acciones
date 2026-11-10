@@ -6,11 +6,14 @@ líneas de producto y regiones geográficas desde notas XBRL (ASC 280 y ASC 606)
 import json
 try:
     from json_io import atomic_json_write
+    from config_loader import DATA_PROCESSED_DIR
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import DATA_PROCESSED_DIR
     except ImportError:
         from ..json_io import atomic_json_write
+        from ..config_loader import DATA_PROCESSED_DIR
 import re
 from pathlib import Path
 import pandas as pd
@@ -27,9 +30,11 @@ def build_and_save_segments_data(company, all_fys, output_dir=None, canonical_re
     3. Normaliza las series anuales (FY2024, FY2025...) y computa el LTM oficial sincronizado con ingresos canónicos.
     4. Genera y persiste 'data/processed/{TICKER}/segments_data.json' y retorna el DataFrame auditado.
     """
-    output_path = Path(output_dir) if output_dir else Path("data/processed")
+    ticker_str = str(getattr(company, "ticker", getattr(company, "tickers", ["UNKNOWN"])[0]))
+    output_path = Path(output_dir) if output_dir else (DATA_PROCESSED_DIR / ticker_str.upper())
     seg_json_path = output_path / "segments_data.json"
-    ticker_str = str(getattr(company, "ticker", getattr(company, "tickers", [output_path.name])[0]))
+    if output_dir and ticker_str == "UNKNOWN":
+        ticker_str = output_path.name
 
     # Deduplicación canónica de períodos para evitar columnas 'LTM' repetidas
     clean_fys = []

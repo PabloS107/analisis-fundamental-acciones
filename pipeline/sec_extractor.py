@@ -5,7 +5,6 @@ Soporta 10 años de historia fiscal completa y cálculo institucional de LTM (La
 Actúa como fachada pública y orquestador modular de alto nivel.
 """
 
-import os
 import sys
 import json
 import re
@@ -13,12 +12,34 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
-import numpy as np
-from edgar import set_identity, Company
+from edgar import set_identity
 
 project_root = str(Path(__file__).resolve().parent.parent)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
+
+try:
+    from config_loader import (
+        load_sec_config,
+        resolve_output_dir,
+        DATA_PROCESSED_DIR,
+        DEFAULT_SEC_IDENTITY,
+    )
+except ImportError:
+    try:
+        from pipeline.config_loader import (
+            load_sec_config,
+            resolve_output_dir,
+            DATA_PROCESSED_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
+    except ImportError:
+        from .config_loader import (
+            load_sec_config,
+            resolve_output_dir,
+            DATA_PROCESSED_DIR,
+            DEFAULT_SEC_IDENTITY,
+        )
 
 try:
     from json_io import atomic_json_write
@@ -213,29 +234,10 @@ except ImportError:
         )
 
 
-def load_sec_config():
-    """Carga la configuración de identidad para SEC EDGAR."""
-    possible_paths = [
-        Path("config/sec_config.json"),
-        Path(__file__).resolve().parents[4] / "config" / "sec_config.json",
-        Path(__file__).resolve().parents[3] / "config" / "sec_config.json",
-    ]
-    for p in possible_paths:
-        if p.exists():
-            with open(p, "r", encoding="utf-8") as f:
-                return json.load(f)
-                
-    return {
-        "sec_identity": "Pablo Inversiones pablo_inversiones@gmail.com",
-        "google_drive_base_path": "G:\\Mi unidad\\analisis fundamental",
-        "local_output_path": "data\\processed"
-    }
-
-
 def extract_sec_data(ticker, output_dir=None, filing_context=None):
     """Extrae datos 100% oficiales y auditados desde SEC EDGAR (10 Años + LTM)."""
     cfg = load_sec_config()
-    set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
+    set_identity(cfg.get("sec_identity", DEFAULT_SEC_IDENTITY))
     
     if filing_context is None:
         filing_context = SharedFilingContext(ticker)
@@ -250,10 +252,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
     accounting_std = filing_context.accounting_standard
     print(f"[SEC Extractor] Estándar contable detectado: {accounting_std}")
     
-    if output_dir is None:
-        output_dir = Path(cfg.get("local_output_path", "data/processed")) / ticker.upper()
-    else:
-        output_dir = Path(output_dir)
+    output_dir = resolve_output_dir(ticker, output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # 1. Estados Financieros Anuales (10 Años)
@@ -352,7 +351,7 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
     # 2.1. Clasificación dinámica de sector y modelo contable (Banca/Fintech vs Corporativa)
     profile_path = output_dir / "company_profile.json"
     if not profile_path.exists():
-        cand_p = Path("data/processed") / ticker.upper() / "company_profile.json"
+        cand_p = DATA_PROCESSED_DIR / ticker.upper() / "company_profile.json"
         if cand_p.exists():
             profile_path = cand_p
 

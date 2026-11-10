@@ -23,9 +23,18 @@ if sys.platform == "win32":
         pass
 
 # Añadir scripts del pipeline al PATH para importar audit_engine
-pipeline_dir = Path(__file__).resolve().parent.parent / "pipeline"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+pipeline_dir = PROJECT_ROOT / "pipeline"
 if str(pipeline_dir) not in sys.path:
     sys.path.insert(0, str(pipeline_dir))
+
+try:
+    from config_loader import CONFIG_DIR, DATA_PROCESSED_DIR, DRIVE_INPUT_DIR, load_sec_config
+except ImportError:
+    CONFIG_DIR = PROJECT_ROOT / "config"
+    DATA_PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+    DRIVE_INPUT_DIR = PROJECT_ROOT / "drive_input"
+    load_sec_config = None
 
 try:
     from audit_engine import run_full_audit
@@ -45,16 +54,15 @@ except ImportError:
 
 def test_sec_connectivity():
     """Comprueba la conexión con SEC EDGAR y la validez del User-Agent."""
-    config_path = Path("config/sec_config.json")
+    config_path = CONFIG_DIR / "sec_config.json"
     if not config_path.exists():
         return {
             "component": "SEC EDGAR API",
             "status": "FAIL",
-            "message": "Archivo config/sec_config.json no encontrado."
+            "message": f"Archivo {config_path} no encontrado."
         }
         
-    with open(config_path, "r", encoding="utf-8") as f:
-        cfg = json.load(f)
+    cfg = load_sec_config() if load_sec_config else json.loads(config_path.read_text(encoding="utf-8"))
         
     identity = cfg.get("sec_identity", "")
     if not identity:
@@ -107,7 +115,7 @@ def test_google_drive():
     if resolve_google_drive_path:
         base_drive = resolve_google_drive_path()
     else:
-        config_path = Path("config/sec_config.json")
+        config_path = CONFIG_DIR / "sec_config.json"
         base_drive = Path("G:\\Mi unidad\\analisis fundamental")
         if config_path.exists():
             with open(config_path, "r", encoding="utf-8") as f:
@@ -129,7 +137,7 @@ def test_google_drive():
         test_file.unlink()
         
         # Test de unión en workspace
-        junction = Path("drive_input")
+        junction = DRIVE_INPUT_DIR
         junction_ok = junction.exists()
         
         return {
@@ -147,12 +155,12 @@ def test_google_drive():
 
 def test_skills_integrity():
     """Verifica que todas las skills registradas cumplan los estándares de Antigravity."""
-    skills_root = Path(".agents/skills")
+    skills_root = PROJECT_ROOT / ".agents" / "skills"
     if not skills_root.exists():
         return [{
             "component": "Skills Antigravity",
             "status": "FAIL",
-            "message": "Directorio .agents/skills no existe."
+            "message": f"Directorio {skills_root} no existe."
         }]
         
     results = []
@@ -175,7 +183,6 @@ def test_skills_integrity():
             content = f.read()
             
         has_frontmatter = content.startswith("---") and "name:" in content and "description:" in content
-        pipeline_dir = Path("pipeline")
         has_scripts = (skill_dir / "scripts").exists() or (pipeline_dir.exists() and len(list(pipeline_dir.glob("*.py"))) > 0)
         
         if has_frontmatter and has_scripts:
@@ -202,7 +209,7 @@ def test_skills_integrity():
 
 def test_processed_companies():
     """Audita contablemente todas las empresas procesadas en data/processed/."""
-    processed_dir = Path("data/processed")
+    processed_dir = DATA_PROCESSED_DIR
     if not processed_dir.exists():
         return []
         
@@ -304,7 +311,7 @@ def generate_qa_report(checks, passed, failed, warns):
         icon = "✅" if c["status"] == "PASS" else ("❌" if c["status"] == "FAIL" else "⚠️")
         lines.append(f"| {icon} **{c['status']}** | {c['component']} | {c['message']} |")
         
-    report_path = Path("QA_REPORT.md")
+    report_path = PROJECT_ROOT / "QA_REPORT.md"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
     print(f"[Health Check] Reporte guardado en: {report_path.resolve()}")

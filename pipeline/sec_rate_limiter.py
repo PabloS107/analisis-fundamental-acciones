@@ -15,8 +15,15 @@ import random
 import threading
 import urllib.request
 import urllib.error
-from pathlib import Path
 from functools import wraps
+
+try:
+    from config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
+except ImportError:
+    try:
+        from .config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
+    except ImportError:
+        from pipeline.config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
 
 # Intentar importar excepciones de edgar si está instalado
 try:
@@ -99,7 +106,7 @@ def sec_call_with_retry(fn, *args, max_retries=5, base_delay=1.0, max_delay=32.0
                         hdr = e.headers.get("Retry-After")
                         if hdr:
                             retry_after_header = float(hdr)
-                    except Exception:
+                    except (ValueError, TypeError, AttributeError):
                         pass
             
             # Caso requests / httpx HTTPStatusError
@@ -109,7 +116,7 @@ def sec_call_with_retry(fn, *args, max_retries=5, base_delay=1.0, max_delay=32.0
                     hdr = e.response.headers.get("Retry-After")
                     if hdr:
                         retry_after_header = float(hdr)
-                except Exception:
+                except (ValueError, TypeError, AttributeError):
                     pass
                     
             # Caso mensaje de error que contiene 429 o Too Many Requests
@@ -167,12 +174,8 @@ def safe_sec_request(url, identity=None, timeout=15, max_retries=4, base_delay=1
     :return: Diccionario con la respuesta JSON parseada o bytes/texto.
     """
     if identity is None:
-        try:
-            from drive_manager import load_sec_config
-            cfg = load_sec_config()
-            identity = cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com")
-        except Exception:
-            identity = "Pablo Inversiones pablo_inversiones@gmail.com"
+        cfg = load_sec_config()
+        identity = cfg.get("sec_identity", DEFAULT_SEC_IDENTITY)
             
     headers = {
         "User-Agent": identity,

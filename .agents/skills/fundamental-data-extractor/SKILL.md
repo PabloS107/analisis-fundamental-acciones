@@ -1,12 +1,12 @@
 ---
 name: fundamental-data-extractor
 description: >-
-  Extracts official audited financial statements (10-K, 10-Q) from SEC EDGAR via XBRL, parses investor presentations and earnings call transcripts from Google Drive, and generates clean structured JSON and Excel datasets for fundamental stock analysis. Use this skill whenever the user requests extracting financial statements, filing data, balance sheets, cash flows, or qualitative reports for any public company.
+  Extracts official audited financial statements (10-K, 10-Q, 20-F, 6-K) from SEC EDGAR via XBRL, extracts operational Non-GAAP KPIs from 8-K/6-K Ex-99.1 and investor presentations, and generates clean structured JSON datasets for the Django web dashboard. Use this skill whenever the user requests extracting financial statements, filing data, balance sheets, cash flows, or operational KPIs for any public company.
 ---
 
 # Fundamental Data Extractor Skill
 
-Esta skill es el motor de entrada de datos para el asistente de análisis fundamental. Su objetivo es obtener, limpiar y estandarizar tanto la información cuantitativa auditada (normativa US-GAAP de la SEC) como la información cualitativa estratégica (presentaciones, guidance y llamadas de resultados) antes de proceder a la valuación o análisis de ratios.
+Esta skill es el motor de entrada de datos para el asistente de análisis fundamental. Su objetivo es obtener, limpiar y estandarizar la información cuantitativa auditada (normativa US-GAAP e IFRS de la SEC) y los KPIs operativos de comunicados 8-K/6-K para el Dashboard Web Django (`web_dashboard/`).
 
 ---
 
@@ -25,9 +25,9 @@ Activa esta skill cuando el usuario pida:
 - **SEC EDGAR API (`data.sec.gov`):**
   - Conexión oficial y directa con identidad configurada en [sec_config.json](../../../config/sec_config.json).
   - Extracción de conceptos XBRL oficiales (100% libre de errores o estimaciones de terceros).
-- **Google Drive (Entrada de usuario):**
+- **Google Drive (Entrada opcional de presentaciones):**
   - Ruta base: `G:\Mi unidad\analisis fundamental\<TICKER>\`
-  - El usuario puede depositar allí presentaciones en PDF (subcarpeta `presentations/` o directamente en la carpeta del ticker) y transcripciones de llamadas (`transcripts/`).
+  - El usuario puede depositar allí presentaciones en PDF (subcarpeta `presentations/` o directamente en la carpeta del ticker).
 - **Salidas Estandarizadas:**
   - Carpeta local del proyecto: `data/processed/<TICKER>/`
   - Carpeta sincronizada en Drive: `G:\Mi unidad\analisis fundamental\<TICKER>\processed\`
@@ -50,54 +50,46 @@ python pipeline/fundamental_pipeline.py --ticker <TICKER>
    Genera:
    - `financial_statements.json`: JSON estructurado con balance, resultados, cash flow y ratios canónicos.
    - `sec_narrative.json`: Textos oficiales de Item 1 (Negocio), Item 1A (Riesgos) e Item 7 (MD&A).
+   - `segments_data.json`: Segmentos operativos y geográficos ASC 280 / ASC 606.
 
-2. **Extracción y Estructuración Automática de Earnings Calls (Sin Drive):**
+2. **Extracción de KPIs Operativos y Métricas Non-GAAP (8-K / 6-K Ex-99.1):**
    ```powershell
-   python pipeline/earnings_call_extractor.py --ticker <TICKER>
+   python pipeline/kpi_extractor.py --ticker <TICKER>
    ```
    Genera:
-   - `earnings_call_data.json`: Dataset canónico con Bloque A (Guidance oficial SEC 8-K, hitos estratégicos, riesgos y Q&A banco por banco con diagnóstico fundamental) y Bloque B (Auditoría longitudinal 5 trimestres, Say-Do ratio y credibilidad directiva).
+   - `presentation_reconciliation.json`: KPIs sectoriales normalizados consumidos por el Dashboard Web.
 
-3. **Procesamiento de documentos locales / Drive (Opcional):**
-   ```powershell
-   python pipeline/doc_parser.py --ticker <TICKER>
-   ```
-   Genera:
-   - `qualitative_dossier.json`: Guidance numérico, presentaciones en PDF y notas suplementarias.
-
-4. **Auditoría Contable de Corroboración Matemática:**
+3. **Auditoría Contable de Corroboración Matemática:**
    ```powershell
    python pipeline/audit_engine.py --ticker <TICKER>
    ```
    Genera:
-   - `audit_certificate.json`: Certificado con el desglose de pruebas contables.
-   - `audit_report.md`: Reporte de auditoría con fórmulas matemáticas de partida doble.
+   - `audit_report.json`: Dictamen completo por período de identidades contables y sanidad.
 
-5. **Gobernanza Corporativa, Insiders (Form 4/144) y Alertas Tempranas (8-K):**
+4. **Gobernanza Corporativa, Insiders (Form 4/144) y Alertas Tempranas (8-K):**
    ```powershell
    python pipeline/governance_insider_analyzer.py --ticker <TICKER>
    ```
    Genera:
    - `governance_insider_data.json`: Scorecard de gobernanza, detección de hechos materiales (8-K), compras y ventas de insiders (Form 4) diferenciando planes 10b5-1, y avisos de venta de acciones restringidas (Form 144) con banderas de anomalía.
 
-6. **Motor Cuantitativo de Scoring Fundamental (Piotroski & Mohanram):**
+5. **Motor Cuantitativo de Scoring Fundamental (Piotroski & Mohanram):**
    ```powershell
    python pipeline/financial_scoring_engine.py <TICKER>
    ```
    Genera:
    - `fundamental_scores.json`: Puntuación detallada criterio por criterio de Piotroski F-Score (0-9 pts) y Mohanram G-Score (0-8 pts) con benchmarks sectoriales (SIC/GICS), evolución histórica multianual (2016-2025 + LTM) y clasificación estratégica en matriz 2x2 (*Compounder de Élite*, *Cash Cow*, *Crecimiento Vulnerable*, *Trampa de Valor*).
-   - Incorpora 5 mejoras institucionales: Acciones Básicas para $EQ\_OFFER$, Deuda Financiera Total para $F\_\Delta LEVER$, Apalancamiento Operativo Comercial ($\% \Delta \text{Ventas} > \% \Delta \text{SG\&A}$) para $G8$, Coeficiente de Variación / Cláusula de Hipercrecimiento para $G4/G5$, y Tasa de Inversión Total para modelos *Asset-Light* en $G7$.
 
-7. **Pipeline Unificado y Servidor Web Django:**
+6. **Pipeline Unificado y Servidor Web Django:**
    ```powershell
-   python pipeline/fundamental_pipeline.py <TICKER>
+   python pipeline/fundamental_pipeline.py --ticker <TICKER>
    python web_dashboard/manage.py runserver
    ```
    Ejecuta el procesamiento integral de datos y disponibiliza la visualización interactiva en el Dashboard Web Django.
 
-8. **Suite de Pruebas Unitarias y Diagnóstico del Sistema:**
+7. **Suite de Pruebas Unitarias y Diagnóstico del Sistema:**
    ```powershell
-   python -m unittest tests/test_scoring_engine.py -v
+   python -m unittest discover -s tests -v
    python tests/health_check.py
    ```
    Comprueba SEC API, Google Drive, Skills de Antigravity, audita todas las empresas procesadas y valida al 100% los cálculos matemáticos de scoring.
@@ -112,13 +104,9 @@ Para consultar los nombres exactos de los campos y variables que consumirán los
 Archivos generados en `data/processed/<TICKER>/` y `G:\Mi unidad\analisis fundamental\<TICKER>\processed\`:
 1. `financial_statements.json`: Datos fuente auditados listos para scripts de valuación y modelos matemáticos.
 2. `fundamental_scores.json`: Resultados cuantitativos de Piotroski F-Score, Mohanram G-Score y Matriz Combinada.
-3. `earnings_call_data.json`: Conferencia de resultados y guidance oficial estructurado (Bloque A y Bloque B).
-5. `qualitative_dossier.json`: Resumen de riesgos, negocio, guidance de presentaciones y Q&A de llamadas.
+3. `segments_data.json`: Segmentos operativos y geográficos.
+4. `presentation_reconciliation.json`: KPIs operativos Non-GAAP.
+5. `audit_report.json`: Log de auditoría contable y faltantes.
 6. `sec_narrative.json`: Textos oficiales íntegros de 10-K (Item 1, 1A y 7).
-7. `governance_insider_data.json`: Scorecard de gobernanza, análisis de 8-K, Form 4 y 144 con explicaciones educativas y diagnósticos.
-8. `audit_certificate.json`: Certificado con puntaje de fidelidad contable y pruebas superadas.
-9. `audit_report.md`: Reporte legible de auditoría matemática de partida doble.
-10. `executive_dossier.md`: Informe resumen ejecutivo consolidado listo para ser presentado al usuario.
-11. `Analisis_Resultados_Q3_FY26_<TICKER>.docx`: Informe Word con diseño institucional de Wall Street.
-12. `Analisis_Resultados_Q3_FY26_<TICKER>.md`: Informe Markdown de análisis fundamental, gobernanza y scoring.
+7. `governance_insider_data.json`: Scorecard de gobernanza, análisis de 8-K, Form 4 y 144.
 

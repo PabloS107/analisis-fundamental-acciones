@@ -7,13 +7,13 @@ las últimas presentaciones oficiales disponibles en SEC EDGAR:
 2. Eventos Relevantes de Resultados: Form 8-K con Item 2.02 (Results of Operations and Financial Condition).
 """
 
-import os
-import re
 import json
-import time
+import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
+
+logger = logging.getLogger(__name__)
 
 try:
     from edgar import Company, set_identity
@@ -22,16 +22,14 @@ except ImportError:
     set_identity = None
 
 try:
-    from ..sec_config import load_sec_config
+    from ..config_loader import load_sec_config, DATA_PROCESSED_DIR, DEFAULT_SEC_IDENTITY
 except ImportError:
     try:
-        from pipeline.sec_config import load_sec_config
+        from config_loader import load_sec_config, DATA_PROCESSED_DIR, DEFAULT_SEC_IDENTITY
     except ImportError:
-        def load_sec_config():
-            return {"sec_identity": "Pablo Inversiones pablo_inversiones@gmail.com"}
+        from pipeline.config_loader import load_sec_config, DATA_PROCESSED_DIR, DEFAULT_SEC_IDENTITY
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-DATA_DIR = PROJECT_ROOT / "data" / "processed"
+DATA_DIR = DATA_PROCESSED_DIR
 
 
 def derive_period_label(form: str, report_date_str: str, filing_date_str: str = "") -> str:
@@ -96,7 +94,8 @@ def get_local_sec_metadata(ticker: str, processed_dir: Optional[Path] = None) ->
     try:
         with open(fs_file, "r", encoding="utf-8") as f:
             fs_data = json.load(f)
-    except Exception:
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning("[SECFreshness] Error leyendo %s: %s", fs_file, exc)
         return result
 
     result["has_local_data"] = True
@@ -125,8 +124,8 @@ def get_local_sec_metadata(ticker: str, processed_dir: Optional[Path] = None) ->
                 sn_data = json.load(snf)
                 k_date = sn_data.get("filing_date")
                 k_acc = sn_data.get("accession_number")
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError) as exc:
+            logger.debug("[SECFreshness] No se pudo leer fallback %s: %s", sn_file, exc)
 
     # Inspeccionar fiscal_years para saber cuál es el año base
     fys = fs_data.get("fiscal_years", [])
@@ -219,7 +218,7 @@ def check_sec_freshness(
     try:
         cfg = load_sec_config()
         if set_identity:
-            set_identity(cfg.get("sec_identity", "Pablo Inversiones pablo_inversiones@gmail.com"))
+            set_identity(cfg.get("sec_identity", DEFAULT_SEC_IDENTITY))
 
         c = Company(t)
         

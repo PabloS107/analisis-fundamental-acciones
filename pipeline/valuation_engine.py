@@ -9,18 +9,20 @@ Usado por el Dashboard Web Django (views_valuation.py) para simulación dinámic
 import sys
 try:
     from json_io import atomic_json_write
+    from config_loader import DATA_PROCESSED_DIR, resolve_market_cache_path
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
+        from pipeline.config_loader import DATA_PROCESSED_DIR, resolve_market_cache_path
     except ImportError:
         from .json_io import atomic_json_write
+        from .config_loader import DATA_PROCESSED_DIR, resolve_market_cache_path
 import re
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_DATA_DIR = PROJECT_ROOT / "data" / "processed"
+DEFAULT_DATA_DIR = DATA_PROCESSED_DIR
 
 try:
     from sec_extractor import normalize_archetype
@@ -799,7 +801,7 @@ def calculate_z_score_valuation(
 
     closes = []
     dates = []
-    cache_path = Path("data/cache/market_data_cache.json")
+    cache_path = resolve_market_cache_path()
     cached_prices = {}
     if cache_path.exists():
         try:
@@ -911,7 +913,7 @@ def calculate_historical_multiples_analysis(
 
     # 1. Recuperar histórico de precios
     hist_prices_dict = {}
-    cache_path = Path("data/cache/market_data_cache.json")
+    cache_path = resolve_market_cache_path()
     if cache_path.exists():
         try:
             with open(cache_path, "r", encoding="utf-8") as f:

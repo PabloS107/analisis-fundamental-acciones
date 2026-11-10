@@ -1,7 +1,7 @@
 ---
 name: fundamental-scoring-benchmark
 description: >-
-  Evaluates corporate financial health, solvency, growth quality, and pure capital productivity using Piotroski F-Score (0-9), Mohanram G-Score (0-8), Novy-Marx Gross Profitability to Assets (GP/A), Intangible-Adjusted ROIC (Damodaran roll-forward identity), Real-Time WACC multi-source extraction, and Economic Spread (EVA / Moat durability), maintaining dynamic peer group benchmarks and 9-sheet Excel financial models. Use this skill whenever calculating fundamental scores, benchmarking a company against industry peers, evaluating capital returns vs. hurdle rates, or formatting financial Excel workbooks.
+  Evaluates corporate financial health, solvency, growth quality, and pure capital productivity using Piotroski F-Score (0-9), Mohanram G-Score (0-8), Novy-Marx Gross Profitability to Assets (GP/A), Intangible-Adjusted ROIC (Damodaran roll-forward identity), Real-Time WACC multi-source extraction, and Economic Spread (EVA / Moat durability), maintaining dynamic peer group benchmarks for the Django web dashboard. Use this skill whenever calculating fundamental scores, benchmarking a company against industry peers, or evaluating capital returns vs. hurdle rates.
 ---
 
 # Fundamental Scoring & Benchmark Skill
@@ -17,7 +17,6 @@ Activa esta skill cuando el usuario solicite:
 - Evaluar la ventaja competitiva o estabilidad de crecimiento mediante el **Mohanram G-Score (0-8 puntos)**.
 - Calcular e interpretar la **Rentabilidad Bruta sobre Activos de Novy-Marx (GP/A)**, su cálculo dual (Activos Totales vs. Ex-Caja), descomposición DuPont y matriz de 4 cuadrantes.
 - Comparar una empresa contra su **Peer Group** o calcular **medianas sectoriales LTM** (ROA, CFROA, I+D, Reinversión, Gross Profitability).
-- Generar el informe ejecutivo institucional en Word (`.docx`) y Markdown (`.md`).
 - Visualizar métricas interactivas en la plataforma web Django (`web_dashboard/`).
 
 ---
@@ -103,13 +102,7 @@ Evalúa el verdadero rendimiento económico sobre el capital desplegado y la dur
 
 ```powershell
 # 1. Ejecutar el cálculo completo de scores cuantitativos (Piotroski, Mohanram y Novy-Marx):
-python .agents/skills/fundamental-scoring-benchmark/scripts/run_scoring.py AAPL
-
-# 2. Actualizar el modelo financiero interactivo en Excel (Hojas 1 a 8):
-python .agents/skills/fundamental-scoring-benchmark/scripts/update_excel_model.py AAPL
-
-# 3. Generar el informe institucional en Word (.docx) y Markdown (.md):
-python .agents/skills/fundamental-scoring-benchmark/scripts/generate_report.py AAPL
+python pipeline/financial_scoring_engine.py AAPL
 ```
 
 ---
@@ -120,6 +113,4 @@ python .agents/skills/fundamental-scoring-benchmark/scripts/generate_report.py A
 - **Entrada Financiera:** `data/processed/<TICKER>/financial_statements.json`.
 - **Salidas Producidas:**
   - `data/processed/<TICKER>/fundamental_scores.json`: Resultados detallados de F-Score, G-Score, matriz combinada y `novy_marx_analysis`.
-  - `data/processed/<TICKER>/Analisis_Resultados_<TICKER>.docx`: Informe Word institucional con Sección 11 de Novy-Marx GP/A en 4 bloques.
-  - `data/processed/<TICKER>/Analisis_Resultados_<TICKER>.md`: Informe Markdown sincronizado.
   - Plataforma Web Django (`web_dashboard/`): Panel interactivo por empresa con visualización en tiempo real.

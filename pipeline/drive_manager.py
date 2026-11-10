@@ -9,31 +9,17 @@ Proporciona:
 import os
 import sys
 import time
-import json
 import shutil
 from pathlib import Path
-from typing import Optional, Union, List
+from typing import Optional, Union
 
-
-def load_sec_config() -> dict:
-    """Carga la configuracion con la ruta base de Google Drive buscando en varias ubicaciones relativas."""
-    possible_paths = [
-        Path("config/sec_config.json"),
-        Path(__file__).resolve().parents[4] / "config" / "sec_config.json",
-        Path(__file__).resolve().parents[3] / "config" / "sec_config.json",
-        Path(__file__).resolve().parent.parent / "config" / "sec_config.json",
-    ]
-    for p in possible_paths:
-        try:
-            if p.exists():
-                with open(p, "r", encoding="utf-8") as f:
-                    return json.load(f)
-        except Exception:
-            continue
-    return {
-        "google_drive_base_path": "G:\\Mi unidad\\analisis fundamental",
-        "local_output_path": "data\\processed"
-    }
+try:
+    from config_loader import load_sec_config, DRIVE_INPUT_DIR
+except ImportError:
+    try:
+        from .config_loader import load_sec_config, DRIVE_INPUT_DIR
+    except ImportError:
+        from pipeline.config_loader import load_sec_config, DRIVE_INPUT_DIR
 
 
 def _auto_detect_system_drive_path() -> Optional[Path]:
@@ -128,11 +114,11 @@ def resolve_google_drive_path(custom_path: Optional[Union[str, Path]] = None) ->
     if cfg_drive:
         p = Path(cfg_drive)
         if sys.platform != "win32" and ":" in cfg_drive:
-            return Path("drive_input")
+            return DRIVE_INPUT_DIR
         return p
 
     # 5. Fallback local por defecto
-    return Path("drive_input")
+    return DRIVE_INPUT_DIR
 
 
 def find_ticker_drive_dir(ticker: str, custom_drive_path: Optional[Union[str, Path]] = None) -> Optional[Path]:
@@ -143,8 +129,8 @@ def find_ticker_drive_dir(ticker: str, custom_drive_path: Optional[Union[str, Pa
     candidates = [
         base_drive / ticker_clean.upper(),
         base_drive / ticker_clean.lower(),
-        Path("drive_input") / ticker_clean.upper(),
-        Path("drive_input") / ticker_clean.lower(),
+        DRIVE_INPUT_DIR / ticker_clean.upper(),
+        DRIVE_INPUT_DIR / ticker_clean.lower(),
     ]
 
     for c in candidates:
@@ -159,8 +145,8 @@ def find_ticker_drive_dir(ticker: str, custom_drive_path: Optional[Union[str, Pa
             (target / "presentations").mkdir(exist_ok=True)
             (target / "transcripts").mkdir(exist_ok=True)
             return target
-        except Exception:
-            pass
+        except OSError as exc:
+            print(f"[DriveManager] Aviso creando carpetas en {target}: {exc}")
 
     return None
 
@@ -200,8 +186,8 @@ def safe_copy_file(src: Union[str, Path], dst: Union[str, Path], max_retries: in
 
     try:
         dst_p.parent.mkdir(parents=True, exist_ok=True)
-    except Exception:
-        pass
+    except OSError as exc:
+        print(f"  [AVISO] No se pudo preparar carpeta destino {dst_p.parent}: {exc}")
 
     for attempt in range(1, max_retries + 1):
         try:
