@@ -308,4 +308,37 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 5. **Pruebas actualizadas y nuevas:** Extendidos `tests/test_audit_engine.py`, `tests/test_kpi_extractor.py`, `tests/test_drive_manager.py` y `tests/test_config_and_pipeline_runner.py` (`+6` pruebas unitarias netas: `376 -> 382`).
 
 ### Próxima intervención pendiente de aprobación (Capa 3 — STOP & PROPOSE)
-- `pipeline/financial_scoring_engine.py` (`4419L`) y `pipeline/valuation_engine.py` (`2282L`): consolidar `normalize_archetype()` y clasificación de arquetipo con `entity_classifier` SSOT, eliminar fallbacks/literales ficticios (`Regla 6`: `"price": 230.0`, `"market_cap_usd_m": 3000000.0`, `wacc=0.1090`/`fcf_margin=0.244` en `g_implied_fiscal`, precios sintéticos `current_price * [0.65, ...]`, `rotce_val = 0.15`, `price = 100.0`, `base_rev_m = 100.0`), eliminar los `3 + 9 = 12` `except Exception: pass` silenciosos y modularizar ambos archivos monolíticos (12 métodos de `234L–594L` en scoring; `get_valuation_parameters` de `801L` y `calculate_historical_multiples_analysis` de `328L` en valoración).
+- *(Completada en la Sección 12).*
+
+---
+
+## 12. Sesión 2026-11-10 — Auditoría por Capas: Capa 3 completada (STOP & PROPOSE -> Capa 4)
+
+### Estado verificado tras Capa 3
+- `python -m unittest discover -s tests -q`: **392 tests en 343.521s — OK (`skipped=2`)** (incluye los 10 nuevos tests en `tests/test_capa3_scoring_and_valuation_hygiene.py`).
+- Suite focalizada Capa 3 (`test_capa3_scoring_and_valuation_hygiene.py`, `scoring`, `roc_greenblatt`, `forensic`, `solvency`, `valuation`, `challenger_m2*`, `challenger_m3*`): **119 tests en 120.425s — OK**.
+- Paridad matemática A/B contra `git show 01a0ce3` sobre las 11 emisoras: coincidencia exacta en 10 (`AAPL`, `DECK`, `GOOGL`, `JPM`, `META`, `NU`, `NVDA`, `O`, `PGR`, `UBER`) y equivalencia numérica en `1e-12` ULP para `MELI.total_intangibles_usd_m`.
+- `python tests/health_check.py`: **15 / 15 PASS | Fallos: 0 | Advertencias: 0**.
+- Dashboard Django (`GET /` y 11 rutas `/company/{TICKER}/`): **12 / 12 HTTP 200**.
+- `python web_dashboard/manage.py test analytics`: **6 tests en 18.386s — 5 OK, 1 fallo preexistente** (`ValuationAndSensitivityTests.test_meli_hybrid_view`, `'Margen FCF Auditado:'`, incluido en el STOP & PROPOSE de Capa 4).
+- Auditoría AST sobre los 11 archivos de Capa 3: **0** `except:` desnudos, **0** `except: pass` silenciosos y **0** funciones `> 180L`.
+
+### Cambios implementados en Capa 3
+1. **Modularización y fachada retrocompatible de Scoring (`pipeline/scoring_modules/` + `pipeline/financial_scoring_engine.py` `328L`):**
+   - Creados 6 submódulos cohesivos: `__init__.py` (`50L`), `scoring_utils.py` (`693L`), `piotroski_mohanram.py` (`629L`), `profitability_capital.py` (`1109L`), `forensic_accounting.py` (`504L`) y `solvency_credit.py` (`550L`).
+   - Unificada la normalización de arquetipos vía `normalize_archetype` importada desde `pipeline/entity_classifier.py` (SSOT), `CONFIG_DIR` SSOT en `load_peer_benchmarks`, tabla `_SYNTHETIC_RATING_TABLE` en solvencia, preservación de `0.0` contable en `_first_present`, y eliminación de duplicación FY/LTM en `IntangibleROICCalculator` y `GreenblattROCCalculator`.
+2. **Modularización y fachada retrocompatible de Valoración (`pipeline/valuation_modules/` + `pipeline/valuation_engine.py` `742L`):**
+   - Creados `__init__.py` (`46L`), `dcf_models.py` (`602L`) y `market_history.py` (`513L`).
+   - `get_report_archetype` y `get_solvency_archetype` delegados al SSOT `entity_classifier` (`detect_company_archetype` / `normalize_archetype`); `get_valuation_parameters` descompuesto en `_load_valuation_inputs`, `_resolve_capital_structure_and_wacc`, `_resolve_net_debt_m`, `_build_financial_pillars`, `_build_financial_valuation`, `_compute_corporate_margins_and_dcf` y `_build_corporate_valuation` (todas las funciones `< 180L`).
+3. **Eliminación de fallbacks ficticios (Regla 4 / Regla 6) y manejo explícito de excepciones:**
+   - Erradicados los `12` bloques `except Exception: pass` silenciosos (`3` en scoring, `9` en valoración, reemplazados por errores explícitos o `logger.debug`).
+   - Eliminados literales/series sintéticas prohibidos: fallback Apple `"price": 230.0` / `"market_cap_usd_m": 3000000.0` en `WACCCalculator` (ahora `None` + `"UNAVAILABLE_MODULE_MISSING"`), `g_implied_fiscal` con `wacc=0.1090`/`fcf_margin=0.244` (ahora alineado a `g_implied_our`), precios sintéticos `current_price * [0.65, ...]` en `calculate_z_score_valuation`, cierres ficticios `current_price * 0.85` en `calculate_historical_multiples_analysis` (`price: None` sin histórico real), `rotce_val = 0.15`, `price = 100.0`, `base_rev_m = 100.0`, `buyback_rate = 1.5` (ahora `0.0`), y filas `"10.0%"` en `_generate_sensitivity_grid` (ahora `"N/D"` cuando faltan insumos corporativos).
+   - Corregido `build_audit_traceability` para recibir e interpolar `g_implied_oe_pct` real en la fórmula LaTeX `reverse_dcf`.
+4. **Tests de regresión Capa 3 (`tests/test_capa3_scoring_and_valuation_hygiene.py` `253L`, 10 tests):** Verifican higiene AST (`0` funciones `> 180L`, `0` `except: pass`), ausencia de literales prohibidos, re-exports de fachada y cumplimiento de Regla 4/Regla 6.
+
+### Próxima intervención pendiente de aprobación (Capa 4 — STOP & PROPOSE)
+- `web_dashboard/analytics/` (`views/views.py` `392L`, `views/views_scoring.py` `807L`, `views/views_charts.py` `1168L`, `views/views_statements.py` `1345L`, `views/views_valuation.py` `123L`, `context_processors.py` `63L`, `tests.py` `117L`):
+  1. Unificar SSOT de rutas (`DATA_PROCESSED_DIR`, `PROJECT_ROOT`) y arquetipos (`normalize_archetype` en `views.py`), eliminando los `10+` `except ...: pass` silenciosos (`views.py`, `views_scoring.py`, `views_charts.py`, `views_statements.py`, `views_valuation.py`).
+  2. Erradicar fallbacks positivos/literales ficticios (`Regla 6`): `"AAA"`, `0.095`, `"WIDE MOAT"` en `views.py`; `f_score=7`, `g_score=6`, `"SALUD EXCEPCIONAL"`, `"EXCELENTE"`, `"41.8x"`, `3.23`, `"+0.40%"`, `"rating_is_safe": True` y dictámenes fijos en `views_scoring.py`; `_to_millions` / `_norm_pct` retornando `0.0` sobre `None` con heurística de escala en `views_charts.py`; fallback `"buyback_rate_pct": 1.5` en `views_valuation.py:112`.
+  3. Corregir el bug REIT en `views_statements.py:1274` (`"affo_per_share"` formatea `ffo_sh_val` en lugar de `affo_sh_val`).
+  4. Descomponer los monolitos `build_scoring_context` (`786L`), `build_charts_and_segments_context` (`1151L`), `build_statements_context` (`1319L`) / `_get_memo_rows` (`312L`) en módulos/helpers `< 180L` sin duplicación (`_to_m` / `_to_millions`) y resolver/actualizar `analytics/tests.py:78` (`test_meli_hybrid_view`).
