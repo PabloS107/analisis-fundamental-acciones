@@ -20,10 +20,10 @@ import valuation_engine
 class TestValuationEngine(unittest.TestCase):
 
     def setUp(self):
-        self.nu_scores_path = Path("data/processed/NU/financial_scores.json")
-        self.meli_scores_path = Path("data/processed/MELI/financial_scores.json")
-        self.deck_scores_path = Path("data/processed/DECK/financial_scores.json")
-        self.aapl_scores_path = Path("data/processed/AAPL/financial_scores.json")
+        self.nu_scores_path = Path("data/processed/NU/fundamental_scores.json")
+        self.meli_scores_path = Path("data/processed/MELI/fundamental_scores.json")
+        self.deck_scores_path = Path("data/processed/DECK/fundamental_scores.json")
+        self.aapl_scores_path = Path("data/processed/AAPL/fundamental_scores.json")
 
     def test_01_deck_reverse_dcf(self):
         """Verifica que el Reverse DCF de DECK resuelva en el crecimiento implícito esperado."""
@@ -95,7 +95,7 @@ class TestValuationEngine(unittest.TestCase):
 
     def test_06_corporate_sensitivity_grid_generation(self):
         """Verifica la generación de la matriz de sensibilidad WACC vs gn para corporaciones."""
-        meta_scores_path = Path("data/processed/META/financial_scores.json")
+        meta_scores_path = Path("data/processed/META/fundamental_scores.json")
         if not meta_scores_path.exists():
             self.skipTest("Datos de META no encontrados.")
         with open(meta_scores_path, "r", encoding="utf-8") as f:

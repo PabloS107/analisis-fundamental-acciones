@@ -57,8 +57,8 @@ class TestAdversarialBankingArchetype(unittest.TestCase):
 
     def test_nu_banking_solvency_and_valuation(self):
         """NU: Banking solvency & Excess Return valuation generated dynamically without Nubank constants."""
-        nu_scores_path = self.data_dir / "NU" / "financial_scores.json"
-        self.assertTrue(nu_scores_path.exists(), "NU financial_scores.json must exist")
+        nu_scores_path = self.data_dir / "NU" / "fundamental_scores.json"
+        self.assertTrue(nu_scores_path.exists(), "NU fundamental_scores.json must exist")
         with open(nu_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
 
@@ -90,8 +90,8 @@ class TestAdversarialBankingArchetype(unittest.TestCase):
 
     def test_jpm_banking_solvency_and_no_nubank_leakage(self):
         """JPM: Universal banking solvency reflects JPM figures without leaking Nubank numbers."""
-        jpm_scores_path = self.data_dir / "JPM" / "financial_scores.json"
-        self.assertTrue(jpm_scores_path.exists(), "JPM financial_scores.json must exist")
+        jpm_scores_path = self.data_dir / "JPM" / "fundamental_scores.json"
+        self.assertTrue(jpm_scores_path.exists(), "JPM fundamental_scores.json must exist")
         with open(jpm_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
 
@@ -127,8 +127,8 @@ class TestAdversarialInsuranceArchetype(unittest.TestCase):
 
     def test_pgr_insurance_solvency_and_gordon_shapiro(self):
         """PGR: Insurance solvency (Combined Ratio, Float) and Gordon-Shapiro valuation."""
-        pgr_scores_path = self.data_dir / "PGR" / "financial_scores.json"
-        self.assertTrue(pgr_scores_path.exists(), "PGR financial_scores.json must exist")
+        pgr_scores_path = self.data_dir / "PGR" / "fundamental_scores.json"
+        self.assertTrue(pgr_scores_path.exists(), "PGR fundamental_scores.json must exist")
         with open(pgr_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
 
@@ -168,8 +168,8 @@ class TestAdversarialReitArchetype(unittest.TestCase):
 
     def test_o_reit_solvency(self):
         """O: Real Estate REIT solvency routes through corporate credit engine."""
-        o_scores_path = self.data_dir / "O" / "financial_scores.json"
-        self.assertTrue(o_scores_path.exists(), "O financial_scores.json must exist")
+        o_scores_path = self.data_dir / "O" / "fundamental_scores.json"
+        self.assertTrue(o_scores_path.exists(), "O fundamental_scores.json must exist")
         with open(o_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
 
@@ -233,7 +233,7 @@ class TestAdversarialPlatformArchetype(unittest.TestCase):
 
     def test_meli_fcf_margin_safeguard(self):
         """MELI: Audited FCF margin from financial statements is correctly propagated."""
-        meli_scores_path = self.data_dir / "MELI" / "financial_scores.json"
+        meli_scores_path = self.data_dir / "MELI" / "fundamental_scores.json"
         self.assertTrue(meli_scores_path.exists())
         with open(meli_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
@@ -252,7 +252,7 @@ class TestAdversarialCorporateControls(unittest.TestCase):
 
     def test_aapl_control_integrity(self):
         """AAPL: Valid debt ($70B-$115B), Altman Z'' > 2.6, no hardcoded fallbacks."""
-        aapl_scores_path = self.data_dir / "AAPL" / "financial_scores.json"
+        aapl_scores_path = self.data_dir / "AAPL" / "fundamental_scores.json"
         self.assertTrue(aapl_scores_path.exists())
         with open(aapl_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
@@ -268,7 +268,7 @@ class TestAdversarialCorporateControls(unittest.TestCase):
 
     def test_deck_control_debt_free_integrity(self):
         """DECK: Genuine debt-free ($0 debt), AAA synthetic rating, zero interest burden."""
-        deck_scores_path = self.data_dir / "DECK" / "financial_scores.json"
+        deck_scores_path = self.data_dir / "DECK" / "fundamental_scores.json"
         self.assertTrue(deck_scores_path.exists())
         with open(deck_scores_path, "r", encoding="utf-8") as f:
             scores = json.load(f)
@@ -301,7 +301,7 @@ class TestAdversarialValuationPipeline(unittest.TestCase):
         test_tickers = ["NU", "MELI", "AAPL", "DECK", "JPM", "PGR", "O"]
         for ticker in test_tickers:
             with self.subTest(ticker=ticker):
-                scores_path = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+                scores_path = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
                 if not scores_path.exists():
                     continue
                 with open(scores_path, "r", encoding="utf-8") as f:

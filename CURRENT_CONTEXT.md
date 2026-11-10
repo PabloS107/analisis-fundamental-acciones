@@ -209,3 +209,39 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 5. data/cache/ en .gitignore + git rm --cached market_data_cache.json (opcional).
 6. Opción B: capa SQLite de lectura para el dashboard (sincronización pipeline→BD tras cada análisis).
 7. Question pendiente: etiqueta 'LTM' en columna as-reported (10-Q intermedio vs FY2026).
+
+---
+
+## 8. SesiÃ³n 2026-11-10 (Registro de la intervenciÃ³n)
+
+### Estado verificado: Suite COMPLETA 365/365 OK (skipped=2 red SEC). Cero regresiones.
+
+### Correcciones aplicadas en esta sesiÃ³n
+1. EQ_OFFER (pipeline/financial_scoring_engine.py): la tolerancia absoluta <=0.001 acciones
+   crudas daba FAIL ante ruido de redondeo (250 acciones sobre 14.66B). Cambiada a relativa
+   <=0.01% del capital previo (misma semÃ¡ntica que F_dLEVER). Nuevo test test_19 de regresiÃ³n.
+2. GOOGL EPS BPA (2 partes):
+   - sec_canonical_builder.py: eps_*_adjusted ya no divide un EPS XBRL ya restatementado
+     (doble aplicaciÃ³n del factor 20:1 -> 0.15 basura). Ahora deriva de NI/shares restatementadas.
+   - audit_engine.py: la ruta ajustada compara eps_reported vs NI/shares_adj (independiente,
+     no tautolÃ³gica); tolerancia relativa 2% con piso 0.20 en las 3 comparaciones del test.
+   - Resultado: FY2020 PASS; 5 empresas-control al 100%; GOOGL 98.6% con FY2015 FAIL.
+   - FY2015 de GOOGL: dato XBRL huÃ©rfano â€” 92.86 inexistante en todos los filings de Alphabet
+     (FY2015 10-K reporta 22.84 consolidado/24.34 clase C; no estÃ¡ en us-gaap_EarningsPerShareDiluted).
+     Pendiente arreglo taxonÃ³mico multi-clase (emisoras con axis StatementClassOfStockAxis).
+3. financial_scores.json eliminado (duplicado exacto x10, -3.6MB): escritura del pipeline
+   suprimida; referencias de tests apuntan a fundamental_scores.json; ficheros retirados del repo.
+4. data/cache/ en .gitignore; market_data_cache.json ya no se versiona (arresca el diff diario).
+5. Suite: 365 tests OK (antes 364 OK/21 fail preexistentes; -2 redes SEC skip por defecto).
+
+### Hallazgo mayor pendiente para la prÃ³xima sesiÃ³n
+- El extractor de EPS no maneja emisoras multi-clase (axis StatementClassOfStockAxis en XBRL,
+  p. ej. GOOGL clases A/B vs C): de ahÃ­ naciÃ³ el dato 92.86. Afecta a futuras multi-clase.
+- Antes de tocar: decidir si se reextrae GOOGL completo (pipeline, ~15-30 min red) o se
+  implementa el arreglo taxonÃ³mico raÃ­z + spec de per-miembro/total en los EPS facts.
+
+### Nota sobre artefactos de mercado
+- data/cache/market_data_cache.json refrescado por la suite con precios en vivo; no versionado.
+- data/processed/UBER/ NUEVO (sin tracking): aparece como extracciÃ³n de hoy 10:20; origen no
+  confirmado (Â¿re-extracciÃ³n vÃ­a dashboard?). Se deja fuera del commit y pendiente de tu decisiÃ³n
+  (commit vs actualizar manualmente vs eliminar).

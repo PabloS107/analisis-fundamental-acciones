@@ -1266,17 +1266,19 @@ def extract_canonical_summary(inc_data, bal_data, cf_data, periods, facts_df=Non
         adj_sd = canonical["shares_diluted_adjusted"].get(p)
         adj_sb = canonical["shares_basic_adjusted"].get(p)
         
-        if canonical["eps_diluted"].get(p) is not None:
-            canonical["eps_diluted_adjusted"][p] = round(canonical["eps_diluted"][p] / fac, 2)
-        elif ni_val is not None and adj_sd and adj_sd > 0:
+        if ni_val is not None and adj_sd and adj_sd > 0:
+            # Derivar del par restatementado (la vía real): el EPS de XBRL puede ya venir
+            # restatementado y dividir de nuevo por fac lo corrompería.
             canonical["eps_diluted_adjusted"][p] = round(ni_val / adj_sd, 2)
+        elif canonical["eps_diluted"].get(p) is not None:
+            canonical["eps_diluted_adjusted"][p] = round(canonical["eps_diluted"][p] / fac, 2)
         else:
             canonical["eps_diluted_adjusted"][p] = None
-            
-        if canonical["eps_basic"].get(p) is not None:
-            canonical["eps_basic_adjusted"][p] = round(canonical["eps_basic"][p] / fac, 2)
-        elif ni_val is not None and adj_sb and adj_sb > 0:
+
+        if ni_val is not None and adj_sb and adj_sb > 0:
             canonical["eps_basic_adjusted"][p] = round(ni_val / adj_sb, 2)
+        elif canonical["eps_basic"].get(p) is not None:
+            canonical["eps_basic_adjusted"][p] = round(canonical["eps_basic"][p] / fac, 2)
         else:
             canonical["eps_basic_adjusted"][p] = None
 

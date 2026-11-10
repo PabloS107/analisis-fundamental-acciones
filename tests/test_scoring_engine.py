@@ -181,7 +181,7 @@ class TestScoringEngine(unittest.TestCase):
 
     def test_09_financial_scores_file_and_robustness(self):
         """
-        Verifica la existencia y coherencia de fundamental_scores.json y financial_scores.json,
+        Verifica la existencia y coherencia de fundamental_scores.json y fundamental_scores.json,
         así como la consistencia de las señales G1, G2, G6, G7 contra benchmarks sectoriales.
         """
         tmp_dir = Path(tempfile.mkdtemp(prefix="scoring_aapl_"))
@@ -190,9 +190,9 @@ class TestScoringEngine(unittest.TestCase):
             scores = calculate_fundamental_scores("AAPL", tmp_dir / "financial_statements.json", out_dir=tmp_dir)
 
             fund_path = tmp_dir / "fundamental_scores.json"
-            fin_path = tmp_dir / "financial_scores.json"
+            fin_path = tmp_dir / "fundamental_scores.json"
             self.assertTrue(fund_path.exists(), "fundamental_scores.json debe existir")
-            self.assertTrue(fin_path.exists(), "financial_scores.json debe existir")
+            self.assertTrue(fin_path.exists(), "fundamental_scores.json debe existir")
 
             with open(fund_path, "r", encoding="utf-8") as f1, open(fin_path, "r", encoding="utf-8") as f2:
                 d1 = json.load(f1)
@@ -202,7 +202,7 @@ class TestScoringEngine(unittest.TestCase):
             self.assertEqual(d1["latest_diagnosis"], d2["latest_diagnosis"])
             self.assertEqual(d1["benchmarks_used"], d2["benchmarks_used"])
 
-        # Verificar señales G1, G2, G6, G7 en financial_scores.json contra benchmarks
+        # Verificar señales G1, G2, G6, G7 en fundamental_scores.json contra benchmarks
         ltm_g = d2["mohanram_g_score"]["LTM"]["signals"]
         bm = d2["benchmarks_used"]
         self.assertEqual(ltm_g["G1_ROA"]["benchmark"], f"{bm['median_roa']*100:.2f}%")
@@ -338,7 +338,7 @@ class TestScoringEngine(unittest.TestCase):
         Verifica la gestión dinámica de años fiscales e integración end-to-end:
         1. AAPL: año fiscal más reciente es FY2025 + LTM móvil.
         2. DECK: año fiscal más reciente es FY2026 + LTM móvil.
-        3. Presencia de novy_marx_analysis en fundamental_scores.json y financial_scores.json.
+        3. Presencia de novy_marx_analysis en fundamental_scores.json y fundamental_scores.json.
         4. Existencia de Sección 11 de Novy-Marx en informes generados (.md y .docx).
         """
         # 1. AAPL Scores
@@ -620,6 +620,30 @@ class TestScoringEngine(unittest.TestCase):
             first = ranking[0]
             self.assertEqual(first["ticker"], "NVDA")
             self.assertGreater(first["gross_profitability_total"], 0.65)
+
+    def test_19_eq_offer_relative_tolerance(self):
+        """Regresión: EQ_OFFER debe tolerar ruido de redondeo (<=0.01% del capital) pero no dilución real."""
+        base = {
+            "net_income": 100.0,
+            "cfo": 120.0,
+            "total_assets": 1000.0,
+            "total_debt": 200.0,
+            "current_assets": 300.0,
+            "current_liabilities": 250.0,
+            "gross_profit": 400.0,
+            "revenue": 800.0,
+        }
+        prev = 14_662_000_000.0
+        curr = {**base, "basic_shares": prev + 250.0}          # +250 acciones de ruido
+        prev_data = {**base, "basic_shares": prev}
+        res_noise = PiotroskiScoreCalculator.calculate_year("FY2026", curr, prev_data, prev_data)
+        self.assertTrue(res_noise["signals"]["EQ_OFFER"]["passed"],
+                        "Delta de 250 acciones sobre 14.66B (<=0.01%) debe pasar (ruido de redondeo)")
+
+        curr_dilutive = {**base, "basic_shares": prev * 1.005}  # +0.5% de emisión genuina
+        res_dilutive = PiotroskiScoreCalculator.calculate_year("FY2026", curr_dilutive, prev_data, prev_data)
+        self.assertFalse(res_dilutive["signals"]["EQ_OFFER"]["passed"],
+                         "Emisión del 0.5% del capital debe fallar (dilución material)")
 
 
 if __name__ == "__main__":

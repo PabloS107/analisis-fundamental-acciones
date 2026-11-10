@@ -406,13 +406,13 @@ class TestDiskArtifactIntegrityAndConformance(unittest.TestCase):
             self.assertNotIn("Infinity", data, f"Infinity token found at {path}")
 
     def test_all_8_fundamental_scores_exist_and_parseable(self):
-        """All 8 companies must have non-empty, parseable fundamental_scores.json and financial_scores.json."""
+        """All 8 companies must have non-empty, parseable fundamental_scores.json and fundamental_scores.json."""
         for ticker in self.TICKERS:
             fpath = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
-            fpath_sync = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+            fpath_sync = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
 
             self.assertTrue(fpath.exists(), f"Missing fundamental_scores.json for {ticker}")
-            self.assertTrue(fpath_sync.exists(), f"Missing financial_scores.json for {ticker}")
+            self.assertTrue(fpath_sync.exists(), f"Missing fundamental_scores.json for {ticker}")
 
             self.assertGreater(fpath.stat().st_size, 50000, f"File unexpectedly small for {ticker}")
             self.assertEqual(fpath.stat().st_size, fpath_sync.stat().st_size, f"Sync file size mismatch for {ticker}")

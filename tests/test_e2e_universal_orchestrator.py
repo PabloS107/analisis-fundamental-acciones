@@ -164,7 +164,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         for ticker in ["JPM", "NU"]:
             score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if not score_file.exists():
-                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if score_file.exists():
                 with open(score_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
@@ -177,7 +177,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         for ticker in ["JPM", "NU"]:
             score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if not score_file.exists():
-                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if score_file.exists():
                 with open(score_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
@@ -189,7 +189,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         """R2.3: INSURANCE contract inhibits Altman Z'' and Greenblatt ROC."""
         pgr_file = PROJECT_ROOT / "data" / "processed" / "PGR" / "fundamental_scores.json"
         if not pgr_file.exists():
-            pgr_file = PROJECT_ROOT / "data" / "processed" / "PGR" / "financial_scores.json"
+            pgr_file = PROJECT_ROOT / "data" / "processed" / "PGR" / "fundamental_scores.json"
         if pgr_file.exists():
             with open(pgr_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -216,7 +216,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         for ticker in ["JPM", "NU", "O", "PGR"]:
             score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if not score_file.exists():
-                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if score_file.exists():
                 with open(score_file, "r", encoding="utf-8") as f:
                     scores = json.load(f)
@@ -229,7 +229,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         for ticker, expected_model in [("AAPL", "WACC"), ("DECK", "WACC"), ("JPM", "COST_OF_EQUITY_KE"), ("NU", "COST_OF_EQUITY_KE")]:
             score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if not score_file.exists():
-                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "financial_scores.json"
+                score_file = PROJECT_ROOT / "data" / "processed" / ticker / "fundamental_scores.json"
             if score_file.exists():
                 with open(score_file, "r", encoding="utf-8") as f:
                     scores = json.load(f)
@@ -849,7 +849,7 @@ class TestTier4RealWorldScenarios(unittest.TestCase):
         self.assertEqual(total_debt_ltm, 0.0, "DECK LTM total debt must be exactly 0.0 (genuine debt-free)")
 
         # Verify solvency engine rates DECK as AAA / LIBRE DE DEUDA
-        score_path = PROJECT_ROOT / "data" / "processed" / "DECK" / "financial_scores.json"
+        score_path = PROJECT_ROOT / "data" / "processed" / "DECK" / "fundamental_scores.json"
         if score_path.exists():
             with open(score_path, "r", encoding="utf-8") as sf:
                 scores = json.load(sf)

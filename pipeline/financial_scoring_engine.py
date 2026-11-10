@@ -539,8 +539,11 @@ class PiotroskiScoreCalculator:
         }
 
         # 7. EQ_OFFER: Basic Shares_t <= Basic Shares_{t-1} (Mejora A: Acciones Básicas)
+        # Tolerancia relativa (0.01% del capital previo): absorbe el ruido de redondeo
+        # sin permitir dilución material (p. ej. 250 acciones sobre 14.66B no tumban la señal).
         delta_shares = (shares_t - shares_prev) if (shares_t is not None and shares_prev is not None) else None
-        pass_eq_offer = bool(delta_shares is not None and delta_shares <= 0.001)
+        shares_base = shares_prev if (shares_prev is not None and shares_prev > 0) else (shares_t or 0.0)
+        pass_eq_offer = bool(delta_shares is not None and delta_shares <= 0.0001 * shares_base)
         score += 1 if pass_eq_offer else 0
         results["signals"]["EQ_OFFER"] = {
             "name": "Cero Dilución (Acciones Básicas)",
@@ -548,7 +551,7 @@ class PiotroskiScoreCalculator:
             "value": delta_shares,
             "formatted_value": f"{delta_shares/1e6:+,.1f}M acciones" if delta_shares is not None else "N/A",
             "comparison_label": f"Acc {shares_t/1e6:,.0f}M vs {shares_prev/1e6:,.0f}M ({delta_shares/1e6:+,.0f}M)" if (shares_t is not None and shares_prev is not None) else (f"{delta_shares/1e6:+,.0f}M" if delta_shares is not None else "N/A"),
-            "threshold": "Delta Acciones Básicas <= 0",
+            "threshold": "Delta Acciones Básicas <= 0.01% del capital previo",
             "passed": pass_eq_offer,
             "points": 1 if pass_eq_offer else 0,
             "description": "Sin emisión neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -4381,11 +4384,6 @@ def calculate_fundamental_scores(ticker: str, financials_json_path: Path, out_di
         out_path = Path(out_dir) / "fundamental_scores.json"
         atomic_json_write(out_path, scoring_results, indent=2)
         print(f"[Scoring Engine] Resultados cuantitativos guardados exitosamente en: {out_path}")
-
-        # Guardar también como financial_scores.json para compatibilidad total con los requerimientos
-        fin_scores_path = Path(out_dir) / "financial_scores.json"
-        atomic_json_write(fin_scores_path, scoring_results, indent=2)
-        print(f"[Scoring Engine] Copia sincronizada guardada en: {fin_scores_path}")
 
     return scoring_results
 

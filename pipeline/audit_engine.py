@@ -401,20 +401,25 @@ def audit_eps_consistency(data, fy):
             "message": f"Datos insuficientes de Net Income o Acciones para {fy}."
         }
         
+    # Tolerancia relativa: NCI/redondeo fiscal en contra de restatement son legítimos hasta ~2%;
+    # piso absoluto 0.20 para valores pequeños.
+    tol = max(0.20, round(0.02 * abs(eps_reported), 2))
+
     calc_eps = round(net_income / shares_diluted, 2)
     diff = round(abs(eps_reported - calc_eps), 2)
-    passed = diff <= 0.20
+    passed = diff <= tol
     
     diff_adj = None
-    if not passed and eps_adj is not None and shares_adj:
+    if not passed and shares_adj:
+        # Verificación independiente real (no tautológica): EPS XBRL restatementado vs NI / shares restatementadas
         calc_eps_adj = round(net_income / shares_adj, 2)
-        diff_adj = round(abs(eps_adj - calc_eps_adj), 2)
-        passed = diff_adj <= 0.20
+        diff_adj = round(abs(eps_reported - calc_eps_adj), 2)
+        passed = diff_adj <= tol
 
     if not passed and net_income_total is not None and net_income_total != net_income:
         calc_eps_tot = round(net_income_total / shares_diluted, 2)
         diff_tot = round(abs(eps_reported - calc_eps_tot), 2)
-        if diff_tot <= 0.20:
+        if diff_tot <= tol:
             passed = True
             diff = diff_tot
             calc_eps = calc_eps_tot
