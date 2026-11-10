@@ -28,6 +28,7 @@ def run_audit_in_tmp(ticker):
         shutil.rmtree(tmp, ignore_errors=True)
 
 from audit_engine import (
+    audit_eps_consistency,
     audit_gross_profit,
     audit_free_cash_flow,
     audit_sanity_bounds,
@@ -133,9 +134,32 @@ class TestAuditEngineAccountingRules(unittest.TestCase):
         self.assertTrue(any("Costo de ventas (COGS) negativo" in err for err in res_neg["anomalies"]))
         self.assertTrue(any("Gastos operativos (OpEx) negativos" in err for err in res_neg["anomalies"]))
 
+    def test_eps_consistency_resets_diff_adj_when_total_net_income_reconciles(self):
+        """Si net_income total concilia el EPS tras un desajuste en net_income_common/shares_adj, discrepancy debe ser 0.0."""
+        data = {
+            "canonical_summary": {
+                "net_income": {"FY2016": 100.0},
+                "net_income_common": {"FY2016": 122.0},
+                "shares_diluted": {"FY2016": 50.0},
+                "shares_diluted_adjusted": {"FY2016": 40.0},
+                "eps_diluted": {"FY2016": 2.0},
+            },
+            "split_adjustment_factor": 2.0,
+        }
+        res = audit_eps_consistency(data, "FY2016")
+        self.assertTrue(res["passed"])
+        self.assertEqual(res["status"], "PASS")
+        self.assertEqual(res["discrepancy"], 0.0)
+
 
 class TestAuditEngineArtifactVerification(unittest.TestCase):
     """Verifica que los artefactos procesados en disco pasen la auditoría."""
+
+    def test_deck_processed_audit_passes_100_percent(self):
+        """DECK procesado debe pasar la auditoría contable con 100% de cumplimiento tras fix de diff_adj."""
+        res = run_audit_in_tmp("DECK")
+        self.assertEqual(res["compliance_score_pct"], 100.0)
+        self.assertEqual(res["failed_tests"], 0)
 
     def test_meli_processed_audit_passes_100_percent(self):
         """MELI procesado debe pasar la auditoría contable con 100% de cumplimiento."""

@@ -9,12 +9,14 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
+from unittest.mock import patch
 
 # Asegurar path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "pipeline"))
 
 from kpi_extractor import (
+    _score_pdf_recency,
     normalize_banking_kpis,
     normalize_platform_kpis,
     normalize_corporate_kpis,
@@ -117,7 +119,7 @@ class TestKpiExtractor(unittest.TestCase):
         brands = res.get("brand_segmentation", {})
         self.assertEqual(brands.get("HOKA", {}).get("revenue_usd_m"), 703.5)
         self.assertEqual(brands.get("HOKA", {}).get("growth_yoy_pct"), 7.7)
-        self.assertEqual(brands.get("UGG brand", {}).get("revenue_usd_m"), 278.0)
+        self.assertEqual(brands.get("UGG", {}).get("revenue_usd_m"), 278.0)
         
         channels = res.get("channel_breakdown", {})
         self.assertEqual(channels.get("Wholesale", {}).get("revenue_usd_m"), 666.7)
@@ -155,6 +157,61 @@ class TestKpiExtractor(unittest.TestCase):
             self.assertEqual(comps["total_assets"]["status"], "MATCH_EXACTO")
             self.assertEqual(comps["stockholders_equity"]["sec_value"], 50000000.0)
             self.assertEqual(comps["cash_and_equivalents"]["sec_value"], 20000000.0)
+
+    def test_banking_kpis_no_fake_defaults_when_missing(self):
+        """Regla 6: Si el texto bancario no reporta métricas, deben quedar en None y nunca con defaults de Nubank."""
+        sec_data = {"source_doc": "jpm_ex991.htm", "text": "Quarterly operating summary.", "lines": ["Quarterly operating summary."]}
+        res = normalize_banking_kpis(sec_data, None, {})
+        self.assertIsNone(res.get("total_customers_m"))
+        self.assertIsNone(res.get("monthly_cost_to_serve_usd"))
+        self.assertIsNone(res.get("monthly_arpac_usd"))
+        self.assertIsNone(res.get("efficiency_ratio_pct"))
+        self.assertIsNone(res.get("provision_coverage_pct"))
+        self.assertEqual(res.get("deposits_by_country_bn"), {})
+
+    def test_build_comparisons_block_marks_missing_as_unavailable(self):
+        """Regla 6: Campos ausentes en financial_statements.json deben reportar None y DATO_NO_DISPONIBLE."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            fs_data = {
+                "fiscal_years": ["FY2025"],
+                "canonical_summary": {"total_assets": {"FY2025": 1000.0}},
+            }
+            with open(tmp_path / "financial_statements.json", "w", encoding="utf-8") as f:
+                json.dump(fs_data, f)
+
+            comps = build_comparisons_block("TEST", tmp_path)
+            self.assertEqual(comps["total_assets"]["status"], "MATCH_EXACTO")
+            self.assertIsNone(comps["stockholders_equity"]["sec_value"])
+            self.assertEqual(comps["stockholders_equity"]["status"], "DATO_NO_DISPONIBLE")
+            self.assertIsNone(comps["cash_and_equivalents"]["sec_value"])
+            self.assertEqual(comps["cash_and_equivalents"]["status"], "DATO_NO_DISPONIBLE")
+
+    def test_score_pdf_recency_dynamic_years(self):
+        """La puntuación de recencia de PDFs debe ordenar dinámicamente años futuros y trimestres."""
+        self.assertGreater(_score_pdf_recency("Q4 2029 Presentation.pdf"), _score_pdf_recency("Q4 2028 Presentation.pdf"))
+        self.assertGreater(_score_pdf_recency("Q4 2028 Presentation.pdf"), _score_pdf_recency("Q4 2026 Presentation.pdf"))
+        self.assertGreater(_score_pdf_recency("Q3 2027 Deck.pdf"), _score_pdf_recency("Q1 2027 Deck.pdf"))
+        self.assertGreater(_score_pdf_recency("Q1 2028 Deck.pdf"), _score_pdf_recency("Q4 2027 Deck.pdf"))
+
+    def test_extract_operational_kpis_uses_normalize_archetype_ssot(self):
+        """extract_operational_kpis normaliza alias heredados via SSOT normalize_archetype."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            drive_dir = tmp_path / "drive"
+            drive_dir.mkdir()
+            (tmp_path / "financial_statements.json").write_text(
+                json.dumps({"fiscal_years": ["FY2025"], "canonical_summary": {}}),
+                encoding="utf-8",
+            )
+            with patch("kpi_extractor.extract_from_sec_ex99", return_value=None):
+                res = extract_operational_kpis(
+                    "MOCK",
+                    archetype="BANKING",
+                    output_dir=tmp_path,
+                    custom_drive_path=drive_dir,
+                )
+            self.assertEqual(res.get("archetype"), "FINANCIAL_BANKING")
 
 
 if __name__ == "__main__":

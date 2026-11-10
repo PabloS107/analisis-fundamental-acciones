@@ -286,4 +286,26 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
 ### Próxima intervención pendiente de aprobación (Capa 2 — STOP & PROPOSE)
 - `audit_engine.py`: bug de reporte residual `diff_adj` en `audit_eps_consistency()` (p. ej. `DECK FY2016/FY2017` con `status=PASS` pero `discrepancy=3.49 / 0.26`).
 - Módulos huérfanos sin llamadores: `pipeline/cross_verifier.py` (`364L`) y `pipeline/run_scoring.py` (`17L`), además de duplicidad `cross_verifier.py` vs `data_verifier.py`.
-- SSOT, `Regla 6` e higiene en `kpi_extractor.py`, `governance_insider_analyzer.py`, `data_verifier.py`, `market_data_provider.py`, `drive_manager.py`, `sec_rate_limiter.py` y `filing_context.py` (elimina copias locales de arquetipos/años fijos/marcas, `total_tax_withholding_shares` muerto, restos de `"transcripts"` y `except: pass`).
+- SSOT, `Regla 6` e higiene en `kpi_extractor.py`, `governance_insider_analyzer.py`, `data_verifier.py`, `market_data_provider.py`, `drive_manager.py`, `sec_rate_limiter.py` y `filing_context.py` (elimina copias locales de arquetipos/años fijos/marcas, `total_tax_withholding_shares` muerto, restos de `"transcripts"` y `except: pass`). *(Completada en la Sección 11).*
+
+---
+
+## 11. Sesión 2026-11-10 — Auditoría por Capas: Capa 2 completada (STOP & PROPOSE -> Capa 3)
+
+### Estado verificado tras Capa 2
+- **Higiene AST (11 archivos de Capa 2 e infraestructura):** `0` `bare except:`, `0` `except ...: pass` silenciosos y `0` funciones `> 180` líneas (`audit_engine.py`, `config_loader.py`, `data_verifier.py`, `drive_manager.py`, `fundamental_pipeline.py`, `governance_insider_analyzer.py`, `json_io.py`, `kpi_extractor.py`, `market_data_provider.py`, `sec_rate_limiter.py`, `sec_modules/filing_context.py`).
+- **Suite unitaria dirigida Capa 2 (`8` módulos):** **69 tests en 4.364s — OK**.
+- **`python -m unittest discover -s tests -q`:** **382 tests en 311.795s — OK (`skipped=2`)** (`exit code 0`).
+- **`python tests/health_check.py`:** **15 / 15 PASS | Fallos: 0 | Advertencias: 0**. Las 11 emisoras (`AAPL`, `DECK`, `GOOGL`, `JPM`, `MELI`, `META`, `NU`, `NVDA`, `O`, `PGR`, `UBER`) alcanzan **100.0%**; en `data/processed/DECK/audit_report.json` tanto `FY2016` como `FY2017` reportan `"status": "PASS"` y `"discrepancy": 0.0`.
+- **Dashboard Django (`GET /` + 11 rutas `/company/{TICKER}/`):** **12 / 12 HTTP 200**.
+- **`python web_dashboard/manage.py test analytics`:** **6 tests en 14.805s — 5 OK, 1 fallo preexistente** (`ValuationAndSensitivityTests.test_meli_hybrid_view`, `'Margen FCF Auditado:'` diferido a Capa 5).
+
+### Cambios implementados en Capa 2
+1. **`pipeline/audit_engine.py` (`506L`):** Corregido bug residual de `diff_adj` en `audit_eps_consistency()` cuando `net_income_total` concilia el BPA; extraídos `_find_concept_value()` y `_select_net_cash_change()`; eliminados `except: pass` mediante `logger.debug`.
+2. **Eliminación de huérfanos y modularización de `pipeline/data_verifier.py` (`862L`):** Eliminados `pipeline/cross_verifier.py` y `pipeline/run_scoring.py` (cero llamadores); descompuesto `data_verifier.py` en `_sync_reports_to_drive()`, `_detect_standard_split_factor()`, `_extract_sec_facts_bundle()`, `_reconcile_fiscal_year()`, `_detect_target_sic()` y `_audit_single_peer_entry()`, removiendo `facts_ebit` muerto, ruta fija `"G:/Mi unidad/..."` y los 5 `except: pass`.
+3. **`pipeline/kpi_extractor.py` (`777L`) y `pipeline/drive_manager.py` (`199L`):** Conectado `normalize_archetype` SSOT desde `entity_classifier`; reemplazados años hardcodeados en `_score_pdf_recency()` (6 pts/año + trimestre `1-4` sin techo fijo), defaults ficticios bancarios (`113.0`, `1.0`, `9.1`, `57.0`), caso especial `"ugg"` y `0.0` en `build_comparisons_block()` por `None` / `"DATO_NO_DISPONIBLE"` (`Regla 6`); suprimida creación automática de carpetas `"transcripts"` en `drive_manager.py`.
+4. **`pipeline/governance_insider_analyzer.py` (`691L`), `pipeline/market_data_provider.py` (`351L`), `sec_rate_limiter.py` (`213L`), `filing_context.py` (`354L`), `json_io.py` (`42L`) y `fundamental_pipeline.py` (`190L`):** Eliminado `total_tax_withholding_shares` muerto, reutilizado `filing_context.get_filing_obj()` en Form 4/144, descompuesto `scan_form4_filings()` y `get_market_data()`, extraído `_parse_retry_after_header()`, limpiada referencia residual a `"Earnings Calls"` y eliminados todos los `except: pass`.
+5. **Pruebas actualizadas y nuevas:** Extendidos `tests/test_audit_engine.py`, `tests/test_kpi_extractor.py`, `tests/test_drive_manager.py` y `tests/test_config_and_pipeline_runner.py` (`+6` pruebas unitarias netas: `376 -> 382`).
+
+### Próxima intervención pendiente de aprobación (Capa 3 — STOP & PROPOSE)
+- `pipeline/financial_scoring_engine.py` (`4419L`) y `pipeline/valuation_engine.py` (`2282L`): consolidar `normalize_archetype()` y clasificación de arquetipo con `entity_classifier` SSOT, eliminar fallbacks/literales ficticios (`Regla 6`: `"price": 230.0`, `"market_cap_usd_m": 3000000.0`, `wacc=0.1090`/`fcf_margin=0.244` en `g_implied_fiscal`, precios sintéticos `current_price * [0.65, ...]`, `rotce_val = 0.15`, `price = 100.0`, `base_rev_m = 100.0`), eliminar los `3 + 9 = 12` `except Exception: pass` silenciosos y modularizar ambos archivos monolíticos (12 métodos de `234L–594L` en scoring; `get_valuation_parameters` de `801L` y `calculate_historical_multiples_analysis` de `328L` en valoración).

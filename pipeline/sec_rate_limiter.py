@@ -10,12 +10,16 @@ Funcionalidades:
 """
 
 import time
+import gzip
 import json
+import logging
 import random
 import threading
 import urllib.request
 import urllib.error
 from functools import wraps
+
+logger = logging.getLogger(__name__)
 
 try:
     from config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
@@ -34,6 +38,17 @@ except ImportError:
     except ImportError:
         class EdgarTooManyRequestsError(Exception):
             pass
+
+
+def _parse_retry_after_header(headers):
+    """Extrae el valor numérico de Retry-After desde encabezados HTTP si es válido."""
+    try:
+        hdr = headers.get("Retry-After") if headers else None
+        if hdr:
+            return float(hdr)
+    except (ValueError, TypeError, AttributeError) as exc:
+        logger.debug("Encabezado Retry-After inválido o ausente: %s", exc)
+    return None
 
 
 class SECRateLimiter:
@@ -102,22 +117,14 @@ def sec_call_with_retry(fn, *args, max_retries=5, base_delay=1.0, max_delay=32.0
             elif isinstance(e, urllib.error.HTTPError):
                 if e.code == 429:
                     is_429 = True
-                    try:
-                        hdr = e.headers.get("Retry-After")
-                        if hdr:
-                            retry_after_header = float(hdr)
-                    except (ValueError, TypeError, AttributeError):
-                        pass
-            
+                    retry_after_header = _parse_retry_after_header(e.headers)
+
             # Caso requests / httpx HTTPStatusError
             elif hasattr(e, "response") and getattr(e.response, "status_code", None) == 429:
                 is_429 = True
-                try:
-                    hdr = e.response.headers.get("Retry-After")
-                    if hdr:
-                        retry_after_header = float(hdr)
-                except (ValueError, TypeError, AttributeError):
-                    pass
+                retry_after_header = _parse_retry_after_header(
+                    getattr(e.response, "headers", None)
+                )
                     
             # Caso mensaje de error que contiene 429 o Too Many Requests
             elif "429" in str(e) or "too many requests" in str(e).lower():
@@ -188,13 +195,13 @@ def safe_sec_request(url, identity=None, timeout=15, max_retries=4, base_delay=1
             content_type = resp.headers.get("Content-Type", "")
             raw = resp.read()
             if "gzip" in resp.headers.get("Content-Encoding", "").lower():
-                import gzip
                 raw = gzip.decompress(raw)
             text = raw.decode("utf-8", errors="replace")
             if "json" in content_type or text.strip().startswith("{"):
                 try:
                     return json.loads(text)
-                except Exception:
+                except (json.JSONDecodeError, ValueError) as exc:
+                    logger.debug("Respuesta SEC no es JSON válido (%s): %s", url, exc)
                     return text
             return text
 

@@ -6,7 +6,7 @@ Centraliza la conexión a SEC EDGAR, cacheando en memoria RAM:
 - Objetos de formulario parseados (.obj()) indexados por accession_number (cero descargas/parseos duplicados).
 - Árboles XBRL parseados (.xbrl()) indexados por accession_number (eliminando el mayor cuello de botella de CPU/red).
 - DataFrame de Company Facts (facts_df) único.
-- Metadatos y adjuntos EX-99 de comunicados de resultados para reutilización entre KPIs y Earnings Calls.
+- Metadatos y adjuntos EX-99 de comunicados de resultados para reutilización en extracción de KPIs operativos.
 
 Sigue el principio Shared Data Manifest de Fiscal.ai: 'Construir un único manifiesto de datos lógico
 y aplicar sobre él múltiples lentes analíticos sin repetir llamadas de red ni parseos de archivo'.
@@ -23,7 +23,7 @@ try:
 except ImportError:
     Company = None
     def set_identity(ident):
-        pass
+        logger.debug("set_identity omitido (%s): edgar-tools no está instalado.", ident)
 
 try:
     from ..config_loader import load_sec_config, DEFAULT_SEC_IDENTITY
@@ -202,8 +202,10 @@ class SharedFilingContext:
                 xb = getattr(obj.financials, "xb", None)
                 if xb and acc_num not in self._xbrl_cache:
                     self._xbrl_cache[acc_num] = xb
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.debug(
+                "No se pudo pre-cachear XBRL desde filing %s: %s", acc_num, exc
+            )
 
         return obj
 
@@ -235,8 +237,12 @@ class SharedFilingContext:
                         self._xbrl_cache[acc_num] = xb
                         self.stats["cache_hits"] += 1
                         return xb
-            except Exception:
-                pass
+            except Exception as exc:
+                logger.debug(
+                    "No se pudo reutilizar XBRL cacheado desde objeto %s: %s",
+                    acc_num,
+                    exc,
+                )
 
         self.stats["xbrl_parses"] += 1
         xb = sec_call_with_retry(filing.xbrl)
@@ -260,7 +266,12 @@ class SharedFilingContext:
                 self._facts_df = facts_obj.to_dataframe()
             else:
                 self._facts_df = None
-        except Exception:
+        except Exception as exc:
+            logger.debug(
+                "No se pudieron obtener CompanyFacts de SEC para %s: %s",
+                self.ticker,
+                exc,
+            )
             self._facts_df = None
 
         return self._facts_df

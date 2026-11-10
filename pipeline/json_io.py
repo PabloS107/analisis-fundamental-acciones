@@ -8,9 +8,12 @@ medio escribir. El archivo temporal se limpia siempre.
 """
 
 import json
+import logging
 import os
 import uuid
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 def atomic_json_write(path, data, **dump_kwargs):
@@ -33,7 +36,7 @@ def atomic_json_write(path, data, **dump_kwargs):
         try:
             if tmp.exists():
                 tmp.unlink()
-        except OSError:
-            pass
+        except OSError as exc:
+            logger.debug("No se pudo limpiar archivo temporal %s: %s", tmp, exc)
         raise
     return target

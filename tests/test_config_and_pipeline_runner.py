@@ -67,9 +67,11 @@ class TestCapa0ConfigAndPaths(unittest.TestCase):
             os.chdir(orig_cwd)
 
     def test_02_obsolete_artifacts_removed(self):
-        """Confirma eliminación de módulos de llamadas/docx y carpeta residual web_dashboard/data."""
+        """Confirma eliminación de módulos de llamadas/docx, huérfanos Capa 2 y carpeta residual web_dashboard/data."""
         self.assertFalse((PIPELINE_DIR / "earnings_call_extractor.py").exists())
         self.assertFalse((PIPELINE_DIR / "doc_parser.py").exists())
+        self.assertFalse((PIPELINE_DIR / "cross_verifier.py").exists())
+        self.assertFalse((PIPELINE_DIR / "run_scoring.py").exists())
         self.assertFalse((WEB_DIR / "data").exists())
 
     def test_03_load_sec_config_corrupt_json_fallback(self):

@@ -69,11 +69,11 @@ class TestDriveManager(unittest.TestCase):
             self.assertEqual(resolved, env_dir.resolve())
 
     def test_find_ticker_drive_dir_scaffolding(self):
-        """Verifica que find_ticker_drive_dir cree la estructura presentations y transcripts si no existen."""
+        """Verifica que find_ticker_drive_dir cree presentations sin crear carpetas obsoletas de transcripts."""
         ticker_dir = find_ticker_drive_dir("TEST_TICKER", custom_drive_path=self.base_path)
         self.assertIsNotNone(ticker_dir)
         self.assertTrue((ticker_dir / "presentations").exists())
-        self.assertTrue((ticker_dir / "transcripts").exists())
+        self.assertFalse((ticker_dir / "transcripts").exists())
 
     def test_get_ticker_drive_processed_dir(self):
         """Verifica que get_ticker_drive_processed_dir cree y devuelva el directorio processed."""

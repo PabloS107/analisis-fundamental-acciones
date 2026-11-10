@@ -10,16 +10,19 @@ Incluye:
 - Sincronización automática en Google Drive.
 """
 
-import sys
 import argparse
+import logging
+import sys
 from typing import Callable, Optional
+
+logger = logging.getLogger(__name__)
 
 # UTF-8 para consola en Windows
 if sys.platform == "win32":
     try:
         sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+    except (AttributeError, ValueError, OSError) as exc:
+        logger.debug("No se pudo reconfigurar stdout a UTF-8: %s", exc)
 
 # Soportar importación tanto como paquete (`pipeline.fundamental_pipeline`) como script directo
 try:
