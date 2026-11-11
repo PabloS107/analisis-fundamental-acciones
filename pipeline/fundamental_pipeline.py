@@ -13,7 +13,18 @@ Incluye:
 import argparse
 import logging
 import sys
+from pathlib import Path
 from typing import Callable, Optional
+
+_PIPELINE_DIR = Path(__file__).resolve().parent
+_PROJECT_ROOT = _PIPELINE_DIR.parent
+for _p in (
+    _PROJECT_ROOT,
+    _PIPELINE_DIR,
+    *(_PIPELINE_DIR / _s for _s in ("infra", "sec_modules", "audit_modules", "scoring_modules", "valuation_modules")),
+):
+    if _p.exists() and str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
 
 logger = logging.getLogger(__name__)
 

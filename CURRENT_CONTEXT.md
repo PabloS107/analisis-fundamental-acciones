@@ -1,8 +1,8 @@
 # ESTADO Y CONTEXTO DEL PROYECTO: ORQUESTADOR UNIVERSAL DE ANÁLISIS FUNDAMENTAL
 
-**Última actualización:** 9 de Noviembre de 2026 (noche, sesión de cierre)  
+**Última actualización:** 11 de Noviembre de 2026 (Reorganización estructural de `pipeline/`, `tests/` y guías `README.md`)  
 **Rama activa de Git:** `main` (sincronizada con `origin/main`)  
-**Estado del sistema:** ✅ 100% Operativo | Suite de Pruebas: **364/364 OK** (solo 2 skips de red SEC, `RUN_SEC_NETWORK_TESTS=1`) | Health Check: 100.0% Cumplimiento Contable | Cero Regresiones  
+**Estado del sistema:** ✅ Operativo | `unittest discover -s tests`: **413 PASS / 2 SKIP / 1 FAIL preexistente** (`test_web_statements.py:460` tras sync LTM AAPL en `4b453fa`) | Django `analytics`: **6/6 PASS** | `health_check.test_skills_integrity`: **PASS (32 scripts)** | Cero regresiones de rutas/imports  
 **Tag de respaldo local:** `archive/banking-excel-d5a4c61` (commit banking-Excel eliminado, preservado en local)  
 **Notas de arquitectura del almacenamiento:** el proyecto sigue sirviendo JSON como artefacto canónico; ver Sección 7 (Opción A aplicada) y Sección 8 (hallazgos de auditoría y pendientes).
 **Universo activo de control y validación (9 empresas en 5 arquetipos contables):**
@@ -125,32 +125,47 @@ python -m unittest discover -s tests -v
 
 ## 5. Estructura de Directorios Clave
 
-```
+```text
 Analisis fundamental de acciones/
-├── CURRENT_CONTEXT.md              # Este archivo (SSOT del contexto y estado vivo del proyecto)
-├── AGENTS.md                       # Reglas mandatorias irrestrictas del proyecto
-├── QA_REPORT.md                    # Reporte generado por tests/health_check.py
-├── pipeline/                       # Motores centrales de extracción, scoring y valoración
-│   ├── sec_extractor.py            # Extracción universal de SEC EDGAR XBRL multi-arquetipo
-│   ├── financial_taxonomy.py       # Mapeo canónico unificado de conceptos XBRL
-│   ├── financial_scoring_engine.py # Motores Piotroski, Mohanram, Novy-Marx, ROIC, WACC/Ke
-│   ├── audit_engine.py             # Auditoría de identidades contables y sanidad
-│   ├── valuation_report_builder.py # Reverse DCF y Excess Return Model 2-Etapas
-│   └── solvency_report_builder.py  # Diagnóstico de solvencia bancaria, aseguradora y corporativa
-├── web_dashboard/                  # Aplicación Web Django
-│   ├── analytics/views.py          # Lógica de presentación, reconciliación de estados y modelos
-│   ├── templates/company_detail.html # Plantilla integral con pestañas interactivas y simulador JS
-│   └── manage.py                   # Administrador de Django
-├── tests/                          # Suite de tests automatizados
-│   ├── test_web_statements.py      # Verificación de tablas y reconciliaciones web
-│   ├── health_check.py             # Verificación multidimensional de fidelidad contable
-│   └── test_*.py                   # Tests unitarios cuantitativos y de regresión
-└── data/processed/{TICKER}/        # Datasets auditados y entregables generados
-    ├── financial_statements.json   # Estados financieros y summary canónico
-    ├── fundamental_scores.json     # Puntuaciones, retornos sobre capital y valoración
-    ├── audit_report.json           # Log de auditoría contable y faltantes
-    ├── *.docx                      # Informe institucional Word
-    └── *.md                        # Informe institucional Markdown
+├── AGENTS.md                           # Reglas obligatorias irrestrictas (STOP & PROPOSE, Reglas 1–7)
+├── CURRENT_CONTEXT.md                  # Este archivo (SSOT del contexto y estado vivo del proyecto)
+├── QA_REPORT.md                        # Reporte automático generado por tests/health_check.py
+├── README.md                           # Guía general actualizada del Orquestador Universal
+├── Iniciar_Dashboard_Web.bat           # Lanzador 1-clic en Windows para el Dashboard Web Django
+├── pyproject.toml / requirements.txt   # Metadatos y dependencias Python del proyecto
+├── pipeline/                           # Motor central (5 fachadas + 5 subpaquetes temáticos + 6 README.md)
+│   ├── __init__.py                     # Extiende __path__ y sys.path con los 5 subpaquetes (100% retrocompatible)
+│   ├── README.md                       # Arquitectura global del pipeline y matriz de impacto de fachadas
+│   ├── fundamental_pipeline.py         # Orquestador CLI y programático (Pre-Flight + Pasos A–E)
+│   ├── sec_extractor.py                # Fachada pública de extracción SEC XBRL US-GAAP/IFRS y segmentos
+│   ├── financial_scoring_engine.py     # Fachada de F/G-Score, Novy-Marx, ROIC, WACC/Ke, Forense y Solvencia
+│   ├── valuation_engine.py             # Fachada de Reverse DCF (2/3 etapas), Excess Return y sensibilidad
+│   ├── audit_engine.py                 # Fachada de auditoría de identidades contables y sanidad
+│   ├── sec_modules/                    # 12 módulos SEC + __init__.py + README.md (taxonomía, LTM, segmentos, KPIs, gobernanza)
+│   ├── audit_modules/                  # data_verifier.py, period_integrity.py + __init__.py + README.md
+│   ├── scoring_modules/                # 5 módulos cuantitativos + __init__.py + README.md
+│   ├── valuation_modules/              # dcf_models.py, market_history.py, market_data_provider.py + __init__.py + README.md
+│   └── infra/                          # config_loader.py, json_io.py, sec_rate_limiter.py, drive_manager.py, sync_to_drive.py + __init__.py + README.md
+├── web_dashboard/                      # Aplicación Web Django (Terminal Financiero Interactivo)
+│   ├── README.md                       # Arquitectura Django, caché mtime+size y matriz de impacto
+│   ├── manage.py                       # CLI de Django
+│   ├── web_dashboard/                  # settings.py (LocMemCache), urls.py, wsgi.py, asgi.py
+│   ├── analytics/                      # context_processors, json_cache, pipeline_runner, urls, tests
+│   │   └── views/                      # 14 módulos cohesivos por pestaña/arquetipo + README.md (matriz visual/datos)
+│   └── templates/                      # base.html, index.html, company_detail.html (6 pestañas + simulador JS)
+├── tests/                              # Suite modular de pruebas automatizadas (416 tests + health_check)
+│   ├── __init__.py                     # Configura sys.path, importa pipeline y desambigua web_dashboard.__path__
+│   ├── README.md                       # Mapa completo de suites y guía rápida de ejecución por módulo
+│   ├── health_check.py                 # Diagnóstico integral (SEC API, Drive, Skills 32 scripts y auditoría)
+│   ├── sec_extraction/                 # 8 suites (arquetipos, IFRS, KPIs, XBRL, frescura, rate limiter, context)
+│   ├── accounting_audit/               # 8 suites (P&L, balance, flujos, As-Reported, OpEx/EBIT, período)
+│   ├── scoring_valuation/              # 7 suites (Capa 3 AST, F/G-Score, ROC, forense, solvencia, mercado, DCF)
+│   ├── web_dashboard/                  # 8 suites (Capa 4 AST, runner, Drive, gráficos, segmentos, vistas web)
+│   └── e2e_stress/                     # 7 suites (Challengers M1/M2/M3, E2E multi-arquetipo y estrés empírico)
+├── config/                             # sec_config.json, industry_medians.json, peer_benchmarks.json + README.md
+├── docs/                               # Especificacion_Calculos_FScore_GScore.txt + README.md
+├── drive_input/                        # Acceso/respaldo local de presentaciones y datos Drive
+└── data/                               # cache/ (efímero) y processed/{TICKER}/ (datasets JSON canónicos auditados)
 ```
 
 ---
@@ -377,3 +392,33 @@ A partir de este hito, **cada intervención o cambio en el repositorio debe segu
    - Descomponer el monolito `company_detail.html` (`6038L`) en parciales HTML cohesivos por pestaña (`templates/analytics/partials/`) y mover los `~2200L` de JavaScript embebido a módulos estáticos/locales limpios.
    - Eliminar duplicación JS de `syncWithSec` (`company_detail.html:5885-5967`) vs `startPipeline`/`pollPipeline` (`index.html:338-429`) y los bucles repetidos de DCF 3-Stage vs 2-Stage en `recalcDCF` / `solveCell` (`company_detail.html:4383-4435`, `4661`).
    - Limpiar defaults y XSS/texto legado en plantillas: `peCurrent` (`|default:20.0` en `company_detail.html:3866`), `ltm_period|default:"LTM"` (`company_detail.html:30`, alinear a `"N/D"`), `vp.rotce_pct|default:hist_growth_pct` (`L73`, `L3148`), escapes HTML en `index.html:271-277` y `company_detail.html:5843-5874`, y texto `"entregables"` legado en `index.html:403`.
+
+---
+
+## 14. Sesión 2026-11-11 — Reorganización Modular de `pipeline/` y `tests/`, Limpieza de Obsoletos y 12 Guías `README.md` de Impacto
+
+### Cambios ejecutados
+1. **Eliminación de documentación histórica obsoleta y caché de raíz:**
+   - Eliminados vía `git rm -f`: `ORIGINAL_REQUEST.md`, `PROJECT.md`, `TEST_INFRA.md`, `TEST_READY.md`, `Informe_Auditoria_Universalidad_2026-10-09.md`, `docs/AUDIT_FORENSE_EXTRACTORES_SEC.md` y `docs/INFORME_AUDITORIA_CUANTITATIVA_SCORING.md`.
+   - Eliminado directorio `__pycache__/` en raíz (y caché obsoleto en `pipeline/__pycache__/`).
+2. **Reorganización modular de `pipeline/` en 5 fachadas + 5 subpaquetes temáticos (`32` scripts):**
+   - Raíz de `pipeline/`: exclusivamente `__init__.py`, `README.md` y las 5 fachadas de entrada (`fundamental_pipeline.py`, `sec_extractor.py`, `financial_scoring_engine.py`, `valuation_engine.py`, `audit_engine.py`).
+   - `pipeline/sec_modules/` (`12` módulos): reubicados `entity_classifier.py`, `financial_taxonomy.py`, `financial_bilingual_map.py`, `canonical_resolvers.py`, `kpi_extractor.py` y `governance_insider_analyzer.py` junto a los 6 submódulos SEC previos.
+   - `pipeline/audit_modules/` (`2` módulos, nuevo subpaquete): `data_verifier.py` y `period_integrity.py`.
+   - `pipeline/scoring_modules/` (`5` módulos): conservados sin cambios estructurales con bootstrap de `sys.path` en `__init__.py`.
+   - `pipeline/valuation_modules/` (`3` módulos): reubicado `market_data_provider.py` junto a `dcf_models.py` y `market_history.py`.
+   - `pipeline/infra/` (`5` módulos, nuevo subpaquete): reubicados `config_loader.py` (`PROJECT_ROOT` actualizado a `.parent.parent.parent`), `json_io.py`, `sec_rate_limiter.py`, `drive_manager.py` y `sync_to_drive.py` (`source_root` a `.parent.parent.parent`, eliminados `"schemas"`, `"TREE.txt"` y `"sync_to_drive.py"` de sus listas de sincronización).
+   - **Retrocompatibilidad 100% de imports y CLI:** `pipeline/__init__.py` extiende `__path__` y `sys.path` con los 5 subpaquetes; las 5 fachadas, los 5 `__init__.py` de subpaquetes y los scripts CLI ejecutables directamente (`data_verifier.py`, `kpi_extractor.py`, `governance_insider_analyzer.py`, `market_data_provider.py`, `sync_to_drive.py`) registran `PROJECT_ROOT`/`pipeline` e importan `pipeline` cuando corresponde.
+3. **Reorganización de `tests/` en 5 subpaquetes temáticos (`38` archivos `test_*.py` + `health_check.py`):**
+   - Creados `tests/__init__.py` y subpaquetes `sec_extraction/` (`8`), `accounting_audit/` (`8`), `scoring_valuation/` (`7`), `web_dashboard/` (`8`) y `e2e_stress/` (`7`) con `__init__.py` en cada uno.
+   - Actualizada la resolución de raíz a `parents[2]` / 3 niveles de `dirname` en los 38 tests y actualizado `tests/health_check.py` para contar recursivamente todos los scripts `.py` bajo `pipeline/` (`32` scripts).
+   - Desambiguación de paquetes en `tests/__init__.py` y `tests/web_dashboard/__init__.py` extendiendo `web_dashboard.__path__` con `web_dashboard/web_dashboard` y `tests/web_dashboard` para evitar colisiones de nombres durante `python -m unittest discover -s tests`.
+4. **Creación y actualización de los `12` archivos `README.md` en español con matrices de impacto:**
+   - Raíz (`README.md`), `pipeline/README.md`, `pipeline/{sec_modules,audit_modules,scoring_modules,valuation_modules,infra}/README.md`, `web_dashboard/README.md`, `web_dashboard/analytics/views/README.md`, `tests/README.md`, `config/README.md` y `docs/README.md` (todos verificados con `0` enlaces rotos).
+
+### Verificación final post-reorganización
+- `python web_dashboard/manage.py test analytics`: **6/6 PASS** (`17.536s`).
+- `python tests/accounting_audit/test_verify_aapl_nca.py`: **PASS** (`0.0M` diferencia en NCA LTM).
+- `health_check.test_skills_integrity()`: **PASS** (`2/2` skills válidas, `32` scripts consolidados en `pipeline/`).
+- `python -m unittest discover -s tests -q`: **416 tests en 264.697s — 413 PASS, 2 SKIP** (red SEC opt-in), **1 FAIL preexistente ajeno a la reorganización** (`tests/web_dashboard/test_web_statements.py:460` `test_quality_and_forensic_fixes_5_points` espera `$59,160.0M` en `AAPL`, pero el commit previo `4b453fa` actualizó `short_term_investments` LTM a `$20,417.0M`, resultando `$56,722.0M` de tesorería y `$23,389.0M` de deuda neta; pendiente de revisión bajo Regla 1).
+- CLI e imports aislados (`data_verifier.py --help`, `kpi_extractor.py --help`, `governance_insider_analyzer.py --help`, `market_data_provider`, `sync_to_drive`, `fundamental_pipeline.py --help`, `sec_extractor.py --help`, `audit_engine.py --help`): **OK (`rc=0`)**.

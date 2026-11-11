@@ -4,6 +4,19 @@ Garantiza datos auditados bajo normativa US-GAAP e IFRS, cálculo de LTM,
 construcción del resumen canónico, conciliación As-Reported y segmentos ASC 280 / ASC 606.
 """
 
+import sys as _sys
+from pathlib import Path as _Path
+
+_PIPELINE_DIR = _Path(__file__).resolve().parent.parent
+_PROJECT_ROOT = _PIPELINE_DIR.parent
+for _p in (
+    _PROJECT_ROOT,
+    _PIPELINE_DIR,
+    *(_PIPELINE_DIR / _s for _s in ("infra", "sec_modules", "audit_modules", "scoring_modules", "valuation_modules")),
+):
+    if _p.exists() and str(_p) not in _sys.path:
+        _sys.path.insert(0, str(_p))
+
 from .sec_xbrl_ltm import (
     normalize_fiscal_year,
     _clean_concept_token,

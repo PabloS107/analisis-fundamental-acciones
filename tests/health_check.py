@@ -22,11 +22,14 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-# Añadir scripts del pipeline al PATH para importar audit_engine
+# Añadir raíz del proyecto y scripts del pipeline al PATH para importar audit_engine y submódulos
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 pipeline_dir = PROJECT_ROOT / "pipeline"
-if str(pipeline_dir) not in sys.path:
-    sys.path.insert(0, str(pipeline_dir))
+for _p in (PROJECT_ROOT, pipeline_dir):
+    if str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
+
+import pipeline  # noqa: E402, F401
 
 try:
     from config_loader import CONFIG_DIR, DATA_PROCESSED_DIR, DRIVE_INPUT_DIR, load_sec_config
@@ -182,11 +185,15 @@ def test_skills_integrity():
         with open(skill_md, "r", encoding="utf-8") as f:
             content = f.read()
             
+        pipeline_scripts = (
+            [p for p in pipeline_dir.rglob("*.py") if p.name != "__init__.py" and "__pycache__" not in p.parts]
+            if pipeline_dir.exists() else []
+        )
         has_frontmatter = content.startswith("---") and "name:" in content and "description:" in content
-        has_scripts = (skill_dir / "scripts").exists() or (pipeline_dir.exists() and len(list(pipeline_dir.glob("*.py"))) > 0)
+        has_scripts = (skill_dir / "scripts").exists() or len(pipeline_scripts) > 0
         
         if has_frontmatter and has_scripts:
-            scripts_count = len(list(pipeline_dir.glob("*.py"))) if pipeline_dir.exists() else 0
+            scripts_count = len(pipeline_scripts)
             results.append({
                 "component": f"Skill: {skill_name}",
                 "status": "PASS",
