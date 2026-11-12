@@ -181,6 +181,23 @@ class TestMulticlassEpsAndXbrlHygiene(unittest.TestCase):
         self.assertEqual(pandas_future, [])
         self.assertEqual(len(target_df), 3)
 
+    def test_merge_annual_statement_df_handles_duplicate_new_concept_without_keyerror(self):
+        """Regresión KeyError 43: conceptos nuevos repetidos en source_df se actualizan en cola sin fallar."""
+        target_df = pd.DataFrame([
+            {"concept": "ifrs-full_Revenue", "label": "Revenue", "FY2025": None, "FY2024": 100.0},
+        ])
+        source_df = pd.DataFrame([
+            {"concept": "ifrs-full_NewConcept", "label": "New Concept", "FY2025": 50.0, "FY2024": None},
+            {"concept": "ifrs-full_NewConcept", "label": "New Concept", "FY2025": 60.0, "FY2024": 40.0},
+        ])
+        merge_annual_statement_df(
+            source_df, target_df, ["FY2025", "FY2024"], updated_cells=set(), overwrite_if_newer=True
+        )
+        self.assertEqual(len(target_df), 2)
+        new_row = target_df[target_df["concept"] == "ifrs-full_NewConcept"].iloc[0]
+        self.assertEqual(float(new_row["FY2025"]), 50.0)
+        self.assertEqual(float(new_row["FY2024"]), 40.0)
+
     def test_normalize_archetype_never_leaks_custom_default_onto_corporate(self):
         """Asegura que alias corporativos retornen STANDARD_CORPORATE sin heredar default financiero."""
         self.assertEqual(normalize_archetype("CORPORATE_STANDARD", default="FINANCIAL_BANKING"), "STANDARD_CORPORATE")

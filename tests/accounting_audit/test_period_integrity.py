@@ -162,8 +162,11 @@ class TestRealDatasets(unittest.TestCase):
     def test_aapl_ltm_equals_fy_after_annual_sync(self):
         self.assertEqual(self._run("AAPL")["LTM_IGUAL_FY"]["severity"], "PASS")
 
-    def test_detects_known_nu_future_period_error(self):
-        self.assertEqual(self._run("NU")["PERIODO_NO_POSTERIOR"]["severity"], "ERROR")
+    def test_nu_period_integrity_pass_after_6k_filter(self):
+        res = self._run("NU")
+        self.assertEqual(res["PERIODO_NO_POSTERIOR"]["severity"], "PASS")
+        self.assertEqual(res["PERIODO_NO_FUTURO"]["severity"], "PASS")
+        self.assertFalse([c for c, f in res.items() if f["severity"] == "ERROR"], res)
 
     def test_control_company_deck_has_no_period_errors(self):
         res = self._run("DECK")

@@ -9,42 +9,7 @@
     "FY2020",
     "FY2019"
   ],
-  "product_segments": [
-    {
-      "name": "Ingreso Neto por Intereses (Net Interest Income - NII)",
-      "description": "Margen de intermediación financiera: rendimiento de cartera y activos menos costo de fondeo y depósitos.",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "status": "active",
-      "values": {
-        "LTM": 11131.4,
-        "FY2025": 8856.0,
-        "FY2024": 6796.2,
-        "FY2023": 4402.8,
-        "FY2022": 2007.3,
-        "FY2021": 679.4,
-        "FY2020": 269.0,
-        "FY2019": 228.2
-      }
-    },
-    {
-      "name": "Ingresos por Comisiones y Tarifas (Fee & Commission Income)",
-      "description": "Comisiones por transacciones, servicios bancarios, interchange fees y productos de valor agregado.",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "status": "active",
-      "values": {
-        "LTM": 2730.067,
-        "FY2025": 2340.058,
-        "FY2024": 1886.032,
-        "FY2023": 1589.264,
-        "FY2022": 1237.018,
-        "FY2021": 651.277,
-        "FY2020": 354.211,
-        "FY2019": 274.258
-      }
-    }
-  ],
+  "product_segments": [],
   "channel_segments": [],
   "geographic_segments": [
     {

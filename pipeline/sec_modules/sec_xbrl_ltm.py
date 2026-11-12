@@ -1146,6 +1146,7 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
             target_idx_by_token[t_tok] = t_idx
 
     rows_to_append: List[Dict[str, Any]] = []
+    pending_idx_by_token: Dict[str, int] = {}
     for _, s_row in source_df.iterrows():
         c_concept = str(s_row.get('concept', '')).strip()
         if not c_concept or c_concept == 'nan':
@@ -1169,6 +1170,16 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
                         elif (tv is None or pd.isna(tv)) and cell_key not in updated_cells:
                             target_df.at[match_idx, fy] = f_sv
                             updated_cells.add(cell_key)
+        elif c_token in pending_idx_by_token:
+            pending_row = rows_to_append[pending_idx_by_token[c_token]]
+            for fy in annual_fys:
+                if fy in source_df.columns:
+                    f_sv = _safe_float(s_row.get(fy))
+                    cell_key = (c_token, fy)
+                    if f_sv is not None and cell_key not in updated_cells:
+                        if overwrite_if_newer or pending_row.get(fy) is None:
+                            pending_row[fy] = f_sv
+                            updated_cells.add(cell_key)
         else:
             new_row_dict: Dict[str, Any] = {"concept": c_concept, "label": str(s_row.get('label', c_concept))}
             has_any = False
@@ -1180,8 +1191,8 @@ def merge_annual_statement_df(source_df, target_df, annual_fys, updated_cells=No
                     if overwrite_if_newer:
                         updated_cells.add((c_token, fy))
             if has_any:
+                pending_idx_by_token[c_token] = len(rows_to_append)
                 rows_to_append.append(new_row_dict)
-                target_idx_by_token[c_token] = len(target_df) + len(rows_to_append) - 1
 
     if rows_to_append:
         _append_rows_safely(target_df, rows_to_append)

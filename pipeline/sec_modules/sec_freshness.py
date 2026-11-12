@@ -138,10 +138,19 @@ def get_local_sec_metadata(ticker: str, processed_dir: Optional[Path] = None) ->
     return result
 
 
+def _filter_valid_periodic_filings(filings, limit: int = 30):
+    """Filtra una colección de filings conservando sólo reportes periódicos legítimos."""
+    if not filings:
+        return []
+    return [f for f in filings[:limit] if _is_valid_periodic_filing(f)]
+
+
 def build_sec_freshness_metadata(company, filing_context, latest_k_filings, latest_q_filings) -> Dict[str, Any]:
     """Construye el bloque canónico `sec_metadata` con periodicidad y último 8-K de resultados."""
-    latest_k_filing = latest_k_filings[0] if (latest_k_filings and len(latest_k_filings) > 0) else None
-    latest_q_filing = latest_q_filings[0] if (latest_q_filings and len(latest_q_filings) > 0) else None
+    valid_k = _filter_valid_periodic_filings(latest_k_filings, limit=10)
+    valid_q = _filter_valid_periodic_filings(latest_q_filings, limit=30)
+    latest_k_filing = valid_k[0] if valid_k else None
+    latest_q_filing = valid_q[0] if valid_q else None
 
     if latest_q_filing and latest_k_filing:
         latest_periodic = latest_q_filing if str(latest_q_filing.filing_date) >= str(latest_k_filing.filing_date) else latest_k_filing
@@ -243,10 +252,7 @@ def check_sec_freshness(
         
         # 1. Obtener reportes periódicos (10-K, 10-Q, 20-F, 6-K filtrados)
         f_periodic = c.get_filings(form=["10-K", "10-Q", "20-F", "6-K"])
-        valid_filings = []
-        for f in f_periodic[:15]:
-            if _is_valid_periodic_filing(f):
-                valid_filings.append(f)
+        valid_filings = _filter_valid_periodic_filings(f_periodic, limit=30)
 
         latest_sec = valid_filings[0] if valid_filings else None
         

@@ -29,6 +29,7 @@ from pipeline.sec_modules.sec_freshness import (
     derive_period_label,
     get_local_sec_metadata,
     _is_valid_periodic_filing,
+    build_sec_freshness_metadata,
     check_sec_freshness,
 )
 
@@ -44,11 +45,21 @@ requires_sec_network = unittest.skipUnless(
 
 
 class DummyFiling:
-    def __init__(self, form, is_xbrl=0, primary_document="doc.htm", filing_date="2026-08-01"):
+    def __init__(
+        self,
+        form,
+        is_xbrl=0,
+        primary_document="doc.htm",
+        filing_date="2026-08-01",
+        report_date="2026-06-30",
+        accession_number="0000000000-26-000001",
+    ):
         self.form = form
         self.is_xbrl = is_xbrl
         self.primary_document = primary_document
         self.filing_date = filing_date
+        self.report_date = report_date
+        self.accession_number = accession_number
 
 
 class TestSECFreshnessEngine(unittest.TestCase):
@@ -152,6 +163,41 @@ class TestSECFreshnessEngine(unittest.TestCase):
         d2 = time.time() - t0
         self.assertEqual(resp2.status_code, 200)
         self.assertLess(d2, 0.05, f"La respuesta cacheada tardó demasiado ({d2:.4f}s)")
+
+    def test_07_build_sec_freshness_metadata_filters_non_periodic_6k(self):
+        """Regresión NU: build_sec_freshness_metadata ignora 6-K de eventos y toma el último 6-K financiero válido."""
+        k_filings = [
+            DummyFiling("20-F", filing_date="2026-04-15", report_date="2025-12-31", accession_number="0001292814-26-001000"),
+        ]
+        q_filings = [
+            DummyFiling(
+                "6-K",
+                is_xbrl=0,
+                primary_document="nu20261023_6k.htm",
+                filing_date="2026-10-23",
+                report_date="2026-12-31",
+                accession_number="0001292814-26-005000",
+            ),
+            DummyFiling(
+                "6-K",
+                is_xbrl=0,
+                primary_document="nufs2q26_6k.htm",
+                filing_date="2026-08-13",
+                report_date="2026-06-30",
+                accession_number="0001292814-26-004225",
+            ),
+        ]
+
+        class DummyCompany:
+            def get_filings(self, form=None):
+                return []
+
+        meta = build_sec_freshness_metadata(DummyCompany(), None, k_filings, q_filings)
+        self.assertEqual(meta["ltm_period"], "Q2 2026")
+        self.assertEqual(meta["ltm_period_end"], "2026-06-30")
+        self.assertEqual(meta["latest_periodic_form"], "6-K")
+        self.assertEqual(meta["latest_periodic_date"], "2026-08-13")
+        self.assertEqual(meta["latest_periodic_accession"], "0001292814-26-004225")
 
 
 if __name__ == "__main__":

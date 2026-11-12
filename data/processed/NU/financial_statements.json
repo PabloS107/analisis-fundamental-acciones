@@ -8,7 +8,7 @@
   "is_financial": true,
   "business_model": "BANKING_FINTECH",
   "source": "SEC EDGAR (IFRS Oficial)",
-  "extraction_timestamp": "2026-11-08T17:47:30.865683",
+  "extraction_timestamp": "2026-11-12T15:13:06.085310",
   "fiscal_years": [
     "LTM",
     "FY2025",
@@ -20,13 +20,13 @@
     "FY2019"
   ],
   "sec_metadata": {
-    "ltm_period": "Q4 2026",
-    "ltm_period_end": "2026-12-31",
+    "ltm_period": "Q2 2026",
+    "ltm_period_end": "2026-06-30",
     "latest_periodic_form": "6-K",
-    "latest_periodic_date": "2026-10-23",
-    "latest_periodic_accession": "0001292814-26-005000",
+    "latest_periodic_date": "2026-08-13",
+    "latest_periodic_accession": "0001292814-26-004225",
     "latest_8k_earnings_date": null,
-    "extraction_timestamp": "2026-11-08T17:47:30.865668"
+    "extraction_timestamp": "2026-11-12T15:13:06.085276"
   },
   "canonical_summary": {
     "revenue": {
@@ -311,7 +311,7 @@
     },
     "eps_diluted_adjusted": {
       "LTM": 0.74,
-      "FY2025": 0.58,
+      "FY2025": 0.59,
       "FY2024": 0.4,
       "FY2023": 0.21,
       "FY2022": -0.08,
@@ -8048,7 +8048,7 @@
       },
       "eps_diluted": {
         "LTM": 0.74,
-        "FY2025": 0.58,
+        "FY2025": 0.59,
         "FY2024": 0.4,
         "FY2023": 0.21,
         "FY2022": -0.08,
