@@ -25,15 +25,18 @@ try:
     from json_io import atomic_json_write
     from config_loader import DATA_PROCESSED_DIR
     from period_integrity import run_period_integrity
+    from statement_quality_audit import run_statement_quality_audit
 except ImportError:
     try:
         from pipeline.json_io import atomic_json_write
         from pipeline.config_loader import DATA_PROCESSED_DIR
         from pipeline.period_integrity import run_period_integrity
+        from pipeline.audit_modules.statement_quality_audit import run_statement_quality_audit
     except ImportError:
         from .json_io import atomic_json_write
         from .config_loader import DATA_PROCESSED_DIR
         from .period_integrity import run_period_integrity
+        from .audit_modules.statement_quality_audit import run_statement_quality_audit
 
 logger = logging.getLogger(__name__)
 
@@ -442,6 +445,22 @@ def audit_eps_consistency(data, fy):
     }
 
 
+def _record_audit_findings(audit_results: dict, findings: list) -> None:
+    """Registra hallazgos PASS/ERROR/WARN de módulos de integridad y calidad en audit_results."""
+    for f in findings:
+        audit_results["total_tests"] += 1
+        if f["severity"] == "PASS":
+            audit_results["passed_tests"] += 1
+            print(f"  [PASS] {f['check']}")
+        elif f["severity"] == "ERROR":
+            audit_results["failed_tests"] += 1
+            audit_results["overall_status"] = "FAIL"
+            print(f"  [FAIL] {f['check']} -> {f['message']}")
+        else:
+            audit_results["skipped_tests"] += 1
+            print(f"  [WARN] {f['check']} ({f['message']})")
+
+
 def run_full_audit(ticker, custom_dir=None):
     """Ejecuta la suite completa de auditoría contable para una empresa."""
     data, output_dir = load_financial_data(ticker, custom_dir)
@@ -497,18 +516,12 @@ def run_full_audit(ticker, custom_dir=None):
     print("\n--- Integridad de Período y Vigencia de Verificación ---")
     period_findings = run_period_integrity(output_dir)
     audit_results["period_integrity"] = period_findings
-    for f in period_findings:
-        audit_results["total_tests"] += 1
-        if f["severity"] == "PASS":
-            audit_results["passed_tests"] += 1
-            print(f"  [PASS] {f['check']}")
-        elif f["severity"] == "ERROR":
-            audit_results["failed_tests"] += 1
-            audit_results["overall_status"] = "FAIL"
-            print(f"  [FAIL] {f['check']} -> {f['message']}")
-        else:
-            audit_results["skipped_tests"] += 1
-            print(f"  [WARN] {f['check']} ({f['message']})")
+    _record_audit_findings(audit_results, period_findings)
+
+    print("\n--- Calidad Semántica, Traductológica y Procedencia SEC (Q1-Q5) ---")
+    quality_findings = run_statement_quality_audit(output_dir)
+    audit_results["statement_quality"] = quality_findings
+    _record_audit_findings(audit_results, quality_findings)
 
     executed_tests = audit_results["passed_tests"] + audit_results["failed_tests"]
     if executed_tests > 0:

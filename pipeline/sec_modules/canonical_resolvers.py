@@ -331,6 +331,16 @@ _BS_CONCEPT_KEYS = {
         "CapitalLeaseObligationsNoncurrent",
     ],
     "tl": ["Liabilities", "TotalLiabilities", "us-gaap_Liabilities"],
+    "mezz_eq": [
+        "RedeemableNoncontrollingInterestEquityCarryingAmount",
+        "us-gaap_RedeemableNoncontrollingInterestEquityCarryingAmount",
+        "RedeemableNoncontrollingInterestEquityPreferred",
+        "us-gaap_RedeemableNoncontrollingInterestEquityPreferred",
+        "TemporaryEquityCarryingAmountAttributableToParent",
+        "us-gaap_TemporaryEquityCarryingAmountAttributableToParent",
+        "TemporaryEquityCarryingAmountIncludingPortionAttributableToNoncontrollingInterests",
+        "us-gaap_TemporaryEquityCarryingAmountIncludingPortionAttributableToNoncontrollingInterests",
+    ],
     "eq": [
         "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
         "ifrs-full_Equity",
@@ -807,8 +817,9 @@ def _resolve_bs_liabilities_and_debt(extract_val, tot_ast, eq_v, p):
     lease_nc_v = extract_val(_BS_CONCEPT_KEYS["lease_liab_nc"], p)
     def_tax_nc_v = extract_val(_BS_CONCEPT_KEYS["def_tax_nc"], p)
     tl_raw = extract_val(_BS_CONCEPT_KEYS["tl"], p)
+    mezz_pre = extract_val(_BS_CONCEPT_KEYS["mezz_eq"], p) if tl_raw is None else None
     tot_liab = tl_raw if (tl_raw is not None and tl_raw > 0) else (
-        max(0.0, round((tot_ast or 0.0) - (eq_v or 0.0), 1)) if (tot_ast is not None and eq_v is not None) else None
+        max(0.0, round((tot_ast or 0.0) - (eq_v or 0.0) - (mezz_pre or 0.0), 1)) if (tot_ast is not None and eq_v is not None) else None
     )
     tot_ncl = max(0.0, round((tot_liab or 0.0) - (tot_cl or 0.0), 1)) if (tot_liab is not None and tot_cl is not None) else None
     other_ncl = (
@@ -877,13 +888,16 @@ def _resolve_bs_equity_and_sectoral(
 
     other_eq_v = round((eq_v or 0.0) - ((apic_v or 0.0) + (re_v or 0.0)), 1) if eq_v is not None else None
 
+    mezz_v = extract_val(_BS_CONCEPT_KEYS["mezz_eq"], p)
+
     min_int_v = extract_val(
         [
+            "NonredeemableNoncontrollingInterest",
+            "us-gaap_NonredeemableNoncontrollingInterest",
             "MinorityInterest",
             "us-gaap_MinorityInterest",
             "NoncontrollingInterests",
             "NoncontrollingInterest",
-            "RedeemableNoncontrollingInterestEquityCarryingAmount",
         ],
         p,
     )
@@ -896,10 +910,20 @@ def _resolve_bs_equity_and_sectoral(
             min_int_v = round(eq_tot_cand - eq_v, 1)
         eq_v = eq_tot_cand
     elif min_int_v is not None and min_int_v > 0:
-        if tot_ast is not None and tot_liab is not None and abs((tot_liab + (eq_v or 0.0) + min_int_v) - tot_ast) <= 2.0:
+        if tot_ast is not None and tot_liab is not None and abs((tot_liab + (eq_v or 0.0) + (mezz_v or 0.0) + min_int_v) - tot_ast) <= 2.0:
             eq_v = round((eq_v or 0.0) + min_int_v, 1)
 
-    tot_liab_eq = round((tot_liab or 0.0) + (eq_v or 0.0), 1) if (tot_liab is not None or eq_v is not None) else None
+    base_liab_eq = round((tot_liab or 0.0) + (eq_v or 0.0), 1) if (tot_liab is not None or eq_v is not None) else None
+    if mezz_v is not None and mezz_v != 0.0 and base_liab_eq is not None:
+        with_mezz = round(base_liab_eq + mezz_v, 1)
+        if tot_ast is not None and abs(with_mezz - tot_ast) < abs(base_liab_eq - tot_ast):
+            tot_liab_eq = with_mezz
+        elif tot_ast is not None and abs(base_liab_eq - tot_ast) <= 2.0:
+            tot_liab_eq = base_liab_eq
+        else:
+            tot_liab_eq = with_mezz
+    else:
+        tot_liab_eq = base_liab_eq
     if archetype == "FINANCIAL_BANKING":
         nwc_v = net_fin_pos = tot_ca = tot_cl = tot_nca = tot_ncl = None
     else:
@@ -958,6 +982,7 @@ def _resolve_bs_equity_and_sectoral(
         "common_stock_and_apic": apic_v,
         "retained_earnings": re_v,
         "other_equity": other_eq_v,
+        "mezzanine_equity": mezz_v,
         "minority_interest": min_int_v,
         "stockholders_equity": eq_v,
         "total_liab_and_equity": tot_liab_eq,
@@ -1000,15 +1025,17 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
 
     def _extract_val(key_cands, p, can_key=None):
         src_p = ltm_source_period if (p == "LTM" and ltm_source_period) else p
+        period_chain = ["LTM", src_p] if (p == "LTM" and src_p != "LTM") else [p]
         can_keys = [can_key] if isinstance(can_key, str) else (can_key or [])
         for ck in can_keys:
             can_val = _to_float(canonical.get(ck, {}).get(p), f"canonical.{ck}:{p}")
             if can_val is not None and can_val != 0.0:
                 return can_val
-        for src in bal_sources:
-            found = _extract_from_single_source(src, key_cands, src_p)
-            if found is not None:
-                return found
+        for period_try in period_chain:
+            for src in bal_sources:
+                found = _extract_from_single_source(src, key_cands, period_try)
+                if found is not None:
+                    return found
         for ck in can_keys:
             can_val = _to_float(canonical.get(ck, {}).get(p), f"canonical.{ck}:{p}")
             if can_val is not None:
@@ -1049,6 +1076,7 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
             "common_stock_and_apic",
             "retained_earnings",
             "other_equity",
+            "mezzanine_equity",
             "minority_interest",
             "total_debt",
             "stockholders_equity",

@@ -14,6 +14,131 @@
   ],
   "product_segments": [
     {
+      "name": "Agency Channel",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2023": 21198.2,
+        "FY2022": 17744.7,
+        "FY2021": 16881.0,
+        "FY2020": 15789.5,
+        "FY2019": 14904.1,
+        "FY2018": 13017.2,
+        "FY2017": 11177.6,
+        "FY2016": 9791.7
+      }
+    },
+    {
+      "name": "Direct Channel",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2023": 25015.1,
+        "FY2022": 20135.5,
+        "FY2021": 18492.3,
+        "FY2020": 16830.6,
+        "FY2019": 15305.9,
+        "FY2018": 13017.5,
+        "FY2017": 10769.6,
+        "FY2016": 9396.5
+      }
+    },
+    {
+      "name": "Service Businesses",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2023": 310.1,
+        "FY2022": 299.3,
+        "FY2021": 271.4,
+        "FY2020": 226.4,
+        "FY2019": 195.0,
+        "FY2018": 158.5,
+        "FY2017": 126.8,
+        "FY2016": 103.3
+      }
+    },
+    {
+      "name": "Investments Member",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2023": 2244.9,
+        "FY2022": -651.9,
+        "FY2021": 2370.1
+      }
+    },
+    {
+      "name": "Pretax Profit (Loss)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2023": 0.9,
+        "FY2022": 0.9,
+        "FY2021": 0.9,
+        "FY2020": 0.9,
+        "FY2019": 0.9,
+        "FY2018": 0.9
+      },
+      "operating_income": {
+        "FY2023": 4903.7,
+        "FY2022": 922.1,
+        "FY2021": 4210.0,
+        "FY2020": 7173.2,
+        "FY2019": 5160.3,
+        "FY2018": 3163.6,
+        "FY2017": 2138.9,
+        "FY2016": 1470.7
+      },
+      "operating_margin_pct": {
+        "FY2023": 544855.56,
+        "FY2022": 102455.56,
+        "FY2021": 467777.78,
+        "FY2020": 797022.22,
+        "FY2019": 573366.67,
+        "FY2018": 351511.11
+      }
+    },
+    {
+      "name": "Investments",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2022": -651.9,
+        "FY2021": 2370.1,
+        "FY2020": 2566.6,
+        "FY2019": 2071.2,
+        "FY2018": 415.0,
+        "FY2017": 612.7,
+        "FY2016": 530.0
+      }
+    },
+    {
+      "name": "Other gains (losses)",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2019": 0.0,
+        "FY2018": 0.0,
+        "FY2017": -1.0,
+        "FY2016": 1.6
+      }
+    },
+    {
       "name": "Personal Lines",
       "is_subtotal": false,
       "is_subsegment": false,
@@ -24,11 +149,11 @@
         "FY2024": 60091.0,
         "FY2023": 48765.0,
         "FY2022": 40150.0,
-        "FY2021": 16881.0,
-        "FY2020": 15789.5,
-        "FY2019": 14904.1,
-        "FY2018": 13017.2,
-        "FY2017": 11177.6,
+        "FY2021": 35373.3,
+        "FY2020": 32620.1,
+        "FY2019": 30210.0,
+        "FY2018": 26034.7,
+        "FY2017": 21947.2,
         "FY2016": 19188.2,
         "LTM": 70778.0
       },
@@ -46,11 +171,11 @@
       "operating_margin_pct": {
         "FY2023": 2.11,
         "FY2022": 1.83,
-        "FY2021": 5.88,
-        "FY2020": 14.16,
-        "FY2019": 11.23,
-        "FY2018": 11.03,
-        "FY2017": 7.51,
+        "FY2021": 2.8,
+        "FY2020": 6.86,
+        "FY2019": 5.54,
+        "FY2018": 5.51,
+        "FY2017": 3.83,
         "FY2016": 4.72
       }
     },
@@ -147,6 +272,89 @@
       "status": "active"
     },
     {
+      "name": "Personal Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fees and other revenues",
+      "values": {
+        "FY2025": 1060.0,
+        "FY2024": 893.0,
+        "FY2023": 740.0,
+        "FY2022": 594.0,
+        "LTM": 1060.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2023": 1029.2,
+        "FY2022": 734.1,
+        "FY2021": 992.1,
+        "FY2020": 2236.5,
+        "FY2019": 1673.2,
+        "FY2018": 1435.7,
+        "FY2017": 839.6,
+        "FY2016": 905.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 139.08,
+        "FY2022": 123.59
+      }
+    },
+    {
+      "name": "Commercial Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fees and other revenues",
+      "values": {
+        "FY2025": 136.0,
+        "FY2024": 171.0,
+        "FY2023": 149.0,
+        "FY2022": 128.0,
+        "LTM": 136.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2023": 123.0,
+        "FY2022": 810.3,
+        "FY2021": 767.8,
+        "FY2020": 634.8,
+        "FY2019": 458.8,
+        "FY2018": 478.6,
+        "FY2017": 214.1,
+        "FY2016": 155.2
+      },
+      "operating_margin_pct": {
+        "FY2023": 82.55,
+        "FY2022": 633.05
+      }
+    },
+    {
+      "name": "Other Indemnity",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Fees and other revenues",
+      "values": {
+        "FY2025": 0.0,
+        "FY2024": 0.0,
+        "FY2023": 0.0,
+        "FY2022": 0.0,
+        "LTM": 0.0
+      },
+      "status": "active",
+      "operating_income": {
+        "FY2023": -16.2,
+        "FY2022": -11.4,
+        "FY2021": -1.4,
+        "FY2020": 0.0,
+        "FY2019": 0.0,
+        "FY2018": 0.9,
+        "FY2017": -0.2,
+        "FY2016": -1.6
+      }
+    },
+    {
       "name": "Service revenues",
       "is_subtotal": false,
       "is_subsegment": false,
@@ -160,6 +368,163 @@
         "LTM": 504.0
       },
       "status": "active"
+    },
+    {
+      "name": "Personal Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Service revenues",
+      "values": {
+        "FY2024": 60984.0,
+        "FY2023": 49505.0,
+        "FY2022": 40744.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": 1029.2,
+        "FY2022": 734.1,
+        "FY2021": 992.1,
+        "FY2020": 2236.5,
+        "FY2019": 1673.2,
+        "FY2018": 1435.7,
+        "FY2017": 839.6,
+        "FY2016": 905.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 2.08,
+        "FY2022": 1.8
+      }
+    },
+    {
+      "name": "Commercial Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Service revenues",
+      "values": {
+        "FY2024": 10878.0,
+        "FY2023": 10048.0,
+        "FY2022": 9216.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": 123.0,
+        "FY2022": 810.3,
+        "FY2021": 767.8,
+        "FY2020": 634.8,
+        "FY2019": 458.8,
+        "FY2018": 478.6,
+        "FY2017": 214.1,
+        "FY2016": 155.2
+      },
+      "operating_margin_pct": {
+        "FY2023": 1.22,
+        "FY2022": 8.79
+      }
+    },
+    {
+      "name": "Other Indemnity",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Service revenues",
+      "values": {
+        "FY2024": 1.0,
+        "FY2023": 1.0,
+        "FY2022": 3.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": -16.2,
+        "FY2022": -11.4,
+        "FY2021": -1.4,
+        "FY2020": 0.0,
+        "FY2019": 0.0,
+        "FY2018": 0.9,
+        "FY2017": -0.2,
+        "FY2016": -1.6
+      },
+      "operating_margin_pct": {
+        "FY2023": -1620.0,
+        "FY2022": -380.0
+      }
+    },
+    {
+      "name": "Personal Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Agency Channel",
+      "values": {
+        "FY2023": 21198.2,
+        "FY2022": 17744.7,
+        "FY2021": 16881.0,
+        "FY2020": 15789.5,
+        "FY2019": 14904.1,
+        "FY2018": 13017.2,
+        "FY2017": 11177.6,
+        "FY2016": 9791.7
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": 1029.2,
+        "FY2022": 734.1,
+        "FY2021": 992.1,
+        "FY2020": 2236.5,
+        "FY2019": 1673.2,
+        "FY2018": 1435.7,
+        "FY2017": 839.6,
+        "FY2016": 905.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 4.86,
+        "FY2022": 4.14,
+        "FY2021": 5.88,
+        "FY2020": 14.16,
+        "FY2019": 11.23,
+        "FY2018": 11.03,
+        "FY2017": 7.51,
+        "FY2016": 9.24
+      }
+    },
+    {
+      "name": "Personal Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Direct Channel",
+      "values": {
+        "FY2023": 25015.1,
+        "FY2022": 20135.5,
+        "FY2021": 18492.3,
+        "FY2020": 16830.6,
+        "FY2019": 15305.9,
+        "FY2018": 13017.5,
+        "FY2017": 10769.6,
+        "FY2016": 9396.5
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": 1029.2,
+        "FY2022": 734.1,
+        "FY2021": 992.1,
+        "FY2020": 2236.5,
+        "FY2019": 1673.2,
+        "FY2018": 1435.7,
+        "FY2017": 839.6,
+        "FY2016": 905.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 4.11,
+        "FY2022": 3.65,
+        "FY2021": 5.36,
+        "FY2020": 13.29,
+        "FY2019": 10.93,
+        "FY2018": 11.03,
+        "FY2017": 7.8,
+        "FY2016": 9.63
+      }
     },
     {
       "name": "Property",
@@ -273,6 +638,170 @@
         "FY2018": 5.17,
         "FY2017": 4.67,
         "FY2016": 3.4
+      }
+    },
+    {
+      "name": "Segment Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": true,
+      "parent": "Service Businesses",
+      "values": {
+        "FY2023": 310.1,
+        "FY2022": 299.3,
+        "FY2021": 271.4,
+        "FY2020": 226.4,
+        "FY2019": 195.0,
+        "FY2018": 158.5,
+        "FY2017": 126.8,
+        "FY2016": 103.3
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": -38.9,
+        "FY2022": 2.6,
+        "FY2021": 18.6,
+        "FY2020": 20.9,
+        "FY2019": 16.1,
+        "FY2018": 24.4,
+        "FY2017": 17.3,
+        "FY2016": 11.3
+      },
+      "operating_margin_pct": {
+        "FY2023": -12.54,
+        "FY2022": 0.87,
+        "FY2021": 6.85,
+        "FY2020": 9.23,
+        "FY2019": 8.26,
+        "FY2018": 15.39,
+        "FY2017": 13.64,
+        "FY2016": 10.94
+      }
+    },
+    {
+      "name": "Segment Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": true,
+      "parent": "Investments Member",
+      "values": {
+        "FY2023": 2244.9,
+        "FY2022": -651.9,
+        "FY2021": 2370.1
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": -38.9,
+        "FY2022": 2.6,
+        "FY2021": 18.6,
+        "FY2020": 20.9,
+        "FY2019": 16.1,
+        "FY2018": 24.4,
+        "FY2017": 17.3,
+        "FY2016": 11.3
+      },
+      "operating_margin_pct": {
+        "FY2023": -1.73,
+        "FY2022": -0.4,
+        "FY2021": 0.78
+      }
+    },
+    {
+      "name": "Personal Lines",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Pretax Profit (Loss)",
+      "values": {
+        "FY2023": 0.9,
+        "FY2022": 0.9,
+        "FY2021": 0.9,
+        "FY2020": 0.9,
+        "FY2019": 0.9,
+        "FY2018": 0.9
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": 1029.2,
+        "FY2022": 734.1,
+        "FY2021": 992.1,
+        "FY2020": 2236.5,
+        "FY2019": 1673.2,
+        "FY2018": 1435.7,
+        "FY2017": 839.6,
+        "FY2016": 905.0
+      },
+      "operating_margin_pct": {
+        "FY2023": 114355.56,
+        "FY2022": 81566.67,
+        "FY2021": 110233.33,
+        "FY2020": 248500.0,
+        "FY2019": 185911.11,
+        "FY2018": 159522.22
+      }
+    },
+    {
+      "name": "Segment Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": true,
+      "parent": "Investments",
+      "values": {
+        "FY2022": -651.9,
+        "FY2021": 2370.1,
+        "FY2020": 2566.6,
+        "FY2019": 2071.2,
+        "FY2018": 415.0,
+        "FY2017": 612.7,
+        "FY2016": 530.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": -38.9,
+        "FY2022": 2.6,
+        "FY2021": 18.6,
+        "FY2020": 20.9,
+        "FY2019": 16.1,
+        "FY2018": 24.4,
+        "FY2017": 17.3,
+        "FY2016": 11.3
+      },
+      "operating_margin_pct": {
+        "FY2022": -0.4,
+        "FY2021": 0.78,
+        "FY2020": 0.81,
+        "FY2019": 0.78,
+        "FY2018": 5.88,
+        "FY2017": 2.82,
+        "FY2016": 2.13
+      }
+    },
+    {
+      "name": "Segment Reconciling Items",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": true,
+      "parent": "Other gains (losses)",
+      "values": {
+        "FY2019": 0.0,
+        "FY2018": 0.0,
+        "FY2017": -1.0,
+        "FY2016": 1.6
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2023": -38.9,
+        "FY2022": 2.6,
+        "FY2021": 18.6,
+        "FY2020": 20.9,
+        "FY2019": 16.1,
+        "FY2018": 24.4,
+        "FY2017": 17.3,
+        "FY2016": 11.3
+      },
+      "operating_margin_pct": {
+        "FY2017": -1730.0,
+        "FY2016": 706.25
       }
     }
   ],

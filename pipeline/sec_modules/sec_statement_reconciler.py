@@ -401,19 +401,26 @@ def build_as_reported_statements(
         if not k_stmt:
             if hist_df is not None and not hist_df.empty:
                 fallback_rows = []
+                fb_section_stack = []
                 for _, r in hist_df.iterrows():
                     lbl = str(r.get("label", "")).strip()
                     conc = str(r.get("concept", "")).strip()
                     if not lbl and not conc:
                         continue
+                    is_abs = bool(r.get("is_abstract", False))
+                    lvl = int(r.get("depth", 0)) if pd.notna(r.get("depth")) else 0
+                    is_tot = False if is_abs else _is_true_statement_total(lbl, bool(r.get("is_total", False)))
+                    sec_path = _update_section_stack(fb_section_stack, lvl, lbl, is_abs, is_tot)
                     row_vals = {p: _safe_float(r.get(p)) for p in (["LTM"] + annual_fys) if p in hist_df.columns}
                     fallback_rows.append({
                         "label": lbl or conc,
                         "clarification": get_spanish_clarification(lbl, conc),
                         "concept": conc,
-                        "level": int(r.get("depth", 0)) if pd.notna(r.get("depth")) else 0,
-                        "is_abstract": bool(r.get("is_abstract", False)),
-                        "is_total": bool(r.get("is_total", False)),
+                        "level": lvl,
+                        "section_path": sec_path,
+                        "is_extension_tag": _is_extension_concept(conc),
+                        "is_abstract": is_abs,
+                        "is_total": is_tot,
                         "values": row_vals,
                     })
                 as_reported[s_name] = fallback_rows
@@ -483,13 +490,14 @@ def build_as_reported_statements(
         seen_cash_flow_ending_cash = False
         seen_statement_concepts = set()
         used_hist_indices = set()
+        section_stack = []
 
         for _, r in face_df.iterrows():
             lbl = str(r.get("label", "")).strip()
             conc = str(r.get("concept", "")).strip()
             is_abs = bool(r.get("abstract", False))
             lvl = int(r.get("level", 0)) if pd.notna(r.get("level")) else 0
-            is_tot = ("total" in lbl.lower()) or bool(r.get("is_total", False))
+            is_tot = False if is_abs else _is_true_statement_total(lbl, bool(r.get("is_total", False)))
             conc_tok = _clean_concept_token(conc)
 
             if s_name == "income_statement" and not is_abs and conc_tok == "netincomeloss":
@@ -510,6 +518,7 @@ def build_as_reported_statements(
                     clean_detail = m_par.group(1)
                     clean_lbl = re.sub(r'\s*\([^)]+\)', '', lbl).strip()
 
+            sec_path = _update_section_stack(section_stack, lvl, clean_lbl, is_abs, is_tot)
             base_clarif = get_spanish_clarification(clean_lbl, conc)
             clarif = f"{base_clarif} · {clean_detail}" if (clean_detail and base_clarif) else (clean_detail or base_clarif)
 
@@ -560,6 +569,8 @@ def build_as_reported_statements(
                 "clarification": clarif,
                 "concept": conc,
                 "level": lvl,
+                "section_path": sec_path,
+                "is_extension_tag": _is_extension_concept(conc),
                 "is_abstract": is_abs,
                 "is_total": is_tot,
                 "values": row_vals,
@@ -569,6 +580,82 @@ def build_as_reported_statements(
         print(f"[SEC Extractor] {s_name}: {len(rows)} partidas As-Reported extraídas fielmente de la SEC.")
 
     return as_reported
+
+
+_STD_XBRL_PREFIXES = ("us-gaap", "ifrs-full", "ifrs", "dei", "srt", "invest", "ecd", "cyd")
+
+
+def _is_true_statement_total(lbl: str, is_total_flag: bool) -> bool:
+    """Detecta totales contables reales evitando falsos positivos como 'Purchase of total return swaps'."""
+    if bool(is_total_flag):
+        return True
+    low = (lbl or "").strip().lower()
+    if not low:
+        return False
+    return low.startswith("total ") or low == "total" or low.endswith(", total") or low.startswith("subtotal ")
+
+
+def _is_extension_concept(concept: str) -> bool:
+    """Identifica tags XBRL de extensión propios de la empresa (ej. uber_*, aapl_*)."""
+    raw = str(concept or "").strip()
+    if not raw or (":" not in raw and "_" not in raw):
+        return False
+    prefix = raw.split(":", 1)[0].split("_", 1)[0].lower()
+    return bool(prefix and prefix not in _STD_XBRL_PREFIXES)
+
+
+def _update_section_stack(section_stack: list, lvl: int, lbl: str, is_abs: bool, is_tot: bool) -> str:
+    """Mantiene la pila jerárquica de secciones XBRL para atribuir sección exacta a cada fila."""
+    clean = re.sub(r'[:\s]+$', '', str(lbl or '')).strip()
+    while section_stack and section_stack[-1][0] > lvl:
+        section_stack.pop()
+    if is_abs:
+        while section_stack and section_stack[-1][0] >= lvl:
+            section_stack.pop()
+        if clean and "[abstract]" not in clean.lower() and "[line items]" not in clean.lower():
+            section_stack.append((lvl, clean))
+        return " > ".join(name for _, name in section_stack)
+    path = " > ".join(name for _, name in section_stack)
+    if is_tot:
+        while section_stack and section_stack[-1][0] >= lvl:
+            section_stack.pop()
+    return path
+
+
+def _disambiguate_as_reported_labels(rows: list, translate_fn) -> None:
+    """Garantiza unicidad semántica de spanish_label dentro de un mismo estado financiero."""
+    counts = {}
+    for row in rows:
+        sp = (row.get("spanish_label") or "").strip().lower()
+        if sp and not row.get("is_abstract"):
+            counts[sp] = counts.get(sp, 0) + 1
+
+    seen_final = set()
+    for row in rows:
+        if row.get("is_abstract"):
+            continue
+        sp = (row.get("spanish_label") or "").strip()
+        sp_low = sp.lower()
+        if counts.get(sp_low, 0) > 1:
+            sec_leaf = (row.get("section_path") or "").split(" > ")[-1].strip()
+            orig_lbl = (row.get("label") or "").strip()
+            candidate = sp
+            if sec_leaf:
+                sec_es = translate_fn(sec_leaf, None)
+                candidate = f"{sp} — {sec_es}"
+            if candidate.lower() in seen_final or counts.get(sp_low, 0) > 1 and sum(
+                1 for r in rows if not r.get("is_abstract")
+                and (r.get("spanish_label") or "").strip().lower() == sp_low
+                and (r.get("section_path") or "").split(" > ")[-1].strip() == sec_leaf
+            ) > 1:
+                if orig_lbl:
+                    candidate = f"{sp} ({orig_lbl})"
+            if candidate.lower() in seen_final:
+                conc = (row.get("concept") or "").strip()
+                if conc:
+                    candidate = f"{candidate} [{conc.split(':')[-1].split('_')[-1]}]"
+            row["spanish_label"] = candidate
+        seen_final.add((row.get("spanish_label") or "").strip().lower())
 
 
 def _sync_short_term_investments_and_cash_ltm(as_rep_bs: list, can_summary: dict, bs_detail: dict) -> None:
@@ -714,10 +801,15 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
                 continue
             seen_keys.add(dedup_key)
 
+            row["is_abstract"] = bool(row.get("is_abstract", False))
+            row["is_total"] = False if row["is_abstract"] else _is_true_statement_total(lbl, bool(row.get("is_total", False)))
+            row.setdefault("is_extension_tag", _is_extension_concept(conc))
+            row.setdefault("section_path", "")
             row["spanish_label"] = get_spanish_label(lbl, conc)
             row["orig_tooltip"] = f"{lbl} ({conc})" if conc else lbl
             row["values"] = _normalize_statement_row_signs(s_name, conc, lbl, row.get("values", {}))
             cleaned_rows.append(row)
+        _disambiguate_as_reported_labels(cleaned_rows, get_spanish_label)
         as_reported[s_name] = cleaned_rows
 
     can_summary = full_dataset.get("canonical_summary", {})
@@ -757,10 +849,20 @@ def sanitize_and_validate_statements(full_dataset: dict) -> dict:
     periods_res = full_dataset.get("fiscal_years", [])[:11]
     arch_res = full_dataset.get("archetype") or ("FINANCIAL_BANKING" if full_dataset.get("is_financial") else "STANDARD_CORPORATE")
     cap_flows_res = resolve_canonical_capital_flows(full_dataset, periods_res)
+    bs_res = resolve_canonical_balance_sheet(full_dataset, periods_res, archetype=arch_res)
+    is_res = resolve_canonical_income_statement(full_dataset, periods_res, archetype=arch_res)
+    cf_res = resolve_canonical_cash_flow(full_dataset, periods_res, capital_flows=cap_flows_res, archetype=arch_res)
     full_dataset["resolved_canonical_statements"] = {
-        "balance_sheet": resolve_canonical_balance_sheet(full_dataset, periods_res, archetype=arch_res),
-        "income_statement": resolve_canonical_income_statement(full_dataset, periods_res, archetype=arch_res),
+        "balance_sheet": bs_res,
+        "income_statement": is_res,
         "capital_flows": cap_flows_res,
-        "cash_flow": resolve_canonical_cash_flow(full_dataset, periods_res, capital_flows=cap_flows_res, archetype=arch_res),
+        "cash_flow": cf_res,
     }
+    try:
+        from .canonical_lineage import build_resolved_canonical_lineage
+    except ImportError:
+        from pipeline.sec_modules.canonical_lineage import build_resolved_canonical_lineage
+    full_dataset["resolved_canonical_lineage"] = build_resolved_canonical_lineage(
+        full_dataset, bs_res, is_res, cf_res, periods_res
+    )
     return full_dataset

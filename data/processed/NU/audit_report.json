@@ -2,7 +2,7 @@
   "ticker": "NU",
   "company_name": "Nu Holdings Ltd.",
   "cik": "0001691493",
-  "audit_timestamp": "2026-11-12T15:14:53.524797",
+  "audit_timestamp": "2026-11-12T18:15:37.930501",
   "years_audited": {
     "LTM": [
       {
@@ -400,10 +400,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 53,
-  "passed_tests": 28,
+  "total_tests": 58,
+  "passed_tests": 31,
   "failed_tests": 0,
-  "skipped_tests": 25,
+  "skipped_tests": 27,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -428,9 +428,119 @@
     },
     {
       "check": "VERIFICACION_VIGENTE",
+      "severity": "WARN",
+      "message": "STALE: financial_statements.json cambió después de la verificación cruzada. Re-ejecutar data_verifier.",
+      "state": "STALE"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
       "severity": "PASS",
-      "message": "Verificación corresponde a la extracción vigente.",
-      "state": "CURRENT"
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "12 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 12,
+      "samples": [
+        {
+          "metric": "other_equity",
+          "period": "LTM",
+          "value_usd": 186449000.0,
+          "explained_sum_usd": 18003024000.0,
+          "residual_unexplained_usd": -17816575000.0,
+          "residual_pct": 9555.7
+        },
+        {
+          "metric": "other_equity",
+          "period": "FY2025",
+          "value_usd": -184300000.0,
+          "explained_sum_usd": -16169112000.0,
+          "residual_unexplained_usd": 15984812000.0,
+          "residual_pct": 8673.3
+        },
+        {
+          "metric": "other_equity",
+          "period": "FY2024",
+          "value_usd": -828167000.0,
+          "explained_sum_usd": -11871898000.0,
+          "residual_unexplained_usd": 11043731000.0,
+          "residual_pct": 1333.5
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "LTM",
+          "value_usd": 10564259000.0,
+          "explained_sum_usd": 130037053000.0,
+          "residual_unexplained_usd": -119472794000.0,
+          "residual_pct": 1130.9
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "FY2025",
+          "value_usd": 8354297000.0,
+          "explained_sum_usd": 114175778000.0,
+          "residual_unexplained_usd": -105821481000.0,
+          "residual_pct": 1266.7
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "FY2024",
+          "value_usd": 5004849000.0,
+          "explained_sum_usd": 77567540000.0,
+          "residual_unexplained_usd": -72562691000.0,
+          "residual_pct": 1449.8
+        },
+        {
+          "metric": "other_liabilities_sectoral",
+          "period": "LTM",
+          "value_usd": 18432679000.0,
+          "explained_sum_usd": 85133009000.0,
+          "residual_unexplained_usd": -66700330000.0,
+          "residual_pct": 361.9
+        },
+        {
+          "metric": "other_liabilities_sectoral",
+          "period": "FY2025",
+          "value_usd": 16465161000.0,
+          "explained_sum_usd": 77272233000.0,
+          "residual_unexplained_usd": -60807072000.0,
+          "residual_pct": 369.3
+        },
+        {
+          "metric": "other_liabilities_sectoral",
+          "period": "FY2024",
+          "value_usd": 11390133000.0,
+          "explained_sum_usd": 51650008000.0,
+          "residual_unexplained_usd": -40259875000.0,
+          "residual_pct": 353.5
+        },
+        {
+          "metric": "other_noncash",
+          "period": "LTM",
+          "value_usd": 11081422000.0,
+          "explained_sum_usd": 6599351000.0,
+          "residual_unexplained_usd": 4482071000.0,
+          "residual_pct": 40.4
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

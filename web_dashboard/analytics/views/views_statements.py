@@ -50,37 +50,38 @@ def build_statements_context(
     bs_tot_assets_asrep = {p: bs_tot_assets_std.get(p) for p in as_rep_fys}
 
     memo_args = (fs, archetype, canonical, key_ratios, enriched, bs_data, pnl_data, cap_flows, cf_data, as_rep_cf)
+    lineage = fs.get("resolved_canonical_lineage") or {}
 
     # 1. Vista Estandarizada (10Y + LTM)
-    std_inc_rows = build_standardized_section(get_pnl_sections(archetype), pnl_data, statements_fys, canonical, default_pct_mode="rev")
+    std_inc_rows = build_standardized_section(get_pnl_sections(archetype), pnl_data, statements_fys, canonical, default_pct_mode="rev", lineage=lineage, stmt_type="income_statement")
     std_inc_rows.extend(build_memo_rows(statements_fys, "pnl", *memo_args))
     std_pnl = [build_statement_cells(r, statements_fys, canonical, ebt_dict=ebt_dict_std) for r in std_inc_rows]
 
-    std_cf_rows = build_standardized_section(get_cashflow_sections(archetype, cf_data), cf_data, statements_fys, canonical, default_pct_mode="ni")
+    std_cf_rows = build_standardized_section(get_cashflow_sections(archetype, cf_data), cf_data, statements_fys, canonical, default_pct_mode="ni", lineage=lineage, stmt_type="cash_flow_statement")
     std_cf_rows.extend(build_memo_rows(statements_fys, "cashflow", *memo_args))
     std_cashflow = [build_statement_cells(r, statements_fys, canonical) for r in std_cf_rows]
 
-    std_bs_rows = build_standardized_section(get_balance_sheet_sections(archetype), bs_data, statements_fys, canonical, default_pct_mode="assets")
+    std_bs_rows = build_standardized_section(get_balance_sheet_sections(archetype), bs_data, statements_fys, canonical, default_pct_mode="assets", lineage=lineage, stmt_type="balance_sheet")
     std_bs_rows.extend(build_memo_rows(statements_fys, "balancesheet", *memo_args))
     std_balancesheet = [build_statement_cells(r, statements_fys, canonical, bs_tot_assets=bs_tot_assets_std) for r in std_bs_rows]
 
     # 2. Vista Oficial SEC (As-Reported 3Y + LTM)
     if as_rep_inc:
-        as_rep_inc_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="rev") for r_raw in as_rep_inc]
+        as_rep_inc_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="rev", stmt_type="income_statement") for r_raw in as_rep_inc]
         as_rep_inc_rows.extend(build_memo_rows(as_rep_fys, "pnl", *memo_args))
         as_rep_pnl = [build_statement_cells(r, as_rep_fys, canonical, ebt_dict=ebt_dict_asrep) for r in as_rep_inc_rows]
     else:
         as_rep_pnl = std_pnl
 
     if as_rep_cf:
-        as_rep_cf_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="ni") for r_raw in as_rep_cf]
+        as_rep_cf_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="ni", stmt_type="cash_flow_statement") for r_raw in as_rep_cf]
         as_rep_cf_rows.extend(build_memo_rows(as_rep_fys, "cashflow", *memo_args))
         as_rep_cashflow = [build_statement_cells(r, as_rep_fys, canonical) for r in as_rep_cf_rows]
     else:
         as_rep_cashflow = std_cashflow
 
     if as_rep_bs:
-        as_rep_bs_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="assets") for r_raw in as_rep_bs]
+        as_rep_bs_rows = [format_as_reported_row(r_raw, as_rep_fys, fs, pct_mode="assets", stmt_type="balance_sheet") for r_raw in as_rep_bs]
         as_rep_bs_rows.extend(build_memo_rows(as_rep_fys, "balancesheet", *memo_args))
         as_rep_balancesheet = [build_statement_cells(r, as_rep_fys, canonical, bs_tot_assets=bs_tot_assets_asrep) for r in as_rep_bs_rows]
     else:
@@ -90,6 +91,9 @@ def build_statements_context(
         statements_fys, fs, canonical, key_ratios, archetype, is_banking, is_insurance, is_reit, is_financial, enriched, bs_data, pnl_data,
     )
     table_pnl = build_legacy_table_pnl(fys, canonical)
+
+    from pipeline.audit_modules.statement_quality_audit import evaluate_statement_quality
+    statement_quality_audit = evaluate_statement_quality(fs if isinstance(fs, dict) else {})
 
     return {
         "table_pnl": table_pnl,
@@ -109,4 +113,5 @@ def build_statements_context(
         "as_rep_ltm": as_rep_fys[0] if as_rep_fys else "LTM",
         "as_rep_annual_fys": as_rep_fys[1:] if len(as_rep_fys) > 1 else [],
         "statements_summary": statements_summary,
+        "statement_quality_audit": statement_quality_audit,
     }

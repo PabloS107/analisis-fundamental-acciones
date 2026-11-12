@@ -2,20 +2,20 @@
   "ticker": "PGR",
   "company_name": "PROGRESSIVE CORP/OH/",
   "cik": "0000080661",
-  "audit_timestamp": "2026-11-12T15:14:53.666240",
+  "audit_timestamp": "2026-11-12T18:15:38.208787",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 124925000000.0,
-        "liabilities": 90592000000.0,
-        "equity": 34333000000.0,
+        "assets": 127744000000.0,
+        "liabilities": 93259000000.0,
+        "equity": 34485000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 124925000000.0,
+        "liabilities_plus_equity": 127744000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 12492500.0
+        "tolerance_usd": 12774400.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -45,13 +45,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 11695000000.0,
-        "shares_diluted": 586850000.0,
-        "eps_reported": 19.93,
-        "eps_calculated": 19.93,
-        "eps_adjusted": 19.93,
+        "net_income": 11622000000.0,
+        "shares_diluted": 585350000.0,
+        "eps_reported": 19.86,
+        "eps_calculated": 19.85,
+        "eps_adjusted": 19.85,
         "split_factor": 1.0,
-        "discrepancy": 0.0
+        "discrepancy": 0.01
       }
     ],
     "FY2025": [
@@ -159,7 +159,7 @@
         "shares_diluted": 587700000.0,
         "eps_reported": 14.4,
         "eps_calculated": 14.4,
-        "eps_adjusted": 14.4,
+        "eps_adjusted": 14.43,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -214,7 +214,7 @@
         "shares_diluted": 587500000.0,
         "eps_reported": 6.58,
         "eps_calculated": 6.58,
-        "eps_adjusted": 6.58,
+        "eps_adjusted": 6.64,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -269,7 +269,7 @@
         "shares_diluted": 587100000.0,
         "eps_reported": 1.18,
         "eps_calculated": 1.18,
-        "eps_adjusted": 1.18,
+        "eps_adjusted": 1.23,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -324,7 +324,7 @@
         "shares_diluted": 587100000.0,
         "eps_reported": 5.66,
         "eps_calculated": 5.66,
-        "eps_adjusted": 5.66,
+        "eps_adjusted": 5.71,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -379,7 +379,7 @@
         "shares_diluted": 587600000.0,
         "eps_reported": 9.66,
         "eps_calculated": 9.66,
-        "eps_adjusted": 9.66,
+        "eps_adjusted": 9.71,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -434,7 +434,7 @@
         "shares_diluted": 587200000.0,
         "eps_reported": 6.72,
         "eps_calculated": 6.72,
-        "eps_adjusted": 6.72,
+        "eps_adjusted": 6.76,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -489,7 +489,7 @@
         "shares_diluted": 586700000.0,
         "eps_reported": 4.42,
         "eps_calculated": 4.42,
-        "eps_adjusted": 4.42,
+        "eps_adjusted": 4.46,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -662,9 +662,15 @@
     "FY2014": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Partidas insuficientes en FY2014 para verificar balance completo."
+        "passed": true,
+        "status": "PASS",
+        "assets": 25787600000.0,
+        "liabilities": 18859000000.0,
+        "equity": 6928600000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 25787600000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 2578760.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -710,22 +716,147 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 80,
-  "passed_tests": 50,
+  "total_tests": 88,
+  "passed_tests": 59,
   "failed_tests": 0,
-  "skipped_tests": 30,
+  "skipped_tests": 29,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
       "check": "METADATA_PRESENTE",
-      "severity": "WARN",
-      "message": "N/D: falta sec_metadata; no es posible certificar el período LTM ni su filing de origen. Re-ejecutar la extracción SEC."
+      "severity": "PASS",
+      "message": "sec_metadata presente."
+    },
+    {
+      "check": "PERIODO_NO_POSTERIOR",
+      "severity": "PASS",
+      "message": "Cierre de período anterior o igual a la presentación."
+    },
+    {
+      "check": "PERIODO_NO_FUTURO",
+      "severity": "PASS",
+      "message": "Cierre de período no posterior a la extracción."
+    },
+    {
+      "check": "LTM_IGUAL_FY",
+      "severity": "PASS",
+      "message": "No aplica: el LTM no proviene de un reporte anual."
     },
     {
       "check": "VERIFICACION_VIGENTE",
       "severity": "WARN",
       "message": "N/D: no existe cross_verification_report.json.",
       "state": "MISSING"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "18 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 18,
+      "samples": [
+        {
+          "metric": "other_non_operating",
+          "period": "LTM",
+          "value_usd": 456000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 456000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_non_operating",
+          "period": "FY2025",
+          "value_usd": -3305000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": -3305000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_non_operating",
+          "period": "FY2024",
+          "value_usd": -2553000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": -2553000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "LTM",
+          "value_usd": 32292000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 32292000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "FY2025",
+          "value_usd": 29247000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 29247000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "FY2024",
+          "value_usd": 28626000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 28626000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_equity",
+          "period": "LTM",
+          "value_usd": -2744000000.0,
+          "explained_sum_usd": -111328000000.0,
+          "residual_unexplained_usd": 108584000000.0,
+          "residual_pct": 3957.1
+        },
+        {
+          "metric": "other_equity",
+          "period": "FY2025",
+          "value_usd": 103000000.0,
+          "explained_sum_usd": 113573000000.0,
+          "residual_unexplained_usd": -113470000000.0,
+          "residual_pct": 110165.0
+        },
+        {
+          "metric": "other_equity",
+          "period": "FY2024",
+          "value_usd": -1423000000.0,
+          "explained_sum_usd": -99131000000.0,
+          "residual_unexplained_usd": 97708000000.0,
+          "residual_pct": 6866.3
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "LTM",
+          "value_usd": 12655000000.0,
+          "explained_sum_usd": 97072000000.0,
+          "residual_unexplained_usd": -84417000000.0,
+          "residual_pct": 667.1
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

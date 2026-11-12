@@ -421,9 +421,43 @@ def _scan_10k_segment_filings(valid_k_filings, filing_context):
     return product_segments, channel_segments, geographic_segments, segment_op_income
 
 
+def _can_subordinate_us_to_other_countries(us_item, geographic_segments, latest_fy):
+    """Valida si EE. UU. es un desglose de pie dentro de 'Other countries' (vigencia y cota de magnitud)."""
+    other_item = next((g for g in geographic_segments if g["name"].lower() == "other countries"), None)
+    if not other_item:
+        return None
+    intl_siblings = [
+        g for g in geographic_segments
+        if g["name"].lower() in ("brazil", "mexico", "latin america", "europe")
+    ]
+    if not intl_siblings:
+        return None
+
+    us_vals = us_item.get("values", {}) or {}
+    other_vals = other_item.get("values", {}) or {}
+    if latest_fy and us_vals.get(latest_fy) is not None:
+        if other_vals.get(latest_fy) is None:
+            return None
+        if not any((s.get("values", {}) or {}).get(latest_fy) is not None for s in intl_siblings):
+            return None
+
+    common = [p for p in us_vals if us_vals.get(p) is not None and other_vals.get(p) is not None]
+    if common:
+        ref_p = latest_fy if latest_fy in common else sorted(common, reverse=True)[0]
+        if float(us_vals[ref_p]) > float(other_vals[ref_p]) * 1.05:
+            return None
+
+    return other_item["name"]
+
+
 def _resolve_segment_hierarchies(product_segments, geographic_segments, latest_fy):
     """Resuelve dinámicamente jerarquías geográficas, nodos padres sintéticos y huérfanos."""
     all_geo_names = {item["name"].lower() for item in geographic_segments}
+    active_geo_names = {
+        item["name"].lower()
+        for item in geographic_segments
+        if latest_fy and (item.get("values", {}) or {}).get(latest_fy) is not None
+    }
     for item in geographic_segments:
         name_low = item["name"].lower()
         if item.get("parent") and item["parent"].lower() not in all_geo_names:
@@ -435,15 +469,16 @@ def _resolve_segment_hierarchies(product_segments, geographic_segments, latest_f
             if parent_found:
                 item["is_subsegment"] = True
                 item["parent"] = next(g["name"] for g in geographic_segments if g["name"].lower() == parent_found)
-            elif any(k in all_geo_names for k in ("brazil", "mexico", "latin america", "europe")) and "other countries" in all_geo_names:
-                item["is_country_breakdown"] = True
-                item["is_subsegment"] = True
-                parent_item = next((g for g in geographic_segments if g["name"].lower() == "other countries"), None)
-                if parent_item:
-                    item["parent"] = parent_item["name"]
             else:
-                item["is_subsegment"] = False
-                item["parent"] = None
+                other_parent = _can_subordinate_us_to_other_countries(item, geographic_segments, latest_fy)
+                if other_parent:
+                    item["is_country_breakdown"] = True
+                    item["is_subsegment"] = True
+                    item["parent"] = other_parent
+                else:
+                    item["is_country_breakdown"] = False
+                    item["is_subsegment"] = False
+                    item["parent"] = None
         elif name_low == "china":
             if "greater china" in all_geo_names:
                 item["is_subsegment"] = True
@@ -452,7 +487,8 @@ def _resolve_segment_hierarchies(product_segments, geographic_segments, latest_f
                 item["is_subsegment"] = False
                 item["parent"] = None
         elif name_low == "other countries":
-            item["is_country_breakdown"] = any(r in all_geo_names for r in ("americas", "europe", "greater china", "rest of asia pacific"))
+            ref_names = active_geo_names if latest_fy and (item.get("values", {}) or {}).get(latest_fy) is not None else all_geo_names
+            item["is_country_breakdown"] = any(r in ref_names for r in ("americas", "europe", "greater china", "rest of asia pacific"))
 
     for item in product_segments:
         if item.get("parent") and item["parent"].lower() in ("other", "u.k."):

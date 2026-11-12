@@ -2,7 +2,7 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-11-12T15:14:53.269714",
+  "audit_timestamp": "2026-11-12T18:15:37.291693",
   "years_audited": {
     "LTM": [
       {
@@ -826,17 +826,17 @@
         "shares_diluted": 5793069000.0,
         "eps_reported": 9.22,
         "eps_calculated": 9.22,
-        "eps_adjusted": 2.31,
+        "eps_adjusted": 2.3,
         "split_factor": 4.0,
         "discrepancy": 0.0
       }
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 83,
-  "passed_tests": 81,
+  "total_tests": 88,
+  "passed_tests": 85,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 3,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -862,8 +862,86 @@
     {
       "check": "VERIFICACION_VIGENTE",
       "severity": "WARN",
-      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-06. Re-ejecutar data_verifier.",
+      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-12. Re-ejecutar data_verifier.",
       "state": "STALE"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "6 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 6,
+      "samples": [
+        {
+          "metric": "other_current_liabilities",
+          "period": "LTM",
+          "value_usd": 12281000000.0,
+          "explained_sum_usd": 66124000000.0,
+          "residual_unexplained_usd": -53843000000.0,
+          "residual_pct": 438.4
+        },
+        {
+          "metric": "other_current_liabilities",
+          "period": "FY2026",
+          "value_usd": 12281000000.0,
+          "explained_sum_usd": 66124000000.0,
+          "residual_unexplained_usd": -53843000000.0,
+          "residual_pct": 438.4
+        },
+        {
+          "metric": "other_current_liabilities",
+          "period": "FY2025",
+          "value_usd": 21935000000.0,
+          "explained_sum_usd": 66387000000.0,
+          "residual_unexplained_usd": -44452000000.0,
+          "residual_pct": 202.7
+        },
+        {
+          "metric": "other_noncurrent_liabilities",
+          "period": "LTM",
+          "value_usd": 42974000000.0,
+          "explained_sum_usd": 54332000000.0,
+          "residual_unexplained_usd": -11358000000.0,
+          "residual_pct": 26.4
+        },
+        {
+          "metric": "other_noncurrent_liabilities",
+          "period": "FY2026",
+          "value_usd": 42974000000.0,
+          "explained_sum_usd": 54332000000.0,
+          "residual_unexplained_usd": -11358000000.0,
+          "residual_pct": 26.4
+        },
+        {
+          "metric": "other_noncurrent_liabilities",
+          "period": "FY2025",
+          "value_usd": 30638000000.0,
+          "explained_sum_usd": 41549000000.0,
+          "residual_unexplained_usd": -10911000000.0,
+          "residual_pct": 35.6
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

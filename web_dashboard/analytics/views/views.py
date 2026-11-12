@@ -38,6 +38,7 @@ from .views_statements import (
     resolve_canonical_income_statement,
 )
 from .views_valuation import build_valuation_context
+from .views_sec_viewer import cell_evidence_api, sec_report_proxy_api
 
 # Caché en memoria para frescura SEC (Salvaguarda 3: TTL de 15 minutos / 900s)
 _FRESHNESS_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}

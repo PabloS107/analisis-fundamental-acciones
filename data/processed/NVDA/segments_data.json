@@ -369,6 +369,165 @@
         "FY2018": 19.75,
         "FY2017": -1.09
       }
+    },
+    {
+      "name": "All Other",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 0.0,
+        "FY2019": 0.0,
+        "FY2018": 43.0,
+        "FY2017": 264.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2026": 139297.0,
+        "FY2025": 87960.0,
+        "FY2024": 37862.0,
+        "FY2023": -5411.0,
+        "FY2022": -3049.0,
+        "FY2021": -2628.0,
+        "FY2020": -1172.0,
+        "FY2019": -864.0,
+        "FY2018": -600.0,
+        "FY2017": -237.0,
+        "LTM": 139297.0
+      },
+      "operating_margin_pct": {
+        "FY2018": -1395.35,
+        "FY2017": -89.77
+      }
+    },
+    {
+      "name": "Gaming",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 5518.0,
+        "FY2019": 6246.0,
+        "FY2018": 5513.0,
+        "FY2017": 4060.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Professional Visualization",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 1212.0,
+        "FY2019": 1130.0,
+        "FY2018": 934.0,
+        "FY2017": 835.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Data Center",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 2983.0,
+        "FY2019": 2932.0,
+        "FY2018": 1932.0,
+        "FY2017": 830.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Automotive",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 700.0,
+        "FY2019": 641.0,
+        "FY2018": 558.0,
+        "FY2017": 487.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "OEM & Other",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Unallocated revenue",
+      "values": {
+        "FY2020": 505.0,
+        "FY2019": 767.0,
+        "FY2018": 777.0,
+        "FY2017": 698.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
+      }
+    },
+    {
+      "name": "GPU",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 9465.0,
+        "FY2019": 10175.0,
+        "FY2018": 8137.0,
+        "FY2017": 5822.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2020": 3806.0,
+        "FY2019": 4443.0,
+        "FY2018": 3507.0,
+        "FY2017": 2180.0
+      },
+      "operating_margin_pct": {
+        "FY2020": 40.21,
+        "FY2019": 43.67,
+        "FY2018": 43.1,
+        "FY2017": 37.44
+      }
+    },
+    {
+      "name": "Tegra Processor",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "values": {
+        "FY2020": 1453.0,
+        "FY2019": 1541.0,
+        "FY2018": 1534.0,
+        "FY2017": 824.0
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2020": 196.0,
+        "FY2019": 241.0,
+        "FY2018": 303.0,
+        "FY2017": -9.0
+      },
+      "operating_margin_pct": {
+        "FY2020": 13.49,
+        "FY2019": 15.64,
+        "FY2018": 19.75,
+        "FY2017": -1.09
+      }
     }
   ],
   "channel_segments": [],
@@ -391,6 +550,7 @@
         "FY2017": 904.0,
         "LTM": 214878.0
       },
+      "is_country_breakdown": false,
       "status": "active"
     },
     {

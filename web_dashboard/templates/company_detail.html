@@ -370,56 +370,93 @@
         {% endif %}
 
                 <!-- Barra de Controles & Switchers -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4">
-            <!-- Left: View Mode Toggle (Estandarizada 10Y vs Oficial SEC 3Y) -->
-            <div class="flex items-center gap-2 w-full xl:w-auto">
-                <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
-                    <button id="btn-view-std" onclick="setStatementViewModeType('std')" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition flex items-center gap-1.5 font-bold">
-                        <span>📐</span> Vista Estandarizada (10Y + LTM)
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div class="flex flex-col xl:flex-row items-center justify-between gap-3">
+                <!-- Left: View Mode Toggle (Estandarizada 10Y vs Oficial SEC 3Y) + Idioma & Tags -->
+                <div class="flex items-center gap-2 w-full xl:w-auto flex-wrap">
+                    <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
+                        <button id="btn-view-std" onclick="setStatementViewModeType('std')" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition flex items-center gap-1.5 font-bold">
+                            <span>📐</span> Vista Estandarizada (10Y + LTM)
+                        </button>
+                        <button id="btn-view-asrep" onclick="setStatementViewModeType('asrep')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-bold">
+                            <span>🏛️</span> Reporte Oficial SEC (3Y + LTM)
+                        </button>
+                    </div>
+                    <button id="btn-stmt-lang" onclick="toggleStatementLanguage()" data-lang="en"
+                            class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center gap-1"
+                            title="Alternar etiquetas de partidas entre Inglés Wall Street (original) y Español">
+                        <span>🌐</span> <span id="stmt-lang-badge">EN | es</span>
                     </button>
-                    <button id="btn-view-asrep" onclick="setStatementViewModeType('asrep')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-bold">
-                        <span>🏛️</span> Reporte Oficial SEC (3Y + LTM)
+                    <button id="btn-toggle-xbrl" onclick="toggleAsReportedXbrlTags()" data-active="false"
+                            class="hidden px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center gap-1"
+                            title="Mostrar códigos de tags XBRL oficiales SEC y etiquetas de extensión bajo cada partida">
+                        <span>🏷️</span> Tags SEC
+                    </button>
+                    {% if statement_quality_audit %}
+                    <button id="btn-quality-badge" onclick="toggleQualityAuditPanel()"
+                            class="px-2.5 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1.5 {% if statement_quality_audit.status == 'PASS' %}bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100{% elif statement_quality_audit.status == 'WARN' %}bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100{% else %}bg-rose-50 border-rose-200 text-rose-800 hover:bg-rose-100{% endif %}"
+                            title="Ver resultado de los controles automáticos Q1-Q5 (etiquetas, equilibrio de balance, atribución de 'Otros' y procedencia SEC)">
+                        <span>{% if statement_quality_audit.status == 'PASS' %}✓{% elif statement_quality_audit.status == 'WARN' %}⚠{% else %}✕{% endif %}</span>
+                        <span>Calidad SEC Q1-Q5: {{ statement_quality_audit.pass_count }}/5</span>
+                    </button>
+                    {% endif %}
+                </div>
+
+                <!-- Middle: Subtab Pill Switcher (Default: Estado de Resultados) -->
+                <div class="flex items-center gap-1 bg-slate-100 p-1.5 rounded-xl text-xs font-semibold overflow-x-auto w-full xl:w-auto">
+                    <button onclick="setStatementSubTab('all')" id="btn-sub-all" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        📑 Cascada Completa
+                    </button>
+                    <button onclick="setStatementSubTab('pnl')" id="btn-sub-pnl" class="subtab-btn px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition">
+                        📊 Estado de Resultados
+                    </button>
+                    <button onclick="setStatementSubTab('cashflow')" id="btn-sub-cashflow" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        🌊 Flujo de Caja
+                    </button>
+                    <button onclick="setStatementSubTab('balancesheet')" id="btn-sub-balancesheet" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        🏛️ Balance General
+                    </button>
+                </div>
+
+                <!-- Right: Buscador y Selector de Modos (Importes / Vertical % / YoY) -->
+                <div class="flex items-center gap-3 w-full xl:w-auto justify-end flex-wrap">
+                    <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
+                        <button id="btn-mode-abs" onclick="setStatementViewMode('abs')" class="px-2.5 py-1 rounded-lg bg-white text-slate-900 shadow-sm transition">
+                            💵 Importes ($M)
+                        </button>
+                        <button id="btn-mode-pct" onclick="setStatementViewMode('pct')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                            📐 % Vertical
+                        </button>
+                        <button id="btn-mode-yoy" onclick="setStatementViewMode('yoy')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                            📈 % YoY & CAGR
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <input type="text" id="statementSearch" onkeyup="filterStatements()" placeholder="Buscar EN/ES o tag SEC..." 
+                               class="bg-slate-50 text-xs text-slate-900 pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 w-44 focus:outline-none focus:border-sky-500 transition">
+                        <span class="absolute right-2.5 top-1.5 text-xs text-slate-400">🔍</span>
+                    </div>
+                    <button id="btn-export-csv" onclick="exportActiveStatementsCSV()" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5" title="Exportar tabla activa a CSV">
+                        <span>📥</span> CSV
                     </button>
                 </div>
             </div>
-
-            <!-- Middle: Subtab Pill Switcher (Default: Estado de Resultados) -->
-            <div class="flex items-center gap-1 bg-slate-100 p-1.5 rounded-xl text-xs font-semibold overflow-x-auto w-full xl:w-auto">
-                <button onclick="setStatementSubTab('all')" id="btn-sub-all" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-                    📑 Cascada Completa
-                </button>
-                <button onclick="setStatementSubTab('pnl')" id="btn-sub-pnl" class="subtab-btn px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition">
-                    📊 Estado de Resultados
-                </button>
-                <button onclick="setStatementSubTab('cashflow')" id="btn-sub-cashflow" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-                    🌊 Flujo de Caja
-                </button>
-                <button onclick="setStatementSubTab('balancesheet')" id="btn-sub-balancesheet" class="subtab-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-                    🏛️ Balance General
-                </button>
+            {% if statement_quality_audit %}
+            <div id="quality-audit-panel" class="hidden pt-3 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-2 text-[11px]">
+                {% for chk in statement_quality_audit.checks %}
+                <div class="p-2.5 rounded-xl border {% if chk.severity == 'PASS' %}bg-emerald-50/70 border-emerald-200 text-emerald-900{% elif chk.severity == 'WARN' %}bg-amber-50/80 border-amber-200 text-amber-900{% else %}bg-rose-50/80 border-rose-200 text-rose-900{% endif %}">
+                    <div class="font-bold flex items-center justify-between gap-1">
+                        <span class="truncate">{{ chk.check }}</span>
+                        <span class="px-1.5 py-0.5 rounded text-[9px] uppercase font-black {% if chk.severity == 'PASS' %}bg-emerald-200/70 text-emerald-900{% elif chk.severity == 'WARN' %}bg-amber-200/80 text-amber-900{% else %}bg-rose-200/80 text-rose-900{% endif %}">{{ chk.severity }}</span>
+                    </div>
+                    <p class="mt-1 opacity-90 leading-snug">{{ chk.message }}</p>
+                </div>
+                {% endfor %}
             </div>
-
-            <!-- Right: Buscador y Selector de Modos (Importes / Vertical % / YoY) -->
-            <div class="flex items-center gap-3 w-full xl:w-auto justify-end flex-wrap">
-                <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
-                    <button id="btn-mode-abs" onclick="setStatementViewMode('abs')" class="px-2.5 py-1 rounded-lg bg-white text-slate-900 shadow-sm transition">
-                        💵 Importes ($M)
-                    </button>
-                    <button id="btn-mode-pct" onclick="setStatementViewMode('pct')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
-                        📐 % Vertical
-                    </button>
-                    <button id="btn-mode-yoy" onclick="setStatementViewMode('yoy')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
-                        📈 % YoY & CAGR
-                    </button>
-                </div>
-                <div class="relative">
-                    <input type="text" id="statementSearch" onkeyup="filterStatements()" placeholder="Buscar partida..." 
-                           class="bg-slate-50 text-xs text-slate-900 pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 w-44 focus:outline-none focus:border-sky-500 transition">
-                    <span class="absolute right-2.5 top-1.5 text-xs text-slate-400">🔍</span>
-                </div>
-                <button id="btn-export-csv" onclick="exportActiveStatementsCSV()" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5" title="Exportar tabla activa a CSV">
-                    <span>📥</span> CSV
-                </button>
+            {% endif %}
+            <div class="text-[11px] text-slate-500 flex items-center justify-between flex-wrap gap-2 border-t border-slate-100 pt-2">
+                <span>💡 <strong>Click-to-Source SEC:</strong> haz clic en cualquier cifra para ver su fórmula, desglose de <em>"Otros"</em>, puente LTM y cita directa resaltada en el reporte oficial de la SEC (<code>R*.htm</code>).</span>
+                <span class="inline-flex items-center gap-1.5 text-[10px]"><span class="inline-block w-2 h-2 rounded-full bg-amber-500"></span> Indica cajón <em>"Otros"</em> con residual pendiente de atribución</span>
             </div>
         </div>
 
@@ -447,53 +484,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in std_pnl %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=std_pnl col_fys=statements_fys view_kind="std" stmt_name="income_statement" %}
                     </tbody>
                 </table>
             </div>
@@ -512,53 +503,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in as_rep_pnl %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=as_rep_pnl col_fys=as_rep_fys view_kind="asrep" stmt_name="income_statement" %}
                     </tbody>
                 </table>
             </div>
@@ -588,53 +533,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in std_cashflow %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=std_cashflow col_fys=statements_fys view_kind="std" stmt_name="cash_flow_statement" %}
                     </tbody>
                 </table>
             </div>
@@ -653,53 +552,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in as_rep_cashflow %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=as_rep_cashflow col_fys=as_rep_fys view_kind="asrep" stmt_name="cash_flow_statement" %}
                     </tbody>
                 </table>
             </div>
@@ -729,53 +582,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in std_balancesheet %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ statements_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ CONCEPTO OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=std_balancesheet col_fys=statements_fys view_kind="std" stmt_name="balance_sheet" %}
                     </tbody>
                 </table>
             </div>
@@ -794,53 +601,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {% for row in as_rep_balancesheet %}
-                        {% if row.row_type == 'section_header' %}
-                        <tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
-                            <td colspan="{{ as_rep_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
-                                <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
-                                {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}">
-                            <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
-                                <div class="flex items-center justify-between gap-1.5">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
-                                        <span class="{% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate" title="{{ row.label }}">{{ row.label }}</span>
-                                    </div>
-                                    {% if row.clarification %}
-                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
-                                    {% elif row.orig_tooltip %}
-                                    <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="Oficial SEC: {{ row.orig_tooltip }}">ⓘ</span>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell"
-                                data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
-                                {% else %}{{ row.ltm_val }}{% endif %}
-                            </td>
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
-                                data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
-                                {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
-                                {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
-                            </td>
-                            {% for cell in row.annual_cells %}
-                            <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell"
-                                data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}">
-                                {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
-                                {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
-                                {% else %}{{ cell.abs }}{% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                        {% include "partials/statement_tbody.html" with rows=as_rep_balancesheet col_fys=as_rep_fys view_kind="asrep" stmt_name="balance_sheet" %}
                     </tbody>
                 </table>
             </div>
@@ -848,13 +609,17 @@
 
     </div>
 
-    <!-- Script de Interactividad para Sub-pestañas, Selector de 3 Modos, Colapsado, Búsqueda Inteligente y Exportación CSV -->
+    <!-- Script de Interactividad para Sub-pestañas, Selector de 3 Modos, Idioma, Tags SEC, Búsqueda, Exportación CSV y Visor Evidence Drawer -->
     <script>
         let currentViewType = 'std';
+        let currentStmtLang = 'en';
+        let showAsRepXbrlTags = false;
+
         function setStatementViewModeType(type) {
             currentViewType = type;
             const btnStd = document.getElementById('btn-view-std');
             const btnAsrep = document.getElementById('btn-view-asrep');
+            const btnXbrl = document.getElementById('btn-toggle-xbrl');
             const stdTables = document.querySelectorAll('.table-view-std');
             const asrepTables = document.querySelectorAll('.table-view-asrep');
 
@@ -864,14 +629,57 @@
             if (type === 'std') {
                 if (btnStd) btnStd.className = activeCls;
                 if (btnAsrep) btnAsrep.className = inactiveCls;
+                if (btnXbrl) btnXbrl.classList.add('hidden');
                 stdTables.forEach(t => t.classList.remove('hidden'));
                 asrepTables.forEach(t => t.classList.add('hidden'));
             } else {
                 if (btnStd) btnStd.className = inactiveCls;
                 if (btnAsrep) btnAsrep.className = activeCls;
+                if (btnXbrl) btnXbrl.classList.remove('hidden');
                 stdTables.forEach(t => t.classList.add('hidden'));
                 asrepTables.forEach(t => t.classList.remove('hidden'));
             }
+        }
+
+        function toggleStatementLanguage() {
+            currentStmtLang = (currentStmtLang === 'en') ? 'es' : 'en';
+            const btn = document.getElementById('btn-stmt-lang');
+            const badge = document.getElementById('stmt-lang-badge');
+            if (badge) badge.textContent = (currentStmtLang === 'en') ? 'EN | es' : 'en | ES';
+            if (btn) {
+                btn.setAttribute('data-lang', currentStmtLang);
+                btn.classList.toggle('bg-indigo-50', currentStmtLang === 'es');
+                btn.classList.toggle('border-indigo-300', currentStmtLang === 'es');
+                btn.classList.toggle('text-indigo-800', currentStmtLang === 'es');
+            }
+            document.querySelectorAll('.std-row-label').forEach(el => {
+                const nextTxt = (currentStmtLang === 'en')
+                    ? (el.getAttribute('data-label-en') || el.textContent)
+                    : (el.getAttribute('data-label-es') || el.textContent);
+                el.textContent = nextTxt;
+            });
+            document.querySelectorAll('.asrep-es-badge').forEach(el => {
+                el.classList.toggle('hidden', currentStmtLang !== 'es');
+            });
+        }
+
+        function toggleAsReportedXbrlTags() {
+            showAsRepXbrlTags = !showAsRepXbrlTags;
+            const btn = document.getElementById('btn-toggle-xbrl');
+            if (btn) {
+                btn.setAttribute('data-active', showAsRepXbrlTags ? 'true' : 'false');
+                btn.classList.toggle('bg-sky-50', showAsRepXbrlTags);
+                btn.classList.toggle('border-sky-300', showAsRepXbrlTags);
+                btn.classList.toggle('text-sky-800', showAsRepXbrlTags);
+            }
+            document.querySelectorAll('.asrep-xbrl-badge').forEach(el => {
+                el.classList.toggle('hidden', !showAsRepXbrlTags);
+            });
+        }
+
+        function toggleQualityAuditPanel() {
+            const panel = document.getElementById('quality-audit-panel');
+            if (panel) panel.classList.toggle('hidden');
         }
 
         function setStatementSubTab(mode) {
@@ -962,19 +770,23 @@
             const dataCells = document.querySelectorAll('.stmt-data-cell');
             dataCells.forEach(td => {
                 td.classList.remove('text-emerald-600', 'text-rose-600', 'font-bold', 'text-slate-400', 'text-slate-900', 'text-slate-700');
+                const residual = td.getAttribute('data-residual') || '';
+                const residualDot = residual
+                    ? `<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 ml-1 align-middle" title="Residual SEC sin atribuir: ${residual}M"></span>`
+                    : '';
                 if (mode === 'abs') {
                     const val = td.getAttribute('data-abs') || '-';
                     const rType = td.getAttribute('data-row-type') || 'item';
                     const isLtm = td.getAttribute('data-is-ltm') === 'true';
 
                     if (rType === 'result' || rType === 'net_income') {
-                        td.innerHTML = `<span class="text-slate-900 font-black">${val}</span>`;
+                        td.innerHTML = `<span class="text-slate-900 font-black">${val}</span>${residualDot}`;
                     } else if (rType === 'subtotal') {
-                        td.innerHTML = `<span class="text-slate-900 font-bold">${val}</span>`;
+                        td.innerHTML = `<span class="text-slate-900 font-bold">${val}</span>${residualDot}`;
                     } else if (rType === 'eps' || rType === 'dps' || rType === 'multiple') {
-                        td.innerHTML = `<span class="text-indigo-700 font-black">${val}</span>`;
+                        td.innerHTML = `<span class="text-indigo-700 font-black">${val}</span>${residualDot}`;
                     } else {
-                        td.textContent = val;
+                        td.innerHTML = `${val}${residualDot}`;
                     }
                     td.classList.add(isLtm ? 'text-slate-900' : 'text-slate-700');
                     if (isLtm) td.classList.add('font-bold');
@@ -1039,8 +851,14 @@
                             tr.style.display = '';
                             tr.classList.remove('hidden');
                         } else {
-                            const text = (tr.textContent || tr.innerText || '').toUpperCase();
-                            if (text.indexOf(filter) > -1) {
+                            const hay = [
+                                tr.textContent || tr.innerText || '',
+                                tr.getAttribute('data-label-en') || '',
+                                tr.getAttribute('data-label-es') || '',
+                                tr.getAttribute('data-concept') || '',
+                                tr.getAttribute('data-raw-label') || '',
+                            ].join(' ').toUpperCase();
+                            if (hay.indexOf(filter) > -1) {
                                 tr.style.display = '';
                                 tr.classList.remove('hidden');
                                 sectionHasMatch = true;
@@ -1074,7 +892,6 @@
                 const table = tableWrap.querySelector('table');
                 if (!table) return;
 
-                // Header
                 const ths = table.querySelectorAll('thead tr th');
                 const headerRow = [];
                 ths.forEach(th => {
@@ -1082,7 +899,6 @@
                 });
                 csvRows.push(headerRow);
 
-                // Body rows
                 const trs = table.querySelectorAll('tbody tr');
                 trs.forEach(tr => {
                     if (tr.style.display === 'none' || tr.classList.contains('hidden')) return;
@@ -1096,9 +912,12 @@
                         const rowData = [];
                         const tds = tr.querySelectorAll('td');
                         tds.forEach((td, idx) => {
-                            let cellText = td.textContent.trim();
+                            let cellText = '';
                             if (idx === 0) {
-                                cellText = cellText.replace(/ⓘ\s*$/, '').trim();
+                                const lblSpan = td.querySelector('.stmt-row-label');
+                                cellText = lblSpan ? lblSpan.textContent.trim() : td.textContent.trim().replace(/ⓘ\s*$/, '').trim();
+                            } else {
+                                cellText = td.textContent.trim();
                             }
                             rowData.push(`"${cellText.replace(/"/g, '""')}"`);
                         });
@@ -1106,7 +925,7 @@
                     }
                 });
 
-                csvRows.push([]); // Empty line separator between sections
+                csvRows.push([]);
             });
 
             const csvContent = '\uFEFF' + csvRows.map(r => r.join(',')).join('\r\n');
@@ -1121,6 +940,19 @@
             link.click();
             document.body.removeChild(link);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabEl = document.getElementById('tab-statements');
+            if (!tabEl) return;
+            tabEl.addEventListener('click', (ev) => {
+                const td = ev.target.closest('td.stmt-data-cell.stmt-clickable');
+                if (!td) return;
+                const tr = td.closest('tr.statement-row');
+                if (tr && typeof window.openCellEvidence === 'function') {
+                    window.openCellEvidence(tr, td);
+                }
+            });
+        });
     </script>
 
     <!-- TAB: SEGMENTOS & GEOGRAFÍA -->
@@ -6034,5 +5866,366 @@
             }
         }
     };
+</script>
+
+<!-- Slide-Over Drawer: Visor de Evidencia y Procedencia SEC EDGAR (Fiscal.ai Style) -->
+<div id="sec-evidence-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="ev-drawer-title">
+    <div id="sec-evidence-backdrop" onclick="closeCellEvidence()" class="fixed inset-0 bg-slate-950/50 backdrop-blur-[2px] transition-opacity"></div>
+    <div class="fixed inset-y-0 right-0 max-w-4xl w-full bg-white shadow-2xl border-l border-slate-200 flex flex-col">
+        <!-- Drawer Header -->
+        <div class="px-6 py-4 bg-slate-900 text-white flex items-start justify-between gap-4 shrink-0">
+            <div class="min-w-0 space-y-1">
+                <div class="flex items-center gap-2 flex-wrap text-[11px] font-bold">
+                    <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30 font-mono">{{ ticker }}</span>
+                    <span id="ev-period-badge" class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 font-mono">LTM</span>
+                    <span id="ev-view-badge" class="px-2 py-0.5 rounded bg-slate-700 text-slate-200 border border-slate-600">Estandarizada</span>
+                    <span id="ev-method-badge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-mono">SEC</span>
+                </div>
+                <h3 id="ev-drawer-title" class="text-base font-extrabold text-white truncate">Auditoría SEC EDGAR</h3>
+                <p id="ev-drawer-subtitle" class="text-xs text-slate-300 truncate"></p>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+                <div class="text-right">
+                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Valor Celda</div>
+                    <div id="ev-cell-val" class="text-xl font-black font-mono text-white">-</div>
+                </div>
+                <button onclick="closeCellEvidence()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition text-lg leading-none" title="Cerrar (Esc)">✕</button>
+            </div>
+        </div>
+
+        <!-- Drawer Tabs -->
+        <div class="px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-3 flex-wrap shrink-0">
+            <div class="flex items-center gap-1.5 bg-slate-200/70 p-1 rounded-xl text-xs font-bold">
+                <button id="ev-tab-btn-audit" onclick="switchEvidenceTab('audit')" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition">
+                    🔬 Auditoría &amp; Desglose
+                </button>
+                <button id="ev-tab-btn-report" onclick="switchEvidenceTab('report')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+                    🏛️ Reporte Oficial SEC (R*.htm)
+                </button>
+            </div>
+            <div id="ev-quick-links" class="flex items-center gap-2 flex-wrap text-xs"></div>
+        </div>
+
+        <!-- Drawer Body -->
+        <div class="flex-1 overflow-y-auto bg-slate-50/40 relative">
+            <div id="ev-loading" class="hidden p-8 text-center text-sm text-slate-500">
+                Consultando linaje XBRL y archivos SEC EDGAR...
+            </div>
+            <div id="ev-error" class="hidden m-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-sm text-rose-800"></div>
+
+            <!-- Tab 1: Auditoría & Composición (100% Español) -->
+            <div id="ev-panel-audit" class="p-6 space-y-5">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1.5">Regla Contable / Fórmula Aplicada</div>
+                    <p id="ev-formula-text" class="text-sm text-slate-800 leading-relaxed font-medium">-</p>
+                </div>
+
+                <div id="ev-residual-banner" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-950 text-xs space-y-1">
+                    <div class="font-extrabold flex items-center gap-1.5">
+                        <span>⚠️</span> Observabilidad de Residual No Atribuido (Regla 6)
+                    </div>
+                    <p id="ev-residual-text" class="leading-relaxed"></p>
+                </div>
+
+                <div id="ev-components-card" class="hidden bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2.5">Componentes Canónicos de la Identidad</div>
+                    <div id="ev-components-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+                </div>
+
+                <div id="ev-sources-card" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase tracking-wider text-slate-600">Líneas Exactas SEC EDGAR (As-Reported / "Otros")</span>
+                        <span id="ev-sources-sum" class="text-xs font-mono font-bold text-slate-700"></span>
+                    </div>
+                    <div id="ev-sources-body" class="divide-y divide-slate-100"></div>
+                </div>
+
+                <div id="ev-ltm-card" class="hidden bg-white p-4 rounded-2xl border border-indigo-200 shadow-sm space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase tracking-wider text-indigo-700">Puente de Cálculo LTM (Trailing 12M)</span>
+                        <span id="ev-ltm-mode" class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-50 text-indigo-800 border border-indigo-200"></span>
+                    </div>
+                    <div id="ev-ltm-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs"></div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Render SEC R*.htm Resaltado -->
+            <div id="ev-panel-report" class="hidden h-full flex flex-col">
+                <div id="ev-report-filings-bar" class="px-4 py-2.5 bg-white border-b border-slate-200 flex items-center justify-between gap-2 flex-wrap shrink-0 text-xs">
+                    <div id="ev-report-pills" class="flex items-center gap-1.5 flex-wrap"></div>
+                    <div id="ev-report-meta" class="text-[11px] text-slate-500 font-mono"></div>
+                </div>
+                <div class="relative flex-1 min-h-[540px] bg-white">
+                    <div id="ev-iframe-loader" class="hidden absolute inset-0 bg-white/90 flex items-center justify-center text-xs text-slate-600 font-semibold z-10">
+                        Descargando reporte oficial R*.htm desde SEC EDGAR y resaltando partida...
+                    </div>
+                    <iframe id="ev-sec-iframe" class="w-full h-full min-h-[540px] border-0" title="Reporte Oficial SEC EDGAR"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        let activeEvidenceData = null;
+
+        function escHtml(s) {
+            return String(s ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function fmtUsdM(usd) {
+            if (usd === null || usd === undefined || isNaN(Number(usd))) return '-';
+            const m = Number(usd) / 1e6;
+            const abs = Math.abs(m).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+            return (m < 0 ? '-' : '') + '$' + abs + 'M';
+        }
+
+        window.switchEvidenceTab = function(tab) {
+            const auditPanel = document.getElementById('ev-panel-audit');
+            const repPanel = document.getElementById('ev-panel-report');
+            const btnAudit = document.getElementById('ev-tab-btn-audit');
+            const btnRep = document.getElementById('ev-tab-btn-report');
+            const activeCls = 'px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition';
+            const idleCls = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition';
+            if (tab === 'report') {
+                if (auditPanel) auditPanel.classList.add('hidden');
+                if (repPanel) repPanel.classList.remove('hidden');
+                if (btnAudit) btnAudit.className = idleCls;
+                if (btnRep) btnRep.className = activeCls;
+            } else {
+                if (repPanel) repPanel.classList.add('hidden');
+                if (auditPanel) auditPanel.classList.remove('hidden');
+                if (btnAudit) btnAudit.className = activeCls;
+                if (btnRep) btnRep.className = idleCls;
+            }
+        };
+
+        window.loadEvidenceReportIndex = function(idx) {
+            if (!activeEvidenceData || !Array.isArray(activeEvidenceData.filing_links)) return;
+            const links = activeEvidenceData.filing_links;
+            const link = links[idx];
+            if (!link) return;
+            const pills = document.getElementById('ev-report-pills');
+            if (pills) {
+                pills.querySelectorAll('button').forEach((b, i) => {
+                    b.className = (i === idx)
+                        ? 'px-2.5 py-1 rounded-lg bg-slate-900 text-white font-bold transition'
+                        : 'px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition';
+                });
+            }
+            const meta = document.getElementById('ev-report-meta');
+            if (meta) {
+                meta.textContent = [link.form, link.filing_date ? ('Presentado: ' + link.filing_date) : '', link.accession].filter(Boolean).join(' · ');
+            }
+            const iframe = document.getElementById('ev-sec-iframe');
+            const loader = document.getElementById('ev-iframe-loader');
+            if (iframe && link.proxy_url) {
+                if (loader) loader.classList.remove('hidden');
+                iframe.onload = () => { if (loader) loader.classList.add('hidden'); };
+                iframe.src = link.proxy_url;
+            }
+        };
+
+        window.closeCellEvidence = function() {
+            const drawer = document.getElementById('sec-evidence-drawer');
+            if (drawer) drawer.classList.add('hidden');
+            const iframe = document.getElementById('ev-sec-iframe');
+            if (iframe) iframe.src = 'about:blank';
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') window.closeCellEvidence();
+        });
+
+        function renderEvidencePayload(data, labelDisplay, absDisplay) {
+            activeEvidenceData = data;
+            document.getElementById('ev-loading').classList.add('hidden');
+            document.getElementById('ev-period-badge').textContent = data.period || '-';
+            document.getElementById('ev-view-badge').textContent = (data.view === 'std') ? 'Vista Estandarizada' : 'Reporte Oficial SEC';
+            document.getElementById('ev-method-badge').textContent = data.method || 'SEC';
+            document.getElementById('ev-drawer-title').textContent = labelDisplay || data.metric || data.highlight_label || 'Partida SEC';
+            document.getElementById('ev-drawer-subtitle').textContent = data.highlight_concept ? ('Concepto XBRL: ' + data.highlight_concept) : ('Estado: ' + (data.stmt || ''));
+            document.getElementById('ev-cell-val').textContent = absDisplay || (data.value_usd != null ? fmtUsdM(data.value_usd) : '-');
+            document.getElementById('ev-formula-text').textContent = data.formula_display || '-';
+
+            const resBanner = document.getElementById('ev-residual-banner');
+            const resText = document.getElementById('ev-residual-text');
+            if (data.residual_unexplained_usd != null && Math.abs(Number(data.residual_unexplained_usd)) >= 10000) {
+                resBanner.classList.remove('hidden');
+                resText.textContent = `Suma explicada en carátula SEC: ${fmtUsdM(data.explained_sum_usd)} vs. valor canónico ${fmtUsdM(data.value_usd)}. Diferencia residual sin atribuir: ${fmtUsdM(data.residual_unexplained_usd)} (usualmente proviene de desgloses en notas o consolidaciones de extensión).`;
+            } else {
+                resBanner.classList.add('hidden');
+            }
+
+            const compCard = document.getElementById('ev-components-card');
+            const compList = document.getElementById('ev-components-list');
+            const compEntries = Object.entries(data.components || {});
+            if (compEntries.length) {
+                compCard.classList.remove('hidden');
+                compList.innerHTML = compEntries.map(([k, v]) => `
+                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2 text-xs">
+                        <span class="font-mono text-slate-700 truncate">${escHtml(k)}</span>
+                        <span class="font-mono font-bold text-slate-900">${fmtUsdM(v)}</span>
+                    </div>
+                `).join('');
+            } else {
+                compCard.classList.add('hidden');
+            }
+
+            const sources = Array.isArray(data.sources) ? data.sources : [];
+            const srcBody = document.getElementById('ev-sources-body');
+            const srcSum = document.getElementById('ev-sources-sum');
+            if (data.explained_sum_usd != null) {
+                srcSum.textContent = 'Suma atribuida: ' + fmtUsdM(data.explained_sum_usd);
+            } else if (sources.length > 0) {
+                srcSum.textContent = `${sources.length} línea(s) SEC`;
+            } else {
+                srcSum.textContent = 'Sin líneas directas (cálculo por fórmula)';
+            }
+
+            if (sources.length) {
+                srcBody.innerHTML = sources.map(src => {
+                    const extBadge = src.is_extension_tag
+                        ? `<span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300 text-[9px] font-bold uppercase">Extensión</span>`
+                        : '';
+                    const spLine = (src.spanish_label && src.spanish_label !== src.raw_label)
+                        ? `<div class="text-[11px] text-slate-500 italic">${escHtml(src.spanish_label)}</div>`
+                        : '';
+                    const secLine = src.section_path
+                        ? `<span class="text-[10px] text-slate-400">Sección: ${escHtml(src.section_path)}</span>`
+                        : '';
+                    return `
+                        <div class="px-4 py-3 flex items-start justify-between gap-4 hover:bg-slate-50/70">
+                            <div class="min-w-0 space-y-0.5">
+                                <div class="text-xs font-bold text-slate-900 break-words">${escHtml(src.raw_label || src.display_label || src.concept)}</div>
+                                ${spLine}
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    ${src.concept ? `<code class="text-[10px] font-mono bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded border border-slate-200">${escHtml(src.concept)}</code>` : ''}
+                                    ${extBadge}
+                                    ${secLine}
+                                </div>
+                            </div>
+                            <div class="text-xs font-mono font-bold text-slate-900 whitespace-nowrap shrink-0">${fmtUsdM(src.val_usd)}</div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                srcBody.innerHTML = `<div class="px-4 py-4 text-xs text-slate-500">Esta celda se calcula a partir de los componentes anteriores sin línea única adicional en carátula.</div>`;
+            }
+
+            const ltmCard = document.getElementById('ev-ltm-card');
+            const ltmGrid = document.getElementById('ev-ltm-grid');
+            const ltmMode = document.getElementById('ev-ltm-mode');
+            const br = data.ltm_bridge;
+            if (br && typeof br === 'object') {
+                ltmCard.classList.remove('hidden');
+                ltmMode.textContent = br.mode || 'LTM';
+                if (br.mode === 'MRQ_STOCK') {
+                    ltmGrid.innerHTML = `
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 col-span-2">
+                            <div class="text-[10px] text-slate-500 uppercase font-bold">Corte Balance MRQ</div>
+                            <div class="font-mono font-bold text-slate-900 mt-0.5">${escHtml(br.mrq_period || 'MRQ')}</div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200 col-span-2">
+                            <div class="text-[10px] text-indigo-700 uppercase font-bold">Saldo LTM / MRQ</div>
+                            <div class="font-mono font-black text-indigo-900 mt-0.5">${fmtUsdM(br.ltm_val)}</div>
+                        </div>`;
+                } else {
+                    ltmGrid.innerHTML = `
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <div class="text-[10px] text-slate-500 font-bold">Base (${escHtml(br.base_fy || '10-K')})</div>
+                            <div class="font-mono font-bold text-slate-900 mt-0.5">${fmtUsdM(br.base_fy_val)}</div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                            <div class="text-[10px] text-emerald-700 font-bold">+ YTD Actual</div>
+                            <div class="font-mono font-bold text-emerald-900 mt-0.5">${escHtml(br.ytd_curr || 'MRQ')}</div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200">
+                            <div class="text-[10px] text-rose-700 font-bold">− YTD Anterior</div>
+                            <div class="font-mono font-bold text-rose-900 mt-0.5">${escHtml(br.ytd_prev || 'Prior YTD')}</div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200">
+                            <div class="text-[10px] text-indigo-700 font-bold">= Total LTM</div>
+                            <div class="font-mono font-black text-indigo-900 mt-0.5">${fmtUsdM(br.ltm_val)}</div>
+                        </div>`;
+                }
+            } else {
+                ltmCard.classList.add('hidden');
+            }
+
+            const links = Array.isArray(data.filing_links) ? data.filing_links : [];
+            const quick = document.getElementById('ev-quick-links');
+            const primary = links[0];
+            if (primary) {
+                const btns = [];
+                if (primary.proxy_url) {
+                    btns.push(`<button onclick="switchEvidenceTab('report')" class="px-2.5 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold transition">👁️ Ver en R*.htm</button>`);
+                }
+                if (primary.text_fragment_url) {
+                    btns.push(`<a href="${escHtml(primary.text_fragment_url)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold transition">↗ SEC R*.htm</a>`);
+                }
+                if (primary.sec_ixbrl_url) {
+                    btns.push(`<a href="${escHtml(primary.sec_ixbrl_url)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-800 font-bold transition">⚡ Inline XBRL</a>`);
+                }
+                quick.innerHTML = btns.join('');
+            } else {
+                quick.innerHTML = `<span class="text-[11px] text-slate-400 italic">Sin enlaces SEC directos para este período</span>`;
+            }
+
+            const pills = document.getElementById('ev-report-pills');
+            if (links.length) {
+                pills.innerHTML = links.map((lnk, idx) => `
+                    <button onclick="loadEvidenceReportIndex(${idx})" class="px-2.5 py-1 rounded-lg ${idx === 0 ? 'bg-slate-900 text-white font-bold' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold'} transition">
+                        ${escHtml(lnk.role || lnk.form)} (${escHtml(lnk.report_file || 'SEC')})
+                    </button>
+                `).join('');
+                window.loadEvidenceReportIndex(0);
+            } else {
+                pills.innerHTML = `<span class="text-slate-500">Re-extraiga el ticker para poblar citas R*.htm nativas.</span>`;
+                document.getElementById('ev-report-meta').textContent = '';
+                document.getElementById('ev-sec-iframe').src = 'about:blank';
+            }
+        }
+
+        window.openCellEvidence = async function(tr, td) {
+            const drawer = document.getElementById('sec-evidence-drawer');
+            if (!drawer) return;
+            drawer.classList.remove('hidden');
+            window.switchEvidenceTab('audit');
+
+            const stmt = tr.getAttribute('data-stmt') || 'income_statement';
+            const view = tr.getAttribute('data-view') || 'std';
+            const metric = tr.getAttribute('data-metric') || '';
+            const concept = tr.getAttribute('data-concept') || '';
+            const rawLabel = tr.getAttribute('data-raw-label') || '';
+            const period = td.getAttribute('data-period') || 'LTM';
+            const absDisplay = td.getAttribute('data-abs') || '-';
+            const lblEl = tr.querySelector('.stmt-row-label');
+            const labelDisplay = lblEl ? lblEl.textContent.trim() : rawLabel;
+
+            document.getElementById('ev-drawer-title').textContent = labelDisplay || metric || 'Auditoría SEC EDGAR';
+            document.getElementById('ev-cell-val').textContent = absDisplay;
+            document.getElementById('ev-loading').classList.remove('hidden');
+            document.getElementById('ev-error').classList.add('hidden');
+
+            const qs = new URLSearchParams({ stmt, view, metric, period, concept, raw_label: rawLabel });
+            try {
+                const resp = await fetch(`/api/cell-evidence/{{ ticker }}/?${qs.toString()}`);
+                if (!resp.ok) throw new Error(`Error HTTP ${resp.status}`);
+                const data = await resp.json();
+                renderEvidencePayload(data, labelDisplay, absDisplay);
+            } catch (err) {
+                document.getElementById('ev-loading').classList.add('hidden');
+                const errEl = document.getElementById('ev-error');
+                errEl.classList.remove('hidden');
+                errEl.textContent = 'No se pudo obtener la evidencia SEC EDGAR: ' + (err && err.message ? err.message : String(err));
+            }
+        };
+    })();
 </script>
 {% endblock %}

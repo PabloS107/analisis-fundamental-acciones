@@ -263,7 +263,10 @@ class SharedFilingContext:
             self.stats["network_fetches"] += 1
             facts_obj = sec_call_with_retry(self.company.get_facts)
             if hasattr(facts_obj, "to_dataframe"):
-                self._facts_df = facts_obj.to_dataframe()
+                try:
+                    self._facts_df = facts_obj.to_dataframe(include_metadata=True)
+                except TypeError:
+                    self._facts_df = facts_obj.to_dataframe()
             else:
                 self._facts_df = None
         except Exception as exc:

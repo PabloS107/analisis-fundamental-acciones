@@ -48,7 +48,7 @@ class TestIncomeStatementAudit(unittest.TestCase):
         fys = resp.context.get('statements_fys', [])
         fy23_idx = fys.index('FY2023') - 1 # cell index in annual_cells
         
-        tax_row = next(r for r in std_pnl if 'Impuesto sobre Beneficios' in r.get('label', ''))
+        tax_row = next(r for r in std_pnl if 'Impuesto sobre Beneficios' in (r.get('label_es') or r.get('label', '')))
         tax_val = tax_row['annual_cells'][fy23_idx]['abs']
         self.assertTrue(tax_val.startswith('+$'), f"Expected positive benefit +$187.0M, got {tax_val}")
 
@@ -60,7 +60,7 @@ class TestIncomeStatementAudit(unittest.TestCase):
         fys = resp.context.get('statements_fys', [])
         fy23_idx = fys.index('FY2023') - 1
         
-        assoc_row = next((r for r in std_pnl if 'Asociadas' in r.get('label', '')), None)
+        assoc_row = next((r for r in std_pnl if 'Asociadas' in (r.get('label_es') or r.get('label', ''))), None)
         self.assertIsNotNone(assoc_row, "Associates row should be present for MELI")
         self.assertEqual(assoc_row['annual_cells'][fy23_idx]['abs'], '$3.0M')
 
@@ -71,7 +71,7 @@ class TestIncomeStatementAudit(unittest.TestCase):
         std_pnl = resp.context.get('std_pnl', [])
         fys = resp.context.get('statements_fys', [])
         
-        dps_row = next(r for r in std_pnl if 'Dividendos por Acción (DPS)' in r.get('label', ''))
+        dps_row = next(r for r in std_pnl if 'Dividendos por Acción (DPS)' in (r.get('label_es') or r.get('label', '')))
         for yr in ['FY2022', 'FY2021', 'FY2020']:
             idx = fys.index(yr) - 1
             val = dps_row['annual_cells'][idx]['abs']

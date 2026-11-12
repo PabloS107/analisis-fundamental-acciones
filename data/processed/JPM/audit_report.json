@@ -2,20 +2,20 @@
   "ticker": "JPM",
   "company_name": "JPMORGAN CHASE & CO",
   "cik": "0000019617",
-  "audit_timestamp": "2026-11-12T15:14:53.380412",
+  "audit_timestamp": "2026-11-12T18:15:37.567128",
   "years_audited": {
     "LTM": [
       {
         "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
         "passed": true,
         "status": "PASS",
-        "assets": 5015069000000.0,
-        "liabilities": 4640471000000.0,
-        "equity": 374598000000.0,
+        "assets": 5091545000000.0,
+        "liabilities": 4719177000000.0,
+        "equity": 372368000000.0,
         "mezzanine_equity": null,
-        "liabilities_plus_equity": 5015069000000.0,
+        "liabilities_plus_equity": 5091545000000.0,
         "discrepancy_usd": 0.0,
-        "tolerance_usd": 501506900.0
+        "tolerance_usd": 509154500.0
       },
       {
         "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
@@ -45,13 +45,13 @@
         "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
         "passed": true,
         "status": "PASS",
-        "net_income": 63634000000.0,
-        "shares_diluted": 2730600000.0,
-        "eps_reported": 23.35,
-        "eps_calculated": 23.3,
-        "eps_adjusted": 23.35,
+        "net_income": 64527000000.0,
+        "shares_diluted": 2709450000.0,
+        "eps_reported": 23.85,
+        "eps_calculated": 23.82,
+        "eps_adjusted": 24.35,
         "split_factor": 1.0,
-        "discrepancy": 0.05
+        "discrepancy": 0.03
       }
     ],
     "FY2025": [
@@ -104,7 +104,7 @@
         "shares_diluted": 2781500000.0,
         "eps_reported": 20.02,
         "eps_calculated": 20.02,
-        "eps_adjusted": 20.02,
+        "eps_adjusted": 20.51,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -159,7 +159,7 @@
         "shares_diluted": 2879000000.0,
         "eps_reported": 19.75,
         "eps_calculated": 19.75,
-        "eps_adjusted": 19.75,
+        "eps_adjusted": 20.31,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -214,7 +214,7 @@
         "shares_diluted": 2943100000.0,
         "eps_reported": 16.23,
         "eps_calculated": 16.23,
-        "eps_adjusted": 16.23,
+        "eps_adjusted": 16.84,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -269,7 +269,7 @@
         "shares_diluted": 2970000000.0,
         "eps_reported": 12.09,
         "eps_calculated": 12.08,
-        "eps_adjusted": 12.09,
+        "eps_adjusted": 12.69,
         "split_factor": 1.0,
         "discrepancy": 0.01
       }
@@ -324,7 +324,7 @@
         "shares_diluted": 3026600000.0,
         "eps_reported": 15.36,
         "eps_calculated": 15.36,
-        "eps_adjusted": 15.36,
+        "eps_adjusted": 15.97,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -379,7 +379,7 @@
         "shares_diluted": 3087400000.0,
         "eps_reported": 8.88,
         "eps_calculated": 8.88,
-        "eps_adjusted": 8.88,
+        "eps_adjusted": 9.44,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -434,7 +434,7 @@
         "shares_diluted": 3230400000.0,
         "eps_reported": 10.72,
         "eps_calculated": 10.72,
-        "eps_adjusted": 10.72,
+        "eps_adjusted": 11.28,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -489,7 +489,7 @@
         "shares_diluted": 3414000000.0,
         "eps_reported": 9.0,
         "eps_calculated": 9.0,
-        "eps_adjusted": 9.0,
+        "eps_adjusted": 9.51,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -544,7 +544,7 @@
         "shares_diluted": 3576800000.0,
         "eps_reported": 6.31,
         "eps_calculated": 6.31,
-        "eps_adjusted": 6.31,
+        "eps_adjusted": 6.83,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -599,7 +599,7 @@
         "shares_diluted": 3690000000.0,
         "eps_reported": 6.19,
         "eps_calculated": 6.19,
-        "eps_adjusted": 6.19,
+        "eps_adjusted": 6.7,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -654,7 +654,7 @@
         "shares_diluted": 3773600000.0,
         "eps_reported": 6.0,
         "eps_calculated": 6.0,
-        "eps_adjusted": 6.0,
+        "eps_adjusted": 6.48,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -709,17 +709,17 @@
         "shares_diluted": 3797500000.0,
         "eps_reported": 5.29,
         "eps_calculated": 5.29,
-        "eps_adjusted": 5.29,
+        "eps_adjusted": 5.73,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 83,
-  "passed_tests": 55,
+  "total_tests": 88,
+  "passed_tests": 59,
   "failed_tests": 0,
-  "skipped_tests": 28,
+  "skipped_tests": 29,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -745,8 +745,110 @@
     {
       "check": "VERIFICACION_VIGENTE",
       "severity": "WARN",
-      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-10-25. Re-ejecutar data_verifier.",
+      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-12. Re-ejecutar data_verifier.",
       "state": "STALE"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "9 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 9,
+      "samples": [
+        {
+          "metric": "other_operating_expense",
+          "period": "FY2025",
+          "value_usd": 292000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 292000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_operating_expense",
+          "period": "FY2024",
+          "value_usd": 777000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 777000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_noncash",
+          "period": "LTM",
+          "value_usd": -193537000000.0,
+          "explained_sum_usd": -10056000000.0,
+          "residual_unexplained_usd": -183481000000.0,
+          "residual_pct": 94.8
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2025",
+          "value_usd": -235458000000.0,
+          "explained_sum_usd": -14673000000.0,
+          "residual_unexplained_usd": -220785000000.0,
+          "residual_pct": 93.8
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2024",
+          "value_usd": -121579000000.0,
+          "explained_sum_usd": -6883000000.0,
+          "residual_unexplained_usd": -114696000000.0,
+          "residual_pct": 94.3
+        },
+        {
+          "metric": "wc_other",
+          "period": "LTM",
+          "value_usd": 29146000000.0,
+          "explained_sum_usd": 104325000000.0,
+          "residual_unexplained_usd": -75179000000.0,
+          "residual_pct": 257.9
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2025",
+          "value_usd": 12582000000.0,
+          "explained_sum_usd": 193637000000.0,
+          "residual_unexplained_usd": -181055000000.0,
+          "residual_pct": 1439.0
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2024",
+          "value_usd": 7650000000.0,
+          "explained_sum_usd": 98920000000.0,
+          "residual_unexplained_usd": -91270000000.0,
+          "residual_pct": 1193.1
+        },
+        {
+          "metric": "other_financing",
+          "period": "FY2024",
+          "value_usd": 84749000000.0,
+          "explained_sum_usd": 13854000000.0,
+          "residual_unexplained_usd": 70895000000.0,
+          "residual_pct": 83.7
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

@@ -2,7 +2,7 @@
   "ticker": "DECK",
   "company_name": "DECKERS OUTDOOR CORP",
   "cik": "0000910521",
-  "audit_timestamp": "2026-11-12T15:14:53.309517",
+  "audit_timestamp": "2026-11-12T18:15:37.385731",
   "years_audited": {
     "LTM": [
       {
@@ -58,7 +58,7 @@
         "shares_diluted": 139940500.0,
         "eps_reported": 7.56,
         "eps_calculated": 7.57,
-        "eps_adjusted": 7.56,
+        "eps_adjusted": 7.57,
         "split_factor": 1.0,
         "discrepancy": 0.01
       }
@@ -442,7 +442,7 @@
         "shares_diluted": 28406000.0,
         "eps_reported": 13.47,
         "eps_calculated": 13.47,
-        "eps_adjusted": 2.25,
+        "eps_adjusted": 2.24,
         "split_factor": 6.0,
         "discrepancy": 0.0
       }
@@ -769,10 +769,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 77,
-  "passed_tests": 75,
+  "total_tests": 82,
+  "passed_tests": 79,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 3,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -798,8 +798,62 @@
     {
       "check": "VERIFICACION_VIGENTE",
       "severity": "WARN",
-      "message": "STALE: verificada 2026-09-08, extracción posterior 2026-11-06. Re-ejecutar data_verifier.",
+      "message": "STALE: verificada 2026-09-08, extracción posterior 2026-11-12. Re-ejecutar data_verifier.",
       "state": "STALE"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "3 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 3,
+      "samples": [
+        {
+          "metric": "wc_other",
+          "period": "LTM",
+          "value_usd": 25910000.0,
+          "explained_sum_usd": 32292000.0,
+          "residual_unexplained_usd": -6382000.0,
+          "residual_pct": 24.6
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2026",
+          "value_usd": 30355000.0,
+          "explained_sum_usd": 78308000.0,
+          "residual_unexplained_usd": -47953000.0,
+          "residual_pct": 158.0
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2025",
+          "value_usd": 16520000.0,
+          "explained_sum_usd": 8157000.0,
+          "residual_unexplained_usd": 8363000.0,
+          "residual_pct": 50.6
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

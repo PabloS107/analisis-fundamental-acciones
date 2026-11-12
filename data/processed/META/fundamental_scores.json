@@ -338,7 +338,7 @@
           "value": 17250000.0,
           "formatted_value": "+17.2M acciones",
           "comparison_label": "Acc 2,538M vs 2,521M (+17M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": false,
           "points": 0,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -369,8 +369,8 @@
       "total_score": 3,
       "max_score": 9,
       "rating": "VULNERABILIDAD FINANCIERA",
-      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
-      "status_color": "RED"
+      "status_color": "RED",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez."
     },
     "FY2025": {
       "period": "FY2025",
@@ -447,7 +447,7 @@
           "value": -13000000.0,
           "formatted_value": "-13.0M acciones",
           "comparison_label": "Acc 2,521M vs 2,534M (-13M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -478,8 +478,8 @@
       "total_score": 5,
       "max_score": 9,
       "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "status_color": "YELLOW",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento."
     },
     "FY2024": {
       "period": "FY2024",
@@ -556,7 +556,7 @@
           "value": -40000000.0,
           "formatted_value": "-40.0M acciones",
           "comparison_label": "Acc 2,534M vs 2,574M (-40M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -587,8 +587,8 @@
       "total_score": 8,
       "max_score": 9,
       "rating": "SALUD EXCEPCIONAL",
-      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima.",
-      "status_color": "GREEN"
+      "status_color": "GREEN",
+      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima."
     },
     "FY2023": {
       "period": "FY2023",
@@ -665,7 +665,7 @@
           "value": -113000000.0,
           "formatted_value": "-113.0M acciones",
           "comparison_label": "Acc 2,574M vs 2,687M (-113M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -696,8 +696,8 @@
       "total_score": 7,
       "max_score": 9,
       "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "status_color": "GREEN_LIGHT",
+      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n."
     },
     "FY2022": {
       "period": "FY2022",
@@ -774,7 +774,7 @@
           "value": -128000000.0,
           "formatted_value": "-128.0M acciones",
           "comparison_label": "Acc 2,687M vs 2,815M (-128M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -805,8 +805,8 @@
       "total_score": 4,
       "max_score": 9,
       "rating": "VULNERABILIDAD FINANCIERA",
-      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
-      "status_color": "RED"
+      "status_color": "RED",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez."
     },
     "FY2021": {
       "period": "FY2021",
@@ -883,7 +883,7 @@
           "value": -36000000.0,
           "formatted_value": "-36.0M acciones",
           "comparison_label": "Acc 2,815M vs 2,851M (-36M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -914,8 +914,8 @@
       "total_score": 8,
       "max_score": 9,
       "rating": "SALUD EXCEPCIONAL",
-      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima.",
-      "status_color": "GREEN"
+      "status_color": "GREEN",
+      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima."
     },
     "FY2020": {
       "period": "FY2020",
@@ -992,7 +992,7 @@
           "value": -3000000.0,
           "formatted_value": "-3.0M acciones",
           "comparison_label": "Acc 2,851M vs 2,854M (-3M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1023,8 +1023,8 @@
       "total_score": 7,
       "max_score": 9,
       "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "status_color": "GREEN_LIGHT",
+      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n."
     },
     "FY2019": {
       "period": "FY2019",
@@ -1101,7 +1101,7 @@
           "value": -36000000.0,
           "formatted_value": "-36.0M acciones",
           "comparison_label": "Acc 2,854M vs 2,890M (-36M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1132,8 +1132,8 @@
       "total_score": 5,
       "max_score": 9,
       "rating": "SALUD MODERADA",
-      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento.",
-      "status_color": "YELLOW"
+      "status_color": "YELLOW",
+      "summary_text": "Desempe\u00f1o financiero equilibrado, monitorear m\u00e1rgenes o apalancamiento."
     },
     "FY2018": {
       "period": "FY2018",
@@ -1210,7 +1210,7 @@
           "value": -11000000.0,
           "formatted_value": "-11.0M acciones",
           "comparison_label": "Acc 2,890M vs 2,901M (-11M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": true,
           "points": 1,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1241,8 +1241,8 @@
       "total_score": 7,
       "max_score": 9,
       "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "status_color": "GREEN_LIGHT",
+      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n."
     },
     "FY2017": {
       "period": "FY2017",
@@ -1319,7 +1319,7 @@
           "value": 38000000.0,
           "formatted_value": "+38.0M acciones",
           "comparison_label": "Acc 2,901M vs 2,863M (+38M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": false,
           "points": 0,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1350,8 +1350,8 @@
       "total_score": 8,
       "max_score": 9,
       "rating": "SALUD EXCEPCIONAL",
-      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima.",
-      "status_color": "GREEN"
+      "status_color": "GREEN",
+      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima."
     },
     "FY2016": {
       "period": "FY2016",
@@ -1428,7 +1428,7 @@
           "value": 60000000.0,
           "formatted_value": "+60.0M acciones",
           "comparison_label": "Acc 2,863M vs 2,803M (+60M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": false,
           "points": 0,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1459,8 +1459,8 @@
       "total_score": 8,
       "max_score": 9,
       "rating": "SALUD EXCEPCIONAL",
-      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima.",
-      "status_color": "GREEN"
+      "status_color": "GREEN",
+      "summary_text": "Solidez financiera de primer nivel institucional. Calidad de balance \u00f3ptima."
     },
     "FY2015": {
       "period": "FY2015",
@@ -1537,7 +1537,7 @@
           "value": 189000000.0,
           "formatted_value": "+189.0M acciones",
           "comparison_label": "Acc 2,803M vs 2,614M (+189M)",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": false,
           "points": 0,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1568,8 +1568,8 @@
       "total_score": 7,
       "max_score": 9,
       "rating": "SALUD S\u00d3LIDA",
-      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n.",
-      "status_color": "GREEN_LIGHT"
+      "status_color": "GREEN_LIGHT",
+      "summary_text": "Finanzas saludables y balance robusto con \u00e1reas menores de optimizaci\u00f3n."
     },
     "FY2014": {
       "period": "FY2014",
@@ -1646,7 +1646,7 @@
           "value": null,
           "formatted_value": "N/A",
           "comparison_label": "N/A",
-          "threshold": "Delta Acciones B\u00e1sicas <= 0",
+          "threshold": "Delta Acciones B\u00e1sicas <= 0.01% del capital previo",
           "passed": false,
           "points": 0,
           "description": "Sin emisi\u00f3n neta dilutiva de capital; recompra de acciones o estabilidad."
@@ -1677,8 +1677,8 @@
       "total_score": 3,
       "max_score": 9,
       "rating": "VULNERABILIDAD FINANCIERA",
-      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez.",
-      "status_color": "RED"
+      "status_color": "RED",
+      "summary_text": "Alerta de estr\u00e9s operativo, diluci\u00f3n o deterioro de liquidez."
     }
   },
   "mohanram_g_score": {
@@ -1777,13 +1777,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2025": {
       "period": "FY2025",
@@ -1880,13 +1880,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2024": {
       "period": "FY2024",
@@ -1983,13 +1983,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2023": {
       "period": "FY2023",
@@ -2086,13 +2086,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2022": {
       "period": "FY2022",
@@ -2189,13 +2189,13 @@
       "total_score": 6,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2021": {
       "period": "FY2021",
@@ -2292,13 +2292,13 @@
       "total_score": 8,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2020": {
       "period": "FY2020",
@@ -2395,13 +2395,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2019": {
       "period": "FY2019",
@@ -2498,13 +2498,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2018": {
       "period": "FY2018",
@@ -2601,13 +2601,13 @@
       "total_score": 7,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2017": {
       "period": "FY2017",
@@ -2704,13 +2704,13 @@
       "total_score": 6,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2016": {
       "period": "FY2016",
@@ -2807,13 +2807,13 @@
       "total_score": 6,
       "max_score": 8,
       "rating": "CRECIMIENTO DE \u00c9LITE",
+      "status_color": "GREEN",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles.",
-      "status_color": "GREEN"
+      "summary_text": "Liderazgo superior en rentabilidad, alta reinversi\u00f3n y ventajas competitivas sostenibles."
     },
     "FY2015": {
       "period": "FY2015",
@@ -2910,13 +2910,13 @@
       "total_score": 5,
       "max_score": 8,
       "rating": "CRECIMIENTO PROMEDIO",
+      "status_color": "YELLOW",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Desempe\u00f1o en l\u00ednea con la mediana de la industria; vigilar reinversi\u00f3n o volatilidad.",
-      "status_color": "YELLOW"
+      "summary_text": "Desempe\u00f1o en l\u00ednea con la mediana de la industria; vigilar reinversi\u00f3n o volatilidad."
     },
     "FY2014": {
       "period": "FY2014",
@@ -3013,13 +3013,13 @@
       "total_score": 1,
       "max_score": 8,
       "rating": "CRECIMIENTO FR\u00c1GIL",
+      "status_color": "RED",
       "benchmark_info": {
         "sic_code": "7370",
         "industry_name": "Internet Services & Interactive Media",
         "is_asset_light": true
       },
-      "summary_text": "Retornos rezagados frente a competidores o crecimiento inestable/destructivo de capital.",
-      "status_color": "RED"
+      "summary_text": "Retornos rezagados frente a competidores o crecimiento inestable/destructivo de capital."
     }
   },
   "combined_matrix": {
@@ -3166,17 +3166,17 @@
     },
     "roic_wacc": {
       "model_type": "WACC",
-      "wacc": 0.10543709458989083,
-      "ke": 0.10802250000000001,
-      "kd_after_tax": 0.0531335,
-      "we": 0.9528975676345137,
-      "wd": 0.04710243236548629,
+      "wacc": 0.1091356629519307,
+      "ke": 0.11191999999999999,
+      "kd_after_tax": 0.05426399999999999,
+      "we": 0.9517077659208182,
+      "wd": 0.04829223407918185,
       "roic_traditional": 0.2176630611258235,
       "roic_adjusted": 0.2037457015826903,
       "rotce": null,
       "roe": null,
-      "economic_spread_adjusted": 0.09830860699279946,
-      "spread": 0.09830860699279946,
+      "economic_spread_adjusted": 0.09461003863075959,
+      "spread": 0.09461003863075959,
       "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
       "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
       "total_intangibles_usd_m": 109034.33333333331,
@@ -3827,10 +3827,10 @@
         "ic_trad_avg": 35651.0,
         "ic_adj_avg": 38317.0,
         "rd_investment": 2666.0,
-        "rd_amortization": 0.0,
+        "rd_amortization": 0,
         "rd_stock": 2666.0,
         "mkt_investment": 0.0,
-        "mkt_amortization": 0.0,
+        "mkt_amortization": 0,
         "mkt_stock": 0.0,
         "total_intangible_stock": 2666.0,
         "roic_trad": 0.09105214439987658,
@@ -3935,7 +3935,7 @@
         "ic_trad_avg": 76491.5,
         "ic_adj_avg": 91851.83333333333,
         "rd_investment": 10273.0,
-        "rd_amortization": 6162.999999999999,
+        "rd_amortization": 6163.0,
         "rd_stock": 17415.333333333332,
         "mkt_investment": 0.0,
         "mkt_amortization": 0.0,
@@ -4445,9 +4445,9 @@
         "tangible_capital_end": 298889.0,
         "tangible_capital_avg": 253151.0,
         "roc_avg": 0.3135677915552378,
-        "roc_ltm": 0.3135677915552378,
         "roc_end": 0.2655835443927344,
-        "roc_pct": 31.36
+        "roc_pct": 31.36,
+        "roc_ltm": 0.3135677915552378
       }
     },
     "ltm": {
@@ -4464,9 +4464,9 @@
       "tangible_capital_end": 298889.0,
       "tangible_capital_avg": 253151.0,
       "roc_avg": 0.3135677915552378,
-      "roc_ltm": 0.3135677915552378,
       "roc_end": 0.2655835443927344,
-      "roc_pct": 31.36
+      "roc_pct": 31.36,
+      "roc_ltm": 0.3135677915552378
     },
     "latest_result": {
       "period": "LTM",
@@ -4482,9 +4482,9 @@
       "tangible_capital_end": 298889.0,
       "tangible_capital_avg": 253151.0,
       "roc_avg": 0.3135677915552378,
-      "roc_ltm": 0.3135677915552378,
       "roc_end": 0.2655835443927344,
-      "roc_pct": 31.36
+      "roc_pct": 31.36,
+      "roc_ltm": 0.3135677915552378
     },
     "latest_roc": 0.3135677915552378,
     "latest_roc_pct": 31.36,
@@ -4718,9 +4718,9 @@
       "tangible_capital_end": 298889.0,
       "tangible_capital_avg": 253151.0,
       "roc_avg": 0.3135677915552378,
-      "roc_ltm": 0.3135677915552378,
       "roc_end": 0.2655835443927344,
-      "roc_pct": 31.36
+      "roc_pct": 31.36,
+      "roc_ltm": 0.3135677915552378
     }
   },
   "wacc_analysis": {
@@ -4729,33 +4729,33 @@
     "archetype": "STANDARD_CORPORATE",
     "market_data": {
       "ticker": "META",
-      "timestamp": "2026-10-24T19:38:56.845870+00:00",
-      "timestamp_epoch": 1792870742.8544898,
+      "timestamp": "2026-11-12T20:54:43.061897+00:00",
+      "timestamp_epoch": 1794516888.4298022,
       "is_offline": false,
-      "from_cache": true,
-      "price": 642.62,
-      "market_cap_usd_m": 1637078.45,
-      "diluted_shares": 2547506225,
-      "rf_10y": 0.04993,
-      "beta": 1.223,
+      "from_cache": false,
+      "price": 621.4325,
+      "market_cap_usd_m": 1594751.15,
+      "diluted_shares": 2566250000.0,
+      "rf_10y": 0.05112,
+      "beta": 1.28,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 642.6199951171875,
-          "market_cap": 1637078437870.505,
-          "beta": 1.185,
-          "rf_10y": 0.0498799991607666,
-          "shares_outstanding": 2547506225,
+          "price": 621.35498046875,
+          "market_cap": 1588700939902.9248,
+          "beta": 1.279,
+          "rf_10y": 0.051029996871948244,
+          "shares_outstanding": 2556833034,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 642.62,
+          "price": 621.51,
           "market_cap": null,
-          "beta": 1.26,
-          "rf_10y": 0.04999,
-          "shares_outstanding": 2550000000.0,
+          "beta": 1.28,
+          "rf_10y": 0.051210000000000006,
+          "shares_outstanding": 2600000000.0,
           "success": true
         }
       },
@@ -4765,34 +4765,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $642.62 (Yahoo: $642.62, CNBC: $642.62, \u0394=0.00%) | Market Cap calculado: $1,637,078.5M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.22 (Yahoo: 1.19, CNBC: 1.26, \u0394=0.07)"
+        "notes": "Precio validado por consenso: $621.43 (Yahoo: $621.35, CNBC: $621.51, \u0394=0.02%) | Market Cap calculado: $1,594,751.2M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.112% (Yahoo ^TNX: 5.103%, CNBC US10Y: 5.121%) | Beta validado: 1.28 (Yahoo: 1.28, CNBC: 1.28, \u0394=0.00)"
       }
     },
-    "cost_of_equity_ke": 0.10802250000000001,
-    "cost_of_debt_kd_pre_tax": 0.05593,
-    "cost_of_debt_kd_after_tax": 0.0531335,
+    "cost_of_equity_ke": 0.11191999999999999,
+    "cost_of_debt_kd_pre_tax": 0.05712,
+    "cost_of_debt_kd_after_tax": 0.05426399999999999,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 1637078.45,
+    "market_cap_usd_m": 1594751.15,
     "total_debt_usd_m": 80922.0,
-    "enterprise_value_usd_m": 1718000.45,
-    "weight_equity": 0.9528975676345137,
-    "weight_debt": 0.04710243236548629,
+    "enterprise_value_usd_m": 1675673.15,
+    "weight_equity": 0.9517077659208182,
+    "weight_debt": 0.04829223407918185,
     "is_debt_free": false,
-    "wacc": 0.10543709458989083,
-    "hurdle_rate": 0.10543709458989083,
+    "wacc": 0.1091356629519307,
+    "hurdle_rate": 0.1091356629519307,
     "sector_wacc_benchmark": 0.087,
     "roic_traditional": 0.2176630611258235,
     "roic_adjusted": 0.2037457015826903,
-    "economic_spread_traditional": 0.11222596653593268,
-    "economic_spread_adjusted": 0.09830860699279946,
-    "spread": 0.09830860699279946,
+    "economic_spread_traditional": 0.10852739817389281,
+    "economic_spread_adjusted": 0.09461003863075959,
+    "spread": 0.09461003863075959,
     "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
     "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 10.80%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.99%) + Beta (1.22) \u00d7 Prima de Riesgo ERP (4.75%).",
-      "kd_debt": "Costo de la Deuda Neto = 5.31% (Tasa antes de impuestos 5.59% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 10.54%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.3% de Equity y 4.7% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un Spread positivo de +9.83 p.p. sobre el WACC (10.54%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
+      "ke_capm": "Costo del Equity (Ke) = 11.19%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.11%) + Beta (1.28) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "kd_debt": "Costo de la Deuda Neto = 5.43% (Tasa antes de impuestos 5.71% con escudo fiscal del 5.0%).",
+      "wacc": "WACC = 10.91%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.2% de Equity y 4.8% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un Spread positivo de +9.46 p.p. sobre el WACC (10.91%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
     }
   },
   "wacc_and_spread_analysis": {
@@ -4801,33 +4801,33 @@
     "archetype": "STANDARD_CORPORATE",
     "market_data": {
       "ticker": "META",
-      "timestamp": "2026-10-24T19:38:56.845870+00:00",
-      "timestamp_epoch": 1792870742.8544898,
+      "timestamp": "2026-11-12T20:54:43.061897+00:00",
+      "timestamp_epoch": 1794516888.4298022,
       "is_offline": false,
-      "from_cache": true,
-      "price": 642.62,
-      "market_cap_usd_m": 1637078.45,
-      "diluted_shares": 2547506225,
-      "rf_10y": 0.04993,
-      "beta": 1.223,
+      "from_cache": false,
+      "price": 621.4325,
+      "market_cap_usd_m": 1594751.15,
+      "diluted_shares": 2566250000.0,
+      "rf_10y": 0.05112,
+      "beta": 1.28,
       "erp": 0.0475,
       "raw_sources": {
         "yahoo": {
           "source": "Yahoo Finance",
-          "price": 642.6199951171875,
-          "market_cap": 1637078437870.505,
-          "beta": 1.185,
-          "rf_10y": 0.0498799991607666,
-          "shares_outstanding": 2547506225,
+          "price": 621.35498046875,
+          "market_cap": 1588700939902.9248,
+          "beta": 1.279,
+          "rf_10y": 0.051029996871948244,
+          "shares_outstanding": 2556833034,
           "success": true
         },
         "cnbc": {
           "source": "CNBC Quote Service",
-          "price": 642.62,
+          "price": 621.51,
           "market_cap": null,
-          "beta": 1.26,
-          "rf_10y": 0.04999,
-          "shares_outstanding": 2550000000.0,
+          "beta": 1.28,
+          "rf_10y": 0.051210000000000006,
+          "shares_outstanding": 2600000000.0,
           "success": true
         }
       },
@@ -4837,34 +4837,34 @@
           "Yahoo Finance",
           "CNBC Quote Service"
         ],
-        "notes": "Precio validado por consenso: $642.62 (Yahoo: $642.62, CNBC: $642.62, \u0394=0.00%) | Market Cap calculado: $1,637,078.5M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.22 (Yahoo: 1.19, CNBC: 1.26, \u0394=0.07)"
+        "notes": "Precio validado por consenso: $621.43 (Yahoo: $621.35, CNBC: $621.51, \u0394=0.02%) | Market Cap calculado: $1,594,751.2M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.112% (Yahoo ^TNX: 5.103%, CNBC US10Y: 5.121%) | Beta validado: 1.28 (Yahoo: 1.28, CNBC: 1.28, \u0394=0.00)"
       }
     },
-    "cost_of_equity_ke": 0.10802250000000001,
-    "cost_of_debt_kd_pre_tax": 0.05593,
-    "cost_of_debt_kd_after_tax": 0.0531335,
+    "cost_of_equity_ke": 0.11191999999999999,
+    "cost_of_debt_kd_pre_tax": 0.05712,
+    "cost_of_debt_kd_after_tax": 0.05426399999999999,
     "effective_tax_rate": 0.05,
-    "market_cap_usd_m": 1637078.45,
+    "market_cap_usd_m": 1594751.15,
     "total_debt_usd_m": 80922.0,
-    "enterprise_value_usd_m": 1718000.45,
-    "weight_equity": 0.9528975676345137,
-    "weight_debt": 0.04710243236548629,
+    "enterprise_value_usd_m": 1675673.15,
+    "weight_equity": 0.9517077659208182,
+    "weight_debt": 0.04829223407918185,
     "is_debt_free": false,
-    "wacc": 0.10543709458989083,
-    "hurdle_rate": 0.10543709458989083,
+    "wacc": 0.1091356629519307,
+    "hurdle_rate": 0.1091356629519307,
     "sector_wacc_benchmark": 0.087,
     "roic_traditional": 0.2176630611258235,
     "roic_adjusted": 0.2037457015826903,
-    "economic_spread_traditional": 0.11222596653593268,
-    "economic_spread_adjusted": 0.09830860699279946,
-    "spread": 0.09830860699279946,
+    "economic_spread_traditional": 0.10852739817389281,
+    "economic_spread_adjusted": 0.09461003863075959,
+    "spread": 0.09461003863075959,
     "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
     "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
     "explanations": {
-      "ke_capm": "Costo del Equity (Ke) = 10.80%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.99%) + Beta (1.22) \u00d7 Prima de Riesgo ERP (4.75%).",
-      "kd_debt": "Costo de la Deuda Neto = 5.31% (Tasa antes de impuestos 5.59% con escudo fiscal del 5.0%).",
-      "wacc": "WACC = 10.54%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.3% de Equity y 4.7% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
-      "economic_spread": "El negocio genera un Spread positivo de +9.83 p.p. sobre el WACC (10.54%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
+      "ke_capm": "Costo del Equity (Ke) = 11.19%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.11%) + Beta (1.28) \u00d7 Prima de Riesgo ERP (4.75%).",
+      "kd_debt": "Costo de la Deuda Neto = 5.43% (Tasa antes de impuestos 5.71% con escudo fiscal del 5.0%).",
+      "wacc": "WACC = 10.91%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.2% de Equity y 4.8% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
+      "economic_spread": "El negocio genera un Spread positivo de +9.46 p.p. sobre el WACC (10.91%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
     }
   },
   "roic_wacc_analysis": {
@@ -4884,10 +4884,10 @@
           "ic_trad_avg": 35651.0,
           "ic_adj_avg": 38317.0,
           "rd_investment": 2666.0,
-          "rd_amortization": 0.0,
+          "rd_amortization": 0,
           "rd_stock": 2666.0,
           "mkt_investment": 0.0,
-          "mkt_amortization": 0.0,
+          "mkt_amortization": 0,
           "mkt_stock": 0.0,
           "total_intangible_stock": 2666.0,
           "roic_trad": 0.09105214439987658,
@@ -4992,7 +4992,7 @@
           "ic_trad_avg": 76491.5,
           "ic_adj_avg": 91851.83333333333,
           "rd_investment": 10273.0,
-          "rd_amortization": 6162.999999999999,
+          "rd_amortization": 6163.0,
           "rd_stock": 17415.333333333332,
           "mkt_investment": 0.0,
           "mkt_amortization": 0.0,
@@ -5284,33 +5284,33 @@
       "archetype": "STANDARD_CORPORATE",
       "market_data": {
         "ticker": "META",
-        "timestamp": "2026-10-24T19:38:56.845870+00:00",
-        "timestamp_epoch": 1792870742.8544898,
+        "timestamp": "2026-11-12T20:54:43.061897+00:00",
+        "timestamp_epoch": 1794516888.4298022,
         "is_offline": false,
-        "from_cache": true,
-        "price": 642.62,
-        "market_cap_usd_m": 1637078.45,
-        "diluted_shares": 2547506225,
-        "rf_10y": 0.04993,
-        "beta": 1.223,
+        "from_cache": false,
+        "price": 621.4325,
+        "market_cap_usd_m": 1594751.15,
+        "diluted_shares": 2566250000.0,
+        "rf_10y": 0.05112,
+        "beta": 1.28,
         "erp": 0.0475,
         "raw_sources": {
           "yahoo": {
             "source": "Yahoo Finance",
-            "price": 642.6199951171875,
-            "market_cap": 1637078437870.505,
-            "beta": 1.185,
-            "rf_10y": 0.0498799991607666,
-            "shares_outstanding": 2547506225,
+            "price": 621.35498046875,
+            "market_cap": 1588700939902.9248,
+            "beta": 1.279,
+            "rf_10y": 0.051029996871948244,
+            "shares_outstanding": 2556833034,
             "success": true
           },
           "cnbc": {
             "source": "CNBC Quote Service",
-            "price": 642.62,
+            "price": 621.51,
             "market_cap": null,
-            "beta": 1.26,
-            "rf_10y": 0.04999,
-            "shares_outstanding": 2550000000.0,
+            "beta": 1.28,
+            "rf_10y": 0.051210000000000006,
+            "shares_outstanding": 2600000000.0,
             "success": true
           }
         },
@@ -5320,34 +5320,34 @@
             "Yahoo Finance",
             "CNBC Quote Service"
           ],
-          "notes": "Precio validado por consenso: $642.62 (Yahoo: $642.62, CNBC: $642.62, \u0394=0.00%) | Market Cap calculado: $1,637,078.5M v\u00eda Fuentes de Mercado Validadas | Rf (Bono 10Y) consensuado: 4.993% (Yahoo ^TNX: 4.988%, CNBC US10Y: 4.999%) | Beta validado: 1.22 (Yahoo: 1.19, CNBC: 1.26, \u0394=0.07)"
+          "notes": "Precio validado por consenso: $621.43 (Yahoo: $621.35, CNBC: $621.51, \u0394=0.02%) | Market Cap calculado: $1,594,751.2M v\u00eda Precio de Mercado x Acciones Diluidas Auditadas (SEC 10-Q) | Rf (Bono 10Y) consensuado: 5.112% (Yahoo ^TNX: 5.103%, CNBC US10Y: 5.121%) | Beta validado: 1.28 (Yahoo: 1.28, CNBC: 1.28, \u0394=0.00)"
         }
       },
-      "cost_of_equity_ke": 0.10802250000000001,
-      "cost_of_debt_kd_pre_tax": 0.05593,
-      "cost_of_debt_kd_after_tax": 0.0531335,
+      "cost_of_equity_ke": 0.11191999999999999,
+      "cost_of_debt_kd_pre_tax": 0.05712,
+      "cost_of_debt_kd_after_tax": 0.05426399999999999,
       "effective_tax_rate": 0.05,
-      "market_cap_usd_m": 1637078.45,
+      "market_cap_usd_m": 1594751.15,
       "total_debt_usd_m": 80922.0,
-      "enterprise_value_usd_m": 1718000.45,
-      "weight_equity": 0.9528975676345137,
-      "weight_debt": 0.04710243236548629,
+      "enterprise_value_usd_m": 1675673.15,
+      "weight_equity": 0.9517077659208182,
+      "weight_debt": 0.04829223407918185,
       "is_debt_free": false,
-      "wacc": 0.10543709458989083,
-      "hurdle_rate": 0.10543709458989083,
+      "wacc": 0.1091356629519307,
+      "hurdle_rate": 0.1091356629519307,
       "sector_wacc_benchmark": 0.087,
       "roic_traditional": 0.2176630611258235,
       "roic_adjusted": 0.2037457015826903,
-      "economic_spread_traditional": 0.11222596653593268,
-      "economic_spread_adjusted": 0.09830860699279946,
-      "spread": 0.09830860699279946,
+      "economic_spread_traditional": 0.10852739817389281,
+      "economic_spread_adjusted": 0.09461003863075959,
+      "spread": 0.09461003863075959,
       "moat_rating": "FOSO DEFENSIVO S\u00d3LIDO (NARROW MOAT)",
       "moat_badge": "\ud83d\udee1\ufe0f NARROW MOAT / CREACI\u00d3N DE VALOR SOSTENIBLE",
       "explanations": {
-        "ke_capm": "Costo del Equity (Ke) = 10.80%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (4.99%) + Beta (1.22) \u00d7 Prima de Riesgo ERP (4.75%).",
-        "kd_debt": "Costo de la Deuda Neto = 5.31% (Tasa antes de impuestos 5.59% con escudo fiscal del 5.0%).",
-        "wacc": "WACC = 10.54%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.3% de Equity y 4.7% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
-        "economic_spread": "El negocio genera un Spread positivo de +9.83 p.p. sobre el WACC (10.54%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
+        "ke_capm": "Costo del Equity (Ke) = 11.19%: Tasa m\u00ednima que exigen los accionistas por invertir en la empresa. Calculado mediante CAPM: Tasa Libre de Riesgo Rf (5.11%) + Beta (1.28) \u00d7 Prima de Riesgo ERP (4.75%).",
+        "kd_debt": "Costo de la Deuda Neto = 5.43% (Tasa antes de impuestos 5.71% con escudo fiscal del 5.0%).",
+        "wacc": "WACC = 10.91%: Tasa de corte u obst\u00e1culo financiero global. Pondera 95.2% de Equity y 4.8% de Deuda a valores de mercado. Frente a la mediana del sector (8.70%), su costo de financiamiento es ligeramente superior.",
+        "economic_spread": "El negocio genera un Spread positivo de +9.46 p.p. sobre el WACC (10.91%), demostrando capacidad de generar valor econ\u00f3mico superior a la media de forma constante frente a sus competidores."
       }
     }
   },

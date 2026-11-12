@@ -636,7 +636,7 @@ SPANISH_CLARIFICATIONS = {
 
 # Mapeo exhaustivo de conceptos XBRL canónicos a español
 CANONICAL_CONCEPT_MAP = {
-    "revenues": "Ingresos por alquileres",
+    "revenues": "Ingresos totales",
     "salesrevenuenet": "Ingresos / Ventas netas",
     "revenuefromcontractwithcustomerexcludingassessedtax": "Ingresos / Ventas netas",
     "revenue": "Ingresos / Ventas netas",
@@ -646,25 +646,42 @@ CANONICAL_CONCEPT_MAP = {
     "revenuefromcontractswithcustomers": "Ingresos / Ventas netas",
     "grossrevenue": "Ingresos / Ventas netas",
     "operatingrevenue": "Ingresos / Ventas netas",
+    "costofgoodsandserviceexcludingdepreciationdepletionandamortization": "Costo de ingresos (excluyendo D&A)",
+    "costofrevenue": "Costo de ingresos",
+    "costofgoodssold": "Costo de bienes vendidos (COGS)",
+    "costofgoodsandservicessold": "Costo de bienes y servicios vendidos",
+    "depreciationdepletionandamortization": "Depreciación y amortización",
+    "depreciationandamortization": "Depreciación y amortización",
+    "depreciationandamortizationincludingamountfromotherincomeexpense": "Depreciación y amortización (incl. otros ingresos/gastos)",
+    "operationsandsupportexpense": "Gastos de operaciones y soporte",
     "grossprofit": "Beneficio bruto",
     "grossprofitloss": "Beneficio bruto",
     "operatingexpenses": "Gastos operativos totales",
     "totaloperatingexpenses": "Gastos operativos totales",
     "operatingexpense": "Gastos operativos totales",
-    "administrativeexpense": "Gastos operativos totales",
-    "distributioncosts": "Gastos operativos totales",
-    "sellinggeneralandadministrativeexpense": "Gastos operativos totales",
+    "administrativeexpense": "Gastos generales y administrativos",
+    "distributioncosts": "Costos de distribución",
+    "researchanddevelopmentexpense": "Investigación y desarrollo (I+D)",
+    "sellingandmarketingexpense": "Ventas y marketing",
+    "sellinggeneralandadministrativeexpense": "Gastos de ventas, generales y administrativos (SG&A)",
     "costsandexpensesoperating": "Gastos operativos totales",
+    "costsandexpenses": "Costos y gastos totales",
     "operatingcosts": "Gastos operativos totales",
     "totaloperatingcosts": "Gastos operativos totales",
     "operatingincomeloss": "Beneficio operativo (EBIT)",
     "operatingincome": "Beneficio operativo (EBIT)",
     "profitlossfromoperatingactivities": "Beneficio operativo (EBIT)",
     "operatingprofitloss": "Beneficio operativo (EBIT)",
-    "profitlossbeforetax": "Beneficio operativo (EBIT)",
-    "netincomeloss": "Beneficio neto consolidado",
+    "othernonoperatingincomeexpense": "Otros ingresos (gastos) no operativos netos",
+    "profitlossbeforetax": "Beneficio antes de impuestos (EBT)",
+    "incomelossfromcontinuingoperationsbeforeincometaxesextraordinaryitemsnoncontrollinginterest": "Beneficio antes de impuestos (EBT)",
+    "incomelossfromcontinuingoperationsbeforeincometaxesminorityinterestandincomelossfromequitymethodinvestments": "Beneficio antes de impuestos y asociadas (EBT)",
+    "incometaxexpensebenefit": "Impuesto sobre beneficios / Ganancias",
+    "incomelossfromequitymethodinvestments": "Resultado de inversiones por método de participación",
+    "netincomeloss": "Beneficio neto atribuible a la matriz",
     "netincome": "Beneficio neto consolidado",
-    "profitloss": "Beneficio neto consolidado",
+    "profitloss": "Beneficio neto consolidado (incl. minoritarios)",
+    "netincomelossattributabletononcontrollinginterest": "Menos: beneficio neto atribuible a intereses minoritarios",
     "profitlossattributabletoownersofparent": "Beneficio neto común",
     "profitlossfromcontinuingoperations": "Beneficio neto consolidado",
     "netincomelossavailabletocommonstockholdersdiluted": "Beneficio neto común",
@@ -672,7 +689,7 @@ CANONICAL_CONCEPT_MAP = {
     "profitlossattributabletoordinaryequityholdersofparententity": "Beneficio neto común",
     "profitlossfromcontinuingoperationsattributabletoordinaryequityholdersofparententity": "Beneficio neto común",
     "weightedaveragenumberofsharesoutstandingbasic": "Acciones ordinarias básicas",
-    "commonstocksharesoutstanding": "Acciones ordinarias diluidas",
+    "commonstocksharesoutstanding": "Acciones ordinarias en circulación",
     "weightedaverageshares": "Acciones ordinarias básicas",
     "weightedaveragenumberofordinarysharesoutstandingbasic": "Acciones ordinarias básicas",
     "numberofsharesoutstanding": "Acciones ordinarias básicas",
@@ -692,33 +709,47 @@ CANONICAL_CONCEPT_MAP = {
     "dilutedearningslosspersharefromcontinuingoperations": "Beneficio diluido por acción ($)",
     "assets": "Total de activos",
     "totalassets": "Total de activos",
+    "liabilities": "Total de pasivos",
+    "liabilitiesandstockholdersequity": "Total pasivos, minoritarios redimibles y patrimonio neto",
+    "equityandliabilities": "Total patrimonio neto y pasivos",
     "stockholdersequity": "Patrimonio neto de los accionistas",
     "equityattributabletoownersofparent": "Patrimonio neto de los accionistas",
     "equity": "Patrimonio neto de los accionistas",
     "totalequity": "Patrimonio neto de los accionistas",
-    "stockholdersequityincludingportionattributabletononcontrollinginterest": "Patrimonio neto de los accionistas",
+    "stockholdersequityincludingportionattributabletononcontrollinginterest": "Total patrimonio neto (incl. minoritarios no redimibles)",
+    "redeemablenoncontrollinginterestequitycarryingamount": "Intereses minoritarios redimibles (Mezzanine)",
+    "nonredeemablenoncontrollinginterest": "Intereses minoritarios no redimibles",
+    "minorityinterest": "Intereses minoritarios",
     "commonequity": "Patrimonio neto de los accionistas",
     "allequitybalance": "Patrimonio neto de los accionistas",
     "cashandcashequivalentsatcarryingvalue": "Efectivo y equivalentes de efectivo",
-    "cashcashequivalentsrestrictedcashandrestrictedcashequivalents": "Efectivo y equivalentes de efectivo",
+    "cashcashequivalentsrestrictedcashandrestrictedcashequivalents": "Efectivo, equivalentes y efectivo restringido",
+    "restrictedcashandcashequivalentsatcarryingvalue": "Efectivo y equivalentes restringidos (corriente)",
+    "restrictedcashandcashequivalentsnoncurrent": "Efectivo y equivalentes restringidos (no corriente)",
+    "restrictedinvestmentsnoncurrent": "Inversiones restringidas (no corriente)",
+    "marketablesecuritiescurrent": "Valores negociables a corto plazo",
+    "marketablesecuritiesnoncurrent": "Valores negociables a largo plazo",
+    "equitymethodinvestments": "Inversiones contabilizadas por método de participación",
+    "equitysecuritieswithoutreadilydeterminablefairvalueamount": "Inversiones en acciones sin valor de mercado observable",
     "cashandcashequivalents": "Efectivo y equivalentes de efectivo",
     "cash": "Efectivo y equivalentes de efectivo",
     "debtcurrent": "Deuda financiera a corto plazo",
     "shorttermdebt": "Deuda financiera a corto plazo",
-    "currentportionoflongtermdebt": "Deuda financiera a corto plazo",
-    "commercialpaper": "Deuda financiera a corto plazo",
-    "revolvingcreditfacilityandcommercialpaper": "Deuda financiera a corto plazo",
-    "lineofcreditandcommercialpaper": "Deuda financiera a corto plazo",
-    "linesofcreditcurrent": "Deuda financiera a corto plazo",
-    "lineofcredit": "Deuda financiera a corto plazo",
+    "currentportionoflongtermdebt": "Porción corriente de deuda a largo plazo",
+    "longtermdebtcurrent": "Porción corriente de deuda a largo plazo",
+    "commercialpaper": "Papel comercial (corto plazo)",
+    "revolvingcreditfacilityandcommercialpaper": "Línea de crédito y papel comercial",
+    "lineofcreditandcommercialpaper": "Línea de crédito y papel comercial",
+    "linesofcreditcurrent": "Líneas de crédito a corto plazo",
+    "lineofcredit": "Líneas de crédito a corto plazo",
     "currentborrowingsandotherfinancialliabilities": "Deuda financiera a corto plazo",
-    "currentportionofnoncurrentborrowings": "Deuda financiera a corto plazo",
-    "currentfinancialliabilities": "Deuda financiera a corto plazo",
-    "borrowingsfromfinancialinstitutions": "Deuda financiera a corto plazo",
-    "shorttermborrowings": "Deuda financiera a corto plazo",
+    "currentportionofnoncurrentborrowings": "Porción corriente de préstamos a largo plazo",
+    "currentfinancialliabilities": "Pasivos financieros corrientes",
+    "borrowingsfromfinancialinstitutions": "Préstamos de entidades financieras",
+    "shorttermborrowings": "Préstamos y financiación a corto plazo",
     "longtermdebtnoncurrent": "Deuda financiera a largo plazo",
     "longtermdebt": "Deuda financiera a largo plazo",
-    "debtlongtermandshorttermcombinedamount": "Deuda financiera a largo plazo",
+    "debtlongtermandshorttermcombinedamount": "Deuda financiera total",
     "notespayable": "Deuda financiera a largo plazo",
     "loanspayable": "Deuda financiera a largo plazo",
     "secureddebt": "Deuda financiera a largo plazo",
@@ -870,32 +901,49 @@ def normalize_label(label):
     return s
 
 HEURISTIC_REPLACEMENTS = [
-    # Flows & actions
+    # 1. Flows, exclusions & actions (multi-word prefixes first)
+    (r'\brepayments? of borrowings under\b', 'Reembolsos de préstamos bajo'),
+    (r'\brepayments? of\b', 'Reembolsos de'),
     (r'\bproceeds from borrowings on\b', 'Cobros por préstamos en'),
     (r'\bproceeds from issuance of\b', 'Cobros por emisión de'),
-    (r'\bproceeds from sales? of\b', 'Cobros por venta de'),
+    (r'\bproceeds from maturities and sales? of\b', 'Cobros por vencimiento y venta de'),
+    (r'\bproceeds from sales? and maturities of\b', 'Cobros por venta y vencimiento de'),
     (r'\bproceeds from maturities of\b', 'Cobros por vencimiento de'),
+    (r'\bproceeds from sales? of\b', 'Cobros por venta de'),
     (r'\bproceeds from\b', 'Cobros por'),
-    (r'\bpayments for purchase of\b', 'Pagos por compra de'),
-    (r'\bpayments for acquisitions? of\b', 'Pagos por adquisición de'),
-    (r'\bpayments to acquire\b', 'Pagos para adquirir'),
-    (r'\bpayments of dividends\b', 'Pagos de dividendos'),
-    (r'\bpayments for\b', 'Pagos por'),
-    (r'\bpayments to\b', 'Pagos a'),
-    (r'\bpayments of\b', 'Pagos de'),
+    (r'\bpayments? for acquisitions?(?: of businesses)?(?:, net of cash acquired)?(?=\s|,|$)', 'Pagos por adquisiciones (neto de efectivo adquirido)'),
+    (r'\bpayments? for taxes related to net share settlement\b', 'Pagos de impuestos por liquidación neta de acciones'),
+    (r'\bpayments? for purchase of\b', 'Pagos por compra de'),
+    (r'\bpayments? for acquisitions? of\b', 'Pagos por adquisición de'),
+    (r'\bpayments? to acquire\b', 'Pagos para adquirir'),
+    (r'\bpayments? of dividends\b', 'Pagos de dividendos'),
+    (r'\bpayments? for\b', 'Pagos por'),
+    (r'\bpayments? to\b', 'Pagos a'),
+    (r'\bpayments? of\b', 'Pagos de'),
+    (r'\brepurchases? of\b', 'Recompra de'),
+    (r'\bissuance of\b', 'Emisión de'),
     (r'\bpurchases? of\b', 'Compras de'),
     (r'\bsales? of\b', 'Ventas de'),
+    (r'\bextinguishment of\b', 'Cancelación anticipada de'),
+    (r'\bimpairment of\b', 'Deterioro de'),
+    (r'\bgain \(loss\) on\b', 'Ganancia (pérdida) por'),
+    (r'\bloss \(gain\) on\b', 'Pérdida (ganancia) por'),
+    (r'\bnet gain on\b', 'Ganancia neta por'),
+    (r'\bnet loss on\b', 'Pérdida neta por'),
+    (r'\bgains? on\b', 'Ganancia por'),
+    (r'\bloss(?:es)? on\b', 'Pérdida por'),
+    (r'\beffect of exchange rate changes on\b', 'Efecto de variaciones cambiarias sobre'),
     (r'\bnet increase \(decrease\) in\b', 'Variación neta en'),
     (r'\bnet decrease \(increase\) in\b', 'Variación neta en'),
     (r'\bincrease \(decrease\) in\b', 'Variación en'),
     (r'\bdecrease \(increase\) in\b', 'Variación en'),
     (r'\bchanges? in\b', 'Variaciones en'),
     (r'\bchange in\b', 'Variación en'),
-    (r'\bnet cash provided by \(used in\)\b', 'Flujo neto provisto por (usado en)'),
+    (r'\bnet cash provided by \(used in\)(?=\s|,|$)', 'Flujo neto provisto por (usado en)'),
     (r'\bnet cash provided by\b', 'Flujo neto provisto por'),
     (r'\bnet cash used in\b', 'Flujo neto usado en'),
-    (r'\bcash flows? generated from \(used in\)\b', 'Flujos de efectivo generados por (usados en)'),
-    (r'\bcash flows? from \(used in\)\b', 'Flujos de efectivo de (usados en)'),
+    (r'\bcash flows? generated from \(used in\)(?=\s|,|$)', 'Flujos de efectivo generados por (usados en)'),
+    (r'\bcash flows? from \(used in\)(?=\s|,|$)', 'Flujos de efectivo de (usados en)'),
     (r'\bcash flows? from\b', 'Flujos de efectivo de'),
     (r'\bcash flows? used in\b', 'Flujos de efectivo usados en'),
     (r'\bcash generated by\b', 'Efectivo generado por'),
@@ -903,8 +951,30 @@ HEURISTIC_REPLACEMENTS = [
     (r'\boperating activities\b', 'actividades de operación'),
     (r'\binvesting activities\b', 'actividades de inversión'),
     (r'\bfinancing activities\b', 'actividades de financiación'),
-    
-    # Core nouns
+
+    # 2. Compound domain & financial nouns (strictly before single nouns)
+    (r'\bredeemable non-?controlling interests?\b', 'participaciones no controladoras rescatables'),
+    (r'\bnon-?controlling interests?\b', 'participaciones no controladoras'),
+    (r'\bequity method investments?\b', 'inversiones contabilizadas por método de participación'),
+    (r'\bequity and other investments?\b', 'inversiones en capital y otras'),
+    (r'\bnon-?marketable debt and equity securities\b', 'valores de deuda y capital no negociables'),
+    (r'\bnon-?marketable equity securities\b', 'valores de capital no negociables'),
+    (r'\bnon-?marketable securities\b', 'valores no negociables'),
+    (r'\bdebt and equity securities\b', 'valores de deuda y capital'),
+    (r'\bmarketable equity securities\b', 'valores de capital negociables'),
+    (r'\bmarketable debt securities\b', 'valores de deuda negociables'),
+    (r'\bmarketable securities\b', 'valores negociables'),
+    (r'\bavailable-?for-?sale securities\b', 'valores disponibles para la venta'),
+    (r'\bheld-?to-?maturity securities\b', 'valores mantenidos hasta vencimiento'),
+    (r'\bloss and loss adjustment expense reserves?\b', 'reservas para siniestros y gastos de ajuste'),
+    (r'\binsurance reserves?\b', 'reservas técnicas de seguros'),
+    (r'\bunearned premiums?\b', 'primas no devengadas'),
+    (r'\btotal return swaps?\b', 'swaps de rentabilidad total'),
+    (r'\binterest rate swaps?\b', 'swaps de tasas de interés'),
+    (r'\bforeign currency contracts?\b', 'contratos en moneda extranjera'),
+    (r'\bderivative assets\b', 'activos por derivados'),
+    (r'\bderivative liabilities\b', 'pasivos por derivados'),
+    (r'\bderivatives?\b', 'instrumentos derivados'),
     (r'\baccounts receivable, net\b', 'cuentas por cobrar netas'),
     (r'\baccounts receivable\b', 'cuentas por cobrar'),
     (r'\baccounts payable and accrued expenses\b', 'cuentas por pagar y gastos acumulados'),
@@ -916,17 +986,19 @@ HEURISTIC_REPLACEMENTS = [
     (r'\baccrued liabilities\b', 'pasivos acumulados'),
     (r'\baccrued interest\b', 'intereses devengados'),
     (r'\baccrued payroll\b', 'remuneraciones devengadas'),
-    (r'\baccrued\b', 'acumulado'),
-    (r'\breceivables\b', 'cuentas por cobrar'),
-    (r'\bpayables\b', 'cuentas por pagar'),
-    (r'\bmarketable securities\b', 'valores negociables'),
+    (r'\bprepaid expenses and other current assets\b', 'gastos pagados por anticipado y otros activos corrientes'),
+    (r'\bprepaid expenses\b', 'gastos pagados por anticipado'),
     (r'\bshort-term investments\b', 'inversiones a corto plazo'),
+    (r'\blong-term investments\b', 'inversiones a largo plazo'),
     (r'\bproperty, plant and equipment, net\b', 'propiedad, planta y equipo (PP&E neto)'),
     (r'\bproperty, plant and equipment\b', 'propiedad, planta y equipo'),
     (r'\bproperty and equipment, net\b', 'propiedad y equipo neto'),
     (r'\bproperty and equipment\b', 'propiedad y equipo'),
+    (r'\bleasehold improvements\b', 'mejoras en propiedades arrendadas'),
+    (r'\bgoodwill and intangible assets\b', 'fondo de comercio y activos intangibles'),
     (r'\bintangible assets, net\b', 'activos intangibles netos'),
     (r'\bintangible assets\b', 'activos intangibles'),
+    (r'\bgoodwill\b', 'fondo de comercio (Goodwill)'),
     (r'\bdeferred tax assets\b', 'activos por impuestos diferidos'),
     (r'\bdeferred tax liabilities\b', 'pasivos por impuestos diferidos'),
     (r'\bdeferred income taxes\b', 'impuestos diferidos'),
@@ -936,21 +1008,35 @@ HEURISTIC_REPLACEMENTS = [
     (r'\boperating lease liabilities\b', 'pasivos por arrendamiento operativo'),
     (r'\boperating leases?\b', 'arrendamiento operativo'),
     (r'\bfinance leases?\b', 'arrendamiento financiero'),
+    (r'\bconvertible senior notes\b', 'notas senior convertibles'),
+    (r'\bsenior notes\b', 'notas senior'),
     (r'\blong-term debt\b', 'deuda a largo plazo'),
     (r'\bshort-term debt\b', 'deuda a corto plazo'),
     (r'\bcommercial paper\b', 'pagarés comerciales'),
     (r'\brevolving credit facilities\b', 'líneas de crédito revolving'),
     (r'\brevolving credit facility\b', 'línea de crédito revolving'),
+    (r"\btotal stockholders'? equity\b", 'Total patrimonio neto de los accionistas'),
+    (r"\btotal shareholders'? equity\b", 'Total patrimonio neto de los accionistas'),
+    (r"\bstockholders'? equity\b", 'patrimonio neto de los accionistas'),
+    (r"\bshareholders'? equity\b", 'patrimonio neto de los accionistas'),
     (r'\bcommon stock\b', 'acciones ordinarias'),
     (r'\bpreferred stock\b', 'acciones preferentes'),
     (r'\bretained earnings\b', 'ganancias retenidas'),
     (r'\btreasury stock\b', 'acciones propias en cartera'),
     (r'\badditional paid-in capital\b', 'prima de emisión (capital adicional)'),
+    (r'\baccumulated other comprehensive income \(loss\)(?=\s|,|$)', 'otros resultados integrales acumulados'),
+    (r'\baccumulated other comprehensive income\b', 'otros resultados integrales acumulados'),
+    (r'\baccumulated other comprehensive loss\b', 'pérdida integral acumulada'),
     (r'\bdepreciation and amortization\b', 'depreciación y amortización'),
     (r'\bdepreciation\b', 'depreciación'),
     (r'\bamortization\b', 'amortización'),
     (r'\bshare-based compensation\b', 'compensación en acciones'),
     (r'\bstock-based compensation\b', 'compensación en acciones'),
+    (r'\bresearch and development\b', 'investigación y desarrollo'),
+    (r'\bsales and marketing\b', 'ventas y marketing'),
+    (r'\bgeneral and administrative\b', 'gastos generales y administrativos'),
+    (r'\bprovision for income taxes\b', 'provisión para impuestos sobre beneficios'),
+    (r'\bprovision for credit losses\b', 'provisión para pérdidas crediticias'),
     (r'\bincome taxes\b', 'impuestos sobre beneficios'),
     (r'\bincome tax\b', 'impuesto sobre beneficios'),
     (r'\btotal current assets\b', 'Total de activos corrientes'),
@@ -958,36 +1044,81 @@ HEURISTIC_REPLACEMENTS = [
     (r'\btotal assets\b', 'Total de activos'),
     (r'\btotal current liabilities\b', 'Total de pasivos corrientes'),
     (r'\btotal non-current liabilities\b', 'Total de pasivos no corrientes'),
+    (r"\btotal liabilities and (?:stockholders'|shareholders') equity\b", 'Total pasivos y patrimonio neto'),
     (r'\btotal liabilities\b', 'Total de pasivos'),
-    (r"total stockholders' equity", 'Total patrimonio neto de los accionistas'),
-    (r"total shareholders' equity", 'Total patrimonio neto de los accionistas'),
     (r'\btotal equity\b', 'Total patrimonio neto'),
+    (r'\bother non-operating current assets\b', 'Otros activos corrientes no operativos'),
+    (r'\bother non-operating current liabilities\b', 'Otros pasivos corrientes no operativos'),
     (r'\bother current assets\b', 'Otros activos corrientes'),
     (r'\bother non-current assets\b', 'Otros activos no corrientes'),
     (r'\bother current liabilities\b', 'Otros pasivos corrientes'),
     (r'\bother non-current liabilities\b', 'Otros pasivos no corrientes'),
-    (r'\bother non-operating current assets\b', 'Otros activos corrientes no operativos'),
-    (r'\bother non-operating current liabilities\b', 'Otros pasivos corrientes no operativos'),
     (r'\bother assets\b', 'Otros activos'),
     (r'\bother liabilities\b', 'Otros pasivos'),
     (r'\bother income \(expense\), net\b', 'Otros ingresos (gastos) netos'),
     (r'\bother income\b', 'Otros ingresos'),
     (r'\bother expenses?\b', 'Otros gastos'),
+    (r'\bnet income \(loss\)(?=\s|,|$)', 'Beneficio (pérdida) neto'),
     (r'\bnet income\b', 'Beneficio neto'),
     (r'\bnet loss\b', 'Pérdida neta'),
     (r'\boperating income\b', 'Beneficio operativo (EBIT)'),
     (r'\boperating profit\b', 'Beneficio operativo (EBIT)'),
     (r'\boperating expenses\b', 'Gastos operativos (OpEx)'),
     (r'\bgross profit\b', 'Beneficio bruto'),
-    (r'\brevenues?\b', 'Ingresos'),
-    (r'\bnet sales\b', 'Ventas netas'),
     (r'\bcost of sales\b', 'Costo de ventas'),
     (r'\bcost of goods sold\b', 'Costo de bienes vendidos'),
-    (r'\bcost of revenues?\b', 'Costo de ingresos')
+    (r'\bcost of revenues?\b', 'Costo de ingresos'),
+    (r'\bnet sales\b', 'Ventas netas'),
+    (r'\brevenues?\b', 'Ingresos'),
+    (r'\brestricted cash and cash equivalents\b', 'efectivo y equivalentes restringidos'),
+    (r'\brestricted cash\b', 'efectivo restringido'),
+    (r'\bcash and cash equivalents\b', 'efectivo y equivalentes'),
+    (r'\brelated parties\b', 'partes relacionadas'),
+    (r'\brelated party\b', 'parte relacionada'),
+    (r'\bworking capital\b', 'capital de trabajo'),
+    (r'\bcapital expenditures?\b', 'gastos de capital (CapEx)'),
+    (r'\bfixed assets\b', 'activos fijos'),
+
+    # 3. Residual modifiers, standalone nouns & grammatical connectors (LAST)
+    (r'\battributable to\b', 'atribuible a'),
+    (r'\(loss\)', '(pérdida)'),
+    (r'\breceivables\b', 'cuentas por cobrar'),
+    (r'\bpayables\b', 'cuentas por pagar'),
+    (r'\baccrued\b', 'acumulado'),
+    (r'\binventories\b', 'inventarios'),
+    (r'\bborrowings\b', 'préstamos'),
+    (r'\binvestments?\b', 'inversiones'),
+    (r'\bsecurities\b', 'valores'),
+    (r'\bliabilities\b', 'pasivos'),
+    (r'\bassets\b', 'activos'),
+    (r'\bdividends\b', 'dividendos'),
+    (r'\bnon-?operating\b', 'no operativo'),
+    (r'\bnon-?current\b', 'no corriente'),
+    (r'\bnon-?cash\b', 'sin salida de efectivo'),
+    (r'\bother\b', 'otros'),
+    (r'\bnet\b', 'neto'),
+    (r'\btotal\b', 'total'),
+    (r'\band\b', 'y'),
+    (r'\bof\b', 'de'),
+    (r'\bfor\b', 'por'),
+    (r'\bfrom\b', 'de'),
+    (r'\bwith\b', 'con'),
+    (r'\bin\b', 'en'),
+    (r'\bon\b', 'sobre'),
 ]
 
 # Claves ordenadas de mayor a menor longitud para evitar que términos cortos pisen términos compuestos
 SORTED_MAP_KEYS = sorted(SPANISH_CLARIFICATIONS.keys(), key=lambda x: len(x), reverse=True)
+
+_EXCLUSION_SPLIT_RE = re.compile(
+    r'^(.*?)(?:\s*(?:,|\()\s*|\s+)(exclusive\s+of|excluding|attributable\s+to)\s+(.+?)\s*\)?$',
+    re.IGNORECASE,
+)
+_CONNECTOR_ES = {
+    'exclusive of': 'excluyendo',
+    'excluding': 'excluyendo',
+    'attributable to': 'atribuible a',
+}
 
 
 def heuristic_translate(label):
@@ -1001,17 +1132,8 @@ def heuristic_translate(label):
     return text
 
 
-def get_spanish_label(label, concept=None):
-    """
-    Traduce una etiqueta oficial de la SEC al español siguiendo el orden estricto de prioridades:
-    1. Coincidencia exacta en SPANISH_CLARIFICATIONS (con/sin notas, comillas, etc.).
-    2. Coincidencia por concepto XBRL canónico (CANONICAL_CONCEPT_MAP).
-    3. Coincidencia parcial no ambigua ordenada por longitud descendente.
-    4. Traductor heurístico dinámico universal (garantiza jamás devolver None ni texto crudo en inglés).
-    """
-    if not label:
-        return "N/D"
-
+def _translate_without_compound_split(label, concept=None):
+    """Traduce una etiqueta o subfrase sin re-aplicar división de cláusulas excluyentes."""
     clean_lbl = normalize_label(label)
     lbl_lower = clean_lbl.lower()
 
@@ -1030,24 +1152,65 @@ def get_spanish_label(label, concept=None):
     if raw_lower in SPANISH_CLARIFICATIONS:
         return SPANISH_CLARIFICATIONS[raw_lower]
 
-    # Prioridad 2: Coincidencia por concepto canónico XBRL
-    if concept:
+    # Prioridad 2: Coincidencia por concepto canónico XBRL (solo cuando el label no es más específico o compuesto)
+    if concept and len(lbl_lower.split()) <= 5:
         c_tok = str(concept).split(':')[-1].split('_')[-1].lower()
         if c_tok in CANONICAL_CONCEPT_MAP:
             return CANONICAL_CONCEPT_MAP[c_tok]
 
-    # Prioridad 3: Búsqueda parcial ordenada por longitud descendente
-    for k in SORTED_MAP_KEYS:
-        if len(k) >= 6 and k in lbl_lower:
-            return SPANISH_CLARIFICATIONS[k]
+    # Prioridad 3: Coincidencia segura por prefijo con límite de palabra y cobertura >= 70% (sin secuestro parcial)
+    lbl_len = len(lbl_lower)
+    if lbl_len > 0:
+        for k in SORTED_MAP_KEYS:
+            k_len = len(k)
+            if k_len < 8 or (k_len / lbl_len) < 0.70:
+                continue
+            if lbl_lower.startswith(k) and (lbl_len == k_len or not lbl_lower[k_len].isalnum()):
+                return SPANISH_CLARIFICATIONS[k]
 
     # Prioridad 4: Traducción heurística universal
-    h = heuristic_translate(label)
+    h = heuristic_translate(clean_lbl)
     if h and h.lower() != lbl_lower:
         return h
 
-    # Respaldo garantizado no nulo
     return h if h else clean_lbl
+
+
+def get_spanish_label(label, concept=None):
+    """
+    Traduce una etiqueta oficial de la SEC al español siguiendo el orden estricto de prioridades:
+    1. Coincidencia exacta en SPANISH_CLARIFICATIONS.
+    2. División estructural de cláusulas (exclusive of / excluding / attributable to) preservando semántica.
+    3. Coincidencia por concepto XBRL canónico (CANONICAL_CONCEPT_MAP) para etiquetas simples.
+    4. Coincidencia segura por prefijo con cobertura >= 70% (evita colisiones por subcadenas).
+    5. Traductor heurístico dinámico universal.
+    """
+    if not label:
+        return "N/D"
+
+    clean_lbl = normalize_label(label)
+    lbl_lower = clean_lbl.lower()
+
+    if lbl_lower in SPANISH_CLARIFICATIONS:
+        return SPANISH_CLARIFICATIONS[lbl_lower]
+
+    raw_lower = str(label).strip().lower().replace('\xa0', ' ').replace('’', "'")
+    if raw_lower in SPANISH_CLARIFICATIONS:
+        return SPANISH_CLARIFICATIONS[raw_lower]
+
+    split_match = _EXCLUSION_SPLIT_RE.match(clean_lbl)
+    if split_match:
+        head_raw, conn_raw, tail_raw = split_match.groups()
+        head_es = _translate_without_compound_split(head_raw, concept=None)
+        tail_es = _translate_without_compound_split(tail_raw, concept=None)
+        conn_key = re.sub(r'\s+', ' ', conn_raw.strip().lower())
+        conn_es = _CONNECTOR_ES.get(conn_key, conn_key)
+        tail_clean = tail_es[0].lower() + tail_es[1:] if tail_es else ''
+        if conn_key in ('exclusive of', 'excluding'):
+            return f"{head_es} ({conn_es} {tail_clean})"
+        return f"{head_es} {conn_es} {tail_clean}"
+
+    return _translate_without_compound_split(clean_lbl, concept=concept)
 
 
 def get_spanish_clarification(label, concept=None):

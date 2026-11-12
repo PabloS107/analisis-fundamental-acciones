@@ -457,9 +457,9 @@ class TestStatementsWebDashboard(unittest.TestCase):
             self.assertIn('Deuda Financiera Neta', content)
             if ticker == 'AAPL':
                 self.assertIn('$80,111.0M', content)   # Deuda Financiera Total (total_debt LTM==FY2026)
-                self.assertIn('$59,160.0M', content)   # Tesorería ($36,305.0M + $22,855.0M inversiones CP)
-                self.assertIn('$20,951.0M', content)   # Deuda Financiera Neta
-                self.assertNotIn('+$20,951.0M', content)
+                self.assertIn('$56,722.0M', content)   # Tesorería ($36,305.0M + $20,417.0M inversiones CP FY2026)
+                self.assertIn('$23,389.0M', content)   # Deuda Financiera Neta
+                self.assertNotIn('+$23,389.0M', content)
             elif ticker == 'DECK':
                 self.assertIn('$0.0M', content)
                 self.assertIn('-$1,209.7M (Caja Neta)', content)
@@ -695,33 +695,36 @@ class TestStatementsWebDashboard(unittest.TestCase):
         sino que despliegue la fila de alerta '⚠️ Desglose Incompleto / Partidas de Inversión No Mapeadas'
         y mantenga FCF como N/D."""
         import json
+        import os
         from pathlib import Path
+        from unittest.mock import patch
+        import analytics.views.views as views_mod
 
         nvda_path = Path(ROOT_DIR) / 'data' / 'processed' / 'NVDA' / 'financial_statements.json'
+        nvda_norm = os.path.normcase(os.path.abspath(str(nvda_path)))
         with open(nvda_path, 'r', encoding='utf-8') as f:
             original_data = json.load(f)
 
-        try:
-            tampered_data = json.loads(json.dumps(original_data))
-            # Forzar CapEx en LTM a None para simular fallo de extracción
-            tampered_data['canonical_summary']['capital_expenditures']['LTM'] = None
-            if 'free_cash_flow' in tampered_data['canonical_summary']:
-                tampered_data['canonical_summary']['free_cash_flow']['LTM'] = None
+        tampered_data = json.loads(json.dumps(original_data))
+        # Forzar CapEx en LTM a None para simular fallo de extracción
+        tampered_data['canonical_summary']['capital_expenditures']['LTM'] = None
+        if 'free_cash_flow' in tampered_data['canonical_summary']:
+            tampered_data['canonical_summary']['free_cash_flow']['LTM'] = None
 
-            with open(nvda_path, 'w', encoding='utf-8') as f:
-                json.dump(tampered_data, f, indent=2)
+        real_load = views_mod.load_json_cached
 
+        def fake_load_json(path_arg, *args, **kwargs):
+            if os.path.normcase(os.path.abspath(str(path_arg))) == nvda_norm:
+                return json.loads(json.dumps(tampered_data))
+            return real_load(path_arg, *args, **kwargs)
+
+        with patch('analytics.views.views.load_json_cached', side_effect=fake_load_json):
             res = self.client.get('/company/NVDA/')
             self.assertEqual(res.status_code, 200)
             content = html.unescape(res.content.decode('utf-8'))
 
             # 1. Regla 6: 'Inversión Neta en Valores Negociables' NO debe absorber el CapEx convirtiéndose en un plug de -$73,853.0M
             self.assertNotIn('-$73,853.0M', content)
-
-        finally:
-            # Restaurar datos originales incondicionalmente
-            with open(nvda_path, 'w', encoding='utf-8') as f:
-                json.dump(original_data, f, indent=2)
 
     def test_fiscal_ai_standardized_skeletons_all_archetypes(self):
         """Verifica la arquitectura completa de la Fase 2 según Fiscal.ai:
@@ -871,9 +874,9 @@ class TestStatementsWebDashboard(unittest.TestCase):
         content_pgr = html.unescape(resp_pgr.content.decode('utf-8'))
         summary_pgr = resp_pgr.context.get('statements_summary', {})
         self.assertEqual(summary_pgr.get('inv_yield'), '4.1%', "PGR Rendimiento de Cartera debe ser 4.1%")
-        self.assertEqual(summary_pgr.get('total_investments'), '$92,413.0M', "PGR Cartera Total de Inversiones debe ser $92,413.0M")
-        self.assertEqual(summary_pgr.get('fcf_ltm'), '$15,951.0M', "PGR FCF LTM debe ser $15,951.0M")
-        self.assertEqual(summary_pgr.get('combined_ratio'), '87.8%', "PGR Combined Ratio debe ser 87.8%")
+        self.assertEqual(summary_pgr.get('total_investments'), '$94,372.0M', "PGR Cartera Total de Inversiones debe ser $94,372.0M (Q3 2026)")
+        self.assertEqual(summary_pgr.get('fcf_ltm'), '$15,224.0M', "PGR FCF LTM debe ser $15,224.0M (Q3 2026)")
+        self.assertEqual(summary_pgr.get('combined_ratio'), '88.7%', "PGR Combined Ratio debe ser 88.7% (Q3 2026)")
         self.assertIn('RATIO COMBINADO (%)', content_pgr)
         self.assertIn('FLOAT ASEGURADOR DISPONIBLE', content_pgr)
 
@@ -881,11 +884,11 @@ class TestStatementsWebDashboard(unittest.TestCase):
         resp_o = self.client.get('/company/O/')
         content_o = html.unescape(resp_o.content.decode('utf-8'))
         summary_o = resp_o.context.get('statements_summary', {})
-        self.assertEqual(summary_o.get('ffo_per_share'), '$3.95', "O FFO/sh debe ser $3.95")
-        self.assertEqual(summary_o.get('affo_per_share'), '$3.77', "O AFFO/sh debe ser $3.77")
-        self.assertEqual(summary_o.get('payout_affo'), '85.7%', "O Payout/AFFO debe ser 85.7%")
-        self.assertEqual(summary_o.get('ffo_ltm'), '$3,662.7M', "O FFO LTM debe ser $3,662.7M")
-        self.assertEqual(summary_o.get('affo_ltm'), '$3,496.6M', "O AFFO LTM debe ser $3,496.6M")
+        self.assertEqual(summary_o.get('ffo_per_share'), '$3.99', "O FFO/sh debe ser $3.99 (Q3 2026)")
+        self.assertEqual(summary_o.get('affo_per_share'), '$3.81', "O AFFO/sh debe ser $3.81 (Q3 2026)")
+        self.assertEqual(summary_o.get('payout_affo'), '85.1%', "O Payout/AFFO debe ser 85.1% (Q3 2026)")
+        self.assertEqual(summary_o.get('ffo_ltm'), '$3,728.0M', "O FFO LTM debe ser $3,728.0M (Q3 2026)")
+        self.assertEqual(summary_o.get('affo_ltm'), '$3,556.2M', "O AFFO LTM debe ser $3,556.2M (Q3 2026)")
         self.assertIn('NET OPERATING INCOME (NOI)', content_o)
         self.assertIn('FUNDS FROM OPERATIONS (FFO)', content_o)
         self.assertIn('AFFO NORMALIZADO', content_o)

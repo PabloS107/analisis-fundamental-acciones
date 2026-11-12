@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-11-12T15:14:53.429183",
+  "audit_timestamp": "2026-11-12T18:15:37.701986",
   "years_audited": {
     "LTM": [
       {
@@ -122,7 +122,7 @@
         "shares_diluted": 50697320.0,
         "eps_reported": 39.4,
         "eps_calculated": 39.39,
-        "eps_adjusted": 39.4,
+        "eps_adjusted": 39.39,
         "split_factor": 1.0,
         "discrepancy": 0.01
       }
@@ -250,7 +250,7 @@
         "shares_diluted": 51006860.0,
         "eps_reported": 19.46,
         "eps_calculated": 19.35,
-        "eps_adjusted": 19.46,
+        "eps_adjusted": 19.35,
         "split_factor": 1.0,
         "discrepancy": 0.11
       }
@@ -314,7 +314,7 @@
         "shares_diluted": 51335621.0,
         "eps_reported": 9.53,
         "eps_calculated": 9.53,
-        "eps_adjusted": 9.53,
+        "eps_adjusted": 9.39,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -442,7 +442,7 @@
         "shares_diluted": 49740407.0,
         "eps_reported": -0.08,
         "eps_calculated": -0.08,
-        "eps_adjusted": -0.08,
+        "eps_adjusted": -0.02,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -506,7 +506,7 @@
         "shares_diluted": 48692906.0,
         "eps_reported": -3.71,
         "eps_calculated": -3.71,
-        "eps_adjusted": -3.71,
+        "eps_adjusted": -3.53,
         "split_factor": 1.0,
         "discrepancy": 0.0
       }
@@ -769,10 +769,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 77,
-  "passed_tests": 75,
+  "total_tests": 82,
+  "passed_tests": 79,
   "failed_tests": 0,
-  "skipped_tests": 2,
+  "skipped_tests": 3,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -798,8 +798,118 @@
     {
       "check": "VERIFICACION_VIGENTE",
       "severity": "WARN",
-      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-06. Re-ejecutar data_verifier.",
+      "message": "STALE: verificada 2026-09-27, extracción posterior 2026-11-12. Re-ejecutar data_verifier.",
       "state": "STALE"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "10 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 10,
+      "samples": [
+        {
+          "metric": "other_non_operating",
+          "period": "LTM",
+          "value_usd": -174000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": -174000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_non_operating",
+          "period": "FY2025",
+          "value_usd": -337000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": -337000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_non_operating",
+          "period": "FY2024",
+          "value_usd": -182000000.0,
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": -182000000.0,
+          "residual_pct": 100.0
+        },
+        {
+          "metric": "other_current_assets",
+          "period": "LTM",
+          "value_usd": 37269000000.0,
+          "explained_sum_usd": 24818000000.0,
+          "residual_unexplained_usd": 12451000000.0,
+          "residual_pct": 33.4
+        },
+        {
+          "metric": "other_current_assets",
+          "period": "FY2025",
+          "value_usd": 26335000000.0,
+          "explained_sum_usd": 17480000000.0,
+          "residual_unexplained_usd": 8855000000.0,
+          "residual_pct": 33.6
+        },
+        {
+          "metric": "other_current_assets",
+          "period": "FY2024",
+          "value_usd": 12471000000.0,
+          "explained_sum_usd": 7755000000.0,
+          "residual_unexplained_usd": 4716000000.0,
+          "residual_pct": 37.8
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "LTM",
+          "value_usd": 34247000000.0,
+          "explained_sum_usd": 25990000000.0,
+          "residual_unexplained_usd": 8257000000.0,
+          "residual_pct": 24.1
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "FY2025",
+          "value_usd": 25014000000.0,
+          "explained_sum_usd": 18569000000.0,
+          "residual_unexplained_usd": 6445000000.0,
+          "residual_pct": 25.8
+        },
+        {
+          "metric": "other_assets_sectoral",
+          "period": "FY2024",
+          "value_usd": 11819000000.0,
+          "explained_sum_usd": 8165000000.0,
+          "residual_unexplained_usd": 3654000000.0,
+          "residual_pct": 30.9
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2024",
+          "value_usd": 4711000000.0,
+          "explained_sum_usd": 2248000000.0,
+          "residual_unexplained_usd": 2463000000.0,
+          "residual_pct": 52.3
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

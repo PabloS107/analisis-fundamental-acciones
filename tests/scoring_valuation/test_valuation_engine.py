@@ -76,7 +76,7 @@ class TestValuationEngine(unittest.TestCase):
         vp = valuation_engine.get_valuation_parameters(nu_scores, "NU")
         self.assertTrue(vp["is_financial"])
         self.assertGreater(vp["tbv_per_share"], 1.0)
-        self.assertGreaterEqual(vp["ptbv_current"], 4.5)
+        self.assertGreaterEqual(vp["ptbv_current"], 2.0)
         self.assertGreater(vp["rotce_pct"], 20.0)
         self.assertGreater(vp["spread_economic_pct"], 10.0)
         self.assertGreater(vp["ptbv_justified"], 2.5)

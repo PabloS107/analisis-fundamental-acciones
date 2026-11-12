@@ -410,9 +410,9 @@ class TestBankingCanonicalAccounting(unittest.TestCase):
         self.assertEqual(summary["borrowings"]["FY2025"], 435206000000.0)
         self.assertEqual(summary["repurchase_agreements"]["FY2025"], 64776000000.0)
         self.assertEqual(summary["total_debt"]["FY2025"], 499982000000.0)
-        self.assertEqual(summary["borrowings"]["LTM"], 460523000000.0)
-        self.assertEqual(summary["repurchase_agreements"]["LTM"], 72430000000.0)
-        self.assertEqual(summary["total_debt"]["LTM"], 532953000000.0)
+        self.assertEqual(summary["borrowings"]["LTM"], 460160000000.0)
+        self.assertEqual(summary["repurchase_agreements"]["LTM"], 71339000000.0)
+        self.assertEqual(summary["total_debt"]["LTM"], 531499000000.0)
 
 
 class TestPlatformEcosystemCanonicalAccounting(unittest.TestCase):

@@ -2,7 +2,7 @@
   "ticker": "UBER",
   "company_name": "Uber Technologies, Inc",
   "cik": "0001543151",
-  "audit_timestamp": "2026-11-12T15:14:53.700028",
+  "audit_timestamp": "2026-11-12T18:15:38.284862",
   "years_audited": {
     "LTM": [
       {
@@ -635,10 +635,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 65,
-  "passed_tests": 62,
+  "total_tests": 70,
+  "passed_tests": 66,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 4,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -666,6 +666,116 @@
       "severity": "WARN",
       "message": "N/D: no existe cross_verification_report.json.",
       "state": "MISSING"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "11 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 11,
+      "samples": [
+        {
+          "metric": "other_current_liabilities",
+          "period": "FY2024",
+          "value_usd": 2136000000.0,
+          "explained_sum_usd": 10618000000.0,
+          "residual_unexplained_usd": -8482000000.0,
+          "residual_pct": 397.1
+        },
+        {
+          "metric": "other_noncash",
+          "period": "LTM",
+          "value_usd": 1867000000.0,
+          "explained_sum_usd": 134000000.0,
+          "residual_unexplained_usd": 1733000000.0,
+          "residual_pct": 92.8
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2025",
+          "value_usd": 625000000.0,
+          "explained_sum_usd": 903000000.0,
+          "residual_unexplained_usd": -278000000.0,
+          "residual_pct": 44.5
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2024",
+          "value_usd": -167000000.0,
+          "explained_sum_usd": -590000000.0,
+          "residual_unexplained_usd": 423000000.0,
+          "residual_pct": 253.3
+        },
+        {
+          "metric": "wc_other",
+          "period": "LTM",
+          "value_usd": 2390000000.0,
+          "explained_sum_usd": 4232000000.0,
+          "residual_unexplained_usd": -1842000000.0,
+          "residual_pct": 77.1
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2025",
+          "value_usd": 1995000000.0,
+          "explained_sum_usd": 4623000000.0,
+          "residual_unexplained_usd": -2628000000.0,
+          "residual_pct": 131.7
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2024",
+          "value_usd": 1024000000.0,
+          "explained_sum_usd": 3818000000.0,
+          "residual_unexplained_usd": -2794000000.0,
+          "residual_pct": 272.9
+        },
+        {
+          "metric": "other_investing",
+          "period": "FY2025",
+          "value_usd": -1012000000.0,
+          "explained_sum_usd": -754000000.0,
+          "residual_unexplained_usd": -258000000.0,
+          "residual_pct": 25.5
+        },
+        {
+          "metric": "other_financing",
+          "period": "LTM",
+          "value_usd": 12000000.0,
+          "explained_sum_usd": 48000000.0,
+          "residual_unexplained_usd": -36000000.0,
+          "residual_pct": 300.0
+        },
+        {
+          "metric": "other_financing",
+          "period": "FY2025",
+          "value_usd": -42000000.0,
+          "explained_sum_usd": -199000000.0,
+          "residual_unexplained_usd": 157000000.0,
+          "residual_pct": 373.8
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

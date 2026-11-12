@@ -2,7 +2,7 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-11-12T15:14:53.349173",
+  "audit_timestamp": "2026-11-12T18:15:37.484362",
   "years_audited": {
     "LTM": [
       {
@@ -675,9 +675,14 @@
       },
       {
         "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
-        "passed": null,
-        "status": "SKIP",
-        "message": "Detalle de flujo de caja incompleto para FY2016."
+        "passed": true,
+        "status": "PASS",
+        "cfo": 36036000000.0,
+        "cfi": -31165000000.0,
+        "cff": -8332000000.0,
+        "sum_of_activities": -3631000000.0,
+        "net_change_reported": -3631000000.0,
+        "discrepancy_usd": 0.0
       },
       {
         "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
@@ -697,11 +702,75 @@
         "split_factor": 20.0,
         "discrepancy": 0.33
       }
+    ],
+    "FY2015": [
+      {
+        "test_name": "Ecuación Fundamental del Balance (Activos = Pasivos + Patrimonio)",
+        "passed": true,
+        "status": "PASS",
+        "assets": 147461000000.0,
+        "liabilities": 27130000000.0,
+        "equity": 120331000000.0,
+        "mezzanine_equity": null,
+        "liabilities_plus_equity": 147461000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 14746100.0
+      },
+      {
+        "test_name": "Identidad de Margen Bruto (Gross Profit = Revenue - COGS)",
+        "passed": true,
+        "status": "PASS",
+        "revenue": 74989000000.0,
+        "cost_of_goods_sold": 28164000000.0,
+        "gross_profit_reported": 46825000000.0,
+        "gross_profit_calculated": 46825000000.0,
+        "discrepancy_usd": 0.0,
+        "tolerance_usd": 7498900.0
+      },
+      {
+        "test_name": "Identidad de Free Cash Flow (FCF = CFO - CapEx)",
+        "passed": true,
+        "status": "PASS",
+        "cash_from_operations": 26572000000.0,
+        "capital_expenditures": 9950000000.0,
+        "fcf_reported": 16622000000.0,
+        "fcf_calculated": 16622000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Reconciliación de Flujos de Caja (Net Change = CFO + CFI + CFF)",
+        "passed": true,
+        "status": "PASS",
+        "cfo": 26572000000.0,
+        "cfi": -23711000000.0,
+        "cff": -4225000000.0,
+        "sum_of_activities": -1798000000.0,
+        "net_change_reported": -1798000000.0,
+        "discrepancy_usd": 0.0
+      },
+      {
+        "test_name": "Límites de Sanidad Financiera y Rango de Métricas",
+        "passed": true,
+        "status": "PASS",
+        "anomalies": []
+      },
+      {
+        "test_name": "Consistencia Matemática de BPA (EPS = Net Income / Diluted Shares)",
+        "passed": true,
+        "status": "PASS",
+        "net_income": 15826000000.0,
+        "shares_diluted": 687348000.0,
+        "eps_reported": 22.84,
+        "eps_calculated": 23.02,
+        "eps_adjusted": 1.19,
+        "split_factor": 20.0,
+        "discrepancy": 0.18
+      }
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 71,
-  "passed_tests": 68,
+  "total_tests": 82,
+  "passed_tests": 79,
   "failed_tests": 0,
   "skipped_tests": 3,
   "compliance_score_pct": 100.0,
@@ -731,6 +800,116 @@
       "severity": "WARN",
       "message": "N/D: no existe cross_verification_report.json.",
       "state": "MISSING"
+    }
+  ],
+  "statement_quality": [
+    {
+      "check": "ZERO_DUPLICATE_ASREP_LABELS",
+      "severity": "PASS",
+      "message": "Cero colisiones semánticas en carátulas As-Reported."
+    },
+    {
+      "check": "TRANSLATION_SEMANTIC_INTEGRITY",
+      "severity": "PASS",
+      "message": "Integridad semántica verificada al 100%."
+    },
+    {
+      "check": "BALANCE_MEZZANINE_PARITY",
+      "severity": "PASS",
+      "message": "Cuadre patrimonial exacto en 6 períodos (incl. Mezzanine Equity)."
+    },
+    {
+      "check": "UNEXPLAINED_PLUG_THRESHOLD",
+      "severity": "WARN",
+      "message": "15 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
+      "count": 15,
+      "samples": [
+        {
+          "metric": "other_current_assets",
+          "period": "FY2025",
+          "value_usd": 13870000000.0,
+          "explained_sum_usd": 16309000000.0,
+          "residual_unexplained_usd": -2439000000.0,
+          "residual_pct": 17.6
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "LTM",
+          "value_usd": 31925000000.0,
+          "explained_sum_usd": 167155000000.0,
+          "residual_unexplained_usd": -135230000000.0,
+          "residual_pct": 423.6
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "FY2025",
+          "value_usd": 14962000000.0,
+          "explained_sum_usd": 84932000000.0,
+          "residual_unexplained_usd": -69970000000.0,
+          "residual_pct": 467.7
+        },
+        {
+          "metric": "other_noncurrent_assets",
+          "period": "FY2024",
+          "value_usd": 14874000000.0,
+          "explained_sum_usd": 52856000000.0,
+          "residual_unexplained_usd": -37982000000.0,
+          "residual_pct": 255.4
+        },
+        {
+          "metric": "other_noncurrent_liabilities",
+          "period": "LTM",
+          "value_usd": 50361000000.0,
+          "explained_sum_usd": 21512000000.0,
+          "residual_unexplained_usd": 28849000000.0,
+          "residual_pct": 57.3
+        },
+        {
+          "metric": "other_equity",
+          "period": "LTM",
+          "value_usd": 13697000000.0,
+          "explained_sum_usd": 4326000000.0,
+          "residual_unexplained_usd": 9371000000.0,
+          "residual_pct": 68.4
+        },
+        {
+          "metric": "other_noncash",
+          "period": "FY2024",
+          "value_usd": -612000000.0,
+          "explained_sum_usd": -748000000.0,
+          "residual_unexplained_usd": 136000000.0,
+          "residual_pct": 22.2
+        },
+        {
+          "metric": "wc_other",
+          "period": "LTM",
+          "value_usd": -9170000000.0,
+          "explained_sum_usd": -4502000000.0,
+          "residual_unexplained_usd": -4668000000.0,
+          "residual_pct": 50.9
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2025",
+          "value_usd": 10817000000.0,
+          "explained_sum_usd": 8490000000.0,
+          "residual_unexplained_usd": 2327000000.0,
+          "residual_pct": 21.5
+        },
+        {
+          "metric": "wc_other",
+          "period": "FY2024",
+          "value_usd": -1515000000.0,
+          "explained_sum_usd": -2874000000.0,
+          "residual_unexplained_usd": 1359000000.0,
+          "residual_pct": 89.7
+        }
+      ]
+    },
+    {
+      "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
+      "severity": "PASS",
+      "message": "Cero falsos totales y procedencia SEC EDGAR completa."
     }
   ]
 }

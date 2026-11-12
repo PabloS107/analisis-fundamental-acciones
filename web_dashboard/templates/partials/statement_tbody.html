@@ -1,0 +1,79 @@
+{% for row in rows %}
+{% if row.row_type == 'section_header' %}
+<tr onclick="toggleStatementSection(this)" data-collapsed="false" class="stmt-section-header bg-slate-100/90 hover:bg-slate-200/80 border-y border-slate-300 cursor-pointer transition select-none">
+    <td colspan="{{ col_fys|length|add:2 }}" class="py-2.5 px-4 text-[11px] font-black uppercase tracking-wider text-slate-800">
+        <span class="section-chevron inline-block w-3.5 text-slate-500 font-mono transition-transform">▾</span>
+        {{ row.label }}{% if row.clarification %} <span class="text-[10px] text-slate-500 font-semibold normal-case italic ml-1.5">({{ row.clarification }})</span>{% endif %}
+    </td>
+</tr>
+{% else %}
+<tr class="statement-row transition {% if row.row_type == 'result' or row.row_type == 'net_income' %}bg-slate-50/70 border-t-2 border-b-2 border-slate-900 font-bold{% elif row.row_type == 'subtotal' %}bg-slate-50/30 border-t border-slate-300 font-semibold{% elif row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' %}bg-indigo-50/15 hover:bg-indigo-50/40 border-b border-slate-100{% else %}hover:bg-slate-50/80 border-b border-slate-100{% endif %}"
+    data-view="{{ view_kind }}"
+    data-stmt="{{ row.stmt_type|default:stmt_name }}"
+    data-metric="{{ row.metric_key }}"
+    data-concept="{{ row.concept }}"
+    data-raw-label="{{ row.raw_label|default:row.label }}"
+    data-label-en="{{ row.label_en|default:row.label }}"
+    data-label-es="{{ row.label_es|default:row.label }}"
+    data-section-path="{{ row.section_path }}">
+    <td class="py-2.5 px-4 sticky left-0 bg-white z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight shadow-[1px_0_0_0_#e2e8f0] {% if row.indent %}pl-8 border-l-2 border-slate-200{% endif %}">
+        <div class="flex items-center justify-between gap-1.5">
+            <div class="flex flex-col min-w-0">
+                <div class="flex items-center gap-1.5 min-w-0">
+                    {% if row.operator %}<span class="{% if row.row_type == 'metric' or row.row_type == 'metric_pct' or row.row_type == 'net_debt' or row.row_type == 'multiple' or row.row_type == 'eps' or row.row_type == 'dps' %}text-indigo-600 font-mono text-[10px] font-bold{% else %}text-slate-400 font-mono text-[11px]{% endif %} select-none shrink-0">{{ row.operator }}</span>{% endif %}
+                    <span class="stmt-row-label {% if view_kind == 'std' %}std-row-label{% else %}asrep-row-label{% endif %} {% if row.is_bold %}font-bold text-slate-900{% else %}font-normal text-slate-700{% endif %} truncate"
+                          data-label-en="{{ row.label_en|default:row.label }}"
+                          data-label-es="{{ row.label_es|default:row.label }}"
+                          title="{{ row.orig_tooltip|default:row.label }}">{{ row.label }}</span>
+                </div>
+                {% if view_kind == 'asrep' %}
+                {% if row.label_es or row.concept %}
+                <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
+                    {% if row.label_es and row.label_es != row.label %}
+                    <span class="asrep-es-badge hidden text-[10px] text-slate-500 italic truncate max-w-[260px]">{{ row.label_es }}</span>
+                    {% endif %}
+                    {% if row.concept %}
+                    <code class="asrep-xbrl-badge hidden text-[9.5px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 truncate max-w-[230px]">{{ row.concept }}</code>
+                    {% endif %}
+                    {% if row.is_extension_tag %}
+                    <span class="asrep-xbrl-badge hidden text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300" title="Tag extensión específica de la empresa (custom XBRL)">Ext</span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endif %}
+            </div>
+            {% if row.clarification %}
+            <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition text-[10px] font-black cursor-help shrink-0 font-mono ml-1 select-none shadow-sm" title="📐 FÓRMULA DE CÁLCULO:&#10;{{ row.clarification }}{% if row.orig_tooltip %}&#10;&#10;🏛️ {% if view_kind == 'std' %}CONCEPTO {% endif %}OFICIAL SEC:&#10;{{ row.orig_tooltip }}{% endif %}">!</span>
+            {% elif row.orig_tooltip %}
+            <span class="text-slate-400 hover:text-indigo-600 transition cursor-help text-[11px] shrink-0 font-mono ml-1" title="{% if view_kind == 'asrep' %}Oficial SEC: {% endif %}{{ row.orig_tooltip }}">ⓘ</span>
+            {% endif %}
+        </div>
+    </td>
+    <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-sky-50/30 font-bold text-slate-900 border-x border-sky-100 stmt-data-cell {% if row.metric_key or row.concept %}stmt-clickable cursor-pointer hover:bg-sky-100/70 hover:underline decoration-sky-500 underline-offset-2{% endif %}"
+        data-abs="{{ row.ltm_val }}" data-pct="{{ row.ltm_pct }}" data-yoy="{{ row.ltm_yoy }}" data-row-type="{{ row.row_type }}" data-is-ltm="true"
+        data-period="{{ row.ltm_period|default:'LTM' }}" data-residual="{{ row.ltm_residual|default_if_none:'' }}"
+        {% if row.metric_key or row.concept %}title="Clic para auditar origen SEC EDGAR ({{ row.ltm_period|default:'LTM' }})"{% endif %}>
+        {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ row.ltm_val }}</span>
+        {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ row.ltm_val }}</span>
+        {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ row.ltm_val }}</span>
+        {% else %}{{ row.ltm_val }}{% endif %}{% if row.ltm_residual %}<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 ml-1 align-middle" title="Residual SEC sin atribuir: {{ row.ltm_residual }}M"></span>{% endif %}
+    </td>
+    <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct col-meta-cell bg-slate-50/60 border-r-2 border-slate-300"
+        data-pct="{{ row.ltm_pct }}" data-cagr="{{ row.cagr_5y }}">
+        {% if row.ltm_pct != '-' %}<span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200/70 text-slate-700 border border-slate-300/80">{{ row.ltm_pct }}</span>
+        {% else %}<span class="text-slate-400 font-normal text-xs">-</span>{% endif %}
+    </td>
+    {% for cell in row.annual_cells %}
+    <td class="py-2.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-700 stmt-data-cell {% if row.metric_key or row.concept %}stmt-clickable cursor-pointer hover:bg-sky-50/80 hover:underline decoration-sky-400 underline-offset-2{% endif %}"
+        data-abs="{{ cell.abs }}" data-pct="{{ cell.pct }}" data-yoy="{{ cell.yoy }}" data-row-type="{{ row.row_type }}"
+        data-period="{{ cell.period }}" data-residual="{{ cell.residual|default_if_none:'' }}"
+        {% if row.metric_key or row.concept %}title="Clic para auditar origen SEC EDGAR ({{ cell.period }})"{% endif %}>
+        {% if row.row_type == 'result' or row.row_type == 'net_income' %}<span class="text-slate-900 font-black">{{ cell.abs }}</span>
+        {% elif row.row_type == 'subtotal' %}<span class="text-slate-900 font-bold">{{ cell.abs }}</span>
+        {% elif row.row_type == 'eps' or row.row_type == 'dps' or row.row_type == 'multiple' %}<span class="text-indigo-700 font-black">{{ cell.abs }}</span>
+        {% else %}{{ cell.abs }}{% endif %}{% if cell.residual %}<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 ml-1 align-middle" title="Residual SEC sin atribuir: {{ cell.residual }}M"></span>{% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endif %}
+{% endfor %}

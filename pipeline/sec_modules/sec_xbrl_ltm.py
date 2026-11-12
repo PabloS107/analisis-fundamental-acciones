@@ -1496,7 +1496,7 @@ def compute_and_inject_ltm_columns(
         fy_val = _safe_float(row.get(latest_fy))
         val = None
 
-        if not q_is_newer and fy_val is not None:
+        if not q_is_newer:
             ltm_vals_inc.append(fy_val)
             continue
 
@@ -1534,7 +1534,7 @@ def compute_and_inject_ltm_columns(
         fy_val = _safe_float(row.get(latest_fy))
         val = None
 
-        if not q_is_newer and fy_val is not None:
+        if not q_is_newer:
             ltm_vals_bal.append(fy_val)
             continue
         if c_name.lower().endswith('abstract') or str(row.get('label', '')).lower().endswith('[abstract]'):
@@ -1594,13 +1594,24 @@ def compute_and_inject_ltm_columns(
         "debt_repayments", "debt_issuances", "operating_cash_flow", "cash_from_operations",
     )
 
+    active_fy_tokens = {
+        _clean_concept_token(str(r.get('concept', '')).strip())
+        for _, r in cf_df.iterrows()
+        if _safe_float(r.get(latest_fy)) is not None and str(r.get('concept', '')).strip()
+    }
+    q_cf_toks = q_cf['concept'].astype(str).apply(_clean_concept_token) if q_cf is not None else None
+    q_cf_lbls = (
+        q_cf['label'].astype(str).apply(lambda s: re.sub(r'[^a-z0-9]', '', str(s).lower()))
+        if (q_cf is not None and 'label' in q_cf.columns) else None
+    )
+
     ltm_vals_cf = []
     for _, row in cf_df.iterrows():
         c_name = str(row.get('concept', '')).strip()
         fy_val = _safe_float(row.get(latest_fy))
         val = None
 
-        if not q_is_newer and fy_val is not None:
+        if not q_is_newer:
             ltm_vals_cf.append(fy_val)
             continue
 
@@ -1609,29 +1620,38 @@ def compute_and_inject_ltm_columns(
         is_beg_cash = c_tok in BEGINNING_CASH_CONCEPTS
 
         if q_cf is not None and ytd_curr_cf and ytd_prev_cf:
-            q_toks = q_cf['concept'].astype(str).apply(_clean_concept_token)
-            match_cf = q_cf[(q_toks == c_tok) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
-            if match_cf.empty:
+            match_cf = q_cf[(q_cf_toks == c_tok) | (q_cf['concept'].astype(str).str.lower() == c_name.lower())]
+            if match_cf.empty and c_tok:
                 match_cf = q_cf[q_cf['concept'].astype(str).str.lower().str.endswith(':' + c_tok) | q_cf['concept'].astype(str).str.lower().str.endswith('_' + c_tok)]
-            if match_cf.empty:
+            exact_match = not match_cf.empty
+
+            # Solo prestar variantes de taxonomía o etiqueta si la fila está activa en latest_fy
+            # y evitando clonar conceptos que ya tienen su propia fila activa en cf_df.
+            if match_cf.empty and fy_val is not None:
                 for cat in cf_categories:
                     cand_list = XBRL_TAXONOMY_MAP.get(cat, [])
-                    if c_tok in {_clean_concept_token(cand) for cand in cand_list} or any(cand.lower() in c_name.lower() for cand in cand_list):
+                    cand_tokens = {_clean_concept_token(cand) for cand in cand_list}
+                    if c_tok in cand_tokens:
                         for cand in cand_list:
                             c_clean = _clean_concept_token(cand)
-                            cand_match = q_cf[(q_toks == c_clean) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
+                            if c_clean in active_fy_tokens and c_clean != c_tok:
+                                continue
+                            cand_match = q_cf[(q_cf_toks == c_clean) | (q_cf['concept'].astype(str).str.lower() == cand.lower())]
                             if not cand_match.empty:
                                 match_cf = cand_match
                                 break
                     if not match_cf.empty:
                         break
-            if match_cf.empty and 'label' in q_cf.columns and 'label' in row:
+            if match_cf.empty and fy_val is not None and q_cf_lbls is not None and 'label' in row:
                 lbl_raw = str(row.get('label', '')).strip()
                 if lbl_raw and not c_name.lower().endswith('abstract'):
                     lbl_clean = re.sub(r'[^a-z0-9]', '', lbl_raw.lower())
                     if len(lbl_clean) >= 4:
-                        q_lbls_clean = q_cf['label'].astype(str).apply(lambda s: re.sub(r'[^a-z0-9]', '', str(s).lower()))
-                        cand_lbl = q_cf[(q_lbls_clean == lbl_clean) & (~q_cf['concept'].astype(str).str.lower().str.endswith('abstract'))]
+                        cand_lbl = q_cf[
+                            (q_cf_lbls == lbl_clean)
+                            & (~q_cf['concept'].astype(str).str.lower().str.endswith('abstract'))
+                            & (~q_cf_toks.isin(active_fy_tokens - {c_tok}))
+                        ]
                         if not cand_lbl.empty:
                             match_cf = cand_lbl
 
@@ -1642,7 +1662,7 @@ def compute_and_inject_ltm_columns(
                 if is_ending_cash:
                     val = v_curr
                 elif is_beg_cash:
-                    end_match = q_cf[q_cf['concept'].astype(str).apply(_clean_concept_token).isin(ENDING_CASH_CONCEPTS)]
+                    end_match = q_cf[q_cf_toks.isin(ENDING_CASH_CONCEPTS)]
                     if not end_match.empty:
                         val = _safe_float(end_match.iloc[0].get(ytd_prev_cf))
                     if val is None:
@@ -1650,16 +1670,16 @@ def compute_and_inject_ltm_columns(
                 elif v_curr is not None:
                     if v_prev is not None and fy_val is not None:
                         val = fy_val + v_curr - v_prev
-                    elif v_prev is not None:
-                        val = v_curr - v_prev
+                    elif exact_match and fy_val is None and (v_prev is None or abs(v_prev) < 1e-6):
+                        val = v_curr
 
         if val is None and is_ending_cash and facts_df is not None and not facts_df.empty:
             val = get_mrq_fact(facts_df, [c_name, c_tok], mrq_date=latest_mrq_date)
 
         if val is None and ltm_cf_map and not is_ending_cash and not is_beg_cash:
-            if c_tok in ltm_cf_map:
+            if c_tok in ltm_cf_map and (fy_val is not None or c_tok not in active_fy_tokens):
                 val = ltm_cf_map[c_tok]
-            elif str(row.get('label', '')).strip().lower() in ltm_cf_map:
+            elif fy_val is not None and str(row.get('label', '')).strip().lower() in ltm_cf_map:
                 val = ltm_cf_map[str(row.get('label', '')).strip().lower()]
 
         if val is None and fy_val is not None and any(cand.lower() in c_name.lower() for cand in XBRL_TAXONOMY_MAP["acquisitions_ma"]):

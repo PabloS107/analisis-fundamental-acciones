@@ -63,8 +63,23 @@ def _should_include_row(row_def, data_dict, statements_fys) -> bool:
     return False
 
 
-def build_standardized_section(sections_def, source_data, statements_fys, canonical, default_pct_mode=None) -> list:
-    """Construye filas estandarizadas filtrando partidas vacías opcionales y preservando tooltips."""
+def build_standardized_section(
+    sections_def,
+    source_data,
+    statements_fys,
+    canonical,
+    default_pct_mode=None,
+    lineage=None,
+    stmt_type="",
+) -> list:
+    """Construye filas estandarizadas (EN por defecto + ES para toggle) preservando linaje SEC."""
+    stmt_lineage = {}
+    if isinstance(lineage, dict):
+        if stmt_type and isinstance(lineage.get(stmt_type), dict):
+            stmt_lineage = lineage.get(stmt_type, {})
+        else:
+            stmt_lineage = lineage
+
     out_rows = []
     for sec_title, items in sections_def:
         sec_visible_items = []
@@ -79,7 +94,9 @@ def build_standardized_section(sections_def, source_data, statements_fys, canoni
                 val_dict = {p: (val_dict[p] if val_dict.get(p) is not None else 0.0) for p in statements_fys}
 
             if _should_include_row(item, val_dict, statements_fys):
-                eff_tooltip = tip or f"Estándar Canónico: {k}"
+                label_es = lbl
+                label_en = (tip or "").strip() or lbl
+                eff_tooltip = f"{label_es} | Estándar Canónico: {k}"
                 if k == "sga_expense":
                     canon_rd = canonical.get("rd_expense", {}) if isinstance(canonical, dict) else {}
                     if any(v is not None for v in canon_rd.values()) and not any(v is not None for v in source_data.get("rd_expense", {}).values()):
@@ -87,29 +104,78 @@ def build_standardized_section(sections_def, source_data, statements_fys, canoni
                             f"{eff_tooltip}. En empresas que integran I+D/diseño en gastos generales "
                             "(ej. calzado y retail), incluye la inversión reportada en notas del 10-K."
                         )
+
+                metric_lineage = stmt_lineage.get(k, {}) if isinstance(stmt_lineage, dict) else {}
+                periods_map = metric_lineage.get("periods", metric_lineage) if isinstance(metric_lineage, dict) else {}
+                residual_periods = {}
+                if isinstance(periods_map, dict):
+                    for p in statements_fys:
+                        p_info = periods_map.get(p)
+                        if not isinstance(p_info, dict):
+                            continue
+                        res_val = p_info.get("residual_unexplained_usd")
+                        if res_val is None and isinstance(p_info.get("plug_explanation"), dict):
+                            plug = p_info.get("plug_explanation", {})
+                            res_val = plug.get("residual_unexplained_usd") or plug.get("unexplained_usd")
+                        if res_val is not None and abs(float(res_val)) >= 10_000.0:
+                            residual_periods[p] = round(float(res_val) / 1e6, 2)
+
                 sec_visible_items.append({
-                    "label": lbl, "orig_tooltip": eff_tooltip, "clarification": None,
-                    "operator": op, "row_type": r_type, "indent": ind, "is_bold": bold,
-                    "negate_val": neg, "data": val_dict, "pct_mode": p_mode or default_pct_mode,
+                    "label": label_en,
+                    "label_en": label_en,
+                    "label_es": label_es,
+                    "metric_key": k,
+                    "stmt_type": stmt_type,
+                    "residual_periods": residual_periods,
+                    "orig_tooltip": eff_tooltip,
+                    "clarification": None,
+                    "operator": op,
+                    "row_type": r_type,
+                    "indent": ind,
+                    "is_bold": bold,
+                    "negate_val": neg,
+                    "data": val_dict,
+                    "pct_mode": p_mode or default_pct_mode,
                 })
         if sec_visible_items:
             if sec_title:
                 out_rows.append({
-                    "label": sec_title, "orig_tooltip": f"Sección Canónica: {sec_title}",
-                    "clarification": None, "operator": "", "row_type": "section_header",
-                    "indent": False, "is_bold": True, "negate_val": False,
-                    "data": {p: None for p in statements_fys}, "pct_mode": None,
+                    "label": sec_title,
+                    "label_en": sec_title,
+                    "label_es": sec_title,
+                    "metric_key": "",
+                    "stmt_type": stmt_type,
+                    "orig_tooltip": f"Sección Canónica: {sec_title}",
+                    "clarification": None,
+                    "operator": "",
+                    "row_type": "section_header",
+                    "indent": False,
+                    "is_bold": True,
+                    "negate_val": False,
+                    "data": {p: None for p in statements_fys},
+                    "pct_mode": None,
                 })
             out_rows.extend(sec_visible_items)
     return out_rows
 
 
-def format_as_reported_row(row_raw, target_fys, fs, pct_mode=None) -> dict:
-    """Formatea una partida cruda SEC As-Reported con traducción bilingüe y escalado explícito."""
-    orig_lbl = row_raw.get("label", "")
-    conc = row_raw.get("concept", "")
-    lbl = get_spanish_label(orig_lbl, conc) if orig_lbl else (row_raw.get("spanish_label") or "")
-    orig_tooltip = row_raw.get("orig_tooltip") or (f"{orig_lbl} ({conc})" if conc else orig_lbl)
+def format_as_reported_row(row_raw, target_fys, fs, pct_mode=None, stmt_type="") -> dict:
+    """Formatea una partida SEC As-Reported mostrando etiqueta original oficial SEC por defecto."""
+    orig_lbl = (row_raw.get("label") or "").strip()
+    conc = (row_raw.get("concept") or "").strip()
+    sp_lbl = (row_raw.get("spanish_label") or "").strip()
+    if not sp_lbl and orig_lbl:
+        sp_lbl = get_spanish_label(orig_lbl, conc)
+    lbl = orig_lbl or sp_lbl
+    label_en = orig_lbl or lbl
+    label_es = sp_lbl or lbl
+    raw_label = row_raw.get("raw_label") or orig_lbl
+    section_path = row_raw.get("section_path") or ""
+    is_extension_tag = bool(row_raw.get("is_extension_tag", False))
+
+    orig_tooltip = row_raw.get("orig_tooltip") or (
+        f"{label_es} | SEC: {conc}" if (label_es and conc) else (conc or label_es)
+    )
     is_abs = row_raw.get("is_abstract", False) or row_raw.get("row_type") == "section_header"
     lvl = row_raw.get("level", 0)
     is_tot = row_raw.get("is_total", False)
@@ -118,9 +184,22 @@ def format_as_reported_row(row_raw, target_fys, fs, pct_mode=None) -> dict:
 
     if is_abs:
         return {
-            "label": lbl, "orig_tooltip": orig_tooltip, "clarification": clarif,
-            "operator": "", "row_type": "section_header", "indent": False,
-            "is_bold": True, "data": {p: None for p in target_fys}, "pct_mode": None,
+            "label": lbl,
+            "label_en": label_en,
+            "label_es": label_es,
+            "raw_label": raw_label,
+            "concept": conc,
+            "section_path": section_path,
+            "is_extension_tag": is_extension_tag,
+            "stmt_type": stmt_type,
+            "orig_tooltip": orig_tooltip,
+            "clarification": clarif,
+            "operator": "",
+            "row_type": "section_header",
+            "indent": False,
+            "is_bold": True,
+            "data": {p: None for p in target_fys},
+            "pct_mode": None,
         }
 
     lbl_lower, conc_lower = orig_lbl.lower(), conc.lower()
@@ -174,9 +253,22 @@ def format_as_reported_row(row_raw, target_fys, fs, pct_mode=None) -> dict:
         row_type, operator, bold, indent, p_mode = "item", "", False, (lvl > 2), pct_mode
 
     return {
-        "label": lbl, "orig_tooltip": orig_tooltip, "clarification": clarif,
-        "operator": operator, "row_type": row_type, "indent": indent,
-        "is_bold": bold, "data": data_m, "pct_mode": p_mode,
+        "label": lbl,
+        "label_en": label_en,
+        "label_es": label_es,
+        "raw_label": raw_label,
+        "concept": conc,
+        "section_path": section_path,
+        "is_extension_tag": is_extension_tag,
+        "stmt_type": stmt_type,
+        "orig_tooltip": orig_tooltip,
+        "clarification": clarif,
+        "operator": operator,
+        "row_type": row_type,
+        "indent": indent,
+        "is_bold": bold,
+        "data": data_m,
+        "pct_mode": p_mode,
     }
 
 
@@ -253,13 +345,46 @@ def build_statement_cells(r, target_fys, canonical, ebt_dict=None, bs_tot_assets
         if v_end is not None and v_start is not None and v_start > 0 and v_end > 0:
             cagr_5y = f"{(((v_end / v_start) ** (1.0 / 5.0) - 1.0) * 100.0):+.1f}%"
 
-    annual_cells = [{"abs": row_vals[i], "pct": row_pcts[i], "yoy": row_yoys[i]} for i in range(1, len(target_fys))]
+    residual_periods = r.get("residual_periods", {}) if isinstance(r.get("residual_periods"), dict) else {}
+    ltm_period = target_fys[0] if target_fys else "LTM"
+    ltm_residual = residual_periods.get(ltm_period)
+    annual_cells = [
+        {
+            "period": target_fys[i],
+            "abs": row_vals[i],
+            "pct": row_pcts[i],
+            "yoy": row_yoys[i],
+            "residual": residual_periods.get(target_fys[i]),
+        }
+        for i in range(1, len(target_fys))
+    ]
     return {
-        "label": r["label"], "orig_tooltip": r.get("orig_tooltip", ""), "clarification": r.get("clarification"),
-        "operator": r.get("operator", ""), "row_type": row_type, "indent": r.get("indent", False),
-        "is_bold": r.get("is_bold", False), "values": row_vals, "pcts": row_pcts, "yoy": row_yoys, "cagr_5y": cagr_5y,
-        "ltm_val": row_vals[0] if row_vals else "-", "ltm_pct": row_pcts[0] if row_pcts else "-",
-        "ltm_yoy": row_yoys[0] if row_yoys else "-", "annual_cells": annual_cells,
+        "label": r["label"],
+        "label_en": r.get("label_en", r["label"]),
+        "label_es": r.get("label_es", r["label"]),
+        "metric_key": r.get("metric_key", ""),
+        "raw_label": r.get("raw_label", ""),
+        "concept": r.get("concept", ""),
+        "section_path": r.get("section_path", ""),
+        "is_extension_tag": bool(r.get("is_extension_tag", False)),
+        "stmt_type": r.get("stmt_type", ""),
+        "orig_tooltip": r.get("orig_tooltip", ""),
+        "clarification": r.get("clarification"),
+        "operator": r.get("operator", ""),
+        "row_type": row_type,
+        "indent": r.get("indent", False),
+        "is_bold": r.get("is_bold", False),
+        "values": row_vals,
+        "pcts": row_pcts,
+        "yoy": row_yoys,
+        "cagr_5y": cagr_5y,
+        "ltm_period": ltm_period,
+        "ltm_residual": ltm_residual,
+        "ltm_val": row_vals[0] if row_vals else "-",
+        "ltm_pct": row_pcts[0] if row_pcts else "-",
+        "ltm_yoy": row_yoys[0] if row_yoys else "-",
+        "annual_cells": annual_cells,
         "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
-        "latest_val": row_vals[0] if row_vals else "-", "latest_pct": row_pcts[0] if row_pcts else "-",
+        "latest_val": row_vals[0] if row_vals else "-",
+        "latest_pct": row_pcts[0] if row_pcts else "-",
     }

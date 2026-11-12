@@ -395,7 +395,10 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         try:
             facts_obj = sec_call_with_retry(company.get_facts)
             if hasattr(facts_obj, 'to_dataframe'):
-                facts_df = facts_obj.to_dataframe()
+                try:
+                    facts_df = facts_obj.to_dataframe(include_metadata=True)
+                except TypeError:
+                    facts_df = facts_obj.to_dataframe()
         except Exception as e:
             print(f"[SEC Extractor] Nota al obtener facts_df temprano: {e}")
 
@@ -468,7 +471,10 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         try:
             facts_obj = sec_call_with_retry(company.get_facts)
             if hasattr(facts_obj, 'to_dataframe'):
-                facts_df = facts_obj.to_dataframe()
+                try:
+                    facts_df = facts_obj.to_dataframe(include_metadata=True)
+                except TypeError:
+                    facts_df = facts_obj.to_dataframe()
         except Exception as exc:
             logger.debug("Respaldo get_facts no disponible: %s", exc)
 
@@ -530,8 +536,20 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         facts_df=facts_df
     )
 
-    # 2.6 Metadatos canónicos de frescura y periodicidad SEC
+    # 2.6 Metadatos canónicos de frescura, periodicidad e índice de procedencia SEC
     sec_metadata = build_sec_freshness_metadata(company, filing_context, latest_k_filings, latest_q_filings)
+    try:
+        from .sec_modules.sec_provenance import build_sec_provenance_index
+    except ImportError:
+        from sec_provenance import build_sec_provenance_index
+    sec_filings_index, period_filing_map = build_sec_provenance_index(
+        filing_context=filing_context,
+        annual_fys=annual_fys,
+        has_ltm=has_ltm,
+        q_inc=q_inc,
+        latest_fy=latest_fy,
+        sec_metadata=sec_metadata,
+    )
 
     full_dataset = {
         "ticker": ticker.upper(),
@@ -546,6 +564,8 @@ def extract_sec_data(ticker, output_dir=None, filing_context=None):
         "extraction_timestamp": datetime.now().isoformat(),
         "fiscal_years": all_fys,
         "sec_metadata": sec_metadata,
+        "sec_filings_index": sec_filings_index,
+        "period_filing_map": period_filing_map,
         "canonical_summary": canonical,
         "key_ratios": ratios,
         "income_statement_detail": inc_data,

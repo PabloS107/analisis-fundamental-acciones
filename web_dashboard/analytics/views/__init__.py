@@ -18,6 +18,8 @@ from .views import (
     resolve_canonical_cash_flow,
     _extract_multi_source_val,
     _extract_multi_source_sum,
+    cell_evidence_api,
+    sec_report_proxy_api,
     DATA_DIR,
     PIPELINE_DIR,
 )
