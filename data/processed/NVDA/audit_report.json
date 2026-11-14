@@ -2,7 +2,7 @@
   "ticker": "NVDA",
   "company_name": "NVIDIA CORP",
   "cik": "0001045810",
-  "audit_timestamp": "2026-11-12T18:24:26.827767",
+  "audit_timestamp": "2026-11-14T12:34:59.727558",
   "years_audited": {
     "LTM": [
       {
@@ -833,10 +833,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 88,
-  "passed_tests": 85,
+  "total_tests": 90,
+  "passed_tests": 88,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -884,96 +884,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "11 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 11,
-      "samples": [
-        {
-          "metric": "other_non_operating",
-          "period": "LTM",
-          "value_usd": 30399000000.0,
-          "explained_sum_usd": 22629000000.0,
-          "residual_unexplained_usd": 7770000000.0,
-          "residual_pct": 25.6
-        },
-        {
-          "metric": "other_current_assets",
-          "period": "LTM",
-          "value_usd": 3409000000.0,
-          "explained_sum_usd": 80335000000.0,
-          "residual_unexplained_usd": -76926000000.0,
-          "residual_pct": 2256.6
-        },
-        {
-          "metric": "other_current_assets",
-          "period": "FY2026",
-          "value_usd": 3180000000.0,
-          "explained_sum_usd": 55131000000.0,
-          "residual_unexplained_usd": -51951000000.0,
-          "residual_pct": 1633.7
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "LTM",
-          "value_usd": 19005000000.0,
-          "explained_sum_usd": 66903000000.0,
-          "residual_unexplained_usd": -47898000000.0,
-          "residual_pct": 252.0
-        },
-        {
-          "metric": "other_noncash",
-          "period": "LTM",
-          "value_usd": -44119000000.0,
-          "explained_sum_usd": -30421000000.0,
-          "residual_unexplained_usd": -13698000000.0,
-          "residual_pct": 31.0
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2025",
-          "value_usd": -2322000000.0,
-          "explained_sum_usd": -1532000000.0,
-          "residual_unexplained_usd": -790000000.0,
-          "residual_pct": 34.0
-        },
-        {
-          "metric": "other_investing",
-          "period": "LTM",
-          "value_usd": -2270000000.0,
-          "explained_sum_usd": -38723000000.0,
-          "residual_unexplained_usd": 36453000000.0,
-          "residual_pct": 1605.9
-        },
-        {
-          "metric": "other_investing",
-          "period": "FY2025",
-          "value_usd": 22000000.0,
-          "explained_sum_usd": 4271000000.0,
-          "residual_unexplained_usd": -4249000000.0,
-          "residual_pct": 19313.6
-        },
-        {
-          "metric": "other_financing",
-          "period": "LTM",
-          "value_usd": -2922000000.0,
-          "explained_sum_usd": -811000000.0,
-          "residual_unexplained_usd": -2111000000.0,
-          "residual_pct": 72.2
-        },
-        {
-          "metric": "other_financing",
-          "period": "FY2026",
-          "value_usd": -24905000000.0,
-          "explained_sum_usd": -635000000.0,
-          "residual_unexplained_usd": -24270000000.0,
-          "residual_pct": 97.5
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (18 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

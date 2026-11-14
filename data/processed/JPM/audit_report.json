@@ -2,7 +2,7 @@
   "ticker": "JPM",
   "company_name": "JPMORGAN CHASE & CO",
   "cik": "0000019617",
-  "audit_timestamp": "2026-11-12T18:15:37.567128",
+  "audit_timestamp": "2026-11-14T12:34:49.154262",
   "years_audited": {
     "LTM": [
       {
@@ -716,10 +716,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 88,
-  "passed_tests": 59,
+  "total_tests": 90,
+  "passed_tests": 62,
   "failed_tests": 0,
-  "skipped_tests": 29,
+  "skipped_tests": 28,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -767,88 +767,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "9 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 9,
-      "samples": [
-        {
-          "metric": "other_operating_expense",
-          "period": "FY2025",
-          "value_usd": 292000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 292000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_operating_expense",
-          "period": "FY2024",
-          "value_usd": 777000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 777000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_noncash",
-          "period": "LTM",
-          "value_usd": -193537000000.0,
-          "explained_sum_usd": -10056000000.0,
-          "residual_unexplained_usd": -183481000000.0,
-          "residual_pct": 94.8
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2025",
-          "value_usd": -235458000000.0,
-          "explained_sum_usd": -14673000000.0,
-          "residual_unexplained_usd": -220785000000.0,
-          "residual_pct": 93.8
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2024",
-          "value_usd": -121579000000.0,
-          "explained_sum_usd": -6883000000.0,
-          "residual_unexplained_usd": -114696000000.0,
-          "residual_pct": 94.3
-        },
-        {
-          "metric": "wc_other",
-          "period": "LTM",
-          "value_usd": 29146000000.0,
-          "explained_sum_usd": 104325000000.0,
-          "residual_unexplained_usd": -75179000000.0,
-          "residual_pct": 257.9
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2025",
-          "value_usd": 12582000000.0,
-          "explained_sum_usd": 193637000000.0,
-          "residual_unexplained_usd": -181055000000.0,
-          "residual_pct": 1439.0
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2024",
-          "value_usd": 7650000000.0,
-          "explained_sum_usd": 98920000000.0,
-          "residual_unexplained_usd": -91270000000.0,
-          "residual_pct": 1193.1
-        },
-        {
-          "metric": "other_financing",
-          "period": "FY2024",
-          "value_usd": 84749000000.0,
-          "explained_sum_usd": 13854000000.0,
-          "residual_unexplained_usd": 70895000000.0,
-          "residual_pct": 83.7
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (6 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

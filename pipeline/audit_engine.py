@@ -518,7 +518,7 @@ def run_full_audit(ticker, custom_dir=None):
     audit_results["period_integrity"] = period_findings
     _record_audit_findings(audit_results, period_findings)
 
-    print("\n--- Calidad Semántica, Traductológica y Procedencia SEC (Q1-Q5) ---")
+    print("\n--- Calidad Semántica, Traductológica y Procedencia SEC (Q1-Q7) ---")
     quality_findings = run_statement_quality_audit(output_dir)
     audit_results["statement_quality"] = quality_findings
     _record_audit_findings(audit_results, quality_findings)

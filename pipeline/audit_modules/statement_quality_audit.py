@@ -2,12 +2,14 @@
 """
 statement_quality_audit.py - Auditoría Semántica, Traductológica y Contable de Estados Financieros.
 
-Controles universales (Q1-Q5) ejecutados sin depender de red sobre `financial_statements.json`:
+Controles universales (Q1-Q7) ejecutados sin depender de red sobre `financial_statements.json`:
   Q1  ZERO_DUPLICATE_ASREP_LABELS   : cero colisiones de `spanish_label` dentro de un mismo estado SEC.
   Q2  TRANSLATION_SEMANTIC_INTEGRITY: cero traducciones corruptas, Spanglish o etiquetas vacías.
   Q3  BALANCE_MEZZANINE_PARITY      : Assets == Liabilities + Mezzanine Equity + Stockholders' Equity.
   Q4  UNEXPLAINED_PLUG_THRESHOLD    : observabilidad de residuales no atribuidos en cajones "Otros".
   Q5  IS_FALSE_TOTAL_AND_PROVENANCE : sin falsos totales y con índice SEC EDGAR presente.
+  Q6  VERTICAL_SUBTOTAL_IDENTITY    : consistencia vertical CA+NCA==Assets, GP==Rev-COGS y puente CF.
+  Q7  FACE_ANCHOR_PARITY            : paridad exacta entre anclas canónicas y totales oficiales SEC.
 """
 from __future__ import annotations
 
@@ -212,14 +214,131 @@ def check_false_totals_and_provenance(fs_data: Dict[str, Any]) -> Dict[str, Any]
     return _finding("IS_FALSE_TOTAL_AND_PROVENANCE", "PASS", "Cero falsos totales y procedencia SEC EDGAR completa.")
 
 
+def check_vertical_subtotal_identity(fs_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Q6: valida subtotales verticales (CA+NCA=Assets, GP=Rev-COGS y puente CF=NetChange)."""
+    rc = fs_data.get("resolved_canonical_statements") or {}
+    if not rc:
+        return _finding(
+            "VERTICAL_SUBTOTAL_IDENTITY",
+            "WARN",
+            "N/D: resolved_canonical_statements ausente para verificar identidades verticales.",
+        )
+    archetype = str(fs_data.get("archetype") or "STANDARD_CORPORATE").upper()
+    periods = (fs_data.get("fiscal_years") or [])[:6]
+    bs = rc.get("balance_sheet") or {}
+    inc = rc.get("income_statement") or {}
+    cf = rc.get("cash_flow") or rc.get("cash_flow_statement") or {}
+
+    mismatches = []
+    checked = 0
+    for p in periods:
+        ta = (bs.get("total_assets") or {}).get(p)
+        tca = (bs.get("total_current_assets") or {}).get(p)
+        tnca = (bs.get("total_noncurrent_assets") or {}).get(p)
+        if ta is not None and tca is not None and tnca is not None and archetype not in ("FINANCIAL_BANKING", "INSURANCE"):
+            checked += 1
+            tol = max(2_000_000.0, abs(float(ta)) * 0.002)
+            if abs((float(tca) + float(tnca)) - float(ta)) > tol:
+                mismatches.append({"period": p, "identity": "CA+NCA=Assets", "calc": float(tca) + float(tnca), "reported": float(ta)})
+
+        rev = (inc.get("revenue") or {}).get(p)
+        cogs = (inc.get("cogs") or {}).get(p)
+        gp = (inc.get("gross_profit") or {}).get(p)
+        if archetype not in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT") and rev is not None and cogs is not None and gp is not None:
+            checked += 1
+            tol = max(2_000_000.0, abs(float(rev)) * 0.002)
+            if abs((float(rev) - float(cogs)) - float(gp)) > tol:
+                mismatches.append({"period": p, "identity": "Rev-COGS=GP", "calc": float(rev) - float(cogs), "reported": float(gp)})
+
+        cfo = (cf.get("cfo") or {}).get(p)
+        cfi = (cf.get("cfi") or {}).get(p)
+        cff = (cf.get("cff") or {}).get(p)
+        fx = float((cf.get("fx_effect") or {}).get(p) or 0.0)
+        nc = (cf.get("net_change_in_cash") or {}).get(p)
+        if cfo is not None and cfi is not None and cff is not None and nc is not None:
+            checked += 1
+            base_sum = float(cfo) + float(cfi) + float(cff)
+            err = min(abs((base_sum + fx) - float(nc)), abs(base_sum - float(nc)))
+            tol = max(2_000_000.0, abs(float(nc)) * 0.005)
+            if err > tol:
+                mismatches.append({"period": p, "identity": "CFO+CFI+CFF(+FX)=NetChangeCash", "calc": base_sum + fx, "reported": float(nc)})
+
+    if mismatches:
+        return _finding(
+            "VERTICAL_SUBTOTAL_IDENTITY",
+            "ERROR",
+            f"Descuadre vertical de subtotales en {len(mismatches)} verificación(es).",
+            count=len(mismatches),
+            samples=mismatches[:8],
+        )
+    return _finding("VERTICAL_SUBTOTAL_IDENTITY", "PASS", f"Identidades verticales y puente de efectivo consistentes ({checked} controles).")
+
+
+def check_face_anchor_parity(fs_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Q7: verifica paridad exacta entre anclas canónicas (Assets, NetIncome, CFO, CFI, CFF) y carátula SEC."""
+    rc = fs_data.get("resolved_canonical_statements") or {}
+    as_rep = fs_data.get("as_reported_statements") or {}
+    if not rc or not as_rep:
+        return _finding(
+            "FACE_ANCHOR_PARITY",
+            "WARN",
+            "N/D: faltan datos canónicos o carátula As-Reported para cotejo SEC.",
+        )
+
+    bs = rc.get("balance_sheet") or {}
+    inc = rc.get("income_statement") or {}
+    cf = rc.get("cash_flow") or rc.get("cash_flow_statement") or {}
+    periods = (fs_data.get("fiscal_years") or [])[:6]
+    anchor_specs = [
+        ("balance_sheet", bs, "total_assets", {"us-gaap_Assets", "ifrs-full_Assets"}),
+        ("income_statement", inc, "net_income", {
+            "us-gaap_NetIncomeLoss", "us-gaap_ProfitLoss",
+            "ifrs-full_ProfitLoss", "ifrs-full_ProfitLossAttributableToOwnersOfParent",
+        }),
+        ("cash_flow_statement", cf, "cfo", {"us-gaap_NetCashProvidedByUsedInOperatingActivities", "ifrs-full_CashFlowsFromUsedInOperatingActivities"}),
+        ("cash_flow_statement", cf, "cfi", {"us-gaap_NetCashProvidedByUsedInInvestingActivities", "ifrs-full_CashFlowsFromUsedInInvestingActivities"}),
+        ("cash_flow_statement", cf, "cff", {"us-gaap_NetCashProvidedByUsedInFinancingActivities", "ifrs-full_CashFlowsFromUsedInFinancingActivities"}),
+    ]
+
+    mismatches = []
+    checked = 0
+    for stmt_name, res_dict, metric_key, tags in anchor_specs:
+        series = res_dict.get(metric_key) or {}
+        face_rows = [r for r in (as_rep.get(stmt_name) or []) if not r.get("is_abstract") and r.get("concept") in tags]
+        if not face_rows or not series:
+            continue
+        for p in periods:
+            rv = series.get(p)
+            fvs = [float(r["values"][p]) for r in face_rows if (r.get("values") or {}).get(p) is not None]
+            if rv is None or not fvs:
+                continue
+            checked += 1
+            best_diff = min(abs(fv - float(rv)) for fv in fvs)
+            tol = max(2_000_000.0, abs(float(rv)) * 0.002)
+            if best_diff > tol:
+                mismatches.append({"period": p, "metric": metric_key, "resolved": float(rv), "sec_face": fvs[0], "diff_usd": round(best_diff, 2)})
+
+    if mismatches:
+        return _finding(
+            "FACE_ANCHOR_PARITY",
+            "ERROR",
+            f"Discrepancia frente a carátula oficial SEC en {len(mismatches)} ancla(s).",
+            count=len(mismatches),
+            samples=mismatches[:8],
+        )
+    return _finding("FACE_ANCHOR_PARITY", "PASS", f"Paridad 100% exacta contra anclas oficiales SEC ({checked} cotejos).")
+
+
 def evaluate_statement_quality(fs_data: Dict[str, Any]) -> Dict[str, Any]:
-    """Ejecuta controles Q1-Q5 en memoria sobre un dict `financial_statements` ya cargado."""
+    """Ejecuta controles Q1-Q7 en memoria sobre un dict `financial_statements` ya cargado."""
     checks = [
         check_duplicate_as_reported_labels(fs_data),
         check_translation_semantic_integrity(fs_data),
         check_balance_mezzanine_parity(fs_data),
         check_unexplained_plugs(fs_data),
         check_false_totals_and_provenance(fs_data),
+        check_vertical_subtotal_identity(fs_data),
+        check_face_anchor_parity(fs_data),
     ]
     error_count = sum(1 for c in checks if c.get("severity") == "ERROR")
     warn_count = sum(1 for c in checks if c.get("severity") not in ("PASS", "ERROR"))
@@ -235,7 +354,7 @@ def evaluate_statement_quality(fs_data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def run_statement_quality_audit(local_dir: Path | str) -> List[Dict[str, Any]]:
-    """Ejecuta controles Q1-Q5 sobre `data/processed/{TICKER}/financial_statements.json`."""
+    """Ejecuta controles Q1-Q7 sobre `data/processed/{TICKER}/financial_statements.json`."""
     local_dir = Path(local_dir)
     fs_path = local_dir / "financial_statements.json"
     if not fs_path.exists():

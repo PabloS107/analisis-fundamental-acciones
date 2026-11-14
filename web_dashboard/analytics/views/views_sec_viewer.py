@@ -225,6 +225,7 @@ def cell_evidence_api(request, ticker: str) -> JsonResponse:
         "explained_sum_usd": None,
         "residual_unexplained_usd": None,
         "ltm_bridge": None,
+        "footnote_disclosures": [],
     }
 
     hi_concept, hi_label = concept, raw_label
@@ -240,6 +241,7 @@ def cell_evidence_api(request, ticker: str) -> JsonResponse:
         payload["explained_sum_usd"] = p_info.get("explained_sum_usd")
         payload["residual_unexplained_usd"] = p_info.get("residual_unexplained_usd")
         payload["ltm_bridge"] = p_info.get("ltm_bridge")
+        payload["footnote_disclosures"] = p_info.get("footnote_disclosures") or []
         if payload["sources"] and not hi_concept:
             hi_concept = payload["sources"][0].get("concept", "")
             hi_label = payload["sources"][0].get("raw_label", "")

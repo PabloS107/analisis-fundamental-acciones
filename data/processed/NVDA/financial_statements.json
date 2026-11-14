@@ -7785,8 +7785,8 @@
         "FY2017": 1766000000.0
       },
       "short_term_investments": {
-        "LTM": 76926000000.0,
-        "FY2026": 51951000000.0,
+        "LTM": 34143000000.0,
+        "FY2026": 39065000000.0,
         "FY2025": 34621000000.0,
         "FY2024": 18704000000.0,
         "FY2023": 9907000000.0,
@@ -7798,8 +7798,8 @@
         "FY2017": 5032000000.0
       },
       "total_liquid_cash": {
-        "LTM": 99369000000.0,
-        "FY2026": 62556000000.0,
+        "LTM": 56586000000.0,
+        "FY2026": 49670000000.0,
         "FY2025": 43210000000.0,
         "FY2024": 25984000000.0,
         "FY2023": 13296000000.0,
@@ -7837,8 +7837,8 @@
         "FY2017": 794000000.0
       },
       "other_current_assets": {
-        "LTM": 3409000000.0,
-        "FY2026": 3180000000.0,
+        "LTM": 46192000000.0,
+        "FY2026": 16066000000.0,
         "FY2025": 3771000000.0,
         "FY2024": 3080000000.0,
         "FY2023": 791000000.0,
@@ -8015,7 +8015,7 @@
         "FY2021": null,
         "FY2020": null,
         "FY2019": null,
-        "FY2018": 15000000.0,
+        "FY2018": null,
         "FY2017": 85000000.0
       },
       "short_term_debt": {
@@ -8041,7 +8041,7 @@
         "FY2021": 0.0,
         "FY2020": 0.0,
         "FY2019": 0.0,
-        "FY2018": 0.0,
+        "FY2018": 15000000.0,
         "FY2017": 711000000.0
       },
       "total_current_liabilities": {
@@ -8081,7 +8081,7 @@
         "FY2020": 561000000.0,
         "FY2019": 0.0,
         "FY2018": null,
-        "FY2017": 6000000.0
+        "FY2017": null
       },
       "deferred_tax_liabilities_noncurrent": {
         "LTM": null,
@@ -8107,7 +8107,7 @@
         "FY2020": 775000000.0,
         "FY2019": 633000000.0,
         "FY2018": 632000000.0,
-        "FY2017": 271000000.0
+        "FY2017": 277000000.0
       },
       "total_noncurrent_liabilities": {
         "LTM": 48269000000.0,
@@ -8253,8 +8253,8 @@
         "FY2017": 6748000000.0
       },
       "net_financial_position": {
-        "LTM": -66003000000.0,
-        "FY2026": -54088000000.0,
+        "LTM": -23220000000.0,
+        "FY2026": -41202000000.0,
         "FY2025": -34747000000.0,
         "FY2024": -16275000000.0,
         "FY2023": -2343000000.0,
@@ -9334,8 +9334,8 @@
         "FY2021": 19308000000.0,
         "FY2020": 1461000000.0,
         "FY2019": 11148000000.0,
-        "FY2018": 72000000.0,
-        "FY2017": 6268000000.0
+        "FY2018": 36000000.0,
+        "FY2017": 3134000000.0
       },
       "sales_maturities_investments": {
         "LTM": null,
@@ -9344,11 +9344,11 @@
         "FY2024": 9783000000.0,
         "FY2023": 21239000000.0,
         "FY2022": 16220000000.0,
-        "FY2021": 18111000000.0,
-        "FY2020": 12853000000.0,
-        "FY2019": 7660000000.0,
-        "FY2018": 2804000000.0,
-        "FY2017": 4061000000.0
+        "FY2021": 9319000000.0,
+        "FY2020": 8109000000.0,
+        "FY2019": 428000000.0,
+        "FY2018": 863000000.0,
+        "FY2017": 1546000000.0
       },
       "other_investing": {
         "LTM": -2270000000.0,
@@ -9357,11 +9357,11 @@
         "FY2024": -124000000.0,
         "FY2023": 0.0,
         "FY2022": -24000000.0,
-        "FY2021": -8826000000.0,
-        "FY2020": -4754000000.0,
-        "FY2019": -9000000.0,
-        "FY2018": -861000000.0,
-        "FY2017": 1590000000.0
+        "FY2021": -34000000.0,
+        "FY2020": -10000000.0,
+        "FY2019": 7223000000.0,
+        "FY2018": 1044000000.0,
+        "FY2017": 971000000.0
       },
       "cfi": {
         "LTM": -75009000000.0,
@@ -9751,6 +9751,15 @@
               "val_usd": 76729000000.0
             }
           ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 76728000000.0,
+              "source": "income_statement_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -9773,6 +9782,15 @@
               "is_extension_tag": false,
               "val_usd": 62475000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 62475000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2025": {
@@ -9785,6 +9803,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 32639000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 32639000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -9799,6 +9826,15 @@
               "is_extension_tag": false,
               "val_usd": 16621000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 16621000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2023": {
@@ -9811,6 +9847,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 11618000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 11618000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -9825,6 +9870,15 @@
               "is_extension_tag": false,
               "val_usd": 9439000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 9439000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2021": {
@@ -9837,6 +9891,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 6279000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 6279000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -9851,6 +9914,15 @@
               "is_extension_tag": false,
               "val_usd": 4150000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 4150000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2019": {
@@ -9863,6 +9935,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 4545000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 4545000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -9877,6 +9958,15 @@
               "is_extension_tag": false,
               "val_usd": 3892000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 3892000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2017": {
@@ -9889,6 +9979,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 2847000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CostOfGoodsAndServicesSold",
+              "raw_label": "Cost of Revenue",
+              "spanish_label": "Cost of Revenue",
+              "val_usd": 2847000000.0,
+              "source": "income_statement_detail"
             }
           ]
         }
@@ -10425,15 +10524,65 @@
       "periods": {
         "FY2023": {
           "value_usd": 1353000000.0,
-          "sources": [],
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 1353000000.0
+          "sources": [
+            {
+              "concept": "bridge:nvda_BusinessCombinationAdvancedConsiderationWrittenOff",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition termination cost",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition termination cost",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 1353000000.0
+            }
+          ],
+          "explained_sum_usd": 1353000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 699000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2017": {
           "value_usd": 3000000.0,
-          "sources": [],
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 3000000.0
+          "sources": [
+            {
+              "concept": "bridge:us-gaap_RestructuringCharges",
+              "raw_label": "Reconciliación off-face / XBRL: Restructuring and other charges",
+              "spanish_label": "Reconciliación off-face / XBRL: Restructuring and other charges",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 3000000.0
+            }
+          ],
+          "explained_sum_usd": 3000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DepreciationAndAmortization",
+              "raw_label": "Depreciation, Depletion and Amortization, Nonproduction",
+              "spanish_label": "Depreciation, Depletion and Amortization, Nonproduction",
+              "val_usd": 187000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 68000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "us-gaap_RestructuringCharges",
+              "raw_label": "Restructuring and other charges",
+              "spanish_label": "Restructuring and other charges",
+              "val_usd": 3000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         }
       }
     },
@@ -10856,16 +11005,41 @@
           "value_usd": 30399000000.0,
           "sources": [
             {
-              "concept": "us-gaap_OtherNonoperatingIncomeExpense",
-              "raw_label": "Other income, net",
-              "spanish_label": "Otros ingresos no operativos, netos",
-              "section_path": "Operating expenses",
+              "concept": "us-gaap_NonoperatingIncomeExpense",
+              "raw_label": "Total Ingresos / Gastos No Operativos",
+              "spanish_label": "Total Ingresos / Gastos No Operativos",
+              "section_path": "Reconciliación No-Operativa XBRL",
               "is_extension_tag": false,
-              "val_usd": 22629000000.0
+              "val_usd": 32164000000.0
+            },
+            {
+              "concept": "bridge:reclass_interest_income",
+              "raw_label": "Reclasificación: Ingresos por Intereses",
+              "spanish_label": "Reclasificación: Ingresos por Intereses",
+              "section_path": "Reconciliación No-Operativa XBRL",
+              "is_extension_tag": false,
+              "val_usd": -2228000000.0
+            },
+            {
+              "concept": "bridge:reclass_interest_expense",
+              "raw_label": "Reclasificación: Gastos por Intereses",
+              "spanish_label": "Reclasificación: Gastos por Intereses",
+              "section_path": "Reconciliación No-Operativa XBRL",
+              "is_extension_tag": false,
+              "val_usd": 463000000.0
             }
           ],
-          "explained_sum_usd": 22629000000.0,
-          "residual_unexplained_usd": 7770000000.0,
+          "explained_sum_usd": 30399000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": 30552000000.0,
+              "source": "income_statement_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -10890,7 +11064,16 @@
             }
           ],
           "explained_sum_usd": 9022000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": 8918000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2025": {
           "value_usd": 1034000000.0,
@@ -10905,7 +11088,16 @@
             }
           ],
           "explained_sum_usd": 1034000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": 1030000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2024": {
           "value_usd": 237000000.0,
@@ -10920,7 +11112,23 @@
             }
           ],
           "explained_sum_usd": 237000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 257000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": 238000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": -48000000.0,
@@ -10935,7 +11143,23 @@
             }
           ],
           "explained_sum_usd": -48000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 262000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": -45000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 107000000.0,
@@ -10950,7 +11174,23 @@
             }
           ],
           "explained_sum_usd": 107000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 236000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "GainLossOnInvestments",
+              "raw_label": "Gain (Loss) on Investments",
+              "spanish_label": "Gain (Loss) on Investments",
+              "val_usd": 100000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 4000000.0,
@@ -10965,7 +11205,16 @@
             }
           ],
           "explained_sum_usd": 4000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 184000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": -2000000.0,
@@ -10980,7 +11229,16 @@
             }
           ],
           "explained_sum_usd": -2000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 52000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 14000000.0,
@@ -10995,7 +11253,16 @@
             }
           ],
           "explained_sum_usd": 14000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 58000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": -22000000.0,
@@ -11010,7 +11277,23 @@
             }
           ],
           "explained_sum_usd": -22000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 61000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "InterestExpenseDebt",
+              "raw_label": "Interest Expense, Debt",
+              "spanish_label": "Interest Expense, Debt",
+              "val_usd": 2000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2017": {
           "value_usd": -25000000.0,
@@ -11025,7 +11308,30 @@
             }
           ],
           "explained_sum_usd": -25000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "InterestExpense",
+              "raw_label": "Interest Expense",
+              "spanish_label": "Interest Expense",
+              "val_usd": 58000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "InterestExpenseDebt",
+              "raw_label": "Interest Expense, Debt",
+              "spanish_label": "Interest Expense, Debt",
+              "val_usd": 33000000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "ForeignCurrencyTransactionGainLossRealized",
+              "raw_label": "Foreign Currency Transaction Gain (Loss), Realized",
+              "spanish_label": "Foreign Currency Transaction Gain (Loss), Realized",
+              "val_usd": 5000000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         }
       }
     },
@@ -11487,6 +11793,15 @@
               "is_extension_tag": false,
               "val_usd": 21383000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 22807000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2025": {
@@ -11499,6 +11814,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 11146000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 15623000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -11513,6 +11837,15 @@
               "is_extension_tag": false,
               "val_usd": 4058000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 6547000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2023": {
@@ -11525,6 +11858,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": -187000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 1977000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -11539,6 +11881,15 @@
               "is_extension_tag": false,
               "val_usd": 189000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 595000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2021": {
@@ -11551,6 +11902,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 77000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 359000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -11565,6 +11925,15 @@
               "is_extension_tag": false,
               "val_usd": 174000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 156000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2019": {
@@ -11577,6 +11946,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": -245000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 70000000.0,
+              "source": "income_statement_detail"
             }
           ]
         },
@@ -11591,6 +11969,15 @@
               "is_extension_tag": false,
               "val_usd": 149000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 508000000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2017": {
@@ -11603,6 +11990,15 @@
               "section_path": "",
               "is_extension_tag": false,
               "val_usd": 239000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "CurrentIncomeTaxExpenseBenefit",
+              "raw_label": "Current Income Tax Expense (Benefit)",
+              "spanish_label": "Current Income Tax Expense (Benefit)",
+              "val_usd": 42000000.0,
+              "source": "income_statement_detail"
             }
           ]
         }
@@ -11930,54 +12326,144 @@
       "formula_display": "Valores negociables e inversiones financieras de corto plazo.",
       "periods": {
         "LTM": {
-          "value_usd": 76926000000.0,
+          "value_usd": 34143000000.0,
           "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 76926000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
             "accession": "0001045810-26-000075",
-            "ltm_val": 76926000000.0
+            "ltm_val": 34143000000.0
           }
         },
         "FY2026": {
-          "value_usd": 51951000000.0,
+          "value_usd": 39065000000.0,
           "sources": []
         },
         "FY2025": {
           "value_usd": 34621000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 34621000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2024": {
           "value_usd": 18704000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 18704000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": 9907000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 9907000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 19218000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 19218000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 10714000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 10714000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 1000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 1000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 6640000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 6640000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": 3106000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 3106000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2017": {
           "value_usd": 5032000000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_MarketableSecuritiesCurrent",
+              "raw_label": "Marketable securities",
+              "spanish_label": "Marketable securities",
+              "val_usd": 5032000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         }
       }
     },
@@ -11987,25 +12473,25 @@
       "formula_display": "Total Cash & ST Investments = Cash & Cash Equivalents + Short-Term Investments.",
       "periods": {
         "LTM": {
-          "value_usd": 99369000000.0,
+          "value_usd": 56586000000.0,
           "sources": [],
           "components": {
             "cash": 22443000000.0,
-            "short_term_investments": 76926000000.0
+            "short_term_investments": 34143000000.0
           },
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
             "accession": "0001045810-26-000075",
-            "ltm_val": 99369000000.0
+            "ltm_val": 56586000000.0
           }
         },
         "FY2026": {
-          "value_usd": 62556000000.0,
+          "value_usd": 49670000000.0,
           "sources": [],
           "components": {
             "cash": 10605000000.0,
-            "short_term_investments": 51951000000.0
+            "short_term_investments": 39065000000.0
           }
         },
         "FY2025": {
@@ -12400,7 +12886,7 @@
       "formula_display": "Other Current Assets = Total Current Assets − (Cash + ST Inv. + AR + Inventories).",
       "periods": {
         "LTM": {
-          "value_usd": 3409000000.0,
+          "value_usd": 46192000000.0,
           "sources": [
             {
               "concept": "us-gaap_EquitySecuritiesFvNi",
@@ -12411,14 +12897,6 @@
               "val_usd": 42783000000.0
             },
             {
-              "concept": "us-gaap_DebtSecuritiesCurrent",
-              "raw_label": "Marketable debt securities",
-              "spanish_label": "Valores de deuda negociables",
-              "section_path": "Assets > Current assets",
-              "is_extension_tag": false,
-              "val_usd": 34143000000.0
-            },
-            {
               "concept": "us-gaap_PrepaidExpenseAndOtherAssetsCurrent",
               "raw_label": "Prepaid expenses and other current assets",
               "spanish_label": "Gastos pagados por anticipado y otros activos corrientes",
@@ -12427,17 +12905,17 @@
               "val_usd": 3409000000.0
             }
           ],
-          "explained_sum_usd": 80335000000.0,
-          "residual_unexplained_usd": -76926000000.0,
+          "explained_sum_usd": 46192000000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
             "accession": "0001045810-26-000075",
-            "ltm_val": 3409000000.0
+            "ltm_val": 46192000000.0
           }
         },
         "FY2026": {
-          "value_usd": 3180000000.0,
+          "value_usd": 16066000000.0,
           "sources": [
             {
               "concept": "us-gaap_EquitySecuritiesFvNi",
@@ -12448,14 +12926,6 @@
               "val_usd": 12886000000.0
             },
             {
-              "concept": "us-gaap_DebtSecuritiesCurrent",
-              "raw_label": "Marketable debt securities",
-              "spanish_label": "Valores de deuda negociables",
-              "section_path": "Assets > Current assets",
-              "is_extension_tag": false,
-              "val_usd": 39065000000.0
-            },
-            {
               "concept": "us-gaap_PrepaidExpenseAndOtherAssetsCurrent",
               "raw_label": "Prepaid expenses and other current assets",
               "spanish_label": "Gastos pagados por anticipado y otros activos corrientes",
@@ -12464,8 +12934,8 @@
               "val_usd": 3180000000.0
             }
           ],
-          "explained_sum_usd": 55131000000.0,
-          "residual_unexplained_usd": -51951000000.0
+          "explained_sum_usd": 16066000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2025": {
           "value_usd": 3771000000.0,
@@ -12783,10 +13253,18 @@
               "section_path": "Assets > Current assets",
               "is_extension_tag": false,
               "val_usd": 15746000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_EquitySecuritiesFVNINoncurrent",
+              "raw_label": "Reconciliación off-face / XBRL: Non-marketable equity securities",
+              "spanish_label": "Reconciliación off-face / XBRL: Non-marketable equity securities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -47898000000.0
             }
           ],
-          "explained_sum_usd": 66903000000.0,
-          "residual_unexplained_usd": -47898000000.0,
+          "explained_sum_usd": 19005000000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
@@ -12897,7 +13375,16 @@
             }
           ],
           "explained_sum_usd": 118000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DeferredTaxAssetsGrossNoncurrent",
+              "raw_label": "Deferred income tax assets",
+              "spanish_label": "Deferred income tax assets",
+              "val_usd": 548000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 668000000.0,
@@ -12909,10 +13396,27 @@
               "section_path": "Assets > Current assets",
               "is_extension_tag": false,
               "val_usd": 108000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_DeferredTaxAssetsGrossNoncurrent",
+              "raw_label": "Reconciliación off-face / XBRL: Deferred income tax assets",
+              "spanish_label": "Reconciliación off-face / XBRL: Deferred income tax assets",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 560000000.0
             }
           ],
-          "explained_sum_usd": 108000000.0,
-          "residual_unexplained_usd": 560000000.0
+          "explained_sum_usd": 668000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DeferredTaxAssetsGrossNoncurrent",
+              "raw_label": "Deferred income tax assets",
+              "spanish_label": "Deferred income tax assets",
+              "val_usd": 560000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": 319000000.0,
@@ -13112,6 +13616,22 @@
           "sources": [],
           "explained_sum_usd": 0,
           "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "LongTermDebtCurrent",
+              "raw_label": "Long-term Debt, Current Maturities",
+              "spanish_label": "Long-term Debt, Current Maturities",
+              "val_usd": 1000000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 509000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
@@ -13123,43 +13643,134 @@
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "LongTermDebtCurrent",
+              "raw_label": "Long-term Debt, Current Maturities",
+              "spanish_label": "Long-term Debt, Current Maturities",
+              "val_usd": 999000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 372000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2025": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 288000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2024": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "LongTermDebtCurrent",
+              "raw_label": "Long-term Debt, Current Maturities",
+              "spanish_label": "Long-term Debt, Current Maturities",
+              "val_usd": 1250000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 228000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "LongTermDebtCurrent",
+              "raw_label": "Long-term Debt, Current Maturities",
+              "spanish_label": "Long-term Debt, Current Maturities",
+              "val_usd": 1250000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 176000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 144000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "LongTermDebtCurrent",
+              "raw_label": "Long-term Debt, Current Maturities",
+              "spanish_label": "Long-term Debt, Current Maturities",
+              "val_usd": 999000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 121000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 0.0,
           "sources": [],
           "explained_sum_usd": 0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OperatingLeaseLiabilityCurrent",
+              "raw_label": "Operating Lease, Liability, Current",
+              "spanish_label": "Operating Lease, Liability, Current",
+              "val_usd": 91000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 0.0,
@@ -13168,16 +13779,42 @@
           "residual_unexplained_usd": 0.0
         },
         "FY2018": {
-          "value_usd": 0.0,
-          "sources": [],
-          "explained_sum_usd": 0,
+          "value_usd": 15000000.0,
+          "sources": [
+            {
+              "concept": "bridge:DeferredRevenueNoncurrent",
+              "raw_label": "Reconciliación off-face / XBRL: Deferred Revenue, Noncurrent",
+              "spanish_label": "Reconciliación off-face / XBRL: Deferred Revenue, Noncurrent",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 15000000.0
+            }
+          ],
+          "explained_sum_usd": 15000000.0,
           "residual_unexplained_usd": 0.0
         },
         "FY2017": {
           "value_usd": 711000000.0,
-          "sources": [],
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 711000000.0
+          "sources": [
+            {
+              "concept": "bridge:DeferredRevenueCurrent",
+              "raw_label": "Reconciliación XBRL: Deferred Revenue, Current",
+              "spanish_label": "Reconciliación XBRL: Deferred Revenue, Current",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -85000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_ConvertibleDebtCurrent",
+              "raw_label": "Reconciliación XBRL: Convertible short-term debt",
+              "spanish_label": "Reconciliación XBRL: Convertible short-term debt",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 796000000.0
+            }
+          ],
+          "explained_sum_usd": 711000000.0,
+          "residual_unexplained_usd": 0.0
         }
       }
     },
@@ -13200,6 +13837,15 @@
           ],
           "explained_sum_usd": 10918000000.0,
           "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 1619000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-07-26 (YTD)",
@@ -13220,7 +13866,16 @@
             }
           ],
           "explained_sum_usd": 7306000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 1774000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2025": {
           "value_usd": 4245000000.0,
@@ -13235,7 +13890,16 @@
             }
           ],
           "explained_sum_usd": 4245000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 886000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2024": {
           "value_usd": 2541000000.0,
@@ -13250,7 +13914,16 @@
             }
           ],
           "explained_sum_usd": 2541000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 462000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": 1913000000.0,
@@ -13265,7 +13938,16 @@
             }
           ],
           "explained_sum_usd": 1913000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 247000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 1553000000.0,
@@ -13280,7 +13962,16 @@
             }
           ],
           "explained_sum_usd": 1553000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 245000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 1375000000.0,
@@ -13295,7 +13986,16 @@
             }
           ],
           "explained_sum_usd": 1375000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 241000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 775000000.0,
@@ -13310,7 +14010,23 @@
             }
           ],
           "explained_sum_usd": 775000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "Deferred Tax Liabilities, Net",
+              "spanish_label": "Deferred Tax Liabilities, Net",
+              "val_usd": 148000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 29000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 633000000.0,
@@ -13325,7 +14041,23 @@
             }
           ],
           "explained_sum_usd": 633000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "Deferred Tax Liabilities, Net",
+              "spanish_label": "Deferred Tax Liabilities, Net",
+              "val_usd": 37000000.0,
+              "source": "balance_sheet_detail"
+            },
+            {
+              "concept": "DeferredIncomeTaxLiabilitiesNet",
+              "raw_label": "Deferred Income Tax Liabilities, Net",
+              "spanish_label": "Deferred Income Tax Liabilities, Net",
+              "val_usd": 19000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": 632000000.0,
@@ -13340,10 +14072,19 @@
             }
           ],
           "explained_sum_usd": 632000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "Deferred Tax Liabilities, Net",
+              "spanish_label": "Deferred Tax Liabilities, Net",
+              "val_usd": 30000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2017": {
-          "value_usd": 271000000.0,
+          "value_usd": 277000000.0,
           "sources": [
             {
               "concept": "us-gaap_OtherLiabilitiesNoncurrent",
@@ -13355,7 +14096,16 @@
             }
           ],
           "explained_sum_usd": 277000000.0,
-          "residual_unexplained_usd": -6000000.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "Deferred Tax Liabilities, Net",
+              "spanish_label": "Deferred Tax Liabilities, Net",
+              "val_usd": 838000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         }
       }
     },
@@ -13620,26 +14370,109 @@
           "value_usd": -10737000000.0,
           "sources": [
             {
+              "concept": "us-gaap_CommonStockValue",
+              "raw_label": "Common stock, $0.001 par value",
+              "spanish_label": "Acciones ordinarias, $0.001 par value",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 3000000.0
+            },
+            {
               "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
               "raw_label": "Accumulated other comprehensive income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
               "is_extension_tag": false,
-              "val_usd": -19000000.0
+              "val_usd": 19000000.0
+            },
+            {
+              "concept": "bridge:CommonStockValue",
+              "raw_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "spanish_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -3000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_TreasuryStockValue",
+              "raw_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -10756000000.0
             }
           ],
-          "explained_sum_usd": -19000000.0,
-          "residual_unexplained_usd": -10718000000.0
+          "explained_sum_usd": -10737000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_TreasuryStockValue",
+              "raw_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "val_usd": -10756000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": -9813000000.0,
-          "sources": [],
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -9813000000.0
+          "sources": [
+            {
+              "concept": "us-gaap_CommonStockValue",
+              "raw_label": "Common stock, $0.001 par value",
+              "spanish_label": "Acciones ordinarias, $0.001 par value",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 1000000.0
+            },
+            {
+              "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+              "raw_label": "Accumulated other comprehensive income",
+              "spanish_label": "Otro resultado integral acumulado (AOCI)",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 1000000.0
+            },
+            {
+              "concept": "bridge:CommonStockValue",
+              "raw_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "spanish_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_TreasuryStockValue",
+              "raw_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -9814000000.0
+            }
+          ],
+          "explained_sum_usd": -9813000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_TreasuryStockValue",
+              "raw_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "val_usd": -9814000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": -9275000000.0,
           "sources": [
+            {
+              "concept": "us-gaap_CommonStockValue",
+              "raw_label": "Common stock, $0.001 par value",
+              "spanish_label": "Acciones ordinarias, $0.001 par value",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 1000000.0
+            },
             {
               "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
               "raw_label": "Accumulated other comprehensive income",
@@ -13647,14 +14480,47 @@
               "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
               "is_extension_tag": false,
               "val_usd": -12000000.0
+            },
+            {
+              "concept": "bridge:CommonStockValue",
+              "raw_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "spanish_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_TreasuryStockValue",
+              "raw_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -9263000000.0
             }
           ],
-          "explained_sum_usd": -12000000.0,
-          "residual_unexplained_usd": -9263000000.0
+          "explained_sum_usd": -9275000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_TreasuryStockValue",
+              "raw_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "val_usd": -9263000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": -6668000000.0,
           "sources": [
+            {
+              "concept": "us-gaap_CommonStockValue",
+              "raw_label": "Common stock, $0.001 par value",
+              "spanish_label": "Acciones ordinarias, $0.001 par value",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 1000000.0
+            },
             {
               "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
               "raw_label": "Accumulated other comprehensive income",
@@ -13662,14 +14528,47 @@
               "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
               "is_extension_tag": false,
               "val_usd": -18000000.0
+            },
+            {
+              "concept": "bridge:CommonStockValue",
+              "raw_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "spanish_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_TreasuryStockValue",
+              "raw_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -6650000000.0
             }
           ],
-          "explained_sum_usd": -18000000.0,
-          "residual_unexplained_usd": -6650000000.0
+          "explained_sum_usd": -6668000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_TreasuryStockValue",
+              "raw_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "val_usd": -6650000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2017": {
           "value_usd": -5055000000.0,
           "sources": [
+            {
+              "concept": "us-gaap_CommonStockValue",
+              "raw_label": "Common stock, $0.001 par value",
+              "spanish_label": "Acciones ordinarias, $0.001 par value",
+              "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
+              "is_extension_tag": false,
+              "val_usd": 1000000.0
+            },
             {
               "concept": "us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
               "raw_label": "Accumulated other comprehensive income",
@@ -13677,10 +14576,35 @@
               "section_path": "Liabilities and Shareholders' Equity > Shareholders’ equity",
               "is_extension_tag": false,
               "val_usd": -16000000.0
+            },
+            {
+              "concept": "bridge:CommonStockValue",
+              "raw_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "spanish_label": "Reconciliación XBRL: Common Stock, Value, Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_TreasuryStockValue",
+              "raw_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Reconciliación XBRL: Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -5039000000.0
             }
           ],
-          "explained_sum_usd": -16000000.0,
-          "residual_unexplained_usd": -5039000000.0
+          "explained_sum_usd": -5055000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_TreasuryStockValue",
+              "raw_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "spanish_label": "Treasury stock, at cost (None as of January 30, 2022 and 1,380 shares as of January 31, 2021)",
+              "val_usd": -5039000000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         }
       }
     },
@@ -14057,6 +14981,15 @@
               "val_usd": 3687000000.0
             }
           ],
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 715000000.0,
+              "source": "cash_flow_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -14079,6 +15012,22 @@
               "is_extension_tag": false,
               "val_usd": 2843000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 2400000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 488000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2025": {
@@ -14091,6 +15040,22 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 1864000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 1300000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 593000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14105,6 +15070,22 @@
               "is_extension_tag": false,
               "val_usd": 1508000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 894000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 614000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2023": {
@@ -14117,6 +15098,22 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 1544000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 844000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 699000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14131,6 +15128,22 @@
               "is_extension_tag": false,
               "val_usd": 1174000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 611000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 563000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2021": {
@@ -14143,6 +15156,29 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 1098000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 1098000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 612000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 486000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14157,6 +15193,29 @@
               "is_extension_tag": false,
               "val_usd": 381000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 381000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 355000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 25000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2019": {
@@ -14169,6 +15228,29 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 262000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 262000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 233000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 29000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14183,6 +15265,29 @@
               "is_extension_tag": false,
               "val_usd": 199000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 199000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 144000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 55000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2017": {
@@ -14195,6 +15300,29 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 187000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 187000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "Depreciation",
+              "raw_label": "Depreciation",
+              "spanish_label": "Depreciation",
+              "val_usd": 118000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 68000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         }
@@ -14215,6 +15343,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 7241000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 7243000000.0,
+              "source": "cash_flow_detail"
             }
           ],
           "ltm_bridge": {
@@ -14239,6 +15376,15 @@
               "is_extension_tag": false,
               "val_usd": 6386000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 6386000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2025": {
@@ -14251,6 +15397,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 4737000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 4737000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14265,6 +15420,15 @@
               "is_extension_tag": false,
               "val_usd": 3549000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 3549000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2023": {
@@ -14277,6 +15441,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 2709000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 2710000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14291,6 +15464,15 @@
               "is_extension_tag": false,
               "val_usd": 2004000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 2004000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2021": {
@@ -14303,6 +15485,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 1397000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 1397000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14317,6 +15508,15 @@
               "is_extension_tag": false,
               "val_usd": 844000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 844000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2019": {
@@ -14329,6 +15529,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 557000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 557000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         },
@@ -14343,6 +15552,15 @@
               "is_extension_tag": false,
               "val_usd": 391000000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 391000000.0,
+              "source": "cash_flow_detail"
+            }
           ]
         },
         "FY2017": {
@@ -14355,6 +15573,15 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 247000000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "AllocatedShareBasedCompensationExpense",
+              "raw_label": "Share-based Payment Arrangement, Expense",
+              "spanish_label": "Share-based Payment Arrangement, Expense",
+              "val_usd": 248000000.0,
+              "source": "cash_flow_detail"
             }
           ]
         }
@@ -14383,10 +15610,27 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 131000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -13698000000.0
             }
           ],
-          "explained_sum_usd": -30421000000.0,
-          "residual_unexplained_usd": -13698000000.0,
+          "explained_sum_usd": -44119000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 715000000.0,
+              "source": "cash_flow_detail"
+            }
+          ],
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -14419,7 +15663,16 @@
             }
           ],
           "explained_sum_usd": -9205000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 488000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2025": {
           "value_usd": -2322000000.0,
@@ -14439,10 +15692,27 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": -502000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -790000000.0
             }
           ],
-          "explained_sum_usd": -1532000000.0,
-          "residual_unexplained_usd": -790000000.0
+          "explained_sum_usd": -2322000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 593000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2024": {
           "value_usd": -3560000000.0,
@@ -14462,10 +15732,27 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": -278000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -3044000000.0
             }
           ],
-          "explained_sum_usd": -516000000.0,
-          "residual_unexplained_usd": -3044000000.0
+          "explained_sum_usd": -3560000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 614000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": -1643000000.0,
@@ -14476,7 +15763,7 @@
               "spanish_label": "Ganancias netas en participaciones de capital cotizadas y no cotizadas",
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
-              "val_usd": -45000000.0
+              "val_usd": 45000000.0
             },
             {
               "concept": "us-gaap_OtherNoncashIncomeExpense",
@@ -14484,11 +15771,28 @@
               "spanish_label": "Otros conceptos operativos / no monetarios — Ajustes para conciliar el beneficio neto con el flujo operativo",
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
-              "val_usd": 7000000.0
+              "val_usd": -7000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -1681000000.0
             }
           ],
-          "explained_sum_usd": -38000000.0,
-          "residual_unexplained_usd": -1605000000.0
+          "explained_sum_usd": -1643000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 699000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": -3483000000.0,
@@ -14508,10 +15812,27 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 47000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -3430000000.0
             }
           ],
-          "explained_sum_usd": -53000000.0,
-          "residual_unexplained_usd": -3430000000.0
+          "explained_sum_usd": -3483000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 563000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": -808000000.0,
@@ -14523,10 +15844,34 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": -20000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -788000000.0
             }
           ],
-          "explained_sum_usd": -20000000.0,
-          "residual_unexplained_usd": -788000000.0
+          "explained_sum_usd": -808000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 1098000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 612000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 5000000.0,
@@ -14549,7 +15894,23 @@
             }
           ],
           "explained_sum_usd": 5000000.0,
-          "residual_unexplained_usd": 0.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 381000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 25000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": -155000000.0,
@@ -14561,10 +15922,49 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": -45000000.0
+            },
+            {
+              "concept": "bridge:IncreaseDecreaseInAccountsPayable",
+              "raw_label": "Reconciliación XBRL: Increase (Decrease) in Accounts Payable",
+              "spanish_label": "Reconciliación XBRL: Increase (Decrease) in Accounts Payable",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 135000000.0
+            },
+            {
+              "concept": "bridge:IncomeTaxExpenseBenefit",
+              "raw_label": "Reconciliación XBRL: Income Tax Expense (Benefit)",
+              "spanish_label": "Reconciliación XBRL: Income Tax Expense (Benefit)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -245000000.0
             }
           ],
-          "explained_sum_usd": -45000000.0,
-          "residual_unexplained_usd": -110000000.0
+          "explained_sum_usd": -155000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 262000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 29000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": 6000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2018": {
           "value_usd": 39000000.0,
@@ -14576,10 +15976,55 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 20000000.0
+            },
+            {
+              "concept": "bridge:GainsLossesOnExtinguishmentOfDebt",
+              "raw_label": "Reconciliación off-face / XBRL: Gain (Loss) on Extinguishment of Debt",
+              "spanish_label": "Reconciliación off-face / XBRL: Gain (Loss) on Extinguishment of Debt",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 19000000.0
             }
           ],
-          "explained_sum_usd": 20000000.0,
-          "residual_unexplained_usd": 19000000.0
+          "explained_sum_usd": 39000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 199000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 55000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "us-gaap_AmortizationOfDebtDiscountPremium",
+              "raw_label": "Amortization of debt discount",
+              "spanish_label": "Amortization of debt discount",
+              "val_usd": 3000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfFinancingCostsAndDiscounts",
+              "raw_label": "Amortization of Debt Issuance Costs and Discounts",
+              "spanish_label": "Amortization of Debt Issuance Costs and Discounts",
+              "val_usd": 2000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": -1000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2017": {
           "value_usd": 18000000.0,
@@ -14591,10 +16036,62 @@
               "section_path": "Cash flows from operating activities > Adjustments to reconcile net income to net cash provided by operating activities",
               "is_extension_tag": false,
               "val_usd": 33000000.0
+            },
+            {
+              "concept": "bridge:ProceedsFromPaymentsForOtherFinancingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "spanish_label": "Reconciliación off-face / XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -15000000.0
             }
           ],
-          "explained_sum_usd": 33000000.0,
-          "residual_unexplained_usd": -15000000.0
+          "explained_sum_usd": 18000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "us-gaap_DepreciationAndAmortization",
+              "raw_label": "Depreciation and amortization",
+              "spanish_label": "Depreciation and amortization",
+              "val_usd": 187000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfIntangibleAssets",
+              "raw_label": "Amortization of Intangible Assets",
+              "spanish_label": "Amortization of Intangible Assets",
+              "val_usd": 68000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "us-gaap_AmortizationOfDebtDiscountPremium",
+              "raw_label": "Amortization of debt discount",
+              "spanish_label": "Amortization of debt discount",
+              "val_usd": 25000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "AmortizationOfFinancingCostsAndDiscounts",
+              "raw_label": "Amortization of Debt Issuance Costs and Discounts",
+              "spanish_label": "Amortization of Debt Issuance Costs and Discounts",
+              "val_usd": 24000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "ForeignCurrencyTransactionGainLossRealized",
+              "raw_label": "Foreign Currency Transaction Gain (Loss), Realized",
+              "spanish_label": "Foreign Currency Transaction Gain (Loss), Realized",
+              "val_usd": 5000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": 2000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         }
       }
     },
@@ -15210,24 +16707,32 @@
               "val_usd": 46387000000.0
             },
             {
-              "concept": "us-gaap_PaymentsToAcquireBusinessTwoNetOfCashAcquired",
-              "raw_label": "Groq, Inc.",
-              "spanish_label": "Inversión corporativa en Groq, Inc.",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": -15944000000.0
-            },
-            {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
               "raw_label": "Other",
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de inversión",
               "section_path": "Cash flows from investing activities",
               "is_extension_tag": false,
               "val_usd": -15000000.0
+            },
+            {
+              "concept": "sibling_reclass_acquisitions_ma",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (acquisitions_ma)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (acquisitions_ma)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
+              "is_extension_tag": false,
+              "val_usd": 1156000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_investing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 19353000000.0
             }
           ],
-          "explained_sum_usd": -38723000000.0,
-          "residual_unexplained_usd": 36453000000.0,
+          "explained_sum_usd": -2270000000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -15267,76 +16772,36 @@
               "val_usd": 26563000000.0
             },
             {
-              "concept": "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
-              "raw_label": "Proceeds from sales of non-marketable equity securities",
-              "spanish_label": "Cobros por venta de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
+              "concept": "sibling_reclass_acquisitions_ma",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (acquisitions_ma)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (acquisitions_ma)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 84000000.0
+              "val_usd": 1535000000.0
             },
             {
-              "concept": "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi",
-              "raw_label": "Purchases of non-marketable equity securities",
-              "spanish_label": "Pagos por adquisición de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
+              "concept": "sibling_reclass_sales_maturities_investments",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (sales_maturities_investments)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (sales_maturities_investments)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": -17502000000.0
+              "val_usd": 96000000.0
             },
             {
-              "concept": "us-gaap_PaymentsToAcquireBusinessTwoNetOfCashAcquired",
-              "raw_label": "Groq, Inc.",
-              "spanish_label": "Inversión corporativa en Groq, Inc.",
-              "section_path": "Cash flows from investing activities",
+              "concept": "sec_section_reconciliation_other_investing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
               "is_extension_tag": false,
-              "val_usd": -13000000000.0
+              "val_usd": 6969000000.0
             }
           ],
-          "explained_sum_usd": -39018000000.0,
-          "residual_unexplained_usd": 39018000000.0
+          "explained_sum_usd": 0.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2025": {
           "value_usd": 22000000.0,
           "sources": [
-            {
-              "concept": "nvda_PaymentsToAcquireEquitySecurities",
-              "raw_label": "Purchases of debt securities",
-              "spanish_label": "Pagos por adquisición de valores de deuda y renta fija",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": true,
-              "val_usd": -1245000000.0
-            },
-            {
-              "concept": "nvda_ProceedsFromSaleOfEquitySecurities",
-              "raw_label": "Proceeds from sales of equity securities",
-              "spanish_label": "Cobros por venta de equity valores",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": true,
-              "val_usd": 70000000.0
-            },
-            {
-              "concept": "us-gaap_ProceedsFromSaleAndMaturityOfAvailableForSaleSecurities",
-              "raw_label": "Proceeds from sales and maturities of debt securities",
-              "spanish_label": "Cobros por venta y vencimiento de valores de renta fija",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": 6739000000.0
-            },
-            {
-              "concept": "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
-              "raw_label": "Proceeds from sales of non-marketable equity securities",
-              "spanish_label": "Cobros por venta de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": 171000000.0
-            },
-            {
-              "concept": "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi",
-              "raw_label": "Purchases of non-marketable equity securities",
-              "spanish_label": "Pagos por adquisición de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": -1486000000.0
-            },
             {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
               "raw_label": "Other",
@@ -15346,28 +16811,12 @@
               "val_usd": 22000000.0
             }
           ],
-          "explained_sum_usd": 4271000000.0,
-          "residual_unexplained_usd": -4249000000.0
+          "explained_sum_usd": 22000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
           "value_usd": -124000000.0,
           "sources": [
-            {
-              "concept": "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
-              "raw_label": "Proceeds from sales of non-marketable equity securities",
-              "spanish_label": "Cobros por venta de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": 1000000.0
-            },
-            {
-              "concept": "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi",
-              "raw_label": "Purchases of non-marketable equity securities",
-              "spanish_label": "Pagos por adquisición de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": -862000000.0
-            },
             {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
               "raw_label": "Other",
@@ -15377,40 +16826,23 @@
               "val_usd": -124000000.0
             }
           ],
-          "explained_sum_usd": -985000000.0,
-          "residual_unexplained_usd": 861000000.0
+          "explained_sum_usd": -124000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
           "value_usd": 0.0,
-          "sources": [
-            {
-              "concept": "us-gaap_ProceedsFromSaleOfEquitySecuritiesFvNi",
-              "raw_label": "Proceeds from sales of non-marketable equity securities",
-              "spanish_label": "Cobros por venta de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": 8000000.0
-            },
-            {
-              "concept": "us-gaap_PaymentsToAcquireEquitySecuritiesFvNi",
-              "raw_label": "Purchases of non-marketable equity securities",
-              "spanish_label": "Pagos por adquisición de participaciones de capital no cotizadas",
-              "section_path": "Cash flows from investing activities",
-              "is_extension_tag": false,
-              "val_usd": -85000000.0
-            }
-          ],
-          "explained_sum_usd": -77000000.0,
-          "residual_unexplained_usd": 77000000.0
+          "sources": [],
+          "explained_sum_usd": 0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
           "value_usd": -24000000.0,
           "sources": [
             {
-              "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de inversión",
-              "section_path": "Cash flows from investing activities",
+              "concept": "bridge:PaymentsForProceedsFromOtherInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "spanish_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -24000000.0
             }
@@ -15419,37 +16851,46 @@
           "residual_unexplained_usd": 0.0
         },
         "FY2021": {
-          "value_usd": -8826000000.0,
+          "value_usd": -34000000.0,
           "sources": [
             {
-              "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de inversión",
-              "section_path": "Cash flows from investing activities",
+              "concept": "bridge:PaymentsForProceedsFromOtherInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "spanish_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -34000000.0
             }
           ],
           "explained_sum_usd": -34000000.0,
-          "residual_unexplained_usd": -8792000000.0
+          "residual_unexplained_usd": 0.0
         },
         "FY2020": {
-          "value_usd": -4754000000.0,
+          "value_usd": -10000000.0,
           "sources": [
             {
-              "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de inversión",
-              "section_path": "Cash flows from investing activities",
+              "concept": "bridge:PaymentsForProceedsFromOtherInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "spanish_label": "Reconciliación off-face / XBRL: Payments for (Proceeds from) Other Investing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -10000000.0
             }
           ],
           "explained_sum_usd": -10000000.0,
-          "residual_unexplained_usd": -4744000000.0
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax",
+              "raw_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "spanish_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "val_usd": 5000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2019": {
-          "value_usd": -9000000.0,
+          "value_usd": 7223000000.0,
           "sources": [
             {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
@@ -15458,13 +16899,37 @@
               "section_path": "Cash flows from investing activities",
               "is_extension_tag": false,
               "val_usd": -9000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities",
+              "raw_label": "Reconciliación off-face / XBRL: Proceeds from maturities of marketable securities",
+              "spanish_label": "Reconciliación off-face / XBRL: Proceeds from maturities of marketable securities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 7232000000.0
             }
           ],
-          "explained_sum_usd": -9000000.0,
-          "residual_unexplained_usd": 0.0
+          "explained_sum_usd": 7223000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax",
+              "raw_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "spanish_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "val_usd": 11000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": 6000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2018": {
-          "value_usd": -861000000.0,
+          "value_usd": 1044000000.0,
           "sources": [
             {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
@@ -15473,13 +16938,45 @@
               "section_path": "Cash flows from investing activities",
               "is_extension_tag": false,
               "val_usd": -36000000.0
+            },
+            {
+              "concept": "bridge:AmortizationOfFinancingCostsAndDiscounts",
+              "raw_label": "Reconciliación XBRL: Amortization of Debt Issuance Costs and Discounts",
+              "spanish_label": "Reconciliación XBRL: Amortization of Debt Issuance Costs and Discounts",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 2000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities",
+              "raw_label": "Reconciliación XBRL: Proceeds from maturities of marketable securities",
+              "spanish_label": "Reconciliación XBRL: Proceeds from maturities of marketable securities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 1078000000.0
             }
           ],
-          "explained_sum_usd": -36000000.0,
-          "residual_unexplained_usd": -825000000.0
+          "explained_sum_usd": 1044000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax",
+              "raw_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "spanish_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "val_usd": 3000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": -1000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2017": {
-          "value_usd": 1590000000.0,
+          "value_usd": 971000000.0,
           "sources": [
             {
               "concept": "us-gaap_PaymentsForProceedsFromOtherInvestingActivities",
@@ -15487,11 +16984,43 @@
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de inversión",
               "section_path": "Cash flows from investing activities",
               "is_extension_tag": false,
-              "val_usd": 5000000.0
+              "val_usd": -5000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_ProceedsFromSaleAndMaturityOfMarketableSecurities",
+              "raw_label": "Reconciliación XBRL: Proceeds from maturities of marketable securities",
+              "spanish_label": "Reconciliación XBRL: Proceeds from maturities of marketable securities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 969000000.0
+            },
+            {
+              "concept": "bridge:nvda_Proceedsfromsaleoflonglivedassetsandinvestments",
+              "raw_label": "Reconciliación XBRL: Proceeds from sale of long-lived assets and investments",
+              "spanish_label": "Reconciliación XBRL: Proceeds from sale of long-lived assets and investments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 7000000.0
             }
           ],
-          "explained_sum_usd": 5000000.0,
-          "residual_unexplained_usd": 1585000000.0
+          "explained_sum_usd": 971000000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax",
+              "raw_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "spanish_label": "Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax",
+              "val_usd": 2000000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "UnrealizedGainLossOnDerivatives",
+              "raw_label": "Unrealized Gain (Loss) on Derivatives",
+              "spanish_label": "Unrealized Gain (Loss) on Derivatives",
+              "val_usd": 2000000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         }
       }
     },
@@ -15664,24 +17193,24 @@
           "value_usd": -2922000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": -789000000.0
-            },
-            {
               "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
               "raw_label": "Other",
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": false,
-              "val_usd": -22000000.0
+              "val_usd": 22000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_financing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -2944000000.0
             }
           ],
-          "explained_sum_usd": -811000000.0,
-          "residual_unexplained_usd": -2111000000.0,
+          "explained_sum_usd": -2922000000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2026",
@@ -15697,66 +17226,50 @@
           "value_usd": -24905000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromPaymentsForOtherFinancingActivities",
+              "raw_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "spanish_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -644000000.0
+              "val_usd": -9000000.0
             },
             {
-              "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:debt_issued",
+              "raw_label": "Reconciliación XBRL: Debt Issued",
+              "spanish_label": "Reconciliación XBRL: Debt Issued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": 9000000.0
+              "val_usd": -24896000000.0
             }
           ],
-          "explained_sum_usd": -635000000.0,
-          "residual_unexplained_usd": -24270000000.0
+          "explained_sum_usd": -24905000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2025": {
           "value_usd": -129000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:nvda_PaymentsForFinancedPropertyPlantAndEquipmentAndIntangibleAssetsFinancingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Principal payments on property and equipment and intangible assets",
+              "spanish_label": "Reconciliación off-face / XBRL: Principal payments on property and equipment and intangible assets",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -490000000.0
-            },
-            {
-              "concept": "nvda_PaymentsForFinancedPropertyPlantAndEquipmentAndIntangibleAssetsFinancingActivities",
-              "raw_label": "Principal payments on property and equipment and intangible assets",
-              "spanish_label": "Principal payments sobre propiedad y equipo y activos intangibles",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": true,
-              "val_usd": 129000000.0
+              "val_usd": -129000000.0
             }
           ],
-          "explained_sum_usd": -361000000.0,
-          "residual_unexplained_usd": 232000000.0
+          "explained_sum_usd": -129000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
           "value_usd": -75000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": -403000000.0
-            },
-            {
               "concept": "nvda_PaymentsForFinancedPropertyPlantAndEquipmentAndIntangibleAssetsFinancingActivities",
               "raw_label": "Principal payments on property and equipment and intangible assets",
               "spanish_label": "Principal payments sobre propiedad y equipo y activos intangibles",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": true,
-              "val_usd": 74000000.0
+              "val_usd": -74000000.0
             },
             {
               "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
@@ -15764,53 +17277,37 @@
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": false,
-              "val_usd": 1000000.0
+              "val_usd": -1000000.0
             }
           ],
-          "explained_sum_usd": -328000000.0,
-          "residual_unexplained_usd": 253000000.0
+          "explained_sum_usd": -75000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
           "value_usd": -2000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromPaymentsForOtherFinancingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "spanish_label": "Reconciliación off-face / XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -355000000.0
-            },
-            {
-              "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": 2000000.0
+              "val_usd": -2000000.0
             }
           ],
-          "explained_sum_usd": -353000000.0,
-          "residual_unexplained_usd": 351000000.0
+          "explained_sum_usd": -2000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
           "value_usd": -90000000.0,
           "sources": [
-            {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": -281000000.0
-            },
             {
               "concept": "nvda_PaymentsForFinancedPropertyPlantAndEquipmentAndIntangibleAssetsFinancingActivities",
               "raw_label": "Principal payments on property and equipment and intangible assets",
               "spanish_label": "Principal payments sobre propiedad y equipo y activos intangibles",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": true,
-              "val_usd": 83000000.0
+              "val_usd": -83000000.0
             },
             {
               "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
@@ -15818,118 +17315,118 @@
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": false,
-              "val_usd": 7000000.0
+              "val_usd": -7000000.0
             }
           ],
-          "explained_sum_usd": -191000000.0,
-          "residual_unexplained_usd": 101000000.0
+          "explained_sum_usd": -90000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2021": {
           "value_usd": -21000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": -194000000.0
-            },
-            {
               "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
               "raw_label": "Other",
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": false,
-              "val_usd": 4000000.0
+              "val_usd": -4000000.0
+            },
+            {
+              "concept": "bridge:nvda_PaymentsForFinancedPropertyPlantAndEquipmentFinancingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Principal payments on property and equipment",
+              "spanish_label": "Reconciliación off-face / XBRL: Principal payments on property and equipment",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -17000000.0
             }
           ],
-          "explained_sum_usd": -190000000.0,
-          "residual_unexplained_usd": 169000000.0
+          "explained_sum_usd": -21000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2020": {
           "value_usd": -1980000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromIssuanceOfLongTermDebt",
+              "raw_label": "Reconciliación off-face / XBRL: Proceeds from Issuance of Long-term Debt",
+              "spanish_label": "Reconciliación off-face / XBRL: Proceeds from Issuance of Long-term Debt",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -149000000.0
+              "val_usd": -1980000000.0
             }
           ],
-          "explained_sum_usd": -149000000.0,
-          "residual_unexplained_usd": -1831000000.0
+          "explained_sum_usd": -1980000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2019": {
           "value_usd": -1985000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromPaymentsForOtherFinancingActivities",
+              "raw_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "spanish_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -137000000.0
+              "val_usd": -5000000.0
             },
             {
-              "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromIssuanceOfLongTermDebt",
+              "raw_label": "Reconciliación XBRL: Proceeds from Issuance of Long-term Debt",
+              "spanish_label": "Reconciliación XBRL: Proceeds from Issuance of Long-term Debt",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": 5000000.0
+              "val_usd": -1980000000.0
             }
           ],
-          "explained_sum_usd": -132000000.0,
-          "residual_unexplained_usd": -1853000000.0
+          "explained_sum_usd": -1985000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2018": {
           "value_usd": -1989000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromPaymentsForOtherFinancingActivities",
+              "raw_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "spanish_label": "Reconciliación XBRL: Proceeds from (Payments for) Other Financing Activities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -139000000.0
+              "val_usd": -9000000.0
             },
             {
-              "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
-              "raw_label": "Other",
-              "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
-              "section_path": "Cash flows from financing activities",
+              "concept": "bridge:ProceedsFromIssuanceOfLongTermDebt",
+              "raw_label": "Reconciliación XBRL: Proceeds from Issuance of Long-term Debt",
+              "spanish_label": "Reconciliación XBRL: Proceeds from Issuance of Long-term Debt",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": 9000000.0
+              "val_usd": -1980000000.0
             }
           ],
-          "explained_sum_usd": -130000000.0,
-          "residual_unexplained_usd": -1859000000.0
+          "explained_sum_usd": -1989000000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2017": {
           "value_usd": -7000000.0,
           "sources": [
             {
-              "concept": "us-gaap_ProceedsFromStockPlans",
-              "raw_label": "Proceeds related to employee stock plans",
-              "spanish_label": "Cobros asociados a planes de compra de acciones de empleados",
-              "section_path": "Cash flows from financing activities",
-              "is_extension_tag": false,
-              "val_usd": -167000000.0
-            },
-            {
               "concept": "us-gaap_ProceedsFromPaymentsForOtherFinancingActivities",
               "raw_label": "Other",
               "spanish_label": "Otros conceptos operativos / no monetarios — Flujos de efectivo de actividades de financiación",
               "section_path": "Cash flows from financing activities",
               "is_extension_tag": false,
-              "val_usd": 15000000.0
+              "val_usd": -15000000.0
+            },
+            {
+              "concept": "bridge:us-gaap_PaymentsOfDebtIssuanceCosts",
+              "raw_label": "Reconciliación off-face / XBRL: Payments for debt issuance costs",
+              "spanish_label": "Reconciliación off-face / XBRL: Payments for debt issuance costs",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 8000000.0
             }
           ],
-          "explained_sum_usd": -152000000.0,
-          "residual_unexplained_usd": 145000000.0
+          "explained_sum_usd": -7000000.0,
+          "residual_unexplained_usd": 0.0
         }
       }
     },

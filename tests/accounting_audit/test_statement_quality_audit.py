@@ -64,14 +64,14 @@ def _checks_by_id(report: dict) -> dict:
 
 
 class TestStatementQualityAudit(unittest.TestCase):
-    """Cubre los 5 invariantes Q1-Q5 ante escenarios PASS, WARN y ERROR."""
+    """Cubre los 7 invariantes Q1-Q7 ante escenarios PASS, WARN y ERROR."""
 
-    def test_clean_fixture_passes_all_five_checks(self):
+    def test_clean_fixture_passes_all_seven_checks(self):
         rep = evaluate_statement_quality(_clean_fixture())
         self.assertEqual(rep["status"], "PASS")
         self.assertEqual(rep["error_count"], 0)
         self.assertEqual(rep["warn_count"], 0)
-        self.assertEqual(rep["pass_count"], 5)
+        self.assertEqual(rep["pass_count"], 7)
 
     def test_q1_duplicate_asrep_labels_flags_error_and_ignores_abstract(self):
         data = _clean_fixture()
@@ -121,8 +121,20 @@ class TestStatementQualityAudit(unittest.TestCase):
             p = Path(tmp) / "financial_statements.json"
             p.write_text(json.dumps(_clean_fixture()), encoding="utf-8")
             checks = run_statement_quality_audit(tmp)
-            self.assertEqual(len(checks), 5)
+            self.assertEqual(len(checks), 7)
             self.assertTrue(all(c["severity"] == "PASS" for c in checks))
+
+    def test_q6_vertical_subtotal_and_q7_face_anchor_parity_flag_errors(self):
+        data = _clean_fixture()
+        data["resolved_canonical_statements"]["income_statement"] = {
+            "revenue": {"FY2025": 500e6},
+            "cogs": {"FY2025": 200e6},
+            "gross_profit": {"FY2025": 250e6},
+        }
+        data["as_reported_statements"]["balance_sheet"][0]["values"] = {"FY2025": 1100e6}
+        by_id = _checks_by_id(evaluate_statement_quality(data))
+        self.assertEqual(by_id["VERTICAL_SUBTOTAL_IDENTITY"]["severity"], "ERROR")
+        self.assertEqual(by_id["FACE_ANCHOR_PARITY"]["severity"], "ERROR")
 
 
 if __name__ == "__main__":

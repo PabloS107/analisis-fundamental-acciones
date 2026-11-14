@@ -63,6 +63,59 @@ def _should_include_row(row_def, data_dict, statements_fys) -> bool:
     return False
 
 
+def _build_row_footnote_subrows(key: str, periods: list[str], periods_map: dict) -> list[dict]:
+    """Construye sub-filas colapsables no aditivas desde `footnote_disclosures` por período."""
+    if not isinstance(periods_map, dict) or not periods:
+        return []
+    by_concept: dict[str, dict] = {}
+    for p in periods:
+        p_info = periods_map.get(p)
+        if not isinstance(p_info, dict):
+            continue
+        for disc in p_info.get("footnote_disclosures") or []:
+            conc = (disc.get("concept") or "").strip()
+            raw_v = disc.get("val_usd")
+            if not conc or raw_v is None:
+                continue
+            rec = by_concept.setdefault(conc, {
+                "concept": conc,
+                "label_en": (disc.get("raw_label") or conc).strip(),
+                "label_es": (disc.get("spanish_label") or disc.get("raw_label") or conc).strip(),
+                "source": disc.get("source") or "detail",
+                "values_m": {},
+                "max_abs": 0.0,
+            })
+            val_m = usd_to_m(raw_v)
+            if val_m is not None:
+                rec["values_m"][p] = val_m
+                rec["max_abs"] = max(rec["max_abs"], abs(float(val_m)))
+
+    rows = []
+    for rec in sorted(by_concept.values(), key=lambda x: x["max_abs"], reverse=True):
+        if rec["max_abs"] < 1e-6:
+            continue
+        lbl_es = rec["label_es"]
+        if not lbl_es or lbl_es == rec["label_en"]:
+            lbl_es = get_spanish_label(rec["label_en"], rec["concept"])
+        ltm_p = periods[0]
+        ltm_m = rec["values_m"].get(ltm_p)
+        rows.append({
+            "key": re.sub(r"[^a-zA-Z0-9_]+", "_", f"{key}_{rec['concept']}"),
+            "concept": rec["concept"],
+            "label": rec["label_en"],
+            "label_en": rec["label_en"],
+            "label_es": lbl_es or rec["label_en"],
+            "source": rec["source"],
+            "ltm_period": ltm_p,
+            "ltm_abs": fmt_money_m(ltm_m) if ltm_m is not None else "-",
+            "annual_cells": [
+                {"period": p, "abs": fmt_money_m(rec["values_m"].get(p)) if rec["values_m"].get(p) is not None else "-"}
+                for p in periods[1:]
+            ],
+        })
+    return rows
+
+
 def build_standardized_section(
     sections_def,
     source_data,
@@ -120,6 +173,8 @@ def build_standardized_section(
                         if res_val is not None and abs(float(res_val)) >= 10_000.0:
                             residual_periods[p] = round(float(res_val) / 1e6, 2)
 
+                footnote_rows = _build_row_footnote_subrows(k, statements_fys, periods_map)
+
                 sec_visible_items.append({
                     "label": label_en,
                     "label_en": label_en,
@@ -127,6 +182,8 @@ def build_standardized_section(
                     "metric_key": k,
                     "stmt_type": stmt_type,
                     "residual_periods": residual_periods,
+                    "footnote_rows": footnote_rows,
+                    "footnote_count": len(footnote_rows),
                     "orig_tooltip": eff_tooltip,
                     "clarification": None,
                     "operator": op,
@@ -387,4 +444,6 @@ def build_statement_cells(r, target_fys, canonical, ebt_dict=None, bs_tot_assets
         "annual_vals": row_vals[1:] if len(row_vals) > 1 else [],
         "latest_val": row_vals[0] if row_vals else "-",
         "latest_pct": row_pcts[0] if row_pcts else "-",
+        "footnote_rows": r.get("footnote_rows") or [],
+        "footnote_count": r.get("footnote_count") or 0,
     }

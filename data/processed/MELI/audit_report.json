@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-11-12T18:15:37.701986",
+  "audit_timestamp": "2026-11-14T12:34:50.260333",
   "years_audited": {
     "LTM": [
       {
@@ -769,10 +769,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 82,
-  "passed_tests": 79,
+  "total_tests": 84,
+  "passed_tests": 82,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -820,96 +820,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "10 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 10,
-      "samples": [
-        {
-          "metric": "other_non_operating",
-          "period": "LTM",
-          "value_usd": -174000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -174000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2025",
-          "value_usd": -337000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -337000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2024",
-          "value_usd": -182000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -182000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_current_assets",
-          "period": "LTM",
-          "value_usd": 37269000000.0,
-          "explained_sum_usd": 24818000000.0,
-          "residual_unexplained_usd": 12451000000.0,
-          "residual_pct": 33.4
-        },
-        {
-          "metric": "other_current_assets",
-          "period": "FY2025",
-          "value_usd": 26335000000.0,
-          "explained_sum_usd": 17480000000.0,
-          "residual_unexplained_usd": 8855000000.0,
-          "residual_pct": 33.6
-        },
-        {
-          "metric": "other_current_assets",
-          "period": "FY2024",
-          "value_usd": 12471000000.0,
-          "explained_sum_usd": 7755000000.0,
-          "residual_unexplained_usd": 4716000000.0,
-          "residual_pct": 37.8
-        },
-        {
-          "metric": "other_assets_sectoral",
-          "period": "LTM",
-          "value_usd": 34247000000.0,
-          "explained_sum_usd": 25990000000.0,
-          "residual_unexplained_usd": 8257000000.0,
-          "residual_pct": 24.1
-        },
-        {
-          "metric": "other_assets_sectoral",
-          "period": "FY2025",
-          "value_usd": 25014000000.0,
-          "explained_sum_usd": 18569000000.0,
-          "residual_unexplained_usd": 6445000000.0,
-          "residual_pct": 25.8
-        },
-        {
-          "metric": "other_assets_sectoral",
-          "period": "FY2024",
-          "value_usd": 11819000000.0,
-          "explained_sum_usd": 8165000000.0,
-          "residual_unexplained_usd": 3654000000.0,
-          "residual_pct": 30.9
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2024",
-          "value_usd": 4711000000.0,
-          "explained_sum_usd": 2248000000.0,
-          "residual_unexplained_usd": 2463000000.0,
-          "residual_pct": 52.3
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (18 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

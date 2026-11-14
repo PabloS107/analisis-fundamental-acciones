@@ -2,7 +2,7 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-11-12T18:15:37.484362",
+  "audit_timestamp": "2026-11-14T12:34:47.569184",
   "years_audited": {
     "LTM": [
       {
@@ -769,10 +769,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 82,
-  "passed_tests": 79,
+  "total_tests": 84,
+  "passed_tests": 82,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -820,96 +820,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "15 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 15,
-      "samples": [
-        {
-          "metric": "other_current_assets",
-          "period": "FY2025",
-          "value_usd": 13870000000.0,
-          "explained_sum_usd": 16309000000.0,
-          "residual_unexplained_usd": -2439000000.0,
-          "residual_pct": 17.6
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "LTM",
-          "value_usd": 31925000000.0,
-          "explained_sum_usd": 167155000000.0,
-          "residual_unexplained_usd": -135230000000.0,
-          "residual_pct": 423.6
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2025",
-          "value_usd": 14962000000.0,
-          "explained_sum_usd": 84932000000.0,
-          "residual_unexplained_usd": -69970000000.0,
-          "residual_pct": 467.7
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2024",
-          "value_usd": 14874000000.0,
-          "explained_sum_usd": 52856000000.0,
-          "residual_unexplained_usd": -37982000000.0,
-          "residual_pct": 255.4
-        },
-        {
-          "metric": "other_noncurrent_liabilities",
-          "period": "LTM",
-          "value_usd": 50361000000.0,
-          "explained_sum_usd": 21512000000.0,
-          "residual_unexplained_usd": 28849000000.0,
-          "residual_pct": 57.3
-        },
-        {
-          "metric": "other_equity",
-          "period": "LTM",
-          "value_usd": 13697000000.0,
-          "explained_sum_usd": 4326000000.0,
-          "residual_unexplained_usd": 9371000000.0,
-          "residual_pct": 68.4
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2024",
-          "value_usd": -612000000.0,
-          "explained_sum_usd": -748000000.0,
-          "residual_unexplained_usd": 136000000.0,
-          "residual_pct": 22.2
-        },
-        {
-          "metric": "wc_other",
-          "period": "LTM",
-          "value_usd": -9170000000.0,
-          "explained_sum_usd": -4502000000.0,
-          "residual_unexplained_usd": -4668000000.0,
-          "residual_pct": 50.9
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2025",
-          "value_usd": 10817000000.0,
-          "explained_sum_usd": 8490000000.0,
-          "residual_unexplained_usd": 2327000000.0,
-          "residual_pct": 21.5
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2024",
-          "value_usd": -1515000000.0,
-          "explained_sum_usd": -2874000000.0,
-          "residual_unexplained_usd": 1359000000.0,
-          "residual_pct": 89.7
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (18 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

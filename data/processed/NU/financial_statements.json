@@ -7833,13 +7833,13 @@
   "resolved_canonical_statements": {
     "balance_sheet": {
       "cash": {
-        "LTM": 22700739000.0,
-        "FY2025": 24541431000.0,
-        "FY2024": 15929078000.0,
-        "FY2023": 13370923000.0,
-        "FY2022": 6950335000.0,
-        "FY2021": 3644334000.0,
-        "FY2020": 2387322000.0,
+        "LTM": 13551611000.0,
+        "FY2025": 15003643000.0,
+        "FY2024": 9185742000.0,
+        "FY2023": 5923440000.0,
+        "FY2022": 4172316000.0,
+        "FY2021": 2705675000.0,
+        "FY2020": 2343780000.0,
         "FY2019": 0.0
       },
       "short_term_investments": {
@@ -7853,13 +7853,13 @@
         "FY2019": null
       },
       "total_liquid_cash": {
-        "LTM": 38220855000.0,
-        "FY2025": 37839178000.0,
-        "FY2024": 26583301000.0,
-        "FY2023": 22566543000.0,
-        "FY2022": 17031116000.0,
-        "FY2021": 12726094000.0,
-        "FY2020": 6765440000.0,
+        "LTM": 29071727000.0,
+        "FY2025": 28301390000.0,
+        "FY2024": 19839965000.0,
+        "FY2023": 15119060000.0,
+        "FY2022": 14253097000.0,
+        "FY2021": 11787435000.0,
+        "FY2020": 6721898000.0,
         "FY2019": 0.0
       },
       "accounts_receivable": {
@@ -7963,13 +7963,13 @@
         "FY2019": null
       },
       "other_noncurrent_assets": {
-        "LTM": 43228429000.0,
-        "FY2025": 35922713000.0,
-        "FY2024": 22466301000.0,
-        "FY2023": 20054774000.0,
-        "FY2022": 12305213000.0,
-        "FY2021": 6651952000.0,
-        "FY2020": 3364947000.0,
+        "LTM": 52377557000.0,
+        "FY2025": 45460501000.0,
+        "FY2024": 29209637000.0,
+        "FY2023": 27502257000.0,
+        "FY2022": 15083232000.0,
+        "FY2021": 7590611000.0,
+        "FY2020": 3408489000.0,
         "FY2019": null
       },
       "total_noncurrent_assets": {
@@ -8133,12 +8133,12 @@
         "FY2019": null
       },
       "other_equity": {
-        "LTM": 186449000.0,
-        "FY2025": -184300000.0,
-        "FY2024": -828167000.0,
+        "LTM": 188500000.0,
+        "FY2025": -153686000.0,
+        "FY2024": -827380000.0,
         "FY2023": 156430000.0,
         "FY2022": -137651000.0,
-        "FY2021": -109227000.0,
+        "FY2021": -107718000.0,
         "FY2020": -97500000.0,
         "FY2019": 612251000.0
       },
@@ -8233,13 +8233,13 @@
         "FY2019": 0.18
       },
       "net_loans": {
-        "LTM": 32811828000.0,
-        "FY2025": 27689362000.0,
-        "FY2024": 17581161000.0,
-        "FY2023": 15616467000.0,
-        "FY2022": 9906512000.0,
-        "FY2021": 5975334000.0,
-        "FY2020": 3083601000.0,
+        "LTM": 11317422000.0,
+        "FY2025": 9421458000.0,
+        "FY2024": 5321885000.0,
+        "FY2023": 3202334000.0,
+        "FY2022": 1673440000.0,
+        "FY2021": 1194814000.0,
+        "FY2020": 174694000.0,
         "FY2019": null
       },
       "allowance_for_loan_losses": {
@@ -8303,13 +8303,13 @@
         "FY2019": null
       },
       "other_assets_sectoral": {
-        "LTM": 10564259000.0,
-        "FY2025": 8354297000.0,
-        "FY2024": 5004849000.0,
-        "FY2023": 4468766000.0,
-        "FY2022": 2417683000.0,
-        "FY2021": 683044000.0,
-        "FY2020": 292006000.0,
+        "LTM": 41207793000.0,
+        "FY2025": 36159989000.0,
+        "FY2024": 24007461000.0,
+        "FY2023": 24330382000.0,
+        "FY2022": 13428774000.0,
+        "FY2021": 6402223000.0,
+        "FY2020": 3244455000.0,
         "FY2019": null
       },
       "other_liabilities_sectoral": {
@@ -9349,23 +9349,89 @@
       "periods": {
         "FY2023": {
           "value_usd": 146655000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "SellingExpense",
+              "raw_label": "SellingExpense",
+              "spanish_label": "SellingExpense",
+              "val_usd": 146655000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 1469409000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "GeneralAndAdministrativeExpense",
+              "raw_label": "GeneralAndAdministrativeExpense",
+              "spanish_label": "GeneralAndAdministrativeExpense",
+              "val_usd": 1333267000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "SellingExpense",
+              "raw_label": "SellingExpense",
+              "spanish_label": "SellingExpense",
+              "val_usd": 136142000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 700676000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "GeneralAndAdministrativeExpense",
+              "raw_label": "GeneralAndAdministrativeExpense",
+              "spanish_label": "GeneralAndAdministrativeExpense",
+              "val_usd": 628901000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "SellingExpense",
+              "raw_label": "SellingExpense",
+              "spanish_label": "SellingExpense",
+              "val_usd": 71775000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 282503000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "GeneralAndAdministrativeExpense",
+              "raw_label": "GeneralAndAdministrativeExpense",
+              "spanish_label": "GeneralAndAdministrativeExpense",
+              "val_usd": 266024000.0,
+              "source": "income_statement_detail"
+            },
+            {
+              "concept": "SellingExpense",
+              "raw_label": "SellingExpense",
+              "spanish_label": "SellingExpense",
+              "val_usd": 16479000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": 199919000.0,
-          "sources": []
+          "sources": [],
+          "footnote_disclosures": [
+            {
+              "concept": "GeneralAndAdministrativeExpense",
+              "raw_label": "GeneralAndAdministrativeExpense",
+              "spanish_label": "GeneralAndAdministrativeExpense",
+              "val_usd": 199919000.0,
+              "source": "income_statement_detail"
+            }
+          ]
         }
       }
     },
@@ -9764,6 +9830,15 @@
               "is_extension_tag": false,
               "val_usd": -4830000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "nu_IncomeTaxInStatementOfProfitOrLoss",
+              "raw_label": "Income tax in the statement of profit or loss",
+              "spanish_label": "Income tax in the statement of profit or loss",
+              "val_usd": 4830000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2020": {
@@ -9777,6 +9852,15 @@
               "is_extension_tag": false,
               "val_usd": 21687000.0
             }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "nu_IncomeTaxInStatementOfProfitOrLoss",
+              "raw_label": "Income tax in the statement of profit or loss",
+              "spanish_label": "Income tax in the statement of profit or loss",
+              "val_usd": 21687000.0,
+              "source": "income_statement_detail"
+            }
           ]
         },
         "FY2019": {
@@ -9789,6 +9873,15 @@
               "section_path": "Operating (expenses) income",
               "is_extension_tag": false,
               "val_usd": 36768000.0
+            }
+          ],
+          "footnote_disclosures": [
+            {
+              "concept": "nu_IncomeTaxInStatementOfProfitOrLoss",
+              "raw_label": "Income tax in the statement of profit or loss",
+              "spanish_label": "Income tax in the statement of profit or loss",
+              "val_usd": 36769000.0,
+              "source": "income_statement_detail"
             }
           ]
         }
@@ -9921,7 +10014,7 @@
       "formula_display": "Efectivo y equivalentes de efectivo reportados en balance.",
       "periods": {
         "LTM": {
-          "value_usd": 22700739000.0,
+          "value_usd": 13551611000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -9936,11 +10029,11 @@
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-12-31",
             "accession": "0001292814-26-005000",
-            "ltm_val": 22700739000.0
+            "ltm_val": 13551611000.0
           }
         },
         "FY2025": {
-          "value_usd": 24541431000.0,
+          "value_usd": 15003643000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -9953,7 +10046,7 @@
           ]
         },
         "FY2024": {
-          "value_usd": 15929078000.0,
+          "value_usd": 9185742000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -9966,7 +10059,7 @@
           ]
         },
         "FY2023": {
-          "value_usd": 13370923000.0,
+          "value_usd": 5923440000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -9979,7 +10072,7 @@
           ]
         },
         "FY2022": {
-          "value_usd": 6950335000.0,
+          "value_usd": 4172316000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -9992,7 +10085,7 @@
           ]
         },
         "FY2021": {
-          "value_usd": 3644334000.0,
+          "value_usd": 2705675000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -10005,7 +10098,7 @@
           ]
         },
         "FY2020": {
-          "value_usd": 2387322000.0,
+          "value_usd": 2343780000.0,
           "sources": [
             {
               "concept": "ifrs-full_CashAndCashEquivalents",
@@ -10070,64 +10163,64 @@
       "formula_display": "Total Cash & ST Investments = Cash & Cash Equivalents + Short-Term Investments.",
       "periods": {
         "LTM": {
-          "value_usd": 38220855000.0,
+          "value_usd": 29071727000.0,
           "sources": [],
           "components": {
-            "cash": 22700739000.0,
+            "cash": 13551611000.0,
             "short_term_investments": 15520116000.0
           },
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-12-31",
             "accession": "0001292814-26-005000",
-            "ltm_val": 38220855000.0
+            "ltm_val": 29071727000.0
           }
         },
         "FY2025": {
-          "value_usd": 37839178000.0,
+          "value_usd": 28301390000.0,
           "sources": [],
           "components": {
-            "cash": 24541431000.0,
+            "cash": 15003643000.0,
             "short_term_investments": 13297747000.0
           }
         },
         "FY2024": {
-          "value_usd": 26583301000.0,
+          "value_usd": 19839965000.0,
           "sources": [],
           "components": {
-            "cash": 15929078000.0,
+            "cash": 9185742000.0,
             "short_term_investments": 10654223000.0
           }
         },
         "FY2023": {
-          "value_usd": 22566543000.0,
+          "value_usd": 15119060000.0,
           "sources": [],
           "components": {
-            "cash": 13370923000.0,
+            "cash": 5923440000.0,
             "short_term_investments": 9195620000.0
           }
         },
         "FY2022": {
-          "value_usd": 17031116000.0,
+          "value_usd": 14253097000.0,
           "sources": [],
           "components": {
-            "cash": 6950335000.0,
+            "cash": 4172316000.0,
             "short_term_investments": 10080781000.0
           }
         },
         "FY2021": {
-          "value_usd": 12726094000.0,
+          "value_usd": 11787435000.0,
           "sources": [],
           "components": {
-            "cash": 3644334000.0,
+            "cash": 2705675000.0,
             "short_term_investments": 9081760000.0
           }
         },
         "FY2020": {
-          "value_usd": 6765440000.0,
+          "value_usd": 6721898000.0,
           "sources": [],
           "components": {
-            "cash": 2387322000.0,
+            "cash": 2343780000.0,
             "short_term_investments": 4378118000.0
           }
         },
@@ -10354,16 +10447,8 @@
       "formula_display": "Other Equity / AOCI / NCI = Total Stockholders' Equity − (Common Stock & APIC + Retained Earnings).",
       "periods": {
         "LTM": {
-          "value_usd": 186449000.0,
+          "value_usd": 188500000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": 4566905000.0
-            },
             {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
@@ -10373,96 +10458,72 @@
               "val_usd": 186449000.0
             },
             {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
+              "concept": "ifrs-full_NoncontrollingInterests",
+              "raw_label": "Noncontrolling Interest",
+              "spanish_label": "Intereses no dominantes / Socios minoritarios",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 13249670000.0
+              "val_usd": 2051000.0
             }
           ],
-          "explained_sum_usd": 18003024000.0,
-          "residual_unexplained_usd": -17816575000.0,
+          "explained_sum_usd": 188500000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-12-31",
             "accession": "0001292814-26-005000",
-            "ltm_val": 186449000.0
+            "ltm_val": 188500000.0
           }
         },
         "FY2025": {
-          "value_usd": -184300000.0,
+          "value_usd": -153686000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -5062464000.0
-            },
             {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 184300000.0
+              "val_usd": -184300000.0
             },
             {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
+              "concept": "ifrs-full_NoncontrollingInterests",
+              "raw_label": "Noncontrolling Interest",
+              "spanish_label": "Intereses no dominantes / Socios minoritarios",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": -11290948000.0
+              "val_usd": 30614000.0
             }
           ],
-          "explained_sum_usd": -16169112000.0,
-          "residual_unexplained_usd": 15984812000.0
+          "explained_sum_usd": -153686000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
-          "value_usd": -828167000.0,
+          "value_usd": -827380000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -5053776000.0
-            },
             {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 828167000.0
+              "val_usd": -828167000.0
             },
             {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
+              "concept": "ifrs-full_NoncontrollingInterests",
+              "raw_label": "Noncontrolling Interest",
+              "spanish_label": "Intereses no dominantes / Socios minoritarios",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": -7646289000.0
+              "val_usd": 787000.0
             }
           ],
-          "explained_sum_usd": -11871898000.0,
-          "residual_unexplained_usd": 11043731000.0
+          "explained_sum_usd": -827380000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
           "value_usd": 156430000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": 4972922000.0
-            },
             {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
@@ -10470,117 +10531,78 @@
               "section_path": "Equity",
               "is_extension_tag": false,
               "val_usd": 156430000.0
-            },
-            {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": 6406385000.0
             }
           ],
-          "explained_sum_usd": 11535737000.0,
-          "residual_unexplained_usd": -11379307000.0
+          "explained_sum_usd": 156430000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
           "value_usd": -137651000.0,
           "sources": [
             {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -4963774000.0
-            },
-            {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 137651000.0
-            },
-            {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -4890783000.0
+              "val_usd": -137651000.0
             }
           ],
-          "explained_sum_usd": -9716906000.0,
-          "residual_unexplained_usd": 9579255000.0
+          "explained_sum_usd": -137651000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2021": {
-          "value_usd": -109227000.0,
+          "value_usd": -107718000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -4678585000.0
-            },
             {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 109227000.0
+              "val_usd": -109227000.0
             },
             {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
+              "concept": "ifrs-full_NoncontrollingInterests",
+              "raw_label": "Noncontrolling Interest",
+              "spanish_label": "Intereses no dominantes / Socios minoritarios",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": -4441032000.0
+              "val_usd": 1509000.0
             }
           ],
-          "explained_sum_usd": -9010390000.0,
-          "residual_unexplained_usd": 8901163000.0
+          "explained_sum_usd": -107718000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2020": {
           "value_usd": -97500000.0,
           "sources": [
             {
-              "concept": "ifrs-full_SharePremium",
-              "raw_label": "Additional Paid-In Capital",
-              "spanish_label": "Prima de emisión de acciones (Capital adicional)",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -638007000.0
-            },
-            {
               "concept": "ifrs-full_AccumulatedOtherComprehensiveIncome",
               "raw_label": "Accumulated Other Comprehensive Income",
               "spanish_label": "Otro resultado integral acumulado (AOCI)",
               "section_path": "Equity",
               "is_extension_tag": false,
-              "val_usd": 97500000.0
-            },
-            {
-              "concept": "ifrs-full_EquityAttributableToOwnersOfParent",
-              "raw_label": "Equity attributable to shareholders of the parent company",
-              "spanish_label": "Patrimonio neto atribuible a los accionistas de la sociedad dominante",
-              "section_path": "Equity",
-              "is_extension_tag": false,
-              "val_usd": -438111000.0
+              "val_usd": -97500000.0
             }
           ],
-          "explained_sum_usd": -978618000.0,
-          "residual_unexplained_usd": 881118000.0
+          "explained_sum_usd": -97500000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2019": {
           "value_usd": 612251000.0,
-          "sources": [],
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 612251000.0
+          "sources": [
+            {
+              "concept": "bridge:stockholders_equity",
+              "raw_label": "Reconciliación off-face / XBRL: Stockholders Equity",
+              "spanish_label": "Reconciliación off-face / XBRL: Stockholders Equity",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 612251000.0
+            }
+          ],
+          "explained_sum_usd": 612251000.0,
+          "residual_unexplained_usd": 0.0
         }
       }
     },
@@ -10774,16 +10796,8 @@
       "formula_display": "Otros Activos (Banca/Seguros) = Total Assets − Activos principales sectoriales.",
       "periods": {
         "LTM": {
-          "value_usd": 10564259000.0,
+          "value_usd": 41207793000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 1473272000.0
-            },
             {
               "concept": "nu_Securities",
               "raw_label": "Securities",
@@ -10801,14 +10815,6 @@
               "val_usd": 115257000.0
             },
             {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 14046844000.0
-            },
-            {
               "concept": "nu_OtherSecurities",
               "raw_label": "Securities",
               "spanish_label": "Valores e instrumentos de deuda negociables (Securities) [OtherSecurities]",
@@ -10817,28 +10823,12 @@
               "val_usd": 14046844000.0
             },
             {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 46722060000.0
-            },
-            {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
               "spanish_label": "Cartera de créditos por operaciones de tarjetas",
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 21494406000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 11317422000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -10881,6 +10871,22 @@
               "val_usd": 3649091000.0
             },
             {
+              "concept": "ifrs-full_InvestmentsInAssociates",
+              "raw_label": "Investments in associates",
+              "spanish_label": "Inversiones financieras en entidades asociadas",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 93004000.0
+            },
+            {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 54654000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
@@ -10889,74 +10895,42 @@
               "val_usd": 50665000.0
             },
             {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
+              "concept": "sibling_reclass_short_term_investments",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (short_term_investments)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (short_term_investments)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 747101000.0
+              "val_usd": -1473272000.0
+            },
+            {
+              "concept": "sibling_reclass_goodwill_and_intangibles",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (goodwill_and_intangibles)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (goodwill_and_intangibles)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
+              "is_extension_tag": false,
+              "val_usd": -409371000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_assets_sectoral",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -12787576000.0
             }
           ],
-          "explained_sum_usd": 130037053000.0,
-          "residual_unexplained_usd": -119472794000.0,
+          "explained_sum_usd": 41207793000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-12-31",
             "accession": "0001292814-26-005000",
-            "ltm_val": 10564259000.0
+            "ltm_val": 41207793000.0
           }
         },
         "FY2025": {
-          "value_usd": 8354297000.0,
+          "value_usd": 36159989000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 1140671000.0
-            },
-            {
-              "concept": "nu_Securities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities)",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 1059923000.0
-            },
-            {
-              "concept": "nu_Derivatives",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo) — Activos",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 80748000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 12157076000.0
-            },
-            {
-              "concept": "nu_OtherSecurities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities) [OtherSecurities]",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 12157076000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 41518114000.0
-            },
             {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
@@ -10964,14 +10938,6 @@
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 18267904000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 9421458000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11022,76 +10988,36 @@
               "val_usd": 2510967000.0
             },
             {
+              "concept": "ifrs-full_InvestmentsInAssociates",
+              "raw_label": "Investments in associates",
+              "spanish_label": "Inversiones financieras en entidades asociadas",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 98702000.0
+            },
+            {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 22244000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
               "section_path": "Assets",
               "is_extension_tag": false,
               "val_usd": 27550000.0
-            },
-            {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 601669000.0
             }
           ],
-          "explained_sum_usd": 114175778000.0,
-          "residual_unexplained_usd": -105821481000.0
+          "explained_sum_usd": 36159989000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
-          "value_usd": 5004849000.0,
+          "value_usd": 24007461000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 740706000.0
-            },
-            {
-              "concept": "nu_Securities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities)",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 665242000.0
-            },
-            {
-              "concept": "nu_Derivatives",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo) — Activos",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 75464000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 9913517000.0
-            },
-            {
-              "concept": "nu_OtherSecurities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities) [OtherSecurities]",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 9913517000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 26701841000.0
-            },
             {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
@@ -11099,14 +11025,6 @@
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 12259276000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 5321885000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11157,68 +11075,36 @@
               "val_usd": 1818339000.0
             },
             {
+              "concept": "ifrs-full_InvestmentsInAssociates",
+              "raw_label": "Investments in associates",
+              "spanish_label": "Inversiones financieras en entidades asociadas",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 99365000.0
+            },
+            {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 20344000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
               "section_path": "Assets",
               "is_extension_tag": false,
               "val_usd": 25879000.0
-            },
-            {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 347616000.0
             }
           ],
-          "explained_sum_usd": 77567540000.0,
-          "residual_unexplained_usd": -72562691000.0
+          "explained_sum_usd": 24007461000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
-          "value_usd": 4468766000.0,
+          "value_usd": 24330382000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 389875000.0
-            },
-            {
-              "concept": "nu_Securities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities)",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 368574000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 8805745000.0
-            },
-            {
-              "concept": "nu_OtherSecurities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities) [OtherSecurities]",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 8805745000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 24988919000.0
-            },
             {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
@@ -11226,14 +11112,6 @@
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 12414133000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 3202334000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11284,36 +11162,28 @@
               "val_usd": 1537835000.0
             },
             {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 30459000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
               "section_path": "Assets",
               "is_extension_tag": false,
               "val_usd": 39294000.0
-            },
-            {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 295881000.0
             }
           ],
-          "explained_sum_usd": 71156996000.0,
-          "residual_unexplained_usd": -66688230000.0
+          "explained_sum_usd": 24330382000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
-          "value_usd": 2417683000.0,
+          "value_usd": 13428774000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 133643000.0
-            },
             {
               "concept": "nu_Securities",
               "raw_label": "Securities",
@@ -11321,14 +11191,6 @@
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 91853000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 9947138000.0
             },
             {
               "concept": "nu_OtherSecurities",
@@ -11339,28 +11201,12 @@
               "val_usd": 9947138000.0
             },
             {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 13684484000.0
-            },
-            {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
               "spanish_label": "Cartera de créditos por operaciones de tarjetas",
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 8233072000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 1673440000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11403,6 +11249,14 @@
               "val_usd": 811050000.0
             },
             {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 18982000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
@@ -11411,60 +11265,45 @@
               "val_usd": 27482000.0
             },
             {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
+              "concept": "sibling_reclass_short_term_investments",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (short_term_investments)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (short_term_investments)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 182164000.0
+              "val_usd": -133643000.0
+            },
+            {
+              "concept": "sibling_reclass_goodwill_and_intangibles",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (goodwill_and_intangibles)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (goodwill_and_intangibles)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
+              "is_extension_tag": false,
+              "val_usd": -182164000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_assets_sectoral",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -9704871000.0
             }
           ],
-          "explained_sum_usd": 49051339000.0,
-          "residual_unexplained_usd": -46633656000.0
+          "explained_sum_usd": 13428774000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 41118000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2021": {
-          "value_usd": 683044000.0,
+          "value_usd": 6402223000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughProfitOrLoss",
-              "raw_label": "Financial assets at fair value through profit or loss",
-              "spanish_label": "Activos financieros a valor razonable con cambios en resultados",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 918332000.0
-            },
-            {
-              "concept": "nu_Securities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities)",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 815962000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtFairValueThroughOtherComprehensiveIncome",
-              "raw_label": "Financial assets at fair value through other comprehensive income",
-              "spanish_label": "Activos financieros a valor razonable con cambios en OCI",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 8163428000.0
-            },
-            {
-              "concept": "nu_OtherSecurities",
-              "raw_label": "Securities",
-              "spanish_label": "Valores e instrumentos de deuda negociables (Securities) [OtherSecurities]",
-              "section_path": "Assets",
-              "is_extension_tag": true,
-              "val_usd": 8163428000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 6982835000.0
-            },
             {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
@@ -11472,14 +11311,6 @@
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 4780520000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 1194814000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11522,27 +11353,36 @@
               "val_usd": 360752000.0
             },
             {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 6426000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
               "section_path": "Assets",
               "is_extension_tag": false,
               "val_usd": 14109000.0
-            },
-            {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 72337000.0
             }
           ],
-          "explained_sum_usd": 32706933000.0,
-          "residual_unexplained_usd": -32023889000.0
+          "explained_sum_usd": 6402223000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 29334000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
-          "value_usd": 292006000.0,
+          "value_usd": 3244455000.0,
           "sources": [
             {
               "concept": "nu_Securities",
@@ -11553,28 +11393,12 @@
               "val_usd": 4287277000.0
             },
             {
-              "concept": "ifrs-full_FinancialAssetsAtAmortisedCost",
-              "raw_label": "Financial assets at amortized cost",
-              "spanish_label": "Activos financieros al coste amortizado",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 3150013000.0
-            },
-            {
               "concept": "nu_CreditCardReceivables1",
               "raw_label": "Credit card receivables",
               "spanish_label": "Cartera de créditos por operaciones de tarjetas",
               "section_path": "Assets",
               "is_extension_tag": true,
               "val_usd": 2908907000.0
-            },
-            {
-              "concept": "ifrs-full_LoansAndAdvancesToCustomers",
-              "raw_label": "Loans to customers",
-              "spanish_label": "Cartera de créditos y préstamos a clientes",
-              "section_path": "Assets",
-              "is_extension_tag": false,
-              "val_usd": 174694000.0
             },
             {
               "concept": "nu_CompulsoryAndOtherDepositsAtCentralBanks",
@@ -11601,6 +11425,14 @@
               "val_usd": 125131000.0
             },
             {
+              "concept": "ifrs-full_RightofuseAssets",
+              "raw_label": "Operating Lease Right-of-Use Asset",
+              "spanish_label": "Activo por derecho de uso bajo arrendamiento operativo",
+              "section_path": "Assets",
+              "is_extension_tag": false,
+              "val_usd": 10660000.0
+            },
+            {
               "concept": "ifrs-full_PropertyPlantAndEquipment",
               "raw_label": "Property, Plant and Equipment",
               "spanish_label": "Propiedad, planta y equipo",
@@ -11609,16 +11441,33 @@
               "val_usd": 9850000.0
             },
             {
-              "concept": "ifrs-full_IntangibleAssetsOtherThanGoodwill",
-              "raw_label": "Intangible Assets",
-              "spanish_label": "Activos intangibles",
-              "section_path": "Assets",
+              "concept": "bridge:nu_Securities",
+              "raw_label": "Reconciliación XBRL: Securities",
+              "spanish_label": "Reconciliación XBRL: Securities",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": 12372000.0
+              "val_usd": -4287277000.0
+            },
+            {
+              "concept": "bridge:nu_OtherFinancialAssetsAtAmortisedCost",
+              "raw_label": "Reconciliación XBRL: Other financial assets at amortized cost",
+              "spanish_label": "Reconciliación XBRL: Other financial assets at amortized cost",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 22870000.0
             }
           ],
-          "explained_sum_usd": 10835281000.0,
-          "residual_unexplained_usd": -10543275000.0
+          "explained_sum_usd": 3244455000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 8741000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         }
       }
     },
@@ -11637,22 +11486,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 116068000.0
-            },
-            {
-              "concept": "ifrs-full_DerivativeFinancialLiabilities",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo) — Pasivos",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 89659000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 66610671000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -11711,8 +11544,8 @@
               "val_usd": 1240846000.0
             }
           ],
-          "explained_sum_usd": 85133009000.0,
-          "residual_unexplained_usd": -66700330000.0,
+          "explained_sum_usd": 18432679000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "MRQ_STOCK",
             "mrq_period": "2026-12-31",
@@ -11730,22 +11563,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 65969000.0
-            },
-            {
-              "concept": "ifrs-full_DerivativeFinancialLiabilities",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo) — Pasivos",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 65969000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 60741103000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -11804,8 +11621,8 @@
               "val_usd": 966922000.0
             }
           ],
-          "explained_sum_usd": 77272233000.0,
-          "residual_unexplained_usd": -60807072000.0
+          "explained_sum_usd": 16465161000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
           "value_usd": 11390133000.0,
@@ -11817,22 +11634,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 32329000.0
-            },
-            {
-              "concept": "ifrs-full_DerivativeFinancialLiabilities",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo) — Pasivos",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 32329000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 40227546000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -11891,8 +11692,8 @@
               "val_usd": 621612000.0
             }
           ],
-          "explained_sum_usd": 51650008000.0,
-          "residual_unexplained_usd": -40259875000.0
+          "explained_sum_usd": 11390133000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
           "value_usd": 10974992000.0,
@@ -11912,14 +11713,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 28173000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 34582759000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -11976,10 +11769,26 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 532331000.0
+            },
+            {
+              "concept": "bridge:ifrs-full_DerivativeFinancialLiabilities",
+              "raw_label": "Reconciliación XBRL: Derivatives",
+              "spanish_label": "Reconciliación XBRL: Derivatives",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -28173000.0
+            },
+            {
+              "concept": "bridge:ifrs-full_Borrowings",
+              "raw_label": "Reconciliación XBRL: Borrowings and financing (i)",
+              "spanish_label": "Reconciliación XBRL: Borrowings and financing (i)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1136344000.0
             }
           ],
-          "explained_sum_usd": 46722268000.0,
-          "residual_unexplained_usd": -35747276000.0
+          "explained_sum_usd": 10974992000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
           "value_usd": 8064412000.0,
@@ -11999,14 +11808,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 9425000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 23448892000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -12063,10 +11864,27 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 636000000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_liabilities_sectoral",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -535562000.0
             }
           ],
-          "explained_sum_usd": 32048866000.0,
-          "residual_unexplained_usd": -23984454000.0
+          "explained_sum_usd": 8064412000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 41118000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": 5454354000.0,
@@ -12086,14 +11904,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 87278000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 14706713000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -12150,10 +11960,27 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 182247000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_liabilities_sectoral",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -195176000.0
             }
           ],
-          "explained_sum_usd": 20356243000.0,
-          "residual_unexplained_usd": -14901889000.0
+          "explained_sum_usd": 5454354000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 29334000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": 3936369000.0,
@@ -12173,14 +12000,6 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 75304000.0
-            },
-            {
-              "concept": "ifrs-full_FinancialLiabilitiesAtAmortisedCost",
-              "raw_label": "Financial liabilities at amortized cost",
-              "spanish_label": "Pasivos financieros al coste amortizado",
-              "section_path": "Liabilities",
-              "is_extension_tag": false,
-              "val_usd": 9421710000.0
             },
             {
               "concept": "ifrs-full_OtherPayables",
@@ -12237,10 +12056,27 @@
               "section_path": "Liabilities",
               "is_extension_tag": false,
               "val_usd": 83814000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_liabilities_sectoral",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 244119000.0
             }
           ],
-          "explained_sum_usd": 13113960000.0,
-          "residual_unexplained_usd": -9177591000.0
+          "explained_sum_usd": 3936369000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "DeferredTaxLiabilities",
+              "raw_label": "DeferredTaxLiabilities",
+              "spanish_label": "DeferredTaxLiabilities",
+              "val_usd": 8741000.0,
+              "source": "balance_sheet_detail"
+            }
+          ]
         }
       }
     },
@@ -12541,10 +12377,98 @@
               "section_path": "Adjustments",
               "is_extension_tag": true,
               "val_usd": 99624000.0
+            },
+            {
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -6668161000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables",
+              "raw_label": "Other receivables",
+              "spanish_label": "Otros deudores y saldos por cobrar operativos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": 76049000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -976221000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": -735278000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 4354132000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -20266000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 2874620000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -248920000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -2108055000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 10690123000.0
+            },
+            {
+              "concept": "bridge:xbrl_calc_weight_inversion_ifrs-full_AdjustmentsForDeferredTaxExpense",
+              "raw_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "spanish_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -2755952000.0
             }
           ],
-          "explained_sum_usd": 6599351000.0,
-          "residual_unexplained_usd": 4482071000.0,
+          "explained_sum_usd": 11081422000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2025",
@@ -12559,14 +12483,6 @@
         "FY2025": {
           "value_usd": 9723203000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 2871672000.0
-            },
             {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
@@ -12616,28 +12532,100 @@
               "val_usd": 86676000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -4812896000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables",
+              "raw_label": "Other receivables",
+              "spanish_label": "Otros deudores y saldos por cobrar operativos",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": 7873137000.0
+              "val_usd": 406251000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -2749819000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": -828600000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 4132411000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 5791000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 2659676000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -92292000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -1641663000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 8439951000.0
+            },
+            {
+              "concept": "bridge:xbrl_calc_weight_inversion_ifrs-full_AdjustmentsForDeferredTaxExpense",
+              "raw_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "spanish_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -854518000.0
             }
           ],
-          "explained_sum_usd": 15803720000.0,
-          "residual_unexplained_usd": -6080517000.0
+          "explained_sum_usd": 9723203000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
           "value_usd": 6350441000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 1972112000.0
-            },
             {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
@@ -12679,28 +12667,109 @@
               "val_usd": -2723000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -2552241000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables",
+              "raw_label": "Other receivables",
+              "spanish_label": "Otros deudores y saldos por cobrar operativos",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": 5320050000.0
+              "val_usd": 385192000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 805963000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": 369190000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -528511000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 3750000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 1111830000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -88082000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -1262541000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 5820898000.0
+            },
+            {
+              "concept": "bridge:xbrl_calc_weight_inversion_ifrs-full_AdjustmentsForDeferredTaxExpense",
+              "raw_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "spanish_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1426870000.0
             }
           ],
-          "explained_sum_usd": 11004025000.0,
-          "residual_unexplained_usd": -4653584000.0
+          "explained_sum_usd": 6350441000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "nu_UnrealizedLossesOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": -11000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2023": {
           "value_usd": 3075552000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 1030530000.0
-            },
             {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
@@ -12742,28 +12811,109 @@
               "val_usd": 23076000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 699076000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables",
+              "raw_label": "Other receivables",
+              "spanish_label": "Otros deudores y saldos por cobrar operativos",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": 3277573000.0
+              "val_usd": -1136488000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -4540463000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": -60982000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 2818592000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 25935000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 1279987000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -82904000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -612447000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 3389331000.0
+            },
+            {
+              "concept": "bridge:xbrl_calc_weight_inversion_ifrs-full_AdjustmentsForDeferredTaxExpense",
+              "raw_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "spanish_label": "Reconciliación off-face / XBRL: Normalización Signo XBRL (ifrs-full_AdjustmentsForDeferredTaxExpense)",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -1351364000.0
             }
           ],
-          "explained_sum_usd": 6955382000.0,
-          "residual_unexplained_usd": -3879830000.0
+          "explained_sum_usd": 3075552000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "nu_UnrealizedLossesOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": 20000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2022": {
           "value_usd": 1238670000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": -364634000.0
-            },
             {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
@@ -12797,35 +12947,130 @@
               "val_usd": 8203000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -1102864000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInTradeAndOtherReceivables",
+              "raw_label": "Other receivables",
+              "spanish_label": "Otros deudores y saldos por cobrar operativos",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": 1361183000.0
+              "val_usd": -481824000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -1880347000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": -772415000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 2221037000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 11277000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 979277000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -30935000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -297090000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 1573133000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -479977000.0
             }
           ],
-          "explained_sum_usd": 2495947000.0,
-          "residual_unexplained_usd": -1257277000.0
+          "explained_sum_usd": 1238670000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "nu_UnrealizedLossesGainsOnFinancialInstruments",
+              "raw_label": "Unrealized losses (gains) on financial instruments",
+              "spanish_label": "Unrealized losses (gains) on financial instruments",
+              "val_usd": 17794000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "nu_UnrealizedLossesOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": 848000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "nu_UnrealizedLossesGainsOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": 848000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2021": {
           "value_usd": -3069517000.0,
           "sources": [
-            {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 165334000.0
-            },
             {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
               "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -503679000.0
+              "val_usd": 503679000.0
             },
             {
               "concept": "nu_UnrealizedLossesOnFinancialInstruments",
@@ -12833,7 +13078,7 @@
               "spanish_label": "Pérdidas (ganancias) no realizadas en instrumentos financieros",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -19338000.0
+              "val_usd": 19338000.0
             },
             {
               "concept": "nu_InterestAccrued",
@@ -12841,38 +13086,125 @@
               "spanish_label": "Intereses devengados pendientes de liquidación",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -11077000.0
+              "val_usd": 11077000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -4666792000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -924889000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": -293487000.0
+              "val_usd": -64072000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 1602485000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 4848000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 417225000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -9062000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -52314000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 563550000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -474590000.0
             }
           ],
-          "explained_sum_usd": -662247000.0,
-          "residual_unexplained_usd": -2407270000.0
+          "explained_sum_usd": -3069517000.0,
+          "residual_unexplained_usd": 0.0,
+          "footnote_disclosures": [
+            {
+              "concept": "nu_UnrealizedLossesOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": -39280000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "nu_UnrealizedLossesGainsOnOtherInvestments",
+              "raw_label": "Unrealized losses (gains) on other investments",
+              "spanish_label": "Unrealized losses (gains) on other investments",
+              "val_usd": -39280000.0,
+              "source": "cash_flow_detail"
+            },
+            {
+              "concept": "nu_UnrealizedLossesGainsOnFinancialInstruments",
+              "raw_label": "Unrealized losses (gains) on financial instruments",
+              "spanish_label": "Unrealized losses (gains) on financial instruments",
+              "val_usd": 19338000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2020": {
           "value_usd": -1163344000.0,
           "sources": [
             {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 171491000.0
-            },
-            {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
               "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -187790000.0
+              "val_usd": 187790000.0
             },
             {
               "concept": "nu_InterestAccrued",
@@ -12880,38 +13212,119 @@
               "spanish_label": "Intereses devengados pendientes de liquidación",
               "section_path": "Adjustments",
               "is_extension_tag": true,
+              "val_usd": 39521000.0
+            },
+            {
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -2008861000.0
+            },
+            {
+              "concept": "nu_CompulsoryDepositsAndOthersAtCentralBanks",
+              "raw_label": "Compulsory and other deposits at central banks",
+              "spanish_label": "Compulsory y otros deposits at central banks",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -43841000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": false,
+              "val_usd": 78319000.0
+            },
+            {
+              "concept": "nu_PayablesToNetwork",
+              "raw_label": "Payables to network",
+              "spanish_label": "Saldos pendientes de liquidación con redes de pago",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 312607000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 3621000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 57841000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -6199000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -7880000.0
+            },
+            {
+              "concept": "nu_InterestReceived",
+              "raw_label": "Interest received",
+              "spanish_label": "Intereses financieros cobrados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 263035000.0
+            },
+            {
+              "concept": "bridge:nu_InterestAccrued",
+              "raw_label": "Reconciliación XBRL: Interest accrued",
+              "spanish_label": "Reconciliación XBRL: Interest accrued",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
               "val_usd": -39521000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "bridge:nu_ProvisionForAdministrativeAndLegalProceedings",
+              "raw_label": "Reconciliación XBRL: Provision for lawsuits and administrative proceedings",
+              "spanish_label": "Reconciliación XBRL: Provision for lawsuits and administrative proceedings",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -103452000.0
+              "val_usd": 227000.0
             }
           ],
-          "explained_sum_usd": -159272000.0,
-          "residual_unexplained_usd": -1004072000.0
+          "explained_sum_usd": -1163341000.0,
+          "residual_unexplained_usd": -3000.0,
+          "footnote_disclosures": [
+            {
+              "concept": "nu_UnrealizedLossesGainsOnFinancialInstruments",
+              "raw_label": "Unrealized losses (gains) on financial instruments",
+              "spanish_label": "Unrealized losses (gains) on financial instruments",
+              "val_usd": 48433000.0,
+              "source": "cash_flow_detail"
+            }
+          ]
         },
         "FY2019": {
           "value_usd": -306551000.0,
           "sources": [
             {
-              "concept": "ifrs-full_ProfitLossFromContinuingOperations",
-              "raw_label": "Net income for the year",
-              "spanish_label": "Beneficio neto consolidado del ejercicio",
-              "section_path": "Reconciliation of net income to net cash flows from operating activities",
-              "is_extension_tag": false,
-              "val_usd": 92531000.0
-            },
-            {
               "concept": "nu_CreditLossAllowanceExpenses1",
               "raw_label": "Expected credit loss",
               "spanish_label": "Pérdidas crediticias esperadas (deterioro de cartera NIIF 9)",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -193967000.0
+              "val_usd": 193967000.0
             },
             {
               "concept": "nu_InterestAccrued",
@@ -12919,19 +13332,75 @@
               "spanish_label": "Intereses devengados pendientes de liquidación",
               "section_path": "Adjustments",
               "is_extension_tag": true,
-              "val_usd": -17681000.0
+              "val_usd": 17681000.0
             },
             {
-              "concept": "ifrs-full_AdjustmentsForReconcileProfitLoss",
-              "raw_label": "Net Cash from Operating Activities",
-              "spanish_label": "Neto Cash de actividades de operación — Adjustments",
-              "section_path": "Adjustments",
+              "concept": "nu_OperatingSecurities",
+              "raw_label": "Securities",
+              "spanish_label": "Valores e instrumentos de deuda negociables",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -1689547000.0
+            },
+            {
+              "concept": "ifrs-full_AdjustmentsForDecreaseIncreaseInOtherAssets",
+              "raw_label": "Other assets",
+              "spanish_label": "Otros activos operativos y no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
               "is_extension_tag": false,
-              "val_usd": -111546000.0
+              "val_usd": -166173000.0
+            },
+            {
+              "concept": "nu_DeferredIncome1",
+              "raw_label": "Deferred income",
+              "spanish_label": "Ingresos diferidos y cobros anticipados por contratos",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 10325000.0
+            },
+            {
+              "concept": "nu_OtherLiabilities1",
+              "raw_label": "Other liabilities",
+              "spanish_label": "Otros pasivos operativos no corrientes",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": 52366000.0
+            },
+            {
+              "concept": "nu_InterestPaid1",
+              "raw_label": "Interest paid",
+              "spanish_label": "Intereses financieros pagados",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -15603000.0
+            },
+            {
+              "concept": "nu_IncomeTaxPaid",
+              "raw_label": "Income tax paid",
+              "spanish_label": "Impuestos sobre las ganancias pagados en efectivo",
+              "section_path": "Changes in operating assets and liabilities",
+              "is_extension_tag": true,
+              "val_usd": -3457000.0
+            },
+            {
+              "concept": "sibling_reclass_banking_loans_cf",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (banking_loans_cf)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (banking_loans_cf)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
+              "is_extension_tag": false,
+              "val_usd": 63009000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_noncash",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 1230881000.0
             }
           ],
-          "explained_sum_usd": -230663000.0,
-          "residual_unexplained_usd": -75888000.0
+          "explained_sum_usd": -306551000.0,
+          "residual_unexplained_usd": 0.0
         }
       }
     },
@@ -13120,10 +13589,18 @@
               "section_path": "Cash flows in investing activities",
               "is_extension_tag": false,
               "val_usd": -19047000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_investing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": -1539000.0
             }
           ],
-          "explained_sum_usd": -19047000.0,
-          "residual_unexplained_usd": -1539000.0,
+          "explained_sum_usd": -20586000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2025",
@@ -13139,10 +13616,10 @@
           "value_usd": -7215000.0,
           "sources": [
             {
-              "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
-              "raw_label": "Acquisition of property, plant and equipment",
-              "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
-              "section_path": "Cash flows in investing activities",
+              "concept": "bridge:ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -7215000.0
             }
@@ -13154,28 +13631,12 @@
           "value_usd": -155418000.0,
           "sources": [
             {
-              "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
-              "raw_label": "Acquisition of property, plant and equipment",
-              "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
-              "section_path": "Cash flows in investing activities",
+              "concept": "sec_section_reconciliation_other_investing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
               "is_extension_tag": false,
-              "val_usd": -5418000.0
-            },
-            {
-              "concept": "nu_InvestmentInAssociates",
-              "raw_label": "Investments in associates",
-              "spanish_label": "Inversiones financieras en entidades asociadas",
-              "section_path": "Cash flows in investing activities",
-              "is_extension_tag": true,
-              "val_usd": -99365000.0
-            },
-            {
-              "concept": "nu_FinancialInstrumentsDerivatives",
-              "raw_label": "Derivatives",
-              "spanish_label": "Instrumentos financieros derivados (activo/pasivo)",
-              "section_path": "Cash flows in investing activities",
-              "is_extension_tag": true,
-              "val_usd": -50635000.0
+              "val_usd": -155418000.0
             }
           ],
           "explained_sum_usd": -155418000.0,
@@ -13185,10 +13646,10 @@
           "value_usd": -20243000.0,
           "sources": [
             {
-              "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
-              "raw_label": "Acquisition of property, plant and equipment",
-              "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
-              "section_path": "Cash flows in investing activities",
+              "concept": "bridge:ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -20243000.0
             }
@@ -13206,10 +13667,18 @@
               "section_path": "Cash flows in investing activities",
               "is_extension_tag": false,
               "val_usd": -20001000.0
+            },
+            {
+              "concept": "bridge:nu_AcquisitionOfSecuritiesEquityInstruments",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of securities - equity instruments",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of securities - equity instruments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -2500000.0
             }
           ],
-          "explained_sum_usd": -20001000.0,
-          "residual_unexplained_usd": -2500000.0
+          "explained_sum_usd": -22501000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2021": {
           "value_usd": -17236000.0,
@@ -13221,19 +13690,27 @@
               "section_path": "Cash flows in investing activities",
               "is_extension_tag": false,
               "val_usd": -6025000.0
+            },
+            {
+              "concept": "bridge:nu_EquityInstrument1",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of securities - equity instruments",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of securities - equity instruments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": -11211000.0
             }
           ],
-          "explained_sum_usd": -6025000.0,
-          "residual_unexplained_usd": -11211000.0
+          "explained_sum_usd": -17236000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2020": {
           "value_usd": -3084000.0,
           "sources": [
             {
-              "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
-              "raw_label": "Acquisition of property, plant and equipment",
-              "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
-              "section_path": "Cash flows in investing activities",
+              "concept": "bridge:ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -3084000.0
             }
@@ -13245,10 +13722,10 @@
           "value_usd": -2377000.0,
           "sources": [
             {
-              "concept": "ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
-              "raw_label": "Acquisition of property, plant and equipment",
-              "spanish_label": "Adquisición de propiedad, planta y equipo (CapEx)",
-              "section_path": "Cash flows in investing activities",
+              "concept": "bridge:ifrs-full_OtherCashPaymentsToAcquireEquityOrDebtInstrumentsOfOtherEntitiesClassifiedAsInvestingActivities",
+              "raw_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "spanish_label": "Reconciliación off-face / XBRL: Acquisition of property, plant and equipment",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
               "val_usd": -2377000.0
             }
@@ -13402,26 +13879,10 @@
               "section_path": "Cash flows in financing activities",
               "is_extension_tag": true,
               "val_usd": 9234000.0
-            },
-            {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": false,
-              "val_usd": -73649000.0
-            },
-            {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": -73649000.0
             }
           ],
-          "explained_sum_usd": -148291000.0,
-          "residual_unexplained_usd": 147298000.0,
+          "explained_sum_usd": -993000.0,
+          "residual_unexplained_usd": 0.0,
           "ltm_bridge": {
             "mode": "FY_PLUS_YTD_MINUS_PRIOR_YTD",
             "base_fy": "FY2025",
@@ -13437,118 +13898,70 @@
           "value_usd": -487000.0,
           "sources": [
             {
-              "concept": "nu_LeasePayments",
-              "raw_label": "Lease payments",
-              "spanish_label": "Pagos efectuados por arrendamientos",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
-              "val_usd": 6708000.0
-            },
-            {
-              "concept": "nu_ExerciseOfStockOptions1",
-              "raw_label": "Exercise of stock options",
-              "spanish_label": "Cobros por ejercicio de opciones sobre acciones",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
-              "val_usd": -6221000.0
-            },
-            {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "bridge:nu_LeasePayments",
+              "raw_label": "Reconciliación XBRL: Lease payments",
+              "spanish_label": "Reconciliación XBRL: Lease payments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -5448386000.0
+              "val_usd": -6708000.0
             },
             {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": -5448386000.0
+              "concept": "bridge:nu_ExerciseOfStockOptions1",
+              "raw_label": "Reconciliación XBRL: Exercise of stock options",
+              "spanish_label": "Reconciliación XBRL: Exercise of stock options",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 6221000.0
             }
           ],
-          "explained_sum_usd": -10896285000.0,
-          "residual_unexplained_usd": 10895798000.0
+          "explained_sum_usd": -487000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2024": {
           "value_usd": -1507000.0,
           "sources": [
             {
-              "concept": "nu_LeasePayments",
-              "raw_label": "Lease payments",
-              "spanish_label": "Pagos efectuados por arrendamientos",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
-              "val_usd": 7053000.0
-            },
-            {
-              "concept": "nu_ExerciseOfStockOptions1",
-              "raw_label": "Exercise of stock options",
-              "spanish_label": "Cobros por ejercicio de opciones sobre acciones",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
-              "val_usd": -5546000.0
-            },
-            {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "bridge:nu_LeasePayments",
+              "raw_label": "Reconciliación XBRL: Lease payments",
+              "spanish_label": "Reconciliación XBRL: Lease payments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": -2796158000.0
+              "val_usd": -7053000.0
             },
             {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": -2796158000.0
+              "concept": "bridge:nu_ExerciseOfStockOptions1",
+              "raw_label": "Reconciliación XBRL: Exercise of stock options",
+              "spanish_label": "Reconciliación XBRL: Exercise of stock options",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
+              "val_usd": 5546000.0
             }
           ],
-          "explained_sum_usd": -5590809000.0,
-          "residual_unexplained_usd": 5589302000.0
+          "explained_sum_usd": -1507000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2023": {
           "value_usd": 2215000.0,
           "sources": [
             {
-              "concept": "nu_LeasePayments",
-              "raw_label": "Lease payments",
-              "spanish_label": "Pagos efectuados por arrendamientos",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
+              "concept": "bridge:nu_LeasePayments",
+              "raw_label": "Reconciliación XBRL: Lease payments",
+              "spanish_label": "Reconciliación XBRL: Lease payments",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
+              "is_extension_tag": false,
               "val_usd": -6933000.0
             },
             {
-              "concept": "nu_ExerciseOfStockOptions1",
-              "raw_label": "Exercise of stock options",
-              "spanish_label": "Cobros por ejercicio de opciones sobre acciones",
-              "section_path": "Cash flows in financing activities",
-              "is_extension_tag": true,
-              "val_usd": 9148000.0
-            },
-            {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "bridge:nu_ExerciseOfStockOptions1",
+              "raw_label": "Reconciliación XBRL: Exercise of stock options",
+              "spanish_label": "Reconciliación XBRL: Exercise of stock options",
+              "section_path": "Reconciliación XBRL / Nota al Pie",
               "is_extension_tag": false,
-              "val_usd": 1514401000.0
-            },
-            {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": 1514401000.0
+              "val_usd": 9148000.0
             }
           ],
-          "explained_sum_usd": 3031017000.0,
-          "residual_unexplained_usd": -3028802000.0
+          "explained_sum_usd": 2215000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2022": {
           "value_usd": 243513000.0,
@@ -13578,24 +13991,24 @@
               "val_usd": 4505000.0
             },
             {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "sibling_reclass_debt_repaid",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 1282460000.0
+              "val_usd": 330599000.0
             },
             {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": 1282460000.0
+              "concept": "sec_section_reconciliation_other_financing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 73397000.0
             }
           ],
-          "explained_sum_usd": 2404437000.0,
-          "residual_unexplained_usd": -2160924000.0
+          "explained_sum_usd": 243513000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2021": {
           "value_usd": 3351166000.0,
@@ -13617,24 +14030,24 @@
               "val_usd": -4387000.0
             },
             {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "sibling_reclass_debt_repaid",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 257469000.0
+              "val_usd": 187449000.0
             },
             {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": 257469000.0
+              "concept": "sec_section_reconciliation_other_financing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 3228627000.0
             }
           ],
-          "explained_sum_usd": 450028000.0,
-          "residual_unexplained_usd": 2901138000.0
+          "explained_sum_usd": 3351166000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2020": {
           "value_usd": 302208000.0,
@@ -13656,24 +14069,24 @@
               "val_usd": -4568000.0
             },
             {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "sibling_reclass_debt_repaid",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 1198352000.0
+              "val_usd": 107958000.0
             },
             {
-              "concept": "nu_IncreaseDecreaseInCashAndCashEquivalent",
-              "raw_label": "Increase (decrease) in cash and cash equivalents",
-              "spanish_label": "Variación en efectivo y equivalentes",
-              "section_path": "Cash and cash equivalents",
-              "is_extension_tag": true,
-              "val_usd": 1198352000.0
+              "concept": "sec_section_reconciliation_other_financing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 226711000.0
             }
           ],
-          "explained_sum_usd": 2364243000.0,
-          "residual_unexplained_usd": -2062035000.0
+          "explained_sum_usd": 302208000.0,
+          "residual_unexplained_usd": 0.0
         },
         "FY2019": {
           "value_usd": 549410000.0,
@@ -13695,16 +14108,24 @@
               "val_usd": -2014000.0
             },
             {
-              "concept": "ifrs-full_IncreaseDecreaseInCashAndCashEquivalents",
-              "raw_label": "Net Change in Cash",
-              "spanish_label": "Variación neta en el efectivo y equivalentes",
-              "section_path": "Cash flows in financing activities",
+              "concept": "sibling_reclass_debt_repaid",
+              "raw_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "spanish_label": "Reclasificación Canónica de Partida Hermana (debt_repaid)",
+              "section_path": "Conciliación Canónica / Reclasificación SEC",
               "is_extension_tag": false,
-              "val_usd": 882651000.0
+              "val_usd": 173205000.0
+            },
+            {
+              "concept": "sec_section_reconciliation_other_financing",
+              "raw_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "spanish_label": "Ajuste de Conciliación de Total de Sección SEC (LTM / Reclasificación Inter-Filing)",
+              "section_path": "Conciliación de Total de Sección SEC",
+              "is_extension_tag": false,
+              "val_usd": 456404000.0
             }
           ],
-          "explained_sum_usd": 802452000.0,
-          "residual_unexplained_usd": -253042000.0
+          "explained_sum_usd": 549410000.0,
+          "residual_unexplained_usd": 0.0
         }
       }
     },

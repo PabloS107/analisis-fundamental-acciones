@@ -2,7 +2,7 @@
   "ticker": "DECK",
   "company_name": "DECKERS OUTDOOR CORP",
   "cik": "0000910521",
-  "audit_timestamp": "2026-11-12T18:15:37.385731",
+  "audit_timestamp": "2026-11-14T12:34:46.651453",
   "years_audited": {
     "LTM": [
       {
@@ -769,10 +769,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 82,
-  "passed_tests": 79,
+  "total_tests": 84,
+  "passed_tests": 82,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -820,40 +820,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "3 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 3,
-      "samples": [
-        {
-          "metric": "wc_other",
-          "period": "LTM",
-          "value_usd": 25910000.0,
-          "explained_sum_usd": 32292000.0,
-          "residual_unexplained_usd": -6382000.0,
-          "residual_pct": 24.6
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2026",
-          "value_usd": 30355000.0,
-          "explained_sum_usd": 78308000.0,
-          "residual_unexplained_usd": -47953000.0,
-          "residual_pct": 158.0
-        },
-        {
-          "metric": "wc_other",
-          "period": "FY2025",
-          "value_usd": 16520000.0,
-          "explained_sum_usd": 8157000.0,
-          "residual_unexplained_usd": 8363000.0,
-          "residual_pct": 50.6
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (18 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

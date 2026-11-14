@@ -2,7 +2,7 @@
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
   "cik": "0001326801",
-  "audit_timestamp": "2026-11-12T18:15:37.841222",
+  "audit_timestamp": "2026-11-14T12:34:51.203599",
   "years_audited": {
     "LTM": [
       {
@@ -833,10 +833,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 88,
-  "passed_tests": 85,
+  "total_tests": 90,
+  "passed_tests": 88,
   "failed_tests": 0,
-  "skipped_tests": 3,
+  "skipped_tests": 2,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -884,72 +884,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "7 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 7,
-      "samples": [
-        {
-          "metric": "other_non_operating",
-          "period": "LTM",
-          "value_usd": 363000000.0,
-          "explained_sum_usd": 517000000.0,
-          "residual_unexplained_usd": -154000000.0,
-          "residual_pct": 42.4
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2025",
-          "value_usd": 1698000000.0,
-          "explained_sum_usd": 2656000000.0,
-          "residual_unexplained_usd": -958000000.0,
-          "residual_pct": 56.4
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2024",
-          "value_usd": -519000000.0,
-          "explained_sum_usd": -1283000000.0,
-          "residual_unexplained_usd": 764000000.0,
-          "residual_pct": 147.2
-        },
-        {
-          "metric": "other_noncash",
-          "period": "LTM",
-          "value_usd": -7582000000.0,
-          "explained_sum_usd": -249000000.0,
-          "residual_unexplained_usd": -7333000000.0,
-          "residual_pct": 96.7
-        },
-        {
-          "metric": "other_noncash",
-          "period": "FY2024",
-          "value_usd": -927000000.0,
-          "explained_sum_usd": -470000000.0,
-          "residual_unexplained_usd": -457000000.0,
-          "residual_pct": 49.3
-        },
-        {
-          "metric": "other_investing",
-          "period": "LTM",
-          "value_usd": 4900000000.0,
-          "explained_sum_usd": 2515000000.0,
-          "residual_unexplained_usd": 2385000000.0,
-          "residual_pct": 48.7
-        },
-        {
-          "metric": "other_investing",
-          "period": "FY2025",
-          "value_usd": 182000000.0,
-          "explained_sum_usd": 18026000000.0,
-          "residual_unexplained_usd": -17844000000.0,
-          "residual_pct": 9804.4
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (18 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

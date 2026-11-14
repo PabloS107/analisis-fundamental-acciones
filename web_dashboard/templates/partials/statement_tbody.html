@@ -25,6 +25,12 @@
                           data-label-en="{{ row.label_en|default:row.label }}"
                           data-label-es="{{ row.label_es|default:row.label }}"
                           title="{{ row.orig_tooltip|default:row.label }}">{{ row.label }}</span>
+                    {% if view_kind == 'std' and row.footnote_count %}
+                    <button type="button"
+                            onclick="event.stopPropagation(); toggleFootnoteSubrows(this, '{{ row.stmt_type|default:stmt_name }}_{{ row.metric_key }}')"
+                            class="ml-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition shrink-0"
+                            title="Ver desglose de notas XBRL ({{ row.footnote_count }})">📑 Notas ({{ row.footnote_count }}) <span class="fn-chevron">▾</span></button>
+                    {% endif %}
                 </div>
                 {% if view_kind == 'asrep' %}
                 {% if row.label_es or row.concept %}
@@ -75,5 +81,36 @@
     </td>
     {% endfor %}
 </tr>
+{% if view_kind == 'std' and row.footnote_rows %}
+{% for fn in row.footnote_rows %}
+<tr class="statement-row footnote-subrow hidden bg-indigo-50/25 border-b border-indigo-100/70 text-xs text-slate-600"
+    data-parent-fn="{{ row.stmt_type|default:stmt_name }}_{{ row.metric_key }}"
+    data-fn-open="false"
+    data-non-additive="true"
+    data-view="{{ view_kind }}"
+    data-stmt="{{ row.stmt_type|default:stmt_name }}"
+    data-concept="{{ fn.concept }}"
+    data-label-en="{{ fn.label_en }}"
+    data-label-es="{{ fn.label_es }}">
+    <td class="py-1.5 px-4 pl-10 sticky left-0 bg-indigo-50/40 z-10 min-w-[240px] max-w-[360px] whitespace-normal break-words leading-tight border-l-2 border-indigo-400 shadow-[1px_0_0_0_#e2e8f0]">
+        <div class="flex items-center justify-between gap-1.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+                <span class="text-indigo-500 font-mono text-[10px] select-none shrink-0">↳</span>
+                <span class="stmt-row-label std-row-label font-normal text-slate-600 truncate"
+                      data-label-en="{{ fn.label_en }}"
+                      data-label-es="{{ fn.label_es }}"
+                      title="Nota XBRL ({{ fn.source }}): {{ fn.concept }}">{{ fn.label }}</span>
+            </div>
+            <span class="px-1 py-0.5 rounded text-[9px] font-mono bg-indigo-100/80 text-indigo-700 border border-indigo-200 shrink-0" title="{{ fn.concept }}">Nota XBRL</span>
+        </div>
+    </td>
+    <td class="py-1.5 px-3 text-right font-mono tabular-nums whitespace-nowrap bg-indigo-50/30 text-slate-600 border-x border-indigo-100/70">{{ fn.ltm_abs }}</td>
+    <td class="py-1.5 px-3 text-right font-mono tabular-nums whitespace-nowrap col-pct bg-slate-50/60 border-r-2 border-slate-300 text-[10px] text-indigo-500">Nota</td>
+    {% for fcell in fn.annual_cells %}
+    <td class="py-1.5 px-3 text-right font-mono tabular-nums whitespace-nowrap text-slate-600">{{ fcell.abs }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+{% endif %}
 {% endif %}
 {% endfor %}

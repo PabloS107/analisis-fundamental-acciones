@@ -204,6 +204,25 @@ _BS_CONCEPT_KEYS = {
         "PrepaidExpensesAndOtherCurrentAssets",
         "OtherCurrentAssets",
     ],
+    "other_cl": [
+        "OtherLiabilitiesCurrent",
+        "us-gaap_OtherLiabilitiesCurrent",
+        "OtherCurrentLiabilities",
+    ],
+    "def_tax_nc": [
+        "DeferredIncomeTaxLiabilitiesNet",
+        "us-gaap_DeferredIncomeTaxLiabilitiesNet",
+        "DeferredTaxLiabilitiesNoncurrent",
+        "us-gaap_DeferredTaxLiabilitiesNoncurrent",
+        "DeferredTaxLiabilities",
+        "us-gaap_DeferredTaxLiabilities",
+    ],
+    "other_ncl": [
+        "OtherLiabilitiesNoncurrent",
+        "us-gaap_OtherLiabilitiesNoncurrent",
+        "OtherLongTermLiabilities",
+        "OtherNoncurrentLiabilities",
+    ],
     "ppe": [
         "RealEstateInvestmentPropertyNet",
         "us-gaap_RealEstateInvestmentPropertyNet",
@@ -231,6 +250,8 @@ _BS_CONCEPT_KEYS = {
     ],
     "gw": ["Goodwill", "us-gaap_Goodwill"],
     "intang": [
+        "IntangibleAssetExcludingGoodwillAfterAccumulatedAmortizationNoncurrent",
+        "aapl_IntangibleAssetExcludingGoodwillAfterAccumulatedAmortizationNoncurrent",
         "IntangibleAssetsNetExcludingGoodwill",
         "IntangibleAssetsNet",
         "OtherIntangibleAssetsNet",
@@ -282,6 +303,8 @@ _BS_CONCEPT_KEYS = {
     "accrued": [
         "AccruedLiabilitiesCurrent",
         "us-gaap_AccruedLiabilitiesCurrent",
+        "AccruedLiabilitiesAndOtherLiabilitiesCurrent",
+        "uber_AccruedLiabilitiesAndOtherLiabilitiesCurrent",
         "OtherAccruedLiabilitiesCurrent",
         "AccruedLiabilities",
     ],
@@ -312,6 +335,8 @@ _BS_CONCEPT_KEYS = {
         "LongTermDebtNoncurrent",
         "us-gaap_LongTermDebtNoncurrent",
         "LongTermDebtAndCapitalLeaseObligationsNoncurrent",
+        "LongTermLoansPayable",
+        "us-gaap_LongTermLoansPayable",
         "LongTermDebt",
         "NotesPayable",
         "LoansPayable",
@@ -623,13 +648,41 @@ def _detect_ltm_source_period(canonical, periods):
     return None
 
 
+def _extract_face_sum_distinct(as_rep_bs_dict, key_cands, period_chain):
+    """Suma conceptos distintos en carátula as-reported evitando duplicados por alias/token."""
+    if not isinstance(as_rep_bs_dict, dict) or not as_rep_bs_dict:
+        return None
+    cand_tokens = [k.lower().split(":")[-1].split("_")[-1] for k in key_cands]
+    for period_try in period_chain:
+        seen_toks = set()
+        seen_vals = []
+        total = 0.0
+        matched = False
+        for src_k, src_obj in as_rep_bs_dict.items():
+            src_tok = src_k.lower().split(":")[-1].split("_")[-1]
+            if src_tok in seen_toks:
+                continue
+            if any(src_k.lower() == k.lower() or src_tok == kt for k, kt in zip(key_cands, cand_tokens)):
+                vals = src_obj.get("values", src_obj) if isinstance(src_obj, dict) else {}
+                if isinstance(vals, dict) and period_try in vals and vals[period_try] is not None:
+                    parsed = _to_float(vals[period_try], f"face.{src_k}:{period_try}")
+                    if parsed is not None:
+                        seen_toks.add(src_tok)
+                        seen_vals.append(parsed)
+                        total += parsed
+                        matched = True
+        if matched:
+            return round(total, 1) if len(seen_vals) > 1 else seen_vals[0]
+    return None
+
+
 def _is_any_key_on_face(key_cands, face_dict):
     """Verifica si alguno de los conceptos candidatos figura en la carátula as-reported."""
     face_tokens = {c.lower().split(":")[-1].split("_")[-1] for c in face_dict}
     return any(k.lower().split(":")[-1].split("_")[-1] in face_tokens for k in key_cands)
 
 
-def _resolve_bs_current_assets(fs, canonical, extract_val, p, archetype, ltm_source_period):
+def _resolve_bs_current_assets(fs, canonical, extract_val, extract_face_val, p, archetype, ltm_source_period):
     """Resuelve caja, inversiones corrientes y activos corrientes cerrando sum(hijos) == CA."""
     c_v = extract_val(_BS_CONCEPT_KEYS["cash"], p, "cash_and_equivalents")
     if c_v is None or c_v == 0.0:
@@ -685,23 +738,30 @@ def _resolve_bs_current_assets(fs, canonical, extract_val, p, archetype, ltm_sou
             if comb > 0:
                 sti_v = round(comb, 1)
 
-    ar_v = extract_val(_BS_CONCEPT_KEYS["ar"], p)
-    nontrade_ar = extract_val(["NontradeReceivablesCurrent", "us-gaap_NontradeReceivablesCurrent"], p)
-    inv_v = extract_val(_BS_CONCEPT_KEYS["inv"], p)
-    ca_raw = extract_val(_BS_CONCEPT_KEYS["ca"], p, "current_assets")
+    ar_v = extract_face_val(_BS_CONCEPT_KEYS["ar"], p)
+    if ar_v is None:
+        ar_v = extract_val(_BS_CONCEPT_KEYS["ar"], p)
+    nontrade_ar = extract_face_val(["NontradeReceivablesCurrent", "us-gaap_NontradeReceivablesCurrent"], p)
+    inv_v = extract_face_val(_BS_CONCEPT_KEYS["inv"], p)
+    if inv_v is None:
+        inv_v = extract_val(_BS_CONCEPT_KEYS["inv"], p)
+    ca_raw = extract_face_val(_BS_CONCEPT_KEYS["ca"], p)
+    if ca_raw is None:
+        ca_raw = extract_val(_BS_CONCEPT_KEYS["ca"], p, "current_assets")
 
-    prep_cand = extract_val(["PrepaidExpenseCurrent", "us-gaap_PrepaidExpenseCurrent", "PrepaidExpensesAndOtherCurrentAssets"], p)
-    oth_cand = extract_val(["OtherAssetsCurrent", "us-gaap_OtherAssetsCurrent", "OtherCurrentAssets"], p)
+    prep_cand = extract_face_val(["PrepaidExpenseCurrent", "us-gaap_PrepaidExpenseCurrent", "PrepaidExpensesAndOtherCurrentAssets"], p)
+    oth_cand = extract_face_val(["OtherAssetsCurrent", "us-gaap_OtherAssetsCurrent", "OtherCurrentAssets"], p)
     if prep_cand is not None and oth_cand is not None and prep_cand != oth_cand:
         other_ca_rep = round(prep_cand + oth_cand, 1)
     else:
-        other_ca_rep = extract_val(_BS_CONCEPT_KEYS["other_ca"], p)
+        other_ca_rep = extract_face_val(_BS_CONCEPT_KEYS["other_ca"], p) or extract_val(_BS_CONCEPT_KEYS["other_ca"], p)
     if nontrade_ar is not None and nontrade_ar > 0:
-        other_ca_rep = (other_ca_rep or 0.0) + nontrade_ar
+        if ar_v is None or abs(nontrade_ar - ar_v) > 1.0:
+            other_ca_rep = (other_ca_rep or 0.0) + nontrade_ar
 
-    restr_cash = extract_val(["RestrictedCashAndCashEquivalentsAtCarryingValue", "us-gaap_RestrictedCashAndCashEquivalentsAtCarryingValue", "RestrictedCashAndInvestmentsCurrent"], p)
-    fintech_loans = extract_val(["NotesAndLoansReceivableNetCurrent", "us-gaap_NotesAndLoansReceivableNetCurrent", "LoansAndAdvancesToCustomersCurrent"], p)
-    broker_rec = extract_val(["meli_ReceivableFromCustomerInBrokerageCurrent", "ReceivableFromCustomerInBrokerageCurrent"], p)
+    restr_cash = extract_face_val(["RestrictedCashAndCashEquivalentsAtCarryingValue", "us-gaap_RestrictedCashAndCashEquivalentsAtCarryingValue", "RestrictedCashAndInvestmentsCurrent"], p)
+    fintech_loans = extract_face_val(["NotesAndLoansReceivableNetCurrent", "us-gaap_NotesAndLoansReceivableNetCurrent", "LoansAndAdvancesToCustomersCurrent"], p)
+    broker_rec = extract_face_val(["meli_ReceivableFromCustomerInBrokerageCurrent", "ReceivableFromCustomerInBrokerageCurrent"], p)
     for add_val in (restr_cash, fintech_loans, broker_rec):
         if add_val:
             other_ca_rep = (other_ca_rep or 0.0) + add_val
@@ -718,55 +778,81 @@ def _resolve_bs_current_assets(fs, canonical, extract_val, p, archetype, ltm_sou
     return c_v, sti_v, tot_liquid, ar_v, inv_v, other_ca, tot_ca
 
 
-def _resolve_bs_noncurrent_assets(extract_val, as_rep_bs_dict, tot_ca, p, periods):
-    """Resuelve activos no corrientes y total activos cerrando sum(hijos) == NCA."""
-    ppe_v = extract_val(_BS_CONCEPT_KEYS["ppe"], p, "net_ppe")
-    rou_v = extract_val(_BS_CONCEPT_KEYS["rou"], p, "operating_lease_rou_asset")
-    gw_v = extract_val(_BS_CONCEPT_KEYS["gw"], p)
-    int_v = extract_val(_BS_CONCEPT_KEYS["intang"], p)
+def _resolve_bs_noncurrent_assets(extract_val, extract_face_val, as_rep_bs_dict, tot_ca, p, periods):
+    """Resuelve activos no corrientes y total activos cerrando sum(hijos) == NCA (Face-First)."""
+    ppe_v = extract_face_val(_BS_CONCEPT_KEYS["ppe"], p)
+    if ppe_v is None:
+        ppe_v = extract_val(_BS_CONCEPT_KEYS["ppe"], p, "net_ppe")
 
-    is_rou_on_face = _is_any_key_on_face(_BS_CONCEPT_KEYS["rou"], as_rep_bs_dict)
-    is_gw_on_face = _is_any_key_on_face(_BS_CONCEPT_KEYS["gw"], as_rep_bs_dict)
-    is_int_on_face = _is_any_key_on_face(_BS_CONCEPT_KEYS["intang"], as_rep_bs_dict)
+    ta_raw = extract_face_val(_BS_CONCEPT_KEYS["ta"], p)
+    if ta_raw is None:
+        ta_raw = extract_val(_BS_CONCEPT_KEYS["ta"], p, "total_assets")
+    tot_nca_est = round(ta_raw - (tot_ca or 0.0), 1) if (ta_raw is not None and tot_ca is not None) else None
+    face_other_nca = extract_face_val(_BS_CONCEPT_KEYS["other_nca"], p)
 
-    if not is_rou_on_face:
-        rou_v = None
+    face_rou = extract_face_val(_BS_CONCEPT_KEYS["rou"], p)
+    face_gw = extract_face_val(_BS_CONCEPT_KEYS["gw"], p)
+    face_int = extract_face_val(_BS_CONCEPT_KEYS["intang"], p)
+    face_lt_inv = extract_face_val(_BS_CONCEPT_KEYS["lt_inv"], p)
+    face_dta = extract_face_val(_BS_CONCEPT_KEYS["dta"], p)
 
-    if p == "LTM" and len(periods) > 1:
-        prev_p = periods[1]
-        ltm_ma = extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
-        if gw_v and not is_gw_on_face:
-            prev_gw = extract_val(_BS_CONCEPT_KEYS["gw"], prev_p)
-            if (not prev_gw or prev_gw == 0.0) and abs(ltm_ma) < 5000.0:
-                gw_v = None
-        if int_v and not is_int_on_face:
-            prev_int = extract_val(_BS_CONCEPT_KEYS["intang"], prev_p)
-            if (not prev_int or prev_int == 0.0) and abs(ltm_ma) < 5000.0:
-                int_v = None
-
-    if gw_v is not None and int_v is not None and gw_v == int_v:
-        gw_int_v = gw_v
-    elif is_int_on_face:
-        gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
+    if face_gw is not None and face_int is not None and face_gw == face_int:
+        face_gw_int = face_gw
+    elif face_gw is not None or face_int is not None:
+        face_gw_int = round((face_gw or 0.0) + (face_int or 0.0), 1)
     else:
-        gw_int_v = gw_v
+        face_gw_int = None
 
-    lt_inv_v = extract_val(_BS_CONCEPT_KEYS["lt_inv"], p)
-    if not _is_any_key_on_face(_BS_CONCEPT_KEYS["lt_inv"], as_rep_bs_dict):
-        eq_method = extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
-        non_mkt_eq = extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount"], p)
-        if eq_method is not None and non_mkt_eq is not None:
-            lt_inv_v = round(eq_method + non_mkt_eq, 1)
+    face_nca_closed = (
+        tot_nca_est is not None
+        and face_other_nca is not None
+        and abs(
+            ((ppe_v or 0.0) + (face_rou or 0.0) + (face_gw_int or 0.0) + (face_lt_inv or 0.0) + (face_dta or 0.0) + face_other_nca)
+            - tot_nca_est
+        )
+        <= 2.0
+    )
 
-    ta_raw = extract_val(_BS_CONCEPT_KEYS["ta"], p, "total_assets")
+    if face_nca_closed:
+        rou_v, gw_int_v, lt_inv_v, dta_v = face_rou, face_gw_int, face_lt_inv, face_dta
+    else:
+        rou_v = face_rou if face_rou is not None else (extract_val(_BS_CONCEPT_KEYS["rou"], p, "operating_lease_rou_asset") if _is_any_key_on_face(_BS_CONCEPT_KEYS["rou"], as_rep_bs_dict) else None)
+        gw_v = face_gw if face_gw is not None else extract_val(_BS_CONCEPT_KEYS["gw"], p)
+        int_v = face_int if face_int is not None else extract_val(_BS_CONCEPT_KEYS["intang"], p)
+        is_int_on_face = face_int is not None or _is_any_key_on_face(_BS_CONCEPT_KEYS["intang"], as_rep_bs_dict)
+
+        if p == "LTM" and len(periods) > 1:
+            prev_p = periods[1]
+            ltm_ma = extract_val(["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross"], "LTM") or 0.0
+            if gw_v and face_gw is None and not _is_any_key_on_face(_BS_CONCEPT_KEYS["gw"], as_rep_bs_dict):
+                prev_gw = extract_val(_BS_CONCEPT_KEYS["gw"], prev_p)
+                if (not prev_gw or prev_gw == 0.0) and abs(ltm_ma) < 5000.0:
+                    gw_v = None
+            if int_v and face_int is None and not _is_any_key_on_face(_BS_CONCEPT_KEYS["intang"], as_rep_bs_dict):
+                prev_int = extract_val(_BS_CONCEPT_KEYS["intang"], prev_p)
+                if (not prev_int or prev_int == 0.0) and abs(ltm_ma) < 5000.0:
+                    int_v = None
+
+        if gw_v is not None and int_v is not None and gw_v == int_v:
+            gw_int_v = gw_v
+        elif is_int_on_face:
+            gw_int_v = round((gw_v or 0.0) + (int_v or 0.0), 1) if (gw_v is not None or int_v is not None) else None
+        else:
+            gw_int_v = gw_v
+
+        lt_inv_v = face_lt_inv if face_lt_inv is not None else extract_val(_BS_CONCEPT_KEYS["lt_inv"], p)
+        if not _is_any_key_on_face(_BS_CONCEPT_KEYS["lt_inv"], as_rep_bs_dict):
+            eq_method = extract_val(["EquityMethodInvestments", "InvestmentsInAssociates", "InvestmentsInAffiliatesSubsidiariesAssociatesAndJointVentures"], p)
+            non_mkt_eq = extract_val(["EquitySecuritiesWithoutReadilyDeterminableFairValueAmount"], p)
+            if eq_method is not None and non_mkt_eq is not None:
+                lt_inv_v = round(eq_method + non_mkt_eq, 1)
+        dta_v = face_dta if face_dta is not None else extract_val(_BS_CONCEPT_KEYS["dta"], p)
+
     sum_ast = (tot_ca or 0.0) + (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0)
     tot_ast = ta_raw if (ta_raw is not None and ta_raw > 0) else (sum_ast if sum_ast > 0 else None)
     tot_nca = max(0.0, round((tot_ast or 0.0) - (tot_ca or 0.0), 1)) if tot_ast is not None else None
 
-    other_nca_rep = extract_val(_BS_CONCEPT_KEYS["other_nca"], p)
-    other_nca = round(other_nca_rep, 1) if other_nca_rep is not None else None
-    dta_v = extract_val(_BS_CONCEPT_KEYS["dta"], p)
-
+    other_nca = round(face_other_nca, 1) if face_other_nca is not None else extract_val(_BS_CONCEPT_KEYS["other_nca"], p)
     sum_nca = (ppe_v or 0.0) + (rou_v or 0.0) + (gw_int_v or 0.0) + (lt_inv_v or 0.0) + (dta_v or 0.0) + (other_nca or 0.0)
     if tot_nca is not None:
         diff_nca = round(tot_nca - sum_nca, 1)
@@ -776,54 +862,106 @@ def _resolve_bs_noncurrent_assets(extract_val, as_rep_bs_dict, tot_ca, p, period
     return ppe_v, rou_v, gw_int_v, lt_inv_v, dta_v, other_nca, tot_nca, tot_ast
 
 
-def _resolve_bs_liabilities_and_debt(extract_val, tot_ast, eq_v, p):
-    """Resuelve pasivos corrientes, no corrientes, deuda total y total pasivos."""
-    ap_v = extract_val(_BS_CONCEPT_KEYS["ap"], p)
-    accrued_v = extract_val(_BS_CONCEPT_KEYS["accrued"], p, "accrued_liabilities")
-    if accrued_v is None or accrued_v == 0.0:
-        emp_acc = extract_val(["EmployeeRelatedLiabilitiesCurrent", "us-gaap_EmployeeRelatedLiabilitiesCurrent"], p) or 0.0
-        oth_acc = extract_val(["OtherAccruedLiabilitiesCurrent", "us-gaap_OtherAccruedLiabilitiesCurrent"], p) or 0.0
-        tax_acc = extract_val(["AccruedIncomeTaxesCurrent", "us-gaap_AccruedIncomeTaxesCurrent"], p) or 0.0
-        sub_acc = emp_acc + oth_acc + tax_acc
-        if sub_acc > 0:
-            accrued_v = round(sub_acc, 1)
+def _resolve_bs_liabilities_and_debt(extract_val, extract_face_val, as_rep_bs_dict, period_chain, tot_ast, eq_v, p, archetype):
+    """Resuelve pasivos corrientes, no corrientes, deuda total y total pasivos (Face-First)."""
+    cl_raw = extract_face_val(_BS_CONCEPT_KEYS["cl"], p)
+    if cl_raw is None:
+        cl_raw = extract_val(_BS_CONCEPT_KEYS["cl"], p, "current_liabilities")
 
-    tot_debt = extract_val(_BS_CONCEPT_KEYS["tot_debt"], p, "total_debt")
-    st_debt_v = extract_val(_BS_CONCEPT_KEYS["st_debt"], p, "short_term_debt")
-    if tot_debt is not None and tot_debt > 0:
-        if st_debt_v is not None and st_debt_v > tot_debt:
-            st_debt_v = tot_debt
-        lt_debt_v = max(0.0, round(tot_debt - (st_debt_v or 0.0), 1))
-        if st_debt_v is None:
-            st_debt_v = 0.0
+    face_ap = extract_face_val(_BS_CONCEPT_KEYS["ap"], p)
+    face_accrued = extract_face_val(_BS_CONCEPT_KEYS["accrued"], p)
+    face_def_rev = extract_face_val(_BS_CONCEPT_KEYS["def_rev"], p)
+    face_other_cl = extract_face_val(_BS_CONCEPT_KEYS["other_cl"], p)
+    face_st_debt = _extract_face_sum_distinct(
+        as_rep_bs_dict,
+        ["LongTermDebtCurrent", "us-gaap_LongTermDebtCurrent", "CommercialPaper", "us-gaap_CommercialPaper",
+         "ShortTermBorrowings", "LoansPayableCurrent", "us-gaap_LoansPayableCurrent", "CurrentPortionOfLongTermDebt", "DebtCurrent"],
+        period_chain,
+    ) if cl_raw is not None else None
+
+    face_cl_closed = (
+        cl_raw is not None
+        and face_other_cl is not None
+        and abs(((face_ap or 0.0) + (face_st_debt or 0.0) + (face_accrued or 0.0) + (face_def_rev or 0.0) + face_other_cl) - cl_raw) <= 2.0
+    )
+
+    if face_cl_closed:
+        ap_v, st_debt_v, accrued_v, def_rev_v = face_ap, face_st_debt, face_accrued, face_def_rev
     else:
-        lt_debt_v = extract_val(_BS_CONCEPT_KEYS["lt_debt"], p, "long_term_debt")
-        if st_debt_v is not None or lt_debt_v is not None:
-            tot_debt = round((st_debt_v or 0.0) + (lt_debt_v or 0.0), 1)
-            if st_debt_v is None:
-                st_debt_v = 0.0
-
-    def_rev_v = extract_val(_BS_CONCEPT_KEYS["def_rev"], p)
-    cl_raw = extract_val(_BS_CONCEPT_KEYS["cl"], p, "current_liabilities")
-    if cl_raw is not None and def_rev_v is not None:
-        pre_def_sum = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0)
-        if pre_def_sum + def_rev_v > cl_raw:
-            def_rev_v = max(0.0, round(cl_raw - pre_def_sum, 1))
+        ap_v = face_ap if face_ap is not None else extract_val(_BS_CONCEPT_KEYS["ap"], p)
+        accrued_v = face_accrued if face_accrued is not None else extract_val(_BS_CONCEPT_KEYS["accrued"], p, "accrued_liabilities")
+        if accrued_v is None or accrued_v == 0.0:
+            emp_acc = extract_val(["EmployeeRelatedLiabilitiesCurrent", "us-gaap_EmployeeRelatedLiabilitiesCurrent"], p) or 0.0
+            oth_acc = extract_val(["OtherAccruedLiabilitiesCurrent", "us-gaap_OtherAccruedLiabilitiesCurrent"], p) or 0.0
+            tax_acc = extract_val(["AccruedIncomeTaxesCurrent", "us-gaap_AccruedIncomeTaxesCurrent"], p) or 0.0
+            sub_acc = emp_acc + oth_acc + tax_acc
+            if sub_acc > 0 and (cl_raw is None or (ap_v or 0.0) + sub_acc <= cl_raw + 2.0):
+                accrued_v = round(sub_acc, 1)
+        st_debt_v = face_st_debt if face_st_debt is not None else (
+            extract_val(_BS_CONCEPT_KEYS["st_debt"], p, "short_term_debt")
+            if (cl_raw is None or face_other_cl is None)
+            else None
+        )
+        def_rev_v = face_def_rev if face_def_rev is not None else (
+            extract_val(_BS_CONCEPT_KEYS["def_rev"], p) if (cl_raw is None or face_other_cl is None) else None
+        )
+        if cl_raw is not None and def_rev_v is not None:
+            pre_def_sum = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0)
+            if pre_def_sum + def_rev_v > cl_raw + 1.0:
+                def_rev_v = max(0.0, round(cl_raw - pre_def_sum, 1)) if face_def_rev is not None else None
 
     sum_cl = (ap_v or 0.0) + (st_debt_v or 0.0) + (accrued_v or 0.0) + (def_rev_v or 0.0)
     tot_cl = cl_raw if (cl_raw is not None and cl_raw > 0) else (sum_cl if sum_cl > 0 else None)
-    other_cl = max(0.0, round((tot_cl or 0.0) - sum_cl, 1)) if tot_cl is not None else None
+    other_cl = round((tot_cl or 0.0) - sum_cl, 1) if tot_cl is not None else None
 
-    lease_nc_v = extract_val(_BS_CONCEPT_KEYS["lease_liab_nc"], p)
-    def_tax_nc_v = extract_val(_BS_CONCEPT_KEYS["def_tax_nc"], p)
-    tl_raw = extract_val(_BS_CONCEPT_KEYS["tl"], p)
+    tl_raw = extract_face_val(_BS_CONCEPT_KEYS["tl"], p)
+    if tl_raw is None:
+        tl_raw = extract_val(_BS_CONCEPT_KEYS["tl"], p)
     mezz_pre = extract_val(_BS_CONCEPT_KEYS["mezz_eq"], p) if tl_raw is None else None
     tot_liab = tl_raw if (tl_raw is not None and tl_raw > 0) else (
         max(0.0, round((tot_ast or 0.0) - (eq_v or 0.0) - (mezz_pre or 0.0), 1)) if (tot_ast is not None and eq_v is not None) else None
     )
-    tot_ncl = max(0.0, round((tot_liab or 0.0) - (tot_cl or 0.0), 1)) if (tot_liab is not None and tot_cl is not None) else None
+    tot_ncl = round((tot_liab or 0.0) - (tot_cl or 0.0), 1) if (tot_liab is not None and tot_cl is not None) else None
+
+    face_lt_debt = extract_face_val(_BS_CONCEPT_KEYS["lt_debt"], p)
+    face_lease_nc = extract_face_val(_BS_CONCEPT_KEYS["lease_liab_nc"], p)
+    face_def_tax_nc = extract_face_val(_BS_CONCEPT_KEYS["def_tax_nc"], p)
+    face_other_ncl = extract_face_val(_BS_CONCEPT_KEYS["other_ncl"], p)
+
+    tot_debt = extract_val(_BS_CONCEPT_KEYS["tot_debt"], p, "total_debt")
+    if face_lt_debt is not None:
+        lt_debt_v = face_lt_debt
+        if archetype in ("STANDARD_CORPORATE", "PLATFORM_ECOSYSTEM") and cl_raw is not None:
+            tot_debt = round((st_debt_v or 0.0) + lt_debt_v, 1)
+    elif tot_debt is not None and tot_debt > 0:
+        if st_debt_v is not None and st_debt_v > tot_debt:
+            st_debt_v = tot_debt
+        lt_debt_v = max(0.0, round(tot_debt - (st_debt_v or 0.0), 1))
+    else:
+        lt_debt_v = extract_val(_BS_CONCEPT_KEYS["lt_debt"], p, "long_term_debt")
+        if st_debt_v is not None or lt_debt_v is not None:
+            tot_debt = round((st_debt_v or 0.0) + (lt_debt_v or 0.0), 1)
+    if st_debt_v is None and lt_debt_v is not None and tot_debt is not None:
+        st_debt_v = 0.0
+
+    face_ncl_closed = (
+        tot_ncl is not None
+        and face_other_ncl is not None
+        and abs(((lt_debt_v or 0.0) + (face_lease_nc or 0.0) + (face_def_tax_nc or 0.0) + face_other_ncl) - tot_ncl) <= 2.0
+    )
+    if face_ncl_closed:
+        lease_nc_v = face_lease_nc
+        def_tax_nc_v = face_def_tax_nc
+    else:
+        lease_nc_v = face_lease_nc if face_lease_nc is not None else (
+            extract_val(_BS_CONCEPT_KEYS["lease_liab_nc"], p) if (tot_ncl is None or face_other_ncl is None) else None
+        )
+        def_tax_nc_v = face_def_tax_nc if face_def_tax_nc is not None else (
+            extract_val(_BS_CONCEPT_KEYS["def_tax_nc"], p) if (tot_ncl is None or face_other_ncl is None) else None
+        )
+
     other_ncl = (
-        max(0.0, round((tot_ncl or 0.0) - ((lt_debt_v or 0.0) + (lease_nc_v or 0.0) + (def_tax_nc_v or 0.0)), 1))
+        round((tot_ncl or 0.0) - ((lt_debt_v or 0.0) + (lease_nc_v or 0.0) + (def_tax_nc_v or 0.0)), 1)
         if tot_ncl is not None
         else None
     )
@@ -1023,16 +1161,37 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
     ]
     ltm_source_period = _detect_ltm_source_period(canonical, periods)
 
-    def _extract_val(key_cands, p, can_key=None):
+    def _period_chain_for(p):
         src_p = ltm_source_period if (p == "LTM" and ltm_source_period) else p
-        period_chain = ["LTM", src_p] if (p == "LTM" and src_p != "LTM") else [p]
+        return ["LTM", src_p] if (p == "LTM" and src_p != "LTM") else [p]
+
+    def _extract_face_val(key_cands, p):
+        if not as_rep_bs_dict:
+            return None
+        for period_try in _period_chain_for(p):
+            found = _extract_from_single_source(as_rep_bs_dict, key_cands, period_try)
+            if found is not None:
+                return found
+        return None
+
+    def _extract_val(key_cands, p, can_key=None):
+        period_chain = _period_chain_for(p)
         can_keys = [can_key] if isinstance(can_key, str) else (can_key or [])
+        if "total_debt" in can_keys and archetype in ("FINANCIAL_BANKING", "INSURANCE", "REAL_ESTATE_REIT"):
+            for ck in can_keys:
+                can_val = _to_float(canonical.get(ck, {}).get(p), f"canonical.{ck}:{p}")
+                if can_val is not None and can_val != 0.0:
+                    return can_val
+        for period_try in period_chain:
+            found_face = _extract_from_single_source(as_rep_bs_dict, key_cands, period_try)
+            if found_face is not None:
+                return found_face
         for ck in can_keys:
             can_val = _to_float(canonical.get(ck, {}).get(p), f"canonical.{ck}:{p}")
             if can_val is not None and can_val != 0.0:
                 return can_val
         for period_try in period_chain:
-            for src in bal_sources:
+            for src in bal_sources[1:]:
                 found = _extract_from_single_source(src, key_cands, period_try)
                 if found is not None:
                     return found
@@ -1098,11 +1257,12 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
     }
 
     for p in periods:
+        p_chain = _period_chain_for(p)
         c_v, sti_v, tot_liquid, ar_v, inv_v, other_ca, tot_ca = _resolve_bs_current_assets(
-            fs, canonical, _extract_val, p, archetype, ltm_source_period
+            fs, canonical, _extract_val, _extract_face_val, p, archetype, ltm_source_period
         )
         ppe_v, rou_v, gw_int_v, lt_inv_v, dta_v, other_nca, tot_nca, tot_ast = _resolve_bs_noncurrent_assets(
-            _extract_val, as_rep_bs_dict, tot_ca, p, periods
+            _extract_val, _extract_face_val, as_rep_bs_dict, tot_ca, p, periods
         )
         eq_v = _extract_val(_BS_CONCEPT_KEYS["eq"], p, "stockholders_equity")
         (
@@ -1119,7 +1279,7 @@ def resolve_canonical_balance_sheet(fs, periods, archetype="STANDARD_CORPORATE")
             tot_ncl,
             tot_liab,
             tot_debt,
-        ) = _resolve_bs_liabilities_and_debt(_extract_val, tot_ast, eq_v, p)
+        ) = _resolve_bs_liabilities_and_debt(_extract_val, _extract_face_val, as_rep_bs_dict, p_chain, tot_ast, eq_v, p, archetype)
 
         tail = _resolve_bs_equity_and_sectoral(
             _extract_val,
@@ -1202,6 +1362,18 @@ def _extract_multi_source_val(fs, section_type, key_cands, p, canon_keys=None):
                     if parsed is not None:
                         return parsed
 
+    for row in _iter_as_reported_rows(fs, section_type):
+        concept = str(row.get("concept", ""))
+        c_token = concept.lower().split(":")[-1].split("_")[-1]
+        for k in key_cands:
+            k_token = k.lower().split(":")[-1].split("_")[-1]
+            if concept == k or concept.lower() == k.lower() or c_token == k_token:
+                vals = row.get("values", {})
+                if isinstance(vals, dict) and p in vals and vals[p] is not None:
+                    parsed = _to_float(vals[p], f"as_reported.{concept}:{p}")
+                    if parsed is not None:
+                        return parsed
+
     det_key = _SECTION_DETAIL_MAP.get(section_type, f"{section_type}_detail")
     detail_dict = fs.get(det_key, {})
     if isinstance(detail_dict, dict):
@@ -1228,18 +1400,6 @@ def _extract_multi_source_val(fs, section_type, key_cands, p, canon_keys=None):
                         parsed = _to_float(vals[p], f"{det_key}.{dk}:{p}")
                         if parsed is not None:
                             return parsed
-
-    for row in _iter_as_reported_rows(fs, section_type):
-        concept = str(row.get("concept", ""))
-        c_token = concept.lower().split(":")[-1].split("_")[-1]
-        for k in key_cands:
-            k_token = k.lower().split(":")[-1].split("_")[-1]
-            if concept == k or concept.lower() == k.lower() or c_token == k_token:
-                vals = row.get("values", {})
-                if isinstance(vals, dict) and p in vals and vals[p] is not None:
-                    parsed = _to_float(vals[p], f"as_reported.{concept}:{p}")
-                    if parsed is not None:
-                        return parsed
     return None
 
 
@@ -1254,25 +1414,14 @@ def _extract_multi_source_sum(fs, section_type, key_cands, p, canon_keys=None):
     matched = False
     matched_tokens = set()
 
-    det_key = _SECTION_DETAIL_MAP.get(section_type, f"{section_type}_detail")
-    detail_dict = fs.get(det_key, {})
-    if isinstance(detail_dict, dict):
-        for k in key_cands:
-            k_token = k.lower().split(":")[-1].split("_")[-1]
-            for dk, dobj in detail_dict.items():
-                if "abstract" in str(dk).lower():
-                    continue
-                d_token = str(dk).lower().split(":")[-1].split("_")[-1]
-                if (dk.lower() == k.lower() or d_token == k_token) and d_token not in matched_tokens:
-                    vals = dobj.get("values", dobj) if isinstance(dobj, dict) else {}
-                    if isinstance(vals, dict) and p in vals and vals[p] is not None:
-                        parsed = _to_float(vals[p], f"{det_key}.{dk}:{p}")
-                        if parsed is not None:
-                            total += parsed
-                            matched = True
-                            matched_tokens.add(d_token)
+    as_rep_rows = _iter_as_reported_rows(fs, section_type)
+    has_face_period = any(
+        isinstance(r.get("values"), dict) and r["values"].get(p) is not None
+        for r in as_rep_rows
+        if not r.get("is_abstract")
+    )
 
-    for row in _iter_as_reported_rows(fs, section_type):
+    for row in as_rep_rows:
         if row.get("is_abstract"):
             continue
         concept = str(row.get("concept", ""))
@@ -1287,6 +1436,24 @@ def _extract_multi_source_sum(fs, section_type, key_cands, p, canon_keys=None):
                         total += parsed
                         matched = True
                         matched_tokens.add(c_token)
+
+    det_key = _SECTION_DETAIL_MAP.get(section_type, f"{section_type}_detail")
+    detail_dict = fs.get(det_key, {})
+    if not has_face_period and isinstance(detail_dict, dict):
+        for k in key_cands:
+            k_token = k.lower().split(":")[-1].split("_")[-1]
+            for dk, dobj in detail_dict.items():
+                if "abstract" in str(dk).lower():
+                    continue
+                d_token = str(dk).lower().split(":")[-1].split("_")[-1]
+                if (dk.lower() == k.lower() or d_token == k_token) and d_token not in matched_tokens:
+                    vals = dobj.get("values", dobj) if isinstance(dobj, dict) else {}
+                    if isinstance(vals, dict) and p in vals and vals[p] is not None:
+                        parsed = _to_float(vals[p], f"{det_key}.{dk}:{p}")
+                        if parsed is not None:
+                            total += parsed
+                            matched = True
+                            matched_tokens.add(d_token)
 
     if not matched and canon_keys:
         canonical = fs.get("canonical_summary", {})
@@ -1984,6 +2151,32 @@ def _resolve_cf_operating(fs, p, archetype):
             "IncreaseDecreaseInContractWithCustomerLiability",
             "IncreaseDecreaseInDeferredRevenue",
             "IncreaseDecreaseInOperatingLeaseLiability",
+            "IncreaseDecreaseInOperatingLeaseRightOfUseAssets",
+            "uber_IncreaseDecreaseInOperatingLeaseRightOfUseAssets",
+            "uber_IncreaseDecreaseInOperatingLeaseLiabilities",
+            "uber_IncreaseDecreaseInInsuranceReserve",
+            "deck_IncreaseDecreaseInOperatingLeaseRightofUseAssetsAndOperatingLeaseLiabilities",
+            "goog_IncreaseDecreaseInAccruedRevenueShare",
+            "IncreaseDecreaseInIncomeTaxes",
+            "IncreaseDecreaseInAccruedIncomeTaxesPayable",
+            "IncreaseDecreaseInIncomeTaxesReceivable",
+            "IncreaseDecreaseInIncomeTaxesPayableNet",
+            "IncreaseDecreaseInPremiumsReceivable",
+            "IncreaseDecreaseInReinsuranceRecoverable",
+            "IncreaseDecreaseInPrepaidReinsurancePremiums",
+            "IncreaseDecreaseInDeferredPolicyAcquisitionCosts",
+            "IncreaseDecreaseInUnearnedPremiums",
+            "IncreaseDecreaseInLiabilityForClaimsAndClaimsAdjustmentExpenseReserve",
+            "IncreaseDecreaseInOtherOperatingCapitalNet",
+            "IncreaseDecreaseInFinancialInstrumentsUsedInOperatingActivities",
+            "IncreaseDecreaseInCashCollateralForBorrowedSecurities",
+            "jpm_IncreaseDecreaseInAccruedInterestsAndAccountsReceivable",
+            "IncreaseDecreaseInTradingLiabilities",
+            "jpm_IncreaseDecreaseInAccountsPayableAndOtherLiabilities",
+            "AdjustmentsForIncreaseDecreaseInOtherOperatingAssets",
+            "AdjustmentsForIncreaseDecreaseInOtherOperatingLiabilities",
+            "AdjustmentsForIncreaseDecreaseInTradeAccountPayable",
+            "AdjustmentsForDecreaseIncreaseInInventories",
             "meli_IncreaseDecreaseInFundsPayableToCustomers",
             "meli_IncreaseDecreaseInAmountsPayableDueToCreditAndDebitCardTransactions",
             "IncreaseDecreaseInOperatingCapital",

@@ -2,7 +2,7 @@
   "ticker": "PGR",
   "company_name": "PROGRESSIVE CORP/OH/",
   "cik": "0000080661",
-  "audit_timestamp": "2026-11-12T18:15:38.208787",
+  "audit_timestamp": "2026-11-14T12:35:02.637864",
   "years_audited": {
     "LTM": [
       {
@@ -716,10 +716,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 88,
-  "passed_tests": 59,
+  "total_tests": 90,
+  "passed_tests": 62,
   "failed_tests": 0,
-  "skipped_tests": 29,
+  "skipped_tests": 28,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -767,96 +767,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "18 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 18,
-      "samples": [
-        {
-          "metric": "other_non_operating",
-          "period": "LTM",
-          "value_usd": 456000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 456000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2025",
-          "value_usd": -3305000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -3305000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2024",
-          "value_usd": -2553000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": -2553000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "LTM",
-          "value_usd": 32292000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 32292000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2025",
-          "value_usd": 29247000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 29247000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2024",
-          "value_usd": 28626000000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 28626000000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_equity",
-          "period": "LTM",
-          "value_usd": -2744000000.0,
-          "explained_sum_usd": -111328000000.0,
-          "residual_unexplained_usd": 108584000000.0,
-          "residual_pct": 3957.1
-        },
-        {
-          "metric": "other_equity",
-          "period": "FY2025",
-          "value_usd": 103000000.0,
-          "explained_sum_usd": 113573000000.0,
-          "residual_unexplained_usd": -113470000000.0,
-          "residual_pct": 110165.0
-        },
-        {
-          "metric": "other_equity",
-          "period": "FY2024",
-          "value_usd": -1423000000.0,
-          "explained_sum_usd": -99131000000.0,
-          "residual_unexplained_usd": 97708000000.0,
-          "residual_pct": 6866.3
-        },
-        {
-          "metric": "other_assets_sectoral",
-          "period": "LTM",
-          "value_usd": 12655000000.0,
-          "explained_sum_usd": 97072000000.0,
-          "residual_unexplained_usd": -84417000000.0,
-          "residual_pct": 667.1
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (6 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

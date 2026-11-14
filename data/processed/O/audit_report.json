@@ -2,7 +2,7 @@
   "ticker": "O",
   "company_name": "REALTY INCOME CORP",
   "cik": "0000726728",
-  "audit_timestamp": "2026-11-12T18:15:38.125159",
+  "audit_timestamp": "2026-11-14T12:35:01.245841",
   "years_audited": {
     "LTM": [
       {
@@ -709,10 +709,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 82,
-  "passed_tests": 67,
+  "total_tests": 84,
+  "passed_tests": 70,
   "failed_tests": 0,
-  "skipped_tests": 15,
+  "skipped_tests": 14,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -760,96 +760,23 @@
     },
     {
       "check": "UNEXPLAINED_PLUG_THRESHOLD",
-      "severity": "WARN",
-      "message": "23 cajones 'Otros' presentan diferencias entre carátula y notas (>15% / >$5M).",
-      "count": 23,
-      "samples": [
-        {
-          "metric": "other_operating_expense",
-          "period": "LTM",
-          "value_usd": 174231000.0,
-          "explained_sum_usd": 3247847000.0,
-          "residual_unexplained_usd": -3073616000.0,
-          "residual_pct": 1764.1
-        },
-        {
-          "metric": "other_operating_expense",
-          "period": "FY2025",
-          "value_usd": 194385000.0,
-          "explained_sum_usd": 3640283000.0,
-          "residual_unexplained_usd": -3445898000.0,
-          "residual_pct": 1772.7
-        },
-        {
-          "metric": "other_operating_expense",
-          "period": "FY2024",
-          "value_usd": 200780000.0,
-          "explained_sum_usd": 3442422000.0,
-          "residual_unexplained_usd": -3241642000.0,
-          "residual_pct": 1614.5
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "LTM",
-          "value_usd": 197326000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 197326000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2025",
-          "value_usd": 167520000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 167520000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_non_operating",
-          "period": "FY2024",
-          "value_usd": 55802000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 55802000.0,
-          "residual_pct": 100.0
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "LTM",
-          "value_usd": 15401334000.0,
-          "explained_sum_usd": 9621548000.0,
-          "residual_unexplained_usd": 5779786000.0,
-          "residual_pct": 37.5
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2025",
-          "value_usd": 12961181000.0,
-          "explained_sum_usd": 10423158000.0,
-          "residual_unexplained_usd": 2538023000.0,
-          "residual_pct": 19.6
-        },
-        {
-          "metric": "other_noncurrent_assets",
-          "period": "FY2024",
-          "value_usd": 11666238000.0,
-          "explained_sum_usd": 5248267000.0,
-          "residual_unexplained_usd": 6417971000.0,
-          "residual_pct": 55.0
-        },
-        {
-          "metric": "other_noncurrent_liabilities",
-          "period": "LTM",
-          "value_usd": 4515070000.0,
-          "explained_sum_usd": 0,
-          "residual_unexplained_usd": 4515070000.0,
-          "residual_pct": 100.0
-        }
-      ]
+      "severity": "PASS",
+      "message": "Todos los cajones 'Otros' recientes están atribuidos dentro de tolerancia."
     },
     {
       "check": "IS_FALSE_TOTAL_AND_PROVENANCE",
       "severity": "PASS",
       "message": "Cero falsos totales y procedencia SEC EDGAR completa."
+    },
+    {
+      "check": "VERTICAL_SUBTOTAL_IDENTITY",
+      "severity": "PASS",
+      "message": "Identidades verticales y puente de efectivo consistentes (12 controles)."
+    },
+    {
+      "check": "FACE_ANCHOR_PARITY",
+      "severity": "PASS",
+      "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
     }
   ]
 }

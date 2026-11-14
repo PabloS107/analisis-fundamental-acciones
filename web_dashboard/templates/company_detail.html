@@ -395,9 +395,9 @@
                     {% if statement_quality_audit %}
                     <button id="btn-quality-badge" onclick="toggleQualityAuditPanel()"
                             class="px-2.5 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1.5 {% if statement_quality_audit.status == 'PASS' %}bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100{% elif statement_quality_audit.status == 'WARN' %}bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100{% else %}bg-rose-50 border-rose-200 text-rose-800 hover:bg-rose-100{% endif %}"
-                            title="Ver resultado de los controles automáticos Q1-Q5 (etiquetas, equilibrio de balance, atribución de 'Otros' y procedencia SEC)">
+                            title="Ver resultado de los controles automáticos Q1-Q7 (etiquetas, equilibrio de balance, atribución de 'Otros', procedencia SEC e identidades verticales)">
                         <span>{% if statement_quality_audit.status == 'PASS' %}✓{% elif statement_quality_audit.status == 'WARN' %}⚠{% else %}✕{% endif %}</span>
-                        <span>Calidad SEC Q1-Q5: {{ statement_quality_audit.pass_count }}/5</span>
+                        <span>Calidad SEC Q1-Q7: {{ statement_quality_audit.pass_count }}/{{ statement_quality_audit.checks|length }}</span>
                     </button>
                     {% endif %}
                 </div>
@@ -442,7 +442,7 @@
                 </div>
             </div>
             {% if statement_quality_audit %}
-            <div id="quality-audit-panel" class="hidden pt-3 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-2 text-[11px]">
+            <div id="quality-audit-panel" class="hidden pt-3 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-7 gap-2 text-[11px]">
                 {% for chk in statement_quality_audit.checks %}
                 <div class="p-2.5 rounded-xl border {% if chk.severity == 'PASS' %}bg-emerald-50/70 border-emerald-200 text-emerald-900{% elif chk.severity == 'WARN' %}bg-amber-50/80 border-amber-200 text-amber-900{% else %}bg-rose-50/80 border-rose-200 text-rose-900{% endif %}">
                     <div class="font-bold flex items-center justify-between gap-1">
@@ -817,12 +817,36 @@
             while (nextTr && !nextTr.classList.contains('stmt-section-header')) {
                 if (nextState) {
                     nextTr.classList.add('hidden');
-                } else {
+                } else if (!nextTr.classList.contains('footnote-subrow') || nextTr.getAttribute('data-fn-open') === 'true') {
                     nextTr.classList.remove('hidden');
                 }
                 nextTr = nextTr.nextElementSibling;
             }
         }
+
+        window.toggleFootnoteSubrows = function(btn, groupKey) {
+            const tbody = btn.closest('tbody');
+            if (!tbody) return;
+            const subrows = tbody.querySelectorAll('tr.footnote-subrow');
+            let anyOpening = null;
+            subrows.forEach(tr => {
+                if (tr.getAttribute('data-parent-fn') !== groupKey) return;
+                if (anyOpening === null) {
+                    anyOpening = tr.getAttribute('data-fn-open') !== 'true';
+                }
+                tr.setAttribute('data-fn-open', anyOpening ? 'true' : 'false');
+                if (anyOpening) {
+                    tr.classList.remove('hidden');
+                    tr.style.display = '';
+                } else {
+                    tr.classList.add('hidden');
+                }
+            });
+            const chev = btn.querySelector('.fn-chevron');
+            if (chev && anyOpening !== null) {
+                chev.textContent = anyOpening ? '▴' : '▾';
+            }
+        };
 
         function filterStatements() {
             const input = document.getElementById('statementSearch');
@@ -849,7 +873,11 @@
                     } else if (tr.classList.contains('statement-row')) {
                         if (filter === '') {
                             tr.style.display = '';
-                            tr.classList.remove('hidden');
+                            if (tr.classList.contains('footnote-subrow') && tr.getAttribute('data-fn-open') !== 'true') {
+                                tr.classList.add('hidden');
+                            } else {
+                                tr.classList.remove('hidden');
+                            }
                         } else {
                             const hay = [
                                 tr.textContent || tr.innerText || '',
@@ -910,12 +938,14 @@
                         csvRows.push([`"--- ${txt.replace(/"/g, '""')} ---"`]);
                     } else if (tr.classList.contains('statement-row')) {
                         const rowData = [];
+                        const isNonAdd = tr.getAttribute('data-non-additive') === 'true';
                         const tds = tr.querySelectorAll('td');
                         tds.forEach((td, idx) => {
                             let cellText = '';
                             if (idx === 0) {
                                 const lblSpan = td.querySelector('.stmt-row-label');
                                 cellText = lblSpan ? lblSpan.textContent.trim() : td.textContent.trim().replace(/ⓘ\s*$/, '').trim();
+                                if (isNonAdd) cellText = '[Nota XBRL - No Aditivo] ' + cellText;
                             } else {
                                 cellText = td.textContent.trim();
                             }
@@ -5940,6 +5970,14 @@
                     <div id="ev-sources-body" class="divide-y divide-slate-100"></div>
                 </div>
 
+                <div id="ev-footnotes-card" class="hidden bg-white rounded-2xl border border-indigo-200 shadow-sm overflow-hidden">
+                    <div class="px-4 py-3 bg-indigo-50/70 border-b border-indigo-200 flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase tracking-wider text-indigo-800">📑 Desglose en Notas XBRL (Off-Face / No Aditivo)</span>
+                        <span id="ev-footnotes-count" class="text-xs font-mono font-bold text-indigo-700"></span>
+                    </div>
+                    <div id="ev-footnotes-body" class="divide-y divide-indigo-100/60"></div>
+                </div>
+
                 <div id="ev-ltm-card" class="hidden bg-white p-4 rounded-2xl border border-indigo-200 shadow-sm space-y-2.5">
                     <div class="flex items-center justify-between">
                         <span class="text-[11px] font-black uppercase tracking-wider text-indigo-700">Puente de Cálculo LTM (Trailing 12M)</span>
@@ -6116,6 +6154,35 @@
                 }).join('');
             } else {
                 srcBody.innerHTML = `<div class="px-4 py-4 text-xs text-slate-500">Esta celda se calcula a partir de los componentes anteriores sin línea única adicional en carátula.</div>`;
+            }
+
+            const fnCard = document.getElementById('ev-footnotes-card');
+            const fnBody = document.getElementById('ev-footnotes-body');
+            const fnCount = document.getElementById('ev-footnotes-count');
+            const footnotes = Array.isArray(data.footnote_disclosures) ? data.footnote_disclosures : [];
+            if (fnCard && fnBody && footnotes.length) {
+                fnCard.classList.remove('hidden');
+                if (fnCount) fnCount.textContent = `${footnotes.length} revelación(es) en nota`;
+                fnBody.innerHTML = footnotes.map(fn => {
+                    const spSub = (fn.spanish_label && fn.spanish_label !== fn.raw_label)
+                        ? `<div class="text-[11px] text-slate-500 italic">${escHtml(fn.spanish_label)}</div>`
+                        : '';
+                    return `
+                        <div class="px-4 py-2.5 flex items-start justify-between gap-4 hover:bg-indigo-50/30">
+                            <div class="min-w-0 space-y-0.5">
+                                <div class="text-xs font-semibold text-slate-800 break-words">↳ ${escHtml(fn.raw_label || fn.concept)}</div>
+                                ${spSub}
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    ${fn.concept ? `<code class="text-[10px] font-mono bg-indigo-50 text-indigo-800 px-1.5 py-0.5 rounded border border-indigo-200">${escHtml(fn.concept)}</code>` : ''}
+                                    <span class="text-[10px] text-indigo-500">${escHtml(fn.source || 'Nota XBRL')} · No aditivo</span>
+                                </div>
+                            </div>
+                            <div class="text-xs font-mono font-bold text-indigo-900 whitespace-nowrap shrink-0">${fmtUsdM(fn.val_usd)}</div>
+                        </div>`;
+                }).join('');
+            } else if (fnCard) {
+                fnCard.classList.add('hidden');
+                if (fnBody) fnBody.innerHTML = '';
             }
 
             const ltmCard = document.getElementById('ev-ltm-card');
