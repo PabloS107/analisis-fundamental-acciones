@@ -9,7 +9,10 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017"
+    "FY2017",
+    "FY2016",
+    "FY2015",
+    "FY2014"
   ],
   "product_segments": [
     {
@@ -18,6 +21,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Family of Apps",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 196175.0,
         "FY2024": 160633.0,
@@ -28,7 +32,16 @@
         "FY2019": 69655.0,
         "LTM": 235587.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 177449.0,
+        "prior_ytd": 138037.0,
+        "yoy_pct": 28.55
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other revenue",
@@ -36,6 +49,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Family of Apps",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 2584.0,
         "FY2024": 1722.0,
@@ -46,7 +60,16 @@
         "FY2019": 541.0,
         "LTM": 3787.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 2987.0,
+        "prior_ytd": 1784.0,
+        "yoy_pct": 67.43
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Family of Apps",
@@ -54,6 +77,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 198759.0,
         "FY2024": 162355.0,
@@ -64,7 +88,16 @@
         "FY2019": 70196.0,
         "LTM": 239374.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 180436.0,
+        "prior_ytd": 139821.0,
+        "yoy_pct": 29.05
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2025": 102469.0,
         "FY2024": 87109.0,
@@ -92,6 +125,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 2207.0,
         "FY2024": 2146.0,
@@ -102,7 +136,16 @@
         "FY2019": 501.0,
         "LTM": 2231.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1276.0,
+        "prior_ytd": 1252.0,
+        "yoy_pct": 1.92
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2025": -19193.0,
         "FY2024": -17729.0,
@@ -130,6 +173,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 84169.0,
         "FY2019": 69655.0,
@@ -144,6 +188,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 1796.0,
         "FY2019": 1042.0,
@@ -172,7 +217,16 @@
         "FY2017": 19065.0,
         "LTM": 95181.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 71346.0,
+        "prior_ytd": 55031.0,
+        "yoy_pct": 29.65
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Europe",
@@ -191,7 +245,16 @@
         "FY2017": 10126.0,
         "LTM": 55526.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 41272.0,
+        "prior_ytd": 32315.0,
+        "yoy_pct": 27.72
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Asia-Pacific",
@@ -210,7 +273,16 @@
         "FY2017": 7921.0,
         "LTM": 63927.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 48511.0,
+        "prior_ytd": 38401.0,
+        "yoy_pct": 26.33
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Rest of World",
@@ -229,7 +301,16 @@
         "FY2017": 3541.0,
         "LTM": 26971.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 20583.0,
+        "prior_ytd": 15326.0,
+        "yoy_pct": 34.3
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "United States",
@@ -246,9 +327,12 @@
         "FY2019": 30230.0,
         "FY2018": 24100.0,
         "FY2017": 17730.0,
-        "LTM": 74780.0
+        "FY2016": 12579.0,
+        "FY2015": 8513.0,
+        "FY2014": 5649.0
       },
-      "status": "active"
+      "status": "active",
+      "ltm_disclosure_status": "annual_only"
     },
     {
       "name": "China",
@@ -260,6 +344,19 @@
         "FY2023": 13690.0,
         "FY2022": 7400.0,
         "FY2021": 7590.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Rest of the world",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2017": 22919.0,
+        "FY2016": 15059.0,
+        "FY2015": 9415.0,
+        "FY2014": 6817.0
       },
       "status": "discontinued"
     }
@@ -319,6 +416,16 @@
       }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "META"
 }

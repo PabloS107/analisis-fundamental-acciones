@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-10T11:11:31.294202",
+  "timestamp": "2026-11-14T16:17:36.581163",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -22,174 +22,37 @@
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "STANDARD_CORPORATE",
-    "source_sec": "uberq326earningspressrelea.htm",
-    "brand_segmentation": {
-      "Mobility": {
-        "revenue_usd_m": 29670.0
-      },
-      "Delivery": {
-        "revenue_usd_m": 17248.0
-      },
-      "Freight": {
-        "revenue_usd_m": 5099.0
-      },
-      "Reconciling Items": {
-        "revenue_usd_m": -2.0
-      },
-      "All Other": {
-        "revenue_usd_m": 0.0
-      },
-      "Aurora": {
-        "revenue_usd_m": 0.0
-      },
-      "Previously Reported": {
-        "revenue_usd_m": 0.0
-      },
-      "Effect of Change": {
-        "revenue_usd_m": 0.0
-      },
-      "Other revenue": {
-        "revenue_usd_m": 0.0
-      },
-      "Rides": {
-        "revenue_usd_m": 0.0
-      },
-      "Other Bets": {
-        "revenue_usd_m": 0.0
-      }
-    },
-    "channel_breakdown": {},
-    "geographic_breakdown": {
-      "United States and Canada (\"US&CAN\")": {
-        "revenue_usd_m": 26469.0
-      },
-      "Latin America (\"LatAm\")": {
-        "revenue_usd_m": 3327.0
-      },
-      "Europe, Middle East and Africa (\"EMEA\")": {
-        "revenue_usd_m": 16364.0
-      },
-      "Asia Pacific (\"APAC\")": {
-        "revenue_usd_m": 5857.0
-      },
-      "United States": {
-        "revenue_usd_m": 23771.0
-      },
-      "United Kingdom": {
-        "revenue_usd_m": 10609.0
-      },
-      "All other countries": {
-        "revenue_usd_m": 17637.0
-      },
-      "United States & Canada": {
-        "revenue_usd_m": 0.0
-      },
-      "Latin America": {
-        "revenue_usd_m": 0.0
-      },
-      "EMEA": {
-        "revenue_usd_m": 0.0
-      },
-      "Latin America (LATAM)": {
-        "revenue_usd_m": 0.0
-      },
-      "Europe, Middle East and Africa (EMEA)": {
-        "revenue_usd_m": 0.0
-      },
-      "Asia Pacific (APAC)": {
-        "revenue_usd_m": 0.0
-      },
-      "Brazil": {
-        "revenue_usd_m": 0.0
-      }
-    },
-    "operational_kpis": {
-      "diluted_eps": 0.25
-    }
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
     "archetype": "STANDARD_CORPORATE",
     "source_sec": "uberq326earningspressrelea.htm",
     "brand_segmentation": {
       "Mobility": {
-        "revenue_usd_m": 29670.0
+        "revenue_usd_m": 29885.0
       },
       "Delivery": {
-        "revenue_usd_m": 17248.0
+        "revenue_usd_m": 20693.0
       },
       "Freight": {
-        "revenue_usd_m": 5099.0
-      },
-      "Reconciling Items": {
-        "revenue_usd_m": -2.0
-      },
-      "All Other": {
-        "revenue_usd_m": 0.0
-      },
-      "Aurora": {
-        "revenue_usd_m": 0.0
-      },
-      "Previously Reported": {
-        "revenue_usd_m": 0.0
-      },
-      "Effect of Change": {
-        "revenue_usd_m": 0.0
-      },
-      "Other revenue": {
-        "revenue_usd_m": 0.0
-      },
-      "Rides": {
-        "revenue_usd_m": 0.0
-      },
-      "Other Bets": {
-        "revenue_usd_m": 0.0
+        "revenue_usd_m": 5948.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
-      "United States and Canada (\"US&CAN\")": {
-        "revenue_usd_m": 26469.0
+      "United States & Canada": {
+        "revenue_usd_m": 29543.0
       },
-      "Latin America (\"LatAm\")": {
-        "revenue_usd_m": 3327.0
+      "Latin America": {
+        "revenue_usd_m": 4091.0
       },
-      "Europe, Middle East and Africa (\"EMEA\")": {
-        "revenue_usd_m": 16364.0
+      "Europe, Middle East and Africa": {
+        "revenue_usd_m": 15905.0
       },
-      "Asia Pacific (\"APAC\")": {
-        "revenue_usd_m": 5857.0
+      "Asia Pacific": {
+        "revenue_usd_m": 6987.0
       },
       "United States": {
         "revenue_usd_m": 23771.0
-      },
-      "United Kingdom": {
-        "revenue_usd_m": 10609.0
-      },
-      "All other countries": {
-        "revenue_usd_m": 17637.0
-      },
-      "United States & Canada": {
-        "revenue_usd_m": 0.0
-      },
-      "Latin America": {
-        "revenue_usd_m": 0.0
-      },
-      "EMEA": {
-        "revenue_usd_m": 0.0
-      },
-      "Latin America (LATAM)": {
-        "revenue_usd_m": 0.0
-      },
-      "Europe, Middle East and Africa (EMEA)": {
-        "revenue_usd_m": 0.0
-      },
-      "Asia Pacific (APAC)": {
-        "revenue_usd_m": 0.0
-      },
-      "Brazil": {
-        "revenue_usd_m": 0.0
       }
     },
     "operational_kpis": {

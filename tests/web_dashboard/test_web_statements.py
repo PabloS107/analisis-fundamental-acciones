@@ -517,20 +517,27 @@ class TestStatementsWebDashboard(unittest.TestCase):
         self.assertIn('value="5.50"', c_aapl)
 
     def test_nvda_segments_and_descriptions(self):
-        """Verifica que los segmentos modernos y las descripciones institucionales de NVDA se rendericen con precisión."""
+        """Verifica el renderizado de segmentos vigentes Q2 FY27 y tabla predecesora/discontinuada de NVDA."""
         res_nvda = self.client.get('/company/NVDA/')
         self.assertEqual(res_nvda.status_code, 200)
         c_nvda = html.unescape(res_nvda.content.decode('utf-8'))
 
-        # Plataformas modernas (taxonomía oficial FY2026, ASC 280)
+        # Plataformas vigentes según el último 10-Q (Q2 FY27, base 6M YTD) + historia continua Data Center LTM
         self.assertIn('Línea Principal: Data Center', c_nvda)
-        self.assertIn('$277,798M', c_nvda)          # Data Center LTM (FY2026 10-K + LTM)
-        self.assertIn('91.7%', c_nvda)
-        self.assertIn('Línea Secundaria: Gaming', c_nvda)
-        self.assertIn('$16,042M', c_nvda)
-        self.assertIn('5.3%', c_nvda)
+        self.assertIn('$164,269M', c_nvda)          # Data Center 6M YTD (mix consistente 92.4%)
+        self.assertIn('92.4%', c_nvda)
+        self.assertIn('$277,798M', c_nvda)          # Data Center LTM histórico continuo en tabla
+        self.assertIn('Línea Secundaria: Edge Computing', c_nvda)
+        self.assertIn('$13,568M', c_nvda)
+        self.assertIn('7.6%', c_nvda)
 
-        # Subsegmentos del hipercubo Data Center (Compute / Networking)
+        # Subsegmentos vigentes dentro de Data Center
+        self.assertIn('Hyperscale', c_nvda)
+        self.assertIn('AI Clouds, Industrial, & Enterprise', c_nvda)
+
+        # Aviso de re-segmentación y preservación histórica de predecesores (Gaming, Compute, Networking)
+        self.assertIn('Cambio de taxonomía operativa', c_nvda)
+        self.assertIn('Gaming', c_nvda)
         self.assertIn('Compute', c_nvda)
         self.assertIn('Networking', c_nvda)
 

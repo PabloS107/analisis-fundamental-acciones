@@ -10,15 +10,38 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017"
+    "FY2017",
+    "FY2016",
+    "FY2015"
   ],
   "product_segments": [
+    {
+      "name": "Change in estimate based on the availability of additional supporting information",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2017": 640.0
+      }
+    },
+    {
+      "name": "Favorable final resolution of various lawsuits",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "status": "discontinued",
+      "values": {
+        "FY2018": 236.0
+      }
+    },
     {
       "name": "Products",
       "is_subtotal": true,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 355533.0,
         "FY2025": 307003.0,
@@ -32,6 +55,7 @@
         "FY2017": 196534.0,
         "LTM": 355533.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -40,6 +64,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 254098.0,
         "FY2025": 209586.0,
@@ -51,8 +76,11 @@
         "FY2019": 142381.0,
         "FY2018": 164888.0,
         "FY2017": 139337.0,
+        "FY2016": 136700.0,
+        "FY2015": 155041.0,
         "LTM": 254098.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -61,6 +89,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 37929.0,
         "FY2025": 33708.0,
@@ -72,8 +101,11 @@
         "FY2019": 25740.0,
         "FY2018": 25198.0,
         "FY2017": 25569.0,
+        "FY2016": 22831.0,
+        "FY2015": 25471.0,
         "LTM": 37929.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -82,6 +114,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 27929.0,
         "FY2025": 28023.0,
@@ -93,8 +126,11 @@
         "FY2019": 21280.0,
         "FY2018": 18380.0,
         "FY2017": 18802.0,
+        "FY2016": 20628.0,
+        "FY2015": 23227.0,
         "LTM": 27929.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -103,6 +139,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 35577.0,
         "FY2025": 35686.0,
@@ -116,6 +153,7 @@
         "FY2017": 12826.0,
         "LTM": 35577.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -124,6 +162,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 123301.0,
         "FY2025": 109158.0,
@@ -135,8 +174,11 @@
         "FY2019": 46291.0,
         "FY2018": 39748.0,
         "FY2017": 32700.0,
+        "FY2016": 24348.0,
+        "FY2015": 19909.0,
         "LTM": 123301.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     },
     {
@@ -145,20 +187,54 @@
       "is_subsegment": false,
       "is_reconciling": true,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 0.0,
         "FY2025": 0.0,
         "FY2024": 0.0,
         "LTM": 0.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2026": -54405.0,
-        "FY2025": -42627.0,
-        "FY2024": -38828.0,
-        "FY2023": -36587.0,
-        "LTM": -54405.0
-      }
+      "ltm_disclosure_status": "10k_is_latest",
+      "status": "active"
+    },
+    {
+      "name": "Other Products",
+      "is_subtotal": true,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2018": 17417.0,
+        "FY2017": 12863.0,
+        "FY2016": 11132.0,
+        "FY2015": 10067.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Services",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Change in estimate based on the availability of additional supporting information",
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2017": 640.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Services",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Favorable final resolution of various lawsuits",
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2018": 236.0
+      },
+      "status": "discontinued"
     }
   ],
   "channel_segments": [],
@@ -179,8 +255,11 @@
         "FY2019": 116914.0,
         "FY2018": 112093.0,
         "FY2017": 96600.0,
+        "FY2016": 86613.0,
+        "FY2015": 93864.0,
         "LTM": 198083.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
       "operating_income": {
         "FY2026": 86008.0,
@@ -193,6 +272,8 @@
         "FY2019": 35099.0,
         "FY2018": 34864.0,
         "FY2017": 30684.0,
+        "FY2016": 28172.0,
+        "FY2015": 31186.0,
         "LTM": 86008.0
       },
       "operating_margin_pct": {
@@ -206,6 +287,8 @@
         "FY2019": 30.02,
         "FY2018": 31.1,
         "FY2017": 31.76,
+        "FY2016": 32.53,
+        "FY2015": 33.22,
         "LTM": 43.42
       }
     },
@@ -225,8 +308,11 @@
         "FY2019": 60288.0,
         "FY2018": 62420.0,
         "FY2017": 54938.0,
+        "FY2016": 49952.0,
+        "FY2015": 50337.0,
         "LTM": 127604.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
       "operating_income": {
         "FY2026": 58098.0,
@@ -239,6 +325,8 @@
         "FY2019": 19195.0,
         "FY2018": 19955.0,
         "FY2017": 16514.0,
+        "FY2016": 15348.0,
+        "FY2015": 16527.0,
         "LTM": 58098.0
       },
       "operating_margin_pct": {
@@ -252,6 +340,8 @@
         "FY2019": 31.84,
         "FY2018": 31.97,
         "FY2017": 30.06,
+        "FY2016": 30.73,
+        "FY2015": 32.83,
         "LTM": 45.53
       }
     },
@@ -271,8 +361,11 @@
         "FY2019": 43678.0,
         "FY2018": 51942.0,
         "FY2017": 44764.0,
+        "FY2016": 48492.0,
+        "FY2015": 58715.0,
         "LTM": 82378.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
       "operating_income": {
         "FY2026": 35326.0,
@@ -285,6 +378,8 @@
         "FY2019": 16232.0,
         "FY2018": 19742.0,
         "FY2017": 17032.0,
+        "FY2016": 18835.0,
+        "FY2015": 23002.0,
         "LTM": 35326.0
       },
       "operating_margin_pct": {
@@ -298,6 +393,8 @@
         "FY2019": 37.16,
         "FY2018": 38.01,
         "FY2017": 38.05,
+        "FY2016": 38.84,
+        "FY2015": 39.18,
         "LTM": 42.88
       }
     },
@@ -317,8 +414,11 @@
         "FY2019": 21506.0,
         "FY2018": 21733.0,
         "FY2017": 17733.0,
+        "FY2016": 16928.0,
+        "FY2015": 15706.0,
         "LTM": 30908.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
       "operating_income": {
         "FY2026": 14650.0,
@@ -331,6 +431,8 @@
         "FY2019": 9369.0,
         "FY2018": 9500.0,
         "FY2017": 8097.0,
+        "FY2016": 7165.0,
+        "FY2015": 7617.0,
         "LTM": 14650.0
       },
       "operating_margin_pct": {
@@ -344,6 +446,8 @@
         "FY2019": 43.56,
         "FY2018": 43.71,
         "FY2017": 45.66,
+        "FY2016": 42.33,
+        "FY2015": 48.5,
         "LTM": 47.4
       }
     },
@@ -363,8 +467,11 @@
         "FY2019": 17788.0,
         "FY2018": 17407.0,
         "FY2017": 15199.0,
+        "FY2016": 13654.0,
+        "FY2015": 15093.0,
         "LTM": 39861.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
       "operating_income": {
         "FY2026": 18386.0,
@@ -377,6 +484,8 @@
         "FY2019": 6055.0,
         "FY2018": 6181.0,
         "FY2017": 5304.0,
+        "FY2016": 4781.0,
+        "FY2015": 5518.0,
         "LTM": 18386.0
       },
       "operating_margin_pct": {
@@ -390,6 +499,8 @@
         "FY2019": 34.04,
         "FY2018": 35.51,
         "FY2017": 34.9,
+        "FY2016": 35.02,
+        "FY2015": 36.56,
         "LTM": 46.13
       }
     },
@@ -409,9 +520,13 @@
         "FY2019": 102266.0,
         "FY2018": 98061.0,
         "FY2017": 84339.0,
+        "FY2016": 75667.0,
+        "FY2015": 81732.0,
         "LTM": 167746.0
       },
-      "status": "active"
+      "ltm_disclosure_status": "10k_is_latest",
+      "status": "active",
+      "is_country_breakdown": true
     },
     {
       "name": "China",
@@ -429,41 +544,20 @@
         "FY2019": 43678.0,
         "FY2018": 51942.0,
         "FY2017": 44764.0,
+        "FY2016": 48492.0,
+        "FY2015": 58715.0,
         "LTM": 82378.0
       },
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active",
-      "operating_income": {
-        "FY2026": 35326.0,
-        "FY2025": 26917.0,
-        "FY2024": 27082.0,
-        "FY2023": 30328.0,
-        "FY2022": 31153.0,
-        "FY2021": 28504.0,
-        "FY2020": 15261.0,
-        "FY2019": 16232.0,
-        "FY2018": 19742.0,
-        "FY2017": 17032.0,
-        "LTM": 35326.0
-      },
-      "operating_margin_pct": {
-        "FY2026": 42.88,
-        "FY2025": 41.81,
-        "FY2024": 40.45,
-        "FY2023": 41.8,
-        "FY2022": 41.99,
-        "FY2021": 41.69,
-        "FY2020": 37.86,
-        "FY2019": 37.16,
-        "FY2018": 38.01,
-        "FY2017": 38.05,
-        "LTM": 42.88
-      }
+      "is_country_breakdown": true
     },
     {
       "name": "Other countries",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "parent": null,
+      "is_country_breakdown": true,
       "values": {
         "FY2026": 228710.0,
         "FY2025": 199994.0,
@@ -475,9 +569,11 @@
         "FY2019": 114230.0,
         "FY2018": 115592.0,
         "FY2017": 100131.0,
+        "FY2016": 91480.0,
+        "FY2015": 93268.0,
         "LTM": 228710.0
       },
-      "is_country_breakdown": true,
+      "ltm_disclosure_status": "10k_is_latest",
       "status": "active"
     }
   ],
@@ -495,8 +591,11 @@
         "FY2019": 63930.0,
         "FY2018": 70898.0,
         "FY2017": 61344.0,
+        "FY2016": 60024.0,
+        "FY2015": 71230.0,
         "LTM": 158063.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Americas",
@@ -511,8 +610,11 @@
         "FY2019": 35099.0,
         "FY2018": 34864.0,
         "FY2017": 30684.0,
+        "FY2016": 28172.0,
+        "FY2015": 31186.0,
         "LTM": 86008.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Europe",
@@ -527,8 +629,11 @@
         "FY2019": 19195.0,
         "FY2018": 19955.0,
         "FY2017": 16514.0,
+        "FY2016": 15348.0,
+        "FY2015": 16527.0,
         "LTM": 58098.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Greater China",
@@ -543,8 +648,11 @@
         "FY2019": 16232.0,
         "FY2018": 19742.0,
         "FY2017": 17032.0,
+        "FY2016": 18835.0,
+        "FY2015": 23002.0,
         "LTM": 35326.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Japan",
@@ -559,8 +667,11 @@
         "FY2019": 9369.0,
         "FY2018": 9500.0,
         "FY2017": 8097.0,
+        "FY2016": 7165.0,
+        "FY2015": 7617.0,
         "LTM": 14650.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Rest of Asia Pacific",
@@ -575,8 +686,11 @@
         "FY2019": 6055.0,
         "FY2018": 6181.0,
         "FY2017": 5304.0,
+        "FY2016": 4781.0,
+        "FY2015": 5518.0,
         "LTM": 18386.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Corporate non-segment",
@@ -586,7 +700,8 @@
         "FY2024": -38828.0,
         "FY2023": -36587.0,
         "LTM": -54405.0
-      }
+      },
+      "ltm_disclosure_status": "10k_is_latest"
     },
     {
       "name": "Operating segments",
@@ -598,10 +713,22 @@
         "FY2020": 91240.0,
         "FY2019": 85950.0,
         "FY2018": 90242.0,
-        "FY2017": 77631.0
+        "FY2017": 77631.0,
+        "FY2016": 74301.0,
+        "FY2015": 83850.0
       }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": false,
+    "latest_interim_period": null,
+    "product_ltm_status": "10k_is_latest",
+    "geo_ltm_status": "10k_is_latest",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "AAPL"
 }

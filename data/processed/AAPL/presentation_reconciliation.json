@@ -1,97 +1,33 @@
 {
-  "timestamp": "2026-11-04T16:09:58.171962",
+  "timestamp": "2026-11-14T16:24:14.610988",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
-      "sec_value": 383266000000.0,
-      "fst_value": 383266000000.0,
+      "sec_value": 404548000000.0,
+      "fst_value": 404548000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     },
     "stockholders_equity": {
-      "sec_value": 107520000000.0,
-      "fst_value": 107520000000.0,
+      "sec_value": 112093000000.0,
+      "fst_value": 112093000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     },
     "cash_and_equivalents": {
-      "sec_value": 39544000000.0,
-      "fst_value": 39544000000.0,
+      "sec_value": 36305000000.0,
+      "fst_value": 36305000000.0,
       "delta_pct": 0.0,
       "status": "MATCH_EXACTO"
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "STANDARD_CORPORATE",
-    "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
-    "total_slides": 3,
-    "brand_segmentation": {
-      "Products": {
-        "revenue_usd_m": 355533.0
-      },
-      "Services": {
-        "revenue_usd_m": 123301.0
-      },
-      "iPhone": {
-        "revenue_usd_m": 254098.0
-      },
-      "Mac": {
-        "revenue_usd_m": 37929.0
-      },
-      "iPad": {
-        "revenue_usd_m": 27929.0
-      },
-      "Wearables, Home and Accessories": {
-        "revenue_usd_m": 35577.0
-      },
-      "Corporate non-segment": {
-        "revenue_usd_m": 0.0
-      }
-    },
-    "channel_breakdown": {},
-    "geographic_breakdown": {
-      "Americas": {
-        "revenue_usd_m": 198083.0
-      },
-      "Europe": {
-        "revenue_usd_m": 127604.0
-      },
-      "Greater China": {
-        "revenue_usd_m": 82378.0
-      },
-      "Japan": {
-        "revenue_usd_m": 30908.0
-      },
-      "Rest of Asia Pacific": {
-        "revenue_usd_m": 39861.0
-      },
-      "U.S.": {
-        "revenue_usd_m": 167746.0
-      },
-      "China": {
-        "revenue_usd_m": 82378.0
-      },
-      "Other countries": {
-        "revenue_usd_m": 228710.0
-      }
-    },
-    "operational_kpis": {
-      "diluted_eps": 2.1
-    },
-    "source_sec": "a8-kex991q4202609262026.htm"
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
     "archetype": "STANDARD_CORPORATE",
     "source_presentation": "FY26_Q3_Consolidated_Financial_Statements.pdf",
     "total_slides": 3,
     "brand_segmentation": {
-      "Products": {
-        "revenue_usd_m": 355533.0
-      },
-      "Services": {
-        "revenue_usd_m": 123301.0
-      },
       "iPhone": {
         "revenue_usd_m": 254098.0
       },
@@ -104,8 +40,8 @@
       "Wearables, Home and Accessories": {
         "revenue_usd_m": 35577.0
       },
-      "Corporate non-segment": {
-        "revenue_usd_m": 0.0
+      "Services": {
+        "revenue_usd_m": 123301.0
       }
     },
     "channel_breakdown": {},
@@ -124,15 +60,6 @@
       },
       "Rest of Asia Pacific": {
         "revenue_usd_m": 39861.0
-      },
-      "U.S.": {
-        "revenue_usd_m": 167746.0
-      },
-      "China": {
-        "revenue_usd_m": 82378.0
-      },
-      "Other countries": {
-        "revenue_usd_m": 228710.0
       }
     },
     "operational_kpis": {

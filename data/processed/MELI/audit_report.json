@@ -2,7 +2,7 @@
   "ticker": "MELI",
   "company_name": "MERCADOLIBRE INC",
   "cik": "0001099590",
-  "audit_timestamp": "2026-11-14T12:34:50.260333",
+  "audit_timestamp": "2026-11-14T16:23:01.932906",
   "years_audited": {
     "LTM": [
       {
@@ -769,8 +769,8 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 84,
-  "passed_tests": 82,
+  "total_tests": 87,
+  "passed_tests": 85,
   "failed_tests": 0,
   "skipped_tests": 2,
   "compliance_score_pct": 100.0,
@@ -837,6 +837,23 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "2 segmentos activos"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "PASS",
+      "message": "Desglose geográfico activo validado"
     }
   ]
 }

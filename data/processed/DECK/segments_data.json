@@ -10,7 +10,8 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017"
+    "FY2017",
+    "FY2016"
   ],
   "product_segments": [
     {
@@ -19,6 +20,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 2587.3,
         "FY2025": 2233.1,
@@ -26,7 +28,16 @@
         "FY2023": 1412.9,
         "LTM": 2680.8
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1380.7,
+        "prior_ytd": 1287.2,
+        "yoy_pct": 7.26
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2026": 911.0,
         "FY2025": 848.5,
@@ -48,6 +59,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 2738.8,
         "FY2025": 2531.4,
@@ -55,7 +67,16 @@
         "FY2023": 1929.2,
         "LTM": 2778.5
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1064.4,
+        "prior_ytd": 1024.7,
+        "yoy_pct": 3.87
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2026": 1045.3,
         "FY2025": 1002.9,
@@ -77,6 +98,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2026": 146.2,
         "FY2025": 221.2,
@@ -84,7 +106,16 @@
         "FY2023": 285.2,
         "LTM": 117.6
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 54.9,
+        "prior_ytd": 83.5,
+        "yoy_pct": -34.25
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2026": 16.4,
         "FY2025": 34.6,
@@ -98,6 +129,129 @@
         "FY2024": 9.8,
         "FY2023": 17.36,
         "LTM": 9.61
+      }
+    },
+    {
+      "name": "Net sales to external customers",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueGoodsNet",
+      "values": {
+        "FY2018": 1903.3,
+        "FY2017": 1790.1,
+        "FY2016": 1875.2,
+        "FY2015": 1817.1
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other brands wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueGoodsNet",
+      "values": {
+        "FY2018": 150.0,
+        "FY2017": 116.2,
+        "FY2016": 100.8,
+        "FY2015": 76.2
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2018": 22.3,
+        "FY2017": 1.6,
+        "FY2016": -4.4,
+        "FY2015": -9.8
+      },
+      "operating_margin_pct": {
+        "FY2018": 14.87,
+        "FY2017": 1.38,
+        "FY2016": -4.37,
+        "FY2015": -12.86
+      }
+    },
+    {
+      "name": "Sanuk brand wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueGoodsNet",
+      "values": {
+        "FY2018": 78.3,
+        "FY2017": 77.6,
+        "FY2016": 90.7,
+        "FY2015": 102.7
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2018": 14.5,
+        "FY2017": -110.6,
+        "FY2016": 15.6,
+        "FY2015": 21.9
+      },
+      "operating_margin_pct": {
+        "FY2018": 18.52,
+        "FY2017": -142.53,
+        "FY2016": 17.2,
+        "FY2015": 21.32
+      }
+    },
+    {
+      "name": "Teva brand wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueGoodsNet",
+      "values": {
+        "FY2018": 117.5,
+        "FY2017": 103.7,
+        "FY2016": 121.2,
+        "FY2015": 116.9
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2018": 20.4,
+        "FY2017": 10.0,
+        "FY2016": 17.7,
+        "FY2015": 13.3
+      },
+      "operating_margin_pct": {
+        "FY2018": 17.36,
+        "FY2017": 9.64,
+        "FY2016": 14.6,
+        "FY2015": 11.38
+      }
+    },
+    {
+      "name": "UGG brand wholesale",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueGoodsNet",
+      "values": {
+        "FY2018": 841.9,
+        "FY2017": 826.4,
+        "FY2016": 918.1,
+        "FY2015": 903.9
+      },
+      "status": "discontinued",
+      "operating_income": {
+        "FY2018": 247.8,
+        "FY2017": 213.4,
+        "FY2016": 247.0,
+        "FY2015": 269.5
+      },
+      "operating_margin_pct": {
+        "FY2018": 29.43,
+        "FY2017": 25.82,
+        "FY2016": 26.9,
+        "FY2015": 29.82
       }
     }
   ],
@@ -120,7 +274,16 @@
         "FY2017": 93.1,
         "LTM": 3279.2
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1759.7,
+        "prior_ytd": 1688.6,
+        "yoy_pct": 4.21
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2024": 349.5,
         "FY2023": 267.0,
@@ -158,9 +321,20 @@
         "FY2019": 715.0,
         "FY2018": 715.7,
         "FY2017": 666.3,
+        "FY2016": 644.3,
+        "FY2015": 617.4,
         "LTM": 2297.8
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 740.4,
+        "prior_ytd": 706.8,
+        "yoy_pct": 4.75
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2024": 748.7,
         "FY2023": 508.9,
@@ -169,7 +343,9 @@
         "FY2020": 182.5,
         "FY2019": 185.4,
         "FY2018": 156.9,
-        "FY2017": 109.8
+        "FY2017": 109.8,
+        "FY2016": 101.8,
+        "FY2015": 150.3
       },
       "operating_margin_pct": {
         "FY2024": 40.35,
@@ -179,7 +355,9 @@
         "FY2020": 24.77,
         "FY2019": 25.93,
         "FY2018": 21.92,
-        "FY2017": 16.48
+        "FY2017": 16.48,
+        "FY2016": 15.8,
+        "FY2015": 24.34
       }
     }
   ],
@@ -195,7 +373,16 @@
         "FY2024": 2863.7,
         "LTM": 3204.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1353.3,
+        "prior_ytd": 1340.8,
+        "yoy_pct": 0.93
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "International",
@@ -208,7 +395,16 @@
         "FY2024": 1424.1,
         "LTM": 2373.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1146.8,
+        "prior_ytd": 1054.6,
+        "yoy_pct": 8.74
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     }
   ],
   "segment_operating_income": [
@@ -296,7 +492,9 @@
         "FY2020": 182.5,
         "FY2019": 185.4,
         "FY2018": 156.9,
-        "FY2017": 109.8
+        "FY2017": 109.8,
+        "FY2016": 101.8,
+        "FY2015": 150.3
       }
     },
     {
@@ -318,10 +516,74 @@
         "FY2020": 338.1,
         "FY2019": 327.3,
         "FY2018": 222.6,
-        "FY2017": -1.9
+        "FY2017": -1.9,
+        "FY2016": 162.1,
+        "FY2015": 224.4
+      }
+    },
+    {
+      "name": "Unallocated overhead costs",
+      "values": {
+        "FY2018": -239.3,
+        "FY2017": -226.2,
+        "FY2016": -215.5
+      }
+    },
+    {
+      "name": "Other brands wholesale",
+      "values": {
+        "FY2018": 22.3,
+        "FY2017": 1.6,
+        "FY2016": -4.4,
+        "FY2015": -9.8
+      }
+    },
+    {
+      "name": "Sanuk brand wholesale",
+      "values": {
+        "FY2018": 14.5,
+        "FY2017": -110.6,
+        "FY2016": 15.6,
+        "FY2015": 21.9
+      }
+    },
+    {
+      "name": "Teva brand wholesale",
+      "values": {
+        "FY2018": 20.4,
+        "FY2017": 10.0,
+        "FY2016": 17.7,
+        "FY2015": 13.3
+      }
+    },
+    {
+      "name": "UGG brand wholesale",
+      "values": {
+        "FY2018": 247.8,
+        "FY2017": 213.4,
+        "FY2016": 247.0,
+        "FY2015": 269.5
+      }
+    },
+    {
+      "name": "Unallocated to Segments",
+      "values": {
+        "FY2017": -226.2,
+        "FY2016": -215.5,
+        "FY2015": -220.8
       }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "6M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "DECK"
 }

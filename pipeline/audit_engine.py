@@ -445,6 +445,61 @@ def audit_eps_consistency(data, fy):
     }
 
 
+def audit_segments_and_geography(output_dir: Path, financial_data: dict) -> list:
+    """Audita integridad, conciliación y observabilidad de segmentos y geografía (Regla 6)."""
+    findings = []
+    seg_path = Path(output_dir) / "segments_data.json"
+    if not seg_path.exists():
+        return [{"check": "Segmentos & Geografía", "severity": "WARN", "message": "segments_data.json no generado"}]
+
+    try:
+        with open(seg_path, "r", encoding="utf-8") as f:
+            seg = json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        return [{"check": "Segmentos & Geografía", "severity": "ERROR", "message": f"JSON inválido en segments_data.json: {exc}"}]
+
+    meta = seg.get("metadata", {}) or {}
+    prods = seg.get("product_segments", [])
+    geos = seg.get("geographic_segments", [])
+
+    active_top_prods = [
+        p for p in prods
+        if p.get("status") != "discontinued" and not p.get("is_subtotal") and not p.get("is_subsegment") and not p.get("is_reconciling")
+    ]
+    if not active_top_prods:
+        findings.append({"check": "Cobertura Segmentos Producto", "severity": "WARN", "message": "Sin segmentos operativos activos en ASC 280/606"})
+    else:
+        findings.append({"check": "Cobertura Segmentos Producto", "severity": "PASS", "message": f"{len(active_top_prods)} segmentos activos"})
+
+    if meta.get("product_ltm_status") == "annual_only_not_in_10q":
+        findings.append({"check": "Frescura LTM Segmentos", "severity": "WARN", "message": "Último 10-Q omite desglose de segmentos; se muestra último cierre anual (LTM = N/D)"})
+    elif meta.get("product_resegmented"):
+        findings.append({"check": "Re-segmentación Operativa (10-Q)", "severity": "PASS", "message": f"Taxonomía actualizada en {meta.get('latest_interim_period', 'último 10-Q')}; líneas previas marcadas como discontinuadas"})
+
+    bad_margins = []
+    for item in prods + geos:
+        if item.get("status") == "discontinued" or item.get("is_subtotal") or item.get("is_reconciling"):
+            continue
+        for per, m_val in (item.get("operating_margin_pct") or {}).items():
+            if m_val is not None and float(m_val) > 100.0:
+                bad_margins.append(f"{item.get('name')} ({per}: {m_val}%)")
+    if bad_margins:
+        findings.append({"check": "Sanidad Márgenes por Segmento", "severity": "ERROR", "message": f"Márgenes operativos fuera de rango (>100%): {', '.join(bad_margins[:5])}"})
+    else:
+        findings.append({"check": "Sanidad Márgenes por Segmento", "severity": "PASS", "message": "Márgenes operativos por segmento consistentes"})
+
+    has_active_geo = any(
+        g.get("status") != "discontinued" and not g.get("is_subtotal") and not g.get("is_country_breakdown")
+        for g in geos
+    )
+    if has_active_geo:
+        findings.append({"check": "Cobertura Geográfica (ASC 280)", "severity": "PASS", "message": "Desglose geográfico activo validado"})
+    else:
+        findings.append({"check": "Cobertura Geográfica (ASC 280)", "severity": "WARN", "message": "Sin desglose geográfico en reportes SEC XBRL (señalado como N/D)"})
+
+    return findings
+
+
 def _record_audit_findings(audit_results: dict, findings: list) -> None:
     """Registra hallazgos PASS/ERROR/WARN de módulos de integridad y calidad en audit_results."""
     for f in findings:
@@ -522,6 +577,11 @@ def run_full_audit(ticker, custom_dir=None):
     quality_findings = run_statement_quality_audit(output_dir)
     audit_results["statement_quality"] = quality_findings
     _record_audit_findings(audit_results, quality_findings)
+
+    print("\n--- Integridad de Segmentos y Geografía (ASC 280 / ASC 606) ---")
+    seg_findings = audit_segments_and_geography(output_dir, data)
+    audit_results["segments_quality"] = seg_findings
+    _record_audit_findings(audit_results, seg_findings)
 
     executed_tests = audit_results["passed_tests"] + audit_results["failed_tests"]
     if executed_tests > 0:

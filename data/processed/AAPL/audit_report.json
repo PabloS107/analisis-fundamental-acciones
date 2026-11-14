@@ -2,7 +2,7 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "cik": "0000320193",
-  "audit_timestamp": "2026-11-14T12:34:45.616524",
+  "audit_timestamp": "2026-11-14T16:24:14.692778",
   "years_audited": {
     "LTM": [
       {
@@ -833,8 +833,8 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 90,
-  "passed_tests": 88,
+  "total_tests": 93,
+  "passed_tests": 91,
   "failed_tests": 0,
   "skipped_tests": 2,
   "compliance_score_pct": 100.0,
@@ -901,6 +901,23 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "5 segmentos activos"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "PASS",
+      "message": "Desglose geográfico activo validado"
     }
   ]
 }

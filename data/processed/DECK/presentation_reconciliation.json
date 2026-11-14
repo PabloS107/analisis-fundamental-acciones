@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-04T16:03:21.754421",
+  "timestamp": "2026-11-14T16:24:44.800115",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -22,155 +22,31 @@
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "STANDARD_CORPORATE",
-    "source_presentation": "DECK_Q1_FY2027_Earnings_Release.pdf",
-    "total_slides": 8,
-    "brand_segmentation": {
-      "HOKA": {
-        "revenue_usd_m": 677.2,
-        "growth_yoy_pct": 6.8
-      },
-      "UGG brand": {
-        "revenue_usd_m": 786.4,
-        "growth_yoy_pct": 3.5
-      },
-      "Other brands": {
-        "revenue_usd_m": 17.0,
-        "growth_yoy_pct": -54.3
-      },
-      "UGG": {
-        "revenue_usd_m": 2778.5
-      },
-      "Other Brands": {
-        "revenue_usd_m": 117.6
-      },
-      "Wholesale (Canal)": {
-        "revenue_usd_m": 3186.1
-      },
-      "Direct-to-Consumer (Canal)": {
-        "revenue_usd_m": 2341.2
-      },
-      "Wholesale": {
-        "revenue_usd_m": 3279.2
-      },
-      "Direct-to-Consumer": {
-        "revenue_usd_m": 2297.8
-      },
-      "Net sales in foreign currencies": {
-        "revenue_usd_m": 1376.8
-      },
-      "Foreign": {
-        "revenue_usd_m": 0.0
-      },
-      "Directly to Consumer": {
-        "revenue_usd_m": 0.0
-      },
-      "Sales Revenue, Net": {
-        "revenue_usd_m": 0.0
-      }
-    },
-    "channel_breakdown": {
-      "Wholesale": {
-        "revenue_usd_m": 1.093,
-        "growth_yoy_pct": 5.5
-      },
-      "Direct-to-Consumer (DTC)": {
-        "revenue_usd_m": 387.5,
-        "growth_yoy_pct": -1.8
-      }
-    },
-    "geographic_breakdown": {
-      "Domestic": {
-        "revenue_usd_m": 3204.0
-      },
-      "International": {
-        "revenue_usd_m": 644.7,
-        "growth_yoy_pct": 9.0
-      },
-      "Domestic (EE.UU.)": {
-        "revenue_usd_m": 3174.9
-      },
-      "International (Global)": {
-        "revenue_usd_m": 2352.4
-      },
-      "International - Sales Revenue, Net - Net sales in foreign currencies": {
-        "revenue_usd_m": 1748.1
-      },
-      "Foreign - Sales Revenue, Net - International net sales": {
-        "revenue_usd_m": 1798.9
-      },
-      "Wholesale - Sanuk brand wholesale": {
-        "revenue_usd_m": 0.0
-      },
-      "Foreign - International net sales": {
-        "revenue_usd_m": 0.0
-      },
-      "Sales Revenue, Net - International net sales": {
-        "revenue_usd_m": 0.0
-      }
-    },
-    "operational_kpis": {
-      "gross_margin_pct": 56.4,
-      "diluted_eps": 0.94,
-      "operating_income_usd_m": 155.3,
-      "share_repurchase_shares_m": 3.2,
-      "share_repurchase_usd_m": 299.0,
-      "remaining_authorization_usd_bn": 4.7
-    },
-    "source_sec": "deckex991pressrelease-9302.htm"
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
     "archetype": "STANDARD_CORPORATE",
-    "source_presentation": "DECK_Q1_FY2027_Earnings_Release.pdf",
-    "total_slides": 8,
+    "source_presentation": "Deckers Brands Reports Fourth Quarter and Full Fiscal Year 2026 Financial Results __ Deckers Outdoor Corporation (DECK).pdf",
+    "total_slides": 10,
     "brand_segmentation": {
       "HOKA": {
         "revenue_usd_m": 677.2,
         "growth_yoy_pct": 6.8
       },
-      "UGG brand": {
+      "UGG": {
         "revenue_usd_m": 786.4,
         "growth_yoy_pct": 3.5
-      },
-      "Other brands": {
-        "revenue_usd_m": 17.0,
-        "growth_yoy_pct": -54.3
-      },
-      "UGG": {
-        "revenue_usd_m": 2778.5
       },
       "Other Brands": {
         "revenue_usd_m": 117.6
       },
-      "Wholesale (Canal)": {
-        "revenue_usd_m": 3186.1
-      },
-      "Direct-to-Consumer (Canal)": {
-        "revenue_usd_m": 2341.2
-      },
-      "Wholesale": {
-        "revenue_usd_m": 3279.2
-      },
-      "Direct-to-Consumer": {
-        "revenue_usd_m": 2297.8
-      },
-      "Net sales in foreign currencies": {
-        "revenue_usd_m": 1376.8
-      },
-      "Foreign": {
-        "revenue_usd_m": 0.0
-      },
-      "Directly to Consumer": {
-        "revenue_usd_m": 0.0
-      },
-      "Sales Revenue, Net": {
-        "revenue_usd_m": 0.0
+      "Other brands": {
+        "revenue_usd_m": 17.0,
+        "growth_yoy_pct": -54.3
       }
     },
     "channel_breakdown": {
       "Wholesale": {
-        "revenue_usd_m": 1.093,
+        "revenue_usd_m": 1093.0,
         "growth_yoy_pct": 5.5
       },
       "Direct-to-Consumer (DTC)": {
@@ -185,32 +61,11 @@
       "International": {
         "revenue_usd_m": 644.7,
         "growth_yoy_pct": 9.0
-      },
-      "Domestic (EE.UU.)": {
-        "revenue_usd_m": 3174.9
-      },
-      "International (Global)": {
-        "revenue_usd_m": 2352.4
-      },
-      "International - Sales Revenue, Net - Net sales in foreign currencies": {
-        "revenue_usd_m": 1748.1
-      },
-      "Foreign - Sales Revenue, Net - International net sales": {
-        "revenue_usd_m": 1798.9
-      },
-      "Wholesale - Sanuk brand wholesale": {
-        "revenue_usd_m": 0.0
-      },
-      "Foreign - International net sales": {
-        "revenue_usd_m": 0.0
-      },
-      "Sales Revenue, Net - International net sales": {
-        "revenue_usd_m": 0.0
       }
     },
     "operational_kpis": {
-      "gross_margin_pct": 56.4,
-      "diluted_eps": 0.94,
+      "gross_margin_pct": 57.6,
+      "diluted_eps": 0.96,
       "operating_income_usd_m": 155.3,
       "share_repurchase_shares_m": 3.2,
       "share_repurchase_usd_m": 299.0,

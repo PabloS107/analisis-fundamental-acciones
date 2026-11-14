@@ -10,7 +10,9 @@
     "FY2020",
     "FY2019",
     "FY2018",
-    "FY2017"
+    "FY2017",
+    "FY2016",
+    "FY2015"
   ],
   "product_segments": [
     {
@@ -19,6 +21,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 193737.0,
         "FY2025": 115186.0,
@@ -30,9 +33,20 @@
         "FY2019": 2932.0,
         "FY2018": 1932.0,
         "FY2017": 830.0,
+        "FY2016": 339.0,
+        "FY2015": 317.0,
         "LTM": 277798.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 164269.0,
+        "prior_ytd": 80208.0,
+        "yoy_pct": 104.8
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Compute",
@@ -40,32 +54,16 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Data Center",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 162361.0,
         "FY2025": 102196.0,
         "FY2024": 38950.0,
-        "FY2023": 11317.0,
-        "LTM": 162361.0
+        "FY2023": 11317.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2026": 130141.0,
-        "FY2025": 82875.0,
-        "FY2024": 32016.0,
-        "FY2023": 5083.0,
-        "FY2022": 4598.0,
-        "FY2021": 2548.0,
-        "FY2020": 751.0,
-        "FY2019": 1251.0,
-        "LTM": 195755.0
-      },
-      "operating_margin_pct": {
-        "FY2026": 80.16,
-        "FY2025": 81.09,
-        "FY2024": 82.2,
-        "FY2023": 44.91,
-        "LTM": 120.57
-      }
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "Networking",
@@ -73,32 +71,16 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Data Center",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 31376.0,
         "FY2025": 12990.0,
         "FY2024": 8575.0,
-        "FY2023": 3688.0,
-        "LTM": 31376.0
+        "FY2023": 3688.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2026": 130141.0,
-        "FY2025": 82875.0,
-        "FY2024": 32016.0,
-        "FY2023": 5083.0,
-        "FY2022": 4598.0,
-        "FY2021": 2548.0,
-        "FY2020": 751.0,
-        "FY2019": 1251.0,
-        "LTM": 195755.0
-      },
-      "operating_margin_pct": {
-        "FY2026": 414.78,
-        "FY2025": 637.99,
-        "FY2024": 373.36,
-        "FY2023": 137.83,
-        "LTM": 623.9
-      }
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "Gaming",
@@ -106,6 +88,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 16042.0,
         "FY2025": 11350.0,
@@ -117,9 +100,12 @@
         "FY2019": 6246.0,
         "FY2018": 5513.0,
         "FY2017": 4060.0,
-        "LTM": 16042.0
+        "FY2016": 2818.0,
+        "FY2015": 2058.0
       },
-      "status": "active"
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "Professional Visualization",
@@ -127,6 +113,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 3191.0,
         "FY2025": 1878.0,
@@ -138,9 +125,12 @@
         "FY2019": 1130.0,
         "FY2018": 934.0,
         "FY2017": 835.0,
-        "LTM": 3191.0
+        "FY2016": 750.0,
+        "FY2015": 795.0
       },
-      "status": "active"
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "Automotive",
@@ -148,6 +138,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 2349.0,
         "FY2025": 1694.0,
@@ -159,9 +150,12 @@
         "FY2019": 641.0,
         "FY2018": 558.0,
         "FY2017": 487.0,
-        "LTM": 2349.0
+        "FY2016": 320.0,
+        "FY2015": 183.0
       },
-      "status": "active"
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "OEM & Other",
@@ -169,6 +163,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2026": 619.0,
         "FY2025": 389.0,
@@ -179,22 +174,11 @@
         "FY2020": 505.0,
         "FY2019": 767.0,
         "FY2018": 777.0,
-        "FY2017": 698.0,
-        "LTM": 619.0
+        "FY2017": 698.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2025": 3.0,
-        "FY2024": -30.0,
-        "FY2023": -79.0,
-        "FY2022": 0.0
-      },
-      "operating_margin_pct": {
-        "FY2025": 0.77,
-        "FY2024": -9.8,
-        "FY2023": -17.36,
-        "FY2022": 0.0
-      }
+      "status": "discontinued",
+      "discontinued_reason": "superseded_in_latest_10q",
+      "discontinued_after": "FY2026"
     },
     {
       "name": "Graphics",
@@ -202,6 +186,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 14304.0,
         "FY2024": 13517.0,
@@ -239,6 +224,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 0.0,
         "FY2024": 0.0,
@@ -248,7 +234,9 @@
         "FY2020": 0.0,
         "FY2019": 0.0,
         "FY2018": 43.0,
-        "FY2017": 264.0
+        "FY2017": 264.0,
+        "FY2016": 264.0,
+        "FY2015": 264.0
       },
       "status": "discontinued",
       "operating_income": {
@@ -262,11 +250,13 @@
         "FY2019": -864.0,
         "FY2018": -600.0,
         "FY2017": -237.0,
-        "LTM": 139297.0
+        "FY2016": -358.0,
+        "FY2015": -100.0
       },
       "operating_margin_pct": {
-        "FY2018": -1395.35,
-        "FY2017": -89.77
+        "FY2017": -89.77,
+        "FY2016": -135.61,
+        "FY2015": -37.88
       }
     },
     {
@@ -275,6 +265,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2024": 47405.0,
         "FY2023": 15068.0,
@@ -310,6 +301,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 10918.0,
         "FY2019": 11716.0,
@@ -321,213 +313,173 @@
     {
       "name": "GPU",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Unallocated revenue",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 9465.0,
         "FY2019": 10175.0,
         "FY2018": 8137.0,
-        "FY2017": 5822.0
+        "FY2017": 5822.0,
+        "FY2016": 4187.0,
+        "FY2015": 3839.0
       },
       "status": "discontinued",
       "operating_income": {
         "FY2020": 3806.0,
         "FY2019": 4443.0,
         "FY2018": 3507.0,
-        "FY2017": 2180.0
+        "FY2017": 2180.0,
+        "FY2016": 1344.0,
+        "FY2015": 1113.0
       },
       "operating_margin_pct": {
         "FY2020": 40.21,
         "FY2019": 43.67,
         "FY2018": 43.1,
-        "FY2017": 37.44
+        "FY2017": 37.44,
+        "FY2016": 32.1,
+        "FY2015": 28.99
       }
     },
     {
       "name": "Tegra Processor",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Unallocated revenue",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 1453.0,
         "FY2019": 1541.0,
         "FY2018": 1534.0,
-        "FY2017": 824.0
+        "FY2017": 824.0,
+        "FY2016": 559.0,
+        "FY2015": 579.0
       },
       "status": "discontinued",
       "operating_income": {
         "FY2020": 196.0,
         "FY2019": 241.0,
         "FY2018": 303.0,
-        "FY2017": -9.0
+        "FY2017": -9.0,
+        "FY2016": -239.0,
+        "FY2015": -254.0
       },
       "operating_margin_pct": {
         "FY2020": 13.49,
         "FY2019": 15.64,
         "FY2018": 19.75,
-        "FY2017": -1.09
+        "FY2017": -1.09,
+        "FY2016": -42.75,
+        "FY2015": -43.87
       }
     },
     {
-      "name": "All Other",
+      "name": "OEM and IP",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Unallocated revenue",
+      "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
-        "FY2020": 0.0,
-        "FY2019": 0.0,
-        "FY2018": 43.0,
-        "FY2017": 264.0
-      },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2026": 139297.0,
-        "FY2025": 87960.0,
-        "FY2024": 37862.0,
-        "FY2023": -5411.0,
-        "FY2022": -3049.0,
-        "FY2021": -2628.0,
-        "FY2020": -1172.0,
-        "FY2019": -864.0,
-        "FY2018": -600.0,
-        "FY2017": -237.0,
-        "LTM": 139297.0
-      },
-      "operating_margin_pct": {
-        "FY2018": -1395.35,
-        "FY2017": -89.77
-      }
-    },
-    {
-      "name": "Gaming",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Unallocated revenue",
-      "values": {
-        "FY2020": 5518.0,
-        "FY2019": 6246.0,
-        "FY2018": 5513.0,
-        "FY2017": 4060.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Professional Visualization",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Unallocated revenue",
-      "values": {
-        "FY2020": 1212.0,
-        "FY2019": 1130.0,
-        "FY2018": 934.0,
-        "FY2017": 835.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Data Center",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Unallocated revenue",
-      "values": {
-        "FY2020": 2983.0,
-        "FY2019": 2932.0,
-        "FY2018": 1932.0,
-        "FY2017": 830.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Automotive",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Unallocated revenue",
-      "values": {
-        "FY2020": 700.0,
-        "FY2019": 641.0,
-        "FY2018": 558.0,
-        "FY2017": 487.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "OEM & Other",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Unallocated revenue",
-      "values": {
-        "FY2020": 505.0,
-        "FY2019": 767.0,
         "FY2018": 777.0,
-        "FY2017": 698.0
+        "FY2017": 698.0,
+        "FY2016": 783.0,
+        "FY2015": 1329.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2025": 3.0,
-        "FY2024": -30.0,
-        "FY2023": -79.0,
-        "FY2022": 0.0
-      }
+      "status": "discontinued"
     },
     {
-      "name": "GPU",
+      "name": "Other Americas",
       "is_subtotal": false,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
-        "FY2020": 9465.0,
-        "FY2019": 10175.0,
-        "FY2018": 8137.0,
-        "FY2017": 5822.0
+        "FY2018": 719.0,
+        "FY2017": 486.0,
+        "FY2016": 418.0,
+        "FY2015": 368.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2020": 3806.0,
-        "FY2019": 4443.0,
-        "FY2018": 3507.0,
-        "FY2017": 2180.0
-      },
-      "operating_margin_pct": {
-        "FY2020": 40.21,
-        "FY2019": 43.67,
-        "FY2018": 43.1,
-        "FY2017": 37.44
-      }
+      "status": "discontinued"
     },
     {
-      "name": "Tegra Processor",
+      "name": "Other Asia Pacific",
       "is_subtotal": false,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
-        "FY2020": 1453.0,
-        "FY2019": 1541.0,
-        "FY2018": 1534.0,
-        "FY2017": 824.0
+        "FY2018": 2066.0,
+        "FY2017": 1010.0,
+        "FY2016": 749.0,
+        "FY2015": 638.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2020": 196.0,
-        "FY2019": 241.0,
-        "FY2018": 303.0,
-        "FY2017": -9.0
+      "status": "discontinued"
+    },
+    {
+      "name": "Hyperscale",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Data Center",
+      "status": "active",
+      "is_new_in_latest_10q": true,
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 91761.0,
+        "prior_ytd": 46428.0,
+        "yoy_pct": 97.64
       },
-      "operating_margin_pct": {
-        "FY2020": 13.49,
-        "FY2019": 15.64,
-        "FY2018": 19.75,
-        "FY2017": -1.09
-      }
+      "source_concept": "us-gaap_Revenues",
+      "ltm_disclosure_status": "new_in_10q_interim"
+    },
+    {
+      "name": "AI Clouds, Industrial, & Enterprise",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Data Center",
+      "status": "active",
+      "is_new_in_latest_10q": true,
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 72508.0,
+        "prior_ytd": 33780.0,
+        "yoy_pct": 114.65
+      },
+      "source_concept": "us-gaap_Revenues",
+      "ltm_disclosure_status": "new_in_10q_interim"
+    },
+    {
+      "name": "Edge Computing",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "status": "active",
+      "is_new_in_latest_10q": true,
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 13568.0,
+        "prior_ytd": 10597.0,
+        "yoy_pct": 28.04
+      },
+      "source_concept": "us-gaap_Revenues",
+      "ltm_disclosure_status": "new_in_10q_interim"
     }
   ],
   "channel_segments": [],
@@ -537,6 +489,7 @@
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": false,
       "values": {
         "FY2026": 149617.0,
         "FY2025": 77482.0,
@@ -548,10 +501,20 @@
         "FY2019": 1506.0,
         "FY2018": 1274.0,
         "FY2017": 904.0,
+        "FY2016": 643.0,
+        "FY2015": 791.0,
         "LTM": 214878.0
       },
-      "is_country_breakdown": false,
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 123843.0,
+        "prior_ytd": 58582.0,
+        "yoy_pct": 111.4
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Taiwan",
@@ -569,9 +532,20 @@
         "FY2019": 3360.0,
         "FY2018": 2991.0,
         "FY2017": 2546.0,
+        "FY2016": 1912.0,
+        "FY2015": 1594.0,
         "LTM": 64786.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 38991.0,
+        "prior_ytd": 16550.0,
+        "yoy_pct": 135.6
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "China (including Hong Kong)",
@@ -591,7 +565,16 @@
         "FY2017": 1305.0,
         "LTM": 18463.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 12430.0,
+        "prior_ytd": 13644.0,
+        "yoy_pct": -8.9
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other",
@@ -605,26 +588,26 @@
         "FY2023": 3623.0,
         "LTM": 4843.0
       },
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 2573.0,
+        "prior_ytd": 2029.0,
+        "yoy_pct": 26.81
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
-        "FY2026": 139297.0,
-        "FY2025": 87960.0,
-        "FY2024": 37862.0,
-        "FY2023": -5411.0,
-        "FY2022": -3049.0,
-        "FY2021": -2628.0,
-        "FY2020": -1172.0,
-        "FY2019": -864.0,
-        "FY2018": -600.0,
-        "FY2017": -237.0,
-        "LTM": 139297.0
+        "FY2025": 3.0,
+        "FY2024": -30.0,
+        "FY2023": -79.0,
+        "FY2022": 0.0
       },
       "operating_margin_pct": {
-        "FY2026": 3240.22,
-        "FY2025": 2014.2,
-        "FY2024": 1763.48,
-        "FY2023": -149.35,
-        "LTM": 2876.25
+        "FY2025": 0.07,
+        "FY2024": -1.4,
+        "FY2023": -2.18
       }
     },
     {
@@ -644,6 +627,7 @@
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": true,
       "values": {
         "FY2024": 10245.0,
         "FY2023": 5911.0,
@@ -654,19 +638,7 @@
         "FY2018": 719.0,
         "FY2017": 486.0
       },
-      "is_country_breakdown": true,
-      "status": "discontinued",
-      "operating_income": {
-        "FY2025": 3.0,
-        "FY2024": -30.0,
-        "FY2023": -79.0,
-        "FY2022": 0.0
-      },
-      "operating_margin_pct": {
-        "FY2024": -0.29,
-        "FY2023": -1.34,
-        "FY2022": 0.0
-      }
+      "status": "discontinued"
     },
     {
       "name": "Other Asia Pacific",
@@ -680,13 +652,7 @@
         "FY2018": 2066.0,
         "FY2017": 1010.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2025": 3.0,
-        "FY2024": -30.0,
-        "FY2023": -79.0,
-        "FY2022": 0.0
-      }
+      "status": "discontinued"
     },
     {
       "name": "Europe",
@@ -698,7 +664,22 @@
         "FY2020": 992.0,
         "FY2019": 914.0,
         "FY2018": 768.0,
-        "FY2017": 659.0
+        "FY2017": 659.0,
+        "FY2016": 482.0,
+        "FY2015": 369.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "CHINA",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2018": 1896.0,
+        "FY2017": 1305.0,
+        "FY2016": 806.0,
+        "FY2015": 922.0
       },
       "status": "discontinued"
     }
@@ -712,6 +693,13 @@
         "FY2024": 32972.0,
         "FY2023": 4224.0,
         "FY2022": 10041.0,
+        "FY2021": 4532.0,
+        "FY2020": 2846.0,
+        "FY2019": 3804.0,
+        "FY2018": 3210.0,
+        "FY2017": 1934.0,
+        "FY2016": 747.0,
+        "FY2015": 759.0,
         "LTM": 197579.0
       }
     },
@@ -765,7 +753,8 @@
         "FY2019": -864.0,
         "FY2018": -600.0,
         "FY2017": -237.0,
-        "LTM": 139297.0
+        "FY2016": -358.0,
+        "FY2015": -100.0
       }
     },
     {
@@ -773,8 +762,7 @@
       "values": {
         "FY2026": 130387.0,
         "FY2025": 81453.0,
-        "FY2024": 32972.0,
-        "LTM": 130387.0
+        "FY2024": 32972.0
       }
     },
     {
@@ -784,29 +772,6 @@
         "FY2025": 1034.0,
         "FY2024": 237.0,
         "LTM": 30123.0
-      }
-    },
-    {
-      "name": "Income before income tax",
-      "values": {
-        "FY2026": 141450.0,
-        "FY2025": 84026.0,
-        "FY2024": 33818.0,
-        "LTM": 229743.0
-      }
-    },
-    {
-      "name": "Operating income (loss)",
-      "values": {
-        "FY2025": 81453.0,
-        "FY2024": 32972.0,
-        "FY2023": 4224.0,
-        "FY2022": 10041.0,
-        "FY2021": 4532.0,
-        "FY2020": 2846.0,
-        "FY2019": 3804.0,
-        "FY2018": 3210.0,
-        "FY2017": 1934.0
       }
     },
     {
@@ -836,7 +801,9 @@
         "FY2020": 3806.0,
         "FY2019": 4443.0,
         "FY2018": 3507.0,
-        "FY2017": 2180.0
+        "FY2017": 2180.0,
+        "FY2016": 1344.0,
+        "FY2015": 1113.0
       }
     },
     {
@@ -845,10 +812,34 @@
         "FY2020": 196.0,
         "FY2019": 241.0,
         "FY2018": 303.0,
-        "FY2017": -9.0
+        "FY2017": -9.0,
+        "FY2016": -239.0,
+        "FY2015": -254.0
+      }
+    },
+    {
+      "name": "Segment Reporting, Reconciling Item, Corporate Nonsegment",
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "6M YTD (2026-07-26)",
+        "period_end": "2026-07-26",
+        "prior_period_end": "2025-07-27",
+        "current_ytd": 122871.0,
+        "prior_ytd": 54299.0,
+        "yoy_pct": 126.29
       }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "6M YTD (2026-07-26)",
+    "product_ltm_status": "resegmented_in_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": true,
+    "geo_resegmented": false,
+    "superseded_after_fy": "FY2026",
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "NVDA"
 }

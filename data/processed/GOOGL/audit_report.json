@@ -2,7 +2,7 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "cik": "0001652044",
-  "audit_timestamp": "2026-11-14T12:34:47.569184",
+  "audit_timestamp": "2026-11-14T16:23:54.328361",
   "years_audited": {
     "LTM": [
       {
@@ -769,8 +769,8 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 84,
-  "passed_tests": 82,
+  "total_tests": 88,
+  "passed_tests": 86,
   "failed_tests": 0,
   "skipped_tests": 2,
   "compliance_score_pct": 100.0,
@@ -837,6 +837,28 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "3 segmentos activos"
+    },
+    {
+      "check": "Re-segmentación Operativa (10-Q)",
+      "severity": "PASS",
+      "message": "Taxonomía actualizada en 9M YTD (2026-09-30); líneas previas marcadas como discontinuadas"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "PASS",
+      "message": "Desglose geográfico activo validado"
     }
   ]
 }

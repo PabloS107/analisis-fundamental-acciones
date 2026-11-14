@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T15:59:13.063459",
+  "timestamp": "2026-11-14T16:17:06.233730",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -22,68 +22,37 @@
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
-    "source_sec": "q2fy27pr.htm",
-    "brand_segmentation": {
-      "Data Center — Hyperscale": {
-        "revenue_usd_m": 170000.0
-      },
-      "Data Center — AI Clouds, Industrial & Enterprise": {
-        "revenue_usd_m": 107798.0
-      },
-      "Edge Computing": {
-        "revenue_usd_m": 25171.0
-      }
-    },
-    "channel_breakdown": {},
-    "geographic_breakdown": {
-      "United States": {
-        "revenue_usd_m": 209655.0
-      },
-      "Taiwan": {
-        "revenue_usd_m": 59382.0
-      },
-      "China (incl. Hong Kong)": {
-        "revenue_usd_m": 27570.0
-      },
-      "Other Countries": {
-        "revenue_usd_m": 6363.0
-      }
-    },
-    "operational_kpis": {
-      "remaining_authorization_usd_bn": 99.0
-    },
-    "source_presentation": "Q2FY27-CFO-Commentary.pdf",
-    "total_slides": 9
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
-    "archetype": "CORPORATE_INDUSTRIAL",
+    "archetype": "STANDARD_CORPORATE",
     "source_sec": "q2fy27pr.htm",
     "brand_segmentation": {
-      "Data Center — Hyperscale": {
-        "revenue_usd_m": 170000.0
+      "Data Center": {
+        "revenue_usd_m": 277798.0
       },
-      "Data Center — AI Clouds, Industrial & Enterprise": {
-        "revenue_usd_m": 107798.0
+      "Hyperscale": {
+        "revenue_usd_m": 91761.0
+      },
+      "AI Clouds, Industrial, & Enterprise": {
+        "revenue_usd_m": 72508.0
       },
       "Edge Computing": {
-        "revenue_usd_m": 25171.0
+        "revenue_usd_m": 13568.0
       }
     },
     "channel_breakdown": {},
     "geographic_breakdown": {
       "United States": {
-        "revenue_usd_m": 209655.0
+        "revenue_usd_m": 214878.0
       },
       "Taiwan": {
-        "revenue_usd_m": 59382.0
+        "revenue_usd_m": 64786.0
       },
-      "China (incl. Hong Kong)": {
-        "revenue_usd_m": 27570.0
+      "China (including Hong Kong)": {
+        "revenue_usd_m": 18463.0
       },
-      "Other Countries": {
-        "revenue_usd_m": 6363.0
+      "Other": {
+        "revenue_usd_m": 4843.0
       }
     },
     "operational_kpis": {
@@ -93,5 +62,5 @@
     "total_slides": 9
   },
   "flags": [],
-  "archetype": "CORPORATE_INDUSTRIAL"
+  "archetype": "STANDARD_CORPORATE"
 }

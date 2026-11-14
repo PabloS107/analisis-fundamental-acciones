@@ -2,7 +2,7 @@
   "ticker": "NVDA",
   "company_name": "NVIDIA CORP",
   "cik": "0001045810",
-  "audit_timestamp": "2026-11-14T12:34:59.727558",
+  "audit_timestamp": "2026-11-14T16:17:06.332190",
   "years_audited": {
     "LTM": [
       {
@@ -833,8 +833,8 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 90,
-  "passed_tests": 88,
+  "total_tests": 94,
+  "passed_tests": 92,
   "failed_tests": 0,
   "skipped_tests": 2,
   "compliance_score_pct": 100.0,
@@ -901,6 +901,28 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "2 segmentos activos"
+    },
+    {
+      "check": "Re-segmentación Operativa (10-Q)",
+      "severity": "PASS",
+      "message": "Taxonomía actualizada en 6M YTD (2026-07-26); líneas previas marcadas como discontinuadas"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "PASS",
+      "message": "Desglose geográfico activo validado"
     }
   ]
 }

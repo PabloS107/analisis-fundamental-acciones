@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-06T15:20:06.305558",
+  "timestamp": "2026-11-14T16:23:01.789411",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -22,64 +22,7 @@
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "PLATFORM_ECOSYSTEM",
-    "marketplace_kpis": {
-      "gmv_three_months_usd_m": 23000.0,
-      "gmv_six_months_usd_m": 40877.0,
-      "unique_active_buyers_m": 89.0,
-      "items_sold_three_months_m": 795.0,
-      "items_sold_six_months_m": 1517.0
-    },
-    "fintech_kpis": {
-      "tpv_total_usd_m": 109000.0,
-      "tpv_total_six_months_usd_m": 188138.0,
-      "fintech_mau_m": 88.0,
-      "acquiring_tpv_usd_m": 64079.0,
-      "payment_transactions_m": 5181.0
-    },
-    "credit_portfolio_kpis": {
-      "nimal_pct": 20.1,
-      "credit_portfolio_usd_bn": 16.4,
-      "npl_15_90_pct": 4.6,
-      "npl_90_plus_pct": 18.7,
-      "provision_coverage_15_plus_pct": 105.0,
-      "provision_coverage_90_plus_pct": 105.0
-    },
-    "geographic_breakdown": {
-      "Brazil": {
-        "revenue_usd_m": 5530.0,
-        "direct_contribution_usd_m": 550.0
-      },
-      "Mexico": {
-        "revenue_usd_m": 2337.0,
-        "direct_contribution_usd_m": 306.0
-      },
-      "Argentina": {
-        "revenue_usd_m": 1839.0,
-        "direct_contribution_usd_m": 623.0
-      },
-      "Other": {
-        "revenue_usd_m": 463.0,
-        "direct_contribution_usd_m": 65.0
-      },
-      "Total": {
-        "revenue_usd_m": 10169.0,
-        "direct_contribution_usd_m": 1544.0
-      }
-    },
-    "segment_breakdown": {
-      "commerce_revenue_usd_m": 5762.0,
-      "fintech_revenue_usd_m": 4407.0
-    },
-    "cash_flow_kpis": {
-      "capex_usd_m": 441.0,
-      "depreciation_amortization_usd_m": 292.0,
-      "adjusted_free_cash_flow_usd_m": 285.0
-    },
-    "source_letter": "meli-20260930xex991.htm",
-    "source_presentation": "MELI Earnings Presentation q226- Linked.pdf"
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
     "archetype": "PLATFORM_ECOSYSTEM",
     "marketplace_kpis": {

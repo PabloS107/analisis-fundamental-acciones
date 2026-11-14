@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-11-14T16:20:39.082725",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 127744000000.0,
+      "fst_value": 127744000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 34485000000.0,
+      "fst_value": 34485000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 156000000.0,
+      "fst_value": 156000000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {
+    "archetype": "INSURANCE",
+    "source_sec": "pgr202512ex991earningsrele.htm",
+    "investments_breakdown": {},
+    "insurance_operational_kpis": {
+      "investments_breakdown": {}
+    }
+  },
+  "kpis_enriched": {
+    "archetype": "INSURANCE",
+    "source_sec": "pgr202512ex991earningsrele.htm",
+    "investments_breakdown": {},
+    "insurance_operational_kpis": {
+      "investments_breakdown": {}
+    }
+  },
+  "flags": [],
+  "archetype": "INSURANCE"
+}

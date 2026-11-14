@@ -10,7 +10,9 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016"
+    "FY2016",
+    "FY2015",
+    "FY2014"
   ],
   "product_segments": [
     {
@@ -19,6 +21,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2025": 76029.0,
         "FY2024": 71507.0,
@@ -30,23 +33,20 @@
         "FY2018": 51271.0,
         "FY2017": 46485.0,
         "FY2016": 44915.0,
-        "LTM": 76029.0
+        "FY2015": 43820.0,
+        "FY2014": 44368.0,
+        "LTM": 80407.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 61011.0,
+        "prior_ytd": 56633.0,
+        "yoy_pct": 7.73
       },
       "status": "active",
-      "operating_income": {
-        "FY2020": 10966.0,
-        "FY2019": 21903.0,
-        "FY2018": 19349.0,
-        "FY2017": 14851.0,
-        "FY2016": 15516.0
-      },
-      "operating_margin_pct": {
-        "FY2020": 21.39,
-        "FY2019": 39.73,
-        "FY2018": 37.74,
-        "FY2017": 31.95,
-        "FY2016": 34.55
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Commercial & Investment Bank (CIB)",
@@ -54,6 +54,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2025": 78454.0,
         "FY2024": 70114.0,
@@ -65,23 +66,20 @@
         "FY2018": 37382.0,
         "FY2017": 34657.0,
         "FY2016": 35340.0,
-        "LTM": 78454.0
+        "FY2015": 33542.0,
+        "FY2014": 34595.0,
+        "LTM": 90341.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 70966.0,
+        "prior_ytd": 59079.0,
+        "yoy_pct": 20.12
       },
       "status": "active",
-      "operating_income": {
-        "FY2020": 23020.0,
-        "FY2019": 16544.0,
-        "FY2018": 15566.0,
-        "FY2017": 15295.0,
-        "FY2016": 15661.0
-      },
-      "operating_margin_pct": {
-        "FY2020": 46.71,
-        "FY2019": 42.13,
-        "FY2018": 41.64,
-        "FY2017": 44.13,
-        "FY2016": 44.32
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Asset & Wealth Management",
@@ -89,6 +87,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2025": 24073.0,
         "FY2024": 21578.0,
@@ -100,35 +99,20 @@
         "FY2018": 13427.0,
         "FY2017": 13835.0,
         "FY2016": 12822.0,
+        "FY2015": 12119.0,
+        "FY2014": 12028.0,
         "LTM": 26650.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2025": 8644.0,
-        "FY2024": 7232.0,
-        "FY2023": 6888.0,
-        "FY2022": 5791.0,
-        "FY2021": 6265.0,
-        "FY2020": 4020.0,
-        "FY2019": 3785.0,
-        "FY2018": 3800.0,
-        "FY2017": 3578.0,
-        "FY2016": 3541.0,
-        "LTM": 9775.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 20134.0,
+        "prior_ytd": 17557.0,
+        "yoy_pct": 14.68
       },
-      "operating_margin_pct": {
-        "FY2025": 35.91,
-        "FY2024": 33.52,
-        "FY2023": 34.74,
-        "FY2022": 32.63,
-        "FY2021": 36.95,
-        "FY2020": 28.23,
-        "FY2019": 27.85,
-        "FY2018": 28.3,
-        "FY2017": 25.86,
-        "FY2016": 27.62,
-        "LTM": 36.68
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Corporate",
@@ -136,6 +120,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2025": 7025.0,
         "FY2024": 17394.0,
@@ -147,35 +132,20 @@
         "FY2018": -128.0,
         "FY2017": 1140.0,
         "FY2016": -487.0,
+        "FY2015": 267.0,
+        "FY2014": 12.0,
         "LTM": 8834.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2025": 5193.0,
-        "FY2024": 13390.0,
-        "FY2023": 2266.0,
-        "FY2022": -976.0,
-        "FY2021": -5366.0,
-        "FY2020": -2615.0,
-        "FY2019": 145.0,
-        "FY2018": -1026.0,
-        "FY2017": 639.0,
-        "FY2016": -945.0,
-        "LTM": 6458.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 7354.0,
+        "prior_ytd": 5545.0,
+        "yoy_pct": 32.62
       },
-      "operating_margin_pct": {
-        "FY2025": 73.92,
-        "FY2024": 76.98,
-        "FY2023": 28.19,
-        "FY2022": -1220.0,
-        "FY2021": 154.06,
-        "FY2020": 222.36,
-        "FY2019": 11.97,
-        "FY2018": 801.56,
-        "FY2017": 56.05,
-        "FY2016": 194.05,
-        "LTM": 73.1
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Reconciling Items",
@@ -183,6 +153,7 @@
       "is_subsegment": false,
       "is_reconciling": true,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2025": -3134.0,
         "FY2024": -3037.0,
@@ -194,35 +165,20 @@
         "FY2018": -2505.0,
         "FY2017": -4017.0,
         "FY2016": -3474.0,
+        "FY2015": -3090.0,
+        "FY2014": -2773.0,
         "LTM": -3079.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": -2110.0,
+        "prior_ytd": -2165.0,
+        "yoy_pct": 2.54
       },
       "status": "active",
-      "operating_income": {
-        "FY2025": -3134.0,
-        "FY2024": -3037.0,
-        "FY2023": -4262.0,
-        "FY2022": -3582.0,
-        "FY2021": -3655.0,
-        "FY2020": -2978.0,
-        "FY2019": -2744.0,
-        "FY2018": -2505.0,
-        "FY2017": -4017.0,
-        "FY2016": -3474.0,
-        "LTM": -3079.0
-      },
-      "operating_margin_pct": {
-        "FY2025": 100.0,
-        "FY2024": 100.0,
-        "FY2023": 100.0,
-        "FY2022": 100.0,
-        "FY2021": 100.0,
-        "FY2020": 100.0,
-        "FY2019": 100.0,
-        "FY2018": 100.0,
-        "FY2017": 100.0,
-        "FY2016": 100.0,
-        "LTM": 100.0
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Commercial Banking",
@@ -230,6 +186,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenuesNetOfInterestExpense",
       "values": {
         "FY2023": 15546.0,
         "FY2022": 11533.0,
@@ -238,219 +195,26 @@
         "FY2019": 9264.0,
         "FY2018": 9336.0,
         "FY2017": 8605.0,
-        "FY2016": 7453.0
-      },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2020": 3402.0,
-        "FY2019": 5233.0,
-        "FY2018": 5580.0,
-        "FY2017": 5554.0,
-        "FY2016": 4237.0
-      },
-      "operating_margin_pct": {
-        "FY2020": 36.53,
-        "FY2019": 56.49,
-        "FY2018": 59.77,
-        "FY2017": 64.54,
-        "FY2016": 56.85
-      }
-    },
-    {
-      "name": "Reported",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2017": 99624.0,
-        "FY2016": 95668.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Revisions",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2017": 1081.0,
-        "FY2016": 901.0
+        "FY2016": 7453.0,
+        "FY2015": 6885.0,
+        "FY2014": 6882.0
       },
       "status": "discontinued"
     }
   ],
   "channel_segments": [],
   "geographic_segments": [],
-  "segment_operating_income": [
-    {
-      "name": "Income/(loss) before income tax expense/(benefit)",
-      "values": {
-        "FY2025": 72595.0,
-        "FY2024": 75081.0,
-        "FY2023": 61612.0,
-        "FY2022": 46166.0,
-        "FY2021": 59562.0,
-        "FY2020": 35815.0,
-        "FY2019": 44866.0,
-        "LTM": 85289.0
-      }
-    },
-    {
-      "name": "Total international",
-      "values": {
-        "FY2025": 17482.0,
-        "FY2024": 16573.0,
-        "FY2023": 14405.0,
-        "FY2022": 11754.0,
-        "FY2021": 10177.0,
-        "FY2020": 10460.0,
-        "FY2019": 9065.0,
-        "LTM": 17482.0
-      }
-    },
-    {
-      "name": "Europe/Middle East/Africa",
-      "values": {
-        "FY2025": 9653.0,
-        "FY2024": 9510.0,
-        "FY2023": 9027.0,
-        "FY2022": 7011.0,
-        "FY2021": 5728.0,
-        "FY2020": 5579.0,
-        "FY2019": 6027.0,
-        "LTM": 9653.0
-      }
-    },
-    {
-      "name": "Asia-Pacific",
-      "values": {
-        "FY2025": 5794.0,
-        "FY2024": 5073.0,
-        "FY2023": 4055.0,
-        "FY2022": 3262.0,
-        "FY2021": 3282.0,
-        "FY2020": 3731.0,
-        "FY2019": 2194.0,
-        "LTM": 5794.0
-      }
-    },
-    {
-      "name": "Latin America/Caribbean",
-      "values": {
-        "FY2025": 2035.0,
-        "FY2024": 1990.0,
-        "FY2023": 1323.0,
-        "FY2022": 1481.0,
-        "FY2021": 1167.0,
-        "FY2020": 1150.0,
-        "FY2019": 844.0,
-        "LTM": 2035.0
-      }
-    },
-    {
-      "name": "North America",
-      "values": {
-        "FY2025": 55113.0,
-        "FY2024": 58508.0,
-        "FY2023": 47207.0,
-        "FY2022": 34412.0,
-        "FY2021": 49385.0,
-        "FY2020": 25355.0,
-        "FY2019": 35801.0,
-        "LTM": 55113.0
-      }
-    },
-    {
-      "name": "Asset & Wealth Management",
-      "values": {
-        "FY2025": 8644.0,
-        "FY2024": 7232.0,
-        "FY2023": 6888.0,
-        "FY2022": 5791.0,
-        "FY2021": 6265.0,
-        "FY2020": 4020.0,
-        "FY2019": 3785.0,
-        "FY2018": 3800.0,
-        "FY2017": 3578.0,
-        "FY2016": 3541.0,
-        "LTM": 9775.0
-      }
-    },
-    {
-      "name": "Corporate",
-      "values": {
-        "FY2025": 5193.0,
-        "FY2024": 13390.0,
-        "FY2023": 2266.0,
-        "FY2022": -976.0,
-        "FY2021": -5366.0,
-        "FY2020": -2615.0,
-        "FY2019": 145.0,
-        "FY2018": -1026.0,
-        "FY2017": 639.0,
-        "FY2016": -945.0,
-        "LTM": 6458.0
-      }
-    },
-    {
-      "name": "Reconciling Items",
-      "values": {
-        "FY2025": -3134.0,
-        "FY2024": -3037.0,
-        "FY2023": -4262.0,
-        "FY2022": -3582.0,
-        "FY2021": -3655.0,
-        "FY2020": -2978.0,
-        "FY2019": -2744.0,
-        "FY2018": -2505.0,
-        "FY2017": -4017.0,
-        "FY2016": -3474.0,
-        "LTM": -3079.0
-      }
-    },
-    {
-      "name": "Income before income tax expense",
-      "values": {
-        "FY2020": 35407.0,
-        "FY2019": 44545.0,
-        "FY2018": 40764.0,
-        "FY2017": 35900.0,
-        "FY2016": 34536.0
-      }
-    },
-    {
-      "name": "Consumer & Community Banking (CCB)",
-      "values": {
-        "FY2020": 10966.0,
-        "FY2019": 21903.0,
-        "FY2018": 19349.0,
-        "FY2017": 14851.0,
-        "FY2016": 15516.0
-      }
-    },
-    {
-      "name": "Commercial & Investment Bank (CIB)",
-      "values": {
-        "FY2020": 23020.0,
-        "FY2019": 16544.0,
-        "FY2018": 15566.0,
-        "FY2017": 15295.0,
-        "FY2016": 15661.0
-      }
-    },
-    {
-      "name": "Commercial Banking",
-      "values": {
-        "FY2020": 3402.0,
-        "FY2019": 5233.0,
-        "FY2018": 5580.0,
-        "FY2017": 5554.0,
-        "FY2016": 4237.0
-      }
-    }
-  ],
+  "segment_operating_income": [],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "annual_only_not_in_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": false
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "JPM"
 }

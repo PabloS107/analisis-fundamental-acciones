@@ -18,6 +18,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 29670.0,
         "FY2024": 25087.0,
@@ -27,9 +28,20 @@
         "FY2020": 6089.0,
         "FY2019": 10707.0,
         "FY2018": 9288.0,
-        "LTM": 29670.0
+        "LTM": 29885.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 21681.0,
+        "prior_ytd": 21466.0,
+        "yoy_pct": 1.0
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
+      "operating_income": {},
+      "operating_income_interim": 6606.0
     },
     {
       "name": "Delivery",
@@ -37,6 +49,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 17248.0,
         "FY2024": 13750.0,
@@ -45,9 +58,20 @@
         "FY2021": 8362.0,
         "FY2020": 3904.0,
         "FY2019": 1401.0,
-        "LTM": 17248.0
+        "LTM": 20693.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 15801.0,
+        "prior_ytd": 12356.0,
+        "yoy_pct": 27.88
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
+      "operating_income": {},
+      "operating_income_interim": 3073.0
     },
     {
       "name": "Freight",
@@ -55,6 +79,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 5099.0,
         "FY2024": 5141.0,
@@ -63,9 +88,18 @@
         "FY2021": 2132.0,
         "FY2020": 1011.0,
         "FY2019": 731.0,
-        "LTM": 5099.0
+        "LTM": 5948.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 4678.0,
+        "prior_ytd": 3829.0,
+        "yoy_pct": 22.17
       },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2019": -217.0,
         "FY2018": -102.0,
@@ -76,30 +110,12 @@
       }
     },
     {
-      "name": "Reconciling Items",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": true,
-      "parent": null,
-      "values": {
-        "FY2025": -2.0,
-        "FY2024": -3.0,
-        "FY2023": -84.0,
-        "FY2022": -25.0,
-        "FY2021": -157.0,
-        "FY2020": -317.0,
-        "FY2019": -8.0,
-        "FY2018": -237.0,
-        "LTM": -2.0
-      },
-      "status": "active"
-    },
-    {
       "name": "All Other",
       "is_subtotal": false,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2023": 0.0,
         "FY2022": 0.0,
@@ -116,6 +132,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2021": 83.0
       },
@@ -128,37 +145,12 @@
       }
     },
     {
-      "name": "Previously Reported",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2020": 12422.0,
-        "FY2019": 14147.0,
-        "FY2018": 11270.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Effect of Change",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2020": -1283.0,
-        "FY2019": -1147.0,
-        "FY2018": -837.0
-      },
-      "status": "discontinued"
-    },
-    {
       "name": "Other revenue",
       "is_subtotal": false,
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2019": 112.0,
         "FY2018": 112.0,
@@ -172,6 +164,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2019": 10745.0,
         "FY2018": 9437.0,
@@ -195,6 +188,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2019": 119.0,
         "FY2018": 17.0,
@@ -207,15 +201,14 @@
         "FY2017": -1.0
       },
       "operating_margin_pct": {
-        "FY2019": -210.92,
-        "FY2018": -294.12
+        "FY2019": -210.92
       }
     }
   ],
   "channel_segments": [],
   "geographic_segments": [
     {
-      "name": "United States and Canada (\"US&CAN\")",
+      "name": "United States & Canada",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -224,12 +217,26 @@
         "FY2024": 23618.0,
         "FY2023": 20436.0,
         "FY2022": 19474.0,
-        "LTM": 26469.0
+        "FY2021": 10094.0,
+        "FY2020": 6611.0,
+        "FY2019": 8465.0,
+        "FY2018": 6226.0,
+        "FY2017": 4367.0,
+        "LTM": 29543.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 22552.0,
+        "prior_ytd": 19478.0,
+        "yoy_pct": 15.78
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "Latin America (\"LatAm\")",
+      "name": "Latin America",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -238,15 +245,26 @@
         "FY2024": 2795.0,
         "FY2023": 2512.0,
         "FY2022": 1978.0,
+        "FY2021": 1417.0,
         "FY2020": 1295.0,
         "FY2019": 1862.0,
         "FY2018": 1963.0,
-        "LTM": 3327.0
+        "FY2017": 1645.0,
+        "LTM": 4091.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 3099.0,
+        "prior_ytd": 2335.0,
+        "yoy_pct": 32.72
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "Europe, Middle East and Africa (\"EMEA\")",
+      "name": "Europe, Middle East and Africa",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -255,15 +273,26 @@
         "FY2024": 12529.0,
         "FY2023": 9904.0,
         "FY2022": 6944.0,
+        "FY2021": 3213.0,
         "FY2020": 2086.0,
         "FY2019": 1852.0,
         "FY2018": 1495.0,
-        "LTM": 16364.0
+        "FY2017": 1157.0,
+        "LTM": 15905.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 11147.0,
+        "prior_ytd": 11606.0,
+        "yoy_pct": -3.95
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "Asia Pacific (\"APAC\")",
+      "name": "Asia Pacific",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -276,9 +305,19 @@
         "FY2020": 1147.0,
         "FY2019": 821.0,
         "FY2018": 749.0,
-        "LTM": 5857.0
+        "FY2017": 763.0,
+        "LTM": 6987.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 5362.0,
+        "prior_ytd": 4232.0,
+        "yoy_pct": 26.7
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "United States",
@@ -294,10 +333,10 @@
         "FY2020": 6082.0,
         "FY2019": 7968.0,
         "FY2018": 5824.0,
-        "FY2017": 4068.0,
-        "LTM": 23771.0
+        "FY2017": 4068.0
       },
-      "status": "active"
+      "status": "active",
+      "ltm_disclosure_status": "annual_only"
     },
     {
       "name": "United Kingdom",
@@ -310,16 +349,18 @@
         "FY2023": 6522.0,
         "FY2022": 4215.0,
         "FY2021": 551.0,
-        "FY2020": 637.0,
-        "LTM": 10609.0
+        "FY2020": 637.0
       },
-      "status": "active"
+      "status": "discontinued",
+      "discontinued_reason": "omitted_in_latest_10q",
+      "discontinued_after": "FY2025"
     },
     {
       "name": "All other countries",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": true,
       "values": {
         "FY2025": 17637.0,
         "FY2024": 14176.0,
@@ -329,90 +370,11 @@
         "FY2020": 4420.0,
         "FY2019": 5032.0,
         "FY2018": 4609.0,
-        "FY2017": 3033.0,
-        "LTM": 17637.0
+        "FY2017": 3033.0
       },
-      "status": "active"
-    },
-    {
-      "name": "United States & Canada",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 20436.0,
-        "FY2022": 19474.0,
-        "FY2021": 10094.0,
-        "FY2020": 6611.0,
-        "FY2019": 8465.0,
-        "FY2018": 6226.0,
-        "FY2017": 4367.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Latin America",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 2512.0,
-        "FY2022": 1978.0,
-        "FY2021": 1417.0,
-        "FY2020": 1295.0,
-        "FY2019": 1862.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "EMEA",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2023": 9904.0,
-        "FY2022": 6944.0,
-        "FY2021": 3213.0,
-        "FY2020": 2086.0,
-        "FY2019": 1852.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Latin America (LATAM)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2019": 1947.0,
-        "FY2018": 2002.0,
-        "FY2017": 1645.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Europe, Middle East and Africa (EMEA)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2019": 2148.0,
-        "FY2018": 1721.0,
-        "FY2017": 1157.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Asia Pacific (APAC)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2019": 1247.0,
-        "FY2018": 1026.0,
-        "FY2017": 763.0
-      },
-      "status": "discontinued"
+      "status": "discontinued",
+      "discontinued_reason": "omitted_in_latest_10q",
+      "discontinued_after": "FY2025"
     },
     {
       "name": "Brazil",
@@ -434,7 +396,7 @@
         "FY2025": 5565.0,
         "FY2024": 2799.0,
         "FY2023": 1110.0,
-        "LTM": 5565.0
+        "LTM": 7034.0
       }
     },
     {
@@ -444,16 +406,7 @@
         "FY2024": 1128.0,
         "FY2023": 1360.0,
         "FY2022": -7029.0,
-        "LTM": -68.0
-      }
-    },
-    {
-      "name": "Income before income taxes and income (loss) from equity method investments",
-      "values": {
-        "FY2025": 5800.0,
-        "FY2024": 4125.0,
-        "FY2023": 2321.0,
-        "LTM": 5800.0
+        "LTM": -2336.0
       }
     },
     {
@@ -463,14 +416,6 @@
         "FY2023": 1110.0,
         "FY2022": -1832.0,
         "FY2021": -3834.0
-      }
-    },
-    {
-      "name": "Income (loss) before income taxes and income (loss) from equity method investments",
-      "values": {
-        "FY2024": 4125.0,
-        "FY2023": 2321.0,
-        "FY2022": -9426.0
       }
     },
     {
@@ -537,8 +482,54 @@
         "FY2018": 251.0,
         "FY2017": -550.0
       }
+    },
+    {
+      "name": "Mobility",
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 6606.0,
+        "prior_ytd": 5180.0,
+        "yoy_pct": 27.53
+      }
+    },
+    {
+      "name": "Delivery",
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 3073.0,
+        "prior_ytd": 2248.0,
+        "yoy_pct": 36.7
+      }
+    },
+    {
+      "name": "Operating Segments",
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 9592.0,
+        "prior_ytd": 7337.0,
+        "yoy_pct": 30.73
+      }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "UBER"
 }

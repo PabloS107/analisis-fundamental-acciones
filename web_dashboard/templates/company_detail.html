@@ -998,7 +998,7 @@
                 </div>
                 <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_product_ltm }}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Mix sobre Ventas:</span>
+                    <span class="text-slate-500">Mix ({{ product_basis_label }}):</span>
                     <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_product_mix }}</span>
                 </div>
             </div>
@@ -1011,7 +1011,7 @@
                 </div>
                 <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.second_product_ltm }}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
-                    <span class="text-slate-500">Mix sobre Ventas:</span>
+                    <span class="text-slate-500">Mix ({{ product_basis_label }}):</span>
                     <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.second_product_mix }}</span>
                 </div>
             </div>
@@ -1022,10 +1022,10 @@
                     <span class="text-xs text-slate-500 font-medium">Región Principal: {{ kpis_segments.top_geo_name }}</span>
                     <span class="text-lg">🌎</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.top_geo_ltm }}</div>
+                <div class="text-3xl font-black {% if geo_reported %}text-slate-900{% else %}text-slate-400{% endif %} mt-1">{{ kpis_segments.top_geo_ltm }}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">Mix sobre Ventas:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.top_geo_mix }}</span>
+                    <span class="font-bold {% if geo_reported %}text-slate-800 bg-slate-100 border-slate-200{% else %}text-amber-700 bg-amber-50 border-amber-200{% endif %} px-2.5 py-0.5 rounded-full border">{{ kpis_segments.top_geo_mix }}</span>
                 </div>
             </div>
 
@@ -1035,10 +1035,10 @@
                     <span class="text-xs text-slate-500 font-medium">Ventas Internacionales / Resto</span>
                     <span class="text-lg">🌐</span>
                 </div>
-                <div class="text-3xl font-black text-slate-900 mt-1">{{ kpis_segments.intl_ltm }}</div>
+                <div class="text-3xl font-black {% if geo_reported %}text-slate-900{% else %}text-slate-400{% endif %} mt-1">{{ kpis_segments.intl_ltm }}</div>
                 <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-200">
                     <span class="text-slate-500">Diversificación Global:</span>
-                    <span class="font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">{{ kpis_segments.intl_pct }}</span>
+                    <span class="font-bold {% if geo_reported %}text-slate-800 bg-slate-100 border-slate-200{% else %}text-amber-700 bg-amber-50 border-amber-200{% endif %} px-2.5 py-0.5 rounded-full border">{{ kpis_segments.intl_pct }}</span>
                 </div>
             </div>
         </div>
@@ -1061,9 +1061,22 @@
                             <button type="button" onclick="setSegPeriodView('5y', this)" class="seg-period-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm transition cursor-pointer">5A</button>
                             <button type="button" onclick="setSegPeriodView('all', this)" class="seg-period-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 transition cursor-pointer">Todos</button>
                         </div>
-                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 hidden sm:inline-block">Auditado 10-K</span>
+                        <span class="text-[11px] text-slate-700 bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 hidden sm:inline-block">Auditado 10-K / 10-Q</span>
                     </div>
                 </div>
+
+                {% if product_cutover_notice %}
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs leading-relaxed flex items-start gap-2">
+                    <span class="text-sm shrink-0">⚠️</span>
+                    <div><strong>Aclaración de Re-segmentación / Discontinuación:</strong> {{ product_cutover_notice }}</div>
+                </div>
+                {% endif %}
+                {% if product_table_scope_note %}
+                <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs flex items-center gap-2">
+                    <span>ℹ️</span>
+                    <span>{{ product_table_scope_note }}</span>
+                </div>
+                {% endif %}
 
                 <div class="overflow-x-auto rounded-xl border border-slate-200">
                     <table class="w-full text-xs text-left border-collapse">
@@ -1085,6 +1098,9 @@
                             <tr class="{% if row.is_total %}bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300{% elif row.is_subtotal %}bg-slate-50/80 font-bold text-slate-900 border-t border-slate-200{% elif row.indent %}bg-slate-50/60 text-slate-600{% elif row.is_reconciling %}bg-amber-50/60 text-amber-900 italic{% else %}text-slate-700 hover:bg-slate-50{% endif %}">
                                 <td class="py-2.5 px-3 sticky left-0 z-10 min-w-[200px] max-w-[280px] border-r border-slate-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)] {% if row.is_total %}bg-slate-100 font-black text-slate-900{% elif row.is_subtotal %}bg-slate-50 font-bold text-slate-900{% elif row.indent %}bg-slate-50 text-slate-700 pl-6{% elif row.is_reconciling %}bg-amber-50/90 text-amber-900 font-medium{% else %}bg-white font-sans text-slate-900{% endif %}">
                                     <div class="whitespace-nowrap {% if row.indent %}pl-4 text-slate-600 font-normal{% elif row.is_reconciling %}text-amber-800 font-medium text-[11px]{% else %}font-semibold{% endif %} truncate" title="{{ row.raw_name|default:row.name }}">{{ row.name }}</div>
+                                    {% if row.interim_tag %}
+                                    <div class="mt-0.5"><span class="inline-block text-[10px] font-bold text-cyan-800 bg-cyan-50 px-1.5 py-0.5 rounded border border-cyan-200">{{ row.interim_tag }}</span></div>
+                                    {% endif %}
                                     {% if row.description %}
                                     <div class="text-[11px] text-slate-500 font-normal leading-snug mt-0.5 line-clamp-2">{{ row.description }}</div>
                                     {% endif %}
@@ -1134,8 +1150,8 @@
                 </div>
 
                 {% if has_discontinued_products %}
-                <!-- Acordeón de Segmentos Históricos Descontinuados -->
-                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                <!-- Acordeón de Segmentos Históricos Descontinuados / Predecesores -->
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group" {% if product_cutover_notice %}open{% endif %}>
                     <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
                         <span class="flex items-center gap-1.5">
                             <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
@@ -1184,14 +1200,33 @@
                         <p class="text-xs text-slate-500 mt-0.5">Distribución regional, cuota de ventas y diversificación global</p>
                     </div>
                     <div class="flex items-center gap-2 text-xs">
+                        {% if geo_reported %}
                         <span class="font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-                            Doméstico: <strong class="text-slate-900">{{ kpis_segments.top_geo_mix }}</strong>
+                            Principal: <strong class="text-slate-900">{{ kpis_segments.top_geo_mix }}</strong>
                         </span>
                         <span class="font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
-                            Global: <strong>{{ kpis_segments.intl_pct }}</strong>
+                            Resto / Global: <strong>{{ kpis_segments.intl_pct }}</strong>
                         </span>
+                        {% else %}
+                        <span class="font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+                            Sin desglose geográfico (ASC 280)
+                        </span>
+                        {% endif %}
                     </div>
                 </div>
+
+                {% if geo_cutover_notice %}
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs leading-relaxed flex items-start gap-2">
+                    <span class="text-sm shrink-0">⚠️</span>
+                    <div><strong>Cambio en Desglose Geográfico:</strong> {{ geo_cutover_notice }}</div>
+                </div>
+                {% endif %}
+
+                {% if not geo_reported and not table_geos %}
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed">
+                    <strong>Dato Geográfico No Reportado (ASC 280):</strong> La compañía no desagrega sus ingresos por país o región en sus notas oficiales XBRL ante la SEC. Conforme a la política de integridad contable, no se imputan porcentajes domésticos/internacionales artificiales.
+                </div>
+                {% endif %}
 
                 {% if has_geo_territories %}
                 <!-- Grid de Tarjetas Territoriales -->
@@ -1230,8 +1265,9 @@
                 </div>
                 {% endif %}
 
+                {% if table_geos or has_discontinued_geos %}
                 <!-- Acordeón con Tabla Histórica Multi-Anual Geográfica -->
-                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group" {% if geo_cutover_notice %}open{% endif %}>
                     <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
                         <span class="flex items-center gap-1.5">
                             <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
@@ -1286,7 +1322,7 @@
 
                     {% if has_discontinued_geos %}
                     <!-- Acordeón de Regiones Históricas Descontinuadas -->
-                    <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <details class="mt-3 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group" {% if geo_cutover_notice %}open{% endif %}>
                         <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
                             <span class="flex items-center gap-1.5">
                                 <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
@@ -1324,6 +1360,46 @@
                     </details>
                     {% endif %}
                 </details>
+                {% endif %}
+
+                {% if has_geo_countries %}
+                <!-- Desglose Estatutario por País (Nota ASC 280 separada para evitar doble conteo regional) -->
+                <details class="mt-2 border border-slate-200 rounded-xl bg-slate-50/50 p-3 text-xs group">
+                    <summary class="font-bold text-slate-700 cursor-pointer flex items-center justify-between select-none">
+                        <span class="flex items-center gap-1.5">
+                            <span class="text-slate-400 group-open:rotate-90 transition-transform">▸</span>
+                            <span>Desglose Estatutario por País (Nota ASC 280 — Partición Alternativa al 100%)</span>
+                        </span>
+                        <span class="text-[10px] bg-cyan-50 text-cyan-800 px-2 py-0.5 rounded-full border border-cyan-200 font-semibold">No acumulable a regiones</span>
+                    </summary>
+                    <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                                    <th class="py-2 px-3 sticky left-0 bg-slate-100/95 z-20 min-w-[180px] max-w-[260px] border-r border-slate-200">País / Grupo Estatutario</th>
+                                    <th class="py-2 px-2 text-right">Mix</th>
+                                    <th class="py-2 px-2 text-center">YoY</th>
+                                    {% for p in seg_periods %}
+                                    <th data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ p }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-mono">
+                                {% for row in table_geos_countries %}
+                                <tr class="text-slate-700 hover:bg-slate-50">
+                                    <td class="py-2 px-3 sticky left-0 z-10 bg-white font-sans font-semibold text-slate-900 min-w-[180px] max-w-[260px] border-r border-slate-200 truncate" title="{{ row.name }}">{{ row.name }}</td>
+                                    <td class="py-2 px-2 text-right text-slate-700 font-semibold">{{ row.mix_pct }}</td>
+                                    <td class="py-2 px-2 text-center whitespace-nowrap">{{ row.yoy_str }}</td>
+                                    {% for v in row.values %}
+                                    <td data-col-idx="{{ forloop.counter }}" class="py-2 px-2 text-right whitespace-nowrap seg-year-col {% if forloop.counter > 5 %}hidden{% endif %}">{{ v }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                {% endif %}
             </div>
         </div>
 
@@ -1391,31 +1467,43 @@
                     </div>
                     <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Tendencia Geográfica</span>
                 </div>
+                {% if geo_reported %}
                 <div class="h-80 relative"><canvas id="chartGeoTrends"></canvas></div>
+                {% else %}
+                <div class="h-80 flex items-center justify-center rounded-xl bg-slate-50 border border-dashed border-slate-200 text-xs text-slate-500 text-center px-6">
+                    Sin serie geográfica histórica reportada por la compañía en SEC XBRL (ASC 280).
+                </div>
+                {% endif %}
             </div>
 
-            <!-- Gráfico C: Mix de Productos LTM (Donut) -->
+            <!-- Gráfico C: Mix de Productos (Donut) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Producto (LTM)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Participación sobre ventas totales de productos y servicios</p>
+                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Producto ({{ product_basis_label }})</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Participación sobre ventas totales de productos y servicios vigentes</p>
                     </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">{{ product_basis_label }}</span>
                 </div>
                 <div class="h-80 relative"><canvas id="chartProductDonut"></canvas></div>
             </div>
 
-            <!-- Gráfico D: Mix Geográfico LTM (Donut) -->
+            <!-- Gráfico D: Mix Geográfico (Donut) -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Región (LTM)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Participación porcentual por mercado geográfico</p>
+                        <h3 class="font-bold text-slate-900 text-base">Mix de Ingresos por Región</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Participación porcentual por mercado geográfico activo</p>
                     </div>
-                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Distribución LTM</span>
+                    <span class="text-[11px] text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">{% if geo_reported %}Distribución Vigente{% else %}N/D{% endif %}</span>
                 </div>
+                {% if geo_reported %}
                 <div class="h-80 relative"><canvas id="chartGeoDonut"></canvas></div>
+                {% else %}
+                <div class="h-80 flex items-center justify-center rounded-xl bg-slate-50 border border-dashed border-slate-200 text-xs text-slate-500 text-center px-6">
+                    Sin desglose geográfico activo para graficar distribución regional.
+                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -5331,7 +5419,8 @@
         const geoColors = {{ donut_geo_colors_json|safe }};
 
         // Gráfico A: Tendencia de Líneas de Negocio ($M)
-        new Chart(document.getElementById('chartProductTrends'), {
+        const elProdTrend = document.getElementById('chartProductTrends');
+        if (elProdTrend) new Chart(elProdTrend, {
             type: 'line',
             data: {
                 labels: prodChartPeriods,
@@ -5358,7 +5447,8 @@
         });
 
         // Gráfico B: Tendencia de Ventas por Región ($M)
-        new Chart(document.getElementById('chartGeoTrends'), {
+        const elGeoTrend = document.getElementById('chartGeoTrends');
+        if (elGeoTrend) new Chart(elGeoTrend, {
             type: 'line',
             data: {
                 labels: geoChartPeriods,
@@ -5384,8 +5474,9 @@
             }
         });
 
-        // Gráfico C: Mix de Productos LTM (Doughnut)
-        new Chart(document.getElementById('chartProductDonut'), {
+        // Gráfico C: Mix de Productos (Doughnut)
+        const elProdDonut = document.getElementById('chartProductDonut');
+        if (elProdDonut) new Chart(elProdDonut, {
             type: 'doughnut',
             data: {
                 labels: prodLabels,
@@ -5416,8 +5507,9 @@
             }
         });
 
-        // Gráfico D: Mix Geográfico LTM (Doughnut)
-        new Chart(document.getElementById('chartGeoDonut'), {
+        // Gráfico D: Mix Geográfico (Doughnut)
+        const elGeoDonut = document.getElementById('chartGeoDonut');
+        if (elGeoDonut) new Chart(elGeoDonut, {
             type: 'doughnut',
             data: {
                 labels: geoLabels,

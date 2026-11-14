@@ -2,7 +2,7 @@
   "ticker": "PGR",
   "company_name": "PROGRESSIVE CORP/OH/",
   "cik": "0000080661",
-  "audit_timestamp": "2026-11-14T12:35:02.637864",
+  "audit_timestamp": "2026-11-14T16:20:39.156315",
   "years_audited": {
     "LTM": [
       {
@@ -716,10 +716,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 90,
-  "passed_tests": 62,
+  "total_tests": 94,
+  "passed_tests": 64,
   "failed_tests": 0,
-  "skipped_tests": 28,
+  "skipped_tests": 30,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -784,6 +784,28 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "5 segmentos activos"
+    },
+    {
+      "check": "Frescura LTM Segmentos",
+      "severity": "WARN",
+      "message": "Último 10-Q omite desglose de segmentos; se muestra último cierre anual (LTM = N/D)"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "WARN",
+      "message": "Sin desglose geográfico en reportes SEC XBRL (señalado como N/D)"
     }
   ]
 }

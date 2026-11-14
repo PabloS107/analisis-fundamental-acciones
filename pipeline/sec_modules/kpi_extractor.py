@@ -462,7 +462,16 @@ def normalize_platform_kpis(sec_data, pdf_data, base_dict):
 
 def _update_channel_metric(channels, channel_name, line_text, line_low):
     """Extrae ventas y crecimiento de un canal manteniendo valores previos si faltan."""
-    rev = _extract_float(line_text, r"(?:to|\$)\s*([0-9,]+(?:\.[0-9]+)?)\s*(?:million)?")
+    m_rev = re.search(
+        r"(?:to|\$)\s*([0-9,]+(?:\.[0-9]+)?)\s*(million|billion|bn|m)?\b",
+        line_text,
+        re.IGNORECASE,
+    )
+    rev = None
+    if m_rev:
+        raw_num = float(m_rev.group(1).replace(",", ""))
+        unit = (m_rev.group(2) or "").lower()
+        rev = round(raw_num * 1000.0, 1) if unit in ("billion", "bn") else raw_num
     g = _extract_float(line_text, r"(?:increased|decreased|up|down)\s+([0-9]+(?:\.[0-9]+)?)\s*%")
     if g is not None and any(k in line_low for k in ("decreased", "down")):
         g = -g
@@ -493,14 +502,25 @@ def normalize_corporate_kpis(sec_data, pdf_data, base_dict, output_dir=None):
             try:
                 with open(seg_file, "r", encoding="utf-8") as f:
                     s_data = json.load(f)
+                fresh_brands, fresh_geos = {}, {}
                 for p in s_data.get("product_segments", []):
+                    if p.get("status") == "discontinued" or p.get("is_subtotal") or p.get("is_reconciling"):
+                        continue
                     p_name = p.get("name")
-                    if p_name:
-                        brands[p_name] = {"revenue_usd_m": _latest_period_value(p.get("values", {}))}
+                    val = _latest_period_value(p.get("values", {}))
+                    if val is None:
+                        val = (p.get("interim_disclosure") or {}).get("current_ytd")
+                    if p_name and val is not None:
+                        fresh_brands[p_name] = {"revenue_usd_m": val}
                 for g in s_data.get("geographic_segments", []):
+                    if g.get("status") == "discontinued" or g.get("is_subtotal") or g.get("is_country_breakdown"):
+                        continue
                     g_name = g.get("name")
-                    if g_name:
-                        geos[g_name] = {"revenue_usd_m": _latest_period_value(g.get("values", {}))}
+                    val = _latest_period_value(g.get("values", {}))
+                    if g_name and val is not None:
+                        fresh_geos[g_name] = {"revenue_usd_m": val}
+                brands = fresh_brands
+                geos = fresh_geos
             except (OSError, json.JSONDecodeError, TypeError) as e:
                 print(f"[KPI Extractor] Nota leyendo segments_data.json: {e}")
 
@@ -758,7 +778,7 @@ def extract_operational_kpis(ticker, archetype=None, output_dir=None, custom_dri
         "overall_status": existing_recon.get("overall_status", "CONCILIADO"),
         "comparisons": comparisons,
         "methodological_reconciliation": existing_recon.get("methodological_reconciliation", {}),
-        "banking_kpis_enriched": normalized_enriched,
+        "banking_kpis_enriched": normalized_enriched if arch_norm in ("FINANCIAL_BANKING", "INSURANCE") else {},
         "kpis_enriched": normalized_enriched,
         "flags": existing_recon.get("flags", []),
         "archetype": normalized_enriched.get("archetype", arch_norm),

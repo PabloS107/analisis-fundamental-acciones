@@ -10,23 +10,20 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016"
+    "FY2016",
+    "FY2015"
   ],
   "product_segments": [
     {
-      "name": "Retail",
+      "name": "Home furnishings",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
-      "status": "active",
+      "status": "discontinued",
       "values": {
-        "FY2025": 4135.3,
-        "FY2024": 3876.7,
-        "FY2023": 3128.3,
-        "FY2022": 2455.9,
-        "FY2021": 1566.7,
-        "FY2020": 1312.5,
-        "LTM": 4135.3
+        "FY2021": 21.5,
+        "FY2020": 12.4,
+        "FY2019": 10.5
       }
     },
     {
@@ -38,19 +35,10 @@
       "values": {
         "FY2021": 71.3,
         "FY2020": 46.3,
-        "FY2019": 45.2
-      }
-    },
-    {
-      "name": "Apparel",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "status": "discontinued",
-      "values": {
-        "FY2018": 16.8,
-        "FY2017": 19.2,
-        "FY2016": 20.0
+        "FY2019": 45.2,
+        "FY2016": 42.3,
+        "FY2015": 37.6,
+        "FY2014": 38.5
       }
     },
     {
@@ -66,27 +54,15 @@
       }
     },
     {
-      "name": "Motor vehicle dealerships",
+      "name": "quick service",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "status": "discontinued",
       "values": {
-        "FY2018": 24.4,
-        "FY2017": 24.0,
-        "FY2016": 20.3
-      }
-    },
-    {
-      "name": "Wholesale club",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "status": "discontinued",
-      "values": {
-        "FY2018": 37.6,
-        "FY2017": 37.6,
-        "FY2016": 37.5
+        "FY2016": 52.7,
+        "FY2015": 41.4,
+        "FY2014": 33.4
       }
     },
     {
@@ -95,6 +71,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Retail",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 3515.4,
         "FY2024": 3368.5,
@@ -102,9 +79,18 @@
         "FY2022": 2455.9,
         "FY2021": 1566.7,
         "FY2020": 1312.5,
-        "LTM": 3515.4
+        "LTM": 3556.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 2655.1,
+        "prior_ytd": 2614.5,
+        "yoy_pct": 1.55
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Retail (United Kingdom)",
@@ -112,13 +98,80 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Retail",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 619.9,
         "FY2024": 508.2,
         "FY2023": 374.1,
-        "LTM": 619.9
+        "FY2022": 243.3,
+        "FY2021": 138.9,
+        "FY2020": 55.9,
+        "LTM": 719.3
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 554.1,
+        "prior_ytd": 454.7,
+        "yoy_pct": 21.86
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
+    },
+    {
+      "name": "Retail (Other)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Retail",
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2025": 190.4,
+        "FY2024": 133.2,
+        "FY2023": 65.3,
+        "FY2022": 30.9,
+        "FY2021": 4.2,
+        "FY2020": 0.0,
+        "LTM": 228.1
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 176.1,
+        "prior_ytd": 138.4,
+        "yoy_pct": 27.24
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
+    },
+    {
+      "name": "Retail",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2025": 4325.7,
+        "FY2024": 4009.9,
+        "FY2023": 3193.6,
+        "FY2022": 2730.1,
+        "FY2021": 1709.8,
+        "FY2020": 1368.4,
+        "LTM": 4503.3
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 3385.3,
+        "prior_ytd": 3207.7,
+        "yoy_pct": 5.54
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Industrial (U.S.)",
@@ -126,6 +179,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Industrial",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 785.9,
         "FY2024": 747.0,
@@ -133,9 +187,18 @@
         "FY2022": 465.2,
         "FY2021": 261.5,
         "FY2020": 184.6,
-        "LTM": 785.9
+        "LTM": 846.7
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 647.5,
+        "prior_ytd": 586.7,
+        "yoy_pct": 10.36
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Industrial (United Kingdom)",
@@ -143,30 +206,53 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Industrial",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 54.8,
         "FY2024": 48.1,
         "FY2023": 43.7,
-        "LTM": 54.8
+        "FY2022": 30.2,
+        "FY2021": 9.6,
+        "FY2020": 1.3,
+        "LTM": 60.5
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 47.5,
+        "prior_ytd": 41.8,
+        "yoy_pct": 13.64
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "Industrial",
+      "name": "Industrial (Other)",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Industrial",
+      "source_concept": "us-gaap_Revenues",
       "values": {
-        "FY2025": 864.4,
-        "FY2024": 795.1,
-        "FY2023": 559.1,
-        "FY2022": 465.2,
-        "FY2021": 261.5,
-        "FY2020": 184.6,
-        "LTM": 864.4
+        "FY2025": 23.7,
+        "FY2024": 0.0,
+        "FY2023": 0.0,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
+        "LTM": 81.6
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 71.2,
+        "prior_ytd": 13.3,
+        "yoy_pct": 435.34
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Industrial",
@@ -174,6 +260,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 864.4,
         "FY2024": 795.2,
@@ -181,9 +268,18 @@
         "FY2022": 495.4,
         "FY2021": 271.1,
         "FY2020": 185.9,
-        "LTM": 864.4
+        "LTM": 988.8
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 766.2,
+        "prior_ytd": 641.8,
+        "yoy_pct": 19.38
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other (U.S.)",
@@ -191,15 +287,26 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Other",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 240.7,
         "FY2024": 237.9,
         "FY2023": 205.5,
         "FY2022": 74.2,
         "FY2021": 84.1,
-        "LTM": 240.7
+        "FY2020": 85.2,
+        "LTM": 250.5
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 194.9,
+        "prior_ytd": 185.1,
+        "yoy_pct": 5.29
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other (United Kingdom)",
@@ -207,33 +314,53 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Other",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 6.5,
         "FY2024": 0.8,
         "FY2023": 0.0,
-        "LTM": 6.5
-      },
-      "status": "active"
-    },
-    {
-      "name": "Other",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2025": 494.4,
-        "FY2024": 477.4,
-        "FY2023": 411.0,
-        "FY2022": 148.4,
-        "FY2021": 168.2,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
         "FY2020": 0.0,
-        "FY2018": 231.9,
-        "FY2017": 224.7,
-        "FY2016": 216.0,
-        "LTM": 494.4
+        "LTM": 8.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 4.7,
+        "prior_ytd": 3.2,
+        "yoy_pct": 46.88
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
+    },
+    {
+      "name": "Other (Other)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Other",
+      "source_concept": "us-gaap_Revenues",
+      "values": {
+        "FY2025": 0.0,
+        "FY2024": 0.0,
+        "FY2023": 0.0,
+        "FY2022": 0.0,
+        "FY2021": 0.0,
+        "FY2020": 0.0,
+        "LTM": 0.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 0.0,
+        "prior_ytd": 0.0,
+        "yoy_pct": null
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other",
@@ -241,107 +368,31 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 247.2,
         "FY2024": 238.7,
         "FY2023": 205.5,
         "FY2022": 74.2,
         "FY2021": 84.1,
+        "FY2020": 85.2,
         "FY2018": 6.3,
         "FY2017": 3.5,
         "FY2016": 2.7,
-        "LTM": 247.2
+        "FY2015": 171.9,
+        "FY2014": 159.3,
+        "LTM": 258.5
       },
-      "status": "active"
-    },
-    {
-      "name": "Industrial",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2024": 843.2,
-        "FY2023": 602.8,
-        "FY2022": 495.4,
-        "FY2021": 271.1,
-        "FY2020": 185.9,
-        "FY2025": 840.7,
-        "LTM": 840.7
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 199.6,
+        "prior_ytd": 188.3,
+        "yoy_pct": 6.0
       },
-      "status": "active"
-    },
-    {
-      "name": "Other",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2024": 239.5,
-        "FY2023": 205.5,
-        "FY2022": 74.2,
-        "FY2021": 84.1,
-        "FY2025": 247.2,
-        "FY2020": 0.0,
-        "FY2018": 231.9,
-        "FY2017": 224.7,
-        "FY2016": 216.0,
-        "LTM": 247.2
-      },
-      "status": "active"
-    },
-    {
-      "name": "Other (2) (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Other (2)",
-      "values": {
-        "FY2022": 74.2,
-        "FY2021": 84.1,
-        "FY2020": 85.2
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Other (2)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2022": 74.2,
-        "FY2021": 84.1,
-        "FY2020": 85.2
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Other (2)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2022": 74.2,
-        "FY2021": 84.1,
-        "FY2020": 85.2
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Other (2)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2022": 74.2,
-        "FY2021": 84.1,
-        "FY2020": 85.2
-      },
-      "status": "discontinued"
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Automotive service",
@@ -349,12 +400,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 47.8,
         "FY2020": 35.1,
         "FY2019": 32.4,
         "FY2018": 28.3,
-        "FY2017": 25.3
+        "FY2017": 25.3,
+        "FY2016": 20.2,
+        "FY2015": 18.6,
+        "FY2014": 16.5
       },
       "status": "discontinued"
     },
@@ -364,12 +419,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 37.3,
         "FY2020": 32.8,
         "FY2019": 31.8,
         "FY2018": 31.5,
-        "FY2017": 31.2
+        "FY2017": 31.2,
+        "FY2016": 27.6,
+        "FY2015": 25.5,
+        "FY2014": 25.1
       },
       "status": "discontinued"
     },
@@ -379,12 +438,30 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 36.4,
         "FY2020": 35.6,
         "FY2019": 31.7,
         "FY2018": 21.9,
-        "FY2017": 20.8
+        "FY2017": 20.8,
+        "FY2016": 19.7,
+        "FY2015": 19.9,
+        "FY2014": 20.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Convenience stores (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Convenience stores",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 217.2,
+        "FY2020": 189.7,
+        "FY2019": 166.8
       },
       "status": "discontinued"
     },
@@ -394,12 +471,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 149.1,
         "FY2020": 126.7,
         "FY2019": 102.7,
         "FY2018": 94.8,
-        "FY2017": 91.1
+        "FY2017": 91.1,
+        "FY2016": 90.7,
+        "FY2015": 88.1,
+        "FY2014": 85.0
       },
       "status": "discontinued"
     },
@@ -409,12 +490,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 153.2,
         "FY2020": 141.0,
         "FY2019": 127.9,
         "FY2018": 129.6,
-        "FY2017": 126.6
+        "FY2017": 126.6,
+        "FY2016": 117.8,
+        "FY2015": 103.3,
+        "FY2014": 84.6
       },
       "status": "discontinued"
     },
@@ -424,28 +509,62 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 36.8,
         "FY2020": 30.5,
         "FY2019": 30.2,
         "FY2018": 29.4,
-        "FY2017": 28.7
+        "FY2017": 28.7,
+        "FY2016": 18.8,
+        "FY2015": 17.0,
+        "FY2014": 16.8
       },
       "status": "discontinued"
     },
     {
-      "name": "Grocery stores",
+      "name": "General merchandise (U.S.)",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "General merchandise",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 72.4,
+        "FY2020": 49.4,
+        "FY2019": 35.4
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Grocery stores (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Grocery stores",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 88.4,
+        "FY2020": 78.1,
+        "FY2019": 69.7,
+        "FY2018": 63.6,
+        "FY2017": 50.7
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Grocery stores (United Kingdom)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Grocery stores",
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 100.5,
         "FY2020": 51.5,
         "FY2019": 17.8,
-        "FY2018": 63.6,
-        "FY2017": 50.7,
-        "FY2016": 32.8
+        "FY2018": 0.0,
+        "FY2017": 0.0
       },
       "status": "discontinued"
     },
@@ -455,28 +574,73 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 115.9,
         "FY2020": 104.7,
         "FY2019": 105.9,
         "FY2018": 94.6,
-        "FY2017": 88.1
+        "FY2017": 88.1,
+        "FY2016": 85.9,
+        "FY2015": 75.9,
+        "FY2014": 62.1
       },
       "status": "discontinued"
     },
     {
-      "name": "Home improvement",
+      "name": "Health care (U.S.)",
       "is_subtotal": false,
-      "is_subsegment": false,
+      "is_subsegment": true,
       "is_reconciling": false,
-      "parent": null,
+      "parent": "Health care",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 33.6,
+        "FY2020": 25.6,
+        "FY2019": 21.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home furnishings (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Home furnishings",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 21.5,
+        "FY2020": 12.4,
+        "FY2019": 10.5
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home improvement (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Home improvement",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2021": 62.1,
+        "FY2020": 46.4,
+        "FY2019": 42.4,
+        "FY2018": 37.9
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Home improvement (United Kingdom)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Home improvement",
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 34.5,
         "FY2020": 4.2,
-        "FY2019": 0.0,
-        "FY2018": 37.9,
-        "FY2017": 30.3,
-        "FY2016": 25.7
+        "FY2019": 0.0
       },
       "status": "discontinued"
     },
@@ -486,10 +650,14 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "casual dining",
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 71.3,
         "FY2020": 46.3,
-        "FY2019": 45.2
+        "FY2019": 45.2,
+        "FY2016": 42.3,
+        "FY2015": 37.6,
+        "FY2014": 38.5
       },
       "status": "discontinued"
     },
@@ -499,6 +667,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Restaurants",
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 115.8,
         "FY2020": 88.2,
@@ -512,11 +681,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 90.8,
         "FY2020": 78.7,
         "FY2019": 87.7,
-        "FY2018": 70.6
+        "FY2018": 70.6,
+        "FY2017": 58.4,
+        "FY2016": 51.9,
+        "FY2015": 49.5,
+        "FY2014": 47.1
       },
       "status": "discontinued"
     },
@@ -526,12 +700,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 72.0,
         "FY2020": 64.1,
         "FY2019": 66.5,
         "FY2018": 63.6,
-        "FY2017": 62.3
+        "FY2017": 62.3,
+        "FY2016": 57.7,
+        "FY2015": 51.7,
+        "FY2014": 46.3
       },
       "status": "discontinued"
     },
@@ -541,12 +719,16 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2021": 46.1,
         "FY2020": 38.7,
         "FY2019": 38.1,
         "FY2018": 37.6,
-        "FY2017": 37.6
+        "FY2017": 37.6,
+        "FY2016": 37.5,
+        "FY2015": 37.4,
+        "FY2014": 36.6
       },
       "status": "discontinued"
     },
@@ -556,11 +738,15 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2020": 189.7,
         "FY2019": 166.8,
         "FY2018": 142.2,
-        "FY2017": 111.0
+        "FY2017": 111.0,
+        "FY2016": 91.8,
+        "FY2015": 90.1,
+        "FY2014": 89.8
       },
       "status": "discontinued"
     },
@@ -570,11 +756,15 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2020": 49.4,
         "FY2019": 35.4,
         "FY2018": 29.2,
-        "FY2017": 23.8
+        "FY2017": 23.8,
+        "FY2016": 19.0,
+        "FY2015": 16.4,
+        "FY2014": 13.6
       },
       "status": "discontinued"
     },
@@ -584,11 +774,14 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2020": 46.3,
         "FY2019": 45.2,
         "FY2018": 46.2,
-        "FY2017": 43.9
+        "FY2017": 43.9,
+        "FY2016": 42.3,
+        "FY2015": 37.6
       },
       "status": "discontinued"
     },
@@ -598,11 +791,14 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2020": 88.2,
         "FY2019": 92.0,
         "FY2018": 72.5,
-        "FY2017": 59.6
+        "FY2017": 59.6,
+        "FY2016": 52.7,
+        "FY2015": 41.4
       },
       "status": "discontinued"
     },
@@ -612,10 +808,14 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2019": 31.3,
         "FY2018": 30.1,
-        "FY2017": 29.6
+        "FY2017": 29.6,
+        "FY2016": 28.8,
+        "FY2015": 28.6,
+        "FY2014": 28.2
       },
       "status": "discontinued"
     },
@@ -625,10 +825,28 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_LeaseIncome",
       "values": {
         "FY2019": 42.4,
         "FY2018": 37.9,
-        "FY2017": 30.3
+        "FY2017": 30.3,
+        "FY2016": 25.7,
+        "FY2015": 23.1,
+        "FY2014": 15.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Theaters (U.S.)",
+      "is_subtotal": false,
+      "is_subsegment": true,
+      "is_reconciling": false,
+      "parent": "Theaters",
+      "source_concept": "us-gaap_LeaseIncome",
+      "values": {
+        "FY2019": 87.7,
+        "FY2018": 70.6,
+        "FY2017": 58.4
       },
       "status": "discontinued"
     },
@@ -638,6 +856,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 47.0,
         "FY2017": 46.1,
@@ -651,6 +870,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 1274.6,
         "FY2017": 1166.2,
@@ -664,6 +884,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Apparel",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 16.8,
         "FY2017": 19.2,
@@ -677,6 +898,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Automotive Service",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 28.3,
         "FY2017": 25.3,
@@ -690,6 +912,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Automotive Tire Service",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 30.1,
         "FY2017": 29.6,
@@ -703,6 +926,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Beverages",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 31.5,
         "FY2017": 31.2,
@@ -716,6 +940,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Convenience Stores",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 142.2,
         "FY2017": 111.0,
@@ -729,6 +954,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Dollar stores",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 94.8,
         "FY2017": 91.1,
@@ -742,6 +968,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Drug stores",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 129.6,
         "FY2017": 126.6,
@@ -755,6 +982,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Financial services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 29.4,
         "FY2017": 28.7,
@@ -768,6 +996,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "General merchandise",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 29.2,
         "FY2017": 23.8,
@@ -781,6 +1010,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Grocery stores",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 63.6,
         "FY2017": 50.7,
@@ -794,6 +1024,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Health and fitness",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 94.6,
         "FY2017": 88.1,
@@ -807,6 +1038,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Home improvement",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 37.9,
         "FY2017": 30.3,
@@ -820,6 +1052,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Motor vehicle dealerships",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 24.4,
         "FY2017": 24.0,
@@ -833,6 +1066,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Restaurants-casual dining",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 46.2,
         "FY2017": 43.9,
@@ -846,6 +1080,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Restaurants-quick service",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 72.5,
         "FY2017": 59.6,
@@ -859,6 +1094,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Theaters",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 70.6,
         "FY2017": 58.4,
@@ -872,6 +1108,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Transportation services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 63.6,
         "FY2017": 62.3,
@@ -885,6 +1122,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Wholesale club",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 37.6,
         "FY2017": 37.6,
@@ -893,43 +1131,184 @@
       "status": "discontinued"
     },
     {
-      "name": "Rental",
+      "name": "Rental (Other)",
       "is_subtotal": false,
       "is_subsegment": true,
       "is_reconciling": false,
-      "parent": "Other",
+      "parent": "Rental",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 231.9,
         "FY2017": 224.7,
         "FY2016": 216.0
       },
       "status": "discontinued"
-    }
-  ],
-  "channel_segments": [
+    },
     {
-      "name": "Retail",
+      "name": "Rental revenue",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2017": 1166.2,
+        "FY2016": 1057.4,
+        "FY2015": 976.9,
+        "FY2014": 893.5
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Apparel",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2017": 19.2,
+        "FY2016": 20.0,
+        "FY2015": 19.8
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Grocery stores",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2017": 50.7,
+        "FY2016": 32.8,
+        "FY2015": 29.5,
+        "FY2014": 27.3
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Motor vehicle dealerships",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2017": 24.0,
+        "FY2016": 20.3,
+        "FY2015": 15.3,
+        "FY2014": 13.9
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Wholesale club",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2017": 37.6,
+        "FY2016": 37.5,
+        "FY2015": 37.4
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Other revenue",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OtherRealEstateRevenue",
+      "values": {
+        "FY2017": 3.5,
+        "FY2016": 2.7,
+        "FY2015": 4.4,
+        "FY2014": 2.9
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Real Estate Investment",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_RealEstateRevenueNet",
+      "values": {
+        "FY2017": 37.1,
+        "FY2016": 44.6
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Apparel stores",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2016": 20.0,
+        "FY2015": 19.8,
+        "FY2014": 17.7
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Health care",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
+      "values": {
+        "FY2016": 16.2,
+        "FY2015": 16.1,
+        "FY2014": 16.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Restaurants",
       "is_subtotal": false,
       "is_subsegment": true,
-      "parent": "Other",
+      "is_reconciling": false,
+      "parent": "quick service",
+      "source_concept": "us-gaap_OperatingLeasesIncomeStatementLeaseRevenue",
       "values": {
-        "FY2025": 190.4,
-        "FY2024": 133.2,
-        "FY2023": 65.3,
-        "FY2022": 243.3,
-        "FY2021": 138.9,
-        "FY2020": 55.9,
-        "LTM": 190.4
+        "FY2016": 52.7,
+        "FY2015": 41.4,
+        "FY2014": 33.4
       },
-      "status": "active"
+      "status": "discontinued"
+    },
+    {
+      "name": "Aggregate acquisitions",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_RealEstateRevenueNet",
+      "values": {
+        "FY2016": 44.6,
+        "FY2015": 43.4
+      },
+      "status": "discontinued"
     }
   ],
+  "channel_segments": [],
   "geographic_segments": [
     {
       "name": "U.S.",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": false,
       "values": {
         "FY2025": 4542.1,
         "FY2024": 4353.4,
@@ -937,9 +1316,18 @@
         "FY2022": 2995.3,
         "FY2021": 1912.3,
         "FY2020": 1582.3,
-        "LTM": 4542.1
+        "LTM": 4653.3
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 3497.5,
+        "prior_ytd": 3386.3,
+        "yoy_pct": 3.28
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "United Kingdom",
@@ -950,9 +1338,21 @@
         "FY2025": 681.2,
         "FY2024": 557.1,
         "FY2023": 417.7,
-        "LTM": 681.2
+        "FY2022": 273.5,
+        "FY2021": 148.5,
+        "FY2020": 57.2,
+        "LTM": 787.7
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 606.3,
+        "prior_ytd": 499.8,
+        "yoy_pct": 21.31
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other",
@@ -966,113 +1366,31 @@
         "FY2022": 30.9,
         "FY2021": 0.0,
         "FY2020": 0.0,
-        "LTM": 214.1
+        "LTM": 309.7
       },
-      "status": "active"
-    },
-    {
-      "name": "U.K.",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2024": 557.1,
-        "FY2023": 417.7,
-        "FY2022": 273.5,
-        "FY2021": 148.5,
-        "FY2020": 57.2
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 247.3,
+        "prior_ytd": 151.7,
+        "yoy_pct": 63.02
       },
-      "status": "discontinued"
-    },
-    {
-      "name": "Convenience stores (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 217.2,
-        "FY2020": 189.7,
-        "FY2019": 166.8
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "General merchandise (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 72.4,
-        "FY2020": 49.4,
-        "FY2019": 35.4
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Grocery stores (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 88.4,
-        "FY2020": 78.1,
-        "FY2019": 69.7,
-        "FY2018": 63.6,
-        "FY2017": 50.7
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Health care (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 33.6,
-        "FY2020": 25.6,
-        "FY2019": 21.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Home furnishings (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 21.5,
-        "FY2020": 12.4,
-        "FY2019": 10.5
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Home improvement (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 62.1,
-        "FY2020": 46.4,
-        "FY2019": 42.4,
-        "FY2018": 37.9
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Theaters (U.S.)",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2019": 87.7,
-        "FY2018": 70.6,
-        "FY2017": 58.4
-      },
-      "status": "discontinued"
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     }
   ],
   "segment_operating_income": [],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "O"
 }

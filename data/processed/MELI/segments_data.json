@@ -10,26 +10,17 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016"
+    "FY2016",
+    "FY2015"
   ],
   "product_segments": [
-    {
-      "name": "Restatement Adjustment",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "status": "discontinued",
-      "values": {
-        "FY2020": 283.5,
-        "FY2019": 30.6
-      }
-    },
     {
       "name": "Net service revenues and financial income",
       "is_subtotal": false,
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Tipo de Ingreso (ASC 606)",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 25286.0,
         "FY2024": 18638.0,
@@ -37,7 +28,16 @@
         "FY2022": 9685.0,
         "LTM": 33138.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 25612.0,
+        "prior_ytd": 17760.0,
+        "yoy_pct": 44.21
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net product revenues",
@@ -45,14 +45,25 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Tipo de Ingreso (ASC 606)",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 3607.0,
         "FY2024": 2139.0,
         "FY2023": 1490.0,
         "FY2022": 1095.0,
+        "FY2021": 920.0,
         "LTM": 5385.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 4152.0,
+        "prior_ytd": 2374.0,
+        "yoy_pct": 74.89
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net service revenues and financial income (Brazil)",
@@ -60,23 +71,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net service revenues and financial income",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 12846.0,
         "FY2024": 10033.0,
         "FY2023": 6946.0,
         "FY2022": 5283.0,
-        "LTM": 12846.0
+        "LTM": 17371.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 13531.0,
+        "prior_ytd": 9006.0,
+        "yoy_pct": 50.24
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 259.0,
-        "FY2021": 189.0,
-        "FY2020": 79.0,
-        "FY2019": 25.7
-      },
-      "operating_margin_pct": {
-        "FY2022": 4.9
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net service revenues and financial income (Mexico)",
@@ -84,23 +96,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net service revenues and financial income",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 5699.0,
         "FY2024": 4183.0,
         "FY2023": 2734.0,
         "FY2022": 1638.0,
-        "LTM": 5699.0
+        "LTM": 7711.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 5890.0,
+        "prior_ytd": 3878.0,
+        "yoy_pct": 51.88
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 74.0,
-        "FY2021": -130.0,
-        "FY2020": -134.0,
-        "FY2019": -168.3
-      },
-      "operating_margin_pct": {
-        "FY2022": 4.52
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net service revenues and financial income (Argentina)",
@@ -108,23 +121,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net service revenues and financial income",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 5646.0,
         "FY2024": 3614.0,
         "FY2023": 3322.0,
         "FY2022": 2299.0,
-        "LTM": 5646.0
+        "LTM": 6550.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 5034.0,
+        "prior_ytd": 4130.0,
+        "yoy_pct": 21.89
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 699.0,
-        "FY2021": 389.0,
-        "FY2020": 185.0,
-        "FY2019": 61.2
-      },
-      "operating_margin_pct": {
-        "FY2022": 30.4
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net service revenues and financial income (Other Countries)",
@@ -132,23 +146,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net service revenues and financial income",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 1095.0,
         "FY2024": 808.0,
         "FY2023": 615.0,
         "FY2022": 465.0,
-        "LTM": 1095.0
+        "LTM": 1506.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1157.0,
+        "prior_ytd": 746.0,
+        "yoy_pct": 55.09
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": -45.0,
-        "FY2021": 7.0,
-        "FY2020": 5.0,
-        "FY2019": -28.7
-      },
-      "operating_margin_pct": {
-        "FY2022": -9.68
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net product revenues (Brazil)",
@@ -156,23 +171,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net product revenues",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 2355.0,
         "FY2024": 1373.0,
         "FY2023": 875.0,
         "FY2022": 515.0,
-        "LTM": 2355.0
+        "LTM": 3571.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 2774.0,
+        "prior_ytd": 1558.0,
+        "yoy_pct": 78.05
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 259.0,
-        "FY2021": 189.0,
-        "FY2020": 79.0,
-        "FY2019": 25.7
-      },
-      "operating_margin_pct": {
-        "FY2022": 50.29
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net product revenues (Mexico)",
@@ -180,23 +196,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net product revenues",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 776.0,
         "FY2024": 481.0,
         "FY2023": 337.0,
         "FY2022": 255.0,
-        "LTM": 776.0
+        "LTM": 1127.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 852.0,
+        "prior_ytd": 501.0,
+        "yoy_pct": 70.06
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 74.0,
-        "FY2021": -130.0,
-        "FY2020": -134.0,
-        "FY2019": -168.3
-      },
-      "operating_margin_pct": {
-        "FY2022": 29.02
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net product revenues (Argentina)",
@@ -204,23 +221,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net product revenues",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 316.0,
         "FY2024": 204.0,
         "FY2023": 228.0,
         "FY2022": 276.0,
-        "LTM": 316.0
+        "LTM": 417.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 321.0,
+        "prior_ytd": 220.0,
+        "yoy_pct": 45.91
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": 699.0,
-        "FY2021": 389.0,
-        "FY2020": 185.0,
-        "FY2019": 61.2
-      },
-      "operating_margin_pct": {
-        "FY2022": 253.26
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net product revenues (Other Countries)",
@@ -228,23 +246,24 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Net product revenues",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 160.0,
         "FY2024": 81.0,
         "FY2023": 50.0,
         "FY2022": 49.0,
-        "LTM": 160.0
+        "LTM": 270.0
+      },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 205.0,
+        "prior_ytd": 95.0,
+        "yoy_pct": 115.79
       },
       "status": "active",
-      "operating_income": {
-        "FY2022": -45.0,
-        "FY2021": 7.0,
-        "FY2020": 5.0,
-        "FY2019": -28.7
-      },
-      "operating_margin_pct": {
-        "FY2022": -91.84
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Services",
@@ -252,6 +271,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Commerce",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 12750.0,
         "FY2024": 10076.0,
@@ -261,7 +281,16 @@
         "FY2020": 2305.0,
         "LTM": 16433.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 12670.0,
+        "prior_ytd": 8987.0,
+        "yoy_pct": 40.98
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Product Sales",
@@ -269,6 +298,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Commerce",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 3544.0,
         "FY2024": 2083.0,
@@ -278,7 +308,16 @@
         "FY2020": 255.0,
         "LTM": 5316.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 4101.0,
+        "prior_ytd": 2329.0,
+        "yoy_pct": 76.08
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Commerce",
@@ -286,14 +325,28 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 16294.0,
         "FY2024": 12159.0,
         "FY2023": 8201.0,
         "FY2022": 5808.0,
+        "FY2021": 4635.0,
+        "FY2020": 2560.0,
+        "FY2019": 1346.4,
+        "FY2018": 838.6,
         "LTM": 21749.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 16771.0,
+        "prior_ytd": 11316.0,
+        "yoy_pct": 48.21
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Financial services and income",
@@ -301,6 +354,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Fintech",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 6678.0,
         "FY2024": 4962.0,
@@ -310,7 +364,16 @@
         "FY2020": 1139.0,
         "LTM": 8144.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 6232.0,
+        "prior_ytd": 4766.0,
+        "yoy_pct": 30.76
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Credit revenues",
@@ -318,6 +381,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Fintech",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 5858.0,
         "FY2024": 3600.0,
@@ -327,7 +391,16 @@
         "FY2020": 246.0,
         "LTM": 8561.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 6710.0,
+        "prior_ytd": 4007.0,
+        "yoy_pct": 67.46
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Fintech product sales",
@@ -335,6 +408,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Fintech",
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 63.0,
         "FY2024": 56.0,
@@ -344,7 +418,16 @@
         "FY2020": 29.0,
         "LTM": 69.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 51.0,
+        "prior_ytd": 45.0,
+        "yoy_pct": 13.33
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Fintech",
@@ -352,27 +435,28 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2025": 12599.0,
         "FY2024": 8618.0,
         "FY2023": 6906.0,
         "FY2022": 4972.0,
+        "FY2021": 2434.0,
+        "FY2020": 1414.0,
+        "FY2019": 949.9,
+        "FY2018": 601.0,
         "LTM": 16774.0
       },
-      "status": "active"
-    },
-    {
-      "name": "Argentinean Subsidiaries",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "is_reconciling": false,
-      "parent": null,
-      "values": {
-        "FY2024": 3818.0,
-        "FY2023": 3550.0,
-        "FY2022": 2575.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 12993.0,
+        "prior_ytd": 8818.0,
+        "yoy_pct": 47.35
       },
-      "status": "discontinued"
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Net revenues",
@@ -380,6 +464,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2023": 14473.0,
         "FY2022": 10537.0,
@@ -388,16 +473,19 @@
         "FY2019": 2296.3,
         "FY2018": 1439.7,
         "FY2017": 1216.5,
-        "FY2016": 844.4
+        "FY2016": 844.4,
+        "FY2015": 651.8,
+        "FY2014": 556.5
       },
       "status": "discontinued"
     },
     {
       "name": "Net service revenues",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2023": 12983.0,
         "FY2022": 9442.0,
@@ -406,56 +494,12 @@
       "status": "discontinued"
     },
     {
-      "name": "Net product revenues",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Net revenues",
-      "values": {
-        "FY2023": 1490.0,
-        "FY2022": 1095.0,
-        "FY2021": 920.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Commerce",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Net revenues",
-      "values": {
-        "FY2023": 8201.0,
-        "FY2022": 5808.0,
-        "FY2021": 4635.0,
-        "FY2020": 2560.0,
-        "FY2019": 1346.4,
-        "FY2018": 838.6
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Fintech",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Net revenues",
-      "values": {
-        "FY2023": 6272.0,
-        "FY2022": 4729.0,
-        "FY2021": 2434.0,
-        "FY2020": 1414.0,
-        "FY2019": 949.9,
-        "FY2018": 601.0
-      },
-      "status": "discontinued"
-    },
-    {
       "name": "Service",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2022": 9442.0,
         "FY2021": 6149.0,
@@ -467,9 +511,10 @@
     {
       "name": "Product",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2022": 1095.0,
         "FY2021": 920.0,
@@ -479,36 +524,12 @@
       "status": "discontinued"
     },
     {
-      "name": "Argentinean Subsidiaries",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Net revenues",
-      "values": {
-        "FY2022": 2500.0,
-        "FY2021": 1531.0,
-        "FY2020": 980.0
-      },
-      "status": "discontinued"
-    },
-    {
-      "name": "Product",
-      "is_subtotal": false,
-      "is_subsegment": true,
-      "is_reconciling": false,
-      "parent": "Restatement Adjustment",
-      "values": {
-        "FY2020": 283.5,
-        "FY2019": 30.6
-      },
-      "status": "discontinued"
-    },
-    {
       "name": "Enchanced Marketplace",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 1199.2,
         "FY2018": 702.4,
@@ -519,39 +540,61 @@
     {
       "name": "Non-marketplace",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 1097.1,
         "FY2018": 737.3,
         "FY2017": 479.1,
-        "FY2016": 296.3
+        "FY2016": 296.3,
+        "FY2015": 258.8,
+        "FY2014": 180.4
       },
       "status": "discontinued"
     },
     {
-      "name": "Venezuela Segment",
+      "name": "Venezuela",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2017": 54.3,
-        "FY2016": 37.2
+        "FY2016": 37.2,
+        "FY2015": 40.5
       },
       "status": "discontinued"
     },
     {
       "name": "Marketplace",
       "is_subtotal": false,
-      "is_subsegment": true,
+      "is_subsegment": false,
       "is_reconciling": false,
-      "parent": "Net revenues",
+      "parent": null,
+      "source_concept": "us-gaap_Revenues",
       "values": {
         "FY2018": 702.4,
         "FY2017": 737.5,
-        "FY2016": 548.1
+        "FY2016": 548.1,
+        "FY2015": 393.0,
+        "FY2014": 376.2
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Venezuelan Operations",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_SalesRevenueServicesNet",
+      "values": {
+        "FY2016": 37.2,
+        "FY2015": 40.5,
+        "FY2014": 58.0
       },
       "status": "discontinued"
     }
@@ -563,6 +606,7 @@
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": false,
       "values": {
         "FY2025": 1255.0,
         "FY2024": 889.0,
@@ -570,21 +614,24 @@
         "FY2022": 514.0,
         "FY2021": 456.0,
         "FY2020": 225.0,
+        "FY2019": 103.3,
+        "FY2018": 87.8,
+        "FY2017": 60.7,
+        "FY2016": 43.6,
+        "FY2015": 35.4,
+        "FY2014": 36.5,
         "LTM": 1776.0
       },
-      "is_country_breakdown": false,
-      "status": "active",
-      "operating_income": {
-        "FY2022": -45.0,
-        "FY2021": 7.0,
-        "FY2020": 5.0,
-        "FY2019": -28.7
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1362.0,
+        "prior_ytd": 841.0,
+        "yoy_pct": 61.95
       },
-      "operating_margin_pct": {
-        "FY2022": -8.75,
-        "FY2021": 1.54,
-        "FY2020": 2.22
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Brazil",
@@ -598,20 +645,24 @@
         "FY2022": 5798.0,
         "FY2021": 3910.0,
         "FY2020": 2194.0,
+        "FY2019": 1461.5,
+        "FY2018": 866.2,
+        "FY2017": 690.8,
+        "FY2016": 455.0,
+        "FY2015": 290.6,
+        "FY2014": 273.6,
         "LTM": 20942.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2022": 259.0,
-        "FY2021": 189.0,
-        "FY2020": 79.0,
-        "FY2019": 25.7
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 16305.0,
+        "prior_ytd": 10564.0,
+        "yoy_pct": 54.34
       },
-      "operating_margin_pct": {
-        "FY2022": 4.47,
-        "FY2021": 4.83,
-        "FY2020": 3.6
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Mexico",
@@ -625,20 +676,24 @@
         "FY2022": 1893.0,
         "FY2021": 1172.0,
         "FY2020": 575.0,
+        "FY2019": 275.1,
+        "FY2018": 109.1,
+        "FY2017": 51.3,
+        "FY2016": 46.3,
+        "FY2015": 40.3,
+        "FY2014": 37.7,
         "LTM": 8838.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2022": 74.0,
-        "FY2021": -130.0,
-        "FY2020": -134.0,
-        "FY2019": -168.3
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 6742.0,
+        "prior_ytd": 4379.0,
+        "yoy_pct": 53.96
       },
-      "operating_margin_pct": {
-        "FY2022": 3.91,
-        "FY2021": -11.09,
-        "FY2020": -23.3
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Argentina",
@@ -652,26 +707,31 @@
         "FY2022": 2575.0,
         "FY2021": 1531.0,
         "FY2020": 980.0,
+        "FY2019": 456.3,
+        "FY2018": 376.6,
+        "FY2017": 359.4,
+        "FY2016": 262.3,
+        "FY2015": 245.0,
+        "FY2014": 150.7,
         "LTM": 6967.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2022": 699.0,
-        "FY2021": 389.0,
-        "FY2020": 185.0,
-        "FY2019": 61.2
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 5355.0,
+        "prior_ytd": 4350.0,
+        "yoy_pct": 23.1
       },
-      "operating_margin_pct": {
-        "FY2022": 27.15,
-        "FY2021": 25.41,
-        "FY2020": 18.88
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "U.S.",
       "is_subtotal": false,
       "is_subsegment": true,
       "parent": "Other Countries",
+      "is_country_breakdown": true,
       "values": {
         "FY2025": 51.0,
         "FY2024": 35.0,
@@ -679,17 +739,16 @@
         "FY2022": 0.0,
         "LTM": 77.0
       },
-      "is_country_breakdown": true,
-      "status": "active",
-      "operating_income": {
-        "FY2024": 94.0,
-        "FY2023": -362.0,
-        "FY2022": -207.0,
-        "FY2021": -214.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 59.0,
+        "prior_ytd": 33.0,
+        "yoy_pct": 78.79
       },
-      "operating_margin_pct": {
-        "FY2024": 268.57
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Non-U.S.",
@@ -702,123 +761,19 @@
         "FY2022": 514.0,
         "FY2021": 456.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2024": 2338.0,
-        "FY2023": 1915.0,
-        "FY2022": 987.0,
-        "FY2021": 455.0
-      },
-      "operating_margin_pct": {
-        "FY2024": 262.99,
-        "FY2023": 287.97,
-        "FY2022": 192.02,
-        "FY2021": 99.78
-      }
+      "status": "discontinued"
     },
     {
-      "name": "Brazil Segment",
+      "name": "Venezuela",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
       "values": {
-        "FY2021": 3909.6,
-        "FY2020": 2194.0,
-        "FY2019": 1461.5,
-        "FY2018": 866.2,
-        "FY2017": 690.8,
-        "FY2016": 455.0
+        "FY2016": 37.2,
+        "FY2015": 40.5,
+        "FY2014": 58.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2022": 259.0,
-        "FY2021": 189.0,
-        "FY2020": 79.0,
-        "FY2019": 25.7
-      },
-      "operating_margin_pct": {
-        "FY2021": 4.83,
-        "FY2020": 3.6,
-        "FY2019": 1.76
-      }
-    },
-    {
-      "name": "Argentina Segment",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 1531.0,
-        "FY2020": 980.3,
-        "FY2019": 456.3,
-        "FY2018": 376.6,
-        "FY2017": 359.4,
-        "FY2016": 262.3
-      },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2022": 699.0,
-        "FY2021": 389.0,
-        "FY2020": 185.0,
-        "FY2019": 61.2
-      },
-      "operating_margin_pct": {
-        "FY2021": 25.41,
-        "FY2020": 18.87,
-        "FY2019": 13.41
-      }
-    },
-    {
-      "name": "Mexico Segment",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 1172.4,
-        "FY2020": 575.2,
-        "FY2019": 275.1,
-        "FY2018": 109.1,
-        "FY2017": 51.3,
-        "FY2016": 46.3
-      },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2022": 74.0,
-        "FY2021": -130.0,
-        "FY2020": -134.0,
-        "FY2019": -168.3
-      },
-      "operating_margin_pct": {
-        "FY2021": -11.09,
-        "FY2020": -23.3,
-        "FY2019": -61.18
-      }
-    },
-    {
-      "name": "Other Countries Segment",
-      "is_subtotal": false,
-      "is_subsegment": false,
-      "parent": null,
-      "values": {
-        "FY2021": 456.4,
-        "FY2020": 224.0,
-        "FY2019": 103.3,
-        "FY2018": 87.8,
-        "FY2017": 60.7,
-        "FY2016": 43.6
-      },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2022": -45.0,
-        "FY2021": 7.0,
-        "FY2020": 5.0,
-        "FY2019": -28.7
-      },
-      "operating_margin_pct": {
-        "FY2021": 1.53,
-        "FY2020": 2.23,
-        "FY2019": -27.78
-      }
+      "status": "discontinued"
     }
   ],
   "segment_operating_income": [
@@ -831,102 +786,11 @@
         "FY2022": 1069.0,
         "FY2021": 441.0,
         "FY2020": 128.0,
+        "FY2017": 56.3,
+        "FY2016": 181.1,
+        "FY2015": 139.2,
+        "FY2014": 120.5,
         "LTM": 2859.0
-      }
-    },
-    {
-      "name": "As reported",
-      "values": {
-        "FY2023": 1823.0,
-        "FY2022": 1034.0
-      }
-    },
-    {
-      "name": "Reclassification",
-      "values": {
-        "FY2023": 384.0,
-        "FY2022": 35.0
-      }
-    },
-    {
-      "name": "Net income before income tax expense and equity in earnings of unconsolidated entity",
-      "values": {
-        "FY2025": 2842.0,
-        "FY2024": 2432.0,
-        "FY2023": 1553.0,
-        "FY2022": 780.0,
-        "FY2021": 241.0,
-        "LTM": 2842.0
-      }
-    },
-    {
-      "name": "U.S.",
-      "values": {
-        "FY2024": 94.0,
-        "FY2023": -362.0,
-        "FY2022": -207.0,
-        "FY2021": -214.0
-      }
-    },
-    {
-      "name": "Non-U.S.",
-      "values": {
-        "FY2024": 2338.0,
-        "FY2023": 1915.0,
-        "FY2022": 987.0,
-        "FY2021": 455.0
-      }
-    },
-    {
-      "name": "Net income before income tax expense",
-      "values": {
-        "FY2022": 780.0,
-        "FY2021": 241.0,
-        "FY2020": 81.0
-      }
-    },
-    {
-      "name": "United States",
-      "values": {
-        "FY2022": -207.0,
-        "FY2021": -214.0,
-        "FY2020": -54.0
-      }
-    },
-    {
-      "name": "Brazil",
-      "values": {
-        "FY2022": 259.0,
-        "FY2021": 189.0,
-        "FY2020": 79.0,
-        "FY2019": 25.7
-      }
-    },
-    {
-      "name": "Argentina",
-      "values": {
-        "FY2022": 699.0,
-        "FY2021": 389.0,
-        "FY2020": 185.0,
-        "FY2019": 61.2
-      }
-    },
-    {
-      "name": "Mexico",
-      "values": {
-        "FY2022": 74.0,
-        "FY2021": -130.0,
-        "FY2020": -134.0,
-        "FY2019": -168.3
-      }
-    },
-    {
-      "name": "Other Countries",
-      "values": {
-        "FY2022": -45.0,
-        "FY2021": 7.0,
-        "FY2020": 5.0,
-        "FY2019": -28.7
       }
     },
     {
@@ -939,30 +803,6 @@
       }
     },
     {
-      "name": "Net income (loss) before income tax expense",
-      "values": {
-        "FY2021": 240.6,
-        "FY2020": 81.3,
-        "FY2019": -107.2
-      }
-    },
-    {
-      "name": "US",
-      "values": {
-        "FY2021": -214.0,
-        "FY2020": -54.4,
-        "FY2019": 2.9
-      }
-    },
-    {
-      "name": "Net income (loss) before income tax (expense) gain",
-      "values": {
-        "FY2020": 81.3,
-        "FY2019": -107.2,
-        "FY2018": -65.5
-      }
-    },
-    {
       "name": "(Loss) income from operations",
       "values": {
         "FY2019": -153.2,
@@ -970,24 +810,18 @@
         "FY2017": 56.3,
         "FY2016": 181.1
       }
-    },
-    {
-      "name": "Net (loss) income before income tax (expense) gain",
-      "values": {
-        "FY2019": -107.2,
-        "FY2018": -65.5,
-        "FY2017": 54.1
-      }
-    },
-    {
-      "name": "Net (loss) income before income tax gain (expense)",
-      "values": {
-        "FY2018": -65.5,
-        "FY2017": 54.1,
-        "FY2016": 185.3
-      }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "ltm_updated_from_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": false,
+    "geo_resegmented": false,
+    "superseded_after_fy": null,
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "MELI"
 }

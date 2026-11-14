@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-24T16:42:52.313806",
+  "timestamp": "2026-11-14T16:23:27.431218",
   "overall_status": "CONCILIADO",
   "comparisons": {
     "total_assets": {
@@ -22,64 +22,7 @@
     }
   },
   "methodological_reconciliation": {},
-  "banking_kpis_enriched": {
-    "archetype": "STANDARD_CORPORATE",
-    "source_sec": "meta-09302026xexhibit991.htm",
-    "return_on_equity_reported": null,
-    "risk_adjusted_nim_pct": null,
-    "efficiency_ratio_pct": null,
-    "npl_15_90_pct": null,
-    "npl_90_plus_pct": null,
-    "provision_coverage_pct": 113.0,
-    "total_customers_m": null,
-    "active_customers_m": null,
-    "monthly_arpac_usd": null,
-    "monthly_cost_to_serve_usd": 1.0,
-    "deposits_by_country_bn": {},
-    "customers_by_country_m": {},
-    "capital_adequacy": {
-      "total_capital_usd_bn": 9.1,
-      "liquidity_ratio_pct": 57.0
-    },
-    "brand_segmentation": {
-      "Revenue": {
-        "revenue_usd_m": 228247.0
-      },
-      "Other revenue": {
-        "revenue_usd_m": 3787.0
-      },
-      "Family of Apps": {
-        "revenue_usd_m": 239374.0
-      },
-      "Reality Labs": {
-        "revenue_usd_m": 2231.0
-      },
-      "Advertising": {
-        "revenue_usd_m": 235587.0
-      }
-    },
-    "channel_breakdown": {},
-    "geographic_breakdown": {
-      "United States & Canada": {
-        "revenue_usd_m": 95181.0
-      },
-      "Europe": {
-        "revenue_usd_m": 55526.0
-      },
-      "Asia-Pacific": {
-        "revenue_usd_m": 63927.0
-      },
-      "Rest of World": {
-        "revenue_usd_m": 26971.0
-      },
-      "United States": {
-        "revenue_usd_m": 74780.0
-      }
-    },
-    "operational_kpis": {
-      "diluted_eps": 3.83
-    }
-  },
+  "banking_kpis_enriched": {},
   "kpis_enriched": {
     "archetype": "STANDARD_CORPORATE",
     "source_sec": "meta-09302026xexhibit991.htm",
@@ -100,8 +43,8 @@
       "liquidity_ratio_pct": 57.0
     },
     "brand_segmentation": {
-      "Revenue": {
-        "revenue_usd_m": 228247.0
+      "Advertising": {
+        "revenue_usd_m": 235587.0
       },
       "Other revenue": {
         "revenue_usd_m": 3787.0
@@ -111,9 +54,6 @@
       },
       "Reality Labs": {
         "revenue_usd_m": 2231.0
-      },
-      "Advertising": {
-        "revenue_usd_m": 235587.0
       }
     },
     "channel_breakdown": {},

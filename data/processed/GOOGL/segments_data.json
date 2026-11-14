@@ -10,7 +10,8 @@
     "FY2019",
     "FY2018",
     "FY2017",
-    "FY2016"
+    "FY2016",
+    "FY2015"
   ],
   "product_segments": [
     {
@@ -23,22 +24,23 @@
         "FY2019": 408818.0,
         "FY2018": 465592.0,
         "FY2017": 379460.0,
-        "FY2016": 169367.0
+        "FY2016": 169367.0,
+        "FY2015": 67390.0
       },
       "operating_income": {
-        "FY2025": 139404.0,
-        "FY2024": 121263.0,
-        "FY2023": 95858.0,
-        "FY2022": 82699.0,
-        "FY2021": 88132.0,
-        "FY2020": 54606.0,
-        "FY2019": 48999.0,
-        "FY2018": 43137.0,
-        "LTM": 159422.0
+        "FY2019": 41673.0,
+        "FY2018": 36655.0,
+        "FY2017": 32456.0,
+        "FY2016": 27055.0,
+        "FY2015": 23319.0,
+        "FY2014": 18965.0
       },
       "operating_margin_pct": {
-        "FY2019": 11.99,
-        "FY2018": 9.26
+        "FY2019": 10.19,
+        "FY2018": 7.87,
+        "FY2017": 8.55,
+        "FY2016": 15.97,
+        "FY2015": 34.6
       }
     },
     {
@@ -47,6 +49,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 224532.0,
         "FY2024": 198084.0,
@@ -58,17 +61,16 @@
         "FY2018": 85296.0,
         "LTM": 250093.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 187020.0,
+        "prior_ytd": 161459.0,
+        "yoy_pct": 15.83
       },
-      "operating_margin_pct": {
-        "FY2019": 42.47,
-        "FY2018": 42.97
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "YouTube ads",
@@ -76,6 +78,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 40367.0,
         "FY2024": 36147.0,
@@ -87,7 +90,16 @@
         "FY2018": 11155.0,
         "LTM": 43528.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 32145.0,
+        "prior_ytd": 28984.0,
+        "yoy_pct": 10.91
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Google Network",
@@ -95,6 +107,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 29792.0,
         "FY2024": 30359.0,
@@ -105,16 +118,16 @@
         "FY2019": 21547.0,
         "LTM": 29557.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 21729.0,
+        "prior_ytd": 21964.0,
+        "yoy_pct": -1.07
       },
-      "operating_margin_pct": {
-        "FY2019": 193.41
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Google advertising",
@@ -122,6 +135,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 294691.0,
         "FY2024": 264590.0,
@@ -133,17 +147,16 @@
         "FY2018": 116461.0,
         "LTM": 323178.0
       },
-      "status": "active",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 240894.0,
+        "prior_ytd": 212407.0,
+        "yoy_pct": 13.41
       },
-      "operating_margin_pct": {
-        "FY2019": 30.91,
-        "FY2018": 31.47
-      }
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Google subscriptions, platforms, and devices",
@@ -151,6 +164,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 48030.0,
         "FY2024": 40340.0,
@@ -159,13 +173,16 @@
         "FY2021": 28032.0,
         "LTM": 53163.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 39585.0,
+        "prior_ytd": 34452.0,
+        "yoy_pct": 14.9
+      },
       "status": "active",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      }
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Google Services",
@@ -173,6 +190,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 342721.0,
         "FY2024": 304930.0,
@@ -184,7 +202,16 @@
         "FY2018": 130524.0,
         "LTM": 376341.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 280479.0,
+        "prior_ytd": 246859.0,
+        "yoy_pct": 13.62
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2025": 139404.0,
         "FY2024": 121263.0,
@@ -214,6 +241,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 58705.0,
         "FY2024": 43229.0,
@@ -225,7 +253,16 @@
         "FY2018": 5838.0,
         "LTM": 93169.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 75505.0,
+        "prior_ytd": 41041.0,
+        "yoy_pct": 83.97
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2025": 13910.0,
         "FY2024": 6112.0,
@@ -255,6 +292,7 @@
       "is_subsegment": false,
       "is_reconciling": false,
       "parent": null,
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2025": 1537.0,
         "FY2024": 1648.0,
@@ -266,9 +304,20 @@
         "FY2018": 595.0,
         "FY2017": 477.0,
         "FY2016": 288.0,
+        "FY2015": 445.0,
+        "FY2014": 327.0,
         "LTM": 1535.0
       },
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 1165.0,
+        "prior_ytd": 1167.0,
+        "yoy_pct": -0.17
+      },
       "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q",
       "operating_income": {
         "FY2025": -7515.0,
         "FY2024": -4444.0,
@@ -280,6 +329,8 @@
         "FY2018": -3358.0,
         "FY2017": -2734.0,
         "FY2016": -2741.0,
+        "FY2015": -3456.0,
+        "FY2014": -1893.0,
         "LTM": -9563.0
       },
       "operating_margin_pct": {
@@ -293,6 +344,8 @@
         "FY2018": -564.37,
         "FY2017": -573.17,
         "FY2016": -951.74,
+        "FY2015": -776.63,
+        "FY2014": -578.9,
         "LTM": -623.0
       }
     },
@@ -302,13 +355,23 @@
       "is_subsegment": false,
       "is_reconciling": true,
       "parent": null,
+      "source_concept": "us-gaap_RevenueNotFromContractWithCustomer",
       "values": {
         "FY2025": -127.0,
         "FY2024": 211.0,
         "FY2023": 236.0,
         "LTM": 53.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 120.0,
+        "prior_ytd": -60.0,
+        "yoy_pct": 300.0
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Google other",
@@ -316,6 +379,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2022": 29055.0,
         "FY2021": 28032.0,
@@ -323,17 +387,7 @@
         "FY2019": 17014.0,
         "FY2018": 14063.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 244.93,
-        "FY2018": 260.65
-      }
+      "status": "discontinued"
     },
     {
       "name": "Google Network Members' properties",
@@ -341,22 +395,13 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google Services",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2020": 23090.0,
         "FY2019": 21547.0,
         "FY2018": 20010.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 193.41,
-        "FY2018": 183.18
-      }
+      "status": "discontinued"
     },
     {
       "name": "Google Search & other",
@@ -364,23 +409,13 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 98115.0,
         "FY2018": 85296.0,
         "FY2017": 69811.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 42.47,
-        "FY2018": 42.97,
-        "FY2017": 46.49
-      }
+      "status": "discontinued"
     },
     {
       "name": "YouTube ads",
@@ -388,6 +423,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 15149.0,
         "FY2018": 11155.0,
@@ -401,25 +437,15 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 113264.0,
         "FY2018": 96451.0,
         "FY2017": 77961.0,
-        "FY2016": 63785.0
+        "FY2016": 63785.0,
+        "FY2015": 52357.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 36.79,
-        "FY2018": 38.0,
-        "FY2017": 41.63,
-        "FY2016": 42.42
-      }
+      "status": "discontinued"
     },
     {
       "name": "Google Network Members' properties",
@@ -427,25 +453,15 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 21547.0,
         "FY2018": 20010.0,
         "FY2017": 17616.0,
-        "FY2016": 15598.0
+        "FY2016": 15598.0,
+        "FY2015": 15033.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 193.41,
-        "FY2018": 183.18,
-        "FY2017": 184.24,
-        "FY2016": 173.45
-      }
+      "status": "discontinued"
     },
     {
       "name": "Google advertising",
@@ -453,23 +469,13 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 134811.0,
         "FY2018": 116461.0,
         "FY2017": 95577.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2019": 41673.0,
-        "FY2018": 36655.0,
-        "FY2017": 32456.0,
-        "FY2016": 27055.0
-      },
-      "operating_margin_pct": {
-        "FY2019": 30.91,
-        "FY2018": 31.47,
-        "FY2017": 33.96
-      }
+      "status": "discontinued"
     },
     {
       "name": "Google Cloud",
@@ -477,27 +483,13 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 8918.0,
         "FY2018": 5838.0,
         "FY2017": 4056.0
       },
-      "status": "discontinued",
-      "operating_income": {
-        "FY2025": 13910.0,
-        "FY2024": 6112.0,
-        "FY2023": 1716.0,
-        "FY2022": -1922.0,
-        "FY2021": -2282.0,
-        "FY2020": -5607.0,
-        "FY2019": -4645.0,
-        "FY2018": -4348.0,
-        "LTM": 31846.0
-      },
-      "operating_margin_pct": {
-        "FY2019": -52.09,
-        "FY2018": -74.48
-      }
+      "status": "discontinued"
     },
     {
       "name": "Other Revenues",
@@ -505,6 +497,7 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2019": 17014.0,
         "FY2018": 14063.0,
@@ -519,12 +512,61 @@
       "is_subsegment": true,
       "is_reconciling": false,
       "parent": "Google",
+      "source_concept": "us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax",
       "values": {
         "FY2018": 116318.0,
         "FY2017": 95375.0,
         "FY2016": 79383.0
       },
       "status": "discontinued"
+    },
+    {
+      "name": "Google advertising revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_AdvertisingRevenue",
+      "values": {
+        "FY2017": 95375.0,
+        "FY2016": 79383.0,
+        "FY2015": 67390.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Google other revenues",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": false,
+      "parent": null,
+      "source_concept": "us-gaap_OtherSalesRevenueNet",
+      "values": {
+        "FY2017": 14277.0,
+        "FY2016": 10080.0,
+        "FY2015": 7154.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Foreign exchange derivatives",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "is_reconciling": true,
+      "parent": null,
+      "status": "active",
+      "is_new_in_latest_10q": true,
+      "values": {},
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 82.0,
+        "prior_ytd": -133.0,
+        "yoy_pct": 161.65
+      },
+      "source_concept": "us-gaap_Revenues",
+      "ltm_disclosure_status": "new_in_10q_interim"
     }
   ],
   "channel_segments": [],
@@ -534,6 +576,7 @@
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
+      "is_country_breakdown": false,
       "values": {
         "FY2025": 194229.0,
         "FY2024": 170447.0,
@@ -545,12 +588,23 @@
         "FY2018": 63269.0,
         "FY2017": 52449.0,
         "FY2016": 42781.0,
+        "FY2015": 34810.0,
+        "FY2014": 29482.0,
         "LTM": 237946.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 182502.0,
+        "prior_ytd": 138785.0,
+        "yoy_pct": 31.5
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "EMEA",
+      "name": "Europe, Middle East and Africa",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -565,12 +619,22 @@
         "FY2018": 44739.0,
         "FY2017": 36236.0,
         "FY2016": 30304.0,
+        "FY2015": 26368.0,
         "LTM": 129720.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 96664.0,
+        "prior_ytd": 84096.0,
+        "yoy_pct": 14.94
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
-      "name": "APAC",
+      "name": "Asia Pacific",
       "is_subtotal": false,
       "is_subsegment": false,
       "parent": null,
@@ -585,9 +649,19 @@
         "FY2018": 21341.0,
         "FY2017": 16192.0,
         "FY2016": 12559.0,
+        "FY2015": 9887.0,
         "LTM": 76038.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 57511.0,
+        "prior_ytd": 49153.0,
+        "yoy_pct": 17.0
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
     },
     {
       "name": "Other Americas",
@@ -605,9 +679,43 @@
         "FY2018": 7608.0,
         "FY2017": 6147.0,
         "FY2016": 4628.0,
+        "FY2015": 3924.0,
         "LTM": 27341.0
       },
-      "status": "active"
+      "interim_disclosure": {
+        "period_label": "9M YTD (2026-09-30)",
+        "period_end": "2026-09-30",
+        "prior_period_end": "2025-09-30",
+        "current_ytd": 20472.0,
+        "prior_ytd": 17033.0,
+        "yoy_pct": 20.19
+      },
+      "status": "active",
+      "ltm_disclosure_status": "ltm_computed_from_10q"
+    },
+    {
+      "name": "United Kingdom",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2016": 7787.0,
+        "FY2015": 7067.0,
+        "FY2014": 6483.0
+      },
+      "status": "discontinued"
+    },
+    {
+      "name": "Rest of the world",
+      "is_subtotal": false,
+      "is_subsegment": false,
+      "parent": null,
+      "values": {
+        "FY2016": 39704.0,
+        "FY2015": 33112.0,
+        "FY2014": 30036.0
+      },
+      "status": "discontinued"
     }
   ],
   "segment_operating_income": [
@@ -662,6 +770,8 @@
         "FY2018": -3358.0,
         "FY2017": -2734.0,
         "FY2016": -2741.0,
+        "FY2015": -3456.0,
+        "FY2014": -1893.0,
         "LTM": -9563.0
       }
     },
@@ -678,6 +788,8 @@
         "FY2018": -7907.0,
         "FY2017": -3544.0,
         "FY2016": -598.0,
+        "FY2015": -503.0,
+        "FY2014": -576.0,
         "LTM": -24729.0
       }
     },
@@ -691,7 +803,9 @@
         "FY2019": 34231.0,
         "FY2018": 27524.0,
         "FY2017": 26178.0,
-        "FY2016": 23716.0
+        "FY2016": 23716.0,
+        "FY2015": 19360.0,
+        "FY2014": 16496.0
       }
     },
     {
@@ -700,10 +814,22 @@
         "FY2019": 41673.0,
         "FY2018": 36655.0,
         "FY2017": 32456.0,
-        "FY2016": 27055.0
+        "FY2016": 27055.0,
+        "FY2015": 23319.0,
+        "FY2014": 18965.0
       }
     }
   ],
+  "metadata": {
+    "q_is_newer_than_10k": true,
+    "latest_interim_period": "9M YTD (2026-09-30)",
+    "product_ltm_status": "resegmented_in_10q",
+    "geo_ltm_status": "ltm_updated_from_10q",
+    "product_resegmented": true,
+    "geo_resegmented": false,
+    "superseded_after_fy": "FY2025",
+    "geo_reported": true
+  },
   "extraction_method": "SEC_EDGAR_XBRL_ASC280_ASC606",
   "ticker": "GOOGL"
 }

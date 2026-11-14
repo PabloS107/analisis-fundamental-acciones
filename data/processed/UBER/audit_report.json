@@ -2,7 +2,7 @@
   "ticker": "UBER",
   "company_name": "Uber Technologies, Inc",
   "cik": "0001543151",
-  "audit_timestamp": "2026-11-14T12:35:03.649969",
+  "audit_timestamp": "2026-11-14T16:17:36.757962",
   "years_audited": {
     "LTM": [
       {
@@ -635,8 +635,8 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 72,
-  "passed_tests": 69,
+  "total_tests": 75,
+  "passed_tests": 72,
   "failed_tests": 0,
   "skipped_tests": 3,
   "compliance_score_pct": 100.0,
@@ -703,6 +703,23 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "3 segmentos activos"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "PASS",
+      "message": "Desglose geográfico activo validado"
     }
   ]
 }

@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-11-14T16:20:00.347268",
+  "overall_status": "CONCILIADO",
+  "comparisons": {
+    "total_assets": {
+      "sec_value": 77950414000.0,
+      "fst_value": 77950414000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "stockholders_equity": {
+      "sec_value": 39491949000.0,
+      "fst_value": 39491949000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    },
+    "cash_and_equivalents": {
+      "sec_value": 368534000.0,
+      "fst_value": 368534000.0,
+      "delta_pct": 0.0,
+      "status": "MATCH_EXACTO"
+    }
+  },
+  "methodological_reconciliation": {},
+  "banking_kpis_enriched": {},
+  "kpis_enriched": {
+    "archetype": "REAL_ESTATE_REIT",
+    "source_sec": "o-991q32026.htm",
+    "occupancy_rate_pct": 98.8,
+    "total_properties": 15500,
+    "properties_count": 15500,
+    "reit_operational_kpis": {
+      "occupancy_rate_pct": 98.8,
+      "total_properties": 15500
+    }
+  },
+  "flags": [],
+  "archetype": "REAL_ESTATE_REIT"
+}

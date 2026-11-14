@@ -2,7 +2,7 @@
   "ticker": "JPM",
   "company_name": "JPMORGAN CHASE & CO",
   "cik": "0000019617",
-  "audit_timestamp": "2026-11-14T12:34:49.154262",
+  "audit_timestamp": "2026-11-14T16:22:28.258227",
   "years_audited": {
     "LTM": [
       {
@@ -716,10 +716,10 @@
     ]
   },
   "overall_status": "PASS",
-  "total_tests": 90,
-  "passed_tests": 62,
+  "total_tests": 93,
+  "passed_tests": 64,
   "failed_tests": 0,
-  "skipped_tests": 28,
+  "skipped_tests": 29,
   "compliance_score_pct": 100.0,
   "period_integrity": [
     {
@@ -784,6 +784,23 @@
       "check": "FACE_ANCHOR_PARITY",
       "severity": "PASS",
       "message": "Paridad 100% exacta contra anclas oficiales SEC (30 cotejos)."
+    }
+  ],
+  "segments_quality": [
+    {
+      "check": "Cobertura Segmentos Producto",
+      "severity": "PASS",
+      "message": "4 segmentos activos"
+    },
+    {
+      "check": "Sanidad Márgenes por Segmento",
+      "severity": "PASS",
+      "message": "Márgenes operativos por segmento consistentes"
+    },
+    {
+      "check": "Cobertura Geográfica (ASC 280)",
+      "severity": "WARN",
+      "message": "Sin desglose geográfico en reportes SEC XBRL (señalado como N/D)"
     }
   ]
 }
